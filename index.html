@@ -750,13 +750,32 @@
             </div>
             <p class="text-xs font-medium text-orange-950 leading-relaxed">${relay.content}</p>
           </div>
-          <button class="w-10 h-10 rounded-full bg-orange-100/80 hover:bg-orange-200 text-orange-850 flex items-center justify-center transition-colors min-w-[40px] min-h-[40px]">
-            <i data-lucide="play" class="w-4.5 h-4.5"></i>
-          </button>
+          <div class="flex gap-2 items-center">
+            <button onclick="event.stopPropagation(); deleteRelay(${relay.id})" title="삭제" class="w-10 h-10 rounded-full bg-rose-50/50 hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors min-w-[40px] min-h-[40px]">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+            <button class="w-10 h-10 rounded-full bg-orange-100/80 hover:bg-orange-200 text-orange-850 flex items-center justify-center transition-colors min-w-[40px] min-h-[40px]">
+              <i data-lucide="play" class="w-4.5 h-4.5"></i>
+            </button>
+          </div>
         `;
         relayList.appendChild(item);
       });
       lucide.createIcons();
+    }
+
+    // Delete a single relay audio item
+    async function deleteRelay(id) {
+      if (confirm("이 따뜻한 릴레이 소리를 정말로 삭제할까요?")) {
+        try {
+          await db.relays.delete(id);
+          showToast("릴레이가 성공적으로 삭제되었습니다.");
+          loadRelays();
+        } catch (err) {
+          console.error("삭제 실패:", err);
+          showToast("삭제 중 문제가 생겼습니다.");
+        }
+      }
     }
 
     // Export Dexie Database to JSON file
