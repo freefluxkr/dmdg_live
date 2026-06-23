@@ -130,6 +130,22 @@
       </div>
     </div>
 
+    <!-- Dynamic Primer Display Card (시, 수필, 오늘의 말) -->
+    <div class="glass-card rounded-3xl p-5 border-l-4 border-orange-400 bg-orange-50/50 flex flex-col gap-2">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-orange-800 flex items-center gap-1">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          <span id="primer-type">오늘의 마중물 말</span>
+        </span>
+        <button onclick="rotatePrimer()" class="p-1 rounded-full hover:bg-orange-100/50 text-orange-700 active:scale-90 transition-transform flex items-center justify-center">
+          <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+      <p id="primer-content" class="text-xs font-medium text-orange-950 font-warm leading-relaxed italic">
+        "바람이 불어오는 곳으로 마음을 던져두면, 어느샌가 그리운 목소리가 찾아와 귀를 채웁니다."
+      </p>
+    </div>
+
     <!-- Visualizer / Emotional Blob Card -->
     <div class="glass-card rounded-3xl p-6 flex flex-col items-center justify-center min-h-[260px] relative overflow-hidden">
       <!-- Background Soft Decorative Ring -->
@@ -266,6 +282,45 @@
     let audioChunks = [];
     let canvasAnimationId = null;
 
+    // Primers Data (마중물: 시, 수필, 오늘의 말)
+    const primersData = {
+      '전체': [
+        { type: "오늘의 말", content: "“바람이 불어오는 곳으로 마음을 던져두면, 어느샌가 그리운 목소리가 찾아와 귀를 채웁니다.”" },
+        { type: "시 한 구절", content: "“흔들리지 않고 피는 꽃이 어디 있으랴. 그 어떤 아름다운 꽃들도 다 흔들리며 피었나니.” — 도종환" },
+        { type: "수필의 한 락", content: "“우리는 매일 밤 서로의 목소리에 기대어 보이지 않는 선을 잇는다. 그것은 하루를 견뎌낸 이들에게 주는 소박한 위안이다.”" }
+      ],
+      '위로': [
+        { type: "오늘의 말", content: "“그늘이 깊다는 것은 그만큼 빛이 가깝다는 뜻입니다. 당신의 지친 하루에 조용히 손을 얹습니다.”" },
+        { type: "시 한 구절", content: "“울지 마라. 외로우니까 사람이다. 살아간다는 것은 외로움을 견디는 일이다.” — 정호승" },
+        { type: "수필의 한 락", content: "“마음이 시릴 때는 따뜻한 차 한 잔처럼, 가만히 내밀어 주는 목소리 하나만으로도 다시 걸어갈 힘을 얻곤 합니다.”" }
+      ],
+      '설렘': [
+        { type: "오늘의 말", content: "“어쩌면 오늘, 바람결에 실려 온 맑은 목소리가 당신의 마음을 가만히 두드릴지도 모릅니다.”" },
+        { type: "시 한 구절", content: "“내가 그대의 이름을 불렀을 때, 그는 나에게로 와서 꽃이 되었다.” — 김춘수" },
+        { type: "수필의 한 락", content: "“새로운 계절이 올 때마다 느끼는 은은한 두근거림. 그것은 우리 안에 숨겨진 온기가 깨어나는 신호다.”" }
+      ],
+      '평온': [
+        { type: "오늘의 말", content: "“마음속 시끄러운 물결을 가라앉히고, 지금 이 나지막한 침묵과 소리의 틈새에 머물러 보세요.”" },
+        { type: "시 한 구절", content: "“풀꽃 자세히 보아야 예쁘다. 오래 보아야 사랑스럽다. 너도 그렇다.” — 나태주" },
+        { type: "수필의 한 락", content: "“아무 일도 일어나지 않는 오후, 가볍게 스쳐 가는 새소리와 바람 소리 속에 우리의 평화가 조용히 깃들어 있다.”" }
+      ]
+    };
+
+    let currentPrimerIndex = 0;
+
+    function rotatePrimer() {
+      const currentList = primersData[currentFilter] || primersData['전체'];
+      currentPrimerIndex = (currentPrimerIndex + 1) % currentList.length;
+      updatePrimerUI();
+    }
+
+    function updatePrimerUI() {
+      const currentList = primersData[currentFilter] || primersData['전체'];
+      const activePrimer = currentList[currentPrimerIndex % currentList.length];
+      document.getElementById('primer-type').textContent = activePrimer.type;
+      document.getElementById('primer-content').textContent = activePrimer.content;
+    }
+
     // Build Emotion Tabs UI
     const emotionTabs = document.getElementById('emotion-tabs');
     emotions.forEach(e => {
@@ -276,7 +331,9 @@
       btn.textContent = e;
       btn.onclick = () => {
         currentFilter = e;
+        currentPrimerIndex = 0;
         updateTabsUI();
+        updatePrimerUI();
         loadRelays();
       };
       emotionTabs.appendChild(btn);
