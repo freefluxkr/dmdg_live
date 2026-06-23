@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dangmok-cache-v1';
+const CACHE_NAME = 'dangmok-cache-v2';
 const urlsToCache = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const urlsToCache = [
 
 // 서비스 워커 설치 및 리소스 캐싱
 self.addEventListener('install', (event) => {
+  self.skipWaiting(); // Force activate new service worker
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(urlsToCache);
