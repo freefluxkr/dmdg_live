@@ -15,7 +15,7 @@ from firebase_admin import firestore
 # Firebase Admin SDK의 비공개 키가 없는 경우에도 안전하게 작동하도록 구성
 # 프로젝트 ID가 dmdg-pwa 이므로 로컬 혹은 Firebase Admin 기본 자격 증명을 로드합니다.
 try:
-    # dmdg-pwa 프로젝트 인증 초기화
+    # dmdg-live 프로젝트 인증 초기화
     if not firebase_admin._apps:
         # GCP 환경 혹은 로컬 서비스 계정 키 파일 경로 지정 가능
         # 만약 로컬에 키 파일(serviceAccountKey.json)이 없다면 Application Default Credentials 사용
@@ -26,7 +26,7 @@ try:
         else:
             # credentials 없이 초기화할 때 환경 변수를 기준으로 인증을 시도합니다.
             firebase_admin.initialize_app(options={
-                'projectId': 'dmdg-pwa'
+                'projectId': 'dmdg-live'
             })
     db = firestore.client()
 except Exception as e:
