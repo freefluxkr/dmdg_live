@@ -65,73 +65,86 @@ def fetch_happy_contents():
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
     scraped_items = []
     
-    # 크롤링할 카테고리별 주소 맵 (행복한가 편지 카테고리)
-    categories = {
-        "일상스토리": "https://m-letter.or.kr/happy-contents?category=I6d504u2k1",
-        "문화생활정보": "https://m-letter.or.kr/happy-contents?category=q233ZF15bi"
-    }
+    # 크롤링할 카테고리별 주소 및 페이지 범위 설정
+    # 일상스토리 카테고리 ID: I6d504u2k1 (최대 75페이지)
+    # 문화생활정보 카테고리 ID: q233ZF15bi (최대 60페이지)
+    category_configs = [
+        {
+            "name": "일상스토리",
+            "base_url": "https://m-letter.or.kr/happy-contents/?q=YToyOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjtzOjQ6InBhZ2UiO2k6NzM7fQ%3D%3D",
+            "cat_param": "I6d504u2k1",
+            "max_page": 75
+        },
+        {
+            "name": "문화생활정보",
+            "base_url": "https://m-letter.or.kr/happy-contents/?q=YToyOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjtzOjQ6InBhZ2UiO2k6Mjg7fQ%3D%3D",
+            "cat_param": "q233ZF15bi",
+            "max_page": 60
+        }
+    ]
     
-    for category_name, url in categories.items():
-        print(f"🔗 [{category_name}] 최신 글 추출 중: {url}")
-        try:
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=10) as response:
-                html = response.read()
-                soup = BeautifulSoup(html, 'html.parser')
-                
-                # 행복한가 목록 페이지의 카드 혹은 아티클 래퍼 선택 (일반적인 목록 리스크 구조 적용)
-                # m-letter.or.kr 구조에 맞추어 article, card 또는 특정 class를 탐색합니다.
-                posts = soup.select('.post-item, .card, article, .board-list tr')
-                
-                # 만약 클래스명이 매칭되지 않을 경우를 대비하여 일반적인 a 태그를 탐색하는 Fallback 지원
-                if not posts:
+    for config in category_configs:
+        category_name = config["name"]
+        
+        # 각 카테고리에 정의된 개별 max_page 범위까지 순회하며 긁어오기
+        for page_num in range(1, config["max_page"] + 1):
+            url = f"{config['base_url']}&page={page_num}&category={config['cat_param']}"
+            print(f"🔗 [{category_name}] {page_num}페이지 추출 중: {url}")
+            try:
+                req = urllib.request.Request(url, headers=headers)
+                with urllib.request.urlopen(req, timeout=10) as response:
+                    html = response.read()
+                    soup = BeautifulSoup(html, 'html.parser')
+                    
+                    # 행복한가 목록에서 개별 글 a 태그들 추출
                     posts = soup.find_all('a', href=re.compile(r'/happy-contents/\d+'))
-                
-                for post in posts[:5]:  # 각 카테고리별 최신 5개 글 분석
-                    # 글의 링크가 있으면 링크로 들어가서 본문 전문 크롤링
-                    link = post.get('href') if post.name == 'a' else (post.find('a')['href'] if post.find('a') else None)
-                    if not link:
-                        continue
-                        
-                    if not link.startswith('http'):
-                        link = "https://m-letter.or.kr" + link
-                        
-                    # 본문 상세 페이지 요청
-                    detail_req = urllib.request.Request(link, headers=headers)
-                    with urllib.request.urlopen(detail_req, timeout=10) as detail_res:
-                        detail_soup = BeautifulSoup(detail_res.read(), 'html.parser')
-                        
-                        # 본문 영역 파싱 (일반적인 상세페이지 본문 클래스/ID 탐색)
-                        content_area = detail_soup.select_one('.post-content, .article-body, #content_area, .view-content')
-                        title_area = detail_soup.select_one('.post-title, .title, h1, .view-title')
-                        
-                        title = title_area.get_text().strip() if title_area else "따뜻한 마중물 편지"
-                        
-                        if content_area:
-                            # 이미지를 제외한 텍스트 콘텐츠 정제
-                            for img in content_area.find_all('img'):
-                                img.decompose()
-                            content_text = content_area.get_text().strip()
-                        else:
-                            # Fallback: 본문 태그가 명확하지 않으면 p 태그들을 묶어서 텍스트 추출
-                            paragraphs = detail_soup.find_all('p')
-                            content_text = "\n".join([p.get_text().strip() for p in paragraphs if len(p.get_text().strip()) > 30])
-                        
-                        if len(content_text) > 40: # 유효한 글만 적재
-                            scraped_items.append({
-                                "title": title,
-                                "content": content_text,
-                                "category": category_name,
-                                "link": link
-                            })
-                            print(f"✅ 성공적으로 가져옴: {title[:20]}...")
+                    
+                    links = []
+                    for post in posts:
+                        link = post.get('href')
+                        if link:
+                            if not link.startswith('http'):
+                                link = "https://m-letter.or.kr" + link
+                            if link not in links:
+                                links.append(link)
+                    
+                    for link in links:
+                        try:
+                            detail_req = urllib.request.Request(link, headers=headers)
+                            with urllib.request.urlopen(detail_req, timeout=10) as detail_res:
+                                detail_soup = BeautifulSoup(detail_res.read(), 'html.parser')
+                                content_area = detail_soup.select_one('.post-content, .article-body, #content_area, .view-content')
+                                title_area = detail_soup.select_one('.post-title, .title, h1, .view-title')
+                                
+                                title = title_area.get_text().strip() if title_area else "따뜻한 마중물 편지"
+                                
+                                if content_area:
+                                    for img in content_area.find_all('img'):
+                                        img.decompose()
+                                    content_text = content_area.get_text().strip()
+                                else:
+                                    paragraphs = detail_soup.find_all('p')
+                                    content_text = "\n".join([p.get_text().strip() for p in paragraphs if len(p.get_text().strip()) > 30])
+                                
+                                if len(content_text) > 40:
+                                    scraped_items.append({
+                                        "title": title,
+                                        "content": content_text,
+                                        "category": category_name,
+                                        "link": link
+                                    })
+                                    print(f"   ↳ [수집완료] {title[:20]}... ({len(content_text)}자)")
+                        except Exception:
+                            continue
                             
-            time.sleep(1.5) # 서버 부하 방지를 위한 슬립
-        except urllib.error.URLError as ue:
-            print(f"❌ [{category_name}] 네트워크 오류: {ue}")
-        except Exception as ex:
-            print(f"❌ [{category_name}] 데이터 추출 중 에러: {ex}")
-            
+                time.sleep(0.5)
+            except urllib.error.URLError as ue:
+                print(f"❌ [{category_name}] {page_num}페이지 네트워크 오류: {ue}")
+                break
+            except Exception as ex:
+                print(f"❌ [{category_name}] {page_num}페이지 에러: {ex}")
+                continue
+                
     return scraped_items
 
 # ==========================================
