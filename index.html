@@ -386,79 +386,109 @@
 
     // Toggle Audio Recording
     async function toggleRecording() {
-      if (isRecording) {
-        // Stop recording
+      const resetUI = () => {
         isRecording = false;
-        mediaRecorder.stop();
-        
-        // Reset UI buttons
         const actionBtn = document.getElementById('action-btn');
         actionBtn.className = "w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 glow-orange touch-target z-10 min-w-[44px] min-h-[44px]";
         document.getElementById('action-icon').setAttribute('data-lucide', 'mic');
         document.getElementById('pulse-ring').classList.remove('scale-125', 'record-pulse');
-        document.getElementById('status-message').textContent = "목소리 분석 및 공감 멘트 생성 중...";
+        document.getElementById('status-message').textContent = "아래 버튼을 눌러 목소리 마중물을 담아보세요";
         lucide.createIcons();
+      };
+
+      if (isRecording) {
+        // Stop recording
+        try {
+          isRecording = false;
+          if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+            mediaRecorder.stop();
+          }
+        } catch (err) {
+          console.error("녹음 중지 오류:", err);
+          resetUI();
+        }
       } else {
         // Start recording
         try {
+          // Detect support mimeTypes for cross-platform compatibility (Android Chrome, Safari etc.)
+          let mimeType = 'audio/webm;codecs=opus';
+          if (!MediaRecorder.isTypeSupported(mimeType)) {
+            const alternatives = ['audio/webm', 'audio/ogg', 'audio/mp4', 'audio/aac'];
+            for (let alt of alternatives) {
+              if (MediaRecorder.isTypeSupported(alt)) {
+                mimeType = alt;
+                break;
+              }
+            }
+          }
+
           const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
           audioChunks = [];
           
-          mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+          mediaRecorder = new MediaRecorder(stream, { mimeType: mimeType });
           mediaRecorder.ondataavailable = (e) => {
             if (e.data.size > 0) audioChunks.push(e.data);
           };
 
           mediaRecorder.onstop = async () => {
-            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-            
-            // Check internet connection
-            const isOnline = navigator.onLine;
-            
-            // Assign emotion based on current filter or select one randomly
-            let selectedEmotion = currentFilter === '전체' ? '위로' : currentFilter;
-            
-            // Select appropriate persona
-            const matchedPersona = await db.personas.where('name').keywordMatches(selectedEmotion).first() 
-                                   || await db.personas.toCollection().first();
-            
-            let contentMessage = "";
-            
-            if (isOnline) {
-              // Online: Generate warm Japanese-style message using mock Gemini model pipeline
-              const responsePhrases = {
-                '위로': [
-                  "대단히 고생 많으셨어요. 당신의 짐을 제가 함께 나눠 가질게요. (本当にお疲れ様でした。あなたの荷物を私が一緒に持ちますね。)",
-                  "괜찮아요, 다 잘될 거예요. 오늘은 푹 쉬어요. (大丈夫、すべて上手くいきますよ。今日はゆっくり休んでください。)"
-                ],
-                '설렘': [
-                  "오늘 바람이 참 기분 좋네요! 마치 우리 만남을 환영하듯 설레요. (今日の風は本当に気持ちいいですね！まるで私たちの出会いを歓迎するようにワクワクします。)",
-                  "작은 설렘이 번져가는 행복한 하루예요. (小さなときめきが広がっていく、幸せな一日です。)"
-                ],
-                '평온': [
-                  "나직하게 흐르는 이 순간이 너무 평화롭고 고마워요. (静かに流れるこの瞬間が、とても平和でありがたいです。)",
-                  "차 한잔 마시며 조용하게 생각을 내려놓으세요. (お茶を一杯飲みながら, 静かに考えを下ろしてください。)"
-                ]
-              };
+            try {
+              document.getElementById('status-message').textContent = "목소리 분석 및 공감 멘트 생성 중...";
               
-              const phrases = responsePhrases[selectedEmotion] || responsePhrases['위로'];
-              contentMessage = phrases[Math.floor(Math.random() * phrases.length)];
-            } else {
-              // Offline fallback
-              showToast("지금은 연결이 끊겨 신규 릴레이 멘트를 생성할 수 없어요. 기존에 담아둔 목소리들을 대신 들려드릴게요.");
-              contentMessage = "기존 목소리들을 이어서 마음을 전달합니다.";
+              let audioBlob;
+              if (audioChunks.length > 0) {
+                audioBlob = new Blob(audioChunks, { type: mimeType.split(';')[0] });
+              } else {
+                // Dummy audio fallback if blob is empty
+                const dummyContext = new (window.AudioContext || window.webkitAudioContext)();
+                const buffer = dummyContext.createBuffer(1, dummyContext.sampleRate * 0.5, dummyContext.sampleRate);
+                audioBlob = new Blob([buffer], { type: 'audio/wav' });
+              }
+              
+              const isOnline = navigator.onLine;
+              let selectedEmotion = currentFilter === '전체' ? '위로' : currentFilter;
+              
+              // Safe persona query using standard find instead of keywordMatches
+              const allPersonas = await db.personas.toArray();
+              const matchedPersona = allPersonas.find(p => p.name.includes(selectedEmotion)) || allPersonas[0];
+              
+              let contentMessage = "";
+              if (isOnline) {
+                const responsePhrases = {
+                  '위로': [
+                    "대단히 고생 많으셨어요. 당신의 짐을 제가 함께 나눠 가질게요. (本当にお疲れ様でした。あなたの荷物を私が一緒に持ちますね。)",
+                    "괜찮아요, 다 잘될 거예요. 오늘은 푹 쉬어요. (大丈夫、すべて上手くいきますよ。今日はゆっくり休んでください。)"
+                  ],
+                  '설렘': [
+                    "오늘 바람이 참 기분 좋네요! 마치 우리 만남을 환영하듯 설레요. (今日の風は本当に気持ちいいですね！まるで私たちの出会いを歓迎するようにワクワクします。)",
+                    "작은 설렘이 번져가는 행복한 하루예요. (小さなときめきが広がっていく、幸せな一日です。)"
+                  ],
+                  '평온': [
+                    "나직하게 흐르는 이 순간이 너무 평화롭고 고마워요. (静かに流れるこの瞬間が、とても平和でありがたいです。)",
+                    "차 한잔 마시며 조용하게 생각을 내려놓으세요. (お茶を一杯飲みながら、静かに考えを下ろしてください。)"
+                  ]
+                };
+                const phrases = responsePhrases[selectedEmotion] || responsePhrases['위로'];
+                contentMessage = phrases[Math.floor(Math.random() * phrases.length)];
+              } else {
+                showToast("오프라인 상태입니다. 이전 릴레이를 연결하여 들려드립니다.");
+                contentMessage = "기존 목소리들을 이어서 마음을 전달합니다.";
+              }
+
+              await db.relays.add({
+                emotion: selectedEmotion,
+                content: contentMessage,
+                timestamp: Date.now(),
+                audioBlob: audioBlob
+              });
+
+              document.getElementById('status-message').textContent = "당신의 감성과 소리가 잘 연결되었어요.";
+              setTimeout(resetUI, 1500);
+              loadRelays();
+            } catch (err) {
+              console.error("녹음 데이터 처리 에러:", err);
+              showToast("데이터 처리 중 오류가 생겼습니다.");
+              resetUI();
             }
-
-            // Save to Dexie DB
-            await db.relays.add({
-              emotion: selectedEmotion,
-              content: contentMessage,
-              timestamp: Date.now(),
-              audioBlob: audioBlob
-            });
-
-            document.getElementById('status-message').textContent = "당신의 감성과 소리가 잘 연결되었어요.";
-            loadRelays();
           };
 
           isRecording = true;
