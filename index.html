@@ -198,6 +198,11 @@
       <!-- Dynamic list items -->
     </div>
 
+    <!-- Copyright Footer Notice -->
+    <footer class="mt-4 px-2 py-4 border-t border-orange-200/40 text-[10px] text-orange-950/40 leading-relaxed text-center font-medium">
+      위 글의 저작권은 행복한가에 있으며 모든 페이지 내용의 소유권은 행복한가에서 가지고 있습니다. 내용을 공유하실 때에는 글 하단 또는 제목에 '행복한가'를 반드시 표기 바랍니다.
+    </footer>
+
   </main>
 
   <!-- PWA Offline Toast Warning -->
@@ -212,18 +217,32 @@
 
     // 1. Dexie Database Setup
     const db = new Dexie('DangmokdamgeulDB');
-    db.version(1).stores({
+    db.version(2).stores({
       personas: '++id, name, style, tone, preferredWritingStyle',
-      primers: '++id, personaId, content, timestamp, weather, emotion, sensorContext',
+      primers: '++id, personaId, content, timestamp, weather, emotion, sensorContext, type',
       relays: '++id, primerId, personaId, content, audioBlob, timestamp, emotion'
     });
 
-    // Populate initial default personas if none exist
+    // Populate initial default personas and actual happy letters from m-letter.or.kr
     db.on('populate', () => {
       db.personas.bulkAdd([
         { name: '하루 (위로)', style: '예쁜 일본어 구어체', tone: '따스하고 다정한 목소리', preferredWritingStyle: '소박하고 따스한 말투' },
         { name: '사쿠라 (설렘)', style: '귀엽고 낭만적인 구어체', tone: '맑고 생기 넘치는 목소리', preferredWritingStyle: '발랄하고 감성 가득한 말투' },
         { name: '렌 (평온)', style: '차분하고 정갈한 구어체', tone: '나직하고 깊은 목소리', preferredWritingStyle: '담담하면서 평화로운 말투' }
+      ]);
+
+      // Populate actual m-letter happy content (마중물 편지)
+      db.primers.bulkAdd([
+        { type: "오늘의 편지", emotion: "위로", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요. '나는 이런 사람이야' 하면서 자신을 가두거나, '나는 안 맞아' 하면서 미리 포기하지 마세요.” — 김창완 <이제야 보이네> 중에서" },
+        { type: "오늘의 편지", emotion: "위로", content: "“부디 자기 인생을 다른 사람과 비교하며 비참해지지 않았으면 좋겠습니다. 허탈함 속의 나를 발견하는 것도 나쁘지 않아요. 괜한 불안을 느끼는 일도 일상의 아름다움 아닐까요?” — 김창완 <이제야 보이네> 중에서" },
+        { type: "오늘의 편지", emotion: "위로", content: "“자신을, 우리 삶을 재단하지 말아요. 어마어마한 기적을 가두지 말자고요.” — 김창완 <이제야 보이네> 중에서" },
+        { type: "오늘의 편지", emotion: "위로", content: "“우리는 매일 밤 서로의 목소리에 기대어 보이지 않는 선을 잇는다. 그것은 하루를 견뎌낸 이들에게 주는 소박한 위안이다.”" },
+        { type: "오늘의 편지", emotion: "위로", content: "“그늘이 깊다는 것은 그만큼 빛이 가깝다는 뜻입니다. 당신의 지친 하루에 조용히 손을 얹습니다.”" },
+        { type: "오늘의 편지", emotion: "설렘", content: "“어쩌면 오늘, 바람결에 실려 온 맑은 목소리가 당신의 마음을 가만히 두드릴지도 모릅니다. 기대해 보세요.”" },
+        { type: "오늘의 편지", emotion: "설렘", content: "“새로운 방향을 찾아 한 걸음 내딛는 일, 비록 불안할지라도 그것은 우리 삶이 꽃피기 시작하는 가장 설레는 기적입니다.”" },
+        { type: "오늘의 편지", emotion: "평온", content: "“'나는 이런 사람이야'라며 억지로 규정하지 않을 때, 마음속에는 비로소 고요하고 넓은 평온함이 찾아옵니다.”" },
+        { type: "오늘의 편지", emotion: "평온", content: "“불안마저 일상의 자연스러운 부분으로 받아들이고 흘려보낼 때, 우리의 일상은 가장 정갈하고 평화로워집니다.”" },
+        { type: "오늘의 편지", emotion: "평온", content: "“아무 일도 일어나지 않는 오후, 가볍게 스쳐 가는 새소리와 바람 소리 속에 우리의 평화가 조용히 깃들어 있다.”" }
       ]);
     });
 
@@ -282,39 +301,39 @@
     let audioChunks = [];
     let canvasAnimationId = null;
 
-    // Primers Data (마중물: 시, 수필, 오늘의 말)
-    const primersData = {
-      '전체': [
-        { type: "오늘의 편지", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요. '나는 이런 사람이야' 하면서 자신을 가두거나, '나는 안 맞아' 하면서 미리 포기하지 마세요.” — 김창완 <이제야 보이네> 중에서" },
-        { type: "오늘의 편지", content: "“부디 자기 인생을 다른 사람과 비교하며 비참해지지 않았으면 좋겠습니다. 허탈함 속의 나를 발견하는 것도 나쁘지 않아요. 괜한 불안을 느끼는 일도 일상의 아름다움 아닐까요?” — 김창완 <이제야 보이네> 중에서" },
-        { type: "오늘의 편지", content: "“자신을, 우리 삶을 재단하지 말아요. 어마어마한 기적을 가두지 말자고요.” — 김창완 <이제야 보이네> 중에서" }
-      ],
-      '위로': [
-        { type: "위로의 편지", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요. '나는 이런 사람이야' 하면서 자신을 가두거나, '나는 안 맞아' 하면서 미리 포기하지 마세요.”" },
-        { type: "위로의 편지", content: "“부디 자기 인생을 다른 사람과 비교하며 비참해지지 않았으면 좋겠습니다.”" },
-        { type: "위로의 편지", content: "“허탈함 속의 나를 발견하는 것도 나쁘지 않아요. 괜한 불안을 느끼는 일도 일상의 아름다움 아닐까요?”" }
-      ],
-      '설렘': [
-        { type: "설렘의 편지", content: "“자신을, 우리 삶을 재단하지 말아요. 우리 앞에 일어날 어마어마한 기적들을 가두지 말자고요.”" },
-        { type: "설렘의 편지", content: "“새로운 방향을 찾아 한 걸음 내딛는 일, 비록 불안할지라도 그것은 우리 삶이 꽃피기 시작하는 가장 설레는 기적입니다.”" }
-      ],
-      '평온': [
-        { type: "평온의 편지", content: "“'나는 이런 사람이야'라며 억지로 규정하지 않을 때, 마음속에는 비로소 고요하고 넓은 평온함이 찾아옵니다.”" },
-        { type: "평온의 편지", content: "“불안마저 일상의 자연스러운 부분으로 받아들이고 흘려보낼 때, 우리의 일상은 가장 정갈하고 평화로워집니다.”" }
-      ]
-    };
-
+    let loadedPrimers = [];
     let currentPrimerIndex = 0;
 
-    function rotatePrimer() {
-      const currentList = primersData[currentFilter] || primersData['전체'];
-      currentPrimerIndex = (currentPrimerIndex + 1) % currentList.length;
+    async function loadPrimersFromDB() {
+      try {
+        let items = [];
+        if (currentFilter === '전체') {
+          items = await db.primers.toArray();
+        } else {
+          items = await db.primers.where('emotion').equals(currentFilter).toArray();
+        }
+        
+        // If DB is empty, use memory fallback
+        if (items.length === 0) {
+          loadedPrimers = [
+            { type: "오늘의 편지", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요.”" }
+          ];
+        } else {
+          loadedPrimers = items;
+        }
+      } catch (err) {
+        console.error("마중물 불러오기 오류:", err);
+      }
+    }
+
+    async function rotatePrimer() {
+      if (loadedPrimers.length === 0) await loadPrimersFromDB();
+      currentPrimerIndex = (currentPrimerIndex + 1) % loadedPrimers.length;
       updatePrimerUI();
     }
 
     function updatePrimerUI() {
-      const currentList = primersData[currentFilter] || primersData['전체'];
-      const activePrimer = currentList[currentPrimerIndex % currentList.length];
+      const activePrimer = loadedPrimers[currentPrimerIndex % loadedPrimers.length] || { type: "오늘의 편지", content: "“가만히 귀를 기울이면 온기가 스며듭니다.”" };
       document.getElementById('primer-type').textContent = activePrimer.type;
       document.getElementById('primer-content').textContent = activePrimer.content;
     }
@@ -327,10 +346,11 @@
         currentFilter === e ? 'bg-orange-500 text-white shadow-md' : 'text-orange-950/70 hover:bg-orange-100/30'
       }`;
       btn.textContent = e;
-      btn.onclick = () => {
+      btn.onclick = async () => {
         currentFilter = e;
         currentPrimerIndex = 0;
         updateTabsUI();
+        await loadPrimersFromDB();
         updatePrimerUI();
         loadRelays();
       };
@@ -699,7 +719,9 @@
     }
 
     // Initial Loading
-    window.addEventListener('load', () => {
+    window.addEventListener('load', async () => {
+      await loadPrimersFromDB();
+      updatePrimerUI(); // Ensure primer text is rendered on start
       loadRelays();
 
       // PWA Service Worker Registration
