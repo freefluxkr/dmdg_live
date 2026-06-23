@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#fff7ed">
+  <title>당목담글 - 마음을 잇는 따뜻한 소리</title>
+  
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/love-letter.png">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Dexie.js (IndexedDB library) -->
+  <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
+
+  <!-- Google Fonts for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Gaegu:wght@400;700&family=Gowun+Batang:wght@400;700&family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: linear-gradient(135deg, #fffaf4 0%, #ffeeda 50%, #ffdcb4 100%);
+      min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    
+    .font-warm {
+      font-family: 'Gowun Batang', serif;
+    }
+
+    .font-comfort {
+      font-family: 'Comfortaa', cursive;
+    }
+
+    .font-cute {
+      font-family: 'Gaegu', cursive;
+    }
+
+    /* Micro-interaction & Active Scaling */
+    .touch-target {
+      touch-action: manipulation;
+    }
+    .touch-target:active {
+      transform: scale(0.95);
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 10px 30px rgba(251, 146, 60, 0.08);
+    }
+
+    /* Golden-Orange Soft Glows */
+    .glow-orange {
+      box-shadow: 0 0 25px rgba(251, 146, 60, 0.35);
+    }
+
+    /* Custom scrollbar for premium look */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(251, 146, 60, 0.3);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-between pb-8">
+
+  <!-- Warm background light circles -->
+  <div class="fixed top-[-10%] left-[-20%] w-[80vw] h-[80vw] rounded-full bg-orange-200/40 blur-[80px] pointer-events-none z-[-1]"></div>
+  <div class="fixed bottom-[10%] right-[-20%] w-[90vw] h-[90vw] rounded-full bg-amber-100/60 blur-[100px] pointer-events-none z-[-1]"></div>
+
+  <!-- Header -->
+  <header class="w-full max-w-md px-6 pt-8 flex items-center justify-between">
+    <div class="flex flex-col">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🍊</span>
+        <h1 class="text-2xl font-bold text-orange-950 font-warm tracking-tight">당목담글</h1>
+      </div>
+      <p class="text-xs text-orange-700/80 font-medium tracking-wide mt-0.5">마음을 이어주는 따스한 목소리 릴레이</p>
+    </div>
+    <div class="flex gap-2">
+      <!-- Database backup / restore triggers -->
+      <button onclick="exportData()" title="데이터 백업" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
+        <i data-lucide="download" class="w-5 h-5"></i>
+      </button>
+      <button onclick="document.getElementById('importFile').click()" title="데이터 불러오기" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
+        <i data-lucide="upload" class="w-5 h-5"></i>
+      </button>
+      <input type="file" id="importFile" accept=".json" class="hidden" onchange="importData(event)">
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="w-full max-w-md px-5 py-4 flex-grow flex flex-col justify-start gap-5">
+    
+    <!-- Emotion Filter & Mode Tabs -->
+    <div class="glass-card rounded-2xl p-2.5 flex items-center justify-between">
+      <div class="flex gap-1.5 overflow-x-auto scrollbar-none" id="emotion-tabs">
+        <!-- Will be dynamically populated -->
+      </div>
+      
+      <!-- Speech Speed Control -->
+      <div class="flex items-center gap-1.5 pl-2 border-l border-orange-200/60 text-orange-900">
+        <i data-lucide="gauge" class="w-4 h-4 text-orange-650"></i>
+        <select id="play-speed" class="bg-transparent text-xs font-bold text-orange-900 border-none focus:outline-none pr-1 cursor-pointer">
+          <option value="0.8">0.8x</option>
+          <option value="1.0" selected>1.0x</option>
+          <option value="1.2">1.2x</option>
+          <option value="1.5">1.5x</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Visualizer / Emotional Blob Card -->
+    <div class="glass-card rounded-3xl p-6 flex flex-col items-center justify-center min-h-[260px] relative overflow-hidden">
+      <!-- Background Soft Decorative Ring -->
+      <div class="absolute w-56 h-56 rounded-full border border-orange-100/30 animate-[ping_10s_infinite_linear]"></div>
+      
+      <canvas id="blob-canvas" width="300" height="240" class="w-full h-48 z-10"></canvas>
+      
+      <!-- Persona Information Display -->
+      <div class="absolute bottom-4 left-0 right-0 text-center z-20">
+        <p id="current-persona-text" class="text-xs font-semibold text-orange-850/70 font-warm">
+          따스한 감성 큐레이터 • 하루
+        </p>
+      </div>
+    </div>
+
+    <!-- Controls / Action Button -->
+    <div class="glass-card rounded-3xl p-5 flex flex-col gap-4 items-center">
+      <!-- Status Display -->
+      <div class="text-center">
+        <p id="status-message" class="text-sm font-semibold text-orange-900 font-warm">아래 버튼을 눌러 목소리 마중물을 담아보세요</p>
+      </div>
+
+      <!-- Record Button -->
+      <div class="relative flex items-center justify-center">
+        <!-- Pulsing background ring when recording -->
+        <div id="pulse-ring" class="absolute w-24 h-24 bg-red-400/20 rounded-full scale-0 transition-transform duration-500"></div>
+        <button id="action-btn" onclick="toggleRecording()" class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 glow-orange touch-target z-10 min-w-[44px] min-h-[44px]">
+          <i data-lucide="mic" id="action-icon" class="w-8 h-8"></i>
+        </button>
+      </div>
+
+      <!-- Helper info -->
+      <div class="w-full flex items-center justify-center gap-1.5 text-xs text-orange-700/60 font-medium">
+        <i data-lucide="info" class="w-3.5 h-3.5"></i>
+        <span>당신의 따뜻한 기운이 담겨요.</span>
+      </div>
+    </div>
+
+    <!-- Relay List Title -->
+    <div class="flex items-center justify-between px-1">
+      <h3 class="text-sm font-bold text-orange-950 font-warm flex items-center gap-1.5">
+        <i data-lucide="music-4" class="w-4 h-4 text-orange-600"></i>
+        <span>이어받은 따뜻한 소리들</span>
+      </h3>
+      <span id="relay-count" class="text-xs font-bold bg-orange-150 text-orange-800 px-2.5 py-0.5 rounded-full glass-card">0</span>
+    </div>
+
+    <!-- Relay List -->
+    <div id="relay-list" class="space-y-3.5 max-h-[300px] overflow-y-auto pr-1 pb-4">
+      <!-- Dynamic list items -->
+    </div>
+
+  </main>
+
+  <!-- PWA Offline Toast Warning -->
+  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-amber-950/90 text-amber-50 px-5 py-3 rounded-full text-xs font-semibold shadow-2xl z-50 flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none">
+    <i data-lucide="wifi-off" class="w-4 h-4 text-amber-400"></i>
+    <span id="toast-text">지금은 연결이 끊겨 릴레이를 생성할 수 없어요.</span>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. Dexie Database Setup
+    const db = new Dexie('DangmokdamgeulDB');
+    db.version(1).stores({
+      personas: '++id, name, style, tone, preferredWritingStyle',
+      primers: '++id, personaId, content, timestamp, weather, emotion, sensorContext',
+      relays: '++id, primerId, personaId, content, audioBlob, timestamp, emotion'
+    });
+
+    // Populate initial default personas if none exist
+    db.on('populate', () => {
+      db.personas.bulkAdd([
+        { name: '하루 (위로)', style: '예쁜 일본어 구어체', tone: '따스하고 다정한 목소리', preferredWritingStyle: '소박하고 따스한 말투' },
+        { name: '사쿠라 (설렘)', style: '귀엽고 낭만적인 구어체', tone: '맑고 생기 넘치는 목소리', preferredWritingStyle: '발랄하고 감성 가득한 말투' },
+        { name: '렌 (평온)', style: '차분하고 정갈한 구어체', tone: '나직하고 깊은 목소리', preferredWritingStyle: '담담하면서 평화로운 말투' }
+      ]);
+    });
+
+    // Open DB
+    db.open().catch((err) => {
+      console.error("DB 오픈 실패:", err);
+    });
+
+    // Audio Engine
+    class AudioPlayerEngine {
+      constructor() {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.analyser = this.audioContext.createAnalyser();
+        this.analyser.fftSize = 64;
+        this.analyser.connect(this.audioContext.destination);
+        this.playbackRate = 1.0;
+        this.nextStartTime = 0;
+      }
+
+      setSpeed(rate) {
+        this.playbackRate = rate;
+      }
+
+      async playChunk(arrayBuffer) {
+        if (this.audioContext.state === 'suspended') {
+          await this.audioContext.resume();
+        }
+        
+        try {
+          const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+          const source = this.audioContext.createBufferSource();
+          source.buffer = audioBuffer;
+          source.playbackRate.value = this.playbackRate;
+          
+          source.connect(this.analyser);
+          source.connect(this.audioContext.destination);
+
+          const currentTime = this.audioContext.currentTime;
+          if (this.nextStartTime < currentTime) {
+            this.nextStartTime = currentTime;
+          }
+          
+          source.start(this.nextStartTime);
+          this.nextStartTime += audioBuffer.duration / this.playbackRate;
+        } catch (e) {
+          console.error("오디오 재생 실패:", e);
+        }
+      }
+    }
+
+    const audioEngine = new AudioPlayerEngine();
+    let currentFilter = '전체';
+    const emotions = ['전체', '위로', '설렘', '평온'];
+    let isRecording = false;
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let canvasAnimationId = null;
+
+    // Build Emotion Tabs UI
+    const emotionTabs = document.getElementById('emotion-tabs');
+    emotions.forEach(e => {
+      const btn = document.createElement('button');
+      btn.className = `px-4 py-2 rounded-xl text-xs font-bold transition-all touch-target select-none ${
+        currentFilter === e ? 'bg-orange-500 text-white shadow-md' : 'text-orange-950/70 hover:bg-orange-100/30'
+      }`;
+      btn.textContent = e;
+      btn.onclick = () => {
+        currentFilter = e;
+        updateTabsUI();
+        loadRelays();
+      };
+      emotionTabs.appendChild(btn);
+    });
+
+    function updateTabsUI() {
+      Array.from(emotionTabs.children).forEach(btn => {
+        const e = btn.textContent;
+        if (currentFilter === e) {
+          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all touch-target select-none bg-orange-500 text-white shadow-md';
+        } else {
+          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all touch-target select-none text-orange-950/70 hover:bg-orange-100/30';
+        }
+      });
+    }
+
+    // Canvas Blob Visualizer
+    const canvas = document.getElementById('blob-canvas');
+    const ctx = canvas.getContext('2d');
+    let time = 0;
+
+    function drawBlob() {
+      canvasAnimationId = requestAnimationFrame(drawBlob);
+      
+      const bufferLength = audioEngine.analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      audioEngine.analyser.getByteFrequencyData(dataArray);
+
+      let sum = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        sum += dataArray[i];
+      }
+      const avg = sum / bufferLength;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      
+      // Gentle pulsing base radius based on sound
+      const baseRadius = 55 + avg * 0.45;
+
+      // Draw soft outer radiant gradient
+      const outerGlow = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, baseRadius * 1.8);
+      outerGlow.addColorStop(0, 'rgba(251, 146, 60, 0.35)');
+      outerGlow.addColorStop(0.5, 'rgba(244, 63, 94, 0.15)');
+      outerGlow.addColorStop(1, 'rgba(255, 238, 219, 0)');
+      
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, baseRadius * 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = outerGlow;
+      ctx.fill();
+
+      // Draw the organic moving Blob shape
+      ctx.beginPath();
+      const points = 12;
+      for (let i = 0; i < points; i++) {
+        const angle = (i / points) * Math.PI * 2;
+        // Apply sinusoidal waves combined with sound volume to give organic feeling
+        const offset = Math.sin(angle * 3 + time) * 6 + Math.cos(angle * 2 - time * 0.5) * 4 + (avg > 0 ? (dataArray[i % bufferLength] / 255) * 15 : 0);
+        const r = baseRadius + offset;
+        const x = centerX + Math.cos(angle) * r;
+        const y = centerY + Math.sin(angle) * r;
+        
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.closePath();
+      
+      const blobGrad = ctx.createLinearGradient(centerX - baseRadius, centerY - baseRadius, centerX + baseRadius, centerY + baseRadius);
+      blobGrad.addColorStop(0, '#f97316'); // Orange
+      blobGrad.addColorStop(1, '#ec4899'); // Pink
+      
+      ctx.fillStyle = blobGrad;
+      ctx.shadowColor = 'rgba(244, 63, 94, 0.3)';
+      ctx.shadowBlur = 15;
+      ctx.fill();
+      ctx.shadowBlur = 0; // reset shadow
+
+      // Core light accent
+      ctx.beginPath();
+      ctx.arc(centerX - 10, centerY - 15, baseRadius * 0.25, 0, Math.PI * 2);
+      const coreGrad = ctx.createRadialGradient(centerX - 10, centerY - 15, 0, centerX - 10, centerY - 15, baseRadius * 0.25);
+      coreGrad.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+      coreGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = coreGrad;
+      ctx.fill();
+
+      time += 0.035;
+    }
+    
+    drawBlob();
+
+    // Show Custom Alert/Toast
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 4000);
+    }
+
+    // Toggle Audio Recording
+    async function toggleRecording() {
+      if (isRecording) {
+        // Stop recording
+        isRecording = false;
+        mediaRecorder.stop();
+        
+        // Reset UI buttons
+        const actionBtn = document.getElementById('action-btn');
+        actionBtn.className = "w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 glow-orange touch-target z-10 min-w-[44px] min-h-[44px]";
+        document.getElementById('action-icon').setAttribute('data-lucide', 'mic');
+        document.getElementById('pulse-ring').classList.remove('scale-125', 'record-pulse');
+        document.getElementById('status-message').textContent = "목소리 분석 및 공감 멘트 생성 중...";
+        lucide.createIcons();
+      } else {
+        // Start recording
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          audioChunks = [];
+          
+          mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+          mediaRecorder.ondataavailable = (e) => {
+            if (e.data.size > 0) audioChunks.push(e.data);
+          };
+
+          mediaRecorder.onstop = async () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            
+            // Check internet connection
+            const isOnline = navigator.onLine;
+            
+            // Assign emotion based on current filter or select one randomly
+            let selectedEmotion = currentFilter === '전체' ? '위로' : currentFilter;
+            
+            // Select appropriate persona
+            const matchedPersona = await db.personas.where('name').keywordMatches(selectedEmotion).first() 
+                                   || await db.personas.toCollection().first();
+            
+            let contentMessage = "";
+            
+            if (isOnline) {
+              // Online: Generate warm Japanese-style message using mock Gemini model pipeline
+              const responsePhrases = {
+                '위로': [
+                  "대단히 고생 많으셨어요. 당신의 짐을 제가 함께 나눠 가질게요. (本当にお疲れ様でした。あなたの荷物を私が一緒に持ちますね。)",
+                  "괜찮아요, 다 잘될 거예요. 오늘은 푹 쉬어요. (大丈夫、すべて上手くいきますよ。今日はゆっくり休んでください。)"
+                ],
+                '설렘': [
+                  "오늘 바람이 참 기분 좋네요! 마치 우리 만남을 환영하듯 설레요. (今日の風は本当に気持ちいいですね！まるで私たちの出会いを歓迎するようにワクワクします。)",
+                  "작은 설렘이 번져가는 행복한 하루예요. (小さなときめきが広がっていく、幸せな一日です。)"
+                ],
+                '평온': [
+                  "나직하게 흐르는 이 순간이 너무 평화롭고 고마워요. (静かに流れるこの瞬間が、とても平和でありがたいです。)",
+                  "차 한잔 마시며 조용하게 생각을 내려놓으세요. (お茶を一杯飲みながら, 静かに考えを下ろしてください。)"
+                ]
+              };
+              
+              const phrases = responsePhrases[selectedEmotion] || responsePhrases['위로'];
+              contentMessage = phrases[Math.floor(Math.random() * phrases.length)];
+            } else {
+              // Offline fallback
+              showToast("지금은 연결이 끊겨 신규 릴레이 멘트를 생성할 수 없어요. 기존에 담아둔 목소리들을 대신 들려드릴게요.");
+              contentMessage = "기존 목소리들을 이어서 마음을 전달합니다.";
+            }
+
+            // Save to Dexie DB
+            await db.relays.add({
+              emotion: selectedEmotion,
+              content: contentMessage,
+              timestamp: Date.now(),
+              audioBlob: audioBlob
+            });
+
+            document.getElementById('status-message').textContent = "당신의 감성과 소리가 잘 연결되었어요.";
+            loadRelays();
+          };
+
+          isRecording = true;
+          mediaRecorder.start(100);
+          
+          // Set UI to recording state
+          const actionBtn = document.getElementById('action-btn');
+          actionBtn.className = "w-20 h-20 rounded-full bg-gradient-to-br from-rose-600 to-red-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 touch-target z-10 min-w-[44px] min-h-[44px]";
+          document.getElementById('action-icon').setAttribute('data-lucide', 'square');
+          document.getElementById('pulse-ring').classList.add('scale-125', 'record-pulse');
+          document.getElementById('status-message').textContent = "따뜻한 목소리를 담고 있어요... (멈추려면 탭)";
+          lucide.createIcons();
+          
+        } catch (err) {
+          console.error("녹음 시작 에러:", err);
+          showToast("마이크 권한을 승인해주세요.");
+        }
+      }
+    }
+
+    // Play a single relay audio item
+    async function playRelay(id) {
+      const relay = await db.relays.get(id);
+      if (!relay || !relay.audioBlob) return;
+
+      const speedSelect = document.getElementById('play-speed');
+      audioEngine.setSpeed(parseFloat(speedSelect.value));
+
+      // Visual feedback on visualizer
+      const personaDisplay = document.getElementById('current-persona-text');
+      personaDisplay.textContent = `당목담글 재생 중 • ${relay.emotion} 릴레이`;
+
+      const arrayBuffer = await relay.audioBlob.arrayBuffer();
+      await audioEngine.playChunk(arrayBuffer);
+    }
+
+    // Load Relays from IndexedDB
+    async function loadRelays() {
+      const relayList = document.getElementById('relay-list');
+      relayList.innerHTML = '';
+
+      let items = [];
+      if (currentFilter === '전체') {
+        items = await db.relays.orderBy('timestamp').reverse().toArray();
+      } else {
+        items = await db.relays.where('emotion').equals(currentFilter).reverse().toArray();
+      }
+
+      document.getElementById('relay-count').textContent = items.length;
+
+      if (items.length === 0) {
+        relayList.innerHTML = `
+          <div class="text-center py-8 text-orange-950/40 text-xs font-semibold">
+            아직 여기에 담긴 목소리가 없어요.<br>첫 번째 마중물을 담아보세요.
+          </div>
+        `;
+        return;
+      }
+
+      items.forEach(relay => {
+        const item = document.createElement('div');
+        item.className = "glass-card p-4 rounded-2xl flex items-center justify-between gap-3 shadow-sm active:scale-[0.98] transition-transform duration-200 cursor-pointer";
+        item.onclick = () => playRelay(relay.id);
+        
+        // Pick custom pastel tags
+        let tagClass = "bg-orange-100/60 text-orange-800";
+        if (relay.emotion === '설렘') tagClass = "bg-rose-100/60 text-rose-800";
+        if (relay.emotion === '평온') tagClass = "bg-amber-100/60 text-amber-800";
+
+        item.innerHTML = `
+          <div class="flex-grow min-w-0">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${tagClass}">${relay.emotion}</span>
+              <span class="text-[10px] text-orange-950/40 font-semibold">${new Date(relay.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+            </div>
+            <p class="text-xs font-medium text-orange-950 truncate">${relay.content}</p>
+          </div>
+          <button class="w-10 h-10 rounded-full bg-orange-100/80 hover:bg-orange-200 text-orange-850 flex items-center justify-center transition-colors min-w-[40px] min-h-[40px]">
+            <i data-lucide="play" class="w-4.5 h-4.5"></i>
+          </button>
+        `;
+        relayList.appendChild(item);
+      });
+      lucide.createIcons();
+    }
+
+    // Export Dexie Database to JSON file
+    async function exportData() {
+      try {
+        const relays = await db.relays.toArray();
+        // Convert Blobs to base64 for JSON serialization
+        const serializedRelays = await Promise.all(relays.map(async (r) => {
+          const buffer = await r.audioBlob.arrayBuffer();
+          const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+          return {
+            ...r,
+            audioBlobBase64: base64,
+            audioBlob: undefined // clear to avoid serialization crash
+          };
+        }));
+
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(serializedRelays));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `dangmokdamgeul_backup_${Date.now()}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        showToast("데이터 백업 파일이 저장되었습니다.");
+      } catch (err) {
+        console.error("백업 오류:", err);
+        showToast("백업 생성 중 문제가 생겼어요.");
+      }
+    }
+
+    // Import Dexie Database from JSON file
+    async function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const rawRelays = JSON.parse(e.target.result);
+          
+          await db.relays.clear();
+          
+          for (let r of rawRelays) {
+            // Restore Base64 to Blob
+            const binaryStr = atob(r.audioBlobBase64);
+            const bytes = new Uint8Array(binaryStr.length);
+            for (let i = 0; i < binaryStr.length; i++) {
+              bytes[i] = binaryStr.charCodeAt(i);
+            }
+            const audioBlob = new Blob([bytes], { type: 'audio/webm' });
+            
+            await db.relays.add({
+              emotion: r.emotion,
+              content: r.content,
+              timestamp: r.timestamp || Date.now(),
+              audioBlob: audioBlob
+            });
+          }
+          
+          showToast("데이터를 성공적으로 복원했습니다!");
+          loadRelays();
+        } catch (err) {
+          console.error("가져오기 에러:", err);
+          showToast("잘못된 백업 파일 형식입니다.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Initial Loading
+    window.addEventListener('load', () => {
+      loadRelays();
+
+      // PWA Service Worker Registration
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('서비스 워커가 등록되었습니다!', reg))
+          .catch(err => console.error('서비스 워커 등록 실패:', err));
+      }
+    });
+
+  </script>
+</body>
+</html>

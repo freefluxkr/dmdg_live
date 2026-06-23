@@ -1,0 +1,21 @@
+{
+  "short_name": "당목담글",
+  "name": "당목담글 - 마음을 잇는 따뜻한 소리",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/color/192/love-letter.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://img.icons8.com/color/512/love-letter.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#fff7ed",
+  "theme_color": "#fff7ed",
+  "display": "standalone",
+  "orientation": "portrait"
+}
