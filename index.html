@@ -194,7 +194,13 @@
         <i data-lucide="music-4" class="w-4 h-4 text-orange-600"></i>
         <span>이어받은 따뜻한 소리들</span>
       </h3>
-      <span id="relay-count" class="text-xs font-bold bg-orange-150 text-orange-800 px-2.5 py-0.5 rounded-full glass-card">0</span>
+      <div class="flex items-center gap-2">
+        <button onclick="startAudiobook()" class="text-xs font-bold bg-gradient-to-r from-orange-500 to-rose-500 text-white px-3 py-1.5 rounded-full shadow-sm hover:scale-105 transition-transform flex items-center gap-1 touch-target">
+          <i data-lucide="headphones" class="w-3.5 h-3.5"></i>
+          <span>오디오북 듣기</span>
+        </button>
+        <span id="relay-count" class="text-xs font-bold bg-orange-150 text-orange-800 px-2.5 py-0.5 rounded-full glass-card">0</span>
+      </div>
     </div>
 
     <!-- Relay List -->
@@ -208,6 +214,45 @@
     </footer>
 
   </main>
+
+  <!-- Audiobook Overlay Player Control Panel -->
+  <div id="audiobook-player" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-[90%] max-w-sm glass-card rounded-3xl p-4 shadow-2xl z-40 hidden border-t-2 border-orange-400 transition-all duration-300">
+    <div class="flex flex-col gap-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-orange-850 flex items-center gap-1">
+          <span class="animate-pulse">🎧</span>
+          <span>마음 오디오북 연속 재생 중</span>
+        </span>
+        <button onclick="stopAudiobook()" class="text-orange-950/50 hover:text-orange-900 transition-colors p-1">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      
+      <!-- Progress Bar & Active Info -->
+      <div class="bg-orange-50/50 rounded-xl p-2.5 border border-orange-100 flex flex-col gap-1">
+        <div class="flex justify-between text-[10px] font-bold text-orange-800">
+          <span id="audiobook-emotion-badge" class="px-2 py-0.5 rounded-full bg-orange-200/60">위로</span>
+          <span id="audiobook-track-index">1 / 1</span>
+        </div>
+        <p id="audiobook-text" class="text-xs font-medium text-orange-950 font-warm leading-relaxed truncate">
+          로딩 중...
+        </p>
+      </div>
+
+      <!-- Playback Controls -->
+      <div class="flex items-center justify-center gap-5">
+        <button onclick="prevAudiobookTrack()" class="p-2 rounded-full hover:bg-orange-100 text-orange-800 transition-colors touch-target">
+          <i data-lucide="skip-back" class="w-5 h-5"></i>
+        </button>
+        <button onclick="toggleAudiobookPlay()" id="audiobook-play-btn" class="w-12 h-12 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-md touch-target">
+          <i data-lucide="pause" class="w-6 h-6"></i>
+        </button>
+        <button onclick="nextAudiobookTrack()" class="p-2 rounded-full hover:bg-orange-100 text-orange-800 transition-colors touch-target">
+          <i data-lucide="skip-forward" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- PWA Offline Toast Warning -->
   <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-amber-950/90 text-amber-50 px-5 py-3 rounded-full text-xs font-semibold shadow-2xl z-50 flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none">
@@ -308,7 +353,7 @@
         this.playbackRate = rate;
       }
 
-      async playChunk(arrayBuffer) {
+      async playChunk(arrayBuffer, onEndedCallback) {
         if (this.audioContext.state === 'suspended') {
           await this.audioContext.resume();
         }
@@ -327,10 +372,18 @@
             this.nextStartTime = currentTime;
           }
           
+          if (onEndedCallback) {
+            source.onended = () => {
+              // Ensure callback runs after the playback duration (taking playbackRate into account)
+              setTimeout(onEndedCallback, 100);
+            };
+          }
+          
           source.start(this.nextStartTime);
           this.nextStartTime += audioBuffer.duration / this.playbackRate;
         } catch (e) {
           console.error("오디오 재생 실패:", e);
+          if (onEndedCallback) onEndedCallback();
         }
       }
     }
@@ -707,6 +760,190 @@
 
         window.speechSynthesis.speak(utterance);
       }
+    }
+
+    // --- Audiobook Playback State and Functions ---
+    let audiobookTracks = [];
+    let audiobookIndex = 0;
+    let audiobookPlaying = false;
+    let isAudiobookMode = false;
+    let isTtsSpeaking = false;
+
+    async function startAudiobook() {
+      // Load current filtered relays
+      let items = [];
+      if (currentFilter === '전체') {
+        items = await db.relays.orderBy('timestamp').reverse().toArray();
+      } else {
+        items = await db.relays.where('emotion').equals(currentFilter).reverse().toArray();
+      }
+
+      if (items.length === 0) {
+        showToast("오디오북을 구성할 소리가 없습니다. 먼저 녹음해 주세요!");
+        return;
+      }
+
+      audiobookTracks = items;
+      audiobookIndex = 0;
+      isAudiobookMode = true;
+      audiobookPlaying = true;
+
+      // Show Player UI
+      const playerEl = document.getElementById('audiobook-player');
+      playerEl.classList.remove('hidden');
+
+      // Update Play Button Icon
+      updateAudiobookPlayIcon();
+      
+      playAudiobookCurrentTrack();
+    }
+
+    function stopAudiobook() {
+      audiobookPlaying = false;
+      isAudiobookMode = false;
+      window.speechSynthesis.cancel();
+      
+      const playerEl = document.getElementById('audiobook-player');
+      playerEl.classList.add('hidden');
+      
+      // Restore normal visualizer text
+      const personaDisplay = document.getElementById('current-persona-text');
+      personaDisplay.textContent = "따스한 감성 큐레이터 • 하루";
+    }
+
+    function toggleAudiobookPlay() {
+      if (!isAudiobookMode) return;
+      audiobookPlaying = !audiobookPlaying;
+      updateAudiobookPlayIcon();
+
+      if (audiobookPlaying) {
+        playAudiobookCurrentTrack();
+      } else {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function updateAudiobookPlayIcon() {
+      const btn = document.getElementById('audiobook-play-btn');
+      if (audiobookPlaying) {
+        btn.innerHTML = `<i data-lucide="pause" class="w-6 h-6"></i>`;
+      } else {
+        btn.innerHTML = `<i data-lucide="play" class="w-6 h-6 ml-0.5"></i>`;
+      }
+      lucide.createIcons();
+    }
+
+    function nextAudiobookTrack() {
+      if (!isAudiobookMode) return;
+      window.speechSynthesis.cancel();
+      audiobookIndex = (audiobookIndex + 1) % audiobookTracks.length;
+      playAudiobookCurrentTrack();
+    }
+
+    function prevAudiobookTrack() {
+      if (!isAudiobookMode) return;
+      window.speechSynthesis.cancel();
+      audiobookIndex = (audiobookIndex - 1 + audiobookTracks.length) % audiobookTracks.length;
+      playAudiobookCurrentTrack();
+    }
+
+    async function playAudiobookCurrentTrack() {
+      if (!isAudiobookMode || !audiobookPlaying) return;
+      if (audiobookIndex < 0 || audiobookIndex >= audiobookTracks.length) return;
+
+      const relay = audiobookTracks[audiobookIndex];
+      
+      // Update UI elements
+      document.getElementById('audiobook-track-index').textContent = `${audiobookIndex + 1} / ${audiobookTracks.length}`;
+      document.getElementById('audiobook-text').textContent = relay.content;
+      
+      const badge = document.getElementById('audiobook-emotion-badge');
+      badge.textContent = relay.emotion;
+      
+      // Set badge color depending on emotion
+      badge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold " + 
+        (relay.emotion === '설렘' ? 'bg-rose-100/60 text-rose-800' : 
+         relay.emotion === '평온' ? 'bg-amber-100/60 text-amber-800' : 'bg-orange-200/60 text-orange-800');
+
+      // Visual feedback on main screen
+      const personaDisplay = document.getElementById('current-persona-text');
+      personaDisplay.textContent = `오디오북 재생 중 • ${relay.emotion} ${audiobookIndex + 1}번 째 이야기`;
+
+      const speedSelect = document.getElementById('play-speed');
+      const playbackRate = parseFloat(speedSelect.value);
+      audioEngine.setSpeed(playbackRate);
+
+      // Cancel any ongoing TTS before proceeding
+      window.speechSynthesis.cancel();
+
+      // Step 1: Play voice recording, once done, trigger TTS and next track
+      if (relay.audioBlob) {
+        const arrayBuffer = await relay.audioBlob.arrayBuffer();
+        
+        // playChunk with callback
+        await audioEngine.playChunk(arrayBuffer, () => {
+          // Play matching TTS if audiobook is still active & playing
+          if (isAudiobookMode && audiobookPlaying) {
+            playTtsAndThenNext(relay, playbackRate);
+          }
+        });
+      } else {
+        // Fallback directly to TTS if no voice recording
+        playTtsAndThenNext(relay, playbackRate);
+      }
+    }
+
+    function playTtsAndThenNext(relay, playbackRate) {
+      if (!relay.content) {
+        // Auto-advance if no content text
+        setTimeout(autoAdvance, 1000);
+        return;
+      }
+
+      const jpRegex = /\(([^)]+)\)/;
+      const match = relay.content.match(jpRegex);
+      const speechText = match ? match[1] : relay.content;
+
+      const utterance = new SpeechSynthesisUtterance(speechText);
+      utterance.lang = 'ja-JP';
+      utterance.rate = playbackRate;
+
+      const voices = window.speechSynthesis.getVoices();
+      const jaVoice = voices.find(v => v.lang.startsWith('ja') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Microsoft')));
+      if (jaVoice) {
+        utterance.voice = jaVoice;
+      }
+
+      // Chain transition onend
+      utterance.onend = () => {
+        if (isAudiobookMode && audiobookPlaying) {
+          autoAdvance();
+        }
+      };
+
+      utterance.onerror = () => {
+        if (isAudiobookMode && audiobookPlaying) {
+          autoAdvance();
+        }
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function autoAdvance() {
+      // Pause slightly between tracks for professional pacing
+      setTimeout(() => {
+        if (isAudiobookMode && audiobookPlaying) {
+          audiobookIndex++;
+          if (audiobookIndex < audiobookTracks.length) {
+            playAudiobookCurrentTrack();
+          } else {
+            // End of book
+            stopAudiobook();
+            showToast("오디오북을 모두 들었습니다. 감사합니다! 🍊");
+          }
+        }
+      }, 1200);
     }
 
     // Load Relays from IndexedDB
