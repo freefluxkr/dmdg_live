@@ -668,17 +668,45 @@
     // Play a single relay audio item
     async function playRelay(id) {
       const relay = await db.relays.get(id);
-      if (!relay || !relay.audioBlob) return;
+      if (!relay) return;
 
       const speedSelect = document.getElementById('play-speed');
-      audioEngine.setSpeed(parseFloat(speedSelect.value));
+      const playbackRate = parseFloat(speedSelect.value);
+      audioEngine.setSpeed(playbackRate);
 
       // Visual feedback on visualizer
       const personaDisplay = document.getElementById('current-persona-text');
       personaDisplay.textContent = `당목담글 재생 중 • ${relay.emotion} 릴레이`;
 
-      const arrayBuffer = await relay.audioBlob.arrayBuffer();
-      await audioEngine.playChunk(arrayBuffer);
+      // 1. Play back original recorded voice (Korean)
+      if (relay.audioBlob) {
+        const arrayBuffer = await relay.audioBlob.arrayBuffer();
+        await audioEngine.playChunk(arrayBuffer);
+      }
+
+      // 2. Speak matching Japanese translation text using Web Speech API (TTS)
+      if (relay.content) {
+        // Extract Japanese characters inside parentheses if present, otherwise read full text
+        const jpRegex = /\(([^)]+)\)/;
+        const match = relay.content.match(jpRegex);
+        const speechText = match ? match[1] : relay.content;
+
+        // Cancel previous speech if running
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(speechText);
+        utterance.lang = 'ja-JP'; // Set language to Japanese
+        utterance.rate = playbackRate; // Apply custom speed rate
+        
+        // Find a warm Japanese female voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const jaVoice = voices.find(v => v.lang.startsWith('ja') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Microsoft')));
+        if (jaVoice) {
+          utterance.voice = jaVoice;
+        }
+
+        window.speechSynthesis.speak(utterance);
+      }
     }
 
     // Load Relays from IndexedDB
