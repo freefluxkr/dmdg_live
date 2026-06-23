@@ -39,5 +39,18 @@
 
 ---
 
+## 🔗 주요 접속 및 관리 URL 정보
+
+이 프로젝트를 관리하고 접속할 수 있는 실시간 링크 정보입니다:
+
+* **당목담글 모바일 PWA 라이브 서비스**: [https://freefluxkr.github.io/dmdg_live/](https://freefluxkr.github.io/dmdg_live/)
+* **GitHub 원격 소스코드 저장소**: [https://github.com/freefluxkr/dmdg_live](https://github.com/freefluxkr/dmdg_live)
+* **GitHub Actions 크롤러 대시보드**: [https://github.com/freefluxkr/dmdg_live/actions](https://github.com/freefluxkr/dmdg_live/actions)
+* **Firebase Console (DMDG-LIVE)**: [https://console.firebase.google.com/u/0/project/dmdg-live/overview](https://console.firebase.google.com/u/0/project/dmdg-live/overview)
+* **Firebase Firestore 실시간 데이터베이스**: [https://console.firebase.google.com/u/0/project/dmdg-live/firestore/databases/-default-/data](https://console.firebase.google.com/u/0/project/dmdg-live/firestore/databases/-default-/data)
+* **Firebase SDK 비공개 키 생성 위치**: [https://console.firebase.google.com/u/0/project/dmdg-live/settings/serviceaccounts/adminsdk](https://console.firebase.google.com/u/0/project/dmdg-live/settings/serviceaccounts/adminsdk)
+
+---
+
 ## 🧡 배포 확인
-모든 기능 코드와 자동화 파일은 원격 깃허브 저장소(`https://github.com/freefluxkr/dmdg_live.git`) `main` 브랜치에 안전하게 커밋 및 강제 푸시 완료되었으며, 깃허브 페이지를 통해 최신 버전 웹 앱이 라이브 서비스되고 있습니다.
+모든 기능 코드와 자동화 파일은 원격 깃허브 저장소 main 브랜치에 안전하게 커밋 및 강제 푸시 완료되었으며, 깃허브 페이지를 통해 최신 버전 웹 앱이 라이브 서비스되고 있습니다.
