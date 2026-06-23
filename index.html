@@ -26,6 +26,10 @@
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
   <style>
     body {
       font-family: 'Pretendard', sans-serif;
@@ -331,6 +335,19 @@
       }
     }
 
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnISNciX3r53A3oLR4FaLUNpmyKkiharc",
+      authDomain: "dmdg-pwa.firebaseapp.com",
+      projectId: "dmdg-pwa",
+      storageBucket: "dmdg-pwa.firebasestorage.app",
+      messagingSenderId: "998738485811",
+      appId: "1:998738485811:web:9d49012ec8b1d3c5bf7946",
+      measurementId: "G-WZNW6P49VM"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const firestore = firebase.firestore();
+
     const audioEngine = new AudioPlayerEngine();
     let currentFilter = '전체';
     const emotions = ['전체', '위로', '설렘', '평온'];
@@ -344,20 +361,46 @@
 
     async function loadPrimersFromDB() {
       try {
-        let items = [];
-        if (currentFilter === '전체') {
-          items = await db.primers.toArray();
-        } else {
-          items = await db.primers.where('emotion').equals(currentFilter).toArray();
+        const isOnline = navigator.onLine;
+        
+        if (isOnline) {
+          console.log("Firebase Firestore에서 마중물 데이터를 로드합니다.");
+          let queryRef = firestore.collection("primers");
+          if (currentFilter !== '전체') {
+            queryRef = queryRef.where("emotion", "==", currentFilter);
+          }
+          
+          const snapshot = await queryRef.get();
+          const items = [];
+          snapshot.forEach(doc => {
+            items.push(doc.data());
+          });
+
+          if (items.length > 0) {
+            loadedPrimers = items;
+            
+            // Sync to local Dexie DB for offline-first resilience
+            await db.primers.clear();
+            await db.primers.bulkAdd(items);
+            return;
+          }
         }
         
-        // If DB is empty, use memory fallback
-        if (items.length === 0) {
+        // Fallback to local Dexie database if offline or Firestore query returned 0 items
+        console.log("로컬 데이터베이스(IndexedDB)에서 마중물 데이터를 로드합니다.");
+        let localItems = [];
+        if (currentFilter === '전체') {
+          localItems = await db.primers.toArray();
+        } else {
+          localItems = await db.primers.where('emotion').equals(currentFilter).toArray();
+        }
+        
+        if (localItems.length === 0) {
           loadedPrimers = [
             { type: "오늘의 편지", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요.”" }
           ];
         } else {
-          loadedPrimers = items;
+          loadedPrimers = localItems;
         }
       } catch (err) {
         console.error("마중물 불러오기 오류:", err);
@@ -677,7 +720,7 @@
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${tagClass}">${relay.emotion}</span>
               <span class="text-[10px] text-orange-950/40 font-semibold">${new Date(relay.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
             </div>
-            <p class="text-xs font-medium text-orange-950 truncate">${relay.content}</p>
+            <p class="text-xs font-medium text-orange-950 leading-relaxed">${relay.content}</p>
           </div>
           <button class="w-10 h-10 rounded-full bg-orange-100/80 hover:bg-orange-200 text-orange-850 flex items-center justify-center transition-colors min-w-[40px] min-h-[40px]">
             <i data-lucide="play" class="w-4.5 h-4.5"></i>
