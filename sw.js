@@ -1,8 +1,10 @@
-const CACHE_NAME = 'dangmok-cache-v3';
+const CACHE_NAME = 'dangmok-cache-v7';
 const urlsToCache = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './bg_waves.png',
+  './logo_circle.png'
 ];
 
 // 서비스 워커 설치 및 리소스 캐싱
