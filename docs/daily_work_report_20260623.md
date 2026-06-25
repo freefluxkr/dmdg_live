@@ -1,0 +1,56 @@
+# 📝 당목담글 2026-06-23 작업 이력 보고서
+
+금일 요청사항에 따라 진행한 PWA 웹 애플리케이션 기능 개선 및 Firebase 신규 라이브 서버 이전, 자동화 크롤러 구축 작업의 순차적 히스토리 정리 문서입니다.
+
+---
+
+## 📅 실시간 작업 이력 요약
+
+### 1. 🎧 마음 오디오북 연속 재생 기능 구현
+* **내용**: [이어받은 따뜻한 소리들] 리스트 우측 상단에 `오디오북 듣기` 버튼 및 하단 오버레이 슬라이더 플레이어를 추가했습니다.
+* **작동**: 사용자가 직접 녹음한 음성 릴레이 재생이 끝나면 자동으로 연동된 일본어 TTS 멘트가 낭독되고, 1.2초 후 다음 카드로 자동 슬라이딩 연속 재생되는 유기적인 사운드 트랙 연쇄 작동 엔진을 구축했습니다.
+
+### 2. 🚫 파일 업로드 시 카메라/캠코더 팝업 제외 처리
+* **내용**: 백업 데이터 복원을 위한 올리기(Upload) 탐색 시, 기기에서 카메라나 동영상 촬영 선택이 불필요하게 권장되던 문제를 해결했습니다.
+* **조치**: 파일 입력 필드의 허용 형식을 확장자에서 완전 표준 JSON MIME 타입인 `accept="application/json"`으로 변경하여 스마트폰의 [파일] 탐색기 메뉴만 깔끔하게 팝업되도록 필터링했습니다.
+
+### 3. 🧹 신규 Firebase 프로젝트 (`DMDG-LIVE`) 이전 완료
+* **내용**: 과거의 테스트 데이터가 잔존하는 기존 `dmdg-pwa` 프로젝트에서 벗어나, 오직 당목담글 라이브용으로만 활용할 깨끗한 `DMDG-LIVE` (dmdg-live) 프로젝트를 신규 개설했습니다.
+* **조치**: 
+  * `index.html` 소스코드 내 Firebase Config 환경 변수 정보를 신규 키 정보로 전면 갱신 및 이전 배포 완료했습니다.
+  * 기기 내부의 서비스 워커 캐시 버전(`sw.js`)을 `v3`로 올려 사용자가 접속했을 때 이전 캐시를 무효화하고 새로운 설정을 즉시 적용받도록 보완했습니다.
+
+### 4. 🕷️ '행복한가' 웹사이트 자동 크롤러 및 증분 적재기 구축
+* **파일명**: `happy_scrapper.py`
+* **기능**: '행복한가' 웹사이트의 `일상스토리` 및 `문화생활정보` 페이지에서 이미지를 제외한 순수 글귀를 실시간 수집합니다.
+* **분류**: 텍스트 형태 분석을 통해 감정(`위로 / 설렘 / 평온`) 및 카테고리를 알아서 매핑합니다.
+* **중복 제거**: 기존 Firestore 데이터베이스에 등록된 본문 내용과 고유 MD5 해시 비교 분석을 진행하여 중복 등록 없이 **오직 새로 추가된 글귀만 증분 업데이트** 되도록 설계했습니다.
+
+### ☁️ 5. GitHub Actions 클라우드 스케줄러 자동화 탑재
+* **워크플로우**: `.github/workflows/weekly_scraper.yml`
+* **기능**: 사용자의 컴퓨터가 꺼져 있어도 GitHub 클라우드 서버가 **매주 일요일 오전 5시 정각(한국 표준시)** 마다 크롤러 스케줄러를 알아서 구동시킵니다.
+* **수집 범위 지정**:
+  * **일상스토리**: 1페이지부터 **75페이지**까지 순회
+  * **문화생활정보**: 1페이지부터 **60페이지**까지 순회
+
+### 📂 6. 타 노트북 작업 지원을 위한 가이드 추가
+* **파일명**: `setup_guide.md`
+* **내용**: 타 장비나 개발 환경에서 개발자가 본 환경을 다시 복제하고 깃허브 시크릿(Secrets - `FIREBASE_SERVICE_ACCOUNT_KEY`)을 연동할 때 헷갈리지 않고 따라 할 수 있는 단계별 매뉴얼을 작성하여 공유 폴더에 배포해 두었습니다.
+
+---
+
+## 🔗 주요 접속 및 관리 URL 정보
+
+이 프로젝트를 관리하고 접속할 수 있는 실시간 링크 정보입니다:
+
+* **당목담글 모바일 PWA 라이브 서비스**: [https://freefluxkr.github.io/dmdg_live/](https://freefluxkr.github.io/dmdg_live/)
+* **GitHub 원격 소스코드 저장소**: [https://github.com/freefluxkr/dmdg_live](https://github.com/freefluxkr/dmdg_live)
+* **GitHub Actions 크롤러 대시보드**: [https://github.com/freefluxkr/dmdg_live/actions](https://github.com/freefluxkr/dmdg_live/actions)
+* **Firebase Console (DMDG-LIVE)**: [https://console.firebase.google.com/u/0/project/dmdg-live/overview](https://console.firebase.google.com/u/0/project/dmdg-live/overview)
+* **Firebase Firestore 실시간 데이터베이스**: [https://console.firebase.google.com/u/0/project/dmdg-live/firestore/databases/-default-/data](https://console.firebase.google.com/u/0/project/dmdg-live/firestore/databases/-default-/data)
+* **Firebase SDK 비공개 키 생성 위치**: [https://console.firebase.google.com/u/0/project/dmdg-live/settings/serviceaccounts/adminsdk](https://console.firebase.google.com/u/0/project/dmdg-live/settings/serviceaccounts/adminsdk)
+
+---
+
+## 🧡 배포 확인
+모든 기능 코드와 자동화 파일은 원격 깃허브 저장소 main 브랜치에 안전하게 커밋 및 강제 푸시 완료되었으며, 깃허브 페이지를 통해 최신 버전 웹 앱이 라이브 서비스되고 있습니다.

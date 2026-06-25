@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dangmok-cache-v7';
+const CACHE_NAME = 'dangmok-cache-v10';
 const urlsToCache = [
   './',
   './index.html',
