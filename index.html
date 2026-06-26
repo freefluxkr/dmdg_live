@@ -2613,10 +2613,31 @@
         document.getElementById('ai-good').textContent = result.good;
         document.getElementById('ai-improve').textContent = result.improve;
 
-        // Gemini의 피드백 문자열(개선할 점)을 시각화 영역에 크게 노출
+        // Gemini의 피드백 자리에 원본 텍스트 + 틀린 단어 하이라이트 렌더링
         const feedbackVisual = document.getElementById('evaluation-visual-feedback');
-        feedbackVisual.innerHTML = `<div class="p-3 bg-rose-50 rounded-xl border border-rose-100 shadow-sm text-center">
-            <span class="text-xs text-rose-400 font-bold mb-1 block">💡 교정 가이드</span>
+        let highlightedHtml = originalText;
+        
+        if (result.bad_words && result.bad_words.length > 0) {
+          const words = originalText.split(/\s+/);
+          highlightedHtml = words.map(word => {
+            const cleanWord = word.replace(/[^가-힣a-zA-Z0-9]/g, "");
+            const isBad = result.bad_words.some(bw => {
+              const cleanBw = bw.replace(/[^가-힣a-zA-Z0-9]/g, "");
+              return cleanBw === cleanWord || (cleanBw.length > 1 && cleanWord.includes(cleanBw));
+            });
+            if (isBad && cleanWord.length > 0) {
+              return `<span class="text-rose-600 font-bold underline decoration-rose-400 underline-offset-4 cursor-pointer hover:bg-rose-100 transition-colors rounded px-1 active:scale-95 inline-block" onclick="playAnnouncerTts('${word.replace(/'/g, "\\'")}')">${word}</span>`;
+            }
+            return word;
+          }).join(' ');
+        }
+
+        feedbackVisual.innerHTML = `<div class="p-4 bg-orange-50 rounded-xl border border-orange-100 shadow-sm text-center mb-3">
+            <p class="text-sm font-medium text-orange-900 leading-relaxed break-keep">${highlightedHtml}</p>
+            <p class="text-[10px] text-orange-600 mt-2 font-bold animate-pulse">💡 붉은색 단어를 터치하면 정확한 발음을 들을 수 있어요!</p>
+          </div>
+          <div class="p-3 bg-rose-50 rounded-xl border border-rose-100 shadow-sm text-center">
+            <span class="text-xs text-rose-400 font-bold mb-1 block">🎯 교정 가이드</span>
             <span class="text-sm font-bold text-rose-800 break-keep leading-snug">${result.improve}</span>
           </div>`;
 
@@ -2652,6 +2673,23 @@
         document.getElementById('ai-improve').textContent = "로컬 모드로 전환합니다.";
         gradeHangulSyllables(originalText, recognizedText);
       }
+    }
+    function playAnnouncerTts(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast("이 기기에서는 아나운서 발음 듣기를 지원하지 않습니다.");
+        return;
+      }
+      unlockTts();
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ko-KR';
+      utterance.rate = 0.85; // 또박또박 들려주기 위해 약간 느리게 설정
+      
+      const voices = window.speechSynthesis.getVoices();
+      const targetVoice = voices.find(v => v.lang.includes('ko-KR') && (v.name.includes('Google') || v.name.includes('Siri')));
+      if (targetVoice) utterance.voice = targetVoice;
+      
+      window.speechSynthesis.speak(utterance);
     }
 
     function closeEvaluationModal() {
