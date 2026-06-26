@@ -1325,6 +1325,16 @@
       applyCountryTheme(lang);   // 🎨 국가 테마 즉시 전환
       toggleLangDropdown();
 
+      // 마중물 텍스트 번역 업데이트
+      const translationBox = document.getElementById('primer-translation-box');
+      if (lang === 'ko') {
+        translationBox.classList.add('hidden');
+      } else {
+        if (typeof triggerPrimerTranslation === 'function') {
+          triggerPrimerTranslation();
+        }
+      }
+
       // Show welcome toast message matching the language/country
       const welcomeMessages = {
         ko: "당목담글에 오신 것을 환영합니다! 🇰🇷",
