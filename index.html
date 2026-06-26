@@ -53,7 +53,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-functions-compat.js"></script>
   <style>
     /* ================================================
        🇰🇷 당목담글 Master Theme — 태극기 디자인 시스템
@@ -380,7 +380,7 @@
       <button onclick="document.getElementById('importFile').click()" title="데이터 불러오기" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
         <i data-lucide="upload" class="w-5 h-5"></i>
       </button>
-      <button onclick="openSettingsModal()" title="Gemini 설정" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
+      <button onclick="openSettingsModal()" title="Gemini 설정" class="hidden p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
         <i data-lucide="settings" class="w-5 h-5"></i>
       </button>
       <input type="file" id="importFile" accept="application/json" class="hidden" onchange="importData(event)">
@@ -457,9 +457,14 @@
         <div class="absolute w-72 h-72 rounded-full border-[1.5px] border-orange-200/40 animate-[ping_8s_infinite_linear]"></div>
         
         <!-- Text Info -->
-        <div class="text-center z-20 mb-6 mt-2">
+        <div class="text-center z-20 mb-4 mt-2">
           <h2 id="audio-popup-title" class="text-2xl font-bold text-orange-900 font-warm mb-1">소리를 듣고 있어요...</h2>
           <p id="audio-popup-subtitle" class="text-sm font-medium text-orange-800/70 font-warm">당신의 따뜻한 기운이 담겨요.</p>
+        </div>
+
+        <!-- Script to Read -->
+        <div id="audio-popup-script-container" class="z-20 w-[90%] max-w-[280px] bg-white/60 backdrop-blur-sm rounded-2xl p-4 shadow-sm mb-4 hidden border border-orange-200/50">
+          <p id="audio-popup-script" class="text-[13px] font-bold text-orange-950 font-warm leading-relaxed break-keep text-center"></p>
         </div>
 
         <!-- Blob Canvas (Moved here) -->
@@ -467,7 +472,7 @@
         
         <!-- Large Stop Button -->
         <div class="z-20 mt-6 mb-2">
-          <button onclick="closeAudioPopupAndStop()" class="w-16 h-16 rounded-full bg-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 touch-target border-4 border-white/50">
+          <button onclick="handleAudioPopupStop()" class="w-16 h-16 rounded-full bg-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 touch-target border-4 border-white/50">
             <i data-lucide="square" class="w-6 h-6 fill-current"></i>
           </button>
         </div>
@@ -785,9 +790,9 @@
   </div>
 
   <!-- PWA Offline Toast Warning -->
-  <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-amber-950/90 text-amber-50 px-5 py-3 rounded-full text-xs font-semibold shadow-2xl z-50 flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none w-max max-w-[90vw]">
-    <i data-lucide="wifi-off" class="w-4 h-4 text-amber-400"></i>
-    <span id="toast-text">지금은 연결이 끊겨 릴레이를 생성할 수 없어요.</span>
+  <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-rose-600/95 text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl z-50 flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none w-max max-w-[90vw]">
+    <i data-lucide="info" class="w-4 h-4 text-white"></i>
+    <span id="toast-text" class="text-white">네트워크 연결이 끊어졌습니다.</span>
   </div>
 
   <script>
@@ -1879,13 +1884,22 @@
       const modal = document.getElementById('audio-popup-modal');
       const title = document.getElementById('audio-popup-title');
       const subtitle = document.getElementById('audio-popup-subtitle');
+      const scriptContainer = document.getElementById('audio-popup-script-container');
+      const scriptText = document.getElementById('audio-popup-script');
 
       if (mode === 'recording') {
         title.textContent = "목소리를 듣고 있어요...";
-        subtitle.textContent = "편안하게 마음속 이야기를 들려주세요.";
+        subtitle.textContent = "아래 문장을 편안하게 읽어주세요.";
+        
+        const primerContent = document.getElementById('primer-content');
+        if (primerContent) {
+          scriptText.innerText = primerContent.innerText.replace(/\"/g, ''); // 따옴표 제거
+          scriptContainer.classList.remove('hidden');
+        }
       } else if (mode === 'playing') {
         title.textContent = "따뜻한 목소리 재생 중";
         subtitle.textContent = text || "누군가의 소중한 이야기가 흐르고 있어요.";
+        scriptContainer.classList.add('hidden');
       }
 
       modal.classList.remove('hidden');
@@ -1944,63 +1958,42 @@
           avg = sum / bufferLength;
         }
 
-
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
-        const baseRadius = 55 + avg * 0.45;
 
-        // Outer Glow
-        const outerGlow = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, baseRadius * 1.8);
-        outerGlow.addColorStop(0, 'rgba(251, 146, 60, 0.35)');
-        outerGlow.addColorStop(0.5, 'rgba(244, 63, 94, 0.15)');
-        outerGlow.addColorStop(1, 'rgba(255, 238, 219, 0)');
-        
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, baseRadius * 1.8, 0, Math.PI * 2);
-        ctx.fillStyle = outerGlow;
-        ctx.fill();
+        if (!dataArray || bufferLength === 0) {
+          // 오디오 입력이 없을 때 잔잔한 펄스 라인
+          ctx.beginPath();
+          ctx.moveTo(0, centerY);
+          ctx.lineTo(canvas.width, centerY);
+          ctx.strokeStyle = 'rgba(244, 63, 94, 0.3)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        } else {
+          // 세련된 웨이브폼(바) 렌더링
+          const barWidth = (canvas.width / bufferLength) * 2.5;
+          let x = 0;
 
-        // Core Blob
-        ctx.beginPath();
-        const points = 12;
-        for (let i = 0; i < points; i++) {
-          const angle = (i / points) * Math.PI * 2;
-          const offset = Math.sin(angle * 3 + popupBlobTime) * 6 + Math.cos(angle * 2 - popupBlobTime * 0.5) * 4 + (avg > 0 ? (dataArray[i % bufferLength] / 255) * 15 : 0);
-          const r = baseRadius + offset;
-          const x = centerX + Math.cos(angle) * r;
-          const y = centerY + Math.sin(angle) * r;
-          
-          if (i === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
+          for (let i = 0; i < bufferLength; i++) {
+            // 부드러운 반응을 위해 노이즈를 약간 상쇄
+            const value = dataArray[i];
+            const barHeight = (value / 255) * (canvas.height * 0.4);
+
+            const grad = ctx.createLinearGradient(0, centerY - barHeight, 0, centerY + barHeight);
+            grad.addColorStop(0, 'rgba(249, 115, 22, 0.8)'); // orange
+            grad.addColorStop(0.5, 'rgba(236, 72, 153, 0.9)'); // pink
+            grad.addColorStop(1, 'rgba(249, 115, 22, 0.8)');
+
+            ctx.fillStyle = grad;
+            // 가운데를 기준으로 대칭되게 바를 그립니다.
+            const h = Math.max(barHeight * 2, 4); // 최소 높이 4px 보장
+            ctx.fillRect(x, centerY - h / 2, barWidth - 1, h);
+
+            x += barWidth;
           }
         }
-        ctx.closePath();
-        
-        const blobGrad = ctx.createLinearGradient(centerX - baseRadius, centerY - baseRadius, centerX + baseRadius, centerY + baseRadius);
-        blobGrad.addColorStop(0, '#f97316');
-        blobGrad.addColorStop(1, '#ec4899');
-        
-        ctx.fillStyle = blobGrad;
-        ctx.shadowColor = 'rgba(244, 63, 94, 0.3)';
-        ctx.shadowBlur = 15;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        // Inner Highlight
-        ctx.beginPath();
-        ctx.arc(centerX - 10, centerY - 15, baseRadius * 0.25, 0, Math.PI * 2);
-        const coreGrad = ctx.createRadialGradient(centerX - 10, centerY - 15, 0, centerX - 10, centerY - 15, baseRadius * 0.25);
-        coreGrad.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-        coreGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        ctx.fillStyle = coreGrad;
-        ctx.fill();
-
-        popupBlobTime += 0.035;
       }
       draw();
     }
@@ -2070,15 +2063,19 @@
 
           // Start Web Speech API Speech Recognition
           recognitionText = "";
+          let interimTranscript = "";
           if (SpeechRecognition) {
             recognition = new SpeechRecognition();
             recognition.continuous = true;
-            recognition.interimResults = false;
+            recognition.interimResults = true;
             recognition.lang = 'ko-KR';
             recognition.onresult = (event) => {
+              interimTranscript = "";
               for (let i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                   recognitionText += event.results[i][0].transcript + " ";
+                } else {
+                  interimTranscript += event.results[i][0].transcript;
                 }
               }
             };
@@ -2135,7 +2132,15 @@
 
               // 임시 변수에 기부용 데이터 저장
               const originalText = document.getElementById('primer-content').textContent.trim();
-              const finalRecognizedText = recognitionText.trim() || originalText;
+              
+              // 부분 인식된 텍스트까지 합쳐서 최종 판별
+              const finalRecognizedText = (recognitionText + " " + (typeof interimTranscript !== 'undefined' ? interimTranscript : "")).trim();
+
+              if (!finalRecognizedText) {
+                showToast("앗, 목소리가 잘 들리지 않았어요. 다시 한번 또박또박 읽어주시겠어요?");
+                resetUI();
+                return;
+              }
 
               tempOriginalText = originalText;
               tempRecognizedText = finalRecognizedText;
@@ -2518,13 +2523,9 @@
     let currentOriginalText = "";
     let currentRecognizedText = "";
 
-    async function evaluatePronunciationWithGemini(originalText, recognizedText) {
-      // Simulate real-time Gemini AI analysis delay
-      await new Promise(resolve => setTimeout(resolve, 800));
-
+    function localEvaluatePronunciation(originalText, recognizedText) {
       const score = calculateJamoSimilarity(originalText, recognizedText);
       
-      // Dynamic weak word analysis
       const origWords = originalText.split(/\s+/);
       const recogWords = recognizedText.split(/\s+/);
       let weakWord = "";
@@ -2568,11 +2569,18 @@
         }
       }
 
-      return {
-        score: score,
-        good: goodText,
-        improve: improveText
-      };
+      return { score, good: goodText, improve: improveText };
+    }
+
+    async function evaluatePronunciationWithGemini(originalText, recognizedText) {
+      try {
+        const evaluateFn = firebase.functions().httpsCallable('evaluatePronunciation');
+        const result = await evaluateFn({ originalText, recognizedText });
+        return result.data;
+      } catch (err) {
+        console.error("Gemini Evaluation failed, falling back to local:", err);
+        return localEvaluatePronunciation(originalText, recognizedText);
+      }
     }
 
     async function openEvaluationModal(originalText, recognizedText) {
@@ -2887,46 +2895,14 @@
     window.updateWarmthLogo = updateWarmthLogo;
 
     async function translateTextWithGemini(text, targetLang) {
-      const apiKey = localStorage.getItem('dmdg_gemini_key');
-      if (!apiKey) {
-        showToast(i18n[currentLang].gemini_key_needed || "Gemini API Key를 먼저 설정해 주세요.");
-        openSettingsModal();
-        throw new Error("Gemini API Key missing");
+      try {
+        const translateFn = firebase.functions().httpsCallable('translateText');
+        const result = await translateFn({ text, targetLang });
+        return result.data.translatedText || result.data;
+      } catch (err) {
+        console.error("Gemini Translation Error via Functions:", err);
+        throw new Error(err.message || "번역에 실패했습니다.");
       }
-
-      const langMap = {
-        'ko': 'Korean',
-        'ja': 'Japanese',
-        'en': 'English'
-      };
-      const targetLangName = langMap[targetLang] || 'English';
-
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-      const prompt = `Translate the following literary/poetic sentence into ${targetLangName} naturally while maintaining its warm, comforting, and emotional tone. Respond ONLY with the translated text without any explanation, markdown, prefix, or quotation marks:\n\n"${text}"`;
-
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{
-              text: prompt
-            }]
-          }]
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Gemini API Error:", errorData);
-        throw new Error(errorData.error?.message || "Gemini API 호출 실패");
-      }
-
-      const data = await response.json();
-      let translatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-      return translatedText.trim();
     }
 
     async function triggerPrimerTranslation() {

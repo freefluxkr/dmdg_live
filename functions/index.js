@@ -68,15 +68,14 @@ exports.translateText = onCall({
   }
 });
 
-// 2. 음성 발음 평가 프록시 함수 (Gemini 2.5 Flash 오디오 분석 이용 - v2)
+// 2. 음성 발음 평가 프록시 함수 (Gemini 1.5 Flash 텍스트 분석 이용 - v2)
 exports.evaluatePronunciation = onCall({
   secrets: ["GEMINI_API_KEY"],
-  timeoutSeconds: 120, // 음성 분석 시간 확보
-  memory: "512MiB"
+  timeoutSeconds: 60,
+  memory: "256MiB"
 }, async (request) => {
-  // v2에서는 파라미터가 request.data에 들어있습니다.
-  const { originalText, audioBase64, mimeType } = request.data || {};
-  if (!originalText || !audioBase64) {
+  const { originalText, recognizedText } = request.data || {};
+  if (!originalText || !recognizedText) {
     throw new HttpsError("invalid-argument", "평가에 필요한 정보가 누락되었습니다.");
   }
 
@@ -85,20 +84,21 @@ exports.evaluatePronunciation = onCall({
     throw new HttpsError("failed-precondition", "서버 API 키가 구성되지 않았습니다.");
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
   
-  const systemPrompt = `당신은 한국어 발음 교육 및 코칭 전문가입니다.
-사용자가 낭독한 오디오 파일과 원래 목표 문장(originalText)이 제공됩니다.
-사용자의 발음 음성을 직접 자세히 듣고, 원래 문장과 비교하여 정밀하게 평가해 주세요.
+  const prompt = `당신은 한국어 발음 교육 및 코칭 전문가입니다.
+사용자가 낭독해야 할 '원래 목표 문장'과, 사용자의 음성을 Web Speech API로 인식한 '음성 인식 결과' 텍스트가 제공됩니다.
+음성 인식 결과에서 발생한 오타나 누락을 분석하여, 사용자가 어느 발음(특히 어느 단어의 자음/모음/받침)이 부정확했는지 유추해 정밀하고 날카롭게 평가해 주세요.
 
-다음 형식의 JSON 데이터로만 응답해 주세요. 마크다운 기호(예: \`\`\`json)나 추가 텍스트 없이 순수한 JSON만 반환해야 합니다:
+원래 목표 문장: "${originalText}"
+음성 인식 결과: "${recognizedText}"
+
+다음 형식의 JSON 데이터로만 응답해 주세요. 마크다운 기호나 추가 텍스트 없이 순수한 JSON만 반환해야 합니다.
 {
-  "score": 0~100 사이의 정수 (원래 문장과 발음 일치도 점수),
-  "good": "사용자 발음의 장점과 칭찬 포인트 (다정하고 온화한 격려 톤)",
-  "improve": "사용자가 발음을 개선할 수 있는 구체적인 피드백 (어느 단어나 자모 발음이 흐릿했는지, 연음이 잘 되었는지, 템포 조절 팁 등)"
-}
-
-목표 문장: "${originalText}"`;
+  "score": <0~100 사이의 정수 (발음 정확도 유추 점수)>,
+  "good": "<사용자 발음의 장점과 칭찬 포인트 (다정하고 온화한 격려 톤)>",
+  "improve": "<사용자가 발음을 개선할 수 있는 구체적인 피드백 (음성 인식 오류를 바탕으로 유추한 교정 팁)>"
+}`;
 
   try {
     const response = await fetch(url, {
@@ -108,17 +108,7 @@ exports.evaluatePronunciation = onCall({
       },
       body: JSON.stringify({
         contents: [{
-          parts: [
-            {
-              inlineData: {
-                mimeType: mimeType || "audio/webm",
-                data: audioBase64
-              }
-            },
-            {
-              text: systemPrompt
-            }
-          ]
+          parts: [{ text: prompt }]
         }],
         generationConfig: {
           responseMimeType: "application/json"
@@ -133,11 +123,12 @@ exports.evaluatePronunciation = onCall({
     }
 
     const resData = await response.json();
-    const rawJsonString = resData.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+    let rawJsonString = resData.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+    rawJsonString = rawJsonString.replace(/```json/g, '').replace(/```/g, '').trim();
     
     let result;
     try {
-      result = JSON.parse(rawJsonString.trim());
+      result = JSON.parse(rawJsonString);
     } catch (parseErr) {
       console.error("JSON 파싱 에러:", rawJsonString);
       throw new HttpsError("internal", "AI 피드백 데이터를 분석하는 데 실패했습니다.");
