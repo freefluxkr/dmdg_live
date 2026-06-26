@@ -27,15 +27,8 @@ exports.translateText = onCall({
     throw new HttpsError("failed-precondition", "서버 API 키가 구성되지 않았습니다.");
   }
 
-  const langMap = {
-    'ko': 'Korean',
-    'ja': 'Japanese',
-    'en': 'English'
-  };
-  const targetLangName = langMap[targetLang] || 'English';
-
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-  const prompt = `Translate the following literary/poetic sentence into ${targetLangName} naturally while maintaining its warm, comforting, and emotional tone. Respond ONLY with the translated text without any explanation, markdown, prefix, or quotation marks:\n\n"${text}"`;
+  const prompt = `Translate the following literary/poetic sentence into the language with ISO 639-1 code "${targetLang}" naturally while maintaining its warm, comforting, and emotional tone. Respond ONLY with the translated text without any explanation, markdown, prefix, or quotation marks:\n\n"${text}"`;
 
   try {
     const response = await fetch(url, {

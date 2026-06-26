@@ -2241,9 +2241,7 @@
       if (relay.audioBlob) {
         const arrayBuffer = await relay.audioBlob.arrayBuffer();
         audioEngine.init();
-        openAudioPopup("playing", relay.content, audioEngine.analyser);
         await audioEngine.playChunk(arrayBuffer);
-        closeAudioPopup();
       }
 
       
@@ -2419,8 +2417,8 @@
         const item = document.createElement('div');
         item.className = "glass-card p-4 rounded-2xl flex items-center justify-between gap-3 shadow-sm active:scale-[0.98] transition-transform duration-200 cursor-pointer";
         item.onclick = () => {
-          
-          playRelay(relay.id);
+          unlockTts();
+          toggleRelayPlayback(relay.id);
         };
         
         let tagClass = "bg-orange-100/60 text-orange-800";
