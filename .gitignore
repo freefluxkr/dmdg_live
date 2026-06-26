@@ -1,0 +1,14 @@
+# Firebase / Secrets
+serviceAccountKey.json
+firebase-adminsdk-api_key.json
+
+# Scratch & Backup
+scratch/
+index.bak.html
+split_code.py
+add_AGENTS/
+
+# Env
+node_modules/
+.env
+.DS_Store
