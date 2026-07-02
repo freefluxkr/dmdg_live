@@ -2040,8 +2040,8 @@ lucide.createIcons();
       const stars = [];
       const numStars = 150;
       
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = 144;
+      canvas.height = 144;
 
       for(let i=0; i<numStars; i++) {
         stars.push({
