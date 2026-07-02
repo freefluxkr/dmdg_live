@@ -96,16 +96,19 @@ def fetch_happy_contents():
                     html = response.read()
                     soup = BeautifulSoup(html, 'html.parser')
                     
-                    # 행복한가 목록에서 개별 글 a 태그들 추출 (bmode=view 매개변수가 포함된 뷰 링크 추출)
-                    posts = soup.find_all('a', href=re.compile(r'bmode=view'))
+                    # 행복한가 목록에서 개별 글 a 태그들 추출 (파라미터가 포함된 주소도 포함되도록 패턴 완화)
+                    posts = soup.find_all('a', href=re.compile(r'/happy-contents/'))
                     
                     links = []
                     for post in posts:
                         link = post.get('href')
                         if link:
+                            # 쿼리 파라미터가 뒤에 붙어있거나 상세 ID 링크인 경우를 파싱 및 정규화
                             if not link.startswith('http'):
                                 link = "https://m-letter.or.kr" + link
-                            if link not in links:
+                            
+                            # 중복 삽입 및 목록 페이지 재접근 방지 (상세 본문글 주소만 수집)
+                            if "/happy-contents/?" not in link and link not in links:
                                 links.append(link)
                     
                     for link in links:
