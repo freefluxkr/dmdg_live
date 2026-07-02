@@ -522,11 +522,8 @@ lucide.createIcons();
         }
       });
 
-      // body 배경색 부드럽게 전환
-      document.body.style.background = theme.bodyBg;
-      document.body.style.backgroundImage =
-        `radial-gradient(ellipse 70% 50% at 20% 10%, ${theme['--theme-bg-circle1']} 0%, transparent 60%),
-         radial-gradient(ellipse 60% 50% at 80% 90%, ${theme['--theme-bg-circle2']} 0%, transparent 60%)`;
+      // body 배경색 부드럽게 전환은 CSS 변수(--theme-bg-circle) 트랜지션으로 대체하여 깜빡임 제거
+      document.body.style.backgroundColor = theme.bodyBg;
 
       // 🎨 국기 상징 요소(Motif) 적용 — 국가별 기하학적 정체성 부여
       applyThemeMotif(theme.motif || 'none');
