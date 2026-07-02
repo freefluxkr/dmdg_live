@@ -10,10 +10,32 @@
   
   <!-- Web App Manifest -->
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/love-letter.png">
+  <link class="touch-icon" rel="apple-touch-icon" href="https://img.icons8.com/color/192/love-letter.png">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            orange: {
+              50: 'var(--theme-bg-light)',
+              100: 'var(--theme-bg-soft)',
+              150: 'var(--theme-bg-medium)',
+              200: 'var(--theme-bg-medium)',
+              500: 'var(--theme-primary)',
+              600: 'var(--theme-primary-dark)',
+              700: 'var(--theme-accent)',
+              850: 'var(--theme-text-dark)',
+              900: 'var(--theme-text-dark)',
+              950: 'var(--theme-text-deep)'
+            }
+          }
+        }
+      }
+    }
+  </script>
   
   <!-- Dexie.js (IndexedDB library) -->
   <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
@@ -29,79 +51,44 @@
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
-  <style>
-    body {
-      font-family: 'Pretendard', sans-serif;
-      background: linear-gradient(135deg, #fffaf4 0%, #ffeeda 50%, #ffdcb4 100%);
-      min-height: 100vh;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-    
-    .font-warm {
-      font-family: 'Gowun Batang', serif;
-    }
-
-    .font-comfort {
-      font-family: 'Comfortaa', cursive;
-    }
-
-    .font-cute {
-      font-family: 'Gaegu', cursive;
-    }
-
-    /* Micro-interaction & Active Scaling */
-    .touch-target {
-      touch-action: manipulation;
-    }
-    .touch-target:active {
-      transform: scale(0.95);
-    }
-
-    /* Glassmorphism Cards */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 10px 30px rgba(251, 146, 60, 0.08);
-    }
-
-    /* Golden-Orange Soft Glows */
-    .glow-orange {
-      box-shadow: 0 0 25px rgba(251, 146, 60, 0.35);
-    }
-
-    /* Custom scrollbar for premium look */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(251, 146, 60, 0.3);
-      border-radius: 9999px;
-    }
-  </style>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-functions-compat.js"></script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="flex flex-col items-center justify-between pb-8">
 
   <!-- Warm background light circles -->
-  <div class="fixed top-[-10%] left-[-20%] w-[80vw] h-[80vw] rounded-full bg-orange-200/40 blur-[80px] pointer-events-none z-[-1]"></div>
-  <div class="fixed bottom-[10%] right-[-20%] w-[90vw] h-[90vw] rounded-full bg-amber-100/60 blur-[100px] pointer-events-none z-[-1]"></div>
+  <div id="bg-circle-1" class="fixed top-[-10%] left-[-20%] w-[80vw] h-[80vw] rounded-full blur-[80px] pointer-events-none z-[-1] transition-colors duration-500" style="background-color: var(--theme-bg-circle1);"></div>
+  <div id="bg-circle-2" class="fixed bottom-[10%] right-[-20%] w-[90vw] h-[90vw] rounded-full blur-[100px] pointer-events-none z-[-1] transition-colors duration-500" style="background-color: var(--theme-bg-circle2);"></div>
 
   <!-- Header -->
   <header class="w-full max-w-md px-6 pt-8 flex items-center justify-between">
     <div class="flex flex-col">
       <div class="flex items-center gap-2">
         <span class="text-2xl">🍊</span>
-        <h1 class="text-2xl font-bold text-orange-950 font-warm tracking-tight">당목담글</h1>
+        <h1 class="text-2xl font-bold text-orange-950 font-warm tracking-tight" data-i18n="title">당목담글</h1>
       </div>
-      <p class="text-xs text-orange-700/80 font-medium tracking-wide mt-0.5">마음을 이어주는 따스한 목소리 릴레이</p>
+      <p class="text-xs text-orange-700/80 font-medium tracking-wide mt-0.5" data-i18n="subtitle">마음을 이어주는 따스한 목소리 릴레이</p>
     </div>
     <div class="flex gap-2">
+      <!-- Language Selector -->
+      <div class="relative inline-block text-left">
+        <button onclick="toggleLangDropdown()" id="lang-btn" title="언어 변경" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center gap-1.5 min-w-[54px] min-h-[44px]">
+          <i data-lucide="languages" class="w-5 h-5"></i>
+          <span id="lang-flag-icon" class="text-sm font-semibold select-none">🇰🇷</span>
+        </button>
+        <div id="lang-dropdown" class="origin-top-right absolute right-0 mt-2 w-36 rounded-2xl shadow-xl bg-white/95 backdrop-blur-md border border-orange-100 focus:outline-none hidden z-50">
+          <div class="py-1.5 px-1.5 space-y-0.5">
+            <button onclick="changeLanguage('ko')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇰🇷 한국어 (KO)</button>
+            <button onclick="changeLanguage('ja')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇯🇵 日本語 (JA)</button>
+            <button onclick="changeLanguage('en')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇺🇸 English (EN)</button>
+            <div class="border-t border-gray-100 my-1"></div>
+            <button onclick="changeLanguage('fr')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇫🇷 Français (FR)</button>
+            <button onclick="changeLanguage('de')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇩🇪 Deutsch (DE)</button>
+          </div>
+        </div>
+      </div>
       <!-- Database backup / restore triggers -->
       <button onclick="exportData()" title="데이터 백업" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
         <i data-lucide="download" class="w-5 h-5 flex items-center justify-center">📥</i>
@@ -109,12 +96,34 @@
       <button onclick="document.getElementById('importFile').click()" title="데이터 불러오기" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
         <i data-lucide="upload" class="w-5 h-5 flex items-center justify-center">📤</i>
       </button>
+      <button onclick="openSettingsModal()" title="Gemini 설정" class="hidden p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
+        <i data-lucide="settings" class="w-5 h-5"></i>
+      </button>
       <input type="file" id="importFile" accept="application/json" class="hidden" onchange="importData(event)">
     </div>
   </header>
 
   <!-- Main Container -->
   <main class="w-full max-w-md px-5 py-4 flex-grow flex flex-col justify-start gap-5">
+    
+    <!-- Privacy Trust Banner -->
+    <div class="glass-card rounded-2xl p-3.5 border-l-4 border-amber-400 bg-amber-50/20 flex items-center gap-2.5 shadow-sm">
+      <i data-lucide="shield-check" class="w-5 h-5 text-orange-600 shrink-0"></i>
+      <p class="text-[10px] font-semibold text-orange-950/80 leading-relaxed" data-i18n="privacy_banner">
+        🍊 모든 음성 데이터는 사용자의 기기에만 안전하게 저장됩니다 (Local Storage Only)
+      </p>
+    </div>
+
+    <!-- Benefit Info Banner -->
+    <div onclick="openBenefitModal()" class="glass-card rounded-2xl p-3.5 border-l-4 border-rose-400 bg-rose-50/20 flex items-center justify-between shadow-sm cursor-pointer hover:bg-rose-50/30 transition-all touch-target">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <i data-lucide="gift" class="w-5 h-5 text-rose-600 shrink-0 animate-bounce"></i>
+        <p class="text-[10px] font-bold text-orange-950/80 leading-relaxed truncate" data-i18n="benefit_banner">
+          🎁 목소리 기부 시 AI 분석 무료 5회 충전! [자세히 보기]
+        </p>
+      </div>
+      <i data-lucide="chevron-right" class="w-4 h-4 text-orange-950/40 shrink-0"></i>
+    </div>
     
     <!-- Emotion Filter & Mode Tabs -->
     <div class="glass-card rounded-2xl p-2.5 flex items-center justify-between">
@@ -135,33 +144,53 @@
     </div>
 
     <!-- Dynamic Primer Display Card (시, 수필, 오늘의 말) -->
-    <div class="glass-card rounded-3xl p-5 border-l-4 border-orange-400 bg-orange-50/50 flex flex-col gap-2">
+    <div class="glass-card rounded-3xl p-5 border-l-4 border-theme-primary bg-orange-50/50 flex flex-col gap-2.5">
       <div class="flex items-center justify-between">
         <span class="text-xs font-bold text-orange-800 flex items-center gap-1">
           <i data-lucide="book-open" class="w-3.5 h-3.5 flex items-center justify-center">📖</i>
-          <span id="primer-type">오늘의 마중물 말</span>
+          <span id="primer-type" data-i18n="primer_type_word">오늘의 마중물 말</span>
         </span>
-        <button onclick="rotatePrimer()" class="p-1 rounded-full hover:bg-orange-100/50 text-orange-700 active:scale-90 transition-transform flex items-center justify-center">
-          <i data-lucide="rotate-cw" class="w-3.5 h-3.5 flex items-center justify-center">🔄</i>
-        </button>
+        <div class="flex items-center gap-1">
+          <button onclick="rotatePrimer()" class="p-1 rounded-full hover:bg-orange-100/50 text-orange-700 active:scale-90 transition-transform flex items-center justify-center min-w-[32px] min-h-[32px]">
+            <i data-lucide="rotate-cw" class="w-3.5 h-3.5 flex items-center justify-center">🔄</i>
+          </button>
+        </div>
       </div>
-      <p id="primer-content" class="text-xs font-medium text-orange-950 font-warm leading-relaxed italic">
+      <p id="primer-content" class="text-xs font-medium text-orange-950 font-warm leading-relaxed italic select-all max-h-[140px] overflow-y-auto pr-1">
         "바람이 불어오는 곳으로 마음을 던져두면, 어느샌가 그리운 목소리가 찾아와 귀를 채웁니다."
       </p>
+      <!-- Translation output placeholder -->
+      <div id="primer-translation-box" class="hidden mt-1.5 pt-2 border-t border-orange-200/50">
+        <p id="primer-translation-text" class="text-xs font-semibold text-rose-800/80 font-warm leading-relaxed italic select-all"></p>
+      </div>
     </div>
 
-    <!-- Visualizer / Emotional Blob Card -->
-    <div class="glass-card rounded-3xl p-6 flex flex-col items-center justify-center min-h-[260px] relative overflow-hidden">
-      <!-- Background Soft Decorative Ring -->
-      <div class="absolute w-56 h-56 rounded-full border border-orange-100/30 animate-[ping_10s_infinite_linear]"></div>
-      
-      <canvas id="blob-canvas" width="300" height="240" class="w-full h-48 z-10"></canvas>
-      
-      <!-- Persona Information Display -->
-      <div class="absolute bottom-4 left-0 right-0 text-center z-20">
-        <p id="current-persona-text" class="text-xs font-semibold text-orange-850/70 font-warm">
-          따스한 감성 큐레이터 • 하루
-        </p>
+    <!-- Audio Popup Modal -->
+    <div id="audio-popup-modal" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-white/60 backdrop-blur-md">
+      <div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center min-w-[320px] max-w-[90%] relative overflow-hidden shadow-2xl ring-1 ring-orange-900/10">
+        <!-- Background Soft Decorative Ring -->
+        <div class="absolute w-72 h-72 rounded-full border-[1.5px] border-orange-200/40 animate-[ping_8s_infinite_linear]"></div>
+        
+        <!-- Text Info -->
+        <div class="text-center z-20 mb-4 mt-2">
+          <h2 id="audio-popup-title" class="text-2xl font-bold text-orange-900 font-warm mb-1">소리를 듣고 있어요...</h2>
+          <p id="audio-popup-subtitle" class="text-sm font-medium text-orange-800/70 font-warm">당신의 따뜻한 기운이 담겨요.</p>
+        </div>
+
+        <!-- Script to Read -->
+        <div id="audio-popup-script-container" class="z-20 w-[90%] max-w-[280px] bg-white/60 backdrop-blur-sm rounded-2xl p-4 shadow-sm mb-4 hidden border border-orange-200/50">
+          <p id="audio-popup-script" class="text-[13px] font-bold text-orange-950 font-warm leading-relaxed break-keep text-center"></p>
+        </div>
+
+        <!-- Blob Canvas (Moved here) -->
+        <canvas id="popup-blob-canvas" width="300" height="240" class="w-full h-56 z-10 drop-shadow-md"></canvas>
+        
+        <!-- Large Stop Button -->
+        <div class="z-20 mt-6 mb-2">
+          <button onclick="handleAudioPopupStop()" class="w-16 h-16 rounded-full bg-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 touch-target border-4 border-white/50">
+            <i data-lucide="square" class="w-6 h-6 fill-current"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -169,22 +198,28 @@
     <div class="glass-card rounded-3xl p-5 flex flex-col gap-4 items-center">
       <!-- Status Display -->
       <div class="text-center">
-        <p id="status-message" class="text-sm font-semibold text-orange-900 font-warm">아래 버튼을 눌러 목소리 마중물을 담아보세요</p>
+        <p id="status-message" class="text-sm font-semibold text-orange-900 font-warm" data-i18n="status_initial">아래 버튼을 눌러 목소리 마중물을 담아보세요</p>
       </div>
 
       <!-- Record Button -->
       <div class="relative flex items-center justify-center">
         <!-- Pulsing background ring when recording -->
         <div id="pulse-ring" class="absolute w-24 h-24 bg-red-400/20 rounded-full scale-0 transition-transform duration-500"></div>
-        <button id="action-btn" onclick="toggleRecording()" class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 glow-orange touch-target z-10 min-w-[44px] min-h-[44px]">
+        <button id="action-btn" onclick="toggleRecording()" class="w-20 h-20 rounded-full bg-theme-grad text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 glow-theme touch-target z-10 min-w-[44px] min-h-[44px]">
           <i data-lucide="mic" id="action-icon" class="w-8 h-8 flex items-center justify-center">🎙️</i>
         </button>
       </div>
 
       <!-- Helper info -->
-      <div class="w-full flex items-center justify-center gap-1.5 text-xs text-orange-700/60 font-medium">
-        <i data-lucide="info" class="w-3.5 h-3.5 flex items-center justify-center">ℹ️</i>
-        <span>당신의 따뜻한 기운이 담겨요.</span>
+      <div class="w-full flex items-center justify-between px-2 text-xs text-orange-700/60 font-medium">
+        <div class="flex items-center gap-1.5">
+          <i data-lucide="info" class="w-3.5 h-3.5 flex items-center justify-center">ℹ️</i>
+          <span data-i18n="mic_help">당신의 따뜻한 기운이 담겨요.</span>
+        </div>
+        <div id="free-eval-badge" class="flex items-center gap-1 bg-orange-100/50 px-2 py-1 rounded-md border border-orange-200">
+          <span class="font-bold text-orange-800" data-i18n="free_eval_badge_text">남은 무료 평가:</span>
+          <span id="free-eval-count" class="font-black text-rose-600">0/5</span><span class="font-bold text-orange-800" data-i18n="free_eval_badge_unit">회</span>
+        </div>
       </div>
     </div>
 
@@ -192,15 +227,17 @@
     <div class="flex items-center justify-between px-1">
       <h3 class="text-sm font-bold text-orange-950 font-warm flex items-center gap-1.5">
         <i data-lucide="music-4" class="w-4 h-4 text-orange-600 flex items-center justify-center">🎵</i>
-        <span>이어받은 따뜻한 소리들</span>
+        <span data-i18n="relay_title">이어받은 따뜻한 소리들</span>
       </h3>
       <div class="flex items-center gap-2">
-        <button onclick="startAudiobook()" class="text-xs font-bold bg-gradient-to-r from-orange-500 to-rose-500 text-white px-3 py-1.5 rounded-full shadow-sm hover:scale-105 transition-transform flex items-center gap-1 touch-target">
+        <button onclick="startAudiobook()" class="text-xs font-bold bg-theme-grad text-white px-3 py-1.5 rounded-full shadow-sm hover:scale-105 transition-transform flex items-center gap-1 touch-target">
           <i data-lucide="headphones" class="w-3.5 h-3.5 flex items-center justify-center">🎧</i>
-          <span>오디오북 듣기</span>
+          <span data-i18n="play_audiobook">오디오북 듣기</span>
         </button>
         <span id="relay-count" class="text-xs font-bold bg-orange-150 text-orange-800 px-2.5 py-0.5 rounded-full glass-card">0</span>
       </div>
+    </div>
+
     </div>
 
     <!-- Relay List -->
@@ -208,8 +245,55 @@
       <!-- Dynamic list items -->
     </div>
 
+    <!-- Global Warmth Dashboard -->
+    <div class="glass-card rounded-2xl border border-orange-100/40 overflow-hidden shadow-sm transition-all duration-300">
+      <!-- Dashboard Accordion Header -->
+      <div onclick="toggleDashboard()" class="p-4 bg-orange-50/20 hover:bg-orange-100/30 cursor-pointer flex justify-between items-center transition-all touch-target">
+        <div class="flex items-center gap-2">
+          <i data-lucide="line-chart" class="w-4 h-4 text-orange-600"></i>
+          <span class="text-xs font-bold text-orange-950" data-i18n="dashboard_title">글로벌 온기 분석 대시보드</span>
+        </div>
+        <i id="dashboard-chevron" data-lucide="chevron-down" class="w-4 h-4 text-orange-950/40 transition-transform duration-300"></i>
+      </div>
+      
+      <!-- Dashboard Content (Collapsible) -->
+      <div id="dashboard-content" class="max-h-0 overflow-hidden transition-all duration-500 bg-white/30 border-t border-orange-100/30">
+        <div class="p-4 flex flex-col items-center gap-4">
+          <!-- Thermometer / Warmth Logo Visualizer -->
+          <div class="flex flex-col items-center gap-3 py-4 w-full relative">
+            <div class="text-center z-10">
+              <span id="warmth-degree" class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 font-comfort">36.5°C</span>
+              <span class="text-[10px] text-orange-950/50 block font-semibold mt-0.5" data-i18n="dashboard_desc">기부가 쌓일수록 지구촌의 온도가 올라갑니다.</span>
+            </div>
+            
+            <!-- Warmth Logo Container -->
+            <div class="relative w-36 h-36 flex items-center justify-center rounded-full bg-slate-950/5 p-1 border border-orange-100/30 overflow-hidden mt-2 shadow-inner">
+              <canvas id="milkyway-canvas" class="absolute inset-0 w-full h-full rounded-full z-0 pointer-events-none"></canvas>
+              <img id="warmth-logo" src="./logo_circle.png" alt="Warmth Logo" class="w-[90%] h-[90%] object-contain rounded-full transition-all duration-1000 z-10 relative" style="filter: grayscale(100%) blur(6px); opacity: 0.15;">
+            </div>
+            
+            <p class="text-[10px] text-orange-950/60 font-semibold px-4 text-center leading-relaxed mt-2" id="warmth-status-desc">
+              지구촌의 감성 온도가 조금씩 따뜻해지고 있어요!
+            </p>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="grid grid-cols-2 gap-3.5 w-full mt-1.5">
+            <div class="bg-orange-50/50 border border-orange-100/50 rounded-2xl p-3 text-center">
+              <span class="text-[9px] font-bold text-orange-700 block uppercase tracking-wider" data-i18n="stat_donations">누적 기부 소리</span>
+              <span id="stat-donations-count" class="text-lg font-extrabold text-orange-950 font-comfort mt-0.5 block">0</span>
+            </div>
+            <div class="bg-rose-50/50 border border-rose-100/50 rounded-2xl p-3 text-center">
+              <span class="text-[9px] font-bold text-rose-700 block uppercase tracking-wider" data-i18n="stat_chains">누적 릴레이 체인</span>
+              <span id="stat-chains-count" class="text-lg font-extrabold text-orange-950 font-comfort mt-0.5 block">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Copyright Footer Notice -->
-    <footer class="mt-4 px-2 py-4 border-t border-orange-200/40 text-[10px] text-orange-950/40 leading-relaxed text-center font-medium">
+    <footer class="mt-4 px-2 py-4 border-t border-orange-200/40 text-[10px] text-orange-950/40 leading-relaxed text-center font-medium" data-i18n="footer_notice">
       위 글의 저작권은 행복한가에 있으며 모든 페이지 내용의 소유권은 행복한가에서 가지고 있습니다. 내용을 공유하실 때에는 글 하단 또는 제목에 '행복한가'를 반드시 표기 바랍니다.
     </footer>
 
@@ -221,7 +305,7 @@
       <div class="flex items-center justify-between">
         <span class="text-xs font-bold text-orange-850 flex items-center gap-1">
           <span class="animate-pulse">🎧</span>
-          <span>마음 오디오북 연속 재생 중</span>
+          <span data-i18n="audiobook_panel_title">마음 오디오북 연속 재생 중</span>
         </span>
         <button onclick="stopAudiobook()" class="text-orange-950/50 hover:text-orange-900 transition-colors p-1">
           <i data-lucide="x" class="w-4 h-4 flex items-center justify-center">✖</i>
@@ -256,18 +340,20 @@
 
   <!-- AI Pronunciation Evaluation Scorecard Dialog -->
   <div id="ai-evaluation-modal" class="fixed inset-0 bg-orange-950/40 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4">
+    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 relative">
       <div class="flex justify-between items-center">
         <span class="text-xs font-bold bg-orange-200 text-orange-900 px-3 py-1 rounded-full flex items-center gap-1">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-orange-600 animate-pulse flex items-center justify-center">✨</i>
-          <span>Gemini AI 발음 평가 성적표</span>
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-orange-600 animate-pulse"></i>
+          <span data-i18n="eval_title">Gemini AI 발음 평가 성적표</span>
         </span>
         <button onclick="closeEvaluationModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
-          <i data-lucide="x" class="w-4 h-4 flex items-center justify-center">✖</i>
+          <i data-lucide="x" class="w-4 h-4"></i>
+>>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
         </button>
       </div>
 
       <!-- Score Display -->
+<<<<<<< HEAD
       <div class="text-center py-4 bg-gradient-to-br from-orange-100/50 to-rose-100/50 rounded-2xl border border-orange-200/40">
         <span class="text-[10px] font-bold text-orange-800 uppercase tracking-widest block mb-1">PRONUNCIATION SCORE</span>
         <span id="ai-score" class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 font-comfort">92</span>
@@ -279,6 +365,24 @@
         <div class="flex flex-col gap-1 bg-white/40 rounded-xl p-3 border border-orange-100">
           <span class="text-[10px] font-bold text-orange-800 flex items-center gap-1">
             <i data-lucide="smile" class="w-3 h-3 text-orange-600"></i> 잘한 부분
+=======
+      <div class="text-center py-3 bg-gradient-to-br from-orange-100/50 to-rose-100/50 rounded-2xl border border-orange-200/40">
+        <span class="text-[10px] font-bold text-orange-800 uppercase tracking-widest block mb-0.5" data-i18n="eval_score_label">PRONUNCIATION SCORE</span>
+        <span id="ai-score" class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 font-comfort">92</span>
+        <span class="text-lg font-bold text-orange-700">/ 100</span>
+      </div>
+
+      <!-- Detailed Feedback Section -->
+      <div class="space-y-3 relative overflow-hidden" id="evaluation-feedback-wrapper">
+        <!-- 2안: 초·중·종성 한글 자모 해체 알고리즘(Disassembler) 시각화 뷰 -->
+        <div id="evaluation-visual-feedback" class="flex flex-wrap gap-1.5 p-3.5 bg-white/50 rounded-2xl border border-orange-100/60 justify-center font-warm text-sm leading-relaxed tracking-wider min-h-[60px]">
+          <!-- 글자들이 자모 채점에 맞춰 동적으로 채워짐 -->
+        </div>
+
+        <div class="flex flex-col gap-1 bg-white/40 rounded-xl p-3 border border-orange-100">
+          <span class="text-[10px] font-bold text-orange-800 flex items-center gap-1">
+            <i data-lucide="smile" class="w-3 h-3 text-orange-600"></i> <span data-i18n="eval_good_label">잘한 부분</span>
+>>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
           </span>
           <p id="ai-good" class="text-xs font-medium text-orange-950 leading-relaxed font-warm">
             목소리 톤이 아주 차분하며, 문장의 감정선이 따뜻하게 묻어나와 듣기 좋습니다.
@@ -286,12 +390,17 @@
         </div>
         <div class="flex flex-col gap-1 bg-rose-50/40 rounded-xl p-3 border border-rose-100">
           <span class="text-[10px] font-bold text-rose-800 flex items-center gap-1">
+<<<<<<< HEAD
             <i data-lucide="alert-circle" class="w-3 h-3 text-rose-600"></i> 교정이 필요한 부분
+=======
+            <i data-lucide="alert-circle" class="w-3 h-3 text-rose-600"></i> <span data-i18n="eval_improve_label">교정이 필요한 부분</span>
+>>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
           </span>
           <p id="ai-improve" class="text-xs font-medium text-orange-950 leading-relaxed font-warm">
             "바람이" 구절에서 종성 발음이 조금 급해 뭉개졌습니다. 템포를 살짝 늦춰보세요.
           </p>
         </div>
+<<<<<<< HEAD
       </div>
 
       <!-- Premium Share / Close Buttons -->
@@ -1181,29 +1290,72 @@
         relayList.innerHTML = `
           <div class="text-center py-8 text-orange-950/40 text-xs font-semibold">
             아직 여기에 담긴 목소리가 없어요.<br>첫 번째 마중물을 담아보세요.
-          </div>
-        `;
-        return;
-      }
+=======
 
-      items.forEach(relay => {
-        const item = document.createElement('div');
-        item.className = "glass-card p-4 rounded-2xl flex items-center justify-between gap-3 shadow-sm active:scale-[0.98] transition-transform duration-200 cursor-pointer";
-        item.onclick = () => playRelay(relay.id);
-        
-        // Pick custom pastel tags
-        let tagClass = "bg-orange-100/60 text-orange-800";
-        if (relay.emotion === '설렘') tagClass = "bg-rose-100/60 text-rose-800";
-        if (relay.emotion === '평온') tagClass = "bg-amber-100/60 text-amber-800";
+        <!-- 3회 초과 비회원용 블러 잠금 오버레이 -->
+        <div id="premium-lock-overlay" class="absolute inset-0 bg-white/60 backdrop-blur-[6px] flex flex-col items-center justify-center text-center p-4 z-30 hidden rounded-2xl border border-orange-200">
+          <i data-lucide="lock" class="w-8 h-8 text-orange-600 mb-2"></i>
+          <h4 class="text-sm font-bold text-orange-950 mb-1" data-i18n="premium_title">프리미엄 전용 기능</h4>
+          <p class="text-[10px] text-orange-800/80 leading-relaxed mb-3" data-i18n="premium_overlay_desc">
+            일일 무료 체험 3회가 완료되었습니다.<br>PayPal 결제 후 정밀 분석 결과를 확인해 보세요!
+          </p>
+          <button onclick="openPaywallModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 text-white font-bold text-[10px] shadow-md hover:scale-105 transition-transform" data-i18n="premium_unlock_btn">
+            멤버십 잠금해제 🔓
+          </button>
+        </div>
+      </div>
 
-        item.innerHTML = `
-          <div class="flex-grow min-w-0">
-            <div class="flex items-center gap-2 mb-1">
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${tagClass}">${relay.emotion}</span>
-              <span class="text-[10px] text-orange-950/40 font-semibold">${new Date(relay.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-            </div>
-            <p class="text-xs font-medium text-orange-950 leading-relaxed">${relay.content}</p>
+      <button onclick="closeEvaluationModal()" class="w-full py-3 rounded-2xl bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all touch-target" data-i18n="eval_close_btn">
+        확인 완료
+      </button>
+    </div>
+  </div>
+
+  <!-- Paywall / Subscription Modal -->
+  <div id="paywall-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
+    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
+      <div class="flex justify-end">
+        <button onclick="closePaywallModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-3xl shadow-inner">💎</div>
+        <h3 class="text-base font-bold text-orange-950 font-warm" data-i18n="paywall_title">Gemini AI 정밀 진단 횟수 초과</h3>
+        <p class="text-xs text-orange-700/80 leading-relaxed" data-i18n="paywall_desc">
+          오늘의 무료 AI 발음 평가 3회를 모두 사용하셨습니다.<br>유료 프리미엄 멤버십으로 24시간 언제든 정밀 과외를 즐겨보세요!
+        </p>
+      </div>
+      <!-- Donation Option (Conditional) -->
+      <div id="paywall-donation-option" class="hidden mb-2">
+        <div onclick="processVoiceDonationFromPaywall()" class="p-4 rounded-2xl bg-gradient-to-r from-orange-100 to-rose-100 border border-orange-300 hover:border-orange-400 cursor-pointer flex flex-col justify-center items-center transition-all shadow-sm">
+          <span class="text-xs font-bold text-orange-900 mb-1">🎤 내 목소리 기부하고 5회 받기</span>
+          <span class="text-[10px] text-orange-700/80" id="paywall-donation-limit-text">이번 달 보상 한도: 3회 남음</span>
+        </div>
+        <div class="flex items-center justify-center gap-2 my-3">
+          <div class="h-px bg-orange-200 flex-1"></div>
+          <span class="text-[10px] text-orange-400 font-bold">또는 프리미엄 가입</span>
+          <div class="h-px bg-orange-200 flex-1"></div>
+        </div>
+      </div>
+
+      <!-- Subscription Options -->
+      <div class="space-y-2.5 my-2">
+        <div onclick="selectPricingOption('weekly')" id="option-weekly" class="p-3.5 rounded-2xl border-2 border-orange-400 bg-orange-50/50 hover:bg-orange-100/50 cursor-pointer flex justify-between items-center transition-all">
+          <div class="text-left">
+            <span class="text-xs font-bold text-orange-950 block" data-i18n="paywall_pass">주간 자유 패스</span>
+            <span class="text-[10px] text-orange-700/60" data-i18n="paywall_pass_desc">매주 무제한 발음 피드백</span>
+>>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
           </div>
+          <span class="text-xs font-bold text-orange-900" id="price-pass">₩2,900 / 주</span>
+        </div>
+        <div onclick="selectPricingOption('charge')" id="option-charge" class="p-3.5 rounded-2xl border border-orange-200 bg-white/40 hover:bg-orange-50/30 cursor-pointer flex justify-between items-center transition-all">
+          <div class="text-left">
+            <span class="text-xs font-bold text-orange-950 block" data-i18n="paywall_coin">30 코인 충전</span>
+            <span class="text-[10px] text-orange-700/60" data-i18n="paywall_coin_desc">30회 정밀 성적표 발급</span>
+          </div>
+<<<<<<< HEAD
           <div class="flex gap-2 items-center">
             <button onclick="event.stopPropagation(); deleteRelay(${relay.id})" title="삭제" class="w-10 h-10 rounded-full bg-rose-50/50 hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors min-w-[40px] min-h-[40px]">
               <i data-lucide="trash-2" class="w-4 h-4 flex items-center justify-center">🗑️</i>
@@ -1217,103 +1369,96 @@
       });
       lucide.createIcons();
     }
+=======
+          <span class="text-xs font-bold text-orange-900" id="price-coin">₩4,900 / 1회성</span>
+        </div>
+      </div>
+>>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
 
-    // Delete a single relay audio item
-    async function deleteRelay(id) {
-      if (confirm("이 따뜻한 릴레이 소리를 정말로 삭제할까요?")) {
-        try {
-          await db.relays.delete(id);
-          showToast("릴레이가 성공적으로 삭제되었습니다.");
-          loadRelays();
-        } catch (err) {
-          console.error("삭제 실패:", err);
-          showToast("삭제 중 문제가 생겼습니다.");
-        }
-      }
-    }
+      <!-- PayPal Smart Button container (Will be dynamically rendered inside script) -->
+      <div id="paypal-button-container" class="w-full mt-1 hidden transition-all duration-300"></div>
 
-    // Export Dexie Database to JSON file
-    async function exportData() {
-      try {
-        const relays = await db.relays.toArray();
-        // Convert Blobs to base64 for JSON serialization
-        const serializedRelays = await Promise.all(relays.map(async (r) => {
-          const buffer = await r.audioBlob.arrayBuffer();
-          const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
-          return {
-            ...r,
-            audioBlobBase64: base64,
-            audioBlob: undefined // clear to avoid serialization crash
-          };
-        }));
+      <button id="paywall-btn" onclick="startPaypalFlow()" class="w-full py-3.5 rounded-2xl bg-theme-grad text-white font-bold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all touch-target" data-i18n="paywall_btn">
+        프리미엄 멤버십 시작하기
+      </button>
+    </div>
+  </div>
 
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(serializedRelays));
-        const downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute("download", `dangmokdamgeul_backup_${Date.now()}.json`);
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
-        showToast("데이터 백업 파일이 저장되었습니다.");
-      } catch (err) {
-        console.error("백업 오류:", err);
-        showToast("백업 생성 중 문제가 생겼어요.");
-      }
-    }
+  <!-- Gemini API Key Settings Modal -->
+  <div id="settings-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
+    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
+      <div class="flex justify-between items-center">
+        <span class="text-xs font-bold bg-orange-100 text-orange-900 px-3 py-1 rounded-full flex items-center gap-1">
+          <i data-lucide="key" class="w-3.5 h-3.5 text-orange-600"></i>
+          <span data-i18n="gemini_key_title">Gemini API 설정</span>
+        </span>
+        <button onclick="closeSettingsModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <p class="text-xs text-orange-950/70 leading-relaxed text-left" data-i18n="gemini_key_desc">
+        70개국 실시간 감성 번역을 사용하기 위해 개인 Gemini API Key를 등록해 주세요. 키는 기기 로컬에만 안전하게 보관됩니다.
+      </p>
+      <input type="password" id="gemini-api-key-input" placeholder="AIzaSy..." class="w-full px-4 py-3 rounded-2xl border border-orange-200/60 bg-white/50 focus:outline-none focus:border-orange-400 text-xs font-medium font-comfort">
+      <div class="flex gap-2">
+        <button onclick="closeSettingsModal()" class="w-1/2 py-3 rounded-2xl bg-orange-50 hover:bg-orange-100 text-orange-950 font-bold text-xs shadow-sm transition-all" data-i18n="cancel_btn">취소</button>
+        <button onclick="saveGeminiApiKey()" class="w-1/2 py-3 rounded-2xl bg-theme-grad text-white font-bold text-xs shadow-md transition-all" data-i18n="gemini_key_save">저장하기</button>
+      </div>
+    </div>
+  </div>
 
-    // Import Dexie Database from JSON file
-    async function importData(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+  <!-- Benefit Info Modal -->
+  <div id="benefit-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
+    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
+      <div class="flex justify-end">
+        <button onclick="closeBenefitModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-16 h-16 rounded-full bg-rose-100 flex items-center justify-center text-3xl shadow-inner animate-pulse">🎁</div>
+        <h3 class="text-base font-bold text-orange-950 font-warm" data-i18n="benefit_modal_title">목소리 기부 혜택 안내</h3>
+        <p class="text-xs text-orange-850/80 leading-relaxed text-left px-1 mt-1 space-y-2">
+          <span class="block">🍊 <b>어떻게 참여하나요?</b><br>낭독 녹음을 마친 후 "세상에 목소리 기부하기"를 선택해 전 세계 릴레이 피드에 업로드합니다.</span>
+          <span class="block">🎁 <b>어떤 혜택을 받나요?</b><br>소중한 온기 기부에 대한 감사의 보답으로, 1회 기부당 <b>Gemini AI 정밀 발음 분석 무료 이용권 5회</b>를 즉시 지급해 드립니다!</span>
+          <span class="block">🔒 <b>개인정보는 안전한가요?</b><br>음성 릴레이 공유에 참여할 때에만 익명 로그인을 경유해 클라우드에 업로드되며, 기부를 선택하지 않으면 오직 기기 로컬에만 안전하게 유지됩니다.</span>
+        </p>
+      </div>
+      <button onclick="closeBenefitModal()" class="w-full py-3.5 rounded-2xl bg-theme-grad text-white font-bold text-xs shadow-md hover:scale-[1.02] transition-all" data-i18n="eval_close_btn">확인 완료</button>
+    </div>
+  </div>
 
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        try {
-          const rawRelays = JSON.parse(e.target.result);
-          
-          await db.relays.clear();
-          
-          for (let r of rawRelays) {
-            // Restore Base64 to Blob
-            const binaryStr = atob(r.audioBlobBase64);
-            const bytes = new Uint8Array(binaryStr.length);
-            for (let i = 0; i < binaryStr.length; i++) {
-              bytes[i] = binaryStr.charCodeAt(i);
-            }
-            const audioBlob = new Blob([bytes], { type: 'audio/webm' });
-            
-            await db.relays.add({
-              emotion: r.emotion,
-              content: r.content,
-              timestamp: r.timestamp || Date.now(),
-              audioBlob: audioBlob
-            });
-          }
-          
-          showToast("데이터를 성공적으로 복원했습니다!");
-          loadRelays();
-        } catch (err) {
-          console.error("가져오기 에러:", err);
-          showToast("잘못된 백업 파일 형식입니다.");
-        }
-      };
-      reader.readAsText(file);
-    }
+  <!-- Voice Donation Confirm Modal -->
+  <div id="donate-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
+    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-3xl shadow-inner">🌍</div>
+        <h3 class="text-base font-bold text-orange-950 font-warm" data-i18n="donate_modal_title">목소리 온기 나누기</h3>
+        <p class="text-xs text-orange-700/80 leading-relaxed" data-i18n="donate_invite">
+          세상에 목소리를 기부하시면 무료로 발음 정확도를 알려드려요! 🎁<br>
+          <span class="text-[10px] text-orange-600 mt-1 block font-bold">(💡 정밀 교정 및 원어민 발음 듣기는 프리미엄 전용)</span>
+        </p>
+      </div>
+      <div class="flex flex-col gap-2 mt-2">
+        <button onclick="processVoiceDonation()" class="w-full py-3.5 rounded-2xl bg-theme-grad text-white font-bold text-xs shadow-md hover:scale-[1.02] transition-all" data-i18n="donate_btn">
+          목소리 기부하고 5회 얻기
+        </button>
+        <button onclick="processLocalSaveOnly()" class="w-full py-3 rounded-2xl bg-orange-50 hover:bg-orange-100 text-orange-950 font-bold text-xs shadow-sm transition-all" data-i18n="donate_skip">
+          그냥 로컬에만 저장할래요
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
 
-    // Initial Loading
-    window.addEventListener('load', async () => {
-      await loadPrimersFromDB();
-      updatePrimerUI(); // Ensure primer text is rendered on start
-      loadRelays();
-
-      // PWA Service Worker Registration
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('서비스 워커가 등록되었습니다!', reg))
-          .catch(err => console.error('서비스 워커 등록 실패:', err));
-      }
-    });
-
-  </script>
+  <!-- PWA Offline Toast Warning -->
+  <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-rose-600/95 text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl z-50 flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none w-max max-w-[90vw]">
+    <i data-lucide="info" class="w-4 h-4 text-white"></i>
+    <span id="toast-text" class="text-white">네트워크 연결이 끊어졌습니다.</span>
+  </div>
+  <script src="js/db.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

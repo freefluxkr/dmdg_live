@@ -1,9 +1,6 @@
 name: Weekly Happy Letter Scraper
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     # 한국 시간 기준(UTC+9) 매주 일요일 오전 5시 정각 실행 (UTC 기준 토요일 20:00)
     - cron: '0 20 * * 0'

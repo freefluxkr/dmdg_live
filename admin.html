@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DMDG Admin Dashboard</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body { font-family: 'Outfit', sans-serif; background-color: #f8fafc; }
+    .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); border-radius: 1rem; }
+  </style>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+</head>
+<body class="text-slate-800 antialiased min-h-screen pb-12 relative overflow-x-hidden">
+
+  <!-- Google Auth Overlay -->
+  <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-900/90 flex items-center justify-center backdrop-blur-sm">
+    <div class="glass-card p-8 max-w-sm w-full text-center mx-4">
+      <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="shield-check" class="w-8 h-8"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-slate-800 mb-2">Admin Login</h2>
+      <p class="text-sm text-slate-500 mb-6">관리자 승인된 Gmail 계정으로 로그인하세요.</p>
+      
+      <button onclick="loginWithGoogle()" class="w-full py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-xl transition-colors flex items-center justify-center gap-3 shadow-sm">
+        <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Sign in with Google
+      </button>
+      
+      <p id="auth-error" class="text-rose-500 text-xs mt-4 hidden font-bold">접근 권한이 없는 계정입니다.</p>
+    </div>
+  </div>
+
+  <!-- Dashboard Container -->
+  <div id="dashboard-container" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden opacity-0 transition-opacity duration-500">
+    
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-2">
+          <i data-lucide="layout-dashboard" class="text-orange-500"></i>
+          DMDG Dashboard
+        </h1>
+        <p class="text-sm text-slate-500 mt-1">실시간 서비스 운영 지표 현황</p>
+      </div>
+      <button onclick="logoutAdmin()" class="flex items-center gap-2 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-bold transition-colors">
+        <i data-lucide="log-out" class="w-4 h-4"></i> 로그아웃
+      </button>
+    </header>
+
+    <!-- Metrics Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      
+      <!-- Metric 1 -->
+      <div class="glass-card p-5 flex flex-col justify-between">
+        <div class="flex items-start justify-between mb-2">
+          <span class="text-sm font-semibold text-slate-500">총 마중물 (Primers)</span>
+          <div class="p-1.5 bg-blue-50 text-blue-600 rounded-md">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <h3 id="stat-primers" class="text-3xl font-bold text-slate-800 mt-1">...</h3>
+      </div>
+
+      <!-- Metric 2 -->
+      <div class="glass-card p-5 flex flex-col justify-between">
+        <div class="flex items-start justify-between mb-2">
+          <span class="text-sm font-semibold text-slate-500">누적 기부 (Relays)</span>
+          <div class="p-1.5 bg-emerald-50 text-emerald-600 rounded-md">
+            <i data-lucide="mic" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <h3 id="stat-relays" class="text-3xl font-bold text-slate-800 mt-1">...</h3>
+      </div>
+
+      <!-- Metric 3 -->
+      <div class="glass-card p-5 flex flex-col justify-between">
+        <div class="flex items-start justify-between mb-2">
+          <span class="text-sm font-semibold text-slate-500">프리미엄 유저</span>
+          <div class="p-1.5 bg-amber-50 text-amber-600 rounded-md">
+            <i data-lucide="crown" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <h3 id="stat-premium" class="text-3xl font-bold text-slate-800 mt-1">...</h3>
+      </div>
+
+      <!-- Metric 4 -->
+      <div class="glass-card p-5 flex flex-col justify-between">
+        <div class="flex items-start justify-between mb-2">
+          <span class="text-sm font-semibold text-slate-500">총 접속(방문) 수</span>
+          <div class="p-1.5 bg-purple-50 text-purple-600 rounded-md">
+            <i data-lucide="users" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <h3 id="stat-visits" class="text-3xl font-bold text-slate-800 mt-1">...</h3>
+      </div>
+      
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      
+      <!-- Chart 1: Traffic Sources -->
+      <div class="glass-card p-6">
+        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <i data-lucide="pie-chart" class="w-5 h-5 text-indigo-500"></i>
+          유입 경로 (Referrer)
+        </h3>
+        <div class="relative h-64 w-full">
+          <canvas id="referrerChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: Daily Activity -->
+      <div class="glass-card p-6">
+        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <i data-lucide="activity" class="w-5 h-5 text-rose-500"></i>
+          일별 접속 추이
+        </h3>
+        <div class="relative h-64 w-full">
+          <canvas id="dailyChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+</html>

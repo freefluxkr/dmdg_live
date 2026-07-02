@@ -1,0 +1,11 @@
+PayPal 가입계정
+
+dmdg.official@gmail.com
+
+전화번호 : 01024702926
+
+비밀번호 : ddkey^^989
+
+Default Application 의 API credentials
+
+https://developer.paypal.com/dashboard/applications/edit/SB:QWFZdGc1NGh4cXdJN2ZuODd5bTJNMjhrVERPbDdOUTFSWkpVamRYMHRJdXRqMDQ4SlgyVG92RGtDV3l0U3k4Sy1COWxJcGNmN19JSERBLWM=?appname=Default%20Application

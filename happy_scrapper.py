@@ -16,19 +16,19 @@ from firebase_admin import firestore
 # 프로젝트 ID가 dmdg-pwa 이므로 로컬 혹은 Firebase Admin 기본 자격 증명을 로드합니다.
 try:
     # dmdg-live 프로젝트 인증 초기화
+    app = None
     if not firebase_admin._apps:
-        # GCP 환경 혹은 로컬 서비스 계정 키 파일 경로 지정 가능
-        # 만약 로컬에 키 파일(serviceAccountKey.json)이 없다면 Application Default Credentials 사용
         cred_path = "serviceAccountKey.json"
         if os.path.exists(cred_path):
             cred = credentials.Certificate(cred_path)
-            firebase_admin.initialize_app(cred)
+            app = firebase_admin.initialize_app(cred)
         else:
-            # credentials 없이 초기화할 때 환경 변수를 기준으로 인증을 시도합니다.
-            firebase_admin.initialize_app(options={
+            app = firebase_admin.initialize_app(options={
                 'projectId': 'dmdg-live'
             })
-    db = firestore.client()
+    else:
+        app = firebase_admin.get_app()
+    db = firestore.client(app=app)
 except Exception as e:
     print(f"⚠️ Firebase Admin SDK 초기화 실패: {e}")
     print("👉 로컬 실행을 위해 Firebase 콘솔에서 serviceAccountKey.json 파일을 발급받아 스크립트와 동일 폴더에 넣어주세요.")
@@ -96,8 +96,8 @@ def fetch_happy_contents():
                     html = response.read()
                     soup = BeautifulSoup(html, 'html.parser')
                     
-                    # 행복한가 목록에서 개별 글 a 태그들 추출
-                    posts = soup.find_all('a', href=re.compile(r'/happy-contents/\d+'))
+                    # 행복한가 목록에서 개별 글 a 태그들 추출 (bmode=view 매개변수가 포함된 뷰 링크 추출)
+                    posts = soup.find_all('a', href=re.compile(r'bmode=view'))
                     
                     links = []
                     for post in posts:
@@ -113,10 +113,12 @@ def fetch_happy_contents():
                             detail_req = urllib.request.Request(link, headers=headers)
                             with urllib.request.urlopen(detail_req, timeout=10) as detail_res:
                                 detail_soup = BeautifulSoup(detail_res.read(), 'html.parser')
-                                content_area = detail_soup.select_one('.post-content, .article-body, #content_area, .view-content')
+                                content_area = detail_soup.select_one('.board_txt_area, .post-content, .article-body, #content_area, .view-content')
                                 title_area = detail_soup.select_one('.post-title, .title, h1, .view-title')
                                 
                                 title = title_area.get_text().strip() if title_area else "따뜻한 마중물 편지"
+                                # 제목 앞의 [일상스토리] 같은 말머리 제거
+                                title = re.sub(r'^\[.*?\]\s*', '', title)
                                 
                                 if content_area:
                                     for img in content_area.find_all('img'):
