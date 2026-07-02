@@ -91,10 +91,10 @@
       </div>
       <!-- Database backup / restore triggers -->
       <button onclick="exportData()" title="데이터 백업" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
-        <i data-lucide="download" class="w-5 h-5 flex items-center justify-center">📥</i>
+        <i data-lucide="download" class="w-5 h-5"></i>
       </button>
       <button onclick="document.getElementById('importFile').click()" title="데이터 불러오기" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
-        <i data-lucide="upload" class="w-5 h-5 flex items-center justify-center">📤</i>
+        <i data-lucide="upload" class="w-5 h-5"></i>
       </button>
       <button onclick="openSettingsModal()" title="Gemini 설정" class="hidden p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
         <i data-lucide="settings" class="w-5 h-5"></i>
@@ -133,7 +133,7 @@
       
       <!-- Speech Speed Control -->
       <div class="flex items-center gap-1.5 pl-2 border-l border-orange-200/60 text-orange-900">
-        <i data-lucide="gauge" class="w-4 h-4 text-orange-650 flex items-center justify-center">⚡</i>
+        <i data-lucide="gauge" class="w-4 h-4 text-orange-650"></i>
         <select id="play-speed" class="bg-transparent text-xs font-bold text-orange-900 border-none focus:outline-none pr-1 cursor-pointer">
           <option value="0.8">0.8x</option>
           <option value="1.0" selected>1.0x</option>
@@ -147,12 +147,13 @@
     <div class="glass-card rounded-3xl p-5 border-l-4 border-theme-primary bg-orange-50/50 flex flex-col gap-2.5">
       <div class="flex items-center justify-between">
         <span class="text-xs font-bold text-orange-800 flex items-center gap-1">
-          <i data-lucide="book-open" class="w-3.5 h-3.5 flex items-center justify-center">📖</i>
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
           <span id="primer-type" data-i18n="primer_type_word">오늘의 마중물 말</span>
         </span>
         <div class="flex items-center gap-1">
+
           <button onclick="rotatePrimer()" class="p-1 rounded-full hover:bg-orange-100/50 text-orange-700 active:scale-90 transition-transform flex items-center justify-center min-w-[32px] min-h-[32px]">
-            <i data-lucide="rotate-cw" class="w-3.5 h-3.5 flex items-center justify-center">🔄</i>
+            <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
           </button>
         </div>
       </div>
@@ -206,14 +207,14 @@
         <!-- Pulsing background ring when recording -->
         <div id="pulse-ring" class="absolute w-24 h-24 bg-red-400/20 rounded-full scale-0 transition-transform duration-500"></div>
         <button id="action-btn" onclick="toggleRecording()" class="w-20 h-20 rounded-full bg-theme-grad text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 glow-theme touch-target z-10 min-w-[44px] min-h-[44px]">
-          <i data-lucide="mic" id="action-icon" class="w-8 h-8 flex items-center justify-center">🎙️</i>
+          <i data-lucide="mic" id="action-icon" class="w-8 h-8"></i>
         </button>
       </div>
 
       <!-- Helper info -->
       <div class="w-full flex items-center justify-between px-2 text-xs text-orange-700/60 font-medium">
         <div class="flex items-center gap-1.5">
-          <i data-lucide="info" class="w-3.5 h-3.5 flex items-center justify-center">ℹ️</i>
+          <i data-lucide="info" class="w-3.5 h-3.5"></i>
           <span data-i18n="mic_help">당신의 따뜻한 기운이 담겨요.</span>
         </div>
         <div id="free-eval-badge" class="flex items-center gap-1 bg-orange-100/50 px-2 py-1 rounded-md border border-orange-200">
@@ -226,12 +227,12 @@
     <!-- Relay List Title -->
     <div class="flex items-center justify-between px-1">
       <h3 class="text-sm font-bold text-orange-950 font-warm flex items-center gap-1.5">
-        <i data-lucide="music-4" class="w-4 h-4 text-orange-600 flex items-center justify-center">🎵</i>
+        <i data-lucide="music-4" class="w-4 h-4 text-orange-600"></i>
         <span data-i18n="relay_title">이어받은 따뜻한 소리들</span>
       </h3>
       <div class="flex items-center gap-2">
-        <button onclick="startAudiobook()" class="text-xs font-bold bg-theme-grad text-white px-3 py-1.5 rounded-full shadow-sm hover:scale-105 transition-transform flex items-center gap-1 touch-target">
-          <i data-lucide="headphones" class="w-3.5 h-3.5 flex items-center justify-center">🎧</i>
+        <button onclick=" startAudiobook()" class="text-xs font-bold bg-theme-grad text-white px-3 py-1.5 rounded-full shadow-sm hover:scale-105 transition-transform flex items-center gap-1 touch-target">
+          <i data-lucide="headphones" class="w-3.5 h-3.5"></i>
           <span data-i18n="play_audiobook">오디오북 듣기</span>
         </button>
         <span id="relay-count" class="text-xs font-bold bg-orange-150 text-orange-800 px-2.5 py-0.5 rounded-full glass-card">0</span>
@@ -308,7 +309,7 @@
           <span data-i18n="audiobook_panel_title">마음 오디오북 연속 재생 중</span>
         </span>
         <button onclick="stopAudiobook()" class="text-orange-950/50 hover:text-orange-900 transition-colors p-1">
-          <i data-lucide="x" class="w-4 h-4 flex items-center justify-center">✖</i>
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
       
@@ -325,14 +326,14 @@
 
       <!-- Playback Controls -->
       <div class="flex items-center justify-center gap-5">
-        <button onclick="prevAudiobookTrack()" class="p-2 rounded-full hover:bg-orange-100 text-orange-800 transition-colors touch-target">
-          <i data-lucide="skip-back" class="w-5 h-5 flex items-center justify-center">⏮</i>
+        <button onclick=" prevAudiobookTrack()" class="p-2 rounded-full hover:bg-orange-100 text-orange-800 transition-colors touch-target">
+          <i data-lucide="skip-back" class="w-5 h-5"></i>
         </button>
-        <button onclick="toggleAudiobookPlay()" id="audiobook-play-btn" class="w-12 h-12 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-md touch-target">
-          <i data-lucide="pause" class="w-6 h-6 flex items-center justify-center">⏸</i>
+        <button onclick=" toggleAudiobookPlay()" id="audiobook-play-btn" class="w-12 h-12 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-md touch-target">
+          <i data-lucide="pause" class="w-6 h-6"></i>
         </button>
-        <button onclick="nextAudiobookTrack()" class="p-2 rounded-full hover:bg-orange-100 text-orange-800 transition-colors touch-target">
-          <i data-lucide="skip-forward" class="w-5 h-5 flex items-center justify-center">⏭</i>
+        <button onclick=" nextAudiobookTrack()" class="p-2 rounded-full hover:bg-orange-100 text-orange-800 transition-colors touch-target">
+          <i data-lucide="skip-forward" class="w-5 h-5"></i>
         </button>
       </div>
     </div>
@@ -348,24 +349,10 @@
         </span>
         <button onclick="closeEvaluationModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
           <i data-lucide="x" class="w-4 h-4"></i>
->>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
         </button>
       </div>
 
       <!-- Score Display -->
-<<<<<<< HEAD
-      <div class="text-center py-4 bg-gradient-to-br from-orange-100/50 to-rose-100/50 rounded-2xl border border-orange-200/40">
-        <span class="text-[10px] font-bold text-orange-800 uppercase tracking-widest block mb-1">PRONUNCIATION SCORE</span>
-        <span id="ai-score" class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 font-comfort">92</span>
-        <span class="text-xl font-bold text-orange-700">/ 100</span>
-      </div>
-
-      <!-- Detailed Feedback Section -->
-      <div class="space-y-3">
-        <div class="flex flex-col gap-1 bg-white/40 rounded-xl p-3 border border-orange-100">
-          <span class="text-[10px] font-bold text-orange-800 flex items-center gap-1">
-            <i data-lucide="smile" class="w-3 h-3 text-orange-600"></i> 잘한 부분
-=======
       <div class="text-center py-3 bg-gradient-to-br from-orange-100/50 to-rose-100/50 rounded-2xl border border-orange-200/40">
         <span class="text-[10px] font-bold text-orange-800 uppercase tracking-widest block mb-0.5" data-i18n="eval_score_label">PRONUNCIATION SCORE</span>
         <span id="ai-score" class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 font-comfort">92</span>
@@ -382,7 +369,6 @@
         <div class="flex flex-col gap-1 bg-white/40 rounded-xl p-3 border border-orange-100">
           <span class="text-[10px] font-bold text-orange-800 flex items-center gap-1">
             <i data-lucide="smile" class="w-3 h-3 text-orange-600"></i> <span data-i18n="eval_good_label">잘한 부분</span>
->>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
           </span>
           <p id="ai-good" class="text-xs font-medium text-orange-950 leading-relaxed font-warm">
             목소리 톤이 아주 차분하며, 문장의 감정선이 따뜻하게 묻어나와 듣기 좋습니다.
@@ -390,907 +376,12 @@
         </div>
         <div class="flex flex-col gap-1 bg-rose-50/40 rounded-xl p-3 border border-rose-100">
           <span class="text-[10px] font-bold text-rose-800 flex items-center gap-1">
-<<<<<<< HEAD
-            <i data-lucide="alert-circle" class="w-3 h-3 text-rose-600"></i> 교정이 필요한 부분
-=======
             <i data-lucide="alert-circle" class="w-3 h-3 text-rose-600"></i> <span data-i18n="eval_improve_label">교정이 필요한 부분</span>
->>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
           </span>
           <p id="ai-improve" class="text-xs font-medium text-orange-950 leading-relaxed font-warm">
             "바람이" 구절에서 종성 발음이 조금 급해 뭉개졌습니다. 템포를 살짝 늦춰보세요.
           </p>
         </div>
-<<<<<<< HEAD
-      </div>
-
-      <!-- Premium Share / Close Buttons -->
-      <button onclick="closeEvaluationModal()" class="w-full py-3 rounded-2xl bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all touch-target">
-        확인 완료
-      </button>
-    </div>
-  </div>
-
-  <!-- Paywall / Subscription Modal -->
-  <div id="paywall-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
-      <div class="flex justify-end">
-        <button onclick="closePaywallModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-
-      <div class="flex flex-col items-center gap-2">
-        <div class="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-3xl shadow-inner">💎</div>
-        <h3 class="text-base font-bold text-orange-950 font-warm">Gemini AI 정밀 진단 횟수 초과</h3>
-        <p class="text-xs text-orange-700/80 leading-relaxed">
-          오늘의 무료 AI 발음 평가 3회를 모두 사용하셨습니다.<br>유료 프리미엄 멤버십으로 24시간 언제든 정밀 과외를 즐겨보세요!
-        </p>
-      </div>
-
-      <!-- Subscription Options -->
-      <div class="space-y-2.5 my-2">
-        <div onclick="purchasePremium('weekly')" class="p-3.5 rounded-2xl border-2 border-orange-400 bg-orange-50/50 hover:bg-orange-100/50 cursor-pointer flex justify-between items-center transition-colors">
-          <div class="text-left">
-            <span class="text-xs font-bold text-orange-950 block">주간 자유 패스</span>
-            <span class="text-[10px] text-orange-700/60">매주 무제한 발음 피드백</span>
-          </div>
-          <span class="text-xs font-bold text-orange-900">₩2,900 / 주</span>
-        </div>
-        <div onclick="purchasePremium('charge')" class="p-3.5 rounded-2xl border border-orange-200 bg-white/40 hover:bg-orange-50/30 cursor-pointer flex justify-between items-center transition-colors">
-          <div class="text-left">
-            <span class="text-xs font-bold text-orange-950 block">30 코인 충전</span>
-            <span class="text-[10px] text-orange-700/60">30회 정밀 성적표 발급</span>
-          </div>
-          <span class="text-xs font-bold text-orange-900">₩4,900 / 1회성</span>
-        </div>
-      </div>
-
-      <button onclick="showToast('성공적으로 결제되었습니다! 프리미엄 혜택을 누리세요.'); closePaywallModal();" class="w-full py-3.5 rounded-2xl bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all touch-target">
-        프리미엄 멤버십 시작하기
-      </button>
-    </div>
-  </div>
-
-  <!-- PWA Offline Toast Warning -->
-  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-amber-950/90 text-amber-50 px-5 py-3 rounded-full text-xs font-semibold shadow-2xl z-50 flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none">
-    <i data-lucide="wifi-off" class="w-4 h-4 text-amber-400"></i>
-    <span id="toast-text">지금은 연결이 끊겨 릴레이를 생성할 수 없어요.</span>
-  </div>
-
-  <script>
-    // Initialize Lucide Icons Safely
-    function safeInitLucide() {
-      if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
-        try {
-          lucide.createIcons();
-        } catch (e) {
-          console.error("Lucide 아이콘 생성 실패:", e);
-        }
-      } else {
-        console.warn("Lucide 스크립트가 준비되지 않아 기본 이모지 폴백 기호를 사용합니다.");
-      }
-    }
-    safeInitLucide();
-
-    // 1. Dexie Database Setup
-    const db = new Dexie('DangmokdamgeulDB');
-    db.version(3).stores({
-      personas: '++id, name, style, tone, preferredWritingStyle',
-      primers: '++id, personaId, content, timestamp, weather, emotion, sensorContext, type',
-      relays: '++id, primerId, personaId, content, audioBlob, timestamp, emotion'
-    });
-
-    // Populate initial default personas and actual happy letters from m-letter.or.kr
-    db.on('populate', () => {
-      db.personas.bulkAdd([
-        { name: '하루 (위로)', style: '예쁜 일본어 구어체', tone: '따스하고 다정한 목소리', preferredWritingStyle: '소박하고 따스한 말투' },
-        { name: '사쿠라 (설렘)', style: '귀엽고 낭만적인 구어체', tone: '맑고 생기 넘치는 목소리', preferredWritingStyle: '발랄하고 감성 가득한 말투' },
-        { name: '렌 (평온)', style: '차분하고 정갈한 구어체', tone: '나직하고 깊은 목소리', preferredWritingStyle: '담담하면서 평화로운 말투' }
-      ]);
-
-      // Populate actual m-letter happy content (마중물 편지)
-      db.primers.bulkAdd([
-        { type: "오늘의 편지", emotion: "위로", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요. '나는 이런 사람이야' 하면서 자신을 가두거나, '나는 안 맞아' 하면서 미리 포기하지 마세요.” — 김창완 <이제야 보이네> 중에서" },
-        { type: "오늘의 편지", emotion: "위로", content: "“부디 자기 인생을 다른 사람과 비교하며 비참해지지 않았으면 좋겠습니다. 허탈함 속의 나를 발견하는 것도 나쁘지 않아요. 괜한 불안을 느끼는 일도 일상의 아름다움 아닐까요?” — 김창완 <이제야 보이네> 중에서" },
-        { type: "오늘의 편지", emotion: "위로", content: "“자신을, 우리 삶을 재단하지 말아요. 어마어마한 기적을 가두지 말자고요.” — 김창완 <이제야 보이네> 중에서" },
-        { type: "오늘의 편지", emotion: "위로", content: "“우리는 매일 밤 서로의 목소리에 기대어 보이지 않는 선을 잇는다. 그것은 하루를 견뎌낸 이들에게 주는 소박한 위안이다.”" },
-        { type: "오늘의 편지", emotion: "위로", content: "“그늘이 깊다는 것은 그만큼 빛이 가깝다는 뜻입니다. 당신의 지친 하루에 조용히 손을 얹습니다.”" },
-        
-        // 설렘 (q233ZF15bi 카테고리 추가: 부모, 가족, 사랑, 마음)
-        { type: "오늘의 편지", emotion: "설렘", content: "“아이들이 놀아달라고 하는 것은 부모와 눈을 맞추고 따뜻한 교감을 하고 싶다는 신호입니다. 그것이 우리 안에 숨겨진 가장 맑고 설레는 만남의 시작입니다.”" },
-        { type: "오늘의 편지", emotion: "설렘", content: "“가족과 함께 보내는 여가 시간은 서로를 더 깊이 이해하고 신뢰를 쌓아가는 신비한 울타리이자, 일상 속 작은 소풍과 같습니다.”" },
-        { type: "오늘의 편지", emotion: "설렘", content: "“어쩌면 오늘, 바람결에 실려 온 맑은 목소리가 당신의 마음을 가만히 두드릴지도 모릅니다. 설레는 맘으로 기다려 보세요.”" },
-        { type: "오늘의 편지", emotion: "설렘", content: "“새로운 방향을 찾아 한 걸음 내딛는 일, 비록 불안할지라도 그것은 우리 삶이 꽃피기 시작하는 가장 설레는 기적입니다.”" },
-        
-        // 평온 (q233ZF15bi 카테고리 추가: 마음 돌보기)
-        { type: "오늘의 편지", emotion: "평온", content: "“어른이 되어가는 과정에서 겪는 아픔이나 결핍을 다독이고, 스스로를 따뜻한 시선으로 바라보며 '지금' 행복해지는 마음의 자세를 배워갑니다.”" },
-        { type: "오늘의 편지", emotion: "평온", content: "“모두에게 무리하여 좋은 사람이 되려 하기보다, 내 마음의 온기를 먼저 돌볼 때 비로소 진정한 평화가 깃듭니다.”" },
-        { type: "오늘의 편지", emotion: "평온", content: "“'나는 이런 사람이야'라며 억지로 규정하지 않을 때, 마음속에는 비로소 고요하고 넓은 평온함이 찾아옵니다.”" },
-        { type: "오늘의 편지", emotion: "평온", content: "“불안마저 일상의 자연스러운 부분으로 받아들이고 흘려보낼 때, 우리의 일상은 가장 정갈하고 평화로워집니다.”" },
-        { type: "오늘의 편지", emotion: "평온", content: "“아무 일도 일어나지 않는 오후, 가볍게 스쳐 가는 새소리와 바람 소리 속에 우리의 평화가 조용히 깃들어 있다.”" }
-      ]);
-    });
-
-    // Open DB
-    db.open().then(async () => {
-      // Safe fallback: If on('populate') did not run because DB already exists, manually insert if empty.
-      const primerCount = await db.primers.count();
-      if (primerCount === 0) {
-        await db.personas.bulkAdd([
-          { name: '하루 (위로)', style: '예쁜 일본어 구어체', tone: '따스하고 다정한 목소리', preferredWritingStyle: '소박하고 따스한 말투' },
-          { name: '사쿠라 (설렘)', style: '귀엽고 낭만적인 구어체', tone: '맑고 생기 넘치는 목소리', preferredWritingStyle: '발랄하고 감성 가득한 말투' },
-          { name: '렌 (평온)', style: '차분하고 정갈한 구어체', tone: '나직하고 깊은 목소리', preferredWritingStyle: '담담하면서 평화로운 말투' }
-        ]);
-        await db.primers.bulkAdd([
-          { type: "오늘의 편지", emotion: "위로", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요. '나는 이런 사람이야' 하면서 자신을 가두거나, '나는 안 맞아' 하면서 미리 포기하지 마세요.” — 김창완 <이제야 보이네> 중에서" },
-          { type: "오늘의 편지", emotion: "위로", content: "“부디 자기 인생을 다른 사람과 비교하며 비참해지지 않았으면 좋겠습니다. 허탈함 속의 나를 발견하는 것도 나쁘지 않아요. 괜한 불안을 느끼는 일도 일상의 아름다움 아닐까요?” — 김창완 <이제야 보이네> 중에서" },
-          { type: "오늘의 편지", emotion: "위로", content: "“자신을, 우리 삶을 재단하지 말아요. 어마어마한 기적을 가두지 말자고요.” — 김창완 <이제야 보이네> 중에서" },
-          { type: "오늘의 편지", emotion: "위로", content: "“우리는 매일 밤 서로의 목소리에 기대어 보이지 않는 선을 잇는다. 그것은 하루를 견뎌낸 이들에게 주는 소박한 위안이다.”" },
-          { type: "오늘의 편지", emotion: "위로", content: "“그늘이 깊다는 것은 그만큼 빛이 가깝다는 뜻입니다. 당신의 지친 하루에 조용히 손을 얹습니다.”" },
-          { type: "오늘의 편지", emotion: "설렘", content: "“아이들이 놀아달라고 하는 것은 부모와 눈을 맞추고 따뜻한 교감을 하고 싶다는 신호입니다. 그것이 우리 안에 숨겨진 가장 맑고 설레는 만남의 시작입니다.”" },
-          { type: "오늘의 편지", emotion: "설렘", content: "“가족과 함께 보내는 여가 시간은 서로를 더 깊이 이해하고 신뢰를 쌓아가는 신비한 울타리이자, 일상 속 작은 소풍과 같습니다.”" },
-          { type: "오늘의 편지", emotion: "설렘", content: "“어쩌면 오늘, 바람결에 실려 온 맑은 목소리가 당신의 마음을 가만히 두드릴지도 모릅니다. 설레는 맘으로 기다려 보세요.”" },
-          { type: "오늘의 편지", emotion: "설렘", content: "“새로운 방향을 찾아 한 걸음 내딛는 일, 비록 불안할지라도 그것은 우리 삶이 꽃피기 시작하는 가장 설레는 기적입니다.”" },
-          { type: "오늘의 편지", emotion: "평온", content: "“어른이 되어가는 과정에서 겪는 아픔이나 결핍을 다독이고, 스스로를 따뜻한 시선으로 바라보며 '지금' 행복해지는 마음의 자세를 배워갑니다.”" },
-          { type: "오늘의 편지", emotion: "평온", content: "“모두에게 무리하여 좋은 사람이 되려 하기보다, 내 마음의 온기를 먼저 돌볼 때 비로소 진정한 평화가 깃듭니다.”" },
-          { type: "오늘의 편지", emotion: "평온", content: "“'나는 이런 사람이야'라며 억지로 규정하지 않을 때, 마음속에는 비로소 고요하고 넓은 평온함이 찾아옵니다.”" },
-          { type: "오늘의 편지", emotion: "평온", content: "“불안마저 일상의 자연스러운 부분으로 받아들이고 흘려보낼 때, 우리의 일상은 가장 정갈하고 평화로워집니다.”" },
-          { type: "오늘의 편지", emotion: "평온", content: "“아무 일도 일어나지 않는 오후, 가볍게 스쳐 가는 새소리와 바람 소리 속에 우리의 평화가 조용히 깃들어 있다.”" }
-        ]);
-        
-        // Re-load to make sure UI gets updated immediately on first migration
-        await loadPrimersFromDB();
-        updatePrimerUI();
-      }
-    }).catch((err) => {
-      console.error("DB 오픈 실패:", err);
-    });
-
-    // Audio Engine
-    class AudioPlayerEngine {
-      constructor() {
-        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        this.analyser = this.audioContext.createAnalyser();
-        this.analyser.fftSize = 64;
-        this.analyser.connect(this.audioContext.destination);
-        this.playbackRate = 1.0;
-        this.nextStartTime = 0;
-      }
-
-      setSpeed(rate) {
-        this.playbackRate = rate;
-      }
-
-      async playChunk(arrayBuffer, onEndedCallback) {
-        if (this.audioContext.state === 'suspended') {
-          await this.audioContext.resume();
-        }
-        
-        try {
-          const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
-          const source = this.audioContext.createBufferSource();
-          source.buffer = audioBuffer;
-          source.playbackRate.value = this.playbackRate;
-          
-          source.connect(this.analyser);
-          source.connect(this.audioContext.destination);
-
-          const currentTime = this.audioContext.currentTime;
-          if (this.nextStartTime < currentTime) {
-            this.nextStartTime = currentTime;
-          }
-          
-          if (onEndedCallback) {
-            source.onended = () => {
-              // Ensure callback runs after the playback duration (taking playbackRate into account)
-              setTimeout(onEndedCallback, 100);
-            };
-          }
-          
-          source.start(this.nextStartTime);
-          this.nextStartTime += audioBuffer.duration / this.playbackRate;
-        } catch (e) {
-          console.error("오디오 재생 실패:", e);
-          if (onEndedCallback) onEndedCallback();
-        }
-      }
-    }
-
-    // Firebase Configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyBcS8aS5yHk2KFNYPImXslsFkSyoBwYrKI",
-      authDomain: "dmdg-live.firebaseapp.com",
-      projectId: "dmdg-live",
-      storageBucket: "dmdg-live.firebasestorage.app",
-      messagingSenderId: "357433220336",
-      appId: "1:357433220336:web:1a8914811da09123a0f635",
-      measurementId: "G-RRYE7JKKWX"
-    };
-    
-    let firestore = null;
-    if (typeof firebase !== 'undefined') {
-      try {
-        firebase.initializeApp(firebaseConfig);
-        firestore = firebase.firestore();
-        console.log("Firebase Firestore가 성공적으로 로드되었습니다.");
-      } catch (e) {
-        console.error("Firebase 초기화 중 에러 발생:", e);
-      }
-    } else {
-      console.warn("Firebase SDK가 로드되지 않았습니다. 오프라인 모드로 자동 조율합니다.");
-    }
-
-    const audioEngine = new AudioPlayerEngine();
-    let currentFilter = '전체';
-    const emotions = ['전체', '위로', '설렘', '평온'];
-    let isRecording = false;
-    let mediaRecorder = null;
-    let audioChunks = [];
-    let canvasAnimationId = null;
-
-    let loadedPrimers = [];
-    let currentPrimerIndex = 0;
-
-    async function loadPrimersFromDB() {
-      try {
-        const isOnline = navigator.onLine && firestore !== null;
-        
-        if (isOnline) {
-          console.log("Firebase Firestore에서 마중물 데이터를 로드합니다.");
-          const primersCol = firestore.collection("primers");
-          const checkSnapshot = await primersCol.limit(1).get();
-          
-          // Seeding if empty
-          if (checkSnapshot.empty) {
-            console.log("Firestore primers 컬렉션이 비어있습니다. 행복한가 데이터를 적재합니다.");
-            const seedLetters = [
-              {
-                category: "일상스토리",
-                emotion: "위로",
-                title: "삶의 방향을 잃은 당신에게",
-                content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요. '나는 이런 사람이야' 하면서 자신을 가두거나, '나는 안 맞아' 하면서 미리 포기하지 마세요. 부디 자기 인생을 다른 사람과 비교하며 비참해지지 않았으면 좋겠습니다.” — 김창완 <이제야 보이네> 중에서",
-                type: "오늘의 편지"
-              },
-              {
-                category: "일상스토리",
-                emotion: "위로",
-                title: "그늘 속의 위로",
-                content: "“그늘이 깊다는 것은 그만큼 빛이 가깝다는 뜻입니다. 당신의 지친 하루에 조용히 손을 얹습니다. 괜찮아요, 오늘 하루 참 고생 많으셨습니다.”",
-                type: "오늘의 편지"
-              },
-              {
-                category: "일상스토리",
-                emotion: "위로",
-                title: "위안의 연결",
-                content: "“우리는 매일 밤 서로의 목소리에 기대어 보이지 않는 선을 잇는다. 그것은 하루를 견뎌낸 이들에게 주는 소박한 위안이다.”",
-                type: "오늘의 편지"
-              },
-              {
-                category: "일상스토리",
-                emotion: "평온",
-                title: "진정한 나를 찾는 평온",
-                content: "“'나는 이런 사람이야'라며 억지로 규정하지 않을 때, 마음속에는 비로소 고요하고 넓은 평온함이 찾아옵니다. 나를 정의하는 복잡한 수식어를 내려놓고 그냥 숨을 쉬어 보세요.”",
-                type: "오늘의 편지"
-              },
-              {
-                category: "일상스토리",
-                emotion: "평온",
-                title: "일상 수용의 평화",
-                content: "“불안마저 일상의 자연스러운 부분으로 받아들이고 흘려보낼 때, 우리의 일상은 가장 정갈하고 평화로워집니다. 바람이 불면 흔들리는 대로, 비가 오면 내리는 대로 흘러가 봅시다.”",
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "설렘",
-                title: "교감이라는 이름의 소풍",
-                content: "“아이들이 놀아달라고 하는 것은 부모와 눈을 맞추고 따뜻한 교감을 하고 싶다는 신호입니다. 그것이 우리 안에 숨겨진 가장 맑고 설레는 만남의 시작입니다.”",
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "설렘",
-                title: "가족과 함께하는 소풍",
-                content: "“가족과 함께 보내는 여가 시간은 서로를 더 깊이 이해하고 신뢰를 쌓아가는 신비한 울타리이자, 일상 속 작은 소풍과 같습니다. 함께 걷는 길 위에 설렘의 꽃이 핍니다.”",
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "설렘",
-                title: "소리의 문을 두드리다",
-                content: "“어쩌면 오늘, 바람결에 실려 온 맑은 목소리가 당신의 마음을 가만히 두드릴지도 모릅니다. 설레는 맘으로 귀 기울여 들어보세요.”",
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "평온",
-                title: "자연의 평온함",
-                content: "“아무 일도 일어나지 않는 오후, 가볍게 스쳐 가는 새소리와 바람 소리 속에 우리의 평화가 조용히 깃들어 있다.”",
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "평온",
-                title: "내면의 고요한 방",
-                content: "“소리치며 바쁘게 달려가던 발걸음을 멈추고 내면의 방에 초를 켭니다. 고요하게 머물 때 마음은 가장 깨끗하게 씻겨 나갑니다.”",
-                type: "오늘의 편지"
-              }
-            ];
-
-            const batch = firestore.batch();
-            seedLetters.forEach((letter, index) => {
-              const docRef = primersCol.doc(`letter_${index + 1}`);
-              batch.set(docRef, { ...letter, timestamp: Date.now() });
-            });
-            await batch.commit();
-            console.log("Firestore에 행복한가 마중물 적재가 완료되었습니다.");
-          }
-
-          let queryRef = firestore.collection("primers");
-          if (currentFilter !== '전체') {
-            queryRef = queryRef.where("emotion", "==", currentFilter);
-          }
-          
-          const snapshot = await queryRef.get();
-          const items = [];
-          snapshot.forEach(doc => {
-            items.push(doc.data());
-          });
-
-          if (items.length > 0) {
-            loadedPrimers = items;
-            
-            // Sync to local Dexie DB for offline-first resilience
-            await db.primers.clear();
-            await db.primers.bulkAdd(items);
-            return;
-          }
-        }
-        
-        // Fallback to local Dexie database if offline or Firestore query returned 0 items
-        console.log("로컬 데이터베이스(IndexedDB)에서 마중물 데이터를 로드합니다.");
-        let localItems = [];
-        if (currentFilter === '전체') {
-          localItems = await db.primers.toArray();
-        } else {
-          localItems = await db.primers.where('emotion').equals(currentFilter).toArray();
-        }
-        
-        if (localItems.length === 0) {
-          loadedPrimers = [
-            { type: "오늘의 편지", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요.”" }
-          ];
-        } else {
-          loadedPrimers = localItems;
-        }
-      } catch (err) {
-        console.error("마중물 불러오기 오류:", err);
-      }
-    }
-
-    async function rotatePrimer() {
-      if (loadedPrimers.length === 0) await loadPrimersFromDB();
-      currentPrimerIndex = (currentPrimerIndex + 1) % loadedPrimers.length;
-      updatePrimerUI();
-    }
-
-    function updatePrimerUI() {
-      const activePrimer = loadedPrimers[currentPrimerIndex % loadedPrimers.length] || { type: "오늘의 편지", content: "“가만히 귀를 기울이면 온기가 스며듭니다.”" };
-      document.getElementById('primer-type').textContent = activePrimer.type;
-      document.getElementById('primer-content').textContent = activePrimer.content;
-    }
-
-    // Build Emotion Tabs UI
-    try {
-      const emotionTabs = document.getElementById('emotion-tabs');
-      if (emotionTabs) {
-        emotions.forEach(e => {
-          const btn = document.createElement('button');
-          btn.className = `px-4 py-2 rounded-xl text-xs font-bold transition-all touch-target select-none ${
-            currentFilter === e ? 'bg-orange-500 text-white shadow-md' : 'text-orange-950/70 hover:bg-orange-100/30'
-          }`;
-          btn.textContent = e;
-          btn.onclick = async () => {
-            currentFilter = e;
-            currentPrimerIndex = 0;
-            updateTabsUI();
-            await loadPrimersFromDB();
-            updatePrimerUI();
-            loadRelays();
-          };
-          emotionTabs.appendChild(btn);
-        });
-      }
-    } catch (err) {
-      console.error("감정 탭 UI 생성 오류:", err);
-    }
-
-    function updateTabsUI() {
-      Array.from(emotionTabs.children).forEach(btn => {
-        const e = btn.textContent;
-        if (currentFilter === e) {
-          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all touch-target select-none bg-orange-500 text-white shadow-md';
-        } else {
-          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all touch-target select-none text-orange-950/70 hover:bg-orange-100/30';
-        }
-      });
-    }
-
-    // Canvas Blob Visualizer
-    const canvas = document.getElementById('blob-canvas');
-    const ctx = canvas.getContext('2d');
-    let time = 0;
-
-    function drawBlob() {
-      canvasAnimationId = requestAnimationFrame(drawBlob);
-      
-      const bufferLength = audioEngine.analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
-      audioEngine.analyser.getByteFrequencyData(dataArray);
-
-      let sum = 0;
-      for (let i = 0; i < bufferLength; i++) {
-        sum += dataArray[i];
-      }
-      const avg = sum / bufferLength;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      
-      // Gentle pulsing base radius based on sound
-      const baseRadius = 55 + avg * 0.45;
-
-      // Draw soft outer radiant gradient
-      const outerGlow = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, baseRadius * 1.8);
-      outerGlow.addColorStop(0, 'rgba(251, 146, 60, 0.35)');
-      outerGlow.addColorStop(0.5, 'rgba(244, 63, 94, 0.15)');
-      outerGlow.addColorStop(1, 'rgba(255, 238, 219, 0)');
-      
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, baseRadius * 1.8, 0, Math.PI * 2);
-      ctx.fillStyle = outerGlow;
-      ctx.fill();
-
-      // Draw the organic moving Blob shape
-      ctx.beginPath();
-      const points = 12;
-      for (let i = 0; i < points; i++) {
-        const angle = (i / points) * Math.PI * 2;
-        // Apply sinusoidal waves combined with sound volume to give organic feeling
-        const offset = Math.sin(angle * 3 + time) * 6 + Math.cos(angle * 2 - time * 0.5) * 4 + (avg > 0 ? (dataArray[i % bufferLength] / 255) * 15 : 0);
-        const r = baseRadius + offset;
-        const x = centerX + Math.cos(angle) * r;
-        const y = centerY + Math.sin(angle) * r;
-        
-        if (i === 0) {
-          ctx.moveTo(x, y);
-        } else {
-          ctx.lineTo(x, y);
-        }
-      }
-      ctx.closePath();
-      
-      const blobGrad = ctx.createLinearGradient(centerX - baseRadius, centerY - baseRadius, centerX + baseRadius, centerY + baseRadius);
-      blobGrad.addColorStop(0, '#f97316'); // Orange
-      blobGrad.addColorStop(1, '#ec4899'); // Pink
-      
-      ctx.fillStyle = blobGrad;
-      ctx.shadowColor = 'rgba(244, 63, 94, 0.3)';
-      ctx.shadowBlur = 15;
-      ctx.fill();
-      ctx.shadowBlur = 0; // reset shadow
-
-      // Core light accent
-      ctx.beginPath();
-      ctx.arc(centerX - 10, centerY - 15, baseRadius * 0.25, 0, Math.PI * 2);
-      const coreGrad = ctx.createRadialGradient(centerX - 10, centerY - 15, 0, centerX - 10, centerY - 15, baseRadius * 0.25);
-      coreGrad.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-      coreGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      ctx.fillStyle = coreGrad;
-      ctx.fill();
-
-      time += 0.035;
-    }
-    
-    drawBlob();
-
-    // Show Custom Alert/Toast
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toast-text').textContent = message;
-      toast.classList.remove('opacity-0', 'pointer-events-none');
-      
-      setTimeout(() => {
-        toast.classList.add('opacity-0', 'pointer-events-none');
-      }, 4000);
-    }
-
-    // Toggle Audio Recording
-    async function toggleRecording() {
-      const resetUI = () => {
-        isRecording = false;
-        const actionBtn = document.getElementById('action-btn');
-        actionBtn.className = "w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 glow-orange touch-target z-10 min-w-[44px] min-h-[44px]";
-        
-        const actionIcon = document.getElementById('action-icon');
-        actionIcon.setAttribute('data-lucide', 'mic');
-        actionIcon.textContent = "🎙️"; // 폴백 텍스트 복구
-        
-        document.getElementById('pulse-ring').classList.remove('scale-125', 'record-pulse');
-        document.getElementById('status-message').textContent = "아래 버튼을 눌러 목소리 마중물을 담아보세요";
-        safeInitLucide();
-      };
-
-      if (isRecording) {
-        // Stop recording
-        try {
-          isRecording = false;
-          if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-            mediaRecorder.stop();
-          }
-        } catch (err) {
-          console.error("녹음 중지 오류:", err);
-          resetUI();
-        }
-      } else {
-        // Start recording
-        try {
-          // Detect support mimeTypes for cross-platform compatibility (Android Chrome, Safari etc.)
-          let mimeType = 'audio/webm;codecs=opus';
-          if (!MediaRecorder.isTypeSupported(mimeType)) {
-            const alternatives = ['audio/webm', 'audio/ogg', 'audio/mp4', 'audio/aac'];
-            for (let alt of alternatives) {
-              if (MediaRecorder.isTypeSupported(alt)) {
-                mimeType = alt;
-                break;
-              }
-            }
-          }
-
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          audioChunks = [];
-          
-          mediaRecorder = new MediaRecorder(stream, { mimeType: mimeType });
-          mediaRecorder.ondataavailable = (e) => {
-            if (e.data.size > 0) audioChunks.push(e.data);
-          };
-
-          mediaRecorder.onstop = async () => {
-            try {
-              document.getElementById('status-message').textContent = "목소리 분석 및 공감 멘트 생성 중...";
-              
-              let audioBlob;
-              if (audioChunks.length > 0) {
-                audioBlob = new Blob(audioChunks, { type: mimeType.split(';')[0] });
-              } else {
-                // Dummy audio fallback if blob is empty
-                const dummyContext = new (window.AudioContext || window.webkitAudioContext)();
-                const buffer = dummyContext.createBuffer(1, dummyContext.sampleRate * 0.5, dummyContext.sampleRate);
-                audioBlob = new Blob([buffer], { type: 'audio/wav' });
-              }
-              
-              const isOnline = navigator.onLine;
-              let selectedEmotion = currentFilter === '전체' ? '위로' : currentFilter;
-              
-              // Safe persona query using standard find instead of keywordMatches
-              const allPersonas = await db.personas.toArray();
-              const matchedPersona = allPersonas.find(p => p.name.includes(selectedEmotion)) || allPersonas[0];
-              
-              let contentMessage = "";
-              if (isOnline) {
-                const responsePhrases = {
-                  '위로': [
-                    "대단히 고생 많으셨어요. 당신의 짐을 제가 함께 나눠 가질게요. (本当にお疲れ様でした。あなたの荷物を私が一緒に持ちますね。)",
-                    "괜찮아요, 다 잘될 거예요. 오늘은 푹 쉬어요. (大丈夫、すべて上手くいきますよ。今日はゆっくり休んでください。)"
-                  ],
-                  '설렘': [
-                    "오늘 바람이 참 기분 좋네요! 마치 우리 만남을 환영하듯 설레요. (今日の風は本当に気持ちいいですね！まるで私たちの出会いを歓迎するようにワクワクします。)",
-                    "작은 설렘이 번져가는 행복한 하루예요. (小さなときめきが広がっていく、幸せな一日です。)"
-                  ],
-                  '평온': [
-                    "나직하게 흐르는 이 순간이 너무 평화롭고 고마워요. (静かに流れるこの瞬間が、とても平和でありがたいです。)",
-                    "차 한잔 마시며 조용하게 생각을 내려놓으세요. (お茶を一杯飲みながら、静かに考えを下ろしてください。)"
-                  ]
-                };
-                const phrases = responsePhrases[selectedEmotion] || responsePhrases['위로'];
-                contentMessage = phrases[Math.floor(Math.random() * phrases.length)];
-              } else {
-                showToast("오프라인 상태입니다. 이전 릴레이를 연결하여 들려드립니다.");
-                contentMessage = "기존 목소리들을 이어서 마음을 전달합니다.";
-              }
-
-              await db.relays.add({
-                emotion: selectedEmotion,
-                content: contentMessage,
-                timestamp: Date.now(),
-                audioBlob: audioBlob
-              });
-
-              document.getElementById('status-message').textContent = "당신의 감성과 소리가 잘 연결되었어요.";
-              setTimeout(resetUI, 1500);
-              loadRelays();
-
-              // Trigger Gemini AI Pronunciation evaluation only if online
-              if (isOnline) {
-                evaluatePronunciationWithGemini(contentMessage);
-              }
-            } catch (err) {
-              console.error("녹음 데이터 처리 에러:", err);
-              showToast("데이터 처리 중 오류가 생겼습니다.");
-              resetUI();
-            }
-          };
-
-          isRecording = true;
-          mediaRecorder.start(100);
-          
-          // Set UI to recording state
-          const actionBtn = document.getElementById('action-btn');
-          actionBtn.className = "w-20 h-20 rounded-full bg-gradient-to-br from-rose-600 to-red-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 touch-target z-10 min-w-[44px] min-h-[44px]";
-          
-          const actionIcon = document.getElementById('action-icon');
-          actionIcon.setAttribute('data-lucide', 'square');
-          actionIcon.textContent = "⏹"; // 폴백 텍스트 변경
-          
-          document.getElementById('pulse-ring').classList.add('scale-125', 'record-pulse');
-          document.getElementById('status-message').textContent = "따뜻한 목소리를 담고 있어요... (멈추려면 탭)";
-          safeInitLucide();
-          
-        } catch (err) {
-          console.error("녹음 시작 에러:", err);
-          showToast("마이크 권한을 승인해주세요.");
-        }
-      }
-    }
-
-    // Play a single relay audio item
-    async function playRelay(id) {
-      const relay = await db.relays.get(id);
-      if (!relay) return;
-
-      const speedSelect = document.getElementById('play-speed');
-      const playbackRate = parseFloat(speedSelect.value);
-      audioEngine.setSpeed(playbackRate);
-
-      // Visual feedback on visualizer
-      const personaDisplay = document.getElementById('current-persona-text');
-      personaDisplay.textContent = `당목담글 재생 중 • ${relay.emotion} 릴레이`;
-
-      // 1. Play back original recorded voice (Korean)
-      if (relay.audioBlob) {
-        const arrayBuffer = await relay.audioBlob.arrayBuffer();
-        await audioEngine.playChunk(arrayBuffer);
-      }
-
-      // 2. Speak matching Japanese translation text using Web Speech API (TTS)
-      if (relay.content) {
-        // Extract Japanese characters inside parentheses if present, otherwise read full text
-        const jpRegex = /\(([^)]+)\)/;
-        const match = relay.content.match(jpRegex);
-        const speechText = match ? match[1] : relay.content;
-
-        // Cancel previous speech if running
-        window.speechSynthesis.cancel();
-
-        const utterance = new SpeechSynthesisUtterance(speechText);
-        utterance.lang = 'ja-JP'; // Set language to Japanese
-        utterance.rate = playbackRate; // Apply custom speed rate
-        
-        // Find a warm Japanese female voice if available
-        const voices = window.speechSynthesis.getVoices();
-        const jaVoice = voices.find(v => v.lang.startsWith('ja') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Microsoft')));
-        if (jaVoice) {
-          utterance.voice = jaVoice;
-        }
-
-        window.speechSynthesis.speak(utterance);
-      }
-    }
-
-    // --- Audiobook Playback State and Functions ---
-    let audiobookTracks = [];
-    let audiobookIndex = 0;
-    let audiobookPlaying = false;
-    let isAudiobookMode = false;
-    let isTtsSpeaking = false;
-
-    async function startAudiobook() {
-      // Load current filtered relays
-      let items = [];
-      if (currentFilter === '전체') {
-        items = await db.relays.orderBy('timestamp').reverse().toArray();
-      } else {
-        items = await db.relays.where('emotion').equals(currentFilter).reverse().toArray();
-      }
-
-      if (items.length === 0) {
-        showToast("오디오북을 구성할 소리가 없습니다. 먼저 녹음해 주세요!");
-        return;
-      }
-
-      audiobookTracks = items;
-      audiobookIndex = 0;
-      isAudiobookMode = true;
-      audiobookPlaying = true;
-
-      // Show Player UI
-      const playerEl = document.getElementById('audiobook-player');
-      playerEl.classList.remove('hidden');
-
-      // Update Play Button Icon
-      updateAudiobookPlayIcon();
-      
-      playAudiobookCurrentTrack();
-    }
-
-    function stopAudiobook() {
-      audiobookPlaying = false;
-      isAudiobookMode = false;
-      window.speechSynthesis.cancel();
-      
-      const playerEl = document.getElementById('audiobook-player');
-      playerEl.classList.add('hidden');
-      
-      // Restore normal visualizer text
-      const personaDisplay = document.getElementById('current-persona-text');
-      personaDisplay.textContent = "따스한 감성 큐레이터 • 하루";
-    }
-
-    function toggleAudiobookPlay() {
-      if (!isAudiobookMode) return;
-      audiobookPlaying = !audiobookPlaying;
-      updateAudiobookPlayIcon();
-
-      if (audiobookPlaying) {
-        playAudiobookCurrentTrack();
-      } else {
-        window.speechSynthesis.cancel();
-      }
-    }
-
-    function updateAudiobookPlayIcon() {
-      const btn = document.getElementById('audiobook-play-btn');
-      if (audiobookPlaying) {
-        btn.innerHTML = `<i data-lucide="pause" class="w-6 h-6"></i>`;
-      } else {
-        btn.innerHTML = `<i data-lucide="play" class="w-6 h-6 ml-0.5"></i>`;
-      }
-      lucide.createIcons();
-    }
-
-    function nextAudiobookTrack() {
-      if (!isAudiobookMode) return;
-      window.speechSynthesis.cancel();
-      audiobookIndex = (audiobookIndex + 1) % audiobookTracks.length;
-      playAudiobookCurrentTrack();
-    }
-
-    function prevAudiobookTrack() {
-      if (!isAudiobookMode) return;
-      window.speechSynthesis.cancel();
-      audiobookIndex = (audiobookIndex - 1 + audiobookTracks.length) % audiobookTracks.length;
-      playAudiobookCurrentTrack();
-    }
-
-    async function playAudiobookCurrentTrack() {
-      if (!isAudiobookMode || !audiobookPlaying) return;
-      if (audiobookIndex < 0 || audiobookIndex >= audiobookTracks.length) return;
-
-      const relay = audiobookTracks[audiobookIndex];
-      
-      // Update UI elements
-      document.getElementById('audiobook-track-index').textContent = `${audiobookIndex + 1} / ${audiobookTracks.length}`;
-      document.getElementById('audiobook-text').textContent = relay.content;
-      
-      const badge = document.getElementById('audiobook-emotion-badge');
-      badge.textContent = relay.emotion;
-      
-      // Set badge color depending on emotion
-      badge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold " + 
-        (relay.emotion === '설렘' ? 'bg-rose-100/60 text-rose-800' : 
-         relay.emotion === '평온' ? 'bg-amber-100/60 text-amber-800' : 'bg-orange-200/60 text-orange-800');
-
-      // Visual feedback on main screen
-      const personaDisplay = document.getElementById('current-persona-text');
-      personaDisplay.textContent = `오디오북 재생 중 • ${relay.emotion} ${audiobookIndex + 1}번 째 이야기`;
-
-      const speedSelect = document.getElementById('play-speed');
-      const playbackRate = parseFloat(speedSelect.value);
-      audioEngine.setSpeed(playbackRate);
-
-      // Cancel any ongoing TTS before proceeding
-      window.speechSynthesis.cancel();
-
-      // Step 1: Play voice recording, once done, trigger TTS and next track
-      if (relay.audioBlob) {
-        const arrayBuffer = await relay.audioBlob.arrayBuffer();
-        
-        // playChunk with callback
-        await audioEngine.playChunk(arrayBuffer, () => {
-          // Play matching TTS if audiobook is still active & playing
-          if (isAudiobookMode && audiobookPlaying) {
-            playTtsAndThenNext(relay, playbackRate);
-          }
-        });
-      } else {
-        // Fallback directly to TTS if no voice recording
-        playTtsAndThenNext(relay, playbackRate);
-      }
-    }
-
-    function playTtsAndThenNext(relay, playbackRate) {
-      if (!relay.content) {
-        // Auto-advance if no content text
-        setTimeout(autoAdvance, 1000);
-        return;
-      }
-
-      const jpRegex = /\(([^)]+)\)/;
-      const match = relay.content.match(jpRegex);
-      const speechText = match ? match[1] : relay.content;
-
-      const utterance = new SpeechSynthesisUtterance(speechText);
-      utterance.lang = 'ja-JP';
-      utterance.rate = playbackRate;
-
-      const voices = window.speechSynthesis.getVoices();
-      const jaVoice = voices.find(v => v.lang.startsWith('ja') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Microsoft')));
-      if (jaVoice) {
-        utterance.voice = jaVoice;
-      }
-
-      // Chain transition onend
-      utterance.onend = () => {
-        if (isAudiobookMode && audiobookPlaying) {
-          autoAdvance();
-        }
-      };
-
-      utterance.onerror = () => {
-        if (isAudiobookMode && audiobookPlaying) {
-          autoAdvance();
-        }
-      };
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    function autoAdvance() {
-      // Pause slightly between tracks for professional pacing
-      setTimeout(() => {
-        if (isAudiobookMode && audiobookPlaying) {
-          audiobookIndex++;
-          if (audiobookIndex < audiobookTracks.length) {
-            playAudiobookCurrentTrack();
-          } else {
-            // End of book
-            stopAudiobook();
-            showToast("오디오북을 모두 들었습니다. 감사합니다! 🍊");
-          }
-        }
-      }, 1200);
-    }
-
-    // Load Relays from IndexedDB
-    async function loadRelays() {
-      const relayList = document.getElementById('relay-list');
-      relayList.innerHTML = '';
-
-      let items = [];
-      if (currentFilter === '전체') {
-        items = await db.relays.orderBy('timestamp').reverse().toArray();
-      } else {
-        items = await db.relays.where('emotion').equals(currentFilter).reverse().toArray();
-      }
-
-      document.getElementById('relay-count').textContent = items.length;
-
-      if (items.length === 0) {
-        relayList.innerHTML = `
-          <div class="text-center py-8 text-orange-950/40 text-xs font-semibold">
-            아직 여기에 담긴 목소리가 없어요.<br>첫 번째 마중물을 담아보세요.
-=======
 
         <!-- 3회 초과 비회원용 블러 잠금 오버레이 -->
         <div id="premium-lock-overlay" class="absolute inset-0 bg-white/60 backdrop-blur-[6px] flex flex-col items-center justify-center text-center p-4 z-30 hidden rounded-2xl border border-orange-200">
@@ -1346,7 +437,6 @@
           <div class="text-left">
             <span class="text-xs font-bold text-orange-950 block" data-i18n="paywall_pass">주간 자유 패스</span>
             <span class="text-[10px] text-orange-700/60" data-i18n="paywall_pass_desc">매주 무제한 발음 피드백</span>
->>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
           </div>
           <span class="text-xs font-bold text-orange-900" id="price-pass">₩2,900 / 주</span>
         </div>
@@ -1355,25 +445,9 @@
             <span class="text-xs font-bold text-orange-950 block" data-i18n="paywall_coin">30 코인 충전</span>
             <span class="text-[10px] text-orange-700/60" data-i18n="paywall_coin_desc">30회 정밀 성적표 발급</span>
           </div>
-<<<<<<< HEAD
-          <div class="flex gap-2 items-center">
-            <button onclick="event.stopPropagation(); deleteRelay(${relay.id})" title="삭제" class="w-10 h-10 rounded-full bg-rose-50/50 hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors min-w-[40px] min-h-[40px]">
-              <i data-lucide="trash-2" class="w-4 h-4 flex items-center justify-center">🗑️</i>
-            </button>
-            <button class="w-10 h-10 rounded-full bg-orange-100/80 hover:bg-orange-200 text-orange-850 flex items-center justify-center transition-colors min-w-[40px] min-h-[40px]">
-              <i data-lucide="play" class="w-4.5 h-4.5 flex items-center justify-center">▶</i>
-            </button>
-          </div>
-        `;
-        relayList.appendChild(item);
-      });
-      lucide.createIcons();
-    }
-=======
           <span class="text-xs font-bold text-orange-900" id="price-coin">₩4,900 / 1회성</span>
         </div>
       </div>
->>>>>>> 1b80588d800956734d639a2b12d63c6ea3d0c5ae
 
       <!-- PayPal Smart Button container (Will be dynamically rendered inside script) -->
       <div id="paypal-button-container" class="w-full mt-1 hidden transition-all duration-300"></div>

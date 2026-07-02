@@ -880,8 +880,6 @@ lucide.createIcons();
       '평온': 'emotion_calm'
     };
 
-    const emotions = ['전체', '위로', '설렘', '평온'];
-
     emotions.forEach(e => {
       const btn = document.createElement('button');
       btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition-all touch-target select-none ${
