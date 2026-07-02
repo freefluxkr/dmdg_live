@@ -708,7 +708,7 @@ lucide.createIcons();
 
     async function loadPrimersFromDB() {
       try {
-        const isOnline = navigator.onLine;
+        const isOnline = navigator.onLine && typeof firestore !== 'undefined' && firestore !== null;
         
         if (isOnline) {
           console.log("Firebase Firestore에서 마중물 데이터를 로드합니다.");
