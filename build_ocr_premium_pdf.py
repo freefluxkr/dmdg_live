@@ -129,7 +129,18 @@ def find_browser_path():
 # =====================================================================
 def extract_contents_from_image(reader, src_path, asset_dir, filename, stored_data):
     """이미지 내 텍스트 위치를 지능적으로 검출하여 찢어짐 없이 다이어그램과 설명글을 분리합니다."""
-    # 💡 이미 소스 데이터가 추출 보관되어 있는 경우 분석 연산 통째 건너뛰기
+    # 💡 [자택 테스트용 안전망] 만약 원본 스크린샷 이미지 파일이 없다면,
+    # 깃으로 내려받은 extracted_texts.json 캐시 데이터와 쪼개진 그림 자산만 활용해 PDF를 빌드(Fast-Pass)
+    if not os.path.exists(src_path):
+        diagram_filename = f"diagram_{filename.split('.')[0]}.png"
+        diagram_path = os.path.join(asset_dir, diagram_filename)
+        diagram_rel_path = f"extracted_assets/{diagram_filename}" if os.path.exists(diagram_path) else ""
+        if filename in BOOK_CORE_TEXTS:
+            return diagram_rel_path, BOOK_CORE_TEXTS[filename]
+        if filename in stored_data:
+            return diagram_rel_path, stored_data[filename]
+        return "", ""
+
     if filename in BOOK_CORE_TEXTS:
         return "", BOOK_CORE_TEXTS[filename]
     if filename in stored_data:
@@ -252,15 +263,6 @@ def extract_contents_from_image(reader, src_path, asset_dir, filename, stored_da
 # 🚀 6. 메인 프리미엄 네이비 템플릿 컴파일러 및 PDF 빌더
 # =====================================================================
 def main():
-    # 💡 [필수 조치] 한글 코딩 변수명 치환이 적용된 텍스트 자산을 완전히 처음부터 새로 구성하기 위해 기존 캐시 데이터 강제 파괴
-    # (이를 통해 기존 캐시본에 박혀 있던 한글 변수명을 100% 영문으로 일괄 물갈이합니다.)
-    if os.path.exists(TEXT_DATA_FILE):
-        try:
-            os.remove(TEXT_DATA_FILE)
-            print("💡 [Cache Reset] 변수명 영문 치환 필터링을 위해 기존 텍스트 캐시를 리셋하였습니다.")
-        except Exception:
-            pass
-
     img_dir = "2주차 교재 생활코딩 머신러닝 실습편"
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
@@ -275,38 +277,54 @@ def main():
     print(f"🎯 발견된 브라우저 엔진: {browser_path}")
     
     # 1. 이미지 파일 목록 수집
-    valid_extensions = (".jpg", ".jpeg", ".png")
-    image_files = [
-        f for f in os.listdir(img_dir)
-        if f.lower().endswith(valid_extensions) and not f.endswith(".pdf")
-    ]
-    image_files.sort()
+    part1_files = []
+    part2_files = []
     
-    if not image_files:
-        print("❌ 에러: 원본 스크린샷 이미지 파일이 존재하지 않습니다.")
-        sys.exit(1)
+    # 만약 원본 폴더가 존재하는 경우 이미지 파일 분할 수집
+    if os.path.exists(img_dir):
+        valid_extensions = (".jpg", ".jpeg", ".png")
+        image_files = [
+            f for f in os.listdir(img_dir)
+            if f.lower().endswith(valid_extensions) and not f.endswith(".pdf")
+        ]
+        image_files.sort()
+        part1_files = [f for f in image_files if "20260629_08" in f]
+        part2_files = [f for f in image_files if "20260629_09" in f]
+    else:
+        # 💡 [자택 가동 시] 이미지 폴더가 없으면 캐시 데이터베이스(JSON) 키값을 통해 이미지 명단 수립
+        print("⚠️ [Warning] 원본 이미지 폴더가 감지되지 않아 보관된 캐시 데이터셋 파일 명단으로 빌드합니다.")
+        stored_data = load_stored_texts()
+        cached_keys = list(stored_data.keys())
+        # 핵심 코어 매핑도 병합
+        for k in BOOK_CORE_TEXTS.keys():
+            if k not in cached_keys:
+                cached_keys.append(k)
+        cached_keys.sort()
         
-    part1_files = [f for f in image_files if "20260629_08" in f]
-    part2_files = [f for f in image_files if "20260629_09" in f]
-    
-    print(f"✓ 감지된 총 이미지 파일: {len(image_files)}장")
+        part1_files = [f for f in cached_keys if "20260629_08" in f]
+        part2_files = [f for f in cached_keys if "20260629_09" in f]
+        
+    print(f"✓ 감지된 총 파일 수: {len(part1_files) + len(part2_files)}장")
     print(f"  └ 1부 (Tensorflow 101): {len(part1_files)}장")
     print(f"  └ 2부 (Tensorflow 102): {len(part2_files)}장")
     
-    # 2. 캐시 로드 (위에서 파괴했으므로 빈 딕셔너리로 초기화)
+    # 2. 캐시 로드
     stored_data = load_stored_texts()
     
-    ensure_ocr_dependencies()
-    import easyocr
-    print("\n🤖 [AI Engine] 변수명 영문 치환용 OCR 정밀 스캔 시작 중...")
-    use_gpu = False
-    try:
-        import torch
-        use_gpu = torch.cuda.is_available()
-    except Exception:
-        pass
-    reader = easyocr.Reader(['ko', 'en'], gpu=use_gpu)
-    print(f"✓ AI OCR Reader 초기화 완료. (GPU 가속: {use_gpu})")
+    reader = None
+    # 원본 이미지가 있을 때만 OCR Reader 기동 (GPU 가속 판단)
+    if os.path.exists(img_dir):
+        ensure_ocr_dependencies()
+        import easyocr
+        print("\n🤖 [AI Engine] 변수명 영문 치환용 OCR 정밀 스캔 시작 중...")
+        use_gpu = False
+        try:
+            import torch
+            use_gpu = torch.cuda.is_available()
+        except Exception:
+            pass
+        reader = easyocr.Reader(['ko', 'en'], gpu=use_gpu)
+        print(f"✓ AI OCR Reader 초기화 완료. (GPU 가속: {use_gpu})")
 
     # 3. 파트별 빌드 루프 정의
     def build_premium_pdf(files, part_title, file_prefix):
