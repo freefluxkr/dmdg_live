@@ -1,0 +1,73 @@
+<h1 class="page-subject">2) 이미지 편집(resize,crop,rotate,flip)</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>시작하기에 앞서 관련 패키지를 import하고 지난 시간에 다운로드 받았던 고양이 사진을 불러오겠습니다.</p>
+<pre><code># Pillow 라이브러리 불러오기
+from PIL import Image
+
+# 고양이 이미지 불러와서 img라는 변수에 입력
+img = Image.open('cat.jpg')
+</code></pre>
+<h1 id="1">1. 이미지 크기 변경</h1>
+<p>이미지 크기 변경은 resize( ) 함수를 사용합니다. 사이즈는 튜플 형식 (width, height)으로 입력해줍니다.</p>
+<pre><code># 이미지 사이즈 변경
+img_resized = img.resize((400,300))
+
+# 변경한 이미지 출력
+img_resized.show()
+
+# 비교를 위해 원본 이미지 출력
+img.show()
+</code></pre>
+<p><strong>&lt;출력 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/comb0U/btrkaPNArzi/zAKJKz3aYOyqaCPfn9OWr0/img.png"/></p>
+<h1 id="2">2. 이미지 자르기</h1>
+<p>이미지의 일부분을 얻고 싶을 때는 crop( ) 함수를 사용합니다. 마찬가지로 인자를 튜플 형태 (left, upper, right, lower)로 입력 받습니다.</p>
+<p>쉽게 생각해서 좌측상단의 xy좌표, 우측하단의 xy좌표를 차례대로 받는다고 생각하시면 돼요.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cLWAcd/btrkgGPBfvp/5ke3JjbImsCt0MC7QHF7PK/img.png"/></p>
+<pre><code># 이미지 자르기
+img_cropped = img.crop((0,0,300,300))
+
+# 잘라낸 이미지 출력
+img_cropped.show()
+</code></pre>
+<p><strong>&lt;출력 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/biho8S/btrkjW410XY/HsWaWO9mILARSgVVkmaWRK/img.png"/></p>
+<h1 id="3">3. 이미지 회전</h1>
+<p>이미지를 회전 하고 싶으면 rotate( ) 함수를 사용합니다. 입력 인자는 각도입니다.</p>
+<pre><code># 이미지 90도 회전
+img_rotated = img.rotate(90)
+
+# 회전한 이미지 출력
+img_rotated.show()
+</code></pre>
+<p><strong>&lt;출력 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/GSLBY/btrkelkV6RY/GOwC8XtGL9gFPHozdKzKxK/img.png"/></p>
+<h1 id="4">4. 이미지 대칭</h1>
+<p>이미지를 상하 혹은 좌우 대칭시키고 싶으면 transpose( ) 함수를 사용합니다. 입력 인자는 6가지가 있는데 대칭에 사용하는 인자는 아래의 2가지입니다. 나머지 인자들은 90도, 180도, 270도 회전과 관련되어 있습니다.</p>
+<p>좌우대칭: Image.FLIP_LEFT_RIGHT</p>
+<p>상하대칭: Image.FLIP_TOP_BOTTOM</p>
+<pre><code># 좌우대칭
+img_flipped_LR = img.transpose(Image.FLIP_LEFT_RIGHT)
+img_flipped_LR.show()
+
+# 상하대칭
+img_flipped_TB = img.transpose(Image.FLIP_TOP_BOTTOM)
+img_flipped_TB.show()
+</code></pre>
+<p><strong>&lt;출력 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/mZzvP/btrkjXiAkKn/IPGN8dQcSpdEK4M7k82PNk/img.png"/></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h1 id="5">5. 이미지 저장</h1>
+<p>지금까지 편집한 이미지를 저장하려면 save( ) 함수를 사용하면 됩니다. 입력 받는 인자로는 '파일명.확장자' 혹은 '파일의 경로'입니다.</p>
+<pre><code># 상하반전한 이미지 저장
+img_flipped_TB.save('cat_flip.jpg')
+</code></pre>
+<p><strong>&lt;저장된 이미지&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/HR8Fj/btrkhqsB1oS/SDbhVHs4SYOlJPe4g5PZOK/img.png"/></p>
+</div>

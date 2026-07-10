@@ -1,0 +1,93 @@
+<h1 class="page-subject">3) 화면 이미지 인식하기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>이번 시간에는 직접 좌표를 지정해서 마우스를 움직이는 방법이 아니라,</p>
+<p>화면에서 찾고자 하는 이미지를 캡처&amp;저장해놓고 그 이미지의 좌표를 찾아가는 방법에 대해서 배워보겠습니다.</p>
+<h1 id="1">1. 화면 원하는 부분 캡처하기</h1>
+<p>이를 위해서 먼저 화면을 캡처하는 방법을 간단히 알아보겠습니다.</p>
+<h3 id="1-windows-os"><strong>1) Windows OS</strong></h3>
+<ul>
+<li>
+<p>캡처 도구 (모드는 사각형 캡처를 추천)</p>
+</li>
+<li>
+<p>캡처 후 저장하면 자동으로 png 파일로 저장됨 (파일명은 영어로 할 것)</p>
+</li>
+</ul>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bEiFtF/btq7EBlBiDr/vJkSWvcNNOicIRPOLQEEUk/img.png"/></p>
+<ul>
+<li>Shift + 윈도우키 + S</li>
+</ul>
+<h3 id="2-mac-os"><strong>2) mac OS</strong></h3>
+<ul>
+<li>
+<p>Shift + Command + 4 (부분 캡처)</p>
+</li>
+<li>
+<p>Shift + Command + 3 (전체 캡처)</p>
+</li>
+<li>
+<p>마찬가지로 저장 시 자동으로 png 파일로 저장됨 ((파일명은 영어로 할 것)</p>
+</li>
+</ul>
+<h1 id="2">2. 캡처한 이미지로 좌표 정보 얻기</h1>
+<p>캡처한 이미지의 좌표를 얻으려면 locateOnScreen( ) 함수를 사용하시면 됩니다. 이때 괄호 안의 이미지는 같은 디렉토리에 위치해야 작동합니다. 굳이 이미지 파일을 다른 폴더에 위치시키고 싶다면 해당 경로를 입력해주어야합니다.</p>
+<p>저의 경우는 화면 우측상단의 Run 버튼을 캡처해서 찾아보는 코드를 작성해보았습니다. img_capture 변수에 들어가 있는 값을 확인해보면  <strong>Box(left=x 좌표, top=y 좌표, width = 이미지 너비, height=이미지 높이)</strong>가 출력되는 것을 확인하실 수 있습니다.</p>
+<pre><code>img_capture = pyautogui.locateOnScreen("Run_icon.png")
+
+print(img_capture)
+
+pyautogui.click(img_capture)
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/lUaKm/btq7I0St9Dk/dBeniBIHlBUcXI6LXvGHzK/img.png"/></p>
+<p>이미지의 경로가 제대로 설정되지 않은 경우에는 에러가 출력되며, 경로는 정확하지만 화면상에서 해당 이미지를 못 찾았을 때는 None(값이 없음을 의미)을 돌려줍니다.</p>
+<h1 id="3">3. 캡처한 이미지가 화면에 여러개 일 때</h1>
+<p>예를 들어서 아래와 같은 체크박스를 중복 선택해야한다면 어떻게 해야할까요?</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/LocQz/btq7C2xEO1T/4Qqg76lh6IiKvhdqRPMvR0/img.png"/></p>
+<p>그럴 때는 아래와 같이 locateAllOnScreen( ) 함수와 for 문으로 해결 가능합니다. 위에서 배운 locateOnScreen( ) 함수와 무엇이 다른지 보이시죠? 해당 함수를 사용하면 원하는 이미지의 위치들을 리스트에 저장해놓고 for문으로 하나씩 꺼내어 쓰는 개념입니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code>for i in pyautogui.locateAllOnScreen("checkbox.png"):
+
+    pyautogui.click(i, duration=0.25)
+</code></pre>
+<h1 id="4">4. 범위 안에서만 캡처한 이미지를 찾고 싶을 때</h1>
+<p>다른 영역에 있는 중복되는 이미지를 무시하고 싶거나, 이미지 검색 범위를 좁혀 속도를 개선하고 싶을 때 사용하면 좋을 것 같아요.</p>
+<pre><code>import pyautogui
+
+img_capture = pyautogui.locateOnScreen("Run_icon.png", region=(1800, 0, 1920, 100))
+
+pyautogui.moveTo(img_capture)
+
+</code></pre>
+<p><strong>Tip. 코드 실행 속도 측정법</strong></p>
+<pre><code>import pyautogui
+import time
+
+start = time.time()  # 시작 시간 저장
+
+img_capture = pyautogui.locateOnScreen("Run_icon.png")
+
+pyautogui.moveTo(img_capture)
+
+# 현재시각 - 시작시각 = 실행 시간
+print("코드 실행 시간 :", time.time() - start)  
+</code></pre>
+<h1 id="5">5. 이미지 인식이 됐다 안됐다 할 때</h1>
+<p>가끔 찾고자 하는 이미지와 화면의 이미지가 어떤 이유로 100% 일치하지 않아서 잘 되던 코드가 실행이 되지 않을 경우도 있습니다. 저는 아직 겪어보지 않았지만 혹시 이런 현상이 발생한다면 지금 알려드리는 옵션을 사용해보세요!</p>
+<p>이런 경우에는 예를 들어 일치도를 70% 이상이면 같은 이미지로 인식하라고 설정할 수가 있습니다.</p>
+<p>이 기능을 사용하려면 아래의 패키지를 설치해주셔야 합니다.</p>
+<pre><code># 이미지 처리 패키지인 opencv-python 설치
+pip install opencv-python
+
+</code></pre>
+<p>사용법은 간단합니다. 지금껏 배워왔던 locateOnScreen 함수안에 confidence 옵션을 설정해주시면 됩니다.</p>
+<pre><code>img_capture = pyautogui.locateOnScreen("Run_icon.png", confidence=0.7) # 70%
+
+pyautogui.moveTo(img_capture)
+</code></pre>
+</div>

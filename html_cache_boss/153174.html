@@ -1,0 +1,23 @@
+<h1 class="page-subject">1) win32com 소개 및 설치 방법</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<h1 id="1-win32compywin32">1. Win32com(pywin32) 소개</h1>
+<p>Win32com은 Microsoft에서 제공하는 윈도우 프로그램을 파이썬이라는 언어를 매개체로 제어할 수 있도록 만든 API입니다. Win32com을 사용하면 Microsoft Excel, Power point, Word, Outlook 등 프로그램을 제어할 수 있습니다. 이번 파트에서는 Win32com 엑셀을 다루는 기본적인 방법과 Outlook 이메일을 제어하는 방법에 대해 소개하고자 합니다.
+(Power point, Word 등 프로그램을 다루는 방법은 차후 소개해보도록 하겠습니다.)</p>
+<p>앞에서 배웠던 Openpyxl를 공부하신 분이라면 Win32com으로 엑셀을 다루는 것이랑 무슨 차이가 있나 궁금증이 드실 수도 있을 것 같습니다. Openpyxl과 대표적인 차이점이라면, Win32com을 사용했을 때 엑셀 실행 상태에서 제어가 가능하다라는 점을 들 수 있습니다. Openpyxl은 해당 엑셀파일을 실행하면 파이썬 코드에서 접근이 불가능합니다. Win32com 을 사용하여 엑셀을 제어하면 실행상태를 바로 볼 수 있어 편리해집니다.(실시간 확인 가능)</p>
+<p>두번째는, 좀더 엑셀 기능적인 측면에서 접근할 수 있습니다. 쉽게 설명하자면 엑셀에서의 자동 줄채우기 기능, 복사 붙여넣기 등 실제 엑셀 프로그램에서 사용하는 기능을 함수 하나로 대체하여 사용할 수 있습니다. 이 부분은 Openpyxl에는 없는 부분으로 차이가 있습니다. 엑셀 VBA를 아시는 분이라면 코드 구조가 VBA랑 매우 비슷함을 느끼실 수 있습니다. 이 부분은 "win32com 통해 엑셀 다루기" 파트에서 자세하게 다뤄보도록 하겠습니다.  </p>
+<p>추가로, 이번 파트에서 다루는 내용 중 Outlook 이메일 제어는 사내 이메일 파싱 등 이메일 업무를 자동화할 수 있습니다. 이 부분은 "3-1-9) Outlook 이메일 제어'에서 배웁니다.</p>
+<h1 id="2">2. 설치방법</h1>
+<p>Win32com은 파이썬의 내장모듈이 아니기에 따로 설치가 필요합니다. 본인의 개발환경에 맞게 pywin32이라는 라이브러리를 설치하시면 됩니다.</p>
+<pre><code>pip install pywin32
+</code></pre>
+<hr/>
+<p>2021년 12월 16일 기준, pywin32를 설치하면 302 버전이 설치됩니다. 하지만 최신 버전의 안정성 문제 때문인지 아래와 같은 에러가 출력되면서 파이썬 스크립트가 정상적으로 실행되지 않습니다.</p>
+<p><strong>ImportError: DLL load failed while importing win32api: 지정된 프로시저를 찾을 수 없습니다.</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/byXD8K/btrnTDCH5qy/9eSuf9W1NeNX08qpZsTpF0/img.png"/></p>
+<hr/>
+<p>따라서 해결방법은 버전을 다운그레이드 해주는 것입니다.</p>
+<pre><code>pip install --upgrade pywin32==225
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bL4L43/btrn0W77Jjl/ZWGqQPYmxd9FuSURfrQUNk/img.png"/></p>
+</div>

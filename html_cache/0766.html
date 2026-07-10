@@ -1,0 +1,47 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5" id="s1">
+<p class="txt1 dm"><span class="brown">Self Check</span></p>
+<p class="txts"> </p>
+<div class="box_white2">
+<p class="txt bl">고객계좌 클래스와 은행 클래스를 정의해 금융 거래 프로그램을 작성하려고 합니다. 다음은 각 클래스가 가져야 하는 조건과 완성된 클래스의 일부입니다. 내용을 보고 다음 물음에 답하세요.</p>
+<div class="box_black_line2">
+<p class="txts dm">|조건|</p>
+<p class="txts dl s08_08">• 고객계좌 클래스(<span class="cd">Customer_account</span>)는 고객이름과 잔고를 속성으로 가지며, 메서드는 없습니다.</p>
+<p class="txts dl s08_08">• 은행 클래스(<span class="cd">Bank</span>)는 3개의 메서드가 있습니다. 계좌에 입금하는 <span class="cd">deposit()</span>, 계좌에서 출금하는 <span class="cd">withdrawal()</span>, 한 계좌에서 다른 계좌로 이체하는 <span class="cd">send_money()</span>입니다.</p>
+<p class="txts dl s08_08">• 은행 클래스의 각 메서드는 고객계좌 객체와 거래금액을 인자로 전달받아 고객계좌 객체의 거래금액만큼 잔고를 수정합니다.</p>
+</div>
+<div class="highlight">
+<pre><span class="green"># 계좌 클래스</span>
+<span class="blue2">class</span> Customer_account:
+    <span class="blue2">def</span> <span class="gold">__init__</span>(<span class="blue3">self</span>, <span class="blue3">name</span>, <span class="blue3">bal</span>):
+        <span class="blue3">self</span>.name = name
+        <span class="blue3">self</span>.balance = bal <span class="green"># 통장 잔고</span>
+        <span class="gold">print</span>(<span class="blue3">self</span>.name, <span class="red2">'고객님! 계좌를 개설했습니다</span><span class="red2">. 잔고는'</span>, <span class="blue3">self</span>.balance, <span class="red2">'원'</span>)
+
+<span class="green"># 은행 클래스</span>
+<span class="blue2">class</span> Bank:
+    <span class="green"># 입금 거래, customer에 customer_account 객체 전달</span>
+    <span class="blue2">def</span> <span class="gold">deposit</span>(<span class="blue3">self</span>, <span class="blue3">customer</span>, <span class="blue3">amount</span>):
+        <span class="cd2">(가)</span>
+        <span class="gold">print</span>(customer.name, <span class="red2">'고객님'</span>, amount, <span class="red2">'원 입금'</span>)
+        <span class="gold">print</span>(<span class="red2">'입금 후 잔고는'</span>, customer.balance, <span class="red2">'원'</span>)
+
+    <span class="green"># 출금 거래, customer에 customer_account 객체 전달</span>
+    <span class="blue2">def</span> <span class="gold">withdrawal</span>(<span class="blue3">self</span>, <span class="blue3">customer</span>, <span class="blue3">amount</span>):
+        <span class="cd2">(나)</span>
+        <span class="gold">print</span>(customer.name, <span class="red2">'고객님'</span>, amount, <span class="red2">'원 출금'</span>)
+        <span class="gold">print</span>(<span class="red2">'출금 후 잔고는'</span>, customer.balance, <span class="red2">'원'</span>)
+
+    <span class="green"># 계좌이체 거래, sender와 reciever에 customer_account 객체 전달</span>
+    <span class="blue2">def</span> <span class="gold">send_money</span>(<span class="blue3">self</span>, <span class="blue3">sender</span>, <span class="blue3">reciever</span>, <span class="blue3">amount</span>):
+        <span class="cd2">(다)</span>
+        <span class="gold">print</span>(sender.name, <span class="red2">'고객님이'</span>, reciever.name, <span class="red2">'고객님께'</span>, amount, <span class="red2">'원 송금'</span>)
+        <span class="gold">print</span>(<span class="red2">'이체 후 잔고는'</span>, sender.name, sender.balance, reciever.name, reciever.balance)</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>

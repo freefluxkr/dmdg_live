@@ -1,0 +1,134 @@
+<h1 class="page-subject">3) 원하는 시간마다 파이썬 자동 실행</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>시작하기에 앞서, 오늘은 VS Code에서 파이썬 파일(.py)를 개발환경으로 사용하는 점 참고바랍니다.</p>
+<p>schedule 패키지를 쥬피터 노트북(.ipynb)으로 다루니 프로그램이 종료되지 않고 계속 함수를 실행하는 문제가 있더라구요.</p>
+<h1 id="1-schedule">1.  schedule 설치</h1>
+<p>우리가 오늘 배워볼 패키지는 앞서 언급했 듯이 schedule 입니다. 자세한 설명 없이 바로 설치하고 코드로 보여 드리겠습니다.</p>
+<p>터미널 창에 아래의 코드를 입력하시고 엔터를 누르시면 설치가 완료됩니다.</p>
+<pre><code>pip install schedule
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bjxqLD/btrlEH6Qjm8/46sl0Y83D59kw95chYNAGk/img.png"/></p>
+<p>설치 완료 시 출력되는 문구</p>
+<h1 id="2-schedule-time">2.  schedule &amp; time 모듈 불러오기</h1>
+<p>schedule 패키지는 파이썬 내장 라이브러리에 포함되어 있는 time 모듈과 함께 사용됩니다.</p>
+<pre><code>import schedule
+import time
+</code></pre>
+<h1 id="3-schedule">3. schedule 패키지 주기 설정법</h1>
+<p>잠시 schedule 패키지로 다양한 주기를 설정하는 방법을 살펴보겠습니다.</p>
+<h2 id="1">1)  시, 분, 초 단위로 실행</h2>
+<pre><code># 5초에 한번씩 함수 실행
+schedule.every(5).seconds.do(함수)
+
+# 10분에 한번씩 함수 실행
+schedule.every(10).minutes.do(함수)
+
+# 2시간에 한번씩 함수 실행
+schedule.every(2).hour.do(함수)
+</code></pre>
+<h2 id="2">2) 일, 주 단위로 실행</h2>
+<pre><code># 3일에 한번씩 함수 실행
+schedule.every(3).days.do(함수)
+
+# 2주에 한번씩 함수 실행
+schedule.every(2).weeks.do(함수)
+</code></pre>
+<h2 id="3">3)  매일 정해진 시각에 실행</h2>
+<p>위에서 언급한 시, 분, 초, 일, 주 단위와 조합하여  <strong>더 디테일하게 주기를 설정</strong>할 수도 있습니다.</p>
+<pre><code># 매일 13시 30분에 함수 실행
+schedule.every().day.at("13:30").do(함수)
+
+# 매일 "11:11:11"에 함수 실행
+schedule.every().day.at("11:11:11").do(함수)
+</code></pre>
+<h2 id="4">4)  매주 정해진 요일의 특정 시각에 실행</h2>
+<p>요일도 설정 가능합니다. 모두 소문자로 입력하는 점 주의해주세요.</p>
+<p>(monday, tuesday, wednesday, thursday, friday, saturday, sunday)</p>
+<pre><code># 매주 월요일 13시 30분에 함수 실행
+schedule.every().monday.at("13:30").do(함수)
+</code></pre>
+<h1 id="4-schedule">4. schedule 패키지 실행</h1>
+<p>실행 방법은 아주 간단합니다. 이 부분은 전체적인 코드로 보여드리겠습니다.</p>
+<p>가장 step4의 무한루프 코드를 넣어주지 않으면 파이썬 파일이 종료되면서 바로 스케쥴링도 작동하지 않습니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code># step1.관련 패키지 및 모듈 import
+import schedule
+import time
+
+# step2.실행할 함수 선언
+def message():
+    print("스케쥴 실행중...")
+
+# step3.실행 주기 설정
+schedule.every(1).seconds.do(message1)
+
+# step4.스캐쥴 시작
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+</code></pre>
+<p>&lt;실행 결과&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/nk7E6/btrlDfchMYA/akTCBiqKOlLGNiOw1q86Kk/img.gif"/></p>
+<h1 id="5">5. 인자를 받는 함수 사용법</h1>
+<p>위에서는 아주 단순한 print 함수를 사용한 함수를 사용해서 문제 없었지만, 우리는 분명 인자를 받는 함수를 사용할 일이 있습니다.</p>
+<p>이럴 때는 기본적인 함수가 인자를 받는 방법과 다르니 알아두시면 도움이 되실거예요.</p>
+<pre><code># text라는 파라미터가 존재하여, 실제 사용 시엔 인자를 받아야함
+
+def message2(text):
+    print(text)
+
+# 사용방법
+schedule.every(2).seconds.do(message2,'2초마다 알려줄게요')
+</code></pre>
+<p>보시다시피 message2(인자)가 아닌 점에 주의해주세요. 작동하는 것은 아래에서 보여드리겠습니다.</p>
+<h1 id="6-schedule">6. schedule 중지하는 법</h1>
+<p>제가 아는한 schedule을 중지하는 법은 크게 3가지 입니다.</p>
+<ol>
+<li>
+<p>while문에 조건을 걸어서 무한루프를 종료시키고 파이썬 파일을 종료한다.</p>
+</li>
+<li>
+<p>sys 모듈의 exit( ) 함수로 파이썬 파일을 강제 종료</p>
+</li>
+</ol>
+<p><strong>3. schedule 패키지의 cancel_job( ) 함수 사용</strong></p>
+<p>제가 이번 시간에 알려드릴 방법은 세번째 방법인 cancel_job( ) 함수입니다.</p>
+<p>추가적인 모듈을 import할 필요도 없고, 주기 설정한 함수 별로 종료할 수 있기 때문입니다.</p>
+<p>코드는 아래와 같습니다.</p>
+<p>여기서 주목할 점은 설정한 주기를 변수(job1, job2)에 넣어주었고, 이 job들을 cancel_job( )의 인자로 넣어 준다는 것입니다.</p>
+<p>바로 실행 시켜보겠습니다.</p>
+<pre><code>import schedule
+import time
+
+def message1():
+    print("스케쥴 실행중...")
+
+def message2(text):
+    print(text)
+
+# 주기 설정
+job1 = schedule.every(1).seconds.do(message1)
+job2 = schedule.every(2).seconds.do(message2,'2초마다 알려줄게요')
+
+
+count = 0
+
+while True:
+
+    schedule.run_pending()
+    time.sleep(1)
+
+    count = count + 1
+
+    if count &gt; 5:
+        schedule.cancel_job(job1)
+</code></pre>
+<p>&lt;출력 결과&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/FPQqz/btrlDwdYVnh/p9QhpRz6ouV3KY5KfyBxd0/img.gif"/></p>
+</div>

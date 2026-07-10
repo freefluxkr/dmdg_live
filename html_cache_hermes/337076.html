@@ -1,0 +1,605 @@
+<h1 class="page-subject">07-3. 번들 스킬 카탈로그</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: 이 페이지의 번들 스킬 목록은 2026년 6월 번들(<code>~/.hermes/skills/</code>)을 기준으로 재대조했습니다. 번들 구성은 버전마다 바뀌므로(니치·ML 스킬이 옵션으로 빠지거나 새 스킬이 들어오는 식), 정확한 현재 목록은 환경별로 <code>hermes skills</code> 또는 <code>ls ~/.hermes/skills/</code>로 확인하세요.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">번들 스킬</a><ul>
+<li><a href="#_2">개발 및 협업</a></li>
+<li><a href="#_3">생산성</a></li>
+<li><a href="#_4">추론·평가·데이터</a></li>
+<li><a href="#_5">사전 학습 모델</a></li>
+<li><a href="#_6">미디어·디자인 — 영상·시각</a></li>
+<li><a href="#html">미디어·디자인 — 디자인·HTML·문서</a></li>
+<li><a href="#_7">미디어·디자인 — 음악·오디오</a></li>
+<li><a href="#_8">미디어·디자인 — 인터랙티브·창작 워크플로</a></li>
+<li><a href="#apple-macos">Apple 생태계 (macOS 전용)</a></li>
+<li><a href="#_9">리서치</a></li>
+<li><a href="#_10">스마트홈</a></li>
+<li><a href="#_11">이메일·소셜</a></li>
+<li><a href="#_12">레드팀</a></li>
+</ul>
+</li>
+<li><a href="#_13">번들 플러그인</a></li>
+<li><a href="#skills-hub">옵션 스킬 (Skills Hub)</a></li>
+<li><a href="#_14">변경 이력</a><ul>
+<li><a href="#2026-6">번들 정리 (2026년 6월)</a></li>
+<li><a href="#v0120">v0.12.0 — 신규 번들 및 번들 승격</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Hermes Agent를 설치하면 번들 스킬이 <code>~/.hermes/skills/</code> 디렉터리에 함께 설치됩니다. v0.17.0 기준 번들 스킬은 71개입니다. 플랫폼에 따라 자동 활성화·비활성화되며(예: Apple 스킬은 macOS에서만 활성화), 설정 파일에서 개별 제어할 수도 있습니다. Linux에서는 macOS 전용 스킬이 숨겨져 더 적게 표시됩니다(예: Ubuntu에서는 71개 중 5개가 빠진 66개가 노출).</p>
+<p>이 절은 번들 스킬을 카테고리별로 정리하고, 그 뒤에 번들 플러그인·옵션 스킬·변경 이력을 따로 묶습니다. 각 스킬의 상세 사용법은 SKILL.md 파일이나 <code>/skills</code> 명령으로 확인할 수 있습니다.</p>
+<fieldset><legend>번들은 슬림해지는 방향으로 정리됐습니다</legend><p style="margin-top: 0.2em;">초기에는 파인튜닝·추론 프레임워크나 게임·니치 연동까지 번들에 들어 있었지만, 최근 버전에서 이런 스킬들은 <strong>옵션 스킬</strong>로 빠졌습니다. 기본 설치를 가볍게 유지하고, 필요한 사람만 Skills Hub에서 받아 쓰도록 한 것입니다. 아래 「옵션 스킬」 절과 「변경 이력」을 함께 보면 어떤 스킬이 옵션으로 이동했는지 알 수 있습니다.</p></fieldset>
+<h3 id="_1">번들 스킬</h3>
+<h4 id="_2">개발 및 협업</h4>
+<p>소프트웨어 개발, 멀티 에이전트 오케스트레이션, GitHub 연동, DevOps 작업을 한 카테고리로 묶었습니다.</p>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plan</code></td>
+<td>작업 계획 수립·태스크 분해 및 기술 설계 문서 작성</td>
+</tr>
+<tr>
+<td><code>test-driven-development</code></td>
+<td>TDD 워크플로 가이드</td>
+</tr>
+<tr>
+<td><code>systematic-debugging</code></td>
+<td>4단계 체계적 디버깅</td>
+</tr>
+<tr>
+<td><code>spike</code></td>
+<td>일회성 실험 코드(스파이크) 워크플로</td>
+</tr>
+<tr>
+<td><code>python-debugpy</code></td>
+<td>debugpy 기반 Python 디버깅</td>
+</tr>
+<tr>
+<td><code>node-inspect-debugger</code></td>
+<td>Node 디버거</td>
+</tr>
+<tr>
+<td><code>requesting-code-review</code></td>
+<td>PR 리뷰 요청 자동화</td>
+</tr>
+<tr>
+<td><code>simplify-code</code></td>
+<td>코드 단순화 — 재사용·중복 제거를 위험도 등급별로 적용</td>
+</tr>
+<tr>
+<td><code>hermes-agent-skill-authoring</code></td>
+<td>Hermes 스킬 작성 가이드</td>
+</tr>
+<tr>
+<td><code>hermes-agent</code></td>
+<td>독립 Hermes 프로세스 생성 및 조율</td>
+</tr>
+<tr>
+<td><code>claude-code</code></td>
+<td>Claude Code에 코딩 작업 위임</td>
+</tr>
+<tr>
+<td><code>codex</code></td>
+<td>Codex CLI에 코딩 작업 위임</td>
+</tr>
+<tr>
+<td><code>opencode</code></td>
+<td>OpenCode CLI에 코딩 작업 위임</td>
+</tr>
+<tr>
+<td><code>github-pr-workflow</code></td>
+<td>PR 생성/커밋/머지/CI 모니터링</td>
+</tr>
+<tr>
+<td><code>github-code-review</code></td>
+<td>GitHub PR 코드 리뷰</td>
+</tr>
+<tr>
+<td><code>github-issues</code></td>
+<td>이슈 생성/검색/닫기</td>
+</tr>
+<tr>
+<td><code>github-repo-management</code></td>
+<td>저장소 관리 및 설정</td>
+</tr>
+<tr>
+<td><code>github-auth</code></td>
+<td>GitHub 인증 설정</td>
+</tr>
+<tr>
+<td><code>codebase-inspection</code></td>
+<td>코드베이스 분석 (LOC, 언어 분포)</td>
+</tr>
+<tr>
+<td><code>kanban-orchestrator</code></td>
+<td>칸반 보드에 작업을 풀어 다른 프로필에 분배</td>
+</tr>
+<tr>
+<td><code>kanban-worker</code></td>
+<td>풀려 있는 작업을 받아 처리</td>
+</tr>
+<tr>
+<td><code>dogfood</code></td>
+<td>웹 앱 탐색적 QA — 버그·증거·리포트 생성</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_3">생산성</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>google-workspace</code></td>
+<td>Gmail, Calendar, Drive, Sheets, Docs 연동</td>
+</tr>
+<tr>
+<td><code>notion</code></td>
+<td>Notion 페이지·데이터베이스 API 연동</td>
+</tr>
+<tr>
+<td><code>obsidian</code></td>
+<td>Obsidian 볼트 노트 관리</td>
+</tr>
+<tr>
+<td><code>nano-pdf</code></td>
+<td>PDF 편집</td>
+</tr>
+<tr>
+<td><code>powerpoint</code></td>
+<td>PowerPoint 프레젠테이션 자동 생성</td>
+</tr>
+<tr>
+<td><code>ocr-and-documents</code></td>
+<td>OCR 및 문서 텍스트 추출</td>
+</tr>
+<tr>
+<td><code>airtable</code></td>
+<td>Airtable 베이스·테이블 자동화</td>
+</tr>
+<tr>
+<td><code>maps</code></td>
+<td>OSM·위치 기반 작업 (주변 장소 검색 포함)</td>
+</tr>
+<tr>
+<td><code>teams-meeting-pipeline</code></td>
+<td>Teams 회의 요약 파이프라인 — 요약·상태 점검·작업 재실행·MS Graph 구독 관리</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_4">추론·평가·데이터</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vllm</code></td>
+<td>고처리량 서빙 (PagedAttention)</td>
+</tr>
+<tr>
+<td><code>llama-cpp</code></td>
+<td>CPU·Apple Silicon 추론</td>
+</tr>
+<tr>
+<td><code>obliteratus</code></td>
+<td>모델 안전 필터 제거 (레드팀용)</td>
+</tr>
+<tr>
+<td><code>weights-and-biases</code></td>
+<td>실험 추적·모니터링</td>
+</tr>
+<tr>
+<td><code>lm-evaluation-harness</code></td>
+<td>LLM 벤치마크 평가</td>
+</tr>
+<tr>
+<td><code>huggingface-hub</code></td>
+<td>모델·데이터셋 허브 검색·다운로드</td>
+</tr>
+<tr>
+<td><code>jupyter-live-kernel</code></td>
+<td>Jupyter 커널 연동</td>
+</tr>
+</tbody>
+</table>
+<p>파인튜닝·양자화·구조화 출력 프레임워크(<code>axolotl</code>, <code>unsloth</code>, <code>trl-fine-tuning</code>, <code>peft</code>, <code>pytorch-fsdp</code>, <code>guidance</code>, <code>outlines</code>, <code>dspy</code> 등)는 번들에서 빠져 <strong>옵션 스킬</strong>로 제공됩니다.</p>
+<h4 id="_5">사전 학습 모델</h4>
+<p>번들 스킬 형태로 들어오는 사전 학습 모델입니다.</p>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>audiocraft</code></td>
+<td>Meta 오디오·음악 생성</td>
+</tr>
+<tr>
+<td><code>segment-anything</code></td>
+<td>SAM 비전 분할 모델</td>
+</tr>
+</tbody>
+</table>
+<p>이미지·음성·비전 모델(<code>stable-diffusion</code>, <code>whisper</code>, <code>clip</code>)은 옵션 스킬로 이동했습니다.</p>
+<h4 id="_6">미디어·디자인 — 영상·시각</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>youtube-content</code></td>
+<td>YouTube 자막 추출 및 콘텐츠 분석</td>
+</tr>
+<tr>
+<td><code>manim-video</code></td>
+<td>Manim 수학·도해 영상</td>
+</tr>
+<tr>
+<td><code>ascii-video</code></td>
+<td>ASCII 비디오 생성</td>
+</tr>
+<tr>
+<td><code>p5js</code></td>
+<td>p5.js 인터랙티브 스케치</td>
+</tr>
+<tr>
+<td><code>excalidraw</code></td>
+<td>손그림 스타일 다이어그램</td>
+</tr>
+<tr>
+<td><code>architecture-diagram</code></td>
+<td>아키텍처 다이어그램</td>
+</tr>
+<tr>
+<td><code>ascii-art</code></td>
+<td>ASCII 아트 생성</td>
+</tr>
+<tr>
+<td><code>gif-search</code></td>
+<td>GIF 검색 (Tenor)</td>
+</tr>
+<tr>
+<td><code>baoyu-infographic</code></td>
+<td>인포그래픽 생성 (레이아웃·스타일 다수 조합)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="html">미디어·디자인 — 디자인·HTML·문서</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claude-design</code></td>
+<td>Anthropic Claude.ai 스타일 HTML 아티팩트</td>
+</tr>
+<tr>
+<td><code>design-md</code></td>
+<td>Google <code>DESIGN.md</code> 스펙으로 기능 설계서 작성</td>
+</tr>
+<tr>
+<td><code>popular-web-designs</code></td>
+<td>인기 웹 디자인 패턴 템플릿</td>
+</tr>
+<tr>
+<td><code>sketch</code></td>
+<td>빠른 HTML 목업</td>
+</tr>
+<tr>
+<td><code>pretext</code></td>
+<td>브라우저용 창작 데모(@chenglou/pretext 기반)</td>
+</tr>
+<tr>
+<td><code>humanizer</code></td>
+<td>LLM 흔적이 강한 텍스트에서 AI투를 줄여 자연스럽게</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_7">미디어·디자인 — 음악·오디오</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>heartmula</code></td>
+<td>오픈소스 음악 생성</td>
+</tr>
+<tr>
+<td><code>songsee</code></td>
+<td>오디오 스펙트로그램 시각화</td>
+</tr>
+<tr>
+<td><code>songwriting-and-ai-music</code></td>
+<td>작곡 보조</td>
+</tr>
+</tbody>
+</table>
+<p>Spotify는 스킬이 아니라 게이트웨이 <strong>번들 플러그인</strong>으로 제공됩니다(아래 「번들 플러그인」 참고).</p>
+<h4 id="_8">미디어·디자인 — 인터랙티브·창작 워크플로</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>comfyui</code></td>
+<td>ComfyUI 이미지 생성 워크플로 — 공식 CLI + REST + 하드웨어 점검</td>
+</tr>
+<tr>
+<td><code>touchdesigner-mcp</code></td>
+<td>TouchDesigner-MCP 모션·시각 인터랙션</td>
+</tr>
+</tbody>
+</table>
+<h4 id="apple-macos">Apple 생태계 (macOS 전용)</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apple-notes</code></td>
+<td>Apple 메모 생성·검색·편집</td>
+</tr>
+<tr>
+<td><code>apple-reminders</code></td>
+<td>미리알림 관리</td>
+</tr>
+<tr>
+<td><code>imessage</code></td>
+<td>iMessage 읽기·보내기</td>
+</tr>
+<tr>
+<td><code>findmy</code></td>
+<td>Find My로 기기·AirTag 위치 추적</td>
+</tr>
+<tr>
+<td><code>macos-computer-use</code></td>
+<td>macOS 데스크톱 백그라운드 제어 — 스크린샷·마우스·키보드를 사용자 커서·포커스를 뺏지 않고 조작</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_9">리서치</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arxiv</code></td>
+<td>arXiv 논문 검색 (API 키 불필요)</td>
+</tr>
+<tr>
+<td><code>research-paper-writing</code></td>
+<td>ML/AI 논문 작성 파이프라인</td>
+</tr>
+<tr>
+<td><code>blogwatcher</code></td>
+<td>블로그·RSS 모니터링</td>
+</tr>
+<tr>
+<td><code>polymarket</code></td>
+<td>예측 시장 데이터 조회</td>
+</tr>
+<tr>
+<td><code>llm-wiki</code></td>
+<td>Karpathy의 LLM Wiki — 상호 연결된 마크다운 지식베이스 구축·질의</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_10">스마트홈</h4>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openhue</code></td>
+<td>Philips Hue 조명 제어</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_11">이메일·소셜</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>himalaya</code></td>
+<td>터미널 이메일 클라이언트</td>
+</tr>
+<tr>
+<td><code>xurl</code></td>
+<td>xurl CLI로 X/Twitter 자동화 — 게시·검색·DM·미디어 (v2 API)</td>
+</tr>
+<tr>
+<td><code>yuanbao</code></td>
+<td>Yuanbao(元宝) 그룹 — 멤버 @멘션·정보·멤버 조회</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_12">레드팀</h4>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>godmode</code></td>
+<td>LLM 안전 필터 우회 테스트</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_13">번들 플러그인</h3>
+<p><code>skills/</code>에 들어가지는 않지만, 번들된 플러그인으로 자동 로드되는 도구가 함께 옵니다. 게이트웨이를 시작하면 자동으로 감지돼 도구·페이지·이벤트 훅에서 사용할 수 있고, 대시보드 Plugins 탭에서 켜고 끌 수 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>플러그인</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spotify</td>
+<td>재생·검색·큐·플레이리스트 7개 도구를 게이트웨이에서 직접 노출 (PKCE OAuth)</td>
+</tr>
+<tr>
+<td>Google Meet</td>
+<td>음성 채널에 봇으로 참여, 받아쓰기·발화·후속 작업까지 한 파이프라인</td>
+</tr>
+<tr>
+<td>Langfuse 옵저버빌리티</td>
+<td>LLM 호출·도구 실행을 Langfuse에 기록</td>
+</tr>
+<tr>
+<td><code>hermes-achievements</code></td>
+<td>전체 세션 히스토리를 스캔해 진행 성과(일종의 도전 과제) 표시</td>
+</tr>
+</tbody>
+</table>
+<h3 id="skills-hub">옵션 스킬 (Skills Hub)</h3>
+<p>번들에 항상 포함되지는 않지만, Skills Hub의 신뢰된 기본 tap(<code>huggingface/skills</code> — 「Skills Hub」 절 참고)에서 한 번에 설치할 수 있습니다. 위에서 언급한, 번들에서 빠진 파인튜닝·추론·모델 스킬(<code>dspy</code>, <code>axolotl</code>, <code>stable-diffusion</code>, <code>whisper</code> 등)과 게임·니치 연동(<code>pixel-art</code>, <code>minecraft-modpack-server</code>, <code>pokemon-player</code>, <code>mcporter</code>, <code>domain-intel</code> 등)도 모두 이 경로로 받습니다. 아래는 자주 쓰이는 일부입니다.</p>
+<table>
+<thead>
+<tr>
+<th>스킬</th>
+<th>영역</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hyperliquid</code></td>
+<td>Hyperliquid SDK·REST API 기반 perpetual·spot 거래</td>
+</tr>
+<tr>
+<td><code>stocks</code></td>
+<td>실시간 시세·기본 재무·과거 데이터</td>
+</tr>
+<tr>
+<td><code>rest-graphql-debug</code></td>
+<td>REST + GraphQL 디버그 레시피</td>
+</tr>
+<tr>
+<td><code>evm</code></td>
+<td>Ethereum + L2 등 EVM 체인 통합</td>
+</tr>
+<tr>
+<td><code>darwinian-evolver</code></td>
+<td>진화 알고리즘 기반 프롬프트·스킬 튜닝</td>
+</tr>
+<tr>
+<td><code>osint-investigation</code></td>
+<td>사람·도메인·조직 대상 OSINT 레시피</td>
+</tr>
+<tr>
+<td><code>pinggy-tunnel</code></td>
+<td>로컬 서비스를 공용 인터넷에 노출</td>
+</tr>
+<tr>
+<td><code>watchers</code></td>
+<td>RSS / HTTP JSON / GitHub 변화 감지(크론 <code>no_agent</code> 모드)</td>
+</tr>
+</tbody>
+</table>
+<fieldset><legend>스킬은 계속 바뀝니다</legend><p style="margin-top: 0.2em;">번들 스킬 목록은 버전이 올라갈 때마다 더해지기도 하고, 니치 스킬이 옵션으로 빠지기도 합니다. 현재 설치된 스킬의 최신 목록은 <code>ls ~/.hermes/skills/</code>로 확인하세요. Skills Hub에서 커뮤니티 스킬을 추가로 설치할 수도 있습니다.</p></fieldset>
+<h3 id="_14">변경 이력</h3>
+<h4 id="2026-6">번들 정리 (2026년 6월)</h4>
+<p>기본 설치를 가볍게 유지하기 위해 번들을 슬림화했습니다.</p>
+<ul>
+<li><strong>옵션으로 이동</strong>: <code>dspy</code>, <code>pixel-art</code>, <code>subagent-driven-development</code>, <code>minecraft-modpack-server</code>, <code>pokemon-player</code> 등이 번들에서 빠져 옵션 스킬(<code>optional-skills/</code>)로 이동. 앞서 파인튜닝·추론 스킬(<code>axolotl</code>, <code>unsloth</code>, <code>trl-fine-tuning</code>, <code>peft</code>, <code>pytorch-fsdp</code>, <code>guidance</code>, <code>outlines</code>)과 모델 스킬(<code>stable-diffusion</code>, <code>whisper</code>, <code>clip</code>), 니치 연동(<code>mcporter</code>, <code>modal</code>, <code>domain-intel</code>)도 같은 방식으로 옵션화됨</li>
+<li><strong>통합</strong>: <code>writing-plans</code>는 <code>plan</code> 스킬로 병합, <code>native-mcp</code>·<code>webhook-subscriptions</code>는 <code>hermes-agent</code> 스킬의 참조 문서(<code>references/native-mcp.md</code>, <code>references/webhooks.md</code>)로 흡수</li>
+<li><strong>제거·개명</strong>: <code>linear</code>는 제거(대신 <code>hermes mcp install linear</code>), <code>spotify</code> 스킬은 게이트웨이 플러그인으로 일원화, <code>xitter</code>는 <code>xurl</code>로 개명, <code>debugging-hermes-tui-commands</code>·<code>inference-sh</code>·<code>find-nearby</code>(→ <code>maps</code>로 흡수) 제거</li>
+<li><strong>신규 번들</strong>: <code>baoyu-infographic</code>, <code>dogfood</code>, <code>llm-wiki</code>, <code>macos-computer-use</code>, <code>teams-meeting-pipeline</code>, <code>yuanbao</code></li>
+</ul>
+<h4 id="v0120">v0.12.0 — 신규 번들 및 번들 승격</h4>
+<table>
+<thead>
+<tr>
+<th>스킬·플러그인</th>
+<th>변화</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>comfyui</code></td>
+<td>optional → <strong>번들 기본</strong> (하드웨어 점검 후 로컬 설치 게이트)</td>
+</tr>
+<tr>
+<td><code>touchdesigner-mcp</code></td>
+<td><strong>번들 기본</strong>, GLSL/post-FX/오디오/지오메트리 9종 레퍼런스 추가</td>
+</tr>
+<tr>
+<td><code>humanizer</code>, <code>claude-design</code>, <code>design-md</code>, <code>pretext</code>, <code>spike</code>, <code>sketch</code>, <code>airtable</code></td>
+<td>번들 신규</td>
+</tr>
+<tr>
+<td><code>kanban-orchestrator</code>, <code>kanban-worker</code></td>
+<td>번들 신규</td>
+</tr>
+<tr>
+<td>Google Meet, Langfuse, hermes-achievements</td>
+<td>번들 플러그인 신규</td>
+</tr>
+</tbody>
+</table>
+</div>

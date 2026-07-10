@@ -1,0 +1,198 @@
+<h1 class="page-subject">03-3. 모델 라우팅</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<div class="toc">
+<ul>
+<li><a href="#_1">모델·프로바이더가 결정되는 흐름</a></li>
+<li><a href="#model">라이브 모델 전환 (/model)</a><ul>
+<li><a href="#hermes-model-model">hermes model과 /model의 차이</a></li>
+</ul>
+</li>
+<li><a href="#fast-mode-fast">Fast Mode (/fast)</a></li>
+<li><a href="#_2">비용 최적화 전략</a></li>
+<li><a href="#supports_vision">비전 지원 수동 선언 (supports_vision)</a></li>
+<li><a href="#_3">보조 모델 슬롯의 기본 라우팅</a></li>
+<li><a href="#openrouter">OpenRouter 라우팅 옵션</a><ul>
+<li><a href="#_4">제공자 라우팅 — 같은 모델, 다른 인프라</a></li>
+<li><a href="#openrouter_1">모델 라우팅 — OpenRouter가 모델 자체를 선택</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>3-2절에서는 한 가지 모델로 실습했습니다. 이 절에서는 모델을 고르고 전환하는 다양한 방법, 그리고 비용·속도를 최적화하는 전략을 살펴봅니다.</p>
+<fieldset><legend>OpenRouter 라우팅과의 구분</legend><p style="margin-top: 0.2em;">OpenRouter도 "라우팅"이라는 단어를 쓰지만 이 절의 주제와 다릅니다. OpenRouter에는 같은 모델을 여러 인프라 제공자 중 어디서 실행할지 고르는 <strong>제공자 라우팅</strong>과, 모델 자체를 자동으로 선택하는 <strong>모델 라우팅</strong>(auto, pareto-code) 두 계층이 있습니다. 이 절에서 주로 다루는 것은 <strong>Hermes 클라이언트</strong> 쪽에서 사용자가 프로바이더·모델을 선택하고 전환하는 방법이며, OpenRouter 라우팅의 설정 방법은 이 절 하단의 "OpenRouter 라우팅 옵션"에서 다룹니다.</p></fieldset>
+<h3 id="_1">모델·프로바이더가 결정되는 흐름</h3>
+<p>요청이 어느 모델로 가는지는 다음 우선순위로 결정됩니다(높은 것이 우선).</p>
+<ol>
+<li><strong>CLI 플래그</strong>: <code>--provider</code>, <code>--model</code> (또는 <code>-m</code>)</li>
+<li><strong>config.yaml</strong>: <code>model.provider</code>, <code>model.default</code></li>
+<li><strong>환경 변수</strong>: <code>HERMES_INFERENCE_PROVIDER</code>, <code>HERMES_INFERENCE_MODEL</code></li>
+<li><strong>auto 탐지</strong>: 위 셋 모두 없으면 사용 가능한 자격 증명을 자동으로 찾습니다</li>
+</ol>
+<p>한 번만 다른 모델로 실행하려면 CLI 플래그가 편합니다.</p>
+<pre><code class="language-bash">hermes chat --provider anthropic -m claude-sonnet-4-6
+hermes -z --provider custom -m qwen3:14b "이 코드를 리팩터링해줘"
+</code></pre>
+<p>영구적으로 바꾸려면 <code>hermes model</code>로 인터랙티브 피커를 띄우거나, <code>config.yaml</code>의 <code>model.provider</code>·<code>model.default</code>를 직접 수정합니다(2-3절 참고).</p>
+<h3 id="model">라이브 모델 전환 (<code>/model</code>)</h3>
+<p>세션 도중에 모델·프로바이더를 즉석에서 갈아 끼울 수 있습니다.</p>
+<pre><code>&gt; /model
+</code></pre>
+<p>인자 없이 부르면 인터랙티브 피커가 뜨고, 인증된 프로바이더가 모두 나옵니다. 한 번에 모델명을 같이 줘도 됩니다.</p>
+<pre><code>&gt; /model anthropic/claude-sonnet-4-6
+&gt; /model gpt-5.5 --provider codex
+&gt; /model qwen3:14b --provider custom --global    # config.yaml 영구 반영
+</code></pre>
+<p>이 명령은 CLI뿐 아니라 텔레그램·디스코드·슬랙 같은 게이트웨이 플랫폼에서도 그대로 작동합니다. 텔레그램·디스코드에서는 인라인 버튼이 달린 모델 피커가 뜹니다. 애그리게이터(OpenRouter·Nous Portal 등)를 쓰는 경우 가능한 한 같은 애그리게이터 안에서 해석해 주고, 안 되면 다른 프로바이더로 자동 폴백합니다.</p>
+<h4 id="hermes-model-model"><code>hermes model</code>과 <code>/model</code>의 차이</h4>
+<p>이름은 비슷하지만 두 명령은 쓰임이 다릅니다. 정리하면 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>비교 항목</th>
+<th><code>hermes model</code></th>
+<th><code>/model</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>실행 시점</td>
+<td>Hermes 진입 전, 셸에서 실행</td>
+<td>Hermes 세션 안에서 슬래시 명령으로 실행</td>
+</tr>
+<tr>
+<td>기본 화면</td>
+<td>프로바이더 → 자격 증명 입력 → 모델 선택 순서의 셋업 마법사</td>
+<td>인증된 프로바이더만 보여 주는 인터랙티브 피커</td>
+</tr>
+<tr>
+<td>자격 증명</td>
+<td>미인증 프로바이더를 고르면 그 자리에서 API 키 프롬프트</td>
+<td>키 입력 단계 없음. 이미 인증된 프로바이더 중에서만 선택</td>
+</tr>
+<tr>
+<td>적용 범위</td>
+<td><code>config.yaml</code>에 저장. 다음 실행 세션부터 반영</td>
+<td>현재 세션의 에이전트에 즉시 반영. <code>--global</code>을 붙이면 <code>config.yaml</code>까지 함께 반영</td>
+</tr>
+<tr>
+<td>자주 쓰는 상황</td>
+<td>처음 설정하거나 새 프로바이더를 추가할 때</td>
+<td>대화 도중 비용·속도 균형을 위해 모델을 갈아 끼울 때</td>
+</tr>
+</tbody>
+</table>
+<p>요컨대 영구 설정이 목적이면 <code>hermes model</code> 또는 <code>/model &lt;이름&gt; --global</code>이 같은 결과를 만들고, <code>/model &lt;이름&gt;</code> 단독은 "이 세션에서만"이라는 점이 가장 큰 차이입니다.</p>
+<h3 id="fast-mode-fast">Fast Mode (<code>/fast</code>)</h3>
+<p>OpenAI Priority Processing과 Anthropic의 Fast 티어를 활용해 응답 지연을 줄이는 토글입니다. 같은 모델로 같은 요청을 보내되, <strong>우선 처리 큐</strong>로 보냅니다.</p>
+<pre><code>&gt; /fast            # 토글
+&gt; /fast status     # 현재 상태
+&gt; /fast on         # 켜기
+&gt; /fast off        # 끄기
+</code></pre>
+<p>OpenAI(GPT 시리즈·Codex)와 Anthropic(Claude 시리즈) 모델 전반에 적용됩니다. 토큰 단가가 약간 더 비쌀 수 있는 대신 체감 응답 속도가 크게 개선되므로, 코드 리뷰처럼 인터랙션이 빠르게 오가는 상황에 유용합니다.</p>
+<h3 id="_2">비용 최적화 전략</h3>
+<p>모델 비용을 줄이면서 대화 품질을 유지하는 방법은 몇 가지가 있습니다.</p>
+<p><strong>1. 보조 모델 활용</strong></p>
+<p>이미지 분석·웹 요약·컨텍스트 압축 같은 부수 작업에 경량 모델을 지정합니다. 주 모델은 클라우드 프론티어 모델을 유지하면서, 보조 슬롯(<code>auxiliary</code>)에 Gemini Flash 같은 저렴한 모델을 배정하면 비용이 크게 줄어듭니다(2-5절 참고).</p>
+<p><strong>2. 서브에이전트 모델 분리</strong></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><code>delegation.model</code>에 경량 모델을 지정하면, 주 모델(예: Claude Sonnet)이 복잡한 판단을 하고 서브에이전트(예: Llama 8B)가 단순 작업을 처리합니다. 주 모델이 작업 지시를 생성하고, 서브에이전트가 파일 생성·검색 같은 반복 작업을 수행하는 패턴입니다.</p>
+<p><strong>3. 세션 단위 모델 전환</strong></p>
+<p>간단한 질의에는 <code>/model</code>로 경량 모델로 전환했다가, 복잡한 작업이 필요할 때 다시 프론티어 모델로 돌아오는 수동 전환도 효과적입니다. <code>--global</code> 플래그를 빼면 현재 세션에서만 적용됩니다.</p>
+<p><strong>4. OpenRouter Pareto Code 라우터</strong></p>
+<p>OpenRouter 프로바이더를 사용한다면, 모델을 <code>openrouter/pareto-code</code>로 지정해 비용 최적화를 OpenRouter에 위임할 수 있습니다. 코딩 벤치마크 점수의 하한선(<code>min_coding_score</code>, 0~1)을 정해 두면, 그 기준을 충족하는 모델 중 가장 저렴한 모델을 OpenRouter가 자동으로 골라 줍니다.</p>
+<pre><code class="language-yaml"># config.yaml
+model:
+  default: "openrouter/pareto-code"
+
+openrouter:
+  min_coding_score: 0.65      # 이 점수 이상인 코딩 모델 중 최저가 선택
+</code></pre>
+<p>점수를 높이면 품질이 보장되는 대신 비싼 모델이 선택되고, 낮추면 저렴한 모델이 선택됩니다. 생략하면 최상위 티어가 기본값입니다. 고정 모델 지정과 달리 새 모델이 OpenRouter에 추가될 때마다 자동으로 후보에 포함되므로, 가격 경쟁이 반영됩니다.</p>
+<p>프론티어 모델로 판단하고 코딩 작업만 pareto-code로 보내는 구성도 가능합니다. <code>delegation.model</code>에 pareto-code를 지정하면 <code>delegate_task</code>로 위임된 서브에이전트가 pareto-code를 사용합니다. <code>openrouter.min_coding_score</code>는 서브에이전트에 자동 상속됩니다.</p>
+<pre><code class="language-yaml">model:
+  default: "anthropic/claude-opus-4.8"
+  provider: "openrouter"
+
+delegation:
+  model: "openrouter/pareto-code"
+  provider: "openrouter"
+
+openrouter:
+  min_coding_score: 0.65
+</code></pre>
+<p>이 구성에서는 Opus가 분석·계획을 담당하고, 파일 생성·코드 수정 같은 반복 작업을 서브에이전트에 위임할 때 pareto-code가 비용 효율적인 모델을 골라 줍니다.</p>
+<p><strong>5. <code>/fast</code> 모드</strong></p>
+<p>비용은 약간 더 들지만, 같은 모델의 우선 처리 큐를 사용해 대기 시간을 줄입니다. 인터랙션이 빈번한 작업에서 체감 효과가 큽니다.</p>
+<fieldset><legend>삭제된 smart_model_routing과 대체 경로</legend><p style="margin-top: 0.2em;">이전 버전에는 메시지 복잡도에 따라 cheap_model과 기본 모델을 자동 분배하는 <code>smart_model_routing</code> 설정이 있었습니다. opt-in(기본 비활성)이었고 실사용이 적어, v0.13.0에서 제거되었습니다(<code>424e9f36b</code>). 판정 로직이 영어 키워드 44개에만 의존하는 규칙 기반이었으므로, 한국어 입력에서는 사실상 분기가 작동하지 않는 한계도 있었습니다.</p>
+<p>대체 경로로 <code>openrouter/pareto-code</code>가 도입되었습니다(<code>c7f0aab94</code>). 클라이언트 측 규칙 대신 OpenRouter 서버 측 벤치마크 기반으로 비용을 최적화하므로 언어와 무관하게 작동합니다.</p></fieldset>
+<h3 id="supports_vision">비전 지원 수동 선언 (<code>supports_vision</code>)</h3>
+<p>models.dev에 등록되지 않은 커스텀·로컬 모델은 기본적으로 비전 미지원으로 분류되어, 이미지를 보내도 API 호출 전에 이미지 콘텐츠가 자동 제거됩니다. LLaVA, Qwen-VL 같은 로컬 비전 모델을 사용할 때 이 기본 분류를 재정의할 수 있습니다.</p>
+<pre><code class="language-yaml"># config.yaml — 현재 기본 모델에 적용
+model:
+  supports_vision: true
+
+# 특정 프로바이더의 특정 모델에만 적용
+providers:
+  my-vllm:
+    models:
+      my-llava:
+        supports_vision: true
+</code></pre>
+<p>이 설정은 models.dev 조회를 건너뛰고 이미지 전처리 단계에서 바로 비전 가능으로 판정합니다.</p>
+<h3 id="_3">보조 모델 슬롯의 기본 라우팅</h3>
+<p>이미지 분석·웹 페이지 요약·컨텍스트 압축·세션 검색 같은 부수 작업에 쓰이는 보조 모델 슬롯은 별도로 고르지 않으면(<code>provider: "auto"</code>) <strong>메인 프로바이더를 따라갑니다</strong>. 메인이 OpenRouter 같은 aggregator라면 메인 모델 그대로 호출되고, Anthropic Direct·z.ai·Kimi 같은 직접 키 프로바이더이면 같은 프로바이더의 가벼운 보조 모델(예: Anthropic은 Haiku, z.ai는 GLM Flash)로 자동 매핑됩니다. 가벼운 보조 작업이 메인 모델 그대로 호출돼 비용이 의외로 큰 상황이면 <code>hermes model</code>의 보조 모델 설정 화면(또는 웹 대시보드의 Models 탭)에서 슬롯별로 가벼운 모델을 직접 지정합니다. 자세한 슬롯 목록과 의미는 2-5절을 참고하세요.</p>
+<h3 id="openrouter">OpenRouter 라우팅 옵션</h3>
+<p>OpenRouter를 프로바이더로 사용할 때는 <strong>모델 라우팅</strong>과 <strong>제공자 라우팅</strong>, 두 가지 계층이 있습니다.</p>
+<h4 id="_4">제공자 라우팅 — 같은 모델, 다른 인프라</h4>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>같은 모델(예: <code>claude-sonnet-4</code>)을 Anthropic 직접, AWS Bedrock, Google Vertex 등 여러 인프라 제공자가 호스팅합니다. OpenRouter는 기본적으로 가용성과 부하를 보고 자동으로 고르지만, <code>config.yaml</code>의 <code>provider_routing</code> 블록으로 제어할 수 있습니다.</p>
+<pre><code class="language-yaml">provider_routing:
+  sort: "throughput"          # price | throughput | latency
+  data_collection: "deny"     # 데이터 보존 제공자 제외
+</code></pre>
+<p>주요 옵션과 설정 방법은 2-5절의 "OpenRouter 프로바이더 라우팅" 항목을 참고하세요.</p>
+<h4 id="openrouter_1">모델 라우팅 — OpenRouter가 모델 자체를 선택</h4>
+<p>OpenRouter에는 모델 자체를 자동으로 고르는 메타 모델(라우터)도 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>모델 ID</th>
+<th>방식</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openrouter/pareto-code</code></td>
+<td>코딩 점수 하한선 + 최저가</td>
+<td>코딩 에이전트 비용 최적화</td>
+</tr>
+<tr>
+<td><code>openrouter/auto</code></td>
+<td>NotDiamond 기반 프롬프트 분석</td>
+<td>범용 자동 선택</td>
+</tr>
+</tbody>
+</table>
+<p><code>openrouter/pareto-code</code>는 Hermes 소스에 <code>plugins</code> 전달 로직이 구현돼 있어, <code>config.yaml</code>의 <code>openrouter.min_coding_score</code>와 연동됩니다(위 "비용 최적화 전략" 4번 참고).</p>
+<p><code>openrouter/auto</code>는 OpenRouter의 공식 기능으로, 프롬프트를 분석해 ~38개 후보 모델 중 최적 모델을 매 요청마다 동적으로 선택합니다. <code>/model openrouter/auto</code>로 전환할 수 있지만, 코딩 에이전트에서는 매 턴 모델이 바뀌면 tool calling 포맷·reasoning 스타일이 달라져 안정성이 떨어질 수 있습니다. 코딩 작업에는 모델을 고정하거나 <code>pareto-code</code>를 사용하는 편이 낫습니다.</p>
+<fieldset><legend>라우팅 계층 정리</legend><p style="margin-top: 0.2em;">정리하면 세 가지 계층이 있습니다.</p>
+<ul>
+<li><strong>Hermes 모델 선택</strong>: 사용자가 <code>/model</code>이나 <code>config.yaml</code>로 직접 고르는 것</li>
+<li><strong>OpenRouter 모델 라우팅</strong>: <code>openrouter/auto</code>·<code>openrouter/pareto-code</code>처럼 OpenRouter가 모델을 골라 주는 것</li>
+<li><strong>OpenRouter 제공자 라우팅</strong>: 이미 정해진 모델을 어떤 인프라에서 실행할지 고르는 것</li>
+</ul>
+<p>일반적으로는 첫 번째(모델 고정) + 세 번째(제공자 라우팅으로 속도·비용 조절)의 조합이 코딩 에이전트에서 가장 안정적입니다.</p></fieldset>
+</div>

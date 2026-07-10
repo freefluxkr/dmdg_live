@@ -1,0 +1,56 @@
+<h1 class="page-subject">4) 메시지 박스 띄우기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>오늘은 지난 시간에 이어서 작동중에 사용자의 확인이 필요하거나 문자 혹은 패스워드를 입력 받아야 하는 경우에 대처할 수 있는 메세지 박스 기능에 대해 배워보겠습니다.</p>
+<hr/>
+<h1 id="1-alert">1. 알림창 - alert( )</h1>
+<p>가장 기본적인 알림을 띄워보겠습니다.</p>
+<pre><code>import pyautogui
+
+pyautogui.alert('코딩유치원 자주 찾아와주세요.')
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/Ieph7/btq85DWpnSD/smYhMOdbfuhdp8tT6oIcTk/img.png"/></p>
+<p>alert( ) 함수에는 어떤 파라미터가 있는지 한 번 보겠습니다.</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137925/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-08_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.00.00.png"/></p>
+<p>alert( ) 함수의 버튼을 클릭하거나 종료하면는 위에서 설정했던 버튼 이름을 문자열로 리턴해줍니다.</p>
+<p>만약 timeout을 설정하셨다면 설정한 시간이 끝나고 timeout을 문자열로 리턴해줍니다.</p>
+<p>아래의 예제 코드를 실행하셔서 어떻게 작동하는지 확인해보세요.</p>
+<pre><code>alert = pyautogui.alert('코딩유치원 자주 찾아와주세요.', title='코딩유치원', button='확인', timeout = 3000)
+
+print(alert)
+</code></pre>
+<h1 id="2-confirm">2. 확인창 - confirm( )</h1>
+<p>위에서 배운 알림창과 다른 것은 버튼 2개 중 하나를 선택할 수 있다는 것입니다.</p>
+<pre><code>import pyautogui
+
+pyautogui.confirm('계속 진행하시겠습니까?')
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bnXBXx/btq86gfAcTM/szmbZZeiQxQHAacJI6kxSK/img.png"/></p>
+<p>confirm( ) 함수도 어떤 파라미터가 있는지 보겠습니다.
+<img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137925/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-08_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.00.09.png"/></p>
+<p>이 함수 역시 위에서 배운 alert( )와 같이 선택한 버튼의 버튼명을 문자열로 리턴해줍니다.</p>
+<h1 id="3-prompt">3. 텍스트 입력창 - prompt( )</h1>
+<p>이번에는 텍스트를 입력받는 것 까지 추가된 창을 띄워보겠습니다.</p>
+<pre><code>import pyautogui
+
+text = pyautogui.prompt('원하는 메시지를 입력해주세요')
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bo366e/btq81ZUanjE/bgpjYTXxgY9kLVOAVewYr1/img.png"/></p>
+<p>마찬가지로 설정 가능한 파라미터를 보겠습니다. default 말고는 이미 봤던 친구들이네요.</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137925/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-08_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.00.19.png"/></p>
+<p>default 옵션이 뭔가 했더니 메시지 입력창에 처음부터 입력되어 있는 메시지였습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cb6h8S/btq85f2x5YD/bYMSBA0jEIQRPth4EwE6q1/img.png"/></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>prompt( ) 함수는 OK 버튼을 누르면 위에서 입력받은 텍스트를 문자열로 리턴해주며, Cancel 버튼을 누를 시엔 None을 리턴해줍니다.</p>
+<h1 id="4-password">4. 비밀번호 입력창 - password( )</h1>
+<p>이 함수는 위에서 배운 prompt( ) 함수와 같지만 입력 시에 *를 출력하여 보안을 위한 기능을 추가한 함수입니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/b9Y71i/btq81UdNfJg/lD8kS41Qb2Hf2rb8UHxHS0/img.png"/></p>
+<p>위의 prompt( ) 함수와 다른 파라미터는 mask 하나입니다. 만약 mask를 '='로 해주면 * 대신에 =으로 출력됩니다.</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137925/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-08_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.00.27.png"/></p>
+<p>password( ) 함수는 prompt( ) 함수와 마찬가지로 OK 버튼을 누르면 위에서 입력받은 텍스트를 문자열로 리턴해주며, Cancel 버튼을 누를 시엔 None을 리턴해줍니다.</p>
+</div>

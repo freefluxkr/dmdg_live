@@ -1,0 +1,1413 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>12장_위치_정보_시각화하기_folium</title>
+    <style>table{width:100%;border-collapse:collapse}table,th,td{padding:.3em;border:1px solid #a4a4a4;vertical-align:top;margin-bottom:1em}tbody{border-top:2px solid #aaa;border-bottom:2px solid #a4a4a4;border-left:2px solid #fff;border-right:2px solid #fff}.tb_pink{background-color:#eaeaea;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #eaeaea}.tb_pink2{background-color:#f5f5f5;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #f5f5f5}.tb_brown_line{border-bottom:2px solid #aaa}.tb_white{background-color:#fff}.tb_white2{background-color:#fff;border:2px solid #fff}.tb_white3{background-color:#fff;border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff}.tb_blue{background-color:#fff;border:2px solid #cacaca}.tb_brown{background-color:#f7f7f7;border:2px solid #f7f7f7}.clear{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0;clear:both}pre{word-break:break-all;word-wrap:break-word;white-space:pre-wrap;font-family:"code";font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;text-align:left;text-indent:0;padding:0;margin:0}.txts{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txts2{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:2em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:.6em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txtex{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txtex2{font-size:.9em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt1{font-size:1.2em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt2{font-size:1.4em;font-style:normal;font-weight:normal;line-height:2em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt3{font-size:1.6em;font-style:normal;font-weight:normal;line-height:1.4em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.key{border:1px solid #000;padding:0 .3em;font-family:"gothic_l";border-radius:.3em;font-size:.85em}.highlight{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:1.2em 0 1.2em 1em}.highlight2{border:2px solid #c6c6c6;padding:.5em;border-radius:0 .3em .3em .3em;margin:-0.2em 0 1.2em 0;background-color:#fff}.highlight3{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:0 0 1.2em 1em}.highlight4{padding:.5em;margin:1.2em 0 1.2em 1em}.highlight5{padding:.5em;margin:0 0 1.2em .6em}.highlight6{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:-0.2em 0 1.2em 0}.highlight7{border:2px solid #d3d3d3;border-radius:.5em;padding:.5em;margin:1.2em 0}.bg_white{background-color:#fff;border-radius:.3em;padding:0 0 0 .3em}.bg_white2{background-color:#fff}.bg_blue{background-color:#cacaca;padding:.3em .2em .3em .2em;border-radius:.9em}.bg_brown{background-color:#dfdfdf;padding:.4em .3em .4em .3em;border-radius:3em}.bg_brown2{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown3{background-color:#dfdfdf;padding:.1em}.bg_brown4{background-color:#dfdfdf;padding:.5em .3em .5em .3em;border-radius:3em}.bg_brown5{background-color:#f6f6f6;padding:.3em;border-radius:.1em}.bg_brown6{background-color:#dfdfdf;padding:.4em .7em .4em .7em;border-radius:3em}.bg_brown7{background-color:#dfdfdf;padding:.1em;border-radius:0}.bg_brown8{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown9{background-color:#dfdfdf;padding:.45em .1em .45em .1em;border-radius:3em}.bg_brown10{background-color:#dfdfdf;padding:.4em .45em .4em .45em;border-radius:3em}.bg_gray{background-color:#a7a7a7;font-size:.85em;padding:.1em .3em;border-radius:.4em;color:#fff}.bg_pink2{background-color:#e5e5e5;padding:.2em;border-radius:.5em;color:#414141}.bg_red{border:2px solid #414141;padding:.3em;border-radius:1em;margin-bottom:1.2em}.bg_yellow{padding:.2em .5em;background-color:#c6c6c6;border-radius:.5em .5em 0 0}.bg_black_line{border-bottom:1px solid #000;padding:.1em}.box_brown{box-sizing:border-box;min-height:100vh;background-color:#b5b5b5;padding:1em 2em}.box_brown2{padding:.5em;border-radius:.5em;background-color:#eee;box-sizing:border-box;min-height:80vh;position:relative}.box_brown3{border-bottom:3px solid #acacac;border-top:3px solid #acacac;padding:1em .5em 1em .5em;margin-bottom:5em}.box_brown4{border:3px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;padding:.5em}.box_brown5{padding:.5em;border-radius:.3em;border:2px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;background-color:#f7f7f7}.box_brown6{box-sizing:border-box;padding:2em;background-color:#f7f7f7}.box_yellow{padding:.5em;border-radius:0 0 .3em .3em;border-top:3px solid #aeaeae;margin-bottom:1.2em;margin-top:1.2em;background-color:#f2f2f2}.box_pink{box-sizing:border-box;padding:2em;background-color:#f8f8f8}.box_white{padding:.5em;border-radius:.5em;background-color:#fff;box-sizing:border-box;min-height:80vh;position:relative}.box_white2{padding:.5em;border-radius:.5em;background-color:#fff}.box_yellow_line{border-bottom:3px solid #c4c4c4}.box_yellow_line2{border:2px solid#c4c4c4;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_yellow_line3{border-bottom:2px solid #c5c5c5;margin-bottom:.5em;margin-top:.5em}.box_green_line{border:2px solid #d3d3d3;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line2{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.bg_brown_line{border-bottom:3px solid #dedede;padding:0 .4em 0 0;color:#acacac}.bg_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_brown_line{border-bottom:3px solid #acacac}.box_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0 0 0 1em}.box_brown_line3{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_white_line{border:1px solid #fff;padding:0;margin-top:2em;margin-bottom:2em}.box_black_line{border:1px solid #000;padding:.3em}.box_black_line2{border:1px solid #000;padding:.3em;border-radius:.3em;margin-bottom:2em}.tcenter{text-align:center}.tright{text-align:right}.s07_07{margin-left:.7em;text-indent:-0.7em}.s08_08{margin-left:.8em;text-indent:-0.8em}.s10_10{margin-left:1em;text-indent:-1em}.s11_11{margin-left:1.1em;text-indent:-1.1em}.s12_12{margin-left:1.2em;text-indent:-1.2em}.s14_14{margin-left:1.4em;text-indent:-1.4em}.s22_22{margin-left:2.2em;text-indent:-2.2em}.s26_26{margin-left:2.6em;text-indent:-2.6em}.s28_28{margin-left:2.85em;text-indent:-2.85em}.ind10{margin-left:1em;margin-bottom:.6em}.ind11{margin-left:1.1em}.ind12{margin-left:1.2em}.ind14{margin-left:1.4em}.ind18{margin-left:1.8em}.ind20{margin-left:2em}.ind22{margin-left:2.2em}.ind24{margin-left:2.4em}.ind26{margin-left:2.65em}.ind30{margin-left:3em}.ind36{margin-left:3.6em}.ind40{margin-left:4em}.ind90{margin-left:9.5em}.fleft{float:left;margin:.5em .5em .5em 0}.blue{color:#d4d4d4}.blue2{color:#414141}.blue3{color:#282828}.blue4{color:#535353}.brown{color:#797979}.brown2{color:#a1a1a1;text-decoration:none}.gold{color:#646464}.gray{color:#646464}.green{color:#5b5b5b}.purple{color:#676767}.yellow{color:#adadad}.red{color:#636363}.red2{color:#414141}.white{color:#fff}.h10{height:1em;max-width:100%}.h20{height:2em;max-width:100%}.h22{height:2.2em;max-width:100%}.h28{height:2.8em;max-width:100%}.h30{height:3em;max-width:100%}.h35{height:3.5em;max-width:100%}.h40{height:4em;max-width:100%}.h50{height:5em;max-width:100%}.h60{height:6em;max-width:100%}.mb02{margin-bottom:-0.2em}.w7{width:7.6%}.w10{width:10%}.w15{width:15%}.w18{width:18%}.w20{width:20%}.w25{width:25%}.w30{width:30%}.w33{width:33%}.w40{width:40%}.w50{width:50%}.w60{width:60%}.w70{width:70%}.w75{width:75%}.w80{width:80%}.w90{width:90%}.w100{width:100%}.w40c{margin-left:30%;margin-right:30%}.w60c{margin-left:20%;margin-right:20%}.w80c{margin-left:10%;margin-right:10%}</style>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="thebook-content">
+        <div class="book-page-fragment" data-page="589">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown">
+<p class="txts"> </p>
+<div class="box_brown2">
+<h2 class="txt3 dm"><span class="brown">12장</span><br/>
+      위치 정보 시각화하기: folium</h2>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txt bl">이 장에서는 위치 정보를 시각화하는 방법을 배워 보겠습니다. 위치 정보를 시각화한 대표적인 예로 지도가 있죠. 파이썬에서는 <span class="cd">folium</span>(폴리움) 라이브러리를 제공해 지도에 위치 정보를 표시할 수 있게 합니다. 그럼 시작해 볼게요!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="590">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown9">12.1</span><br/>
+    지도 만들기</h3>
+</div>
+<h4 class="txt1 dm" id="sigil_toc_id_95"><span class="yellow">12.1.1</span> folium 설치하고 지도 만들기</h4>
+<p class="txt bl">먼저 <span class="cd">folium</span>을 설치해 봅시다. <span class="cd">folium</span>은 파이썬에 내장된 라이브러리가 아니어서 따로 설치해야 합니다. 주피터 노트북에서는 <span class="cd">!pip install folium</span>으로 설치합니다. 코랩에서는 따로 설치할 필요 없습니다.</p>
+<div class="highlight">
+<pre>!pip install folium</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+Collecting folium
+  Downloading folium-0.12.1-py2.py3-none-any.whl (94 kB)
+…
+Successfully installed branca-0.4.2 folium-0.12.1</pre>
+</div>
+<p class="txt bl">설치 내용이 나오다가 가장 마지막 줄에 ‘Successfully installed...’라는 메시지가 보이면 설치가 끝납니다(버전은 책과 다를 수 있습니다). 이제 <span class="cd">folium</span> 라이브러리를 자유롭게 사용할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="591">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">먼저 위치 정보를 표시할 지도를 만들어 봅시다. 지도는 <span class="cd">folium</span> 라이브러리의 <span class="cd">Map([위도, 경도])</span> 명령어로 만들 수 있습니다. 나타내고 싶은 위치의 위도, 경도를 명령어에 넣어 주면 해당 위치를 중심으로 지도가 만들어집니다. 위치를 넣지 않으면 세계지도를 기본으로 만듭니다. <span class="cd">folium</span> 라이브러리에 속한 명령어를 사용하므로 실제 사용할 때는 <span class="cd">folium.Map([위도, 경도])</span>라고 작성합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>folium.Map([위도, 경도])</pre>
+</div>
+<p class="txt bl">지도에 여의도 한강공원을 표시해 봅시다. 여의도 한강공원의 위도와 경도를 알아야겠죠. 위도, 경도는 구글 지도에서 알아낼 수 있습니다. 그림을 보면서 차례대로 따라 해 보세요. 구글에서 <span class="dm">여의도 한강공원</span>을 검색한 후 검색창 바로 아래에 있는 지도 탭을 클릭합니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/489_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-1</span> 구글 지도에서 장소 검색하기</p>
+<p class="txt bl">여의도 한강공원이 구글 지도 위에 빨간 마커로 표시됩니다. <span class="dm">마커</span><span class="txts gray">(maker)</span>란 다음 그림처럼 지도 위에 특정 지점을 표시하는 데 사용하는 핀 모양 이미지입니다. 마커에 마우스를 놓고 우클릭하면 팝업 메뉴가 뜨고 가장 위에 숫자 2개가 나타납니다. 이 숫자가 여의도 한강공원의 위도와 경도입니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/489_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-2</span> 여의도 한강공원의 위도와 경도 구하기</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="592">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">위도는 37.52860, 경도는 126.93431로 나오네요. 마커의 어떤 부분을 클릭했는지에 따라 위도와 경도는 소수점 넷째 자리부터 조금씩 다를 수 있습니다. 하지만 진행하는 데는 문제없으니 각자 화면에 보이는 숫자를 입력해 진행합니다.</p>
+<p class="txt bl">이제 알아낸 위도와 경도를 명령어에 넣습니다. 위도와 경도는 리스트로 묶어야 오류가 발생하지 않습니다. 그리고 문자열, 숫자형, 리스트, 딕셔너리 등의 데이터를 변수에 저장한 것처럼 <span class="cd">folium.Map([위도, 경도])</span>로 만든 지도 역시 변수에 저장할 수 있습니다. 여의도 한강공원을 표시하는 지도이므로 여의도의 y을 따서 변수명을 <span class="cd">map_y</span>로 하겠습니다. 그리고 지도를 화면에 출력하기 위해 지도가 저장된 <span class="cd">map_y</span> 변수를 한 번 더 작성하고 실행합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> folium
+
+map_y = folium.Map([<span class="green">37.52860</span>, <span class="green">126.93431</span>])
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/490.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="593">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">지도가 나타났지만, 여의도 한강공원이 안 보이죠? 지도 왼쪽 상단에 있는 + 버튼을 계속 클릭하면 비로소 여의도 한강공원이 보입니다. 사실 입력한 좌표로 지도가 정확히 표현되긴 했으나 지도 비율이 맞지 않아서 보이지 않았던 겁니다. 우리가 원하는 정도로 보려면 지도를 확대해야 하죠.</p>
+<p class="txts"> </p>
+<p class="txtex dm">지도 비율 조절하기</p>
+<p class="txt bl">지도의 확대 및 축소를 조절하는 옵션은 <span class="cd">zoom_start</span>입니다. 옵션을 추가해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> folium
+
+map_y = folium.Map([<span class="green">37.52860</span>, <span class="green">126.93431</span>]<span class="cd2">, zoom_start=</span><span class="cd2 green">15</span>)
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/491.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="594">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이제는 여의도 한강공원이 지도에서 바로 보이네요. <span class="cd">zoom_start</span> 옵션의 숫자가 커질수록 지도가 확대됩니다. + 버튼을 누르는 효과죠. 반대로 숫자가 작을수록 지도가 축소(- 버튼 효과)됩니다.</p>
+<p class="txt bl">이번에는 앞의 코드를 조금 수정해 보겠습니다. 지금은 예제이니 <span class="cd">folium.Map([37.52860, 126.93431])</span>처럼 위도와 경도를 명령어에 바로 넣을 수 있지만 보통은 위도와 경도가 별도의 변수에 저장되는 경우가 많습니다. 영어로 위도는 latitude, 경도는 longitude이므로 위도는 변수 <span class="cd">lat</span>에, 경도는 변수 <span class="cd">long</span>에 저장하고 실행해 보겠습니다.</p>
+<div class="highlight">
+<pre><span class="cd2">lat, long =</span> <span class="cd2 green">37.52860</span><span class="cd2">,</span> <span class="cd2 green">126.93431</span>
+map_y = folium.Map([<span class="cd2">lat, long</span>], zoom_start=<span class="green">15</span>)
+map_y</pre>
+</div>
+<p class="txt bl">실행하면 앞의 코드와 동일한 결과가 나옵니다. 이처럼 변수를 활용하는 방식에 익숙해지면 프로그래밍하기가 훨씬 수월해집니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="595">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">마커 표시하기</p>
+<p class="txt bl">앞의 지도에 마커를 추가해 보겠습니다. 마커를 만드는 명령어는 <span class="cd">Marker([위도, 경도])</span>입니다. <span class="cd">Map()</span>과 마찬가지로 <span class="cd">folium</span>에 속한 명령어이므로 실제 사용할 때는 <span class="cd">folium.Marker([위도, 경도])</span>라고 작성합니다. 그리고 여기에 마커를 표시할 지도 이름을 <span class="cd">.add_to(지도)</span>로 추가합니다. 그럼 앞에서 만든 지도에 여의도 한강공원을 마커로 표시해 봅시다.</p>
+<div class="highlight">
+<pre>lat, long = <span class="green">37.52860</span>, <span class="green">126.93431</span>
+map_y = folium.Map([lat, long], zoom_start=<span class="green">15</span>)
+<span class="cd2">folium.Marker([lat, long]).add_to(map_y)</span>
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/492.jpg"/></div>
+</div>
+<p class="txt bl">여의도 한강공원에 마커가 표시됩니다. 이때 마커의 위도와 경도는 지도를 만들 때 사용한 위도, 경도와 같지 않아도 됩니다. <span class="cd">folium.Map([위도, 경도])</span>의 위도와 경도는 지도를 만들 때 사용하는 기준 좌표일 뿐입니다. 다른 좌표에 마커를 표시해도 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="596">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_96"><span class="yellow">12.1.2</span> 여러 위치 표시하기</h4>
+<p class="txt bl">이번에는 지도에 여러 위치를 표시해 보겠습니다. 여의도 한강공원과 여의도공원을 표시해 보죠. 구글 지도에서 여의도공원을 검색한 후, 위도와 경도를 알아냅니다(마우스를 우클릭한 위치에 따라 소수점 넷째자리부터 책과 다를 수 있습니다).</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/493.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-3</span> 여의도공원의 위도와 경도 구하기</p>
+<p class="txt bl">앞의 지도에 여의도 한강공원은 이미 표시되어 있으니 여의도공원만 추가하면 됩니다. 앞의 코드에 여의도공원 마커를 추가해 봅시다. 위도와 경도가 2개이므로 변수명을 <span class="cd">lat1</span>, <span class="cd">long1</span>, <span class="cd">lat2</span>, <span class="cd">long2</span>로 변경한 후 진행합니다.</p>
+<div class="highlight">
+<pre><span class="cd2">lat1, long1 =</span> <span class="green">37.52860</span>, <span class="green">126.93431</span> <span class="green"># 여의도 한강공원</span>
+<span class="cd2">lat2, long2 =</span> <span class="cd2 green">37.52400</span><span class="cd2">,</span> <span class="cd2 green">126.91889</span> <span class="green"># 여의도공원</span>
+
+map_y = folium.Map([<span class="cd2">lat1, long1</span>], zoom_start=<span class="green">15</span>)
+folium.Marker([<span class="cd2">lat1, long1</span>]).add_to(map_y)
+<span class="cd2">folium.Marker([lat2, long2]).add_to(map_y)</span>
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/494.jpg"/></div>
+</div>
+<p class="txt bl">지도에 마커 2개가 잘 보입니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="597">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">마커에 텍스트 표시하기</p>
+<p class="txt bl">마커가 여러 개일 때 마커가 각각 어디를 나타내는지 정보를 보여 주면 더 좋겠죠? 이럴 때 사용할 수 있는 옵션이 있는데, <span class="cd">tooltip</span>과 <span class="cd">popup</span>입니다. <span class="cd">tooltip</span>은 마커에 마우스를 올리면 텍스트가 나타나고 마우스를 옮기면 텍스트가 바로 사라집니다. <span class="cd">popup</span>은 마커를 클릭할 때 말풍선 모양으로 텍스트가 나타나고 마커를 다시 클릭하면 텍스트가 사라집니다.</p>
+<p class="txt bl"><span class="cd">tooltip</span>부터 실습해 봅시다.</p>
+<div class="highlight">
+<pre>lat1, long1 = <span class="green">37.52860</span>, <span class="green">126.93431</span> <span class="green"># 여의도 한강공원</span>
+lat2, long2 = <span class="green">37.52400</span>, <span class="green">126.91889</span> <span class="green"># 여의도공원</span>
+
+map_y = folium.Map([lat1, long1], zoom_start=<span class="green">15</span>)
+folium.Marker([lat1, long1], <span class="cd2">tooltip=</span><span class="cd2 red2">'여의도 한강공원'</span>).add_to(map_y)
+folium.Marker([lat2, long2], <span class="cd2">tooltip=</span><span class="cd2 red2">'여의도공원'</span>).add_to(map_y)
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/495.jpg"/></div>
+</div>
+<p class="txt bl">마커에 마우스를 올렸다 내렸다 하면서 텍스트가 나타났다 사라지는지 확인해 보세요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="598">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 툴팁에서 한글이 깨져 보인다면</p>
+<p class="txt bl">다음 설명대로 실행하면 한글이 잘 보입니다.</p>
+<p class="txtex bl s10_10"><span class="dm brown">1.</span> 다음 코드를 실행해 패키지를 설치합니다.</p>
+<div class="highlight">
+<pre>!pip install git+https://github.com/python-visualization/branca.git@master</pre>
+</div>
+<p class="txtex bl s10_10"><span class="dm brown">2.</span> 메뉴에서 [런타임 → 런타임 다시 시작]을 클릭합니다.</p>
+<p class="txtex bl s10_10"><span class="dm brown">3.</span> 한글이 포함된 코드를 재실행합니다.</p>
+</div>
+<p class="txt bl">이번에는 <span class="cd">tooltip</span>을 <span class="cd">popup</span>으로 바꾸어 실행해 봅시다.</p>
+<div class="highlight">
+<pre>lat1, long1 = <span class="green">37.52860</span>, <span class="green">126.93431 # 여의도 한강공원</span>
+lat2, long2 = <span class="green">37.52400</span>, <span class="green">126.91889 # 여의도공원</span>
+
+map_y = folium.Map([lat1, long1], zoom_start=<span class="green">15</span>)
+folium.Marker([lat1, long1], <span class="cd2">popup</span>=<span class="red2">'여의도 한강공원'</span>).add_to(map_y)
+folium.Marker([lat2, long2], <span class="cd2">popup</span>=<span class="red2">'여의도공원'</span>).add_to(map_y)
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/496.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="599">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">마커를 클릭하면 마우스 움직임과 상관없이 설정한 텍스트가 고정적으로 표시됩니다. 다시 마커를 클릭하면 텍스트는 사라집니다. 이처럼 지도에 여러 위치를 표시할 때는 <span class="cd">tooltip</span>과 <span class="cd">popup</span>을 활용해 마커에 정보를 넣을 수 있습니다.</p>
+<p class="txt bl">위치를 하나 더 추가해 봅시다. 여의도의 또 다른 공원인 샛강생태공원을 구글 지도에서 찾으면 위도 37.51865, 경도 126.92041로 나옵니다. 샛강생태공원의 위도와 경도를 <span class="cd">lat3</span>, <span class="cd">long3</span>에 저장하고 마커를 추가합니다.</p>
+<div class="highlight">
+<pre>lat1, long1 = <span class="green">37.52860</span>, <span class="green">126.93431 # 여의도 한강공원</span>
+lat2, long2 = <span class="green">37.52400</span>, <span class="green">126.91889 # 여의도공원</span>
+<span class="cd2">lat3, long3 =</span> <span class="cd2 green">37.51865</span><span class="cd2">,</span> <span class="cd2 green">126.92041</span> <span class="green"># 샛강생태공원</span>
+
+map_y = folium.Map([lat1, long1], zoom_start=<span class="green">15</span>)
+folium.Marker([lat1, long1], tooltip=<span class="red2">'여의도 한강공원'</span>).add_to(map_y)
+folium.Marker([lat2, long2], tooltip=<span class="red2">'여의도공원'</span>).add_to(map_y)
+<span class="cd2">folium.Marker([lat3, long3], tooltip=</span><span class="cd2 red2">'샛강생태공원'</span><span class="cd2">).add_to(map_y)</span>
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/497.jpg"/></div>
+</div>
+<p class="txt bl">마커 3개와 툴팁이 잘 보입니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="600">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">마커의 아이콘과 색 변경하기</p>
+<p class="txt bl">이번에는 마커에 아이콘과 색을 넣어 구분해 보겠습니다. 마커의 아이콘과 색 변경은 <span class="cd">icon=folium.Icon()</span>으로 합니다. 아이콘 모양은 설정하지 않으면 기본으로 <span class="cd">info-sign</span>(i 모양)이 됩니다. 아이콘 색상은 <span class="cd">color</span> 옵션으로 설정해 <span class="cd">icon=folium.Icon(color='색상 이름')</span>처럼 작성합니다. 이렇게 색상을 설정한 아이콘을 <span class="cd">folium.Marker()</span>에 추가합니다.</p>
+<p class="txt bl">앞의 지도에서 각 마커의 색상을 <span class="cd">red</span>, <span class="cd">blue</span>, <span class="cd">purple</span>로 설정하고 코드를 실행해 봅시다.</p>
+<div class="highlight">
+<pre>lat1, long1 = <span class="green">37.52860</span>, <span class="green">126.93431 # 여의도 한강공원</span>
+lat2, long2 = <span class="green">37.52400</span>, <span class="green">126.91889 # 여의도공원</span>
+lat3, long3 = <span class="green">37.51865</span>, <span class="green">126.92041 # 샛강생태공원</span>
+
+map_y = folium.Map([lat1, long1], zoom_start=<span class="green">15</span>)
+folium.Marker(
+    [lat1, long1], tooltip=<span class="red2">'여의도 한강공원'</span>, <span class="cd2">icon=folium.Icon(color=</span><span class="cd2 red2">'red'</span><span class="cd2">)</span>
+).add_to(map_y)
+folium.Marker(
+    [lat2, long2], tooltip=<span class="red2">'여의도공원'</span>, <span class="cd2">icon=folium.Icon(color=</span><span class="cd2 red2">'blue'</span><span class="cd2">)</span>
+).add_to(map_y)
+folium.Marker(
+    [lat3, long3], tooltip=<span class="red2">'샛강생태공원'</span>, <span class="cd2">icon=folium.Icon(color=</span><span class="cd2 red2">'purple'</span><span class="cd2">)</span>
+).add_to(map_y)
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/498.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="601">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">아이콘 모양이 <span class="cd">info-sign</span>으로 바뀌고 각 마커가 3가지 색으로 표시됩니다. 위치를 더 명확하게 구분할 수 있습니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 마커에 설정할 수 있는 색상은 다음과 같습니다.</p>
+<p class="txts cd ind22">'red', 'blue', 'green', 'purple', 'orange', 'darkred', 'lightred', 'beige', 'darkblue', 'darkgreen', 'cadetblue', 'darkpurple', 'white', 'pink', 'lightblue', 'lightgreen', 'gray', 'black', 'lightgray'</p>
+</div>
+<p class="txt bl">마커의 아이콘을 다른 모양으로 변경해 보겠습니다. 아이콘 모양은 아이콘 색상과 마찬가지로 <span class="cd">folium.Icon()</span>에 <span class="cd">icon</span> 옵션으로 설정합니다. 바꿀 수 있는 모양은 <span class="cd">heart</span>, <span class="cd">star</span>, <span class="cd">flag</span>, <span class="cd">bookmark</span>, <span class="cd">home</span> 등이 있습니다. 아이콘 모양을 <span class="cd">heart</span>(하트), <span class="cd">home</span>(집), <span class="cd">flag</span>(깃발)로 변경해 봅시다.</p>
+<div class="highlight">
+<pre>lat1, long1 = <span class="green">37.52860</span>, <span class="green">126.93431 # 여의도 한강공원</span>
+lat2, long2 = <span class="green">37.52400</span>, <span class="green">126.91889 # 여의도공원</span>
+lat3, long3 = <span class="green">37.51865</span>, <span class="green">126.92041 # 샛강생태공원</span>
+
+map_y = folium.Map([lat1, long1], zoom_start=<span class="green">15</span>)
+folium.Marker(
+    [lat1, long1], tooltip=<span class="red2">'여의도 한강공원'</span>,
+    icon=folium.Icon(color=<span class="red2">'red'</span>, <span class="cd2">icon=</span><span class="cd2 red2">'heart'</span>)
+).add_to(map_y)
+folium.Marker(
+    [lat2, long2], tooltip=<span class="red2">'여의도공원'</span>,
+    icon=folium.Icon(color=<span class="red2">'blue'</span>, <span class="cd2">icon=</span><span class="cd2 red2">'home'</span>)
+).add_to(map_y)
+folium.Marker(
+    [lat3, long3], tooltip=<span class="red2">'샛강생태공원'</span>,
+    icon=folium.Icon(color=<span class="red2">'purple'</span>, <span class="cd2">icon=</span><span class="cd2 red2">'flag'</span>)
+).add_to(map_y)
+map_y</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="602">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/499.jpg"/></div>
+</div>
+<p class="txt bl">아이콘이 i에서 하트, 집, 깃발 모양으로 변경됐습니다. 옵션을 추가하면 외부에서 더 많은 아이콘을 가져와 사용할 수 있습니다. 대표적으로 fontawesome 사이트가 있습니다. <a href="https://fontawesome.com/v4.7.0/icons">https://fontawesome.com/v4.7.0/icons</a>에 가면 <span class="cd">folium</span>에서 적용할 수 있는 다양한 아이콘이 있습니다. <a href="https://fontawesome.com">https://fontawesome.com</a>으로 가면 최신 버전으로 연결되니 반드시 URL에 /v4.7.0/icons를 붙여 주세요. 최신 버전은 설정되지 않는 아이콘과 유료 아이콘이 많아 추천하지 않습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="603">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이 중에서 <span class="cd">automobile</span>(자동차), <span class="cd">balance-scale</span>(저울), <span class="cd">ban</span>(금지)을 아이콘으로 설정해 봅시다. 아이콘 모양을 설정하는 방법은 동일하나 fontawesome 사이트의 아이콘을 사용한다는 의미로 <span class="cd">prefix='fa'</span>를 표시해야 합니다.</p>
+<div class="highlight">
+<pre>folium.Marker(
+    [lat1, long1], tooltip=<span class="red2">'여의도 한강공원'</span>,
+    icon=folium.Icon(color=<span class="red2">'red'</span>, icon=<span class="cd2 red2">'automobile'</span><span class="cd2">, prefix=</span><span class="cd2 red2">'fa'</span>)
+).add_to(map_y)
+folium.Marker(
+    [lat2, long2], tooltip=<span class="red2">'여의도공원'</span>,
+    icon=folium.Icon(color=<span class="red2">'blue'</span>, icon=<span class="cd2 red2">'balance-scale'</span><span class="cd2">, prefix=</span><span class="cd2 red2">'fa'</span>)
+).add_to(map_y)
+folium.Marker(
+    [lat3 , long3], tooltip=<span class="red2">'샛강생태공원'</span>,
+    icon=folium.Icon(color=<span class="red2">'purple'</span>, icon=<span class="cd2 red2">'ban'</span><span class="cd2">, prefix=</span><span class="cd2 red2">'fa'</span>)
+).add_to(map_y)
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/500.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="604">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">반복문으로 마커 표시하기</p>
+<p class="txt bl">이번에는 반복문을 사용해 여러 개의 마커를 표시해 보겠습니다. 코드를 보면 <span class="cd">folium.Marker().add_to()</span> 부분이 마커 개수만큼 반복되는 것을 알 수 있습니다. 이 부분을 반복문으로 만들면 다음과 같습니다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">마커개수</span>):
+    folium.Marker(
+        [위도, 경도], tooltip=<span class="red2">'위치 이름'</span>,
+        icon=folium.Icon(color=<span class="red2">'아이콘 색상'</span>, icon=<span class="red2">'아이콘 모양'</span>, prefix=<span class="red2">'fa'</span>)
+        ).add_to(지도이름)</pre>
+</div>
+<p class="txt bl">코드에서 반복할 때마다 변하는 것은 위도, 경도, 위치 이름, 아이콘 색상, 아이콘 모양입니다. 따라서 다섯 가지 요소를 리스트로 각각 만들고, 각 리스트의 인덱스를 활용합니다. 예를 들어, 첫 번째 반복에서는 5개의 리스트의 첫 번째 요소([0])가 자동으로 위도, 경도, 위치 이름, 아이콘 색상, 아이콘 모양에 들어가고, 두 번째 반복에서는 각 리스트의 두 번째 요소([1])가 자동으로 들어가면 되죠.</p>
+<p class="txt bl">다음처럼 총 5개의 리스트를 만들 수 있습니다. 위도 리스트의 첫 번째 요소와 경도 리스트의 첫 번째 요소를 결합하면 첫 번째 마커의 좌표가 됩니다.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/501.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-4</span> 위도, 경도, 위치 이름, 아이콘 색상, 아이콘 모양으로 리스트 만들기</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="605">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이와 마찬가지로 위치 이름 리스트, 아이콘 색상 리스트, 아이콘 모양 리스트의 첫 번째 요소가 첫 번째 마커의 이름과 아이콘 속성에 해당합니다. 두 번째 마커를 나타내려면 5개 리스트의 두 번째 요소들이 모이면 되고요.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/502.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-5</span> 리스트의 코드 대입</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="606">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그럼 코드로 작성해 봅시다. 지도를 만들려면 기준 위치가 필요하니 지도를 그리는 명령어에 첫 번째 위치의 위도, 경도를 넣고 시작합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> folium
+
+lat = [<span class="green">37.52860</span>, <span class="green">37.52400</span>, <span class="green">37.51865</span>]                        <span class="green"># 위도 리스트</span>
+long = [<span class="green">126.93431</span>, <span class="green">126.91889</span>, <span class="green">126.92041</span>]                    <span class="green"># 경도 리스트</span>
+names = [<span class="red2">'여의도 한강공원'</span>, <span class="red2">'여의도공원'</span>, <span class="red2">'샛강생태공원'</span>]   <span class="green"># 위치 이름 리스트</span>
+icons = [<span class="red2">'automobile'</span>, <span class="red2">'balance-scale'</span>, <span class="red2">'ban'</span>]              <span class="green"># 아이콘 모양 리스트</span>
+colors = [<span class="red2">'red'</span>, <span class="red2">'blue'</span>, <span class="red2">'purple'</span>]                          <span class="green"># 아이콘 색상 리스트</span>
+
+map_y = folium.Map([lat[<span class="green">0</span>], long[<span class="green">0</span><span>]</span>], zoom_start=<span class="green">15</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(lat)):
+    folium.Marker(
+        [lat[i], long[i<span>]</span>], tooltip=names[i],
+        icon=folium.Icon(color=colors[i], icon=icons[i], prefix=<span class="red2">'fa'</span>)
+        ).add_to(map_y)
+map_y</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/503.jpg"/></div>
+</div>
+<p class="txt bl">위치 개수가 적을 때는 반복문을 사용하지 않아도 되지만, 표시할 위치가 늘어나면 반복문을 사용하는 것이 효율적입니다. 반복문과 리스트를 활용하는 방법은 다른 곳에서도 자주 사용하니 잘 알아 두기 바랍니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="607">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown9">12.2</span><br/>
+    지도에 프로젝트 결과 표시하기</h3>
+</div>
+<p class="txt bl">그럼 앞서 다룬 핫플레이스 인구 분석 프로젝트와 <span class="cd">folium</span>을 접목해 봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="608">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_97"><span class="yellow">12.2.1</span> 목표 수립하기</h4>
+<p class="txt bl">핫플레이스 인구 분석 프로젝트에서는 4개의 하위 목표를 세워 프로그램을 구현했습니다. 여기에 하위 목표 하나를 추가하겠습니다.</p>
+<p class="txt bl">앞에서 수집한 인구 데이터를 통해 생활인구가 많은 행정동을 순서대로 구할 수 있습니다. 그래서 이번에는 ‘인구가 많은 상위 10개 행정동을 뽑아 지도에 표시하기’를 하위 목표로 추가해 프로그램을 작성해 봅시다. 해당 지역을 마커로 표시하고 <span class="cd">tooltip</span>으로 행정동명도 나타냅니다. 목표를 간단히 스케치해 보겠습니다.</p>
+<p class="txtex dm">하위 목표 5</p>
+<div class="box_blue_line2">
+<p class="txtex2 dl">인구가 많은 상위 10개 행정동을 뽑아 지도에 표시하기</p>
+<div class="w40c"><img alt="" class="w100" src="https://thebook.io/img/080251/504.jpg"/></div>
+</div>
+<p class="txt bl">프로그램을 어떻게 작성할지 한번 생각해 봅시다. 일단 행정동별 인구수를 모두 구해야 합니다. 카드 이용내역에서 매출액 상위 10개 가맹점을 뽑을 때처럼 <span class="dm">행정동명을 키</span>로, <span class="dm">인구수를 값</span>으로 하는 딕셔너리를 만들면 됩니다. 그리고 딕셔너리를 인구수 기준으로 내림차순 정렬하고 앞에서 10개 요소만 선택하면 인구수가 가장 많은 행정동 10개가 추려집니다. 딕셔너리 정렬은 <span class="cd">sorted()</span>와 <span class="cd">operator</span> 라이브러리의 <span class="cd">itemgetter()</span>와 <span class="cd">reverse=True</span> 옵션을 사용하면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="609">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이렇게 인구수 상위 10개 지역을 추렸다면 <span class="cd">folium</span>으로 해당 지역을 지도 위에 표시합니다. 지도에 위치를 표시하려면 위도와 경도를 알아야 하죠. 그런데 우리가 받은 파일에는 인구수만 나와 있을 뿐이고 행정동의 위도와 경도 정보는 없습니다. 따라서 행정동의 위도와 경도를 알려 주는 새로운 데이터를 구해야 합니다.</p>
+<p class="txt bl">인구 데이터를 내려받은 서울 열린데이터 광장 사이트로 가 봅시다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/505.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-6</span> 행정동 위치 정보 검색하기</p>
+<p class="txt bl">‘행정동 위치 정보’를 검색하면 다양한 검색결과가 나오지만, 우리가 원하는 위치 정보만 있는 데이터는 없어 보입니다. 하지만 상심하지 마세요. 이런 데이터에도 위도, 경도가 포함되어 있으므로 이를 활용하면 됩니다. ‘서울시 행정동별 전력 사용량 2008년 위치정보(좌표계: WGS1984)’를 클릭해 봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="610">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">스크롤을 내려 보면 하단에 데이터 미리보기가 있어서 내려받기 전에 데이터 항목을 확인할 수 있습니다. 미리보기를 보니 행정동코드와 경도, 위도가 포함되어 있네요. 그럼 이 데이터를 CSV 파일로 내려받아 봅시다. 그리고 LOCAL_PEOPLE_DONG_201912.csv와 dong_code.csv 파일이 있는 폴더에 내려받고, 파일명을 영문으로 변경합니다. 이번에는 dong_location.csv로 하겠습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/506_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/506_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-7</span> 공공 데이터의 CSV 파일 내려받기</p>
+<p class="txt bl">그런데 dong_location.csv 파일을 살펴보니 행정동코드가 7자리입니다. 핫플레이스 프로젝트에서 dong_code.csv 파일을 다룰 때 행정동코드가 7자리와 8자리, 2가지가 있었죠. 인구 데이터는 8자리 행정동코드가 기준이었습니다. 이처럼 행정동코드가 다를 때는 어떻게 해야 할까요? 이때는 7자리 코드와 8자리 코드를 모두 가지고 있는 파일을 활용하면 됩니다. 파일별로 가지고 있는 정보를 정리하면 다음과 같습니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/506_3.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-8</span> 데이터의 연결 관계 1</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="611">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">인구 데이터 파일과 행정동코드 데이터 파일은 익숙하죠? 인구 데이터는 8자리 행정동코드를 사용하므로 입력된 행정동명에 해당하는 8자리 코드를 행정동코드 데이터에서 알아낸 후 반영했습니다.</p>
+<p class="txt bl">추가된 dong_location.csv 파일에는 7자리 행정동코드와 행정동명, 위치 정보가 포함되어 있습니다. 같은 항목끼리 연결해 보면 파일 간 연결 관계가 드러납니다. 인구 데이터와 위치 데이터는 공통 항목이 없지만, 행정동코드 데이터는 인구 데이터, 위치 데이터와 각각 접점이 있으니 이를 활용합니다.</p>
+<p class="txt bl">우선 1단계에서는 인구 데이터를 분석해 인구가 많은 상위 10개 지역의 8자리 행정동코드를 알아냅니다. 그리고 2단계에서는 행정동코드 데이터에서 8자리 행정동코드에 해당하는 행정동명을 구합니다. 마지막 3단계에서는 위치 데이터에서 행정동명의 위도, 경도를 알아내면 됩니다. 그림으로 정리해 볼까요? 화살표와 추가된 텍스트를 잘 보세요.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/507.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-9</span> 데이터의 연결 관계 2</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="612">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">연결 관계를 보면 인구 데이터와 위치 데이터를 이어주는 행정동코드 데이터가 매우 중요한 역할을 합니다. 행정동을 10개 골라야 하므로 1단계에서 얻어야 하는 행정동코드도 10개입니다. 이를 리스트로 묶으면 효율적입니다. 2단계에서도 행정동명이 10개 나오면 이를 묶어 하나의 리스트로 만듭니다. 마지막 단계에서도 마찬가지로 위도 10개, 경도 10개를 각각 묶어 리스트로 만들면 됩니다. 단계별로 만들어지는 리스트까지 정리하면 다음과 같습니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/508_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-10</span> 데이터의 연결 관계 3</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="613">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">행정동코드[0]</span>에 해당하는 행정동명은 <span class="cd">행정동명[0]</span>에 있습니다. 위도와 경도는 <span class="cd">행정동위도[0]</span>, <span class="cd">행정동경도[0]</span>에 있고요. 이와 마찬가지로 <span class="cd">행정동코드[1]</span>에 저장된 지역의 정보도 다른 리스트의 인덱스 [1]에 있습니다. 글로 표현하면 조금 복잡해 보이지만 앞에서 지도에 여러 위치를 표시할 때 리스트를 여러 개 만든 적이 있으니 참고하면 이해하기 쉬울 겁니다.</p>
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/508_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-11</span> 리스트들의 인덱스 호응관계</p>
+<p class="txt bl">그림을 보면 리스트의 인덱스를 맞춘다는 의미를 이해할 겁니다. <span class="cd">행정동코드[0]</span>에 저장된 행정동코드가 11001122이라면, 11001122의 행정동명은 <span class="cd">행정동명[0]</span>에, 위도와 경도는 각각 <span class="cd">행정동위도[0]</span>, <span class="cd">행정동경도[0]</span>에 저장됩니다. 이처럼 행정동명과 위치 정보를 구하는 과정은 다른 인덱스에도 동일하게 적용돼야 하므로 이 과정을 리스트 요소 개수대로 10번 반복합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="614">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_98"><span class="yellow">12.2.2</span> 프로그램으로 구현하기</h4>
+<p class="txt bl">지금까지 설명한 내용을 바탕으로 프로그램을 구현해 봅시다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">알고리즘 작성하기</p>
+<p class="txtex dm">하위 목표 5</p>
+<div class="box_green_line">
+<p class="txtex2 dl">인구가 많은 상위 10개 행정동을 뽑아 지도에 표시하기</p>
+</div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/509.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-12</span> 알고리즘</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="615">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">우선 알고리즘부터 작성해 봅시다.</p>
+<p class="txt bl">앞에서 설명한 내용을 단계에 맞춰 정리하면 자연스럽게 알고리즘이 완성됩니다. 처음에 파일을 읽어 들여 빈 딕셔너리를 만드는 과정을, 마지막에 완성된 리스트를 지도에 표시하는 과정을 추가했습니다.</p>
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 7자리 행정동코드로 연결하기</p>
+<p class="txt bl">행정동코드보다는 행정동명이 더 알기 쉽기 때문에 책에서는 행정동명을 매개로 위치 정보를 찾지만, 7자리 행정동코드를 매개로 위치 정보를 찾아도 됩니다. 행정동명과 마찬가지로 7자리 행정동코드 역시 행정동코드 데이터와 위치 정보 데이터, 둘 다에 있습니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/510.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-13</span> 데이터의 연결 관계 4</p>
+<p class="txtex bl">프로그램을 작성하다 보면 행정동명을 매개로 하는 것과 7자리 행정동코드를 사용하는 것이 서로 보완적이라는 것을 알게 될 겁니다. 이는 뒤에서 차근차근 살펴보겠습니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="616">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">코드 작성하기</p>
+<p class="txt bl">작성한 알고리즘을 코드로 구현해 봅시다. 먼저 과정 1과 2를 코드로 옮겨 봅시다. 알고리즘을 참고해서 먼저 작성해 본 후 이 책의 코드를 보세요.</p>
+<p class="txt bl">사용하는 데이터 파일이 3개이므로 CSV 파일을 여는 변수와 데이터를 저장하는 변수들이 겹치지 않게 정합니다. 인구 데이터는 <span class="cd">data</span>, 행정동코드 데이터는 <span class="cd">code_data</span>, 위치 데이터는 <span class="cd">location_data</span>에 리스트로 저장합니다. 11장의 파일 읽기 코드에 위치 데이터를 읽어 들이는 코드를 추가하면 됩니다.</p>
+<div class="highlight">
+<pre><span class="green"># 1. 필요한 데이터 파일 모두 읽어 들이기</span>
+<span class="purple">import</span> csv
+<span class="green"># 코랩의 파일 업로드</span>
+<span class="green"># from google.colab import files</span>
+<span class="green"># uploaded = files.upload()</span>
+
+<span class="green"># 인구 데이터 읽어와서 리스트로 저장하기</span>
+f1 = <span class="gold">open</span>(<span class="red2">'LOCAL_PEOPLE_DONG_201912.csv'</span>, encoding=<span class="red2">'utf8'</span>)
+data = csv.reader(f1)
+<span class="gold">next</span>(data)
+data = list(data)
+
+<span class="green"># 행정동코드 데이터 읽어와서 리스트로 저장하기</span>
+f2 = <span class="gold">open</span>(<span class="red2">'dong_code.csv'</span>, encoding=<span class="red2">'utf8'</span>) <span class="green"># 또는 'cp949'</span>
+code_data = csv.reader(f2)
+<span class="gold">next</span>(code_data)
+<span class="gold">next</span>(code_data)
+code_data = list(code_data)
+
+<span class="cd2 green"># 위치 정보 데이터 읽어와서 리스트로 저장하기</span>
+<span class="cd2">f3 =</span> <span class="cd2 gold">open</span><span class="cd2">(</span><span class="cd2 red2">'dong_location.csv'</span><span class="cd2">)</span>
+<span class="cd2">location_data = csv.reader(f3)</span>
+<span class="cd2 gold">next</span><span class="cd2">(location_data)</span>
+<span class="cd2">location_data = list(location_data)</span>
+
+<span class="green"># 인구 데이터의 데이터 타입 변환하기</span>
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="purple">for</span> i in <span class="gold">range</span>(<span class="green">1</span>, <span class="green">32</span>):
+        <span class="purple">if</span> i &lt;= <span class="green">2</span>:
+            row[i] = int(row[i])
+        <span class="purple">else</span>:
+            row[i] = float(row[i])
+
+<span class="green"># 행정동코드 데이터의 데이터 타입 변환하기</span>
+<span class="purple">for</span> row <span class="blue2">in</span> code_data:
+    <span class="cd2">row[</span><span class="cd2 green">0</span><span class="cd2">], row[</span><span class="cd2 green">1</span><span class="cd2">] = int(row[</span><span class="cd2 green">0</span><span class="cd2">]), int(row[</span><span class="cd2 green">1</span><span class="cd2">])</span> <span class="cd2 green"># 7자리 행정동코드, 8자리 행정동코드</span>
+
+<span class="cd2 green"># 위치 정보 데이터의 데이터 타입 변환하기</span>
+<span class="cd2 purple">for</span> <span class="cd2">row</span> <span class="cd2 blue2">in</span> <span class="cd2">location_data:</span> <span class="cd2 green"># row[2]: 행정동코드, row[-2]: 경도, row[-1]: 위도</span>
+    <span class="cd2">row[</span><span class="cd2 green">2</span><span class="cd2">], row[</span><span class="cd2 green">-2</span><span class="cd2">], row[</span><span class="cd2 green">-1</span><span class="cd2">] = int(row[</span><span class="cd2 green">2</span><span class="cd2">]), float(row[</span><span class="cd2 green">-2</span><span class="cd2">]), float(row[</span><span class="cd2 green">-1</span><span class="cd2">])</span></pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="617">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">코드는 길지만, 모두 배운 내용이기 때문에 이해하기 어려운 부분은 없을 겁니다. 11장에서는 행정동코드 파일(dong_code.csv)에서 8자리 행정동코드만 변환했지만, 여기에서는 7자리 행정동코드도 데이터 타입을 변환합니다. 그 이유는 뒤에서 확인합니다. 위치 데이터에서도 필요한 항목인 행정동코드, 경도, 위도를 숫자로 변경했습니다. 다음 과정으로 넘어가 봅시다.</p>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txtex2 dl">dong_location.csv 파일을 읽어 들일 때도 인코딩 옵션에 유의해 주세요. Windows라도 PC 세부 사양에 따라 인코딩 옵션을 지정하지 않거나 utf8, euc-kr, cp949 등을 지정해야 하는 경우도 있습니다. 오류가 발생하더라도 당황하지 말고 다른 옵션을 넣어서 실행해 보세요.</p>
+</div>
+<p class="txt bl">과정 2에서는 행정동별 인구수를 저장하는 <span class="cd">dong_population</span> 딕셔너리를 만듭니다. 그리고 인구 데이터를 담은 <span class="cd">data</span>를 돌며 행정동코드(열 인덱스 [2])를 키로, 총생활인구수(열 인덱스 [3])를 값으로 해서 한 쌍씩 <span class="cd">dong_population</span>에 저장합니다(<span class="cd">data</span>의 항목은 11장을 참고하거나 직접 파일을 열어서 확인해 보세요).</p>
+<div class="highlight">
+<pre><span class="green"># 2. 행정동별 인구수를 저장하는 빈 딕셔너리를 만들고</span>
+<span class="green">#    행정동별 총생활인구수를 딕셔너리에 저장하기</span>
+dong_population = {}
+
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    dong_code, p = row[<span class="green">2</span>], row[<span class="green">3</span>]
+    <span class="purple">if</span> dong_code <span class="blue2">not in</span> dong_population.keys():
+        dong_population[dong_code] = p
+    <span class="purple">else</span>:
+        dong_population[dong_code] += p
+
+<span class="green"># print(dong_population)</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+{11215710: 32699578.380499963, 11680545: 36303123.67050001, 11680610: 39427473.14730003... }</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="618">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">비어 있던 <span class="cd">dong_population</span> 딕셔너리에 데이터가 저장됩니다.</p>
+<p class="txt bl">코드를 한 줄씩 살펴봅시다. 먼저 반복문으로 <span class="cd">data</span>를 돌며 행정동코드(<span class="cd">row[2]</span>)와 총생활인구수(<span class="cd">row[3]</span>)를 변수 <span class="cd">dong_code</span>와 <span class="cd">p</span>에 각각 저장합니다. 이때 해당 행의 <span class="cd">dong_code</span>를 키로 하는 항목이 없다면 {키:값}이 <span class="cd">{dong_code:p}</span>인 항목을 <span class="cd">dong_population</span> 딕셔너리에 추가합니다. 만약 <span class="cd">dong_code</span>를 키로 하는 항목이 있다면 해당 키의 값에 현재 행의 인구수 <span class="cd">p</span>를 더합니다. 결과를 보면 <span class="cd">dong_code</span>가 11215710인 행정동은 2019년 12월 한 달간 총 생활인구수가 약 32,699,578명입니다(결과가 길게 출력되므로 한 번만 확인하고 그 이후에는 주석 처리하거나 삭제해도 됩니다).</p>
+<p class="txt bl">이제 과정 3에서 총인구수를 기준으로 딕셔너리를 내림차순 정렬할 차례입니다.</p>
+<div class="highlight">
+<pre><span class="green"># 3. 인구수를 기준으로 내림차순 정렬하고</span><span class="green">, 앞에서</span> <span class="green">10개 항목만 별도로 저장하기</span>
+<span class="purple">import</span> operator
+
+top10 = <span class="gold">sorted</span>(dong_population.items(), key=operator.itemgetter(<span class="green">1</span>),
+reverse=<span class="blue2">True</span>)[:<span class="green">10</span>]
+<span class="green"># print(top10)</span>
+
+top10_code8 = []
+<span class="green">for</span> t <span class="blue2">in</span> top10:
+    top10_code8.append(t[<span class="green">0</span>])
+<span class="gold">print</span>(top10_code8)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[11680640, 11560540, 11440660, 11110615, 11650530, 11410585, 11380690, 11545510, 11680650, 11680610]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="619">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">딕셔너리의 키-값 쌍으로 정렬해야 하므로 <span class="cd">dong_population.items()</span>를 사용합니다. 그리고 <span class="cd">operator</span>의 <span class="cd">itemgetter()</span>를 사용해 값을 기준으로 내림차순 정렬합니다. 이 중 앞에서 10개 항목을 선택해야 하므로 <span class="cd">[:10]</span>을 추가해 슬라이싱합니다. 이 상태로 변수 <span class="cd">top10</span>에 저장된 값을 출력하면(<span class="cd">print(top10)</span>) 딕셔너리의 키-값이 괄호로 묶여 리스트 형태로 출력됩니다(주석을 지우고 출력해 보세요). 필요한 것은 행정동코드이므로 첫 번째 항목(키에 해당하는 행정동코드)만 뽑아서 다시 <span class="cd">top10_code8</span> 리스트에 차례대로 저장합니다. <span class="cd">top10</span>에 저장된 순서대로 <span class="cd">top10_code8</span>에 저장되므로 <span class="cd">top10_code8</span>에도 인구가 많은 행정동코드부터 차례대로 추가됩니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 이해되지 않으면 <span class="dm">7.1.4 다양한 명령어 사용하기의 딕셔너리 정렬하기: sorted()</span>를 참고하세요.</p>
+</div>
+<p class="txt bl">그런데 행정동코드를 <span class="cd">top10_code8</span>에 저장하는 과정에서 반복문을 사용하네요. 11장에서 배운 리스트 내포를 사용하면 코드를 한 줄로 바꿀 수 있습니다. 리스트 내포를 사용해 코드를 다음과 같이 수정합니다.</p>
+<div class="highlight">
+<pre>top10 = <span class="gold">sorted</span>(dong_population.items(), key=operator.itemgetter(<span class="green">1</span>), reverse=<span class="blue2">True</span>)[:<span class="green">10</span>]
+<span class="cd2">top10_code8 = [t[</span><span class="cd2 green">0</span><span class="cd2">]</span> <span class="cd2 purple">for</span> <span class="cd2">t</span> <span class="cd2 blue2">in</span> <span class="cd2">top10]</span></pre>
+</div>
+<p class="txt bl">다음 과정으로 넘어갑시다. 과정 4에서는 <span class="cd">top10_code8</span> 리스트에 저장한 행정동코드에 해당하는 행정동명을 행정동코드 데이터에서 찾아 행정동명 리스트에 저장합니다. 그리고 과정 5에서는 행정동명에 해당하는 위도와 경도를 찾아 위도와 경로 리스트에 각각 저장합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="620">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">먼저 필요한 리스트를 만듭니다. 행정동명을 저장하는 리스트는 <span class="cd">top10_name</span>, 위도와 경도를 저장하는 리스트는 각각 <span class="cd">top10_lat</span>, <span class="cd">top10_long</span>으로 이름을 정합니다. 10개 지역이므로 각각 초깃값 0을 넣어 10칸짜리 리스트로 만듭니다.</p>
+<div class="highlight">
+<pre>top10_name = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>)]
+top10_lat = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>)]
+top10_long = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>)]</pre>
+</div>
+<p class="txt bl">리스트를 만들었으니 데이터를 넣어야죠. <span class="cd">top10_name</span> 리스트에는 <span class="cd">top10_code8</span> 리스트의 행정동코드에 해당하는 행정동명을 찾아 저장합니다. 이는 <span class="cd">top10_code8[0]</span>부터 <span class="cd">top10_code8[9]</span>까지의 행정동명을 모두 찾아야 한다는 뜻입니다. 반복되는 부분이 보이죠? <span class="cd">top10_code8[i]</span>의 행정동명 찾기가 반복되므로 다음처럼 반복문을 작성할 수 있습니다.</p>
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/514.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl"><span class="cd">range(len(top10_code8))</span>로 반복 범위를 설정합니다. 반복문에서 <span class="cd">range(len(리스트명))</span>을 사용하면 자동으로 인덱스 [0]부터 인덱스 [리스트길이-1](리스트의 마지막)까지 반복 범위가 된다고 배웠습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="621">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그 다음으로 ‘행정동명 찾기’인데 8자리 행정동코드가 주어졌으므로 dong_code.csv 데이터를 담은 <span class="cd">code_data</span>를 활용합니다. <span class="cd">code_data</span>에서 행정동코드는 열 인덱스 [1]에 있고, 행정동명은 열 인덱스 [-1]에 담겨 있습니다. 따라서 행정동코드(<span class="cd">top10_code8[i]</span>)와 <span class="cd">code_data</span>의 열 인덱스 [1]의 값으로 행정동명(열 인덱스 [-1])을 구하면 됩니다(<span class="cd">code_data</span>의 각 요소에 들어 있는 항목은 11장을 참고하세요).</p>
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/515.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">이렇게 찾은 행정동명을 행정동명 리스트인 <span class="cd">top10_name</span>에 저장하면 됩니다. 인덱스가 같도록 <span class="cd">top10_name[i]</span>에 저장합니다.</p>
+<div class="highlight">
+<pre><span class="green"># 4. 8자리 행정동코드에 해당하는 행정동명 찾기</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(top10_code8)):
+    <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+        <span class="purple">if</span> row[<span class="green">1</span>] == top10_code8[i]:
+            top10_name[i] = row[<span class="green">-1</span>] <span class="green"># 행정동명 리스트에 저장하기</span></pre>
+</div>
+<p class="txt bl">반복문 안에 반복문, 또 그 안에 조건문이 있는 형태네요. 이처럼 제어구조가 중첩될 때는 앞에서와 같이 단계를 나눠 생각하는 것이 좋습니다. 인덱스를 의미하는 <span class="cd">i</span>가 변할 때마다 행정동명을 찾는 반복문이 실행됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="622">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">다음 과정으로 행정동명에 해당하는 위도, 경도를 구해야 합니다. 위도, 경도를 구하는 코드 역시 반복문 안에 들어가야 합니다.</p>
+<div class="highlight4">
+<pre>for i in range(len(top10_code8)):
+  top10_code8[i]의 행정동명을 찾아
+    행정동명 리스트에 저장하기
+  <span class="red">행정동명에 해당하는 위도, 경도 찾기</span></pre>
+</div>
+<p class="txt bl">행정동명을 활용해 위도와 경도를 찾아야 하므로 행정동명을 찾는 코드 아래에 작성합니다. 위도와 경도 찾기는 dong_location.csv 파일을 담고 있는 <span class="cd">location_data</span> 리스트를 활용합니다. dong_location.csv 파일의 항목은 다음과 같습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/516_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-14</span> dong_location.csv 파일의 데이터 항목</p>
+<p class="txt bl">행정동명이 네 번째 항목에 있습니다. 즉, <span class="cd">location_data</span> 리스트의 열 인덱스 [3]이 행정동명입니다. 따라서 <span class="cd">location_data</span>의 열 인덱스 [3]과 앞에서 구한 <span class="cd">top10_name[i]</span>이 같은 행의 위도와 경도가 찾는 값입니다(<span class="cd">location_data</span>는 경도, 위도 순서로 되어 있으니 유의하세요). 위도(열 인덱스 [-1])는 위도 리스트(<span class="cd">top10_lat</span>)의 인덱스 <span class="cd">[i]</span>에 넣고, 경도(열 인덱스 [-2])는 경도 리스트(<span class="cd">top10_long</span>)의 인덱스 <span class="cd">[i]</span>에 각각 넣습니다. 이를 코드로 작성하면 다음과 같습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="623">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/516_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">과정 5의 추가 코드는 다음과 같습니다. 마지막에 위도와 경도 리스트의 값을 출력해 직접 확인해 봅시다.</p>
+<div class="highlight">
+<pre><span class="green"># 4. 8자리 행정동코드에 해당하는 행정동명 찾기</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(top10_code8)):
+    <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+        <span class="purple">if</span> row[<span class="green">1</span>] == top10_code8[i]:
+            top10_name[i] = row[<span class="green">-1</span>] <span class="green"># 행정동명 리스트에 저장하기</span>
+    <span class="cd2 green"># 5. 행정동명에 해당하는 위도와 경도를 찾아 리스트에 저장하기</span>
+    <span class="cd2 purple">for</span> <span class="cd2">row</span> <span class="cd2 blue2">in</span> <span class="cd2">location_data:</span>
+        <span class="cd2 purple">if</span> <span class="cd2">row[</span><span class="cd2 green">3</span><span class="cd2">]</span> <span class="cd2">=</span><span class="cd2">= top10_name[i]:</span>
+            <span class="cd2">top10_lat[i], top10_long[i] = row[</span><span class="cd2 green">-1</span><span class="cd2">], row[</span><span class="cd2 green">-2</span><span class="cd2">]</span>
+<span class="gold">print</span>(top10_lat)
+<span class="gold">print</span>(top10_long)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[37.4999211, 0, 37.5550337, 37.5777701, 37.4856591, 37.5659638, 37.64193, 37.4756389, 37.4984733, 37.4955294]
+[127.0367584, 0, 126.9228533, 126.9892737, 127.0097616, 126.9384315, 126.9387277, 126.8850721, 127.0449272, 127.0662436]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="624">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">위도와 경도 리스트가 출력됩니다. 그런데 두 리스트의 인덱스 [1]의 값이 0으로 나옵니다. 다른 9개 값은 잘 저장됐는데 인덱스 [1]만 다를까요?</p>
+<p class="txt bl">답은 데이터에 있습니다. 과정 3 코드를 실행한 결과에서 두 번째 행정동코드는 11560540입니다. <span class="cd">code_data</span>(dong_code.csv)에서 8자리 행정동코드가 11560540인 곳은 ‘여의동’입니다. 따라서 <span class="cd">top10_name[i]</span>에 ‘여의동’이 저장됩니다. 그런데 <span class="cd">location_data</span>(dong_location.csv)에는 여의동이 아닌 ‘여의도동’으로 저장되어 있습니다. dong_location.csv가 오래전에 작성된 파일이라서 그간의 행정동명 변화가 반영되어 않아서 그렇습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/517.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-15</span> 데이터가 일치하지 않는 경우(행정동명이 바뀐 경우)</p>
+<p class="txt bl">이렇게 위치 정보가 누락된 경우에는 7자리 행정동코드를 매개로 찾습니다. 데이터 파일에서 7자리 행정동코드가 1119054로 같은 것이 보이죠. 그래서 위도 리스트와 경도 리스트의 값 중에서 하나라도 0인 요소는 7자리 행정동코드로 다시 위치 정보를 찾게 합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="625">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="green"># 추가. 행정동명으로 위치 정보를 찾지 못하면 7자리 행정동코드로 찾기</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(top10_lat)):
+    <span class="green"># 위도나 경도가 0인 요소가 있다면</span>
+    <span class="purple">if</span> top10_lat[i] == <span class="green">0</span> <span class="blue2">or</span> top10_long[i] == <span class="green">0</span>:
+        <span class="green"># code_data에서</span> <span class="green">7자리 행정동코드를 구해 dong7에 저장하기</span>
+        <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+            <span class="purple">if</span> top10_code8[i] == row[<span class="green">1</span>]:
+                dong7 = row[<span class="green">0</span>]
+        <span class="green"># location_data에서 7자리 행정동코드가 dong7인 행을 찾아 위도와 경도를 구하기</span>
+        <span class="purple">for</span> row <span class="blue2">in</span> location_data:
+            <span class="purple">if</span> dong7 == row[<span class="green">2</span>]:
+                top10_lat[i], top10_long[i] = row[<span class="green">-1</span>], row[<span class="green">-2</span>]
+<span class="gold">print</span>(top10_lat)
+<span class="gold">print</span>(top10_long)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[37.4999211, 37.5286662, 37.5550337, 37.5777701, 37.4856591, 37.5659638, 37.64193, 37.4756389, 37.4984733, 37.4955294]
+[127.0367584, 126.9290731, 126.9228533, 126.9892737, 127.0097616, 126.9384315, 126.9387277, 126.8850721, 127.0449272, 127.0662436]</pre>
+</div>
+<p class="txt bl"><span class="cd">top10_lat[1]</span>과 <span class="cd">top10_long[1]</span>에 정상적인 값이 저장됐습니다. 데이터 파일이 서로 잘 맞으면 작성하지 않아도 될 코드입니다. 사실 데이터 분석을 진행하다 보면 데이터 자체에 문제가 있는 경우가 상당히 많습니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 행정동명이 일치하지 않으면 위도와 경도 모두 값이 제대로 저장되지 않습니다. 그래서 <span class="cd">if top10_lat[i] == 0 or top10_long[i] == 0</span> 대신 <span class="cd">if top10_lat[i] == 0</span> 또는 <span class="cd">if top10_long[i] == 0</span>으로 작성해도 이 프로그램에서는 같은 결과가 나옵니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="626">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 7자리 행정동코드를 매개로 사용한다면</p>
+<p class="txt bl">‘처음부터 7자리 행정동코드를 매개로 위치 정보를 찾았다면 추가 코드가 필요 없지 않았을까?’ 하는 의문이 들 수 있습니다. 여기서 행정동명을 매개로 한 이유는 이후 지도를 그릴 때 마커의 <span class="cd">tooltip</span> 옵션에서 행정동명을 설정하므로 행정동명을 미리 저장해 두는 것이 편하기 때문입니다. 그리고 7자리 행정동코드를 매개로 코드를 작성해도 행정동 1개의 위치 정보는 찾지 못합니다. 강남구 대치2동은 7자리 행정동코드 자체가 변경됐습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/518.jpg"/></div>
+<p class="txts dl s12_12"><span class="dm gray">▲ 그림 12-16</span> 데이터가 일치하지 않는 경우(행정동코드가 바뀐 경우)</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="627">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">지도 그리기</p>
+<p class="txt bl">이제 <span class="cd">folium</span>으로 지도를 그려 보죠. 10개 장소를 마커로 표시해야 하니 앞서 여러 위치를 지도에 한 번에 표시할 때 배운 리스트와 반복문을 활용합니다. 지도 이름은 <span class="cd">map_top10</span>으로 하고 지도를 만드는 좌표는 위도, 경도 리스트의 첫 번째 요소로 하겠습니다. 마커의 아이콘과 색상은 각자 원하는 대로 설정하세요.</p>
+<div class="highlight">
+<pre><span class="green"># 6. 완성된 리스트로 지도 그리기</span>
+<span class="purple">import</span> folium
+
+map_top10 = folium.Map([top10_lat[<span class="green">0</span>], top10_long[<span class="green">0</span><span>]</span>], zoom_start=<span class="green">12</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>):
+    folium.Marker(
+        [top10_lat[i], top10_long[i<span>]</span>], tooltip=top10_name[i],
+        icon=folium.Icon(color=<span class="red2">'red'</span>, icon=<span class="red2">'star'</span>)
+    ).add_to(map_top10)
+map_top10</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/519.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="628">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">행정동 10곳에 마커가 뜹니다. 마커에 마우스를 올려서 행정동명도 직접 확인해 보세요.</p>
+<p class="txt bl">지도에 순위가 표시되면 좋겠죠? 어렵지 않습니다. 행정동명을 저장한 <span class="cd">top10_name</span> 리스트가 이미 인구가 많은 순서대로 저장되어 있기 때문이죠. ‘1. △△동’처럼 인구가 많은 순서대로 1부터 10까지 순위를 붙여 봅시다. 인덱스는 0부터 시작하므로 순위는 인덱스에 1을 더한 값입니다. 따라서 <span class="cd">top10_name</span>의 인덱스에 1을 더한 값을 문자로 바꾸어 <span class="cd">top10_name[i]</span>의 이름과 합치면 됩니다.</p>
+<p class="txt bl">순위를 표시하는 코드까지 추가해 전체 코드를 정리하면 다음과 같습니다.</p>
+<div class="highlight">
+<pre><span class="green"># 1. 필요한 데이터 파일 모두 읽어 들이기</span>
+<span class="purple">import</span> csv
+
+<span class="green"># 인구 데이터 읽어와서 리스트로 저장하기</span>
+f1 = <span class="gold">open</span>(<span class="red2">'LOCAL_PEOPLE_DONG_201912.csv'</span>, encoding=<span class="red2">'utf8'</span>)
+data = csv.reader(f1)
+<span class="gold">next</span>(data)
+data = list(data)
+
+<span class="green"># 행정동코드 데이터 읽어와서 리스트로 저장하기</span>
+f2 = <span class="gold">open</span>(<span class="red2">'dong_code.csv'</span>, encoding=<span class="red2">'utf8'</span>) <span class="green"># 또는 'cp949'</span>
+code_data = csv.reader(f2)
+<span class="gold">next</span>(code_data)
+<span class="gold">next</span>(code_data)
+code_data = list(code_data)
+
+
+</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="629">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight"><pre><span class="green"># 위치 정보 데이터 읽어와서 리스트로 저장하기</span>
+f3 = <span class="gold">open</span>(<span class="red2">'dong_location.csv'</span>)
+location_data = csv.reader(f3)
+<span class="gold">next</span>(location_data)
+location_data = list(location_data)
+
+<span class="green"># 인구 데이터의 데이터 타입 변환하기</span>
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">1</span>, <span class="green">32</span>):
+        <span class="purple">if</span> i &lt;= <span class="green">2</span>:
+            row[i] = int(row[i])
+        <span class="purple">else</span>:
+            row[i] = float(row[i])
+
+<span class="green"># 행정동코드 데이터의 데이터 타입 변환하기</span>
+<span class="purple">for</span> row <span class="blue2">in</span> code_data:
+    row[<span class="green">0</span>], row[<span class="green">1</span>] = int(row[<span class="green">0</span>]), int(row[<span class="green">1</span>])
+
+<span class="green"># 위치 정보 데이터의 데이터 타입 변환하기</span>
+<span class="purple">for</span> row <span class="blue2">in</span> location_data:
+    row[<span class="green">2</span>], row[<span class="green">-2</span>], row[<span class="green">-1</span>] = int(row[<span class="green">2</span>]), float(row[<span class="green">-2</span>]), float(row[<span class="green">-1</span>])
+
+<span class="green"># 2. 행정동별 인구수를 저장할 수 있게 빈 딕셔너리를 만들고</span>
+<span class="green">#    행정동별 총생활인구를 딕셔너리에 저장하기</span>
+dong_population = {}
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    dong_code, p = row[<span class="green">2</span>], row[<span class="green">3</span>]
+    <span class="purple">if</span> dong_code <span class="blue2">not in</span> dong_population.keys():
+        dong_population[dong_code] = p
+    <span class="purple">else</span>:
+        dong_population[dong_code] += p
+
+
+</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="630">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight"><pre><span class="green"># 3. 인구수를 기준으로 내림차순 정렬하고, 앞에서 10개 항목만 별도로 저장하기</span>
+<span class="purple">import</span> operator
+
+top10 = <span class="gold">sorted</span>(dong_population.items(), key=operator.itemgetter(<span class="green">1</span>), reverse=<span class="blue2">True</span>)[:<span class="green">10</span>]
+top10_code8 = [t[<span class="green">0</span>] <span class="purple">for</span> t <span class="blue2">in</span> top10]
+
+top10_name = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>)]
+top10_lat  = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>)]
+top10_long = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>)]
+
+<span class="green"># 4. 8자리 행정동코드에 해당하는 행정동명 찾기</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(top10_code8)):
+    <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+        <span class="purple">if</span> row[<span class="green">1</span>] == top10_code8[i]:
+            top10_name[i] = row[<span class="green">-1</span>]   <span class="green"># 행정동명 리스트에 저장하기</span>
+    <span class="green"># 5. 행정동명에 해당하는 위도와 경도를 찾아 리스트에 저장하기</span>
+    <span class="purple">for</span> row <span class="blue2">in</span> location_data:
+        <span class="purple">if</span> row[<span class="green">3</span>] == top10_name[i]:
+            top10_lat[i], top10_long[i] = row[<span class="green">-1</span>], row[<span class="green">-2</span>]
+
+<span class="green"># 추가. 행정동명으로 위치 정보를 찾지 못하면 7자리 행정동코드로 찾기</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(top10_lat)):
+    <span class="green"># 위도나 경도가 0인 요소가 있다면</span>
+    <span class="purple">if</span> top10_lat[i] == <span class="green">0</span> <span class="blue2">or</span> top10_long[i] == <span class="green">0</span>:
+    <span class="green"># code_data에서</span> <span class="green">7자리 행정동코드를 구해 dong7에 저장하기</span>
+    <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+        <span class="purple">if</span> top10_code8[i] == row[<span class="green">1</span>]:
+            dong7 = row[<span class="green">0</span>]
+    <span class="green"># location_data에서</span> <span class="green">7자리 행정동코드가 dong7인 행을 찾아 위도와 경도 구하기</span>
+    <span class="purple">for</span> row <span class="blue2">in</span> location_data:
+        <span class="purple">if</span> dong7 == row[<span class="green">2</span>]:
+            top10_lat[i], top10_long[i] = row[<span class="green">-1</span>], row[<span class="green">-2</span>]
+
+
+</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="631">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight"><pre><span class="green"># 6. 완성된 리스트로 지도 그리기</span>
+<span class="purple">import</span> folium
+
+<span class="green"># 행정동명 앞에 순위 표시하기</span>
+<span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 gold">len</span><span class="cd2">(top10_name))</span>:
+    <span class="cd2">top10_name[i] = str(i +</span> <span class="cd2 green">1</span><span class="cd2">) +</span> <span class="cd2 red2">'.</span> <span class="cd2 red2">'</span> <span class="cd2">+ top10_name[i]</span>
+
+map_top10 = folium.Map([top10_lat[<span class="green">0</span>], top10_long[<span class="green">0</span><span>]</span>], zoom_start=<span class="green">12</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>):
+    folium.Marker(
+        [top10_lat[i], top10_long[i<span>]</span>], tooltip=top10_name[i],
+        icon=folium.Icon(color=<span class="red2">'red'</span>, icon=<span class="red2">'star'</span>)
+    ).add_to(map_top10)
+map_top10</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/522.jpg"/></div>
+</div>
+<p class="txt bl">과정이 좀 길긴 했지만, 알고리즘을 작성한 것처럼 단계별로 나누어 진행하면 더 체계적이고 쉽게 프로그래밍할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="632">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_99"><span class="yellow">12.2.3</span> 결과 분석하기</h4>
+<p class="txt bl">결과를 분석해 봅시다. 인구수 상위 10개 지역의 분포를 보면 강남구에 몰려 있네요. 무려 4개의 행정동이 순위에 올랐습니다. 서울시에서 인구가 가장 많은 행정동은 역삼1동이고, 여의도동, 서교동, 종로 1,2,3,4가동 순입니다. 이들은 서울의 3대 중심업무지구인 KBD<span class="txts gray">(Kangnam Business District)</span>, YBD<span class="txts gray">(Yeouido Business District)</span>, CBD<span class="txts gray">(Central Business District)</span>에 속합니다.</p>
+<p class="txt bl">조금 재미있는 것은 은평구 진관동입니다. 다른 지역은 사람이 많은 지역임을 익히 알고 있었지만, 진관동이 순위에 꼽을 정도로 인구가 많을 줄은 몰랐어요. 진관동을 11장에서 작성한 핫플레이스 프로그램에 넣어 분석해 보면 다음과 같은 그래프가 나타납니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/523_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/523_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-17</span> 진관동 분석 결과</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="633">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">11장에서 분석해 본 압구정동과는 확연히 다른 모양의 그래프가 나타납니다. 진관동의 평균인구는 출근시간 이후에 급격히 줄고 퇴근시간 이후에 급격히 늘어나네요. 업무지구가 아닌 주거지구의 역할이 크다고 볼 수 있습니다. 주중/주말 그래프를 보면 이 점이 더 뚜렷해집니다. 주말에는 주중과 비교해 낮 시간대에 인구수가 매우 많습니다. 가족과 집이나 동네에서 시간을 많이 보내는 것 같죠?</p>
+<p class="txt bl">남녀 인구 그래프도 흥미롭습니다. 남성보다 여성이 압도적으로 많네요. 그런데 출근 시간대에 여성인구가 줄어드는 폭보다 남성인구가 줄어드는 폭이 훨씬 큽니다. 아마 맞벌이 부부는 모두 출근하고, 전업주부인 여성은 출근하지 않기 때문이 아닐까 추측할 수 있습니다.</p>
+<p class="txt bl">인구수 1위 역삼1동과 비교해 봅시다. 모든 시간대에서 역삼1동이 진관동보다 인구수가 많군요. 업무지구인 역삼1동은 출근시간부터 인구가 꾸준히 늘어나고 퇴근시간에는 인구가 줄어드는 반면, 진관동은 반대 현상이 나타납니다. 업무지구와 주거지구의 차이를 그래프로 확인할 수 있습니다.</p>
+<p class="txt bl">다른 관점에서도 앞의 결과를 분석해 보세요. 그동안 보이지 않던 것이 보일지도 모릅니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="634">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_100"><span class="yellow">12.2.4</span> 추가 분석: 남성이 많은 지역과 여성이 많은 지역 비교하기</h4>
+<p class="txt bl">지금까지 진행한 코드를 이해했다면 남성이 많은 지역 상위 10곳, 여성이 많은 지역 10곳도 각각 지도에 표시할 수 있습니다. 남성이나 여성이 많은 지역 10곳을 지도 위에 마커로 표시하되 1~5위 지역과 6~10위 지역을 다른 색으로 표시해 보겠습니다. 앞서 작성한 알고리즘을 조금만 수정하면 남성 또는 여성 인구만을 기준으로 프로그램을 작성할 수 있어요. 총생활인구를 구하는 대신, 남성 인구와 여성 인구의 합을 구하는 것으로 대체하면 됩니다. 변경된 부분만 붉게 표시해 보겠습니다.</p>
+<div class="ind10">
+<p class="txtex dm">하위 목표 5</p>
+<div class="box_green_line">
+<p class="txtex2 dl">인구가 많은 상위 10개 행정동을 뽑아 지도에 표시하기</p>
+</div>
+<p class="txtex dm">알고리즘</p>
+<div class="box_green_line">
+<p class="txtex dl s12_12">1. 필요한 데이터 파일을 읽어 들이기</p>
+<p class="txtex dl s12_12">2. 행정동별 <span class="red">남녀</span> 인구수를 저장하는 빈 딕셔너리를 만들고 행정동명을 키로, 인구수를 값으로 저장하기</p>
+<p class="txtex dl s12_12">3. 인구수를 기준으로 내림차순 정렬하고, 앞에서 10개 항목만 행정동코드 리스트에 저장하기</p>
+<p class="txtex dl s12_12">4. 행정동코드 리스트의 8자리 행정동코드에 해당하는 행정동명을 찾아서 행정동명 리스트에 저장하기</p>
+<p class="txtex dl s12_12">5. 행정동명 리스트의 행정동명에 해당하는 위도와 경도를 찾아서 각각 위도, 경도 리스트에 저장하기</p>
+<p class="txtex dl s12_12">6. 완성된 리스트로 지도를 그리고 <span class="red">1~5위 지역과 6~10위 지역을 다른 색으로 표시하기</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="635">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">먼저 남성 인구를 기준으로 작성해 보겠습니다. 알고리즘이 거의 같아서 코드도 바뀔 부분이 많지 않습니다. 리스트명이 <span class="cd">top10_code8</span>에서 <span class="cd">male_code8</span>로 변경되고 남성 인구를 구하는 코드를 추가하면 됩니다. 남성 인구를 구하는 코드는 11장에서 배운 바 있죠. 인구 데이터인 <span class="cd">data</span>의 인덱스 <span class="cd">[4]</span>부터 <span class="cd">[17]</span>까지의 합을 구하면 됩니다. 그럼 변경된 부분만 작성해 보겠습니다.</p>
+<div class="highlight">
+<pre><span class="green"># 2. 인구 데이터를 읽으며 행정동별 남성 인구수를 저장하는 딕셔너리 완성하기</span>
+dong_population = {}
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="green"># 남성 인구수를 저장하는 변수 p</span>
+    dong_code, p = row[<span class="green">2</span>], <span class="cd2 gold">sum</span><span class="cd2">(row[</span><span class="cd2 green">4</span><span class="cd2">:</span><span class="cd2 green">18</span><span class="cd2">])</span>
+…
+<span class="green"># 6. 완성된 리스트로 지도 그리기</span>
+<span class="purple">import</span> folium
+
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(top10_name)):
+    top10_name[i] = str(i + <span class="green">1</span>) + <span class="red2">'.</span> <span class="red2">'</span> + top10_name[i]
+
+map_top10 = folium.Map([top10_lat[<span class="green">0</span>], top10_long[<span class="green">0</span><span>]</span>], zoom_start=<span class="green">12</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>):
+    <span class="green"># 1~5위 지역은 진한 파란색&gt;, 6~7위 지역은 연한 파란색으로 표시하기</span>
+    <span class="cd2 purple">if</span> <span class="cd2">i &lt;</span> <span class="cd2 green">5</span><span class="cd2">:</span>
+        folium.Marker(
+            [top10_lat[i], top10_long[i<span>]</span>], tooltip=top10_name[i],
+            icon=folium.Icon(color=<span class="cd2 red2">'darkblue'</span>, icon=<span class="cd2 red2">'male'</span><span class="cd2">, prefix=</span><span class="cd2 red2">'fa'</span>)
+            ).add_to(map_top10)
+    <span class="cd2 purple">else</span><span class="cd2">:</span>
+        <span class="cd2">folium.Marker(</span>
+            <span class="cd2">[top10_lat[i], top10_long[i<span>]</span>], tooltip=top10_name[i],</span>
+            <span class="cd2">icon=folium.Icon(color=</span><span class="cd2 red2">'lightblue'</span><span class="cd2">, icon=</span><span class="cd2 red2">'male'</span><span class="cd2">, prefix=</span><span class="cd2 red2">'fa'</span><span class="cd2">)</span>
+            <span class="cd2">).add_to(map_top10)</span>
+map_top10</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="636">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/526.jpg"/></div>
+</div>
+<p class="txt bl">코드에서 변경된 부분은 앞에서 배운 내용이라 설명을 생략하겠습니다. 지도 그리는 부분만 짚고 넘어가 봅시다. 1~5위 지역과 그 외 지역은 색상을 달리하기로 했죠. 그래서 마커를 추가하는 반복문 내부에 <span class="cd">i</span>가 5 이하인 경우와 그렇지 않은 경우를 분리해 색상을 다르게 했습니다. 그리고 남성임을 나타내는 아이콘을 <a href="https://fontawesome.com/v4.7.0/icons">https://fontawesome.com/v4.7.0/icons</a>에서 찾아 아이콘 모양을 <span class="cd">icon='male'</span>로 변경하고 <span class="cd">prefix='fa'</span> 옵션도 추가했습니다.</p>
+<p class="txt bl">결과를 보니 앞서 전체 인구를 대상으로 분석한 것과 큰 차이는 없는 것 같군요. 강남에 4곳과 중심업무지구, 진관동까지 앞에서 봤던 지역입니다. 다만 인구수에 따라 색상을 달리하니 남성인구가 더 많은 곳이 보입니다. 확실히 서울 도심과 중심업무지구에 남성인구가 많네요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="637">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이번에는 여성이 많은 상위 10개 지역을 지도에 표시해 봅시다. 앞에서 진행한 것처럼 1~5위 지역은 빨간색으로, 6~10위 지역은 분홍색으로 표시하겠습니다. 앞의 코드에서 리스트명의 <span class="cd">male</span> 부분을 <span class="cd">female</span>로만 변경하면 여성 데이터를 저장하는 새로운 리스트를 만들 수 있습니다.</p>
+<div class="highlight">
+<pre><span class="green"># 2. 인구 데이터를 읽으며 행정동별 여성 인구수를 저장하는 딕셔너리 완성하기</span>
+dong_population = {}
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="green"># 여성 인구수를 저장하는 변수 p</span>
+    dong_code, p = row[<span class="green">2</span>], <span class="gold">sum</span>(row[<span class="cd2 green">18</span><span class="cd2">:</span><span class="cd2 green">32</span>])
+…
+<span class="green"># 6. 완성된 리스트로 지도 그리기</span>
+<span class="purple">import</span> folium
+
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(top10_name)):
+    top10_name[i] = str(i + <span class="green">1</span>) + <span class="red2">'.</span> <span class="red2">'</span> + top10_name[i]
+
+map_top10 = folium.Map([top10_lat[<span class="green">0</span>], top10_long[<span class="green">0</span><span>]</span>], zoom_start=<span class="green">12</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>):
+    <span class="green"># 1~5위 지역은 빨간색, 6~7위 지역은 분홍색으로 표시하기</span>
+    <span class="purple">if</span> i &lt; <span class="green">5</span>:
+        folium.Marker(
+            [top10_lat[i], top10_long[i<span>]</span>], tooltip=top10_name[i],
+            icon=folium.Icon(color=<span class="cd2 red2">'red'</span>, icon=<span class="cd2 red2">'female'</span>, prefix=<span class="cd2 red2">'fa'</span>)
+            ).add_to(map_top10)
+    <span class="purple">else</span>:
+        folium.Marker(
+            [top10_lat[i], top10_long[i<span>]</span>], tooltip=top10_name[i],
+            icon=folium.Icon(color=<span class="cd2 red2">'pink'</span>, icon=<span class="cd2 red2">'female'</span>, prefix=<span class="red2">'fa'</span>)
+            ).add_to(map_top10)
+map_top10</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/527.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="638">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">여성이 많은 지역을 표시하니 재미있는 결과가 나타납니다. 여성이 많은 지역 상위 5곳은 대부분 남성이 많은 지역 상위 5곳과 겹칩니다. 진관동을 제외하고요. 진관동은 기본적으로 인구가 많은 지역이고, 남성보다는 여성이 더 많은 것으로 나타납니다. 그리고 남성 인구 지도에서는 보이지 않던 지역이 등장했습니다. 바로 송파구의 잠실3동(9위)과 강동구 길동(10위)입니다. 그리고 남성 인구 지도에서 6위를 차지한 금천구 가산동은 여성 인구 지도에서는 나타나지 않는군요.</p>
+<p class="txt bl">종합해 보면, 여성과 남성의 생활인구가 많은 지역은 비슷합니다. 그러나 남성 생활인구가 여성 생활인구보다 서울의 서쪽 지역(금천구 가산동)에서 조금 더 많고, 여성 생활인구는 서울의 동쪽 지역(송파구 잠실3동, 강동구 길동)에서 더 많습니다. 성별 분포의 차이가 나타나는 이유는 정확히 설명하기는 어렵지만, 각 지역에 많이 분포하는 업종이 어떤 것이냐에 영향이 있지 않을까요?</p>
+<p class="txt bl">지금까지 진행한 데이터와 코드를 참고하면 연령별 인구 분석도 가능하겠죠. 시간대별 분석을 그래프가 아닌 지도에 표시할 수도 있을 겁니다. 본인이 원하는 대로 이리저리 프로그램을 작성해 보고 결과를 분석하다 보면 프로그래밍에 성취감을 느낄 수 있을 거예요.</p>
+<p class="txt bl">벌써 Part 2까지 배웠네요. Part 1에서는 파이썬 프로그래밍의 기초를 다졌고, Part 2에서는 배운 내용을 응용하는 프로젝트를 진행해 봤습니다. 마지막으로 Part 3에서는 파이썬의 심화 문법을 배워 보겠습니다. 심화 문법을 알아야 이 책이 끝나고도 머신러닝, 딥러닝과 같은 더 복잡하고 어려운 코드를 이해할 수 있습니다. 그리고 우리가 평소에 사용하는 프로그램의 외형을 만드는 방법도 배워 보겠습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="639">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown10">12</span><br/>
+      마무리</h3>
+</div>
+<p class="txtex dm s10_10"><span class="dm brown">1</span> folium 설치</p>
+<div class="highlight">
+<pre>!pip install folium</pre>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">2</span> folium 지도 만들고 나타내기</p>
+<div class="ind10">
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>지도이름 = folium.Map([위도, 경도], zoom_start=지도비율)
+지도이름</pre>
+</div>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">3</span> folium 마커 만들고 추가하기</p>
+<div class="ind10">
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>folium.Marker([위도, 경도]).add_to(지도이름)</pre>
+</div>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">4</span> 마커에 추가할 수 있는 옵션</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">툴팁 표현</p>
+</td>
+<td class="w80">
+<p class="txts dl"><span class="cd">tooltip='표현할 텍스트'</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">팝업 표현</p>
+</td>
+<td class="w80">
+<p class="txts dl"><span class="cd">popup='표현할 텍스트'</span></p>
+</td>
+</tr>
+<tr class="tb_brown_line tb_white">
+<td class="w20">
+<p class="txts dl">아이콘</p>
+</td>
+<td class="w80">
+<p class="txts dl"><span class="cd">icon= folium.Icon(color= '아이콘 색상', icon='아이콘 모양')</span></p>
+<p class="txts dl">fontawesome의 아이콘 활용 시 <span class="cd">prefix='fa'</span> 추가</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="640">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5" id="s1">
+<p class="txt1 dm"><span class="brown">Self Check</span></p>
+<p class="txts"> </p>
+<div class="box_white2">
+<p class="txtex bl s10_10"><span class="dm brown">1</span> <span class="cd">folium</span>을 활용하여 해운대 해수욕장을 중심으로 하는 지도를 표시하고, fontawesome의 hand-o-down을 사용해 마커를 추가하세요. <span class="cd">zoom_start</span>는 11로 설정합니다.</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line">
+<td class="w25">
+<p class="txts dm">위치명</p>
+</td>
+<td class="w25">
+<p class="txts dm">위도</p>
+</td>
+<td class="w25">
+<p class="txts dm">경도</p>
+</td>
+<td class="w25">
+<p class="txts dm">마커 아이콘(fontawesome)</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w25">
+<p class="txts dl">해운대 해수욕장</p>
+</td>
+<td class="w25">
+<p class="txts dl">35.15870</p>
+</td>
+<td class="w25">
+<p class="txts dl">129.16047</p>
+</td>
+<td class="w25">
+<p class="txts dl">hand-o-down</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txts"> </p>
+<p class="txtex bl s10_10"><span class="dm brown">2</span> 다음 위치를 모두 <span class="cd">folium</span>으로 나타내세요. 마커에 마우스를 올리면 위치명이 나오게 툴팁을 설정하세요.</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line">
+<td class="w25">
+<p class="txts dm">위치명</p>
+</td>
+<td class="w25">
+<p class="txts dm">위도</p>
+</td>
+<td class="w25">
+<p class="txts dm">경도</p>
+</td>
+<td class="w25">
+<p class="txts dm">마커 아이콘(fontawesome)</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w25">
+<p class="txts dl">해운대 해수욕장</p>
+</td>
+<td class="w25">
+<p class="txts dl">35.15870</p>
+</td>
+<td class="w25">
+<p class="txts dl">129.16047</p>
+</td>
+<td class="w25">
+<p class="txts dl">hand-o-down</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w25">
+<p class="txts dl">부산대학교</p>
+</td>
+<td class="w25">
+<p class="txts dl">35.23360</p>
+</td>
+<td class="w25">
+<p class="txts dl">129.08309</p>
+</td>
+<td class="w25">
+<p class="txts dl">university</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w25">
+<p class="txts dl">김해국제공항</p>
+</td>
+<td class="w25">
+<p class="txts dl">35.17357</p>
+</td>
+<td class="w25">
+<p class="txts dl">128.94632</p>
+</td>
+<td class="w25">
+<p class="txts dl">plane</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0885/">정답 및 해설</a></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div>
+    </div>
+</body>
+</html>

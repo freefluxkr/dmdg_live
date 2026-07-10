@@ -1,0 +1,33 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt2 dm blue box_orange_line"><span class="bg_pink4">5</span> 알고리즘을 코드로 표현하기</p>
+<p class="txt bl">이제 알고리즘의 각 단계를 코드로 표현하겠습니다.</p>
+<p class="txts"> </p>
+<p class="txt1 dm" id="1"><span class="cap blue">■</span> <span class="blue">1</span> <span class="blue">|</span> 데이터를 읽어온다.</p>|<p class="txt1 dm" id="1"><span class="cap blue">■</span> <span class="blue">1</span> <span class="blue">|</span> 데이터를 읽어온다.</p>
+<p class="txt bl">데이터는 Unit 7에서 수집했던 데이터를 그대로 사용하겠습니다. 따라서 데이터를 읽어오는 코드도 동일합니다.</p>
+<div class="box_blue_line">
+<pre><span class="violet">import</span> csv
+f <span class="violet">=</span> <span class="blue">open</span>(<span class="olive">'age.csv'</span>)
+data <span class="violet">=</span> csv.reader(f)
+<span class="violet">for</span> row <span class="violet">in</span> data :
+    <span class="blue">print</span>(row)</pre>
+</div>
+<p class="txts"> </p>
+<p class="txt dm"><span class="bg_pink6">실행 결과</span></p>
+<div class="box_blue_line">
+<pre>['행정구역', '총인구수', '연령구간인구수', '0세', '1세', '2세', '3세', '4세', '5세', '6세', '7세', '8세', (생략), '94세', '95세', '96세', '97세', '98세', '99세', '100세 이상']
+['서울특별시  (1100000000)', '9765623', '9765623', '54719', '60805', '67262', '71433', '70251', '69728', '76957', '73813', '74748', '70652', '75180', '79733', '74074', '71698', '79681', '82773', '83012', '92791', '108139', '108040', '114742', '122499', '129725', '141389', '150560', '156527', '165963', '165471', '153068', '149846', '149513', '</pre>
+</div>
+<p class="txt bl">그리고 데이터 처리에 불필요한 헤더 부분을 제외시키고자 <span class="cd">next()</span> 함수를 사용합니다.</p>
+<div class="box_blue_line">
+<pre><span class="violet">import</span> csv
+f <span class="violet">=</span> <span class="blue">open</span>(<span class="olive">'age.csv'</span>)
+data <span class="violet">=</span> csv.reader(f)
+<span class="violet">next</span>(data)
+<span class="violet">for</span> row <span class="violet">in</span> data :
+    <span class="blue">print</span>(row)</pre>
+</div>
+</div>
+</section>
+</section>

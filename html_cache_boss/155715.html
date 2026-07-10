@@ -1,0 +1,178 @@
+<h1 class="page-subject">실시간으로 네이버 뉴스를 텔레그램으로 전송받기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<h1 id="1">1. 프로그램 컨셉</h1>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/b7w8jh/btrm2o5VSCn/D4qcWydC2PbPHsMBboeLLk/img.png"/></p>
+<h1 id="2">2. 사용 라이브러리 정보</h1>
+<ul>
+<li>requests (특정 url의 html 문서 받기)</li>
+<li>BeautifulSoup  (html 문서에서 원하는 요소 선택적 추출)</li>
+<li>python-telegram-bot (뉴스 링크를 텔레그램 봇으로 채팅방에 전송)</li>
+</ul>
+<h1 id="3">3.  전체 코드</h1>
+<p>이해하기 쉽도록 자세하게 주석을 달아두었으니 어렵지 않을거예요.</p>
+<p>참고로 이 코드가 담긴 파이썬 파일(.py)을 pyinstaller를 이용해서 exe 파일로 만들어서 윈도우 시작 시, 기본 프로그램으로 설정해 놓으면 나만의 알리미 프로그램을 만드실 수 있어요!</p>
+<pre><code>#step1.라이브러리 불러오기
+import  requests
+from  bs4  import  BeautifulSoup  as  bs
+import  telegram
+import  schedule
+import  time
+
+#step2.새로운 네이버 뉴스 기사 링크를 받아오는 함수
+def  get_new_links(old_links=[]):
+
+    # (주의) 네이버에서 키워드 검색 - 뉴스 탭 클릭 - 최신순 클릭 상태의 url
+    url  = f'https://search.naver.com/search.naver?where=news&amp;query={query}&amp;sm=tab_opt&amp;sort=1&amp;photo=0&amp;field=0&amp;pd=0&amp;ds=&amp;de=&amp;docid=&amp;related=0&amp;mynews=0&amp;office_type=0&amp;office_section_code=0&amp;news_office_checked=&amp;nso=so%3Add%2Cp%3Aall&amp;is_sug_officeid=0'
+
+    # html 문서 받아서 파싱(parsing)
+    response  =  requests.get(url)
+    soup  =  bs(response.text , 'html.parser')
+
+    # 해당 페이지의 뉴스기사 링크가 포함된 html 요소 추출
+    news_titles  =  soup.select('a.news_tit')
+
+    # 요소에서 링크만 추출해서 리스트로 저장
+    list_links  = [i.attrs['href'] for  i  in  news_titles]
+
+    # 기존의 링크와 신규 링크를 비교해서 새로운 링크만 저장
+    new_links  = [link  for  link  in  list_links  if  link  not  in  old_links]
+
+    return  new_links
+
+
+#step3.새로운 네이버 뉴스 기사가 있을 때 텔레그램으로 전송하는 함수
+def  send_links():
+    # 함수 내에서 처리된 리스트를 함수 외부에서 참조하기 위함
+    global old_links
+
+    # 위에서 정의했던 함수 실행
+    new_links  =  get_new_links(old_links)
+
+    # 새로운 메시지가 있으면 링크 전송
+    if  new_links:
+        for  link  in  new_links:
+            bot.sendMessage(chat_id=chat_id, text=link)
+
+    # 없으면 패스
+    else:
+        pass
+
+    # 기존 링크를 계속 축적하기 위함
+
+    old_links +=  new_links.copy()
+
+
+# 실제 프로그램 구동
+if  __name__  ==  '__main__':
+
+    #토큰을 변수에 저장
+    bot_token  ='자신이 발급받은 봇의 토큰'
+    bot  =  telegram.Bot(token  =  bot_token)
+
+    #가장 최근에 온 메세지의 정보 중, chat id만 가져옴 (이 chat id는 사용자(나)의 계정 id임)
+    chat_id  =  bot.getUpdates()[-1].message.chat.id
+
+    #step4.검색할 키워드 설정
+    query  =  input('크롤링 할 뉴스기사 키워드를 입력하세요: ')
+
+    #위에서 얻은 chat id로 bot이 메세지를 보냄.
+    bot.sendMessage(chat_id  =  chat_id, text=f"{query}를 주제로 뉴스 기사 크롤링이 시작 되었습니다")
+
+    #step5.기존에 보냈던 링크를 담아둘 리스트 만들기
+    old_links  = []
+
+    # 주기적 실행과 관련된 코드 (hours는 시, minutes는 분, seconds는 초)
+    job  =  schedule.every(10).seconds.do(send_links)
+
+    while  True:
+        schedule.run_pending()
+        time.sleep(1)
+</code></pre>
+<h1 id="4">4.  여러개의 검색어 크롤링하기</h1>
+<pre><code>#step1.라이브러리 불러오기
+import  requests
+from  bs4  import  BeautifulSoup  as  bs
+import  telegram
+import  schedule
+import  time
+
+# step2.새로운 네이버 뉴스 기사 링크를 받아오는 함수
+
+def get_new_links(query, old_links=[]):
+
+    # (주의) 네이버에서 키워드 검색 - 뉴스 탭 클릭 - 최신순 클릭 상태의 url
+    url = f'https://search.naver.com/search.naver?where=news&amp;query={query}&amp;sm=tab_opt&amp;sort=1&amp;photo=0&amp;field=0&amp;pd=0&amp;ds=&amp;de=&amp;docid=&amp;related=0&amp;mynews=0&amp;office_type=0&amp;office_section_code=0&amp;news_office_checked=&amp;nso=so%3Add%2Cp%3Aall&amp;is_sug_officeid=0'
+
+    # html 문서 받아서 파싱(parsing)
+    response = requests.get(url)
+    soup = bs(response.text, 'html.parser')
+
+    # 해당 페이지의 뉴스기사 링크가 포함된 html 요소 추출
+    news_titles = soup.select('a.news_tit')
+
+    # 요소에서 링크만 추출해서 리스트로 저장
+    list_links = [i.attrs['href'] for i in news_titles]
+
+    # 기존의 링크와 신규 링크를 비교해서 새로운 링크만 저장
+    new_links = [link for link in list_links if link not in old_links]
+
+    return new_links
+
+
+# step3.새로운 네이버 뉴스 기사가 있을 때 텔레그램으로 전송하는 함수
+def send_links(query):
+    # 함수 내에서 처리된 리스트를 함수 외부에서 참조하기 위함
+    global old_links
+
+    # 위에서 정의했던 함수 실행
+    new_links = get_new_links(query, old_links)
+
+    # 새로운 메시지가 있으면 링크 전송
+    if new_links:
+        bot.sendMessage(chat_id=chat_id, text='방금 업데이트 된 ' + f"{query} 주제의 크롤링입니다.")
+        for link in new_links:
+            bot.sendMessage(chat_id=chat_id, text=link)
+
+    # 없으면 패스
+    else:
+        pass
+
+    # 기존 링크를 계속 축적하기 위함
+
+    old_links += new_links.copy()
+
+
+# 실제 프로그램 구동
+if __name__ == '__main__':
+
+    # 토큰을 변수에 저장
+    bot_token = '자신이 발급받은 봇의 토큰'
+    bot = telegram.Bot(token=bot_token)
+
+    # 가장 최근에 온 메세지의 정보 중, chat id만 가져옴 (이 chat id는 사용자(나)의 계정 id임)
+    chat_id = bot.getUpdates()[-1].message.chat.id
+
+
+    # #step4.검색할 키워드 설정
+    # query  =  input('크롤링 할 뉴스기사 키워드를 입력하세요: ')
+    queries = ["부동산", "경제", "날씨"]
+
+    for query in queries:
+
+        # 위에서 얻은 chat id로 bot이 메세지를 보냄.
+        bot.sendMessage(chat_id=chat_id,
+                        text=f"{query}를 주제로 뉴스 기사 크롤링이 시작 되었습니다")
+
+        # step5.기존에 보냈던 링크를 담아둘 리스트 만들기
+        old_links = []
+
+        # 주기적 실행과 관련된 코드 (hours는 시, minutes는 분, seconds는 초)
+        job = schedule.every(10).seconds.do(send_links, query)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+</code></pre>
+</div>

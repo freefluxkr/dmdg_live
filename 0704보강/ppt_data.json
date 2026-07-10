@@ -1,0 +1,320 @@
+{
+  "01장_파이썬이란_무엇인가": {
+    "chapter_num": "01",
+    "chapter_title": "파이썬이란 무엇인가?",
+    "slides": [
+      {
+        "section": "01-1. 파이썬의 특징과 매력",
+        "bullets": [
+          "파이썬(Python)은 1991년 귀도 반 로섬이 발표한 오픈소스 인터프리터 언어입니다.",
+          "인간의 사고방식과 유사하여 문법이 지극히 간결하고 읽기 쉽습니다.",
+          "개발 속도가 매우 빨라 'Life is too short, you need Python'이라는 명언을 만들어 냈습니다.",
+          "무료이면서 강력하여 시스템 유틸리티, GUI, 웹 개발, 인공지능 분야에 널리 사용됩니다."
+        ],
+        "code": "# 파이썬의 단순 명료함을 보여주는 예제\nlanguages = ['python', 'perl', 'c', 'java']\n\nfor lang in languages:\n    if lang == 'python':\n        print(f'{lang}은 참 쉽고 강력합니다!')\n    else:\n        print(f'{lang}도 훌륭한 언어입니다.')"
+      },
+      {
+        "section": "01-2. 파이썬으로 할 수 있는 일 & 없는 일",
+        "bullets": [
+          "할 수 있는 일:",
+          "  - AI & 머신러닝/데이터분석 (NumPy, Pandas, TensorFlow)",
+          "  - 웹 프로그래밍 및 크롤링 (Django, Flask, BeautifulSoup)",
+          "  - 시스템 유틸리티 제작 및 자동화 스크립트 작성",
+          "할 수 없는 일 (지양해야 하는 분야):",
+          "  - 하드웨어를 직접 제어하는 시스템 프로그램 (C/C++ 권장)",
+          "  - 엄청난 연산 속도가 요구되는 3D 모바일 게임 엔진"
+        ],
+        "code": "# 간단한 파일 입출력 및 자동화 예제\nimport os\n\n# 현재 폴더의 파일 목록 출력\nfile_list = os.listdir('.')\nprint(f'현재 디렉토리 파일 수: {len(file_list)}')\nfor file in file_list[:3]:\n    print('-', file)"
+      },
+      {
+        "section": "01-3. 파이썬 개발 환경 구축",
+        "bullets": [
+          "공식 홈페이지(python.org)를 통해 윈도우/맥용 인터프리터를 다운로드합니다.",
+          "설치 시 'Add Python to PATH' 옵션을 반드시 선택하여 환경 변수를 자동 등록합니다.",
+          "파이썬 설치 시 기본 제공되는 통합 개발 환경인 IDLE을 사용할 수 있습니다.",
+          "실무 및 프로젝트 진행 시에는 VS Code 또는 PyCharm과 같은 전문 에디터 사용을 적극 권장합니다."
+        ],
+        "code": ""
+      }
+    ]
+  },
+  "02장_파이썬_프로그래밍의_기초_자료형": {
+    "chapter_num": "02",
+    "chapter_title": "파이썬 프로그래밍의 기초, 자료형",
+    "slides": [
+      {
+        "section": "02-1. 숫자형과 문자열 자료형",
+        "bullets": [
+          "숫자형: 정수(Integer), 실수(Float), 8진수 및 16진수를 지원합니다.",
+          "문자열 표현: 따옴표( ' 또는 \" )로 감싸며, 3개를 쓰면 줄바꿈이 유지됩니다.",
+          "인덱싱(Indexing): 문자열의 특정 위치를 지정(예: a[0]은 첫 글자, a[-1]은 마지막).",
+          "슬라이싱(Slicing): 문자열 일부를 잘라냄 (예: a[0:5]는 0번부터 4번 인덱스까지).",
+          "포맷팅: f-string(f'{var}') 형식을 통해 직관적으로 변수 값을 대입합니다."
+        ],
+        "code": "# 문자열 포맷팅 및 슬라이싱 예제\nname = '홍길동'\nage = 30\ninfo = f'제 이름은 {name}이고 나이는 {age}세입니다.'\n\nprint(info)            # 전체 출력\nprint(info[6:9])        # '홍길동'만 슬라이싱\nprint(info[-4:])        # '세입니다.'만 슬라이싱"
+      },
+      {
+        "section": "02-2. 리스트와 튜플 자료형",
+        "bullets": [
+          "리스트(List): 대괄호 [ ]를 사용하며, 여러 개의 요소를 순서대로 담아 관리합니다.",
+          "  - 요소를 추가(append), 정렬(sort), 뒤집기(reverse), 제거(remove)할 수 있습니다.",
+          "튜플(Tuple): 소괄호 ( )를 사용하며, 리스트와 유사하지만 요소를 수정/삭제할 수 없습니다.",
+          "  - 요소를 변경할 수 없는 불변의 특징 덕분에 프로그램의 안전성을 보장할 때 주로 쓰입니다."
+        ],
+        "code": "# 리스트 수정 vs 튜플 수정 불가 예제\na_list = [1, 2, 3]\na_list[0] = 99\na_list.append(4)\nprint('리스트:', a_list)  # [99, 2, 3, 4] 변경 완료\n\na_tuple = (1, 2, 3)\ntry:\n    a_tuple[0] = 99\nexcept TypeError as e:\n    print('튜플 에러:', e)  # 값 변경 시도 시 에러 발생!"
+      },
+      {
+        "section": "02-3. 딕셔너리, 집합, 불 자료형",
+        "bullets": [
+          "딕셔너리(Dictionary): Key-Value 한 쌍을 { } 중괄호 구조로 묶어 관리합니다.",
+          "  - 순서가 없으므로 Key를 통해 빠르게 값을 찾아냅니다.",
+          "집합(Set): set() 키워드를 사용하며, 중복을 허용하지 않고 순서가 없는 것이 특징입니다.",
+          "  - 교집합(&), 합집합(|), 차집합(-) 등의 집합 연산에 최적화되어 있습니다.",
+          "불(Bool): True(참)와 False(거짓) 단 두 가지 상태만을 나타내는 자료형입니다."
+        ],
+        "code": "# 딕셔너리와 집합 연산 예제\n# 1. 딕셔너리\nuser = {'name': 'Alice', 'role': 'Admin'}\nprint(user['name'])\n\n# 2. 집합의 중복 제거 및 연산\ns1 = set([1, 2, 3, 3, 4])\ns2 = set([3, 4, 5, 6])\nprint(s1)           # {1, 2, 3, 4} (중복 자동 제거)\nprint(s1 & s2)      # {3, 4} (교집합)"
+      }
+    ]
+  },
+  "03장_프로그램의_구조를_쌓는다_제어문": {
+    "chapter_num": "03",
+    "chapter_title": "프로그램의 구조를 쌓는다, 제어문",
+    "slides": [
+      {
+        "section": "03-1. if 조건문과 비교/논리 연산자",
+        "bullets": [
+          "if문은 주어진 조건식이 참(True)일 때 블록 내부의 명령을 실행합니다.",
+          "파이썬은 들여쓰기(Indentation)가 필수적이며, 보통 4칸 공백을 규격으로 사용합니다.",
+          "비교 연산자: <, >, ==, !=, >=, <=",
+          "논리 연산자: and(둘 다 참), or(하나만 참이어도 참), not(참/거짓 반전)",
+          "멤버십 연산자: in, not in (리스트나 튜플 내에 특정 요소가 존재하는지 확인)"
+        ],
+        "code": "# if-elif-else 및 in 연산자 활용 예제\npocket = ['paper', 'cellphone', 'money']\n\nif 'money' in pocket:\n    print('택시를 타고 가라')\nelif 'card' in pocket:\n    print('카드를 사용해라')\nelse:\n    print('걸어가라')"
+      },
+      {
+        "section": "03-2. while 반복문과 루프 제어",
+        "bullets": [
+          "while문은 조건문이 참(True)인 동안 계속해서 블록의 명령을 반복합니다.",
+          "break: 반복문을 중간에 강제로 탈출할 때 사용합니다.",
+          "continue: 반복문의 맨 처음 조건문 위치로 돌아가 루프를 이어나갈 때 사용합니다.",
+          "무한 루프(Infinite Loop): 조건식을 항상 True로 주어 프로그램이 무한히 돌게 합니다."
+        ],
+        "code": "# while 루프와 break 예제\ncoffee = 3\nwhile True:\n    print('돈을 받았으니 커피를 줍니다.')\n    coffee -= 1\n    print(f'남은 커피는 {coffee}개입니다.\\n')\n    if coffee == 0:\n        print('커피가 다 떨어졌습니다. 판매를 중단합니다.')\n        break"
+      },
+      {
+        "section": "03-3. for 반복문과 range 함수",
+        "bullets": [
+          "for문은 리스트, 튜플, 문자열 등 순회 가능한 객체의 요소를 차례대로 꺼내 돕니다.",
+          "range(start, stop, step): 숫자 시퀀스를 생성하여 특정 횟수만큼 반복할 때 유용합니다.",
+          "리스트 컴프리헨션(List Comprehension): 리스트 내부에 for문과 if문을 넣어",
+          "  한 줄로 간결하고 빠르게 리스트를 생성하는 파이썬의 강력한 문법적 특징입니다."
+        ],
+        "code": "# 1. range 함수 활용 구구단\nfor i in range(2, 4):\n    for j in range(1, 3):\n        print(f'{i} * {j} = {i*j}')\n\n# 2. 리스트 컴프리헨션\nnumbers = [1, 2, 3, 4]\nresult = [n * 3 for n in numbers if n % 2 == 0]\nprint(result)  # [6, 12] (짝수에만 3을 곱함)"
+        }
+      ]
+  },
+  "04장_파이썬의_입출력": {
+    "chapter_num": "04",
+    "chapter_title": "파이썬의 입출력",
+    "slides": [
+      {
+        "section": "04-1. 함수(Function)와 입력/출력값",
+        "bullets": [
+          "함수(Function): 반복되는 코드 블록을 정의하여 재사용할 수 있게 만드는 뼈대입니다.",
+          "def 키워드로 선언하며, 입력값(매개변수)과 결과값(return)을 가질 수 있습니다.",
+          "가변 매개변수(*args): 입력값의 개수가 정해지지 않았을 때, 튜플 형태로 모두 받아옵니다.",
+          "키워드 매개변수(**kwargs): key=value 형태의 입력을 딕셔너리로 받아 처리합니다."
+        ],
+        "code": "# 가변 매개변수 및 return 활용 예제\ndef add_many(*args):\n    result = 0\n    for i in args:\n        result += i\n    return result\n\ntotal = add_many(1, 2, 3, 4, 5)\nprint(f'합계: {total}')  # 15 출력"
+      },
+      {
+        "section": "04-2. 사용자 입출력 & 파일 읽고 쓰기",
+        "bullets": [
+          "input(): 사용자가 키보드로 입력한 값을 항상 '문자열' 형태로 입력받습니다.",
+          "파일 열기 모드:",
+          "  - 'r' (읽기 모드): 파일의 내용을 읽을 때 사용",
+          "  - 'w' (쓰기 모드): 새로운 내용을 덮어 쓰거나 새 파일을 생성할 때 사용",
+          "  - 'a' (추가 모드): 기존 파일의 끝에 새로운 내용을 덧붙일 때 사용",
+          "with문: 블록을 벗어나면 파일 객체가 자동으로 close되도록 보장하여 안전합니다."
+        ],
+        "code": "# 파일 생성 및 with문 파일 읽기 예제\n# 1. 파일 쓰기\nwith open('test.txt', 'w', encoding='utf-8') as f:\n    f.write('Life is too short\\nYou need Python')\n\n# 2. 파일 읽기\nwith open('test.txt', 'r', encoding='utf-8') as f:\n    content = f.read()\n    print(content)"
+      }
+    ]
+  },
+  "05장_파이썬_날개_달기": {
+    "chapter_num": "05",
+    "chapter_title": "파이썬 날개 달기",
+    "slides": [
+      {
+        "section": "05-1. 클래스(Class)와 객체지향",
+        "bullets": [
+          "클래스(Class): 객체(Instance)를 만들기 위한 일종의 설계도(틀)입니다.",
+          "생성자(__init__): 객체가 생성되는 시점에 자동으로 호출되는 초기화 메서드입니다.",
+          "상속(Inheritance): 기존 클래스의 기능을 그대로 물려받아 새로운 클래스를 생성합니다.",
+          "메서드 오버라이딩(Overriding): 상속받은 부모의 메서드를 자식 클래스에서 재정의합니다."
+        ],
+        "code": "# 클래스 및 상속, 오버라이딩 예제\nclass Calculator:\n    def __init__(self, val=0):\n        self.value = val\n    def add(self, val):\n        self.value += val\n\nclass UpgradeCalculator(Calculator):\n    def minus(self, val):  # 새로운 기능 추가\n        self.value -= val\n\ncal = UpgradeCalculator(100)\ncal.add(20)\ncal.minus(50)\nprint(cal.value)  # 70"
+      },
+      {
+        "section": "05-2. 모듈, 패키지, 예외 처리",
+        "bullets": [
+          "모듈(Module): 함수나 클래스를 모아놓은 파이썬 파일(.py)입니다.",
+          "패키지(Package): 여러 개의 모듈들을 폴더 구조로 묶어 관리하는 것입니다.",
+          "예외 처리(Exception Handling): 프로그램 실행 중 발생하는 오류를 제어합니다.",
+          "  - try: 에러가 발생할 가능성이 있는 코드 영역 실행",
+          "  - except: 지정한 오류가 발생했을 때 대체 동작 수행",
+          "  - finally: 에러 발생 유무와 무관하게 항상 실행할 코드 정의"
+        ],
+        "code": "# 예외 처리 활용 예제\ntry:\n    a = [1, 2]\n    print(a[3])  # IndexError 유발\n    result = 4 / 0\nexcept IndexError as e:\n    print(f'인덱스 범위 초과! ({e})')\nexcept ZeroDivisionError as e:\n    print(f'0으로 나눌 수 없음! ({e})')\nfinally:\n    print('예외 처리 블록 종료!')"
+      },
+      {
+        "section": "05-3. 내장 함수와 외장 표준 라이브러리",
+        "bullets": [
+          "내장 함수: import 없이 언제나 바로 사용할 수 있는 기본 제공 함수들",
+          "  - map(f, list): 모든 요소에 함수 f를 적용하여 결과를 매핑",
+          "  - filter(f, list): 함수 f가 참을 반환하는 요소만 걸러서 반환",
+          "  - zip(*iterable): 동일한 개수의 자료형을 튜플 쌍으로 묶어줌",
+          "표준 라이브러리: 파이썬 설치 시 기본 제공되는 외장 모듈 (sys, os, time 등)"
+        ],
+        "code": "# map/filter 내장 함수 및 datetime 라이브러리\n# 1. map + lambda\nres1 = list(map(lambda x: x*2, [1, 2, 3]))\nprint(res1)  # [2, 4, 6]\n\n# 2. 표준 라이브러리 활용\nimport datetime\ntoday = datetime.date.today()\nprint(f'오늘 날짜: {today}')"
+      }
+    ]
+  },
+  "06장_파이썬_프로그래밍_어떻게_시작해야_할까": {
+    "chapter_num": "06",
+    "chapter_title": "파이썬 프로그래밍, 어떻게 시작해야 할까?",
+    "slides": [
+      {
+        "section": "06-1. 배수 합하기 & 게시판 페이징",
+        "bullets": [
+          "1. 3과 5의 배수 합하기:",
+          "  - 1000 미만의 자연수 중에서 3과 5의 배수를 모두 찾아 더하는 알고리즘 실습.",
+          "  - 중복 계산(예: 15의 배수)을 방지하기 위해 논리 연산자 or를 사용합니다.",
+          "2. 게시판 페이징 계산:",
+          "  - 총 게시물 수와 한 페이지에 보여줄 게시물 수를 입력받아 총 페이지 수를 구합니다.",
+          "  - 소수점 나머지가 있을 경우 1페이지를 추가해주는 수식을 수립합니다."
+        ],
+        "code": "# 1. 3과 5의 배수 합하기 예제\ntotal = 0\nfor n in range(1, 1000):\n    if n % 3 == 0 or n % 5 == 0:\n        total += n\nprint('3과 5의 배수 총합:', total)\n\n# 2. 게시판 페이징 예제\ndef get_total_page(m, n):\n    if m % n == 0:\n        return m // n\n    else:\n        return m // n + 1"
+      },
+      {
+        "section": "06-2. 간단한 메모장 & 디렉터리 검색",
+        "bullets": [
+          "3. 간단한 메모장 만들기:",
+          "  - 명령행 인자(sys.argv)를 이용하여 텍스트 파일에 메모를 쓰고 읽는 프로그램 작성.",
+          "  - '-a' 옵션으로 내용을 추가하고, '-v' 옵션으로 파일 전체 내용을 출력합니다.",
+          "4. 하위 디렉터리 검색하기:",
+          "  - 특정 디렉터리부터 하위 폴더들을 모두 훑으며 파이썬 파일(.py)만 추출하여 출력하는 스크립트 제작."
+        ],
+        "code": "# 4. 특정 디렉토리 파일 검색 예제\nimport os\n\ndef search_dir(dirname):\n    try:\n        filenames = os.listdir(dirname)\n        for filename in filenames:\n            full_path = os.path.join(dirname, filename)\n            if os.path.isdir(full_path):\n                search_dir(full_path)\n            else:\n                ext = os.path.splitext(full_path)[-1]\n                if ext == '.py':\n                    print(full_path)\n    except PermissionError:\n        pass"
+      }
+    ]
+  },
+  "07장_파이썬_날아오르기": {
+    "chapter_num": "07",
+    "chapter_title": "파이썬 날아오르기",
+    "slides": [
+      {
+        "section": "07-1. 데코레이터(Decorator)와 클로저",
+        "bullets": [
+          "클로저(Closure): 어떤 함수 내부에 선언된 함수가 외부 함수의 지역 변수를 기억하는 구조.",
+          "데코레이터(Decorator): 기존 함수의 수정 없이 기능을 추가/변경하는 래퍼(Wrapper) 함수.",
+          "  - 파이썬에서는 `@함수명` 어노테이션 표기를 지원합니다.",
+          "  - 로깅, 실행 시간 검사, 접근 권한 체크 등에 다방면으로 쓰입니다."
+        ],
+        "code": "# 실행 시간을 측정하는 데코레이터 예제\nimport time\n\ndef elapsed(original_fn):\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = original_fn(*args, **kwargs)\n        end = time.time()\n        print(f'실행 시간: {end - start:.4f}초')\n        return result\n    return wrapper\n\n@elapsed\ndef my_heavy_task():\n    time.sleep(1)"
+      },
+      {
+        "section": "07-2. 이터레이터와 제너레이터",
+        "bullets": [
+          "이터레이터(Iterator): `next()` 호출 시 다음 값을 반환하는 객체 (__iter__, __next__).",
+          "제너레이터(Generator): 이터레이터를 보다 쉽고 직관적으로 만드는 특수 함수.",
+          "  - return 대신 `yield` 문을 사용합니다.",
+          "  - 필요한 시점에만 값을 생성(Lazy Evaluation)하므로, 대용량 데이터 처리 시 메모리를 혁신적으로 절약합니다."
+        ],
+        "code": "# 제너레이터를 활용한 피보나치 수열 예제\ndef fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b\n\nfor fib in fibonacci(5):\n    print(fib)  # 0 1 1 2 3 출력"
+      }
+    ]
+  },
+  "08장_정규표현식": {
+    "chapter_num": "08",
+    "chapter_title": "정규표현식 (Regular Expression)",
+    "slides": [
+      {
+        "section": "08-1. 정규표현식 기초와 메타 문자",
+        "bullets": [
+          "정규표현식: 복잡한 문자열 패턴을 검색, 추출, 변경할 수 있는 도구입니다 (re 모듈 사용).",
+          "메타 문자: 특수한 의미를 갖는 패턴 예약어들.",
+          "  - `.` (임의의 한 문자), `*` (0회 이상 반복), `+` (1회 이상 반복), `?` (0~1회 반복)",
+          "  - `^` (문자열의 시작), `$` (문자열의 끝)",
+          "  - `\\d` (숫자), `\\w` (알파벳+숫자), `\\s` (공백)"
+        ],
+        "code": "# re 모듈을 활용한 기본 패턴 매칭 예제\nimport re\n\n# 전화번호 패턴 검색\nphone_pattern = re.compile(r'\\d{3}-\\d{4}-\\d{4}')\ntext = '제 번호는 010-1234-5678 입니다.'\n\nmatch_obj = phone_pattern.search(text)\nif match_obj:\n    print('찾은 번호:', match_obj.group())"
+      },
+      {
+        "section": "08-2. 그룹화, 전방 탐색, 그리고 치환",
+        "bullets": [
+          "그룹화 (Group): 소괄호 `( )`를 사용하여 매칭할 패턴의 범위를 묶어 관리합니다.",
+          "전방 탐색 (Lookahead): 특정 패턴을 검색 조건으로 삼되, 매칭 텍스트 결과에서는 배제합니다.",
+          "  - 긍정형 전방 탐색: `(?=pattern)` (패턴이 뒤이어 오는 경우에만 참)",
+          "치환 (Substitution): `re.sub(pattern, repl, text)` 함수를 통해 패턴을 다른 텍스트로 교체합니다."
+        ],
+        "code": "# 정규식을 활용한 이메일 마스킹 예제\nimport re\n\nemail_text = 'my_mail@gmail.com, hello@naver.com'\n# 아이디 부분만 그룹으로 지정하여 치환\nmasked = re.sub(r'(\\w+)(?=@)', '****', email_text)\nprint(masked)  # ****@gmail.com, ****@naver.com"
+      }
+    ]
+  },
+  "09장_부록": {
+    "chapter_num": "09",
+    "chapter_title": "부록. 실무 팁과 코드 가이드",
+    "slides": [
+      {
+        "section": "09-1. 가상환경(venv) 및 패키지 관리",
+        "bullets": [
+          "가상환경(Virtual Environment): 프로젝트별로 패키지 의존성을 격리하여 충돌을 차단합니다.",
+          "기본 생성 명령: `python -m venv .venv`",
+          "활성화 명령: `.venv\\Scripts\\activate` (Windows PowerShell)",
+          "패키지 목록화: `pip freeze > requirements.txt`로 의존성을 텍스트 파일로 고정 보관합니다.",
+          "패키지 일괄 설치: `pip install -r requirements.txt`"
+        ],
+        "code": "# requirements.txt 파일 예시\npython-pptx==1.0.2\npypdf==4.2.0\ngoogle-generativeai==0.8.3"
+      },
+      {
+        "section": "09-2. 코드 스타일 가이드 (PEP 8)",
+        "bullets": [
+          "PEP 8: 파이썬 공식 디자인 원칙이자 코드 스타일 가이드입니다.",
+          "핵심 스타일 요약:",
+          "  - 들여쓰기: 탭이 아닌 공백(Space) 4칸 필수.",
+          "  - 한 줄 최대 길이: 79자로 제한하여 가독성 증대.",
+          "  - 네이밍: 함수/변수는 snake_case, 클래스는 CamelCase(CapWords) 사용.",
+          "포매터(Formatter): Black, Flake8 등을 사용하여 코드 가독성과 컨벤션을 기계적으로 유지합니다."
+        ],
+        "code": "# 올바른 함수 정의와 들여쓰기 예시\ndef calculate_sum(numbers):\n    # 4칸 공백 들여쓰기 준수\n    total_result = 0\n    for number in numbers:\n        total_result += number\n    return total_result"
+      }
+    ]
+  },
+  "10장_정답_및_풀이": {
+    "chapter_num": "10",
+    "chapter_title": "정답 및 풀이",
+    "slides": [
+      {
+        "section": "10-1. 기초 및 종합 실습 문제 정답",
+        "bullets": [
+          "점프 투 파이썬 교재의 각 단원별 종합 연습문제 중 핵심 정답 코드입니다.",
+          "1. 리스트 중복 요소 제거: 집합(set)의 중복 불가 특성을 활용하여 한 줄로 변환.",
+          "2. 람다식 변환: 간단한 if-else 처리를 한 줄의 lambda 함수 표현식으로 단축 구현.",
+          "3. 파일 읽기/쓰기 역순 배치: 파일 전체를 읽고 줄 단위 리스트로 변환 후, 거꾸로 뒤집어 다시 작성."
+        ],
+        "code": "# 1. 리스트 중복 제거\na = [1, 1, 1, 2, 2, 3, 3, 3, 4]\nresult = list(set(a))\nprint(result)  # [1, 2, 3, 4]\n\n# 2. 람다 함수 처리\n# def mul(x): return x * 3\nmul = lambda x: x * 3"
+      },
+      {
+        "section": "10-2. 파일 읽기/쓰기 종합 문제 풀이",
+        "bullets": [
+          "교재 4장~5장의 파일 제어 관련 종합 실습 예제 풀이입니다.",
+          "텍스트 파일 내의 특정 단어를 검색하여 다른 단어로 치환하는 프로세스를 이해합니다.",
+          "with 블록을 활용하여 파일의 open과 close를 자동으로 처리해주는 안전한 파일 쓰기 패턴.",
+          "파일 읽기 및 문자열 치환 함수인 `replace`를 혼합하여 최종 연산을 수행합니다."
+        ],
+        "code": "# 파일 내 'java' 문자열을 'python'으로 변경하여 덮어쓰기\nwith open('sample.txt', 'r') as f:\n    body = f.read()\n\nbody = body.replace('java', 'python')\n\nwith open('sample.txt', 'w') as f:\n    f.write(body)"
+      }
+    ]
+  }
+}

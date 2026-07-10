@@ -1,0 +1,34 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="purple">import</span> random
+<span class="gold">print</span>(<span class="red2">'구구단을 외자! 구구단을 외자!'</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>):
+    a, b = random.randint(<span class="green">2</span>, <span class="green">9</span>), random.randint(<span class="green">1</span>, <span class="green">9</span>)
+    answer = <span class="gold">input</span>(str(a) + <span class="red2">'x'</span> + str(b) + <span class="red2">'? '</span>)
+    answer = int(answer)
+    <span class="purple">if</span> answer != a * b:
+        <span class="gold">print</span>(<span class="cd2 red2">'틀렸습니다! 5번 반복해 읽어 봅시다.'</span>)
+        <span class="cd2 purple">for</span> <span class="cd2">j</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">5</span><span class="cd2">)</span>:
+            <span class="cd2 gold">print</span><span class="cd2">(a, 'x'</span><span class="cd2">, b, '?'</span><span class="cd2">, a * b)</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+구구단을 외자! 구구단을 외자! 
+6x2? <span class="cd2">12</span> 
+7x6? <span class="cd2">42</span> 
+6x2? <span class="cd2">10</span>
+틀렸습니다! 5번 반복해 읽어 봅시다. 
+6 x 2 ? 12 
+6 x 2 ? 12 
+6 x 2 ? 12 
+6 x 2 ? 12 
+6 x 2 ? 12 
+4x5? <span class="cd2">20</span>
+…</pre>
+</div>
+<p class="txt bl">정답과 오답을 입력해 보고 의도한 대로 결과가 나오는지 확인하세요.</p>
+</div>
+</section>
+</section>

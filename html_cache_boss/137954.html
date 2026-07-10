@@ -1,0 +1,55 @@
+<h1 class="page-subject">2-4. VS CODE 사용법 (기초)</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>지난 시간에 VS code를 설치하고, 파이썬 코딩을 위해 파이썬 관련 Extension 몇가지를 설치해보았습니다.</p>
+<p>이번 시간에는 VS cdoe를 본격적으로 사용하기 위해서, 주요 기능들을 알아보겠습니다.</p>
+<p>추가로 조금 설정할 것들이 있어서 그 부분도 간략히 설명하도록 하겠습니다.</p>
+<h1 id="1-python">1. 폴더 생성 &amp; Python 파일 만들기</h1>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bLuiL6/btqZFunfTiS/4277kS3hRJwcaXG0AgK3Ek/img.png"/></p>
+<p>가장 처음할 것은 파이썬 파일이나 기타 파일들을 전부 넣어두는 하나의 프로젝트용 폴더를 만드는 것입니다.</p>
+<p>위치는 원하시는 어느 곳이든 상관없습니다. 이름은 제가 테스트해보니 한글로 만드셔도 작동하지만 웬만하면 영어로 해주세요.</p>
+<p>보통 외국 프로그램들은 한글이랑 안 친해서 오류가 생기는 경우가 많거든요..</p>
+<p>그리고 폴더를 생성하지 않고 그냥 바탕화면이나 기존 폴더를 사용해도 되지만 추천드리지 않아요.</p>
+<p>나중에 파일을 찾을 때도 힘들고, 프로젝트를 하면서도 직관성이 떨어지니까요!</p>
+<p>폴더를 만드셨으면 메뉴 텝에서 파일-열기를 선택하셔서 생성하신 폴더를 열어주세요.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cHCoOY/btqZrgqQCb9/gUjBnZRRia2Mhq1yoH6dKk/img.png"/></p>
+<p>그러면 위의 그림처럼 화면이 나올텐데요. 좌측 상단을 보시면 +표시가 있는 아이콘이 2개 보이실 거에요.</p>
+<p>왼쪽이 파일을 생성하는 아이콘이고, 오른쪽이 폴더를 생성하는 아이콘입니다. (물론 우리가 방금 만든 프로젝트 폴더 안에요)</p>
+<p>파이썬 파일(.py)을 만들기 위해서는 파일 생성 아이콘을 클릭 후,  <strong>파일 이름.py</strong>로 이름을 지어주세요.</p>
+<p>저는 ex_hello.py로 파이썬 파일을 생성했습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bHUKzj/btqZvNaAZjK/QAfODTzcB0ri6bVNLkFHIK/img.png"/></p>
+<p>만약에 파일 이름에 .py를 붙이지 않으셨다면 당황하지 마시고, 만드신 파일을 우클릭 하셔서 이름 바꾸기로 .py를 추가해주시면 됩니다!</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/Zb7G6/btqZrgdjhZq/BvbYbwoinSyU1UT865XVH0/img.png"/></p>
+<h1 id="2">2. 파이썬 파일 코딩 후 실행해보기</h1>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/Ea1VB/btqZrf6xTg7/xIRRCSK46ze8qhCvXDVbv0/img.png"/></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>자! 이제 드디어 파이썬 언어로 코딩을 한 줄 해봅시다.</p>
+<pre><code>print("hello python")
+</code></pre>
+<p>아주 직관적인 파이썬 답게 "hello python"을 출력해 달라는 내용입니다.</p>
+<p>우측 상단의 초록색 재생 버튼을 눌러서, 코드를 실행시키기 전에!</p>
+<p>만약 아나콘다를 설치하셨다면 좌측 하단에 Python 3.8.3 64-bit('base':conda)라고 나와 있는 것을 보실 수 있을텐데요. 이것은 아나콘다를 설치하면 기본으로 구축되는 인터프리터 환경(environment)입니다. 나중에 배우시겠지만 conda install을 이용해서 라이브러리를 설치하면 여기 'base'에 라이브러리들이 설치되는데, 만약 다른 환경을 선택하신다면 잘 작동하던 코드가 오류가 뜰 수 있으니 신경써 주셔야해요.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/zB9eg/btqZqpBBhlu/kUXlEl67O8vQpDasRApkUk/img.png"/></p>
+<p>만약 python을 따로 설치하셨거나, 별도로 가상 환경을 생성하신 분들은 좌측 하단의 버전을 클릭하시면 위의 그림처럼 여러가지 환경을 선택하실 수 있는 창이 나타날 거에요.</p>
+<h1 id="3">3. 오류 해결 (기본 터미널 설정)</h1>
+<p>다시 본론으로 돌아와서 우측 상단의 코드 실행 버튼 (초록색 재생 버튼)을 누르시면 아마도 하단에 아래와 같은 글씨들이 뜰 거에요.</p>
+<p>(Window OS는 이런 현상이 나타났고, Mac OS는 설치한지가 오래되어서 뜨는지 안뜨는지 잘 모르겠습니다.)</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/sw9bG/btqZFuU6RGI/KY3izpeYQewzgs6yKkpAq1/img.png"/></p>
+<p>실행이 되긴 하는데 계속 빨간 글씨가 뜨는게 마음에 안듭니다.</p>
+<p>많은 시행 착오 끝에 알아낸 원인은 VS code 설치 시, 기본 터미널이 powershell이라는 것입니다.</p>
+<p>해결 방법은 아래와 같습니다.</p>
+<p>1) Ctrl + Shift + P를 눌러서 Command Pallete를 켠 후, Terminal: Select Default Shell을 입력하여 선택</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/mtwfO/btqZtA3HbdM/Ei85ixGuYcVHKRZaEgMnwK/img.png"/></p>
+<p>2) 항목들 중, Command Prompt를 선택
+3) Terminal 재실행</p>
+<h1 id="4">4. 주의할 점</h1>
+<p>구글에 'vscode anaconda 초기설정'이라고 검색하면 나오는 블로그 중 한 곳에서, Code Runner Extension을 설치하라고 나옵니다.</p>
+<p>저의 경우엔 이걸 설치하고 나니깐 코드 실행할 때마다 터미널에 실행 결과가 나오는 것이 아니라, 아래처럼 출력 탭을 통해 이렇게 나왔습니다. </p>
+<p>만약 Code Runner Extension을 설치하셨다면 일단  다시 제거하시는게 좋을 것 같습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/C7TJ2/btqZBd7FThs/8nb6RCwRJfnoOkqQvwQV4K/img.png"/></p>
+</div>

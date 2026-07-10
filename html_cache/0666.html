@@ -1,0 +1,115 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">함수는 호출되기 전까지 불이 꺼져 내부가 보이지 않는다고 생각하면 됩니다. 함수 외부에서는 함수가 있다고는 인식하지만, 함수 내부가 어떻게 생겼는지는 알 수 없습니다. 함수가 호출되면 그제서야 불을 켜고 내부를 볼 수 있게 되죠. 함수가 종료되면 불이 다시 꺼집니다. 따라서 함수 내부에 정의된 변수는 호출되기 전까지 함수 외부에서는 보이지 않습니다. 코드를 보면 <span class="cd">name</span> 변수는 <span class="cd">hi()</span> 함수 내부에 정의되어 있습니다. 이렇게 함수 내부에 정의된 변수는 함수가 호출될 때만 사용할 수 있습니다. 코드의 실행 과정을 정리하면 다음과 같습니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 13-1</span> 실행 과정</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w10">
+<p class="txts dm">실행 순서</p>
+</td>
+<td class="w50">
+<p class="txts dm">실행되는 명령어</p>
+</td>
+<td class="w40">
+<p class="txts dm">설명</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">1</p>
+</td>
+<td class="w50">
+<p class="txts dl ind11"><span class="cd">def hi():</span></p>
+<p class="txts dl ind30"><img alt="" class="h40" src="https://thebook.io/img/080251/554_1.jpg"/></p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">print('자기소개를 시작합니다.')</span></p>
+<p class="txts dl ind11"><span class="cd">hi()</span></p>
+<p class="txts dl ind11"><span class="cd">print(name, '님 안녕하세요.')</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">hi()</span> 함수 내부가 보이지 않음</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">2</p>
+</td>
+<td class="w50">
+<p class="txts dl ind11"><span class="cd">def hi():</span></p>
+<p class="txts dl ind30"><img alt="" class="h40" src="https://thebook.io/img/080251/554_1.jpg"/></p>
+<p class="txts dl ind11"><span class="cd">print('자기소개를 시작합니다.')</span></p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">hi()</span></p>
+<p class="txts dl ind11"><span class="cd">print(name, '님 안녕하세요.')</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">hi()</span> 함수 호출</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">3</p>
+</td>
+<td class="w50">
+<p class="txts dl ind11"><span class="cd">def hi():</span></p>
+<p class="txts dl ind11"><img alt="" class="h40" src="https://thebook.io/img/080251/554_2.jpg"/></p>
+<p class="txts dl ind11"><span class="cd">print('자기소개를 시작합니다.')</span></p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">hi()</span></p>
+<p class="txts dl ind11"><span class="cd">print(name, '님 안녕하세요.')</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">hi()</span> 함수 내부가 보이고, <span class="cd">hi()</span> 함수의 첫 번째 명령어 실행</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">4</p>
+</td>
+<td class="w50">
+<p class="txts dl ind11"><span class="cd">def hi():</span></p>
+<p class="txts dl ind11"><img alt="" class="h40" src="https://thebook.io/img/080251/554_3.jpg"/></p>
+<p class="txts dl ind11"><span class="cd">print('자기소개를 시작합니다.')</span></p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">hi()</span></p>
+<p class="txts dl ind11"><span class="cd">print(name, '님 안녕하세요.')</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">hi()</span> 함수의 두 번째 명령어 실행</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">5</p>
+</td>
+<td class="w50">
+<p class="txts dl ind11"><span class="cd">def hi():</span></p>
+<p class="txts dl ind11"><img alt="" class="h40" src="https://thebook.io/img/080251/554_4.jpg"/></p>
+<p class="txts dl ind11"><span class="cd">print('자기소개를 시작합니다.')</span></p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">hi()</span></p>
+<p class="txts dl ind11"><span class="cd">print(name, '님 안녕하세요.')</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">hi()</span> 함수의 의 세 번째 명령어 실행</p>
+<p class="txts dl"><span class="cd">hi()</span> 함수 종료</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">6</p>
+</td>
+<td class="w50">
+<p class="txts dl ind11"><span class="cd">def hi():</span></p>
+<p class="txts dl ind30"><img alt="" class="h40" src="https://thebook.io/img/080251/554_1.jpg"/></p>
+<p class="txts dl ind11"><span class="cd">print('자기소개를 시작합니다.')</span></p>
+<p class="txts dl ind11"><span class="cd">hi()</span></p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">print(name, '님 안녕하세요.')</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">hi()</span> 함수가 종료되며 내부가 다시 보이지 않음</p>
+<p class="txts dl">다음 명령어 실행</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>

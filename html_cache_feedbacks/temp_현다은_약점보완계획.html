@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>약점 분석 및 보완 계획서</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            color: #2c3e50;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 2.5rem 2rem;
+            line-height: 1.8;
+            -webkit-print-color-adjust: exact;
+        }
+
+        h1 {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            border-bottom: 3px solid #1e3a8a;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1e40af;
+            border-left: 5px solid #2563eb;
+            padding-left: 0.75rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p, li {
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Table Design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            font-weight: 700;
+            padding: 12px 10px;
+            border-bottom: 2px solid #e2e8f0;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Recruiter Recommendation Badges styling (if match) */
+        span.rating {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Warning/Caution Box Styles (Replacing Markdown blockquotes or headers) */
+        li strong {
+            color: #0f172a;
+        }
+
+        /* Page break controls for print */
+        @media print {
+            body {
+                padding: 1.5cm;
+            }
+            h2 {
+                page-break-before: always;
+            }
+            h2:first-of-type {
+                page-break-before: avoid;
+            }
+            table, ul {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🤖 [현다은] 포트폴리오 약점 분석 및 합격 보완 계획서</h1>
+<h2>1. 대상자 프로필</h2>
+<ul>
+<li><strong>희망 직무</strong>: Data Analyst 및 AI 서비스 개발자 (비전공자 / 문화인류학 학사)</li>
+<li><strong>포트폴리오 핵심 주제</strong>: GitHub Release Manager로서의 PR 및 형상 관리 주도, 퍼스널컬러 KNN 알고리즘 일반화 최적화(눈 영역 과의존 해결), 고객 리뷰 토픽 모델링 기반 추천 및 립 제품 매칭</li>
+</ul>
+<hr />
+<h2>2. 5대 IT 대기업 채용담당자 평가 및 등급</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">기업명</th>
+<th style="text-align: center;">추천 등급</th>
+<th style="text-align: center;">핏 스코어</th>
+<th style="text-align: left;">평가 핵심 총평</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>삼성SDS</strong></td>
+<td style="text-align: center;"><strong>B</strong></td>
+<td style="text-align: center;"><strong>75점</strong></td>
+<td style="text-align: left;">버전 배포와 브랜치 머지 전략을 리딩한 형상 관리자 역량은 좋으나, 다양한 AI 모델 학습에 비해 코어 CS 및 DB 튜닝 어필이 약함.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LG CNS</strong></td>
+<td style="text-align: center;"><strong>A-</strong></td>
+<td style="text-align: center;"><strong>87점</strong></td>
+<td style="text-align: left;">CI/CD 배포 파이프라인 구축 시도와 KNN 윈터 편향 오류의 수리적 트러블슈팅 해결 과정이 매우 뛰어나 DX 인재로 적합함.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>신세계I&amp;C</strong></td>
+<td style="text-align: center;"><strong>B+</strong></td>
+<td style="text-align: center;"><strong>80점</strong></td>
+<td style="text-align: left;">퍼스널컬러 기반 화장품 립 추천 등 리테일 도메인 연계성이 좋으나, 대용량 트래픽에 대응한 실시간 응답성(캐싱 등) 검증 부족.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>롯데이노베이트</strong></td>
+<td style="text-align: center;"><strong>B+</strong></td>
+<td style="text-align: center;"><strong>83점</strong></td>
+<td style="text-align: left;">문제 정의-솔루션-계량적 아웃풋으로 이어지는 문서의 논리 전개 수준이 매우 우수하나, 단위 테스트 작성 이력 누락 아쉬움.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CJ올리브네트웍스</strong></td>
+<td style="text-align: center;"><strong>A-</strong></td>
+<td style="text-align: center;"><strong>86점</strong></td>
+<td style="text-align: left;">문화인류학 배경, 동아리 리더십 및 대규모 전시 기획 경험을 기술과 결합한ONLYONE 융합 스토리텔링과 성장의 열망을 높이 삼.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. 핵심 약점 및 분석</h2>
+<h3>⚠️ 약점 1: 넓고 얕은 AI 스택으로 인한 '기술 깊이의 분산' (삼성SDS 지적)</h3>
+<ul>
+<li><strong>원인</strong>: ML(토픽모델링), NLP(감성분석), CV(MediaPipe, OpenCV), LLM(LoRA 튜닝) 등 인공지능의 거의 모든 분야를 포트폴리오에 나열하여, 신입 지원자로서 한 분야의 깊이를 깊게 파지 못한 인상을 줌.</li>
+<li><strong>보완 목표</strong>: "여러 모델을 실서비스 백엔드와 긴밀히 엮어내는 AI 연동 풀스택 역량"으로 스택의 방향성을 단일화하고 구조적 심도 입증.</li>
+</ul>
+<h3>⚠️ 약점 2: Cerebras API 활용 깊이 부족 (LG CNS 지적)</h3>
+<ul>
+<li><strong>원인</strong>: Cerebras를 활용해 정서 케어 RAG 챗봇을 설계했다고 기재했으나, 기획 관점의 프롬프트 작성에 머물러 있어 RAG 벡터 인덱싱 최적화나 실질적인 실시간 임베딩 파이프라인 구축 이력이 부족해 보임.</li>
+<li><strong>보완 목표</strong>: 단순 API 호출을 넘어서는 AI 모델 엔지니어링 구현 내역 보완.</li>
+</ul>
+<h3>⚠️ 약점 3: 실시간 추천 엔진의 가용성 입증 부족 (신세계I&amp;C 지적)</h3>
+<ul>
+<li><strong>원인</strong>: FastAPI와 PostgreSQL로 추천 시스템을 백엔드단에 배포했으나, 리테일 서비스에서 발생할 수 있는 동시 사용자 트래픽 처리나 실시간 립 추천 처리 속도를 위한 성능 개선(캐싱 등) 노력이 보이지 않음.</li>
+<li><strong>보완 목표</strong>: 추천 응답성 확보를 위한 최적화 아키텍처 제시.</li>
+</ul>
+<h3>⚠️ 약점 4: 코드 신뢰도 검증(단위 테스트) 부재 (롯데이노베이트 지적)</h3>
+<ul>
+<li><strong>원인</strong>: GitHub Action을 통한 CI/CD 인프라와 깃 관리는 훌륭하지만, 빌드 단계에서 안정성을 보장할 실질적인 단위 테스트(Unit Test) 구축 흔적이 없음.</li>
+<li><strong>보완 목표</strong>: PyTest 기반 단위 테스트 설계 이력을 추가하여 시스템 안정성 보증.</li>
+</ul>
+<h3>⚠️ 약점 5: 직무 아이덴티티의 경계 모호함 (CJ올리브네트웍스 지적)</h3>
+<ul>
+<li><strong>원인</strong>: 데이터 분석가(DA)와 백엔드/AI 서비스 개발자 사이의 역할 분담이 섞여 있어, 입사 후 어떤 스페셜티로 팀에 기여할지 뚜렷한 포커싱이 아쉬움.</li>
+<li><strong>보완 목표</strong>: "인문학적 사용자 이해도를 갖춘 AI 서비스 풀스택 엔지니어"로 브랜드 정립.</li>
+</ul>
+<hr />
+<h2>4. 단계별 약점 극복 로드맵 (Action Plan)</h2>
+<h3>📅 [Phase 1] 직무 아이덴티티 단일화 및 기여도 명세 (즉시 실행)</h3>
+<ol>
+<li><strong>타이틀 재정의</strong>: 포트폴리오 첫 장과 이력서 헤드라인을 <strong>"사용자 데이터와 AI 모델을 조율하는 AI 서비스 풀스택 개발자"</strong>로 단일화하여 전문성 강조.</li>
+<li><strong>형상관리 성과 시각화</strong>: GitHub Release Manager로서 활약하며 구축한 <strong>브랜치 전략(Git Flow) 다이어그램</strong>을 포트폴리오 내 1페이지로 깔끔하게 삽입하여 협업 역량을 직관적으로 어필.</li>
+</ol>
+<h3>📅 [Phase 2] AI/RAG 및 백엔드 기술 깊이 고도화 (1개월 내)</h3>
+<ol>
+<li><strong>RAG 파이프라인 고도화</strong>:</li>
+<li>Cerebras API 사용 시 데이터 임베딩 모델의 튜닝 방법과 벡터 DB 검색 최적화(Top-k 매칭 및 가중치 조정) 과정을 상세 아키텍처로 추가 서술.</li>
+<li><strong>실시간 캐싱 및 DB 인덱싱 도입</strong>:</li>
+<li>립 추천 및 식당 추천 엔진의 응답 속도 향상을 위해 <strong>Redis 기반 추천 캐싱 레이어</strong> 장표 추가.</li>
+<li>PostgreSQL 데이터베이스의 <strong>복합 인덱스(Composite Index) 튜닝</strong>을 통한 쿼리 속도 개선 이력 가미.</li>
+</ol>
+<h3>📅 [Phase 3] DevOps 인프라 및 코드 안정성 증명 (2개월 내)</h3>
+<ol>
+<li><strong>단위 테스트 및 CI/CD 연동</strong>:</li>
+<li>PyTest를 사용해 퍼스널컬러 KNN 모델 및 API 응답 로직의 단위 테스트를 작성한 이력 기술.</li>
+<li>GitHub Actions의 CI 단계에서 이 테스트 코드가 자동으로 구동되어 빌드 안정성을 체크하도록 자동화 파이프라인 완성.</li>
+<li><strong>IaC(Terraform) 맛보기</strong>:</li>
+<li>로컬 Docker 환경 배포에서 한 단계 나아가, 인프라를 코드로 관리(IaC)하는 기본 Terraform 구성 경험을 서술하여 LG CNS 등 DX 지향 대기업 맞춤 어필.</li>
+</ol>
+<hr />
+<h2>5. 추천 학습 리소스 및 키워드</h2>
+<ul>
+<li><strong>AI/RAG</strong>: LangChain/LangGraph를 활용한 프롬프트 엔지니어링 &amp; 벡터 DB 연동 설계 패턴.</li>
+<li><strong>백엔드/DB</strong>: PostgreSQL 인덱스 작동 원리 및 Redis 캐싱 디자인 패턴 (Cache-Aside, Write-Through).</li>
+<li><strong>테스트/인프라</strong>: Python <code>pytest-mock</code> 및 GitHub Actions 튜토리얼.</li>
+</ul>
+</body>
+</html>

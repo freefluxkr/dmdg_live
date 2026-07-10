@@ -1,0 +1,892 @@
+<div class="page-content tex2jax_process">
+<h2 id="chapter-14-chat-completions-api">Chapter 14. Chat Completions API 활용</h2>
+<p>이번 챕터에서는 <strong>Chat Completions API</strong>를 중심으로 OpenAI, Google Gemini, Anthropic Claude 세 가지 주요 AI 서비스의 API 호출 방법을 배웁니다. 각 API의 구조와 파라미터를 이해하고, 실제로 실행 가능한 Python 코드를 통해 멀티턴 대화 구현과 스트리밍 응답까지 단계적으로 익혀 봅니다.</p>
+<blockquote>
+<p><strong>이 챕터를 마치면</strong>: OpenAI Chat Completions API의 구조를 이해하고, temperature 등 핵심 파라미터를 조절할 수 있습니다. 스트리밍 응답을 구현하고, 멀티턴 대화를 위한 컨텍스트 관리 방법을 익힙니다. 나아가 Gemini와 Claude API도 동일한 방식으로 호출할 수 있게 됩니다.</p>
+<p>📌 <strong>[2026 업데이트] 최신 모델 매핑</strong></p>
+<p>이 챕터의 코드 예시는 학습 편의를 위해 2024년 출시 모델 ID(<code>gpt-4o-mini</code>, <code>gemini-1.5-flash</code>, <code>claude-3-5-haiku-20241022</code>)를 사용합니다. <strong>2026년 5월 기준 동급 최신 모델</strong>로 바꿔 실행하려면 다음 매핑을 사용하세요.</p>
+<table>
+<thead>
+<tr>
+<th>챕터 코드 ID</th>
+<th>2026년 동급 최신 모델</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gpt-4o-mini</code></td>
+<td><code>gpt-5-mini</code> (또는 <code>gpt-5</code>)</td>
+</tr>
+<tr>
+<td><code>gemini-1.5-flash</code></td>
+<td><code>gemini-2.5-flash</code></td>
+</tr>
+<tr>
+<td><code>gemini-1.5-pro</code></td>
+<td><code>gemini-2.5-pro</code></td>
+</tr>
+<tr>
+<td><code>claude-3-5-haiku-20241022</code></td>
+<td><code>claude-haiku-4-5</code></td>
+</tr>
+</tbody>
+</table>
+<p>Gemini SDK도 신 <code>google-genai</code> 패키지로 마이그레이션이 진행 중입니다. 자세한 안내는 Ch13의 모델 ID·SDK 갱신 박스를 참고하세요.</p>
+</blockquote>
+<hr/>
+<h2 id="141-openai-chat-completions-api">14.1 OpenAI Chat Completions API 구조</h2>
+<p><strong>Chat Completions API</strong>는 OpenAI가 제공하는 핵심 API로, 대화 형식의 메시지 목록을 입력받아 모델의 응답을 반환합니다. <code>gpt-4o</code>, <code>gpt-4o-mini</code> 등의 모델을 사용할 수 있습니다.</p>
+<p align="center">
+<img alt="Chat Completions API 호출 흐름 - 클라이언트에서 messages·파라미터를 보내고 응답 객체에서 choices·usage를 받는 구조" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338403/ch14_chat_api_flow_wGtFQ86.png" style="max-width:700px; width:100%; height:auto;"/>
+</p>
+<h3 id="_1">기본 호출 구조</h3>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI(api_key="YOUR_API_KEY")  # 환경변수 OPENAI_API_KEY 설정 시 생략 가능
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "당신은 친절한 AI 어시스턴트입니다."},
+        {"role": "user", "content": "파이썬이란 무엇인가요?"}
+    ]
+)
+
+# 응답 텍스트 추출
+print(response.choices[0].message.content)
+</code></pre>
+<h3 id="_2">응답 객체 구조</h3>
+<p>API가 반환하는 응답 객체(<code>ChatCompletion</code>)의 주요 필드는 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>응답 고유 ID</td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td>객체 타입 (<code>chat.completion</code>)</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>사용된 모델명</td>
+</tr>
+<tr>
+<td><code>choices</code></td>
+<td>생성된 응답 목록 (기본 1개)</td>
+</tr>
+<tr>
+<td><code>choices[0].message.content</code></td>
+<td>실제 응답 텍스트</td>
+</tr>
+<tr>
+<td><code>choices[0].finish_reason</code></td>
+<td>종료 이유 (<code>stop</code>, <code>length</code> 등)</td>
+</tr>
+<tr>
+<td><code>usage.prompt_tokens</code></td>
+<td>입력 토큰 수</td>
+</tr>
+<tr>
+<td><code>usage.completion_tokens</code></td>
+<td>출력 토큰 수</td>
+</tr>
+<tr>
+<td><code>usage.total_tokens</code></td>
+<td>전체 토큰 수</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-python"># 응답 객체 상세 확인 예시
+print(f"모델: {response.model}")
+print(f"응답: {response.choices[0].message.content}")
+print(f"종료 이유: {response.choices[0].finish_reason}")
+print(f"사용 토큰: {response.usage.total_tokens}")
+</code></pre>
+<hr/>
+<h2 id="142-system-user-assistant">14.2 메시지 역할 (system / user / assistant)</h2>
+<p><strong>Chat Completions API</strong>는 대화를 메시지 목록으로 관리합니다. 각 메시지는 <code>role</code>과 <code>content</code> 두 가지 필드로 구성됩니다. 역할(<code>role</code>)은 세 가지가 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>설명</th>
+<th>사용 시점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>system</code></td>
+<td>모델의 행동 방식과 페르소나 설정</td>
+<td>대화 맨 처음에 한 번</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>사용자의 입력 메시지</td>
+<td>매 질문마다</td>
+</tr>
+<tr>
+<td><code>assistant</code></td>
+<td>모델의 이전 응답</td>
+<td>대화 이력 유지 시</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+messages = [
+    # system: 모델의 역할과 지침 설정
+    {
+        "role": "system",
+        "content": (
+            "당신은 파이썬 전문 튜터입니다. "
+            "초보자도 이해할 수 있도록 쉽고 간결하게 설명하세요. "
+            "코드 예시는 반드시 포함하세요."
+        )
+    },
+    # user: 사용자 질문
+    {
+        "role": "user",
+        "content": "리스트 컴프리헨션이 뭔가요?"
+    },
+    # assistant: 이전 응답 (멀티턴 대화 시 이력으로 포함)
+    {
+        "role": "assistant",
+        "content": "리스트 컴프리헨션은 기존 리스트를 기반으로 새 리스트를 간결하게 만드는 문법입니다."
+    },
+    # 후속 질문
+    {
+        "role": "user",
+        "content": "실제 예제를 보여주세요."
+    }
+]
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=messages
+)
+
+print(response.choices[0].message.content)
+</code></pre>
+<blockquote>
+<p><strong>system 메시지 활용 팁</strong>: system 메시지는 모델의 성격, 응답 언어, 출력 형식, 금지 사항 등을 명시하는 데 활용합니다. 구체적일수록 원하는 방향의 응답을 얻기 쉽습니다.</p>
+</blockquote>
+<hr/>
+<h2 id="143">14.3 주요 파라미터 상세</h2>
+<p><strong>Chat Completions API</strong>에는 응답의 품질과 다양성을 조절하는 다양한 파라미터가 있습니다.</p>
+<h3 id="temperature">temperature</h3>
+<p><strong>temperature</strong>는 응답의 무작위성(창의성)을 조절합니다. 값의 범위는 <code>0.0</code> ~ <code>2.0</code>이며, 낮을수록 일관되고 예측 가능한 응답, 높을수록 다양하고 창의적인 응답이 생성됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>값 범위</th>
+<th>특성</th>
+<th>적합한 용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0.0</code> ~ <code>0.3</code></td>
+<td>일관적, 결정론적</td>
+<td>코드 생성, 사실 질의, 번역</td>
+</tr>
+<tr>
+<td><code>0.4</code> ~ <code>0.7</code></td>
+<td>균형적</td>
+<td>일반 대화, 요약</td>
+</tr>
+<tr>
+<td><code>0.8</code> ~ <code>1.5</code></td>
+<td>창의적, 다양</td>
+<td>창작, 아이디어 브레인스토밍</td>
+</tr>
+</tbody>
+</table>
+<h3 id="max_tokens">max_tokens</h3>
+<p><strong>max_tokens</strong>는 응답으로 생성할 최대 토큰 수를 제한합니다. 비용 절감과 응답 길이 제어에 활용합니다.</p>
+<blockquote>
+<p>1 토큰 ≈ 영어 4글자 또는 한글 1~2글자. 응답이 잘리면 <code>finish_reason</code>이 <code>length</code>로 표시됩니다.</p>
+</blockquote>
+<h3 id="top_p">top_p</h3>
+<p><strong>top_p</strong> (nucleus sampling)는 누적 확률 상위 p% 내의 토큰만 고려하여 샘플링합니다. <code>temperature</code>와 유사하게 다양성을 조절하지만, 일반적으로 둘 중 하나만 조절하는 것을 권장합니다.</p>
+<h3 id="frequency_penalty">frequency_penalty</h3>
+<p><strong>frequency_penalty</strong>는 이미 등장한 단어의 반복을 억제합니다. 값 범위는 <code>-2.0</code> ~ <code>2.0</code>이며, 양수 값은 반복을 줄이고 음수 값은 반복을 허용합니다.</p>
+<h3 id="presence_penalty">presence_penalty</h3>
+<p><strong>presence_penalty</strong>는 아직 등장하지 않은 새로운 주제나 단어를 유도합니다. <code>frequency_penalty</code>가 빈도 기반 패널티라면, <code>presence_penalty</code>는 등장 여부 기반 패널티입니다.</p>
+<h3 id="_3">파라미터 종합 예시</h3>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "당신은 창의적인 이야기 작가입니다."},
+        {"role": "user", "content": "외계인이 서울에 나타난 이야기를 짧게 써주세요."}
+    ],
+    temperature=1.2,          # 창의적인 응답을 위해 높게 설정
+    max_tokens=300,            # 최대 300 토큰
+    top_p=0.95,                # 상위 95% 토큰 풀에서 샘플링
+    frequency_penalty=0.5,    # 단어 반복 억제
+    presence_penalty=0.3,     # 새로운 주제 유도
+    n=1                        # 응답 후보 개수 (기본값 1)
+)
+
+print(response.choices[0].message.content)
+</code></pre>
+<hr/>
+<h2 id="144">14.4 응답 파싱과 에러 처리</h2>
+<p>실제 서비스에서는 API 호출 실패에 대비한 안전한 에러 처리가 필수입니다.</p>
+<h3 id="_4">응답 파싱</h3>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+def get_completion(prompt: str, system: str = "당신은 유용한 AI 어시스턴트입니다.") -&gt; str:
+    """프롬프트를 받아 응답 텍스트를 반환하는 헬퍼 함수"""
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=500
+    )
+
+    # choices가 비어 있는 경우 방어 처리
+    if not response.choices:
+        return ""
+
+    message = response.choices[0].message
+    finish_reason = response.choices[0].finish_reason
+
+    # 응답이 잘린 경우 경고
+    if finish_reason == "length":
+        print("⚠️ 경고: max_tokens 한도로 응답이 잘렸습니다.")
+
+    return message.content or ""
+
+result = get_completion("파이썬의 장점을 세 가지로 요약해주세요.")
+print(result)
+</code></pre>
+<h3 id="_5">에러 처리</h3>
+<pre><code class="language-python">from openai import OpenAI, APIError, RateLimitError, AuthenticationError
+import time
+
+client = OpenAI()
+
+def safe_completion(prompt: str, retries: int = 3) -&gt; str:
+    """재시도 로직이 포함된 안전한 API 호출 함수"""
+    for attempt in range(retries):
+        try:
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=300
+            )
+            return response.choices[0].message.content or ""
+
+        except AuthenticationError:
+            # API 키 오류는 재시도해도 의미 없음
+            print("❌ API 키가 유효하지 않습니다. 키를 확인하세요.")
+            raise
+
+        except RateLimitError:
+            # 요청 한도 초과: 잠시 대기 후 재시도
+            wait_time = 2 ** attempt  # 지수 백오프: 1초, 2초, 4초
+            print(f"⚠️ 요청 한도 초과. {wait_time}초 후 재시도합니다... ({attempt+1}/{retries})")
+            time.sleep(wait_time)
+
+        except APIError as e:
+            # 기타 API 오류
+            print(f"❌ API 오류 발생: {e}")
+            if attempt == retries - 1:
+                raise
+            time.sleep(1)
+
+    return ""
+
+result = safe_completion("안녕하세요! 오늘 날씨 어때요?")
+print(result)
+</code></pre>
+<blockquote>
+<p><strong>주요 예외 클래스 정리</strong>
+- <code>AuthenticationError</code>: API 키 인증 실패
+- <code>RateLimitError</code>: 분당 요청 수 또는 토큰 한도 초과
+- <code>APIError</code>: 서버 측 일반 오류
+- <code>APIConnectionError</code>: 네트워크 연결 실패
+- <code>BadRequestError</code>: 잘못된 요청 파라미터</p>
+</blockquote>
+<hr/>
+<h2 id="145-streaming">14.5 스트리밍(Streaming) 응답 구현</h2>
+<p><strong>스트리밍(Streaming)</strong>은 모델이 응답을 생성하는 즉시 토큰 단위로 전달받는 방식입니다. 긴 응답을 기다리지 않고 실시간으로 출력할 수 있어 사용자 경험이 크게 향상됩니다.</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+def stream_completion(prompt: str) -&gt; None:
+    """스트리밍 방식으로 응답을 출력하는 함수"""
+    print("응답: ", end="", flush=True)
+
+    stream = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=500,
+        stream=True  # 스트리밍 활성화
+    )
+
+    full_response = ""
+
+    for chunk in stream:
+        # delta에 텍스트가 있는 경우만 처리
+        delta = chunk.choices[0].delta
+        if delta.content:
+            print(delta.content, end="", flush=True)
+            full_response += delta.content
+
+    print()  # 줄바꿈
+    return full_response
+
+stream_completion("대한민국의 수도와 주요 도시 다섯 곳을 알려주세요.")
+</code></pre>
+<h3 id="vs">스트리밍 vs 일반 호출 비교</h3>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>일반 호출</th>
+<th>스트리밍 호출</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>응답 방식</td>
+<td>전체 완성 후 한 번에 반환</td>
+<td>토큰 단위로 순차 반환</td>
+</tr>
+<tr>
+<td>사용자 경험</td>
+<td>대기 시간 있음</td>
+<td>실시간 출력으로 빠른 체감 속도</td>
+</tr>
+<tr>
+<td>적합한 용도</td>
+<td>배치 처리, 후처리 필요 시</td>
+<td>챗봇 UI, 긴 응답</td>
+</tr>
+<tr>
+<td>구현 복잡도</td>
+<td>단순</td>
+<td>반복문 처리 필요</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="146-context">14.6 대화 이력(Context) 관리 — 멀티턴 대화 구현</h2>
+<p><strong>멀티턴(multi-turn) 대화</strong>를 구현하려면 이전 대화 내용을 메시지 목록에 누적하여 매번 API에 전달해야 합니다. <strong>Chat Completions API</strong>는 상태를 저장하지 않으므로, 컨텍스트 관리는 클라이언트(코드) 쪽에서 직접 수행해야 합니다.</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+class ChatSession:
+    """대화 이력을 관리하는 멀티턴 챗봇 클래스"""
+
+    def __init__(self, system_prompt: str = "당신은 친절한 AI 어시스턴트입니다."):
+        self.messages = [
+            {"role": "system", "content": system_prompt}
+        ]
+        self.model = "gpt-4o-mini"
+
+    def chat(self, user_input: str) -&gt; str:
+        """사용자 입력을 받아 응답을 반환하고 이력을 갱신합니다."""
+        # 사용자 메시지 추가
+        self.messages.append({"role": "user", "content": user_input})
+
+        # API 호출
+        response = client.chat.completions.create(
+            model=self.model,
+            messages=self.messages,
+            max_tokens=500
+        )
+
+        assistant_reply = response.choices[0].message.content or ""
+
+        # 어시스턴트 응답도 이력에 추가
+        self.messages.append({"role": "assistant", "content": assistant_reply})
+
+        return assistant_reply
+
+    def reset(self):
+        """대화 이력을 초기화합니다 (system 메시지는 유지)."""
+        system_msg = self.messages[0]
+        self.messages = [system_msg]
+
+    def get_history(self) -&gt; list:
+        """system 메시지를 제외한 대화 이력을 반환합니다."""
+        return [m for m in self.messages if m["role"] != "system"]
+
+
+# 사용 예시
+session = ChatSession(system_prompt="당신은 파이썬 튜터입니다. 간결하게 설명하세요.")
+
+# 멀티턴 대화
+questions = [
+    "파이썬 리스트와 튜플의 차이는 무엇인가요?",
+    "그럼 언제 튜플을 사용하는 게 좋을까요?",
+    "딕셔너리는 어떤 경우에 쓰나요?"
+]
+
+for q in questions:
+    print(f"\n[사용자]: {q}")
+    answer = session.chat(q)
+    print(f"[어시스턴트]: {answer}")
+
+print(f"\n총 대화 횟수: {len(session.get_history()) // 2}회")
+</code></pre>
+<h3 id="_6">토큰 한도와 컨텍스트 압축</h3>
+<p>모델마다 처리할 수 있는 <strong>컨텍스트 윈도우(context window)</strong> 한도가 있습니다. 대화가 길어지면 오래된 이력을 제거하거나 요약하는 전략이 필요합니다.</p>
+<pre><code class="language-python">def trim_messages(messages: list, max_pairs: int = 10) -&gt; list:
+    """
+    system 메시지는 보존하고, 대화 이력을 최근 N쌍으로 제한합니다.
+    """
+    system_msgs = [m for m in messages if m["role"] == "system"]
+    conversation = [m for m in messages if m["role"] != "system"]
+
+    # 최근 max_pairs * 2개의 메시지만 유지
+    if len(conversation) &gt; max_pairs * 2:
+        conversation = conversation[-(max_pairs * 2):]
+
+    return system_msgs + conversation
+</code></pre>
+<hr/>
+<h2 id="147-gemini-api">14.7 Gemini API 호출 방법</h2>
+<p><strong>Google Gemini API</strong>는 <code>google-generativeai</code> 라이브러리를 통해 사용합니다. <code>gemini-1.5-flash</code>, <code>gemini-1.5-pro</code> 등의 모델을 지원하며, <strong>ChatSession</strong> 방식으로 멀티턴 대화를 관리합니다.</p>
+<h3 id="_7">설치</h3>
+<pre><code class="language-bash">pip install google-generativeai
+</code></pre>
+<h3 id="_8">기본 호출</h3>
+<pre><code class="language-python">import google.generativeai as genai
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    system_instruction="당신은 친절한 AI 어시스턴트입니다."
+)
+
+response = model.generate_content("파이썬이란 무엇인가요?")
+print(response.text)
+</code></pre>
+<h3 id="chatsession">ChatSession을 이용한 멀티턴 대화</h3>
+<p><code>google-generativeai</code> 라이브러리는 <strong>ChatSession</strong> 객체를 제공하여 대화 이력을 자동으로 관리합니다.</p>
+<pre><code class="language-python">import google.generativeai as genai
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    system_instruction="당신은 파이썬 튜터입니다. 간결하게 설명하세요."
+)
+
+# ChatSession 시작 (이력 자동 관리)
+chat = model.start_chat(history=[])
+
+def gemini_chat(session, user_input: str) -&gt; str:
+    """Gemini ChatSession으로 대화하는 함수"""
+    response = session.send_message(user_input)
+    return response.text
+
+# 멀티턴 대화 예시
+print(gemini_chat(chat, "리스트 컴프리헨션이 뭔가요?"))
+print(gemini_chat(chat, "예제 코드를 보여주세요."))
+
+# 대화 이력 확인
+for message in chat.history:
+    print(f"[{message.role}]: {message.parts[0].text[:50]}...")
+</code></pre>
+<h3 id="generationconfig">주요 파라미터 (GenerationConfig)</h3>
+<pre><code class="language-python">import google.generativeai as genai
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+
+generation_config = genai.GenerationConfig(
+    temperature=0.7,
+    max_output_tokens=500,
+    top_p=0.95,
+    top_k=40  # Gemini 고유 파라미터: 상위 k개 토큰만 고려
+)
+
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    generation_config=generation_config
+)
+
+response = model.generate_content("인공지능의 미래를 설명해주세요.")
+print(response.text)
+</code></pre>
+<hr/>
+<h2 id="148-claude-api">14.8 Claude API 호출 방법</h2>
+<p><strong>Anthropic Claude API</strong>는 <code>anthropic</code> 라이브러리를 통해 사용합니다. <strong>Messages API</strong> 구조를 사용하며, system 메시지가 messages 목록이 아닌 별도 파라미터로 전달되는 점이 OpenAI와 다릅니다.</p>
+<h3 id="_9">설치</h3>
+<pre><code class="language-bash">pip install anthropic
+</code></pre>
+<h3 id="messages-api">기본 호출 — Messages API 구조</h3>
+<pre><code class="language-python">import anthropic
+
+client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
+
+response = client.messages.create(
+    model="claude-3-5-haiku-20241022",
+    max_tokens=500,
+    system="당신은 친절한 AI 어시스턴트입니다.",  # system은 별도 파라미터
+    messages=[
+        {"role": "user", "content": "파이썬이란 무엇인가요?"}
+    ]
+)
+
+# 응답 텍스트 추출
+print(response.content[0].text)
+</code></pre>
+<h3 id="openai">OpenAI와의 구조 비교</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>OpenAI</th>
+<th>Anthropic Claude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>라이브러리</td>
+<td><code>openai</code></td>
+<td><code>anthropic</code></td>
+</tr>
+<tr>
+<td>클라이언트</td>
+<td><code>OpenAI()</code></td>
+<td><code>Anthropic()</code></td>
+</tr>
+<tr>
+<td>호출 메서드</td>
+<td><code>client.chat.completions.create()</code></td>
+<td><code>client.messages.create()</code></td>
+</tr>
+<tr>
+<td>system 메시지</td>
+<td>messages 목록 내 포함</td>
+<td>별도 <code>system</code> 파라미터</td>
+</tr>
+<tr>
+<td>응답 텍스트</td>
+<td><code>response.choices[0].message.content</code></td>
+<td><code>response.content[0].text</code></td>
+</tr>
+<tr>
+<td>최대 토큰 파라미터</td>
+<td><code>max_tokens</code></td>
+<td><code>max_tokens</code> (필수)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">멀티턴 대화 구현</h3>
+<pre><code class="language-python">import anthropic
+
+client = anthropic.Anthropic()
+
+class ClaudeChatSession:
+    """Claude API 멀티턴 대화 세션 클래스"""
+
+    def __init__(self, system_prompt: str = "당신은 친절한 AI 어시스턴트입니다."):
+        self.system = system_prompt
+        self.messages = []
+        self.model = "claude-3-5-haiku-20241022"
+
+    def chat(self, user_input: str) -&gt; str:
+        """사용자 입력을 받아 응답을 반환합니다."""
+        self.messages.append({"role": "user", "content": user_input})
+
+        response = client.messages.create(
+            model=self.model,
+            max_tokens=500,
+            system=self.system,
+            messages=self.messages
+        )
+
+        assistant_reply = response.content[0].text
+        self.messages.append({"role": "assistant", "content": assistant_reply})
+
+        return assistant_reply
+
+# 사용 예시
+session = ClaudeChatSession(system_prompt="당신은 파이썬 튜터입니다.")
+
+print(session.chat("파이썬 딕셔너리란 무엇인가요?"))
+print(session.chat("딕셔너리에서 키가 없을 때 오류를 피하려면 어떻게 하나요?"))
+</code></pre>
+<h3 id="_11">스트리밍 응답</h3>
+<pre><code class="language-python">import anthropic
+
+client = anthropic.Anthropic()
+
+def claude_stream(prompt: str) -&gt; str:
+    """Claude 스트리밍 응답 함수"""
+    full_response = ""
+    print("응답: ", end="", flush=True)
+
+    with client.messages.stream(
+        model="claude-3-5-haiku-20241022",
+        max_tokens=500,
+        messages=[{"role": "user", "content": prompt}]
+    ) as stream:
+        for text in stream.text_stream:
+            print(text, end="", flush=True)
+            full_response += text
+
+    print()
+    return full_response
+
+claude_stream("대한민국의 주요 관광지를 다섯 곳 추천해주세요.")
+</code></pre>
+<hr/>
+<h2 id="gpt-gemini-claude">[실습] 동일 프롬프트로 GPT / Gemini / Claude 응답 비교 프로그램</h2>
+<p>세 가지 AI API를 동일한 프롬프트로 호출하여 각 모델의 응답을 나란히 비교하는 프로그램을 만들어 봅니다.</p>
+<h3 id="_12">사전 준비</h3>
+<pre><code class="language-bash">pip install openai google-generativeai anthropic
+</code></pre>
+<p>환경 변수 설정 (<code>.env</code> 파일 또는 OS 환경 변수):</p>
+<pre><code>OPENAI_API_KEY=your_openai_key
+GEMINI_API_KEY=your_gemini_key
+ANTHROPIC_API_KEY=your_anthropic_key
+</code></pre>
+<h3 id="_13">비교 프로그램 전체 코드</h3>
+<pre><code class="language-python">import os
+import time
+from openai import OpenAI
+import google.generativeai as genai
+import anthropic
+
+# ── API 클라이언트 초기화 ──────────────────────────────────────────────────
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+gemini_model = genai.GenerativeModel(model_name="gemini-1.5-flash")
+
+claude_client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+
+# ── 각 API 호출 함수 ──────────────────────────────────────────────────────
+
+def call_gpt(prompt: str, system: str = "") -&gt; dict:
+    """OpenAI GPT 호출"""
+    messages = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+
+    start = time.time()
+    response = openai_client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=messages,
+        max_tokens=500,
+        temperature=0.7
+    )
+    elapsed = time.time() - start
+
+    return {
+        "model": "GPT-4o mini",
+        "response": response.choices[0].message.content,
+        "tokens": response.usage.total_tokens,
+        "elapsed": round(elapsed, 2)
+    }
+
+
+def call_gemini(prompt: str, system: str = "") -&gt; dict:
+    """Google Gemini 호출"""
+    model = genai.GenerativeModel(
+        model_name="gemini-1.5-flash",
+        system_instruction=system if system else None,
+        generation_config=genai.GenerationConfig(
+            temperature=0.7,
+            max_output_tokens=500
+        )
+    )
+
+    start = time.time()
+    response = model.generate_content(prompt)
+    elapsed = time.time() - start
+
+    return {
+        "model": "Gemini 1.5 Flash",
+        "response": response.text,
+        "tokens": response.usage_metadata.total_token_count if hasattr(response, "usage_metadata") else "N/A",
+        "elapsed": round(elapsed, 2)
+    }
+
+
+def call_claude(prompt: str, system: str = "") -&gt; dict:
+    """Anthropic Claude 호출"""
+    kwargs = {
+        "model": "claude-3-5-haiku-20241022",
+        "max_tokens": 500,
+        "messages": [{"role": "user", "content": prompt}]
+    }
+    if system:
+        kwargs["system"] = system
+
+    start = time.time()
+    response = claude_client.messages.create(**kwargs)
+    elapsed = time.time() - start
+
+    return {
+        "model": "Claude 3.5 Haiku",
+        "response": response.content[0].text,
+        "tokens": response.usage.input_tokens + response.usage.output_tokens,
+        "elapsed": round(elapsed, 2)
+    }
+
+
+# ── 비교 실행 함수 ────────────────────────────────────────────────────────
+
+def compare_models(prompt: str, system: str = "") -&gt; None:
+    """세 모델에 동일한 프롬프트를 전송하고 결과를 비교 출력합니다."""
+    print("=" * 60)
+    print(f"프롬프트: {prompt}")
+    if system:
+        print(f"시스템:   {system}")
+    print("=" * 60)
+
+    results = []
+    for call_fn in [call_gpt, call_gemini, call_claude]:
+        try:
+            result = call_fn(prompt, system)
+            results.append(result)
+        except Exception as e:
+            results.append({"model": call_fn.__name__, "response": f"오류: {e}", "tokens": 0, "elapsed": 0})
+
+    for r in results:
+        print(f"\n▶ [{r['model']}] (소요: {r['elapsed']}초, 토큰: {r['tokens']})")
+        print("-" * 40)
+        print(r["response"])
+
+    print("\n" + "=" * 60)
+    print("📊 응답 속도 비교")
+    print("-" * 40)
+    for r in sorted(results, key=lambda x: x["elapsed"]):
+        bar = "█" * int(r["elapsed"] * 5)
+        print(f"  {r['model']:&lt;20} {r['elapsed']:&gt;5}초  {bar}")
+    print("=" * 60)
+
+
+# ── 메인 실행 ─────────────────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    # 테스트 1: 일반 지식 질문
+    compare_models(
+        prompt="인공지능이 사회에 미치는 긍정적 영향을 세 가지로 요약해주세요.",
+        system="당신은 명확하고 간결하게 답변하는 AI 어시스턴트입니다."
+    )
+
+    print()
+
+    # 테스트 2: 코드 생성
+    compare_models(
+        prompt="파이썬으로 피보나치 수열을 생성하는 함수를 작성해주세요.",
+        system="당신은 파이썬 전문가입니다. 코드에 주석을 포함하세요."
+    )
+
+    print()
+
+    # 테스트 3: 창의적 질문
+    compare_models(
+        prompt="만약 인터넷이 갑자기 사라진다면 세상은 어떻게 변할까요?",
+        system=""  # system 없이 모델 기본 설정 사용
+    )
+</code></pre>
+<h3 id="_14">실행 결과 예시</h3>
+<pre><code>============================================================
+프롬프트: 인공지능이 사회에 미치는 긍정적 영향을 세 가지로 요약해주세요.
+시스템:   당신은 명확하고 간결하게 답변하는 AI 어시스턴트입니다.
+============================================================
+
+▶ [GPT-4o mini] (소요: 1.23초, 토큰: 187)
+----------------------------------------
+1. 의료 진단 향상 ...
+
+▶ [Gemini 1.5 Flash] (소요: 0.87초, 토큰: 210)
+----------------------------------------
+1. 업무 자동화 ...
+
+▶ [Claude 3.5 Haiku] (소요: 1.45초, 토큰: 195)
+----------------------------------------
+1. 생산성 향상 ...
+
+============================================================
+📊 응답 속도 비교
+============================================================
+</code></pre>
+<p align="center">
+<img alt="세 모델 응답 속도·토큰 비교 막대그래프 - Gemini Flash(0.87초)·GPT mini(1.23초)·Claude Haiku(1.45초)와 총 토큰 수" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338403/ch14_model_speed_compare.png" style="max-width:700px; width:100%; height:auto;"/>
+</p>
+<blockquote>
+<p><strong>실습 확장 아이디어</strong>
+- 응답을 파일이나 데이터베이스에 저장하여 나중에 비교 분석합니다.
+- <code>asyncio</code>를 사용해 세 API를 병렬로 호출하면 전체 소요 시간을 줄일 수 있습니다.
+- temperature 값을 0.0, 0.7, 1.5로 바꾸며 동일 모델의 응답 변화를 관찰합니다.</p>
+</blockquote>
+<hr/>
+<h2 id="_15">정리</h2>
+<p>이번 챕터에서는 <strong>Chat Completions API</strong>의 구조부터 멀티턴 대화 구현, 스트리밍 응답, 그리고 Gemini와 Claude API 활용까지 폭넓게 살펴보았습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>OpenAI GPT</th>
+<th>Google Gemini</th>
+<th>Anthropic Claude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>라이브러리</td>
+<td><code>openai</code></td>
+<td><code>google-generativeai</code></td>
+<td><code>anthropic</code></td>
+</tr>
+<tr>
+<td>핵심 메서드</td>
+<td><code>chat.completions.create()</code></td>
+<td><code>generate_content()</code></td>
+<td><code>messages.create()</code></td>
+</tr>
+<tr>
+<td>멀티턴 관리</td>
+<td>수동 (messages 리스트)</td>
+<td><code>start_chat()</code> 자동</td>
+<td>수동 (messages 리스트)</td>
+</tr>
+<tr>
+<td>system 메시지</td>
+<td>messages 내 포함</td>
+<td><code>system_instruction</code></td>
+<td>별도 <code>system</code> 파라미터</td>
+</tr>
+<tr>
+<td>스트리밍</td>
+<td><code>stream=True</code></td>
+<td><code>stream=True</code></td>
+<td><code>messages.stream()</code></td>
+</tr>
+</tbody>
+</table>
+<p>세 API 모두 유사한 개념을 사용하지만 세부 구조가 다르므로, 이번 챕터의 비교 프로그램을 직접 실행하며 차이점을 몸으로 익혀두면 이후 프로젝트에서 큰 도움이 됩니다.</p>
+<p>다음 챕터에서는 OpenAI의 <strong>Responses API</strong>를 살펴보며 Chat Completions API와의 차이점, 그리고 함수 호출(Function Calling)과 같은 고급 기능을 알아봅니다.</p>
+</div>

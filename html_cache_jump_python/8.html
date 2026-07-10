@@ -1,0 +1,57 @@
+<h1 class="page-subject">01-4 파이썬 설치하기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>이제 실습을 위해 컴퓨터에 파이썬을 설치해 보자. 이 책에서는 윈도우와 맥 설치 방법만 다룬다. 다른 시스템을 사용한다면 파이썬 홈페이지(<a href="https://www.python.org">www.python.org</a>)를 참고하자.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">윈도우에서 파이썬 설치하기</a></li>
+<li><a href="#_2">맥에서 파이썬 설치하기</a></li>
+</ul>
+</div>
+<h2 id="_1">윈도우에서 파이썬 설치하기</h2>
+<p><strong>1.</strong> 파이썬 공식 홈페이지의 다운로드 페이지(<a href="https://www.python.org/downloads">www.python.org/downloads</a>)에서 윈도우용 파이썬 설치 파일을 내려받자. [Download Python Install manager]를  선택하면 된다(2026년 3월 기준 최신 안정 버전은 3.14.3이다).</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/8/N01-4_1_wikidocs.png"/></p>
+<p><strong>2.</strong> 다운로드 받은 파일(예: python-manager-26.0.msix)을 실행하여 [Python 설치]를 클릭하면 설치가 진행된다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/8/N01-4_4_wikidocs.png"/></p>
+<p>윈도우 환경에 따라서 설치 시 "정책에 의해 사이드로드가 차단되었습니다." 오류가 발생할 수 있다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/8/N01-4_7.png"/></p>
+<p>이런 오류가 발생하면 [윈도우 설정 &gt; 시스템 &gt; 고급] 메뉴에서 개발자 모드를 "켬"으로 수정한 후 다시 설치를 진행하자. 개발자 모드를 켜는 것은 파이썬 설치를 위해 필요한 설정이며, 컴퓨터에 문제를 일으키지 않으니 안심해도 된다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/8/N01-4_5_wikidocs.png"/></p>
+<p>오류없이 설치가 진행되면 다음 화면이 나타난다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/8/N01-4_6.png"/></p>
+<p>이 화면에서는 다음 질문들에 대한 답을 해야 한다.</p>
+<ol>
+<li>Windows is not configured to allow paths longer than 260 characters. - 긴 경로를 허용할지 묻는 질문이다. (엔터 입력)</li>
+<li>The global shortcuts directory is not configured. - 어느 위치에서든 파이썬을 실행할 수 있도록 경로를 설정할지 묻는 질문이다. (반드시 y를 입력)</li>
+<li>You do not have the latest Python runtime. - 최신 파이썬을 설치할지 묻는 질문이다. (엔터 입력)</li>
+</ol>
+<p>[중요] 2번째 항목은 반드시 "Y" 를 선택해야 한다. 이 옵션을 선택해야 어느 위치에서든 파이썬을 실행할 수 있다. 다음 질문에 반드시 "y"를 입력하고 엔터를 입력하자.</p>
+<pre><code class="language-plaintext">Add commands directory to your PATH now? [y/N]
+</code></pre>
+<blockquote>
+<p>이 옵션을 선택하지 않으면 실습 시 오류가 발생할 수 있다.</p>
+</blockquote>
+<p>나머지 질문에 대한 답은 모두 엔터를 입력하여 디폴트 값을 선택하면 된다. </p>
+<p><strong>3.</strong> 설치가 완료되면  [시작] 메뉴의 검색 창에서 python을 검색하여 실행 프로그램을 찾을 수 있다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/8/N01-4_8_wikidocs.png"/></p>
+<h2 id="_2">맥에서 파이썬 설치하기</h2>
+<p><strong>1.</strong> 파이썬 공식 홈페이지(<a href="https://www.python.org">www.python.org</a>)에서 [Downloads] 메뉴를 클릭하여 맥용 파이썬 설치 파일을 내려받자. 최신 안정 버전의 [Download Python 3.x.x] 버튼을 클릭하면 된다(2026년 3월 기준 최신 안정 버전은 3.14.3이다).</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/8/Pasted%20image%2020260330164057.png"/></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><strong>2.</strong> 내려받은 macOS용 설치 패키지 파일(예: <code>python-3.x.x-macos11.pkg</code>)을 실행하여 설치한다.</p>
+<p><strong>3.</strong> 설치가 완료되면 <a class="wiki_link" data-title="터미널" data-wiki="/page/wiki/3/터미널/" href="javascript:void(0)">터미널</a>에서 <code>python3 -V</code> 명령을 입력하여 파이썬이 제대로 설치되었는지 확인하자. 맥에서는 <code>python</code> 명령이 없거나 다른 버전이 실행될 수 있으므로 <code>python3</code> 명령을 사용해야 한다. 파이썬 버전이 출력되면 설치 성공이다.</p>
+<blockquote>
+<p>터미널은 Spotlight(⌘ + Space)에서 "터미널"을 검색하여 실행할 수 있다.</p>
+</blockquote>
+<pre><code class="language-bash">pahkey@mymac ~ % python3 -V
+Python 3.x.x
+</code></pre>
+<blockquote>
+<p><code>-V</code> 에서 V는 소문자가 아닌 대문자로 입력해야 한다.</p>
+</blockquote>
+</div>

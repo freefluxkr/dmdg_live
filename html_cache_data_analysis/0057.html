@@ -1,0 +1,26 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt1 dm"><span class="cap blue">■</span> 그래프 선 모양 바꾸기</p>
+<p class="txt bl"><span class="cd">plot()</span> 함수는 기본적으로 직선으로 그래프를 그립니다. 그래프의 선 모양<span class="txts gray">(line style)</span>을 다양한 형태로 바꾸고 싶을 때는 <span class="cd">linestyle</span> 속성에 원하는 선 모양을 지정하면 됩니다. 이때 <span class="cd">linestyle</span> 속성 대신 <span class="cd">ls</span>라고 작성할 수도 있습니다.</p>
+<div class="box_blue_line">
+<pre><span class="violet">import</span> matplotlib.pyplot as plt
+plt.title(<span class="olive">'linestyle'</span>)  <span class="red"># 제목 설정</span>
+<span class="red"># 빨간색 dashed 그래프</span>
+plt.plot([<span class="blue2">10</span>, <span class="blue2">20</span>, <span class="blue2">30</span>, <span class="blue2">40</span>], color <span class="violet">=</span><span class="olive">'r'</span>, linestyle<span class="violet">=</span><span class="olive">'--'</span>, label<span class="violet">=</span><span class="olive">'dashed'</span>)
+<span class="red"># 초록색 dotted 그래프</span>
+plt.plot([<span class="blue2">40</span>, <span class="blue2">30</span>, <span class="blue2">20</span>, <span class="blue2">10</span>], color <span class="violet">=</span><span class="olive">'g'</span>, ls<span class="violet">=</span><span class="olive">':'</span>, label<span class="violet">=</span><span class="olive">'dotted'</span>)
+plt.legend()  <span class="red"># 범례 표시</span>
+plt.show()</pre>
+</div>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/007029/p062.jpg"/></div>
+<p class="txts dl blue"><span class="dm bg_blue_line">그림 4-7</span> 선 모양 변경 결과</p>
+<p class="txts"> </p>
+<div class="box_gray_line">
+<p class="txtex dm"><span class="bg_blue">TIP</span></p>
+<p class="txts dm blue">색과 선 모양을 ‘&lt;색상&gt;&lt;선모양&gt;’을 동시에 적는 형태로 코드를 작성할 수도 있습니다.</p>
+<p class="txts dm blue">plt.plot([1,2,3,4], 'r--')</p>
+</div>
+</div>
+</section>
+</section>

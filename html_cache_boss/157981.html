@@ -1,0 +1,86 @@
+<h1 class="page-subject">1) 문서 생성, 저장, 불러오기, 글자 입력</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>오늘은 python-docx 라이브러리를 설치하는 것부터 시작해서 기본적인 사용법을 익혀보겠습니다.</p>
+<h1 id="1">1.  패키지 설치</h1>
+<p>아래의 코드를 터미널 창 혹은 주피터 노트북의 셀(cell)에 입력하고 실행시켜주세요. 참고로 해당 패키지는 Windows OS 뿐만 아니라 Mac OS에서도 잘 작동합니다.</p>
+<pre><code>pip install python-docx
+</code></pre>
+<h1 id="2">2. 패키지 불러오기</h1>
+<p>python-docx 라이브러리에는 다양한 클래스들이 존재하며, 원하는 기능(스타일, 정렬, 표 등등)에 따라서 import 해주는 것이 조금씩 다릅니다.</p>
+<p>아래는 몇가지 예로 든 것 외에도 많은 것들이 있으며, 오늘은 Document 클래스를 이용한 기능들만 알아보겠습니다.</p>
+<pre><code># 가장 기본적인 기능(문서 열기, 저장, 글자 쓰기 등등)
+from docx import Document
+
+# 문단 정렬
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+# 문자 스타일 변경
+from docx.enum.style import WD_STYLE_TYPE
+</code></pre>
+<h1 id="3">3. 새 워드문서 만들기</h1>
+<p>위에서 import를 했다면 문서 객체(Object)를 만들어 줄 차례입니다. 참고로 객체란 클래스(Class)를 변수로 선언해줌으로써 만들 수 있습니다.</p>
+<pre><code>doc = Document()
+</code></pre>
+<h1 id="4">4. 워드문서 저장하기</h1>
+<p>현재는 그냥 새 워드문서가 파이썬 상에서만 존재하는 상태입니다. 이것을 우리가 사용하는 실제 워드 파일로 만들어주고 싶으면 아래의 코드로 객체를 저장해주어야합니다.</p>
+<pre><code># 현재 작업경로에 저장
+doc.save('저장하고 싶은 파일명.docx')
+</code></pre>
+<p>저장하실 때 특정 위치에 저장하고 싶으시면, 절대경로를 입력해주시면 됩니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/laaa2/btro13zd8Kk/IsuE9jYadKJkikNbpH2Cq0/img.png"/></p>
+<p>저장된 docx 파일</p>
+<h1 id="5">5. 저장된 워드문서 불러오기</h1>
+<p>만약 기존의 워드파일을 불러오고 싶으시다면 아래와 같이 코딩해주시면 됩니다.</p>
+<p>여기서 '저장하고 싶은 파일명'은 위에서 저장했던 파일명을 그대로 사용한 것입니다.</p>
+<pre><code># 절대경로를 이용하는 방법
+doc = Document(r'C:\Users\SANGWOO\Desktop\VSCODE\저장하고 싶은 파일명.docx')
+
+# 현재작업 경로에 '파일명.docx'가 위치할 때
+doc = Document('저장하고 싶은 파일명.docx')
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/vjpp4/btro7gdsB3S/LyZSkHWXMEdalaMkTOsYpk/img.png"/></p>
+<p>불러온 파일 (실제 출력되지는 않음)</p>
+<h1 id="6">6. 워드문서에 글자 입력하기</h1>
+<p>워드의 가장 기본적인 기능인 글자를 입력하는 방법을 알아보겠습니다.</p>
+<h2 id="1_1">1) 제목 넣기</h2>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bNiC0v/btroYjCbcGH/bMRlw5EpzidVActEOPXTkK/img.png"/></p>
+<p>위와 같이 제목을 넣는 방법은 아래의 코드를 사용합니다. 코드와 이미지를 보면서 비교해보세요.</p>
+<pre><code># 제목
+doc.add_heading('가장 큰 제목 (아래에 밑줄)', level=0)
+doc.add_heading('제목 크기, H1', level=1)
+doc.add_heading('제목 크기, H2', level=2)
+doc.add_heading('제목 크기, H3', level=3)
+doc.add_heading('제목 크기, H4', level=4)
+doc.add_heading('제목 크기, H5', level=5)
+doc.add_heading('제목 크기, H6', level=6)
+</code></pre>
+<p>level이 어디까지 가능한지 확인은 해보지 않았으며, 레벨 3 밑으로는 글자 크기가 더 작아지지 않는 것으로 보입니다.</p>
+<h2 id="2-paragraph">2) 문단(paragraph) 넣기</h2>
+<p>여기서 말하는 문단이란 그냥 한줄로 쭉 이어지는 글을 말합니다. 즉, 엔터를 치지 않은 상태의 글을 의미합니다.</p>
+<p>참고로 제목도 하나의 문단이라고 할 수 있습니다.</p>
+<pre><code>doc.add_paragraph('여기에 원하는 텍스트를 마음껏 입력하면 됩니다.')
+</code></pre>
+<h2 id="3_1">3) 문단에 문자 추가하기</h2>
+<p>문단에 글자를 쭉 이어서 쓸 수도 있지만 특정한 문자를 강조하고 싶거나 다른 스타일을 주고 싶을 때는 add_run( ) 함수를 사용합니다. 참고로 add_paragraph( ) 함수로 문단을 생성하고 내용을 적으면, 자동으로 하나의 run 객체가 문단에 포함되어 만들어집니다.</p>
+<p>우선 위에서와 같이 add_paragraph( ) 함수를 사용하되 변수에 담아줍니다.</p>
+<pre><code>p = doc.add_paragraph('두번째 문단: 여기에 원하는 텍스트를 마음껏 입력하면 됩니다.')
+</code></pre>
+<p>변수 p에 .add_run( ) 함수로 글자를 추가해줍니다. 스타일 적용 방법은 아래의 코드를 참고하세요.</p>
+<pre><code># 굵은 글씨(Bold) 적용
+p.add_run('문단에 굵은 글자 추가').bold = True
+
+# 기울임꼴(Italic) 적용
+p.add_run('문단에 이텔릭 글자 추가').italic = True
+
+# 밑줄(Underline) 적용
+p.add_run('문단에 밑줄 글자 추가').underline = True
+</code></pre>
+<p>add_run( ) 함수는 반드시 paragraph 객체를 기반으로 사용할 수 있다는 것 주의해주세요.</p>
+</div>

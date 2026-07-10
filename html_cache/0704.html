@@ -1,0 +1,24 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">analysis1()</span> 함수에 그래프를 그릴지 안 그릴지 전달받는 매개변수 <span class="cd">graph_yn</span>을 추가합니다. <span class="cd">analysis1()</span> 함수가 호출될 때 <span class="cd">graph_yn</span>에 값을 따로 입력하지 않으면 기본값 <span class="cd">y</span>로 간주하고 진행합니다. 그렇지 않고 <span class="cd">graph_yn</span>에 <span class="cd">n</span>이 전달된다면 그래프를 그리기 전에 인구 데이터 <span class="cd">population</span>을 반환하고 <span class="cd">analysis1()</span> 함수를 종료합니다. 조건문으로 그래프 그리는 부분을 선택할 수 있게 했습니다.</p>
+<p class="txt bl">그럼 <span class="cd">analysis1()</span> 함수를 활용하도록 <span class="cd">analysis4()</span>를 작성해 봅시다(변경 전 코드는 '11.2.5 하위 목표 4 - 다른 지역과 인구 비교 분석하기'에 있습니다).</p>
+<div class="highlight">
+<pre><span class="cd2 blue2">def</span> <span class="cd2 gold">analysis4</span><span class="cd2">(</span><span class="cd2 blue3">dong_name1</span><span class="cd2">,</span> <span class="cd2 blue3">dong_code1</span><span class="cd2">):</span>
+    <span class="green"># 6.1 비교할 지역을 입력받아 행정동코드 알아내기</span>
+    dong_name2 = <span class="gold">input</span>(<span class="red2">'비교할 행정동을입력하세요. --&gt; '</span>)
+    <span class="cd2">dong_code2 = dong_search(dong_name2)</span>
+
+    <span class="green"># 6.2 두 지역의 시간대별 평균인구 구하기</span>
+    <span class="cd2">population1 = analysis1(dong_name = dong_name1, dong_code = dong_code1, graph_yn =</span> <span class="cd2 red2">'n'</span><span class="cd2">)</span>
+    <span class="cd2">population2 = analysis1(dong_name = dong_name2, dong_code = dong_code2, graph_yn =</span> <span class="cd2 red2">'n'</span><span class="cd2">)</span>
+
+    <span class="cd2 green"># 6.3 6.2에서 구한 평균인구 리스트로 꺾은선 그래프 그리기</span>
+    <span class="cd2">data_set = [population1, population2]</span>
+    <span class="cd2">labels = [dong_name1, dong_name2]</span>
+    <span class="cd2">title = dong_name1</span> + <span class="red2">'과 '</span> + dong_name2 + <span class="red2">' 시간대별 평균인구'</span>
+    <span class="cd2">graph_plot(popu_list = data_set, label_list = labels, graph_title = title)</span></pre>
+</div>
+</div>
+</section>
+</section>

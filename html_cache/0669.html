@@ -1,0 +1,57 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">오류가 발생합니다. 그리고 기존에는 오류를 표시하는 화살표가 하나였는데, 이번에는 2개고요. 첫 번째 화살표는 <span class="cd">func1()</span>에 있습니다. 함수 외부에서는 함수 내부를 볼 수 없기 때문에 첫 번째 화살표에서는 ‘오류 내용은 잘 모르겠지만 <span class="cd">func1()</span> 함수를 호출하는 부분에서 오류가 발생했다’고 알려 주기만 합니다. 두 번째 화살표는 호출된 <span class="cd">func1()</span> 함수의 어디에서 오류가 발생했는지를 구체적으로 알려 줍니다.</p>
+<p class="txt bl">함수 정의가 가장 위에 있지만, 함수가 호출되기 전까지 실행되지 않습니다. 그래서 프로그램이 시작되면 가장 먼저 <span class="cd">a, b = 5, 10</span>이 실행되고, 두 번째로 <span class="cd">func1()</span> 함수가 호출됩니다. <span class="cd">func1()</span> 함수가 호출되고 나서야 <span class="cd">func1()</span>에 속한 명령어들이 실행되는 것이죠. 따라서 <span class="cd">func1()</span> 함수가 가장 위에 있지만, <span class="cd">func1()</span> 내부의 명령어들은 세 번째부터 실행됩니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 13-2</span> 실행 과정</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w20">
+<p class="txts dm">실행 순서</p>
+</td>
+<td class="w80">
+<p class="txts dm">실행되는 명령어</p>
+</td>
+</tr>
+<tr>
+<td class="w20">
+<p class="txts dl">1</p>
+</td>
+<td class="w80">
+<p class="txts dl ind11"><span class="cd">def func1():</span></p>
+<p class="txts dl ind30"><img alt="" class="h40" src="https://thebook.io/img/080251/557_1.jpg"/></p>
+<p class="txts"> </p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">a, b = 5, 10</span></p>
+<p class="txts dl ind11"><span class="cd">func1()</span></p>
+</td>
+</tr>
+<tr>
+<td class="w20">
+<p class="txts dl">2</p>
+</td>
+<td class="w80">
+<p class="txts dl ind11"><span class="cd">def func1():</span></p>
+<p class="txts dl ind30"><img alt="" class="h40" src="https://thebook.io/img/080251/557_1.jpg"/></p>
+<p class="txts"> </p>
+<p class="txts dl ind11"><span class="cd">a, b = 5, 10</span></p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">func1()</span></p>
+</td>
+</tr>
+<tr>
+<td class="w20">
+<p class="txts dl">3</p>
+</td>
+<td class="w80">
+<p class="txts dl ind11"><span class="cd">def func1():</span></p>
+<p class="txts dl ind11"><img alt="" class="h50" src="https://thebook.io/img/080251/557_2.jpg"/></p>
+<p class="txts"> </p>
+<p class="txts dl ind11"><span class="cd">a, b = 5, 10</span></p>
+<p class="txts dl"><span class="yellow">➡︎</span> <span class="cd">func1()</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>

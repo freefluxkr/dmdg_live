@@ -1,0 +1,21 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_31"><span class="yellow">4.3.2</span> else if를 뜻하는 elif</h4>
+<p class="txt bl">조건이 3개 이상, 즉 조건이 여러 개일 때는 <span class="cd">if-else</span> 구조에서 <span class="cd">if</span>와 <span class="cd">else</span> 사이에 ‘그렇지 않고 만약 ~라면 ~해라’라는 조건을 추가합니다. 파이썬에서는 이를 다음과 같이 표현합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre><span class="purple">if</span> A:   <span class="green"># 조건</span>
+    B   <span class="green"># 조건 A를 충족할 때 실행할 내용</span>
+<span class="cd2 purple">elif</span> <span class="cd2">C:</span> <span class="green"># 조건</span>
+    <span class="cd2">D</span>   <span class="green"># 조건 A를 충족하지 않고 조건 C를 충족할 때 실행할 내용</span>
+<span class="purple">else</span>:
+    E   <span class="green"># 조건 A, C를 모두 충족하지 않을 때 실행할 내용</span></pre>
+</div>
+<p class="txt bl"><span class="cd">if</span>와 <span class="cd">else</span> 사이에 <span class="cd">elif</span>를 추가했습니다. <span class="cd">elif</span>는 <span class="cd">else</span>와 <span class="cd">if</span>가 합쳐진 단어입니다. <span class="cd">elif</span>가 추가된 조건문은 조건 A를 충족하지 않으면 B를 실행하지 않고 바로 다음 줄인 <span class="cd">elif</span>로 가서 조건 C를 충족하는지를 확인합니다. 여기서도 조건을 충족하지 않으면 <span class="cd">else</span>로 가서 E를 실행합니다.</p>
+<p class="txt bl">무인계산기 프로그램으로 돌아가 봅시다. 투입금액(<span class="cd">price_input</span>)과 입장료(<span class="cd">price</span>)가 같은 조건을 <span class="cd">if</span>와 <span class="cd">else</span> 사이에 넣어 봅시다. <span class="cd">elif</span>는 <span class="cd">if</span> 조건이 충족되지 않을 때 실행되므로 <span class="cd">if</span>가 거짓일 때에 추가돼야 합니다. 그리고 <span class="cd">if</span>도 거짓이고, <span class="cd">elif</span>도 거짓일 때 비로소 <span class="cd">else</span>가 실행됩니다. 그러면 프로그램 구조는 다음과 같이 바뀝니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/142.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 4-5</span> elif를 추가한 무인계산기 프로그램 구조</p>
+</div>
+</section>
+</section>

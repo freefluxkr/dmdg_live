@@ -1,0 +1,20 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">root</span> 객체가 생성된 직후부터 <span class="cd">root.mainloop()</span> 바로 위까지의 코드를 실행한 결과가 창에 나타납니다. 따라서 창에 표현될 내용은 두 줄 사이에 들어가야 합니다.</p>
+<div class="ind12"><img alt="" class="w60" src="https://thebook.io/img/080251/644_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">그러므로 창이 띄워져 있으면 프로그램이 실행 중인 상태입니다. 창이 떠 있는 상태에서 주피터 노트북의 코드 입력창 왼쪽을 보면 [<span class="cd">*</span>] 표시가 있습니다. 이는 프로그램이 ‘실행 중’이라는 의미입니다. 창 오른쪽 위에 있는 <span class="dl">X</span> 표시를 눌러 창을 닫으면 프로그램 실행이 멈추고 [<span class="cd">*</span>] 부분이 코드 줄 수를 나타내는 숫자로 바뀝니다.</p>
+<p class="txt bl">창 상단에 창 이름이 나타납니다. 별도로 창 이름을 설정하지 않으면 기본값으로 tk라고 뜹니다. 창 이름은 바꿀 수 있습니다. 그래프에 제목을 붙일 때처럼 창 이름도 <span class="cd">title()</span>로 설정합니다. 원하는 이름을 <span class="cd">title()</span>의 소괄호 안에 넣고, <span class="cd">root = Tk()</span>와 <span class="cd">root.mainloop()</span> 사이에 추가합니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+<span class="cd2">root.title(</span><span class="cd2 red2">'my first tkinter'</span><span class="cd2">)</span>
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w30"><img alt="" class="w100" src="https://thebook.io/img/080251/645.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

@@ -1,0 +1,291 @@
+<h1 class="page-subject">02-2. 설치하기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: 원라인 설치는 macOS Intel Mac에서 직접 테스트했습니다(v0.14.0). 데스크톱 앱 설치는 v0.16.0 공식 문서·소스(<code>scripts/install.sh</code>, 데스크톱 빌드)를 대조해 정리했고 실행 테스트는 하지 않았습니다. PyPI, Zed ACP, Native Windows 베타 내용은 소스 코드(<code>scripts/install.sh</code>, PowerShell 인스톨러)와 릴리스 노트를 대조해 정리했습니다. 일반 Linux/Ubuntu 설치 절은 v0.17.0 소스(<code>scripts/install.sh</code>)와 실제 Ubuntu 데스크톱 설치 관찰을 대조해 정리했습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">설치 방법 선택</a></li>
+<li><a href="#_2">데스크톱 앱</a></li>
+<li><a href="#_3">원라인 설치</a></li>
+<li><a href="#pypi">PyPI 패키지 설치</a></li>
+<li><a href="#_4">수동 설치</a></li>
+<li><a href="#_5">플랫폼별 설치와 주의사항</a><ul>
+<li><a href="#macos">macOS</a></li>
+<li><a href="#native-windows">Native Windows (베타)</a></li>
+<li><a href="#termux-android">Termux / Android</a></li>
+<li><a href="#linux-ubuntu-root">일반 Linux / Ubuntu 데스크톱 설치 (비root)</a></li>
+<li><a href="#linux-root-fhs">Linux root 설치와 FHS 레이아웃</a></li>
+</ul>
+</li>
+<li><a href="#zed">Zed 에디터 연동</a></li>
+<li><a href="#_6">설치 확인과 초기 설정</a></li>
+<li><a href="#lazy-install">선택 기능 설치 (lazy-install)</a></li>
+<li><a href="#hermes-backup-hermes-import">기존 환경 이전 — hermes backup / hermes import</a></li>
+<li><a href="#_7">버전별 변경 이력</a></li>
+</ul>
+</div>
+<h3 id="_1">설치 방법 선택</h3>
+<p>환경에 맞는 설치 방법을 고릅니다.</p>
+<table>
+<thead>
+<tr>
+<th>환경</th>
+<th>권장 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GUI로 채팅·미리보기·파일 탐색을 쓰고 싶을 때</td>
+<td>데스크톱 앱</td>
+</tr>
+<tr>
+<td>새 환경에서 Python·Node·ripgrep·ffmpeg를 한 번에 준비</td>
+<td>원라인 설치</td>
+</tr>
+<tr>
+<td>Python 환경이 이미 있고 Hermes만 추가로 설치할 때</td>
+<td>PyPI 설치(<code>pip</code> 또는 <code>uv tool install</code>)</td>
+</tr>
+<tr>
+<td>Zed 에디터에서 연동해 쓰는 경우</td>
+<td>본체 설치 후 Zed ACP 등록</td>
+</tr>
+<tr>
+<td>Windows에서 WSL 없이 네이티브로 실행</td>
+<td>Native Windows 베타</td>
+</tr>
+<tr>
+<td>Android/Termux</td>
+<td>Termux 방법</td>
+</tr>
+<tr>
+<td>자동 스크립트 없이 단계별로 직접 설치</td>
+<td>수동 설치</td>
+</tr>
+</tbody>
+</table>
+<p>각 설치 방법의 자세한 절차는 아래 절에서 다룹니다. 설치 후 점검과 초기 설정은 모든 방법에 공통으로 적용되므로 「설치 확인과 초기 설정」 절에 모아 두었습니다.</p>
+<h3 id="_2">데스크톱 앱</h3>
+<p>터미널이 익숙하지 않다면, 가장 쉬운 길은 웹사이트에서 <strong>데스크톱 설치 관리자</strong>를 내려받아 실행하는 것입니다. 이 관리자가 CLI와 데스크톱 앱을 함께 설치합니다.</p>
+<pre><code>https://hermes-agent.nousresearch.com/desktop
+</code></pre>
+<p>데스크톱 앱(macOS·Windows·Linux)은 CLI와 <strong>같은</strong> 에이전트 코어를 GUI로 감싼 것입니다. 같은 설정·API 키·세션·스킬·메모리를 공유하므로, 데스크톱에서 한 작업이 CLI에도 그대로 보이고 그 반대도 됩니다. 스트리밍 도구 출력, 좌우 분할 미리보기, 파일 브라우저, 음성, 크론, 프로필을 한 화면에서 다룹니다. 설치 후 CLI에서 <code>hermes desktop</code>으로 앱을 빌드·실행할 수도 있습니다.</p>
+<blockquote>
+<p>⚠️ <strong>신생 앱 안내</strong>: 데스크톱 앱은 2026년 5월 말 공개된 신규 구성요소로, 온보딩·설정 화면이 릴리스마다 빠르게 바뀌고 있습니다. 이 책은 안정적으로 작동하고 소스로 검증하기 쉬운 <strong>CLI를 기준</strong>으로 설명합니다. 데스크톱 앱의 화면별 절차는 안정화된 뒤 별도로 다룰 예정입니다.</p>
+</blockquote>
+<h3 id="_3">원라인 설치</h3>
+<p>가장 간단한 설치 방법은 공식 설치 스크립트입니다.</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+</code></pre>
+<p>스크립트가 다음을 자동으로 수행합니다.</p>
+<ol>
+<li>Python 3.11 환경 구성(uv 패키지 매니저 사용)</li>
+<li>Node.js 22 LTS 준비(시스템 Node가 요구 버전에 못 미치면 관리형 Node를 따로 설치)</li>
+<li>ripgrep·ffmpeg 설치 여부 확인(선택, 거절 가능)</li>
+<li>저장소 클론 및 의존성 설치(해시 검증 lockfile 우선)</li>
+<li>Node.js 의존성 및 Playwright 브라우저 엔진 설치</li>
+<li><code>~/.hermes/</code> 설정 디렉터리·SOUL.md 생성</li>
+<li><code>hermes</code> 명령어 심볼릭 링크 생성</li>
+<li><code>hermes setup</code> 대화형 설정 마법사 실행(<code>--skip-setup</code>으로 건너뛸 수 있음)</li>
+</ol>
+<h3 id="pypi">PyPI 패키지 설치</h3>
+<p>v0.14.0부터 Hermes Agent를 PyPI 정식 패키지로 설치할 수 있습니다. 셸 스크립트를 거치지 않고 한 줄로 설치할 수 있습니다.</p>
+<pre><code class="language-bash">pip install hermes-agent
+hermes
+</code></pre>
+<p>휠 안에 Ink TUI 번들과 셸 런처가 들어 있어 별도 빌드 없이 바로 실행할 수 있습니다. 독립된 도구 환경에 설치하고 싶다면 <code>uv tool install hermes-agent</code>도 권장합니다.</p>
+<p>원라인 셸 인스톨러는 Python·Node·ripgrep·ffmpeg를 함께 설치하므로 새 환경에 적합합니다. PyPI 설치는 이미 Python 환경이 있는 시스템에 Hermes만 추가할 때 적합합니다.</p>
+<h3 id="_4">수동 설치</h3>
+<p>자동 스크립트 대신 단계별로 직접 설치할 수도 있습니다.</p>
+<pre><code class="language-bash"># 1. 저장소 클론 (서브모듈 포함)
+git clone --recurse-submodules https://github.com/NousResearch/hermes-agent.git
+cd hermes-agent
+
+# 2. uv 설치 (Python 패키지 매니저)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 3. Python 3.11 가상환경 생성
+uv venv --python 3.11
+
+# 4. Python 의존성 설치 (lockfile 기반)
+uv sync --extra all --locked
+
+# 5. 설정 디렉터리 생성
+mkdir -p ~/.hermes/{cron,sessions,logs,pairing,hooks,image_cache,audio_cache,memories,skills}
+
+# 6. 예제 설정 복사
+cp cli-config.yaml.example ~/.hermes/config.yaml
+
+# 7. API 키 설정
+cp .env.example ~/.hermes/.env
+# ~/.hermes/.env를 편집하여 API 키 입력
+
+# 8. 심볼릭 링크 (선택)
+ln -sf $(pwd)/hermes ~/.local/bin/hermes
+
+# 9. LLM 프로바이더 설정
+hermes model
+</code></pre>
+<p><code>uv sync --extra all</code>은 <code>[all]</code> extra에 들어 있는 의존성만 설치합니다. 메시징 어댑터, 음성·TTS, 이미지·비디오 SDK 같은 무거운 의존성은 v0.14의 경량화(디블로팅) 정책에 따라 <code>[all]</code>에 포함하지 않았습니다. 해당 기능은 처음 사용할 때 자동으로 설치됩니다. 자동 설치를 끈 환경에서는 직접 설치해야 합니다(「선택 기능 설치」 참고).</p>
+<h3 id="_5">플랫폼별 설치와 주의사항</h3>
+<h4 id="macos">macOS</h4>
+<p>macOS에서는 <strong>Xcode Command Line Tools</strong>가 필요합니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-bash">xcode-select --install
+</code></pre>
+<p>또는 GUI 없이:</p>
+<pre><code class="language-bash">touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+softwareupdate -l | grep "Command Line Tools"
+softwareupdate -i "Command Line Tools for Xcode-13.2"   # 버전은 출력에 맞게 조정
+</code></pre>
+<fieldset><legend>Big Sur 이하 — Tier 3 우회</legend><p style="margin-top: 0.2em;">Big Sur(11.x) 이하에서는 Homebrew가 사전 빌드 바이너리(bottle)를 제공하지 않습니다(Tier 3 정책). install.sh가 설치하려는 ripgrep·ffmpeg 의존성을 모두 소스에서 빌드해야 해서 8GB RAM 머신에서는 끝까지 진행하기 어렵습니다. 대안은 다음과 같습니다.</p>
+<ol>
+<li><strong>macOS 업그레이드</strong> — Monterey 이상이 공식 지원되는 머신이라면 먼저 업그레이드합니다. Homebrew가 다시 bottle을 사용할 수 있어 설치가 몇 분 안에 끝납니다.</li>
+<li><strong>MacPorts</strong> — Big Sur 공식 pkg(<a href="https://www.macports.org/install.php">www.macports.org</a>)로 ripgrep·ffmpeg를 별도 설치하면 install.sh가 brew 단계를 건너뜁니다.</li>
+<li><strong>수동 설치(대체 절차)</strong> — ripgrep·ffmpeg 없이도 본체는 작동합니다. 음성 모드를 안 쓰는 첫 실습에는 영향이 없으니 둘 다 생략하고 위 「수동 설치」 절차로 진행해도 됩니다.</li>
+<li><strong>장시간 빌드는 <code>screen</code>/<code>tmux</code>로</strong> — SSH 세션이 끊겨도 빌드가 살아남도록 합니다.</li>
+</ol>
+<p>이 책의 실습 환경(12-inch MacBook 2015)도 Big Sur가 최종 지원이라 위 대체 절차를 사용했습니다.</p></fieldset>
+<h4 id="native-windows">Native Windows (베타)</h4>
+<p>v0.14.0에서 WSL 없이 <code>cmd.exe</code>와 PowerShell에서 직접 실행하는 Native Windows 설치 방식이 베타로 추가됐습니다. PowerShell 인스톨러는 MinGit 자동 설치, Microsoft Store python stub 감지, 포그라운드 Ctrl+C 처리까지 자동으로 수행합니다. 아직 다듬어야 할 부분은 남아 있지만, 설치부터 실행까지 핵심 흐름은 새 Windows 환경에서 처음부터 끝까지 작동합니다. 정식 설치 명령은 PowerShell 인스톨러가 안정화된 뒤 본 절에 추가할 예정입니다.</p>
+<h4 id="termux-android">Termux / Android</h4>
+<p>원라인 설치 스크립트는 Android의 Termux 환경을 자동으로 감지합니다(<code>TERMUX_VERSION</code> 또는 <code>PREFIX</code> 경로로 판별). 그에 맞게 패키지 매니저와 경로가 조정되므로, 일반 Linux와 같은 명령으로 설치하면 됩니다.</p>
+<pre><code class="language-bash"># Termux에서
+pkg update &amp;&amp; pkg install curl
+curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+</code></pre>
+<p>설치 후에는 모바일 화면에 맞춰 TUI가 작동하고, 음성 모드와 <code>/image</code> 명령도 사용할 수 있습니다.</p>
+<blockquote>
+<p>💡 <strong>Termux 최적화</strong>: 최근 버전에서 Termux 콜드 스타트 속도가 개선되었고, Python 3.13+에서 <code>sys.platform</code>이 <code>"android"</code>로 보고되어 Linux 태그 스킬(github-pr-workflow, google-workspace 등 약 60개)이 누락되던 문제도 수정되었습니다. 스킬 목록이 비정상적으로 적게 나오면 최신 버전으로 업데이트하십시오.</p>
+</blockquote>
+<h4 id="linux-ubuntu-root">일반 Linux / Ubuntu 데스크톱 설치 (비root)</h4>
+<p>일반 사용자(비root)로 원라인 설치를 실행하면 스크립트가 시스템을 건드리지 않고 필요한 런타임을 <strong>Hermes 전용 영역(<code>~/.hermes/</code>)에 따로 갖춥니다</strong>. Ubuntu 데스크톱 기준으로 실제 흐름은 다음과 같습니다.</p>
+<ul>
+<li><strong>uv는 시스템이 아니라 <code>~/.hermes/bin</code>에 설치됩니다.</strong> 시스템 패키지 매니저를 거치지 않으므로 기존 Python 환경과 충돌하지 않습니다. 위 「수동 설치」는 표준 경로의 uv를 안내하지만, 원라인 설치는 이렇게 관리형 uv를 씁니다.</li>
+<li><strong>Python 3.11이 없으면 uv가 받아옵니다.</strong> 시스템 Python을 바꾸지 않습니다.</li>
+<li><strong>시스템 Node.js가 너무 낡으면 관리형 Node를 따로 설치합니다.</strong> 데스크톱·브라우저 빌드는 Node <code>^20.19 || &gt;=22.12</code>를 요구하는데, 이 조건을 못 채우면 Hermes가 Node 22 LTS를 <code>~/.hermes/node/</code>에 받아 그 안에서만 씁니다. Ubuntu 22.04의 기본 Node 18이 여기에 해당하므로, 관리형 Node가 자동으로 설치되는 것이 정상입니다.</li>
+<li><strong>ripgrep·ffmpeg는 선택 항목입니다.</strong> apt로 설치하므로 sudo 동의를 묻고, 거절할 수 있습니다(Hermes 본체는 root 권한이 필요 없습니다). ripgrep을 설치하지 않으면 파일 검색이 grep으로 대체되고, ffmpeg가 없으면 음성(TTS) 기능이 제한됩니다.</li>
+<li><strong>빌드 도구도 선택적으로 묻습니다.</strong> 일부 Python 패키지를 빌드하는 데 필요한 <code>build-essential</code>·<code>python3-dev</code>·<code>libffi-dev</code>가 없으면 설치 여부를 묻습니다(sudo). 휠(wheel) 설치만으로 충분한 경우가 많아 거절해도 대개 그대로 진행됩니다.</li>
+<li><strong>시스템 Chrome/Chromium이 있으면 Playwright 브라우저를 따로 받지 않습니다.</strong> <code>/usr/bin/google-chrome</code> 같은 시스템 브라우저를 감지하면 다운로드를 생략하고, 그 경로를 <code>~/.hermes/.env</code>의 <code>AGENT_BROWSER_EXECUTABLE_PATH</code>에 기록해 재사용합니다.</li>
+<li><strong>클론은 SSH를 먼저 시도하고 실패하면 HTTPS로 넘어갑니다.</strong> 로그에 <code>SSH failed, trying HTTPS...</code>가 보여도 오류가 아니라 정상적인 폴백입니다.</li>
+</ul>
+<p>설치 위치는 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>경로</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>코드</td>
+<td><code>~/.hermes/hermes-agent/</code></td>
+</tr>
+<tr>
+<td>데이터·설정</td>
+<td><code>~/.hermes/</code> (config.yaml·.env·SOUL.md·cron·sessions·logs 등)</td>
+</tr>
+<tr>
+<td>관리형 런타임</td>
+<td><code>~/.hermes/bin/</code>(uv), <code>~/.hermes/node/</code>(Node)</td>
+</tr>
+<tr>
+<td>명령어</td>
+<td><code>~/.local/bin/hermes</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>대화형 선택 프롬프트 확인</strong>: 설치 스크립트의 선택 프롬프트(ripgrep·ffmpeg·빌드 도구 설치 여부 등)는 답하고 나면 화면에서 지워져, 나중에 터미널 기록을 봐도 무엇을 골랐는지 확인하기 어렵습니다. 무엇이 설치됐는지 다시 확인하려면 <code>hermes doctor</code>를 실행하십시오.</p>
+</blockquote>
+<h4 id="linux-root-fhs">Linux root 설치와 FHS 레이아웃</h4>
+<p>Linux에서 root 사용자로 설치 스크립트를 실행하면 FHS(Filesystem Hierarchy Standard) 레이아웃이 적용됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>경로</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>코드</td>
+<td><code>/usr/local/lib/hermes-agent/</code></td>
+</tr>
+<tr>
+<td>명령어</td>
+<td><code>/usr/local/bin/hermes</code></td>
+</tr>
+<tr>
+<td>데이터</td>
+<td><code>$HERMES_HOME</code> (기본 <code>~/.hermes/</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>기존에 <code>~/.hermes/hermes-agent/</code>에 설치된 환경이 있으면 레거시 레이아웃을 유지합니다. Docker 컨테이너에서 시스템 전역 설치를 할 때 특히 유용합니다.</p>
+<h3 id="zed">Zed 에디터 연동</h3>
+<p>Zed 사용자는 Hermes를 설치한 뒤 Agent Client Protocol 레지스트리에 등록해 Zed 안에서 Hermes를 호출할 수 있습니다. 등록 경로가 <code>uvx</code>라 npm 의존성이 필요 없습니다.</p>
+<pre><code class="language-bash">hermes acp --setup-browser   # 레지스트리 설치용 브라우저 도구 부트스트랩
+</code></pre>
+<p>본체(원라인 또는 PyPI)를 먼저 설치해야 합니다.</p>
+<h3 id="_6">설치 확인과 초기 설정</h3>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>설치가 끝났으면 셸을 다시 로드합니다.</p>
+<pre><code class="language-bash">source ~/.bashrc  # 또는 ~/.zshrc
+</code></pre>
+<p><code>hermes doctor</code>로 Python 버전, 의존성, 설정 파일, API 키 등을 점검합니다.</p>
+<pre><code class="language-bash">hermes doctor
+</code></pre>
+<p>원라인 설치를 <code>--skip-setup</code>으로 건너뛰었거나 수동 설치를 마쳤다면 다음 명령으로 마법사를 다시 실행해 프로바이더·터미널 백엔드·메시징 플랫폼을 대화형으로 설정합니다.</p>
+<pre><code class="language-bash">hermes setup
+</code></pre>
+<p>이후 모델·프로바이더만 별도로 바꾸려면 <code>hermes model</code>을 씁니다. 자세한 모델 선택 절차는 「클라우드 API 연동」 절을 참고합니다.</p>
+<h3 id="lazy-install">선택 기능 설치 (lazy-install)</h3>
+<p>Hermes Agent는 메시징 어댑터, 음성·TTS 프로바이더, 이미지·비디오 생성 SDK 같은 무거운 선택 의존성을 <strong>처음 사용할 때 자동으로 설치</strong>합니다. 새로 설치한 직후에는 이들 SDK를 미리 받아오지 않으므로 디스크와 첫 실행이 가볍습니다.</p>
+<pre><code>&gt; 텔레그램 게이트웨이를 설정해 줘
+🔧 Installing python-telegram-bot … done (3.2s)
+</code></pre>
+<p>자동 설치가 보안 정책에 맞지 않는 환경에서는 <code>config.yaml</code>에서 비활성화할 수 있습니다.</p>
+<pre><code class="language-yaml">security:
+  allow_lazy_installs: false   # 런타임 자동 설치 차단
+</code></pre>
+<p>비활성화한 경우에는 필요한 기능을 직접 설치합니다.</p>
+<pre><code class="language-bash"># 메시징 게이트웨이
+uv pip install -e ".[messaging]"
+
+# 음성 모드
+uv pip install -e ".[voice]"
+</code></pre>
+<blockquote>
+<p>💡 <strong>공급망 점검(supply-chain advisory checker)</strong>: <code>hermes doctor</code>와 CLI 시작 시 알려진 악성 패키지(예: <code>mistralai</code> 2.4.6)가 설치돼 있으면 경고를 표시합니다. <code>hermes doctor --ack &lt;id&gt;</code>로 확인 처리할 수 있습니다.</p>
+</blockquote>
+<h3 id="hermes-backup-hermes-import">기존 환경 이전 — <code>hermes backup</code> / <code>hermes import</code></h3>
+<p>설정·세션·스킬·메모리를 통째로 백업해 다른 머신에서 복원할 수 있습니다.</p>
+<pre><code class="language-bash">hermes backup                 # 전체 백업 (~/hermes-backup-&lt;timestamp&gt;.zip)
+hermes backup -o my-backup.zip
+hermes backup --quick -l "before-experiment"   # 핵심 상태 파일만 빠르게
+
+# 다른 머신에서
+hermes import my-backup.zip            # 기본은 비파괴(이미 있는 파일은 보존)
+hermes import my-backup.zip --force    # 충돌 시 백업의 내용으로 덮어쓰기
+</code></pre>
+<p><code>hermes update</code>와 결합한 자동 백업 옵션은 「업데이트」 절을 참고합니다.</p>
+<h3 id="_7">버전별 변경 이력</h3>
+<ul>
+<li><strong>v0.14.0</strong> — PyPI 정식 배포(<code>pip install hermes-agent</code>), Native Windows 베타, Zed ACP Registry 통합. 지연 설치(lazy-install) 대상 확장(Feishu·DingTalk 어댑터, 음성/TTS 프로바이더, hindsight 클라이언트, codex app-server, Pixverse·Camofox SDK가 추가로 <code>[all]</code>에서 빠짐). 단계별 설치(tiered install) 대체 절차 도입.</li>
+<li><strong>v0.13.0</strong> — 지연 설치(lazy-install) 도입(메시징 어댑터·Edge TTS·ElevenLabs·Bedrock·Honcho·FAL 등이 <code>[all]</code>에서 빠짐). Linux root 설치 시 FHS 레이아웃 적용.</li>
+</ul>
+</div>

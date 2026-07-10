@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>01_Hermes_Agent_소개</title>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Fira+Code:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2c3e50;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code {
+    font-family: 'Fira Code', Consolas, Monaco, monospace;
+}
+code {
+    background-color: #f7f9fa;
+    color: #e06c75;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1em;
+}
+pre {
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: 1.2em;
+    margin: 1.5em 0;
+    border-radius: 6px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* 인용구 스타일 */
+blockquote {
+    border-left: 4px solid #00adb5;
+    background-color: #f8f9fa;
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    color: #555;
+    font-style: italic;
+    border-radius: 0 6px 6px 0;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.95em;
+}
+table, th, td {
+    border: 1px solid #e9ecef;
+    padding: 0.8em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+    color: #495057;
+}
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* 제목 스타일 */
+h1 {
+    font-size: 2.2em;
+    color: #1a202c;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.4em;
+    margin-bottom: 1em;
+}
+h1.page-subject {
+    font-size: 2.2em;
+    color: #1a202c;
+    margin-top: 0;
+    margin-bottom: 0.2em;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.title-divider {
+    border: none;
+    border-top: 2px solid #00adb5;
+    margin-bottom: 1.5em;
+}
+h2 {
+    font-size: 1.6em;
+    color: #2d3748;
+    margin-top: 1.8em;
+    margin-bottom: 0.8em;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 0.2em;
+}
+h3 {
+    font-size: 1.25em;
+    color: #4a5568;
+    margin-top: 1.5em;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    pre, blockquote, table, img, tr {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="thebook-content">
+        <div class="book-page-fragment" data-page-id="334919">
+<div class="page-content tex2jax_process">
+<p>이 장에서는 Hermes Agent가 무엇이고, 왜 주목할 만한지, 그리고 기존 AI 에이전트들과 어떻게 다른지를 살펴봅니다.</p>
+<p><strong>이 장에서 다루는 내용</strong></p>
+<ul>
+<li>Hermes Agent란 무엇인가</li>
+<li>왜 Hermes Agent인가</li>
+<li>다른 AI 에이전트와 비교</li>
+<li>에이전트의 골디락스 존 — 언제 쓰면 효과적인가</li>
+</ul>
+</div>
+</div><div class="book-page-fragment" data-page-id="334920">
+<h1 class="page-subject">01-1. Hermes Agent란 무엇인가</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<div class="toc">
+<ul>
+<li><a href="#_1">개요</a></li>
+<li><a href="#_2">활용 사례</a></li>
+<li><a href="#_3">핵심 기능</a><ul>
+<li><a href="#cli">대화형 CLI</a></li>
+<li><a href="#_4">유연한 모델 연동</a></li>
+<li><a href="#_5">멀티채널 메시징</a></li>
+<li><a href="#_6">예약 실행과 자동화</a></li>
+<li><a href="#_7">메모리와 스킬 학습</a></li>
+<li><a href="#goal">영속 목표(/goal)</a></li>
+<li><a href="#mcp">풍부한 내장 도구와 MCP 확장</a></li>
+<li><a href="#fast-mode-ink-based-tui">Fast Mode와 새 Ink-based TUI</a></li>
+</ul>
+</li>
+<li><a href="#_8">기술 스택</a></li>
+<li><a href="#_9">최신 버전</a></li>
+</ul>
+</div>
+<h3 id="_1">개요</h3>
+<p>Hermes Agent는 NousResearch가 만든 오픈소스 AI 에이전트입니다. 2026년 2월 26일에 공개되었고, MIT 라이선스로 누구나 자유롭게 사용할 수 있습니다.</p>
+<p>OpenClaw가 큰 인기를 끌면서 비슷한 개인용 AI 에이전트가 속속 등장하고 있는데, Hermes Agent도 그중 하나입니다. 터미널에서 <code>hermes</code>를 입력하면 대화가 시작되고, 파일을 읽고 쓰고, 웹을 검색하고, 명령을 실행하고, 메시지를 보내는 등 다양한 작업을 수행합니다. 내장 도구는 터미널·파일 같은 개발 도구부터 브라우저 자동화, 이미지 생성, 음성 합성, 스마트 홈 제어까지 폭넓고, 내장 스킬도 소프트웨어 개발·MLOps부터 게임, 음악, 생산성, SNS, 스마트 홈까지 걸쳐 있습니다(자세한 규모와 목록은 「핵심 기능」 절과 4장·7장 참고).</p>
+<p>메모리와 스킬로 사용할수록 똑똑해지는 "성장하는 에이전트"는 OpenClaw를 비롯해 이 분야의 공통 흐름입니다. Hermes Agent도 같은 방향이지만, 복잡한 작업이 끝난 뒤 <strong>백그라운드에서 대화를 리뷰하고 스스로 스킬을 생성</strong>하는 자동화 메커니즘에 더해, <strong>백그라운드 큐레이터</strong>가 7일 주기로 라이브러리 전체를 정리해 주는 단계까지 와 있는 것이 특징입니다(메모리·스킬 장과 「백그라운드 큐레이터」 절 참고).</p>
+<h3 id="_2">활용 사례</h3>
+<p>커뮤니티에서 공유된 실제 활용 사례를 소개합니다.</p>
+<ul>
+<li><strong>Mac Mini를 24시간 AI 비서로</strong>: Mac Mini에 Hermes Agent를 설치하고, Apple 미리알림·메모·iMessage와 연동해서 "내일 오전 10시에 치과 예약 알려줘"라고 Telegram으로 보내면 끝. 크론으로 매일 아침 일정과 날씨를 브리핑합니다(13장 「Mac Mini AI 허브」 참고).</li>
+<li><strong>팀 디스코드 봇으로 반복 질문 해결</strong>: "스테이징 서버 상태 어때?", "이 PR 리뷰해줘" 같은 반복 질문을 디스코드 채널의 에이전트가 처리. 처음에는 매번 방법을 찾지만, 스킬이 쌓이면서 점점 빨라집니다(13장 「팀 디스코드 봇」 참고).</li>
+<li><strong>매일 뉴스 브리핑 자동화</strong>: "매일 오전 9시에 AI 뉴스를 요약해서 텔레그램으로 보내줘." MCP로 검색 API를 연결하고 크론으로 등록하면, 개인 맞춤 뉴스레터가 매일 도착합니다(13장 「뉴스 브리핑」 참고).</li>
+<li><strong>\$5 VPS에서 돌리는 완전 무료 AI 비서</strong>: 로컬 LLM(Hermes 3, 8B)을 연결하면 API 비용 없이 에이전트를 운영할 수 있습니다. 다만 로컬 모델만으로는 복잡한 지시나 한국어 처리에 한계가 뚜렷하므로, 클라우드 API와 병행하는 혼합 전략이 현실적입니다(2장 「LLM 연동」 참고).</li>
+</ul>
+<p>이런 활용이 가능한 이유는 Hermes Agent가 <strong>도구 + 메모리 + 스킬 + 메시징 + 크론</strong>을 하나로 통합하고 있기 때문입니다. 각 기능은 이 책의 해당 장에서 자세히 다룹니다.</p>
+<h3 id="_3">핵심 기능</h3>
+<h4 id="cli">대화형 CLI</h4>
+<p>터미널에서 <code>hermes</code>를 실행하면 AI와 대화가 시작되고, 웹 검색, 파일 작업, 명령 실행 등을 자연어로 지시할 수 있습니다.</p>
+<h4 id="_4">유연한 모델 연동</h4>
+<p>OpenAI, Anthropic, Ollama(로컬 모델), OpenRouter(200개 이상 모델) 등 OpenAI 호환 API면 무엇이든 됩니다. 이 책에서는 로컬 LLM(Ollama)과 클라우드 API(Claude 등)를 함께 활용하는 방법을 다룹니다.</p>
+<h4 id="_5">멀티채널 메시징</h4>
+<p>Telegram, Discord, Slack, WhatsApp, Signal, Matrix, iMessage, WeChat, Microsoft Teams, LINE, SimpleX Chat 등 22개 메시징 플랫폼에서 봇으로 작동합니다. 터미널 앞에 앉아 있지 않아도 스마트폰에서 지시를 내릴 수 있습니다. 프로파일 기능(11장)과 조합하면 한 머신에 역할별 에이전트를 여러 개 띄우고, 메신저로 각각 지시하거나 에이전트끼리 메시징 채널을 통해 협업하는 구성도 가능합니다(9장, 12장 참고).</p>
+<h4 id="_6">예약 실행과 자동화</h4>
+<p>크론 스케줄링으로 무인 작업이 가능합니다. "매일 아침 8시에 뉴스를 요약해서 Telegram으로 보내줘" 같은 자연어 한 문장이면 됩니다.</p>
+<h4 id="_7">메모리와 스킬 학습</h4>
+<p>대화 내용을 기억하고, 사용자의 선호를 학습하고, 복잡한 작업의 절차를 스킬로 저장합니다. 같은 종류의 작업을 반복하면 점점 빨라집니다. 백그라운드 큐레이터가 주기적으로 라이브러리를 정리해 줍니다(7장 「백그라운드 큐레이터」 참고).</p>
+<h4 id="goal">영속 목표(<code>/goal</code>)</h4>
+<p>한 턴에 끝나지 않는 작업을 며칠에 걸쳐 누적 진행할 수 있도록 <strong>영속 목표</strong>를 설정합니다. 매 턴 후 백그라운드에서 진행 점검이 돕니다(Ralph loop). 10장 「영속 목표」 참고.</p>
+<h4 id="mcp">풍부한 내장 도구와 MCP 확장</h4>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>웹 검색, 파일 읽기/쓰기, 터미널 명령, 브라우저 자동화, 이미지 분석, 코드 실행, 서브에이전트 위임 등 다양한 도구가 내장돼 있습니다. 정확한 활성 목록은 <code>hermes tools</code>로 확인합니다. <strong>Nous Tool Gateway</strong>로 웹 검색·이미지 생성·TTS·브라우저 자동화를 별도 API 키 없이 Nous 구독으로 통합해 쓸 수도 있고(4장), MCP(Model Context Protocol)로 외부 도구를 추가할 수도 있습니다(8장).</p>
+<h4 id="fast-mode-ink-based-tui">Fast Mode와 새 Ink-based TUI</h4>
+<p><code>/fast</code> 토글 한 번이면 OpenAI Priority Processing과 Anthropic Fast 티어로 응답 지연을 줄입니다. 클래식 REPL 외에 React/Ink 기반의 새 TUI(<code>hermes --tui</code>)와 로컬 웹 대시보드(<code>hermes dashboard</code>)가 함께 제공됩니다(3장).</p>
+<h3 id="_8">기술 스택</h3>
+<ul>
+<li><strong>아키텍처</strong>: ReAct(Reasoning and Acting) 루프. 관찰 → 추론 → 행동을 반복합니다. 트랜스포트 추상화로 OpenAI 호환·Anthropic·Bedrock 등 여러 LLM 백엔드를 분리해 다루고, 게이트웨이는 플러그인 호스트로 작동합니다(12장 아키텍처 참고).</li>
+<li><strong>모델</strong>: 특정 모델에 묶이지 않는 하네스 구조입니다. 기본 채팅 모델은 설치 시 선택하며, 트랜스포트 추상화로 OpenAI 호환·Anthropic·로컬 모델 등을 바꿔 끼울 수 있습니다. NousResearch가 Atropos 강화학습 프레임워크로 도구 호출을 학습시킨 자체 Hermes 모델 계열도 그중 한 선택지입니다.</li>
+<li><strong>코드</strong>: Python 91.4%. 나머지는 Shell, JavaScript(Ink TUI) 등.</li>
+<li><strong>라이선스</strong>: MIT.</li>
+</ul>
+<h3 id="_9">최신 버전</h3>
+<p><strong>v0.14.0 (2026년 5월 16일)</strong> — PyPI 정식 배포(<code>pip install hermes-agent</code>), xAI Grok via SuperGrok OAuth(grok-4.3 1M 컨텍스트), <code>hermes proxy</code>(OpenAI 호환 로컬 프락시), <code>x_search</code> 내장 도구, Microsoft Teams end-to-end, 메시징 플랫폼 22개(LINE·SimpleX Chat 추가), Cross-session 1시간 프롬프트 캐시, <code>/handoff</code> 라이브 세션 이관, LSP 시맨틱 진단, 콜드 스타트 ~19초 단축, Native Windows 베타.</p>
+</div>
+</div><div class="book-page-fragment" data-page-id="334921">
+<h1 class="page-subject">01-2. 왜 Hermes Agent인가</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>미검증</strong>: 이 절은 공식 문서를 바탕으로 정리했습니다. 실제 테스트를 마친 뒤 업데이트하겠습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#hermes-agent">왜 Hermes Agent를 선택하는가</a></li>
+<li><a href="#_1">학습하는 에이전트</a></li>
+<li><a href="#_2">완전한 데이터 주권</a></li>
+<li><a href="#_3">모델이 아니라 하네스에 가치가 쌓입니다</a></li>
+<li><a href="#_4">자율 백그라운드 작업</a></li>
+<li><a href="#_5">에이전트가 필요한 작업인가</a></li>
+<li><a href="#_6">비용</a></li>
+<li><a href="#_7">설계 수준의 보안</a></li>
+<li><a href="#openclaw">OpenClaw에서 전환하기</a></li>
+<li><a href="#_8">스킬 공유 생태계</a></li>
+</ul>
+</div>
+<h3 id="hermes-agent">왜 Hermes Agent를 선택하는가</h3>
+<p>AI 에이전트 프레임워크는 이미 많습니다. 이 절에서는 그중 Hermes Agent를 선택할 만한 이유를 정리합니다. 다른 에이전트와의 구체적인 비교는 「에이전트 비교」 절에서 다룹니다.</p>
+<h3 id="_1">학습하는 에이전트</h3>
+<p>Hermes Agent는 네 가지 방식으로 <strong>세션이 끝난 뒤에도 학습 내용을 이어 갑니다</strong>.</p>
+<ol>
+<li><strong>메모리</strong>: 환경 정보, 규칙, 교훈을 기억합니다.</li>
+<li><strong>사용자 프로필</strong>: 사용자의 선호와 작업 스타일을 파악합니다.</li>
+<li><strong>스킬 자동 생성</strong>: 복잡한 작업을 처리한 뒤, 백그라운드 리뷰 에이전트가 이 작업을 스킬로 남길지 검토합니다.</li>
+<li><strong>백그라운드 큐레이터</strong>: 7일마다 라이브러리 전체를 정리해 비슷한 스킬은 합치고, 안 쓰는 스킬은 솎아냅니다(7장 「백그라운드 큐레이터」 참고).</li>
+</ol>
+<p>메모리와 사용자 프로필은 "누구의 어떤 환경인지"를 기억하고, 자동으로 만들어진 스킬은 "어떻게 처리할지"를 쌓아 갑니다. 큐레이터는 스킬 라이브러리가 잡초밭이 되지 않도록 꾸준히 손봐 줍니다. 이 조합이 "함께 성장하는 에이전트"라는 슬로건의 의미입니다.</p>
+<h3 id="_2">완전한 데이터 주권</h3>
+<p>로컬 LLM(Ollama, vLLM, llama.cpp, <strong>LM Studio</strong>)과 연동하면 프롬프트와 작업 데이터가 외부 API로 전송되지 않습니다. <strong>월 5달러짜리 VPS, GPU 클러스터, 서버리스 환경</strong> 어디서든 실행할 수 있습니다. 사내·온프레미스 추론이 필요한 경우에는 GMI Cloud, Azure AI Foundry, AWS Bedrock 같은 프라이빗 연동 경로를 지원합니다(「클라우드 API 연동」 절 참고).</p>
+<p><code>config.yaml</code>에 모델과 엔드포인트를 지정하면 외부 API 없이 로컬에서만 실행할 수 있습니다. 로컬 LLM 설정의 구체적인 방법은 부록 「로컬 LLM 가이드」를, 클라우드 API 연동은 「클라우드 API 연동」 절을 참고하세요.</p>
+<h3 id="_3">모델이 아니라 하네스에 가치가 쌓입니다</h3>
+<p>AI 에이전트는 <strong>모델(LLM) + 하네스(harness)</strong>로 구성됩니다. 모델이 "무엇을 할지" 생각하는 뇌라면, 하네스는 그 뇌가 실제 작업을 해내도록 돕는 실행 환경입니다.</p>
+<ul>
+<li>도구 사용(터미널, 브라우저, API 연결)</li>
+<li>메모리와 컨텍스트 관리(장기 기억, 세션 간 상태 유지)</li>
+<li>실행 루프(계획 → 실행 → 검증 → 수정)</li>
+<li>안전장치(권한 제어, 승인, 오류 복구)</li>
+<li>스킬 자동 생성과 자기 수정</li>
+</ul>
+<p>같은 모델이라도 하네스에 따라 에이전트의 성능이 크게 달라집니다. Hermes Agent의 핵심 경쟁력은 이 하네스에 있으며, 모델은 언제든 교체할 수 있습니다. 오늘 Ollama의 Llama 3.1을 쓰다가 내일 Claude Sonnet으로, 다음 주 Gemma 4로 바꿔도 메모리, 스킬, 워크플로는 그대로 이어집니다.</p>
+<h3 id="_4">자율 백그라운드 작업</h3>
+<p>크론 스케줄링과 메시징 게이트웨이를 이용해 <strong>백그라운드 작업을 자동으로 실행</strong>할 수 있습니다.</p>
+<ul>
+<li>매일 아침 여러 소스에서 뉴스를 수집하고, 관심 분야에 맞게 선별·요약해 Telegram으로 보냅니다.</li>
+<li>매주 코드 저장소를 분석해 리포트를 만듭니다.</li>
+<li>야간에 백업을 실행합니다.</li>
+</ul>
+<p>반복 작업을 처리하는 과정에서 스킬이 자동으로 만들어지므로, 에이전트는 같은 일을 점점 더 정확하게 처리합니다.</p>
+<h3 id="_5">에이전트가 필요한 작업인가</h3>
+<p>에이전트는 만능이 아닙니다. 모든 작업에 에이전트를 쓰면 오히려 비효율적입니다.</p>
+<ul>
+<li><strong>문서 검색·요약·Q&amp;A</strong>: RAG(Retrieval Augmented Generation)가 더 적합합니다. 문서 전체를 컨텍스트로 넘기지 않고 관련 부분만 검색해 전달하므로 토큰을 덜 씁니다.</li>
+<li><strong>단순 대화</strong>: <code>ollama run</code>이나 API를 직접 호출하는 것이 빠르고 효율적입니다.</li>
+</ul>
+<p>에이전트는 <strong>도구를 상황에 맞게 호출하고, 여러 단계를 계획하며, 파일 쓰기·API 호출·브라우저 제어 같은 외부 작업을 처리해야 할 때</strong> 가장 유용합니다. 에이전트가 필요한 작업을 가르는 기준은 「에이전트가 적합한 작업」 절에서 자세히 다룹니다.</p>
+<h3 id="_6">비용</h3>
+<p>로컬 LLM을 사용하면 하드웨어와 전기요금 외에는 추가 비용이 들지 않습니다. 클라우드 API를 함께 쓰는 경우에도 스마트 모델 라우팅으로 간단한 질의는 작은 모델에, 복잡한 작업은 큰 모델에 맡겨 비용을 줄일 수 있습니다.</p>
+<h3 id="_7">설계 수준의 보안</h3>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>AI 에이전트는 사용자의 권한으로 코드를 실행하고, 파일을 읽고, 외부 서비스에 접근합니다. 편리하지만 그만큼 위험합니다. MS는 2026년 2월 보안 블로그에서 OpenClaw를 사례로 들며 AI 에이전트의 네 가지 핵심 위험을 경고했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>MS가 지적한 위험</th>
+<th>Hermes Agent의 대응</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>위험한 명령 실행</td>
+<td><code>rm -rf</code>, <code>curl \| sh</code> 등 20개 이상의 위험 패턴을 감지하고, 실행하기 전에 사용자 승인을 받습니다</td>
+</tr>
+<tr>
+<td>호스트 권한 상속</td>
+<td>Docker 같은 컨테이너 백엔드로 호스트와 격리하고, MCP 서버에는 허용 목록에 있는 환경변수만 전달합니다</td>
+</tr>
+<tr>
+<td>악성 스킬을 통한 공급망 공격</td>
+<td>에이전트가 스킬을 직접 만들고, 백그라운드 리뷰 에이전트가 자동으로 검토합니다</td>
+</tr>
+<tr>
+<td>간접 프롬프트 주입</td>
+<td>컨텍스트 파일을 불러오기 전에 인젝션 패턴과 보이지 않는 유니코드 문자를 스캔해 차단합니다</td>
+</tr>
+</tbody>
+</table>
+<p>MS는 "격리된 환경에서 실행하고, 전용 계정을 쓰고, 지속적으로 모니터링하라"고 권고했습니다. Hermes Agent는 사용자가 이 권고 사항을 하나하나 설정하지 않아도 되도록, <strong>5계층 보안 모델</strong>을 아키텍처에 내장했습니다. 각 계층의 구현 상세는 11장에서 다룹니다.</p>
+<h3 id="openclaw">OpenClaw에서 전환하기</h3>
+<p>이미 OpenClaw를 사용 중이라면, Hermes Agent로의 전환은 간단합니다.</p>
+<pre><code class="language-bash">hermes claw migrate              # 대화형 마이그레이션
+hermes claw migrate --dry-run    # 미리보기 (실제 변경 없음)
+hermes claw migrate --preset user-data  # 시크릿 제외
+</code></pre>
+<p>가져올 수 있는 항목:</p>
+<ul>
+<li>페르소나 파일</li>
+<li>메모리 항목</li>
+<li>사용자 생성 스킬</li>
+<li>명령 허용 목록</li>
+<li>플랫폼 설정</li>
+<li>API 키 (선택적)</li>
+<li>TTS 에셋</li>
+<li>워크스페이스 지시사항</li>
+</ul>
+<h3 id="_8">스킬 공유 생태계</h3>
+<p>Hermes Agent의 스킬 시스템은 <strong>agentskills.io 오픈 표준</strong>을 따릅니다. 이 표준은 Anthropic이 주도하고 Claude Code, Cursor, Gemini CLI 등 16개 이상의 도구가 채택한 업계 공통 규격입니다. 스킬은 사람이 읽을 수 있는 마크다운 형식이며, 감사(audit) 가능하고, 에이전트 간에 공유할 수 있습니다. Skills Hub를 통해 커뮤니티가 만든 스킬을 설치하고, 자신이 만든 스킬을 공유할 수 있습니다.</p>
+</div>
+</div><div class="book-page-fragment" data-page-id="334922">
+<h1 class="page-subject">01-3. 다른 AI 에이전트와 비교</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<div class="toc">
+<ul>
+<li><a href="#_1">언제 어떤 에이전트를 고르나</a></li>
+<li><a href="#_2">개인용 / 자율 운영 에이전트</a><ul>
+<li><a href="#openclaw">OpenClaw</a></li>
+<li><a href="#nanoclaw">NanoClaw</a></li>
+<li><a href="#nemoclaw-nvidia">NemoClaw (NVIDIA)</a></li>
+<li><a href="#hermes-agent-nousresearch">Hermes Agent (NousResearch)</a></li>
+</ul>
+</li>
+<li><a href="#_3">코딩 에이전트</a><ul>
+<li><a href="#claude-code">Claude Code</a></li>
+<li><a href="#opencode">OpenCode</a></li>
+<li><a href="#aider">Aider</a></li>
+<li><a href="#gemini-cli-google">Gemini CLI (Google)</a></li>
+<li><a href="#openhands-all-hands-ai">OpenHands (All-Hands AI)</a></li>
+</ul>
+</li>
+<li><a href="#hermes-agent">Hermes Agent의 약점</a></li>
+<li><a href="#_4">조합이 더 현실적입니다</a></li>
+</ul>
+</div>
+<p>OpenClaw가 큰 인기를 얻은 뒤 개인용 AI 에이전트가 잇따라 등장했고, 코딩 에이전트 분야에서도 거의 매달 새 도구가 나오고 있습니다. 이 절에서는 먼저 사용 시나리오별로 어떤 에이전트를 고르면 좋을지 정리합니다. 이어서 각 에이전트의 특징을 짧은 프로필 카드로 살펴봅니다.</p>
+<blockquote>
+<p>📅 인용된 인기·점수 수치는 빠르게 변합니다. 본문은 <strong>2026년 5월 초</strong>를 기준으로 작성했습니다. 따라서 독자가 책을 펼친 시점에는 수만 단위의 차이가 나도 이상하지 않습니다.</p>
+</blockquote>
+<h3 id="_1">언제 어떤 에이전트를 고르나</h3>
+<table>
+<thead>
+<tr>
+<th>시나리오</th>
+<th>후보</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>메신저(텔레그램·Slack 등)에서 봇으로 운영</td>
+<td>OpenClaw, Hermes Agent, NanoClaw</td>
+</tr>
+<tr>
+<td>코딩 중심 작업 — 디버깅·리팩터링·리뷰</td>
+<td>Claude Code, OpenCode, Aider, Gemini CLI</td>
+</tr>
+<tr>
+<td>데이터를 외부로 내보내면 안 되는 경우</td>
+<td>Hermes Agent(로컬 LLM), NemoClaw(NVIDIA OpenShell)</td>
+</tr>
+<tr>
+<td>크론·메모리·학습을 묶은 자율 운영</td>
+<td>Hermes Agent</td>
+</tr>
+<tr>
+<td>NVIDIA GPU를 보유한 기업의 사내 도입</td>
+<td>NemoClaw</td>
+</tr>
+<tr>
+<td>작은 코드베이스를 한눈에 파악하고 싶을 때</td>
+<td>NanoClaw</td>
+</tr>
+<tr>
+<td>Git 기반 페어 프로그래밍 워크플로</td>
+<td>Aider</td>
+</tr>
+<tr>
+<td>컨테이너로 격리된 코딩 샌드박스</td>
+<td>OpenHands</td>
+</tr>
+</tbody>
+</table>
+<p>여러 시나리오에 걸치는 도구도 많습니다. 예컨대 OpenClaw와 Hermes Agent는 모두 "메신저 봇"과 "자율 운영" 양쪽에 들어가지만, 자기 개선·로컬 LLM 비중에서 결이 다릅니다. 카드를 보고 결정짓는 편이 빠릅니다.</p>
+<h3 id="_2">개인용 / 자율 운영 에이전트</h3>
+<h4 id="openclaw">OpenClaw</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: 개인용 AI 에이전트의 대표주자. "웬만한 일은 다 된다"는 인상을 주는 도구.</li>
+<li><strong>현황</strong>: 약 346k GitHub 스타(2026-05). React, Vue, TensorFlow를 제치고 GitHub에서 스타 수가 가장 많은 비애그리게이터 프로젝트가 됐습니다. macOS·iOS·Android 앱과 20개 이상의 메시징 채널을 통합합니다. 5월 초 기준 <code>2026.5.1-beta</code>에서 Google Chat·LINE·Matrix·Mattermost·BlueBubbles·Google Meet·Nextcloud Talk·Nostr·Zalo 등 새 플러그인이 추가됐으며, 일부는 아직 다듬는 중입니다.</li>
+<li><strong>강점</strong>: 가장 풍부한 통합과 완성도. 모바일까지 포함한 멀티 플랫폼 지원이 다른 어떤 후보보다 넓습니다.</li>
+<li><strong>한계</strong>: 코드베이스가 수십만 줄에 이를 정도로 방대해 내부 작동을 사용자가 한눈에 파악하기 어렵습니다. 어떤 백엔드 모델을 쓰느냐에 따라 추론 안정성이 크게 달라집니다. Hermes Agent는 <code>hermes claw migrate</code>로 OpenClaw의 설정·메모리·스킬·API 키를 가져올 수 있어, 이전할 때 부담이 적습니다.</li>
+</ul>
+<h4 id="nanoclaw">NanoClaw</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: OpenClaw의 가벼운 후계자.</li>
+<li><strong>현황</strong>: 약 28k GitHub 스타. Anthropic Claude Agent SDK 위에서 작동합니다. 단일 Node.js 프로세스로 실행되며, 컨테이너 격리를 지원하고 Raspberry Pi에서도 돌아갑니다.</li>
+<li><strong>강점</strong>: 코드가 작아 한눈에 읽힙니다. 애플리케이션 내부 권한 검사에만 의존하지 않고 리눅스 컨테이너로 격리하므로 보안 모델이 명확합니다.</li>
+<li><strong>한계</strong>: Anthropic 모델에 사실상 종속됩니다. 복잡한 자율 워크플로(크론 체이닝·다중 메시징 동시 운영 등)에는 굳이 이 방향을 택할 이유가 적습니다.</li>
+</ul>
+<h4 id="nemoclaw-nvidia">NemoClaw (NVIDIA)</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: OpenClaw의 기업용 변형. NVIDIA 인프라 위에 정책 기반 안전장치를 더한 형태입니다.</li>
+<li><strong>현황</strong>: 2026년 3월 16일 초기 미리보기(early preview)로 공개됐으며, 아직 알파 단계입니다(GA 일정 미발표). NVIDIA Nemotron 로컬 모델과 NVIDIA OpenShell 런타임이 핵심입니다.</li>
+<li><strong>강점</strong>: 정책 YAML을 통해 네트워크와 파일시스템 격리를 강제할 수 있습니다. 로컬 추론을 사용하면 데이터가 기기를 떠나지 않도록 통제할 수 있습니다. DGX Station이나 DGX Spark에서 자율 에이전트를 상시 운영하려는 경우에 잘 맞습니다.</li>
+<li><strong>한계</strong>: NVIDIA 생태계에 종속됩니다. 아직 알파 단계이므로 운영 환경에 바로 도입하기에는 이릅니다.</li>
+</ul>
+<h4 id="hermes-agent-nousresearch">Hermes Agent (NousResearch)</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: 메신저, 크론, 자율 운영, 자기 개선이 한 패키지.</li>
+<li>
+<p><strong>현황</strong>: 약 110k GitHub 스타(출시 후 10주 기준). 2026년 5월 OpenRouter 앱 랭킹에서 일일 토큰 처리량 기준 1위를 차지하며, GitHub 스타 수와 별개로 실사용 트래픽에서도 OpenClaw를 앞섰습니다. 이 책 전반에서 다루는 핵심 도구이기도 합니다. v0.14.0(2026-05-16) 기준으로 다음 기능이 추가됐습니다.</p>
+<ul>
+<li>PyPI 정식 배포 (<code>pip install hermes-agent</code>)</li>
+<li>xAI Grok 연동 (SuperGrok OAuth, 1M 컨텍스트)</li>
+<li>OpenAI 호환 로컬 프락시 <code>hermes proxy</code></li>
+<li>내장 도구 <code>x_search</code></li>
+<li>Microsoft Teams 정식 end-to-end</li>
+<li>메시징 플랫폼 22개 (LINE·SimpleX Chat 추가)</li>
+<li>세션 간 1시간 프롬프트 캐시</li>
+<li><code>/handoff</code> 라이브 세션 이관</li>
+<li>LSP 시맨틱 진단</li>
+<li>콜드 스타트 ~19초 단축</li>
+<li>네이티브 Windows 베타</li>
+</ul>
+</li>
+<li>
+<p><strong>강점</strong>: 5계층 보안, 백그라운드 큐레이터(7장 참고), 다양한 메시징 플랫폼, 로컬 LLM 사용 시 완전한 데이터 통제. 모델 선택이 자유로워 OpenAI, Anthropic, Ollama, LM Studio 등 원하는 백엔드로 바꿔 쓸 수 있습니다.</p>
+</li>
+<li><strong>한계</strong>: 한국어 환경에서 로컬 모델만으로는 품질 한계가 분명합니다. SaaS가 아니므로 인프라(게이트웨이 프로세스·자격 증명·플랫폼 토큰)를 직접 관리해야 합니다.</li>
+</ul>
+<h3 id="_3">코딩 에이전트</h3>
+<h4 id="claude-code">Claude Code</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: 코딩 추론 품질이 가장 높은 상용 코딩 에이전트.</li>
+<li><strong>현황</strong>: Anthropic 공식 코딩 에이전트입니다. 2026-04-16 출시된 <strong>Claude Opus 4.7</strong>이 기본 모델입니다. SWE-bench Verified 87.6%, SWE-bench Pro 64.3%로 코딩 벤치마크 1위(2026-04 기준). 가격은 Opus 4.6과 같은 \$5/\$25(MTok)입니다.</li>
+<li><strong>강점</strong>: 복잡한 코딩 작업의 추론 안정성, IDE 통합(VS Code·JetBrains), 비전 해상도(2,576px)로 스크린샷·다이어그램 입력에도 강합니다.</li>
+<li><strong>한계</strong>: Anthropic 모델에 종속되며, 사용 과정에서 코드를 클라우드로 보내야 합니다. Opus 4.7부터 토크나이저가 바뀌어 같은 입력이라도 토큰 수가 최대 35%까지 늘 수 있어, 단가는 같아도 실제 비용은 증가할 수 있습니다.</li>
+</ul>
+<h4 id="opencode">OpenCode</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: 75개 이상의 모델을 바꿔 가며 쓸 수 있는 터미널 중심 오픈소스 코딩 에이전트.</li>
+<li><strong>현황</strong>: 약 150k GitHub 스타. Go 기반 CLI에 Bubble Tea TUI. OpenAI·Anthropic·Gemini·Bedrock·Groq·Azure OpenAI·OpenRouter 등 여러 모델 제공자를 지원하고, MCP 통합도 포함합니다.</li>
+<li><strong>강점</strong>: 모델 자유도와 TUI 완성도가 가장 높습니다. GitHub 이슈·PR에 직접 들어가 코드 리뷰 응답까지 처리합니다.</li>
+<li><strong>한계</strong>: 메모리와 자율 운영(크론·메신저)은 Hermes Agent에 비해 미흡합니다. 코딩 한 가지에 집중한 도구입니다.</li>
+</ul>
+<h4 id="aider">Aider</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: Git 워크플로와 통합된 페어 프로그래밍 CLI.</li>
+<li><strong>현황</strong>: 약 44k GitHub 스타. 2026년에도 꾸준히 업데이트되고 있습니다.</li>
+<li><strong>강점</strong>: 변경 사항을 자동으로 커밋하고 diff 뷰를 제공해 기존 Git 워크플로에 자연스럽게 끼어듭니다. 모델 선택이 자유롭고 설치가 간단합니다.</li>
+<li><strong>한계</strong>: 메모리 시스템이 없어 세션을 넘어 사용자 선호를 누적하지 못합니다.</li>
+</ul>
+<h4 id="gemini-cli-google">Gemini CLI (Google)</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: Google 진영의 무료 터미널 코딩 에이전트.</li>
+<li><strong>현황</strong>: 약 103k GitHub 스타. 개인 Google 계정으로 Gemini 3.1 Pro 무료 티어를 사용할 수 있습니다. 1M 컨텍스트 윈도우는 CLI 코딩 도구 중 가장 큽니다.</li>
+<li><strong>강점</strong>: 무료 티어와 대용량 컨텍스트. Google 검색을 활용한 근거 보강(검색 그라운딩), 파일 작업, 셸 명령, 웹 가져오기가 기본 도구로 들어 있고 MCP도 지원합니다.</li>
+<li><strong>한계</strong>: Google 생태계에 치우쳐 있습니다. 모노레포·대규모 코드베이스에서 큰 컨텍스트의 장점이 드러나지만, 그 외 영역에서는 다른 도구와 차별점이 약합니다.</li>
+</ul>
+<h4 id="openhands-all-hands-ai">OpenHands (All-Hands AI)</h4>
+<ul>
+<li><strong>한 줄 평가</strong>: 컨테이너로 격리된 클라우드 코딩 에이전트.</li>
+<li><strong>현황</strong>: 약 70k GitHub 스타, $18.8M 시리즈 A 투자. All-Hands-AI 조직 산하입니다.</li>
+<li><strong>강점</strong>: Docker 기본 격리로 안전하게 코드를 실행합니다. "버그 티켓의 87%를 같은 날 해결"한다는 점을 앞세워 클라우드 코딩 에이전트 시장을 겨냥합니다.</li>
+<li><strong>한계</strong>: 설치·운영이 다른 CLI 도구보다 무겁습니다. 자율 운영(크론·메신저)은 다루지 않습니다.</li>
+</ul>
+<h3 id="hermes-agent">Hermes Agent의 약점</h3>
+<p>공정한 비교를 위해 약점도 짚습니다.</p>
+<ul>
+<li><strong>초기 단계</strong>: 2026년 2월 출시로, 문서에 빈틈이 있고 커뮤니티는 OpenClaw에 비하면 작습니다.</li>
+<li><strong>IDE 통합 없음</strong>: VS Code 플러그인이나 Cursor 통합이 없습니다. 순수 터미널·메신저 기반입니다.</li>
+<li><strong>모델 의존성</strong>: 에이전트의 품질이 백엔드 LLM에 크게 좌우됩니다. 로컬 8B 모델과 GPT-5/Opus 4.7의 격차는 상당합니다.</li>
+<li><strong>인프라 관리</strong>: SaaS가 아니므로 직접 서버를 관리해야 합니다.</li>
+<li><strong>반복 패턴 필요</strong>: 자기 개선 메커니즘은 유사한 작업이 반복될 때 효과가 있습니다.</li>
+</ul>
+<h3 id="_4">조합이 더 현실적입니다</h3>
+<p>이 도구들은 서로의 대체가 아니라 보완재인 경우가 많습니다.</p>
+<ul>
+<li>신규 기능 설계·복잡한 디버깅은 <strong>Claude Code</strong>나 <strong>OpenCode</strong>로 빠르게 짠 다음, 일상 운영(매일 아침 리포트, 메신저로 들어오는 반복 업무, 크론 모니터링)은 <strong>Hermes Agent</strong>에 인계합니다.</li>
+<li>메신저 통합 폭이 압도적으로 필요하면 <strong>OpenClaw</strong>를 메인으로 쓰면서, 자율 학습·로컬 LLM이 필요한 영역만 <strong>Hermes Agent</strong>로 분리합니다.</li>
+<li>보안이 최우선이면 <strong>NemoClaw</strong>(GPU 인프라 보유) 또는 <strong>NanoClaw</strong>(미니멀 컨테이너)를 출발점으로 두고, 위 도구들과 메시징·스킬을 옮겨 가는 방식으로 점진 도입합니다.</li>
+</ul>
+<p>복잡한 신규 작업은 추론 품질이 높은 코딩 에이전트에 맡기고, 지속적·반복적 운영은 메모리·크론·메시징을 갖춘 에이전트에 맡기는 편이 좋습니다. 이 두 축을 조합하면 한 도구만 고집할 때보다 대체로 더 안정적으로 운영할 수 있습니다.</p>
+</div>
+</div><div class="book-page-fragment" data-page-id="352222">
+<h1 class="page-subject">01-4. 에이전트의 골디락스 존</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<div class="toc">
+<ul>
+<li><a href="#_1">두 판단 축</a></li>
+<li><a href="#_2">세 구간으로 나눠 보기</a><ul>
+<li><a href="#_3">결정적 파이프라인 — 에이전트가 필요 없는 작업</a></li>
+<li><a href="#_4">골디락스 존 — 에이전트가 빛나는 작업</a></li>
+<li><a href="#_5">고난도 주관 영역 — 에이전트의 한계</a></li>
+</ul>
+</li>
+<li><a href="#_6">비용 관점</a></li>
+<li><a href="#_7">정리</a></li>
+<li><a href="#_8">참고 자료</a></li>
+</ul>
+</div>
+<p>Hermes Agent가 무엇이고, 왜 쓰고, 다른 에이전트와 어떻게 다른지를 살펴봤습니다. 남은 질문은 <strong>"어디에 쓸 때 효과적인가"</strong>입니다.</p>
+<p>AI 에이전트는 만능이 아닙니다. 너무 단순한 작업에 쓰면 낭비이고, 너무 복잡한 작업에 쓰면 한계에 부딪힙니다. 에이전트가 가장 빛나는 구간 — 골디락스 존 — 을 이해하면, 시간과 비용을 아낄 수 있습니다.</p>
+<h3 id="_1">두 판단 축</h3>
+<p>작업을 어디에 둘지 판단할 때 다음 두 축을 봅니다.</p>
+<ol>
+<li><strong>중간 판단이 필요한가?</strong> — 단계가 고정돼 있고 분기가 없으면 에이전트가 필요 없습니다.</li>
+<li><strong>완료를 객관적으로 확인할 수 있는가?</strong> — 완료 기준이 주관적이면 에이전트가 끝났다고 판정한 결과를 사람이 다시 검토해야 하므로 자율 실행이 어렵습니다.</li>
+</ol>
+<p>두 축을 조합하면 작업이 세 구간으로 나뉩니다.</p>
+<h3 id="_2">세 구간으로 나눠 보기</h3>
+<h4 id="_3">결정적 파이프라인 — 에이전트가 필요 없는 작업</h4>
+<p>입력과 출력이 고정된 반복 작업입니다. "RSS 피드를 읽어서 정해진 템플릿으로 요약하고 슬랙에 올리기"처럼 단계가 정해져 있고, 중간에 판단이 끼어들 여지가 없습니다.</p>
+<p>이런 작업은 n8n 같은 워크플로 자동화 도구나 파이썬 스크립트, 심지어 API 한 번 호출로 끝납니다. 에이전트를 쓰면 시스템 프롬프트, 도구 호출, 메모리 조회 등의 오버헤드가 붙어 토큰만 낭비됩니다. Anthropic의 에이전트 구축 가이드<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>도 "가장 단순한 솔루션부터 시작하고, 측정 가능한 개선이 있을 때만 복잡도를 추가하라"고 권합니다.</p>
+<h4 id="_4">골디락스 존 — 에이전트가 빛나는 작업</h4>
+<p>중간에 판단이 필요하지만, <strong>완료 조건을 객관적으로 확인할 수 있는</strong> 작업입니다.</p>
+<ul>
+<li><code>src/</code> 디렉터리의 린트 에러를 모두 수정하고 <code>ruff check</code>를 통과시키기</li>
+<li>프로젝트 문서의 경어체를 통일하기</li>
+<li>다른 저장소에서 기능을 포팅하고 테스트를 통과시키기</li>
+</ul>
+<p>이런 작업은 한 번의 API 호출로 끝나지 않습니다. 파일을 읽고, 수정하고, 결과를 확인하고, 다음 파일로 넘어가는 과정에서 에이전트의 도구 호출과 판단 능력이 진가를 발휘합니다. <code>/goal</code>로 목표를 설정하면 사용자가 개입하지 않아도 완료까지 이어갈 수 있습니다(10장 「영속 목표」 참고).</p>
+<h4 id="_5">고난도 주관 영역 — 에이전트의 한계</h4>
+<p>"문장을 자연스럽게 다듬어줘", "코드 구조를 개선해줘"처럼 완료 기준 자체가 주관적인 작업입니다. 사람도 의견이 갈리는 판단을 에이전트에게 맡기면, 조기 완료(아직 안 끝났는데 끝났다고 판정)나 무한 루프(끝났는데 계속 고치기)가 발생합니다.</p>
+<p>이 영역에서는 에이전트를 "자율 실행"보다 "보조 도구"로 쓰는 것이 현실적입니다. 한 챕터씩 결과를 확인하고, 방향을 조정하고, 다음으로 넘어가는 — 사람이 턴마다 관여하는 방식입니다.</p>
+<h3 id="_6">비용 관점</h3>
+<p>Microsoft Research와 Stanford의 공동 연구<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>에 따르면, 에이전틱 코딩 작업은 일반 코드 채팅 대비 토큰을 수백~수천 배 더 소비합니다. 그런데 <strong>토큰을 많이 쓴다고 정확도가 높아지지는 않습니다</strong>. 정확도는 중간 비용에서 정점을 찍고, 그 이상은 포화됩니다.</p>
+<p>이 발견은 골디락스 존의 경계를 비용 측면에서도 뒷받침합니다. 결정적 파이프라인에 에이전트를 쓰면 토큰만 낭비하고, 고난도 주관 작업에 에이전트를 풀어도 비용 대비 품질이 올라가지 않습니다.</p>
+<h3 id="_7">정리</h3>
+<p>앞서 본 두 축을 자문 형식으로 줄이면 다음과 같습니다.</p>
+<ol>
+<li>이 작업에 중간 판단이 필요한가? — 아니라면 스크립트나 워크플로 도구가 낫습니다.</li>
+<li>완료를 객관적으로 확인할 수 있는가? — 아니라면 자율 실행 대신 사람이 개입하는 대화형 작업이 낫습니다.</li>
+</ol>
+<p>두 질문에 모두 "예"라면, 에이전트의 골디락스 존에 있는 것입니다. Hermes Agent의 <code>/goal</code>, 크론, 메시징 연동 같은 기능은 이 구간에서 가장 큰 효과를 냅니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h3 id="_8">참고 자료</h3>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Anthropic, "Building Effective Agents" (2024). https://www.anthropic.com/research/building-effective-agents <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>Yuxiang Wei et al., "How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks" (2026). Microsoft Research &amp; Stanford Digital Economy Lab. https://www.microsoft.com/en-us/research/publication/how-do-ai-agents-spend-your-money-analyzing-and-predicting-token-consumption-in-agentic-coding-tasks/ <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+    </div>
+</body>
+</html>

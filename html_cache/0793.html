@@ -1,0 +1,31 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">상대위치로 배치하기: grid()</p>
+<p class="txt bl">위젯을 상대위치로 배치하는 다른 방법으로 <span class="cd">grid()</span>가 있습니다. <span class="cd">grid()</span>는 이름 그대로 격자를 만들어 격자 한 칸에 위젯을 배치하는 방법입니다. <span class="cd">grid()</span>는 배치할 위치를 <span class="cd">row</span>와 <span class="cd">column</span> 옵션으로 지정해야 합니다. <span class="cd">row</span>는 행, <span class="cd">column</span>은 열을 의미하죠.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/660_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-5</span> grid()에 옵션주기</p>
+<p class="txt bl">그림처럼 창을 지정한 행과 열 수로 나눈 후에 위젯을 배치하려는 위치의 행과 열을 <span class="cd">row</span>와 <span class="cd">column</span> 옵션에 숫자로 지정합니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label1.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+label2 = Label(root, text=<span class="red2">'Hello!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label2.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">1</span><span class="cd2">)</span>
+label3 = Label(root, text=<span class="red2">'니하오!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label3.grid(row=</span><span class="cd2 green">1</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+label4 = Label(root, text=<span class="red2">'봉쥬르!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label4.grid(row=</span><span class="cd2 green">1</span><span class="cd2">, column=</span><span class="cd2 green">1</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/661_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

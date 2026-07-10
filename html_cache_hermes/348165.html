@@ -1,0 +1,100 @@
+<h1 class="page-subject">11-6. 프로파일로 환경 분리 운영하기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: v0.16.0 소스 코드(<code>hermes_cli/profiles.py</code>, <code>hermes_cli/main.py</code>의 profile 서브파서, <code>cli.py</code>의 <code>/profile</code> 처리)와 공식 문서를 대조해 확인했습니다. CLI 명령·옵션과 경로(<code>~/.hermes/profiles/&lt;name&gt;</code>, <code>active_profile</code>)는 소스와 일치하며, 멀티 프로파일 실행·게이트웨이 격리를 직접 재현하지는 않았습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">프로파일이 격리하는 범위</a></li>
+<li><a href="#_2">언제 프로파일을 쓰나</a></li>
+<li><a href="#_3">프로파일 라이프사이클</a><ul>
+<li><a href="#_4">기존 환경에서 복제하기</a></li>
+<li><a href="#_5">일회성으로 다른 프로파일 쓰기</a></li>
+<li><a href="#wrapper">별칭(wrapper) 만들기</a></li>
+<li><a href="#_6">프로파일 내보내기·가져오기</a></li>
+</ul>
+</li>
+<li><a href="#default">default 프로파일과의 관계</a></li>
+<li><a href="#_7">활성 프로파일은 어디에 기록되나</a></li>
+<li><a href="#profile">/profile 슬래시 명령</a></li>
+</ul>
+</div>
+<p>11-5절에서 멀티 에이전트 구성의 동기와 격리 수준을 살펴봤습니다. 이 절에서는 그중 가장 가벼운 분리 수단인 <strong>프로파일</strong> 기능의 사용법을 정리합니다. 프로파일은 한 머신에서 여러 개의 독립된 Hermes 인스턴스를 운영하는 도구입니다.</p>
+<p>각 프로파일은 자체 <code>config.yaml</code>, <code>.env</code>, <code>SOUL.md</code>, 메모리, 세션, 스킬, 크론 등을 가집니다. 한쪽 프로파일에서 메모리에 무엇을 적든 다른 프로파일은 영향을 받지 않습니다.</p>
+<h3 id="_1">프로파일이 격리하는 범위</h3>
+<p>프로파일별로 분리되는 데이터와 모든 프로파일이 공유하는 데이터를 정리하면 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>항목</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>프로파일별 격리</strong></td>
+<td><code>config.yaml</code>, <code>.env</code>, <code>SOUL.md</code>, <code>memories/</code>(MEMORY.md, USER.md), <code>sessions/</code>, <code>skills/</code>, <code>cron/</code>, <code>logs/</code>, <code>plans/</code>, <code>workspace/</code>, <code>skins/</code>, <code>home/</code>(서브프로세스용)</td>
+</tr>
+<tr>
+<td><strong>모든 프로파일 공유</strong></td>
+<td>Hermes 코드(설치된 hermes-agent 패키지), <code>hermes update</code> 시 자동 동기화되는 번들 스킬의 새 버전</td>
+</tr>
+</tbody>
+</table>
+<p>번들 스킬은 새 버전이 나오면 모든 프로파일에 자동 동기화되지만, 사용자가 직접 수정한 스킬은 덮어쓰지 않습니다.</p>
+<h3 id="_2">언제 프로파일을 쓰나</h3>
+<p>공식 문서에서 안내하는 대표 활용 사례입니다.</p>
+<ul>
+<li><strong>목적별 에이전트 분리</strong>: 코딩 보조용, 리서치용, 개인 비서용 등 역할별로 메모리·스킬·config가 섞이지 않게 운영합니다(11-5절의 "역할 전문화"와 같은 동기).</li>
+<li><strong>메시징 게이트웨이별 토큰 분리</strong>: 같은 머신에서 텔레그램·디스코드·슬랙 봇을 각자 다른 계정·토큰으로 동시에 띄울 때, 프로파일별로 <code>.env</code>를 두면 토큰 충돌 없이 운영할 수 있습니다(9장 메시징 게이트웨이 참고).</li>
+<li><strong>기존 환경 백업·포크</strong>: 위험할 수 있는 변경(설정 대수술, 새 모델로 전환 등)을 시도하기 전에 현재 프로파일을 그대로 복제해 두면, 잘못돼도 원본은 그대로 남습니다.</li>
+</ul>
+<h3 id="_3">프로파일 라이프사이클</h3>
+<p>프로파일 관리는 모두 <code>hermes profile</code> 서브명령으로 이루어집니다.</p>
+<pre><code class="language-bash">hermes profile list                 # 모든 프로파일 표시
+hermes profile show &lt;name&gt;          # 특정 프로파일 상세
+hermes profile create &lt;name&gt;        # 새 프로파일 생성 (빈 상태로)
+hermes profile use &lt;name&gt;           # 활성 프로파일 변경 (이후 기본값)
+hermes profile delete &lt;name&gt;        # 프로파일 삭제
+hermes profile rename &lt;old&gt; &lt;new&gt;   # 이름 변경
+</code></pre>
+<h4 id="_4">기존 환경에서 복제하기</h4>
+<p>비어 있는 새 프로파일이 아니라 현재 환경을 복제해서 시작하려면 <code>--clone</code> 계열 옵션을 씁니다.</p>
+<pre><code class="language-bash">hermes profile create &lt;name&gt; --clone               # 핵심 파일만 복제
+hermes profile create &lt;name&gt; --clone-all           # 스킬·세션 등 모든 데이터 복제
+hermes profile create &lt;name&gt; --clone-from &lt;other&gt;  # 특정 프로파일을 원본으로
+</code></pre>
+<p><code>--clone</code>은 <code>config.yaml</code>, <code>.env</code>, <code>SOUL.md</code>, 메모리 같은 핵심 파일만 복제하고, <code>--clone-all</code>은 스킬·세션·로그까지 통째로 복제합니다.</p>
+<h4 id="_5">일회성으로 다른 프로파일 쓰기</h4>
+<p>활성 프로파일을 바꾸지 않고 한 번만 다른 프로파일로 실행하려면 <code>-p</code>(또는 <code>--profile</code>) 옵션을 사용합니다.</p>
+<pre><code class="language-bash">hermes -p coding chat               # coding 프로파일로 한 번만 실행
+hermes -p research model            # research 프로파일의 모델 설정 보기
+</code></pre>
+<h4 id="wrapper">별칭(wrapper) 만들기</h4>
+<p>자주 쓰는 프로파일은 별도 실행 파일로 만들어 두면 편합니다.</p>
+<pre><code class="language-bash">hermes profile alias coding         # ~/.local/bin/coding 생성
+coding chat                         # 이후로는 짧게 호출
+</code></pre>
+<p>내부적으로는 <code>hermes -p coding</code>을 래핑한 셸 스크립트가 생성됩니다. 제거는 <code>hermes profile alias coding --remove</code>.</p>
+<h4 id="_6">프로파일 내보내기·가져오기</h4>
+<p>프로파일을 다른 머신으로 옮기거나 백업하려면 export/import를 씁니다.</p>
+<pre><code class="language-bash">hermes profile export coding -o coding-backup.tar.gz
+hermes profile import coding-backup.tar.gz --name coding
+</code></pre>
+<h3 id="default">default 프로파일과의 관계</h3>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><code>default</code>는 별칭이고, 실제 경로는 <code>~/.hermes</code> 자체입니다. 즉 <strong>프로파일을 한 번도 만들지 않은 기존 사용자는 자동으로 <code>default</code> 프로파일을 쓰는 셈</strong>이고, 별도의 마이그레이션 작업이 필요하지 않습니다.</p>
+<p><code>hermes profile use default</code>를 실행하면 활성 프로파일이 해제되고 다시 <code>~/.hermes</code>로 돌아갑니다.</p>
+<h3 id="_7">활성 프로파일은 어디에 기록되나</h3>
+<p><code>hermes profile use &lt;name&gt;</code>을 실행하면 <code>~/.hermes/active_profile</code> 파일에 프로파일명이 기록됩니다. 다음에 <code>hermes</code>를 실행하면 이 파일을 읽어 자동으로 해당 프로파일을 활성화합니다. 직접 환경 변수로 지정하고 싶다면 <code>HERMES_HOME=~/.hermes/profiles/&lt;name&gt;</code>로 설정하면 됩니다(systemd 유닛이나 Docker 컨테이너에서 유용).</p>
+<fieldset><legend>state 격리와 파일시스템 격리의 차이</legend><p style="margin-top: 0.2em;">프로파일은 Hermes 자체의 상태(메모리·스킬·세션·config)만 분리합니다. 파일시스템 접근까지 분리하지는 않습니다 — 모든 프로파일이 같은 사용자 권한으로 같은 파일시스템을 읽고 쓸 수 있고, <code>terminal.cwd</code> 같은 작업 디렉터리도 별도로 설정해야 분리됩니다.</p>
+<p>따라서 "코딩 에이전트가 개인 비서 에이전트의 파일을 못 읽게 하고 싶다" 같은 강한 격리는 프로파일만으로는 부족합니다. 그 수준이 필요하면 컨테이너 격리(11-2절 참고)나 별도 사용자 계정으로 올라가야 합니다.</p></fieldset>
+<h3 id="profile"><code>/profile</code> 슬래시 명령</h3>
+<p>대화 세션 안에서 <code>/profile</code>을 입력하면 <strong>현재 활성 프로파일과 홈 디렉터리를 표시</strong>합니다. 전환 기능은 없습니다 — 프로파일을 바꾸려면 세션을 종료하고 <code>hermes profile use &lt;name&gt;</code> 또는 <code>hermes -p &lt;name&gt;</code>로 다시 시작해야 합니다.</p>
+</div>

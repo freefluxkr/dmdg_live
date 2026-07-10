@@ -1,0 +1,733 @@
+<div class="page-content tex2jax_process">
+<h2 id="chapter-19-sql">Chapter 19. 데이터베이스와 SQL 기초</h2>
+<p>현대 소프트웨어 개발에서 데이터를 체계적으로 저장하고 관리하는 능력은 필수입니다. 파일로 데이터를 저장하는 방식은 간단하지만, 데이터가 많아지고 복잡해질수록 한계가 드러납니다. 이때 필요한 것이 바로 <strong>데이터베이스(Database)</strong>입니다.</p>
+<p>이 챕터에서는 데이터베이스의 기본 개념부터 시작하여 가장 널리 사용되는 <strong>관계형 데이터베이스</strong>의 구조를 이해하고, <strong>SQL(Structured Query Language)</strong>로 데이터를 다루는 방법을 학습합니다. 나아가 Python에서 데이터베이스를 연결하고 실제로 데이터를 조작하는 실습까지 진행합니다.</p>
+<p><strong>이 챕터에서 배울 내용:</strong></p>
+<ul>
+<li>데이터베이스의 개념과 관계형 DB vs NoSQL의 차이</li>
+<li>테이블, 행, 열, 키 등 관계형 DB의 핵심 구조</li>
+<li>MySQL 설치 및 기본 설정 방법</li>
+<li>SELECT, INSERT, UPDATE, DELETE 기본 SQL 문법</li>
+<li>WHERE, ORDER BY, LIMIT을 활용한 데이터 조회</li>
+<li>JOIN과 집계 함수를 활용한 고급 쿼리</li>
+<li>Python에서 pymysql과 SQLAlchemy로 DB 연결 및 CRUD 실습</li>
+</ul>
+<h2 id="191">19.1 데이터베이스의 개념과 종류</h2>
+<p><strong>데이터베이스(Database, DB)</strong>란 데이터를 구조화하여 저장하고, 효율적으로 검색·수정·삭제할 수 있도록 관리하는 시스템입니다. 데이터베이스를 관리하는 소프트웨어를 <strong>DBMS(Database Management System)</strong>라고 합니다.</p>
+<p>데이터베이스는 크게 <strong>관계형 데이터베이스(RDBMS)</strong>와 <strong>NoSQL 데이터베이스</strong>로 나뉩니다.</p>
+<h3 id="rdbms">관계형 데이터베이스 (RDBMS)</h3>
+<p><strong>관계형 데이터베이스(Relational Database Management System)</strong>는 데이터를 행(row)과 열(column)로 이루어진 테이블 형태로 저장합니다. 테이블 간의 관계를 정의하여 데이터 중복을 줄이고 일관성을 유지합니다. SQL을 사용하여 데이터를 조작합니다.</p>
+<p>대표적인 RDBMS로는 MySQL, PostgreSQL, Oracle, SQLite, MariaDB 등이 있습니다.</p>
+<h3 id="nosql">NoSQL 데이터베이스</h3>
+<p><strong>NoSQL(Not Only SQL)</strong>은 관계형 모델을 따르지 않는 다양한 형태의 데이터베이스를 통칭합니다. 대용량 비정형 데이터 처리에 적합하며 수평 확장이 용이합니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>관계형 DB (RDBMS)</th>
+<th>NoSQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>데이터 구조</td>
+<td>테이블 (행/열)</td>
+<td>문서, 키-값, 그래프 등</td>
+</tr>
+<tr>
+<td>스키마</td>
+<td>고정 스키마</td>
+<td>유연한 스키마</td>
+</tr>
+<tr>
+<td>쿼리 언어</td>
+<td>SQL</td>
+<td>각 DB별 고유 문법</td>
+</tr>
+<tr>
+<td>확장성</td>
+<td>수직 확장</td>
+<td>수평 확장</td>
+</tr>
+<tr>
+<td>일관성</td>
+<td>강한 일관성 (ACID)</td>
+<td>최종 일관성 (BASE)</td>
+</tr>
+<tr>
+<td>대표 제품</td>
+<td>MySQL, PostgreSQL</td>
+<td>MongoDB, Redis, Cassandra</td>
+</tr>
+<tr>
+<td>적합한 용도</td>
+<td>정형 데이터, 복잡한 관계</td>
+<td>대용량, 비정형 데이터</td>
+</tr>
+</tbody>
+</table>
+<p>이 챕터에서는 가장 널리 사용되는 관계형 데이터베이스인 <strong>MySQL</strong>을 중심으로 학습합니다.</p>
+<blockquote>
+<p>💡 <strong>어떤 DB를 선택해야 할까?</strong>
+트랜잭션이 중요하고 데이터 관계가 복잡하다면 RDBMS, 빠른 읽기/쓰기와 유연한 구조가 필요하다면 NoSQL을 고려하세요. 실제 프로젝트에서는 두 가지를 혼합하여 사용하기도 합니다.</p>
+</blockquote>
+<h2 id="192">19.2 관계형 데이터베이스 구조</h2>
+<p>관계형 데이터베이스의 핵심 구성 요소를 이해하면 SQL을 훨씬 쉽게 배울 수 있습니다.</p>
+<h3 id="table">테이블 (Table)</h3>
+<p><strong>테이블(Table)</strong>은 관계형 데이터베이스의 기본 저장 단위입니다. 스프레드시트의 시트와 유사하게 행과 열로 데이터를 저장합니다. 하나의 데이터베이스는 여러 개의 테이블로 구성됩니다.</p>
+<p>예를 들어, 쇼핑몰 데이터베이스에는 <code>users</code>(회원), <code>products</code>(상품), <code>orders</code>(주문) 등의 테이블이 있을 수 있습니다.</p>
+<h3 id="row-column">행과 열 (Row &amp; Column)</h3>
+<p><strong>행(Row)</strong>은 하나의 데이터 레코드를 의미합니다. <code>users</code> 테이블에서 한 행은 한 명의 회원 정보를 나타냅니다. <strong>열(Column)</strong>은 데이터의 속성(필드)을 의미합니다. 이름, 이메일, 가입일 등이 열에 해당합니다.</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>email</th>
+<th>created_at</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>홍길동</td>
+<td>hong@example.com</td>
+<td>2024-01-15</td>
+</tr>
+<tr>
+<td>2</td>
+<td>김철수</td>
+<td>kim@example.com</td>
+<td>2024-02-20</td>
+</tr>
+<tr>
+<td>3</td>
+<td>이영희</td>
+<td>lee@example.com</td>
+<td>2024-03-10</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key">키 (Key)</h3>
+<p><strong>키(Key)</strong>는 테이블에서 행을 식별하거나 테이블 간의 관계를 정의하는 데 사용됩니다.</p>
+<p><strong>기본 키(Primary Key, PK)</strong>는 테이블에서 각 행을 고유하게 식별하는 열입니다. 중복될 수 없고 NULL 값을 가질 수 없습니다. 위 예시의 <code>id</code> 열이 기본 키입니다.</p>
+<p><strong>외래 키(Foreign Key, FK)</strong>는 다른 테이블의 기본 키를 참조하는 열입니다. 테이블 간의 관계를 정의합니다. <code>orders</code> 테이블의 <code>user_id</code>가 <code>users</code> 테이블의 <code>id</code>를 참조하는 외래 키가 됩니다.</p>
+<blockquote>
+<p>📌 <strong>스키마(Schema)란?</strong>
+스키마는 데이터베이스의 구조를 정의하는 설계도입니다. 테이블 이름, 각 열의 이름과 데이터 타입, 제약 조건, 테이블 간의 관계 등을 포함합니다.</p>
+</blockquote>
+<p align="center">
+<img alt="관계형 DB 구조 - users 테이블과 orders 테이블이 PK·FK로 연결된 1:N 관계" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338410/ch19_relational_schema.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<h2 id="193-mysql">19.3 MySQL 설치 및 기본 설정</h2>
+<p>MySQL을 설치하고 기본 환경을 설정하는 방법을 알아봅니다.</p>
+<h3 id="mysql">MySQL 설치</h3>
+<p>운영체제별 설치 방법입니다.</p>
+<p><strong>Windows</strong>: <a href="https://dev.mysql.com/downloads/installer/">MySQL 공식 사이트</a>에서 MySQL Installer를 다운로드하여 설치합니다. MySQL Server와 MySQL Workbench를 함께 설치하면 편리합니다.</p>
+<p><strong>macOS</strong>: Homebrew를 사용하는 것이 간편합니다.</p>
+<pre><code class="language-bash">brew install mysql
+brew services start mysql
+</code></pre>
+<p><strong>Ubuntu/Linux</strong>: apt 패키지 관리자를 사용합니다.</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install mysql-server
+sudo systemctl start mysql
+sudo mysql_secure_installation
+</code></pre>
+<h3 id="mysql_1">MySQL 접속 및 기본 명령</h3>
+<p>설치 후 터미널에서 MySQL에 접속합니다.</p>
+<pre><code class="language-bash">mysql -u root -p
+</code></pre>
+<p>MySQL에 접속한 후 기본적인 관리 명령어를 익혀 둡니다.</p>
+<pre><code class="language-sql">-- 데이터베이스 목록 확인
+SHOW DATABASES;
+
+-- 데이터베이스 생성
+CREATE DATABASE myshop CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 데이터베이스 선택
+USE myshop;
+
+-- 테이블 목록 확인
+SHOW TABLES;
+
+-- MySQL 종료
+EXIT;
+</code></pre>
+<h3 id="_1">테이블 생성</h3>
+<p>실습에 사용할 <code>users</code> 테이블을 생성합니다.</p>
+<pre><code class="language-sql">CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    age INT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+</code></pre>
+<p>주요 데이터 타입은 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>데이터 타입</th>
+<th>설명</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INT</code></td>
+<td>정수</td>
+<td>나이, ID</td>
+</tr>
+<tr>
+<td><code>VARCHAR(n)</code></td>
+<td>가변 길이 문자열 (최대 n자)</td>
+<td>이름, 이메일</td>
+</tr>
+<tr>
+<td><code>TEXT</code></td>
+<td>긴 문자열</td>
+<td>본문, 댓글</td>
+</tr>
+<tr>
+<td><code>DATETIME</code></td>
+<td>날짜와 시간</td>
+<td>생성일, 수정일</td>
+</tr>
+<tr>
+<td><code>DECIMAL(p,s)</code></td>
+<td>소수점 포함 실수</td>
+<td>가격, 금액</td>
+</tr>
+<tr>
+<td><code>BOOLEAN</code></td>
+<td>참/거짓</td>
+<td>활성화 여부</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>한글 인코딩 주의</strong>
+MySQL에서 한글을 올바르게 저장하려면 데이터베이스와 테이블 생성 시 <code>utf8mb4</code> 인코딩을 지정해야 합니다. <code>utf8mb4</code>는 이모지를 포함한 모든 유니코드 문자를 지원합니다.</p>
+</blockquote>
+<h2 id="194-sql-select-insert-update-delete">19.4 SQL 기초 문법 - SELECT, INSERT, UPDATE, DELETE</h2>
+<p>SQL의 데이터 조작 언어(DML)의 핵심 4가지 명령어를 <strong>CRUD</strong>라고도 합니다. <strong>C</strong>reate(INSERT), <strong>R</strong>ead(SELECT), <strong>U</strong>pdate(UPDATE), <strong>D</strong>elete(DELETE)를 의미합니다.</p>
+<p>실습을 위해 먼저 샘플 데이터를 삽입합니다.</p>
+<pre><code class="language-sql">INSERT INTO users (name, email, age) VALUES
+('홍길동', 'hong@example.com', 28),
+('김철수', 'kim@example.com', 35),
+('이영희', 'lee@example.com', 24),
+('박민준', 'park@example.com', 42),
+('최수진', 'choi@example.com', 31);
+</code></pre>
+<h3 id="select-">SELECT - 데이터 조회</h3>
+<p><code>SELECT</code>는 테이블에서 데이터를 조회하는 명령어입니다.</p>
+<pre><code class="language-sql">-- 모든 열 조회
+SELECT * FROM users;
+
+-- 특정 열만 조회
+SELECT name, email FROM users;
+
+-- 열에 별칭(Alias) 지정
+SELECT name AS 이름, email AS 이메일 FROM users;
+</code></pre>
+<h3 id="insert-">INSERT - 데이터 삽입</h3>
+<p><code>INSERT INTO</code>는 테이블에 새로운 행을 추가합니다.</p>
+<pre><code class="language-sql">-- 단일 행 삽입
+INSERT INTO users (name, email, age)
+VALUES ('정다은', 'jung@example.com', 27);
+
+-- AUTO_INCREMENT 열(id)은 생략해도 자동으로 값이 부여됩니다
+</code></pre>
+<h3 id="update-">UPDATE - 데이터 수정</h3>
+<p><code>UPDATE</code>는 기존 데이터를 수정합니다.</p>
+<pre><code class="language-sql">-- 특정 사용자의 나이 수정
+UPDATE users
+SET age = 29
+WHERE name = '홍길동';
+
+-- 여러 열 동시 수정
+UPDATE users
+SET age = 36, email = 'kim_new@example.com'
+WHERE id = 2;
+</code></pre>
+<blockquote>
+<p>⚠️ <strong>WHERE 절 없이 UPDATE 금지</strong>
+<code>WHERE</code> 절 없이 <code>UPDATE</code>를 실행하면 테이블의 모든 행이 수정됩니다. 반드시 조건을 지정하는 습관을 들이세요.</p>
+</blockquote>
+<h3 id="delete-">DELETE - 데이터 삭제</h3>
+<p><code>DELETE</code>는 테이블에서 행을 삭제합니다.</p>
+<pre><code class="language-sql">-- 특정 행 삭제
+DELETE FROM users WHERE id = 6;
+
+-- 조건에 맞는 여러 행 삭제
+DELETE FROM users WHERE age &gt; 40;
+</code></pre>
+<blockquote>
+<p>⚠️ <strong>WHERE 절 없이 DELETE 금지</strong>
+<code>WHERE</code> 절 없이 <code>DELETE FROM users;</code>를 실행하면 테이블의 모든 데이터가 삭제됩니다. 삭제 전에 <code>SELECT</code>로 먼저 대상 데이터를 확인하는 습관을 들이세요.</p>
+</blockquote>
+<h2 id="195-where-order-by-limit">19.5 조건절(WHERE), 정렬(ORDER BY), 제한(LIMIT)</h2>
+<p>실제 데이터 조회에서는 원하는 데이터만 필터링하고 정렬하는 기능이 핵심입니다.</p>
+<h3 id="where-">WHERE - 조건 필터링</h3>
+<p><code>WHERE</code> 절은 조회할 데이터의 조건을 지정합니다.</p>
+<pre><code class="language-sql">-- 나이가 30 이상인 사용자 조회
+SELECT * FROM users WHERE age &gt;= 30;
+
+-- 이름이 '홍길동'인 사용자 조회
+SELECT * FROM users WHERE name = '홍길동';
+
+-- AND / OR 연산자 사용
+SELECT * FROM users WHERE age &gt;= 25 AND age &lt;= 35;
+SELECT * FROM users WHERE name = '홍길동' OR name = '김철수';
+
+-- BETWEEN: 범위 조건
+SELECT * FROM users WHERE age BETWEEN 25 AND 35;
+
+-- IN: 여러 값 중 하나와 일치
+SELECT * FROM users WHERE age IN (24, 28, 31);
+
+-- LIKE: 패턴 매칭 (% = 임의의 문자열, _ = 임의의 한 문자)
+SELECT * FROM users WHERE email LIKE '%@example.com';
+SELECT * FROM users WHERE name LIKE '김%';
+
+-- IS NULL / IS NOT NULL
+SELECT * FROM users WHERE age IS NULL;
+</code></pre>
+<h3 id="order-by-">ORDER BY - 정렬</h3>
+<p><code>ORDER BY</code>는 결과를 특정 열 기준으로 정렬합니다.</p>
+<pre><code class="language-sql">-- 나이 오름차순 정렬 (기본값: ASC)
+SELECT * FROM users ORDER BY age ASC;
+
+-- 나이 내림차순 정렬
+SELECT * FROM users ORDER BY age DESC;
+
+-- 여러 열 기준 정렬 (이름 오름차순, 나이 내림차순)
+SELECT * FROM users ORDER BY name ASC, age DESC;
+</code></pre>
+<h3 id="limit-">LIMIT - 결과 수 제한</h3>
+<p><code>LIMIT</code>은 반환할 행의 수를 제한합니다. 페이지네이션 구현에도 활용됩니다.</p>
+<pre><code class="language-sql">-- 상위 3개 행만 조회
+SELECT * FROM users LIMIT 3;
+
+-- 나이 높은 순으로 상위 2명 조회
+SELECT * FROM users ORDER BY age DESC LIMIT 2;
+
+-- OFFSET: 시작 위치 지정 (페이지네이션)
+-- 4번째 행부터 3개 조회 (2페이지, 페이지당 3개)
+SELECT * FROM users LIMIT 3 OFFSET 3;
+</code></pre>
+<blockquote>
+<p>💡 <strong>쿼리 실행 순서</strong>
+SQL 쿼리는 작성 순서와 실행 순서가 다릅니다. <code>FROM</code> → <code>WHERE</code> → <code>SELECT</code> → <code>ORDER BY</code> → <code>LIMIT</code> 순서로 처리됩니다. 이를 이해하면 복잡한 쿼리 작성 시 오류를 예방할 수 있습니다.</p>
+</blockquote>
+<h2 id="196-join">19.6 조인(JOIN)과 집계 함수</h2>
+<p>실제 데이터베이스에서는 여러 테이블을 연결하거나 데이터를 요약할 일이 많습니다.</p>
+<h3 id="join-">JOIN - 테이블 연결</h3>
+<p>실습을 위해 <code>orders</code> 테이블을 생성하고 데이터를 추가합니다.</p>
+<pre><code class="language-sql">CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_name VARCHAR(100) NOT NULL,
+    amount INT NOT NULL,
+    ordered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+INSERT INTO orders (user_id, product_name, amount) VALUES
+(1, '노트북', 1200000),
+(1, '마우스', 30000),
+(2, '키보드', 80000),
+(3, '모니터', 350000),
+(2, '웹캠', 60000);
+</code></pre>
+<p><strong>INNER JOIN</strong>은 두 테이블에서 조건이 일치하는 행만 반환합니다.</p>
+<pre><code class="language-sql">-- 주문 정보와 주문자 이름을 함께 조회
+SELECT
+    orders.id AS 주문번호,
+    users.name AS 주문자,
+    orders.product_name AS 상품명,
+    orders.amount AS 금액
+FROM orders
+INNER JOIN users ON orders.user_id = users.id;
+</code></pre>
+<p><strong>LEFT JOIN</strong>은 왼쪽 테이블의 모든 행을 반환하고, 오른쪽 테이블에 일치하는 행이 없으면 NULL을 반환합니다.</p>
+<pre><code class="language-sql">-- 주문이 없는 사용자도 포함하여 조회
+SELECT
+    users.name AS 이름,
+    orders.product_name AS 상품명
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>JOIN 종류</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INNER JOIN</code></td>
+<td>양쪽 테이블에 모두 일치하는 행만 반환</td>
+</tr>
+<tr>
+<td><code>LEFT JOIN</code></td>
+<td>왼쪽 테이블 전체 + 오른쪽 일치 행 (없으면 NULL)</td>
+</tr>
+<tr>
+<td><code>RIGHT JOIN</code></td>
+<td>오른쪽 테이블 전체 + 왼쪽 일치 행 (없으면 NULL)</td>
+</tr>
+<tr>
+<td><code>FULL OUTER JOIN</code></td>
+<td>양쪽 테이블 모든 행 (MySQL은 UNION으로 구현)</td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+<img alt="JOIN 4종 비교 Venn 다이어그램 - INNER/LEFT/RIGHT/FULL OUTER가 어느 영역의 행을 반환하는지 시각화" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338410/ch19_join_types.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<h3 id="group-by">집계 함수와 GROUP BY</h3>
+<p><strong>집계 함수(Aggregate Function)</strong>는 여러 행의 데이터를 하나의 값으로 요약합니다.</p>
+<pre><code class="language-sql">-- COUNT: 행의 수
+SELECT COUNT(*) AS 전체회원수 FROM users;
+SELECT COUNT(*) AS 주문건수 FROM orders;
+
+-- SUM: 합계
+SELECT SUM(amount) AS 총매출 FROM orders;
+
+-- AVG: 평균
+SELECT AVG(amount) AS 평균주문금액 FROM orders;
+
+-- MAX / MIN: 최댓값 / 최솟값
+SELECT MAX(amount) AS 최고금액, MIN(amount) AS 최저금액 FROM orders;
+</code></pre>
+<p><code>GROUP BY</code>는 특정 열의 값을 기준으로 행을 그룹화하고, 각 그룹에 집계 함수를 적용합니다.</p>
+<pre><code class="language-sql">-- 사용자별 주문 건수와 총 주문 금액
+SELECT
+    users.name AS 이름,
+    COUNT(orders.id) AS 주문건수,
+    SUM(orders.amount) AS 총주문금액
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id
+GROUP BY users.id, users.name;
+
+-- HAVING: 그룹화 후 조건 필터링 (WHERE는 그룹화 전)
+-- 총 주문금액이 100,000원 이상인 사용자만 조회
+SELECT
+    users.name AS 이름,
+    SUM(orders.amount) AS 총주문금액
+FROM users
+INNER JOIN orders ON users.id = orders.user_id
+GROUP BY users.id, users.name
+HAVING SUM(orders.amount) &gt;= 100000;
+</code></pre>
+<blockquote>
+<p>💡 <strong>WHERE vs HAVING</strong>
+<code>WHERE</code>는 그룹화(<code>GROUP BY</code>) 이전에 개별 행을 필터링하고, <code>HAVING</code>은 그룹화 이후 그룹 전체를 필터링합니다. 집계 함수 조건은 반드시 <code>HAVING</code>을 사용해야 합니다.</p>
+</blockquote>
+<h2 id="197-python-db">19.7 Python에서 DB 연결하기</h2>
+<p>Python에서 MySQL에 연결하는 방법은 크게 두 가지입니다. 저수준 드라이버인 <strong>pymysql</strong>과 ORM(Object Relational Mapping) 라이브러리인 <strong>SQLAlchemy</strong>입니다.</p>
+<h3 id="pymysql">pymysql 사용하기</h3>
+<p><code>pymysql</code>은 Python에서 MySQL에 직접 연결하여 SQL을 실행할 수 있는 라이브러리입니다.</p>
+<pre><code class="language-bash">pip install pymysql
+</code></pre>
+<p>기본 연결 및 쿼리 실행 방법입니다.</p>
+<pre><code class="language-python">import pymysql
+
+# 데이터베이스 연결
+conn = pymysql.connect(
+    host='localhost',
+    user='root',
+    password='your_password',
+    database='myshop',
+    charset='utf8mb4'
+)
+
+# 커서 생성
+cursor = conn.cursor()
+
+# SELECT 쿼리 실행
+cursor.execute("SELECT * FROM users")
+rows = cursor.fetchall()  # 모든 결과 가져오기
+
+for row in rows:
+    print(row)
+
+# 연결 종료
+cursor.close()
+conn.close()
+</code></pre>
+<p><code>fetchall()</code> 외에도 <code>fetchone()</code>(한 행), <code>fetchmany(n)</code>(n개 행)을 사용할 수 있습니다.</p>
+<h3 id="sqlalchemy">SQLAlchemy 사용하기</h3>
+<p><strong>SQLAlchemy</strong>는 Python의 대표적인 ORM 라이브러리입니다. SQL을 직접 작성하지 않고 Python 객체로 데이터베이스를 다룰 수 있습니다. Django, Flask, FastAPI 등 많은 웹 프레임워크와 함께 사용됩니다.</p>
+<pre><code class="language-bash">pip install sqlalchemy pymysql
+</code></pre>
+<p>SQLAlchemy를 사용한 연결과 기본 쿼리 방법입니다.</p>
+<pre><code class="language-python">from sqlalchemy import create_engine, text
+
+# 데이터베이스 URL 형식: dialect+driver://user:password@host/dbname
+DATABASE_URL = "mysql+pymysql://root:your_password@localhost/myshop?charset=utf8mb4"
+
+# 엔진 생성
+engine = create_engine(DATABASE_URL, echo=True)
+
+# SQL 직접 실행 (Core 방식)
+with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM users"))
+    for row in result:
+        print(row)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>pymysql</th>
+<th>SQLAlchemy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>방식</td>
+<td>저수준 드라이버</td>
+<td>ORM / SQL 표현식</td>
+</tr>
+<tr>
+<td>SQL 작성</td>
+<td>직접 SQL 문자열 작성</td>
+<td>Python 객체 또는 SQL</td>
+</tr>
+<tr>
+<td>학습 난이도</td>
+<td>낮음</td>
+<td>보통</td>
+</tr>
+<tr>
+<td>사용 사례</td>
+<td>간단한 스크립트</td>
+<td>웹 애플리케이션, 대형 프로젝트</td>
+</tr>
+<tr>
+<td>DB 교체 용이성</td>
+<td>어려움</td>
+<td>쉬움 (DB 추상화)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>어떤 것을 선택해야 할까?</strong>
+간단한 스크립트나 데이터 분석 작업에는 <code>pymysql</code>이 편리합니다. 웹 서비스나 규모 있는 애플리케이션을 개발한다면 <code>SQLAlchemy</code>를 배워두는 것을 권장합니다.</p>
+</blockquote>
+<h2 id="python-crud">[실습] Python으로 데이터 CRUD 실습</h2>
+<p>지금까지 배운 내용을 Python 코드로 통합하는 CRUD 실습을 진행합니다. <code>pymysql</code>을 사용하여 회원 관리 기능을 구현합니다.</p>
+<h3 id="_2">실습 준비</h3>
+<p>먼저 필요한 라이브러리를 설치하고 데이터베이스가 준비되어 있는지 확인합니다.</p>
+<pre><code class="language-bash">pip install pymysql
+</code></pre>
+<h3 id="db">DB 연결 모듈 작성</h3>
+<p>재사용 가능한 DB 연결 함수를 작성합니다.</p>
+<pre><code class="language-python"># db_config.py
+import pymysql
+
+def get_connection():
+    """MySQL 데이터베이스 연결을 반환합니다."""
+    return pymysql.connect(
+        host='localhost',
+        user='root',
+        password='your_password',  # 실제 비밀번호로 변경
+        database='myshop',
+        charset='utf8mb4',
+        cursorclass=pymysql.cursors.DictCursor  # 결과를 딕셔너리로 반환
+    )
+</code></pre>
+<p><code>DictCursor</code>를 사용하면 결과를 딕셔너리 형태로 받아 <code>row['name']</code>처럼 열 이름으로 접근할 수 있습니다.</p>
+<h3 id="create-">Create - 데이터 삽입</h3>
+<pre><code class="language-python"># crud_example.py
+from db_config import get_connection
+
+def create_user(name: str, email: str, age: int) -&gt; int:
+    """새 사용자를 데이터베이스에 삽입하고 생성된 ID를 반환합니다."""
+    conn = get_connection()
+    try:
+        with conn.cursor() as cursor:
+            sql = "INSERT INTO users (name, email, age) VALUES (%s, %s, %s)"
+            cursor.execute(sql, (name, email, age))
+        conn.commit()  # 변경사항 저장
+        return cursor.lastrowid  # 새로 생성된 행의 ID
+    except Exception as e:
+        conn.rollback()  # 오류 시 롤백
+        print(f"오류 발생: {e}")
+        raise
+    finally:
+        conn.close()
+
+# 사용 예시
+new_id = create_user('정다은', 'jung@example.com', 27)
+print(f"새 사용자 생성 완료. ID: {new_id}")
+</code></pre>
+<h3 id="read-">Read - 데이터 조회</h3>
+<pre><code class="language-python">def get_all_users() -&gt; list:
+    """모든 사용자를 조회합니다."""
+    conn = get_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT * FROM users ORDER BY id")
+            return cursor.fetchall()
+    finally:
+        conn.close()
+
+def get_user_by_id(user_id: int) -&gt; dict:
+    """ID로 특정 사용자를 조회합니다."""
+    conn = get_connection()
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT * FROM users WHERE id = %s"
+            cursor.execute(sql, (user_id,))
+            return cursor.fetchone()  # 단일 행 반환 (없으면 None)
+    finally:
+        conn.close()
+
+# 사용 예시
+users = get_all_users()
+for user in users:
+    print(f"[{user['id']}] {user['name']} ({user['email']}) - {user['age']}세")
+
+user = get_user_by_id(1)
+if user:
+    print(f"\n조회된 사용자: {user['name']}")
+</code></pre>
+<h3 id="update-_1">Update - 데이터 수정</h3>
+<pre><code class="language-python">def update_user_age(user_id: int, new_age: int) -&gt; bool:
+    """사용자의 나이를 수정합니다. 성공 여부를 반환합니다."""
+    conn = get_connection()
+    try:
+        with conn.cursor() as cursor:
+            sql = "UPDATE users SET age = %s WHERE id = %s"
+            cursor.execute(sql, (new_age, user_id))
+            affected_rows = cursor.rowcount  # 변경된 행 수
+        conn.commit()
+        return affected_rows &gt; 0
+    except Exception as e:
+        conn.rollback()
+        print(f"오류 발생: {e}")
+        raise
+    finally:
+        conn.close()
+
+# 사용 예시
+success = update_user_age(1, 29)
+print(f"수정 {'성공' if success else '실패'} (대상 없음)")
+</code></pre>
+<h3 id="delete-_1">Delete - 데이터 삭제</h3>
+<pre><code class="language-python">def delete_user(user_id: int) -&gt; bool:
+    """사용자를 삭제합니다. 성공 여부를 반환합니다."""
+    conn = get_connection()
+    try:
+        with conn.cursor() as cursor:
+            sql = "DELETE FROM users WHERE id = %s"
+            cursor.execute(sql, (user_id,))
+            affected_rows = cursor.rowcount
+        conn.commit()
+        return affected_rows &gt; 0
+    except Exception as e:
+        conn.rollback()
+        print(f"오류 발생: {e}")
+        raise
+    finally:
+        conn.close()
+
+# 사용 예시
+success = delete_user(6)
+print(f"삭제 {'성공' if success else '실패 (대상 없음)'}")
+</code></pre>
+<h3 id="crud">전체 CRUD 통합 실행</h3>
+<pre><code class="language-python"># main.py
+from crud_example import create_user, get_all_users, get_user_by_id
+from crud_example import update_user_age, delete_user
+
+print("=== 사용자 관리 CRUD 실습 ===\n")
+
+# 1. 사용자 생성 (Create)
+print("1. 새 사용자 생성")
+new_id = create_user('테스트유저', 'test@example.com', 25)
+print(f"   생성된 ID: {new_id}\n")
+
+# 2. 전체 조회 (Read)
+print("2. 전체 사용자 조회")
+users = get_all_users()
+for user in users:
+    print(f"   [{user['id']}] {user['name']} - {user['age']}세")
+print()
+
+# 3. 단일 조회 (Read)
+print(f"3. ID={new_id} 사용자 조회")
+user = get_user_by_id(new_id)
+print(f"   이름: {user['name']}, 이메일: {user['email']}\n")
+
+# 4. 수정 (Update)
+print(f"4. ID={new_id} 사용자 나이 수정 (25 → 26)")
+update_user_age(new_id, 26)
+user = get_user_by_id(new_id)
+print(f"   수정 후 나이: {user['age']}\n")
+
+# 5. 삭제 (Delete)
+print(f"5. ID={new_id} 사용자 삭제")
+success = delete_user(new_id)
+print(f"   삭제 {'완료' if success else '실패'}\n")
+
+# 최종 목록 확인
+print("6. 최종 사용자 목록")
+users = get_all_users()
+for user in users:
+    print(f"   [{user['id']}] {user['name']}")
+</code></pre>
+<p>실행 결과 예시입니다.</p>
+<pre><code>=== 사용자 관리 CRUD 실습 ===
+
+1. 새 사용자 생성
+   생성된 ID: 7
+
+2. 전체 사용자 조회
+   [1] 홍길동 - 29세
+   [2] 김철수 - 35세
+   [3] 이영희 - 24세
+   [4] 박민준 - 42세
+   [5] 최수진 - 31세
+   [7] 테스트유저 - 25세
+
+3. ID=7 사용자 조회
+   이름: 테스트유저, 이메일: test@example.com
+
+4. ID=7 사용자 나이 수정 (25 → 26)
+   수정 후 나이: 26
+
+5. ID=7 사용자 삭제
+   삭제 완료
+
+6. 최종 사용자 목록
+   [1] 홍길동
+   [2] 김철수
+   [3] 이영희
+   [4] 박민준
+   [5] 최수진
+</code></pre>
+<blockquote>
+<p>📌 <strong>SQL 인젝션 방지</strong>
+위 코드처럼 SQL 쿼리에 파라미터를 직접 문자열로 삽입하지 않고 <code>%s</code> 플레이스홀더와 튜플을 사용하면 <strong>SQL 인젝션(SQL Injection)</strong> 공격을 방어할 수 있습니다. 절대로 <code>f"... WHERE id = {user_id}"</code>와 같이 f-string으로 직접 값을 삽입하지 마세요.</p>
+</blockquote>
+<h2 id="_3">마치며</h2>
+<p>이번 챕터에서는 데이터베이스의 기초부터 Python과의 연동까지 전체적인 흐름을 학습했습니다.</p>
+<p><strong>핵심 요약:</strong></p>
+<ul>
+<li><strong>데이터베이스</strong>는 관계형(RDBMS)과 NoSQL로 나뉘며, MySQL은 대표적인 관계형 DB입니다.</li>
+<li><strong>테이블</strong>은 행(row)과 열(column)로 구성되며, <strong>기본 키(PK)</strong>로 각 행을 고유하게 식별합니다.</li>
+<li>SQL의 핵심 4명령어는 <strong>SELECT</strong>(조회), <strong>INSERT</strong>(삽입), <strong>UPDATE</strong>(수정), <strong>DELETE</strong>(삭제)입니다.</li>
+<li><strong>WHERE</strong>, <strong>ORDER BY</strong>, <strong>LIMIT</strong>으로 데이터를 필터링, 정렬, 제한할 수 있습니다.</li>
+<li><strong>JOIN</strong>으로 여러 테이블을 연결하고, <strong>집계 함수</strong>와 <strong>GROUP BY</strong>로 데이터를 요약합니다.</li>
+<li>Python에서는 <strong>pymysql</strong>로 직접 SQL을 실행하거나 <strong>SQLAlchemy</strong>로 ORM 방식으로 데이터베이스를 다룰 수 있습니다.</li>
+<li>SQL 파라미터는 반드시 플레이스홀더(<code>%s</code>)를 사용하여 <strong>SQL 인젝션</strong>을 방어해야 합니다.</li>
+</ul>
+<p><strong>다음 챕터 예고:</strong></p>
+<p>Chapter 20에서는 <strong>RAG(Retrieval-Augmented Generation)</strong>를 학습합니다. 이번 챕터에서 배운 데이터베이스 개념은 RAG 시스템에서 벡터 데이터베이스와 함께 활용됩니다. 데이터를 검색하고 LLM에 컨텍스트로 제공하는 과정에서 데이터베이스 기술이 핵심 역할을 합니다.</p>
+</div>

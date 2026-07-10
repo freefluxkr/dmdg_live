@@ -1,0 +1,737 @@
+<div class="page-content tex2jax_process">
+<p>지금까지 머신러닝의 기본 개념과 다양한 알고리즘을 살펴보았습니다. 이번 챕터에서는 현대 인공지능의 핵심인 <strong>신경망(Neural Network)</strong>에 대해 깊이 있게 다룹니다. 신경망은 인간의 뇌 구조에서 영감을 받아 설계된 모델로, 이미지 인식, 자연어 처리, 게임 플레이 등 수많은 분야에서 놀라운 성과를 거두고 있습니다.</p>
+<p>이 챕터를 마치면 신경망이 어떻게 학습하는지 그 전체 흐름을 이해하고, 직접 간단한 신경망을 구현해 손글씨 숫자를 분류할 수 있게 됩니다.</p>
+<blockquote>
+<p>💡 <strong>학습 목표</strong>
+- 생물학적 뉴런에서 인공 뉴런의 개념이 어떻게 유래했는지 설명할 수 있습니다.
+- 퍼셉트론과 다층 퍼셉트론(MLP)의 구조를 이해합니다.
+- 주요 활성화 함수의 특징과 용도를 구분합니다.
+- 순전파, 손실함수, 역전파, 경사하강법으로 이어지는 학습 파이프라인을 이해합니다.
+- 최적화 기법과 과적합 방지 기법을 적용할 수 있습니다.
+- PyTorch로 MNIST 손글씨 분류 신경망을 구현합니다.</p>
+</blockquote>
+<h2 id="41">4.1 생물학적 뉴런에서 인공 뉴런으로</h2>
+<h3 id="_1">생물학적 뉴런의 구조</h3>
+<p>우리 뇌에는 약 860억 개의 <strong>뉴런(Neuron)</strong>이 있습니다. 각 뉴런은 다른 뉴런으로부터 신호를 받아 처리하고, 그 결과를 다음 뉴런으로 전달하는 역할을 합니다.</p>
+<p>생물학적 뉴런의 주요 구성 요소는 다음과 같습니다.</p>
+<ul>
+<li><strong>수상돌기(Dendrite)</strong>: 다른 뉴런으로부터 신호를 수신합니다.</li>
+<li><strong>세포체(Cell Body)</strong>: 수신한 신호를 합산하고 처리합니다.</li>
+<li><strong>축삭돌기(Axon)</strong>: 처리된 신호를 다음 뉴런으로 전달합니다.</li>
+<li><strong>시냅스(Synapse)</strong>: 뉴런 간의 연결 부위로, 신호의 강도를 조절합니다.</li>
+</ul>
+<p>뉴런은 입력 신호의 합계가 일정 <strong>임계값(Threshold)</strong>을 넘을 때만 활성화(발화)하여 다음 뉴런으로 신호를 전달합니다.</p>
+<h3 id="_2">인공 뉴런의 탄생</h3>
+<p>1943년 워런 맥컬럭(Warren McCulloch)과 월터 피츠(Walter Pitts)는 생물학적 뉴런을 수학적으로 모델링한 <strong>인공 뉴런(Artificial Neuron)</strong>을 제안했습니다.</p>
+<p>인공 뉴런의 동작 원리는 다음과 같습니다.</p>
+<ol>
+<li>여러 입력값 $x_1, x_2, \ldots, x_n$을 받습니다.</li>
+<li>각 입력에 <strong>가중치(Weight)</strong> $w_1, w_2, \ldots, w_n$를 곱합니다.</li>
+<li>가중합(Weighted Sum)에 <strong>편향(Bias)</strong> $b$를 더합니다.</li>
+<li><strong>활성화 함수(Activation Function)</strong>를 통과시켜 최종 출력을 냅니다.</li>
+</ol>
+<p>수식으로 표현하면 다음과 같습니다.</p>
+<p>$$z = w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b = \mathbf{w}^T \mathbf{x} + b$$</p>
+<p>$$\text{output} = f(z)$$</p>
+<p>여기서 $f$는 활성화 함수입니다.</p>
+<p align="center">
+<img alt="인공 뉴런의 동작 원리 — 입력×가중치 → 가중합+편향 → 활성화 함수 → 출력" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338390/ch04_artificial_neuron.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<blockquote>
+<p>📌 <strong>생물학적 뉴런 vs 인공 뉴런</strong>
+| 생물학적 뉴런 | 인공 뉴런 |
+|---|---|
+| 수상돌기 | 입력값 $x_i$ |
+| 시냅스 연결 강도 | 가중치 $w_i$ |
+| 세포체 신호 합산 | 가중합 계산 |
+| 임계값 초과 시 발화 | 활성화 함수 |
+| 축삭돌기 신호 전달 | 출력값 |</p>
+</blockquote>
+<h2 id="42-mlp">4.2 퍼셉트론과 다층 퍼셉트론(MLP)</h2>
+<h3 id="perceptron">퍼셉트론 (Perceptron)</h3>
+<p>1957년 프랑크 로젠블라트(Frank Rosenblatt)가 제안한 <strong>퍼셉트론(Perceptron)</strong>은 최초의 학습 가능한 인공 신경망입니다. 퍼셉트론은 입력층과 출력층 단 두 개의 층으로 구성됩니다.</p>
+<p>퍼셉트론의 출력은 다음과 같습니다.</p>
+<p>$$\hat{y} = \begin{cases} 1 &amp; \text{if } \mathbf{w}^T \mathbf{x} + b \geq 0 \\ 0 &amp; \text{otherwise} \end{cases}$$</p>
+<p>퍼셉트론은 AND, OR 같은 선형 분리 가능한 문제는 풀 수 있지만, XOR 문제처럼 선형으로 분리되지 않는 문제는 풀 수 없다는 한계가 있습니다.</p>
+<blockquote>
+<p>⚠️ <strong>퍼셉트론의 한계</strong>
+1969년 마빈 민스키(Marvin Minsky)와 시모어 페이퍼트(Seymour Papert)는 단층 퍼셉트론이 XOR 문제를 해결할 수 없음을 수학적으로 증명했습니다. 이 발견은 한동안 인공지능 연구를 침체시켰지만, 다층 구조를 통해 극복할 수 있었습니다.</p>
+</blockquote>
+<h3 id="mlp-multi-layer-perceptron">다층 퍼셉트론 (MLP, Multi-Layer Perceptron)</h3>
+<p>퍼셉트론의 한계를 극복하기 위해 <strong>은닉층(Hidden Layer)</strong>을 추가한 <strong>다층 퍼셉트론(MLP)</strong>이 등장했습니다.</p>
+<p>MLP는 다음 세 가지 층으로 구성됩니다.</p>
+<ul>
+<li><strong>입력층(Input Layer)</strong>: 데이터의 특성(Feature)을 받아들이는 층입니다.</li>
+<li><strong>은닉층(Hidden Layer)</strong>: 입력층과 출력층 사이에서 데이터를 변환합니다. 여러 개를 쌓을 수 있습니다.</li>
+<li><strong>출력층(Output Layer)</strong>: 최종 예측값을 출력하는 층입니다.</li>
+</ul>
+<p align="center">
+<img alt="다층 퍼셉트론(MLP) 구조 — 입력층·은닉층·출력층의 완전 연결" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338390/ch04_mlp_structure.png" style="max-width:900px; width:100%; height:auto;"/>
+</p>
+<p>각 층의 뉴런은 이전 층의 모든 뉴런과 연결되어 있으며, 이를 <strong>완전 연결층(Fully Connected Layer)</strong> 또는 <strong>Dense 층</strong>이라고 합니다.</p>
+<p>은닉층을 여러 겹 쌓은 신경망을 <strong>심층 신경망(Deep Neural Network, DNN)</strong>이라고 하며, 이것이 <strong>딥러닝(Deep Learning)</strong>의 어원입니다.</p>
+<blockquote>
+<p>💡 <strong>왜 은닉층이 필요한가?</strong>
+은닉층은 데이터에서 점점 더 추상적인 특징을 학습합니다. 예를 들어 이미지 인식에서 첫 번째 은닉층은 선과 모서리를, 두 번째는 도형을, 세 번째는 얼굴의 부위를 학습하는 식으로 계층적 특징 추출이 이루어집니다.</p>
+</blockquote>
+<h2 id="43-sigmoid-relu-softmax">4.3 활성화 함수 (Sigmoid, ReLU, Softmax)</h2>
+<p>활성화 함수는 신경망에 <strong>비선형성(Non-linearity)</strong>을 부여합니다. 활성화 함수 없이 가중합만 계산하면, 아무리 층을 깊게 쌓아도 결국 하나의 선형 변환과 동일해집니다.</p>
+<h3 id="sigmoid">Sigmoid 함수</h3>
+<p>$$\sigma(z) = \frac{1}{1 + e^{-z}}$$</p>
+<p>Sigmoid 함수는 출력값을 0과 1 사이로 압축합니다. 이진 분류의 출력층에서 주로 사용됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>특징</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>출력 범위</td>
+<td>(0, 1)</td>
+</tr>
+<tr>
+<td>주요 용도</td>
+<td>이진 분류 출력층</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>확률 해석 가능</td>
+</tr>
+<tr>
+<td>단점</td>
+<td>기울기 소실(Vanishing Gradient) 문제 발생</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>기울기 소실 문제</strong>
+Sigmoid는 입력값이 매우 크거나 작을 때 기울기가 거의 0이 됩니다. 역전파 시 기울기가 점점 작아져 초기 층의 학습이 매우 느려지는 <strong>기울기 소실(Vanishing Gradient)</strong> 문제가 발생합니다.</p>
+</blockquote>
+<h3 id="relu-rectified-linear-unit">ReLU 함수 (Rectified Linear Unit)</h3>
+<p>$$\text{ReLU}(z) = \max(0, z)$$</p>
+<p>ReLU는 현재 가장 널리 사용되는 활성화 함수입니다. 입력이 0보다 크면 그대로 출력하고, 0 이하면 0을 출력합니다.</p>
+<table>
+<thead>
+<tr>
+<th>특징</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>출력 범위</td>
+<td>$[0, +\infty)$</td>
+</tr>
+<tr>
+<td>주요 용도</td>
+<td>은닉층</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>계산이 빠르고, 기울기 소실 문제 완화</td>
+</tr>
+<tr>
+<td>단점</td>
+<td>음수 입력에서 뉴런이 죽는 Dying ReLU 문제</td>
+</tr>
+</tbody>
+</table>
+<p>ReLU의 변형으로는 음수 영역에 작은 기울기를 주는 <strong>Leaky ReLU</strong>, 부드러운 곡선 형태의 <strong>ELU</strong>, <strong>GELU</strong> 등이 있습니다.</p>
+<h3 id="softmax">Softmax 함수</h3>
+<p>$$\text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}$$</p>
+<p>Softmax는 다중 분류 문제의 출력층에서 사용됩니다. 각 클래스의 출력값을 확률로 변환하며, 모든 출력의 합은 1이 됩니다.</p>
+<p>예를 들어 숫자 0~9를 분류하는 경우, Softmax는 10개 클래스 각각의 확률을 반환합니다.</p>
+<blockquote>
+<p>📌 <strong>활성화 함수 선택 가이드</strong>
+| 위치 | 권장 함수 |
+|---|---|
+| 은닉층 (일반) | ReLU 또는 Leaky ReLU |
+| 이진 분류 출력층 | Sigmoid |
+| 다중 분류 출력층 | Softmax |
+| 회귀 출력층 | 없음 (Linear) |</p>
+</blockquote>
+<h3 id="_3">활성화 함수 시각화 코드</h3>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+z = np.linspace(-5, 5, 200)
+
+# Sigmoid
+sigmoid = 1 / (1 + np.exp(-z))
+
+# ReLU
+relu = np.maximum(0, z)
+
+# Softmax는 벡터 입력이므로 간단한 예시
+z_vec = np.array([2.0, 1.0, 0.5])
+softmax = np.exp(z_vec) / np.sum(np.exp(z_vec))
+print("Softmax 출력:", softmax)  # [0.659, 0.242, 0.099]
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+
+axes[0].plot(z, sigmoid, label='Sigmoid', color='blue')
+axes[0].set_title('Sigmoid')
+axes[0].grid(True)
+axes[0].axhline(0, color='k', linewidth=0.5)
+axes[0].axvline(0, color='k', linewidth=0.5)
+
+axes[1].plot(z, relu, label='ReLU', color='red')
+axes[1].set_title('ReLU')
+axes[1].grid(True)
+axes[1].axhline(0, color='k', linewidth=0.5)
+axes[1].axvline(0, color='k', linewidth=0.5)
+
+plt.tight_layout()
+plt.show()
+</code></pre>
+<p>위 코드를 실행하면 두 활성화 함수의 형태를 비교할 수 있습니다.</p>
+<h2 id="44-forward-propagation">4.4 순전파 (Forward Propagation)</h2>
+<p><strong>순전파(Forward Propagation)</strong>는 입력 데이터가 신경망의 입력층에서 출력층까지 차례로 계산되어 예측값을 만들어내는 과정입니다.</p>
+<h3 id="_4">순전파 계산 과정</h3>
+<p>2개의 은닉층을 가진 신경망을 예로 들어봅니다.</p>
+<p><strong>층별 계산:</strong></p>
+<p>$$\mathbf{z}^{(1)} = \mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)}$$
+$$\mathbf{a}^{(1)} = f(\mathbf{z}^{(1)})$$</p>
+<p>$$\mathbf{z}^{(2)} = \mathbf{W}^{(2)} \mathbf{a}^{(1)} + \mathbf{b}^{(2)}$$
+$$\mathbf{a}^{(2)} = f(\mathbf{z}^{(2)})$$</p>
+<p>$$\hat{\mathbf{y}} = \text{Softmax}(\mathbf{W}^{(3)} \mathbf{a}^{(2)} + \mathbf{b}^{(3)})$$</p>
+<p>여기서 $\mathbf{W}^{(l)}$는 $l$번째 층의 가중치 행렬, $\mathbf{b}^{(l)}$는 편향 벡터입니다.</p>
+<h3 id="numpy">NumPy로 구현하는 순전파</h3>
+<pre><code class="language-python">import numpy as np
+
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+def relu(z):
+    return np.maximum(0, z)
+
+def softmax(z):
+    exp_z = np.exp(z - np.max(z))  # 수치 안정성을 위해 최댓값을 뺌
+    return exp_z / np.sum(exp_z)
+
+# 간단한 신경망 파라미터 초기화 (입력 2, 은닉 3, 출력 2)
+np.random.seed(42)
+W1 = np.random.randn(3, 2) * 0.1  # (은닉 뉴런 수, 입력 크기)
+b1 = np.zeros(3)
+W2 = np.random.randn(2, 3) * 0.1  # (출력 크기, 은닉 뉴런 수)
+b2 = np.zeros(2)
+
+# 입력 데이터
+x = np.array([1.0, 2.0])
+
+# 순전파
+z1 = W1 @ x + b1          # 은닉층 가중합
+a1 = relu(z1)              # 은닉층 활성화
+
+z2 = W2 @ a1 + b2          # 출력층 가중합
+y_hat = softmax(z2)        # 출력층 활성화 (확률)
+
+print("예측 확률:", y_hat)
+</code></pre>
+<p>순전파는 계산 방향이 입력 → 출력으로 한 방향이기 때문에 매우 빠릅니다. 학습이 끝난 후 새로운 데이터에 대한 예측도 순전파만으로 수행합니다.</p>
+<h2 id="45-mse-cross-entropy">4.5 손실함수 (MSE, Cross-Entropy)</h2>
+<p><strong>손실함수(Loss Function)</strong>는 모델의 예측값과 실제 정답 사이의 차이를 수치로 나타냅니다. 신경망의 목표는 이 손실값을 최소화하는 것입니다.</p>
+<h3 id="mse-mean-squared-error">평균 제곱 오차 (MSE, Mean Squared Error)</h3>
+<p>$$\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$</p>
+<p>MSE는 주로 <strong>회귀(Regression)</strong> 문제에 사용됩니다. 예측값과 실제값의 차이를 제곱하여 평균을 냅니다. 제곱을 취하기 때문에 큰 오차에 더 큰 패널티를 부여합니다.</p>
+<pre><code class="language-python">import numpy as np
+
+def mse_loss(y_true, y_pred):
+    return np.mean((y_true - y_pred) ** 2)
+
+y_true = np.array([3.0, 5.0, 2.5])
+y_pred = np.array([2.8, 4.5, 2.7])
+
+loss = mse_loss(y_true, y_pred)
+print(f"MSE 손실: {loss:.4f}")  # MSE 손실: 0.0933
+</code></pre>
+<h3 id="cross-entropy-loss">교차 엔트로피 손실 (Cross-Entropy Loss)</h3>
+<p>$$\text{Cross-Entropy} = -\sum_{c=1}^{K} y_c \log(\hat{y}_c)$$</p>
+<p><strong>교차 엔트로피(Cross-Entropy)</strong>는 <strong>분류(Classification)</strong> 문제에 사용됩니다. 정답 클래스의 예측 확률이 낮을수록 손실이 크게 증가합니다.</p>
+<p>이진 분류의 경우 <strong>이진 교차 엔트로피(Binary Cross-Entropy)</strong>를 사용합니다.</p>
+<p>$$\text{BCE} = -[y \log(\hat{y}) + (1-y) \log(1-\hat{y})]$$</p>
+<pre><code class="language-python">import numpy as np
+
+def cross_entropy_loss(y_true, y_pred):
+    # 수치 안정성을 위해 클리핑
+    y_pred = np.clip(y_pred, 1e-12, 1 - 1e-12)
+    return -np.sum(y_true * np.log(y_pred))
+
+# 정답: 클래스 1 (원-핫 인코딩)
+y_true = np.array([0, 1, 0])
+
+# 좋은 예측 (정답 클래스 확률이 높음)
+y_pred_good = np.array([0.1, 0.8, 0.1])
+# 나쁜 예측 (정답 클래스 확률이 낮음)
+y_pred_bad  = np.array([0.4, 0.2, 0.4])
+
+print(f"좋은 예측의 손실: {cross_entropy_loss(y_true, y_pred_good):.4f}")  # 0.2231
+print(f"나쁜 예측의 손실: {cross_entropy_loss(y_true, y_pred_bad):.4f}")   # 1.6094
+</code></pre>
+<blockquote>
+<p>📌 <strong>손실함수 선택 기준</strong>
+| 문제 유형 | 권장 손실함수 |
+|---|---|
+| 회귀 | MSE (Mean Squared Error) |
+| 이진 분류 | Binary Cross-Entropy |
+| 다중 클래스 분류 | Categorical Cross-Entropy |</p>
+</blockquote>
+<h2 id="46-backpropagation">4.6 역전파 (Backpropagation)와 경사하강법</h2>
+<h3 id="gradient-descent">경사하강법 (Gradient Descent)</h3>
+<p>신경망의 학습은 손실함수를 최소화하는 가중치를 찾는 과정입니다. <strong>경사하강법(Gradient Descent)</strong>은 손실함수의 기울기(Gradient)를 따라 파라미터를 조금씩 업데이트하는 최적화 알고리즘입니다.</p>
+<p>$$W \leftarrow W - \eta \frac{\partial L}{\partial W}$$</p>
+<p>여기서 $\eta$는 <strong>학습률(Learning Rate)</strong>으로, 한 번에 얼마나 이동할지를 결정합니다.</p>
+<p align="center">
+<img alt="경사하강법 — 손실 곡면의 등고선을 따라 기울기 반대 방향으로 이동하여 최솟값에 도달" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338390/ch04_gradient_descent.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<blockquote>
+<p>⚠️ <strong>학습률의 중요성</strong>
+- 학습률이 너무 크면: 손실값이 발산하거나 진동할 수 있습니다.
+- 학습률이 너무 작으면: 학습이 매우 느리고 지역 최솟값(Local Minimum)에 갇힐 수 있습니다.
+일반적으로 0.001 ~ 0.01 사이의 값을 초기 학습률로 사용합니다.</p>
+</blockquote>
+<h3 id="backpropagation">역전파 (Backpropagation)</h3>
+<p><strong>역전파(Backpropagation)</strong>는 손실함수에 대한 각 파라미터의 기울기를 효율적으로 계산하는 알고리즘입니다. <strong>연쇄 법칙(Chain Rule)</strong>을 이용하여 출력층에서 입력층 방향으로 기울기를 전파합니다.</p>
+<p><strong>연쇄 법칙:</strong></p>
+<p>$$\frac{\partial L}{\partial W^{(1)}} = \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial a^{(2)}} \cdot \frac{\partial a^{(2)}}{\partial z^{(2)}} \cdot \frac{\partial z^{(2)}}{\partial a^{(1)}} \cdot \frac{\partial a^{(1)}}{\partial z^{(1)}} \cdot \frac{\partial z^{(1)}}{\partial W^{(1)}}$$</p>
+<p>계산 과정을 단계별로 정리하면 다음과 같습니다.</p>
+<ol>
+<li><strong>순전파</strong>: 입력 데이터를 통해 예측값 $\hat{y}$를 계산합니다.</li>
+<li><strong>손실 계산</strong>: $L = \text{Loss}(y, \hat{y})$를 구합니다.</li>
+<li><strong>역전파</strong>: 연쇄 법칙으로 각 파라미터의 기울기 $\frac{\partial L}{\partial W}$를 계산합니다.</li>
+<li><strong>파라미터 업데이트</strong>: $W \leftarrow W - \eta \frac{\partial L}{\partial W}$</li>
+</ol>
+<pre><code class="language-python">import numpy as np
+
+# 간단한 1층 신경망의 역전파 예시 (MSE 손실, Sigmoid 활성화)
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+def sigmoid_derivative(a):
+    return a * (1 - a)
+
+# 데이터
+x = np.array([[1.0, 2.0]])  # 1개 샘플, 2개 특성
+y = np.array([[1.0]])        # 정답
+
+# 파라미터 초기화
+np.random.seed(42)
+W = np.random.randn(1, 2) * 0.1
+b = np.zeros((1, 1))
+lr = 0.1
+
+# 학습 루프
+for epoch in range(5):
+    # 순전파
+    z = x @ W.T + b
+    a = sigmoid(z)
+
+    # 손실 (MSE)
+    loss = np.mean((y - a) ** 2)
+
+    # 역전파
+    dL_da = -2 * (y - a)           # 손실의 a에 대한 기울기
+    da_dz = sigmoid_derivative(a)  # 활성화 함수의 기울기
+    dL_dz = dL_da * da_dz
+
+    dL_dW = dL_dz.T @ x           # W에 대한 기울기
+    dL_db = np.sum(dL_dz, axis=0, keepdims=True)
+
+    # 파라미터 업데이트
+    W -= lr * dL_dW
+    b -= lr * dL_db
+
+    print(f"Epoch {epoch+1}, Loss: {loss:.6f}")
+</code></pre>
+<p>실제 딥러닝 프레임워크(PyTorch, TensorFlow)는 이 역전파 과정을 <strong>자동 미분(Automatic Differentiation)</strong> 기능으로 자동화합니다.</p>
+<h2 id="47-sgd-adam">4.7 최적화 기법 (SGD, Adam)</h2>
+<h3 id="sgd-stochastic-gradient-descent">확률적 경사하강법 (SGD, Stochastic Gradient Descent)</h3>
+<p>전체 데이터셋을 한 번에 사용하는 <strong>배치 경사하강법(Batch GD)</strong>은 데이터가 많을 때 매우 느립니다. <strong>SGD</strong>는 매 업데이트마다 무작위로 선택한 <strong>하나의 샘플</strong>만 사용하여 기울기를 계산합니다.</p>
+<p>현실에서는 여러 샘플을 묶은 <strong>미니배치(Mini-batch)</strong>를 사용하는 <strong>미니배치 SGD</strong>가 표준입니다.</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>업데이트에 사용하는 데이터</th>
+<th>장점</th>
+<th>단점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch GD</td>
+<td>전체 데이터</td>
+<td>안정적인 수렴</td>
+<td>메모리 많이 사용, 느림</td>
+</tr>
+<tr>
+<td>SGD</td>
+<td>1개 샘플</td>
+<td>빠른 업데이트</td>
+<td>수렴이 불안정</td>
+</tr>
+<tr>
+<td>Mini-batch SGD</td>
+<td>N개 샘플(배치)</td>
+<td>속도와 안정성의 균형</td>
+<td>배치 크기 튜닝 필요</td>
+</tr>
+</tbody>
+</table>
+<h3 id="momentum">모멘텀 (Momentum)</h3>
+<p><strong>모멘텀(Momentum)</strong>은 이전 업데이트 방향을 일부 유지하여 진동을 줄이고 수렴 속도를 높이는 기법입니다.</p>
+<p>$$v_t = \beta v_{t-1} + (1-\beta) \nabla L$$
+$$W \leftarrow W - \eta v_t$$</p>
+<h3 id="adam-adaptive-moment-estimation">Adam 최적화기 (Adaptive Moment Estimation)</h3>
+<p><strong>Adam</strong>은 현재 가장 널리 사용되는 최적화 알고리즘입니다. 모멘텀과 <strong>RMSProp</strong>의 장점을 결합하여 각 파라미터마다 학습률을 개별적으로 조정합니다.</p>
+<p>$$m_t = \beta_1 m_{t-1} + (1 - \beta_1) \nabla L \quad \text{(1차 모멘트, 기울기 평균)}$$
+$$v_t = \beta_2 v_{t-1} + (1 - \beta_2) (\nabla L)^2 \quad \text{(2차 모멘트, 기울기 분산)}$$</p>
+<p>$$\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t} \quad \text{(편향 보정)}$$</p>
+<p>$$W \leftarrow W - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$$</p>
+<p>기본 하이퍼파라미터는 $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}$을 사용합니다.</p>
+<pre><code class="language-python">import torch
+import torch.nn as nn
+
+model = nn.Linear(10, 1)
+
+# SGD 옵티마이저
+optimizer_sgd = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+
+# Adam 옵티마이저
+optimizer_adam = torch.optim.Adam(model.parameters(), lr=0.001)
+
+# RMSProp 옵티마이저
+optimizer_rmsprop = torch.optim.RMSprop(model.parameters(), lr=0.001)
+</code></pre>
+<blockquote>
+<p>💡 <strong>어떤 옵티마이저를 선택해야 할까?</strong>
+초보자라면 <strong>Adam</strong>을 기본값으로 사용하는 것을 권장합니다. Adam은 대부분의 경우에 잘 동작하며, 학습률에 비교적 덜 민감합니다. 학습률 $10^{-3}$ (0.001)이 좋은 출발점입니다.</p>
+</blockquote>
+<h2 id="48">4.8 과적합 방지 (드롭아웃, 배치 정규화, 조기 종료)</h2>
+<p>신경망은 학습 데이터에 지나치게 맞춰지는 <strong>과적합(Overfitting)</strong> 문제가 발생할 수 있습니다. 과적합이 발생하면 학습 데이터에서는 성능이 좋지만, 새로운 데이터(테스트 데이터)에서는 성능이 크게 떨어집니다.</p>
+<h3 id="dropout">드롭아웃 (Dropout)</h3>
+<p><strong>드롭아웃(Dropout)</strong>은 학습 시 각 에포크마다 무작위로 일부 뉴런을 비활성화하는 기법입니다. 특정 뉴런에 대한 의존도를 줄여 모델이 더 강건(Robust)한 표현을 학습하도록 유도합니다.</p>
+<p>드롭아웃 비율 $p$를 0.5로 설정하면 학습 시 절반의 뉴런이 무작위로 꺼집니다. 테스트 시에는 모든 뉴런을 활성화하고 출력에 $(1-p)$를 곱하여 스케일을 조정합니다.</p>
+<pre><code class="language-python">import torch.nn as nn
+
+model = nn.Sequential(
+    nn.Linear(784, 256),
+    nn.ReLU(),
+    nn.Dropout(p=0.5),     # 50% 뉴런 비활성화
+    nn.Linear(256, 128),
+    nn.ReLU(),
+    nn.Dropout(p=0.3),     # 30% 뉴런 비활성화
+    nn.Linear(128, 10),
+    nn.Softmax(dim=1)
+)
+</code></pre>
+<h3 id="batch-normalization">배치 정규화 (Batch Normalization)</h3>
+<p><strong>배치 정규화(Batch Normalization)</strong>는 각 층의 입력을 미니배치 단위로 정규화(평균 0, 분산 1)하는 기법입니다. 학습을 안정시키고, 학습 속도를 높이며, 과적합도 줄이는 효과가 있습니다.</p>
+<p>$$\hat{x}_i = \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}$$
+$$y_i = \gamma \hat{x}_i + \beta$$</p>
+<p>여기서 $\mu_B$와 $\sigma_B^2$는 미니배치의 평균과 분산, $\gamma$와 $\beta$는 학습 가능한 스케일·시프트 파라미터입니다.</p>
+<pre><code class="language-python">model = nn.Sequential(
+    nn.Linear(784, 256),
+    nn.BatchNorm1d(256),   # 배치 정규화
+    nn.ReLU(),
+    nn.Linear(256, 128),
+    nn.BatchNorm1d(128),
+    nn.ReLU(),
+    nn.Linear(128, 10)
+)
+</code></pre>
+<h3 id="early-stopping">조기 종료 (Early Stopping)</h3>
+<p><strong>조기 종료(Early Stopping)</strong>는 학습 과정에서 검증 손실(Validation Loss)이 더 이상 줄어들지 않으면 학습을 멈추는 기법입니다.</p>
+<p align="center">
+<img alt="조기 종료 — 검증 손실이 최저인 시점에서 학습을 멈추고 그 시점의 모델을 보존" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338390/ch04_early_stopping.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<pre><code class="language-python"># 조기 종료 구현 예시
+best_val_loss = float('inf')
+patience = 5      # 개선 없이 허용하는 에포크 수
+counter = 0
+
+for epoch in range(100):
+    train_loss = train_one_epoch(model, train_loader)
+    val_loss = evaluate(model, val_loader)
+
+    if val_loss &lt; best_val_loss:
+        best_val_loss = val_loss
+        torch.save(model.state_dict(), 'best_model.pth')
+        counter = 0
+    else:
+        counter += 1
+        if counter &gt;= patience:
+            print(f"Early Stopping at epoch {epoch+1}")
+            break
+
+# 최적 모델 복원
+model.load_state_dict(torch.load('best_model.pth'))
+</code></pre>
+<blockquote>
+<p>📌 <strong>정규화 기법 요약</strong>
+| 기법 | 원리 | 효과 |
+|---|---|---|
+| 드롭아웃 | 뉴런 무작위 비활성화 | 과적합 방지 |
+| 배치 정규화 | 층 입력 정규화 | 학습 안정화, 속도 향상 |
+| 조기 종료 | 검증 손실 모니터링 | 과적합 방지 |
+| L1/L2 정규화 | 손실함수에 가중치 패널티 추가 | 가중치 희소화/축소 |</p>
+</blockquote>
+<h2 id="mnist">[실습] 간단한 신경망으로 손글씨 숫자 분류 (MNIST)</h2>
+<p>이제 지금까지 배운 개념을 모두 활용하여 <strong>MNIST</strong> 데이터셋으로 손글씨 숫자(0~9)를 분류하는 신경망을 구현해보겠습니다.</p>
+<blockquote>
+<p>💡 <strong>MNIST 데이터셋</strong>
+MNIST(Modified National Institute of Standards and Technology)는 0~9 손글씨 숫자 이미지 70,000장(훈련 60,000장 + 테스트 10,000장)으로 구성된 데이터셋입니다. 각 이미지는 28×28 픽셀의 흑백 이미지입니다. 딥러닝의 "Hello World"로 불릴 만큼 입문용으로 널리 사용됩니다.</p>
+</blockquote>
+<h3 id="_5">전체 구현 코드</h3>
+<pre><code class="language-python">import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+import matplotlib.pyplot as plt
+
+# ─────────────────────────────────────────
+# 1. 하이퍼파라미터 설정
+# ─────────────────────────────────────────
+BATCH_SIZE = 64
+LEARNING_RATE = 0.001
+EPOCHS = 10
+DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+print(f"사용 디바이스: {DEVICE}")
+
+# ─────────────────────────────────────────
+# 2. 데이터 로드 및 전처리
+# ─────────────────────────────────────────
+transform = transforms.Compose([
+    transforms.ToTensor(),                  # PIL 이미지 → Tensor [0,1]
+    transforms.Normalize((0.1307,), (0.3081,))  # MNIST 평균/표준편차로 정규화
+])
+
+train_dataset = datasets.MNIST(
+    root='./data', train=True, download=True, transform=transform
+)
+test_dataset = datasets.MNIST(
+    root='./data', train=False, download=True, transform=transform
+)
+
+train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+test_loader  = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
+
+print(f"훈련 샘플 수: {len(train_dataset)}, 테스트 샘플 수: {len(test_dataset)}")
+
+# ─────────────────────────────────────────
+# 3. 데이터 시각화
+# ─────────────────────────────────────────
+examples = iter(train_loader)
+images, labels = next(examples)
+
+fig, axes = plt.subplots(2, 5, figsize=(10, 4))
+for i, ax in enumerate(axes.flat):
+    ax.imshow(images[i].squeeze(), cmap='gray')
+    ax.set_title(f'Label: {labels[i].item()}')
+    ax.axis('off')
+plt.suptitle('MNIST 샘플 이미지')
+plt.tight_layout()
+plt.show()
+
+# ─────────────────────────────────────────
+# 4. 신경망 모델 정의
+# ─────────────────────────────────────────
+class MLP(nn.Module):
+    def __init__(self):
+        super(MLP, self).__init__()
+        self.network = nn.Sequential(
+            nn.Flatten(),                   # (B, 1, 28, 28) → (B, 784)
+
+            nn.Linear(784, 256),            # 입력층 → 은닉층 1
+            nn.BatchNorm1d(256),            # 배치 정규화
+            nn.ReLU(),
+            nn.Dropout(p=0.3),             # 드롭아웃
+
+            nn.Linear(256, 128),            # 은닉층 1 → 은닉층 2
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(p=0.3),
+
+            nn.Linear(128, 10)              # 은닉층 2 → 출력층 (10 클래스)
+            # CrossEntropyLoss에 Softmax가 내장되어 있으므로 별도 Softmax 불필요
+        )
+
+    def forward(self, x):
+        return self.network(x)
+
+model = MLP().to(DEVICE)
+print(model)
+print(f"\n총 파라미터 수: {sum(p.numel() for p in model.parameters()):,}")
+
+# ─────────────────────────────────────────
+# 5. 손실함수와 옵티마이저 정의
+# ─────────────────────────────────────────
+criterion = nn.CrossEntropyLoss()          # 다중 분류 → 교차 엔트로피
+optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
+
+# ─────────────────────────────────────────
+# 6. 학습 함수
+# ─────────────────────────────────────────
+def train(model, loader, criterion, optimizer, device):
+    model.train()   # 학습 모드 (Dropout, BN 활성화)
+    total_loss, correct = 0, 0
+
+    for images, labels in loader:
+        images, labels = images.to(device), labels.to(device)
+
+        optimizer.zero_grad()           # 기울기 초기화
+        outputs = model(images)         # 순전파
+        loss = criterion(outputs, labels)  # 손실 계산
+        loss.backward()                 # 역전파
+        optimizer.step()                # 파라미터 업데이트
+
+        total_loss += loss.item()
+        _, predicted = outputs.max(1)
+        correct += predicted.eq(labels).sum().item()
+
+    avg_loss = total_loss / len(loader)
+    accuracy = 100. * correct / len(loader.dataset)
+    return avg_loss, accuracy
+
+# ─────────────────────────────────────────
+# 7. 평가 함수
+# ─────────────────────────────────────────
+def evaluate(model, loader, criterion, device):
+    model.eval()    # 평가 모드 (Dropout 비활성화, BN 추론 통계 사용)
+    total_loss, correct = 0, 0
+
+    with torch.no_grad():               # 기울기 계산 비활성화
+        for images, labels in loader:
+            images, labels = images.to(device), labels.to(device)
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+
+            total_loss += loss.item()
+            _, predicted = outputs.max(1)
+            correct += predicted.eq(labels).sum().item()
+
+    avg_loss = total_loss / len(loader)
+    accuracy = 100. * correct / len(loader.dataset)
+    return avg_loss, accuracy
+
+# ─────────────────────────────────────────
+# 8. 학습 실행 (조기 종료 포함)
+# ─────────────────────────────────────────
+train_losses, val_losses = [], []
+train_accs, val_accs = [], []
+
+best_val_loss = float('inf')
+patience, counter = 5, 0
+
+for epoch in range(1, EPOCHS + 1):
+    train_loss, train_acc = train(model, train_loader, criterion, optimizer, DEVICE)
+    val_loss, val_acc = evaluate(model, test_loader, criterion, DEVICE)
+
+    train_losses.append(train_loss)
+    val_losses.append(val_loss)
+    train_accs.append(train_acc)
+    val_accs.append(val_acc)
+
+    print(f"Epoch [{epoch:2d}/{EPOCHS}] "
+          f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2f}% | "
+          f"Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.2f}%")
+
+    # 조기 종료
+    if val_loss &lt; best_val_loss:
+        best_val_loss = val_loss
+        torch.save(model.state_dict(), 'best_mnist_model.pth')
+        counter = 0
+    else:
+        counter += 1
+        if counter &gt;= patience:
+            print(f"\n조기 종료: {epoch}번째 에포크에서 종료합니다.")
+            break
+
+# 최적 모델 복원
+model.load_state_dict(torch.load('best_mnist_model.pth'))
+print(f"\n최적 모델 검증 손실: {best_val_loss:.4f}")
+
+# ─────────────────────────────────────────
+# 9. 학습 결과 시각화
+# ─────────────────────────────────────────
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+axes[0].plot(train_losses, label='Train Loss')
+axes[0].plot(val_losses, label='Validation Loss')
+axes[0].set_xlabel('Epoch')
+axes[0].set_ylabel('Loss')
+axes[0].set_title('학습 손실 곡선')
+axes[0].legend()
+axes[0].grid(True)
+
+axes[1].plot(train_accs, label='Train Accuracy')
+axes[1].plot(val_accs, label='Validation Accuracy')
+axes[1].set_xlabel('Epoch')
+axes[1].set_ylabel('Accuracy (%)')
+axes[1].set_title('정확도 곡선')
+axes[1].legend()
+axes[1].grid(True)
+
+plt.tight_layout()
+plt.show()
+
+# ─────────────────────────────────────────
+# 10. 예측 결과 시각화
+# ─────────────────────────────────────────
+model.eval()
+test_images, test_labels = next(iter(test_loader))
+test_images = test_images.to(DEVICE)
+
+with torch.no_grad():
+    outputs = model(test_images)
+    _, predictions = outputs.max(1)
+
+test_images = test_images.cpu()
+predictions = predictions.cpu()
+
+fig, axes = plt.subplots(2, 5, figsize=(10, 4))
+for i, ax in enumerate(axes.flat):
+    ax.imshow(test_images[i].squeeze(), cmap='gray')
+    color = 'green' if predictions[i] == test_labels[i] else 'red'
+    ax.set_title(f'예측: {predictions[i].item()} / 정답: {test_labels[i].item()}',
+                 color=color)
+    ax.axis('off')
+plt.suptitle('예측 결과 (초록: 정답, 빨강: 오답)')
+plt.tight_layout()
+plt.show()
+</code></pre>
+<h3 id="_6">실행 결과 예시</h3>
+<p>위 코드를 실행하면 약 10 에포크 이내에 다음과 같은 결과를 얻을 수 있습니다.</p>
+<pre><code>Epoch [ 1/10] Train Loss: 0.2847, Train Acc: 91.45% | Val Loss: 0.1123, Val Acc: 96.58%
+Epoch [ 2/10] Train Loss: 0.1421, Train Acc: 95.73% | Val Loss: 0.0891, Val Acc: 97.21%
+...
+Epoch [10/10] Train Loss: 0.0612, Train Acc: 98.12% | Val Loss: 0.0712, Val Acc: 97.95%
+</code></pre>
+<blockquote>
+<p>💡 <strong>결과 해석</strong>
+약 98% 수준의 테스트 정확도를 달성합니다. 이는 100장 중 약 98장의 손글씨 숫자를 올바르게 분류한다는 의미입니다. 이후 챕터에서 배울 합성곱 신경망(CNN)을 사용하면 99% 이상의 정확도도 달성할 수 있습니다.</p>
+</blockquote>
+<h2 id="_7">마치며</h2>
+<p>이번 챕터에서는 현대 딥러닝의 핵심 기초가 되는 신경망의 모든 구성 요소를 살펴보았습니다. 생물학적 뉴런에서 출발하여, 퍼셉트론, 다층 퍼셉트론, 활성화 함수, 순전파, 손실함수, 역전파, 최적화, 과적합 방지까지 신경망의 학습 파이프라인 전체를 이해했습니다.</p>
+<blockquote>
+<p>📌 <strong>핵심 요약</strong>
+| 개념 | 역할 |
+|---|---|
+| <strong>인공 뉴런</strong> | 가중합 + 활성화 함수로 신호 처리 |
+| <strong>다층 퍼셉트론(MLP)</strong> | 은닉층을 쌓아 비선형 패턴 학습 |
+| <strong>활성화 함수</strong> | ReLU(은닉층), Sigmoid(이진), Softmax(다중 분류) |
+| <strong>순전파</strong> | 입력 → 출력 방향으로 예측값 계산 |
+| <strong>손실함수</strong> | MSE(회귀), Cross-Entropy(분류) |
+| <strong>역전파</strong> | 연쇄 법칙으로 기울기 계산 |
+| <strong>경사하강법</strong> | 기울기를 따라 파라미터 업데이트 |
+| <strong>Adam</strong> | 학습률 자동 조정 최적화기 |
+| <strong>드롭아웃/배치 정규화</strong> | 과적합 방지 및 학습 안정화 |</p>
+</blockquote>
+<hr/>
+<p><strong>다음 챕터 예고: Chapter 5. 합성곱 신경망 (CNN)</strong></p>
+<p>Chapter 5에서는 이미지 처리에 특화된 <strong>합성곱 신경망(CNN, Convolutional Neural Network)</strong>을 다룹니다. CNN은 MLP와 달리 이미지의 공간적 구조(위치, 인접 픽셀 관계)를 직접 활용하여 훨씬 뛰어난 이미지 인식 성능을 달성합니다. 합성곱 층, 풀링 층, 유명 CNN 아키텍처(LeNet, VGG, ResNet)를 배우고 CIFAR-10 이미지 분류를 직접 구현해봅니다.</p>
+</div>

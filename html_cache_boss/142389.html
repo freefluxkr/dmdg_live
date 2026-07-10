@@ -1,0 +1,125 @@
+<h1 class="page-subject">5) 정적 웹크롤링 - 텍스트, 하이퍼링크, 이미지 가져오기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>이번 시간에는 정적 웹크롤링을 이용해 텍스트, 하이퍼링크, 이미지를 가져오는 방법에 대해서 알아보겠습니다.</p>
+<p>지난 시간에 배웠듯이 정적 웹 크롤링은 아주 간단합니다.</p>
+<p><strong>1단계.</strong>  원하는 웹 페이지의 html문서를 싹 긁어온다.</p>
+<p><strong>2단계.</strong>  긁어온 html 문서를 파싱(Parsing)한다.</p>
+<p><strong>3단계.</strong>  파싱한 html 문서에서 원하는 것을 골라서 사용한다.</p>
+<p>오늘은 3단계, 원하는 것을 골라서 사용하는 방법을 조금 더 자세히 다루어 볼 예정입니다.</p>
+<h1 id="1-url-html"><strong>1. 크롤링 할 페이지(url) HTML 가져오기</strong></h1>
+<p>해당 코드는 1단계와 2단계에 해당하는 코드입니다. 자세한 내용은 코드의 주석을 참고해주세요.</p>
+<pre><code>
+# step1.프로젝트에 필요한 패키지 불러오기
+
+from bs4 import BeautifulSoup as bs
+
+import requests
+
+
+# step2. 검색할 키워드 입력
+
+query = input('검색할 키워드를 입력하세요: ')
+
+
+# step3. 입력받은 query가 포함된 url 주소(네이버 뉴스 검색 결과 페이지) 저장
+
+url = 'https://search.naver.com/search.naver?where=news&amp;sm=tab_jum&amp;query='+'%s'%query
+
+
+# step4. requests 패키지를 이용해 'url'의 html 문서 가져오기
+
+response = requests.get(url)
+
+html_text = response.text
+
+
+# step5. beautifulsoup 패키지로 파싱 후, 'soup' 변수에 저장
+
+soup = bs(response.text, 'html.parser')
+
+</code></pre>
+<h1 id="2-html"><strong>2. 크롤링 할 페이지 실제로 들어가서 추출할 HTML 확인하기</strong></h1>
+<p>코드를 실행하시면 vs code의 터미널 창에 '검색할 키워드를 입력하세요: '라고 출력될텐데, 원하는 검색 키워드를 입력하시면 됩니다.</p>
+<p>저의 경우엔 '추석'을 검색해보았습니다.</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/142389/Sep-19-2021_16-11-24.gif"/></p>
+<p>검색을 하셨다면 F12를 눌러서 HTML 문서가 출력되도록 해주시고, 이제부터 원하는 부분을 추출해보도록 하겠습니다.</p>
+<h2 id="1-get_text"><strong>1) 텍스트 추출 / .get_text( )</strong></h2>
+<p>requests와 beautifulsoup를 이용한 텍스트 추출 방법은 아래와 같습니다.</p>
+<p>1번. 우측 개발자 도구에서 커서 모양의 아이콘을 클릭
+2번. 추출을 원하는 부분, 여기서는 뉴스 제목을 클릭
+3번. 해당 부분의 HTML 태그를 분석하여 select( ) 함수로 추출</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/142389/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-09-19_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.34.58.png"/></p>
+<p>3번 단계를 조금 더 자세히 설명드려보겠습니다.</p>
+<p>css selector, 여기서는 a.news_tit이 되겠네요. 이 선택자는 해당 페이지의 뉴스 기사 제목 10개가 공통으로 가지고 있는 class 이름입니다.</p>
+<p>css selector를 알아냈다면 select 함수에 입력하여 원하는 부분의 html을 변수에 저장해준 후에, for 문과 .get_text( ) 함수를 이용해 주시면 됩니다.</p>
+<pre><code>#step6.뉴스 제목 텍스트 추출
+
+news_titles = soup.select("a.news_tit")
+
+for i in news_titles:
+    title = i.get_text()
+    print(title)
+
+</code></pre>
+<p>결과는 아래와 같이 출력됩니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/142389/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-09-19_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.25.03.png"/></p>
+<h2 id="2-attrshref"><strong>2) 링크 추출 / .attrs['href']</strong></h2>
+<p>링크를 가져오고 싶을 때, 속성을 가져오는 .attrs['href'] 함수를 사용합니다. href 속성은 방금 전 가져온 news_titles 변수에 저장되어 있으므로, 따로 한 번더 가져와줄 필요 없이 바로 for문을 써줬습니다.</p>
+<pre><code>#step7.뉴스 하이퍼링크 추출
+
+for i in news_titles:
+    href = i.attrs['href']
+    print(href)
+</code></pre>
+<p>결과는 아래와 같이 10개의 url이 출력되는 것을 확인하실 수 있을거예요.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/142389/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-09-19_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.34.47.png"/></p>
+<h2 id="3-attrssrc"><strong>3) 이미지 추출 .attrs['src']</strong></h2>
+<p>다음으로는 이미지 추출입니다. 텍스트나 url 링크를 가져올 때와는 다르게 조금 길지만 어려워 하실 필요없어요.</p>
+<p>앞서 배우신 것과 같이 이미지 주소(src)를 갖고 있는 html을 news_thumnail 변수에 저장해줍니다.</p>
+<p>그 다음엔 이미지 다운로드를 위해서 해당 주소들을 리스트(link_thumnail)에 append 함수를 이용해 하나씩 담아주세요.</p>
+<p>사진을 다운로드 받아서 내 PC에 저장하기 위해서는 저장할 폴더를 만들고, src 주소를 이용해 다운로드 해주면 됩니다.</p>
+<p>폴더 생성에는 os 모듈과 urllib.request 패키지의 urlretrieve 함수가 필요한데, 모두 다 파이썬 내장 라이브러리이므로 따로 설치해주실 필요 없이 import 해주시면 돼요.</p>
+<p>os 모듈과 경로에 대한 개념을을 잘 모르신다면 아래 글을 참고해주세요.</p>
+<p><a href="https://coding-kindergarten.tistory.com/83">2021.06.07 - [파이썬 패키지/사무자동화] - [Python / os모듈] 디렉토리(폴더)와 경로 정보 활용하기</a></p>
+<pre><code>#step8.뉴스 썸네일 이미지 추출
+
+news_content_div = html.select(".news_contents")
+
+news_thumbnail = [thumbnail.select_one(".thumb") for thumbnail in news_content_div]
+
+link_thumbnail = []
+
+for img in news_thumbnail:
+    if img is  not  None  and  'data-lazysrc'  in img.attrs:
+        link_thumbnail.append(img.attrs['data-lazysrc'])
+
+# 이미지 저장할 폴더 생성
+import os
+
+# path_folder의 경로는 각자 저장할 폴더의 경로를 적어줄 것(ex.img_download)
+path_folder = '/Users/sangwoo/Desktop/img_download/'
+
+if not os.path.isdir(path_folder):
+    os.mkdir(path_folder)
+
+# 이미지 다운로드
+from urllib.request import urlretrieve
+
+i = 0
+
+for link in link_thumbnail:          
+    i += 1
+    urlretrieve(link, path_folder + f'{i}.jpg')
+
+
+</code></pre>
+<p>&lt;실행 결과&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/0T0mJ/btq7SGsNaJo/YCx24E9j7kAqBrwPRk3Bk0/img.png"/></p>
+</div>

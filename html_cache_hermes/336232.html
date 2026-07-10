@@ -1,0 +1,305 @@
+<h1 class="page-subject">03-5. 음성 모드</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: 이 페이지는 v0.16.0 소스 코드(<code>tools/voice_mode.py</code>, <code>tools/tts_tool.py</code>, <code>tools/transcription_tools.py</code>, <code>hermes_cli/voice.py</code>, <code>hermes_cli/config.py</code>)를 기준으로 작성했습니다. STT/TTS 프로바이더·기본 모델·설정 기본값·슬래시 명령은 소스에서 확인했으나, 실제 마이크 입력·음성 재생·<code>/voice status</code> 출력은 실행 테스트로 검증하지 않았습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">추가 설치</a></li>
+<li><a href="#_2">빠르게 시작하기</a></li>
+<li><a href="#stt">STT: 음성을 텍스트로</a><ul>
+<li><a href="#_3">로컬 모델 크기 선택</a></li>
+</ul>
+</li>
+<li><a href="#tts">TTS: 텍스트를 음성으로</a></li>
+<li><a href="#tui">TUI 음성 모드</a></li>
+<li><a href="#_4">설정</a><ul>
+<li><a href="#_5">무음 감지 조정</a></li>
+<li><a href="#_6">녹음 키 변경</a></li>
+</ul>
+</li>
+<li><a href="#_7">실습: 음성으로 대화하기</a></li>
+<li><a href="#_8">음성 모드 슬래시 명령어</a></li>
+<li><a href="#_9">메신저에서의 음성</a></li>
+</ul>
+</div>
+<p>Hermes Agent는 메신저를 거치지 않고 마이크와 스피커만으로 직접 대화할 수 있습니다. 키보드를 치는 대신 말로 지시하고, 에이전트가 음성으로 답합니다. 코딩하면서 손을 떼기 싫을 때, 산책하면서 아이디어를 정리할 때, 또는 단순히 타이핑이 번거로울 때 유용합니다.</p>
+<h3 id="_1">추가 설치</h3>
+<p>음성 모드를 사용하려면 오디오 관련 패키지가 필요합니다.</p>
+<pre><code class="language-bash"># Python 패키지
+uv pip install -e ".[voice]"
+
+# macOS 시스템 의존성
+brew install portaudio ffmpeg
+</code></pre>
+<fieldset><legend>Linux 사용자</legend><p style="margin-top: 0.2em;">Ubuntu/Debian에서는 <code>sudo apt install portaudio19-dev ffmpeg</code>을 실행합니다.</p></fieldset>
+<p><code>portaudio</code>는 마이크 입력과 오디오 재생을, <code>ffmpeg</code>는 오디오 포맷 변환을 담당합니다. API 키 없이 로컬에서 모든 것이 작동합니다.</p>
+<h3 id="_2">빠르게 시작하기</h3>
+<pre><code class="language-bash">$ hermes
+&gt; /voice on
+</code></pre>
+<p><code>/voice on</code>을 입력하면 음성 모드가 활성화됩니다. 이제 <strong>Ctrl+B</strong>를 누르고 말하면 됩니다.</p>
+<ol>
+<li><strong>Ctrl+B</strong> — 비프음(880Hz)이 울리고 녹음 시작</li>
+<li><strong>말하기</strong> — 화면에 오디오 레벨이 실시간 표시: <code>● [▁▂▃▅▇▇▅▂] ❯</code></li>
+<li><strong>말 멈추기</strong> — 3초간 무음이 감지되면 자동으로 녹음 종료</li>
+<li><strong>변환</strong> — 녹음이 텍스트로 변환되어 에이전트에 전달</li>
+<li><strong>응답</strong> — 에이전트가 텍스트와 음성으로 동시에 답변</li>
+<li><strong>반복</strong> — 녹음이 자동으로 다시 시작되어, 키를 다시 누를 필요 없이 연속 대화 가능</li>
+</ol>
+<p>Ctrl+B를 다시 누르면 연속 대화 모드에서 빠져나옵니다.</p>
+<pre><code>&gt; /voice status
+
+Voice Mode Status
+  Mode:       ON
+  TTS:        ON
+  Recording:  no
+  Record key: Ctrl+B
+</code></pre>
+<h3 id="stt">STT: 음성을 텍스트로</h3>
+<p>STT(Speech-to-Text)는 마이크 입력을 텍스트로 변환합니다. 기본값은 <code>local</code>이며, faster-whisper를 사용해서 API 키 없이 로컬에서 작동합니다.</p>
+<table>
+<thead>
+<tr>
+<th>프로바이더</th>
+<th>모델</th>
+<th>비용</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>local</strong> (기본)</td>
+<td>base (~150MB)</td>
+<td>무료</td>
+<td>faster-whisper, 첫 실행 시 모델 자동 다운로드</td>
+</tr>
+<tr>
+<td><strong>local_command</strong></td>
+<td>—</td>
+<td>무료</td>
+<td><code>HERMES_LOCAL_STT_COMMAND</code> 환경 변수로 커스텀 로컬 명령 지정</td>
+</tr>
+<tr>
+<td><strong>groq</strong></td>
+<td>whisper-large-v3-turbo</td>
+<td>무료 티어</td>
+<td>클라우드, 매우 빠름</td>
+</tr>
+<tr>
+<td><strong>openai</strong></td>
+<td>whisper-1</td>
+<td>유료</td>
+<td>클라우드, 안정적</td>
+</tr>
+<tr>
+<td><strong>xai</strong></td>
+<td>grok-stt</td>
+<td>유료</td>
+<td>xAI Grok STT, 고정밀 + 화자 분리(diarization)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>mistral</strong> (Voxtral Transcribe) 프로바이더도 사용할 수 있습니다. 한동안 <code>mistralai</code> PyPI 패키지가 공급망 보안 이슈로 격리됐었지만, 검토를 마친 <code>mistralai==2.4.8</code>이 다시 설치됩니다.</p>
+</blockquote>
+<p>프로바이더를 지정하지 않으면 <strong>local → local_command → groq → openai → xai → elevenlabs</strong> 순서로 자동 폴백합니다(mistral은 자동 탐지에서 건너뜁니다. <code>provider: mistral</code>로 명시하면 사용할 수 있습니다).</p>
+<h4 id="_3">로컬 모델 크기 선택</h4>
+<table>
+<thead>
+<tr>
+<th>모델</th>
+<th>크기</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tiny</code></td>
+<td>~75MB</td>
+<td>빠른 테스트용</td>
+</tr>
+<tr>
+<td><code>base</code></td>
+<td>~150MB</td>
+<td>일상 사용 (기본값)</td>
+</tr>
+<tr>
+<td><code>small</code></td>
+<td>~500MB</td>
+<td>더 정확한 인식</td>
+</tr>
+<tr>
+<td><code>medium</code></td>
+<td>~1.5GB</td>
+<td>다국어, 고품질</td>
+</tr>
+<tr>
+<td><code>large-v3</code></td>
+<td>~3GB</td>
+<td>최고 품질</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tts">TTS: 텍스트를 음성으로</h3>
+<p>TTS(Text-to-Speech)는 에이전트의 응답을 음성으로 변환합니다. 기본값은 Edge TTS이며, 무료이고 API 키가 필요 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th>프로바이더</th>
+<th>비용</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>edge</strong> (기본)</td>
+<td>무료</td>
+<td>322개 음성, 74개 언어</td>
+</tr>
+<tr>
+<td><strong>piper</strong></td>
+<td>무료</td>
+<td>로컬 실행, 빠르고 가벼운 ONNX 기반</td>
+</tr>
+<tr>
+<td><strong>neutts</strong></td>
+<td>무료</td>
+<td>로컬 실행, <code>espeak-ng</code> 필요</td>
+</tr>
+<tr>
+<td><strong>kittentts</strong></td>
+<td>무료</td>
+<td>경량 로컬 TTS</td>
+</tr>
+<tr>
+<td><strong>elevenlabs</strong></td>
+<td>유료</td>
+<td>최고 음질</td>
+</tr>
+<tr>
+<td><strong>openai</strong></td>
+<td>유료</td>
+<td>gpt-4o-mini-tts</td>
+</tr>
+<tr>
+<td><strong>xai</strong></td>
+<td>유료</td>
+<td>xAI 커스텀 보이스</td>
+</tr>
+<tr>
+<td><strong>minimax</strong></td>
+<td>유료</td>
+<td>MiniMax speech-02-hd</td>
+</tr>
+<tr>
+<td><strong>gemini</strong></td>
+<td>유료</td>
+<td>Google Gemini TTS</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>mistral</strong> (Voxtral TTS) 프로바이더도 STT와 마찬가지로 <code>mistralai==2.4.8</code>로 사용할 수 있습니다.</p>
+</blockquote>
+<p>Edge TTS 한국어 음성을 사용하려면:</p>
+<pre><code class="language-yaml">tts:
+  provider: "edge"
+  edge:
+    voice: "ko-KR-SunHiNeural"    # 여성, 한국어
+    # voice: "ko-KR-InJoonNeural" # 남성, 한국어
+</code></pre>
+<fieldset><legend>Edge TTS 음성 목록 확인</legend><p style="margin-top: 0.2em;"><code>edge-tts --list-voices | grep ko-KR</code>로 사용 가능한 한국어 음성을 확인할 수 있습니다. 영어 음성은 <code>en-US</code>로 필터링합니다.</p></fieldset>
+<p>에이전트가 응답을 생성하면서 <strong>문장 단위로 즉시 음성을 재생</strong>합니다. 전체 응답이 끝날 때까지 기다릴 필요가 없습니다.</p>
+<fieldset><legend>플러그형 TTS 레지스트리</legend><p style="margin-top: 0.2em;">v0.12부터 TTS 프로바이더가 <code>tts.providers.&lt;name&gt;</code> 레지스트리로 정리됐습니다. 새 TTS 백엔드를 플러그인으로 추가하기가 쉬워졌고, 사용자도 같은 패턴으로 직접 등록할 수 있습니다. Piper 같은 로컬 백엔드도 이 레지스트리를 통해 들어옵니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+</fieldset>
+<h3 id="tui">TUI 음성 모드</h3>
+<p>새 Ink-based TUI에서도 클래식 CLI와 동일한 음성 경험을 제공합니다. VAD(음성 활동 감지) 루프와 TTS 출력이 그대로 작동하고, 음성 관련 충돌이 났을 때를 대비한 크래시 포렌식 로그도 포함되어 있어 문제가 생기면 <code>~/.hermes/logs/</code>에서 확인할 수 있습니다. 사용 절차는 클래식 REPL과 동일합니다.</p>
+<h3 id="_4">설정</h3>
+<p><code>~/.hermes/config.yaml</code>에서 음성 관련 설정을 조정할 수 있습니다.</p>
+<pre><code class="language-yaml">voice:
+  record_key: "ctrl+b"          # 녹음 시작/종료 키
+  max_recording_seconds: 120     # 최대 녹음 시간(초)
+  silence_threshold: 200         # 무음 판단 기준 (높을수록 둔감)
+  silence_duration: 3.0          # 무음 후 자동 종료까지 대기 시간(초)
+
+stt:
+  provider: "local"
+  local:
+    model: "base"
+
+tts:
+  provider: "edge"
+  edge:
+    voice: "ko-KR-SunHiNeural"
+</code></pre>
+<h4 id="_5">무음 감지 조정</h4>
+<p>에이전트가 말이 끝나기 전에 끊는다면 <code>silence_duration</code>을 늘립니다. 반대로 반응이 느리다면 줄입니다.</p>
+<pre><code class="language-yaml">voice:
+  silence_duration: 4.0     # 문장 사이 쉼이 긴 경우
+</code></pre>
+<p>주변 소음이 심하면 <code>silence_threshold</code>를 높여서 배경 소음을 무시하게 합니다.</p>
+<pre><code class="language-yaml">voice:
+  silence_threshold: 300    # 시끄러운 환경
+</code></pre>
+<h4 id="_6">녹음 키 변경</h4>
+<p>Ctrl+B가 터미널이나 tmux 단축키와 충돌하면 다른 키로 바꿀 수 있습니다.</p>
+<pre><code class="language-yaml">voice:
+  record_key: "ctrl+space"
+</code></pre>
+<h3 id="_7">실습: 음성으로 대화하기</h3>
+<p>음성 모드를 직접 체험해 봅니다.</p>
+<p><strong>1단계</strong>: 음성 모드 활성화</p>
+<pre><code>$ hermes
+&gt; /voice on
+</code></pre>
+<p><strong>2단계</strong>: Ctrl+B를 누르고 말합니다.</p>
+<pre><code>(Ctrl+B 누른 뒤) "안녕, 오늘 날씨 어때?"
+</code></pre>
+<p>에이전트가 텍스트로 답하면서 동시에 음성으로도 들려줍니다.</p>
+<p><strong>3단계</strong>: 이어서 말해 봅니다. 연속 대화 모드이므로 키를 다시 누를 필요 없이 바로 말하면 됩니다.</p>
+<pre><code>"그러면 이번 주말 서울 날씨도 알려줘"
+</code></pre>
+<p><strong>4단계</strong>: 대화가 끝나면 Ctrl+B를 눌러 음성 모드를 비활성화하거나, <code>/voice off</code>를 입력합니다.</p>
+<fieldset><legend>음성이 안 나온다면</legend><p style="margin-top: 0.2em;"><code>/voice status</code>로 TTS가 켜져 있는지 확인하세요. <code>/voice tts</code>로 TTS만 따로 토글할 수 있습니다. "No audio device found" 오류가 나오면 <code>portaudio</code>가 설치되었는지 확인합니다.</p></fieldset>
+<h3 id="_8">음성 모드 슬래시 명령어</h3>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/voice</code></td>
+<td>음성 모드 토글</td>
+</tr>
+<tr>
+<td><code>/voice on</code></td>
+<td>음성 모드 켜기</td>
+</tr>
+<tr>
+<td><code>/voice off</code></td>
+<td>음성 모드 끄기</td>
+</tr>
+<tr>
+<td><code>/voice tts</code></td>
+<td>TTS 출력만 토글</td>
+</tr>
+<tr>
+<td><code>/voice status</code></td>
+<td>현재 상태 확인</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">메신저에서의 음성</h3>
+<p>Telegram이나 Discord에서도 음성 메시지를 주고받을 수 있습니다. 메신저에서 보낸 음성 메시지를 STT로 변환하고, 응답을 TTS로 음성 버블로 돌려줍니다. Discord 음성 채널에 봇이 직접 참여하는 라이브 대화도 가능합니다. 자세한 설정은 9장에서 다룹니다. (→ 9장)</p>
+</div>

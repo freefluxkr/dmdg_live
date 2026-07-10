@@ -1,0 +1,128 @@
+<h1 class="page-subject">07-1 파이썬과 유니코드</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>컴퓨터는 0과 1이라는 값만 인식할 수 있는 기계 장치이다. 그렇다면 컴퓨터는 어떻게 우리가 입력하는 문자를 인식할 수 있는 걸까?</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">최초의 문자 셋, 아스키코드</a></li>
+<li><a href="#_2">유니코드의 등장</a></li>
+<li><a href="#_3">유니코드로 문자열 다루기</a><ul>
+<li><a href="#_4">인코딩하기</a></li>
+<li><a href="#_5">디코딩하기</a></li>
+</ul>
+</li>
+<li><a href="#_6">입출력과 인코딩</a></li>
+<li><a href="#_7">소스 코드의 인코딩</a></li>
+</ul>
+</div>
+<h2 id="_1">최초의 문자 셋, 아스키코드</h2>
+<p>컴퓨터는 오직 숫자만 이해할 수 있기 때문에 문자를 처리하려면 특별한 방법이 필요하다. 그 방법은 문자와 숫자를 1:1로 매칭시키는 문자 셋(character set)을 만드는 것이다. 예를 들어 숫자 65는 'A', 숫자 66은 'B'와 같이 숫자마다 문자를 매핑해 놓으면 컴퓨터는 해당 숫자를 문자로 대체하여 인식할 수 있다.</p>
+<p>초기 컴퓨터 시대에는 각 회사마다 서로 다른 문자 셋을 사용했다. IBM 컴퓨터에서 숫자 65를 'A'로 정의했는데 다른 회사 컴퓨터에서는 같은 숫자 65를 'X'로 정의하는 식이었다. 그 결과 IBM 컴퓨터에서 만든 문서를 다른 컴퓨터에서 열면 완전히 다른 글자가 나타나는 혼란이 벌어졌다.</p>
+<p>이 문제를 해결하기 위해 1960년대 미국에서 아스키(ASCII, American Standard Code for Information Interchange)라는 표준을 만들었다. 아스키는 전 세계 모든 컴퓨터가 같은 규칙을 사용하도록 한 최초의 문자 셋 표준이다. 아스키는 총 128개의 문자를 지원했는데, 영문 대소문자, 숫자, 특수문자를 포함하여 영어권 국가에서 사용하는 모든 문자를 처리하는 데는 충분했다.</p>
+<h2 id="_2">유니코드의 등장</h2>
+<p>아스키가 영어권에서는 완벽했지만, 128개 문자로는 한글, 중국어, 일본어, 아랍어 같은 다른 나라의 문자들을 표현할 수 없었다. 한글만 해도 수천 개의 글자가 있고, 중국어는 수만 개의 한자가 존재한다. 그래서 각 나라에서는 자신만의 문자 셋을 만들기 시작했다. 한국에서는 KSC5601을, 일본에서는 JIS를, 중국에서는 GB2312를 만들었다.</p>
+<p>하지만 각국이 자신만의 문자 셋을 만들자 더 큰 문제가 생겼다. 한국 컴퓨터에서 만든 문서를 일본 컴퓨터에서 열면 글자가 깨져 보였고, 한글과 중국어를 같은 문서에 함께 쓰는 것도 불가능했다. 인터넷이 발달하면서 이 문제는 더욱 심각해졌다.</p>
+<p>1990년대에 등장한 유니코드(Unicode)는 이 모든 문제를 해결했다. 유니코드는 전 세계 모든 문자를 하나의 거대한 표에 정리한 것이다. 현재 유니코드는 100만 개 이상의 문자를 지원할 수 있도록 설계되어 있으며, 한글, 중국어, 일본어, 아랍어는 물론 이집트 상형문자와 이모지까지 포함하고 있다. 유니코드가 전 세계 표준으로 자리 잡으면서 이제 한 문서에 "Hello 안녕하세요 こんにちは 你好"처럼 여러 나라 언어를 자유롭게 섞어 쓸 수 있게 되었다.</p>
+<h2 id="_3">유니코드로 문자열 다루기</h2>
+<p>이제 유니코드로 문자열을 다루는 방법을 알아보자. 파이썬에서 사용하는 문자열은 모두 유니코드 문자열이다.</p>
+<blockquote>
+<p>파이썬은 버전 3부터 모든 문자열을 유니코드로 처리한다.</p>
+</blockquote>
+<h3 id="_4">인코딩하기</h3>
+<p>다음과 같은 문자열을 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short"
+</code></pre>
+<p>유니코드 문자열은 인코딩(encoding) 없이 그대로 파일에 적거나 다른 시스템으로 전송할 수 없다. 왜냐하면 유니코드는 각 문자에 번호를 매긴 약속일 뿐, 그 번호를 실제 바이트로 어떻게 저장할지는 별도로 정해야 하기 때문이다. 파일에 적거나 다른 시스템으로 전송하려면 바이트(byte) 문자열로 변환해야 한다. 이렇게 유니코드 문자열을 바이트 문자열로 바꾸는 것을 '인코딩'이라고 한다. 반대로 바이트 문자열을 유니코드 문자열로 바꾸는 것을 '디코딩'이라고 한다. 같은 문자라도 utf-8, euc-kr 등 서로 다른 방식으로 인코딩할 수 있으므로, 파일을 읽거나 네트워크를 통해 바이트 문자열을 수신할 때는 해당 바이트가 어떤 방식으로 인코딩되었는지 알아야만 디코딩할 수 있다.</p>
+<p>유니코드 문자열을 바이트 문자열로 바꾸는 방법은 다음과 같다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short"
+&gt;&gt;&gt; b = a.encode('utf-8')
+&gt;&gt;&gt; b
+b'Life is too short'
+&gt;&gt;&gt; type(b)
+&lt;class 'bytes'&gt;
+</code></pre>
+<p>유니코드 문자열을 바이트 문자열로 만들 때는 이 예처럼 utf-8과 같은 인코딩 방식을 인수로 넘겨 주어야 한다. 인수를 생략하면 기본값인 utf-8로 동작한다. 결과를 보면 문자열 앞에 <code>b</code>가 붙어 있는데, 이것은 해당 문자열이 바이트 문자열임을 나타내는 표시이다. type 함수를 호출해 보면 b 객체는 bytes 클래스의 객체라는 것을 알 수 있다.</p>
+<p>이번에는 다음 예제를 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "한글"
+&gt;&gt;&gt; a.encode("ascii")
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
+</code></pre>
+<p>이 예에서는 한글이라는 유니코드 문자열을 아스키(ascii) 방식으로 인코딩하려고 시도한다. 하지만 아스키 방식으로는 한글을 표현할 수 없으므로 오류가 발생한다.</p>
+<p>"한글"이라는 유니코드 문자열을 바이트 문자열로 변경하는 인코딩 방식에는 여러 가지가 있다. 보통은 utf-8을 사용하지만, 기존 시스템이 euc-kr과 같은 인코딩을 사용한다면 다음과 같이 euc-kr로 인코딩할 수도 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = '한글'
+&gt;&gt;&gt; a.encode('euc-kr')
+b'\xc7\xd1\xb1\xdb'
+&gt;&gt;&gt; a.encode('utf-8')
+b'\xed\x95\x9c\xea\xb8\x80'
+</code></pre>
+<p>utf-8로 인코딩했을 때와는 다른 바이트 문자열을 출력하는 것을 확인할 수 있다. 여기서 <code>\x</code>는 그 뒤의 두 자리가 16진수 값이라는 뜻이다. 예를 들어 <code>\xc7</code>은 16진수 c7, 즉 10진수 199에 해당하는 1바이트 값이다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h3 id="_5">디코딩하기</h3>
+<p>이번에는 반대로 인코딩한 바이트 문자열을 유니코드 문자열로 변환하는 디코딩(decoding)을 알아보자. 다음 예제처럼 euc-kr로 인코딩한 바이트 문자열은 euc-kr로만 디코딩해야 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = '한글'
+&gt;&gt;&gt; b = a.encode('euc-kr')
+&gt;&gt;&gt; b.decode('euc-kr')
+'한글'
+</code></pre>
+<p>euc-kr로 인코딩한 바이트 문자열을 utf-8로 디코딩하려 한다면 어떻게 될까?</p>
+<pre><code class="language-python">&gt;&gt;&gt; b.decode('utf-8')
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc7 in position 0: invalid continuation byte
+</code></pre>
+<p>잘못된 인코딩 방식으로 디코딩하려고 하면 이처럼 오류가 발생한다.</p>
+<p>지금까지 살펴본 내용을 정리하면 다음과 같다.</p>
+<pre><code class="language-plaintext">유니코드 문자열  ---encode('utf-8')---&gt;  바이트 문자열
+"한글"  &lt;---decode('utf-8')---   b'\xed\x95\x9c\xea\xb8\x80'
+</code></pre>
+<ul>
+<li><strong>유니코드</strong>: 전 세계 문자에 번호를 매긴 약속(문자 셋)</li>
+<li><strong>인코딩</strong>: 유니코드 문자열 → 바이트 문자열 (저장, 전송할 때)</li>
+<li><strong>디코딩</strong>: 바이트 문자열 → 유니코드 문자열 (읽어올 때)</li>
+</ul>
+<h2 id="_6">입출력과 인코딩</h2>
+<p>인코딩과 관련해서 개발자가 가장 고생하는 부분은 바로 데이터 입출력 관련 작업이다. 문자열과 인코딩에 대한 개념만 확실히 이해하면 어렵지 않지만, 이를 이해하지 못하고 무작정 인코딩, 디코딩을 사용하면 다중 인코딩되거나 문자열이 꼬여 버리는 불상사가 발생하기도 한다.</p>
+<p>핵심 원칙은 간단하다. 프로그램 내부에서는 항상 유니코드 문자열을 사용하고, 외부와 데이터를 주고받을 때만 인코딩/디코딩하는 것이다. 파일을 읽거나 네트워크를 통해 데이터를 주고받을 때 추천하는 방법은 다음과 같다.</p>
+<ol>
+<li>입력으로 받은 바이트 문자열은 되도록 빨리 유니코드 문자열로 디코딩한다.</li>
+<li>함수나 클래스 등에서는 유니코드 문자열만 사용한다.</li>
+<li>입력에 대한 결과를 전송하는 마지막 부분에서만 유니코드 문자열을 바이트 문자열로 인코딩해서 반환한다.</li>
+</ol>
+<p>이 규칙을 지킨다면 인코딩과 관련해서 큰 어려움은 없을 것이다.</p>
+<p>다음은 euc-kr 방식으로 작성한 파일을 읽고 변경하여 저장하는 예제이다.</p>
+<pre><code class="language-python"># euc_kr.py
+# 1. euc-kr로 작성된 파일 읽기
+with open('euc_kr.txt', encoding='euc-kr') as f:
+    data = f.read()  # 유니코드 문자열 
+
+# 2. unicode 문자열로 프로그램 수행하기
+data = data + "\n" + "추가 문자열"
+
+# 3. euc-kr로 수정된 문자열 저장하기
+with open('euc_kr.txt', encoding='euc-kr', mode='w') as f:
+    f.write(data)
+</code></pre>
+<p>open() 함수에 encoding을 지정하면 해당 인코딩으로 파일을 읽을 수 있다. 이때 읽은 문자열은 유니코드 문자열이 된다. 파일을 만들 때도 마찬가지로 encoding을 지정할 수 있다. encoding 항목을 생략하면 기본값으로 utf-8이 지정된다.</p>
+<h2 id="_7">소스 코드의 인코딩</h2>
+<p>파이썬 셸이 아닌 편집기로 코딩할 때는 소스 코드의 인코딩이 매우 중요하다. 소스 코드의 인코딩이란 소스 코드 파일이 어떤 방식으로 인코딩되었는지를 뜻한다.</p>
+<blockquote>
+<p>현재 대부분의 편집기와 파이썬 3는 utf-8을 기본으로 사용하므로 인코딩을 별도로 선언할 일이 거의 없다. 다만 euc-kr 같은 다른 인코딩으로 저장된 파일을 다루는 특수한 경우에는 알아 두어야 한다.</p>
+</blockquote>
+<p>소스 코드도 파일이므로 인코딩 타입이 반드시 필요하다. 파이썬은 소스 코드의 인코딩을 명시하려면 소스 코드 가장 위에 다음과 같은 문장을 넣어야 한다.</p>
+<pre><code class="language-python"># -*- coding: utf-8 -*-
+</code></pre>
+<blockquote>
+<p>파이썬 3.0부터는 utf-8이 기본값이므로 utf-8로 인코딩한 소스 코드라면 이 문장은 생략해도 된다.</p>
+</blockquote>
+<p>소스 코드를 utf-8로 인코딩한 파일이라면 이렇게 작성하면 되고 euc-kr로 인코딩했다면 다음과 같이 작성해야 한다.</p>
+<pre><code class="language-python"># -*- coding: euc-kr -*-
+</code></pre>
+<p>소스 코드는 euc-kr로 인코딩했는데 파일 위에 utf-8로 명시했다면 문자열 처리 부분에서 인코딩 관련 오류가 발생할 수 있다.</p>
+</div>

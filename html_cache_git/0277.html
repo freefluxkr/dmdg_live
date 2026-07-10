@@ -1,0 +1,23 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>6.9.5 이름이 다른 브랜치</h3>
+<p class="x00--">일반적으로 로컬 저장소의 브랜치 이름과 원격 저장소의 브랜치 이름은 동일하게 사용합니다. 하지만 반드시 이름이 동일할 필요는 없습니다. 가끔은 동일한 브랜치 이름을 사용하기 어려울 때가 있습니다. 예를 들어 다른 개발자가 만든 원격 서버의 브랜치를 테스트하려고 할 때 자신의 브랜치 이름과 동일하면 충돌이 생깁니다. 이때는 어떻게 해야 할까요?</p>
+<p class="x00--">깃은 서로 다른 로컬 브랜치와 리모트 브랜치를 수동으로 지정하여 연결할 수 있습니다. 브랜치를 직접 수동으로 지정할 때는 <span class="x3---------">콜론(:)</span>으로 구분합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git push origin <span class="N--------1 N--------1">브랜치이름</span>:<span class="N--------1 N--------1">새로운브랜치</span></p>
+</div>
+<p class="x00--">현재 브랜치를 서버(<span class="A------">origin</span>)의 새로운 브랜치 이름으로 전송하라는 의미입니다. 이번에는 로컬 저장소의 <span class="A------">feature</span> 브랜치를 원격 저장소의 <span class="A------">function</span> 브랜치로 푸시해 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy06<span class="x--"> (hotfix)</span></p>
+<p class="N-----">$ <span class="x--">git push -u origin feature:function</span> <span class="ingd">다른 이름으로 브랜치 전송</span></p>
+<p class="N-----">Total 0 (delta 0), reused 0 (delta 0)</p>
+<p class="N-----">remote:</p>
+<p class="N-----">remote: Create a pull request for 'function' on GitHub by visiting:</p>
+<p class="N-----">remote:      https://github.com/jinygit/gitstudy06/pull/new/function</p>
+<p class="N-----">remote:</p>
+<p class="N-----">To https://github.com/jinygit/gitstudy06.git</p>
+<p class="N-----"><span class="x-----3"> * [new branch]      feature -&gt; function </span><span class="ingd">리모트 브랜치 생성</span></p>
+<p class="N----">Branch 'feature' set up to track remote branch 'function' from 'origin'.</p></code></pre>
+</div>
+</section>
+</section>

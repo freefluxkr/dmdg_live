@@ -1,0 +1,34 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>11.5.5 부모 저장소 갱신</h3>
+<p class="x00--">자식 저장소의 원격 저장소를 이용하여 메인 저장소의 서브모듈을 갱신했습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/<span class="x--">gitstudy11</span><span class="x---1">_parent/child</span><span class="x--"> (master)</span></p>
+<p class="N-----">$ <span class="x--">git status </span><span class="ingd">상태 확인</span></p>
+<p class="N-----">On branch master</p>
+<p class="N-----">Your branch is up to date with 'origin/master'.</p>
+<p class="N-----"> </p>
+<p class="N----">nothing to commit, working tree clean</p></code></pre>
+<p class="x00--">서브모듈을 갱신하면 메인 저장소는 자신의 서브 폴더가 변경된 것을 인식합니다. </p>
+<p class="x00--">부모 폴더로 이동해서 상태를 확인해 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/<span class="x--">gitstudy11</span><span class="x---1">_parent/child</span><span class="x--"> (master)</span></p>
+<p class="N-----">$ <span class="x--">cd .. </span><span class="ingd">메인 저장소 이동</span></p>
+<p class="N-----"> </p>
+<p class="N-----">infoh@DESKTOP MINGW64 /e/<span class="x--">gitstudy11</span><span class="x---1">_parent</span><span class="x--"> (master)</span></p>
+<p class="N-----">$<span class="x--"> git status </span><span class="ingd">상태 확인</span></p>
+<p class="N-----">On branch master</p>
+<p class="N-----">Your branch is up to date with 'origin/master'.</p>
+<p class="N-----"> </p>
+<p class="N-----">Changes not staged for commit:</p>
+<p class="N-----">  (use "git add &lt;file&gt;..." to update what will be committed)</p>
+<p class="N-----">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</p>
+<p class="N-----"><span class="char-style-override-24">        modified:   child (new commits)</span></p>
+<p class="N----">no changes added to commit (use "git add" and/or "git commit -a")</p></code></pre>
+<p class="x00--">즉, <span class="x3---------">메인 저장소는 서브모듈의 변경 내용을 모니터링하고 있는 것입니다.</span> 메인 저장소의 서브 폴더 자체를 변경했기 때문에 변경된 내용을 다시 메인 저장소로 커밋해야 합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/<span class="x--">gitstudy11</span><span class="x---1">_parent</span><span class="x--"> (master)</span></p>
+<p class="N-----">$<span class="x--"> git commit -am "update submodule" </span><span class="ingd">등록 및 커밋</span></p>
+<p class="N-----">[master 6ebe93e] update submodule</p>
+<p class="N----"> 1 file changed, 1 insertion(+), 1 deletion(-)</p></code></pre>
+</div>
+</section>
+</section>

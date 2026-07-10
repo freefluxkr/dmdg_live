@@ -1,0 +1,36 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_23"><span class="yellow">3.2.4</span> 변수를 사용해 간단한 프로그램 만들기 2</h4>
+<p class="txt bl">지금까지 내용을 바탕으로 간단한 프로그램을 만들어 보겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex bl s11_11"><span class="dm brown">1.</span> <span class="dm">마트에서 과자와 라면, 햄을 사려고 합니다. 과자와 라면, 햄의 개수를 각각 입력받아 총 금액이 얼마인지 알려 주는 프로그램을 작성해 봅시다. 이때 과자는 1200원, 라면은 800원, 햄은 2400원이고, 다음처럼 출력합니다.</span></p>
+<p class="txts"> </p>
+<p class="txts cd ind12"><span class="bg_brown3">실행결과</span></p>
+<div class="box_brown_line2">
+<p class="txts dm"><span class="dm bg_pink2">입력받는 부분</span></p>
+<pre>과자를 몇 개 구매하겠습니까? <span class="cd2">3</span> 
+라면을 몇 개 구매하겠습니까? <span class="cd2">5</span> 
+햄을 몇 개 구매하겠습니까? <span class="cd2">2</span> </pre>
+</div>
+<p class="txts"> </p>
+<div class="box_brown_line2">
+<p class="txts dm"><span class="dm bg_pink2">출력하는 부분</span></p>
+<pre>총 금액: 12400</pre>
+</div>
+<p class="txts"> </p>
+<div class="ind12">
+<p class="txts2 dl"><span class="dm bg_brown7">힌트</span> 이 프로그램에는 과자의 가격과 개수, 라면의 가격과 개수, 햄의 가격과 개수, 총 금액까지 모두 7개의 요소가 있습니다. 이 모든 요소를 변수로 만들어야 할까요? 프로그램 안에서 변하는 요소와 변하지 않는 요소를 잘 구분해서 작성해 보세요.</p>
+<p class="txt bl">7가지 요소 중 변하는 부분은 입력받는 부분인 과자 개수, 라면 개수, 햄 개수일 겁니다. 따라서 이 세 요소를 변수에 담는 것이 좋죠. 과자 개수는 snack count 줄여 <span class="cd">s_cnt</span>, 라면 개수는 ramen count를 줄여 <span class="cd">r_cnt</span>, 햄 개수는 ham count를 줄여 <span class="cd">h_cnt</span>로 변수명을 짓겠습니다. 그리고 총 금액도 입력받는 개수에 따라 변하니 변수에 저장하는 게 좋겠네요. <span class="cd">price</span>라고 하겠습니다. 이렇게 변수로 만들어 두면 나중에 필요할 때 변수명으로 언제든지 활용할 수 있습니다. 변수가 정해졌으니 이를 이용해 코드를 작성하면 됩니다.</p>
+</div>
+<div class="highlight">
+<pre>s_cnt = int(<span class="gold">input</span>(<span class="red2">'과자를 몇 개 구매하겠습니까? '</span>))
+r_cnt = int(<span class="gold">input</span>(<span class="red2">'라면을 몇 개 구매하겠습니까? '</span>))
+h_cnt = int(<span class="gold">input</span>(<span class="red2">'햄을 몇 개 구매하겠습니까? '</span>))
+
+price = <span class="green">1200</span> * s_cnt + <span class="green">800</span> * r_cnt + <span class="green">2400</span> * h_cnt
+<span class="gold">print</span>(<span class="red2">'총 금액:'</span>, price)</pre>
+</div>
+</div>
+</section>
+</section>

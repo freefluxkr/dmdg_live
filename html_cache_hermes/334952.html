@@ -1,0 +1,109 @@
+<h1 class="page-subject">08-3. 실습: MCP로 기능 확장</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: 이 페이지는 v0.16.0 소스를 기준으로 점검했습니다. MCP 설정 형식(<code>mcp_servers</code> 블록, 전송 방식 자동 판별)·도구 접두사(<code>mcp_</code>)·<code>/reload-mcp</code>·<code>/tools</code> 명령은 소스와 대조해 확인했고, 실습 절차의 실제 실행 결과는 직접 실행 테스트하지 않았습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#1-mcp">실습 1: 파일시스템 MCP 서버</a></li>
+<li><a href="#2">실습 2: 도구 확인</a></li>
+<li><a href="#3">실습 3: 같은 작업, 다른 접근법 비교</a><ul>
+<li><a href="#1">방법 1: 빌트인 도구 (터미널)</a></li>
+<li><a href="#2-mcp">방법 2: MCP 파일시스템 서버</a></li>
+<li><a href="#3_1">방법 3: 스킬로 자동화</a></li>
+<li><a href="#_1">비교 결과</a></li>
+</ul>
+</li>
+<li><a href="#mcp">MCP 서버 직접 만들기</a></li>
+</ul>
+</div>
+<p>이 절에서는 실제로 MCP 서버를 설정하여 Hermes Agent의 기능을 확장합니다.</p>
+<h3 id="1-mcp">실습 1: 파일시스템 MCP 서버</h3>
+<p>가장 간단한 MCP 서버인 파일시스템 서버를 연결해 봅니다.</p>
+<p><code>~/.hermes/config.yaml</code>에 추가:</p>
+<pre><code class="language-yaml">mcp_servers:
+  filesystem:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "/tmp/mcp-test"]
+    enabled: true
+</code></pre>
+<blockquote>
+<p>💡 <strong>전송 방식 자동 판별</strong>: <code>command</code>가 있으면 stdio, <code>url</code>이 있으면 HTTP로 자동 판별됩니다. 별도의 <code>type</code> 필드는 사용하지 않습니다.</p>
+</blockquote>
+<p>설정을 저장한 후 <code>/reload-mcp</code> 명령을 실행하면 재시작 없이 MCP 서버가 로드됩니다(실행 시 프롬프트 캐시 무효화 경고와 함께 확인을 한 번 거칩니다). 또는 Hermes Agent를 재시작해도 됩니다.</p>
+<pre><code>&gt; /tools    # mcp_filesystem_* 도구가 보이는지 확인
+&gt; mcp 파일시스템 도구로 /tmp/mcp-test에 테스트 파일을 만들어줘
+</code></pre>
+<h3 id="2">실습 2: 도구 확인</h3>
+<p>연결된 MCP 서버의 도구 목록을 확인합니다.</p>
+<pre><code>&gt; 현재 사용 가능한 MCP 도구 목록을 알려줘
+</code></pre>
+<p>또는 직접:</p>
+<pre><code>&gt; /tools
+</code></pre>
+<p>MCP 도구는 <code>mcp_</code> 접두사로 표시됩니다.</p>
+<h3 id="3">실습 3: 같은 작업, 다른 접근법 비교</h3>
+<p>Hermes Agent의 3계층 도구 구조를 체감하기 위해, 동일한 작업을 세 가지 방법으로 수행해 봅니다.</p>
+<p><strong>과제</strong>: <code>/tmp/mcp-test</code> 디렉터리의 파일 목록을 확인하고, 새 파일을 만들기</p>
+<h4 id="1">방법 1: 빌트인 도구 (터미널)</h4>
+<pre><code>&gt; /tmp/mcp-test 디렉터리의 파일 목록을 보여주고, hello.txt를 만들어줘
+</code></pre>
+<p>에이전트가 <code>ls</code>와 <code>echo &gt; hello.txt</code> 같은 셸 명령을 직접 실행합니다. 별도 설정이 필요 없고, LLM이 이미 이 명령어들을 알고 있으므로 가장 빠릅니다.</p>
+<h4 id="2-mcp">방법 2: MCP 파일시스템 서버</h4>
+<p>실습 1에서 설정한 MCP 서버를 사용합니다.</p>
+<pre><code>&gt; mcp 파일시스템 도구로 /tmp/mcp-test의 파일 목록을 보여주고, hello-mcp.txt를 만들어줘
+</code></pre>
+<p>같은 결과를 얻지만, MCP 프로토콜을 통한 도구 호출이 추가됩니다.</p>
+<h4 id="3_1">방법 3: 스킬로 자동화</h4>
+<p>이 작업을 자주 한다면 스킬로 만들 수 있습니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code>&gt; 방금 한 파일 관리 작업을 스킬로 만들어줘
+</code></pre>
+<p>에이전트가 절차를 <code>SKILL.md</code>로 저장하고, 다음부터는 <code>/file-manager</code> 같은 명령으로 빠르게 실행할 수 있습니다.</p>
+<h4 id="_1">비교 결과</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>빌트인 도구</th>
+<th>MCP</th>
+<th>스킬</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>설정</td>
+<td>불필요</td>
+<td>config.yaml 수정</td>
+<td>한 번 생성</td>
+</tr>
+<tr>
+<td>토큰 소비</td>
+<td>최소</td>
+<td>도구 스키마 로드 필요</td>
+<td>필요 시에만 로드</td>
+</tr>
+<tr>
+<td>적합한 상황</td>
+<td>대부분의 로컬 작업</td>
+<td>CLI 없는 외부 서비스</td>
+<td>반복되는 워크플로</td>
+</tr>
+</tbody>
+</table>
+<p>이 실습을 통해 "어떤 계층을 선택할지"에 대한 감각을 익힐 수 있습니다.</p>
+<h3 id="mcp">MCP 서버 직접 만들기</h3>
+<p>Python으로 간단한 MCP 서버를 만들 수도 있습니다. 이 부분은 고급 주제이므로 공식 문서를 참조하세요.</p>
+<fieldset><legend>설정 변경 시 /reload-mcp</legend><p style="margin-top: 0.2em;">MCP 설정을 수정할 때마다 에이전트를 재시작할 필요가 없습니다. <code>/reload-mcp</code> 명령으로 변경 사항을 즉시 반영할 수 있습니다. 도구 필터를 조정하거나 새 서버를 추가할 때 특히 편리합니다.</p></fieldset>
+<fieldset><legend>MCP 서버 생태계</legend><p style="margin-top: 0.2em;">MCP 프로토콜은 빠르게 성장하고 있어, 다양한 서비스에 대한 MCP 서버가 이미 존재합니다. GitHub, Slack, PostgreSQL, MongoDB, Notion, Linear 등에 대한 서버를 npm에서 찾을 수 있습니다. 단, 서버를 추가할수록 토큰 소비가 늘어나므로, 실제로 필요한 서버만 연결하는 것이 좋습니다.</p></fieldset>
+<blockquote>
+<p><strong>주의: 로컬 LLM과 MCP 사용 시 알려진 문제</strong>
+로컬 LLM(예: Ollama 기반 모델)에서 MCP를 사용할 때, 도구 호출이 텍스트로 출력되는 버그가 보고되어 있습니다(GitHub #741). 도구 호출 JSON이 응답 텍스트에 그대로 노출되는 현상입니다. 로컬 LLM으로 MCP를 사용할 때는 이 점을 참고하세요.</p>
+</blockquote>
+</div>

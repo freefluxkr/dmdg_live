@@ -1,0 +1,23 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">창에 띄운 이미지가 조금 커 보이니 이미지 크기를 줄여 봅시다. 이미지 크기는 <span class="cd">PhotoImage</span> 클래스의 <span class="cd">subsample()</span> 메서드로 조절합니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'800x400'</span>)
+
+letsgetit = PhotoImage(file=<span class="red2">'lets get it.png'</span>)
+<span class="cd2">letsgetit = letsgetit.subsample(</span><span class="cd2 green">2</span><span class="cd2">,</span> <span class="cd2 green">2</span><span class="cd2">)</span>
+img_label = Label(root, image=letsgetit)
+img_label.pack()
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/655.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

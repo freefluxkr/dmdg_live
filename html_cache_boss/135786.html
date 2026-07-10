@@ -1,0 +1,123 @@
+<h1 class="page-subject">2-2. IDE란?</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>오늘 배워볼 내용은 파이썬 개발을 도와주는 유용한 도구 IDE(Integrated Development Environment)입니다.</p>
+<p>지난 글에서 파이썬과 아나콘다에 대해서 알아보았고, 아마도 여러분들은 더 유용한 아나콘다를 설치하셨을 것입니다.</p>
+<p>파이썬을 설치하거나, 아나콘다를 설치했을 때에 기본적으로 제공되는 코드를 작성&amp;실행할 수 있는 IDLE Shell이 있습니다.</p>
+<p>하지만 마치 메모장에 코딩을 하는 느낌을 주기 때문에, 사용하기가 매우매우 불편합니다.</p>
+<p>그래서!</p>
+<p>우리는 지금부터 효율적인 파이썬 코딩을 위해서 IDE라 불리는 것에 대해서 알아보고 무엇을 사용할지 정해보는 시간을 가지겠습니다.</p>
+<h1 id="1-ide">1. IDE란 무엇인가</h1>
+<p>IDE가 뭔지 알아보기 위해 네이버 지식백과를 검색해보았습니다.</p>
+<blockquote>
+<p><strong>IDE [Integrated Development Environment]</strong></p>
+</blockquote>
+<p>효율적으로 소프트웨어를 개발하기 위한 통합개발환경 소프트웨어 어플리케이션 인터페이스이다.</p>
+<p>코드 편집기, 디버거, 컴파일러, 인터프리터 등을 포함하고 개발자에게 제공한다.</p>
+<p>위의 설명을 저의 얕은 지식으로 보충 설명 하자면 아래와 같습니다.</p>
+<h3 id="1">1) 코드 편집기</h3>
+<hr/>
+<p>코드를 알록달록 예쁘게, 자동 완성, 자동 들여쓰기, 맞춤법 검사 등의 기능으로 코드 편집을 쉽게 해주는 역할</p>
+<h3 id="2">2) 디버거</h3>
+<hr/>
+<p>코딩을 할 때, 코드가 잘 돌아가는지, 변수에는 어떤 값이 들어가 있는지 모니터링 해주는 역할</p>
+<h3 id="3">3) 컴파일러</h3>
+<hr/>
+<p>작성된 코드 전체를 컴퓨터가 알아먹기 쉬운 언어(기계어)로 번역해서 작동시켜주는 역할</p>
+<h3 id="4">4) 인터프리터</h3>
+<hr/>
+<p>코드를 한 줄 한 줄 실행시켜주는 역할</p>
+<h1 id="2-ide">2. 파이썬 IDE 사용 순위</h1>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>그렇다면 현재 파이썬 유저들이 가장 많이 사용하고 있는 IDE는 무엇일까요?</p>
+<p>한 설문 조사에서 2500개 이상의 응답 (최대 3개 중복 선택)으로 통계를 내보았을 때의 결과는 아래와 같다고 합니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cAnoWV/btqZkqyAecY/R7EO9ulkzjPJ67v6D0nXIk/img.jpg"/></p>
+<p><strong>1위는 아나콘다에서 기본으로 제공하는 웹기반 IDE인 Jupyter Notebook이 차지했네요.</strong></p>
+<p><strong>그리고 2위는 최근 많은 분들이 사용하고 계시는 VS Code가, 3위는 파이썬 전용 IDE인 PyCharm이 차지했습니다.</strong></p>
+<h1 id="3-ide-top3">3. 파이썬 IDE Top3 장단점</h1>
+<p>각 IDE들의 장단점은 아래와 같습니다.</p>
+<h2 id="1-jupyter-notebook">1) Jupyter Notebook</h2>
+<p>아래의 장점으로 인해 주로 데이터 사이언스에 많이 활용됨</p>
+<h4 id="_1"><strong>장점</strong></h4>
+<ol>
+<li>
+<p>코드를 블록 단위로 쪼개어 작성, 실행하여 결과를 바로바로 확인 가능</p>
+</li>
+<li>
+<p>시각화 라이브러리를 이용해 표와 그래프를 즉시 확인 가능</p>
+</li>
+</ol>
+<h4 id="_2"><strong>단점</strong></h4>
+<ol>
+<li>
+<p>디버깅 기능이 없음</p>
+</li>
+<li>
+<p>웹 기반이므로 항상 모든 코드를 처음부터 실행해야 함</p>
+</li>
+<li>
+<p>ipynb라는 전용 확장자를 사용해서 다른 프로그램에서 사용하기가 어려움 (VS Code에서는 되는 것 확인)</p>
+</li>
+</ol>
+<h2 id="2-visual-studio-code">2) Visual Studio Code</h2>
+<p>마이크로 소프트에서 만든 코드 편집기 (태생이 IDE가 아니었음..?!)</p>
+<p>확장 기능의 수도 굉장히 많고, 이를 통해 다양한 종류의 언어를 지원하여 사실상 준 IDE급의 위치에 도달</p>
+<p><strong>장점</strong></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<ol>
+<li>
+<p>완전 무료</p>
+</li>
+<li>
+<p>가볍고 시작 속도가 빠름</p>
+</li>
+<li>
+<p>확장 프로그램 설치를 통해 다양한 언어 코딩 가능 (그 중 하나가 파이썬)</p>
+</li>
+<li>
+<p>한국어 패치 가능</p>
+</li>
+<li>
+<p>코드 편집 UI가 심플하고 알아보기 쉬움</p>
+</li>
+</ol>
+<p><strong>단점</strong></p>
+<p>PyCharm에 비해 파이썬 코딩 시, 기능이 조금 모자란다고 하는데 저는 아직까지 잘 모르겠습니다.</p>
+<h2 id="3-pycharm">3) PyCharm</h2>
+<p><strong>장점</strong></p>
+<ol>
+<li>
+<p>코드별로 파이썬 버전 선택 가능</p>
+</li>
+<li>
+<p>GUI로 편리하게 라이브러리(패키지) 설치 가능</p>
+</li>
+<li>
+<p>파이썬 코딩에 최적화</p>
+</li>
+</ol>
+<p><strong>단점</strong></p>
+<ol>
+<li>
+<p>오직 Python 전용 IDE</p>
+</li>
+<li>
+<p>프로그램이 무거워서 시작할 때 오래걸린다고 함</p>
+</li>
+<li>
+<p>무료 버전인 Community와 유료 버전인 Professional으로 나뉨</p>
+</li>
+</ol>
+<p>&lt;참고자료&gt;</p>
+<p><a href="https://zephyrnet.com/ko/here-are-the-most-popular-python-ides-editors/">zephyrnet.com/ko/here-are-the-most-popular-python-ides-editors/</a></p>
+</div>

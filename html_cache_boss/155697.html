@@ -1,0 +1,60 @@
+<h1 class="page-subject">2) exe 파일 배포</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<h1 id="1pyinstaller">1.PyInstaller란?</h1>
+<p>PyInstaller란 코딩한 파이썬 프로그램을 파이썬에 대해 전혀 모르는 분들도 사용하실 수 있도록 실행 파일(.exe)로 만들어주는 파이썬 패키지입니다.</p>
+<p><strong><pyinstaller 공식="" 문서=""></pyinstaller></strong></p>
+<p>1) Python 3.6이상만 사용 가능</p>
+<p>2) Windows, Mac OS X 및 GNU / Linux에서 사용가능함</p>
+<p>3) Windows에서 컴파일 된 실행파일은 Windows에서만 사용가능 (다른 OS의 경우도 마찬가지)</p>
+<p>4) Windows 8 이상만 지원 / Mac OS X 10.7(Lion) 이상만 지원</p>
+<p><a href="https://pyinstaller.readthedocs.io/en/stable/">https://pyinstaller.readthedocs.io/en/stable/</a></p>
+<h1 id="2">2.설치 방법</h1>
+<p>지금 껏 다른 패키지를 설치하신 분들은 아시겠지만, 아래의 코드는 터미널창에서 실행해 주셔야합니다.</p>
+<pre><code># 설치
+pip install pyinstaller
+
+# 최신 버전으로 업그레이드 (첫 설치 시에는 필요없음)
+pip install --upgrade pyinstaller
+
+# 설치되어 있는지 확인
+pyinstaller --version
+</code></pre>
+<h1 id="3">3.초간단 사용 방법</h1>
+<p>PyInstaller를 사용하기 위해서는 별도의 import가 필요 없습니다. </p>
+<p>사용 시에도 설치했을 때와 마찬가지로 터미널 창에서 입력해주시면 됩니다.</p>
+<pre><code># 가장 기본적인 사용법
+pyinstaller 파이썬 파일명.py
+</code></pre>
+<p>아주 간단한 코드를 작성해서 pyinstaller로 실행파일을 만들어 보았습니다. build 폴더와 dist 폴더가 생기는데 우리가 사용할 exe 파일은 dist 폴더에 생성됩니다.</p>
+<p>여기서 주목하실 점은 너무나도 많은 파일들이 지저분하게(?) 생성된다는 것입니다. 다른 사람에게 배포할 때 이렇게 전달하기엔 좀 별로겠죠?</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bI771u/btq6RbnI1Pr/fx14KFGNKKZWXw6uBfIZC1/img.gif"/></p>
+<p>그래서 아래의 코드를 사용하시길 추천드립니다. PyInstaller에는 여러가지 옵션들이 있지만 딱 알아야하는 것만 설명드리도록 하겠습니다.</p>
+<pre><code>pyinstaller -F -w 파이썬 파일명.py
+</code></pre>
+<p><strong>1) -F, --onefile</strong></p>
+<p>방금 전과 같이 지저분하게 파일이 생성되지 않고, 실행파일 1개만 생성되도록 해주는 설정입니다.</p>
+<p><strong>2) -w, --windowed, --noconsole</strong></p>
+<p>기본적으로 실행 파일을 실행하면 표준 I/O용 콘솔 창(까만 창)을 열도록 되어있는데 이걸 뜨지 않도록 하는 옵션입니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>&lt;깔끔하게 실행파일로 출력됨&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/AHeCr/btq6RLIZROB/MNLhfokLGGbKDgIvMaL8O1/img.png"/></p>
+<p>생성된 실행 파일을 더블클릭해서 실행하면 아래와 같이 print(a+b)의 결과인 15를 출력해주는 것을 보실 수 있습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/brzxoj/btq6RLCdo5x/GeyQGBtFWRcDLZAtQyNTB0/img.gif"/></p>
+<p><strong>&lt;참고&gt; 실행파일 아이콘 변경하기</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cT0ae3/btq6NaDB1W5/jz9rmGdJ7QDoSkWh14WdWK/img.png"/></p>
+<p>출처. 블로그 <it에 취.하.개=""></it에></p>
+<p>실행파일의 아이콘을 바꾸고 싶다면, '--icon = ico 파일의 경로'을 추가해주시면 됩니다.  이미지의 포맷은 꼭 ico여야 합니다.</p>
+<pre><code># ico 파일의 경로에서 ./의 의미는 현재 폴더라는 뜻, 절대경로를 넣어줘도 됨
+
+pyinstaller --icon=./test.ico --onefile 파이썬 파일명.py
+</code></pre>
+<p><strong><icon-icons, 다운로드="" 무료="" 사이트="" 아이콘=""></icon-icons,></strong></p>
+<p><a href="https://icon-icons.com/ko/">https://icon-icons.com/ko/</a></p>
+<h1 id="4">4.용량 줄이는 방법 (추후 반영 예정)</h1>
+</div>

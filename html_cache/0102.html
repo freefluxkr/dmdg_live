@@ -1,0 +1,29 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">'3.1.3 변수를 사용하는 이유'에 나온 원의 넓이와 둘레, 구의 겉넓이를 구하는 코드도 다시 한번 살펴볼까요? 반지름을 입력받는 부분에서 오류가 났습니다. 오류 내용을 직접 해석해 봅시다.</p>
+<div class="highlight">
+<pre>p = <span class="green">3.141592</span>
+r = <span class="gold">input</span>(<span class="red2">'반지름은? '</span>)
+
+result1 = p * r ** <span class="green">2</span>
+result2 = <span class="green">2</span> * p * r
+result3 = <span class="green">4</span> * p * r ** <span class="green">2</span>
+
+print(<span class="red2">'원의 넓이 ='</span>, result1, <span class="red2">'원의 둘레 ='</span>, result2, <span class="red2">'구의 겉넓이 ='</span>, result3)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+반지름은? <span class="cd2">999</span> 
+<span class="red2">---------------------------------------------------------------------------</span> 
+----&gt; 4 result1 = p * r ** 2
+<span class="red2">TypeError</span>: unsupported operand type(s) for ** or pow(): 'str' and 'int'</pre>
+</div>
+<p class="txt bl">4번째 줄에서 오류가 발생했습니다. 마지막 줄의 오류 내용을 해석해 보면 “타입오류: <span class="cd">**</span> 또는 거듭제곱에서 지원하지 않는 연산자 타입: ‘문자열’과 ‘정수형’”입니다. 문자와 숫자 간에는 제곱 연산이 불가능하다는 뜻입니다. 그럼 <span class="cd">p * r ** 2</span> 중 어떤 변수가 <span class="cd">str</span>(문자열)일까요? 변수 <span class="cd">p</span>는 프로그램 첫 줄에서 실수 형태의 원주율을 저장했기 때문에 <span class="cd">float</span>입니다. 그러면 <span class="cd">r</span>이 <span class="cd">str</span>이겠네요. 그런데 조금 이상하죠. 입력 값으로 999를 넣었으니 <span class="cd">int</span>(정수) 타입이어야 하는데 왜 <span class="cd">str</span>일까요? 다음 코드로 확인해 봅시다.</p>
+<div class="highlight">
+<pre>a = <span class="gold">input</span>()
+<span class="gold">print</span>(type(a))</pre>
+</div>
+</div>
+</section>
+</section>

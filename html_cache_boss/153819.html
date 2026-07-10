@@ -1,0 +1,104 @@
+<h1 class="page-subject">1) zipfile 압축/해제</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>오늘은 파이썬을 이용해 zip 파일을 만드는 방법에 대해 알아보겠습니다. </p>
+<p>사무자동화를 할 때에 압축된 폴더를 다운로드 받거나, 압축해서 업로드 해야할 때를 위한 패키지를 소개드릴게요.</p>
+<hr/>
+<h1 id="1">1. 관련 모듈 불러오기</h1>
+<p>zipfile은 파이썬 표준 라이브로리에 포함된 모듈입니다.</p>
+<p>따로 설치할 필요는 없고 import로 불러와주시면 됩니다.</p>
+<pre><code>import zipfile
+import os
+</code></pre>
+<p><a href="https://docs.python.org/ko/3/library/zipfile.html">파이썬 표준 라이브러리_zipfile 공식 문서</a></p>
+<h1 id="2">2. 압축하기</h1>
+<p>바로 압축하는 방법에 대해서 알아보겠습니다. 원리는 간단합니다.</p>
+<p><strong>1단계. 압축하고자 하는 zip 파일 생성</strong></p>
+<p><strong>2단계. 파일에 넣고 싶은 파일 write</strong></p>
+<p><strong>3단계. zip 파일 닫기</strong></p>
+<p>이 3단계를 하나의 파일을 압축하는 경우와 여러개의 파일을 압축하는 경우 2가지로 나눠서 설명드려 보겠습니다.</p>
+<h2 id="1_1">1) 하나의 파일 압축하기</h2>
+<p><strong>1단계. 압축하고자 하는 zip 파일 생성</strong> <strong>(꼭 os.chdir로 현재 경로를 바꾸어 줄 것)</strong></p>
+<p>먼저 os.chdir( )로 현재 작업할 경로를 다시 설정해줄 필요가 있습니다. 그러지 않고 절대 경로로 할 시, 의도와 다르게 가장 상위 디렉토리(폴더)부터 모든 디렉토리가 압축됩니다.</p>
+<p>또한 zip 파일 생성을 위해 폴더를 따로 만들어 줄 필요가 없습니다. 곧 바로 zip 파일이 생성되는 것이니깐요.</p>
+<pre><code>os.chdir('/Users/username/Desktop/zipfile 패키지 테스트 폴더')
+
+my_zip = zipfile.ZipFile('코딩유치원.zip', 'w')
+</code></pre>
+<p><strong>&lt;실행 결과&gt; 코딩유치원.zip 생성됨</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/dhhUrs/btq8GRnU9Nc/0uP6DIeVgj4b2nFeiukEQK/img.png"/></p>
+<p>코딩유치원 폴더는 따로 만들어 줄 필요 없음</p>
+<p>현재의 상태(zip 파일 close 안 해줌)에서는 아래와 같이 zip 파일을 열 수가 없다는 점 참고바랍니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bYJfzY/btq8F93EcP6/r4nGUYdIZjTR0A3noEmDyK/img.png"/></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<hr/>
+<p><strong>2단계. 생성한 zip 파일에 넣고자 하는 파일 입력하기</strong></p>
+<p>아까 설정해준 현재 작업 경로에 test1.txt를 생성해두고 그것을 write 해줍니다.</p>
+<p>참고로 현재 작업 폴더가 아닌 곳의 test1 파일을 write( '절대경로')로 입력할 시, 이상하게 작동하니 주의하세요.</p>
+<pre><code># 현재 작업 경로에 test1.txt 파일이 있어야 함
+my_zip.write('test1.txt')
+</code></pre>
+<p><strong>&lt;실행 결과&gt; 코딩유치원.zip 안에 test1.txt 들어감</strong></p>
+<p>현재 상태에서도 zip 파일을 더블클릭해서 열어보려 해도 아래와 같은 경고창이 뜨면서 확인할 수가 없습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/on4sR/btq8JtTE35v/kMym14G3ah7yUtvIxSFfW1/img.png"/></p>
+<hr/>
+<p><strong>3단계. zip 파일 닫기</strong></p>
+<p>zip 파일 안에 원하는 파일을 모두 넣으셨다면 close( ) 메소드를 통해 zip를 닫아주어야합니다.</p>
+<pre><code>my_zip.close()
+</code></pre>
+<p><strong>&lt;실행 결과&gt; 코딩유치원.zip을 더블 클릭하여 압축해제 시</strong></p>
+<p>의도와 다르게 가장 상위 디렉토리(폴더)부터 모든 디렉토리가 압축된 것을 확인 할 수 있습니다. 다른 방법이 필요하겠습니다.</p>
+<p><strong>&lt;주의!&gt;</strong></p>
+<p>만약 경로를 chdir( )로 바꾸어 주지 않고 절대 경로를 사용하여 압축할 시 아래와 같이 의도치 않은 압축 파일이 생성됩니다.</p>
+<pre><code>my_zip = zipfile.ZipFile('/Users/username/Desktop/zipfile 패키지 테스트 폴더/코딩유치원.zip', 'w')
+
+my_zip.write('/Users/sangwoo/Desktop/zipfile 패키지 테스트 폴더/코딩유치원/test1.txt')
+
+my_zip.close()
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/obBH5/btq8Jjcuygh/EH2qQMh9239EAiWP0buSJk/img.gif"/></p>
+<h2 id="2_1">2) 여러개의 파일 압축하기</h2>
+<p>여러개의 파일을 한꺼번에 압축하려면 with 문과 for문을 함께 사용해 주시면 됩니다.</p>
+<p>아래의 코드를 보시고 직접 한 번 해보시기 바랍니다. 그 외 개념은 위에서 했던 것과 같으므로 자세한 설명은 생략하도록 하겠습니다.</p>
+<pre><code>file_list = ['코딩유치원.txt', '투손플레이스.txt', '고양이미로.xlsx']
+
+with zipfile.ZipFile("코딩은 코딩유치원이지ㅎㅎ.zip", 'w') as my_zip:
+
+    for i in file_list:
+
+        my_zip.write(i)
+
+    my_zip.close()
+</code></pre>
+<p><strong>&lt;실행 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bjslVA/btq8Jte4JeE/BZEJWEvfjAkHvDuXlKuZP0/img.gif"/></p>
+<h1 id="3">3. 압축해제</h1>
+<p>압축을 해제 하는 방법은 크게 2가지가 있습니다. 여러 파일 중 1개만 골라서 압축해제하는 방법과 전체를 다 압축해제하는 방법입니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h2 id="1_2">1) 개별파일 압축해제</h2>
+<p><strong>ZipFile.extract(member,  path=None,  pwd=None)</strong></p>
+<p>path에는 추출할 zip 폴더의 경로를 넣어줄 수 있으며, 넣어주지 않으면 현재 작업 폴더로 지정한 파일을 추출합니다.  member는 파일명.확장자명이며, pwd는 암호화된 파일에 사용되는 비밀번호입니다.</p>
+<pre><code>zipfile.ZipFile('코딩은 코딩유치원이지ㅎㅎ.zip').extract('코딩유치원.txt')
+</code></pre>
+<p><strong>&lt;실행 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/FUSSM/btq8HUq0hd2/l3VKjrwMjfABKIbYIT0dk0/img.gif"/></p>
+<h2 id="2_2">2) 모든파일 압축해제</h2>
+<p><strong>ZipFile.extractall(path=None,  members=None,  pwd=None)</strong></p>
+<p>path에는 추출할 zip 폴더의 경로를 넣어줄 수 있으며, 넣어주지 않으면 현재 작업 폴더로 지정한 파일을 추출합니다. members에는 리스트 형식의 '파일명'을 넣어주시면 선택적으로 여러개의 파일을 압축해제 가능하며, pwd는 암호화된 파일에 사용되는 비밀번호입니다.</p>
+<pre><code># 전체를 압축해제 하고 싶을 때
+zipfile.ZipFile('코딩은 코딩유치원이지ㅎㅎ.zip').extractall()
+
+# 전체가 아닌 몇 개만 압축해제 하고 싶을 때
+zipfile.ZipFile('코딩은 코딩유치원이지ㅎㅎ.zip').extractall(members = ['투손플레이스.txt','고양이미로.xlsx'])
+</code></pre>
+</div>

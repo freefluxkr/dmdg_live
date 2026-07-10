@@ -1,0 +1,13 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>7.1.7 스태시 복사</h3>
+<p class="x00--">스태시는 브랜치 작업들을 임시로 저장할 때 사용합니다. 또 임시 저장된 작업을 스태시 명령 이전의 브랜치 상태로 되돌려 놓습니다. 스태시를 사용한 저장과 복원은 서로 다른 브랜치에도 가능합니다. 반드시 이전에 실행한 브랜치와 같은 브랜치에서 할 필요는 없습니다. </p>
+<p class="x00--">앞에서 실습한 것처럼 다른 브랜치에서 스태시를 실행한 후 새로운 <span class="A------">test</span> 브랜치를 생성하여 스태시를 복원했습니다. <span class="x3---------">스태시 스택에 저장된 항목들은 어느 브랜치에서나 복원이 가능합니다.</span> <span class="A------ x3-------1">apply</span> 옵션은 스택에 저장된 항목을 불러와 현재 브랜치로 복원합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git stash apply</p>
+</div>
+<p class="x00--">스태시 복원은 <span class="A------ x3-------1">pop</span>, <span class="A------ x3-------1">apply</span> 명령어 <span class="A------">2</span>개를 제공합니다. 두 명령어에는 차이가 있습니다. 스태시의 <span class="A------ x3-------1 char-style-override-24">pop</span><span class="x3---------"> 명령어는 스택 내용을 복원한 후 스택 목록에서 자동으로 삭제</span>합니다. 즉, <span class="A------ x3-------1">pop</span> 명령어는 스택 내용을 워킹 디렉터리로 <span class="x3---------">이동</span>하는 것과 같습니다. 하지만 스태시 복원을 하고 난 후 스택 목록을 삭제하고 싶지 않을 때도 있습니다. <span class="x3---------">이때</span> <span class="A------ x3-------1 char-style-override-24">apply</span> <span class="x3---------">옵션을 사용합니다. 스택 목록을 읽은 후 자동으로 삭제하지 않기</span> 때문에 반복적으로 스택에서 스태시 내용을 읽어 올 수 있습니다. <span class="A------ x3-------1">apply</span> 명령어는 스태시 내용을 워킹 디렉터리로 <span class="x3---------">복사</span>하는 것과 같습니다. </p>
+</div>
+</section>
+</section>

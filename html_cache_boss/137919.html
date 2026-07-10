@@ -1,0 +1,52 @@
+<h1 class="page-subject">1) 크롬과 크롬 드라이버</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>오늘은 웹 크롤링을 위한 준비 단계로 크롬과 크롬드라이버를 설치해보겠습니다.</p>
+<h1 id="1">1. 크롬을 사용하는 이유</h1>
+<p>웹크롤링을 할 때는 크롬 브라우저를 사용하는 것이 아주 편합니다.</p>
+<p>그 이유는 아래와 같습니다.  </p>
+<h3 id="1-f12-html">1) F12를 눌렀을 때 오른쪽에 출력되는 HTML 문서 (정식명칭: 개발자 도구)</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137919/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-16_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_2.56.22.png"/></p>
+<h3 id="2">2) 컴퓨터가 크롬 브라우저를 제어할 수 있게 해주는 크롬 드라이버</h3>
+<p>크롬의 설치방법은 정말 간단합니다.</p>
+<p>구글이나 네이버에서 '크롬'을 검색하시고 가장 위에 나오는 결과를 클릭해주시면 자연스럽게 크롬 설치파일을 다운로드하는 링크로 연결됩니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137919/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-16_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_3.00.07.png"/></p>
+<p>다운로드 파일을 받고 설치를 진행해주시면 되겠습니다.  </p>
+<h1 id="2_1">2. 크롬 버전 확인 방법</h1>
+<p>크롬을 설치하셨다면 버전을 확인할 필요가 있습니다. 크롬 드라이버를 다운로드  받을 때 크롬의 버전과 일치하는 것을 받아줘야 정상 작동하니까요.</p>
+<p>크롬 창을 열면 우측상단에 (...) 표시가 보이실겁니다. </p>
+<p>저는 글 쓰는 현재 크롬의 버전이 최신이 아니라서 업데이트라는 붉은색 글씨가 함께 나오네요.</p>
+<p>클릭해주시면 아래와 같이 창이 나오는데 도움말 - Chrome 정보를 클릭해 주세요.  </p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/U2wNk/btq0Ub0U8mu/kj92UY8oXNsiBkHOlwwpKK/img.png"/></p>
+<p>클릭하시면 새로운 창이 뜨면서 아래와 같이 나옵니다. </p>
+<h3 id="_1">최신 버전이 아니었을 때</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cjMcrB/btq0SkK5xgH/AWUE8ZTIK9T3bWCMdcFUP0/img.png"/></p>
+<p>앞서 언급 하였 듯이 최신버전이 아니라서 아래와 같이 자동 업데이트된 후, 크롬을 다시 시작하라고 나왔습니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>이 버전 (위의 사진에서는 89.0.4389.82)을 기억하고 다음 단계로 넘어가 보겠습니다.</p>
+<h3 id="_2">최신 버전이었을 때</h3>
+<p>방금 크롬을 처음 설치하신분들은 최신버전일테니 분들은 아래의 두번째 사진처럼 최신버전이라고 나올거예요.</p>
+<p>마찬가지로 버전을 기억하고 다음 단계로 넘어갑니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cZ11rw/btq0SGNUa7S/dAFPaIHyXOjprWyLEkbrf1/img.png"/></p>
+<blockquote>
+<h3 id="tip">[Tip]</h3>
+<p>한동안 웹크롤링을 하지 않다가 실행하시면 되던 코드가 실행되지 않을 때가 있습니다.</p>
+<p>그 때는 크롬 버전에 비해 크롬 드라이버가 예전 것일 확률이 높으니, 크롬 드라이버를 최신 것으로 다시 다운받아서 교체해주시면
+됩니다.</p>
+</blockquote>
+<h1 id="3">3. 크롬드라이버 설치 방법</h1>
+<p>뒤에서 배울 selenium이라는 패키지가 2022년 4월에 4.6 버전으로 업데이트 되기 전까지는 크롬 드라이버를 매번 크롬 버전에 맞춰서 설치해주어야 했지만, 더 이상 그런 번거로운 일을 하지 않아도 됩니다. </p>
+<p>따라서 예전에 설명드렸던 크롬 드라이버 설치에 대한 내용은 더 이상 필요 없어 졌기 때문에 삭제하였습니다.</p>
+<p>다만, 4.6 보다 더 오래된 버전을 사용하시는 경우에는 다음과 같은 에러가 출력될 수 있습니다.</p>
+<pre><code>selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 106
+
+Current browser version is 116.0.5845.111 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+</code></pre>
+<p>이런 경우에는 selenium을 최신 버전으로 업그레이드 한 후, VSCODE를 종료했다가 실행하셔야 합니다. 최신 버전 업그레이드는 터미널 창이나 Jupyter의 셀에서 아래 명령어를 입력하시면 됩니다.</p>
+<p>pip install --upgrade selenium</p>
+</div>

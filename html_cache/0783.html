@@ -1,0 +1,98 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 텍스트 레이블에 사용 가능한 옵션</p>
+<p class="txt bl">레이블로 텍스트를 나타낼 때 글꼴, 글씨 크기, 색상, 테두리 모양 등 다양한 옵션을 추가할 수 있습니다. 주요 옵션은 다음과 같습니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 15-2</span> 주요 옵션</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w30">
+<p class="txts dm">옵션</p>
+</td>
+<td class="w70">
+<p class="txts dm">설명</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">font=('글꼴', 크기)</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">글꼴과 크기 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">fg='색상'</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">텍스트 색상 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">bg='색상'</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">텍스트 바탕색 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">relief=테두리모양</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 테두리 모양 설정</p>
+<p class="txts dl"><span class="cd">flat</span>(테두리 없음, 기본값), <span class="cd">solid</span>(굵은 테두리), <span class="cd">groove</span>(움푹 파인 테두리), <span class="cd">ridge</span>(돌출된 테두리), <span class="cd">raised</span>(레이블 전체가 돌출), <span class="cd">sunken</span>(레이블 전체가 파임)</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">borderwidth=테두리두께</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 테두리 두께 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">width=너비</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 너비 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">height=높이</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 높이 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">anchor=정렬</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 내부 정렬 방법 설정(<span class="cd">center</span>, <span class="cd">e</span>, <span class="cd">w</span>, <span class="cd">s</span>, <span class="cd">n</span>, <span class="cd">se</span>, <span class="cd">sw</span>, <span class="cd">ne</span>, <span class="cd">nw</span>)</p>
+<div class="w60c"><img alt="" class="w100" src="https://thebook.io/img/080251/652_2.jpg"/></div>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">다음처럼 레이블의 객체를 생성할 때 필요한 옵션을 추가합니다.</p>
+<div class="highlight">
+<pre>label1 = Label(root, text=<span class="red2">'Hello'</span>, font=(<span class="red2">'Malgun Gothic'</span>, <span class="green">20</span>), fg=<span class="red2">'blue'</span>, bg=<span class="red2">'gray'</span>, width= <span class="green">20</span>, height=<span class="green">5</span>, anchor=<span class="red2">'se'</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/653.jpg"/></div>
+</div>
+<p class="txt bl">더 많은 옵션은 <a href="https://tkdocs.com/shipman/label.html">https://tkdocs.com/shipman/label.html</a> 문서를 참고하세요.</p>
+</div>
+</div>
+</section>
+</section>

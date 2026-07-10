@@ -1,0 +1,119 @@
+<h1 class="page-subject">06-6 시저 암호 만들기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>이번에는 문자열을 암호화하는 시저 암호 프로그램을 만들어 보자. 시저 암호는 고대 로마의 율리우스 카이사르(시저)가 사용했다고 알려진 암호 방식으로, 알파벳을 일정한 수만큼 밀어서 다른 글자로 바꾸는 것이다. 예를 들어 A를 3칸 밀면 D가 되고, B는 E가 된다.</p>
+<pre><code class="language-plaintext">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z (원본)
+D E F G H I J K L M N O P Q R S T U V W X Y Z A B C (3칸)
+</code></pre>
+<p>이 방식대로라면 "PYTHON"은 3칸 밀어 "SBWKRQ"이 된다.</p>
+<ul>
+<li>필요한 기능은? 알파벳을 원하는 칸 수만큼 밀어 암호화하기</li>
+<li>입력받는 값은? 문자열, 밀 칸 수</li>
+<li>출력하는 값은? 암호화된 문자열</li>
+</ul>
+<p><strong>1.</strong> 먼저 알파벳 한 글자를 원하는 칸 수만큼 미는 방법을 생각해 보자. 파이썬에서 문자를 숫자로 바꾸려면 ord 함수를 사용하고, 숫자를 다시 문자로 바꾸려면 chr 함수를 사용한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; ord('A')
+65
+&gt;&gt;&gt; chr(65)
+'A'
+&gt;&gt;&gt; chr(65 + 3)
+'D'
+</code></pre>
+<p>ord('A')는 65이고 여기에 3을 더한 68은 chr(68), 즉 'D'가 된다. 이것이 시저 암호의 핵심 원리이다.</p>
+<p><strong>2.</strong> 이 원리를 이용해 문자열 전체를 암호화하는 코드를 작성해 보자.</p>
+<pre><code class="language-python"># c:/doit/caesar.py
+
+word = "PYTHON"
+key = 3
+result = ""
+
+for char in word:
+    result += chr(ord(char) + key)
+
+print(result)
+</code></pre>
+<p>실행하면 다음과 같이 출력된다.</p>
+<pre><code class="language-plaintext">SBWKRQ
+</code></pre>
+<p>for문으로 문자열의 각 글자를 순회하면서 ord로 숫자로 바꾸고, key만큼 더한 후, 다시 chr로 문자로 변환하여 result에 이어 붙였다.</p>
+<p><strong>3.</strong> 그런데 여기에 한 가지 문제가 있다. 만약 'X'를 3칸 밀면 어떻게 될까?</p>
+<pre><code class="language-python">&gt;&gt;&gt; chr(ord('X') + 3)
+'['
+</code></pre>
+<p>'X'에서 3칸 밀면 알파벳 범위를 벗어나 <code>[</code> 같은 엉뚱한 문자가 나온다. Z 다음에는 다시 A로 돌아가야 하는데, 지금 코드는 그렇게 동작하지 않는 것이다. 이 문제를 어떻게 해결할 수 있을까?</p>
+<p>핵심 아이디어는 알파벳을 0부터 25까지의 숫자로 바꿔 생각하는 것이다. A=0, B=1, C=2, ..., Z=25로 놓으면 알파벳 26개를 숫자로 표현할 수 있다. 이렇게 하면 나머지 연산자 <code>%</code>를 사용해 Z를 넘어갈 때 다시 A로 돌아오게 할 수 있다.</p>
+<p>단계별로 살펴보자.</p>
+<p>먼저 알파벳을 0~25 숫자로 바꾸는 방법이다. ord('A')는 65이므로, ord(char) - ord('A')를 하면 A는 0, B는 1, ..., Z는 25가 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; ord('A') - ord('A')  # A → 0
+0
+&gt;&gt;&gt; ord('C') - ord('A')  # C → 2
+2
+&gt;&gt;&gt; ord('X') - ord('A')  # X → 23
+23
+</code></pre>
+<p>다음으로 여기에 밀 칸 수를 더하고 26으로 나눈 나머지를 구한다. 26으로 나눈 나머지를 구하면 결과가 항상 0~25 사이가 되므로 알파벳 범위를 절대 벗어나지 않는다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; (2 + 3) % 26   # C(2)를 3칸 밀면 → 5 → F
+5
+&gt;&gt;&gt; (23 + 3) % 26  # X(23)를 3칸 밀면 → 26 % 26 → 0 → A
+0
+&gt;&gt;&gt; (24 + 3) % 26  # Y(24)를 3칸 밀면 → 27 % 26 → 1 → B
+1
+</code></pre>
+<p>X(23)에 3을 더하면 26인데, 26 % 26은 0이므로 A가 된다. Y(24)에 3을 더하면 27인데, 27 % 26은 1이므로 B가 된다. 이렇게 Z를 넘어가면 자연스럽게 A부터 다시 시작한다.</p>
+<p>마지막으로 이 숫자를 다시 알파벳으로 바꾸려면 ord('A')를 더한 후 chr로 변환하면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; chr(0 + ord('A'))   # 0 → A
+'A'
+&gt;&gt;&gt; chr(5 + ord('A'))   # 5 → F
+'F'
+</code></pre>
+<p>이 과정을 코드로 정리하면 다음과 같다.</p>
+<pre><code class="language-python"># c:/doit/caesar.py
+
+word = "PYTHON"
+key = 3
+result = ""
+
+for char in word:
+    [[MARK]]num = ord(char) - ord('A')       # 알파벳을 0~25 숫자로 변환
+    shifted = (num + key) % 26        # 밀고 26으로 나눈 나머지
+    result += chr(shifted + ord('A')) # 다시 알파벳으로 변환[[/MARK]]
+
+print(result)
+</code></pre>
+<pre><code class="language-plaintext">SBWKRQ
+</code></pre>
+<p>결과는 2단계와 동일하지만, 이제 X, Y, Z처럼 끝쪽 알파벳도 올바르게 처리된다.</p>
+<p><strong>4.</strong> 이번에는 코드를 함수로 만들고, 사용자가 직접 문자열과 밀 칸 수를 입력할 수 있도록 완성해 보자.</p>
+<pre><code class="language-python"># c:/doit/caesar.py
+
+[[MARK]]def caesar(word, key):
+    result = ""
+    for char in word:
+        num = ord(char) - ord('A')
+        shifted = (num + key) % 26
+        result += chr(shifted + ord('A'))
+    return result
+
+word = input("문자열을 입력하세요: ")
+key = int(input("밀 칸 수를 입력하세요: "))
+
+print(f"암호화: {caesar(word, key)}")[[/MARK]]
+</code></pre>
+<p>3단계에서 작성한 암호화 로직을 caesar 함수로 분리했다. 이렇게 하면 같은 코드를 여러 번 사용할 수 있어 편리하다.</p>
+<p><strong>5.</strong> 이제 프로그램을 실행해 보자. 다음은 실행 예시이다.</p>
+<pre><code class="language-plaintext">C:\doit&gt;python caesar.py
+문자열을 입력하세요: HAPPY
+밀 칸 수를 입력하세요: 3
+암호화: KDSSB
+</code></pre>
+<p>그렇다면 암호화된 "KDSSB"를 다시 원래 문자열로 되돌리려면 어떻게 해야 할까? 간단하다. 3칸 밀어서 암호화했으니, -3칸(즉, 반대 방향으로 5칸)을 밀면 원래 문자열이 된다.</p>
+<pre><code class="language-plaintext">C:\doit&gt;python caesar.py
+문자열을 입력하세요: KDSSB
+밀 칸 수를 입력하세요: -3
+암호화: HAPPY
+</code></pre>
+<p>이처럼 암호화할 때 사용한 칸 수에 마이너스를 붙여 다시 암호화하면 원래 문자열로 복호화할 수 있다. 친구에게 암호화된 문자열과 밀 칸 수만 알려주면, 같은 프로그램으로 비밀 메시지를 주고받을 수 있다.</p>
+<blockquote>
+<p><strong>참고:</strong> 이 프로그램은 더 발전시킬 수 있다. 예를 들어 A-Z가 아닌 문자를 입력했을 때의 오류 처리, 공백을 입력했을 때 공백을 그대로 유지하는 기능 등을 추가할 수 있다.</p>
+</blockquote>
+</div>

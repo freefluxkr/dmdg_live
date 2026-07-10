@@ -1,0 +1,75 @@
+<h1 class="page-subject">12-4. hermes proxy — OAuth 프로바이더용 로컬 프록시</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p><code>hermes proxy</code>는 OAuth로 로그인하는 프로바이더를 Aider나 Open WebUI 같은 외부 도구에서 쓸 수 있게 해 주는 로컬 프락시입니다.</p>
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: 이 페이지는 v0.14.0 기준입니다. 공식 가이드와 소스 코드를 바탕으로 정리했지만, 아직 직접 실행해 보지는 않았습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">프락시 시작하기</a></li>
+<li><a href="#_2">활용 시나리오</a></li>
+<li><a href="#_3">작동 방식</a></li>
+</ul>
+</div>
+<h3 id="_1">프락시 시작하기</h3>
+<p>프로바이더에 따라 OAuth 로그인만 제공하고 별도 API 키를 발급하지 않는 경우가 있습니다. 이런 프로바이더는 API 키를 요구하는 외부 도구에서 바로 쓸 수 없는데, <code>hermes proxy</code>가 그 사이를 연결합니다.</p>
+<p>v0.14.0에는 Nous Portal 어댑터만 포함되어 있습니다. Nous Portal은 Hermes Agent를 만든 Nous Research의 추론 서비스입니다. 어댑터 인터페이스(<code>UpstreamAdapter</code>)가 공개되어 있어 다른 OAuth 프로바이더도 추가할 수 있는 구조이지만, SuperGrok 등 다른 어댑터는 아직 없습니다.</p>
+<p>먼저 <code>hermes login nous</code>로 Nous Portal에 로그인합니다. 명령을 실행하면 브라우저가 열리고, 안내에 따라 인증하면 됩니다.</p>
+<pre><code class="language-bash">hermes login nous                         # Nous Portal OAuth 로그인
+</code></pre>
+<p>로그인을 마친 뒤 프락시를 시작합니다.</p>
+<pre><code class="language-bash">hermes proxy start                        # 기본 포트 8645에서 시작
+hermes proxy start --port 8080            # 포트 바꾸기
+hermes proxy start --host 0.0.0.0         # 같은 LAN의 다른 기기에서도 접근 허용
+hermes proxy status                       # 프로바이더 연결 상태 확인
+hermes proxy providers                    # 프락시로 연결할 수 있는 프로바이더 목록
+</code></pre>
+<blockquote>
+<p>⚠️ <strong>LAN 노출 시 주의</strong>: <code>--host 0.0.0.0</code>으로 열면 같은 네트워크의 다른 사람이 이 프락시를 통해 내 계정으로 요청을 보낼 수 있습니다. 프락시 자체에는 별도 인증이 없으므로, 신뢰할 수 있는 네트워크에서만 사용하세요.</p>
+</blockquote>
+<p><code>hermes proxy providers</code>로 현재 버전에서 지원하는 프로바이더를 확인할 수 있습니다. <code>--provider</code> 옵션으로 프로바이더를 지정할 수 있으며, 생략하면 기본값인 <code>nous</code>가 선택됩니다.</p>
+<h3 id="_2">활용 시나리오</h3>
+<p>OpenAI 호환 API를 지원하는 외부 도구에서 API Base URL을 프락시 주소(<code>http://localhost:8645/v1</code>)로 지정하면 됩니다. API 키 입력란에는 <code>dummy</code> 같은 임의 문자열을 넣습니다. 프락시가 OAuth 토큰을 대신 붙여 주므로 이 값은 실제 인증에 쓰이지 않습니다.</p>
+<pre><code class="language-yaml"># 예: Aider에서 hermes proxy 경유로 사용
+# .aider.conf.yml
+openai-api-base: http://localhost:8645/v1
+openai-api-key: dummy
+model: &lt;모델명&gt;          # hermes proxy providers 또는 /v1/models에서 확인
+</code></pre>
+<pre><code class="language-bash"># 예: 환경변수로 설정
+# 도구에 따라 OPENAI_API_BASE 대신 OPENAI_BASE_URL을 요구할 수 있습니다.
+export OPENAI_API_BASE=http://localhost:8645/v1
+export OPENAI_API_KEY=dummy
+</code></pre>
+<h3 id="_3">작동 방식</h3>
+<p>프락시는 Hermes Agent의 대화 흐름을 거치지 않습니다. 외부 도구의 요청에 OAuth 토큰만 붙여서 프로바이더의 추론 서버로 그대로 전달합니다.</p>
+<p>프락시가 받아 주는 API 경로는 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/v1/chat/completions</code></td>
+<td>채팅 (스트리밍 포함)</td>
+</tr>
+<tr>
+<td><code>/v1/completions</code></td>
+<td>텍스트 완성</td>
+</tr>
+<tr>
+<td><code>/v1/embeddings</code></td>
+<td>임베딩</td>
+</tr>
+<tr>
+<td><code>/v1/models</code></td>
+<td>모델 목록</td>
+</tr>
+</tbody>
+</table>
+<p>그 밖의 경로(<code>/v1/images/generations</code>, <code>/v1/audio/speech</code> 등)로 요청하면 404로 응답합니다. X 검색, TTS, 이미지 생성 같은 Hermes Agent의 도구는 에이전트 안에서만 실행되며, 이 프락시를 통해 사용할 수 없습니다.</p>
+</div>

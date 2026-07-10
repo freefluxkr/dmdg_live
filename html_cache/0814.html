@@ -1,0 +1,30 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">엔트리 앞에 레이블을 추가해서 입력칸에 이름을 적도록 안내합니다. 입력칸에 텍스트를 입력해 보면 잘 입력됩니다.</p>
+<p class="txt bl">입력된 텍스트를 프로그램으로 읽어 들여 봅시다. 엔트리에 입력된 값을 가져올 때는 <span class="cd">get()</span> 함수를 사용합니다. 버튼 하나를 추가하고, 버튼이 클릭될 때 엔트리에 입력된 값을 가져와 보겠습니다.</p>
+<div class="highlight">
+<pre><span class="cd2 blue2">def</span> <span class="cd2 gold">entry_value</span><span class="cd2">():</span>
+    <span class="cd2 gold">print</span><span class="cd2">(ent.get())</span> <span class="green"># 함수 실행 시 get()으로 ent의 값을 읽어 들여 출력함</span>
+
+root = Tk()
+root.title(<span class="red2">'entry'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+lbl = Label(root, text=<span class="red2">'이름 : '</span> , width=<span class="green">10</span>)
+lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+ent = Entry(root, width=<span class="green">25</span>)
+ent.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+<span class="cd2">btn = Button(root, text=</span><span class="cd2 red2">'확인'</span><span class="cd2">, width=</span><span class="cd2 green">0</span><span class="cd2">, command=entry_value)</span>
+<span class="cd2">btn.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">2</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/680_1.jpg"/></div>
+<pre>James</pre>
+</div>
+</div>
+</section>
+</section>

@@ -1,0 +1,27 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3 class="txt1 dm" id="sigil_toc_id_24"><span class="purple">2.4.3</span> 비정상 값 검증</h3>
+<p class="txt bl">이번에는 <span class="cd">Item</span> 모델에 비정상 값을 전달했을 때 <span class="cd">Pydantic</span>이 어떻게 검증하고 오류를 발생시키는지 살펴보겠습니다.</p>
+<div class="ind10">
+<table>
+<tbody>
+<tr>
+<td class="tb_gray">
+<p class="txts dm"><img alt="" class="h07 mb01" src="https://thebook.io/img/080491/icon_terminal.png"/> CONSOLE</p>
+</td>
+</tr>
+<tr>
+<td>
+<pre>&gt;&gt;&gt; data = {"name": 123, "price": "abc"} <span class="purple">--- ➊</span>
+&gt;&gt;&gt; new_item = Item(**data) <span class="purple">--- ➋</span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="txt bl s11_11"><span class="purple">➊</span> <span class="cd">data</span> 딕셔너리에 새 <span class="cd">Item</span> 객체를 만들 때 필요한 값을 넣습니다. 검증을 통과하지 못하도록 <span class="cd">name</span> 필드에 문자열이 아닌 숫자(<span class="cd">123</span>)를, <span class="cd">price</span> 필드에 정수가 아닌 문자열(<span class="cd">"abc"</span>)을 넣습니다.</p>
+<p class="txt bl s11_11"><span class="purple">➋</span> 이번에는 검증할 값이 올바르지 않기 때문에 <span class="cd">Item(**data)</span>를 실행하면 <span class="cd">Pydantic</span>이 타입 오류를 감지하고 <span class="cd">ValidationError</span>를 발생시킵니다.</p>
+</div>
+</section>
+</section>

@@ -1,0 +1,70 @@
+<h1 class="page-subject">01-4. 에이전트의 골디락스 존</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<div class="toc">
+<ul>
+<li><a href="#_1">두 판단 축</a></li>
+<li><a href="#_2">세 구간으로 나눠 보기</a><ul>
+<li><a href="#_3">결정적 파이프라인 — 에이전트가 필요 없는 작업</a></li>
+<li><a href="#_4">골디락스 존 — 에이전트가 빛나는 작업</a></li>
+<li><a href="#_5">고난도 주관 영역 — 에이전트의 한계</a></li>
+</ul>
+</li>
+<li><a href="#_6">비용 관점</a></li>
+<li><a href="#_7">정리</a></li>
+<li><a href="#_8">참고 자료</a></li>
+</ul>
+</div>
+<p>Hermes Agent가 무엇이고, 왜 쓰고, 다른 에이전트와 어떻게 다른지를 살펴봤습니다. 남은 질문은 <strong>"어디에 쓸 때 효과적인가"</strong>입니다.</p>
+<p>AI 에이전트는 만능이 아닙니다. 너무 단순한 작업에 쓰면 낭비이고, 너무 복잡한 작업에 쓰면 한계에 부딪힙니다. 에이전트가 가장 빛나는 구간 — 골디락스 존 — 을 이해하면, 시간과 비용을 아낄 수 있습니다.</p>
+<h3 id="_1">두 판단 축</h3>
+<p>작업을 어디에 둘지 판단할 때 다음 두 축을 봅니다.</p>
+<ol>
+<li><strong>중간 판단이 필요한가?</strong> — 단계가 고정돼 있고 분기가 없으면 에이전트가 필요 없습니다.</li>
+<li><strong>완료를 객관적으로 확인할 수 있는가?</strong> — 완료 기준이 주관적이면 에이전트가 끝났다고 판정한 결과를 사람이 다시 검토해야 하므로 자율 실행이 어렵습니다.</li>
+</ol>
+<p>두 축을 조합하면 작업이 세 구간으로 나뉩니다.</p>
+<h3 id="_2">세 구간으로 나눠 보기</h3>
+<h4 id="_3">결정적 파이프라인 — 에이전트가 필요 없는 작업</h4>
+<p>입력과 출력이 고정된 반복 작업입니다. "RSS 피드를 읽어서 정해진 템플릿으로 요약하고 슬랙에 올리기"처럼 단계가 정해져 있고, 중간에 판단이 끼어들 여지가 없습니다.</p>
+<p>이런 작업은 n8n 같은 워크플로 자동화 도구나 파이썬 스크립트, 심지어 API 한 번 호출로 끝납니다. 에이전트를 쓰면 시스템 프롬프트, 도구 호출, 메모리 조회 등의 오버헤드가 붙어 토큰만 낭비됩니다. Anthropic의 에이전트 구축 가이드<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>도 "가장 단순한 솔루션부터 시작하고, 측정 가능한 개선이 있을 때만 복잡도를 추가하라"고 권합니다.</p>
+<h4 id="_4">골디락스 존 — 에이전트가 빛나는 작업</h4>
+<p>중간에 판단이 필요하지만, <strong>완료 조건을 객관적으로 확인할 수 있는</strong> 작업입니다.</p>
+<ul>
+<li><code>src/</code> 디렉터리의 린트 에러를 모두 수정하고 <code>ruff check</code>를 통과시키기</li>
+<li>프로젝트 문서의 경어체를 통일하기</li>
+<li>다른 저장소에서 기능을 포팅하고 테스트를 통과시키기</li>
+</ul>
+<p>이런 작업은 한 번의 API 호출로 끝나지 않습니다. 파일을 읽고, 수정하고, 결과를 확인하고, 다음 파일로 넘어가는 과정에서 에이전트의 도구 호출과 판단 능력이 진가를 발휘합니다. <code>/goal</code>로 목표를 설정하면 사용자가 개입하지 않아도 완료까지 이어갈 수 있습니다(10장 「영속 목표」 참고).</p>
+<h4 id="_5">고난도 주관 영역 — 에이전트의 한계</h4>
+<p>"문장을 자연스럽게 다듬어줘", "코드 구조를 개선해줘"처럼 완료 기준 자체가 주관적인 작업입니다. 사람도 의견이 갈리는 판단을 에이전트에게 맡기면, 조기 완료(아직 안 끝났는데 끝났다고 판정)나 무한 루프(끝났는데 계속 고치기)가 발생합니다.</p>
+<p>이 영역에서는 에이전트를 "자율 실행"보다 "보조 도구"로 쓰는 것이 현실적입니다. 한 챕터씩 결과를 확인하고, 방향을 조정하고, 다음으로 넘어가는 — 사람이 턴마다 관여하는 방식입니다.</p>
+<h3 id="_6">비용 관점</h3>
+<p>Microsoft Research와 Stanford의 공동 연구<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>에 따르면, 에이전틱 코딩 작업은 일반 코드 채팅 대비 토큰을 수백~수천 배 더 소비합니다. 그런데 <strong>토큰을 많이 쓴다고 정확도가 높아지지는 않습니다</strong>. 정확도는 중간 비용에서 정점을 찍고, 그 이상은 포화됩니다.</p>
+<p>이 발견은 골디락스 존의 경계를 비용 측면에서도 뒷받침합니다. 결정적 파이프라인에 에이전트를 쓰면 토큰만 낭비하고, 고난도 주관 작업에 에이전트를 풀어도 비용 대비 품질이 올라가지 않습니다.</p>
+<h3 id="_7">정리</h3>
+<p>앞서 본 두 축을 자문 형식으로 줄이면 다음과 같습니다.</p>
+<ol>
+<li>이 작업에 중간 판단이 필요한가? — 아니라면 스크립트나 워크플로 도구가 낫습니다.</li>
+<li>완료를 객관적으로 확인할 수 있는가? — 아니라면 자율 실행 대신 사람이 개입하는 대화형 작업이 낫습니다.</li>
+</ol>
+<p>두 질문에 모두 "예"라면, 에이전트의 골디락스 존에 있는 것입니다. Hermes Agent의 <code>/goal</code>, 크론, 메시징 연동 같은 기능은 이 구간에서 가장 큰 효과를 냅니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h3 id="_8">참고 자료</h3>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Anthropic, "Building Effective Agents" (2024). https://www.anthropic.com/research/building-effective-agents <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>Yuxiang Wei et al., "How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks" (2026). Microsoft Research &amp; Stanford Digital Economy Lab. https://www.microsoft.com/en-us/research/publication/how-do-ai-agents-spend-your-money-analyzing-and-predicting-token-consumption-in-agentic-coding-tasks/ <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</div>

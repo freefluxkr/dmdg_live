@@ -1,0 +1,296 @@
+<h1 class="page-subject">09-2. 텔레그램 연동</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<div class="toc">
+<ul>
+<li><a href="#qr">자동 연결 (QR, 권장)</a></li>
+<li><a href="#botfather">수동 연결 (BotFather)</a></li>
+<li><a href="#_1">설정</a></li>
+<li><a href="#_2">게이트웨이 시작</a></li>
+<li><a href="#_3">사용</a></li>
+<li><a href="#_4">스트리밍 응답</a></li>
+<li><a href="#_5">크론 출력 전달</a></li>
+<li><a href="#webhook">Webhook 모드</a></li>
+<li><a href="#_6">그룹·포럼 허용 목록과 멘션 게이팅</a></li>
+<li><a href="#_7">그룹 대화 관찰 모드</a></li>
+<li><a href="#_8">스킬 기반 슬래시 메뉴</a></li>
+<li><a href="#_9">음성 메시지</a><ul>
+<li><a href="#stt">STT를 끄고 원본 오디오를 에이전트에 넘기기</a></li>
+<li><a href="#voice">/voice 명령</a></li>
+<li><a href="#_10">음성 활용 예시</a></li>
+</ul>
+</li>
+<li><a href="#_11">미디어 처리</a></li>
+<li><a href="#private-chat-topics">Private Chat Topics</a><ul>
+<li><a href="#_12">활용 예시</a></li>
+<li><a href="#_13">설정</a></li>
+<li><a href="#_14">작동 방식</a></li>
+</ul>
+</li>
+<li><a href="#_15">실전 예시: 멀티스텝 작업</a></li>
+</ul>
+</div>
+<p>Telegram은 Hermes Agent와 연동하기 가장 쉬운 플랫폼입니다. 봇을 연결하는 방법은 두 가지입니다. 최근 버전에서는 <code>hermes setup</code>이 <strong>자동(QR)</strong>과 <strong>수동(BotFather)</strong> 중 하나를 고르게 합니다.</p>
+<h3 id="qr">자동 연결 (QR, 권장)</h3>
+<p><code>hermes setup</code>의 Telegram 단계에서 자동 방식을 고르면, 화면에 QR 코드가 표시됩니다. 휴대폰의 Telegram으로 QR을 스캔하고 앱에서 확인하면 연결이 끝납니다. 봇 토큰을 직접 복사·붙여넣을 필요가 없습니다. 웹 대시보드에서도 같은 QR 온보딩을 쓸 수 있습니다.</p>
+<h3 id="botfather">수동 연결 (BotFather)</h3>
+<p>직접 봇을 만들어 토큰을 넣고 싶다면 BotFather 방식을 씁니다.</p>
+<ol>
+<li>Telegram에서 <strong>@BotFather</strong>와 대화를 시작합니다</li>
+<li><code>/newbot</code> 명령으로 새 봇을 생성합니다</li>
+<li>봇 이름과 사용자명을 설정합니다</li>
+<li>발급된 <strong>봇 토큰</strong>을 복사합니다</li>
+</ol>
+<h3 id="_1">설정</h3>
+<p><code>~/.hermes/.env</code>에 봇 토큰을 추가합니다.</p>
+<pre><code class="language-bash">TELEGRAM_BOT_TOKEN=1234567890:ABCdefGHIjklMNOpqrSTUvwxyz
+</code></pre>
+<p>허용된 사용자를 설정합니다 (선택).</p>
+<pre><code class="language-yaml"># config.yaml
+telegram:
+  allowed_users:
+    - "your_telegram_user_id"
+</code></pre>
+<h3 id="_2">게이트웨이 시작</h3>
+<pre><code class="language-bash">hermes gateway
+</code></pre>
+<p>Telegram 봇이 온라인으로 표시되면 성공입니다.</p>
+<h3 id="_3">사용</h3>
+<p>Telegram에서 봇에게 메시지를 보내면 Hermes Agent가 응답합니다.</p>
+<ul>
+<li>일반 텍스트 메시지 → 대화</li>
+<li><code>/new</code> → 새 세션 시작</li>
+<li><code>/model</code> → 모델 전환</li>
+<li>이미지 전송 → 비전 분석 (보조 모델 필요)</li>
+</ul>
+<h3 id="_4">스트리밍 응답</h3>
+<p>Telegram에서는 <strong>프로그레시브 메시지 편집</strong> 방식으로 스트리밍 응답을 구현합니다. 에이전트가 응답을 생성하는 동안 메시지가 실시간으로 업데이트됩니다.</p>
+<ul>
+<li>업데이트 간격: 0.3초</li>
+<li>버퍼 임계값: 40자 (새로 생성된 텍스트가 40자 이상일 때 메시지 편집 발생)</li>
+</ul>
+<p>긴 응답이 타이핑되는 것처럼 점진적으로 나타나므로, 에이전트가 작업 중이라는 것을 시각적으로 확인할 수 있습니다.</p>
+<h3 id="_5">크론 출력 전달</h3>
+<pre><code>/sethome
+</code></pre>
+<p>이 명령을 실행한 채팅방으로 크론 작업의 결과가 전달됩니다.</p>
+<fieldset><legend>보안 주의</legend><p style="margin-top: 0.2em;">봇에 터미널 접근 권한이 있다면, <code>GATEWAY_ALLOW_ALL_USERS=true</code>로 설정하지 마세요. 반드시 <code>allowed_users</code>를 설정하거나 DM 페어링을 사용하세요.</p></fieldset>
+<h3 id="webhook">Webhook 모드</h3>
+<p>기본적으로 Telegram 어댑터는 <strong>롱 폴링</strong>(long polling) 방식으로 메시지를 수신합니다. <code>TELEGRAM_WEBHOOK_URL</code> 환경 변수를 설정하면 HTTP Webhook 서버로 전환됩니다. Fly.io, Railway 같은 클라우드 플랫폼은 인바운드 HTTP 트래픽이 들어오면 중지된 머신을 자동으로 깨우므로, Webhook 모드가 적합합니다.</p>
+<pre><code class="language-bash"># ~/.hermes/.env
+TELEGRAM_WEBHOOK_URL=https://my-hermes.fly.dev/webhook
+TELEGRAM_WEBHOOK_PORT=8443          # 로컬 리스닝 포트 (기본값: 8443)
+TELEGRAM_WEBHOOK_SECRET=my-secret   # 업데이트 검증용 시크릿 토큰 (웹훅 모드 필수)
+</code></pre>
+<p>웹훅 모드에서는 <strong><code>TELEGRAM_WEBHOOK_SECRET</code>이 필수</strong>입니다(누군가 게이트웨이 URL을 추측해 직접 호출하는 시도를 막기 위함). <code>TELEGRAM_WEBHOOK_URL</code>을 설정하지 않으면 기존과 동일하게 롱 폴링으로 작동합니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h3 id="_6">그룹·포럼 허용 목록과 멘션 게이팅</h3>
+<p>그룹 채팅에서 봇이 모든 메시지에 반응하면 불필요한 응답이 발생합니다. Discord 어댑터와 동일한 <strong>멘션 게이팅</strong>을 Telegram 그룹에도 적용할 수 있고, v0.11부터는 <strong>그룹·포럼 단위의 허용 목록</strong>도 같이 제공됩니다.</p>
+<pre><code class="language-yaml"># config.yaml
+telegram:
+  require_mention: true
+  mention_patterns:
+    - "(?i)hey\\s+hermes"
+    - "(?i)hermes야"
+  free_response_chats:
+    - "-100123456789"   # 게이팅 우회할 특정 채팅 ID
+  allowed_chats:
+    - "-100123456789"          # 이 그룹만 허용
+    - "-100123456789:42"       # 슈퍼그룹의 특정 포럼 토픽만 허용
+</code></pre>
+<p>게이팅이 활성화되면 그룹에서는 슬래시 명령, 봇에 대한 답장, <code>@봇유저네임</code> 멘션, <code>mention_patterns</code>에 매칭되는 메시지만 처리합니다. <code>allowed_chats</code>가 설정돼 있으면 거기에 없는 그룹/포럼은 <strong>아예 무시</strong>됩니다. DM은 제한 없이 그대로 작동합니다.</p>
+<h3 id="_7">그룹 대화 관찰 모드</h3>
+<p>멘션 게이팅을 켜면 봇은 멘션되지 않은 메시지를 완전히 무시합니다. 그런데 나중에 멘션할 때 그때까지의 대화 맥락을 알면 유용한 경우가 있습니다. <code>observe_unmentioned_group_messages</code>를 켜면 봇이 그룹 대화를 <strong>세션 트랜스크립트에 기록</strong>하되 <strong>자동 응답은 하지 않습니다</strong>. 이후 <code>@봇</code> 멘션이나 봇에 대한 답장이 들어오면 관찰된 맥락을 참고해 응답합니다.</p>
+<pre><code class="language-yaml"># config.yaml
+telegram:
+  allowed_chats:
+    - "-1001234567890"
+  group_allowed_chats:
+    - "-1001234567890"
+  require_mention: true
+  observe_unmentioned_group_messages: true
+</code></pre>
+<pre><code class="language-bash"># 환경변수로도 설정 가능
+TELEGRAM_ALLOWED_CHATS=-1001234567890
+TELEGRAM_GROUP_ALLOWED_CHATS=-1001234567890
+TELEGRAM_OBSERVE_UNMENTIONED_GROUP_MESSAGES=true
+</code></pre>
+<p><code>allowed_chats</code>는 봇이 <strong>응답할</strong> 채팅을, <code>group_allowed_chats</code>는 <strong>관찰용 공유 세션</strong>을 허용하는 채팅을 지정합니다. 관찰 모드를 쓸 때는 두 목록에 같은 채팅 ID를 넣으면 됩니다. 관찰된 메시지에는 <code>[닉네임|user_id]</code> 태그가 붙고, 멘션으로 트리거된 턴에는 안전 프롬프트가 추가되어 모델이 관찰 내용을 "지시"가 아닌 "맥락"으로 취급합니다.</p>
+<blockquote>
+<p>⚠️ <strong>프라이버시 모드 해제 필요</strong>: 이 기능은 Telegram이 일반 그룹 메시지를 봇에 전달해야 작동합니다. BotFather에서 프라이버시 모드를 비활성화하거나, 봇을 그룹 관리자로 승격해야 합니다(위 "그룹·포럼 허용 목록" 절 참고).</p>
+</blockquote>
+<h3 id="_8">스킬 기반 슬래시 메뉴</h3>
+<p>활성화된 스킬이 Telegram 슬래시 명령 메뉴에 자동 등록됩니다. 사용자가 <code>/</code>를 입력하면 사용 가능한 스킬 목록이 자동완성으로 표시됩니다. Telegram Bot API는 최대 100개의 명령을 허용하므로, 초과분은 메뉴에 표시되지 않지만 직접 입력하면 정상 실행됩니다.</p>
+<h3 id="_9">음성 메시지</h3>
+<p>Telegram에서 음성 메시지를 보내면 Hermes Agent가 자동으로 STT(Speech-to-Text)를 통해 텍스트로 변환한 뒤 처리합니다. STT 자동 변환은 <strong>기본적으로 활성화</strong>되어 있으며, 음성 파일은 <code>.ogg</code> 형식으로 캐시 디렉터리에 다운로드됩니다.</p>
+<h4 id="stt">STT를 끄고 원본 오디오를 에이전트에 넘기기</h4>
+<p><code>config.yaml</code>에서 <code>stt.enabled: false</code>로 두면 게이트웨이가 오디오를 받아 캐시 디렉터리에 다운로드만 하고 전사하지 않습니다. 에이전트에는 다음과 같은 마커가 전달되어, 화자 분리(diarization)나 별도 전사 도구처럼 STT 대체 처리를 직접 다룰 수 있습니다.</p>
+<pre><code>[The user sent a voice message: /home/&lt;user&gt;/.hermes/cache/audio/&lt;hash&gt;.ogg]
+</code></pre>
+<h4 id="voice">/voice 명령</h4>
+<p><code>/voice</code> 명령으로 음성 응답 모드를 제어할 수 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>모드</th>
+<th>작동</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>off</code></td>
+<td>음성 응답 비활성화 (텍스트로만 응답)</td>
+</tr>
+<tr>
+<td><code>voice_only</code></td>
+<td>음성 메시지에 대해서만 음성으로 응답</td>
+</tr>
+<tr>
+<td><code>all</code></td>
+<td>모든 응답을 음성 메시지로 전송</td>
+</tr>
+</tbody>
+</table>
+<pre><code>/voice voice_only
+</code></pre>
+<p>음성 모드 설정은 <code>~/.hermes/gateway_voice_mode.json</code>에 저장되어 게이트웨이를 재시작해도 유지됩니다.</p>
+<h4 id="_10">음성 활용 예시</h4>
+<pre><code>사용자: [음성 메시지] "서버 디스크 용량 확인해줘"
+Hermes: 현재 디스크 사용량입니다.
+        /dev/sda1  50G  32G  16G  67% /
+        /dev/sdb1 200G 180G  15G  93% /data
+        ⚠️ /data 파티션이 93%입니다. 정리가 필요합니다.
+</code></pre>
+<p><code>/voice all</code> 모드에서는 위 응답이 음성 메시지로도 전송됩니다. 운전 중이나 이동 중에 유용합니다.</p>
+<h3 id="_11">미디어 처리</h3>
+<p>Telegram에서 이미지를 전송하면 <strong>비전 보조 모델</strong>(auxiliary vision model)이 이미지를 분석합니다. 캡션을 함께 보내면 해당 지시사항에 맞춰 분석합니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>게이트웨이에서 텔레그램으로 보낼 때도 한 메시지에 여러 장의 이미지를 묶어 보낼 수 있습니다(<code>send_multiple_images</code>, 9-1절 참고). 또 마크다운 표가 본문에 들어 있으면, 텔레그램이 그대로 표를 그릴 수 없으므로 <strong>행 그룹 단위 불릿</strong>으로 변환되어 가독성을 유지합니다. 오디오 파일이 메시지 한도를 넘으면 자동으로 <strong>문서 첨부로 폴백</strong>합니다.</p>
+<blockquote>
+<p>💡 <strong>20MB 한도를 넘어서: 로컬 Bot API 서버</strong>: Telegram 공개 Bot API는 <code>getFile</code> 다운로드를 20MB로 제한합니다. 더 긴 음성 메모나 큰 비디오를 받으려면 <code>telegram-bot-api</code> 서버를 로컬로 운영하고 <code>platforms.telegram.extra.base_url</code>을 그쪽으로 돌리면 한도가 2GB까지 올라갑니다(Hermes가 자동으로 내부 한도를 함께 올림). 절차는 공식 <a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram">Telegram 메시징 가이드</a>의 "Large Files (&gt;20MB)" 절을 참고하세요.</p>
+</blockquote>
+<p>지원되는 미디어 유형:</p>
+<ul>
+<li><strong>이미지</strong> -- 스크린샷 분석, 오류 메시지 해석, 다이어그램 설명</li>
+<li><strong>파일</strong> -- 텍스트 파일, 로그 파일, CSV 등을 읽고 분석</li>
+<li><strong>음성</strong> -- STT 변환 후 텍스트로 처리</li>
+</ul>
+<pre><code>사용자: [스크린샷 전송] "이 에러 메시지 해결 방법 알려줘"
+Hermes: 스크린샷에 보이는 에러는 `ENOSPC: no space left on device`입니다.
+        디스크 공간이 부족합니다. 다음 명령으로 큰 파일을 찾을 수 있습니다.
+        du -sh /var/log/* | sort -rh | head -10
+        실행할까요?
+</code></pre>
+<h3 id="private-chat-topics">Private Chat Topics</h3>
+<p>Telegram Bot API 9.4(2026년 2월)부터 봇이 1:1 DM 안에서 <strong>포럼 스타일 토픽</strong>을 만들 수 있습니다. 슈퍼그룹 없이도 하나의 DM에서 여러 작업 공간을 분리할 수 있습니다.</p>
+<h4 id="_12">활용 예시</h4>
+<p>장기 프로젝트를 여러 개 진행할 때 토픽별로 컨텍스트를 격리합니다.</p>
+<ul>
+<li><strong>"웹사이트"</strong> 토픽 — 운영 중인 웹 서비스 관련 작업</li>
+<li><strong>"리서치"</strong> 토픽 — 논문 조사, 자료 정리</li>
+<li><strong>"일반"</strong> 토픽 — 잡다한 질문</li>
+</ul>
+<p>각 토픽은 독립된 세션·대화 이력·컨텍스트 창을 가집니다.</p>
+<h4 id="_13">설정</h4>
+<p><code>config.yaml</code>에 토픽을 정의합니다.</p>
+<pre><code class="language-yaml">platforms:
+  telegram:
+    extra:
+      dm_topics:
+      - chat_id: 123456789        # Telegram 사용자 ID
+        topics:
+        - name: General
+          icon_color: 7322096
+        - name: Website
+          icon_color: 9367192
+        - name: Research
+          icon_color: 16766590
+          skill: arxiv             # 이 토픽에서 자동으로 로드할 스킬
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>필수</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>예</td>
+<td>토픽 표시 이름</td>
+</tr>
+<tr>
+<td><code>icon_color</code></td>
+<td>아니오</td>
+<td>Telegram 아이콘 색상 코드 (정수)</td>
+</tr>
+<tr>
+<td><code>icon_custom_emoji_id</code></td>
+<td>아니오</td>
+<td>커스텀 이모지 ID</td>
+</tr>
+<tr>
+<td><code>skill</code></td>
+<td>아니오</td>
+<td>새 세션 시작 시 자동 로드할 스킬</td>
+</tr>
+<tr>
+<td><code>thread_id</code></td>
+<td>아니오</td>
+<td>토픽 생성 후 자동 기록됨 — 직접 설정하지 마세요</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_14">작동 방식</h4>
+<ol>
+<li>게이트웨이 시작 시 <code>thread_id</code>가 없는 토픽에 대해 <code>createForumTopic</code> API를 호출합니다</li>
+<li>생성된 <code>thread_id</code>는 <code>config.yaml</code>에 자동 저장되어 재시작 시 API를 다시 호출하지 않습니다</li>
+<li>각 토픽은 <code>telegram:dm:{chat_id}:{thread_id}</code> 형태의 독립 세션 키를 가집니다</li>
+</ol>
+<p><code>skill</code> 필드가 지정된 토픽은 세션이 시작될 때 해당 스킬을 자동으로 로드합니다. <code>/스킬이름</code>을 직접 입력한 것과 같은 효과입니다.</p>
+<h3 id="_15">실전 예시: 멀티스텝 작업</h3>
+<p>Telegram을 통한 복잡한 작업의 실제 대화 흐름입니다.</p>
+<pre><code>사용자: 프로젝트 A의 최신 로그에서 에러만 추출해서 요약해줘
+
+Hermes: 로그 파일을 확인하겠습니다.
+        🔍 /var/log/project-a/app.log 분석 중...
+
+        최근 24시간 에러 요약:
+        1. ConnectionTimeout (23건) - Redis 연결 시간 초과
+           → 주로 02:00~03:00에 집중 발생
+        2. OutOfMemoryError (3건) - 힙 메모리 부족
+           → 배치 작업 실행 시 발생
+        3. FileNotFoundError (1건) - /tmp/cache.dat 누락
+
+        가장 시급한 것은 Redis 연결 문제입니다. 조치할까요?
+
+사용자: Redis 설정 확인해봐
+
+Hermes: Redis 설정을 확인했습니다.
+        - timeout: 0 (무제한 대기)
+        - maxclients: 128
+        - 현재 연결 수: 127/128 ← 거의 가득 찼습니다
+
+        maxclients를 256으로 늘리면 해결될 것 같습니다.
+        redis.conf를 수정하고 재시작할까요?
+
+사용자: 응 해줘
+
+Hermes: ✅ 완료했습니다.
+        - maxclients: 128 → 256 변경
+        - Redis 재시작 완료
+        - 현재 연결 수: 127/256 (정상)
+</code></pre>
+</div>

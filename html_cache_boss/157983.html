@@ -1,0 +1,118 @@
+<h1 class="page-subject">3) 기존문서 내용 읽기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>지난 두 시간에 걸쳐서 python-docx 라이브러리로 워드 파일에 글자, 그림, 표를 삽입하는 방법을 배워봤습니다.</p>
+<p>새로운 문서를 만들 때에도 필요하겠지만, 기존 문서의 내용에 무언가 추가하고 변경하기 위해서는 인덱싱(indexing)이 필요합니다.</p>
+<p>엑셀에 행(row)과 열(column)의 개념이 있어, 원하는 셀(cell)의 내용을 인덱싱해서 가져올 수 있듯이 워드 파일도 이러한 개념을 잘 파악하고 있어야만이 마음대로 문서를 주무를 수 있답니다.</p>
+<p>우선 오늘의 수업을 위해서 아래의 코드를 실행하셔서 '예제 문서.docx'를 만들어주세요.</p>
+<pre><code>from docx import Document
+
+document = Document()
+
+document.add_heading('코딩유치원 python-docx 강의', level = 0)
+
+p = document.add_paragraph('안녕하세요, 코린이 여러분!')
+p.add_run(' 코딩유치원에 오신 것을 환영합니다.').bold = True
+
+document.add_paragraph('문장 추가 1')
+document.add_paragraph('문장 추가 2')
+document.add_paragraph('문장 추가 3')
+document.add_paragraph('문장 추가 4')
+
+records = (
+    (1, '하나', 'one'),
+    (2, '둘', 'two'),
+    (3, '셋', 'three')
+)
+
+table = document.add_table(rows=1, cols=3)
+
+# 만든 표의 스타일을 가장 기본 스타일인 'Table Grid'로 설정
+table.style = document.styles['Table Grid']
+
+hdr_cells = table.rows[0].cells
+hdr_cells[0].text = 'No'
+hdr_cells[1].text = '한국어'
+hdr_cells[2].text = '영어'
+for qty, id, desc in records:
+    row_cells = table.add_row().cells
+    row_cells[0].text = str(qty)
+    row_cells[1].text = id
+    row_cells[2].text = desc
+
+document.save('예제 문서.docx')
+</code></pre>
+<p><strong>&lt;실행 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/7bNXv/btrpdpCsbqM/qFP9yjiIKwXKOEAjzYwjXK/img.png"/></p>
+<h1 id="1-paragraph">1.  paragraph 인덱싱</h1>
+<p>먼저 문단(paragraph)을 인덱싱 하는 방법부터 시작해보겠습니다. 아래의 코드를 실행해보세요.</p>
+<pre><code>doc = Document('예제 문서.docx')
+
+for i, paragraph in enumerate(doc.paragraphs):
+    print(str(i+1) + ": " + paragraph.text)
+</code></pre>
+<p>그럼 아래와 같이 문단의 번호와 내용들이 출력됩니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cEuKgI/btrpeJ2oHKI/3y6n6NNAcyY03uKggjPKRK/img.png"/></p>
+<blockquote>
+<p><strong>여기서 잠깐</strong></p>
+</blockquote>
+<p>워드 문서에서 '레이아웃-줄 번호-페이지마다 다시 매기기'를 클릭하시면 문단 옆에 문단 번호가 표시된답니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/c7Kjlo/btrpoVz2oXk/PlNae389eUluuIWsxgNxI0/img.png"/></p>
+<p>&lt;문단 좌측에 인덱스가 추가된 모습&gt;
+<img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/dvAHzt/btrpdodat0J/LhMk5XZm0SPufQWd2d2QY1/img.png"/></p>
+<p>만약 특정 문단에 글을 추가하고 싶으시면 지난 시간에 배웠던 add_run( ) 함수를 이용해 주시면 됩니다.</p>
+<p>양식에 내용을 추가할 때 사용하면 되겠죠?</p>
+<pre><code># 추가하고 싶은 문단 (*실제 인덱스는 0부터 시작하므로 원하는 문단번호보다 +1 해주어야함에 주의)
+p = doc.paragraphs[4]
+
+p.add_run('문단에 글자 추가')
+</code></pre>
+<p>그리고 이런 경우가 자주 있을지는 모르겠지만 문단 중간에 새로운 문단을 추가하고 싶으면 아래의 코드를 이용하시면 됩니다.</p>
+<pre><code># 3번째 문장 다음에 삽입 (*paragraphs[3]은 4번째 문장을 의미)
+dco.paragraphs[3].insert_paragraph_before("문장을 삽입한다.")
+</code></pre>
+<h1 id="2-table">2. table 인덱싱</h1>
+<p>위에서 문단을 인덱싱하고 내용을 가져왔을 때, 표(table)은 포함되지 않은 것을 보셨나요?</p>
+<p>python-docx에서 표는 따로 분류되어 관리되며, 인덱싱 하는 방법도 조금 다릅니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/2bVcX/btrpq8FS2eP/wr7v6mKBNqzHzln3kFANy0/img.png"/></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h2 id="1">1) 표의 특정 셀의 값 읽는 방법</h2>
+<p>엑셀과 매우 비슷하면서도 조금 다릅니다. 엑셀로 치면 sheet와 같은 것이 table입니다. 첫번째 시트, 두번째 시트가 있듯이 첫번째 표와 두번째 표를 table[인덱스]로 접근합니다.</p>
+<p>rows[0]과 cells[0]은 행과 열로 셀 하나를 인덱싱하는 것이며, paragraphs[0]은 해당 셀의 내용(정확히는 문단)을 인덱싱 하는 것입니다. 만약 한 셀에 엔터를 치고 글자를 입력되어 있다면 paragraphs[1]로 인덱싱 해주어야겠죠?</p>
+<pre><code># 문서 안의 모든 표를 가져옴
+tables = doc.tables
+
+# 가장 처음 표의 첫행, 첫열의 첫문단 내용 가져오기
+tables[0].rows[0].cells[0].paragraphs[0].text
+</code></pre>
+<p>당연히 'No' 출력되겠죠? (No.라고 했어야했는데 잘 못한걸 이제 발견했네요)</p>
+<h2 id="2">2) 표의 모든 값에 접근하는 방법</h2>
+<p>표의 모든 값을 출력할 일이 있을지 모르겠지만 아래와 같이 가능합니다.</p>
+<pre><code>table = doc.tables[0]
+
+for row in table.rows:
+    for cell in row.cells:
+        for para in cell.paragraphs:
+            print(para.text)
+</code></pre>
+<p>이걸 응용해서 표의 모든 내용 중, '하나'를 찾아볼까요? 만약 그게 가능하면 글자를 추가해주거나 수정할 수도 있답니다.</p>
+<pre><code># 첫번째 표 인덱싱
+table = doc.tables[0]
+
+for row in table.rows:
+    for cell in row.cells:
+        for para in cell.paragraphs:
+            if(para.text == "하나"):
+                para.add_run(' &lt;-- 찾았다 하나')
+
+# 확인을 위해서 저장하기
+doc.save('예제 문서.docx')
+</code></pre>
+<p>실행해보니 하나를 잘 찾아서 글자도 잘 추가했네요.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/OUpaE/btrpiv3epQk/xNcOfQdKxkVs0QX7jctYU1/img.png"/></p>
+</div>

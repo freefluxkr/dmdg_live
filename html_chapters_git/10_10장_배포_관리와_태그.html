@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>10_10장_배포_관리와_태그</title>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Fira+Code:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Fira Code', 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h1>10장 배포 관리와 태그</h1>
+<div class="x-----------1">
+<p class="x----2">이 장에서는 완성된 코드의 관리와 배포 방법을 알아보겠습니다. 깃은 코드를 안정된 상태로 유지하며 완성된 코드를 사용자에게 배포합니다.</p>
+</div>
+<div class="x-----------1">
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">1</span><span class="DIN-------"> </span>배포</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">2</span><span class="DIN-------"> </span>버전</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">3</span><span class="DIN-------"> </span>태그</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">4</span><span class="DIN-------"> </span>태그 목록</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">5</span><span class="DIN-------"> </span><span class="x100">A</span><span class="x100">nnotated</span> 태그</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">6</span><span class="DIN-------"> </span><span class="x100">L</span><span class="x100">ightweight</span> 태그</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">7</span><span class="DIN-------"> </span>특정 커밋 태그</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">8</span><span class="DIN-------"> </span>태그를 사용한 체크아웃</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">9</span><span class="DIN-------"> </span>태그 공유</p>
+<p class="x0-----1"><span class="DIN------- x100">10</span><span class="DIN-------">.</span><span class="DIN------- x100">10</span><span class="DIN-------"> </span>정리</p>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.1 배포</h2>
+<p class="x00--">프로그램을 개발한 후에는 완성된 결과물을 최종 사용자에게 전달해야 합니다. 이때 최종 사용자에게 전달하는 과정을 배포라고 합니다.</p>
+<p class="x00--">개발을 완료했다고 해서 결과물을 직접 사용자에게 배포할 수 없습니다. 완성된 형태로 결과물을 배포하려면 코드를 정리하는 작업들이 추가로 필요합니다. 개발 단계에서 발생한 테스트 메시지나 불필요한 주석들을 정리합니다. 이러한 정리 작업을 거쳐 코드를 좀 더 깔끔하게 만들 수 있고, 배포도 가능합니다. 더불어 정리 작업은 조금이지만 코드 용량을 줄이는 효과도 있습니다. 즉, 배포는 정리된 최종 결과물을 만드는 과정입니다.</p>
+<p class="x00--">과거에는 최종 결과물인 소프트웨어를 <span class="A------">CD</span>나 <span class="A------">USB</span> 등에 담아 고객에게 전달했습니다. 하드웨어 같은 장비들은 <span class="A------">ROM</span>이라는 저장 장치에 저장해서 배포했습니다. 요즘에는 인터넷이 발달하면서 과거의 물리적인 배포 대신 온라인으로 배포합니다. 인터넷이 연결된 서버에서 최종 결과물의 파일을 직접 내려받을 수 있습니다. 온라인 배포는 물리적 생산 비용과 유통 비용이 들지 않고, 빠르게 배포할 수 있습니다. 이렇게 배포 프로세스가 빨라지면서 코드를 안정적으로 유지하고 테스트하는 것이 더 중요해졌습니다.</p>
+<p class="x00--">따라서 개발자는 코드를 안정적인 상태로 유지하면서 쉽게 배포할 수 있는 도구들이 필요해졌습니다. 배포를 잘하려면 코드를 깔끔하게 정리할 수 있는 환경이 필요합니다. 또 사용자가 파일을 쉽게 내려받을 수 있게 해야 합니다. 이러한 이유로 깃은 코드를 배포하는 데도 많이 사용합니다. </p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.2 버전</h2>
+<p class="x00--">세상에 완벽한 것은 없습니다. 코드도 마찬가지입니다. 배포 당시에는 발견하지 못했는데, 이후에 잘못된 동작을 하거나 예외적인 상황이 생겨 처리하지 못하는 동작들이 있을 수 있습니다. 또는 최종 사용자가 추가 기능을 요구할 때도 있습니다. 이때는 코드를 수정해야 합니다. 즉, 코드는 개발을 완료한 후에도 계속 수정됩니다.</p>
+<p class="x00--">코드를 수정했다면 개발자 또는 최종 사용자가 이를 확인하고 구별할 수 있어야 합니다. 코드에서 이러한 차이를 구별할 수 있게 하는 것이 바로 버전<span class="x3------">(</span><span class="A------ x3------">version</span><span class="x3------">)</span>입니다. 버전은 프로그램을 수정하거나 개선할 때마다 코드를 구분하려고 부여된 식별자를 의미하며, 보통 숫자를 사용합니다. 숫자가 클수록 최근에 수정된 코드입니다. 버전업<span class="x3------">(</span><span class="A------ x3------">version</span><span class="x3------"> </span><span class="A------ x3------">up</span><span class="x3------">)</span>은 오래된 버전의 프로그램을 최신 버전의 코드로 변경하는 것을 의미합니다.</p>
+<p class="x00--">버전 번호를 부여할 때는 약간의 규칙이 있습니다. 이 규칙은 오래 전부터 업계에서 사용하던 형태로 꼭 사용할 필요는 없지만, 가능하면 따르는 것을 권장합니다.</p>
+<p class="x00--">기본적인 버전은 단일 번호 하나로 구성되어 있습니다. 단일 번호는 프로그램에서 큰 기능을 변경했을 때 바뀝니다. 첫 자리가 <span class="A------">0</span>으로 시작하면 아직 초기 개발 중인 제품이라는 의미입니다. 정식 버전은 <span class="A------">1</span>부터 시작합니다. 이를 <span class="x3---------">메이저</span><span class="x3------">(</span><span class="A------ x3------">major</span><span class="x3------">)</span><span class="x3---------"> 버전</span>이라고 합니다. 메이저 번호를 변경하면 하위 버전과 호환성이 낮아질 수도 있습니다.</p>
+<p class="x00-- para-style-override-14">메이저 버전 다음으로 작은 코드의 변화는 점(.)을 사용하여 구분합니다. 보통 두 자리 또는 세 자리 형태의 숫자로 작성합니다.</p>
+<ul>
+<li class="x06----"><span class="x3---------">두 자리</span>: <span class="A------">1</span>.<span class="A------">0</span></li>
+<li class="x06---- para-style-override-28"><span class="x3---------">세 자리</span>: <span class="A------">2</span>.<span class="A------">1</span>.<span class="A------">4</span></li>
+</ul>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.3 태그</h2>
+<p class="x00--">깃에서는 코드 배포를 관리하려고 태그<span class="x3------">(</span><span class="A------ x3------">tag</span><span class="x3------">)</span> 기능을 제공합니다. 커밋은 코드 변화를 기록한 것입니다. 그리고 각 커밋은 서로 다른 코드의 상태를 가집니다. 물론 배포를 위해 최종 정리된 커밋도 있습니다. 깃은 정리된 커밋을 배포할 수 있도록 특수한 포인터를 제공하며, 특정 커밋을 가리키는 포인터로 버전을 관리합니다. 그리고 이 포인터를 태그라고 합니다. 즉, <span class="x3---------">태그는 특정 커밋의 해시 값을 가리키는 꼬리표를 의미</span>합니다.</p>
+<p class="x00-- para-style-override-14">최종 사용자는 개발자가 부여한 태그를 사용하여 코드 버전을 구별합니다. 또 태그 포인터로 최종 배포판의 커밋을 구별합니다. 태그는 커밋 해시 값을 기준으로 생성됩니다. 그리고 특정 커밋 해시 값을 가리키는 것뿐만 아니라, 꼬리표 이름과 정보도 포함합니다. 이러한 태그는 추가 정보를 보유하는지 여부에 따라 두 가지로 구분합니다.</p>
+<ul>
+<li class="x06----"><span class="A------ x3---------">A</span><span class="A------ x3---------">nnotated</span>: 태그 이름 + 정보 포함</li>
+<li class="x06---- para-style-override-28"><span class="A------ x3---------">L</span><span class="A------ x3---------">ightweight</span>: 태그 이름만 포함</li>
+</ul>
+<p class="x00--">이 두 가지 태그의 생성 방법과 활용법은 뒤에서 실습과 함께 알아보겠습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.4 태그 목록</h2>
+<p class="x00--">태그 기능을 본격적으로 학습하기에 앞서 간단히 태그 명령어를 알아봅시다. 태그를 사용하려면 <span class="A------ x3-------1">tag</span> 명령어를 사용합니다. 단독으로 실행할 수도 있고, 옵션을 추가할 수도 있습니다. </p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git tag</p>
+</div>
+<p class="x00--">옵션은 <span class="x----- x3-------1">-</span><span class="A------ x3-------1">l</span> 또는 <span class="x----- x3-------1">--</span><span class="A------ x3-------1">list</span> 옵션을 같이 사용합니다. </p>
+<p class="lbl"><span class="ex">예</span></p>
+<pre><code><p class="N---- para-style-override-14">$ <span class="x--">git tag -l</span></p></code></pre>
+<section class="tipbox">
+<header><span class="type">Note</span> <span class="title"></span></header>
+<hr/>
+<p class="x07----- para-style-override-31">소스트리에서는 생성된 태그 목록을 좀 더 쉽게 확인할 수 있습니다. 화면 왼쪽에 <span class="x-----2">태그</span> 탭을 표시하는데, <span class="x-----2">태그</span> 탭을 선택해서 확장하면 생성된 모든 태그 목록을 확인할 수 있습니다.</p>
+<p class="fcap">▼ 그림 10-1 태그 목록</p>
+<img alt="1001.jpg" class="w30" src="https://thebook.io/img/080212/1001_fmt.jpeg"/>
+</section>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.5 Annotated 태그</h2>
+<p class="x00--"><span class="A------">Annotated</span> 태그는 깃에서 가장 일반적으로 사용하는 태그 방법입니다. <span class="A------">Annotated</span>는 ‘주석이 달린’이라는 뜻입니다. </p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.5.1 태그 생성</h3>
+<p class="x00--"><span class="A------">Annotated</span> 태그를 생성할 때는 커밋의 해시 값뿐 아니라 추가로 생성자 정보를 같이 넣을 수 있습니다. 예를 들어 이메일, 날짜, 메시지 등 정보입니다. 또 <span class="A------">GPG</span> 방식으로 서명도 가능합니다.</p>
+<p class="x00--"><span class="A------">Annotated</span> 태그를 생성하려면 <span class="A------ x3-------1">tag</span> 명령어 뒤에 <span class="x----- x3-------1">-</span><span class="A------ x3-------1">a</span> 옵션을 사용합니다. </p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git tag -a <span class="N--------1 N--------1">버전</span> </p>
+</div>
+<p class="x00--">바로 실습해 보겠습니다. <span class="A------">version</span>.<span class="A------">htm</span> 파일을 수정하고 커밋합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N----">$ <span class="x--">code version.htm</span> <span class="ingd">VS Code 실행</span></p></code></pre>
+<p class="x-----1"><span class="x100">version</span>.<span class="x100">htm</span></p>
+<div class="cbox">
+<pre><code><p class="N----- para-style-override-39">&lt;h1&gt;<span class="N--------1 N--------1">태그</span> <span class="N--------1 N--------1">버전</span> <span class="N--------1 N--------1">실습</span> <span class="N--------1 N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N----- para-style-override-39"><span class="x--">&lt;ul&gt;</span></p>
+<p class="N----- para-style-override-39"><span class="x--">    &lt;li&gt;</span><span class="N--------1 N--------1 x--">버전</span><span class="x--"> 1.0.0 </span><span class="N--------1 N--------1 x--">실습</span><span class="x--">&lt;/li&gt;</span></p>
+<p class="N----- para-style-override-39"><span class="x--">&lt;/ul&gt;</span></p></code></pre>
+</div>
+<pre><code><p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git commit -am "test 1.0.0"</span> <span class="ingd">등록 및 커밋</span></p>
+<p class="N-----">[main 53028dc] test 1.0.0</p>
+<p class="N----"> 1 file changed, 4 insertions(+), 1 deletion(-)</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.5.2 간단한 메시지</h3>
+<p class="x00--"><span class="A------ x3---------">Annotated</span><span class="x3---------"> 태그를 생성할 때는 메시지를 작성</span>해야 합니다. 작성할 태그 정보가 간단하다면 <span class="A------">vi</span> 에디터를 사용하지 않고, <span class="x----- x3-------1">-</span><span class="A------ x3-------1">m</span> 옵션으로 대체할 수 있습니다. 커밋 명령어의 <span class="x----- x3-------1">-</span><span class="A------ x3-------1">m</span> 옵션과 유사합니다.</p>
+<p class="x00--">이어서 실습해 보겠습니다. <span class="A------">version</span>.<span class="A------">htm</span> 파일에 한 줄을 더 추가하고 커밋합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N----">$ <span class="x--">code version.htm</span> <span class="ingd">VS Code 실행</span></p></code></pre>
+<p class="x-----1"><span class="x100">version</span>.<span class="x100">htm</span></p>
+<div class="cbox">
+<pre><code><p class="N----- para-style-override-39">&lt;h1&gt;<span class="N--------1 N--------1">태그</span> <span class="N--------1 N--------1">버전</span> <span class="N--------1 N--------1">실습</span> <span class="N--------1 N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N----- para-style-override-39">&lt;ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;<span class="N--------1 N--------1">버전</span> 1.0.0 <span class="N--------1 N--------1">실습</span>&lt;/li&gt;</p>
+<p class="N----- para-style-override-39"><span class="x--">    &lt;li&gt;</span><span class="N--------1 N--------1 x--">버전</span><span class="x--"> 1.1.0 </span><span class="N--------1 N--------1 x--">실습</span><span class="x--">&lt;/li&gt;</span></p>
+<p class="N----- para-style-override-39">&lt;/ul&gt;</p></code></pre>
+</div>
+<pre><code><p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git commit -am "test 1.1.0"</span> <span class="ingd">등록 및 커밋</span></p>
+<p class="N-----">[main da8d211] test 1.1.0</p>
+<p class="N----"> 1 file changed, 1 insertion(+)</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.5.3 소스트리에서 태그 생성</h3>
+<p class="x00--">소스트리에서도 태그를 작성할 수 있습니다. 실습을 위해 <span class="A------">version</span>.<span class="A------">htm</span> 파일을 수정하고 저장한 후 커밋합니다. </p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N----">$<span class="x--"> code version.htm</span> <span class="ingd">VS Code 실행</span></p></code></pre>
+<p class="x-----1"><span class="x100">version</span>.<span class="x100">htm</span></p>
+<div class="cbox">
+<pre><code><p class="N----- para-style-override-39">&lt;h1&gt;<span class="N--------1 N--------1">태그</span> <span class="N--------1 N--------1">버전</span> <span class="N--------1 N--------1">실습</span> <span class="N--------1 N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N----- para-style-override-39">&lt;ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;<span class="N--------1 N--------1">버전</span> 1.0.0 <span class="N--------1 N--------1">실습</span>&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;<span class="N--------1 N--------1">버전</span> 1.1.0 <span class="N--------1 N--------1">실습</span></p>
+<p class="N----- para-style-override-39"><span class="x--">        &lt;ul&gt;</span></p>
+<p class="N----- para-style-override-39"><span class="x--">            &lt;li&gt;</span><span class="N--------1 N--------1 x--">수정</span><span class="x--"> </span><span class="N--------1 N--------1 x--">작업</span><span class="x--"> 1.1.1&lt;/li&gt;</span></p>
+<p class="N----- para-style-override-39"><span class="x--">        &lt;/ul&gt;</span></p>
+<p class="N----- para-style-override-39">    &lt;/li&gt;</p>
+<p class="N----- para-style-override-39">&lt;/ul&gt;</p></code></pre>
+</div>
+<pre><code><p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy10<span class="x--"> (main)</span></p>
+<p class="N-----">$<span class="x--"> git commit -am "test 1.1.1"</span> <span class="ingd">등록 및 커밋</span></p>
+<p class="N-----">[main f2691a0] test 1.1.1</p>
+<p class="N----"> 1 file changed, 5 insertions(+), 1 deletion(-)</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.5.4 태그는 중복해서 생성할 수 없다</h3>
+<p class="x00--">깃에 등록된 태그 이름은 유일해야 합니다. 즉, 태그는 같은 이름으로 중복해서 생성할 수 없습니다. 실습으로 확인해 봅시다. </p>
+<p class="x00--"><span class="A------">version</span>.<span class="A------">htm</span> 파일을 수정하고 저장한 후 커밋합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N----">$ <span class="x--">code version.htm</span> <span class="ingd">VS Code 실행</span></p></code></pre>
+<p class="x-----1"><span class="x100">version</span>.<span class="x100">htm</span></p>
+<div class="cbox">
+<pre><code><p class="N----- para-style-override-39">&lt;h1&gt;<span class="N--------1 N--------1">태그</span> <span class="N--------1 N--------1">버전</span> <span class="N--------1 N--------1">실습</span> <span class="N--------1 N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N----- para-style-override-39">&lt;ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;<span class="N--------1 N--------1">버전</span> 1.0.0 <span class="N--------1 N--------1">실습</span>&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;<span class="N--------1 N--------1">버전</span> 1.1.0 <span class="N--------1 N--------1">실습</span></p>
+<p class="N----- para-style-override-39">        &lt;ul&gt;</p>
+<p class="N----- para-style-override-39">            &lt;li&gt;<span class="N--------1 N--------1">수정</span> <span class="N--------1 N--------1">작업</span> 1.1.1&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">            <span class="x--">&lt;li&gt;</span><span class="N--------1 N--------1 x--">수정</span><span class="x--"> </span><span class="N--------1 N--------1 x--">작업</span><span class="x--"> 1.1.2&lt;/li&gt;</span></p>
+<p class="N----- para-style-override-39">        &lt;/ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;/li&gt;</p>
+<p class="N----- para-style-override-39">&lt;/ul&gt;</p></code></pre>
+</div>
+<pre><code><p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git commit -am "test 1.1.2"</span> <span class="ingd">등록 및 커밋</span></p>
+<p class="N-----">[main 80f8890] test 1.1.2</p>
+<p class="N----"> 1 file changed, 1 insertion(+)</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.5.5 태그 삭제</h3>
+<p class="x00--">태그는 특정 커밋을 가리키는 꼬리표입니다. 실수로 생성할 태그의 커밋을 잘못 지정할 수도 있습니다. 이때는 기존에 생성한 태그를 삭제해야 합니다. </p>
+<p class="x00--">태그는 <span class="A------ x3-------1 char-style-override-24">tag</span><span class="x3-------1 char-style-override-24"> </span><span class="x----- x3-------1 char-style-override-24">-</span><span class="A------ x3-------1 char-style-override-24">d</span> <span class="x3---------">명령어</span>로 삭제할 수 있습니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git tag -d <span class="N--------1 N--------1">태그이름</span></p>
+</div>
+<p class="x00--"><span class="x3---------">태그 목록에서 삭제된 태그 이름은 이후에 다시 사용할 수 있습니다. </span></p>
+<p class="x00--">지금까지 진행한 실습의 로그를 확인해 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git log --oneline</span> <span class="ingd">커밋 로그</span></p>
+<p class="N-----">80f8890 (HEAD -&gt; main) test 1.1.2</p>
+<p class="N-----">f2691a0 (<span class="char-style-override-24">tag: 1.1.1</span>) test 1.1.1</p>
+<p class="N-----">da8d211 (tag: 1.1.0) test 1.1.0</p>
+<p class="N-----">53028dc (tag: 1.0.0) test 1.0.0</p>
+<p class="N----">3c92e35 first</p></code></pre>
+<p class="x00--">커밋 <span class="A------">f</span><span class="A------">2691</span><span class="A------">a</span><span class="A------">0</span>에 태그 <span class="A------">1</span>.<span class="A------">1</span>.<span class="A------">1</span>이 지정되어 있습니다. 태그 <span class="A------">1</span>.<span class="A------">1</span>.<span class="A------">1</span>을 삭제해 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git tag -d 1.1.1</span> <span class="ingd">태그 삭제</span></p>
+<p class="N----">Deleted tag '1.1.1' (was b3ffc7d)</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.5.6 태그의 상세 정보 확인: show 명령어</h3>
+<p class="x00--"><span class="A------">Annotated</span> 태그는 커밋의 태그 포인터와 함께 여러 정보를 포함합니다. <span class="A------ x3-------1">tag</span> 명령어는 태그의 목록만 출력할 뿐 상세 정보는 표시하지 않습니다. 태그의 상세 정보를 확인하려면 <span class="A------ x3-------1">show</span> 명령어를 사용해야 합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git show <span class="N--------1 N--------1">태그이름</span></p>
+</div>
+<p class="x00--">다음과 같이 <span class="A------ x3-------1">show</span> 명령어를 실행하면 생성된 태그의 상세 정보를 확인할 수 있습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git show 1.0.0</span> <span class="ingd">태그 정보</span></p>
+<p class="N-----">tag 1.0.0</p>
+<p class="N-----">Tagger: hojin &lt;infohojin@gmail.com&gt;</p>
+<p class="N-----">Date:   Thu May 23 18:12:16 2019 +0900</p>
+<p class="N-----"> </p>
+<p class="N-----"><span class="char-style-override-24">this is first tag</span> <span class="ingd">태그 정보</span></p>
+<p class="N-----"> </p>
+<p class="N-----">commit 53028dc1486b42d23253ffd4001a758cef455372 (tag: 1.0.0)</p>
+<p class="N-----">Author: hojin &lt;infohojin@gmail.com&gt; </p>
+<p class="N-----">Date:   Thu May 23 18:07:18 2019 +0900 </p>
+<p class="N-----">    test 1.0.0 </p>
+<p class="N-----"> </p>
+<p class="N-----">diff --git a/version.htm b/version.htm</p>
+<p class="N-----">index 14f6513..eccf619 100644</p>
+<p class="N-----">--- a/version.htm</p>
+<p class="N-----">+++ b/version.htm</p>
+<p class="N-----">@@ -1 +1,4 @@</p>
+<p class="N-----">-&lt;h1&gt;<span class="N--------1">태그</span> <span class="N--------1">버전</span> <span class="N--------1">실습</span> <span class="N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N-----">\ No newline at end of file</p>
+<p class="N-----">+&lt;h1&gt;<span class="N--------1">태그</span> <span class="N--------1">버전</span> <span class="N--------1">실습</span> <span class="N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N-----">+&lt;ul&gt;</p>
+<p class="N-----">+    &lt;li&gt;<span class="N--------1">버전</span> 1.0.0 <span class="N--------1">실습</span>&lt;/li&gt;</p>
+<p class="N-----">+&lt;/ul&gt;</p>
+<p class="N----">\ No newline at end of file</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.6 Lightweight 태그</h2>
+<p class="x00--"><span class="A------">Lightweight</span> 태그는 가장 기본적인 태그입니다. <span class="A------">Annotated</span> 태그와 달리 버전 이름만 있습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.6.1 체크섬</h3>
+<p class="x00--"><span class="A------">Annotated</span> 태그에는 커밋 해시 값과 부가적인 정보가 같이 있습니다. 반면 <span class="A------ x3---------">Lightweight</span><span class="x3---------"> 태그 방식은 커밋의 체크섬</span>만 가지고 있습니다. 또 <span class="A------">Annotated</span> 태그에서 사용했던 <span class="x----- x3-------1">-</span><span class="A------ x3-------1">a</span>, <span class="x----- x3-------1">-</span><span class="A------ x3-------1">m</span> 같은 옵션은 사용할 수 없습니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git tag <span class="N--------1 N--------1">태그이름</span></p>
+</div>
+<p class="x00--"><span class="A------">Lightweight</span> 태그의 사용법은 간단합니다. 명령어 뒤에 태그 이름만 작성하면 됩니다. <span class="A------">Lightweight</span> 태그를 생성해 보겠습니다. 실습을 위해 <span class="A------">version</span>.<span class="A------">htm</span> 파일을 수정하고 저장한 후 커밋합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N----">$ <span class="x--">code version.htm</span> <span class="ingd">VS Code 실행</span></p></code></pre>
+<p class="x-----1"><span class="x100">version</span>.<span class="x100">htm</span></p>
+<div class="cbox">
+<pre><code><p class="N----- para-style-override-39">&lt;h1&gt;<span class="N--------1 N--------1">태그</span> <span class="N--------1 N--------1">버전</span> <span class="N--------1 N--------1">실습</span> <span class="N--------1 N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N----- para-style-override-39">&lt;ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;<span class="N--------1 N--------1">버전</span> 1.0.0 <span class="N--------1 N--------1">실습</span>&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;<span class="N--------1 N--------1">버전</span> 1.1.0 <span class="N--------1 N--------1">실습</span></p>
+<p class="N----- para-style-override-39">        &lt;ul&gt;</p>
+<p class="N----- para-style-override-39">            &lt;li&gt;<span class="N--------1 N--------1">수정</span> <span class="N--------1 N--------1">작업</span> 1.1.1&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">            &lt;li&gt;<span class="N--------1 N--------1">수정</span> <span class="N--------1 N--------1">작업</span> 1.1.2&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">        &lt;/ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;/li&gt;</p>
+<p class="N----- para-style-override-39"><span class="x--">    &lt;li&gt;</span><span class="N--------1 N--------1 x--">버전</span><span class="x--"> 2.0.0 lightweight </span><span class="N--------1 N--------1 x--">실습</span><span class="x--">&lt;/li&gt;</span></p>
+<p class="N----- para-style-override-39">&lt;/ul&gt;</p></code></pre>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.6.2 태그의 상세 정보 확인</h3>
+<p class="x00--">생성된 <span class="A------">Lightweight</span> 태그의 상세 정보를 확인해 보겠습니다. <span class="A------">Annotated</span> 태그와 동일하게 <span class="A------ x3-------1">show</span> 명령어를 사용합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git show 2.0.0</span> <span class="ingd">태그 정보</span></p>
+<p class="N-----">commit 3ba46c0a20a9812341e057818ef155f6801d0760 (HEAD -&gt; main, tag: 2.0.0) <span class="ingd">Lightweight 태그는 이 위치에 정보가 없음</span></p>
+<p class="N-----"> </p>
+<p class="N-----">Author: hojin &lt;infohojin@gmail.com&gt;</p>
+<p class="N-----">Date:   Thu May 23 19:14:41 2019 +0900</p>
+<p class="N-----">    test 2.0.0</p>
+<p class="N-----">diff --git a/version.htm b/version.htm</p>
+<p class="N-----">index 78de597..c9c61dc 100644</p>
+<p class="N-----">--- a/version.htm</p>
+<p class="N-----">+++ b/version.htm</p>
+<p class="N-----">@@ -7,4 +7,5 @@</p>
+<p class="N-----">             &lt;li&gt;<span class="N--------1">수정</span> <span class="N--------1">작업</span> 1.1.2&lt;/li&gt;</p>
+<p class="N-----">         &lt;/ul&gt;</p>
+<p class="N-----">     &lt;/li&gt;</p>
+<p class="N-----">+    &lt;li&gt;<span class="N--------1">버전</span> 2.0.0 lightweight <span class="N--------1">실습</span>&lt;/li&gt;</p>
+<p class="N-----"> &lt;/ul&gt;</p>
+<p class="N----">\ No newline at end of file</p></code></pre>
+<p class="x00--"><span class="A------">Annotated</span> 태그와 달리 별도의 정보가 없는 것을 확인할 수 있습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.7 특정 커밋 태그</h2>
+<p class="x00--"><span class="A------ x3-------1">tag</span> 명령어는 기본적으로 현재 <span class="A------">HEAD</span>가 가리키는 커밋을 기준으로 태그를 생성합니다. 현재 <span class="A------">HEAD</span> 포인터가 가리키는 커밋이 아닌 특정 커밋을 직접 지정하여 태그를 생성할 수 있습니다. </p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git tag -a <span class="N--------1 N--------1">태그버전</span> <span class="N--------1 N--------1">커밋</span>ID</p>
+</div>
+<p class="x00--">특정 커밋을 지정하여 커밋을 생성할 때는 마지막 옵션으로 커밋 해시 값을 적습니다. 그러면 <span class="A------ x3-------1">tag</span> 명령어는 <span class="x3---------">지정된 커밋 해시 값을 기준으로 새로운 태그를 생성</span>합니다.</p>
+<p class="x00--">커밋을 지정해서 태그를 생성해 봅시다. 먼저 로그를 확인합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$<span class="x--"> git log --oneline</span> <span class="ingd">커밋 로그</span></p>
+<p class="N-----">3ba46c0 (HEAD -&gt; main, tag: 2.0.0) test 2.0.0</p>
+<p class="N-----">80f8890 test 1.1.2 <span class="ingd">이곳을 지정해서 생성함</span></p>
+<p class="N-----">f2691a0 test 1.1.1</p>
+<p class="N-----">da8d211 (tag: 1.1.0) test 1.1.0</p>
+<p class="N-----">53028dc (tag: 1.0.0) test 1.0.0</p>
+<p class="N----">3c92e35 first</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.7.1 소스트리에서 특정 커밋 지정</h3>
+<p class="x00--">소스트리에서도 특정 커밋을 지정하여 태그를 생성할 수 있습니다. 가장 쉬운 방법은 그래프 목록에서 커밋을 선택하는 것입니다. 커밋을 클릭한 후 마우스 오른쪽 버튼을 눌러 <span class="x3---------">명시적 커밋</span> 메뉴를 선택합니다. 책에서는 <span class="A------">test</span> <span class="A------">2</span>.<span class="A------">0</span>.<span class="A------">0</span> 커밋에서 마우스 오른쪽 버튼을 눌러 <span class="x3---------">명시적 커밋</span> 메뉴를 선택하고, <span class="x3---------">태그 이름</span>에는 <span class="A------">2</span>.<span class="A------">0</span>.<span class="A------">0</span>을 입력합니다. </p>
+<p class="fcap">▼ 그림 10-10 특정 커밋(test 2.0.0)의 태그 생성</p>
+<img alt="1010.jpg" class="w60" src="https://thebook.io/img/080212/1010_fmt.jpeg"/>
+<p class="x00--">마지막으로 <span class="x3---------">태그 추가</span>를 누르면 다음과 같이 <span class="A------">2</span>.<span class="A------">0</span>.<span class="A------">0</span> 태그가 생성됩니다.</p>
+<p class="fcap">▼ 그림 10-11 명시적 태그 추가</p>
+<img alt="1011.jpg" class="w80" src="https://thebook.io/img/080212/1011_fmt.jpeg"/>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.8 태그를 사용한 체크아웃</h2>
+<p class="x00--">태그는 특정 커밋을 가리키는 포인터입니다. 따라서 태그를 사용하여 특정 커밋으로 체크아웃할 수 있습니다.<span class="x3---------"> 체크아웃할 때 브랜치 이름 대신 태그 이름을 입력하면 됩니다.</span></p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git checkout <span class="N--------1 N--------1">태그이름</span></p>
+</div>
+<pre><code><p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git checkout 1.0.0</span> <span class="ingd">태그로 브랜치 이동</span></p>
+<p class="N-----">Note: checking out '1.0.0'.</p>
+<p class="N-----"> </p>
+<p class="N-----">You are in 'detached HEAD' state. You can look around, make experimental</p>
+<p class="N-----">changes and commit them, and you can discard any commits you make in this</p>
+<p class="N-----">state without impacting any branches by performing another checkout.</p>
+<p class="N-----"> </p>
+<p class="N-----">If you want to create a new branch to retain commits you create, you may</p>
+<p class="N-----">do so (now or later) by using -b with the checkout command again. Example:</p>
+<p class="N-----"> </p>
+<p class="N-----">  git checkout -b &lt;new-branch-name&gt;</p>
+<p class="N-----"> </p>
+<p class="N-----">HEAD is now at 53028dc test 1.0.0</p>
+<p class="N-----"> </p>
+<p class="N----">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">((1.0.0))</span> <span class="ingd">브랜치 이름이 태그 이름으로 출력됨</span></p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.8.1 태그 브랜치</h3>
+<p class="x00--">태그를 사용하여 체크아웃할 때는 추가 커밋을 작성할 수 없습니다. <span class="x3---------">추가 커밋 작업이 필요하다면 태그를 기반으로 새 브랜치를 생성합니다.</span> 태그로 생성된 브랜치는 동일한 시작 커밋을 가지며, 새 브랜치에서 원하는 작업을 추가로 할 수 있습니다. </p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git checkout -b <span class="N--------1 N--------1">브랜치이름</span> <span class="N--------1 N--------1">태그이름</span></p>
+</div>
+<p class="x00--">태그로 브랜치를 생성할 때는 커밋의 해시 값 대신 태그 이름을 사용합니다. 그럼 실습해 봅시다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">((1.0.0))</span></p>
+<p class="N-----">$ <span class="x--">git checkout -b fix 1.0.0 </span><span class="ingd">태그 기준으로 브랜치 생성</span></p>
+<p class="N-----">Switched to a new branch 'fix'</p>
+<p class="N-----"> </p>
+<p class="N----">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(fix)</span></p></code></pre>
+<p class="x00--">태그 이름으로 새 브랜치를 생성하고, 체크아웃까지 동시에 할 수 있습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.9 태그 공유</h2>
+<p class="x00--">지금까지는 로컬 저장소에서 태그를 생성하는 방법을 알아보았습니다. 로컬 저장소에서 생성한 태그를 원격 저장소로 공유할 수 있습니다. 태그는 불특정 다수에게 최종 소스의 커밋 정보를 알리려고 공유하는 것입니다. 즉, 태그를 공유하는 것은 최종 코드를 배포하는 것과 같습니다. 태그를 사용하여 사용자는 최종 코드를 내려받을 수 있습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.9.1 원격 저장소 생성</h3>
+<p class="x00--">태그 정보를 공유하는 데는 원격 저장소가 필요합니다. 깃허브 같은 호스팅 서비스를 이용하여 공개 저장소를 생성합니다. 책에서는 <span class="A------">5</span>장에서 생성한 깃허브 저장소를 사용하겠습니다. 먼저 깃허브에 로그인한 후 <span class="A------ x3---------">New</span><span class="x3---------"> </span>버튼<span class="x3---------"> </span>또는<span class="x3---------"> +</span> <span class="char-style-override-17">&gt;</span> <span class="A------ x3---------">New</span><span class="x3---------"> </span><span class="A------ x3---------">repository</span>를 클릭합니다.</p>
+<p class="fcap">▼ 그림 10-12 깃허브에서 새 저장소 메뉴 선택</p>
+<div style="margin-top: 0.5em">
+<img alt="1012.jpg" class="w30" src="https://thebook.io/img/080212/1012_fmt.jpeg"/>
+</div>
+<p class="x00--">다음 화면에서 원하는 저장소 이름을 입력하고 <span class="A------ x3---------">Create</span><span class="x3---------"> </span><span class="A------ x3---------">repository</span>를 누릅니다. 필자는 <span class="A------">gitstudy</span><span class="A------">10</span>으로 정했는데, 로컬 저장소 이름과 동일하지 않아도 됩니다.</p>
+<p class="fcap">▼ 그림 10-13 원하는 이름으로 새 저장소 생성</p>
+<div style="margin-top: 0.5em">
+<img alt="1013.jpg" class="w80" src="https://thebook.io/img/080212/1013_fmt.jpeg"/>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.9.2 태그 동기화</h3>
+<p class="x00--">생성된 원격 저장소로 로컬 저장소의 태그 정보를 공유할 수 있습니다. 태그 정보는 원격 저장소로 자동 전송되지 않으므로 직접 동기화 명령을 수행해야 합니다.</p>
+<p class="x00--">로컬 저장소의 커밋을 원격 저장소로 전송할 때는 <span class="A------ x3-------1">push</span> 명령어를 사용합니다. 원격 저장소로 로컬 저장소의 브랜치는 다음과 같이 전송할 수 있습니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git push <span class="N--------1 N--------1">브랜치이름</span></p>
+</div>
+<p class="x00--">직접 실습해 봅시다. 로컬 저장소의 <span class="A------">main</span> 브랜치를 원격 저장소로 전송해 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git push origin main</span> <span class="ingd">커밋 전송</span></p>
+<p class="N-----">Enumerating objects: 18, done.</p>
+<p class="N-----">Counting objects: 100% (18/18), done.</p>
+<p class="N-----">Delta compression using up to 8 threads</p>
+<p class="N-----">Compressing objects: 100% (11/11), done.</p>
+<p class="N-----">Writing objects: 100% (18/18), 1.44 KiB | 113.00 KiB/s, done.</p>
+<p class="N-----">Total 18 (delta 4), reused 0 (delta 0)</p>
+<p class="N-----">remote: Resolving deltas: 100% (4/4), done.</p>
+<p class="N-----">To https://github.com/jinygit/gitstudy10.git</p>
+<p class="N----"><span class="char-style-override-24"> * [new branch]      main -&gt; main</span></p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.9.3 전체 태그 동기화</h3>
+<p class="x00--">이전에는 태그 <span class="A------">1</span>개를 지정하여 원격 저장소로 공유했습니다. 로컬 저장소에는 태그가 여러 개 있습니다. 이 태그를 하나씩 전송하는 것은 불편합니다. 한꺼번에 전송할 수도 있습니다. 실습으로 알아봅시다.</p>
+<p class="x00--">지금까지 실습한 로컬 저장소의 태그를 다시 확인합니다.</p>
+<p class="N------1 para-style-override-16"><span> </span></p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git tag</span> <span class="ingd">태그 목록</span></p>
+<p class="N-----">1.0.0</p>
+<p class="N-----">1.1.0</p>
+<p class="N-----">1.1.2</p>
+<p class="N----">2.0.0</p></code></pre>
+<p class="x00--">태그가 많군요. <span class="A------ x3-------1">push</span> 명령어의 <span class="x----- x3-------1 char-style-override-24">--</span><span class="A------ x3-------1 char-style-override-24">tags</span> <span class="x3---------">옵션</span>을 사용하면 로컬 저장소의 모든 태그를 한꺼번에 원격 저장소로 보낼 수 있습니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git push origin --tags</p>
+</div>
+<p class="x00--">로컬 저장소의 모든 태그를 원격 서버로 전송해 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10<span class="x--"> (main)</span></p>
+<p class="N-----">$ <span class="x--">git push origin --tags</span> <span class="ingd">모든 태그 전송</span></p>
+<p class="N-----">Enumerating objects: 1, done.</p>
+<p class="N-----">Counting objects: 100% (1/1), done.</p>
+<p class="N-----">Writing objects: 100% (1/1), 156 bytes | 39.00 KiB/s, done.</p>
+<p class="N-----">Total 1 (delta 0), reused 0 (delta 0)</p>
+<p class="N-----">To https://github.com/jinygit/gitstudy10.git</p>
+<p class="N----- para-style-override-49"> * [new tag]         1.1.0 -&gt; 1.1.0</p>
+<p class="N----- para-style-override-49"> * [new tag]         1.1.2 -&gt; 1.1.2</p>
+<p class="N----"><span class="char-style-override-24"> * [new tag]         2.0.0 -&gt; 2.0.0</span></p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.9.4 원격 저장소의 태그 수정과 삭제</h3>
+<p class="x00--">원격 저장소에 등록된 태그를 깃허브에서 직접 수정할 수 있습니다. 깃허브에서 <span class="A------ x3---------">Tags</span>를 누른 후 수정할 태그를 클릭합니다. </p>
+<p class="fcap">▼ 그림 10-20 깃허브에서 수정할 태그 선택</p>
+<div style="margin-top: 0.5em">
+<img alt="1020.jpg" class="w100" src="https://thebook.io/img/080212/1020_fmt.jpeg"/>
+</div>
+<p class="x00--">선택한 화면에서 오른쪽 위의 <span class="A------ x3---------">Edit</span><span class="x3---------"> </span><span class="A------ x3---------">tag</span>를 누릅니다. </p>
+<p class="fcap">▼ 그림 10-21 태그 수정</p>
+<div style="margin-top: 0.5em">
+<img alt="1021.jpg" class="w100" src="https://thebook.io/img/080212/1021_fmt.jpeg"/>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.9.5 원격 저장소에 로컬과 다른 이름으로 태그 전송</h3>
+<p class="x00--"><span class="A------ x3-------1">push</span><span> 명령어는 로컬 저장소의 정보를 원격 저장소로 전송합니다. 이때 </span><span class="A------ x3-------1">push</span><span> 명령어를 사용하여 로컬 저장소의 브랜치를 원격 저장소의 브랜치로 전송할 경우, 다른 이름으로 전송할 수 있었습니다.</span></p>
+<p class="lbl"><span class="ex">예</span></p>
+<pre><code><p class="N----">$ <span class="x--">git push origin main:main1</span></p></code></pre>
+<p class="x00--">이 예는 로컬 저장소의 <span class="A------">main</span> 브랜치를 <span class="A------">origin</span> 서버(원격 저장소)의 <span class="A------">main</span><span class="A------">1</span> 브랜치로 등록하는 방법입니다. 이 원리를 응용하여 태그도 동일한 이름이 아닌 다른 이름으로 전송할 수 있습니다. 다음과 같이 콜론(:)을 사용하여 로컬 저장소의 태그 이름과 원격 저장소의 태그 이름을 지정합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git push origin <span class="N--------1 N--------1">태그이름</span> : <span class="N--------1 N--------1">원격저장소의태그이름</span> </p>
+</div>
+<p class="x00--">로컬 저장소의 <span class="A------">1</span>.<span class="A------">1</span>.<span class="A------">2</span> 태그를 원격 저장소에는 <span class="A------">3</span>.<span class="A------">0</span>.<span class="A------">0</span> 태그로 등록해 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git push origin 1.1.2:3.0.0</span> <span class="ingd">다른 이름의 태그 전송</span></p>
+<p class="N-----">Total 0 (delta 0), reused 0 (delta 0)</p>
+<p class="N-----">To https://github.com/jinygit/gitstudy10.git</p>
+<p class="N----"><span class="char-style-override-24"> * [new tag]         1.1.2 -&gt; 3.0.0</span></p></code></pre>
+<p class="x00--">깃허브 저장소를 확인합니다. 변경된 <span class="A------">3</span>.<span class="A------">0</span>.<span class="A------">0</span> 태그가 등록되었네요. 주의 깊게 살펴보면 <span class="A------">1</span>.<span class="A------">1</span>.<span class="A------">2</span> 태그와 <span class="A------">3</span>.<span class="A------">0</span>.<span class="A------">0</span> 태그가 모두 동일한 <span class="A------">80</span><span class="A------">f</span><span class="A------">8890</span> 해시 값을 가리킵니다.</p>
+<p class="fcap">▼ 그림 10-23 로컬 저장소와 다른 이름의 태그 전송</p>
+<img alt="1023.jpg" class="w100" src="https://thebook.io/img/080212/1023_fmt.jpeg"/>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>10.10 정리</h2>
+<p class="x00--">태그는 완성된 코드를 배포하고 관리하는 데 매우 유용합니다. 또 최종 사용자는 태그를 확인하여 어떤 커밋이 완성된 코드인지 쉽게 확인할 수 있습니다.</p>
+<p class="x00--">태그 버전은 패키지들이 배포하고 업데이트하는 기준이기 때문에 <span class="A------">PHP</span>의 컴포저나 <span class="A------">Node</span>.<span class="A------">js</span>의 패키지 등을 개발할 때도 유용하게 사용할 수 있습니다. </p>
+<p class="x00--">실제 현장에서는 코드를 개발하는 과정도 중요하지만, 태그를 사용하여 버전을 유지 관리하는 것도 매우 중요합니다. 아무리 잘 만든 제품이라도 배포와 태그를 잘 관리하지 않는다면 최종 사용자들은 혼돈에 빠지게 됩니다.</p>
+</div>
+</section>
+</section></div>
+</body>
+</html>

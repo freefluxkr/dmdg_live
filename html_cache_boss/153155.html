@@ -1,0 +1,42 @@
+<h1 class="page-subject">4) glob 모듈</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>glob 모듈은 패턴을 사용하여 현재 폴더(디렉토리)는 물론 하위 경로의 파일들을 검색할 때 사용합니다.</p>
+<h1 id="1">1. 모듈 불러오기</h1>
+<p>glob 모듈을 불러오는 방법은 다음과 같습니다.</p>
+<pre><code>import glob
+</code></pre>
+<h1 id="2">2. 모듈 사용법</h1>
+<p>glob 모듈을 불러왔으니 이제 사용법을 알아보겠습니다.</p>
+<p>복잡했던 os 모듈과 다르게 glob 모듈은 함수 하나만 알아두시면 됩니다.
+바로  glob 함수입니다. 말장난 같지만 glob.glob( )로 사용한답니다.</p>
+<pre><code># 확장자를 정하지 않으려면 '경로/*.*'로 입력해주면 됨
+
+glob.glob('참조하길 원하는 폴더의 경로/*.확장자')
+</code></pre>
+<hr/>
+<p>간단한 예시로 원하는 폴더의 모든 jpg 파일을 찾아서 리스트로 받아보겠습니다.</p>
+<p>참조하려는 폴더는 아래와 같이 jpg 파일이 10개 들어있는 폴더입니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/ba1ApT/btrkOk545KA/2hpLIv6tGvJsFrn7NSLG90/img.png"/></p>
+<pre><code>import glob
+
+list_filepath = glob.glob('/Users/sangwoo/Desktop/img_download/*.jpg')
+
+for filepath in list_filepath:
+    print(filepath)
+</code></pre>
+<p>&lt;실행 결과&gt;</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/153155/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-11-11_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.17.33.png"/></p>
+<h2 id="_1">하위 폴더까지 참조하고 싶을 때</h2>
+<p>다시 우리가 참조한 폴더를 잘 살펴보면 하위 폴더에 jpg 파일이 10개 더 들어있음에도 딱 해당 폴더까지만 참조하고 더이상 가져오지 않은 것을 확인 하실 수 있습니다.</p>
+<p>만약 하위 폴더까지 모두 참조하고 싶을 때는 아래와 같이 코딩 해주셔야합니다.</p>
+<pre><code>import glob
+
+list_filepath = glob.glob('/Users/sangwoo/Desktop/img_download/**/*.jpg', recursive=True)
+
+for filepath in list_filepath:
+    print(filepath)
+</code></pre>
+<p>여기서 주의할 점은 꼭 recursive=True를 넣어주셔야 한다는 것입니다!</p>
+<p>이걸 안넣어주고 단순히 <code>파일경로/**/*/jpg</code>로 하시면 하위 폴더만 참조하게 됩니다.</p>
+</div>

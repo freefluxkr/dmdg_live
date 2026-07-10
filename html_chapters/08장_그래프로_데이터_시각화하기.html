@@ -1,0 +1,1904 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>08장_그래프로_데이터_시각화하기</title>
+    <style>table{width:100%;border-collapse:collapse}table,th,td{padding:.3em;border:1px solid #a4a4a4;vertical-align:top;margin-bottom:1em}tbody{border-top:2px solid #aaa;border-bottom:2px solid #a4a4a4;border-left:2px solid #fff;border-right:2px solid #fff}.tb_pink{background-color:#eaeaea;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #eaeaea}.tb_pink2{background-color:#f5f5f5;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #f5f5f5}.tb_brown_line{border-bottom:2px solid #aaa}.tb_white{background-color:#fff}.tb_white2{background-color:#fff;border:2px solid #fff}.tb_white3{background-color:#fff;border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff}.tb_blue{background-color:#fff;border:2px solid #cacaca}.tb_brown{background-color:#f7f7f7;border:2px solid #f7f7f7}.clear{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0;clear:both}pre{word-break:break-all;word-wrap:break-word;white-space:pre-wrap;font-family:"code";font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;text-align:left;text-indent:0;padding:0;margin:0}.txts{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txts2{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:2em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:.6em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txtex{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txtex2{font-size:.9em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt1{font-size:1.2em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt2{font-size:1.4em;font-style:normal;font-weight:normal;line-height:2em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt3{font-size:1.6em;font-style:normal;font-weight:normal;line-height:1.4em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.key{border:1px solid #000;padding:0 .3em;font-family:"gothic_l";border-radius:.3em;font-size:.85em}.highlight{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:1.2em 0 1.2em 1em}.highlight2{border:2px solid #c6c6c6;padding:.5em;border-radius:0 .3em .3em .3em;margin:-0.2em 0 1.2em 0;background-color:#fff}.highlight3{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:0 0 1.2em 1em}.highlight4{padding:.5em;margin:1.2em 0 1.2em 1em}.highlight5{padding:.5em;margin:0 0 1.2em .6em}.highlight6{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:-0.2em 0 1.2em 0}.highlight7{border:2px solid #d3d3d3;border-radius:.5em;padding:.5em;margin:1.2em 0}.bg_white{background-color:#fff;border-radius:.3em;padding:0 0 0 .3em}.bg_white2{background-color:#fff}.bg_blue{background-color:#cacaca;padding:.3em .2em .3em .2em;border-radius:.9em}.bg_brown{background-color:#dfdfdf;padding:.4em .3em .4em .3em;border-radius:3em}.bg_brown2{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown3{background-color:#dfdfdf;padding:.1em}.bg_brown4{background-color:#dfdfdf;padding:.5em .3em .5em .3em;border-radius:3em}.bg_brown5{background-color:#f6f6f6;padding:.3em;border-radius:.1em}.bg_brown6{background-color:#dfdfdf;padding:.4em .7em .4em .7em;border-radius:3em}.bg_brown7{background-color:#dfdfdf;padding:.1em;border-radius:0}.bg_brown8{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown9{background-color:#dfdfdf;padding:.45em .1em .45em .1em;border-radius:3em}.bg_brown10{background-color:#dfdfdf;padding:.4em .45em .4em .45em;border-radius:3em}.bg_gray{background-color:#a7a7a7;font-size:.85em;padding:.1em .3em;border-radius:.4em;color:#fff}.bg_pink2{background-color:#e5e5e5;padding:.2em;border-radius:.5em;color:#414141}.bg_red{border:2px solid #414141;padding:.3em;border-radius:1em;margin-bottom:1.2em}.bg_yellow{padding:.2em .5em;background-color:#c6c6c6;border-radius:.5em .5em 0 0}.bg_black_line{border-bottom:1px solid #000;padding:.1em}.box_brown{box-sizing:border-box;min-height:100vh;background-color:#b5b5b5;padding:1em 2em}.box_brown2{padding:.5em;border-radius:.5em;background-color:#eee;box-sizing:border-box;min-height:80vh;position:relative}.box_brown3{border-bottom:3px solid #acacac;border-top:3px solid #acacac;padding:1em .5em 1em .5em;margin-bottom:5em}.box_brown4{border:3px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;padding:.5em}.box_brown5{padding:.5em;border-radius:.3em;border:2px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;background-color:#f7f7f7}.box_brown6{box-sizing:border-box;padding:2em;background-color:#f7f7f7}.box_yellow{padding:.5em;border-radius:0 0 .3em .3em;border-top:3px solid #aeaeae;margin-bottom:1.2em;margin-top:1.2em;background-color:#f2f2f2}.box_pink{box-sizing:border-box;padding:2em;background-color:#f8f8f8}.box_white{padding:.5em;border-radius:.5em;background-color:#fff;box-sizing:border-box;min-height:80vh;position:relative}.box_white2{padding:.5em;border-radius:.5em;background-color:#fff}.box_yellow_line{border-bottom:3px solid #c4c4c4}.box_yellow_line2{border:2px solid#c4c4c4;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_yellow_line3{border-bottom:2px solid #c5c5c5;margin-bottom:.5em;margin-top:.5em}.box_green_line{border:2px solid #d3d3d3;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line2{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.bg_brown_line{border-bottom:3px solid #dedede;padding:0 .4em 0 0;color:#acacac}.bg_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_brown_line{border-bottom:3px solid #acacac}.box_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0 0 0 1em}.box_brown_line3{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_white_line{border:1px solid #fff;padding:0;margin-top:2em;margin-bottom:2em}.box_black_line{border:1px solid #000;padding:.3em}.box_black_line2{border:1px solid #000;padding:.3em;border-radius:.3em;margin-bottom:2em}.tcenter{text-align:center}.tright{text-align:right}.s07_07{margin-left:.7em;text-indent:-0.7em}.s08_08{margin-left:.8em;text-indent:-0.8em}.s10_10{margin-left:1em;text-indent:-1em}.s11_11{margin-left:1.1em;text-indent:-1.1em}.s12_12{margin-left:1.2em;text-indent:-1.2em}.s14_14{margin-left:1.4em;text-indent:-1.4em}.s22_22{margin-left:2.2em;text-indent:-2.2em}.s26_26{margin-left:2.6em;text-indent:-2.6em}.s28_28{margin-left:2.85em;text-indent:-2.85em}.ind10{margin-left:1em;margin-bottom:.6em}.ind11{margin-left:1.1em}.ind12{margin-left:1.2em}.ind14{margin-left:1.4em}.ind18{margin-left:1.8em}.ind20{margin-left:2em}.ind22{margin-left:2.2em}.ind24{margin-left:2.4em}.ind26{margin-left:2.65em}.ind30{margin-left:3em}.ind36{margin-left:3.6em}.ind40{margin-left:4em}.ind90{margin-left:9.5em}.fleft{float:left;margin:.5em .5em .5em 0}.blue{color:#d4d4d4}.blue2{color:#414141}.blue3{color:#282828}.blue4{color:#535353}.brown{color:#797979}.brown2{color:#a1a1a1;text-decoration:none}.gold{color:#646464}.gray{color:#646464}.green{color:#5b5b5b}.purple{color:#676767}.yellow{color:#adadad}.red{color:#636363}.red2{color:#414141}.white{color:#fff}.h10{height:1em;max-width:100%}.h20{height:2em;max-width:100%}.h22{height:2.2em;max-width:100%}.h28{height:2.8em;max-width:100%}.h30{height:3em;max-width:100%}.h35{height:3.5em;max-width:100%}.h40{height:4em;max-width:100%}.h50{height:5em;max-width:100%}.h60{height:6em;max-width:100%}.mb02{margin-bottom:-0.2em}.w7{width:7.6%}.w10{width:10%}.w15{width:15%}.w18{width:18%}.w20{width:20%}.w25{width:25%}.w30{width:30%}.w33{width:33%}.w40{width:40%}.w50{width:50%}.w60{width:60%}.w70{width:70%}.w75{width:75%}.w80{width:80%}.w90{width:90%}.w100{width:100%}.w40c{margin-left:30%;margin-right:30%}.w60c{margin-left:20%;margin-right:20%}.w80c{margin-left:10%;margin-right:10%}</style>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="thebook-content">
+        <div class="book-page-fragment" data-page="369">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown">
+<h1 class="txt3 dm white"><span class="white">Part</span> <span class="blue">2</span><br/>
+    파이썬으로 데이터 분석하기</h1>
+<hr class="box_white_line"/>
+<p class="txtex dm s28_28"><span class="txt1 dm"><span class="white">  8장</span> 그래프로 데이터 시각화하기</span></p>
+<p class="txtex dm s28_28"><span class="txt1 dm"><span class="white">  9장</span> 데이터 분석 기초</span></p>
+<p class="txtex dm s28_28"><span class="txt1 dm"><span class="white">10장</span> 프로젝트 로드맵 그리기</span></p>
+<p class="txtex dm s28_28"><span class="txt1 dm"><span class="white">11장</span> 프로젝트로 파이썬 완성하기: 핫플레이스 인구 분석</span></p>
+<p class="txtex dm s28_28"><span class="txt1 dm"><span class="white">12장</span> 위치 정보 시각화하기: folium</span></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="370">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">지금까지 파이썬 프로그래밍의 기본이 되는 개념을 배웠습니다. 입출력 명령어부터 3가지 제어구조, 여러 데이터를 한 번에 저장하는 리스트와 딕셔너리까지 많은 것을 배웠어요. 이제는 이렇게 배운 내용을 바탕으로 무언가를 해볼 때입니다.</p>
+<p class="txt bl">파이썬으로 할 수 있는 일은 많습니다. 웹 페이지를 만들 수도 있고, 웹에서 필요한 정보를 자동으로 긁어모으는 웹 크롤링이나 업무 자동화를 할 수 있습니다. 또한, 애플리케이션이나 게임을 개발할 수도 있죠. 그중에서도 이 책에서 도전해 볼 과제는 ‘데이터 분석’입니다. 파이썬은 데이터를 수집하고 분석하기 쉽게 도와주는 다양한 도구를 지원해서 데이터 분석에 활용하기 좋습니다. 데이터만 있으면 원하는 대로 이리저리 분석할 수 있고 사전에 알아야 하는 프로그래밍 지식도 Part 1에서 배운 정도면 충분합니다. 물론 데이터 분석에 필요한 라이브러리 사용법은 더 알아야 하지만요. 그래도 순서대로 잘 따라온다면 무리 없이 프로젝트를 완성할 수 있습니다. 그럼 동기 유발을 위해 이 책에서 배울 프로젝트를 미리 훑어볼까요?</p>
+<p class="txt bl">휴일이나 주말에 친구 또는 가족과 맛집이나 재밌는 장소에 가고 싶을 때가 있죠. 그런데 사람들이 너무 많을까봐 걱정된 적은 없었나요? 그래서 이 책에서는 가고 싶은 지역의 인구 데이터를 분석하는 프로젝트를 진행합니다. 프로젝트를 완성하고 나면 서울시에서 원하는 행정동의 인구 그래프를 조회할 수 있습니다. 또한 프로젝트를 참고해 스스로 다른 도시의 인구도 분석할 수 있습니다. 그리고 배운 내용을 응용한다면 인구 데이터가 아닌 다른 데이터도 분석할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="371">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이 책에서는 핫플레이스가 있는 지역의 인구 데이터로 그래프를 그려 분석합니다. 코드를 작성해 다음과 같이 여러 형태의 그래프를 그려 보고 그 결과를 분석하는 것이죠.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/317.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">시간대별 인구뿐만 아니라 성별 인구와 두 지역의 인구를 비교하기도 합니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/318_1.jpg"/></div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="372">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">결과를 지도로도 나타내 봅니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/318_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">배운 내용을 참고해 잘 응용한다면 여러분이 원하는 형태로도 나타낼 수 있을 거예요. 재밌을 것 같지 않나요? 그럼 데이터 분석 프로젝트에 필요한 몇 가지부터 배우고 프로젝트에 들어갑시다. Let’s get it!</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="373">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown">
+<p class="txts"> </p>
+<div class="box_brown2">
+<h2 class="txt3 dm"><span class="brown">8장</span><br/>
+      그래프로 데이터 시각화하기</h2>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txt bl">데이터를 이해하기 쉽게 시각적으로 표현하는 것을 <span class="dm">데이터 시각화</span>라고 합니다. 앞에서 살펴본 그래프나 지도가 데이터 시각화의 대표적인 예입니다. 시간대별 인구 데이터를 한눈에 볼 수 있도록 그래프로 표현했기 때문입니다. 이 장에서는 데이터 분석에 들어가기 전에 데이터를 시각화하는 방법을 배워 보겠습니다.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="374">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown">8.1</span><br/>
+    그래프 그리기</h3>
+</div>
+<h4 class="txt1 dm" id="sigil_toc_id_65"><span class="yellow">8.1.1</span> 데이터 시각화 도구 사용하기</h4>
+<p class="txt bl">데이터 시각화의 기본은 그래프 그리기입니다. 그림을 그릴 때 화구가 필요하듯이 그래프를 그리려면 도구가 필요합니다. 파이썬에는 <span class="cd">matplotlib</span>이라는 매우 강력한 도구가 있습니다. <span class="cd">matplotlib</span>은 데이터 시각화를 돕는 파이썬 라이브러리입니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">모듈, 패키지, 라이브러리</p>
+<p class="txt bl">1장에서 파이썬은 다양한 확장 기능을 구현해 놓은 라이브러리가 많다고 했죠. 5장에서는 라이브러리에 관해 잠깐 설명했습니다. 여기서 그 개념을 조금 더 짚고 넘어가겠습니다.</p>
+<p class="txt bl">인터넷에서 파이썬 자료를 검색하다 보면 모듈, 패키지, 라이브러리라는 용어를 자주 접하게 됩니다. 이 셋은 비슷해 보이지만 조금씩 차이가 있습니다.</p>
+<div class="ind10">
+<p class="txt bl s08_08"><span class="yellow">•</span> <span class="dm">모듈</span><span class="txts gray">(module)</span> 특정 기능이 정의되어 있는 단일 파일</p>
+<p class="txt bl s08_08"><span class="yellow">•</span> <span class="dm">패키지</span><span class="txts gray">(package)</span> 여러 모듈을 모아 둔 것</p>
+<p class="txt bl s08_08"><span class="yellow">•</span> <span class="dm">라이브러리</span><span class="txts gray">(library)</span> 모듈과 패키지를 모아 둔 것</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="375">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="dm">모듈</span>은 특정 기능을 구현해 놓은 코드가 들어 있는 하나의 파일입니다. <span class="dm">패키지</span>는 여러 문서를 한 폴더에 넣어 관리하듯이 여러 모듈을 하나로 묶은 것을 말합니다. 이런 모듈과 패키지를 묶어 <span class="dm">라이브러리</span>라고 합니다.</p>
+<p class="txt bl">라이브러리에도 표준 라이브러리와 외부 라이브러리가 있습니다. <span class="dm">표준 라이브러리</span>는 파이썬에서 공식적으로 제공하는 라이브러리로, 파이썬을 설치할 때 함께 설치됩니다. 표준에 포함되지 않은 외부 라이브러리는 파이썬을 설치할 때 자동으로 설치되지 않으므로 사용할 때 별도로 설치해야 합니다.</p>
+<p class="txt bl">모듈, 패키지, 라이브러리는 혼용하는 경우가 많습니다. 5장에서 <span class="cd">random</span>을 라이브러리라고 했죠. 그러나 찾아보면 <span class="cd">random</span>을 모듈이라고 하기도 합니다. 이 장에서 배울 <span class="cd">matplotlib</span> 역시 패키지 또는 라이브러리로 혼용합니다. 따라서 처음부터 그 의미를 정확히 구분하려고 하기보다는 ‘특정 기능을 구현해 놓은 형태’ 정도로 이해해도 괜찮습니다.</p>
+<p class="txt bl">이 셋을 파이썬 파일 또는 프로그램에서 사용하려면 <span class="cd">import</span>로 추가해야 합니다. 5장에서 <span class="cd">import</span> <span class="cd">random</span>으로 <span class="cd">random</span> 라이브러리를 추가한 것처럼 패키지나 모듈도 추가해야 합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="376">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> help()로 정보 확인하기</p>
+<p class="txt bl">파이썬에서 사용하는 명령어, 모듈, 패키지, 라이브러리 등의 정보를 알고 싶다면 <span class="cd">help()</span>를 활용해 보세요. <span class="cd">help()</span>는 괄호 안의 대상에 관한 정보를 알려 주는 명령어입니다. <span class="cd">help(random)</span>을 실행해 <span class="cd">random</span>에 대한 정보를 확인해 봅시다. 코드에서 보듯이 <span class="cd">help()</span>를 실행할 때는 작업하는 파일에서 읽을 수 있게 대상이 속한 모듈, 패키지, 라이브러리를 추가해야 합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+<span class="gold">help</span>(random)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+Help on module random:
+
+NAME
+    random - Random variable generators.
+…
+FUNCTIONS
+…
+    randint(a, b) method of Random instance
+        Return random integer in range [a, b], including both end points.
+…</pre>
+</div>
+<p class="txtex bl">실행결과가 굉장히 길게 출력되는데, 몇 가지만 살펴봅시다. 첫 줄에 <span class="cd">Help on module random</span>을 보면 <span class="cd">random</span>을 모듈로 소개합니다. 스크롤을 내려 <span class="cd">FUNCTIONS</span> 항목을 봅시다. <span class="cd">FUCTIONS</span> 항목에서는 <span class="cd">random</span> 모듈에 속한 명령어를 보여 줍니다. 알파벳 순서로 나열되어 있는데, r 부분을 찾으면 앞에서 사용한 <span class="cd">randint()</span>가 있습니다. 설명을 보면 ‘범위 [a, b]에서 양 끝을 모두 포함하는 무작위 정수를 돌려준다’고 나옵니다. 모듈만이 아니라 특정 명령어에 대한 정보도 바로 확인할 수 있습니다. <span class="cd">help(random.randint)</span>처럼 직접 명령어를 넣으면 됩니다. 궁금한 명령어가 있으면 <span class="cd">help()</span>로 정보를 확인해 보세요.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="377">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이 장에서 사용할 <span class="cd">matplotlib</span>은 모듈, 패키지, 라이브러리 중에 무엇일까요?</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib
+<span class="gold">help</span>(matplotlib)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+Help on package matplotlib:
+
+NAME
+    matplotlib - This is an object-oriented plotting library.
+…</pre>
+</div>
+<p class="txt bl">첫 줄을 보면 <span class="cd">matplotlib</span>은 패키지라고 나옵니다. 그런데 바로 아래 <span class="cd">NAME</span> 항목에는 ‘matplotlib은 그래프를 그리는 객체 지향 라이브러리’라고 나옵니다. 여기서도 패키지와 라이브러리를 혼용하고 있습니다. 이 장에서는 <span class="cd">matplotlib</span> 중 <span class="cd">pyplot</span>을 주로 사용하니 <span class="cd">pyplot</span>도 살펴보죠.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib
+<span class="gold">help</span>(matplotlib.pyplot)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+Help on module matplotlib.pyplot in matplotlib:
+…</pre>
+</div>
+<p class="txt bl"><span class="cd">matplotlib</span> 안에 있는 모듈 <span class="cd">matplotlib.pyplot</span>이라고 나오는 걸로 보아 <span class="cd">pyplot</span>은 모듈임을 알 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="378">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">포함 관계를 나타내는 도트(.)</p>
+<p class="txt bl">모듈, 패키지, 라이브러리를 배워 보니 포함 관계가 굉장히 많죠. 이 포함 관계를 표현하는 방법으로 파이썬에서는 도트(.)를 사용합니다. 도트(.)는 상위 개념에서 하위 개념으로 내려갈 때 <span class="cd">상위개념.하위개념</span> 형식으로 사용합니다.</p>
+<p class="txt bl"><span class="cd">random</span> 모듈에는 다양한 명령어가 있는데, 대표적으로 <span class="cd">randint()</span>가 있습니다. 이를 나타내는 의미로 <span class="cd">randint()</span>를 사용할 때 <span class="cd">random.randint()</span>로 작성합니다.</p>
+<p class="txt bl"><span class="cd">matplotlib</span> 패키지는 그 안에 모듈이 한 단계 더 있으므로 도트 역시 한 번 더 사용해야 합니다. 예를 들어, <span class="cd">matplotlib</span>의 모듈인 <span class="cd">pyplot</span>의 명령어 <span class="cd">a()</span>를 사용한다면 다음과 같이 코드를 작성합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib
+matplotlib.pyplot.a()</pre>
+</div>
+<p class="txt bl"><span class="cd">matplotlib.pyplot</span>은 <span class="cd">matplotlib</span>의 모듈인 <span class="cd">pyplot</span>에 접근한다는 의미이고, 여기에 <span class="cd">.a()</span>를 붙이면 <span class="cd">pyplot</span>에 있는 명령어 <span class="cd">a()</span>를 사용한다는 의미가 되죠. 도트는 이처럼 한 단계 아래로 접근할 수 있게 합니다.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/323.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-1</span> 패키지 안의 명령어 사용하기</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="379">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">as로 명령어 줄여 쓰기</p>
+<p class="txt bl">사용하고 싶은 명령어가 패키지나 모듈에 속해 있으면 명령어를 사용할 때마다 패키지 이름이나 모듈 이름을 넣어야 해서 번거롭습니다. 명령어가 길어지기도 하고요. 가령 <span class="cd">matplotlib</span>의 <span class="cd">pyplot</span> 모듈에 속한 명령어를 사용한다고 해 봅시다. 명령어 <span class="cd">b()</span>와 <span class="cd">c()</span>를 사용하려면 다음과 같이 작성해야겠죠.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib
+matplotlib.pyplot.b()
+matplotlib.pyplot.c()</pre>
+</div>
+<p class="txt bl">이런 경우 <span class="cd">as</span> 키워드를 사용해 줄여 표현하는 방법이 있습니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt</pre>
+</div>
+<p class="txt bl"><span class="cd">import matplotlib.pyplot</span>은 <span class="cd">matplotlib</span>의 <span class="cd">pyplot</span> 모듈을 포함한다는 의미입니다. 이때 코드 마지막에 <span class="cd">as plt</span>를 추가하면 앞에 있는 <span class="cd">matplotlib.pyplot</span>을 앞으로 <span class="cd">plt</span>로 부르겠다는 의미가 됩니다. 따라서 <span class="cd">pyplot</span>에 있는 명령어를 다음과 같이 줄여서 사용할 수 있습니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+plt.b()
+plt.c()</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="380">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">다른 단어를 써도 있지만, 일반적으로 <span class="cd">matplotlib.pyplot</span>은 <span class="cd">plt</span>로 사용하니 이 책에서도 <span class="cd">plt</span>를 사용하겠습니다. 이 장에서는 <span class="cd">matplotlib</span>의 <span class="cd">pyplot</span>만 사용하므로 파일 시작 부분에서 <span class="cd">import matplotlib.pyplot as plt</span>를 한 번만 실행하면 그래프를 그리는 명령어를 계속 사용할 수 있습니다. 그럼 도구 사용법을 알았으니 본격적으로 그래프를 그려 봅시다.</p>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txt dl">지금까지는 주피터 노트북과 구글 코랩에서 코드를 실행했을 때 큰 차이가 없었습니다. 그런데 matplotlib의 일부 명령어는 조금 차이가 있습니다. 해당 부분에 설명을 추가해 두었으니 설명을 보고 충분히 따라할 수 있습니다.</p>
+<p class="txtex2 dl">또한, 코랩은 인터넷에 데이터 파일을 업로드해야 해서 데이터 파일 용량이 크면 업로드 시간이 오래 걸립니다. 하지만 주피터 노트북은 로컬에서 구동되기 때문에 내 PC에 파일이 있다면 업로드 없이 빠르게 데이터 파일을 읽어 들일 수 있습니다. 10장까지는 큰 데이터를 사용하지 않으므로 코랩을 사용해도 됩니다. 다만, 11장부터는 용량이 매우 큰 데이터를 사용하므로 주피터 노트북을 사용하길 추천합니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="381">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_66"><span class="yellow">8.1.2</span> 꺾은선 그래프 그리기</h4>
+<p class="txt bl">앞으로 여러 유형의 그래프를 그려 볼 텐데요. 그중에서 하나를 골라 제대로 이해한 후 다른 그래프로 넘어가겠습니다. 사용법이 비슷해서 하나를 제대로 알면 다른 그래프도 이해하기가 쉽습니다. 여기서는 꺾은선 그래프를 기준으로 설명합니다.</p>
+<p class="txt bl">꺾은선 그래프는 <span class="cd">plot()</span> 명령어로 그립니다. 그래프를 그릴 데이터를 <span class="cd">plot()</span>의 소괄호 안에 넣고 실행하면 그래프가 그려집니다. <span class="cd">plot()</span>은 <span class="cd">pyplot</span> 모듈에 속한 명령어이므로 앞에서 배웠듯이 <span class="cd">plt.plot()</span>으로 사용합니다. 다음을 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+plt.plot([<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[&lt;matplotlib.lines.Line2D at 0x234bfaffd60&gt;]</pre>
+</div>
+<p class="txt bl">아무 일도 벌어지지 않네요. 정상적인 결과이니 당황하지 마세요. 그래프를 보여 주는 별도의 명령어가 필요해서 그렇습니다. <span class="cd">plt.show()</span>를 추가해 다시 실행해 봅시다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 앞의 코드를 실행했을 때 결과창에 텍스트와 그래프가 같이 표현될 수도 있습니다. 그래프를 볼 수 있더라도 그래프를 화면에 그리게 하는 <span class="cd">plt.show()</span>를 마지막에 넣는 것이 제대로 된 형식입니다.</p>
+</div>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+plt.plot([<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>])
+<span class="cd2">plt.show()</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/325.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="382">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">드디어 그래프가 그려집니다. 코드와 결과를 살펴봅시다. <span class="cd">plot()</span>에 넣은 리스트 <span class="cd">[1, 5, 7, 3, 7]</span>은 x축일까요? y축일까요? 그래프를 보면 y축으로 보이죠? 이처럼 <span class="cd">plt.plot()</span>은 데이터가 단일 값이면 입력된 값을 y축으로 보고 x축을 기본으로 0부터 설정됩니다. 만약 x축에도 특정 값을 넣고 싶다면 x축 데이터도 추가하면 됩니다. 2개의 데이터를 넣으면 앞은 x축, 뒤는 y축으로 인식해 그래프를 그립니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>plt.plot(x축, y축)</pre>
+</div>
+<p class="txt bl">그래프를 그리려면 앞에서처럼 여러 개의 데이터 즉, 데이터 묶음이 필요합니다. 이 책에서는 리스트로 그래프를 그리겠습니다.</p>
+<p class="txt bl">앞에서는 <span class="cd">plt.plot()</span>에 리스트를 직접 넣었지만, 리스트를 변수에 저장하고 변수를 넣는 것이 일반적입니다. <span class="cd">[1, 5, 7, 3, 7]</span>을 3월부터 7월까지 5개월 간의 매출이라고 가정해 봅시다. 그럼 3월부터 7월을 리스트 <span class="cd">[3, 4, 5, 6, 7]</span>로 만들고, 이를 변수 <span class="cd">month</span>에 저장합니다. <span class="cd">[1, 5, 7, 3, 7]</span>도 변수 <span class="cd">sales</span>에 저장합니다. <span class="cd">month</span>와 <span class="cd">sales</span>를 <span class="cd">plt.plot()</span>에 넣으면 각각 x축과 y축을 나타내는 리스트가 되겠죠? 다음 코드를 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="cd2">month = [</span><span class="cd2 green">3</span><span class="cd2">,</span> <span class="cd2 green">4</span><span class="cd2">,</span> <span class="cd2 green">5</span><span class="cd2">,</span> <span class="cd2 green">6</span><span class="cd2">,</span> <span class="cd2 green">7</span><span class="cd2">]</span>
+<span class="cd2">sales = [</span><span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">5</span><span class="cd2">,</span> <span class="cd2 green">7</span><span class="cd2">,</span> <span class="cd2 green">3</span><span class="cd2">,</span> <span class="cd2 green">7</span><span class="cd2">]</span>
+plt.plot(<span class="cd2">month, sales</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/326.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="383">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">plt.plot()</span>에 <span class="cd">month</span>를 넣으니 이를 x축으로 인식해 x축이 3부터 7 사이의 값으로 바뀌었습니다. y축은 여전히 <span class="cd">sales</span>의 값으로 대응되고요.</p>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/327_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-2</span> 꺾은선 그래프의 x축과 y축</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 그래프를 그릴 때 눈금 간격은 지정하지 않으면 간격이 자동으로 설정됩니다. 그래서 앞의 결과처럼 3.5, 4.5와 같은 소수점이 있는 실수가 나옵니다. 자세한 내용은 뒤에서 배우겠습니다.</p>
+</div>
+<p class="txt bl">이번에는 의미를 조금 더 알기 쉽게 x축의 ‘월’을 문자로 바꿔 봅시다. 3월부터 7월을 영어 약자로 변경해 리스트에 넣습니다.</p>
+<div class="highlight">
+<pre>month = [<span class="cd2 red2">'mar'</span>, <span class="cd2 red2">'apr'</span>, <span class="cd2 red2">'may'</span>, <span class="cd2 red2">'jun'</span>, <span class="cd2 red2">'jul'</span>]
+sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+plt.plot(month, sales)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/327_2.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="384">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">month</span>를 <span class="cd">[3, 4, 5, 6, 7]</span>에서 <span class="cd">['mar', 'apr', 'may', 'jun', 'jul']</span>로 변경하니 x축이 <span class="cd">['mar', 'apr', 'may', 'jun', 'jul']</span>로 변경됐습니다.</p>
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 자주 하는 실수 - 데이터 개수 맞추기</p>
+<p class="txt bl"><span class="cd">plt.plot()</span>에서 x축과 y축에 데이터를 넣을 때 오류가 자주 발생하는 부분이 있습니다. 다음 코드를 실행해 보고 왜 오류가 났는지 생각해 봅시다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+plt.plot(<span class="cd2">[</span><span class="cd2 green">3</span>, <span class="cd2 green">4</span>, <span class="cd2 green">5</span>, <span class="cd2 green">6</span>, <span class="cd2 green">7</span>, <span class="cd2 green">8</span><span class="cd2">]</span>, sales)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+----&gt; 2 plt.plot([3, 4, 5, 6, 7, 8], sales)
+<span class="red2">ValueError</span>: x and y must have same first dimension, but have shapes (6,) and (5,)</pre>
+</div>
+<p class="txtex bl">오류 설명을 보면 ‘x와 y는 첫 번째 차원이 반드시 같아야 하는데, 이 코드는 (6,)과 (5,) 형태여서 ValueError가 발생한다’고 나옵니다. 여기서 형태라고 하는 (6,)과 (5,)는 리스트의 요소 개수를 의미합니다. x축은 <span class="cd">[3, 4, 5, 6, 7, 8]</span>로 6개인데, y축은 <span class="cd">[1, 5, 7, 3, 7]</span>로 5개입니다. 이렇게 x축과 y축의 데이터 개수가 같지 않으면 그래프를 그릴 수 없습니다. 그래프에 값을 넣을 때는 데이터 개수가 같은지 항상 확인하세요!</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="385">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_67"><span class="yellow">8.1.3</span> 그래프 꾸미기</h4>
+<p class="txt bl">이번에는 그래프를 보기 좋게 꾸며 보겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">제목 넣기</p>
+<p class="txt bl">먼저 그래프에 제목을 붙여 봅시다. 제목은 영어로 title이죠. 그래서 그래프에 제목을 붙이는 명령어도 <span class="cd">plt.title()</span>입니다. 원하는 그래프 제목을 <span class="cd">plt.title()</span>의 소괄호에 넣고 실행해 봅시다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+month = [<span class="red2">'mar'</span>, <span class="red2">'apr'</span>, <span class="red2">'may'</span>, <span class="red2">'jun'</span>, <span class="red2">'jul'</span>]
+<span class="cd2">plt.title('</span><span class="cd2 red2">월별 판매 실적</span>'<span class="cd2">)</span> <span class="green"># 그래프 제목 넣기</span>
+plt.plot(month, sales)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/329.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="386">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">영어로 된 x축은 문제없이 잘 출력되지만, 한글로 입력한 제목은 제대로 표시되지 않습니다. 이는 <span class="cd">matplotlib</span>이 기본으로 한글을 지원하지 않아서 그렇습니다. 한글이 나오게 하려면 다음 형식으로 한글 글꼴을 지정하는 명령어를 추가해야 합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'글꼴 이름'</span>)</pre>
+</div>
+<p class="txt bl">다음처럼 코드를 추가해 봅시다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+month = [<span class="red2">'mar'</span>, <span class="red2">'apr'</span>, <span class="red2">'may'</span>, <span class="red2">'jun'</span>, <span class="red2">'jul'</span>]
+<span class="cd2">plt.rc('</span><span class="cd2 red2">font'</span><span class="cd2">, family='</span><span class="cd2 red2">Malgun Gothic'</span><span class="cd2">)</span> <span class="green"># 글꼴 설정, macOS에서는 AppleGothic</span>
+plt.title(<span class="red2">'월별 판매 실적'</span>)            <span class="green"># 그래프 제목 넣기</span>
+plt.plot(month, sales)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/330.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="387">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">보통 그래프 제목이 있고 그 아래 그래프가 나오죠. 그래서 <span class="cd">plt.title()</span>이 <span class="cd">plt.plot()</span>보다 위에 있습니다. 그리고 그래프 제목을 한글로 출력하려면 그래프 제목을 출력하기 전에 한글 글꼴을 설정해야 하므로 <span class="cd">plt.rc()</span>를 <span class="cd">plt.title()</span>보다 위에 작성합니다. 글꼴은 Windows일 경우 Malgun Gothic을, macOS일 경우 AppleGothic을 넣으면 됩니다. Malgun Gothic은 중간에 공백이 있으니 유의하세요!</p>
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 코랩에서 한글 글꼴 설치하기</p>
+<p class="txt bl">주피터 노트북은 로컬 PC에서 글꼴을 가져오기 때문에 실습하는 컴퓨터에 지정한 글꼴이 있으면 명령어만으로 한글 글꼴을 지정할 수 있습니다. 하지만 코랩은 클라우드에서 작동하기 때문에 한글 글꼴을 설정하려면 글꼴을 따로 설치해야 합니다.</p>
+<p class="txt bl">여기서는 무료 글꼴인 나눔 글꼴을 설치합니다. 다음 코드를 작성 중인 코랩 파일의 첫 번째 셀에서 실행합니다.</p>
+<div class="highlight">
+<pre>!sudo apt-get install -y fonts-nanum <span class="green"># 코랩의 첫 번째 코드 셀에서 실행</span>
+!sudo fc-cache -fv
+!rm ~/.cache/matplotlib -rf</pre>
+</div>
+<p class="txt bl">설치가 끝나면 코랩 메뉴에서 <span class="dm">런타임 → 런타임 다시 시작</span>을 선택하고 팝업창이 뜨면 [예]를 클릭합니다.</p>
+<p class="txt bl">주피터 노트북과 동일한 방법으로 글꼴을 지정하고 코드를 실행합니다.</p>
+<div class="highlight">
+<pre>plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'NanumGothic'</span>)</pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="388">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">그래프 색 바꾸기</p>
+<p class="txt bl">이번에는 그래프의 색을 바꿔 보겠습니다. 색을 바꾸려면 <span class="cd">plt.plot()</span>에 <span class="cd">color</span> 옵션을 추가합니다. <span class="cd">color</span> 옵션의 값을 yellow를 의미하는 <span class="cd">y</span>로 설정하고 실행해 봅시다.</p>
+<div class="highlight">
+<pre>plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적</span>')
+plt.plot(month, sales, <span class="cd2">color='</span><span class="cd2 red2">y'</span>) <span class="green"># 그래프 색 바꾸기</span>
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/331.jpg"/></div>
+</div>
+<p class="txt bl">그래프가 노란색으로 바뀝니다. 다른 색을 넣고 실행해 보면 그래프의 색이 변하는 걸 볼 수 있습니다. 색상 코드는 <a href="https://matplotlib.org/examples/color/named_colors.html">https://matplotlib.org/examples/color/named_colors.html</a>을 참고하세요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="389">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">크기 바꾸기</p>
+<p class="txt bl">화면은 큰데 결과 그래프가 조금 작아 보입니다. 이럴 때는 <span class="cd">plt.figure()</span>를 사용해 그래프 크기를 조절합니다. 크기를 조절할 때는 <span class="cd">figsize</span>와 <span class="cd">dpi</span>라는 2가지 옵션을 줄 수 있습니다. <span class="cd">figsize</span>는 <span class="cd">figsize=(가로, 세로)</span> 형식으로, 그래프의 가로와 세로 크기를 인치 단위로 직접 지정합니다. <span class="cd">dpi</span>는 해상도로 크기를 조절합니다. dpi는 dot per inch의 약어로, 해상도를 나타내는 단위입니다. 1제곱인치 안에 점<span class="txts gray">(dot)</span>, 즉 픽셀이 몇 개 있는지를 의미합니다.</p>
+<p class="txt bl">여기서는 <span class="cd">dpi</span> 옵션으로 크기를 조절합니다. 값을 150으로 설정하고 실행합니다.</p>
+<div class="highlight">
+<pre><span class="cd2">plt.figure(dpi=</span><span class="cd2 green">150</span><span class="cd2">)</span> <span class="green"># 그래프 크기 바꾸기</span>
+<span class="green"># plt.figure(figsize=(8, 4))</span>
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적</span>')
+plt.plot(month, sales, color=<span class="cd2 red2">'b'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/332.jpg"/></div>
+</div>
+<p class="txt bl">그래프 크기가 커지면서 글자가 조금 더 잘 보입니다. 크기를 더 키우고 싶을 때는 더 큰 숫자를 넣으면 됩니다. <span class="cd">figsize</span>로도 실습해 보세요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="390">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">범례 넣기</p>
+<p class="txt bl">이번에는 범례를 추가해 보겠습니다. 그래프에서 점, 선, 막대의 색이나 모양에 따른 의미를 설명하는 부분을 <span class="dm">범례</span><span class="txts gray">(legend)</span>라고 합니다. 보통 그래프의 한쪽에 글상자 형태로 표시됩니다. 그래프에 범례를 표시하려면 <span class="cd">plt.plot()</span>에 <span class="cd">label</span> 옵션으로 라벨을 붙이면 됩니다.</p>
+<p class="txt bl">흔히 종이나 천에 상표나 제품명 등을 인쇄해 상품에 붙여 놓은 조각을 <span class="dm">라벨</span>(또는 레이블, label)이라고 합니다. 상품에 라벨이 달려 있듯이 그래프의 구성 요소가 의미하는 바를 나타내고 싶을 때 라벨을 사용합니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/333.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-3</span> 라벨</p>
+<p class="txt bl"><span class="cd">plt.plot()</span>에 <span class="cd">label</span> 옵션을 추가하면 그림처럼 그래프 선에 라벨이 달립니다. 다만, 그래프에서는 라벨이 상품 라벨과 같은 형태로 나타나는 것이 아니라 범례의 형태로 나타납니다. <span class="cd">matplotlib</span>으로 그래프에 라벨을 붙이려면 2가지가 필요합니다. 먼저 <span class="cd">plt.plot()</span>에 <span class="cd">label</span> 옵션으로 라벨 내용을 설정하고, <span class="cd">plt.legend()</span>로 그래프에 범례를 표시합니다. 일단 코드를 실행해 봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="391">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre>plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적'</span>)
+plt.plot(month, sales, color=<span class="red2">'b'</span>, <span class="cd2">label=</span><span class="cd2 red2">'단위: 개수'</span>) <span class="green"># 범례 넣기</span>
+<span class="cd2">plt.legend()</span>
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/334_1.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">label='단위: 개수'</span>로 그래프의 라벨을 지정하고 <span class="cd">plt.legend()</span>로 범례를 표시합니다. <span class="cd">plt.legend()</span>를 추가하지 않으면 라벨 옵션을 줘도 범례가 표시되지 않습니다.</p>
+<p class="txt bl"><span class="cd">plt.legend()</span>에 <span class="cd">loc</span> 옵션을 추가하면 범례 위치를 바꿀 수 있습니다.</p>
+<div class="highlight">
+<pre>plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적'</span>)
+plt.plot(month, sales, color=<span class="red2">'b'</span>, label=<span class="red2">'단위: 개수'</span>)
+plt.legend(<span class="cd2">loc=</span><span class="cd2 red2">'lower right'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/334_2.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="392">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">범례가 오른쪽 아래로 옮겨집니다. 범례 위치는 다음과 같이 그래프를 9등분해 지정하고, <span class="cd">best</span>로 지정하면 그래프의 생김새에 따라 자동으로 최적이라 판단되는 위치에 범례를 표시합니다.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/335_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-4</span> 옵션 값에 따른 범례 위치</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="393">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">축 이름 넣기</p>
+<p class="txt bl">그래프에 x축과 y축의 이름이 없으니 의미를 한 번에 알기 어렵네요. 이번에는 x축과 y축에 이름을 붙여 봅시다. x축에 이름을 붙이는 명령어는 <span class="cd">plt.xlabel()</span>, y축에 이름 붙이는 명령어는 <span class="cd">plt.ylabel()</span>입니다. 축 이름은 소괄호 안에 넣습니다.</p>
+<div class="highlight">
+<pre>plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적'</span>)
+plt.plot(month, sales, color=<span class="red2">'b'</span>, label=<span class="red2">'단위: 개수'</span>)
+plt.legend(loc=<span class="red2">'lower right'</span>)
+<span class="cd2">plt.xlabel(</span><span class="cd2 red2">'월'</span><span class="cd2">)</span>
+<span class="cd2">plt.ylabel(</span><span class="cd2 red2">'매출'</span><span class="cd2">)</span>
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/335_2.jpg"/></div>
+</div>
+<p class="txt bl">x축과 y축에 축 이름이 표시됩니다. <span class="cd">plt.xlabel()</span>과 <span class="cd">plt.ylabel()</span>은 <span class="cd">label</span> 옵션과 비슷해 보이지만, 명령어에 추가되는 옵션이 아니라 별도의 명령어라는 점을 유의하세요!</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="394">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">지금까지 꺾은선 그래프를 그리고 여러 옵션으로 그래프를 꾸며 봤습니다. 앞에서 봤듯이 그래프를 그릴 때는 일정한 형식이 있습니다. 가장 먼저 라이브러리를 추가하고 <span class="cd">plt.title()</span>로 제목을 붙이고 <span class="cd">plt.plot()</span>으로 그래프를 그리는 것이죠. 만든 그래프를 보여 주지 않으면 소용이 없으니 마지막에 그래프를 보여 주는 명령어 <span class="cd">plt.show()</span>도 필수입니다. 정리하면 다음과 같습니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt    <span class="green"># plt로 명령어 줄여 쓰기</span>
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'글꼴 이름'</span>) <span class="green"># 한글 글꼴 지정하기</span>
+plt.title(<span class="red2">'그래프 제목'</span>)           <span class="green"># 그래프 제목 넣기</span>
+plt.plot(x축 데이터, y축 데이터)   <span class="green"># 꺾은선 그래프 그리기</span>
+plt.show()                         <span class="green"># 그래프 보여 주기</span></pre>
+</div>
+<p class="txt bl">여기에 해상도, 범례, 색상 등 그래프를 꾸미는 명령어를 선택적으로 추가할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="395">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a1"><span class="dm brown">1</span> 다음 코드를 보고 <span class="bg_black_line">틀린</span> 설명을 고르세요.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt 
+
+mon = [<span class="green">1</span>, <span class="green">2</span>, <span class="green">3</span>, <span class="green">4</span>, <span class="green">5</span>, <span class="green">6</span>, <span class="green">7</span>, <span class="green">8</span>, <span class="green">9</span>] 
+data = [<span class="green">92</span>, <span class="green">63</span>, <span class="green">8</span>, <span class="green">27</span>, <span class="green">39</span>, <span class="green">84</span>, <span class="green">76</span>, <span class="green">18</span>, <span class="green">46</span>] 
+
+plt.figure(dpi=<span class="green">200</span>) 
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>) 
+plt.plot(mon, data, color=<span class="red2">'r'</span>, label=<span class="red2">'지출'</span>) 
+plt.legend(loc=<span class="red2">'upper left'</span>) 
+plt.show()</pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">① x축의 범위는 1부터 9다.</p>
+<p class="txt bl s12_12">② 범례는 왼쪽 위에 표시된다.</p>
+<p class="txt bl s12_12">③ ‘지출’이라는 그래프 제목이 나타난다.</p>
+<p class="txt bl s12_12">④ <span class="cd">import matplotlib.pyplot as plt</span>는 <span class="cd">matplotlib.pyplot</span>을 줄여 <span class="cd">plt</span>로 사용할 수 있게 한다.</p>
+<p class="txt bl s12_12">⑤ <span class="cd">plt.rc('font', family='Malgun Gothic')</span>은 한글 글꼴을 설정하는 코드로, 이 코드가 없다면 그래프에서 한글이 표시되지 않는다.</p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0879/">정답 및 해설</a></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="396">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown">8.2</span><br/>
+    다양한 유형의 그래프 그리기</h3>
+</div>
+<p class="txt bl">꺾은선 그래프 외에도 다양한 그래프를 그릴 수 있습니다. 기본 구조는 같고, 그래프를 그리는 명령어 <span class="cd">plt.plot()</span>만 바뀔 뿐이죠. 그럼 하나씩 살펴봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="397">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_68"><span class="yellow">8.2.1</span> 막대그래프 그리기</h4>
+<p class="txt bl">막대그래프는 꺾은선 그래프만큼 자주 쓰입니다. 응용할 수 있는 부분도 무궁무진하죠. 막대그래프는 <span class="cd">plt.bar()</span>로 그립니다. 꺾은선 그래프를 그린 것처럼 다음 코드로 막대그래프를 그려 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+
+sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+plt.bar(sales)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+----&gt; 4 plt.bar(sales)
+<span class="red2">TypeError</span>: bar() missing 1 required positional argument: 'height'</pre>
+</div>
+<p class="txt bl">오류가 뜨지만 당황하지 말고 오류 내용을 잘 살펴봅시다. 마지막 줄을 보니 <span class="cd">TypeError</span>가 발생했고, ‘<span class="cd">bar()</span>에 요구되는 위치 요소인 높이<span class="txts gray">(height)</span>가 누락됨’이라고 합니다. 즉, <span class="cd">bar()</span>에는 높이도 넣어 줘야 하는데, 빠뜨렸다는 뜻입니다.</p>
+<p class="txt bl"><span class="cd">plt.plot()</span>은 데이터를 하나만 넣어도 됐지만, <span class="cd">plt.bar()</span>는 2개의 데이터(x축, y축)를 모두 넣어야 그래프를 그립니다. 그럼 데이터를 추가해 다시 실행해 봅시다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+<span class="cd2">month = [</span><span class="cd2 green">3</span><span class="cd2">,</span> <span class="cd2 green">4</span><span class="cd2">,</span> <span class="cd2 green">5</span><span class="cd2">,</span> <span class="cd2 green">6</span><span class="cd2">,</span> <span class="cd2 green">7</span><span class="cd2">]</span>
+plt.bar(<span class="cd2">month</span>, sales)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/339.jpg"/></div>
+</div>
+<p class="txt bl">막대그래프가 잘 그려집니다. x축에 <span class="cd">month</span>의 값이 차례대로 들어가고, y축에도 <span class="cd">sales</span>의 값이 차례대로 들어갑니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="398">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">제목 넣고 그래프 색 바꾸기</p>
+<p class="txt bl">이번에는 그래프에 제목도 넣고, 막대도 파란색으로 바꿔 봅시다. 제목은 <span class="cd">plt.title()</span>로 추가하면 됩니다. 제목은 한글이니 글꼴도 설정해야죠. 파란색은 <span class="cd">color</span> 옵션을 추가해 <span class="cd">'blue'</span> 또는 <span class="cd">'b'</span>로 설정하면 됩니다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+month = [<span class="green">3</span>, <span class="green">4</span>, <span class="green">5</span>, <span class="green">6</span>, <span class="green">7</span>]
+<span class="cd2">plt.rc(</span><span class="cd2 red2">'font'</span><span class="cd2">, family=</span><span class="cd2 red2">'Malgun Gothic'</span><span class="cd2">)</span>
+<span class="cd2">plt.title(</span><span class="cd2 red2">'월별 판매 실적'</span><span class="cd2">)</span>
+plt.bar(month, sales, <span class="cd2">color=</span><span class="cd2 red2">'b'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/340_1.jpg"/></div>
+</div>
+<p class="txt bl">꺾은선 그래프에서 배운 형식을 그대로 적용해서 그래프 제목과 색을 출력했습니다. 범례를 적용하는 것 역시 꺾은선 그래프와 같으니 직접 수정해 보세요!</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="399">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">x축에 range()로 연속 숫자 넣기</p>
+<p class="txt bl">반복문에서 연속되는 숫자 범위를 표현할 때 <span class="cd">range()</span>라는 명령어를 배웠습니다. 리스트 <span class="cd">[3, 4, 5, 6, 7]</span>도 3부터 7까지 연속된 숫자이므로 <span class="cd">range()</span>를 사용해 <span class="cd">range(3, 8)</span>로 표현할 수 있습니다. x축에 <span class="cd">[3, 4, 5, 6, 7]</span> 대신 <span class="cd">range(3, 8)</span>을 넣고 실행해 봅시다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적'</span>)
+plt.bar(<span class="cd2">range(</span><span class="cd2 green">3</span><span class="cd2">,</span> <span class="cd2 green">8</span><span class="cd2">)</span>, sales, color=<span class="red2">'b'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/340_2.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="400">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">x축 데이터가 <span class="cd">[3, 4, 5, 6, 7]</span>일 때와 똑같은 그래프가 그려집니다. <span class="cd">range()</span>의 숫자를 변경하면 다른 달의 그래프로도 그릴 수 있겠죠? 예를 들어, <span class="cd">range(1, 6)</span>을 넣으면 1월부터 5월까지, <span class="cd">range(2, 11, 2)</span>를 넣으면 2부터 시작해 2씩 건너뛰므로 짝수 월로 x축을 설정할 수 있습니다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적'</span>)
+plt.bar(range(<span class="cd2 green">2</span><span class="cd2">,</span> <span class="cd2 green">11</span><span class="cd2">,</span> <span class="cd2 green">2</span>), sales, color=<span class="red2">'b'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/341.jpg"/></div>
+</div>
+<p class="txt bl">이처럼 데이터가 연속된 숫자일 때는 리스트 대신 <span class="cd">range()</span> 명령어로 데이터를 넣을 수도 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="401">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 자주 하는 실수 - 데이터 개수 맞추기</p>
+<p class="txt bl"><span class="cd">plt.bar()</span>에서도 x축 데이터의 개수와 y축 데이터의 개수가 같지 않으면 오류가 발생합니다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적'</span>)
+plt.bar(range(<span class="cd2 green">6</span>), sales, color=<span class="red2">'b'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+----&gt; 4 plt.bar(range(6), sales, color='b')
+<span class="red2">ValueError</span>: shape mismatch: objects cannot be broadcast to a single shape</pre>
+</div>
+<p class="txtex bl">오류 내용이 길어도 화살표가 가리키는 부분과 마지막 내용만 봐도 오류를 이해할 수 있으니 두려워하지 마세요. 화살표가 <span class="cd">plt.bar(range(6), sales, color='b')</span>를 가리키죠? 이 부분에서 오류가 발생했음을 알 수 있습니다. 마지막 줄을 보면 ‘형태 불일치: 대상들이 하나의 형태로 뿌려질 수 없다’고 나옵니다. 복잡해 보이지만, 이는 x축 데이터와 y축 데이터의 형태가 일치하지 않아서 오류가 발생한다는 뜻입니다. <span class="cd">range(6)</span>은 0부터 5까지를 의미하므로 값이 총 6개지만, <span class="cd">sales</span>에는 5개만 있습니다. 그래프를 그릴 때는 x축 데이터와 y축 데이터의 개수가 같아야 한다는 점을 꼭 기억해 두세요.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="402">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">막대 방향 전환하기</p>
+<p class="txt bl">막대가 세로로 선 형태(수직)가 아니라 가로로 누운 형태(수평)로도 그래프를 그릴 수 있습니다. <span class="cd">plt.bar()</span>에 한 글자를 추가한 <span class="cd">plt.barh()</span>를 사용하면 됩니다. 여기에서 h는 horizontal을 의미합니다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적'</span>)
+<span class="cd2">plt.barh</span>(range(<span class="cd2 green">3</span><span class="cd2">,</span> <span class="cd2 green">8</span>), sales, color=<span class="red2">'b'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/342.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">plt.barh()</span>는 <span class="cd">plt.bar()</span>와 사용법이 같고, 기준점만 x축이 아닌 y축으로 바뀝니다. 따라서 <span class="cd">range(3, 8)</span>이 y축이 되고, <span class="cd">sales</span>가 x축이 됩니다.</p>
+<p class="txt bl">꺾은선 그래프를 배울 때 적용한 방식과 같으니 막대그래프 그리기도 어렵지 않죠? 그래프 그리기 명령어만 <span class="cd">plt.plot()</span>에서 <span class="cd">plt.bar()</span>나 <span class="cd">plt.barh()</span>로 바꾸면 됩니다. 단, <span class="cd">plt.bar()</span>와 <span class="cd">plt.barh()</span>에는 반드시 x축과 y축 데이터를 모두 넣어야 합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="403">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_69"><span class="yellow">8.2.2</span> 히스토그램 그리기</h4>
+<p class="txt bl">이번에는 히스토그램을 그려 보겠습니다. 히스토그램은 막대 모양의 도형으로 나타내는 그래프로, x축에는 데이터를, y축에는 데이터의 개수(빈도)를 넣어 분포를 표현합니다. 히스토그램을 그리는 명령어는 <span class="cd">plt.hist()</span>입니다. 다음 코드로 히스토그램을 그려 봅시다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+<span class="cd2">plt.hist</span>(sales)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/343.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">plt.hist()</span>는 데이터를 넣으면 데이터의 최솟값과 최댓값을 골라내서 최솟값을 x축의 가장 왼쪽에, 최댓값을 x축의 가장 오른쪽에 놓고 범위를 지정합니다. <span class="cd">[1, 5, 7, 3, 7]</span>에서 최솟값은 1, 최댓값은 7이죠. 그리고 1이 1개, 3이 1개, 5가 1개, 7이 2개입니다. 따라서 x축은 <span class="cd">[1, 3, 5, 7]</span>이 되고, y축은 <span class="cd">[1, 1, 1, 2]</span>가 됩니다. 이처럼 <span class="cd">plt.hist()</span>는 리스트를 하나만 넣어도 자동으로 리스트의 값이 다른 요소를 x축으로, 리스트의 각 요소 개수를 y축으로 설정합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="404">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">데이터가 적어서 막대그래프와 비슷해 보이네요. <span class="cd">random</span> 라이브러리를 사용해 무작위 정수 10개를 만들고, 이 데이터로 히스토그램을 그려 봅시다. 무작위 정수 10개를 저장하는 리스트명은 <span class="cd">a</span>라고 하겠습니다.</p>
+<div class="highlight">
+<pre><span class="cd2 purple">import</span> <span class="cd2">random</span>
+
+<span class="cd2">a = []</span>
+<span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">10</span><span class="cd2">)</span>:
+    <span class="cd2">a.append(random.randint(</span><span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">10</span><span class="cd2">))</span>
+<span class="cd2 gold">print</span><span class="cd2">(a)</span>
+plt.hist(<span class="cd2">a</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[7, 5, 3, 3, 1, 3, 2, 10, 7, 8]
+
+</pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/344.jpg"/></div>
+</div>
+<p class="txt bl">책과 결과가 다르다고 놀라지 마세요. 무작위 정수이므로 그래프 모양이 다를 수밖에 없습니다. 코드를 봅시다. 반복문을 활용해 <span class="cd">a</span> 리스트에 1부터 10 사이의 무작위 정수 10개를 추가했습니다. 반복문이 끝나면 <span class="cd">a</span>에 들어 있는 데이터를 출력해 확인하고 바로 <span class="cd">plt.hist(a)</span>로 히스토그램을 그렸습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="405">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">구간 조정하기</p>
+<p class="txt bl">히스토그램을 그릴 때 구간을 조정할 수 있습니다. 구간은 막대의 너비라고 보면 됩니다. 옵션을 <span class="cd">bins</span>로 주는데, 이때 bin이 구간을 뜻합니다. 앞의 코드에서 얻은 무작위 값을 넣어 구간이 20인 히스토그램을 그려 보겠습니다.</p>
+<div class="highlight">
+<pre>a = <span class="cd2">[</span><span class="cd2 green">7</span><span class="cd2">,</span> <span class="cd2 green">5</span><span class="cd2">,</span> <span class="cd2 green">3</span><span class="cd2">,</span> <span class="cd2 green">3</span><span class="cd2">,</span> <span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">3</span><span class="cd2">,</span> <span class="cd2 green">2</span><span class="cd2">,</span> <span class="cd2 green">10</span><span class="cd2">,</span> <span class="cd2 green">7</span><span class="cd2">,</span> <span class="cd2 green">8</span><span class="cd2">]</span>
+plt.hist(a, <span class="cd2">bins=</span><span class="cd2 green">20</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/345.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">bins</span>로 구간 개수를 설정하면 데이터의 x축 범위를 산출한 후 설정한 구간 개수로 나눕니다. 여기서는 1부터 10까지를 20개 구간으로 나누므로 처음 히스토그램보다 막대가 얇아졌습니다.</p>
+<p class="txt bl"><span class="cd">bins</span>는 히스토그램에만 있는 옵션으로 다른 그래프 명령어에서는 사용할 수 없습니다. 그리고 <span class="cd">plt.hist()</span>는 리스트가 하나만 필요합니다. 따라서 x축과 y축 데이터를 모두 넣으면 오류가 발생합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="406">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_70"><span class="yellow">8.2.3</span> 원그래프 그리기</h4>
+<p class="txt bl">원그래프도 그려 봅시다. 원그래프는 파이를 닮았다고 해서 ‘파이차트’라고도 합니다. 원그래프를 그리는 명령어는 <span class="cd">plt.pie()</span>이며, 히스토그램처럼 리스트 하나를 넣으면 됩니다.</p>
+<p class="txt bl">혈액형별 사람 수를 원그래프로 그려 보겠습니다. 혈액형을 뜻하는 blood type을 줄인 <span class="cd">b_type</span>으로 리스트명을 짓고 <span class="cd">[25, 19, 37, 11]</span>을 저장합니다. 이를 각각 A형, B형, O형, AB형인 사람 수라고 가정합시다.</p>
+<div class="highlight">
+<pre>b_type = [<span class="green">25</span>, <span class="green">19</span>, <span class="green">37</span>, <span class="green">11</span>]
+plt.pie(b_type)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w40"><img alt="" class="w100" src="https://thebook.io/img/080251/346.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="407">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">라벨 표시하기</p>
+<p class="txt bl">앞의 코드를 실행하면 원그래프가 잘 나옵니다. 그런데 범례가 없으니 각 영역이 무엇을 의미하는지 알기가 어렵네요. 각 영역이 무엇을 나타내는지 원그래프에 라벨을 붙여 봅시다. 원그래프에서 라벨은 <span class="cd">labels</span> 옵션으로 붙일 수 있습니다. <span class="cd">plt.pie()</span>에서는 한 번에 그리는 영역이 여러 개이므로 앞에서 나온 <span class="cd">label</span> 옵션과 달리 뒤에 s가 붙은 <span class="cd">labels</span>임에 유의하세요. 라벨을 붙이려는 데이터가 4개이므로 리스트로 표현해야죠. 차례대로 리스트 안에 넣어 <span class="cd">labels=['A형', 'B형', 'O형', 'AB형']</span> 형태로 지정하면 됩니다. 그리고 한글이 나오므로 한글 글꼴도 설정합니다.</p>
+<div class="highlight">
+<pre>b_type = [<span class="green">25</span>, <span class="green">19</span>, <span class="green">37</span>, <span class="green">11</span>]
+<span class="cd2">plt.rc(</span><span class="cd2 red2">'font'</span><span class="cd2">, family=</span><span class="cd2 red2">'Malgun Gothic'</span><span class="cd2">)</span> <span class="green"># macOS에서는 'AppleGothic'</span>
+plt.pie(b_type, <span class="cd2">labels=[</span><span class="cd2 red2">'A형'</span><span class="cd2">,</span> <span class="cd2 red2">'B</span><span class="cd2 red2">형'</span><span class="cd2">,</span> <span class="cd2 red2">'O</span><span class="cd2 red2">형'</span><span class="cd2">,</span> <span class="cd2 red2">'AB형'</span><span class="cd2">])</span>
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w40"><img alt="" class="w100" src="https://thebook.io/img/080251/347.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="408">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이제 원그래프 영역별로 라벨이 표시됩니다. <span class="cd">labels</span>에 옵션 값을 넣을 때 앞에서처럼 리스트로 직접 넣어도 되지만, 변수를 사용해도 됩니다. 다음 코드처럼 영역 이름을 <span class="cd">b_name</span>이란 리스트에 저장하고 이를 <span class="cd">labels</span>에 지정합니다.</p>
+<div class="highlight">
+<pre>b_type = [<span class="green">25</span>, <span class="green">19</span>, <span class="green">37</span>, <span class="green">11</span>]
+<span class="cd2">b_name</span> = [<span class="red2">'A형'</span>, <span class="red2">'B형'</span>, <span class="red2">'O형'</span>, <span class="red2">'AB형'</span>]
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.pie(b_type, labels=<span class="cd2">b_name</span>)
+plt.show()</pre>
+</div>
+<p class="txt bl">결과는 같으니 코드를 실행해서 확인해 보세요!</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="409">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">비율 표시하기</p>
+<p class="txt bl">원그래프의 영역이 각각 크기가 달라서 어느 정도 짐작은 가지만, 정확한 비율은 알 수가 없습니다. 혈액형별 비율이 얼마인지 나온다면 그래프를 이해하기가 더 수월하겠죠? 비율은 <span class="cd">autopct</span> 옵션으로 표시합니다. ‘auto percent’라는 의미입니다.</p>
+<div class="highlight">
+<pre>b_type = [<span class="green">25</span>, <span class="green">19</span>, <span class="green">37</span>, <span class="green">11</span>]
+b_name = [<span class="red2">'A형'</span>, <span class="red2">'B형'</span>, <span class="red2">'O형'</span>, <span class="red2">'AB형'</span>]
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.pie(b_type, labels=b_name, <span class="cd2">autopct=</span><span class="cd2 red2">'%1.1f%%'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w40"><img alt="" class="w100" src="https://thebook.io/img/080251/348.jpg"/></div>
+</div>
+<p class="txt bl">영역별로 차지하는 비율이 나옵니다. 옵션에서 값으로 넣은 <span class="cd">'%1.1f%%'</span>는 퍼센트를 소수점 몇 자리까지 나타내는가를 지정합니다. <span class="cd">'%1.1f%%'</span>는 소수점 첫째 자리까지, <span class="cd">'%1.4f%%'</span>는 소수점 넷째 자리까지 나타냅니다. 소수점 이하 자릿수를 직접 바꿔 가면서 실행해 보세요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="410">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_71"><span class="yellow">8.2.4</span> 산점도 그리기</h4>
+<p class="txt bl">통계 분석에 많이 쓰는 산점도라는 그래프가 있습니다. <span class="dm">산점도</span>는 x값과 y값이 만나는 지점을 점으로 찍어서 표현한 그래프입니다. 산점도는 <span class="cd">plt.scatter()</span> 명령어로 그리며, <span class="cd">plt.bar()</span>나 <span class="cd">plt.barh()</span>처럼 x축과 y축 리스트를 넣어 주면 됩니다.</p>
+<p class="txt bl">국어 점수와 영어 점수의 상관관계를 보여 주는 그래프를 그려 봅시다. 국어 점수를 저장한 리스트는 <span class="cd">kor</span>, 영어 점수를 저장한 리스트는 <span class="cd">eng</span>로 하겠습니다.</p>
+<div class="highlight">
+<pre>kor = [<span class="green">80</span>, <span class="green">20</span>, <span class="green">50</span>, <span class="green">20</span>, <span class="green">10</span>, <span class="green">50</span>, <span class="green">60</span>, <span class="green">30</span>, <span class="green">60</span>]
+eng = [<span class="green">90</span>, <span class="green">40</span>, <span class="green">60</span>, <span class="green">40</span>, <span class="green">10</span>, <span class="green">30</span>, <span class="green">50</span>, <span class="green">70</span>, <span class="green">90</span>]
+plt.scatter(kor, eng)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/349_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="411">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">실행하면 x축에 <span class="cd">kor</span> 리스트를, y축에 <span class="cd">eng</span> 리스트를 넣어서 산점도를 그립니다. <span class="cd">kor</span> 리스트의 첫 번째 요소와 <span class="cd">eng</span> 리스트의 첫 번째 요소끼리 짝을 이뤄 (80, 90)에, <span class="cd">kor</span>와 <span class="cd">eng</span>의 두 번째 요소끼리 짝을 이뤄 (20, 40)에 점을 찍습니다. 이렇게 두 리스트의 각 요소가 짝을 이뤄 산점도에 점을 찍습니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/349_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-5</span> 산점도의 x축과 y축</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="412">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">색 바꾸고 투명도 설정하기</p>
+<p class="txt bl">이번에는 산점도를 꾸며 보겠습니다. 먼저 점의 색을 바꾸고 투명도를 설정합니다. 투명도는 색의 ‘진한 정도’로 보면 됩니다. 점의 색은 다른 그래프와 마찬가지로 <span class="cd">color</span> 옵션을 사용하면 됩니다. 투명도는 <span class="cd">alpha</span> 옵션으로 설정합니다. x축 이름과 y축 이름도 추가합시다.</p>
+<div class="highlight">
+<pre>kor = [<span class="green">80</span>, <span class="green">20</span>, <span class="green">50</span>, <span class="green">20</span>, <span class="green">10</span>, <span class="green">50</span>, <span class="green">60</span>, <span class="green">30</span>, <span class="green">60</span>]
+eng = [<span class="green">90</span>, <span class="green">40</span>, <span class="green">60</span>, <span class="green">40</span>, <span class="green">10</span>, <span class="green">30</span>, <span class="green">50</span>, <span class="green">70</span>, <span class="green">90</span>]
+<span class="cd2">plt.rc(</span><span class="cd2 red2">'font'</span><span class="cd2">, family=</span><span class="cd2 red2">'Malgun Gothic'</span><span class="cd2">)</span>
+plt.scatter(kor, eng, <span class="cd2">color=</span><span class="cd2 red2">'red'</span>, <span class="cd2">alpha=</span><span class="cd2 green">0.7</span>)
+<span class="cd2">plt.xlabel(</span><span class="cd2 red2">'국어 점수'</span><span class="cd2">)</span>
+<span class="cd2">plt.ylabel(</span><span class="cd2 red2">'영어 점수'</span><span class="cd2">)</span>
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/350.jpg"/></div>
+</div>
+<p class="txt bl">점의 색은 <span class="cd">red</span>로 하되 <span class="cd">alpha</span>로 투명도를 1보다 낮게 설정해서 조금 연한 빨간색으로 바꿨습니다. 투명도를 0.5, 0.3 등으로 바꾸고 투명도 변화를 확인해 보세요. 축 이름이 한글이라서 한글 글꼴 설정도 넣었습니다. x축과 y축 이름도 추가했고요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="413">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">컬러맵 적용하기</p>
+<p class="txt bl">이번에는 데이터를 바꿔 키와 몸무게의 상관관계를 표현하는 산점도를 그려 보겠습니다. 100명의 데이터를 표시하는데, 숫자 100개를 직접 입력하긴 어려우므로 <span class="cd">random</span> 라이브러리를 사용해 무작위로 키와 몸무게 100개를 만듭니다. 키를 저장하는 리스트는 <span class="cd">height</span>, 몸무게를 저장하는 리스트는 <span class="cd">weight</span>로 하고, 반복문을 활용해 각 리스트에 숫자 100개를 넣습니다. 그리고 컬러맵<span class="txts gray">(color map)</span>을 사용해 산점도를 다채롭게 표현합니다. 컬러맵을 사용하려면 2가지 옵션을 추가해야 합니다. <span class="cd">cmap</span> 옵션으로 사용할 컬러맵의 이름을 지정하고, <span class="cd">c</span> 옵션으로 컬러맵을 표현할 기준이 되는 축을 설정합니다. 코드를 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+height, weight = [], []
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">100</span>):
+    height.append(random.randint(<span class="green">100</span>, <span class="green">200</span>))
+    weight.append(random.randint(<span class="green">20</span>, <span class="green">100</span>))
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'키와 몸무게의 상관관계'</span>)
+plt.scatter(height, weight, c=height, cmap=<span class="red2">'RdPu'</span>)
+plt.xlabel(<span class="red2">'키'</span>)
+plt.ylabel(<span class="red2">'몸무게'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/351.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="414">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">키와 몸무게를 저장할 <span class="cd">height</span>, <span class="cd">weight</span>를 빈 리스트로 한 번에 만듭니다. 5장에서 배웠듯이 여러 변수에 값을 한 번에 넣어 정의할 수 있습니다. 리스트도 마찬가지고요. 다음으로 무작위 값의 키와 몸무게를 리스트에 추가하는 코드를 반복문에 넣었습니다. 키는 100에서 200 사이로, 몸무게는 20부터 100 사이 값이 나오도록 설정했습니다. <span class="cd">plt.scatter()</span>의 <span class="cd">c</span> 옵션에서 색상 기준을 <span class="cd">height</span>로 지정했기 때문에 키가 작을수록 연하게, 클수록 점의 색이 진하게 나타납니다. <span class="cd">c</span> 옵션의 값을 <span class="cd">weight</span>로 바꾸면 몸무게에 따라 점의 색상 농도가 다르게 나타납니다. <span class="cd">c</span> 옵션을 변경해서 색상 변화를 확인해 보세요. 컬러맵은 <span class="cd">RdPu</span>를 지정했습니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> <span class="cd">matplotlib</span>의 컬러맵은 여러 범주로 나뉘고 범주마다 더 많은 하위 컬러맵이 있습니다. <a href="https://matplotlib.org/tutorials/colors/colormaps.html">https://matplotlib.org/tutorials/colors/colormaps.html</a>에 가면 다양한 컬러맵을 볼 수 있습니다. 컬러맵 왼쪽에 있는 영단어가 해당 컬러맵의 이름입니다. 원하는 컬러맵을 넣어서 코드를 실행해 보세요.</p>
+</div>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/352_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-6</span> 컬러맵</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="415">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">cmap</span>을 사용할 때 <span class="cd">plt.colorbar()</span> 명령어를 추가하면 그래프 옆에 숫자별 색상값을 나타내는 컬러바를 보여 줍니다.</p>
+<div class="highlight">
+<pre>…
+plt.scatter(height, weight, c=height, cmap=<span class="red2">'RdPu'</span>)
+<span class="cd2">plt.colorbar(label=</span><span class="cd2 red2">'키'</span><span class="cd2">)</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/352_2.jpg"/></div>
+</div>
+<p class="txt bl">산점도 옆에 컬러바가 생깁니다. <span class="cd">plt.colorbar()</span>에 <span class="cd">label</span> 옵션을 추가해 컬러바에 라벨도 붙였습니다. 실행결과를 보면 컬러바 옆에 키라고 적혀 있습니다. 컬러바가 있으니 색상이 의미하는 바를 좀 더 직관적으로 알 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="416">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">점의 크기 조절하기</p>
+<p class="txt bl">다른 그래프는 항목을 2개까지 표현할 수 있지만, 산점도는 세 항목도 한 번에 표현할 수 있습니다. x축, y축으로 두 항목을, 점의 크기로 세 번째 항목을 표현합니다. 점의 크기는 <span class="cd">plt.scatter()</span>에 <span class="cd">s</span> 옵션으로 추가해 조절합니다.</p>
+<p class="txt bl">키와 몸무게가 체육 점수에 영향을 미치는지 알아봅시다. 이를 위해 키와 몸무게, 체육 점수의 상관관계를 살펴봅시다. 앞의 코드에 체육 점수를 의미하는 <span class="cd">score</span> 리스트를 추가하고 점의 크기를 <span class="cd">score</span>로 지정합니다. 체육 점수는 점의 크기가 뚜렷이 차이나도록 1부터 1000 사이의 무작위 값을 넣겠습니다.</p>
+<div class="highlight">
+<pre>height, weight, <span class="cd2">score</span> = [], [], <span class="cd2">[]</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">100</span>):
+    height.append(random.randint(<span class="green">100</span>, <span class="green">200</span>))
+    weight.append(random.randint(<span class="green">20</span>, <span class="green">100</span>))
+    <span class="cd2">score.append(random.randint(</span><span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">1000</span><span class="cd2">))</span>
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="cd2 red2">'키와 몸무게, 체육 점수의 상관관계'</span>)
+plt.scatter(height, weight, <span class="cd2">s=score</span>, c=<span class="cd2">score</span>, cmap=<span class="cd2 red2">'rainbow'</span><span class="cd2">, alpha=</span><span class="cd2 green">0.7</span>)
+plt.xlabel(<span class="red2">'키'</span>)
+plt.ylabel(<span class="red2">'몸무게'</span>)
+plt.colorbar(label=<span class="cd2 red2">'체육 점수'</span>)
+plt.show()</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="417">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/353.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">score</span> 개수는 <span class="cd">height</span>와 <span class="cd">weight</span> 개수에 맞춰야 하므로 반복문 내부에 <span class="cd">score.append(random.randint(1, 1000))</span>을 추가해 무작위 값 100개를 <span class="cd">score</span>에 저장합니다. 그리고 <span class="cd">s</span> 옵션에 <span class="cd">score</span>를 지정해 체육 점수를 기준으로 점의 크기가 조절되게 합니다. 컬러맵의 기준은 체육 점수로 지정해(<span class="cd">c=score</span>) 체육 점수에 따라 점의 색이 변하게 합니다. 컬러맵은 <span class="cd">rainbow</span>로 설정하고 컬러바의 라벨도 키에서 체육 점수로 변경합니다.</p>
+<p class="txt bl">결과 화면에 점의 크기가 다양하게 나타납니다. 지금은 무작위 값이라 경향성을 찾기 어렵지만, 실제 상관관계가 있는 세 항목을 넣으면 제대로 된 결괏값을 얻을 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="418">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_72"><span class="yellow">8.2.5</span> 상자 수염 그림 그리기</h4>
+<p class="txt bl">상자 수염 그림도 그려 봅시다. <span class="dm">상자 수염 그림</span>(상자 그림)이란 데이터의 최솟값, 25% 값(Q1), 중앙값(Q2), 75% 값(Q3), 최댓값을 상자로 표현한 그래프입니다. 다음 그림처럼 최솟값과 최댓값을 세로로 잇는 선 위에 25% 값과 75% 값을 테두리로 하는 상자를 그립니다. 그리고 그 안에 중앙값을 표현하죠. 이때 최댓값과 최솟값은 이상치를 제외한 값 중 최댓값과 최솟값을 의미합니다.</p>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/354.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-7</span> 상자 수염 그림</p>
+<p class="txt bl">중앙값은 평균값과는 다른 개념입니다. 평균은 모든 요소의 합을 개수로 나눈 값이죠. 평균값은 원본 데이터에 없을 수도 있습니다. 예를 들어, 국어 점수를 저장하는 <span class="cd">kor</span> 리스트에 <span class="cd">[80, 20, 50, 20, 10, 50, 60, 30, 60]</span>이 있습니다. 국어 점수의 평균값은 (80 + 20 + 50 + 20 + 10 + 50 + 60 + 30 + 60)/9 = 42.2222...로, 이 점수는 원본 데이터에 없습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="419">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">중앙값은 원본 데이터에서 중앙에 위치한 값입니다. <span class="cd">kor</span> 리스트를 오름차순으로 정렬하면 <span class="cd">[10, 20, 20, 30, 50, 50, 60, 60, 80]</span>이죠. 여기에서 가운데 위치하는 값은 다섯 번째에 있는 <span class="cd">50</span>입니다. <span class="cd">50</span>이 바로 <span class="cd">kor</span>의 중앙값입니다. 따라서 중앙값은 반드시 원본 데이터에 있습니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/355.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-8</span> 국어 점수의 중앙값</p>
+<p class="txt bl">그럼 국어 점수의 25% 값과 75% 값도 구해 보죠. 25% 값은 상위 25%에 있는 값을 의미합니다. 총 9개의 숫자가 있으니 (데이터 개수 9 × 0.25)번째에 위치한 값입니다. 계산하면 2.25가 나오네요. 반올림하면 2가 됩니다. 국어 점수에서 두 번째에 있는 값은 20이죠. 따라서 25% 값은 20이 됩니다.</p>
+<p class="txt bl">75% 값은 앞에서 75%에 있는 값을 의미합니다. 데이터 개수 9에 0.75를 곱하면 6.75가 나오고 반올림하면 7이 되죠. 국어 점수에서 일곱 번째에 있는 데이터는 60이므로 75% 값은 60이 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="420">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 이상치</p>
+<p class="txt bl">최댓값과 최솟값은 이상치를 제외한 값 중 가장 큰 값과 작은 값으로 각각 정합니다. 그럼 이상치란 무엇일까요? <span class="dm">이상치</span><span class="txts gray">(outlier)</span>란 표본 데이터 범위에서 과하게 벗어난 값을 의미합니다. 상자 수염 그래프에서 이상치를 정하는 기준은 상자의 길이를 활용합니다. 상자의 길이를 <span class="dm">IQR</span>이라고 하는데 IQR은 Q3 - Q1으로 구할 수 있습니다. 따라서 국어 점수 데이터에서의 IQR은 60 - 20인 40이 됩니다.</p>
+<p class="txt bl">최댓값은 Q3부터 (Q3 + 1.5 × IQR) 범위에서 가장 큰 값이고, 최솟값은 (Q1 - 1.5 × IQR)부터 Q1 범위에서 가장 작은 값입니다. 그리고 이 값보다 더 크거나 작은 값은 이상치가 됩니다.</p>
+<p class="txt bl">국어 점수 데이터에서 IQR은 40이고, Q1은 20, Q3는 60입니다. 따라서 60~120(60 + 1.5 × 40) 범위에서 가장 큰 값인 80이 최댓값, -40(20 - 1.5 × 40)~20 범위에서 가장 작은 값인 10이 최솟값이 됩니다. 국어 점수에는 120보다 크거나 -40보다 작은 값은 없으므로 이상치는 없습니다. 이를 상자 수염 그림으로 그리면 다음과 같은 모양이 됩니다.</p>
+<div class="w40"><img alt="" class="w100" src="https://thebook.io/img/080251/356_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-9</span> 국어 점수의 상자 수염 그림</p>
+<p class="txt bl">만약 이상치가 있다면 상자 수염 그림은 다음처럼 그려집니다.</p>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/356_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-10</span> 이상치가 표시된 상자 수염 그림</p>
+<p class="txtex bl">그래프에 보이는 동그라미는 이상치를 나타냅니다. 그래프를 보면 대다수의 데이터는 0과 500 사이에 있는데, 이 범위를 벗어난 700에서 800 사이에 값이 있다는 의미로 해석하면 됩니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="421">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">국어 점수의 분포를 상자 수염 그림으로 표현해 봅시다. 상자 수염 그림을 그리는 명령어는 <span class="cd">plt.boxplot()</span>입니다. 여기에 데이터를 넣으면 자동으로 상자 수염 그림을 그립니다.</p>
+<div class="highlight">
+<pre>kor = [<span class="green">80</span>, <span class="green">20</span>, <span class="green">50</span>, <span class="green">20</span>, <span class="green">10</span>, <span class="green">50</span>, <span class="green">60</span>, <span class="green">30</span>, <span class="green">60</span>]
+plt.boxplot(kor)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/357_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="422">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">상자 수염 그림이 그려지는데, x축이 1로 나옵니다. 상자 수염 그림에서 x축은 데이터의 라벨을 나타냅니다. 라벨은 지정하지 않으면 1을 기본값으로 표시합니다. 이를 ‘국어 점수’로 바꿔 봅시다. 라벨을 지정하려면 <span class="cd">plt.boxplot()</span>에 <span class="cd">labels</span> 옵션을 추가합니다.</p>
+<div class="highlight">
+<pre>kor = [<span class="green">80</span>, <span class="green">20</span>, <span class="green">50</span>, <span class="green">20</span>, <span class="green">10</span>, <span class="green">50</span>, <span class="green">60</span>, <span class="green">30</span>, <span class="green">60</span>]
+plt.boxplot(kor, <span class="cd2">labels=[</span><span class="cd2 red2">'국어 점수'</span><span class="cd2">]</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/357_2.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">labels</span> 옵션에는 원그래프에서 영역에 라벨을 붙일 때처럼 리스트 형태로 값을 넣습니다. 그렇지 않으면 오류가 발생합니다.</p>
+<p class="txt bl">이외에도 다양한 옵션과 명령어가 있지만, 입문 단계에서는 이 정도로 충분합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="423">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a2"><span class="dm brown">2</span> 다음 코드에 대한 설명으로 <span class="bg_black_line">틀린</span> 것을 고르세요.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt 
+
+data = [<span class="green">92</span>, <span class="green">63</span>, <span class="green">8</span>, <span class="green">27</span>, <span class="green">39</span>, <span class="green">84</span>, <span class="green">76</span>, <span class="green">18</span>, <span class="green">46</span>] 
+plt.plot(<span class="gold">range</span>(<span class="green">9</span>), data) 
+plt.show()</pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">① <span class="cd">plt.plot()</span>을 <span class="cd">plt.bar()</span>로 변경하면 막대그래프가 그려진다.</p>
+<p class="txt bl s12_12">② <span class="cd">plt.plot()</span>을 <span class="cd">plt.barh()</span>로 변경하면 가로형 막대그래프가 그려진다.</p>
+<p class="txt bl s12_12">③ <span class="cd">plt.plot()</span>을 <span class="cd">plt.hist()</span>로 변경하면 히스토그램이 그려진다.</p>
+<p class="txt bl s12_12">④ <span class="cd">plt.plot()</span>을 <span class="cd">plt.scatter()</span>로 변경하면 산점도가 그려진다.</p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0879/">정답 및 해설</a></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="424">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown">8.3</span><br/>
+    그래프 겹쳐 그리기</h3>
+</div>
+<p class="txt bl">지금까지 다양한 그래프를 그려 봤습니다. 이번에는 앞에서 배운 그래프를 여러 개 겹쳐 그리는 방법을 배워 보겠습니다. 그래프를 겹쳐 그리면 여러 데이터를 비교할 수 있고 다양하게 응용할 수도 있어요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="425">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_73"><span class="yellow">8.3.1</span> 꺾은선 그래프 겹쳐 그리기</h4>
+<p class="txt bl">신인 가수를 뽑는 오디션 프로그램에서 나온 첫째 주의 득표수와 둘째 주의 득표수를 비교하는 그래프를 그려 봅시다. 참가자는 총 5명으로 편의상 A, B, C, D, E로 하고 <span class="cd">singer</span> 리스트에 저장하겠습니다. 그리고 첫째 주의 득표수는 <span class="cd">week1</span> 리스트, 둘째 주의 득표수는 <span class="cd">week2</span> 리스트에 저장합니다. 그럼 다음과 같이 리스트 3개가 만들어집니다.</p>
+<div class="highlight">
+<pre>singer = [<span class="red2">'</span><span class="red2">A'</span>, <span class="red2">'B'</span>, <span class="red2">'C'</span>, <span class="red2">'D'</span>, <span class="red2">'E'</span>]
+week1 = [<span class="green">42</span>, <span class="green">58</span>, <span class="green">19</span>, <span class="green">92</span>, <span class="green">84</span>]
+week2 = [<span class="green">53</span>, <span class="green">52</span>, <span class="green">48</span>, <span class="green">98</span>, <span class="green">73</span>]</pre>
+</div>
+<p class="txt bl"><span class="cd">week1</span>과 <span class="cd">week2</span>가 참가자별 첫째 주와 둘째 주 득표수이므로 <span class="cd">week1</span>과 <span class="cd">week2</span>로 꺾은선 그래프를 그리면 됩니다. <span class="cd">plt.plot()</span> 명령어 하나당 1개의 꺾은선 그래프가 그려지니 이를 참고해서 코드를 작성합니다.</p>
+<div class="highlight">
+<pre><span class="cd2 purple">import</span> <span class="cd2">matplotlib.pyplot</span> <span class="cd2 purple">as</span> <span class="cd2">plt</span>
+
+singer = [<span class="red2">'A'</span>, <span class="red2">'B'</span>, <span class="red2">'C'</span>, <span class="red2">'D'</span>, <span class="red2">'E'</span>]
+week1 = [<span class="green">42</span>, <span class="green">58</span>, <span class="green">19</span>, <span class="green">92</span>, <span class="green">84</span>]
+week2 = [<span class="green">53</span>, <span class="green">52</span>, <span class="green">48</span>, <span class="green">98</span>, <span class="green">73</span>]
+
+<span class="cd2">plt.plot(singer, week1)</span>
+<span class="cd2">plt.plot(singer, week2)</span>
+<span class="cd2">plt.show()</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/360.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="426">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">꺾은선 그래프 2개가 겹쳐서 그려집니다. <span class="cd">plt.plot(singer, week1)</span>로 참가자별 첫째 주 득표수 그래프를, <span class="cd">plt.plot(singer, week2)</span>로 참가자별 둘째 주 득표수 그래프를 그렸습니다. 이처럼 여러 개의 꺾은선 그래프를 겹쳐 그릴 때는 그래프 개수만큼 <span class="cd">plt.plot()</span>을 작성한 다음, <span class="cd">plt.show()</span>를 실행해 그래프를 한 번에 그리면 됩니다.</p>
+<p class="txt bl">이번에는 그래프에 범례를 표시하고 그래프 색도 변경해 보겠습니다. 제목도 추가합시다.</p>
+<div class="highlight">
+<pre><span class="cd2">plt.rc(</span><span class="cd2 red2">'font'</span><span class="cd2">, family=</span><span class="cd2 red2">'Malgun Gothic'</span><span class="cd2">)</span>
+<span class="cd2">plt.title(</span><span class="cd2 red2">'오디션 프로그램 득표 현황'</span><span class="cd2">)</span>
+plt.plot(singer, week1, <span class="cd2">label=</span><span class="cd2 red2">'첫째 주'</span>, <span class="cd2">color=</span><span class="cd2 red2">'hotpink'</span>)
+plt.plot(singer, week2, <span class="cd2">label=</span><span class="cd2 red2">'둘째 주'</span>, <span class="cd2">color=</span><span class="cd2 red2">'royalblue'</span>)
+<span class="cd2">plt.legend()</span>
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/361_1.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">plt.title()</span>로 제목을 추가하고, <span class="cd">label</span> 옵션으로 라벨을, <span class="cd">color</span> 옵션으로 그래프의 색을 지정합니다. 이렇게 <span class="cd">label</span> 옵션을 추가하면 그 아래에 <span class="cd">plt.legend()</span>를 추가해야 범례가 그래프에 표시됩니다. 제목과 범례를 추가하니 어떤 그래프인지 알아보기 쉬워졌습니다.</p>
+<p class="txt bl">첫째 주보다 성적이 향상된 참가자는 A, C, D이고 성적이 떨어진 참가자는 B, E네요. 2주 연속 D가 1등, C가 꼴등을 했음이 한눈에 보입니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="427">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_74"><span class="yellow">8.3.2</span> 막대그래프로 겹쳐 그리기</h4>
+<p class="txt bl">막대그래프 2개를 다음 그림처럼 항아리 모양으로 그려 봅시다.</p>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/361_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-11</span> 항아리형 막대그래프로 그리기</p>
+<p class="txt bl">가로형 막대그래프이므로 <span class="cd">plt.barh()</span> 2개로 그리면 됩니다. 그리고 x축을 보면 둘째 주 그래프는 x축이 양수지만, 첫째 주 그래프는 x축이 모두 음수입니다. 따라서 첫째 주 득표수는 음수를 만들어야 합니다. 이를 코드로 작성하면 다음과 같습니다.</p>
+<div class="highlight">
+<pre><span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 gold">len</span><span class="cd2">(week1)):</span>
+    <span class="cd2">week1[i] = -week1[i]</span>
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'오디션 프로그램 득표 현황'</span>)
+<span class="cd2">plt.barh</span>(singer, week1, label=<span class="red2">'첫째 주'</span>, color=<span class="red2">'hotpink'</span>)
+<span class="cd2">plt.barh</span>(singer, week2, label=<span class="red2">'둘째 주'</span>, color=<span class="red2">'royalblue'</span>)
+plt.legend()
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/362.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="428">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">week1</span> 리스트의 모든 요소를 음수로 만들어야 하므로 <span class="cd">week1</span>의 모든 요소에 <span class="cd">week1[i] = -week1[i]</span>를 수행하도록 반복문에 넣습니다. 그리고 <span class="cd">plt.barh()</span>로 가로형 막대그래프 2개를 그리면 좌우로 펼쳐진 막대그래프가 만들어집니다.</p>
+<p class="txt bl">그런데 x축을 보면 값이 제대로 표시되지 않습니다. 이런 표시는 문자 인식을 제대로 못했을 때 나타납니다. 따라서 - 기호를 인식하도록 다음처럼 코드 한 줄을 더 추가해야 합니다. 코드를 추가하고 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(week1)):
+    week1[i] = -week1[i]
+
+<span class="cd2">plt.rcParams[</span><span class="cd2 red2">'axes.unicode_minus'</span><span class="cd2">] =</span> <span class="cd2 blue2">False</span>
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+…</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/363_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="429">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">- 기호가 제대로 표시됩니다. <span class="cd">plt.rcParams['axes.unicode_minus'] = False</span>는 그래프에서 - 기호가 나타나게 하는 설정 코드입니다. 이때 다음 그림의 오른쪽 부분처럼 그래프가 겹쳐서 나타나도 당황하지 마세요! 정상적인 결과입니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/363_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-12</span> 실행할 때마다 달라지는 그래프 모양</p>
+<p class="txt bl">원인은 다음 코드에 있습니다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(week1)):
+    week1[i] = -week1[i]</pre>
+</div>
+<p class="txt bl">셀을 한 번 실행할 때마다 <span class="cd">week1</span> 리스트의 요소를 음수로 만드는 반복문이 실행됩니다. 따라서 코드를 처음 실행하면 양수였던 값이 음수로 변환되어 왼쪽 그래프처럼 표현됩니다. 그런데 한 번 더 코드를 실행하면 음수였던 <span class="cd">week1</span>의 값들이 양수로 변환되어 오른쪽 그래프로 표현하는 것이죠. 만약 실행결과가 오른쪽 그래프처럼 나온다면 코드를 한 번 더 실행하면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="430">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 막대그래프를 그리는 다른 방법</p>
+<p class="txt bl">여기서는 2개의 막대그래프를 항아리 모양으로 구성했지만, 다른 방식으로도 표현할 수 있습니다. 다음 그림을 봅시다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/364_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 8-13</span> 막대그래프를 겹쳐 그리는 방법</p>
+<p class="txt bl">첫 번째 방법은 한 그래프 안에서 2개의 막대그래프를 좌우로 분리해 나란히 그리는 것입니다. 앞의 결과 그래프와 비교했을 때 x축이 다르다는 점이 보이나요? 가장 왼쪽의 A가 숫자 1의 위치라고 가정한다면 다음과 같이 정리할 수 있습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/364_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">분홍색 그래프의 x축은 1부터 5까지, 파란색 그래프의 x축은 7부터 11까지 표현되도록 코드를 변경해야 합니다. 그리고 x축의 숫자를 오디션 프로그램 참가자 이름으로 바꿔야죠. 이럴 때는 <span class="cd">plt.xticks()</span>를 사용합니다. <span class="cd">plt.xticks()</span>는 그래프에 표시되는 x축의 눈금 위치와 라벨을 지정하며, <span class="cd">plt.xticks(눈금 위치, 눈금 라벨)</span> 형식으로 작성하면 됩니다. 참고로, 틱<span class="txts gray">(tick)</span>은 그래프에 표시하는 눈금을 의미합니다. 코드는 다음과 같습니다.</p>
+<div class="highlight">
+<pre><span class="cd2">plt.bar(</span><span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">6</span><span class="cd2">)</span>, week1, label=<span class="red2">'첫째 주'</span>, color=<span class="red2">'hotpink'</span>)
+<span class="cd2">plt.bar(</span><span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">7</span><span class="cd2">,</span> <span class="cd2 green">12</span><span class="cd2">)</span>, week2, label=<span class="red2">'둘째 주'</span>, color=<span class="red2">'royalblue'</span>)
+<span class="cd2">plt.xticks(</span><span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">12</span><span class="cd2">), [</span><span class="cd2 red2">'A'</span><span class="cd2">,</span> <span class="cd2 red2">'B'</span><span class="cd2">,</span> <span class="cd2 red2">'C'</span><span class="cd2">,</span> <span class="cd2 red2">'D'</span><span class="cd2">,</span> <span class="cd2 red2">'E'</span><span class="cd2">,</span> <span class="cd2 red2">' '</span><span class="cd2">,</span> <span class="cd2 red2">'A'</span><span class="cd2">,</span> <span class="cd2 red2">'B'</span><span class="cd2">,</span> <span class="cd2 red2">'C'</span><span class="cd2">,</span> <span class="cd2 red2">'D'</span><span class="cd2">,</span> <span class="cd2 red2">'E'</span><span class="cd2">])</span></pre>
+</div>
+<p class="txt bl">분홍색 그래프의 x축 눈금은 1부터 5까지 연속된 숫자이므로 <span class="cd">range()</span>를 사용해 <span class="cd">range(1, 6)</span>으로 범위를 나타낼 수 있습니다. 파란색 그래프는 x축 역시 7부터 11까지 연속된 숫자이므로 <span class="cd">range(7, 12)</span>로 작성할 수 있습니다. x축 눈금 라벨은 1부터 11까지 표시해야 하니 눈금 위치를 <span class="cd">range(7, 12)</span>로 잡습니다. 그리고 원하는 라벨을 뒤에 넣습니다. 눈금 위치를 잘 따진 후, 눈금 라벨을 변경해 주면 그래프가 잘 그려집니다. 같은 형식으로 <span class="cd">plt.yticks()</span>를 사용하면 y축 라벨도 지정할 수 있습니다.</p>
+<p class="txt bl">그림 8-13의 두 번째 그래프도 그려 봅시다. 이 역시 x축을 조정하면 됩니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/365.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">분홍색 그래프와 파란색 그래프가 번갈아가며 나옵니다. 간격이 둘 다 3입니다. 분홍색 그래프의 x축 눈금은 1, 4, 7, 10, 13이므로 <span class="cd">range(시작 숫자, 종료 숫자, 간격)</span> 형식을 사용해 <span class="cd">range(1, 14, 3)</span>으로 작성할 수 있습니다. 파란색 그래프는 x축 눈금이 2, 5, 8, 11, 14이므로 <span class="cd">range(2, 15, 3)</span>으로 작성할 수 있습니다. 그리고 <span class="cd">plt.xticks()</span>를 사용해 눈금 위치와 라벨을 넣습니다. 눈금이 분홍색 그래프 위치인 1, 4, 7, 10, 13에 표시되므로 <span class="cd">range(1, 14, 3)</span>으로 위치를 넣습니다. 눈금 라벨은 참가자 이름을 넣으면 되므로 <span class="cd">singer</span> 리스트를 넣습니다.</p>
+<p class="txt bl">코드는 다음과 같습니다.</p>
+<div class="highlight">
+<pre>plt.bar(<span class="gold">range</span>(<span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">14</span><span class="cd2">,</span> <span class="cd2 green">3</span>), week1, label=<span class="red2">'첫째 주'</span>, color=<span class="red2">'hotpink'</span>) 
+plt.bar(<span class="gold">range</span>(<span class="cd2 green">2</span><span class="cd2">,</span> <span class="cd2 green">15</span><span class="cd2">,</span> <span class="cd2 green">3</span>), week2, label=<span class="red2">'둘째 주'</span>, color=<span class="red2">'royalblue'</span>) 
+plt.xticks(<span class="gold">range</span>(<span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">14</span><span class="cd2">,</span> <span class="cd2 green">3</span>), <span class="cd2">singer</span>)</pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="431">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_75"><span class="yellow">8.3.3</span> 산점도 겹쳐 그리기</h4>
+<p class="txt bl">이번에는 산점도 2개를 겹쳐서 표현해 보겠습니다. 키와 몸무게의 상관관계를 그리는데, 이번에는 그룹1과 그룹2에 각 100명씩 있다고 가정합니다. 그룹1의 키와 몸무게, 그룹2의 키와 몸무게를 산점도에 각기 다른 색상으로 표시해 봅시다.</p>
+<p class="txt bl">그룹1의 키와 몸무게는 <span class="cd">height1</span>, <span class="cd">weight1</span> 리스트에, 그룹2의 키와 몸무게는 <span class="cd">height2</span>, <span class="cd">weight2</span> 리스트에 저장합니다. 예시이므로 총 400개의 값을 <span class="cd">random</span> 라이브러리를 사용해 무작위로 넣습니다. 비교를 위해 그룹1과 그룹2의 키와 몸무게 범위를 다르게 설정합니다. 그룹1의 키는 140~180, 그룹2의 키는 160~200으로, 그룹1의 몸무게는 40~80, 그룹2의 몸무게는 50~100으로 설정합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+height1, weight1, height2, weight2 = [], [], [], []
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">100</span>):
+    height1.append(random.randint(<span class="green">140</span>, <span class="green">180</span>))
+    weight1.append(random.randint(<span class="green">40</span>, <span class="green">80</span>))
+    height2.append(random.randint(<span class="green">160</span>, <span class="green">200</span>))
+    weight2.append(random.randint(<span class="green">50</span>, <span class="green">100</span>))
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'키와 몸무게의 상관관계'</span>)
+plt.scatter(height1, weight1, color=<span class="red2">'crimson'</span>, alpha=<span class="green">0.7</span>, label=<span class="red2">'그룹</span><span class="red2">1'</span>)
+plt.scatter(height2, weight2, color=<span class="red2">'indigo'</span>, alpha=<span class="green">0.7</span>, label=<span class="red2">'그룹</span><span class="red2">2'</span>)
+plt.xlabel(<span class="red2">'키'</span>)
+plt.ylabel(<span class="red2">'몸무게'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/367.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="432">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그룹1과 그룹2에 각각 100명씩 있으므로 키와 몸무게를 리스트에 추가하는 명령어를 반복문으로 100번 반복합니다. 산점도를 2개 그려야 하므로 <span class="cd">plt.scatter()</span>를 두 번 사용합니다. 그룹1의 산점도는 x축을 <span class="cd">height1</span>으로, y축을 <span class="cd">weight1</span>으로 하고, 색상은 <span class="cd">crimson</span>(진홍색), 투명도는 <span class="cd">0.7</span>로 설정합니다. 그룹2의 산점도는 <span class="cd">height2</span>와 <span class="cd">weight2</span>를 각각 x축, y축으로 하고, 색상을 <span class="cd">indigo</span>(남색), 투명도는 <span class="cd">0.7</span>로 설정합니다.</p>
+<p class="txt bl">그룹1과 그룹2의 데이터 범위가 다른 것이 보이나요? 대체적으로 진홍색의 그룹1은 그래프의 왼쪽 아래에, 남색의 그룹2는 그래프의 오른쪽 위에 위치합니다. 그리고 가운데 영역에 그룹1과 그룹2가 겹치는 구간이 있고요. 이처럼 산점도는 데이터의 분포를 비교할 때 용이합니다.</p>
+<p class="txt bl">이번에는 체육 점수를 추가해 점의 크기까지 설정해 보겠습니다. 그룹1의 체육 점수는 <span class="cd">score1</span>, 그룹2의 체육 점수는 <span class="cd">score2</span>로 합니다. 그리고 두 그룹 모두 체육 점수 범위는 0~200 사이로 합니다.</p>
+<div class="highlight">
+<pre>height1, weight1, <span class="cd2">score1</span>, height2, weight2, <span class="cd2">score2</span> = [], [], <span class="cd2">[]</span>, [], [], <span class="cd2">[]</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">100</span>):
+    height1.append(random.randint(<span class="green">140</span>, <span class="green">180</span>))
+    weight1.append(random.randint(<span class="green">40</span>, <span class="green">80</span>))
+    <span class="cd2">score1.append(random.randint(</span><span class="cd2 green">0</span><span class="cd2">,</span> <span class="cd2 green">200</span><span class="cd2">))</span>
+    height2.append(random.randint(<span class="green">160</span>, <span class="green">200</span>))
+    weight2.append(random.randint(<span class="green">50</span>, <span class="green">100</span>))
+    <span class="cd2">score2.append(random.randint(</span><span class="cd2 green">0</span><span class="cd2">,</span> <span class="cd2 green">200</span><span class="cd2">))</span>
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="cd2 red2">'키와 몸무게, 체육 점수의 상관관계'</span>)
+plt.scatter(height1, weight1, <span class="cd2">s=score1</span>, color=<span class="red2">'crimson'</span>, alpha=<span class="green">0.7</span>, label=<span class="red2">'그룹1'</span>)
+plt.scatter(height2, weight2, <span class="cd2">s=score2</span>, color=<span class="red2">'indigo'</span>, alpha=<span class="green">0.7</span>, label=<span class="red2">'그룹2'</span>)
+plt.xlabel(<span class="red2">'키'</span>)
+plt.ylabel(<span class="red2">'몸무게'</span>)
+<span class="cd2">plt.legend()</span>
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/368.jpg"/></div>
+</div>
+<p class="txt bl">산점도를 그릴 때 <span class="cd">s</span> 옵션을 추가하니 점의 크기가 달라집니다. 이처럼 산점도도 겹쳐서 비교 그래프를 그릴 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="433">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_76"><span class="yellow">8.3.4</span> 상자 수염 그림 여러 개 그리기</h4>
+<p class="txt bl">이번에는 상자 수염 그림 2개를 그려 봅시다. 영어 점수 리스트를 추가해 국어 점수와 영어 점수를 각각 상자 수염 그림으로 그립니다. 상자 수염 그림은 다른 그래프와 달리 그래프를 그리는 명령어를 여러 개 사용하지 않고, <span class="cd">plt.boxplot()</span>의 데이터에 이차원 리스트를 넣으면 됩니다. 다음 코드를 봅시다.</p>
+<div class="highlight">
+<pre>kor = [<span class="green">80</span>, <span class="green">20</span>, <span class="green">50</span>, <span class="green">20</span>, <span class="green">10</span>, <span class="green">50</span>, <span class="green">60</span>, <span class="green">30</span>, <span class="green">60</span>]
+eng = [<span class="green">90</span>, <span class="green">40</span>, <span class="green">60</span>, <span class="green">40</span>, <span class="green">10</span>, <span class="green">30</span>, <span class="green">50</span>, <span class="green">70</span>, <span class="green">90</span>]
+
+plt.boxplot([kor, eng], labels=[<span class="red2">'국어 점수'</span>, <span class="red2">'영어 점수'</span>])
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/369.jpg"/></div>
+</div>
+<p class="txt bl">두 리스트를 묶어 이차원 리스트 <span class="cd">[kor, eng]</span>로 만들었습니다. 이차원 리스트의 첫 번째 요소는 <span class="cd">kor</span>, 두 번째 요소는 <span class="cd">eng</span>입니다. 이차원 리스트를 넣은 <span class="cd">plt.boxplot()</span>을 실행하면 이차원 리스트의 요소(일차원 리스트)별로 상자 수염 그림을 그리고 한 그래프 안에 나타냅니다. 그리고 <span class="cd">labels</span> 옵션으로 넣은 각 그래프의 라벨이 표시됩니다.</p>
+<p class="txt bl">그래프를 보니 국어 점수와 영어 점수의 중앙값이 같네요. 하지만 국어 점수의 상자는 중앙값보다 아래쪽이 길고 영어 점수의 상자는 중앙값보다 위쪽이 깁니다. 따라서 국어 점수가 영어 점수보다 대체로 낮다고 볼 수 있습니다.</p>
+<p class="txt bl">이차원 리스트 안에 더 많은 일차원 리스트를 넣으면 일차원 리스트 개수대로 상자 수염 그림이 그려집니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="434">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a3"><span class="dm brown">3</span> 다음 코드를 실행한 결과, 그림과 같은 그래프가 나왔습니다. (가)와 (나)에 들어갈 코드로 알맞게 짝지어진 것을 고르세요.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt 
+
+employee = [<span class="red2">'a'</span>, <span class="red2">'b'</span>, <span class="red2">'c'</span>] 
+incen2018 = [<span class="green">50</span>, <span class="green">91</span>, <span class="green">37</span>] 
+incen2019 = [<span class="green">18</span>, <span class="green">67</span>, <span class="green">93</span>] 
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>) 
+plt.title(<span class="red2">'직원 성과급 현황(2018~2019)'</span>) 
+plt.bar(<span class="gold">range</span>(<span class="green">1</span>, <span class="green">8</span>, <span class="green">3</span>), incen2018, label=<span class="red2">'2018년'</span>) 
+plt.bar(<span class="cd2">(</span><span class="cd2">가</span><span class="cd2">)</span>, incen2019, label=<span class="red2">'2019년'</span>) 
+plt.xticks(<span class="gold">range</span>(<span class="green">1</span>, <span class="green">8</span>, <span class="green">3</span>), <span class="cd2">(</span><span class="cd2">나</span><span class="cd2">)</span>) 
+plt.legend() 
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<p class="txts"> </p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/370.jpg"/></div>
+</div>
+<div class="ind10">
+<p class="txt bl ind20">(가) / (나)</p>
+<p class="txt bl s12_12">① <span class="cd">range(6)</span> / - <span class="cd">range(1, 8, 3)</span></p>
+<p class="txt bl s12_12">② <span class="cd">range(1, 8, 3)</span> / - <span class="cd">range(1, 8, 3)</span></p>
+<p class="txt bl s12_12">③ <span class="cd">range(1, 8, 3)</span> / - <span class="cd">employee</span></p>
+<p class="txt bl s12_12">④ <span class="cd">range(2, 9, 3)</span> / - <span class="cd">employee</span></p>
+<p class="txt bl s12_12">⑤ <span class="cd">range(2, 9, 3)</span> / - <span class="cd">label</span></p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0879/">정답 및 해설</a></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="435">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown6">8</span><br/>
+      마무리</h3>
+</div>
+<p class="txtex dm s10_10"><span class="dm brown">1</span> 그래프 그리기</p>
+<div class="ind10">
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'글꼴 이름'</span>)
+plt.title(<span class="red2">'그래프 제목'</span>)
+<span class="green"># 그래프 형태에 따라 알맞은 명령어 넣기</span>
+plt.show()</pre>
+</div>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">2</span> 그래프 유형별 그리기 명령어</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w20">
+<p class="txts dm">유형</p>
+</td>
+<td class="w50">
+<p class="txts dm">형식</p>
+</td>
+<td class="w30">
+<p class="txts dm">비고</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">꺾은선 그래프</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">plt.plot([x축 리스트], [y축 리스트])</span></p>
+</td>
+<td class="w30">
+<p class="txts"> </p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">막대그래프</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">plt.bar([x축 리스트], [y축 리스트])</span></p>
+</td>
+<td class="w30">
+<p class="txts"> </p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">가로형 막대그래프</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">plt.barh([x축 리스트], [y축 리스트])</span></p>
+</td>
+<td class="w30">
+<p class="txts"> </p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">히스토그램</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">plt.hist([리스트], bins=구간 개수)</span></p>
+</td>
+<td class="w30">
+<p class="txts dl">x축, y축을 구분하지 않고 하나의 리스트만 넣는다.</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">원그래프</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">plt.pie([리스트])</span></p>
+</td>
+<td class="w30">
+<p class="txts dl">x축, y축을 구분하지 않고 하나의 리스트만 넣는다.</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">산점도</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">plt.scatter([x축 리스트], [y축 리스트])</span></p>
+</td>
+<td class="w30">
+<p class="txts"> </p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">상자 수염 그림</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">plt.boxplot([리스트])</span></p>
+</td>
+<td class="w30">
+<p class="txts dl">x축, y축을 구분하지 않고 하나의 리스트만 넣는다.</p>
+<p class="txts dl">상자 수염 그림을 겹쳐 그릴 때는 이차원 리스트로 넣는다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="436">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<p class="txtex dm s10_10"><span class="dm brown">3</span> 그래프 그리기 명령어에 추가 가능한 옵션</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w20">
+<p class="txts dm">구분</p>
+</td>
+<td class="w30">
+<p class="txts dm">옵션</p>
+</td>
+<td class="w50">
+<p class="txts dm">설명</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20" rowspan="2">
+<p class="txts dl">그래프 색상(그래프 공통)</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">color='색상 이름'</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">그래프의 색 설정하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl"><span class="cd">alpha=투명도</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">그래프의 투명도 설정하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="e20" rowspan="2">
+<p class="txts dl">라벨과 범례(그래프 공통)</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">label='라벨'</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">라벨 표시하기</p>
+<p class="txts dl">사용 가능한 그래프: 꺾은선 그래프, 막대그래프, 산점도</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl"><span class="cd">labels=[라벨]</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">사용 가능한 그래프: 원그래프, 수염 상자 그림</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">히스토그램</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">bins=구간 개수</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">히스토그램의 구간 개수 설정하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">원그래프</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">autopct='%1.1%%'</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">영역별 비율 자동 표시하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20" rowspan="3">
+<p class="txts dl">산점도</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">cmap='컬러맵 이름'</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">컬러맵 적용하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl"><span class="cd">c='컬러맵을 적용할 데이터'</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">컬러맵을 적용할 데이터 지정하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl"><span class="cd">s='점의 크기'</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">점의 크기 설정하기</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">4</span> 기타 명령어</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w20">
+<p class="txts dm">구분</p>
+</td>
+<td class="w30">
+<p class="txts dm">명령어</p>
+</td>
+<td class="w50">
+<p class="txts dm">설명</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20" rowspan="2">
+<p class="txts dl">그래프 크기</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">plt.figure(dpi=해상도)</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">그래프 크기를 해상도로 설정하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl"><span class="cd">plt.figure(figsize=가로, 세로)</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">그래프 크기를 인치 단위의 가로, 세로 길이로 설정하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">범례</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">plt.legend()</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">범례 표시하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20" rowspan="2">
+<p class="txts dl">축 이름</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">plt.xlabel()</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">x축 이름 붙이기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl"><span class="cd">plt.ylabel()</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">y축 이름 붙이기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20" rowspan="2">
+<p class="txts dl">눈금 라벨</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">plt.xticks()</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">x축 눈금 라벨 설정하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl"><span class="cd">plt.yticks()</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">y축 눈금 라벨 설정하기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">컬러바</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">plt.colorbar()</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">산점도에 컬러바 표시하기</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="437">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5" id="s1">
+<p class="txt1 dm"><span class="brown">Self Check</span></p>
+<p class="txts"> </p>
+<div class="box_white2">
+<p class="txt bl">다음 두 리스트는 자동차 통행량을 3시간마다 측정한 데이터입니다. weekday는 주중 자동차 통행량을, weekend는 주말 자동차 통행량을 의미합니다. 데이터를 이용해 주중과 주말 자동차 통행량을 비교하는 그래프를 다양한 방식으로 그리려고 합니다.</p>
+<div class="highlight">
+<pre>weekday = [<span class="green">3</span>, <span class="green">2</span>, <span class="green">16</span>, <span class="green">19</span>, <span class="green">9</span>, <span class="green">12</span>, <span class="green">23</span>, <span class="green">16</span>]   <span class="green"># 주중 자동차 통행량</span>
+weekend = [<span class="green">1</span>, <span class="green">7</span>, <span class="green">13</span>, <span class="green">15</span>, <span class="green">19</span>, <span class="green">10</span>, <span class="green">19</span>, <span class="green">12</span>]  <span class="green"># 주말 자동차 통행량</span></pre>
+</div>
+<p class="txtex bl s10_10"><span class="dm brown">1</span> 다음 그래프를 그려 보세요.</p>
+<div class="ind10"><img alt="" class="w60" src="https://thebook.io/img/080251/373_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="box_black_line2 ind10">
+<p class="txts dm">|조건|</p>
+<p class="txts dl s08_08">• x축 눈금은 편의상 숫자 0부터 7까지로 한다.</p>
+<p class="txts dl s08_08">• 주중 통행량 그래프 색상은 crimson, 주말 통행량 그래프 색상은 royalblue이다.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="438">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5" id="s1"><div class="box_white2">
+<p class="txtex bl s10_10"><span class="dm brown">2</span> 다음 그래프를 그려 보세요.</p>
+<div class="ind10"><img alt="" class="w60" src="https://thebook.io/img/080251/373_2.jpg"/></div>
+<p class="txts"> </p>
+<div class="box_black_line2 ind10">
+<p class="txts dm">|조건|</p>
+<p class="txts dl s08_08">• y축 눈금은 편의상 숫자 0부터 7까지로 한다.</p>
+<p class="txts dl s08_08">• 주중 통행량 그래프 색상은 crimson, 주말 통행량 그래프 색상은 royalblue이다.</p>
+</div>
+<p class="txts"> </p>
+<p class="txtex bl s10_10"><span class="dm brown">3</span> 다음 그래프를 그려 보세요.</p>
+<div class="ind10"><img alt="" class="w60" src="https://thebook.io/img/080251/374.jpg"/></div>
+<p class="txts"> </p>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0880/">정답 및 해설</a></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div>
+    </div>
+</body>
+</html>

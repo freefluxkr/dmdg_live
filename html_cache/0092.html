@@ -1,0 +1,21 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 콤마(,)와 + 연산자</p>
+<p class="txt bl">오류가 발생한다면 콤마 대신에 + 연산자를 사용하지 않았는지 살펴보세요.</p>
+<div class="highlight">
+<pre>year = <span class="green">2017</span> 
+height = <span class="green">175.5</span> 
+<span class="gold">print</span>(year + <span class="red2">'년</span> <span class="red2">-'</span> + height + <span class="red2">'cm'</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+----&gt; 3 print(year + '년 -' + height + 'cm')
+<span class="red2">TypeError</span>: unsupported operand type(s) for +: 'int' and 'str'</pre>
+</div>
+<p class="txtex bl">공백이 생기지 않게 <span class="cd">print(year + '년 -' + height + 'cm')</span>로 작성하면 오류가 발생합니다. 결과창에 어떤 오류인지 나타납니다. 오류를 해석하는 방법은 다음 절에 배우므로 여기에서는 생략하겠습니다. 하지만 오류를 해석하지 않아도 이미 배운 부분이라서 쉽게 알 수 있습니다. + 연산자는 ‘숫자 + 숫자’나 ‘문자 + 문자’일 때는 문제가 없습니다. 그러나 ‘문자 + 숫자’처럼 다른 요소를 +로 연결하면 오류가 발생합니다. 앞에서도 설명했듯이 <span class="cd">year</span>는 양옆에 작은따옴표가 없으니 문자가 아닌 변수로 인식합니다. 숫자와 문자를 +로 연결해서 오류가 발생한 겁입니다. 공백이 신경 쓰이더라도 일단은 콤마를 사용하세요.</p>
+</div>
+</div>
+</section>
+</section>

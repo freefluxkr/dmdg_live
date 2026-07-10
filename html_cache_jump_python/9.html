@@ -1,0 +1,155 @@
+<h1 class="page-subject">01-5 파이썬 둘러보기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>파이썬이 어떻게 생겼는지 간단한 코드를 작성하며 알아보자. 전체 모습을 먼저 훑어보면 파이썬을 이해하는 데 큰 도움이 된다.</p>
+<p>'백문이 불여일견, 백견이 불여일타'라고 했다. 직접 따라 해 보자.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">파이썬 기초 실습 준비하기</a></li>
+<li><a href="#_2">파이썬 기초 문법 따라 해 보기</a><ul>
+<li><a href="#_3">사칙 연산</a></li>
+<li><a href="#_4">변수에 숫자 대입하고 계산하기</a></li>
+<li><a href="#_5">변수에 문자 대입하고 출력하기</a></li>
+<li><a href="#if">조건문 if</a></li>
+<li><a href="#for">반복문 for</a></li>
+<li><a href="#while">반복문 while</a></li>
+<li><a href="#_6">함수</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">파이썬 기초 실습 준비하기</h2>
+<p>파이썬 프로그래밍 실습을 시작하기 전에 기초적인 것을 준비해 보자.</p>
+<p>윈도우 사용자는 [시작] 메뉴에서 'Python 3.x'을 찾아 실행한다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/9/N01-4_8_wikidocs%201.png"/></p>
+<p>맥 사용자는 터미널(Spotlight에서 "터미널" 검색)을 열고 <code>python3</code>을 입력하여 실행한다.</p>
+<p>그러면 다음과 같은 화면이 나타난다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/9/N01-5_1.png"/></p>
+<pre><code class="language-plaintext">Python 3.x.x (...) [MSC v.xxxx 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt;
+</code></pre>
+<p>이 창을 '파이썬 대화형 인터프리터'라고 부른다. 인터프리터란 사용자가 입력한 코드를 실행하는 환경을 뜻한다.</p>
+<blockquote>
+<ul>
+<li>파이썬 대화형 인터프리터를 간단히 '파이썬 셸(python shell)'이라고도 부른다.</li>
+<li>파이썬 셸 창에서 3개의 꺾은 괄호(<code>&gt;&gt;&gt;</code>)를 프롬프트(prompt)라고 부른다.</li>
+<li>프롬프트(<code>&gt;&gt;&gt;</code>)가 있는 곳이 입력하는 부분이다.</li>
+</ul>
+</blockquote>
+<p>그렇다면 '대화형'은 무슨 의미일까? 다음과 같이 간단한 수식을 입력해 보자.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/9/N01-5_2.png"/></p>
+<pre><code class="language-python">&gt;&gt;&gt; 1 + 1
+2
+</code></pre>
+<p>입력에 따른 결괏값이 바로 출력된다. 이렇게 입출력이 번갈아 이어지는 것이 마치 대화하는 것처럼 느껴지기 때문에 파이썬 대화형 인터프리터라고 부른다. 대화형 인터프리터를 사용하면 결과를 바로 확인할 수 있어 학습에 효과적이다. 앞으로 파이썬의 기본적인 내용은 이 창을 사용해 실습한다.</p>
+<p>대화형 인터프리터를 종료할 때는 <code>quit()</code> 또는 <code>exit()</code>를 입력하면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; quit()
+</code></pre>
+<blockquote>
+<p>키보드 단축키로도 종료할 수 있다. 윈도우에서는 [<code>Ctrl+Z</code>]를 누른 후 [<code>Enter</code>], 맥/리눅스에서는 [<code>Ctrl+D</code>]를 누르면 된다.</p>
+</blockquote>
+<h2 id="_2">파이썬 기초 문법 따라 해 보기</h2>
+<p>이제 파이썬 대화형 인터프리터(파이썬 셸)를 실행하여 파이썬 기초 문법을 따라 해 보자. 여기에서 소개하는 내용은 뒤에서 자세하게 다룰 것이므로 지금 당장 이해되지 않아도 걱정하지 말자.</p>
+<h3 id="_3">사칙 연산</h3>
+<p>1 더하기(+) 2는 3이라는 값을 출력해 보자. 계산기를 사용하듯이 +만 넣어 주면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; 1 + 2
+3
+</code></pre>
+<p>나눗셈(<code>/</code>)과 곱셈(<code>*</code>) 역시 예상대로 결괏값을 보여 준다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; 3 / 2.4
+1.25
+&gt;&gt;&gt; 3 * 9
+27
+</code></pre>
+<p>일반적으로 알고 있는 ÷나 ×가 아니라 키보드의 <code>/</code>(슬래시)와 <code>*</code>(별표, [<code>Shift+8</code>])를 사용한다는 것에 주의하자.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h3 id="_4">변수에 숫자 대입하고 계산하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = 1
+&gt;&gt;&gt; b = 2
+&gt;&gt;&gt; a + b
+3
+</code></pre>
+<p>a에 1, b에 2를 대입한 후 a와 b를 더하면 3이라는 결괏값을 보여 준다.</p>
+<h3 id="_5">변수에 문자 대입하고 출력하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Python"
+&gt;&gt;&gt; print(a)
+Python
+</code></pre>
+<p>a 변수에 "Python"이라는 값을 대입한 후 print(a)라고 작성하면 a 값을 출력한다.</p>
+<blockquote>
+<p>파이썬은 대소문자를 구별한다. print를 PRINT로 쓰면 정의되지 않았다는 오류 메시지가 나온다.</p>
+</blockquote>
+<p>print 함수 없이 변수 이름 a만 입력해도 a의 값을 확인할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Python"
+&gt;&gt;&gt; a
+'Python'
+</code></pre>
+<blockquote>
+<p><code>print(a)</code>는 값만 깔끔하게 출력하고, 변수명 a만 입력하면 자료형을 알 수 있도록 따옴표가 포함되어 출력된다. 따옴표가 있으면 문자열이라는 뜻이다.</p>
+</blockquote>
+<h3 id="if">조건문 if</h3>
+<p>다음은 조건문 if를 사용한 예제이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 3
+&gt;&gt;&gt; if a &gt; 1:
+...     print("a는 1보다 큽니다.")
+...
+a는 1보다 큽니다.
+</code></pre>
+<p>이 예제는 a가 1보다 크면 "a는 1보다 큽니다."라는 문장을 출력(print)하라는 뜻이다. a는 3이므로 1보다 크다. 따라서 'a는 1보다 큽니다.'라는 문장이 출력된다.</p>
+<blockquote>
+<p>인터프리터 창에서 프롬프트(<code>&gt;&gt;&gt;</code>) 자리에 나타나는 '...'은 아직 입력이 끝나지 않았다는 것을 의미한다.</p>
+</blockquote>
+<p><code>if a &gt; 1:</code> 다음 문장은 [<code>Spacebar</code>] 4개 또는 [<code>Tab</code>]을 이용해 반드시 들여쓰기한 후 print("a는 1보다 큽니다.")라고 작성해야 한다. 들여쓰기를 빠뜨리면 오류가 발생하는데, 이것은 파이썬 초보자가 가장 자주 만나는 실수이므로 주의하자. 들여쓰기 규칙은 '03장 제어문'에서 자세하게 알아본다. 바로 뒤에 이어지는 반복문 for, while 예제도 마찬가지로 들여쓰기가 필요하다.</p>
+<blockquote>
+<p>실습 영상 : <a href="https://youtu.be/5CU-xTiMIZ0">https://youtu.be/5CU-xTiMIZ0</a></p>
+</blockquote>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>최신 파이썬 버전의 자동 들여쓰기</strong></p>
+<p>파이썬 3.10 이상 버전에서는 파이썬 셸에서 "..." 프롬프트가 나타난 후 자동으로 적절한 들여쓰기가 제공되어 [<code>Tab</code>]을 매번 입력하지 않아도 된다. 하지만 코드의 구조를 이해하기 위해 들여쓰기의 개념을 정확히 알고 있어야 한다.</p></fieldset>
+<h3 id="for">반복문 for</h3>
+<p>다음은 for를 사용해서 [1, 2, 3] 안의 값을 하나씩 출력하는 예이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; for a in [1, 2, 3]:
+...     print(a)
+...
+1 
+2 
+3
+</code></pre>
+<p>for 문을 사용하면 실행할 문장을 여러 번 반복할 수 있다. 위 예는 대괄호([]) 사이에 있는 값을 하나씩 출력한다. 이 코드의 의미는 '[1, 2, 3] 리스트의 앞에서부터 하나씩 꺼내 a 변수에 대입한 후 <code>print(a)</code>를 수행하라'이다. 실행하면 a에 차례대로 1, 2, 3이라는 값이 대입되고 <code>print(a)</code>에 의해 그 값이 차례대로 출력된다.</p>
+<h3 id="while">반복문 while</h3>
+<p>다음은 while을 사용하는 예이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; i = 0
+&gt;&gt;&gt; while i &lt; 3:
+...     i = i + 1
+...     print(i)
+...
+1
+2
+3
+</code></pre>
+<p>while이라는 영어 단어의 뜻인 '~인 동안'에서 알 수 있듯이 while 문은 조건이 만족하는 동안 문장을 반복 수행한다. 위 예제는 i 값이 3보다 작은 동안 <code>i = i + 1</code>과 <code>print(i)</code>를 수행하라는 뜻이다. <code>i = i + 1</code>은 'i의 값을 1씩 더한다'라는 의미이다. i 값이 3보다 커지면 while 문을 빠져나간다.</p>
+<blockquote>
+<p>실습 영상 : <a href="https://youtu.be/mtdbM3EOS68">https://youtu.be/mtdbM3EOS68</a></p>
+</blockquote>
+<h3 id="_6">함수</h3>
+<p>파이썬에서 함수의 형태는 다음과 같다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; def add(a, b):
+...     return a + b
+...
+&gt;&gt;&gt; add(3, 4)
+7
+</code></pre>
+<p>def는 파이썬에서 함수를 정의할 때 사용하는 예약어이다. 위 예제는 add 함수를 만들고 그 함수를 어떻게 사용하는지 보여 준다. <code>add(a, b)</code>에서 a, b는 입력값, <code>a + b</code>는 결괏값이다. 즉 3, 4가 입력으로 들어오면 3 + 4를 수행하고 그 결괏값인 7을 반환한다.</p>
+<blockquote>
+<ul>
+<li>예약어란 프로그래밍 언어에서 이미 문법적인 용도로 사용하고 있는 단어를 말한다.</li>
+<li>반환(return)은 함수에서 값을 돌려줄 때 사용한다.</li>
+</ul>
+</blockquote>
+<p>지금까지 기초적인 파이썬 문법에 대해 간략하게 알아보았다.</p>
+</div>

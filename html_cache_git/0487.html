@@ -1,0 +1,37 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.5.6 태그의 상세 정보 확인: show 명령어</h3>
+<p class="x00--"><span class="A------">Annotated</span> 태그는 커밋의 태그 포인터와 함께 여러 정보를 포함합니다. <span class="A------ x3-------1">tag</span> 명령어는 태그의 목록만 출력할 뿐 상세 정보는 표시하지 않습니다. 태그의 상세 정보를 확인하려면 <span class="A------ x3-------1">show</span> 명령어를 사용해야 합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git show <span class="N--------1 N--------1">태그이름</span></p>
+</div>
+<p class="x00--">다음과 같이 <span class="A------ x3-------1">show</span> 명령어를 실행하면 생성된 태그의 상세 정보를 확인할 수 있습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(master)</span></p>
+<p class="N-----">$ <span class="x--">git show 1.0.0</span> <span class="ingd">태그 정보</span></p>
+<p class="N-----">tag 1.0.0</p>
+<p class="N-----">Tagger: hojin &lt;infohojin@gmail.com&gt;</p>
+<p class="N-----">Date:   Thu May 23 18:12:16 2019 +0900</p>
+<p class="N-----"> </p>
+<p class="N-----"><span class="char-style-override-24">this is first tag</span> <span class="ingd">태그 정보</span></p>
+<p class="N-----"> </p>
+<p class="N-----">commit 53028dc1486b42d23253ffd4001a758cef455372 (tag: 1.0.0)</p>
+<p class="N-----">Author: hojin &lt;infohojin@gmail.com&gt; </p>
+<p class="N-----">Date:   Thu May 23 18:07:18 2019 +0900 </p>
+<p class="N-----">    test 1.0.0 </p>
+<p class="N-----"> </p>
+<p class="N-----">diff --git a/version.htm b/version.htm</p>
+<p class="N-----">index 14f6513..eccf619 100644</p>
+<p class="N-----">--- a/version.htm</p>
+<p class="N-----">+++ b/version.htm</p>
+<p class="N-----">@@ -1 +1,4 @@</p>
+<p class="N-----">-&lt;h1&gt;<span class="N--------1">태그</span> <span class="N--------1">버전</span> <span class="N--------1">실습</span> <span class="N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N-----">\ No newline at end of file</p>
+<p class="N-----">+&lt;h1&gt;<span class="N--------1">태그</span> <span class="N--------1">버전</span> <span class="N--------1">실습</span> <span class="N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N-----">+&lt;ul&gt;</p>
+<p class="N-----">+    &lt;li&gt;<span class="N--------1">버전</span> 1.0.0 <span class="N--------1">실습</span>&lt;/li&gt;</p>
+<p class="N-----">+&lt;/ul&gt;</p>
+<p class="N----">\ No newline at end of file</p></code></pre>
+</div>
+</section>
+</section>

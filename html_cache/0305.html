@@ -1,0 +1,209 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">다른 예를 들어 볼까요? 스포츠 경기에서 순위를 나타낼 때도 표 형태를 볼 수 있습니다. 다음은 2016년 브라질에서 열린 제31회 리우데자네이루 올림픽의 순위를 나타낸 표입니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 6-4</span> 올림픽 순위<sup id="footnote-001-backlink"><a class="dm brown2" epub:type="noteref" href="#footnote-001">1</a></sup></p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w10">
+<p class="txts dm">순위</p>
+</td>
+<td class="w18">
+<p class="txts dm">국가</p>
+</td>
+<td class="w18">
+<p class="txts dm">금메달</p>
+</td>
+<td class="w18">
+<p class="txts dm">은메달</p>
+</td>
+<td class="w18">
+<p class="txts dm">동메달</p>
+</td>
+<td class="w18">
+<p class="txts dm">합계</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">1</p>
+</td>
+<td class="w18">
+<p class="txts dl">미국</p>
+</td>
+<td class="w18">
+<p class="txts dl">46</p>
+</td>
+<td class="w18">
+<p class="txts dl">37</p>
+</td>
+<td class="w18">
+<p class="txts dl">38</p>
+</td>
+<td class="w18">
+<p class="txts dl">121</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">2</p>
+</td>
+<td class="w18">
+<p class="txts dl">영국</p>
+</td>
+<td class="w18">
+<p class="txts dl">27</p>
+</td>
+<td class="w18">
+<p class="txts dl">23</p>
+</td>
+<td class="w18">
+<p class="txts dl">17</p>
+</td>
+<td class="w18">
+<p class="txts dl">67</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">3</p>
+</td>
+<td class="w18">
+<p class="txts dl">중국</p>
+</td>
+<td class="w18">
+<p class="txts dl">26</p>
+</td>
+<td class="w18">
+<p class="txts dl">18</p>
+</td>
+<td class="w18">
+<p class="txts dl">26</p>
+</td>
+<td class="w18">
+<p class="txts dl">70</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">4</p>
+</td>
+<td class="w18">
+<p class="txts dl">러시아</p>
+</td>
+<td class="w18">
+<p class="txts dl">19</p>
+</td>
+<td class="w18">
+<p class="txts dl">17</p>
+</td>
+<td class="w18">
+<p class="txts dl">19</p>
+</td>
+<td class="w18">
+<p class="txts dl">55</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">5</p>
+</td>
+<td class="w18">
+<p class="txts dl">독일</p>
+</td>
+<td class="w18">
+<p class="txts dl">17</p>
+</td>
+<td class="w18">
+<p class="txts dl">10</p>
+</td>
+<td class="w18">
+<p class="txts dl">15</p>
+</td>
+<td class="w18">
+<p class="txts dl">42</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">6</p>
+</td>
+<td class="w18">
+<p class="txts dl">일본</p>
+</td>
+<td class="w18">
+<p class="txts dl">12</p>
+</td>
+<td class="w18">
+<p class="txts dl">8</p>
+</td>
+<td class="w18">
+<p class="txts dl">21</p>
+</td>
+<td class="w18">
+<p class="txts dl">41</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">7</p>
+</td>
+<td class="w18">
+<p class="txts dl">프랑스</p>
+</td>
+<td class="w18">
+<p class="txts dl">10</p>
+</td>
+<td class="w18">
+<p class="txts dl">18</p>
+</td>
+<td class="w18">
+<p class="txts dl">14</p>
+</td>
+<td class="w18">
+<p class="txts dl">42</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">8</p>
+</td>
+<td class="w18">
+<p class="txts dl">대한민국</p>
+</td>
+<td class="w18">
+<p class="txts dl">9</p>
+</td>
+<td class="w18">
+<p class="txts dl">3</p>
+</td>
+<td class="w18">
+<p class="txts dl">9</p>
+</td>
+<td class="w18">
+<p class="txts dl">21</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">1위부터 8위까지 순위로 이차원 리스트를 만들어 보겠습니다.</p>
+<div class="highlight">
+<pre>olympic =<span>[</span>[<span class="green">1</span>, <span class="red2">'미국'</span>, <span class="green">46</span>, <span class="green">37</span>, <span class="green">38</span>, <span class="green">121</span>],
+          [<span class="green">2</span>, <span class="red2">'영국'</span>, <span class="green">27</span>, <span class="green">23</span>, <span class="green">17</span>, <span class="green">67</span>],
+          [<span class="green">3</span>, <span class="red2">'중국'</span>, <span class="green">26</span>, <span class="green">18</span>, <span class="green">26</span>, <span class="green">70</span>],
+          [<span class="green">4</span>, <span class="red2">'러시아'</span>, <span class="green">19</span>, <span class="green">18</span>, <span class="green">19</span>, <span class="green">55</span>],
+          [<span class="green">5</span>, <span class="red2">'독일'</span>, <span class="green">17</span>, <span class="green">10</span>, <span class="green">15</span>, <span class="green">42</span>],
+          [<span class="green">6</span>, <span class="red2">'일본'</span>, <span class="green">12</span>, <span class="green">8</span>, <span class="green">21</span>, <span class="green">41</span>],
+          [<span class="green">7</span>, <span class="red2">'프랑스'</span>, <span class="green">10</span>, <span class="green">18</span>, <span class="green">14</span>, <span class="green">42</span>],
+          [<span class="green">8</span>, <span class="red2">'대한민국'</span>, <span class="green">9</span>, <span class="green">3</span>, <span class="green">9</span>, <span class="green">21</span><span>]</span>]</pre>
+</div>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<hr/>
+<div epub:type="footnote" id="footnote-001">
+<p class="txtex dl s08_08"><a class="dm brown2" href="#footnote-001-backlink">1</a> <a href="https://ko.wikipedia.org/wiki/2016%EB%85%84_%ED%95%98%EA%B3%84_%EC%98%AC%EB%A6%BC%ED%94%BD_%EB%A9%94%EB%8B%AC_%EC%A7%91%EA%B3%84">https://ko.wikipedia.org/wiki/2016년_하계_올림픽_메달_집계</a></p>
+</div>
+</div>
+</section>
+</section>

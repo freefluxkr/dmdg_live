@@ -1,0 +1,261 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt2 dm blue box_orange_line"><span class="bg_pink4">3</span> 함수 불러오기</p>
+<p class="txtex bl">지금까지 우리가 사용했던 함수에는 어떤 것들이 있었나요?</p>
+<p class="txts"> </p>
+<p class="txtex bl s14_14"><img alt="" class="h12" src="https://thebook.io/img/007029/icon_chick.jpg"/> <span class="cd">print</span>, <span class="cd">input</span>, <span class="cd">int</span>, <span class="cd">str</span>이요!</p>
+<p class="txts"> </p>
+<p class="txtex bl">지금까지 사용했던 함수들은 파이썬에서 항상 사용할 수 있도록 제공하는 내장 함수<span class="txts gray">(Built-in Functions)</span>입니다. 현재 파이썬 3.7 버전에서 제공하는 내장 함수의 종류는 다음과 같습니다. 이중 몇 가지는 앞으로 사용하겠지만, 모두 알 필요는 전혀 없습니다.</p>
+<p class="txts"> </p>
+<table>
+<tbody>
+<tr>
+<td class="tb_gold" colspan="5">
+<p class="txts dm tcenter">내장 함수</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">abs()</p>
+</td>
+<td>
+<p class="txts dl">delattr()</p>
+</td>
+<td>
+<p class="txts dl">hash()</p>
+</td>
+<td>
+<p class="txts dl">memoryview()</p>
+</td>
+<td>
+<p class="txts dl">set()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">all()</p>
+</td>
+<td>
+<p class="txts dl">dict()</p>
+</td>
+<td>
+<p class="txts dl">help()</p>
+</td>
+<td>
+<p class="txts dl">min()</p>
+</td>
+<td>
+<p class="txts dl">setattr()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">any()</p>
+</td>
+<td>
+<p class="txts dl">dir()</p>
+</td>
+<td>
+<p class="txts dl">hex()</p>
+</td>
+<td>
+<p class="txts dl">next()</p>
+</td>
+<td>
+<p class="txts dl">slice()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">ascii()</p>
+</td>
+<td>
+<p class="txts dl">divmod()</p>
+</td>
+<td>
+<p class="txts dl">id()</p>
+</td>
+<td>
+<p class="txts dl">object()</p>
+</td>
+<td>
+<p class="txts dl">sorted()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">bin()</p>
+</td>
+<td>
+<p class="txts dl">enumerate()</p>
+</td>
+<td>
+<p class="txts dl">input()</p>
+</td>
+<td>
+<p class="txts dl">oct()</p>
+</td>
+<td>
+<p class="txts dl">staticmethod()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">bool()</p>
+</td>
+<td>
+<p class="txts dl">eval()</p>
+</td>
+<td>
+<p class="txts dl">int()</p>
+</td>
+<td>
+<p class="txts dl">open()</p>
+</td>
+<td>
+<p class="txts dl">str()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">breakpoint()</p>
+</td>
+<td>
+<p class="txts dl">exec()</p>
+</td>
+<td>
+<p class="txts dl">isinstance()</p>
+</td>
+<td>
+<p class="txts dl">ord()</p>
+</td>
+<td>
+<p class="txts dl">sum()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">bytearray()</p>
+</td>
+<td>
+<p class="txts dl">filter()</p>
+</td>
+<td>
+<p class="txts dl">issubclass()</p>
+</td>
+<td>
+<p class="txts dl">pow()</p>
+</td>
+<td>
+<p class="txts dl">super()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">bytes()</p>
+</td>
+<td>
+<p class="txts dl">float()</p>
+</td>
+<td>
+<p class="txts dl">iter()</p>
+</td>
+<td>
+<p class="txts dl">print()</p>
+</td>
+<td>
+<p class="txts dl">tuple()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">callable()</p>
+</td>
+<td>
+<p class="txts dl">format()</p>
+</td>
+<td>
+<p class="txts dl">len()</p>
+</td>
+<td>
+<p class="txts dl">property()</p>
+</td>
+<td>
+<p class="txts dl">type()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">chr()</p>
+</td>
+<td>
+<p class="txts dl">frozenset()</p>
+</td>
+<td>
+<p class="txts dl">list()</p>
+</td>
+<td>
+<p class="txts dl">range()</p>
+</td>
+<td>
+<p class="txts dl">vars()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">classmethod()</p>
+</td>
+<td>
+<p class="txts dl">getattr()</p>
+</td>
+<td>
+<p class="txts dl">locals()</p>
+</td>
+<td>
+<p class="txts dl">repr()</p>
+</td>
+<td>
+<p class="txts dl">zip()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">compile()</p>
+</td>
+<td>
+<p class="txts dl">globals()</p>
+</td>
+<td>
+<p class="txts dl">map()</p>
+</td>
+<td>
+<p class="txts dl">reversed()</p>
+</td>
+<td>
+<p class="txts dl">__import__()</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl">complex()</p>
+</td>
+<td>
+<p class="txts dl">hasattr()</p>
+</td>
+<td>
+<p class="txts dl">max()</p>
+</td>
+<td>
+<p class="txts dl">round()</p>
+</td>
+<td>
+<p class="txts dl"> </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txts dl blue"><span class="dm bg_blue_line">표 부록-4</span> 파이썬 내장 함수</p>
+</div>
+</section>
+</section>

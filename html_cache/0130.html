@@ -1,0 +1,28 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">18을 입력하면 제대로 결과가 나오지만, 22를 입력하면 음수가 출력됩니다. 프로그램을 재실행해 30을 입력해도 마찬가지입니다. <span class="cd">if</span> 문 아래에서 들여쓰기가 되면 조건문에 속하지만, 들여쓰기를 하지 않으면 조건문 소속이 아니어서 조건 충족 여부와 상관없이 실행됩니다. 그래서 20 미만인 숫자를 입력해도, 20 이상인 숫자를 입력해도 마지막 줄은 항상 실행됩니다.</p>
+<p class="txt bl">그럼 나이와 상관없이 항상 ‘감사합니다. 안녕히 가세요.’를 출력해 볼까요?</p>
+<div class="highlight">
+<pre>age = int(<span class="gold">input</span>(<span class="red2">'나이가 어떻게 되세요? '</span>))
+<span class="purple">if</span> age &lt; <span class="green">20</span>:
+    <span class="gold">print</span>(<span class="red2">'미성년자는 주류를 구매할 수 없습니다.'</span>)
+    <span class="gold">print</span>(<span class="green">20</span> - age, <span class="red2">'년 후에 성인이 되면 오세요!'</span>)
+<span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'감사합니다. 안녕히 가세요.'</span><span class="cd2">)</span></pre>
+</div>
+<p class="txt bl">마지막 줄에 들여쓰기를 하지 않고 출력 명령어를 넣어 주면 됩니다. 20 미만인 수와 20 이상인 수를 각각 입력해 보고 원하는 대로 결과가 나오는지 확인해 보세요!</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+<span class="cd2 yellow">16을 입력했을 때</span> 
+나이가 어떻게 되세요? <span class="cd2">16</span> 
+미성년자는 주류를 구매할 수 없습니다. 
+4년 후에 성인이 되면 오세요!
+감사합니다. 안녕히 가세요.
+
+<span class="cd2 yellow">40을 입력했을 때</span> 
+나이가 어떻게 되세요? <span class="cd2">40</span>
+감사합니다. 안녕히 가세요.</pre>
+</div>
+</div>
+</section>
+</section>

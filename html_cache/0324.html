@@ -1,0 +1,28 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">다른 값도 출력해 봅시다.</p>
+<div class="highlight">
+<pre>eng = {<span class="red2">'break'</span>: <span class="red2">'깨어지다'</span>, <span class="red2">'bring'</span>: <span class="red2">'가져오다'</span>, <span class="red2">'brush'</span>: <span class="red2">'붓'</span>, <span class="red2">'brave'</span>: <span class="red2">'용감한'</span>}
+<span class="gold">print</span>(eng[<span class="cd2 red2">'brush'</span>])
+<span class="cd2 gold">print</span><span class="cd2">(eng[</span><span class="cd2 red2">'brave'</span><span class="cd2">])</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+붓
+용감한</pre>
+</div>
+<p class="txt bl">키 <span class="cd">brush</span>, <span class="cd">brave</span>와 쌍을 이루는 값이 출력됩니다. 리스트와 공통점, 차이점을 비교하니 딕셔너리도 이해하기 어려운 개념은 아니죠? 인덱스 대신 키를 기준으로 데이터에 접근할 수 있다는 부분이 가장 큰 차이고 그 외에는 비슷한 부분이 많습니다.</p>
+<p class="txt bl">그럼 딕셔너리에 존재하지 않는 키를 넣으면 어떻게 될까요? 코드로 살펴봅시다.</p>
+<div class="highlight">
+<pre>eng = {<span class="red2">'break'</span>: <span class="red2">'깨어지다'</span>, <span class="red2">'bring'</span>: <span class="red2">'가져오다'</span>, <span class="red2">'brush'</span>: <span class="red2">'붓'</span>, <span class="red2">'brave'</span>: <span class="red2">'용감한'</span>}
+<span class="gold">print</span>(eng[<span class="cd2 red2">'brief'</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+----&gt; 2 print(eng['brief'])
+<span class="red2">KeyError</span>: 'brief'</pre>
+</div>
+</div>
+</section>
+</section>

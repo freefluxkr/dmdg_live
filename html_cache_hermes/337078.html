@@ -1,0 +1,59 @@
+<h1 class="page-subject">07-5. 실습: 커스텀 스킬 만들기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: 이 페이지의 명령·도구·파일 경로는 v0.16.0 소스 코드(<code>hermes_cli/skills_hub.py</code>·<code>agent/skill_commands.py</code>·<code>tools/skill_manager_tool.py</code>)로 재확인했습니다. 실습 절차를 직접 실행한 테스트는 하지 않았으므로, 출력 화면과 자동 스킬 생성 동작은 환경·모델에 따라 달라질 수 있습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#1">실습 1: 설치된 스킬 확인</a></li>
+<li><a href="#2">실습 2: 스킬 검색 및 설치</a></li>
+<li><a href="#3">실습 3: 커스텀 스킬 수동 생성</a></li>
+<li><a href="#4">실습 4: 자동 스킬 생성 관찰</a></li>
+<li><a href="#5">실습 5: 스킬 내용 확인</a></li>
+</ul>
+</div>
+<p>이 절에서는 스킬을 직접 만들고, 자동 스킬 생성을 관찰합니다.</p>
+<h3 id="1">실습 1: 설치된 스킬 확인</h3>
+<pre><code>&gt; /skills list
+</code></pre>
+<p>설치된 스킬 목록이 표시됩니다. 번들 스킬과 에이전트가 자동 생성한 스킬이 함께 보입니다.</p>
+<p>스킬은 <code>agent/skill_commands.py</code>를 통해 슬래시 명령어로 등록됩니다. <code>/skills list</code> 명령으로 전체 목록을 볼 수 있고(맨몸 <code>/skills</code>는 도움말을 보여줍니다), 각 스킬 이름을 슬래시 명령어로 직접 실행할 수 있습니다.</p>
+<fieldset><legend>알려진 이슈: 스킬 출처 표시 오류</legend><p style="margin-top: 0.2em;"><code>/skills</code> 목록에서 로컬에서 만든 스킬이 "builtin"으로 잘못 표시되는 경우가 보고되어 있습니다 (GitHub #861). 스킬이 실제로 어디에 있는지는 <code>~/.hermes/skills/</code> 디렉터리를 직접 확인하는 것이 정확합니다.</p></fieldset>
+<h3 id="2">실습 2: 스킬 검색 및 설치</h3>
+<pre><code class="language-bash">hermes skills search "git"
+hermes skills install git-helper
+</code></pre>
+<p>또는 대화 중에:</p>
+<pre><code>&gt; git 관련 스킬을 검색하고 유용한 것을 설치해줘
+</code></pre>
+<p>설치 전에 <code>hermes skills inspect &lt;name&gt;</code>으로 스킬 내용을 미리 확인할 수 있습니다. 특히 community 등급 스킬은 설치 전 내용을 검토하는 습관이 좋습니다.</p>
+<h3 id="3">실습 3: 커스텀 스킬 수동 생성</h3>
+<p>시스템 점검 스킬을 직접 만들어 봅니다.</p>
+<pre><code>&gt; 다음 절차를 수행하는 스킬을 만들어줘:
+&gt; 이름: system-check
+&gt; 1. 디스크 사용량 확인 (df -h)
+&gt; 2. 메모리 사용량 확인
+&gt; 3. 실행 중인 프로세스 수 확인
+&gt; 4. 결과를 마크다운 테이블로 정리
+</code></pre>
+<p>에이전트가 <code>skill_manage</code> 도구의 <code>create</code> 기능으로 <code>~/.hermes/skills/system-check/SKILL.md</code>를 생성합니다. 이후 <code>/system-check</code>로 실행할 수 있습니다.</p>
+<h3 id="4">실습 4: 자동 스킬 생성 관찰</h3>
+<p>복잡한 작업을 시켜서 에이전트가 자동으로 스킬을 생성하는 과정을 관찰합니다.</p>
+<pre><code>&gt; 현재 디렉터리에서 모든 Python 파일을 찾아서,
+&gt; 각 파일의 import 문을 분석하고,
+&gt; 사용되는 외부 패키지 목록을 추출하고,
+&gt; requirements.txt 파일을 생성해줘
+</code></pre>
+<p>이 작업은 여러 도구 호출이 필요합니다. 도구 호출이 충분히 누적되면, 응답 완료 후 백그라운드 리뷰 에이전트가 이 워크플로를 스킬로 만들지 검토합니다.</p>
+<p>자동 생성이 발생하지 않을 수도 있습니다. 최종 결정은 LLM이 하기 때문입니다. 만약 자동 생성이 되지 않는다면 다음과 같이 직접 요청할 수 있습니다.</p>
+<pre><code>&gt; 방금 한 작업을 스킬로 만들어줘
+</code></pre>
+<fieldset><legend>로컬 LLM에서의 자동 생성</legend><p style="margin-top: 0.2em;">로컬 LLM(특히 7B~13B 모델)에서는 백그라운드 리뷰의 판단 품질이 떨어져서, 불필요한 스킬을 만들거나 반대로 유용한 기회를 놓칠 수 있습니다. 자동 생성에 의존하기보다는 수동으로 스킬을 만들거나, 자동 생성된 스킬을 직접 검토하고 편집하는 것을 권장합니다.</p></fieldset>
+<h3 id="5">실습 5: 스킬 내용 확인</h3>
+<p>생성된 스킬의 내용을 직접 확인합니다.</p>
+<pre><code class="language-bash">cat ~/.hermes/skills/system-check/SKILL.md
+ls ~/.hermes/skills/
+</code></pre>
+<p>스킬 파일은 일반 마크다운이므로, 텍스트 에디터로 직접 수정할 수도 있습니다. 필수 frontmatter 필드는 <code>name</code>과 <code>description</code>이며, 특히 <code>description</code>을 구체적으로 작성하면(어떤 상황에서 쓰는 스킬인지, 트리거가 될 표현을 포함) 에이전트가 적절한 상황에서 스킬을 더 정확하게 찾아 사용합니다.</p>
+</div>

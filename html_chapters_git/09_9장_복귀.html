@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>09_9장_복귀</title>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Fira+Code:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Fira Code', 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h1>9장 복귀</h1>
+<div class="x-----------1">
+<p class="x----2">깃은 소스 코드의 시간에 따른 변화 흐름을 기록합니다. 이렇게 저장된 변화 흐름 단계를 커밋(<span class="x100">commit</span>)이라고 합니다. 이 장에서는 커밋을 기준으로 특정 시점의 상태로 되돌리는 방법을 알아보겠습니다.</p>
+</div>
+<div class="x-----------1">
+<p class="x0-----1"><span class="DIN------- x100">9</span><span class="DIN-------">.</span><span class="DIN------- x100">1</span><span class="DIN-------"> </span>되돌리기</p>
+<p class="x0-----1"><span class="DIN------- x100">9</span><span class="DIN-------">.</span><span class="DIN------- x100">2</span><span class="DIN-------"> </span>리셋</p>
+<p class="x0-----1"><span class="DIN------- x100">9</span><span class="DIN-------">.</span><span class="DIN------- x100">3</span><span class="DIN-------"> </span>리버트</p>
+<p class="x0-----1"><span class="DIN------- x100">9</span><span class="DIN-------">.</span><span class="DIN------- x100">4</span><span class="DIN-------"> </span>정리</p>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>9.1 되돌리기</h2>
+<p class="x00--">깃을 이용하여 버전을 관리하는 목적은 만일의 사태를 대비하기 위해서입니다. 프로그래밍은 수많은 코드를 작성하고 테스트하는 과정입니다. 개발자는 코드를 단계별로 발전시키면서 실수를 최소화하고자 노력합니다. 하지만 아무리 주의해서 프로그래밍해도 오류가 생깁니다. 개발 도중에 심각할 정도로 오작동해서 더 이상 개선하기 어려울 때도 생기곤 합니다. 이때는 문제를 억지로 해결하려고 노력하는 것보다 지금까지 한 작업을 포기하고 다시 시작하는 것이 좀 더 빠르게 해결할 수 있는 방법이 될 수도 있습니다. </p>
+<p class="x00--">깃을 사용하면 언제든지 원하는 시점으로 전체 코드를 되돌릴 수 있습니다. 마치 코드 복구 시스템과 같습니다. </p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.1.1 다시 시작</h3>
+<p class="x00--">코드가 한두 줄 변경되었을 때는 언제든지 다시 시작할 수 있습니다. 몇 줄만 암기하여 변경하면 됩니다. 하지만 몇 시간 혹은 며칠 동안 작업한 코드라면 이야기가 다릅니다. 모든 수정 내역을 일일이 기억하여 과거 상태로 되돌아가는 것은 쉽지 않습니다. 이때 깃을 사용하면 좀 더 손쉽게 되돌아갈 수 있습니다.</p>
+<p class="x00--">깃은 기록된 커밋을 기준으로 이전 상태로 되돌릴 수 있습니다. 즉, 코드를 항상 안정적으로 유지하고 관리할 수 있게 해 주는 도구입니다. 수많은 개발자가 깃을 사랑하는 이유 중 하나이기도 합니다. </p>
+<p class="x00--">깃에서 코드 작업을 되돌리는 방법은 크게 <span class="A------ x3---------">reset</span>과 <span class="A------ x3---------">revert</span> 두 가지입니다. 리셋<span class="x3------">(</span><span class="A------ x3------">reset</span><span class="x3------">)</span>과 리버트<span class="x3------">(</span><span class="A------ x3------">revert</span><span class="x3------">)</span> 동작을 좀 더 쉽게 이해할 수 있도록 실습으로 익혀 보겠습니다. 먼저 실습을 위해 새 깃 저장소 폴더를 만들고 초기화합니다.</p>
+<pre><code><p class="N------1">$ <span class="x--">cd </span><span class="N--------1 x--">실습폴더</span></p>
+<p class="N-----">$ <span class="x--">mkdir gitstudy09</span> <span class="ingd">새 폴더 만들기</span></p>
+<p class="N-----">$ <span class="x--">cd gitstudy09</span></p>
+<p class="N-----"> </p>
+<p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy09</p>
+<p class="N-----">$ <span class="x--">git init</span> <span class="ingd"> 저장소 초기화</span></p>
+<p class="N-----">Initialized empty Git repository in E:/gitstudy09/.git/</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>9.2 리셋</h2>
+<p class="x00--">리셋<span class="x3------">(</span><span class="A------ x3------">reset</span><span class="x3------">)</span>은 커밋을 기준으로 이전 코드로 되돌리는 방법으로, 기록한 커밋을 취소합니다. 커밋을 취소하는 만큼 리셋할 때는 항상 신중하게 작업해야 합니다.</p>
+<p class="fcap">▼ 그림 9-2 리셋</p>
+<img alt="316903.png" class="w60" src="https://thebook.io/img/080212/316903.png"/>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.1 복귀 시점</h3>
+<p class="x00--">복귀는 어떤 시점으로 돌아가는 것을 의미합니다. 따라서 이전 코드로 복귀하려면 복귀 시점을 알려 주어야 합니다. 리셋은 이 시점을 커밋을 기준으로 정합니다. 커밋은 <span class="A------ x3-------1">log</span> 명령어로 조회할 수 있습니다. <span class="A------ x3-------1">log</span> 명령어를 실행하면 커밋의 해시 값과 메시지를 출력합니다. 따라서 복귀하고자 하는 특정 시점을 찾는 데 매우 유용합니다.</p>
+<p class="x00--">앞에서 작업한 커밋들을 확인해 봅시다. <span class="x----- x3-------1">--</span><span class="A------ x3-------1">oneline</span> 옵션을 같이 사용하여 로그 기록을 확인합니다. 간략한 커밋 해시 값과 메시지가 같이 출력됩니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09<span class="x--"> (main)</span></p>
+<p class="N-----">$ <span class="x--">git log --oneline</span> <span class="ingd">로그 확인</span></p>
+<p class="N-----"></p>
+<p class="N-----"><span class="char-style-override-24">7f068b6</span> (HEAD -&gt; main) menu5</p>
+<p class="N-----"><span class="char-style-override-24">6619c99</span> menu4</p>
+<p class="N-----"><span class="char-style-override-24">b728366</span> menu3</p>
+<p class="N-----"><span class="char-style-override-24">f1c704f</span> menu2</p>
+<p class="N-----"><span class="char-style-override-24">b741eef</span> menu1</p>
+<p class="N----"><span class="char-style-override-24">69bf712</span> first</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.2 reset 명령어</h3>
+<p class="x00--"><span class="A------ x3-------1 char-style-override-24">reset</span> <span class="x3---------">명령어를 사용하면 지정된 커밋 코드로 되돌아갑니다.</span> 즉, 특정 커밋의 해시 값 상태로 모든 코드를 복구합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git reset <span class="N--------1 N--------1">옵션</span> <span class="N--------1 N--------1">커밋</span>ID</p>
+</div>
+<p class="x00-- para-style-override-14"><span class="A------ x3-------1">reset</span> 명령어는 옵션을 함께 사용해야 하며, 세 가지 옵션이 있습니다.</p>
+<ul>
+<li class="x06----"><span class="A------ x3-------1 char-style-override-24">soft</span>: 스테이지 영역을 포함한 상태로 복원합니다.</li>
+<li class="x06----"><span class="x3-------1 char-style-override-24"></span><span class="A------ x3-------1 char-style-override-24">mixed</span>: 기본 옵션 값은 <span class="A------ x3-------1">mixed</span>입니다. <span class="A------ x3-------1">reset</span> 명령어를 사용할 때 옵션을 지정하지 않으면 기본값인 <span class="A------">mixed</span>로 선택됩니다.</li>
+<li class="x06---- para-style-override-28"><span class="A------ x3-------1 char-style-override-24">hard</span>: 실제 파일이 삭제된 이전 상태로 복원합니다.</li>
+</ul>
+<p class="x00--"><span class="A------ x3-------1">soft</span> 옵션과 <span class="A------ x3-------1">mixed</span> 옵션 차이는 크게 스테이지 영역과 관련이 있습니다. <span class="A------ x3-------1">hard</span> 옵션은 워킹 디렉터리와 관련이 있습니다. 각 옵션의 차이점과 동작은 실습하면서 알아보겠습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.3 soft 옵션</h3>
+<p class="x00--"><span class="A------ x3-------1">soft</span> 옵션은 가장 낮은 단계의 리셋 동작입니다. 먼저 <span class="A------ x3-------1">soft</span> 옵션의 동작은 <span class="A------ x3-------1">reset</span><span class="x3-------1"> </span><span class="x----- x3-------1">--</span><span class="A------ x3-------1">soft</span> 명령어를 실행해서 이해해 봅시다. 코드에서 <span class="A------">HEAD</span>~는 이전 커밋을 의미합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N----">$ <span class="x--">git reset --soft HEAD~</span> <span class="ingd">이전 커밋으로 <span class="x100 x100">soft</span> 옵션을 사용한 리셋</span></p></code></pre>
+<p class="x00--">최신 커밋(<span class="A------">menu</span><span class="A------">5</span>)을 리셋했습니다. <span class="x----- x3-------1">--</span><span class="A------ x3-------1">soft</span> 옵션을 사용하면 별도의 메시지가 출력되지 않습니다. 리셋한 후 소스트리에서 확인하면 다음 그래프를 볼 수 있습니다.</p>
+<p class="fcap">▼ 그림 9-4 소프트 리셋 확인</p>
+<img alt="0904.jpg" class="w60" src="https://thebook.io/img/080212/0904_fmt.jpeg"/>
+<p class="x00--">마지막 <span class="A------">menu</span><span class="A------">5</span> 커밋이 사라지고 <span class="x3---------">커밋하지 않은 변경 사항</span>이 보입니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.4 mixed 옵션</h3>
+<p class="x00--"><span class="A------ x3-------1">reset</span> 명령어의 기본값은 <span class="A------ x3-------1">mixed</span> 옵션입니다. </p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git reset --mixed <span class="N--------1 N--------1">커밋</span>ID</p>
+</div>
+<p class="x00--">또는 다음과 같이 <span class="A------ x3-------1">mixed</span> 옵션을 생략할 수 있습니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git reset <span class="N--------1 N--------1">커밋</span>ID <span class="ingd">생략 가능</span></p>
+</div>
+<p class="x00--">이번에는 <span class="A------ x3-------1">mixed</span> 옵션을 이해할 수 있도록 간단히 실습해 봅시다.<span class="x3-------1"></span></p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git reset --mixed HEAD~ </span><span class="ingd">mixed 옵션을 사용한 리셋 실행</span></p>
+<p class="N-----"><span class="char-style-override-24">Unstaged</span> changes after reset:</p>
+<p class="N----">M       menu.htm</p></code></pre>
+<p class="x00--">이번에는 리셋 메시지가 같이 표시되었습니다. 메시지 내용은 <span class="A------">unstaged</span> 상태로 변경되었다는 의미입니다. <span class="A------ x3-------1">mixed</span> 옵션은 <span class="A------ x3-------1">soft</span> 옵션과 달리 <span class="x3---------">리셋한 후 스테이지 상태까지 복원하지 않습니다.</span> <span class="A------ x3-------1">status</span> 명령어로 깃의 상태를 확인합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$<span class="x--"> git status</span> <span class="ingd">상태 확인</span></p>
+<p class="N-----">On branch main</p>
+<p class="N-----">Changes not staged for commit:</p>
+<p class="N-----">  (use "git add &lt;file&gt;..." to update what will be committed)</p>
+<p class="N-----">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</p>
+<p class="N-----"> <span class="char-style-override-24"> modified:   menu.htm</span></p>
+<p class="N----">no changes added to commit (use "git add" and/or "git commit -a")</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.5 hard 옵션</h3>
+<p class="x00--">이번에는 가장 강력한 옵션인 <span class="A------ x3-------1">hard</span> 옵션을 알아봅니다. <span class="A------ x3-------1">soft</span> 옵션과 <span class="A------ x3-------1">mixed</span> 옵션은 이전 커밋으로 되돌리는 과정에서 실제로 삭제되는 내용은 없습니다. 모든 작업 내용이 워킹 디렉터리에 그대로 유지됩니다. 정확히 말하면 이전 상태로 되돌아가는 것이 아닙니다. 복귀 커밋 이후의 작업들은 워킹 디렉터리 영역에 남겨 두어 다시 수정하거나 커밋할 수 있도록 상태만 변경하는 것입니다.</p>
+<p class="x00--">이에 반해 <span class="A------ x3-------1">hard</span> 옵션은 리셋되는 복귀 시점의 커밋 상태와 해당 커밋의 워킹 디렉터리까지 모두 되돌립니다. 즉, <span class="A------ x3-------1 char-style-override-24">reset</span><span class="x3-------1 char-style-override-24"> </span><span class="x----- x3-------1 char-style-override-24">--</span><span class="A------ x3-------1 char-style-override-24">hard</span> <span class="x3---------">명령어</span>를 사용한 커밋 이후의 모든 내용은 삭제됩니다. 따라서 <span class="A------ x3-------1">hard</span> 옵션은 주의해서 사용해야 합니다.</p>
+<p class="x00--">이번에는 <span class="A------ x3-------1">hard</span> 옵션을 사용해 봅시다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git reset --hard HEAD~</span> <span class="ingd">완전 삭제</span></p>
+<p class="N----">HEAD is now at 6619c99 menu4</p></code></pre>
+<p class="x00--"><span class="A------ x3-------1">hard</span> 옵션을 실행하면 리셋된 결과 메시지가 출력됩니다. 그리고 삭제 이후의 마지막 <span class="A------">HEAD</span> 커밋의 해시 값이 출력됩니다. 소스트리에서도 결과를 확인해 보세요.</p>
+<p class="fcap">▼ 그림 9-9 hard 옵션을 사용한 리셋 이후 상태</p>
+<img alt="0909.jpg" class="w70" src="https://thebook.io/img/080212/0909_fmt.jpeg"/>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.6 소스트리</h3>
+<p class="x00--">리셋하려면 복귀 시점의 커밋 해시 값이 필요합니다. 하지만 매번 로그를 검색하여 리셋하는 것은 불편합니다. 소스트리를 이용하면 더 쉽게 리셋할 수 있습니다. 앞에서 이미 실습했기 때문에 여기서는 메뉴만 확인해 주세요. </p>
+<p class="x00--">먼저 소스트리의 커밋 그래프에서 복귀할 커밋을 선택합니다. 그리고 마우스 오른쪽 버튼을 눌러 <span class="x3---------">이 커밋까지 현재 브랜치를 초기화</span> 메뉴를 선택합니다.</p>
+<p class="fcap">▼ 그림 9-11 소스트리에서 초기화</p>
+<img alt="0911.jpg" class="w40" src="https://thebook.io/img/080212/0911_fmt.jpeg"/>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.7 커밋 합치기</h3>
+<p class="x00--">앞에서는 리베이스 병합의 <span class="x----- x3-------1">-</span><span class="A------ x3-------1">i</span> 옵션을 사용하면 여러 커밋을 하나로 합치는 동작을 수행할 수 있었습니다. 또 단일 커밋은 커밋 명령어의 <span class="x----- x3-------1">--</span><span class="A------ x3-------1">amend</span> 옵션으로 커밋을 수정할 수 있었습니다. 리셋의 동작 원리를 이해하고 있다면, 커밋도 수정할 수 있습니다. 리셋의 <span class="A------ x3-------1">soft</span> 옵션은 <span class="A------">HEAD</span>를 해당 커밋으로 이동합니다. 그리고 원본 내용은 그대로 워킹 디렉터리에 남겨 둡니다.</p>
+<p class="x00--">실습으로 커밋을 수정해 봅시다. 수정하기 전에 먼저 로그를 확인해 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git log --oneline</span> <span class="ingd">로그 확인</span></p>
+<p class="N-----">6619c99 (HEAD -&gt; main) menu4</p>
+<p class="N-----">b728366 menu3</p>
+<p class="N-----">f1c704f menu2</p>
+<p class="N-----">b741eef menu1</p>
+<p class="N----">69bf712 first</p></code></pre>
+<p class="x00--"><span class="A------">menu</span><span class="A------">3</span>과 <span class="A------">menu</span><span class="A------">4</span> 커밋을 <span class="A------ x3-------1">reset</span> 명령어를 사용하여 하나로 합쳐 보겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09<span class="x--"> (main)</span></p>
+<p class="N----">$ <span class="x--">git reset --soft HEAD~2</span> <span class="ingd">2단계 전의 커밋으로 리셋(soft 옵션)</span></p></code></pre>
+<p class="x00--">최신 커밋 <span class="A------">HEAD</span>를 기준으로 <span class="A------">2</span>단계 전 상태로 리셋됩니다. 즉, <span class="A------">menu</span><span class="A------">2</span>를 가리키는 <span class="A------">f</span><span class="A------">1</span><span class="A------">c</span><span class="A------">704</span><span class="A------">f</span> 커밋을 의미합니다. 로그를 다시 실행합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$<span class="x--"> git log --oneline</span> <span class="ingd">로그 확인</span></p>
+<p class="N-----">f1c704f (HEAD -&gt; main) menu2</p>
+<p class="N-----">b741eef menu1</p>
+<p class="N----">69bf712 first</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.8 스테이지 리셋</h3>
+<p class="x00--">스테이지 영역은 커밋을 하려고 임시로 결과물을 보관해 두는 공간입니다. 커밋을 하려면 워킹 디렉터리에서 작업한 내용을 스테이지 영역에 등록해야 합니다. 앞에서 배웠듯이, 스테이지 영역에 등록할 때는 <span class="A------ x3-------1">add</span> 명령어를 사용합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git add <span class="N--------1 N--------1">파일이름</span></p>
+</div>
+<p class="x00--">또 <span class="A------ x3-------1">add</span> 명령어로 등록된 스테이지 영역의 파일을 다시 <span class="A------">unstage</span> 상태가 되도록 스테이징을 취소할 수 있습니다. 스테이지 영역에서 등록된 파일을 다시 <span class="A------">unstage</span> 상태로 만들 때는 <span class="A------ x3-------1">reset</span> 명령어를 사용합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git reset <span class="N--------1 N--------1">파일이름</span></p>
+</div>
+<p class="x00--"><span class="A------ x3-------1">reset</span> 명령어 다음에 커밋 <span class="A------">ID</span> 대신 파일 이름을 사용하면 됩니다. <span class="x3---------">파일 이름을 지정하여 리셋하면 해당 파일은 </span><span class="A------ x3---------">unstage</span><span class="x3---------"> 상태가 됩니다.</span> 하지만 이 명령어는 몇 가지 옵션이 축약되어 있습니다. 내부적으로 다음과 같이 여러 단계로 처리하여 파일을 <span class="A------">unstage</span> 상태로 변경합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git reset --mixed HEAD <span class="N--------1 N--------1">파일이름</span></p>
+</div>
+<p class="x00--">원래는 중간에 <span class="x----- x3-------1">--</span><span class="A------ x3-------1">mixed</span> <span class="A------ x3-------1">HEAD</span>가 생략된 형태입니다. 최신 커밋에서 지정 파일을 리셋하고 <span class="A------ x3-------1">mixed</span> 옵션으로 스테이지 영역도 같이 제거합니다. 다음과 같이 <span class="A------">HEAD</span> 대신 다른 커밋 <span class="A------">ID</span>를 사용할 수도 있습니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git reset <span class="N--------1 N--------1">커밋</span>ID <span class="N--------1 N--------1">파일이름</span></p>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.9 작업 취소</h3>
+<p class="x00--">코드를 수정하는 도중 오류가 생겨 현재 작업을 모두 취소하고 싶을 수 있습니다. 보통은 다음과 같이 워킹 디렉터리에서 코드를 수정하고, 수정한 코드는 다시 스테이지 영역에 등록합니다.</p>
+<p class="fcap">▼ 그림 9-18 코드 수정과 워킹 디렉터리</p>
+<img alt="317077.png" class="w70" src="https://thebook.io/img/080212/317077.png"/>
+<p class="x00--">수정 작업을 완전히 취소하려면 <span class="x3---------">워킹 디렉터리와 스테이지 상태를 모두 제거하여 마지막 커밋 상태로 되돌려 놓아야 합니다.</span> 그림을 보면 <span class="A------">HEAD</span> 포인터는 가장 마지막의 커밋 위치를 가리킵니다. 그리고 수정 작업들은 모두 워킹 디렉터리 안에 남아 있습니다. 리셋할 때의 <span class="x3---------">시점을 현재 </span><span class="A------ x3---------">HEAD</span>를 기준으로 하면 해당 시점의 수정 작업을 모두 삭제할 수 있습니다.</p>
+<p class="lbl"><span class="ex">예</span></p>
+<pre><code><p class="N---- para-style-override-35">$ <span class="x--">git reset --hard HEAD</span></p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.10 병합 취소</h3>
+<p class="x00--">리셋은 병합된 브랜치도 취소할 수 있습니다. 실습과 함께 익혀 봅시다. 먼저 실습을 위해 커밋 환경을 준비합니다. 다음과 같이 브랜치를 만들어 보겠습니다.</p>
+<p class="fcap">▼ 그림 9-19 커밋을 지정하여 브랜치 생성</p>
+<img alt="317089.png" class="w60" src="https://thebook.io/img/080212/317089.png"/>
+<p class="x00--"><span class="A------">menu</span><span class="A------">2</span>의 커밋 해시키를 직접 지정하여 <span class="A------">menu</span> 브랜치를 생성할 것입니다. 그리고 <span class="A------">menu</span> 브랜치로 체크아웃하겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git checkout -b menu f1c704f</span> <span class="ingd">menu2의 커밋 해시키를 직접 지정(자신의 실습에 맞는 값으로 입력)</span></p>
+<p class="N----">Switched to a new branch 'menu'</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.2.11 주의할 점</h3>
+<p class="x00--">리셋 기능을 이용하면 독립된 개인 프로젝트를 관리할 때 쉽게 이전 상태로 복귀할 수 있습니다. 하지만 <span class="x3---------">저장소를 외부에 공개했거나 공유하고 있다면 주의해서 리셋을 사용</span>해야 합니다. 작성된 커밋이 리셋으로 삭제되면 함께 작업하는 개발자에게 혼란을 줄 수 있습니다. 일반적으로 협업하거나 소스 코드를 공유한 후에는 리셋 작업을 하지 않습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>9.3 리버트</h2>
+<p class="x00--">공개된 커밋은 보통 리셋 작업을 하지 않는다고 했습니다. 그러면 공개한 저장소에서는 이전 상태로 되돌리려면 어떻게 해야 할까요? 깃은 커밋의 버전을 되돌릴 수 있는 또 다른 방법인 리버트를 제공합니다. 리버트와 리셋 차이점은 커밋 정보 삭제 여부입니다. </p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.3.1 취소 커밋</h3>
+<p class="x00--">리셋은 기존 커밋 정보를 삭제하는 반면, <span class="x3---------">리버트는 기존 커밋을 남겨 두고 취소에 대한 새로운 커밋을 생성</span>합니다. 취소 커밋을 생성할 때는 <span class="A------ x3-------1">revert</span> 명령어를 사용합니다. 취소 커밋은 지정한 커밋을 삭제하지 않습니다. 그 대신 삭제를 위한 새로운 커밋을 생성합니다.</p>
+<p class="fcap">▼ 그림 9-23 취소 커밋</p>
+<img alt="317140.png" class="w60" src="https://thebook.io/img/080212/317140.png"/>
+<p class="x00--">리버트를 실습할 수 있도록 <span class="A------">main</span> 브랜치에서 코드를 수정한 후 커밋을 몇 개 추가하겠습니다. 먼저 <span class="A------">menu</span>.<span class="A------">htm</span> 파일에 <span class="A------">menu</span><span class="A------">5</span>~<span class="A------">menu</span><span class="A------">7</span>을 차례로 입력한 후 커밋합니다. <span class="A------ x3-------1">code</span><span class="x3-------1"> </span><span class="A------ x3-------1">menu</span><span class="x3-------1">.</span><span class="A------ x3-------1">htm</span> 명령어는 생략합니다.</p>
+<p class="x00--"><span class="A------">menu</span><span class="A------">5</span>를 추가하고 저장한 후 커밋합니다.</p>
+<p class="x-----1"><span class="x100">menu</span>.<span class="x100">htm</span> </p>
+<div class="cbox">
+<pre><code><p class="N----- para-style-override-39">&lt;ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu1&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu2&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu3&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu4&lt;/li&gt;</p>
+<p class="N----- para-style-override-39"> <span class="x--">   &lt;li&gt;menu5&lt;/li&gt;</span></p>
+<p class="N----- para-style-override-39">&lt;/ul&gt;</p></code></pre>
+</div>
+<pre><code><p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$<span class="x--"> git commit -am "menu5"</span> <span class="ingd">menu5 등록 및 커밋</span></p>
+<p class="N-----">[main e19c0b4] menu5</p>
+<p class="N----"> 1 file changed, 1 insertion(+)</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.3.2 리버트 지정</h3>
+<p class="x00--">직전의 커밋은 간단하게 <span class="A------">HEAD</span> 포인터를 이용하여 리버트했습니다. 한 번에 여러 커밋을 리버트해야 한다면 어떻게 해야 할까요? <span class="x3---------">리버트는 한 번에 커밋 하나만 취소할 수 있습니다.</span> 따라서 여러 커밋을 리버트하려면 최신 커밋부터 순차적으로 취소해야 합니다.</p>
+<p class="x00--">그렇다면 직전의 커밋이 아닌 다른 커밋을 취소할 때는 어떻게 해야 할까요? 커밋 해시 값을 지정합니다. </p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git revert <span class="N--------1 N--------1">커밋</span>ID</p>
+</div>
+<p class="x00--">깃의 범위 지정 연산자를 사용하여 여러 커밋을 리버트할 수도 있습니다. 연산자 <span class="x3-------1">..</span>를 같이 사용합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git revert <span class="N--------1 N--------1">커밋</span>ID .. <span class="N--------1 N--------1">커밋</span>ID</p>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.3.3 소스트리에서 리버트</h3>
+<p class="x00--">소스트리에서 리버트하는 방법은 간단합니다. 해당 커밋을 선택한 후 마우스 오른쪽 버튼을 누릅니다. 그리고 <span class="x3---------">커밋 되돌리기</span> 메뉴를 선택합니다. </p>
+<p class="fcap">▼ 그림 9-27 커밋 되돌리기</p>
+<div style="margin-top:0.5em;">
+<img alt="0927.jpg" class="w40" src="https://thebook.io/img/080212/0927_fmt.jpeg"/>
+</div>
+<p class="x00--">정말 커밋을 되돌릴지 묻습니다. 되돌릴 것이라면 <span class="x3---------">예</span>를 누릅니다.</p>
+<p class="fcap">▼ 그림 9-28 리버트 확인</p>
+<div style="margin-top:0.5em;">
+<img alt="0928.jpg" class="w60" src="https://thebook.io/img/080212/0928_fmt.jpeg"/>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.3.4 병합 취소</h3>
+<p class="x00--">리버트를 이용하여 병합한 커밋을 취소할 수 있습니다. 리셋은 방금 전 실행한 병합만 삭제합니다. 하지만 리버트는 시간이 지난 후에도 과거의 병합을 선택하여 취소할 수 있습니다. </p>
+<p class="x00--">실습을 위해 <span class="A------">menu</span> 브랜치를 다시 병합하겠습니다. 병합 메시지 입력창이 뜨면 메시지를 입력하고 저장합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$ <span class="x--">git merge menu</span> <span class="ingd">병합</span></p>
+<p class="N-----">Auto-merging menu.htm</p>
+<p class="N-----">Merge made by the 'recursive' strategy.</p>
+<p class="N-----"> menu.htm | 6 +++++-</p>
+<p class="N----"> 1 file changed, 5 insertions(+), 1 deletion(-)</p></code></pre>
+<p class="x00--">그리고 <span class="A------">main</span> 브랜치의 코드를 수정하고 커밋합니다. <span class="A------">menu</span><span class="A------">7</span>을 다시 등록하겠습니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N----">$ <span class="x--">code menu.htm</span> <span class="ingd">VS Code 실행</span></p></code></pre>
+<p class="x-----1"><span class="x100">code</span>.<span class="x100">htm</span> </p>
+<div class="cbox">
+<pre><code><p class="N----- para-style-override-39">&lt;ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu1</p>
+<p class="N----- para-style-override-39">        &lt;ul&gt;</p>
+<p class="N----- para-style-override-39">            &lt;li&gt;menu1-1&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">        &lt;/ul&gt;</p>
+<p class="N----- para-style-override-39">    &lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu2&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu3&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu4&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu5&lt;/li&gt;</p>
+<p class="N----- para-style-override-39">    &lt;li&gt;menu6&lt;/li&gt;</p>
+<p class="N----- para-style-override-39"><span class="x--">    &lt;li&gt;menu7&lt;/li&gt;</span></p>
+<p class="N----- para-style-override-39">&lt;/ul&gt;</p></code></pre>
+</div>
+<pre><code><p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy09 <span class="x--">(main)</span></p>
+<p class="N-----">$<span class="x--"> git commit -am "menu7"</span> <span class="ingd">등록 및 커밋</span></p>
+<p class="N-----">[main da4d8e4] menu7</p>
+<p class="N----"> 1 file changed, 1 insertion(+)</p></code></pre>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>9.3.5 리버트 히스토리</h3>
+<p class="x00--">리버트를 실행하면 새 커밋이 추가되기 때문에 커밋 이력이 복잡합니다. 어떻게 보면 리셋으로 간단하게 이전 상태로 되돌리는 것이 간편해 보일 수도 있습니다. 하지만 저장소를 공개했다면 리셋으로 커밋을 삭제하는 것은 협업 차원에서 위험합니다. 이때는 리버트가 유용합니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>9.4 정리</h2>
+<p class="x00--">리셋과 리버트는 버전 관리의 특성을 그대로 보여 주는 기능입니다. 리셋과 리버트는 동작을 취소하고 과거로 돌아간다는 면에서는 유사합니다. 코드 변경 이력을 저장하고 필요한 시점에 해당 코드 상태로 쉽게 이동할 수 있습니다.</p>
+<p class="x00--"><span>하지만 이렇게 두 명령어로 분리하여 사용하는 것은 저장소를 원격 저장소로 공유했는지 여부와 관련이 있습니다. 자신의 저장소를 외부로 공유했다면 특정 커밋을 삭제하는 것은 위험합니다. 다수의 사용자와 공유하는 저장소의 커밋 기록이 깨질 수 있기 때문입니다. 외부로 공개한 저장소라면 리버트를 사용하는 것이 좋습니다. 자신의 저장소가 컴퓨터에만 있다면 리셋을 사용해도 됩니다.</span></p>
+<div class="footnotes">
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0455/#footnote-298033-1-backlink" id="footnote-298033-1">1</a><span class="x8-------- x8--------"></span>  기본 메시지로 두고 저장한 후 빠져나와도 됩니다.</p>
+</div>
+</div>
+</div>
+</section>
+</section></div>
+</body>
+</html>

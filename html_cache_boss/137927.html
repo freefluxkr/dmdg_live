@@ -1,0 +1,160 @@
+<h1 class="page-subject">6) 엑셀 서식 지정하기 - 기본</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>지금까지 openpyxl 라이브러리를 통해 기본적으로 Cell에 데이터를 읽고 쓰는 방식에 대해 알아봤습니다. 엑셀에는 데이터를 읽고 쓰는 것 말고도 셀 서식(테두리, 셀 색상, 글씨체 등)을 지정하고 조건부 서식을 적용할 수 있습니다. 조건부 서식이란 조건에 따라 다르게 지정하는 셀 서식을 의미합니다.</p>
+<p>이번 편은 openpyxl을 통해 셀 서식을 적용하는 방법을 알아봅시다.</p>
+<hr/>
+<p>파이썬 openpyxl 라이브러리는 엑셀의 셀 서식 제어 기능을 제공합니다. Font, Border, Alignment, patternfill, Protection 등의 모듈을 제공합니다. 이번 셀서식 기본 파트에서는 위에서 언급한 6가지 모듈에 대한 사용법을 알아보도록 하겠습니다.</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137927/4-1.JPG"/></p>
+<h3 id="1-font">1) Font(글꼴)</h3>
+<p>openpyxl Font 모듈에서는 글자의 크기, 글꼴, 밑줄 등의 옵션을 설정할 수 있습니다. 먼저 아래 코드를 작성하여 실행시켜보도록 하겠습니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code>import  openpyxl  as  op
+from  openpyxl.styles.fonts  import  Font
+
+#Workbook 및 Worksheet 객체 설정하기
+wb = op.Workbook()
+ws = wb.active
+
+#font test1 : 직접 font 설정하기
+ws["A1"].value = "Font test1"
+ws["A1"].font = Font(size=20, italic = True, bold = True)
+
+#font test2 : format을 정해놓고 font 설정하기
+ws["A2"].value = "Font Test2"
+font_format = Font(size=12, name='굴림', color = 'FF000000')
+ws["A2"].font = font_format
+
+#Workbook(엑셀) 저장 및 객체 닫기
+wb.save("test_result.xlsx")
+wb.close()
+</code></pre>
+<p>&lt;결과&gt; </p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bpV9KO/btrgB4NCTDx/9Ps10GBxvdFkTSkTtHr1RK/img.png"/></p>
+<p>위 코드는 Font 를 설정하는 2가지 방식을 나타내보았습니다. 첫번째 방식(font test1)은 직접 Cell 주소에 직접적으로 font를 설정하는 방식입니다. 두번째 방식(font test2)은 특정 format을 정해 놓고 변수로 지정하여 Cell에 설정하는 방식입니다. 두번째 방식은 밑에서 다룰 조건부 서식에서 사용할 수 있는 방식입니다.</p>
+<p>코드 중  "Font(size=20, italic = True, bold = True)"의 괄호 안에는 엑셀에서 font를 설정할 수 있는 여러 설정 값들이 있습니다. size는 폰트 크기, Italic은 글자 기울임, bold는 글자를 굵게 할 것인지 설정할 수 있습니다. </p>
+<p>아래는 Font를 설정할 수 있는 여러 설정 값들입니다. 이미지는 openpyxl 공식 홈페이지에서 참고하였습니다. 설정 값들에 대한 자세한 내용은 openpyxl 공식 홈페이지를 참고하시면 됩니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/dAyKwH/btrgJX0wdAp/NyyL84xMQ54TG3PkaR8fzk/img.png"/></p>
+<h3 id="2-border-side">2) Border, Side(테두리)</h3>
+<p>Border, Side 모듈은 엑셀의 셀 테두리를 설정할 수 있는 모듈입니다. Border의 경우 "선택 Cell에 상하좌우 어떤 부분에 테두리를 설정할 것인가?"에 대한 모듈입니다. Side는 "각 테두리에 어떤 테두리 형식을 적용할 것인가"에 대한 부분으로 이해하시면 됩니다.</p>
+<p>예를 들어, 아래와 같이 1개 Cell "C3"에 위에는 실선, 아래에는 이중선을 적용한다고 생각해봅시다. 그럼 위와 아래를 설정하는 코드는 border를 이용해야 합니다. 위에는 실선, 아래는 이중선이라는 형식은 side를 사용합니다. 대신 side는 2가지 변수로 설정 되어있어야 합니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/J5tY3/btrhdBw3brT/4eeB7uaplYcd4vOzTEChkK/img.png"/></p>
+<p>아래 코드를 통해 이해해보도록 하겠습니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code>#모듈 import
+import  openpyxl  as  op
+from  openpyxl.styles  import  Border, Side
+from  openpyxl.styles.colors  import  Color
+
+#Workbook 객체 생성 및 Sheet 설정
+wb = op.Workbook()
+ws = wb.active
+
+#"C3"에 값 입력
+ws["C3"].value = "1개 Cell"
+
+#border test1 : 위에는 실선, 아래에는 이중선 적용 예시 코드
+ws["C3"].border = Border(top = Side(border_style="thin"))
+ws["C3"].border = Border(bottom = Side(border_style="double"))
+
+#객체 저장 및 닫기
+wb.save("style_result.xlsx")
+wb.close()
+</code></pre>
+<p>위 코드는 이미지의 "C3" 셀에 위는 가는 실선, 아래는 이중선을 적용하는 셀 서식을 Border와 Side 모듈을 통해 구현해본 것입니다. 위 주석을 보며 내용을 이해해보도록 합시다. 주의해야 할 점은 각 셀 위치에 접근할 때 ws["C3"].border와 같이 뒤에 설정할 속성을 써주어야 합니다. </p>
+<p>위 코드에서는 각 테두리에 대한 형태만 설정했지만 테두리의 색상도 설정할 수 있습니다. 색상은 아래와 같이 지정하시면 됩니다. 색상은 Side 내부에 있는 color 파라미터를 활용하시면 됩니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>&lt;테두리 색상 코드 설정 예시&gt;</p>
+<pre><code>ws["C3"].border = Border(top = Side(border_style="thin", color="000000"))
+</code></pre>
+<p>color 의 속성 값인 "000000"은 openpyxl에서 제공하는 IndexedColours 값입니다. "000000"은 검은색을 나타내는 인덱스입니다. "FF0000"는 빨간색, "0000FF"는 파란색 등 색 별로 여러 인덱스가 존재합니다. 여기서는 인덱스 값에 대해 자세히 다루진 않지만 openpyxl tutorial 공식 홈페이지의 'Working with styles'를 참고하시면 자세하게 아실 수 있습니다.</p>
+<p>Border에 대한 속성은 아래 표를 참고하시기 바랍니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/5IdgA/btrhjtxGtBO/gVGAroXRS7BzmPcXKFl051/img.png"/></p>
+<h3 id="3-alignment">3) Alignment(정렬)</h3>
+<p>Alignment는 셀에서 text를 어떤 방식으로 정렬할 것인지를 설정할 수 있습니다. </p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/dtbC3v/btrgCFf8q9b/9fT9rNWeO4mKuDpHk8dXB0/img.png"/></p>
+<p>위 이미지를 봤을 때, "C2"의 Alignment test1은 수직으로 가운데 정렬, 수평 방향으로 왼쪽 정렬을 하였습니다. "C4"의 Alignment test2는 수평,수직 방향으로 모두 가운데 정렬한 것입니다.</p>
+<p>이 내용을 openpyxl 코드로 구현하면 어떻게 될까요?</p>
+<p>&lt;코드&gt;</p>
+<pre><code>import  openpyxl  as  op
+from  openpyxl.styles  import  Alignment
+
+wb = op.Workbook()
+ws = wb.active
+
+# "C2"와 "C4"에 Text 입력  
+ws["C2"].value = "Alignment test1"
+ws["C4"].value = "Alignment test2"
+
+# 셀 너비, 높이 설정하기
+ws.row_dimensions[2].height = 50 #2행의 높이 50으로
+ws.row_dimensions[4].height = 50 #4행의 높이 50으로
+ws.column_dimensions['C'].width = 50 #C열의 너비 50으로
+
+#Alignment test1
+ws["C2"].alignment = Alignment(horizontal = 'left', vertical='center')
+
+#Alignment test2
+format1 = Alignment(horizontal = 'center', vertical='center')
+ws["C4"].alignment = format1
+
+#Save
+wb.save("result.xlsx")
+wb.close()
+</code></pre>
+<p>위 이미지와 코드를 비교해서 이해해보시길 바랍니다. Alignment 내부 속성인 horizontal, verical은 정렬 방향을 설정하는 속성입니다. 각 속성에 대한 설정값은 아래와 같습니다.</p>
+<p><b>-. horizontal : 'center', 'left' , 'right'<br/>
+-. vertical : 'top', 'bottom' 'center'</b></p>
+<h3 id="4-patternfill">4) PatternFill(채우기)</h3>
+<p>PatternFill은 셀 채우기를 설정하는 모듈입니다. 예를 들어, 아래와 같이 "C3"와 "C5"에 각각 연두색, 검은색 셀 채우기를 해봤습니다. 이 것을 openpyxl을 통해 구현하려면 어떻게 할까요? </p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/v276A/btrgP4Fo6wU/75nuXL2j4TK62nqm1fda70/img.png"/></p>
+<p>"2) Border, Side" 파트에서도 다뤘지만 openpyxl에서는 컬러에 대한 인덱스를 제공합니다. 아래 연두색은 "00FF00", 검은색은 "000000"입니다. 이 인덱스를 통해 코드를 작성해보겠습니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code>import  openpyxl  as  op
+from  openpyxl.styles  import  PatternFill
+
+#Workbook 생성 및 시트 설정
+wb = op.Workbook()
+ws = wb.active
+
+#PatternFill test1 : green
+ws["C5"].fill = PatternFill(fill_type='solid', fgColor="00FF00")
+ws["C3"].fill=green
+
+#PatternFill test2 : Black
+ws["C5"].fill = PatternFill(fill_type='solid', fgColor="000000")
+
+wb.save("result.xlsx")
+wb.close()
+</code></pre>
+<p>PatternFill의 내부 속성에 대해 설명드려보겠습니다.  fill_type은 셀을 채우는 형태입니다. "solid"는 설정한 색으로 전부 채우는 속성값입니다. fgColor는 어떤 색으로 채울 것인가에 대한 속성입니다. 이전에도 설명드렸던 바와 마찬가지로 openpyxl의 컬러 인덱스를 사용합니다.</p>
+<p>자세한 내용은 아래 표를 참고해주세요. patterType의 GradientFill( )은 셀 채우기 형태의 다른 형태입니다. GradientFill( )을 사용할 경우 셀 배경색을 설정할 때, 속성을 fgColor가 아닌 start_color/end_color를 사용합니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/A2N0t/btrhgkOMY5B/QqKMvUkcCP1gT2uSfFdKn1/img.png"/></p>
+<h3 id="5-protection">5) Protection(셀 숨김, 보호)</h3>
+<p>Protection은 특정 셀 숨김/잠금 속성을 설정해주는 모듈입니다. 아래 코드를 통해 이해해보도록 하겠습니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code>import  openpyxl  as  op
+from  openpyxl.styles  import  Protection
+
+#Workbook 객체 생성 및 시트 설정
+wb = op.Workbook()
+ws = wb.active
+
+#text 입력하기
+ws["C3"].value = "Protection test1 : locked"
+ws["C5"].value = "Protection test2 : hidden"
+
+#Protection 속성 설정하기(숨김/잠금)
+ws["C3"].protection = Protection(locked = True, hidden = True)
+ws["C5"].protection = Protection(locked = False, hidden = False)
+
+#엑셀 파일 저장 및 객체 닫기
+wb.save("result.xlsx")
+wb.close()
+</code></pre>
+</div>

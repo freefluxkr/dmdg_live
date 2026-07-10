@@ -1,0 +1,64 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown10">12</span><br/>
+      마무리</h3>
+</div>
+<p class="txtex dm s10_10"><span class="dm brown">1</span> folium 설치</p>
+<div class="highlight">
+<pre>!pip install folium</pre>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">2</span> folium 지도 만들고 나타내기</p>
+<div class="ind10">
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>지도이름 = folium.Map([위도, 경도], zoom_start=지도비율)
+지도이름</pre>
+</div>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">3</span> folium 마커 만들고 추가하기</p>
+<div class="ind10">
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>folium.Marker([위도, 경도]).add_to(지도이름)</pre>
+</div>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">4</span> 마커에 추가할 수 있는 옵션</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">툴팁 표현</p>
+</td>
+<td class="w80">
+<p class="txts dl"><span class="cd">tooltip='표현할 텍스트'</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">팝업 표현</p>
+</td>
+<td class="w80">
+<p class="txts dl"><span class="cd">popup='표현할 텍스트'</span></p>
+</td>
+</tr>
+<tr class="tb_brown_line tb_white">
+<td class="w20">
+<p class="txts dl">아이콘</p>
+</td>
+<td class="w80">
+<p class="txts dl"><span class="cd">icon= folium.Icon(color= '아이콘 색상', icon='아이콘 모양')</span></p>
+<p class="txts dl">fontawesome의 아이콘 활용 시 <span class="cd">prefix='fa'</span> 추가</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>

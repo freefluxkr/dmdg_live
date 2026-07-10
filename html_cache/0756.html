@@ -1,0 +1,73 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+<span class="purple">import</span> datetime
+
+<span class="cd2 blue2">class</span> <span class="cd2">Hotplace:</span>
+    <span class="cd2 blue2">def</span> <span class="cd2 gold">__init__</span><span class="cd2">(</span><span class="cd2 blue3">self</span><span class="cd2">,</span> <span class="cd2 blue3">dong_name</span><span class="cd2">,</span> <span class="cd2 blue3">dong_code</span><span class="cd2">):</span>
+        <span class="cd2 blue3">self</span><span class="cd2">.name = dong_name</span>
+        <span class="cd2 blue3">self</span><span class="cd2">.code = dong_code</span>
+
+    <span class="green"># 그래프 그리기 메서드</span>
+    <span class="blue2">def</span> <span class="gold">graph_plot</span>(<span class="cd2 blue3">self</span>, <span class="blue2">popu_list</span>, <span class="blue2">label_list</span>, <span class="blue2">graph_title</span>):
+        plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+        plt.title(graph_title)
+        <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(popu_list)):
+            plt.plot(<span class="gold">range</span>(<span class="green">24</span>), popu_list[i], label=label_list[i])
+        plt.legend()
+        plt.xlabel(<span class="red2">'시간대'</span>)
+        plt.ylabel(<span class="red2">'평균인구수'</span>)
+        plt.xticks(<span class="gold">range</span>(<span class="green">24</span>), <span class="gold">range</span>(<span class="green">24</span>))
+        plt.show()
+
+    <span class="green"># 하위 목표 1 부분</span>
+
+    <span class="green"># 하위 목표 2</span>
+    <span class="blue2">def</span> <span class="gold">analysis2</span>(<span class="cd2 blue3">self</span>):
+        weekday = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+        weekend = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+        <span class="purple">for</span> row <span class="blue2">in</span> data:
+            <span class="purple">if</span> row[<span class="green">2</span>] == <span class="cd2 blue3">self</span><span class="cd2">.code:</span>
+                time, p = row[<span class="green">1</span>], row[<span class="green">3</span>]
+                year, mon, day = int(row[<span class="green">0</span>][:<span class="green">4</span>]), int(row[<span class="green">0</span>][<span class="green">4</span>:<span class="green">6</span>]), int(row[<span class="green">0</span>][<span class="green">6</span>:])
+                num = datetime.date(year, mon, day).weekday()
+                <span class="purple">if</span> num &lt; <span class="green">5</span>:
+                    weekday[time] += p
+                <span class="purple">else</span>:
+                    weekend[time] += p
+        weekday_cnt, weekend_cnt = <span class="green">0</span>, <span class="green">0</span>
+        <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">1</span>, <span class="green">32</span>):
+            <span class="purple">if</span> datetime.date(<span class="green">2019</span>, <span class="green">12</span>, i).weekday() &lt; <span class="green">5</span>:
+                weekday_cnt += <span class="green">1</span>
+            <span class="purple">else</span>:
+                weekend_cnt += <span class="green">1</span>
+        weekday = [w/weekday_cnt <span class="purple">for</span> w <span class="blue2">in</span> weekday]
+        weekend = [w/weekend_cnt <span class="purple">for</span> w <span class="blue2">in</span> weekend]
+        data_set = [weekday, weekend]
+        labels = [<span class="red2">'주중'</span>, <span class="red2">'주말'</span>]
+        title = <span class="cd2 blue3">self</span><span class="cd2">.name</span> + <span class="red2">' 주중/주말 시간대별 평균인구'</span>
+        <span class="cd2 blue3">self</span><span class="cd2">.</span>graph_plot(popu_list = data_set, label_list = labels, graph_title = title)
+
+    <span class="green"># 하위 목표 3</span>
+    <span class="blue2">def</span> <span class="gold">analysis3</span>(<span class="cd2 blue3">self</span>):
+        male = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+        female = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+        <span class="purple">for</span> row <span class="blue2">in</span> data:
+            <span class="purple">if</span> row[<span class="green">2</span>] == <span class="cd2 blue3">self</span>.code:
+                time = row[<span class="green">1</span>]
+                male[time] += <span class="gold">sum</span>(row[<span class="green">4</span>:<span class="green">18</span>])
+                female[time] += <span class="gold">sum</span>(row[<span class="green">18</span>:<span class="green">32</span>])
+        male = [m/<span class="green">31</span> <span class="purple">for</span> m <span class="blue2">in</span> male]
+        female = [f/<span class="green">31</span> <span class="purple">for</span> f <span class="blue2">in</span> female]
+        data_set = [male, female]
+        labels = [<span class="red2">'남성'</span>, <span class="red2">'여성'</span>]
+        title = <span class="cd2 blue3">self</span><span class="cd2">.name</span> + <span class="red2">' 남녀 시간대별 평균인구'</span>
+        <span class="cd2 blue3">self</span><span class="cd2">.</span>graph_plot(popu_list = data_set, label_list = labels, graph_title = title)
+
+<span class="green"># 하위 목표 4 부분</span></pre>
+</div>
+</div>
+</section>
+</section>

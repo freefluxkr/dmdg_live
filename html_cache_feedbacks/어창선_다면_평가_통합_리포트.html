@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>[피드백 리포트] 어창선님 포트폴리오 심층진단</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+
+        :root {
+            --primary: #0A2540;
+            --secondary: #0056B3;
+            --text-dark: #2c3e50;
+            --text-light: #64748b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Area */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .company-badge {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.05em;
+            margin: 0 0 0.2rem 0;
+        }
+
+        .report-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .candidate-info {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Recruiter Profile Card */
+        .profile-section {
+            border-radius: 12px;
+            padding: 1.3rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .recruiter-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .recruiter-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .recruiter-role {
+            font-size: 0.85rem;
+            background: #ffffff;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .recruiter-quote {
+            font-style: italic;
+            margin: 0.4rem 0 0 0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        /* Evaluation Score Summary */
+        .score-section {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .rating-box {
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rating-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .rating-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-box {
+            border-radius: 12px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fit-score-container {
+            margin-bottom: 0.8rem;
+        }
+
+        .fit-score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .fit-score-label {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .fit-score-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+        }
+
+        .summary-text {
+            font-size: 0.92rem;
+            color: #334155;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            padding-left: 0.6rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        /* Cards Design */
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.1rem;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .card-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .card-body p {
+            font-size: 0.92rem;
+            color: #334155;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .strength-card {
+            border-left: 4px solid #22c55e;
+        }
+
+        .weakness-card {
+            border-left: 4px solid #ef4444;
+        }
+
+        /* Icons */
+        .icon-success {
+            width: 18px;
+            height: 18px;
+            color: #22c55e;
+        }
+
+        .icon-danger {
+            width: 18px;
+            height: 18px;
+            color: #ef4444;
+        }
+
+        .icon-info {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Advice List */
+        .advice-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .advice-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.92rem;
+            color: #334155;
+            line-height: 1.5;
+            page-break-inside: avoid;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+
+        /* Cover Page Styling */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 3rem 2rem;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #0A2540 0%, #1A365D 50%, #2A4365 100%);
+            color: #ffffff;
+        }
+
+        .cover-top {
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 2rem;
+        }
+
+        .cover-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            line-height: 1.35;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.03em;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            color: #63b3ed;
+            margin: 0;
+        }
+
+        .cover-middle {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .cover-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .cover-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            border-bottom: 2px solid #63b3ed;
+            padding-bottom: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .cover-bottom {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.2rem;
+        }
+
+        @media print {
+            .cover-page {
+                height: 100vh;
+                page-break-after: always;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .page-break:last-child {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 📄 PAGE 1: COVER PAGE -->
+        <div class="cover-page">
+            <div class="cover-top">
+                <h1 class="cover-title">SW 개발자 포트폴리오<br>다자(Multi-Agent) 심층 진단 보고서</h1>
+                <p class="cover-subtitle">5대 IT 대기업 채용담당자 공동 심사 결과</p>
+            </div>
+            
+            <div class="cover-middle">
+                <div class="cover-card">
+                    <h2 class="cover-card-title">평가 대상자 및 핵심 요약</h2>
+                    <div class="info-grid">
+                        <div>
+                            <div class="info-label">지원 학생명</div>
+                            <div class="info-value" style="color: #63b3ed; font-size: 1.3rem;">어창선님</div>
+                        </div>
+                        <div>
+                            <div class="info-label">지원 분야 및 타깃 상태</div>
+                            <div class="info-value">시계열·AI 엔지니어 지망 (비전공자)</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="font-size: 1.05rem; font-weight: 700; color: #e2e8f0; margin-bottom: 0.5rem;">📋 다차원 종합 총평</h3>
+                    <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.55; margin: 0;">
+                        비전공자임에도 시계열 미래 정보 누수를 차단하기 위해 Walk-forward CV와 Embargo gap을 도입하고 Diebold-Mariano 검정으로 모델 성능의 통계적 유의성을 검증하는 등 이론적 엄격성을 집요하게 챙긴 점이 우수합니다. 또한 네트워크 장비 방화벽 UFW 문제를 docker0 라우팅 및 autossh 터널링으로 직접 트러블슈팅해 원격 GPU 환경을 다룬 해결 이력이 매우 훌륭합니다. 다만, 비전공 전공자로서 코딩 테스트 및 대용량 DB 아키텍처 다중화(Replication) 설계 지식이 얕아 보완이 시급하며, 팀원(한정현)과 프로젝트가 완전히 일치하여 개별 기여도를 명확히 쪼개는 포지셔닝이 필요합니다. 또한 이력서에 'ADsP [준비 중]' 문구를 지우지 않고 방치한 사소한 마무리의 아쉬움이 존재합니다.
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; padding: 1.2rem; border: 1px solid rgba(255,255,255,0.05); page-break-inside: avoid;">
+                <h3 style="font-size: 1.05rem; color: #ffffff; margin-top: 0; margin-bottom: 0.8rem; text-align: center;">📊 기업별 인사담당자 의견 및 평가 요약</h3>
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid rgba(255,255,255,0.15);">
+                            <th style="padding: 10px; color: #cbd5e1; width: 15%;">평가 기업</th>
+                            <th style="padding: 10px; color: #cbd5e1; width: 18%;">담당자</th>
+                            <th style="padding: 10px; color: #cbd5e1; width: 47%;">인사담당자 피드백 의견</th>
+                            <th style="padding: 10px; color: #cbd5e1; width: 10%; text-align: center;">부합도</th>
+                            <th style="padding: 10px; color: #cbd5e1; width: 10%; text-align: center;">추천 등급</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: #cbd5e1;">
+                        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">삼성SDS</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 책임</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">시계열 예측 검증 설계에 대한 학술적 접근은 신입 지원자로서 보기 드문 강점이나, 대용량 트랜잭션 및 분산 처리에 대한 경험이 부족하여 대형 SI 시스템 설계에 필요한 CS 기본기 검증이 추가로 요구됩니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">78점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #FFF3E0; color: #EF6C00; border: 1px solid #FFCC80; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">B+</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">LG CNS</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 책임전문위원</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">네트워크 방화벽 및 autossh 포트 포워딩 등 시스템 배포 과정에서 겪은 에러를 끈질기게 추적해 뚫어낸 디버깅/인프라 역량이 매우 훌륭합니다. 신기술을 시도하려는 의지도 돋보입니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">85점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">A-</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">신세계I&C</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 과장</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">백엔드 인프라와 정형 데이터 예측 성능 개선 이력은 탄탄하나, 실제 리테일 비즈니스 관점에서 서비스가 어떻게 가치를 창출하고 최종 사용자에게 편리함을 주는지에 대한 고민이 보완되어야 합니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">72점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #FFF3E0; color: #EF6C00; border: 1px solid #FFCC80; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">B</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">롯데이노베이트</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 수석</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">예외 처리 및 확률 보정을 통한 데이터 무결성 추구 태도는 바람직하나, 포트폴리오 문서의 오타 방치 및 미완성 항목 누출은 신뢰성과 꼼꼼함 기준에서 큰 감점 요소입니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">68점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #FFF3E0; color: #EF6C00; border: 1px solid #FFCC80; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">B-</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">CJ올리브네트웍스</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 과장</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">인프라가 갖춰지지 않은 부트캠프 환경에서 원격 GPU 학습 서버를 주도적으로 구축해 낸 성장 열망('하고잡이' 정신)을 높이 삽니다. 다만 프로젝트의 주제들이 다소 전형적이어서 차별성이 필요합니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">80점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #FFF3E0; color: #EF6C00; border: 1px solid #FFCC80; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">B+</span>
+            </td>
+        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cover-bottom">
+                <span>DMDG AI & Cloud Boot Camp | Portfolio Multi-Evaluation Report</span>
+                <span>Confidential</span>
+            </div>
+        </div>
+
+        <!-- 📄 PAGES 2-6: AGENT DETAILS -->
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #0A2540;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #0A2540;">삼성SDS</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 어창선님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #0A2540; background-color: #f4f7fa;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #0A2540; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 책임</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">인사팀</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 11년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"기초가 흔들리는 아키텍처는 사상누각일 뿐입니다. 자료구조와 알고리즘, CS 기본기를 철저히 검증합니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #FFCC80; background-color: #FFF3E0;">
+                    <span class="rating-label" style="color: #EF6C00;">평가 등급</span>
+                    <span class="rating-value" style="color: #EF6C00;">B+</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #0A2540;">78점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #0A2540, #0056B3); width: 78%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 시계열 예측 검증 설계에 대한 학술적 접근은 신입 지원자로서 보기 드문 강점이나, 대용량 트랜잭션 및 분산 처리에 대한 경험이 부족하여 대형 SI 시스템 설계에 필요한 CS 기본기 검증이 추가로 요구됩니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #0A2540;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>시계열 검증 설계의 수학적 엄격성</h3>
+                </div>
+                <div class="card-body">
+                    <p>미래 정보 누수(Leakage)를 방지하기 위해 Walk-forward CV and Embargo gap을 코드에 적용하고 Diebold-Mariano 검정으로 우연에 의한 성능 개선을 걸러내려 한 시도는 데이터 신뢰성을 극도로 중시하는 엔지니어링 표준에 부합함.</p>
+                </div>
+            </div>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>구체적인 네트워크 트러블슈팅</h3>
+                </div>
+                <div class="card-body">
+                    <p>로컬 사설망과 클라우드 서버 간의 SSH 터널 및 autossh 영속화, UFW 방화벽 차단을 해결하기 위한 bridge 네트워크 분석 흐름이 매우 논리적임.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #0A2540;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>CS 기본 지식 및 알고리즘 깊이 부족</h3>
+                </div>
+                <div class="card-body">
+                    <p>아동복지학 출신 비전공자로서 백엔드 분산 아키텍처와 DB 이중화(Replication) 설계 등의 시스템 핵심 영역에 대한 설명이 다소 얕게 서술되어 코딩 테스트 및 면접 시 기초 CS 지식 장벽에 부딪힐 우려가 큼.</p>
+                </div>
+            </div>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>팀원과의 차별화 부족</h3>
+                </div>
+                <div class="card-body">
+                    <p>동일 팀원과 3대 프로젝트(ADA, My Mini Co-di, Churn 예측)가 완전히 겹치는데, 본인만의 독자적 소스 코드 기여분이 명확히 드러나지 않음.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #0A2540;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #0056B3;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>자료구조(그래프, 트리, 해시 테이블 등)와 운영체제 프로세스/메모리 관리 등 코딩 테스트용 알고리즘 이론 학습 필수.</span>
+            </li>
+            
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #0056B3;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>데이터베이스 Master-Slave 복제 및 분산 환경의 데이터 정합성 보장 기법 추가 공부 추천.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 삼성SDS HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #A50034;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #A50034;">LG CNS</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 어창선님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #A50034; background-color: #faf4f5;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #A50034; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 책임전문위원</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">DX인재개발팀</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 12년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"안주하지 않는 자가 DX 판도를 바꿉니다. 당신이 겪은 시행착오(Troubleshooting)와 기술적 도전의 크기를 보여주세요."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #90CAF9; background-color: #E3F2FD;">
+                    <span class="rating-label" style="color: #1565C0;">평가 등급</span>
+                    <span class="rating-value" style="color: #1565C0;">A-</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #A50034;">85점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #A50034, #4E5B6A); width: 85%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 네트워크 방화벽 및 autossh 포트 포워딩 등 시스템 배포 과정에서 겪은 에러를 끈질기게 추적해 뚫어낸 디버깅/인프라 역량이 매우 훌륭합니다. 신기술을 시도하려는 의지도 돋보입니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #A50034;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>끈질긴 디버깅(삽질) 기록</h3>
+                </div>
+                <div class="card-body">
+                    <p>방화벽 차단 문제를 docker0 인터페이스 허용 및 bridge 네트워크 설정 튜닝으로 트러블슈팅해 나간 해결 과정이 실무에 즉시 투입 가능한 수준임.</p>
+                </div>
+            </div>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>오케스트레이션 및 파라미터 최적화</h3>
+                </div>
+                <div class="card-body">
+                    <p>AutoML 플랫폼 구축 시 26종 모델의 성능을 비교하기 위해 Optuna를 통합 적용하여 튜닝 과정을 자동화한 엔지니어링 시도가 우수함.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #A50034;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>AWS 클라우드 아키텍처 활용 제한</h3>
+                </div>
+                <div class="card-body">
+                    <p>단순 EC2/VPS 기반의 호스팅에 머물러 있어, 실제 상용 DX 아키텍처에서 요구되는 매니지드 서비스(ECS, EKS, Serverless 등) 설계 역량이 아쉬움.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #A50034;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #4E5B6A;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>Docker Compose 수준을 넘어 Kubernetes(K8s) 오케스트레이션 기초 구조와 배포 프로세스 학습 권장.</span>
+            </li>
+            
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #4E5B6A;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>AWS CloudFront, API Gateway 등을 활용한 아키텍처 고도화 시도 추천.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 LG CNS HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #B9975B;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #B9975B;">신세계I&C</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 어창선님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #B9975B; background-color: #f9f7f4;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #B9975B; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 과장</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">Retail Tech 인사파트</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 10년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"아무리 훌륭한 기술이라도 고객에게 닿지 못하면 무용지물입니다. 비즈니스 실용성과 완성도를 확인합니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #FFCC80; background-color: #FFF3E0;">
+                    <span class="rating-label" style="color: #EF6C00;">평가 등급</span>
+                    <span class="rating-value" style="color: #EF6C00;">B</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #B9975B;">72점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #B9975B, #111111); width: 72%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 백엔드 인프라와 정형 데이터 예측 성능 개선 이력은 탄탄하나, 실제 리테일 비즈니스 관점에서 서비스가 어떻게 가치를 창출하고 최종 사용자에게 편리함을 주는지에 대한 고민이 보완되어야 합니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #B9975B;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>비즈니스 지표 활용 시도</h3>
+                </div>
+                <div class="card-body">
+                    <p>고객 이탈 예측을 단순히 모델링에 그치지 않고, 이탈 고위험 고객 타깃 마케팅을 위한 Target List 추출로 연계하여 실용적인 가치로 바꾼 시도가 긍정적임.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #B9975B;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>리테일테크 분야와의 접점 부족</h3>
+                </div>
+                <div class="card-body">
+                    <p>구축한 시스템들이 순수 데이터 분석이나 인프라 영역에 집중되어 있어, e-Commerce 결제, 장바구니 동시성 제어 등 리테일 도메인에서 발생할 수 있는 대용량 트랜잭션 처리에 대한 역량 어필이 부족함.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #B9975B;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #111111;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>결제 모듈 연동 및 대규모 트래픽 분산 처리를 위한 Redis 캐시 무력화(Invalidation) 전략 등 상용 결제 도메인 공부 권장.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 신세계I&C HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #E11B22;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #E11B22;">롯데이노베이트</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 어창선님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #E11B22; background-color: #fcf5f5;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #E11B22; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 수석</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">HR혁신팀</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 13년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"시스템의 기본은 타협 없는 안정성과 빈틈없는 예외 처리입니다. 성실함이 깃든 테스트 코드가 신뢰를 증명합니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #FFCC80; background-color: #FFF3E0;">
+                    <span class="rating-label" style="color: #EF6C00;">평가 등급</span>
+                    <span class="rating-value" style="color: #EF6C00;">B-</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #E11B22;">68점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #E11B22, #2C3E50); width: 68%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 예외 처리 및 확률 보정을 통한 데이터 무결성 추구 태도는 바람직하나, 포트폴리오 문서의 오타 방치 및 미완성 항목 누출은 신뢰성과 꼼꼼함 기준에서 큰 감점 요소입니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #E11B22;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>신중한 모델 튜닝 및 계량 검증</h3>
+                </div>
+                <div class="card-body">
+                    <p>Brier Score 확률 보정 및 F2 Score 기준 임계값 조정을 통해 오탐을 최소화하고 의사결정 신뢰도를 높이려 한 꼼꼼한 세부 튜닝 접근법을 칭찬함.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #E11B22;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>치명적인 문서 오점 방치</h3>
+                </div>
+                <div class="card-body">
+                    <p>자격증 목록에 'ADsP [준비 중 / 취득 시 날짜 입력]'이라는 템플릿 괄호 텍스트를 지우지 않은 상태로 제출함. 이는 문서 검수 및 꼼꼼함 결여로 비춰질 수 있음.</p>
+                </div>
+            </div>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>단위 테스트 이력 부재</h3>
+                </div>
+                <div class="card-body">
+                    <p>인프라와 백엔드 코드가 많은 것에 비해 PyTest 등 개발 품질을 증명할 단위 테스트나 TDD 작성 흔적이 없어 코드의 안정성을 신뢰하기 어려움.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #E11B22;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #2C3E50;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>자격증란의 미완성 문구를 즉시 정정하고 문서의 사소한 마무리를 정밀 재검수할 것.</span>
+            </li>
+            
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #2C3E50;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>코드의 안정성을 증명하기 위해 테스트 커버리지 및 TDD 개발 프로세스 적용 경험을 추가할 것.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 롯데이노베이트 HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #E06F1D;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #E06F1D;">CJ올리브네트웍스</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 어창선님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #E06F1D; background-color: #f5faf6;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #E06F1D; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 과장</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">테크HR파트</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 10년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"남들이 하지 않은 차별화된 독창성(ONLYONE)과 주도적인 학습 태도(하고잡이)에서 진짜 개발자의 잠재력이 드러납니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #FFCC80; background-color: #FFF3E0;">
+                    <span class="rating-label" style="color: #EF6C00;">평가 등급</span>
+                    <span class="rating-value" style="color: #EF6C00;">B+</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #E06F1D;">80점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #E06F1D, #22B14C); width: 80%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 인프라가 갖춰지지 않은 부트캠프 환경에서 원격 GPU 학습 서버를 주도적으로 구축해 낸 성장 열망('하고잡이' 정신)을 높이 삽니다. 다만 프로젝트의 주제들이 다소 전형적이어서 차별성이 필요합니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #E06F1D;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>주도적인 한계 극복 스토리</h3>
+                </div>
+                <div class="card-body">
+                    <p>비전공자라는 백그라운드 한계를 뛰어넘기 위해 원격 학습 인프라 구축을 도맡고, Docker 환경 표준화를 주도하며 팀에 기여한 성장의 역동성이 잘 전달됨.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #E06F1D;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>전형적인 포트폴리오 구성</h3>
+                </div>
+                <div class="card-body">
+                    <p>이탈 예측 및 AutoML 플랫폼 등은 전형적인 부트캠프 프로젝트로, 지원자만의 ONLYONE 독창성과 차별화 포인트가 부족해 보임.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #E06F1D;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #22B14C;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>개인 블로그 운영이나 오픈소스 기여 등 남들이 하지 않은 주도적이고 개성 있는 기술 시도를 프로젝트 전반에 가미해 보십시오.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 CJ올리브네트웍스 HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

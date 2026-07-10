@@ -1,0 +1,101 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a4"><span class="dm brown">4</span> 다음 그림은 모의고사의 목표 점수와 실제 점수를 나타낸 표입니다.</p>
+<div class="ind10">
+<table>
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w33">
+<p class="txts dm">월</p>
+</td>
+<td class="w33">
+<p class="txts dm">목표 점수</p>
+</td>
+<td class="w33">
+<p class="txts dm">실제 점수</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">3월</p>
+</td>
+<td class="w33">
+<p class="txts dl">82</p>
+</td>
+<td class="w40">
+<p class="txts dl">83</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">4월</p>
+</td>
+<td class="w33">
+<p class="txts dl">85</p>
+</td>
+<td class="w40">
+<p class="txts dl">69</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">6월</p>
+</td>
+<td class="w33">
+<p class="txts dl">75</p>
+</td>
+<td class="w33">
+<p class="txts dl">88</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">9월</p>
+</td>
+<td class="w33">
+<p class="txts dl">92</p>
+</td>
+<td class="w33">
+<p class="txts dl">89</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">10월</p>
+</td>
+<td class="w33">
+<p class="txts dl">100</p>
+</td>
+<td class="w33">
+<p class="txts dl">97</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">이 표를 이차원 리스트로 만들면 다음 코드와 같습니다. 다음 설명 중 <span class="bg_black_line">틀린</span> 것을 고르세요.</p>
+</div>
+<div class="highlight">
+<pre>exam_score = <span>[</span>[<span class="red2">'3월'</span>, <span class="green">82</span>, <span class="green">83</span>],
+              [<span class="red2">'4월'</span>, <span class="green">85</span>, <span class="green">69</span>],
+              [<span class="red2">'6월'</span>, <span class="green">75</span>, <span class="green">88</span>],
+              [<span class="red2">'9월'</span>, <span class="green">92</span>, <span class="green">89</span>],
+              [<span class="red2">'10월'</span>, <span class="green">100</span>, <span class="green">97</span><span>]</span>]
+<span class="purple">for</span> row <span class="blue2">in</span> exam_score:
+    <span class="purple">if</span> <span class="cd2">(가):</span>
+        <span class="cd2">(나)</span></pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">① 6월의 목표 점수와 실제 점수를 출력하려면 (가)에 <span class="cd">row[0] == '6월'</span>, (나)에 <span class="cd">print (row[1:])</span>이 들어가야 한다.</p>
+<p class="txt bl s12_12">② 목표 점수가 90점 이상인 월을 출력하려면 (가)에 <span class="cd">row[1] &gt;= 90</span>, (나)에 <span class="cd">print (row[0])</span>이 들어가야 한다.</p>
+<p class="txt bl s12_12">③ 실제 점수가 85점 이상인 월을 출력하려면 (가)에 <span class="cd">row[-1] &gt;= 85</span>, (나)에 <span class="cd">print (row[0])</span>이 들어가야 한다.</p>
+<p class="txt bl s12_12">④ 목표 점수보다 더 높은 점수를 받은 월을 출력하려면 (가)에 <span class="cd">row[-1] &gt; row[1]</span>, (나)에 <span class="cd">print(row[0])</span>이 들어가야 한다.</p>
+<p class="txt bl s12_12">⑤ 목표 점수보다 더 낮은 점수를 받았을 때, 목표 점수와 실제 점수의 차이를 출력하려면 (가)에 <span class="cd">row[-1] &gt; row[1]</span>, (나)에 <span class="cd">print(row[-1] - row[1])</span>이 들어가야 한다.</p>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0873/">정답 및 해설</a></p>
+</div>
+</div>
+</div>
+</section>
+</section>

@@ -1,0 +1,58 @@
+<h1 class="page-subject">08-1 정규 표현식 살펴보기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>정규 표현식(regular expressions)은 <strong>문자열의 패턴을 표현하는 특별한 문법</strong>이다. </p>
+<p>쉽게 말해, 정규 표현식은 "이런 형태의 문자열을 찾고 싶다"라고 컴퓨터에게 알려주는 방법이다. 예를 들어 "숫자 6개 다음에 하이픈(-), 그리고 숫자 7개로 이루어진 문자열"이라고 설명하는 대신, 정규 표현식으로는 <code>\d{6}-\d{7}</code>처럼 간단하게 표현할 수 있다. 이렇게 하면 주민등록번호 같은 특정 패턴의 문자열을 쉽게 찾거나 검증할 수 있다.</p>
+<p>정규 표현식은 파이썬만의 고유 문법이 아니라 자바스크립트, 자바, C# 등 거의 모든 프로그래밍 언어에서 사용하는 표준적인 문자열 처리 도구이다. 한 번 배워두면 어떤 언어를 사용하든 문자열 처리가 훨씬 쉬워진다.</p>
+<blockquote>
+<p>정규 표현식은 줄여서 '정규식'이라고도 한다.</p>
+</blockquote>
+<h2 id="_1">정규 표현식은 왜 필요한가?</h2>
+<p>다음과 같은 문제가 주어졌다고 가정해 보자.</p>
+<pre><code class="language-plaintext">주민등록번호를 포함하고 있는 텍스트가 있다. 이 텍스트에 포함된 모든 주민등록번호의 뒷자리를 * 문자로 변경해 보자.
+</code></pre>
+<p>정규식을 모르면 다음과 같은 순서로 프로그램을 작성해야 한다.</p>
+<ol>
+<li>전체 텍스트를 공백 문자로 나눈다(split).</li>
+<li>나뉜 단어가 주민등록번호 형식인지 조사한다.</li>
+<li>단어가 주민등록번호 형식이라면 뒷자리를 <code>*</code>로 변환한다.</li>
+<li>나뉜 단어를 다시 조립한다.</li>
+</ol>
+<p>이를 구현한 코드는 다음과 같다.</p>
+<pre><code class="language-python">data = """
+park 800905-1049118
+kim  700905-1059119
+"""
+
+result = []
+for line in data.split("\n"):
+    word_result = []
+    for word in line.split(" "):
+        if len(word) == 14 and word[:6].isdigit() and word[7:].isdigit():
+            word = word[:6] + "-" + "*******"
+        word_result.append(word)
+    result.append(" ".join(word_result))
+print("\n".join(result))
+</code></pre>
+<p><code>[실행 결과]</code></p>
+<pre><code class="language-plaintext">park 800905-*******
+kim  700905-*******
+</code></pre>
+<p>반면, 정규식을 사용하면 훨씬 간편하고 직관적인 코드를 작성할 수 있다. 아직 정규식 사용 방법을 배우지 않았으니 일단 어떤 모습인지만 살펴보자.</p>
+<pre><code class="language-python">import re 
+
+data = """
+park 800905-1049118
+kim  700905-1059119
+"""
+
+pat = re.compile(r"(\d{6})-\d{7}")
+print(pat.sub("\g&lt;1&gt;-*******", data))
+</code></pre>
+<p><code>[실행 결과]</code></p>
+<pre><code class="language-plaintext">park 800905-*******
+kim  700905-*******
+</code></pre>
+<p>정규 표현식을 사용하면 코드가 상당히 간결해진다. 찾으려는 문자열 또는 바꾸어야 할 문자열의 규칙이 복잡할수록 정규식의 효용은 더 커진다.</p>
+<p>이제부터 정규 표현식의 기초부터 심화 부분까지 차근차근 알아보자.</p>
+</div>

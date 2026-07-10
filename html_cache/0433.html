@@ -1,0 +1,22 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_76"><span class="yellow">8.3.4</span> 상자 수염 그림 여러 개 그리기</h4>
+<p class="txt bl">이번에는 상자 수염 그림 2개를 그려 봅시다. 영어 점수 리스트를 추가해 국어 점수와 영어 점수를 각각 상자 수염 그림으로 그립니다. 상자 수염 그림은 다른 그래프와 달리 그래프를 그리는 명령어를 여러 개 사용하지 않고, <span class="cd">plt.boxplot()</span>의 데이터에 이차원 리스트를 넣으면 됩니다. 다음 코드를 봅시다.</p>
+<div class="highlight">
+<pre>kor = [<span class="green">80</span>, <span class="green">20</span>, <span class="green">50</span>, <span class="green">20</span>, <span class="green">10</span>, <span class="green">50</span>, <span class="green">60</span>, <span class="green">30</span>, <span class="green">60</span>]
+eng = [<span class="green">90</span>, <span class="green">40</span>, <span class="green">60</span>, <span class="green">40</span>, <span class="green">10</span>, <span class="green">30</span>, <span class="green">50</span>, <span class="green">70</span>, <span class="green">90</span>]
+
+plt.boxplot([kor, eng], labels=[<span class="red2">'국어 점수'</span>, <span class="red2">'영어 점수'</span>])
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/369.jpg"/></div>
+</div>
+<p class="txt bl">두 리스트를 묶어 이차원 리스트 <span class="cd">[kor, eng]</span>로 만들었습니다. 이차원 리스트의 첫 번째 요소는 <span class="cd">kor</span>, 두 번째 요소는 <span class="cd">eng</span>입니다. 이차원 리스트를 넣은 <span class="cd">plt.boxplot()</span>을 실행하면 이차원 리스트의 요소(일차원 리스트)별로 상자 수염 그림을 그리고 한 그래프 안에 나타냅니다. 그리고 <span class="cd">labels</span> 옵션으로 넣은 각 그래프의 라벨이 표시됩니다.</p>
+<p class="txt bl">그래프를 보니 국어 점수와 영어 점수의 중앙값이 같네요. 하지만 국어 점수의 상자는 중앙값보다 아래쪽이 길고 영어 점수의 상자는 중앙값보다 위쪽이 깁니다. 따라서 국어 점수가 영어 점수보다 대체로 낮다고 볼 수 있습니다.</p>
+<p class="txt bl">이차원 리스트 안에 더 많은 일차원 리스트를 넣으면 일차원 리스트 개수대로 상자 수염 그림이 그려집니다.</p>
+</div>
+</section>
+</section>

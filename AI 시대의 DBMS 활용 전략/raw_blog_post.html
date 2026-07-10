@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="ko-KR" prefix="og: https://ogp.me/ns#">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<link rel="icon" href="/img/T_icon.ico">
+	
+<!-- Rank Math 프로 검색 엔진 최적화 - https://rankmath.com/ -->
+<title>AI 시대의 DBMS 활용 전략 - 티베로 공식 블로그 ｜Tibero</title>
+<meta name="description" content="AI 시대의 DBMS 활용 전략. 티맥스티베로의 OpenSQL과 Tibero를 활용하여 벡터 데이터 처리와 기존 업무 시스템을 통합하는 실무적인 방법론을 소개합니다."/>
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+<link rel="canonical" href="https://blog.tibero.com/ai-era-dbms-strategy/" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="AI 시대의 DBMS 활용 전략 - 티베로 공식 블로그 ｜Tibero" />
+<meta property="og:description" content="AI 시대의 DBMS 활용 전략. 티맥스티베로의 OpenSQL과 Tibero를 활용하여 벡터 데이터 처리와 기존 업무 시스템을 통합하는 실무적인 방법론을 소개합니다." />
+<meta property="og:url" content="https://blog.tibero.com/ai-era-dbms-strategy/" />
+<meta property="og:site_name" content="티맥스티베로 공식 블로그" />
+<meta property="article:section" content="IT Insight" />
+<meta property="og:updated_time" content="2026-05-20T07:24:13+00:00" />
+<meta property="og:image" content="https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp" />
+<meta property="og:image:secure_url" content="https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp" />
+<meta property="og:image:width" content="500" />
+<meta property="og:image:height" content="333" />
+<meta property="og:image:alt" content="DBMS" />
+<meta property="og:image:type" content="image/webp" />
+<meta property="article:published_time" content="2026-04-08T09:23:32+00:00" />
+<meta property="article:modified_time" content="2026-05-20T07:24:13+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI 시대의 DBMS 활용 전략 - 티베로 공식 블로그 ｜Tibero" />
+<meta name="twitter:description" content="AI 시대의 DBMS 활용 전략. 티맥스티베로의 OpenSQL과 Tibero를 활용하여 벡터 데이터 처리와 기존 업무 시스템을 통합하는 실무적인 방법론을 소개합니다." />
+<meta name="twitter:image" content="https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp" />
+<meta name="twitter:label1" content="작성자" />
+<meta name="twitter:data1" content="Tibero" />
+<meta name="twitter:label2" content="읽을 시간" />
+<meta name="twitter:data2" content="8분" />
+<script type="application/ld+json" class="rank-math-schema-pro">{"@context":"https://schema.org","@graph":[{"@type":["Corporation","Organization"],"@id":"https://blog.tibero.com/#organization","name":"\ud2f0\ub9e5\uc2a4\ud2f0\ubca0\ub85c","url":"https://tmaxtibero.blog","email":"mkt@tibero.com","logo":{"@type":"ImageObject","@id":"https://blog.tibero.com/#logo","url":"https://tmaxtibero.blog/wp-content/uploads/2026/05/Tibero-Blog_logo_v6.webp","contentUrl":"https://tmaxtibero.blog/wp-content/uploads/2026/05/Tibero-Blog_logo_v6.webp","caption":"\ud2f0\ub9e5\uc2a4\ud2f0\ubca0\ub85c \uacf5\uc2dd \ube14\ub85c\uadf8","inLanguage":"ko-KR","width":"1500","height":"300"},"description":"Innovating today, leading tomorrow. \uad6d\ub0b4 \ub300\ud45c DBMS \uc804\ubb38\uae30\uc5c5 \ud2f0\ub9e5\uc2a4\ud2f0\ubca0\ub85c\uc785\ub2c8\ub2e4.","legalName":"(\uc8fc)\ud2f0\ub9e5\uc2a4\ud2f0\ubca0\ub85c"},{"@type":"WebSite","@id":"https://blog.tibero.com/#website","url":"https://blog.tibero.com","name":"\ud2f0\ub9e5\uc2a4\ud2f0\ubca0\ub85c \uacf5\uc2dd \ube14\ub85c\uadf8","alternateName":"TmaxTibero","publisher":{"@id":"https://blog.tibero.com/#organization"},"inLanguage":"ko-KR"},{"@type":"ImageObject","@id":"https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp","url":"https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp","width":"500","height":"333","inLanguage":"ko-KR"},{"@type":"BreadcrumbList","@id":"https://blog.tibero.com/ai-era-dbms-strategy/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://blog.tibero.com","name":"\ud648"}},{"@type":"ListItem","position":"2","item":{"@id":"https://blog.tibero.com/category/article/it-insight/","name":"IT Insight"}},{"@type":"ListItem","position":"3","item":{"@id":"https://blog.tibero.com/ai-era-dbms-strategy/","name":"AI \uc2dc\ub300\uc758 DBMS \ud65c\uc6a9 \uc804\ub7b5"}}]},{"@type":"WebPage","@id":"https://blog.tibero.com/ai-era-dbms-strategy/#webpage","url":"https://blog.tibero.com/ai-era-dbms-strategy/","name":"AI \uc2dc\ub300\uc758 DBMS \ud65c\uc6a9 \uc804\ub7b5 - \ud2f0\ubca0\ub85c \uacf5\uc2dd \ube14\ub85c\uadf8 \uff5cTibero","datePublished":"2026-04-08T09:23:32+00:00","dateModified":"2026-05-20T07:24:13+00:00","isPartOf":{"@id":"https://blog.tibero.com/#website"},"primaryImageOfPage":{"@id":"https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp"},"inLanguage":"ko-KR","breadcrumb":{"@id":"https://blog.tibero.com/ai-era-dbms-strategy/#breadcrumb"}},{"@type":"Person","@id":"https://blog.tibero.com/author/tibero26/","name":"Tibero","url":"https://blog.tibero.com/author/tibero26/","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/03a2ee7740910d723ccb11983ca6a683fa96b89dc302cac543d57c8024d7a87c?s=96&amp;d=https%3A%2F%2Fblog.tibero.com%2Fwp-content%2Fuploads%2F2026%2F05%2Ffavicon_tmax.png&amp;r=g","url":"https://secure.gravatar.com/avatar/03a2ee7740910d723ccb11983ca6a683fa96b89dc302cac543d57c8024d7a87c?s=96&amp;d=https%3A%2F%2Fblog.tibero.com%2Fwp-content%2Fuploads%2F2026%2F05%2Ffavicon_tmax.png&amp;r=g","caption":"Tibero","inLanguage":"ko-KR"},"sameAs":["http://blog.tibero.com"],"worksFor":{"@id":"https://blog.tibero.com/#organization"}},{"@type":"BlogPosting","headline":"AI \uc2dc\ub300\uc758 DBMS \ud65c\uc6a9 \uc804\ub7b5 - \ud2f0\ubca0\ub85c \uacf5\uc2dd \ube14\ub85c\uadf8 \uff5cTibero","keywords":"DBMS, AI DBMS, Tibero, \ubca1\ud130 DB, Vector DB, PostgreSQL, \uc624\ud508\uc18c\uc2a4 DB","datePublished":"2026-04-08T09:23:32+00:00","dateModified":"2026-05-20T07:24:13+00:00","articleSection":"Article, IT Insight","author":{"@id":"https://blog.tibero.com/author/tibero26/","name":"Tibero"},"publisher":{"@id":"https://blog.tibero.com/#organization"},"description":"AI \uc2dc\ub300\uc758 DBMS \ud65c\uc6a9 \uc804\ub7b5. \ud2f0\ub9e5\uc2a4\ud2f0\ubca0\ub85c\uc758 OpenSQL\uacfc Tibero\ub97c \ud65c\uc6a9\ud558\uc5ec \ubca1\ud130 \ub370\uc774\ud130 \ucc98\ub9ac\uc640 \uae30\uc874 \uc5c5\ubb34 \uc2dc\uc2a4\ud15c\uc744 \ud1b5\ud569\ud558\ub294 \uc2e4\ubb34\uc801\uc778 \ubc29\ubc95\ub860\uc744 \uc18c\uac1c\ud569\ub2c8\ub2e4.","name":"AI \uc2dc\ub300\uc758 DBMS \ud65c\uc6a9 \uc804\ub7b5 - \ud2f0\ubca0\ub85c \uacf5\uc2dd \ube14\ub85c\uadf8 \uff5cTibero","@id":"https://blog.tibero.com/ai-era-dbms-strategy/#richSnippet","isPartOf":{"@id":"https://blog.tibero.com/ai-era-dbms-strategy/#webpage"},"image":{"@id":"https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp"},"inLanguage":"ko-KR","mainEntityOfPage":{"@id":"https://blog.tibero.com/ai-era-dbms-strategy/#webpage"}}]}</script>
+<!-- /Rank Math WordPress SEO 플러그인 -->
+
+<link rel='dns-prefetch' href='//blog.tibero.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+<link rel="alternate" type="application/rss+xml" title="티베로 공식 블로그 ｜Tibero &raquo; 피드" href="https://blog.tibero.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="티베로 공식 블로그 ｜Tibero &raquo; 댓글 피드" href="https://blog.tibero.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="티베로 공식 블로그 ｜Tibero &raquo; AI 시대의 DBMS 활용 전략 댓글 피드" href="https://blog.tibero.com/ai-era-dbms-strategy/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://blog.tibero.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.tibero.com%2Fai-era-dbms-strategy%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://blog.tibero.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.tibero.com%2Fai-era-dbms-strategy%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://blog.tibero.com/wp-includes/css/dist/block-library/style.min.css' media='all' />
+<style id="wp-block-library-theme-inline-css">
+.wp-block-audio :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio :where(figcaption){color:#ffffffa6}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed :where(figcaption){color:#ffffffa6}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:#ffffffa6}:root :where(.wp-block-image figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme :root :where(.wp-block-image figcaption){color:#ffffffa6}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote :where(cite),.wp-block-pullquote :where(footer),.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote:where(.has-text-align-right){border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote:where(.has-text-align-center){border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote:where(.is-style-plain){border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table :where(figcaption){color:#ffffffa6}.wp-block-video :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video :where(figcaption){color:#ffffffa6}.wp-block-video{margin:0 0 1em}:root :where(.wp-block-template-part.has-background){margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
+/*# sourceURL=/wp-includes/css/dist/block-library/theme.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<style id="kevinbatdorf-code-block-pro-style-inline-css">
+.wp-block-kevinbatdorf-code-block-pro{direction:ltr!important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;-webkit-text-size-adjust:100%!important;box-sizing:border-box!important;position:relative!important}.wp-block-kevinbatdorf-code-block-pro *{box-sizing:border-box!important}.wp-block-kevinbatdorf-code-block-pro pre,.wp-block-kevinbatdorf-code-block-pro pre *{font-size:inherit!important;line-height:inherit!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre{background-image:none!important;border:0!important;border-radius:0!important;border-style:none!important;border-width:0!important;color:inherit!important;font-family:inherit!important;margin:0!important;overflow:auto!important;overflow-wrap:normal!important;padding:16px 0 16px 16px!important;text-align:left!important;white-space:pre!important;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important;outline:2px solid transparent!important;outline-offset:2px!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre:focus-visible{outline-color:inherit!important}.wp-block-kevinbatdorf-code-block-pro.padding-disabled:not(.code-block-pro-editor)
+	pre{padding:0!important}.wp-block-kevinbatdorf-code-block-pro.padding-bottom-disabled pre{padding-bottom:0!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre code{background:none!important;background-color:transparent!important;border:0!important;border-radius:0!important;border-style:none!important;border-width:0!important;color:inherit!important;display:block!important;font-family:inherit!important;margin:0!important;overflow-wrap:normal!important;padding:0!important;text-align:left!important;white-space:pre!important;width:100%!important;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor)
+	pre
+	code
+	.line{display:inline-block!important;min-width:var(--cbp-block-width,100%)!important;vertical-align:top!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor)
+	pre
+	code
+	.line{padding-left:calc(12px + var(--cbp-line-number-width, auto))!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor)
+	pre
+	code{counter-increment:step calc(var(--cbp-line-number-start, 1) - 1)!important;counter-reset:step!important}.wp-block-kevinbatdorf-code-block-pro pre code .line{position:relative!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor)
+	pre
+	code
+	.line:before{content:""!important;display:inline-block!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor)
+	pre
+	code
+	.line:not(.cbp-line-number-disabled):before{color:var(--cbp-line-number-color,#999)!important;content:counter(step)!important;counter-increment:step!important;left:0!important;opacity:.5!important;position:absolute!important;text-align:right!important;transition-duration:.5s!important;transition-property:opacity!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important;-webkit-user-select:none!important;-moz-user-select:none!important;user-select:none!important;width:var(--cbp-line-number-width,auto)!important}.wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover .line{min-height:var(--cbp-block-height,100%)!important}.wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,.wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,.wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter{background:var(--cbp-line-highlight-color,rgba(14,165,233,.2))!important;left:-16px!important;min-height:var(--cbp-block-height,100%)!important;min-width:calc(var(--cbp-block-width, 100%) + 16px)!important;pointer-events:none!important;position:absolute!important;top:0!important;width:100%!important}[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter{top:-.125rem!important}[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter{top:-1.5px!important}[data-code-block-pro-font-family="Code-Pro-Deja-Vu-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Deja-Vu-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Deja-Vu-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Cozette].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Cozette].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Cozette].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter{top:-1px!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor).padding-disabled pre
+	.line.cbp-line-highlight:after{left:0!important;width:100%!important}.wp-block-kevinbatdorf-code-block-pro.cbp-blur-enabled
+	pre
+	.line:not(.cbp-no-blur){filter:blur(1.35px)!important;opacity:.8!important;pointer-events:none!important;transition-duration:.2s!important;transition-property:all!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important}.wp-block-kevinbatdorf-code-block-pro.cbp-blur-enabled.cbp-unblur-on-hover:hover
+	pre
+	.line:not(.cbp-no-blur){opacity:1!important;pointer-events:auto!important;--tw-blur: ;filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre *{font-family:inherit!important}.cbp-see-more-simple-btn-hover{transition-property:none!important}.cbp-see-more-simple-btn-hover:hover{box-shadow:inset 0 0 100px 100px hsla(0,0%,100%,.1)!important}.code-block-pro-copy-button{border:0!important;border-style:none!important;border-width:0!important;cursor:pointer!important;left:auto!important;line-height:1!important;opacity:.1!important;outline:2px solid transparent!important;outline-offset:2px!important;padding:6px!important;position:absolute!important;right:0!important;top:0!important;transition-duration:.2s!important;transition-property:opacity!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important;z-index:10!important}.code-block-pro-copy-button:focus{opacity:.4!important}.code-block-pro-copy-button:focus-visible{outline-color:inherit!important}.code-block-pro-copy-button:not([data-has-text-button]){background:none!important;background-color:transparent!important}body
+	.wp-block-kevinbatdorf-code-block-pro:not(#x)
+	.code-block-pro-copy-button-textarea,body .wp-block-kevinbatdorf-code-block-pro:not(#x)
+	.code-block-pro-copy-button-pre{clip:rect(0,0,0,0)!important;background-color:transparent!important;border-width:0!important;color:transparent!important;height:1px!important;left:0!important;margin:-.25rem!important;opacity:0!important;overflow:hidden!important;pointer-events:none!important;position:absolute!important;resize:none!important;top:0!important;white-space:nowrap!important;width:1px!important;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important}.wp-block-kevinbatdorf-code-block-pro.padding-disabled
+	.code-block-pro-copy-button{padding:0!important}.wp-block-kevinbatdorf-code-block-pro:hover .code-block-pro-copy-button{opacity:.5!important}.wp-block-kevinbatdorf-code-block-pro .code-block-pro-copy-button:hover{opacity:.9!important}.code-block-pro-copy-button[data-has-text-button],.wp-block-kevinbatdorf-code-block-pro:hover
+	.code-block-pro-copy-button[data-has-text-button]{opacity:1!important}.wp-block-kevinbatdorf-code-block-pro
+	.code-block-pro-copy-button[data-has-text-button]:hover{opacity:.8!important}.code-block-pro-copy-button[data-has-text-button]{border-radius:.75rem!important;display:block!important;margin-right:.75rem!important;margin-top:.7rem!important;padding:.125rem .375rem!important}.code-block-pro-copy-button[data-inside-header-type=headlightsMuted],.code-block-pro-copy-button[data-inside-header-type^=headlights]{margin-top:.85rem!important}.code-block-pro-copy-button[data-inside-header-type=headlightsMutedAlt]{margin-top:.65rem!important}.code-block-pro-copy-button[data-inside-header-type=simpleString]{margin-top:.645rem!important}.code-block-pro-copy-button[data-inside-header-type=pillString]{margin-top:1rem!important}.code-block-pro-copy-button[data-inside-header-type=pillString]
+	.cbp-btn-text{position:relative!important;top:1px!important}.cbp-btn-text{font-size:.75rem!important;line-height:1rem!important}.code-block-pro-copy-button .without-check{display:block!important}.code-block-pro-copy-button .with-check{display:none!important}.code-block-pro-copy-button.cbp-copying{opacity:1!important}.code-block-pro-copy-button.cbp-copying .without-check{display:none!important}.code-block-pro-copy-button.cbp-copying .with-check{display:block!important}.cbp-footer-link:hover{text-decoration-line:underline!important}@media print{.wp-block-kevinbatdorf-code-block-pro pre{max-height:none!important}.wp-block-kevinbatdorf-code-block-pro:not(#x) .line:before{background-color:transparent!important;color:inherit!important}.wp-block-kevinbatdorf-code-block-pro:not(#x) .cbp-line-highlighter,.wp-block-kevinbatdorf-code-block-pro:not(#x)>span{display:none!important}}
+
+/*# sourceURL=https://blog.tibero.com/wp-content/plugins/code-block-pro/build/style-index.css */
+</style>
+<style id="safe-svg-svg-icon-style-inline-css">
+.safe-svg-cover{text-align:center}.safe-svg-cover .safe-svg-inside{display:inline-block;max-width:100%}.safe-svg-cover svg{fill:currentColor;height:100%;max-height:100%;max-width:100%;width:100%}
+
+/*# sourceURL=https://blog.tibero.com/wp-content/plugins/safe-svg/dist/safe-svg-block-frontend.css */
+</style>
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:root :where(.wp-block-icon svg){width: 24px;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-term-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-term-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<link rel='stylesheet' id='rivax-icon-css' href='https://blog.tibero.com/wp-content/themes/kayleen/assets/css/rivax-icon.css' media='all' />
+<link rel='stylesheet' id='bootstrap-grid-css' href='https://blog.tibero.com/wp-content/themes/kayleen/assets/css/bootstrap-grid.min.css' media='all' />
+<link rel='stylesheet' id='rivax-theme-style-css' href='https://blog.tibero.com/wp-content/themes/kayleen/style.css' media='all' />
+<style id="rivax-theme-style-inline-css">
+.container { max-width: 1240px; }body .elementor-section.elementor-section-boxed > .elementor-container { max-width: 1240px; }body .e-con { --container-max-width: 1240px; }:root { --accent-color: #2525FF;}a { color: #262ACE;}a:hover, a:focus, a:active { color: #262ACE;}.footer-canvas-menu-bg { background: #000000;}.footer-canvas-menu .header-vertical-nav li a { color: #969696;}.footer-canvas-menu-btn { color: #969696;}.footer-canvas-menu .header-vertical-nav li > a:hover, .footer-canvas-menu .header-vertical-nav li.current-menu-item > a { color: #262ACE;}.blog-archive-title, .blog-archive-title .title {}body {font-family: Noto Sans KR,sans-serif;}.single-hero-title-1 .title,.single-hero-title-2 .title { font-size: 32;}@media screen and (max-width: 1024px) {}
+/*# sourceURL=rivax-theme-style-inline-css */
+</style>
+<link rel='stylesheet' id='rivax-single-css' href='https://blog.tibero.com/wp-content/themes/kayleen/assets/css/single-post.css' media='all' />
+<link rel='stylesheet' id='elementor-frontend-css' href='https://blog.tibero.com/wp-content/plugins/elementor/assets/css/frontend.min.css' media='all' />
+<style id="elementor-frontend-inline-css">
+.e-heading-base a, .e-paragraph-base a { all: unset; cursor: pointer; }form[data-element_type="e-form"].form-state-success [data-element_type="e-form-success-message"],form[data-element_type="e-form"].form-state-error [data-element_type="e-form-error-message"]{ display: block; }
+/*# sourceURL=elementor-frontend-inline-css */
+</style>
+<link rel='stylesheet' id='elementor-post-8141-css' href='https://blog.tibero.com/wp-content/uploads/elementor/css/post-8141.css' media='all' />
+<link rel='stylesheet' id='base-desktop-css' href='https://blog.tibero.com/wp-content/uploads/elementor/css/base-desktop.css' media='all' />
+<link rel='stylesheet' id='elementor-post-208-css' href='https://blog.tibero.com/wp-content/uploads/elementor/css/post-208.css' media='all' />
+<link rel='stylesheet' id='widget-heading-css' href='https://blog.tibero.com/wp-content/plugins/elementor/assets/css/widget-heading.min.css' media='all' />
+<link rel='stylesheet' id='widget-icon-list-css' href='https://blog.tibero.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css' media='all' />
+<link rel='stylesheet' id='elementor-post-1213-css' href='https://blog.tibero.com/wp-content/uploads/elementor/css/post-1213.css' media='all' />
+<link rel='stylesheet' id='widget-image-css' href='https://blog.tibero.com/wp-content/plugins/elementor/assets/css/widget-image.min.css' media='all' />
+<link rel='stylesheet' id='elementor-post-1176-css' href='https://blog.tibero.com/wp-content/uploads/elementor/css/post-1176.css' media='all' />
+<link rel='stylesheet' id='elementor-post-1039-css' href='https://blog.tibero.com/wp-content/uploads/elementor/css/post-1039.css' media='all' />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Noto%20Sans%20KR:100,200,300,400,500,600,700,800,900&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto%20Sans%20KR:100,200,300,400,500,600,700,800,900&#038;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto%20Sans%20KR:100,200,300,400,500,600,700,800,900&#038;display=swap" /></noscript><link rel='stylesheet' id='elementor-gf-roboto-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=swap' media='all' />
+<link rel='stylesheet' id='elementor-gf-robotoslab-css' href='https://fonts.googleapis.com/css?family=Roboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=swap' media='all' />
+<link rel='stylesheet' id='elementor-gf-bricolagegrotesque-css' href='https://fonts.googleapis.com/css?family=Bricolage+Grotesque%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=swap' media='all' />
+<link rel='stylesheet' id='elementor-gf-notosanskr-css' href='https://fonts.googleapis.com/css?family=Noto+Sans+KR%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=swap' media='all' />
+<script id="jquery-core-js" src="https://blog.tibero.com/wp-includes/js/jquery/jquery.min.js"></script>
+<script id="jquery-migrate-js" src="https://blog.tibero.com/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+<link rel="https://api.w.org/" href="https://blog.tibero.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://blog.tibero.com/wp-json/wp/v2/posts/7978" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.tibero.com/xmlrpc.php?rsd" />
+<link rel='shortlink' href='https://blog.tibero.com/?p=7978' />
+<meta name="generator" content="Redux 4.5.11" /><!-- start Simple Custom CSS and JS -->
+<style>
+/**h3tag 줄간격**/
+h3 {
+    line-height: 1.1 !important; 
+}
+
+.main-navigation h2, 
+.nav-menu h2,
+#site-navigation h2 {
+    display: inline !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+</style>
+<!-- end Simple Custom CSS and JS -->
+<!-- start Simple Custom CSS and JS -->
+<style>
+.single-fixed-next-prev-posts .post-label {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    writing-mode: tb-rl;
+    text-align: center;
+    background: #d2d2d2 !important;
+    padding: 4px;
+    z-index: 99;
+    transition: 0.3s;
+}
+
+</style>
+<!-- end Simple Custom CSS and JS -->
+<!-- start Simple Custom CSS and JS -->
+<style>
+#back-to-top:hover {
+    background: #2525FF;
+    color: var(--accent-color-alt);
+    box-shadow: 0 4px 15px var(--accent-color);
+}</style>
+<!-- end Simple Custom CSS and JS -->
+<!-- start Simple Custom CSS and JS -->
+<style>
+.single-hero-title-1 .date + .reading-time {
+    position: relative;
+    display: none;
+}
+
+.single-hero-title-1 .meta-2 {
+    font-size: 14px;
+    display: none;
+}
+</style>
+<!-- end Simple Custom CSS and JS -->
+<!-- start Simple Custom CSS and JS -->
+<style>
+.rivax-post-modern-widget .content-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.rivax-post-modern-widget .meta-wrapper {
+    order: -1 !important;
+}
+.rivax-post-modern-widget .title {
+    order: 1 !important;
+}
+.rivax-post-modern-widget .excerpt {
+    order: 2 !important;
+}</style>
+<!-- end Simple Custom CSS and JS -->
+<meta name="generator" content="Elementor 4.0.8; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-swap">
+			<style>
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload),
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload) * {
+					background-image: none !important;
+				}
+				@media screen and (max-height: 1024px) {
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+				@media screen and (max-height: 640px) {
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+			</style>
+			<script async id="google_gtagjs" src="https://www.googletagmanager.com/gtag/js?id=G-4DDWDHW0RG"></script>
+<script id="google_gtagjs-inline">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-4DDWDHW0RG', {} );
+</script>
+<link rel="icon" href="https://blog.tibero.com/wp-content/uploads/2026/05/cropped-T_icon_color_v1.0-32x32.webp" sizes="32x32" />
+<link rel="icon" href="https://blog.tibero.com/wp-content/uploads/2026/05/cropped-T_icon_color_v1.0-192x192.webp" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://blog.tibero.com/wp-content/uploads/2026/05/cropped-T_icon_color_v1.0-180x180.webp" />
+<meta name="msapplication-TileImage" content="https://blog.tibero.com/wp-content/uploads/2026/05/cropped-T_icon_color_v1.0-270x270.webp" />
+<style id="wp-custom-css">
+.rivax-header-nav .sub-menu li.menu-item a:before {
+	display: none;
+}
+
+.rivax-header-nav .sub-menu li.menu-item a:hover span,
+.rivax-header-nav .sub-menu li.current-menu-item > a span,
+.rivax-header-nav .sub-menu li.current-menu-ancestor > a span {
+	transform: none;
+}
+
+.rivax-header-nav .sub-menu {
+	min-width: 200px;
+}
+
+.header-vertical-nav .sub-menu {
+	border-left: 0;
+}
+
+.header-vertical-nav li a {
+	line-height: 3;
+}
+
+.header-vertical-nav .menu > li > a {
+	font-weight: 500
+}
+
+.header-vertical-nav .sub-menu > li > a {
+	font-size: 0.9rem;
+}
+
+.main-more a {
+	font-weight: 500;
+	color: #777 !important;
+}
+
+.main-more a:after {
+	content: "";
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23999'%3E%3Cpath d='m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z'/%3E%3C/svg%3E");
+	display: inline-block;
+	background-size: 15px;
+	width: 15px;
+	height: 15px;
+	vertical-align: -2px;
+	margin-left: 5px
+}
+
+footer .footer-service a {
+	color: #718096
+}
+
+footer p {
+	margin: 0
+}
+
+.footer-canvas-menu-wrapper {
+	display: none;
+}
+
+.footer-sns ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	gap: 5px;
+}
+
+.footer-sns ul li a {
+	font-size: 0;
+	width: 40px;
+	height: 40px;
+	background-size: 40px;
+	display: block;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	border-radius: 50%;
+	border: 1px solid #dadada;
+}
+
+.footer-sns ul li a.tmax {
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%231f1f1f'%3E%3Cpath d='M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z'/%3E%3C/svg%3E");
+	background-size: 22px;
+}
+
+.footer-sns ul li a.linkedin {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none'%3E%3Cpath d='M13.4733 10C13.0826 10 12.7078 10.1628 12.4315 10.4527C12.1552 10.7425 12 11.1356 12 11.5455C12 11.9553 12.1552 12.3484 12.4315 12.6383C12.7078 12.9281 13.0826 13.0909 13.4733 13.0909C13.8641 13.0909 14.2388 12.9281 14.5151 12.6383C14.7914 12.3484 14.9467 11.9553 14.9467 11.5455C14.9467 11.1356 14.7914 10.7425 14.5151 10.4527C14.2388 10.1628 13.8641 10 13.4733 10ZM12.0867 14.3636C12.0637 14.3636 12.0416 14.3732 12.0254 14.3903C12.0091 14.4073 12 14.4304 12 14.4545V23.9091C12 23.9593 12.0388 24 12.0867 24H14.86C14.883 24 14.905 23.9904 14.9213 23.9734C14.9375 23.9563 14.9467 23.9332 14.9467 23.9091V14.4545C14.9467 14.4304 14.9375 14.4073 14.9213 14.3903C14.905 14.3732 14.883 14.3636 14.86 14.3636H12.0867ZM16.5933 14.3636C16.5703 14.3636 16.5483 14.3732 16.5321 14.3903C16.5158 14.4073 16.5067 14.4304 16.5067 14.4545V23.9091C16.5067 23.9593 16.5455 24 16.5933 24H19.3667C19.3897 24 19.4117 23.9904 19.4279 23.9734C19.4442 23.9563 19.4533 23.9332 19.4533 23.9091V18.8182C19.4533 18.4565 19.5903 18.1097 19.8341 17.8539C20.0779 17.5982 20.4086 17.4545 20.7533 17.4545C21.0981 17.4545 21.4288 17.5982 21.6726 17.8539C21.9164 18.1097 22.0533 18.4565 22.0533 18.8182V23.9091C22.0533 23.9593 22.0922 24 22.14 24H24.9133C24.9363 24 24.9584 23.9904 24.9746 23.9734C24.9909 23.9563 25 23.9332 25 23.9091V17.64C25 15.8749 23.5371 14.4945 21.8627 14.6538C21.3447 14.7037 20.8372 14.8381 20.3588 15.0524L19.4533 15.4596V14.4545C19.4533 14.4304 19.4442 14.4073 19.4279 14.3903C19.4117 14.3732 19.3897 14.3636 19.3667 14.3636H16.5933Z' fill='%23333'/%3E%3C/svg%3E");
+	background-size: 36px;
+}
+
+
+.footer-sns ul li a.youtube {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none'%3E%3Cpath d='M16.636 20.5513L20.3291 18.4166L16.636 16.2819V20.5513ZM24.8618 14.9797C24.9543 15.3141 25.0184 15.7624 25.0611 16.3317C25.1109 16.9009 25.1322 17.3919 25.1322 17.8189L25.1749 18.4166C25.1749 19.9749 25.0611 21.1206 24.8618 21.8535C24.6839 22.4939 24.2712 22.9066 23.6308 23.0845C23.2964 23.177 22.6844 23.2411 21.7451 23.2838C20.8201 23.3336 19.9733 23.3549 19.1905 23.3549L18.0591 23.3976C15.0776 23.3976 13.2204 23.2838 12.4875 23.0845C11.8471 22.9066 11.4343 22.4939 11.2565 21.8535C11.1639 21.5191 11.0999 21.0708 11.0572 20.5015C11.0074 19.9323 10.9861 19.4413 10.9861 19.0143L10.9434 18.4166C10.9434 16.8582 11.0572 15.7126 11.2565 14.9797C11.4343 14.3393 11.8471 13.9265 12.4875 13.7486C12.8219 13.6561 13.4339 13.5921 14.3732 13.5494C15.2982 13.4996 16.145 13.4782 16.9277 13.4782L18.0591 13.4355C21.0407 13.4355 22.8979 13.5494 23.6308 13.7486C24.2712 13.9265 24.6839 14.3393 24.8618 14.9797Z' fill='%23333'/%3E%3C/svg%3E");
+}
+
+.footer-sns ul li a.newsletter {
+	background-image: url("/img/email.png");
+	background-size: 19px;
+}
+
+.footer-sns ul li a.gts {
+	background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black, sans-serif' font-size='8' font-weight='900' letter-spacing='-0.6' fill='%23333'%3E GTS %3C/text%3E%3C/svg%3E");
+	background-size: 31px;
+	background-position-y: calc(50% + 2px) !important;
+}
+
+.blog-archive-title {
+	margin: 50px 0 40px;
+	border: 0;
+	padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+	.blog-archive-title {
+		margin: 30px 0 20px;
+		padding: 0 5px;
+	}
+}
+
+.search-results .blog-archive-title {
+	margin-bottom: 50px;
+}
+
+.blog-archive-title .title {
+	margin: 0;
+	border-bottom: 0;
+}
+
+body:not(.search-results) .blog-archive-title .title {
+	width: 50%;
+}
+
+.blog-archive-search .row > div {
+	padding: 0;
+}
+
+.blog-archive-search .title {
+	margin-bottom: 30px;
+}
+
+.blog-archive-search-form .submit {
+	font-size: 22px;
+}
+
+.blog-archive-search-form {
+	max-width: 370px;
+}
+
+.search-results .blog-archive-search .sub-title {
+	display: block;
+}
+
+@media screen and (max-width: 1024px) {
+	.blog-archive-title .title {
+		font-size: 1.7rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.blog-archive-title .title {
+		font-size: 26px;
+	}
+
+	.search-results .blog-archive-title .blog-archive-search .post-count {
+		text-align: right;
+		margin-top: 15px;
+	}
+
+	.blog-archive-search .title {
+		margin-bottom: 20px;
+	}
+
+	.blog-archive-search-form {
+		max-width: none;
+	}
+
+	.search-results .blog-archive-title {
+		margin-bottom: 30px;
+	}
+}
+
+.blog-archive-search {
+	width: 100%;
+}
+
+body:not(.search-results) .blog-archive-title .post-count {
+	width: 50%;
+}
+
+.blog-archive-title .sub-title {
+	display: none;
+}
+
+.blog-archive-title.radius {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+}
+
+.rivax-posts-pagination .page-numbers.next {
+	font-size: 0;
+}
+
+.rivax-posts-pagination .page-numbers.next:before {
+	content: "";
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23999'%3E%3Cpath d='m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z'/%3E%3C/svg%3E");
+	display: inline-block;
+	background-size: 15px;
+	width: 15px;
+	height: 15px;
+	margin-top: 2px;
+	margin-left: 5px;
+}
+
+.rivax-posts-pagination .page-numbers.prev {
+	font-size: 0;
+}
+
+.rivax-posts-pagination .page-numbers.prev:before {
+	content: "";
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23999'%3E%3Cpath d='M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z'/%3E%3C/svg%3E");
+	display: inline-block;
+	background-size: 15px;
+	width: 15px;
+	height: 15px;
+	margin-top: 2px;
+	margin-right: 5px;
+}
+
+.single-post .single-hero-title-1 .category a[title="Article"],
+.single-post .single-hero-title-1 .category a[title="Highlight"],
+.single-post .single-hero-title-1 .category a[title="High light"],
+.single-post .single-hero-title-1 .category a[title="Related Contents"] {
+	display: none;
+}
+
+.single-hero-title-1 .title {
+	border-bottom: 0;
+	color: #2b2d42;
+}
+
+.single-hero-title-1 .bottom {
+	font-size: 0.8rem;
+	color: #777;
+}
+
+@media (min-width: 1024px) {
+	header .rivax-header-nav {
+		gap: 10px;
+	}
+}
+
+.has-cyan-bluish-gray-background-color {
+	background-color: #f6f6f6 !important;
+}
+
+pre code {
+	background: transparent;
+}
+
+.code-block-pro-copy-button-pre {
+	padding: 0;
+}
+
+.code-block-pro-copy-button-pre textarea {
+	width: 100%;
+	min-height: 200px;
+	height: auto;
+}
+
+
+/*카테고리타이틀너비수정*/
+
+.blog-archive-title.radius.shadow {
+	max-width: 1500px !important;
+	width: 1800px !important;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 30px;
+}
+
+@media (max-width: 1540px) {
+	.blog-archive-title.radius.shadow {
+		width: 95% !important;
+		max-width: none !important;
+	}
+}
+
+.single-next-prev-posts-container {
+	padding: 50px 0;
+	border-top: 1px solid #dfe1ea;
+	display: none;
+}
+
+.comments-container {
+	padding: 50px 0;
+	border-top: 1px solid #dfe1ea;
+	display: none;
+}
+
+.rivax-promo-box figure p,
+.rivax-promo-box figure ul,
+.rivax-promo-box figure ol {
+	letter-spacing: 0;
+	font-size: 70%;
+	max-width: 600px !important;
+}
+
+.single-hero-title-1 .category a {
+	padding: 0;
+	margin-right: 0;
+	background: transparent;
+	color: var(--e-global-color-accent);
+	font-weight: 600;
+	letter-spacing: 0;
+}
+
+.single-hero-title-1 .category a:hover {
+	background: transparent !important;
+}
+
+.single-hero-title-1 .category {
+	display: flex;
+	gap: 20px;
+}
+
+
+/*main tibero inside nav bar pc hide*/
+
+@media (min-width: 1025px) {
+
+	.elementor-133 .elementor-element.elementor-element-2c6bee2 .carousel-nav-prev,
+	.elementor-133 .elementor-element.elementor-element-2c6bee2 .carousel-nav-next {
+		display: none !important;
+	}
+}
+
+/* 태블릿 및 모바일에서는 다시 보이게 설정 (필요한 경우) */
+@media (max-width: 1024px) {
+
+	.elementor-133 .elementor-element.elementor-element-2c6bee2 .carousel-nav-prev,
+	.elementor-133 .elementor-element.elementor-element-2c6bee2 .carousel-nav-next {
+		display: flex;
+	}
+}
+
+
+/*요약글 다 나오게 하기*/
+.elementor-133 .elementor-element.elementor-element-21281dc .excerpt {
+	text-overflow: clip !important;
+	white-space: normal !important;
+}
+
+.terms-of-service dd,
+.terms-of-service p,
+.privacy-policy dd,
+.privacy-policy p {
+	margin-bottom: 0;
+}
+
+.terms-of-service dd + dt,
+.privacy-policy dd + dt {
+	margin-top: 1em;
+}
+
+.privacy-policy table thead th {
+	background: rgb(75, 84, 110);
+	color: #fff;
+	text-align: center;
+}
+
+
+.post-support a {
+	display: block;
+	padding: 70px;
+	background-image: url(/wp-content/uploads/2026/05/support-bg.png);
+	background-size: cover;
+	background-position: center;
+	color: #fff;
+	border-radius: 15px;
+	font-size: 1.0rem;
+	position: relative;
+	transition: all 0.3s ease;
+}
+
+.post-support a strong {
+	font-size: 1.4rem;
+}
+
+.post-support a:before {
+	content: "";
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23fff'%3E%3Cpath d='m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z'/%3E%3C/svg%3E");
+	width: 40px;
+	height: 40px;
+	background-size: 24px;
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	right: 70px;
+	top: 50%;
+	transform: translateY(-50%);
+	border: 2px solid #fff;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: all 0.3s ease;
+}
+
+.post-support a:hover:before {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%235e72ef'%3E%3Cpath d='m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z'/%3E%3C/svg%3E");
+	background-color: #fff;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
+@media (max-width: 1024px) {
+	.post-support a {
+		padding: 70px 40px;
+	}
+
+	.post-support a:before {
+		right: 40px;
+	}
+}
+
+
+@media (max-width: 767px) {
+	.post-support a {
+		padding: 60px 30px;
+	}
+
+	.post-support a:before {
+		right: 30px;
+		width: 32px;
+		height: 32px;
+	}
+
+	.post-support a strong {
+		font-size: 1.2rem;
+	}
+}
+
+h2.wp-block-heading {
+	font-size: 1.56rem;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+h3.wp-block-heading {
+	font-size: 1.3rem;
+	font-weight: bold;
+}
+
+body.author .blog-archive-author-box {
+	width: 100%;
+}
+
+body.author .blog-archive-author-box .desc .row .col-md-8 {
+	display: none;
+}
+
+body.author .blog-archive-author-box .desc .row .col-md-4 {
+	width: 100%;
+	padding: 0;
+}
+
+body.author .blog-archive-author-box .desc .row .col-md-4 .post-count {
+	text-align: left;
+	width: 100%;
+}
+
+.single-share-box-link .share-link-btn {
+	color: #999;
+	font-size: 22px;
+}
+
+body.post-template-default #site-inner {
+	background: #F2F4F8 !important;
+}
+
+
+
+.single-share-box-link .share-link-text {
+	background: #fff;
+}
+
+
+
+.main-navigation h2, 
+.nav-menu h2,
+#site-navigation h2 {
+    display: inline !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+</style>
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-7978 single-format-standard wp-embed-responsive wp-theme-kayleen rivax-smooth-scroll elementor-default elementor-kit-8141">
+<!-- start Simple Custom CSS and JS -->
+<!-- Add HTML code to the header or the footer.
+
+For example, you can use the following code for loading the jQuery library from Google CDN:
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+or the following one for loading the Bootstrap library from jsDelivr:
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+-- End of the comment --> 
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4DDWDHW0RG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4DDWDHW0RG');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MQDMZ9B9');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQDMZ9B9"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --><!-- end Simple Custom CSS and JS -->
+
+<div id="site">
+    <div id="site-inner">
+                <header id="site-header" class="normal-header">
+		<div data-elementor-type="wp-post" data-elementor-id="1176" class="elementor elementor-1176">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-280f7cd elementor-section-content-middle elementor-section-height-min-height elementor-section-boxed elementor-section-height-default elementor-section-items-middle" data-id="280f7cd" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-3efdc40" data-id="3efdc40" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-74b0569 elementor-widget elementor-widget-image" data-id="74b0569" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
+																<a href="/">
+							<img fetchpriority="high" width="1500" height="300" src="https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6.webp" class="attachment-full size-full wp-image-10205" alt="" srcset="https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6.webp 1500w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-300x60.webp 300w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-1024x205.webp 1024w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-768x154.webp 768w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-400x80.webp 400w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-700x140.webp 700w" sizes="(max-width: 1500px) 100vw, 1500px" />								</a>
+															</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-13b2b0b" data-id="13b2b0b" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-53c6c4e elementor-hidden-tablet elementor-hidden-mobile elementor-widget__width-auto elementor-widget rivax-navigation-widget" data-id="53c6c4e" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-navigation.default">
+				<div class="elementor-widget-container">
+					<nav class="rivax-header-nav-wrapper hover-style-1"><ul id="menu-tibero" class="rivax-header-nav"><li id="menu-item-8781" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-8781"><a href="https://blog.tibero.com/category/article/"><span>Article</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-8672" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8672"><a href="https://blog.tibero.com/category/article/tibero-deep-dive/"><span>Tibero Deep Dive</span></a></li>
+	<li id="menu-item-8675" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-8675"><a href="https://blog.tibero.com/category/article/it-insight/"><span>IT Insight</span></a></li>
+</ul>
+</li>
+<li id="menu-item-8450" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-8450"><a href="https://blog.tibero.com/category/tibero-inside/"><span>Tibero Inside</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-8680" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8680"><a href="https://blog.tibero.com/category/tibero-inside/newsroom/"><span>Newsroom</span></a></li>
+	<li id="menu-item-8682" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8682"><a href="https://blog.tibero.com/category/tibero-inside/tibero-now/"><span>Tibero Now</span></a></li>
+	<li id="menu-item-8745" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8745"><a href="https://blog.tibero.com/category/tibero-inside/lifetibero/"><span>Life@Tibero</span></a></li>
+</ul>
+</li>
+<li id="menu-item-8345" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8345"><a href="https://blog.tibero.com/category/global/"><span>Global</span></a></li>
+</ul></nav>				</div>
+				</div>
+				<div class="elementor-element elementor-element-1507c5f elementor-widget__width-auto elementor-widget rivax-search-widget" data-id="1507c5f" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-search.default">
+				<div class="elementor-widget-container">
+					<div class="popup-search-wrapper style-1">
+    <div class="popup-search-opener-wrapper">
+        <span class="popup-search-opener"><i class="ri-search-2-line"></i></span>
+    </div>
+    <div class="popup-search">
+    <div class="popup-search-container">
+        <span class="popup-search-closer"></span>
+        <div class="popup-search-content">
+            <div class="popup-search-title-wrapper">
+                <h3>Type and hit Enter to search</h3>
+            </div>
+            <div class="popup-search-form-wrapper">
+                <form action="https://blog.tibero.com/" method="get" class="popup-search-form">
+                    <input type="text" name="s" value="" class="search-field" placeholder="Search ..." aria-label="Search" required>
+                    <button type="submit" class="submit" aria-label="Submit">
+                        <i class="ri-search-2-line"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-c7b2b26 elementor-hidden-desktop elementor-widget__width-auto elementor-widget rivax-offcanvas-widget" data-id="c7b2b26" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-offcanvas.default">
+				<div class="elementor-widget-container">
+					<div class="rivax-offcanvas">
+    <div class="offcanvas-opener-wrapper">
+        <span class="offcanvas-opener">
+            <span class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </span>
+    </div>
+    <div class="offcanvas-wrapper position-left">
+        <div class="offcanvas-container">
+            <div class="offcanvas-container-inner">
+                <span class="offcanvas-closer"></span>
+                <div class="offcanvas-content">
+                    		<div data-elementor-type="wp-post" data-elementor-id="8220" class="elementor elementor-8220">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-746ae74 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="746ae74" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-40a8d99" data-id="40a8d99" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-9526b16 elementor-widget rivax-navigation-widget" data-id="9526b16" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-navigation.default">
+				<div class="elementor-widget-container">
+					<nav class="header-vertical-nav"><ul id="menu-tibero-1" class="menu"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-8781"><a href="https://blog.tibero.com/category/article/"><span>Article</span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8672"><a href="https://blog.tibero.com/category/article/tibero-deep-dive/"><span>Tibero Deep Dive</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-8675"><a href="https://blog.tibero.com/category/article/it-insight/"><span>IT Insight</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-8450"><a href="https://blog.tibero.com/category/tibero-inside/"><span>Tibero Inside</span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8680"><a href="https://blog.tibero.com/category/tibero-inside/newsroom/"><span>Newsroom</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8682"><a href="https://blog.tibero.com/category/tibero-inside/tibero-now/"><span>Tibero Now</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8745"><a href="https://blog.tibero.com/category/tibero-inside/lifetibero/"><span>Life@Tibero</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8345"><a href="https://blog.tibero.com/category/global/"><span>Global</span></a></li>
+</ul></nav>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		                </div>
+            </div>
+        </div>
+    </div>
+</div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-5b26352 elementor-section-content-middle elementor-section-height-min-height elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-section-boxed elementor-section-height-default elementor-section-items-middle" data-id="5b26352" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-45fa6b1" data-id="45fa6b1" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+									<h1 
+		data-interaction-id="69eee5a" 
+		class="e-heading-base" 
+		 
+		
+	>
+	
+			Home - 티베로 공식 블로그 ｜Tibero
+		</h1>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		</header>
+        <header id="site-sticky-header">
+    		<div data-elementor-type="wp-post" data-elementor-id="1176" class="elementor elementor-1176">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-280f7cd elementor-section-content-middle elementor-section-height-min-height elementor-section-boxed elementor-section-height-default elementor-section-items-middle" data-id="280f7cd" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-3efdc40" data-id="3efdc40" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-74b0569 elementor-widget elementor-widget-image" data-id="74b0569" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
+																<a href="/">
+							<img fetchpriority="high" width="1500" height="300" src="https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6.webp" class="attachment-full size-full wp-image-10205" alt="" srcset="https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6.webp 1500w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-300x60.webp 300w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-1024x205.webp 1024w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-768x154.webp 768w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-400x80.webp 400w, https://blog.tibero.com/wp-content/uploads/2026/05/Tibero-Blog_logo_v6-700x140.webp 700w" sizes="(max-width: 1500px) 100vw, 1500px" />								</a>
+															</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-13b2b0b" data-id="13b2b0b" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-53c6c4e elementor-hidden-tablet elementor-hidden-mobile elementor-widget__width-auto elementor-widget rivax-navigation-widget" data-id="53c6c4e" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-navigation.default">
+				<div class="elementor-widget-container">
+					<nav class="rivax-header-nav-wrapper hover-style-1"><ul id="menu-tibero-2" class="rivax-header-nav"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-8781"><a href="https://blog.tibero.com/category/article/"><span>Article</span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8672"><a href="https://blog.tibero.com/category/article/tibero-deep-dive/"><span>Tibero Deep Dive</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-8675"><a href="https://blog.tibero.com/category/article/it-insight/"><span>IT Insight</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-8450"><a href="https://blog.tibero.com/category/tibero-inside/"><span>Tibero Inside</span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8680"><a href="https://blog.tibero.com/category/tibero-inside/newsroom/"><span>Newsroom</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8682"><a href="https://blog.tibero.com/category/tibero-inside/tibero-now/"><span>Tibero Now</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8745"><a href="https://blog.tibero.com/category/tibero-inside/lifetibero/"><span>Life@Tibero</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8345"><a href="https://blog.tibero.com/category/global/"><span>Global</span></a></li>
+</ul></nav>				</div>
+				</div>
+				<div class="elementor-element elementor-element-1507c5f elementor-widget__width-auto elementor-widget rivax-search-widget" data-id="1507c5f" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-search.default">
+				<div class="elementor-widget-container">
+					<div class="popup-search-wrapper style-1">
+    <div class="popup-search-opener-wrapper">
+        <span class="popup-search-opener"><i class="ri-search-2-line"></i></span>
+    </div>
+    <div class="popup-search">
+    <div class="popup-search-container">
+        <span class="popup-search-closer"></span>
+        <div class="popup-search-content">
+            <div class="popup-search-title-wrapper">
+                <h3>Type and hit Enter to search</h3>
+            </div>
+            <div class="popup-search-form-wrapper">
+                <form action="https://blog.tibero.com/" method="get" class="popup-search-form">
+                    <input type="text" name="s" value="" class="search-field" placeholder="Search ..." aria-label="Search" required>
+                    <button type="submit" class="submit" aria-label="Submit">
+                        <i class="ri-search-2-line"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-c7b2b26 elementor-hidden-desktop elementor-widget__width-auto elementor-widget rivax-offcanvas-widget" data-id="c7b2b26" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-offcanvas.default">
+				<div class="elementor-widget-container">
+					<div class="rivax-offcanvas">
+    <div class="offcanvas-opener-wrapper">
+        <span class="offcanvas-opener">
+            <span class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </span>
+    </div>
+    <div class="offcanvas-wrapper position-left">
+        <div class="offcanvas-container">
+            <div class="offcanvas-container-inner">
+                <span class="offcanvas-closer"></span>
+                <div class="offcanvas-content">
+                    		<div data-elementor-type="wp-post" data-elementor-id="8220" class="elementor elementor-8220">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-746ae74 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="746ae74" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-40a8d99" data-id="40a8d99" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-9526b16 elementor-widget rivax-navigation-widget" data-id="9526b16" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-navigation.default">
+				<div class="elementor-widget-container">
+					<nav class="header-vertical-nav"><ul id="menu-tibero-3" class="menu"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-8781"><a href="https://blog.tibero.com/category/article/"><span>Article</span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8672"><a href="https://blog.tibero.com/category/article/tibero-deep-dive/"><span>Tibero Deep Dive</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-8675"><a href="https://blog.tibero.com/category/article/it-insight/"><span>IT Insight</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-8450"><a href="https://blog.tibero.com/category/tibero-inside/"><span>Tibero Inside</span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8680"><a href="https://blog.tibero.com/category/tibero-inside/newsroom/"><span>Newsroom</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8682"><a href="https://blog.tibero.com/category/tibero-inside/tibero-now/"><span>Tibero Now</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8745"><a href="https://blog.tibero.com/category/tibero-inside/lifetibero/"><span>Life@Tibero</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8345"><a href="https://blog.tibero.com/category/global/"><span>Global</span></a></li>
+</ul></nav>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		                </div>
+            </div>
+        </div>
+    </div>
+</div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-5b26352 elementor-section-content-middle elementor-section-height-min-height elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-section-boxed elementor-section-height-default elementor-section-items-middle" data-id="5b26352" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-45fa6b1" data-id="45fa6b1" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+									<h1 
+		data-interaction-id="69eee5a" 
+		class="e-heading-base" 
+		 
+		
+	>
+	
+			Home - 티베로 공식 블로그 ｜Tibero
+		</h1>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		</header>
+	<main class="main-wrapper">
+		                                <div class="single-hero-outside"></div>                <div class="content-wrapper">
+                    <div class="container">
+                        <div class="page-content-wrapper sidebar-none-narrow">
+                            <div class="content-container">
+                                <div class="single-hero-inside"><div class="single-hero-layout-1"><div class="single-hero-title-1">
+            <div class="category">
+            <a href="https://blog.tibero.com/category/article/it-insight/" title="IT Insight" >IT Insight</a><a href="https://blog.tibero.com/category/article/" title="Article" >Article</a>        </div>
+    
+            <h1 class="title"><span class="title-span">AI 시대의 DBMS 활용 전략</span></h1>
+    
+        <div class="meta">
+        <div class="meta-1">
+                            <div class="author-avatar">
+                    <a target="_blank" href="https://blog.tibero.com/author/tibero26/">
+                    <img loading="lazy" class="avatar avatar-45 photo" src="https://blog.tibero.com/wp-content/uploads/2026/05/cropped-T_icon_color_v1.0-150x150.webp" alt="Tibero" loading="lazy" width="45" height="45">                    </a>
+                </div>
+            
+            <div class="meta-details">
+                <div class="top">
+                                            <span class="author-name">
+                        <a target="_blank" href="https://blog.tibero.com/author/tibero26/">
+                            Tibero                        </a>
+                    </span>
+                                    </div>
+                <div class="bottom">
+                                            <span class="date">
+                        2026년 04월 08일                    </span>
+                    
+                                    </div>
+            </div>
+        </div>
+        <div class="meta-2">
+            
+                    </div>
+    </div>
+</div>
+
+    <div class="image-container after-meta radius">
+        <img width="500" height="333" src="https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp" class="attachment-rivax-large size-rivax-large wp-post-image" alt="AI DBMS 1" title="AI 시대의 DBMS 활용 전략" decoding="async" srcset="https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1.webp 500w, https://blog.tibero.com/wp-content/uploads/2026/04/AI-DBMS-1-300x200.webp 300w" sizes="(max-width: 500px) 100vw, 500px">    </div>
+
+</div></div>                                <article id="post-7978" class="single-content post-7978 post type-post status-publish format-standard has-post-thumbnail hentry category-it-insight category-article" >
+                                    
+<p class="wp-block-paragraph">지난 두 편의 글을 통해 <strong>DB Lock-in 탈피 전략</strong>과, <strong>오픈소스와 상용 DB를 함께 운영하는 현실적인 하이브리드 DB 전략</strong>에 대해 살펴보았습니다.</p>
+
+
+
+<p class="wp-block-paragraph"><a href="https://tibero26.mycafe24.com/db-cost-reduction-tco-guide/" target="_blank" rel="noreferrer noopener"><mark class="has-inline-color has-vivid-cyan-blue-color" style="background-color: rgba(0, 0, 0, 0);">📌 관련 글: </mark><span style="text-decoration: underline;"><mark class="has-inline-color has-vivid-cyan-blue-color" style="background-color: rgba(0, 0, 0, 0);">DB Lock-In 시대, Oracle 전환을 위한 현실적인 전략</mark></span></a></p>
+
+
+
+<p class="wp-block-paragraph"><a href="https://tibero26.mycafe24.com/hybrid-db-strategy-with-ula/" target="_blank" rel="noreferrer noopener"><mark class="has-inline-color has-vivid-cyan-blue-color" style="background-color: rgba(0, 0, 0, 0);">📌 관련 글: </mark></a><span style="text-decoration: underline;"><a href="https://tibero26.mycafe24.com/hybrid-db-strategy-with-ula/" target="_blank" rel="noreferrer noopener"><mark class="has-inline-color has-vivid-cyan-blue-color" style="background-color: rgba(0, 0, 0, 0);">오픈소스DB와 상용DB를 동시에 운영하는 ULA 기반 통합 DB 전략</mark></a></span></p>
+
+
+
+<p class="wp-block-paragraph">이번 글에서 주목할 점은 다음과 같습니다. 기업의 데이터 환경이 단순히 &#8220;어떤 DB를 선택할 것인가&#8221;의 문제를 넘어 <strong>&#8220;AI </strong><strong>시대에 DBMS는 어떻게 진화해야 하는가&#8221;</strong> 라는 본질적인 질문에 직면하고 있다는 점입니다.</p>
+
+
+
+<p class="wp-block-paragraph">실제로 현재 비즈니스 현장에서는 다음과 같은 고민이 이어지고 있습니다.</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>비정형 데이터 활용: </strong>생성형 AI와 대규모 언어 모델(LLM)이 대중화되면서, 기존 구조화된 데이터뿐 아니라 이미지, 문서, 텍스트 같은 비정형 데이터까지 한 번에 활용해야 하는 상황</li>
+
+
+
+<li><strong>기술적 통합: </strong>기존 시스템의 안정성을 유지하며 Vector DB 기능을 어떻게 내재화할 것인가에 대한 고민</li>
+
+
+
+<li><strong>DBMS의 역할 강화:</strong> AI 모델 학습부터 배포, 운영까지의 전체 파이프라인을 DBMS 차원에서 효율적으로 지원할 수 있는 방법</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">&nbsp;</p>
+
+
+
+<p class="wp-block-paragraph"><strong>그 해답이 바로 AI 시대에 최적화된 DBMS입니다.</strong></p>
+
+
+
+<p class="wp-block-paragraph">티맥스티베로는 이러한 시대적 요구에 부응하기 위해 오픈소스 DBMS와 상용 DBMS를 통 <strong>AI 연계 중심의 DBMS 전략</strong>을 제시합니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 25px;"><strong><span style="text-decoration: underline;">OpenSQL: 오픈 AI 생태계와 결합하는 벡터 DB</span></strong></h2>
+
+
+
+<p class="wp-block-paragraph"><strong>OpenSQL</strong>은 PostgreSQL 기반의 오픈소스 DBMS 플랫폼으로, <strong>AI </strong><strong>프로젝트의 요구사항에 따라 적합한 Vector DB Extension을 선택하여 활용할 수 있도록 설계되었습니다.</strong></p>
+
+
+
+<p class="wp-block-paragraph">📌관련 글: <span style="text-decoration: underline;"><mark class="has-inline-color has-vivid-cyan-blue-color" style="background-color: rgba(0, 0, 0, 0);"><a href="https://tibero26.mycafe24.com/opensource-dbms-opensql/" target="_blank" rel="noreferrer noopener">기술지원까지 완벽한 오픈소스 DBMS, OpenSQL</a></mark></span></p>
+
+
+
+<p class="wp-block-paragraph">기존의 RDBMS(관계형 데이터베이스) 기능을 유지하면서도, AI 기반 벡터 검색을 위한 다양한 확장 기능을 제공함으로써, 별도의 벡터 DB 솔루션을 도입할 필요 없이 <strong>기존 DB 환경 내에서 AI 기능을 통합</strong>할 수 있습니다.</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="366" class="wp-image-7980" src="http://tibero26.mycafe24.com/wp-content/uploads/2026/04/opensql-extension-1024x366.png" alt="opensql extension" srcset="https://blog.tibero.com/wp-content/uploads/2026/04/opensql-extension-1024x366.png 1024w, https://blog.tibero.com/wp-content/uploads/2026/04/opensql-extension-300x107.png 300w, https://blog.tibero.com/wp-content/uploads/2026/04/opensql-extension-768x274.png 768w, https://blog.tibero.com/wp-content/uploads/2026/04/opensql-extension.png 1372w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>AI 시대의 DBMS 활용 전략 1</figcaption></figure>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;"><strong>① Pgvector: 표준 벡터 검색의 견고한 기반</strong></h3>
+
+
+
+<p class="wp-block-paragraph"><strong>Pgvector Extension은 OpenSQL에서 가장 널리 활용되는 벡터 DB 솔루션</strong>입니다. 머신러닝 모델의 특성에 따라 <strong>6가지의 서로 다른 거리 계산 방식</strong>을 지원함으로써, 다양한 AI 시나리오에 최적화된 검색을 가능하게 합니다.</p>
+
+
+
+<p class="wp-block-paragraph">Pgvector가 제공하는 거리 계산 방식은 다음과 같습니다.</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>L2 distance(&lt;-&gt;)</strong>: 유클리드 거리로 벡터 간 직선 거리를 계산하여 값 차이를 직관적으로 측정합니다.</li>
+
+
+
+<li><strong>Cosine distance(&lt;=&gt;): </strong>벡터 간 방향을 기준으로 유사도를 판단하며, 텍스트 임베딩 분석에 가장 많이 사용됩니다.</li>
+
+
+
+<li><strong>Inner product(&lt;#&gt;)</strong>: 내적을 계산하여 두 벡터의 관련성 점수를 산출합니다.</li>
+
+
+
+<li><strong>L1(&lt;+&gt;)</strong>: 좌표축을 따라 거리를 계산하는 맨해튼 거리입니다.</li>
+
+
+
+<li><strong>Hamming(&lt;~&gt;)/Jaccard(&lt;%&gt;)</strong>: 이진 데이터 비교 방식으로 일치/불일치 기반의 유사도를 계산합니다.</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">&nbsp;</p>
+
+
+
+<p class="wp-block-paragraph">이와 같이 Pgvector는 다양한 거리 계산 방식을 지원함으로써, 자신의 모델 특성에 맞는 최적의 검색 방식을 선택할 수 있습니다.</p>
+
+
+
+<p class="wp-block-paragraph">특히 성능 최적화를 위한 <strong>ANN(Approximate Nearest Neighbor) 인덱스 알고리즘도 지원</strong>합니다. Pgvector가 제공하는 두 가지의 인덱스 알고리즘 &#8216;<strong>HNSW(Hierarchical Navigable Small World)&#8217;</strong>와 &#8216;<strong>IVFFlat(Inverted File with Flat Compression)</strong>&#8216;의 특성은 다음과 같습니다.</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="2560" height="524" class="wp-image-8002" src="http://tibero26.mycafe24.com/wp-content/uploads/2026/04/pgvector-비교-scaled-1.png" alt="pgvector 비교 scaled 1" srcset="https://blog.tibero.com/wp-content/uploads/2026/04/pgvector-비교-scaled-1.png 2560w, https://blog.tibero.com/wp-content/uploads/2026/04/pgvector-비교-scaled-1-300x61.png 300w, https://blog.tibero.com/wp-content/uploads/2026/04/pgvector-비교-scaled-1-1024x210.png 1024w, https://blog.tibero.com/wp-content/uploads/2026/04/pgvector-비교-scaled-1-768x157.png 768w, https://blog.tibero.com/wp-content/uploads/2026/04/pgvector-비교-scaled-1-1536x314.png 1536w, https://blog.tibero.com/wp-content/uploads/2026/04/pgvector-비교-scaled-1-2048x419.png 2048w" sizes="(max-width: 2560px) 100vw, 2560px" /><figcaption>AI 시대의 DBMS 활용 전략 2</figcaption></figure>
+
+
+
+<ul class="wp-block-list">
+<li>HNSW는 <strong>쿼리 성능과 정확도가 우수</strong>하기 때문에 실시간 검색 성능이 중요한 환경에 적합합니다.</li>
+
+
+
+<li>IVFFlat는 <strong>빠른 구축과 낮은 메모리 사용</strong>으로 인한 효율성이 장점입니다.</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">&nbsp;</p>
+
+
+
+<p class="wp-block-paragraph">실제로 소규모부터 중규모 규모의 벡터 데이터 검색이 필요한 경우, Pgvector만으로도 충분한 성능을 확보할 수 있습니다. 특히 기존 SQL 쿼리와 벡터 검색을 함께 수행해야 하는 <strong>하이브리드 검색</strong> 시나리오에서 매우 효과적입니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;"><strong>②</strong> <strong>PgvectorScale: 대규모 데이터 처리를 위한 확장 솔루션</strong></h3>
+
+
+
+<p class="wp-block-paragraph">데이터 규모가 기하급수적으로 증가하면서 새로운 도전이 등장합니다. 수억 건 이상의 벡터 데이터를 다루는 대규모 환경에서는 메모리 효율성, 검색 속도, 그리고 스토리지 활용 간의 균형이 매우 중요해집니다.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>PgvectorScale</strong>은 바로 이러한 대규모 환경을 위해 설계된 <strong>Pgvector</strong><strong>의 확장 솔루션</strong>입니다. Pgvector의 모든 기능을 계승하면서, 대규모 데이터 처리에 최적화된 고성능 기능들을 추가로 제공합니다.</p>
+
+
+
+<p class="wp-block-paragraph">가장 주목할 기능은 <strong>StreamingDiskANN</strong>입니다. 이것은 Microsoft Research의 DiskANN 알고리즘을 기반으로 하여, <strong>SSD </strong><strong>중심의 대규모 벡터 인덱싱</strong>을 실현합니다. 기존 HNSW 같은 메모리 중심 인덱싱과 달리, StreamingDiskANN은 <strong>메모리와 SSD를 효율적으로 조합</strong>하여 전체 데이터를 메모리에 올릴 필요 없이 대규모 데이터셋을 처리할 수 있습니다. 이는 <strong>스트리밍 방식의 인덱스 빌드</strong>를 지원함으로써 수억 건의 벡터 데이터를 다루는 환경에서도 <strong>메모리 사용량을 안정적으로 제어</strong>할 수 있다는 의미입니다.</p>
+
+
+
+<p class="wp-block-paragraph">또한 PgvectorScale은 <strong>SBQ(Statistical Binary Quantization)</strong>로 독자적인 벡터 압축 기술을 제공합니다. 이는 <strong>벡터 분포를 학습한 통계 기반 압축 기법</strong>으로, 기존 Binary Quantization 대비 정확도(Recall) 손실을 최소화하면서 <strong>인덱스 크기를 획기적으로 감소</strong>시킵니다. 결과적으로 SSD 사용량이 절감되어 <strong>대규모 환경에서 획기적으로 <strong>비용 효율성을 </strong>높일 수 있습니다.</strong></p>
+
+
+
+<p class="wp-block-paragraph">이 기능들이 결합되면, PgvectorScale은 기존의 메모리 중심(HNSW) 방식과 달리 SSD에 최적화된 구조를 통해 엔터프라이즈급 대규모 벡터 검색이 가능해집니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 25px;"><strong><span style="text-decoration: underline;">OpenSQL의 세 가지 핵심 가치</span></strong></h2>
+
+
+
+<p class="wp-block-paragraph">AI 시대 DBMS로 OpenSQL이 가장 적합한 이유는 무엇일까요?</p>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">① AI 생태계에 최적화된 아키텍처</h3>
+
+
+
+<p class="wp-block-paragraph">OpenSQL은 PostgreSQL 기반이기 때문에 <strong>LangChain, LlamaIndex, HuggingFace</strong> 같은 글로벌 오픈 AI 스택과 자연스럽게 결합됩니다. 이는 단순한 기술 호환성을 넘어, 기업이 <strong>빠르게 변화하는 오픈 AI 생태계 속에서 유연하게 대응할 수 있다</strong>는 의미입니다. 새로운 오픈소스 AI 모델이나 라이브러리가 등장했을 때, 벡터 검색 인프라를 크게 수정할 필요 없이 새로운 기술을 신속하게 적용할 수 있습니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">② 벤더 종속을 최소화하는 유연한 확장 구조</h3>
+
+
+
+<p class="wp-block-paragraph">OpenSQL에서 사용되는 Pgvector와 PgvectorScale은 모두 검증된 오픈소스 솔루션입니다. 이를 통해 기업은 특정 벤더 중심 기술에 의존하지 않고, <strong>표준 기반 아키텍처로 얼마든지 확장 가능</strong>할 수 있습니다. 또한 새로운 벡터 인덱싱 방식을 시도하거나, 커뮤니티에서 지원하는 새로운 Extension을 도입하고 싶다면 자유롭게 선택할 수 있습니다. 이는 10년, 20년 뒤 AI 기술이 어떻게 변화할지 모르는 상황에서 매우 중요한 가치입니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">③ 오픈소스 기반의 상용 수준 운영 체계</h3>
+
+
+
+<p class="wp-block-paragraph">많은 기업들이 오픈소스를 도입하면서 겪는 가장 큰 고민은 <em>&#8220;오픈소스는 무료지만 운영은 어렵다&#8221;는</em> 것입니다. OpenSQL은 <strong>상용 수준의 기술지원과 운영 안정성을 제공</strong>함으로써 오픈소스의 진정한 가치를 실현 가능하게 합니다. 기업은 오픈소스의 비용 효율성을 얻으면서도, 장애 상황에서 신속한 지원을 받을 수 있는 운영 안정성을 동시에 확보할 수 있습니다.</p>
+
+
+
+<p class="wp-block-paragraph">이러한 특성들이 결합되면 <strong>비용 효율적이면서도 기술적으로 미래 지향적인 AI 데이터 인프라</strong>가 완성됩니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 25px;"><strong><strong><span style="text-decoration: underline;">Next Step: AI 최적화 DBMS로의 진화</span></strong></strong></h2>
+
+
+
+<p class="wp-block-paragraph">오픈소스가 유연한 확장성을 보여준다면, 향후 강화될 상용 DBMS의 핵심은 <strong>미션 크리티컬 환경에서의 안정적인 AI 활용</strong>에 있습니다. 티맥스티베로가 지향하는 차세대 상용 DBMS는 다음과 같은 방향으로 진화하고 있습니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">① 안정성</h3>
+
+
+
+<p class="wp-block-paragraph">티맥스티베로는 AI 시대의 DBMS가 AI 기능을 확장하더라도, 기존의 트랜잭션 처리 특성과 성능을 그대로 유지하는 것이 필수적이라고 보고 있습니다. 차세대 Tibero는 단순히 기능을 추가하는 것이 아닌, 미션 크리티컬 시스템에서 요구되는 <strong>높은 트랜잭션 안정성과 데이터 무결성을 지켜내면서 동시에 AI를 활용</strong>할 수 있도록 변화할 계획입니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">② 거버넌스</h3>
+
+
+
+<p class="wp-block-paragraph">차세대 Tibero는 <strong>AI 요청을 SQL 기반으로 처리하는 구조</strong>를 지향하고 있습니다. 권한 관리, 접근 제어, 감사 정책과 같은 보안 체계를 DB 차원에서 일관되게 적용할 수 있기 때문입니다. 또한 별도의 AI 서비스가 아닌 DBMS 내부에서 직접 처리하는 방식을 통해, AI 활용에 따른 보안 및 운영 리스크를 효과적으로 줄일 수 있습니다. 특히 금융, 공공, 의료와 같은 규제 산업에서는 이러한 통합 거버넌스 체계가 더욱 중요한 의미를 갖습니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">③ 확장성</h3>
+
+
+
+<p class="wp-block-paragraph">향후 Tibero는 <strong>Vector 검색과 Hybrid Search 기능을 DB 내에서 자연스럽게 확장</strong>할 수 있도록 진화해 나갈 예정입니다. AI 도입으로 벡터 검색 수요가 증가하더라도, 별도의 벡터 DB를 추가로 구축할 필요 없이 Tibero 안에서 유연하게 대응할 수 있는 구조를 지향합니다. 또한 시간이 지나 AI 요구사항이 변화하고 새로운 기술이 등장하더라도, 이에 유연하게 대응할 수 있는 아키텍처를 갖출 계획입니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">④ 실용성</h3>
+
+
+
+<p class="wp-block-paragraph">티맥스티베로가 그리는 미래의 가장 현실적인 특징은 PoC 중심이 아닌, <strong>실제 운영 환경 적용을 전제로 설계</strong>된다는 점입니다. 많은 AI 솔루션이 PoC 단계에서는 뛰어난 성능을 보이지만, 실제 업무 시스템에 적용하려면 추가적인 개발과 통합 작업이 필요한 경우가 많습니다. 반면 차세대 Tibero는 업무 데이터와 AI 검색 결과를 자연스럽게 결합하고, 운영 환경에서 발생하는 다양한 시나리오까지 고려하고 있습니다. 즉, 기업이 AI를 ‘실제로 활용’할 수 있는 수준의 DBMS를 목표로 합니다.</p>
+
+
+
+<p class="wp-block-paragraph">그리고 이 모든 가치가 집대성되는 지점이 바로 <strong>Hybrid Search</strong>입니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 25px;"><strong><strong><strong><span style="text-decoration: underline;">Hybrid Search: 업무 조건과 AI 검색의 자연스러운 결합</span></strong></strong></strong></h2>
+
+
+
+<p class="wp-block-paragraph">실제 업무 시나리오에서는 벡터 검색만으로는 부족한 경우가 대부분입니다. 단순히 &#8220;현재 문의와 의미가 유사한 상담 사례&#8221;를 찾는 것이 아니라, &#8220;최근 3개월 내에 등록된 상담 중에서 현재 문의와 의미가 유사한 사례&#8221;를 찾아야 합니다. 또는 특정 고객군, 특정 상품 카테고리, 특정 기간 등 <strong>다양한 업무 조건이 함께 고려</strong>되어야 합니다.</p>
+
+
+
+<p class="wp-block-paragraph">기존의 벡터 DB만으로는 이러한 요구사항을 처리하기 위해 <strong>별도의 전처리 단계나 복잡한 애플리케이션 로직</strong>이 필요했습니다. 벡터 검색 결과를 RDB에서 다시 필터링하고, 다시 정렬하고, 여러 시스템 간 데이터를 조합하는 과정을 거쳐야 했습니다. 하지만 티맥스티베로의 <strong>Hybrid Search는 이 모든 과정을 하나의 SQL 쿼리로 처리</strong>하는 것을 목표로 합니다.</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="800" height="524" class="wp-image-7986" src="http://tibero26.mycafe24.com/wp-content/uploads/2026/04/하이브리드-서치.webp" alt="하이브리드 서치" srcset="https://blog.tibero.com/wp-content/uploads/2026/04/하이브리드-서치.webp 800w, https://blog.tibero.com/wp-content/uploads/2026/04/하이브리드-서치-300x197.webp 300w, https://blog.tibero.com/wp-content/uploads/2026/04/하이브리드-서치-768x503.webp 768w" sizes="(max-width: 800px) 100vw, 800px" /><figcaption>AI 시대의 DBMS 활용 전략 3</figcaption></figure>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">이 단순한 SQL 한 줄 속에는 세 가지 처리 과정이 포함되어 있습니다.</p>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">① <strong>업무 조건 필터링(RDB 처리)</strong></h3>
+
+
+
+<p class="wp-block-paragraph">WHERE 절의 c.consult_date &gt;= ADD_MONTHS(SYSDATE, -3) 조건은 순수한 RDB 처리로, 최근 3개월 상담 이력만을 대상 데이터로 선정합니다. 이는 기업의 실제 업무 규칙을 반영한 데이터 범위 제한입니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">② <strong>의미 기반 유사도 검색(Vector 처리)</strong></h3>
+
+
+
+<p class="wp-block-paragraph">ORDER BY 절의 VECTOR_DISTANCE() 함수는 벡터 DB 게이트웨이를 통해 벡터 검색을 수행합니다. 상담 내용의 벡터 간 유사도를 계산하여, 사용자 질의와 가장 유사한 상담 사례부터 순서대로 정렬합니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 20px;">③ <strong>결과 통합 및 정렬(Tibero 처리)</strong></h3>
+
+
+
+<p class="wp-block-paragraph">RDB 필터링 결과와 벡터 검색 결과가 Tibero 엔진 차원에서 자연스럽게 통합되며, 유사도 기준으로 최종 정렬되어 상위 N건의 결과가 반환됩니다.</p>
+
+
+
+<p class="wp-block-paragraph">이처럼 벡터 검색과 관계형 데이터 처리를 <strong>동일한 SQL 인터페이스에서 통합</strong>함으로써, 데이터 일관성을 보장하고, 응답 성능을 최적화할 수 있습니다. 이것이 바로 실제 운영 시스템을 위한 설계의 핵심입니다. 기존 SQL 역량을 그대로 활용함으로써 개발자는 새로운 쿼리 언어를 배우지 않아도 되며, 운영 담당자는 통합된 환경에서 일관되게 관리할 수 있습니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 25px;"><strong><strong><strong><strong><span style="text-decoration: underline;">Tibero MCP Server: 오픈 표준 기반 AI 연계</span></strong></strong></strong></strong></h2>
+
+
+
+<p class="wp-block-paragraph">티맥스티베로의 AI 활용은 데이터베이스 내부에만 머물지 않습니다. <strong>Tibero MCP Server</strong>를 통해 다양한 LLM 및 AI 도구와 Tibero를 편리하게 연동할 수 있으며, 특히 <strong><a href="https://github.com/TiberoClient/tibero-mcp" target="_blank" rel="noreferrer noopener"><span style="text-decoration: underline;">GitHub에 공개된 오픈소스 프로젝트</span></a></strong>로 기업이 자유롭게 사용하고 커스터마이징할 수 있습니다.</p>
+
+
+
+<p class="wp-block-paragraph">📌 <a href="https://github.com/TiberoClient/tibero-mcp" target="_blank" rel="noreferrer noopener"><span style="text-decoration: underline;"><mark class="has-inline-color has-vivid-cyan-blue-color" style="background-color: rgba(0, 0, 0, 0);">GitHub &#8211; TiberoClient/tibero-mcp: Tibero DBMS 의 MCP 서버 프로젝트</mark></span></a></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="570" class="wp-image-7987" src="http://tibero26.mycafe24.com/wp-content/uploads/2026/04/Tibero-MCP-1024x570.png" alt="Tibero MCP" srcset="https://blog.tibero.com/wp-content/uploads/2026/04/Tibero-MCP-1024x570.png 1024w, https://blog.tibero.com/wp-content/uploads/2026/04/Tibero-MCP-300x167.png 300w, https://blog.tibero.com/wp-content/uploads/2026/04/Tibero-MCP-768x427.png 768w, https://blog.tibero.com/wp-content/uploads/2026/04/Tibero-MCP.png 1208w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>AI 시대의 DBMS 활용 전략 4</figcaption></figure>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">MCP(Model Context Protocol)는 AI 모델이 외부 도구, 데이터, 시스템과 <strong>표준화된 방식으로 문맥(Context)을 주고받기 위한 통신 규약</strong>입니다. 이를 통해 Tibero MCP Server는 Gemini, Claude, ChatGPT 등 <strong>특정 LLM에 제약 없이 Tibero 데이터베이스와 연결</strong>할 수 있습니다. 기업이 사용 중인 AI 모델이 무엇이든, 향후 새로운 AI 모델이 등장해도 별도의 기술 수정 없이 MCP 표준을 따르기만 하면 자동으로 호환됩니다.</p>
+
+
+
+<p class="wp-block-paragraph">더욱 중요한 것은 <strong>DB </strong><strong>접근 경로를 MCP Server로 단일화</strong>함으로써 권한·트랜잭션·실행 제어를 포함한 안전한 연계를 보장한다는 점입니다. 기업의 데이터 보안 정책을 유지하면서 AI 기능을 활용할 수 있으며, 무분별한 외부 AI 도구로부터의 데이터 접근을 방지할 수 있습니다. 이는 <strong>기업의 데이터 거버넌스를 유지하면서도 다양한 AI 생태계와 유연하게 연동한다</strong>는 의미입니다.</p>
+
+
+
+<div class=" jet-container jet-container--content-direction-vertical jet-container--content-justify-flex-start jet-container--content-align-flex-start wp-block-jet-engine-container">
+<div class="jet-container__overlay   " style="opacity: 0.5;"> </div>
+</div>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 25px;"><strong><strong><strong><strong><span style="text-decoration: underline;">마치며</span></strong></strong></strong></strong></h2>
+
+
+
+<p class="wp-block-paragraph">AI 시대에 DBMS의 역할은 근본적으로 변하고 있습니다.</p>
+
+
+
+<p class="wp-block-paragraph">더 이상 DBMS는 단순히 &#8220;데이터를 저장하고 조회하는 도구&#8221;가 아닙니다. <strong>AI </strong><strong>기술을 비즈니스 수준에서 실제로 운영 가능하게 만드는 기반 인프라</strong>로서의 역할이 요구되고 있습니다.</p>
+
+
+
+<p class="wp-block-paragraph">이 시대의 요구사항에 부응하기 위해 티맥스티베로는 두 가지 전략을 제시합니다.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>OpenSQL</strong>을 통해서는 <strong>오픈 AI 생태계와 자연스럽게 결합되는 유연한 아키텍처</strong>를 제공합니다. Pgvector와 PgvectorScale 같은 검증된 벡터 DB Extension을 통해 벤더 종속을 최소화하면서도, 상용 수준의 운영 안정성을 확보할 수 있습니다.</p>
+
+
+
+<p class="wp-block-paragraph">차세대 <strong>Tibero</strong>를 통해서는 미션 크리티컬 환경에서 <strong>기존의 안정성을 지키면서 AI를 실제로 활용하는 DBMS</strong>를 제시합니다. Hybrid Search로 벡터 검색과 관계형 데이터를 통합하고, Tibero MCP Server로 다양한 AI 모델과 자유롭게 연동하며, 모든 과정에서 데이터 거버넌스를 유지합니다. 개발부터 운영까지 모든 영역에서 AI의 이점을 활용할 수 있도록 설계되었습니다.</p>
+
+
+
+<p class="wp-block-paragraph">기업의 데이터 환경은 더 이상 단순하지 않습니다. 또한 AI 기술도 이제 선택이 아니라 필수입니다.  </p>
+
+
+
+<p class="wp-block-paragraph"><strong>&#8220;안정성을 포기하지 않으면서 AI 시대에 발맞추는 DBMS 전략&#8221;</strong> 이것이 바로 티맥스티베로가 제시하는 현실적인 해답입니다</p>
+
+
+
+<p class="wp-block-paragraph"><em>작성자: Sales Consulting 본부 / Business Consuliting 실 강필균 컨설턴트</em></p>
+                                                                                                        </article>
+                                    <div class="single-share-box-container">
+                <h4 class="title">Share Article</h4>
+        <div class="single-share-box">
+                            <a class="facebook" rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tibero.com/ai-era-dbms-strategy/" target="_blank"><i class="ri-facebook-fill"></i></a>
+                                        <a class="twitter" rel="nofollow"  href="https://twitter.com/intent/tweet?text=AI+%EC%8B%9C%EB%8C%80%EC%9D%98+DBMS+%ED%99%9C%EC%9A%A9+%EC%A0%84%EB%9E%B5&url=https://blog.tibero.com/ai-era-dbms-strategy/" target="_blank"><i class="ri-twitter-x-line"></i></a>
+                                        <a class="linkedin" rel="nofollow" href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tibero.com/ai-era-dbms-strategy/&title=AI+%EC%8B%9C%EB%8C%80%EC%9D%98+DBMS+%ED%99%9C%EC%9A%A9+%EC%A0%84%EB%9E%B5" target="_blank"><i class="ri-linkedin-fill"></i></a>
+                                                                <a class="email" rel="nofollow"  href="mailto:?subject=AI+%EC%8B%9C%EB%8C%80%EC%9D%98+DBMS+%ED%99%9C%EC%9A%A9+%EC%A0%84%EB%9E%B5&body=https://blog.tibero.com/ai-era-dbms-strategy/" target="_blank"><i class="ri-mail-line"></i></a>
+                                </div>
+
+                <div class="single-share-box-link">
+            <div class="form-content">
+                <input type="text" name="url" value="https://blog.tibero.com/ai-era-dbms-strategy/" class="share-link-text" readonly>
+                <button type="submit" class="share-link-btn">
+                    <i class="ri-file-copy-line"></i>
+                    <span class="copied-popup-text">Link Copied!</span>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+                                        <div class="single-author-box-container">
+        <div class="single-author-box">
+            <div class="single-author-box-avatar">
+                <img class="avatar avatar-120 photo" src="https://blog.tibero.com/wp-content/uploads/2026/05/cropped-T_icon_color_v1.0-150x150.webp" alt="Tibero" loading="lazy" width="120" height="120">            </div>
+            <div class="single-author-box-desc">
+                <a class="button more-articles" href="https://blog.tibero.com/author/tibero26/">Follow Me</a>
+                <span class="written-by">Written By</span>
+                <h4 class="author-name">Tibero</h4>
+                <p class="author-bio"></p>
+                <div class="author-social-links">
+                                    </div>
+            </div>
+        </div>
+    </div>
+                                            <div class="single-next-prev-posts-container">
+            <h4 class="single-next-prev-posts-title">
+                Other Articles            </h4>
+            <div class="single-next-prev-posts">
+                <div class="row">
+                    <div class="col-md-6">
+                                                    <div class="post-wrapper prev-post">
+                                <div class="image">
+                                    <a href="https://blog.tibero.com/nhncloud-tibero-mou-ceremony/">
+                                        <img width="150" height="150" src="https://blog.tibero.com/wp-content/uploads/2026/03/NHN-클라우드-티맥스티베로-150x150.webp" class="attachment-thumbnail size-thumbnail wp-post-image" alt="NHN 클라우드 티맥스티베로" title="AI 시대의 DBMS 활용 전략" decoding="async">                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="next-prev-label">
+                                        <span class="icon"><i class="ri-arrow-left-line"></i></span>
+                                        <span class="text">Previous</span>
+                                    </div>
+                                    <h3 class="title">
+                                        <a class="title-animation-underline" href="https://blog.tibero.com/nhncloud-tibero-mou-ceremony/">NHN클라우드, 티맥스티베로와 국산 AI 인프라 구축 협력</a>
+                                    </h3>
+                                </div>
+                            </div>
+                                                </div>
+                    <div class="col-md-6">
+                                                    <div class="post-wrapper next-post">
+                                <div class="image">
+                                    <a href="https://blog.tibero.com/zero-downtime-rolling-patch-strategy/">
+                                        <img width="150" height="150" src="https://blog.tibero.com/wp-content/uploads/2026/04/무중단-롤링-패치-1-150x150.webp" class="attachment-thumbnail size-thumbnail wp-post-image" alt="무중단 롤링 패치 1" title="AI 시대의 DBMS 활용 전략" decoding="async">                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="next-prev-label">
+                                        <span class="text">Next</span>
+                                        <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                                    </div>
+                                    <h3 class="title">
+                                        <a class="title-animation-underline" href="https://blog.tibero.com/zero-downtime-rolling-patch-strategy/">무중단 패치(Rolling Patch), 아키텍처와 운영 전략의 만남</a>
+                                    </h3>
+                                </div>
+                            </div>
+                                                </div>
+                </div>
+            </div>
+        </div>
+                                                <div class="single-fixed-next-prev-posts">
+                            <div class="fixed-post next-post">
+                    <div class="post-label">
+                        <span class="text">Next</span>
+                        <span class="icon"><i class="ri-arrow-down-line"></i></span>
+                    </div>
+                    <div class="post-wrapper">
+                        <div class="image">
+                            <a href="https://blog.tibero.com/zero-downtime-rolling-patch-strategy/">
+                            <img width="150" height="150" src="https://blog.tibero.com/wp-content/uploads/2026/04/무중단-롤링-패치-1-150x150.webp" class="attachment-thumbnail size-thumbnail wp-post-image" alt="무중단 롤링 패치 1" title="AI 시대의 DBMS 활용 전략" decoding="async">                            </a>
+                        </div>
+                        <div class="content">
+                            <span class="date">2026년 04월 09일</span>
+                            <h3 class="title">
+                                <a class="title-animation-underline" href="https://blog.tibero.com/zero-downtime-rolling-patch-strategy/">무중단 패치(Rolling Patch), 아키텍처와 운영 전략의 만남</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                                <div class="fixed-post prev-post">
+                    <div class="post-label">
+                        <span class="icon"><i class="ri-arrow-up-line"></i></span>
+                        <span class="text">Previous</span>
+                    </div>
+                    <div class="post-wrapper">
+                        <div class="content">
+                            <span class="date">2026년 03월 27일</span>
+                            <h3 class="title">
+                                <a class="title-animation-underline" href="https://blog.tibero.com/nhncloud-tibero-mou-ceremony/">NHN클라우드, 티맥스티베로와 국산 AI 인프라 구축 협력</a>
+                            </h3>
+                        </div>
+                        <div class="image">
+                            <a href="https://blog.tibero.com/nhncloud-tibero-mou-ceremony/">
+                                <img width="150" height="150" src="https://blog.tibero.com/wp-content/uploads/2026/03/NHN-클라우드-티맥스티베로-150x150.webp" class="attachment-thumbnail size-thumbnail wp-post-image" alt="NHN 클라우드 티맥스티베로" title="AI 시대의 DBMS 활용 전략" decoding="async">                            </a>
+                        </div>
+                    </div>
+                </div>
+                        </div>
+                                        
+<div class="comments-container">
+        <div id="comments" class="comments-area ">
+        <h4 class="comments-title">
+        No Comment! Be the first one.        </h4><!-- .comments-title -->
+
+        <ol class="comment-list">
+                    </ol><!-- .comment-list -->
+        
+        
+
+        	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">답글 남기기 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/ai-era-dbms-strategy/#respond" style="display:none;">응답 취소</a></small></h3><p class="must-log-in">댓글을 달기 위해서는 <a href="https://blog.tibero.com/tiberoedit/?redirect_to=https%3A%2F%2Fblog.tibero.com%2Fai-era-dbms-strategy%2F">로그인</a>해야합니다.</p>	</div><!-- #respond -->
+	    </div><!-- #comments -->
+</div>
+                            </div>
+                                                    </div>
+                    </div>
+                </div>
+                <div class="single-post-bottom-content">		<div data-elementor-type="wp-post" data-elementor-id="1039" class="elementor elementor-1039">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-6aa14d3 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6aa14d3" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-46ee350" data-id="46ee350" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-1ba6001 post-support elementor-widget elementor-widget-text-editor" data-id="1ba6001" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+									<p><a href="https://support.tibero.com/hc/ko" target="_blank" rel="noopener"><strong>통합 기술지원 사이트</strong><br />Global Technical Support 오픈</a></p>								</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-4043b9f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4043b9f" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-1dbde3f" data-id="1dbde3f" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-2c4b92e elementor-widget elementor-widget-heading" data-id="2c4b92e" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h4 class="elementor-heading-title elementor-size-default">Related Posts</h4>				</div>
+				<div class="elementor-element elementor-element-6c8e177 elementor-widget rivax-post-modern-widget" data-id="6c8e177" data-element_type="widget" data-e-type="widget" data-widget_type="rivax-post-modern.default">
+				<div class="elementor-widget-container">
+					<div class="rivax-posts-container">
+    <div class="rivax-posts-wrapper layout-grid">
+                <div class="post-item">
+    <article class="post-wrapper post-5656 post type-post status-publish format-standard has-post-thumbnail hentry category-article category-it-insight">
+                <div class="image-wrapper">
+            <img width="1536" height="1024" src="https://blog.tibero.com/wp-content/uploads/2025/04/국내-CSP-특징-소개.webp" class="attachment-full size-full wp-post-image" alt="국내 CSP 특징 소개" title="국내 대표 CSP 업체별 특징 : 우리 회사에 맞는 선택은?" decoding="async" srcset="https://blog.tibero.com/wp-content/uploads/2025/04/국내-CSP-특징-소개.webp 1536w, https://blog.tibero.com/wp-content/uploads/2025/04/국내-CSP-특징-소개-300x200.webp 300w, https://blog.tibero.com/wp-content/uploads/2025/04/국내-CSP-특징-소개-1024x683.webp 1024w, https://blog.tibero.com/wp-content/uploads/2025/04/국내-CSP-특징-소개-768x512.webp 768w" sizes="(max-width: 1536px) 100vw, 1536px" />            <a class="image-link rivax-position-cover" href="https://blog.tibero.com/korean-big4-csp/"></a>            <div class="rivax-position-bottom">
+                                            </div>
+                                </div>
+                <div class="content-wrapper">
+                                <h4 class="title">
+        <a href="https://blog.tibero.com/korean-big4-csp/" class="title-animation-default" title="국내 대표 CSP 업체별 특징 : 우리 회사에 맞는 선택은?">
+            국내 대표 CSP 업체별 특징 : 우리 회사에 맞는 선택은?        </a>
+        </h4>
+                    <div class="meta-wrapper">
+                                        <div class="date">
+            <i class="ri-calendar-line"></i>
+            2025년 04월 15일        </div>
+
+                                            </div>
+                                </div>
+    </article>
+</div><div class="post-item">
+    <article class="post-wrapper post-8069 post type-post status-publish format-standard has-post-thumbnail hentry category-it-insight category-article">
+                <div class="image-wrapper">
+            <img width="1536" height="1024" src="https://blog.tibero.com/wp-content/uploads/2026/04/미래형-데이터베이스-관리-시스템-디자인.webp" class="attachment-full size-full wp-post-image" alt="미래형 데이터베이스 관리 시스템 디자인" title="[알쓸잇잡] CPU vs GPU vs NPU 비교" decoding="async" srcset="https://blog.tibero.com/wp-content/uploads/2026/04/미래형-데이터베이스-관리-시스템-디자인.webp 1536w, https://blog.tibero.com/wp-content/uploads/2026/04/미래형-데이터베이스-관리-시스템-디자인-300x200.webp 300w, https://blog.tibero.com/wp-content/uploads/2026/04/미래형-데이터베이스-관리-시스템-디자인-1024x683.webp 1024w, https://blog.tibero.com/wp-content/uploads/2026/04/미래형-데이터베이스-관리-시스템-디자인-768x512.webp 768w" sizes="(max-width: 1536px) 100vw, 1536px">            <a class="image-link rivax-position-cover" href="https://blog.tibero.com/cpu-vs-gpu-vs-npu/"></a>            <div class="rivax-position-bottom">
+                                            </div>
+                                </div>
+                <div class="content-wrapper">
+                                <h4 class="title">
+        <a href="https://blog.tibero.com/cpu-vs-gpu-vs-npu/" class="title-animation-default" title="[알쓸잇잡] CPU vs GPU vs NPU 비교">
+            [알쓸잇잡] CPU vs GPU vs NPU 비교        </a>
+        </h4>
+                    <div class="meta-wrapper">
+                                        <div class="date">
+            <i class="ri-calendar-line"></i>
+            2026년 04월 13일        </div>
+
+                                            </div>
+                                </div>
+    </article>
+</div>            </div>
+    </div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		</div>                        	</main>
+        <footer id="site-footer">
+    		<div data-elementor-type="wp-post" data-elementor-id="1213" class="elementor elementor-1213">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-4605a37 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4605a37" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-2c79d51" data-id="2c79d51" data-element_type="column" data-e-type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-eb174e4 elementor-widget elementor-widget-text-editor" data-id="eb174e4" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+									<p>(주)티맥스티베로<br />대표이사 : 박경희<br />사업자등록번호 : 306-86-01745<br />주소 : 경기도 성남시 분당구 정자일로 45, 티맥스소프트타워<br />대표전화 : 031-8018-1700</p>								</div>
+				<div class="elementor-element elementor-element-fdaacb0 footer-sns elementor-widget elementor-widget-html" data-id="fdaacb0" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+					<ul>
+	<li><a href="https://www.tibero.com/ko" class="tmax" target="_blank" rel="noopener noreferrer">티맥스티베로</a></li>
+	<li><a href="https://page.stibee.com/subscriptions/281630?groupIds=296000?source=%EB%B8%94%EB%A1%9C%EA%B7%B8" class="newsletter" target="_blank" rel="noopener noreferrer">뉴스레터</a></li>
+	<li><a href="https://support.tibero.com/" class="gts" target="_blank" rel="noopener noreferrer">GTS</a></li>
+	<li><a href="https://www.linkedin.com/company/tmaxtibero/" class="linkedin" target="_blank" rel="noopener noreferrer">링크드인</a></li>
+	<li><a href="https://www.youtube.com/@tmaxtibero" class="youtube" target="_blank" rel="noopener noreferrer">유튜브</a></li>
+</ul>
+
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-c001d6e" data-id="c001d6e" data-element_type="column" data-e-type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-b105522 elementor-hidden-tablet elementor-hidden-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="b105522" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-58e02f3" data-id="58e02f3" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-d24c1fa elementor-widget elementor-widget-heading" data-id="d24c1fa" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h4 class="elementor-heading-title elementor-size-default"><a href="/category/article/">Article</a></h4>				</div>
+				<div class="elementor-element elementor-element-04b3cd8 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="04b3cd8" data-element_type="widget" data-e-type="widget" data-widget_type="icon-list.default">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="/category/article/tibero-deep-dive/">
+
+											<span class="elementor-icon-list-text">Tibero Deep Dive</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="/category/article/it-insight/">
+
+											<span class="elementor-icon-list-text">IT Insight</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-6713b54" data-id="6713b54" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-987ffd4 elementor-widget elementor-widget-heading" data-id="987ffd4" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h4 class="elementor-heading-title elementor-size-default"><a href="/tibero-inside/">Tibero Inside</a></h4>				</div>
+				<div class="elementor-element elementor-element-dd81d10 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="dd81d10" data-element_type="widget" data-e-type="widget" data-widget_type="icon-list.default">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="/tibero-inside/newsroom/">
+
+											<span class="elementor-icon-list-text">Newsroom</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="/tibero-inside/tibero-now/">
+
+											<span class="elementor-icon-list-text">Tibero Now</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="/tibero-inside/lifetibero/">
+
+											<span class="elementor-icon-list-text">Life@Tibero</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-994de65" data-id="994de65" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-03b1278 elementor-widget elementor-widget-heading" data-id="03b1278" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h4 class="elementor-heading-title elementor-size-default"><a href="/global/">Global</a></h4>				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-51eabb4 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="51eabb4" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-8fc4021" data-id="8fc4021" data-element_type="column" data-e-type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-d20740a footer-service elementor-widget elementor-widget-text-editor" data-id="d20740a" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+									<p><a href="https://www.tibero.com/ko/boards/terms/" target="_blank" rel="noopener">이용약관</a> I <a href="https://www.tibero.com/ko/boards/privacy-policy/" target="_blank" rel="noopener">개인정보처리방침</a></p>								</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-6fc0cdb" data-id="6fc0cdb" data-element_type="column" data-e-type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-1f0ac2b elementor-widget elementor-widget-heading" data-id="1f0ac2b" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h4 class="elementor-heading-title elementor-size-default">ⓒ TmaxTibero</h4>				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		</footer>
+    </div><!-- #site-inner -->
+</div><!-- #site -->
+
+    <div id="back-to-top">
+        <i class="ri-arrow-up-s-line"></i>
+    </div>
+    <div class="footer-canvas-menu-wrapper">
+        <div class="footer-canvas-menu-bg"></div>
+        <div class="footer-canvas-menu">
+            <nav class="header-vertical-nav">
+                <ul id="menu-tibero-4" class="menu"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-8781"><a href="https://blog.tibero.com/category/article/"><span>Article</span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8672"><a href="https://blog.tibero.com/category/article/tibero-deep-dive/"><span>Tibero Deep Dive</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-8675"><a href="https://blog.tibero.com/category/article/it-insight/"><span>IT Insight</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-8450"><a href="https://blog.tibero.com/category/tibero-inside/"><span>Tibero Inside</span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8680"><a href="https://blog.tibero.com/category/tibero-inside/newsroom/"><span>Newsroom</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8682"><a href="https://blog.tibero.com/category/tibero-inside/tibero-now/"><span>Tibero Now</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8745"><a href="https://blog.tibero.com/category/tibero-inside/lifetibero/"><span>Life@Tibero</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8345"><a href="https://blog.tibero.com/category/global/"><span>Global</span></a></li>
+</ul>            </nav>
+        </div>
+        <div class="footer-canvas-menu-btn-container">
+            <div class="footer-canvas-menu-btn">
+                <div class="inner">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/kayleen/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+			<script>
+				const lazyloadRunObserver = () => {
+					const lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );
+					const lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {
+						entries.forEach( ( entry ) => {
+							if ( entry.isIntersecting ) {
+								let lazyloadBackground = entry.target;
+								if( lazyloadBackground ) {
+									lazyloadBackground.classList.add( 'e-lazyloaded' );
+								}
+								lazyloadBackgroundObserver.unobserve( entry.target );
+							}
+						});
+					}, { rootMargin: '200px 0px 200px 0px' } );
+					lazyloadBackgrounds.forEach( ( lazyloadBackground ) => {
+						lazyloadBackgroundObserver.observe( lazyloadBackground );
+					} );
+				};
+				const events = [
+					'DOMContentLoaded',
+					'elementor/lazyload/observe',
+				];
+				events.forEach( ( event ) => {
+					document.addEventListener( event, lazyloadRunObserver );
+				} );
+			</script>
+			<link rel='stylesheet' id='elementor-post-8220-css' href='https://blog.tibero.com/wp-content/uploads/elementor/css/post-8220.css' media='all' />
+<script id="SmoothScroll-js" src="https://blog.tibero.com/wp-content/themes/kayleen/assets/js/SmoothScroll.min.js"></script>
+<script async data-wp-strategy="async" fetchpriority="low" id="comment-reply-js" src="https://blog.tibero.com/wp-includes/js/comment-reply.min.js"></script>
+<script id="rivax-main-script-js-extra">
+var rivax_ajax_object = {"AjaxUrl":"https://blog.tibero.com/wp-admin/admin-ajax.php"};
+//# sourceURL=rivax-main-script-js-extra
+</script>
+<script id="rivax-main-script-js" src="https://blog.tibero.com/wp-content/themes/kayleen/assets/js/main.js"></script>
+<script id="elementor-webpack-runtime-js" src="https://blog.tibero.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js"></script>
+<script id="elementor-frontend-modules-js" src="https://blog.tibero.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js"></script>
+<script id="jquery-ui-core-js" src="https://blog.tibero.com/wp-includes/js/jquery/ui/core.min.js"></script>
+<script id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"\ud398\uc774\uc2a4\ubd81\uc5d0 \uacf5\uc720","shareOnTwitter":"\ud2b8\uc704\ud130\uc5d0 \uacf5\uc720","pinIt":"\ud540 \ud558\uae30","download":"\ub2e4\uc6b4\ub85c\ub4dc","downloadImage":"\uc774\ubbf8\uc9c0 \ub2e4\uc6b4\ub85c\ub4dc","fullscreen":"\uc804\uccb4 \ud654\uba74","zoom":"\ud655\ub300\/\ucd95\uc18c","share":"\uacf5\uc720","playVideo":"\ub3d9\uc601\uc0c1 \uc7ac\uc0dd","previous":"\uc774\uc804","next":"\ub2e4\uc74c","close":"\ub2eb\uae30","a11yCarouselPrevSlideMessage":"\uc774\uc804 \uc2ac\ub77c\uc774\ub4dc","a11yCarouselNextSlideMessage":"\ub2e4\uc74c \uc2ac\ub77c\uc774\ub4dc","a11yCarouselFirstSlideMessage":"\uccab \ubc88\uc9f8 \uc2ac\ub77c\uc774\ub4dc\uc785\ub2c8\ub2e4","a11yCarouselLastSlideMessage":"\ub9c8\uc9c0\ub9c9 \uc2ac\ub77c\uc774\ub4dc\uc785\ub2c8\ub2e4","a11yCarouselPaginationBulletMessage":"\uc2ac\ub77c\uc774\ub4dc\ub85c \uc774\ub3d9"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"\ubaa8\ubc14\uc77c \uc138\ub85c","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"\ubaa8\ubc14\uc77c \uac00\ub85c","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"\ud0dc\ube14\ub9bf \uc138\ub85c","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"\ud0dc\ube14\ub9bf \uac00\ub85c","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"\ub178\ud2b8\ubd81","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"\uc640\uc774\ub4dc\uc2a4\ud06c\ub9b0","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},"hasCustomBreakpoints":false},"version":"4.0.8","is_static":false,"experimentalFeatures":{"e_font_icon_svg":true,"additional_custom_breakpoints":true,"container":true,"e_optimized_markup":true,"e_pro_free_trial_popup":true,"nested-elements":true,"e_atomic_elements":true,"atomic_widgets_should_enforce_capabilities":true,"editor_mcp":true,"e_bc_migrations":true,"e_classes":true,"global_classes_should_enforce_capabilities":true,"e_variables":true,"e_variables_manager":true,"e_opt_in_v4_page":true,"e_opt_in_v4":true,"e_components":true,"e_interactions":true,"e_widget_creation":true,"import-export-customization":true},"urls":{"assets":"https:\/\/blog.tibero.com\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/blog.tibero.com\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/blog.tibero.com\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"ed52fa5386","atomicFormsSendForm":"f45833e9e7"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":7978,"title":"AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20DBMS%20%ED%99%9C%EC%9A%A9%20%EC%A0%84%EB%9E%B5%20-%20%ED%8B%B0%EB%B2%A0%EB%A1%9C%20%EA%B3%B5%EC%8B%9D%20%EB%B8%94%EB%A1%9C%EA%B7%B8%20%EF%BD%9CTibero","excerpt":"AI \uc2dc\ub300\uc758 DBMS \ud65c\uc6a9 \uc804\ub7b5. \ud2f0\ub9e5\uc2a4\ud2f0\ubca0\ub85c\uc758 OpenSQL\uacfc Tibero\ub97c \ud65c\uc6a9\ud558\uc5ec \ubca1\ud130 \ub370\uc774\ud130 \ucc98\ub9ac\uc640 \uae30\uc874 \uc5c5\ubb34 \uc2dc\uc2a4\ud15c\uc744 \ud1b5\ud569\ud558\ub294 \uc2e4\ubb34\uc801\uc778 \ubc29\ubc95\ub860\uc744 \uc18c\uac1c\ud569\ub2c8\ub2e4.","featuredImage":"https:\/\/blog.tibero.com\/wp-content\/uploads\/2026\/04\/AI-DBMS-1.webp"}};
+//# sourceURL=elementor-frontend-js-before
+</script>
+<script id="elementor-frontend-js" src="https://blog.tibero.com/wp-content/plugins/elementor/assets/js/frontend.min.js"></script>
+<script id="elementor-v2-frontend-handlers-js" src="https://blog.tibero.com/wp-content/plugins/elementor/assets/js/packages/frontend-handlers/frontend-handlers.min.js"></script>
+<script id="elementor-v2-alpinejs-js" src="https://blog.tibero.com/wp-content/plugins/elementor/assets/js/packages/alpinejs/alpinejs.min.js"></script>
+<script id="elementor-v2-widgets-frontend-js" src="https://blog.tibero.com/wp-content/plugins/elementor/assets/js/atomic-widgets-frontend-handler.min.js"></script>
+<script id="page-links-to-js" src="https://blog.tibero.com/wp-content/plugins/page-links-to/dist/new-tab.js"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://blog.tibero.com/wp-includes/js/wp-emoji-release.min.js"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+//# sourceURL=https://blog.tibero.com/wp-includes/js/wp-emoji-loader.min.js
+</script>
+
+</body>
+</html>

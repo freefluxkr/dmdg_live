@@ -1,0 +1,33 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이번에는 격자의 여러 칸을 합칠 때 사용하는 <span class="cd">rowspan</span>과 <span class="cd">columnspan</span>을 살펴보겠습니다. <span class="cd">rowspan</span>, <span class="cd">columnspan</span>은 엑셀에서 사용하는 셀 병합 기능과 비슷합니다. <span class="cd">rowspan=n</span>은 n개 행을 병합하고, <span class="cd">columnspan=n</span>은 n개 열을 병합합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>rowspan=n     <span class="green"># n은 숫자</span>
+columnspan=n  <span class="green"># n은 숫자</span></pre>
+</div>
+<p class="txt bl">코드에 적용해 봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>, width=<span class="green">15</span>, relief=<span class="red2">'groove'</span>)
+label1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+label2 = Label(root, text=<span class="red2">'Hello!'</span>, width=<span class="green">15</span>, relief=<span class="red2">'groove'</span>)
+label2.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+label3 = Label(root, text=<span class="red2">'니하오!'</span>, width=<span class="green">15</span>, relief=<span class="red2">'groove'</span>)
+label3.grid(row=<span class="green">1</span>, column=<span class="green">0</span>, <span class="cd2">columnspan=</span><span class="cd2 green">2</span>)
+label4 = Label(root, text=<span class="red2">'봉쥬르!'</span>, width=<span class="green">15</span>, relief=<span class="red2">'groove'</span>)
+label4.grid(row=<span class="green">0</span>, column=<span class="green">2</span>, <span class="cd2">rowspan=</span><span class="cd2 green">2</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/666.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

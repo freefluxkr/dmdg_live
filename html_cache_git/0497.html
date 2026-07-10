@@ -1,0 +1,18 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.8.1 태그 브랜치</h3>
+<p class="x00--">태그를 사용하여 체크아웃할 때는 추가 커밋을 작성할 수 없습니다. <span class="x3---------">추가 커밋 작업이 필요하다면 태그를 기반으로 새 브랜치를 생성합니다.</span> 태그로 생성된 브랜치는 동일한 시작 커밋을 가지며, 새 브랜치에서 원하는 작업을 추가로 할 수 있습니다. </p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git checkout -b <span class="N--------1 N--------1">브랜치이름</span> <span class="N--------1 N--------1">태그이름</span></p>
+</div>
+<p class="x00--">태그로 브랜치를 생성할 때는 커밋의 해시 값 대신 태그 이름을 사용합니다. 그럼 실습해 봅시다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">((1.0.0))</span></p>
+<p class="N-----">$ <span class="x--">git checkout -b fix 1.0.0 </span><span class="ingd">태그 기준으로 브랜치 생성</span></p>
+<p class="N-----">Switched to a new branch 'fix'</p>
+<p class="N-----"> </p>
+<p class="N----">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(fix)</span></p></code></pre>
+<p class="x00--">태그 이름으로 새 브랜치를 생성하고, 체크아웃까지 동시에 할 수 있습니다.</p>
+</div>
+</section>
+</section>

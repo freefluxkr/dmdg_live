@@ -1,0 +1,75 @@
+<h1 class="page-subject">엑셀 시트별 PDF 자동 저장하기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<h1 id="1">1. 프로그램 컨셉</h1>
+<p>이번 편에서는 엑셀 파일의 모든 시트를 개별적을 pdf 파일로 저장하는 기능을 가진 프로그램에 대해 코드를 작성해보겠습니다. 먼저 코드를 설명하기 전에 프로그램 컨셉에 대해 간단히 설명하겠습니다.</p>
+<h3 id="concept-1">Concept 1.  한 폴더에 여러 엑셀파일이 존재합니다.</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bRPcaa/btq7RKa00LQ/3dmhHyJ23hjojVZWDpRfC0/img.png"/></p>
+<h3 id="concept-2-1">Concept 2. 1개 엑셀파일에는 다수의 시트가 존재합니다.</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/dtTS9U/btq7I1lMz3c/TGC0Mlt5nTbfFGzYSipLEk/img.png"/></p>
+<h3 id="concept-3-pdf">Concept 3. 프로그램 실행시 모든 엑셀파일의 시트를 개별적으로 pdf로 저장하게 됩니다.</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bshrpv/btq7QO5RlSe/aKbhRpsvqEKToAILfFLcQ0/img.png"/>
+<br/>
+위 컨셉을 종합하여 그려본 프로그램 개념도는 아래와 같습니다. 엑셀의 시트 정보를 읽어오는 excelInfo 함수와 excelInfo 함수 결과값을 활용해 pdf 파일로 변환하는 transPDF 함수를 통해 프로그램을 구현하게 됩니다.</p>
+<h3 id="_1">※ 프로그램 개념도</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/Wfix8/btrnGH5R2vO/vMweOuKsRtYHbtzuwvWIgk/img.png"/></p>
+<h1 id="2">2. 사용 라이브러리 정보</h1>
+<p>이번 챕터에서는 엑셀을 다루는 패키지인 OpenPyxl과 win32com 라이브러리를 사용합니다. </p>
+<ul>
+<li>OpenPyxl : 엑셀의 시트 정보를 읽어올 때 사용(Ch3-1 참고)</li>
+<li>win32com.client : 엑셀을 pdf로 저장할 때 사용 (Ch3-3 참고)</li>
+<li>os 모듈 : 폴더 안의 파일 정보를 읽어올 때 사용 (Ch3-4 참고)</li>
+</ul>
+<h1 id="3">3. 전체 코드</h1>
+<p>코드에 대한 설명은 주석으로 달아놓았으니 아래 내용을 참고해주시기 바랍니다.</p>
+<p><br/></p>
+<pre><code>import win32com.client
+import openpyxl as op
+import os
+
+
+def excelInfo(filepath):
+    excel_list = os.listdir(filepath) #폴더안에 잇는 엑셀파일 명을 리스트로 저장
+    result = [] #빈 리스트 생성
+    for file in excel_list: #엑셀파일명 리스트를 for문을 통해 반복
+        wb = op.load_workbook(filepath+"/"+file) #openpyxl workbook 생성
+        ws_list = wb.sheetnames #해당 workbook의 시트명을 리스트로 받음
+        filename = file.replace(".xlsx","") #파일명을 저장하기 위해 문자열에서 확장자 제거
+        for sht in ws_list: #시트명 리스트를 for문을 통해 반복
+            temp_tuple = (filepath+"/"+file, filename, sht) #파일경로, 파일명, sht를 튜플에 저장
+            result.append(temp_tuple) #위 튜플을 빈 리스트에 추가
+    print(result)
+    return result # 튜플로 이루어진 리스트 리턴
+
+
+def transPDF(fileinfo, savepath):
+
+    excel = win32com.client.Dispatch("Excel.Application")
+    i=0 #파일명 중복을 방지하기 위한 인덱싱 번호
+
+    #excelinfo를 입력받아 for문 실행
+    for info in fileinfo:
+        wb = excel.Workbooks.Open(info[0]) #info가 튜플이므로 인덱싱으로 접근(0번째는 파일경로)
+        ws = wb.Worksheets(info[2]) #튜플의 2번째 요소는 시트명임. 
+
+        ws.Select() #위 설정한 시트 선택
+        wb.ActiveSheet.ExportAsFixedFormat(0, savepath+"/"+str(i)+"_"+info[1]+"_"+info[2]+".pdf") #파일명, 시트명으로 pdf 파일명 저장
+        i=i+1
+        wb.Close(False) #workbook 닫기, True일 경우 그 상태를 저장한다.
+        excel.Quit()  # excel application 닫기
+
+
+#실행부
+if __name__ == "__main__"
+    filepath = "엑셀파일 경로"
+    pdfpath = "pdf파일을 저장할 경로"
+
+    #excelinfo 실행(결과값은 튜플임)
+    excelinfo = excelInfo(filepath)
+
+    #transPDF 실행(실제 pdf파일로 변환하는 부분)
+    transPDF(excelinfo, pdfpath)
+
+
+</code></pre>
+</div>

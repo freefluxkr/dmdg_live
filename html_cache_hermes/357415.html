@@ -1,0 +1,141 @@
+<h1 class="page-subject">05-5. 컨텍스트 압축</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>대화가 길어지면 LLM의 컨텍스트 윈도우가 가득 찹니다. Hermes Agent는 이 문제를 자동으로 해결합니다. 사용자가 개입할 필요 없이, 토큰 사용량이 임계값에 도달하면 대화 중간 부분을 요약해서 공간을 확보합니다.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">작동 방식</a></li>
+<li><a href="#_2">압축 트리거</a></li>
+<li><a href="#_3">메모리와의 관계</a></li>
+<li><a href="#_4">설정</a></li>
+<li><a href="#_5">수동 명령</a></li>
+<li><a href="#_6">보조 모델 실패 처리</a></li>
+</ul>
+</div>
+<h3 id="_1">작동 방식</h3>
+<pre><code class="language-mermaid">flowchart TD
+    T["토큰 ≥ 임계값\n또는 413/컨텍스트 오류"] --&gt; P1["1단계: 도구 출력 가지치기\n(LLM 호출 없음)"]
+    P1 --&gt; P2["2단계: 경계 보호\n앞 3개 + 뒤 20개 메시지 보존"]
+    P2 --&gt; AUX{"보조 모델\n사용 가능?"}
+    AUX -- "예" --&gt; P3["3단계: 중간 턴을\n보조 모델로 요약"]
+    AUX -- "아니오" --&gt; DROP["요약 없이\n중간 턴 삭제 ⚠️"]
+    P3 --&gt; OK{"요약\n성공?"}
+    OK -- "예" --&gt; DONE["요약으로 중간 턴 대체\n압축 완료"]
+    OK -- "아니오" --&gt; RETRY["메인 모델로\n한 번 재시도"]
+    RETRY --&gt; OK2{"재시도\n성공?"}
+    OK2 -- "예" --&gt; DONE
+    OK2 -- "아니오" --&gt; DROP
+</code></pre>
+<p>압축은 세 단계로 진행됩니다.</p>
+<p><strong>1단계 — 도구 출력 가지치기</strong> (LLM 호출 없음)</p>
+<p>오래된 도구 실행 결과 중 200자를 넘는 것을 짧은 플레이스홀더로 교체합니다. LLM 호출 없이 빠르게 토큰을 줄이는 사전 작업입니다.</p>
+<p><strong>2단계 — 경계 보호</strong></p>
+<p>대화의 처음과 끝을 보호합니다.</p>
+<ul>
+<li><strong>앞쪽 3개 메시지</strong> — 시스템 프롬프트와 첫 대화를 유지합니다.</li>
+<li><strong>뒤쪽 최근 메시지</strong> — 기본값 20개 메시지(<code>protect_last_n</code>)를 압축 대상에서 제외합니다. 최근 작업 맥락이 유지됩니다.</li>
+</ul>
+<p><strong>3단계 — LLM 요약</strong></p>
+<p>보호 구간 사이의 중간 턴을 보조 모델(저렴한 모델)에게 보내 구조화된 요약을 생성합니다.</p>
+<pre><code>## Goal
+[사용자가 달성하려는 목표]
+
+## Progress
+### Done / In Progress / Blocked
+
+## Key Decisions
+[중요한 기술 결정과 이유]
+
+## Relevant Files
+[읽거나 수정한 파일 목록]
+
+## Next Steps
+[다음에 해야 할 작업]
+</code></pre>
+<p>재압축 시에는 이전 요약을 처음부터 다시 만들지 않고 <strong>누적 업데이트</strong>합니다. 압축을 여러 번 거쳐도 초반 맥락이 점진적으로 사라지지 않습니다.</p>
+<h3 id="_2">압축 트리거</h3>
+<p>압축이 시작되는 시점은 세 가지입니다.</p>
+<table>
+<thead>
+<tr>
+<th>트리거</th>
+<th>시점</th>
+<th>작동</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>사전 압축</strong></td>
+<td>API 호출 직전, 추정 토큰 ≥ 임계값</td>
+<td>최대 3회 반복 압축</td>
+</tr>
+<tr>
+<td><strong>413 Payload Too Large</strong></td>
+<td>API가 413 응답 반환 시</td>
+<td>압축 후 2초 대기, 재시도</td>
+</tr>
+<tr>
+<td><strong>컨텍스트 길이 오류</strong></td>
+<td>"context length exceeded" 등 감지 시</td>
+<td>컨텍스트 한도를 하향 조정 후 압축</td>
+</tr>
+</tbody>
+</table>
+<p>세 번째 트리거는 로컬 백엔드(Ollama, LM Studio 등)에서 특히 중요합니다. 모델마다 실제 컨텍스트 한도가 다르고, 에러 메시지 형식도 제각각이기 때문입니다. Hermes Agent는 에러 메시지에서 실제 한도를 파싱하거나, 단계적으로 한도를 낮추며 재시도합니다.</p>
+<h3 id="_3">메모리와의 관계</h3>
+<p>컨텍스트 압축은 <strong>메모리 도구를 호출하지 않습니다</strong>. 압축 과정에서 MEMORY.md나 USER.md를 읽거나 쓰는 일은 없으며, 요약 생성도 도구 없이 LLM 텍스트 생성만으로 처리됩니다.</p>
+<p>요약기는 메모리 파일에 직접 접근하지 않지만, 요약 내용이 기존 메모리와 충돌하지 않도록 설계되어 있습니다.</p>
+<h3 id="_4">설정</h3>
+<pre><code class="language-yaml"># ~/.hermes/config.yaml
+compression:
+  enabled: true            # 기본값: true
+  threshold: 0.50          # 모델 컨텍스트 한도의 50%에서 압축 시작
+  target_ratio: 0.20       # threshold 토큰 예산의 20%를 최근 대화로 보존
+  protect_last_n: 20       # 최근 20개 메시지는 압축에서 제외
+  summary_model: null      # 요약용 모델 (미지정 시 보조 모델 자동 선택)
+</code></pre>
+<p><code>target_ratio</code>는 <code>threshold</code> 토큰 예산에 대한 비율입니다. 기본값(threshold 0.50 × target_ratio 0.20)에서는 컨텍스트의 약 10%를 최근 대화로 보존합니다. 200K 모델이면 약 20K, 1M 모델이면 약 100K입니다.</p>
+<p><code>threshold</code>를 낮추면 더 일찍 압축이 시작되어 요약 품질이 높아지지만, 압축 횟수가 늘어납니다. 로컬 모델처럼 컨텍스트가 작은 환경에서는 <code>0.40</code> 정도로 낮추는 것이 안정적입니다.</p>
+<h3 id="_5">수동 명령</h3>
+<p>자동 압축 외에 수동으로도 제어할 수 있습니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/compress</code></td>
+<td>즉시 압축 실행</td>
+</tr>
+<tr>
+<td><code>/compress &lt;focus&gt;</code></td>
+<td>주제 지정 압축. 예: <code>/compress "API 설계 결정"</code></td>
+</tr>
+<tr>
+<td><code>/compress here [N]</code></td>
+<td>경계 인식형 부분 압축. 최근 N개 교환은 그대로 두고 그 이전만 요약 (N 생략 시 2)</td>
+</tr>
+<tr>
+<td><code>/usage</code></td>
+<td>현재 토큰 사용량과 임계값 확인</td>
+</tr>
+</tbody>
+</table>
+<p><code>/compress &lt;focus&gt;</code> 형식은 요약기에 "이 주제 중심으로 정리해 줘"라는 힌트를 줍니다. 긴 토론 끝에 결정 사항만 남기고 부수적인 시행착오는 줄이고 싶을 때 유용합니다.</p>
+<p><code>/compress here [N]</code> 형식은 압축 경계를 사용자가 직접 지정합니다. "여기까지는 요약하고 최근 대화는 그대로 두자"라는 뜻으로, 최근 N개 교환(사용자 메시지와 그에 딸린 응답 묶음)을 원문 그대로 보존합니다. 방금 나눈 대화는 손대지 않으면서 그 이전의 긴 맥락만 정리하고 싶을 때 유용합니다.</p>
+<blockquote>
+<p>💡 대화가 느려지거나 응답이 반복되는 느낌이 들면 <code>/usage</code>로 토큰 사용량을 확인해 보세요. 임계값에 가까워졌다면 <code>/compress</code>로 미리 정리하는 것도 방법입니다.</p>
+</blockquote>
+<h3 id="_6">보조 모델 실패 처리</h3>
+<p>압축은 보조 모델을 사용합니다. 보조 모델이 오류를 내면, 포기하기 전에 <strong>메인 모델로 한 번 더 재시도</strong>합니다. 그래도 실패하면 사용자에게 그 사실이 표시되고, 압축 없이 호출이 진행됩니다. 메인 모델로 자동 전환(폴백)이 작동하더라도 보조 모델 설정에 문제가 있다면 <code>hermes status</code>나 로그에서 확인할 수 있습니다.</p>
+<p>보조 모델 자체가 설정되어 있지 않으면, 세션 시작 시 "⚠ No auxiliary LLM provider configured" 경고가 표시됩니다. 이 상태에서 압축이 발동하면 <strong>요약 없이 중간 턴을 그냥 삭제</strong>합니다. 대화 맥락이 크게 손실될 수 있으므로, <code>hermes setup</code>을 실행하거나 <code>OPENROUTER_API_KEY</code> 환경변수를 설정해 보조 모델을 연결하는 것을 권장합니다.</p>
+</div>

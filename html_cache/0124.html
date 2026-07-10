@@ -1,0 +1,28 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">조건과, 조건을 충족할 때 실행할 내용만 정하면 실제 코드로 옮기는 것은 어렵지 않습니다. 변수 <span class="cd">age</span>를 만들어 23을 넣은 후 조건문을 작성해 봅시다.</p>
+<div class="highlight">
+<pre>age = <span class="green">23</span>
+<span class="purple">if</span> age &gt; <span class="green">19</span>:
+    <span class="gold">print</span>(<span class="red2">'성인은 주류를 구매할 수 있습니다.'</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+성인은 주류를 구매할 수 있습니다.</pre>
+</div>
+<p class="txt bl"><span class="cd">age</span>에 저장된 값이 23이므로 조건인 <span class="cd">age &gt; 19</span>를 충족해 <span class="cd">print()</span> 명령어가 실행됩니다. 오타가 없고, 조건문의 형식을 잘 지켰다면 에디터에서 <span class="cd">if</span>가 강조 표시됩니다. 처음 <span class="cd">if</span> 조건문을 실행하면 다양한 오류가 발생할 수 있습니다. 가장 흔한 오류는 조건문에서 콜론(<span class="cd">:</span>)을 빠뜨린 경우입니다.</p>
+<div class="highlight">
+<pre>age = <span class="green">23</span>
+<span class="purple">if</span> age &gt; <span class="green">19</span>
+    <span class="gold">print</span>(<span class="red2">'성인은 주류를 구매할 수 있습니다.'</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+if age &gt; 19 
+           ^
+<span class="red2">SyntaxError:</span> invalid syntax</pre>
+</div>
+</div>
+</section>
+</section>

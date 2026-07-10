@@ -1,0 +1,26 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>10.5.1 태그 생성</h3>
+<p class="x00--"><span class="A------">Annotated</span> 태그를 생성할 때는 커밋의 해시 값뿐 아니라 추가로 생성자 정보를 같이 넣을 수 있습니다. 예를 들어 이메일, 날짜, 메시지 등 정보입니다. 또 <span class="A------">GPG</span> 방식으로 서명도 가능합니다.</p>
+<p class="x00--"><span class="A------">Annotated</span> 태그를 생성하려면 <span class="A------ x3-------1">tag</span> 명령어 뒤에 <span class="x----- x3-------1">-</span><span class="A------ x3-------1">a</span> 옵션을 사용합니다. </p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git tag -a <span class="N--------1 N--------1">버전</span> </p>
+</div>
+<p class="x00--">바로 실습해 보겠습니다. <span class="A------">version</span>.<span class="A------">htm</span> 파일을 수정하고 커밋합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(master)</span></p>
+<p class="N----">$ <span class="x--">code version.htm</span> <span class="ingd">VS Code 실행</span></p></code></pre>
+<p class="x-----1"><span class="x100">version</span>.<span class="x100">htm</span></p>
+<div class="cbox">
+<pre><code><p class="N----- para-style-override-39">&lt;h1&gt;<span class="N--------1 N--------1">태그</span> <span class="N--------1 N--------1">버전</span> <span class="N--------1 N--------1">실습</span> <span class="N--------1 N--------1">파일입니다</span>.&lt;/h1&gt;</p>
+<p class="N----- para-style-override-39"><span class="x--">&lt;ul&gt;</span></p>
+<p class="N----- para-style-override-39"><span class="x--">    &lt;li&gt;</span><span class="N--------1 N--------1 x--">버전</span><span class="x--"> 1.0.0 </span><span class="N--------1 N--------1 x--">실습</span><span class="x--">&lt;/li&gt;</span></p>
+<p class="N----- para-style-override-39"><span class="x--">&lt;/ul&gt;</span></p></code></pre>
+</div>
+<pre><code><p class="N-----">infoh@DESKTOP MINGW64 /e/gitstudy10 <span class="x--">(master)</span></p>
+<p class="N-----">$ <span class="x--">git commit -am "test 1.0.0"</span> <span class="ingd">등록 및 커밋</span></p>
+<p class="N-----">[master 53028dc] test 1.0.0</p>
+<p class="N----"> 1 file changed, 4 insertions(+), 1 deletion(-)</p></code></pre>
+</div>
+</section>
+</section>

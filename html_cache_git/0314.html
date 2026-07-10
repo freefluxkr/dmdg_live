@@ -1,0 +1,26 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>7.1.3 스태시의 임시 스택 영역에 작업 중인 코드 저장</h3>
+<p class="x00--">우리는 현재 작업 중인 브랜치의 워킹 디렉터리를 정리하지 못한 상태입니다. 따라서 현재 브랜치에서 버그를 수정하기 위한 다른 브랜치로 체크아웃할 수 없습니다. </p>
+<p class="x00--">다시 <span class="A------ x3-------1">status</span> 명령어를 실행하여 상태를 확인합시다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/gitstudy07 <span class="x--">(feature)</span></p>
+<p class="N-----">$ <span class="x--">git status</span> <span class="ingd">상태 확인</span></p>
+<p class="N-----">On branch feature</p>
+<p class="N-----">Changes not staged for commit:</p>
+<p class="N-----">  (use "git add &lt;file&gt;..." to update what will be committed)</p>
+<p class="N-----">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</p>
+<p class="N-----"><span class="x-----3">        modified:   stash.htm </span><span class="ingd">수정 상태</span></p>
+<p class="N----">no changes added to commit (use "git add" and/or "git commit -a")</p></code></pre>
+<p class="x00--">브랜치를 이동할 수 없는 이유는 코드가 아직 수정 중인 상태이기 때문입니다. 이를 해결해야 다른 브랜치로 이동할 수 있습니다.</p>
+<p class="x00--"><span>스태시 명령어는 수정 중인 내역을 커밋하지 않고도 </span><span class="x3---------">브랜치를 이동할 수 있게 워킹 디렉터리를 깨끗이 청소</span><span>합니다. 따라서 커밋 대신 스태시 명령을 실행하면 됩니다. 스태시는 영구적인 커밋 기록 대신 </span><span class="x3---------">현재 작업들을 </span><span class="x3---------">임시 스택 영역에 저장</span><span>합니다. 간략하게는 </span><span class="A------ x3-------1">git</span><span class="x3-------1"> </span><span class="A------ x3-------1">stash</span><span> 명령어만 사용합니다.</span></p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git stash </p>
+</div>
+<p class="x00--">또는 <span class="A------ x3-------1">save</span> 명령어를 추가하여 사용합니다. <span class="A------ x3-------1">git</span><span class="x3-------1"> </span><span class="A------ x3-------1">stash</span><span class="x3-------1"> </span><span class="A------ x3-------1">save</span> 명령어는 스태시 여러 개를 생성할 때 유용합니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git stash save</p>
+</div>
+</div>
+</section>
+</section>

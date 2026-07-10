@@ -1,0 +1,23 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">오류 내용을 봅시다. 처음 보는 <span class="cd">UnboundLocalError</span>입니다. Unbound는 ‘매여 있지 않은’, ‘해방된’이라는 뜻이고, Local은 지역을 뜻합니다. 즉, 지역을 벗어난 오류란 의미죠. 지역변수는 특정 지역에서만 사용한다고 했습니다. 코드에서 변수 <span class="cd">a</span>와 <span class="cd">b</span>는 함수 외부에 정의되어 있으므로 전역변수입니다. 이런 전역변수의 값을 함수 안에서 수정하려고 해서(<span class="cd">a += 2</span>) 오류가 발생한 겁니다.</p>
+<p class="txt bl"><span class="cd">a</span>, <span class="cd">b</span>의 값을 수정하는 부분을 주석 처리한 후 다시 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="blue2">def</span> <span class="gold">func1</span>():
+   <span class="green"># a += 2</span>
+   <span class="green"># b *= 2</span>
+    <span class="gold">print</span>(a, b)
+
+a, b = <span class="green">5</span>, <span class="green">10</span>
+func1()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+5 10</pre>
+</div>
+<p class="txt bl">오류가 발생하지 않습니다. 무슨 차이일까요? 함수 내부에서는 전역변수의 값을 변경할 수 없고 읽을 수만 있습니다. 그래서 <span class="cd">a += 2, b *= 2</span>를 주석 처리하고 실행하면 <span class="cd">print(a, b)</span>는 실행됩니다.</p>
+<p class="txt bl">정리하면, <span class="dm">지역변수는 함수 내부에서만 값을 읽고 변경</span>할 수 있습니다. <span class="dm">전역변수는 프로그램 전역에서 값을 읽을 수 있지만, 함수 내부에서 값을 변경할 수 없습니다.</span></p>
+</div>
+</section>
+</section>

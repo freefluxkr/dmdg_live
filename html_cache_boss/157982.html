@@ -1,0 +1,98 @@
+<h1 class="page-subject">2) 이미지 삽입, 표 삽입</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>오늘은 지난 시간에 이어서 python-docx 라이브러리로 워드 파일에 이미지와 표를 삽입하는 방법을 공부해보겠습니다.</p>
+<p>이번 시간 역시 VScode에서 쥬피터 노트북 파일(.ipynb)을 생성하여 코드를 실행해보겠습니다.</p>
+<p>우선 가장 기본이 되는 Document 클래스를 import 해주세요.</p>
+<pre><code>from docx import Document
+</code></pre>
+<h1 id="1">1.  이미지 삽입</h1>
+<p>우선 이미지를 삽입하려면 삽입할 이미지가 있어야겠죠?</p>
+<p>이미지 파일을 하나 준비해주세요.</p>
+<p>뭘 준비해야 할지 모르겠다면 그냥 화면을 캡쳐해서 jpg 혹은 png 파일로 저장해주세요.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cLgYlZ/btrpcOIccUz/FgvzVqstYkW6oTqZMDwYXk/img.jpg"/></p>
+<p>cat.jpg</p>
+<p>저는 귀여운 고양이 사진을 워드 문서에 삽입해보겠습니다.</p>
+<p>코드 설명은 아래에 주석으로 달아두었으며, 주석을 달지 않은 부분이 잘 이해가 안가신다면 지난 글을 참고해주세요.</p>
+<p><strong>&lt;이미지 삽입 코드&gt;</strong></p>
+<pre><code># Cm와 Inch 단위를 사용하기 위한 모듈
+from docx.shared import Cm, Inches
+
+doc = Document()
+
+# 사진의 크기를 Cm 단위로 설정하여 삽입
+doc.add_picture('cat.jpg',width= Cm(16), height= Cm(9))
+
+# 사진의 크기를 Inch 단위로 설정하여 삽입
+doc.add_picture('cat.jpg',width= Inches(4), height= Inches(3))
+
+doc.save('이미지 삽입.docx')
+</code></pre>
+<p><strong>&lt;실행 결과&gt;</strong></p>
+<p>워드 파일을 직접 열어주어야 함.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/3wz9p/btro1286762/q3cFb0ePB2mT5d65C1kcuK/img.png"/></p>
+<h1 id="2">2. 표 삽입</h1>
+<h2 id="1_1">1) 행과 열 설정 및 표 만들기</h2>
+<p>우리가 워드를 사용할 때 표를 삽입하려면 가장 먼저 행과 열의 갯수를 설정해주어야 하죠?</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/t3vRs/btroYkhyx46/hKEAPT0bO2CiKkZkPYp7J0/img.png"/></p>
+<p>Word 사용 시, 일반적인 표 삽입 과정</p>
+<p>python-docx를 사용할 때에도 마찬가지로 가장 먼저 행(rows)와 열(cols)의 갯수를 설정해줍니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>이전 시간에 배우셨던 add_paragraph의 개념과 동일하게 변수에 대입해줌으로써 객체화가 가능합니다.</p>
+<p><strong>&lt;표 삽입 코드&gt;</strong></p>
+<pre><code># 새로운 문서 만들기
+doc = Document()
+
+# 2행 3열의 표 만들기
+table = doc.add_table(rows = 2, cols = 3)
+
+# 만든 표의 스타일을 가장 기본 스타일인 'Table Grid'로 설정
+table.style = doc.styles['Table Grid']
+
+# 저장
+doc.save('표 삽입.docx')
+</code></pre>
+<p><strong>&lt;실행 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/b3UjFJ/btro6alfuGs/ZjPPy3i9GH6eaiWVHVEYz1/img.png"/></p>
+<p>참고로 위에서 표 스타일을 Table Grid로 해주었는데, 이 스타일은 가장 기본적인 스타일입니다.</p>
+<p>추후에 문단과 표를 정렬하고 스타일을 변경하는 방법에 대해서 다루어 보겠습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cdk5UD/btro7fGAGhz/M3QHE4m3qjRijyu0QdYOwK/img.png"/></p>
+<h2 id="2_1">2) 각 셀에 내용 입력</h2>
+<p>각 셀에는 아래와 같은 인덱싱 방법으로 표에 접근하여, 텍스트를 입력할 수 있습니다.</p>
+<p><strong>&lt;표에 텍스트 삽입 코드&gt;</strong></p>
+<pre><code># 표의 첫 행을 리스트로 가져오기
+first_row = table.rows[0].cells
+
+# 첫 행의 각 열들에 접근해서 값 입력 
+first_row[0].text = 'a'
+first_row[1].text = 'b'
+first_row[2].text = 'c'
+
+# 표의 두번째 행을 리스트로 가져온 후, 각 셀에 값 입력
+second_row = table.rows[1].cells
+second_row[0].text = 'd'
+second_row[1].text = 'e'
+second_row[2].text = 'f'
+
+# 저장
+doc.save('표 삽입.docx')
+</code></pre>
+<p><strong>&lt;실행 결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/rWKvK/btro13mEdhf/6kFJklPGwGeTPviMSCYvP1/img.png"/></p>
+<h2 id="3">3) 행과 열 추가하기</h2>
+<p><strong>행 추가</strong></p>
+<pre><code>row_cells = table.add_row().cells
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/b1Kj8f/btrpdqfUgx7/2fzxMVOiDS5QNqG5efUTtk/img.png"/></p>
+<p>위에서 굳이 변수에 대입해준 이유는 나중에 새로 만든 셀들에 값을 입력할 때, row_cells[0]과 같이 인덱싱하여 텍스트 입력이 가능하기 때문입니다.</p>
+<p><strong>열 추가</strong></p>
+<p>열을 추가할 때에는 행을 추가할 때와 다르게 반드시 width 값을 꼭 입력해주어야 합니다.</p>
+<pre><code>col_cells = table.add_column(width=Cm(2)).cells
+</code></pre>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bFCc9u/btroWCitoCi/iGyFN2OjrbJli0JM6wpzB1/img.png"/></p>
+</div>

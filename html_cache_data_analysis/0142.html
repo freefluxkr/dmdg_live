@@ -1,0 +1,22 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt1 dm"><span class="cap blue">■</span> 비율 및 범례 표시하기</p>
+<p class="txtex bl">레이블을 추가하니 각 그래프가 어떤 항목을 의미하는지 쉽게 파악할 수 있습니다. 하지만 그림 9-8 그래프에서 A형과 B형처럼 비율이 비슷한 항목의 경우, 어떤 혈액형의 비율이 더 높은지 구분하기가 어렵습니다. <span class="cd">pie()</span> 함수의 <span class="cd">autopct</span> 속성을 사용하여 각 항목의 비율을 표시해 볼까요?</p>
+<p class="txtex bl"><span class="cd">autopct</span> 속성은 <span class="cd">auto percent</span>를 의미하며, 어떤 형태로 값을 표시할지 작성하면 각 항목의 비율을 자동으로 계산해서 표시합니다. 정확한 계산을 위해 소수점까지 나타내는 <span class="cd">float</span>(실수) 형태로 표시해 봅시다.</p>
+<p class="txt bl">소수점 아래 둘째 자리에서 반올림한 값을 표시하고자 <span class="cd">autopct</span> 속성의 값을 <span class="cd">%.1f%%</span>로 지정합니다. 소수점 아래 첫 번째 소수점까지 표현하겠다는 의미입니다. 그리고 <span class="cd">legend()</span> 함수를 사용해 범례도 간단히 추가합니다.</p>
+<div class="box_blue_line">
+<pre><span class="violet">import</span> matplotlib.pyplot as plt
+plt.rc(<span class="olive">'font'</span>, family<span class="violet">=</span><span class="olive">'Malgun Gothic'</span>)
+size <span class="violet">=</span> [<span class="blue2">2441</span>, <span class="blue2">2312</span>, <span class="blue2">1031</span>, <span class="blue2">1233</span>]
+label <span class="violet">=</span> [<span class="olive">'A형'</span>,<span class="olive">'B형'</span>,<span class="olive">'AB형'</span>, <span class="olive">'O형'</span>]
+plt.axis(<span class="olive">'equal'</span>)
+plt.pie(size, labels<span class="violet">=</span>label, <span class="cd2">autopct</span><span class="violet">=</span><span class="olive">'%.1f%%'</span>)
+<span class="cd2">plt.legend()</span>
+plt.show()</pre>
+</div>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/007029/p133.jpg"/></div>
+<p class="txts dl blue"><span class="dm bg_blue_line">그림 9-9</span> autopct 속성으로 정확한 수치를 표시하고 범례를 추가한 결과</p>
+</div>
+</section>
+</section>

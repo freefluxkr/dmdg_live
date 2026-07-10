@@ -1,0 +1,42 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">하위 목표 2 - 주중/주말 시간대별 인구 분석하기</p>
+<p class="txt bl">하위 목표 2도 수정해 봅시다. 이 역시 그래프 그리는 부분은 <span class="cd">graph_plot()</span> 함수를 호출하는 것으로 대신하고, <span class="cd">graph_plot()</span> 함수에 넣을 인자를 만들어 주면 됩니다(변경 전 코드는 '11.2.3 하위 목표 2 - 주중/주말 시간대별 인구 분석하기'에 있습니다).</p>
+<div class="highlight">
+<pre><span class="purple">import</span> datetime
+
+<span class="cd2 blue2">def</span> <span class="cd2 gold">analysis2</span><span class="cd2">(</span><span class="cd2 blue3">dong_name</span><span class="cd2">,</span> <span class="cd2 blue3">dong_code</span><span class="cd2">):</span>
+    <span class="green"># 4.1 입력된 행정동의 주중/주말 시간대별 평균인구 구하기</span>
+    weekday = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+    weekend = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+
+    <span class="purple">for</span> row <span class="blue2">in</span> data:
+        <span class="purple">if</span> row[<span class="green">2</span>] == dong_code:
+            time, p = row[<span class="green">1</span>], row[<span class="green">3</span>]
+            year, mon, day = int(row[<span class="green">0</span>][:<span class="green">4</span>]), int(row[<span class="green">0</span>][<span class="green">4</span>:<span class="green">6</span>]), int(row[<span class="green">0</span>][<span class="green">6</span>:])
+            num = datetime.date(year, mon, day).weekday()
+            <span class="purple">if</span> num &lt; <span class="green">5</span>:
+                weekday[time] += p
+            <span class="purple">else</span>:
+                weekend[time] += p
+
+    weekday_cnt, weekend_cnt = <span class="green">0</span>, <span class="green">0</span>
+    <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">1</span>, <span class="green">32</span>):
+        <span class="purple">if</span> datetime.date(<span class="green">2019</span>, <span class="green">12</span>, i).weekday() &lt; <span class="green">5</span>:
+            weekday_cnt += <span class="green">1</span>
+        <span class="purple">else</span>:
+            weekend_cnt += <span class="green">1</span>
+
+    weekday = [w/weekday_cnt <span class="purple">for</span> w <span class="blue2">in</span> weekday]
+    weekend = [w/weekend_cnt <span class="purple">for</span> w <span class="blue2">in</span> weekend]
+
+    <span class="green"># 4.2 4.1에서 구한 평균인구 리스트로 꺾은선 그래프 그리기</span>
+    <span class="cd2">data_set = [weekday, weekend]</span>
+    <span class="cd2">labels = [</span><span class="cd2 red2">'주중'</span><span class="cd2">,</span> <span class="cd2 red2">'주말'</span><span class="cd2">]</span>
+    <span class="cd2">title</span> = dong_name + <span class="red2">' 주중/주말 시간대별 평균인구'</span>
+    <span class="cd2">graph_plot(popu_list = data_set, label_list = labels, graph_title = title)</span></pre>
+</div>
+</div>
+</section>
+</section>

@@ -1,0 +1,25 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">리스트 슬라이싱의 생략 규칙을 정리하면 다음과 같습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/235_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/235_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">앞에서 사용한 상반기 지출 리스트로 리스트 슬라이싱해 봅시다. 1월부터 3월까지, 3월부터 5월까지, 5월부터 6월까지 지출을 각각 출력해 봅시다.</p>
+<div class="highlight">
+<pre>spending_6mon = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="gold">print</span>(<span class="cd2 red2">'1월부터 3월 지출:'</span><span class="cd2">, spending_6mon[:</span><span class="cd2 green">3</span><span class="cd2">]</span>)
+<span class="gold">print</span>(<span class="cd2 red2">'3월부터 5월 지출:'</span><span class="cd2">, spending_6mon[</span><span class="cd2 green">2</span><span class="cd2">:</span><span class="cd2 green">5</span><span class="cd2">]</span>)
+<span class="gold">print</span>(<span class="cd2 red2">'5월부터 6월 지출:'</span><span class="cd2">, spending_6mon[</span><span class="cd2 green">-2</span><span class="cd2">:]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+1월부터 3월 지출: [25, 36, 8] 
+3월부터 5월 지출: [8, 53, 24]
+5월부터 6월 지출: [24, 56]</pre>
+</div>
+<p class="txt bl">1~3월까지 지출은 <span class="cd">spending_6mon</span> 리스트의 인덱스 <span class="cd">[0]</span>부터 <span class="cd">[2]</span>까지이므로 <span class="cd">spending_6mon[0:3]</span>이 됩니다. 시작 인덱스가 0이라서 이를 생략하고 <span class="cd">spending_6mon[:3]</span>으로 작성합니다. 3~5월 지출액만 슬라이싱하려면 리스트의 인덱스 <span class="cd">[2]</span>부터 <span class="cd">[4]</span>까지 추출하면 됩니다. 따라서 <span class="cd">spending_6mon[2:5]</span>가 됩니다. 5~6월은 <span class="cd">spending_6mon</span> 리스트의 뒤에서 데이터 2개를 뽑는 것과 같습니다. 5월은 뒤에서 두 번째 데이터이므로 음수 인덱스를 사용하고, 종료 인덱스를 생략하면 <span class="cd">spending_6mon[-2:]</span>가 됩니다.</p>
+</div>
+</section>
+</section>

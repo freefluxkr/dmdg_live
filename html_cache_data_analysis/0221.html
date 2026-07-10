@@ -1,0 +1,82 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt2 dm blue box_orange_line"><span class="bg_pink4">4</span> 시간대별로 사람들이 가장 많이 타고 내리는 역은 어디일까</p>
+<p class="txtex bl">지금까지 출근 시간대와 밤 11시에 사람들이 많이 타는 역을 찾아보았습니다. 그렇다면 다른 시간대에 사람들로 붐비는 역은 어디일까요? 커피 한 잔이 생각나는 오후 2시에는 어떤 역에 사람들이 많을까요? 시간대별로 승차 인원이 가장 많은 역의 이름과 인원을 한눈에 파악할 수 있는 그래프를 만들면 재미있을 것 같습니다.</p>
+<p class="txtex bl">앞의 코드가 특정한 시간에 대한 결과를 알려주는 것이었으니까 이번에는 24시간 전체에 대해 계산하면 될 것 같습니다. <span class="cd">for</span> 반복문을 사용하는 것이 좋겠죠? 그리고 시간대별 데이터를 각각 저장할 리스트도 필요하겠네요.</p>
+<p class="txtex bl"><span class="cd">for</span> 반복문을 사용하기 위해 패턴을 다시 살펴보겠습니다. 우리가 표현할 시간대는 24시간을 1시간 단위로 구분하였으므로 총 24개입니다. <span class="cd">for</span> 반복문의 반복 횟수를 24로 지정하고자 <span class="cd">range()</span> 함수를 사용한다면 <span class="cd">range(24)</span>라고 쓸 수 있습니다.</p>
+<p class="txt bl"><span class="cd">range()</span> 함수는 0부터 시작하니, 다음과 같이 0~23까지의 반복을 표현할 변수 j를 만들고 인덱스 값과의 관계를 생각해봅시다. j는 0부터 시작하고 우리가 원하는 승차 인원 값의 인덱스 i는 4부터 시작합니다. 변수 j와 인덱스 i의 패턴을 분석하여 i = j <span class="cd">*</span> 2 + 4라는 패턴을 찾았습니다.</p>
+<table>
+<tbody>
+<tr>
+<td class="tb_gold" colspan="3">
+<p class="txts dm tcenter">for 반복문에 사용되는 변수 j와 인덱스 사이의 패턴 찾기</p>
+</td>
+</tr>
+<tr>
+<td class="tb_gold w30">
+<p class="txts dm tcenter">변수 j</p>
+</td>
+<td class="tb_gold">
+<p class="txts dm tcenter">인덱스(i)</p>
+</td>
+<td class="tb_gold">
+<p class="txts dm tcenter">패턴</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">0</p>
+</td>
+<td>
+<p class="txts dl tcenter">4</p>
+</td>
+<td class="txts dl" rowspan="6">
+<p class="txts dl ind12">i = j * 2 + 4</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">1</p>
+</td>
+<td>
+<p class="txts dl tcenter">6</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">2</p>
+</td>
+<td>
+<p class="txts dl tcenter">8</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">...</p>
+</td>
+<td>
+<p class="txts dl tcenter">...</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">22</p>
+</td>
+<td>
+<p class="txts dl tcenter">48</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">23</p>
+</td>
+<td>
+<p class="txts dl tcenter">50</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>

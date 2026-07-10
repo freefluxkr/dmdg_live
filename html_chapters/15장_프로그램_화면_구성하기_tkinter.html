@@ -1,0 +1,2855 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>15장_프로그램_화면_구성하기_tkinter</title>
+    <style>table{width:100%;border-collapse:collapse}table,th,td{padding:.3em;border:1px solid #a4a4a4;vertical-align:top;margin-bottom:1em}tbody{border-top:2px solid #aaa;border-bottom:2px solid #a4a4a4;border-left:2px solid #fff;border-right:2px solid #fff}.tb_pink{background-color:#eaeaea;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #eaeaea}.tb_pink2{background-color:#f5f5f5;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #f5f5f5}.tb_brown_line{border-bottom:2px solid #aaa}.tb_white{background-color:#fff}.tb_white2{background-color:#fff;border:2px solid #fff}.tb_white3{background-color:#fff;border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff}.tb_blue{background-color:#fff;border:2px solid #cacaca}.tb_brown{background-color:#f7f7f7;border:2px solid #f7f7f7}.clear{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0;clear:both}pre{word-break:break-all;word-wrap:break-word;white-space:pre-wrap;font-family:"code";font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;text-align:left;text-indent:0;padding:0;margin:0}.txts{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txts2{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:2em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:.6em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txtex{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txtex2{font-size:.9em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt1{font-size:1.2em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt2{font-size:1.4em;font-style:normal;font-weight:normal;line-height:2em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt3{font-size:1.6em;font-style:normal;font-weight:normal;line-height:1.4em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.key{border:1px solid #000;padding:0 .3em;font-family:"gothic_l";border-radius:.3em;font-size:.85em}.highlight{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:1.2em 0 1.2em 1em}.highlight2{border:2px solid #c6c6c6;padding:.5em;border-radius:0 .3em .3em .3em;margin:-0.2em 0 1.2em 0;background-color:#fff}.highlight3{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:0 0 1.2em 1em}.highlight4{padding:.5em;margin:1.2em 0 1.2em 1em}.highlight5{padding:.5em;margin:0 0 1.2em .6em}.highlight6{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:-0.2em 0 1.2em 0}.highlight7{border:2px solid #d3d3d3;border-radius:.5em;padding:.5em;margin:1.2em 0}.bg_white{background-color:#fff;border-radius:.3em;padding:0 0 0 .3em}.bg_white2{background-color:#fff}.bg_blue{background-color:#cacaca;padding:.3em .2em .3em .2em;border-radius:.9em}.bg_brown{background-color:#dfdfdf;padding:.4em .3em .4em .3em;border-radius:3em}.bg_brown2{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown3{background-color:#dfdfdf;padding:.1em}.bg_brown4{background-color:#dfdfdf;padding:.5em .3em .5em .3em;border-radius:3em}.bg_brown5{background-color:#f6f6f6;padding:.3em;border-radius:.1em}.bg_brown6{background-color:#dfdfdf;padding:.4em .7em .4em .7em;border-radius:3em}.bg_brown7{background-color:#dfdfdf;padding:.1em;border-radius:0}.bg_brown8{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown9{background-color:#dfdfdf;padding:.45em .1em .45em .1em;border-radius:3em}.bg_brown10{background-color:#dfdfdf;padding:.4em .45em .4em .45em;border-radius:3em}.bg_gray{background-color:#a7a7a7;font-size:.85em;padding:.1em .3em;border-radius:.4em;color:#fff}.bg_pink2{background-color:#e5e5e5;padding:.2em;border-radius:.5em;color:#414141}.bg_red{border:2px solid #414141;padding:.3em;border-radius:1em;margin-bottom:1.2em}.bg_yellow{padding:.2em .5em;background-color:#c6c6c6;border-radius:.5em .5em 0 0}.bg_black_line{border-bottom:1px solid #000;padding:.1em}.box_brown{box-sizing:border-box;min-height:100vh;background-color:#b5b5b5;padding:1em 2em}.box_brown2{padding:.5em;border-radius:.5em;background-color:#eee;box-sizing:border-box;min-height:80vh;position:relative}.box_brown3{border-bottom:3px solid #acacac;border-top:3px solid #acacac;padding:1em .5em 1em .5em;margin-bottom:5em}.box_brown4{border:3px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;padding:.5em}.box_brown5{padding:.5em;border-radius:.3em;border:2px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;background-color:#f7f7f7}.box_brown6{box-sizing:border-box;padding:2em;background-color:#f7f7f7}.box_yellow{padding:.5em;border-radius:0 0 .3em .3em;border-top:3px solid #aeaeae;margin-bottom:1.2em;margin-top:1.2em;background-color:#f2f2f2}.box_pink{box-sizing:border-box;padding:2em;background-color:#f8f8f8}.box_white{padding:.5em;border-radius:.5em;background-color:#fff;box-sizing:border-box;min-height:80vh;position:relative}.box_white2{padding:.5em;border-radius:.5em;background-color:#fff}.box_yellow_line{border-bottom:3px solid #c4c4c4}.box_yellow_line2{border:2px solid#c4c4c4;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_yellow_line3{border-bottom:2px solid #c5c5c5;margin-bottom:.5em;margin-top:.5em}.box_green_line{border:2px solid #d3d3d3;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line2{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.bg_brown_line{border-bottom:3px solid #dedede;padding:0 .4em 0 0;color:#acacac}.bg_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_brown_line{border-bottom:3px solid #acacac}.box_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0 0 0 1em}.box_brown_line3{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_white_line{border:1px solid #fff;padding:0;margin-top:2em;margin-bottom:2em}.box_black_line{border:1px solid #000;padding:.3em}.box_black_line2{border:1px solid #000;padding:.3em;border-radius:.3em;margin-bottom:2em}.tcenter{text-align:center}.tright{text-align:right}.s07_07{margin-left:.7em;text-indent:-0.7em}.s08_08{margin-left:.8em;text-indent:-0.8em}.s10_10{margin-left:1em;text-indent:-1em}.s11_11{margin-left:1.1em;text-indent:-1.1em}.s12_12{margin-left:1.2em;text-indent:-1.2em}.s14_14{margin-left:1.4em;text-indent:-1.4em}.s22_22{margin-left:2.2em;text-indent:-2.2em}.s26_26{margin-left:2.6em;text-indent:-2.6em}.s28_28{margin-left:2.85em;text-indent:-2.85em}.ind10{margin-left:1em;margin-bottom:.6em}.ind11{margin-left:1.1em}.ind12{margin-left:1.2em}.ind14{margin-left:1.4em}.ind18{margin-left:1.8em}.ind20{margin-left:2em}.ind22{margin-left:2.2em}.ind24{margin-left:2.4em}.ind26{margin-left:2.65em}.ind30{margin-left:3em}.ind36{margin-left:3.6em}.ind40{margin-left:4em}.ind90{margin-left:9.5em}.fleft{float:left;margin:.5em .5em .5em 0}.blue{color:#d4d4d4}.blue2{color:#414141}.blue3{color:#282828}.blue4{color:#535353}.brown{color:#797979}.brown2{color:#a1a1a1;text-decoration:none}.gold{color:#646464}.gray{color:#646464}.green{color:#5b5b5b}.purple{color:#676767}.yellow{color:#adadad}.red{color:#636363}.red2{color:#414141}.white{color:#fff}.h10{height:1em;max-width:100%}.h20{height:2em;max-width:100%}.h22{height:2.2em;max-width:100%}.h28{height:2.8em;max-width:100%}.h30{height:3em;max-width:100%}.h35{height:3.5em;max-width:100%}.h40{height:4em;max-width:100%}.h50{height:5em;max-width:100%}.h60{height:6em;max-width:100%}.mb02{margin-bottom:-0.2em}.w7{width:7.6%}.w10{width:10%}.w15{width:15%}.w18{width:18%}.w20{width:20%}.w25{width:25%}.w30{width:30%}.w33{width:33%}.w40{width:40%}.w50{width:50%}.w60{width:60%}.w70{width:70%}.w75{width:75%}.w80{width:80%}.w90{width:90%}.w100{width:100%}.w40c{margin-left:30%;margin-right:30%}.w60c{margin-left:20%;margin-right:20%}.w80c{margin-left:10%;margin-right:10%}</style>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="thebook-content">
+        <div class="book-page-fragment" data-page="768">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown">
+<p class="txts"> </p>
+<div class="box_brown2">
+<h2 class="txt3 dm"><span class="brown">15장</span><br/>
+      프로그램 화면 구성하기: tkinter</h2>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txt bl">마지막 장에서는 프로그램의 화면을 구성합니다. <span class="cd">tkinter</span>라는 패키지를 활용하는데, 유의할 점이 하나 있습니다. <span class="cd">tkinter</span> 화면은 서버가 구성된 곳에서만 실행결과를 확인할 수 있습니다. 주피터 노트북은 로컬 PC를 서버로 사용하지만, 구글 코랩은 구글 클라우드에서 돌아가므로 서버를 구성할 수 없습니다. 따라서 지금까지 코랩에서 프로그램을 작성했더라도 이 장에서는 <span class="dm">주피터 노트북을 사용하길 추천</span>합니다.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="769">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown9">15.1</span><br/>
+    tkinter 살펴보기</h3>
+</div>
+<p class="txt bl">앱, 게임 등 대부분 프로그램은 사용자가 화면을 클릭하거나 터치해서 동작을 실행하는, 사용하기 편리하고 직관적인 화면으로 되어 있습니다. 그동안 파이썬 프로그래밍의 기본적인 요소를 배우고 프로젝트도 진행했으니 이제는 화면을 만들어 프로그램의 완성도를 높여 봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="770">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_115"><span class="yellow">15.1.1</span> GUI란</h4>
+<p class="txt bl">앞에서 작성한 프로그램은 우리가 평소 사용하던 프로그램 모습과는 조금 달랐죠? 실제 사용하는 프로그램은 코드가 보이지 않고 텍스트나 이미지가 나오는 화면과 버튼 등이 주로 보이죠. 그래서 버튼을 클릭하거나 화면을 터치해 프로그램을 조작할 수 있습니다.</p>
+<p class="txt bl">이는 프로그램에 UI를 입혔기 때문입니다. <span class="dm">UI</span>란 User Interface의 약자로 사용자 인터페이스를 의미합니다. <span class="dm">사용자 인터페이스</span>란 사용자와 코드 사이를 연결하는 모든 것을 의미합니다. 사용자 화면, 안내 음성 등이 이에 해당됩니다. UI 앞에 graphical의 약자인 G를 붙여 GUI라고 합니다. <span class="dm">GUI</span><span class="txts gray">(Graphical User Interface)</span>는 프로그램의 기능을 다양한 그래픽으로 나타낸 것을 의미합니다. 사용자와 프로그램이 소통할 수 있게 도와주는 UI 중에서도 시각적 부분이 GUI입니다.</p>
+<p class="txt bl">처음 프로그래밍을 배우면서 ‘내가 생각한 프로그램이 아닌데?’라고 느꼈다면 이런 사용자 화면<span class="txts gray">(GUI)</span>이 없어서 그랬을 겁니다. 지금까지 작성한 프로그램의 형태는 사용자가 직접 프로그램에 입력값을 넣고 실행결과를 결과창에서 확인하는 형태였습니다. 그러나 사용자 화면이 있는 프로그램에서는 사용자가 코드를 볼 수 없고, 사용자 화면만 볼 수 있습니다. 사용자 화면에 값을 입력하고 버튼을 클릭하는 등의 동작을 하면 이에 맞는 결괏값이 결과창이 아닌 사용자 화면에 나타납니다. 사용자 화면이 없는 경우와 있는 경우를 비교하면 다음과 같습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/641.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-1</span> 프로그램 형태</p>
+<p class="txt bl">파이썬에는 이런 GUI 프로그래밍을 돕는 다양한 라이브러리가 있습니다. 그중에서 파이썬 표준 라이브러리에 속한 <span class="cd">tkinter</span>를 다루겠습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="771">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_116"><span class="yellow">15.1.2</span> 파이썬의 표준 GUI tkinter</h4>
+<p class="txt bl">파이썬은 범용성이 뛰어난 프로그래밍 언어인 만큼 적용할 수 있는 GUI가 다양합니다. PyQt처럼 정교한 GUI를 만들 수 있는 도구도 있지만, 이 책에서는 가장 기본 도구이 <span class="cd">tkinter</span>를 간단하게 배워 봅니다. <span class="cd">tkinter</span> 자체도 기능이 매우 많아서 GUI의 핵심이 되는 레이블, 버튼, 엔트리, 메시지박스, 콤보박스 위주로 살펴보겠습니다. 더 많은 기능은 다음 사이트를 참고하세요.</p>
+<div class="ind10">
+<p class="txtex bl s08_08"><span class="yellow">•</span> <span class="dm">python.org의 공식 tkinter 문서</span> <a href="https://docs.python.org/ko/3/library/tkinter.html?highlight=tkinter#module-tkinter">https://docs.python.org/ko/3/library/tkinter.html?highlight=tkinter#module-tkinter</a></p>
+<p class="txtex bl s08_08"><span class="yellow">•</span> <span class="dm">TkDocs Tutorial</span> <a href="https://tkdocs.com/tutorial/index.html">https://tkdocs.com/tutorial/index.html</a></p>
+</div>
+<p class="txt bl">GUI를 그림 그리기에 비유하면 이해하기 쉽습니다. 그림을 그리려면 가장 먼저 도화지나 연습장 등이 필요하죠. 도화지를 준비하는 것처럼 GUI를 구성하기 전에 바탕이 되는 화면을 만들어야 합니다. <span class="cd">tkinter</span>에서는 이를 라이브러리 내부에 있는 <span class="cd">Tk</span> 클래스의 객체를 생성해 만듭니다. 14장에서 클래스를 정의하면 객체를 만들 수 있었죠? 화면을 만들 수 있는 클래스가 이미 <span class="cd">tkinter</span>에 정의되어 있고, 우리는 이 클래스를 바탕으로 객체만 만들면 됩니다.</p>
+<p class="txt bl">그림을 그릴 때는 도화지 위에 원하는 구도에 맞게 꽃, 나무, 풀 등 그리려는 대상을 하나씩 그립니다. 프로그래밍에서도 GUI에 필요한 요소들을 화면에 배치하는데, 이런 요소들을 <span class="dm">위젯</span>이라고 합니다. 위젯에는 텍스트, 이미지, 버튼 등 다양한 종류가 있습니다. 위젯 역시 <span class="cd">tkinter</span>에 이미 클래스로 정의되어 있습니다. 따라서 위젯을 나타내는 클래스의 객체를 생성한 다음, <span class="cd">Tk</span> 클래스의 객체 위에 배치하면 됩니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/642.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-2</span> 도화지(화면)에 요소(위젯) 배치하기</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="772">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_117"><span class="yellow">15.1.3</span> tkinter 사용하기</h4>
+<p class="txtex dm">tkinter 추가하기</p>
+<p class="txt bl">GUI와 <span class="cd">tkinter</span>의 관계를 알아봤으니 사용법을 배워 봅시다. 먼저 <span class="cd">tkinter</span>의 정보를 <span class="cd">help()</span>로 알아보죠.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> tkinter
+
+<span class="gold">help</span>(tkinter)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+Help on package tkinter:
+
+NAME
+    tkinter - Wrapper functions for Tcl/Tk.
+…</pre>
+</div>
+<p class="txt bl">실행결과를 보니 <span class="cd">tkinter</span>는 패키지입니다. 패키지는 내부에 여러 모듈이 있다고 했습니다. 패키지에 있는 모듈은 다음 형식으로 사용합니다. 사용법은 보이는 것처럼 <span class="cd">from 큰범위 import 작은범위</span>입니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre><span class="purple">from</span> 패키지 <span class="purple">import</span> 모듈              <span class="green"># 패키지 중 특정 모듈만 사용하고 싶을 때</span>
+<span class="purple">from</span> 패키지.서브패키지 <span class="purple">import</span> 모듈   <span class="green"># 패키지에 서브패키지가 있을 때 1</span>
+<span class="purple">from</span> 패키지 <span class="purple">import</span> 서브패키지        <span class="green"># 패키지에 서브패키지가 있을 때 2</span></pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="773">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">tkinter</span>를 다룰 때는 <span class="cd">from tkinter import *</span>로 사용하겠습니다. <span class="cd">*</span>는 모든 것을 포함한다는 의미입니다. 그렇다면 <span class="cd">import tkinter</span>와 다른 점은 무엇일까요?</p>
+<div class="highlight">
+<pre><span class="purple">import</span> tkinter
+
+root = Tk()             <span class="green"># 오류 발생</span>
+<span class="green"># root = tkinter.Tk()   # 오류 발생 안 함</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+<span class="red2">NameError</span>: name 'Tk' is not defined</pre>
+</div>
+<a id="section_1"></a>
+<p class="txt bl"><span class="cd">Tk</span>는 <span class="cd">tkinter</span> 패키지에 속한 클래스입니다. 이때 <span class="cd">import tkinter</span>로만 작성하면 클래스명 앞에 항상 <span class="cd">tkinter</span>를 추가해야 합니다. <span class="cd">root = Tk()</span>를 주석 처리하고 마지막 줄의 주석 처리를 해제한 후 실행하면 오류가 발생하지 않습니다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()</pre>
+</div>
+<p class="txt bl">앞에 <span class="cd">tkinter</span>를 넣지 않아도 오류가 발생하지 않습니다. 그래서 <span class="cd">tkinter</span> 패키지의 명령어를 사용할 때 일일이 <span class="cd">tkinter</span>를 추가하지 않게 <span class="cd">from tkinter import *</span>를 사용합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="774">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">tkinter 창 만들어 띄우기</p>
+<p class="txt bl">앞에서 작성한 <span class="cd">root = Tk()</span>는 <span class="cd">Tk</span> 클래스의 객체를 만드는 코드입니다. <span class="cd">Tk</span>는 창을 생성하는 클래스입니다. 따라서 <span class="cd">Tk</span> 클래스로 만든 객체 <span class="cd">root</span>가 생성됩니다. 그런데 객체를 생성한 후 아무 일도 일어나지 않습니다. <span class="cd">Tk</span> 클래스에는 결과를 화면으로 보여 주는 메서드가 따로 있습니다. 다음처럼 프로그램 마지막에 <span class="cd">root.mainloop()</span>를 추가해 코드를 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w30"><img alt="" class="w100" src="https://thebook.io/img/080251/644_1.jpg"/></div>
+</div>
+<p class="txt bl">프로그램을 실행하는 브라우저 위로 별도의 창(윈도우)이 하나 뜹니다. <span class="cd">root</span> 객체가 실행한 <span class="cd">mainloop()</span>는 프로그램의 메인 창 <span class="cd">root</span>를 화면에 띄우는 <span class="cd">Tk</span> 클래스의 메서드입니다. 프로그램의 바탕이 되는 화면을 만들기 때문에 객체명을 <span class="cd">root</span>(뿌리, 근원)로 작성합니다. 그림 그리는 데 필요한 도화지를 만든 셈입니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="775">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">root</span> 객체가 생성된 직후부터 <span class="cd">root.mainloop()</span> 바로 위까지의 코드를 실행한 결과가 창에 나타납니다. 따라서 창에 표현될 내용은 두 줄 사이에 들어가야 합니다.</p>
+<div class="ind12"><img alt="" class="w60" src="https://thebook.io/img/080251/644_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">그러므로 창이 띄워져 있으면 프로그램이 실행 중인 상태입니다. 창이 떠 있는 상태에서 주피터 노트북의 코드 입력창 왼쪽을 보면 [<span class="cd">*</span>] 표시가 있습니다. 이는 프로그램이 ‘실행 중’이라는 의미입니다. 창 오른쪽 위에 있는 <span class="dl">X</span> 표시를 눌러 창을 닫으면 프로그램 실행이 멈추고 [<span class="cd">*</span>] 부분이 코드 줄 수를 나타내는 숫자로 바뀝니다.</p>
+<p class="txt bl">창 상단에 창 이름이 나타납니다. 별도로 창 이름을 설정하지 않으면 기본값으로 tk라고 뜹니다. 창 이름은 바꿀 수 있습니다. 그래프에 제목을 붙일 때처럼 창 이름도 <span class="cd">title()</span>로 설정합니다. 원하는 이름을 <span class="cd">title()</span>의 소괄호 안에 넣고, <span class="cd">root = Tk()</span>와 <span class="cd">root.mainloop()</span> 사이에 추가합니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+<span class="cd2">root.title(</span><span class="cd2 red2">'my first tkinter'</span><span class="cd2">)</span>
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w30"><img alt="" class="w100" src="https://thebook.io/img/080251/645.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="776">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">상단 바에 있는 창 이름이 ‘my first tkinter’로 바뀝니다. 창의 가로 길이가 짧아 제목이 잘려 보이죠? 창의 크기를 늘려 봅시다. 마우스로 늘려도 되지만, 코드로 조절할 수도 있습니다. 창의 크기는 <span class="cd">geometry()</span>로 설정합니다. 역시 소괄호 안에 창의 크기를 ‘너비x높이’ 형태로 넣습니다. 이때 x는 알파벳 소문자고 앞뒤로 띄어 써서는 안 됩니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+<span class="cd2">root.geometry(</span><span class="cd2 red2">'400x200'</span><span class="cd2">)</span>
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/646.jpg"/></div>
+</div>
+<p class="txt bl">처음 창을 생성했을 때보다 창의 너비가 더 넓어졌습니다. 여기서 숫자 400과 200은 픽셀을 의미합니다. 앞의 코드는 너비 400픽셀, 높이 200픽셀인 창을 만들라는 뜻이죠.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="777">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">창의 크기뿐만 아니라 창이 나타나는 위치도 설정할 수 있습니다. 앞서 작성한 창의 크기 설정 뒤에 다음과 같이 가로 시작 위치와 세로 시작 위치를 추가하면 됩니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200</span><span class="cd2 red2">+0+300'</span>)
+root.mainloop()</pre>
+</div>
+<p class="txt bl">코드를 실행하면 창이 모니터 화면의 왼쪽 끝 중간쯤에 나타납니다(나타나는 위치는 모니터 크기에 따라 조금씩 다를 수 있습니다). 가로가 0이므로 가장 왼쪽에, 세로가 300이므로 위에서 300번째 픽셀에 해당하는 위치에 창이 타납니다. 숫자를 바꾸며 다양하게 실습해 보세요.</p>
+<p class="txt bl">창의 크기를 변경하지 못하게 할 수도 있습니다. <span class="cd">resizable()</span> 명령어로 창의 너비와 높이를 변경할 수 있게 할지 설정합니다. 변경할 수 있다면 <span class="cd">True</span>를, 변경할 수 없다면 <span class="cd">False</span>를 넣습니다. 예를 들어, 다음과 같이 작성하면 창의 너비는 변경할 수 없지만, 높이는 변경할 수 있습니다.</p>
+<div class="highlight">
+<pre>root.resizable(<span class="blue2">False</span>, <span class="blue2">True</span>)</pre>
+</div>
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a1"><span class="dm brown">1</span> 다음 설명 중 <span class="bg_black_line">틀린</span> 것을 고르세요.</p>
+<div class="ind10">
+<p class="txt bl s12_12">① <span class="cd">tkinter</span>는 파이썬에서 화면을 표현하는 GUI 라이브러리다.</p>
+<p class="txt bl s12_12">② <span class="cd">root = Tk()</span>는 <span class="cd">Tk</span> 클래스의 객체를 만드는 코드다.</p>
+<p class="txt bl s12_12">③ 화면에 표현할 코드는 <span class="cd">root.mainloop()</span> 뒤에 작성한다.</p>
+<p class="txt bl s12_12">④ <span class="cd">root.geometry()</span>로 창의 크기를 조절할 수 있다.</p>
+<p class="txt bl s12_12">⑤ <span class="cd">root.resizable()</span>로 창의 크기를 변경할 수 없게 설정한다.</p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0895/">정답 및 해설</a></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="778">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown9">15.2</span><br/>
+    위젯 다루기</h3>
+</div>
+<p class="txt bl">지금까지 프로그램의 바탕이 되는 사용자 화면을 만들어 보았습니다. 이제 창에 배치할 위젯을 몇 가지 배워 봅시다. 위젯에는 텍스트, 이미지, 버튼, 콤보박스, 메시지박스 등 여러 종류가 있습니다. 이런 위젯을 화면에 표시하려면 다음 두 가지 작업을 해야 합니다.</p>
+<p class="txt bl s10_10"><span class="dm brown">1</span> 사용하려는 위젯의 객체 만들기</p>
+<p class="txt bl s10_10"><span class="dm brown">2</span> 만든 위젯을 창에 배치하기</p>
+<p class="txt bl">이 두 가지를 모두 진행해야 위젯을 창에 표시할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="779">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_118"><span class="yellow">15.2.1</span> 레이블</h4>
+<p class="txt bl">첫 번째 위젯으로 <span class="dm">레이블</span><span class="txts gray">(Label)</span>을 다뤄 보겠습니다. 레이블로는 텍스트와 이미지를 표현할 수 있습니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> Label은 레이블 또는 라벨로 읽습니다. 다른 곳에서 <span class="cd">Label</span> 위젯을 라벨로 표현해도 같은 것으로 보면 됩니다.</p>
+</div>
+<p class="txt bl"><span class="cd">help()</span>로 레이블에 대한 정보를 간략히 살펴봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+<span class="gold">help</span>(Label)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+Help on class Label in module tkinter:
+
+class Label(Widget)
+    <span class="green">…</span>
+| Methods defined here:
+|
+| __init__(self, master=None, cnf={}, **kw)
+|     Construct a label widget with the parent MASTER.
+|
+|     STANDARD OPTIONS
+|
+|         activebackground, activeforeground, anchor,
+|         background, bitmap, borderwidth, cursor,
+|         disabledforeground, font, foreground,
+|         highlightbackground, highlightcolor,
+|         highlightthickness, <span class="cd2">image</span>, justify,
+|         padx, pady, relief, takefocus, <span class="cd2">text</span>,
+|         <span class="cd2">textvariable</span>, underline, wraplength
+|
+|     WIDGET-SPECIFIC OPTIONS
+|
+|         <span class="cd2">height</span>, state, <span class="cd2">width</span>
+|
+| ----------------------------------
+<span class="green">…</span></pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="780">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">Label</span>은 많은 요소를 포함하고 있는 클래스입니다. 생성자 <span class="cd">__init__</span> 부분을 봅시다. 생성자 내부에 <span class="cd">STANDARD OPTIONS</span>가 있습니다. 이 중에서 주로 사용할 옵션만 굵게 표시했습니다. 모든 것을 다 알 필요는 없으니 부담 갖지 말고 훑어만 보세요. 차차 설명하겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">텍스트 레이블 만들기</p>
+<p class="txt bl">텍스트 레이블을 만들어 봅시다. 먼저 <span class="cd">Label</span> 클래스의 객체를 만들어야 합니다. 레이블 객체는 <span class="cd">Label()</span>로 만들고, 텍스트는 <span class="cd">text</span> 옵션으로 나타냅니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200+0+300'</span>)
+
+<span class="cd2">label1 = Label(root, text=</span><span class="cd2 red2">'안녕하세요!'</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/650.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="781">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">Label</span> 클래스의 객체 <span class="cd">label1</span>을 생성합니다. 위젯의 객체를 만들 때는 첫 인자로 위젯을 띄울 창을 정해야 합니다. 여기서는 <span class="cd">root</span> 객체를 넣습니다. 그리고 창에 나타날 텍스트를 <span class="cd">text</span> 옵션으로 추가합니다.</p>
+<p class="txt bl">그러나 창에 텍스트가 나타나지 않죠? 왜 그럴까요? 여기도 역시 레이블 객체를 생성하기만 했을 뿐 창에 배치하고 보여 주는 명령어가 없기 때문입니다. 위젯을 창에 표시하려면 <span class="cd">pack()</span> 메서드를 호출해야 합니다(위젯을 만들기만 해서는 화면에 나타낼 수 없습니다. 위젯의 위치를 지정해야 화면에 나타나는데, <span class="cd">pack()</span>은 위치를 지정하는 방법 중 하나입니다. <span class="cd">pack()</span>에 관한 설명은 뒤에 나옵니다). <span class="cd">label1.pack()</span>을 추가해 다시 실행해 봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200+0+300'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>)
+<span class="cd2">label1.pack()</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/651_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="782">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이번에는 창에 텍스트가 나타납니다. 코드의 실행 과정은 다음과 같습니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 15-1</span> 코드 실행 과정</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w10">
+<p class="txts dm">실행 순서</p>
+</td>
+<td class="w40">
+<p class="txts dm">실행되는 명령어</p>
+</td>
+<td class="w50">
+<p class="txts dm">컴퓨터에서 일어나는 일</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">1</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">root = Tk()</span></p>
+</td>
+<td class="w50" rowspan="3">
+<p class="txts dl">창 생성하기</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/651_2.jpg"/></div>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">2</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">root.title('my first tkinter')</span></p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">3</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">root.geometry('400x200')</span></p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">4</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">label1 = Label(root, text='안녕하세요!')</span></p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">label1</span> 객체 생성하기</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/651_3.jpg"/></div>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">5</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">label1.pack()</span></p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">label1</span> 객체의 위치 지정하기</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/651_4.jpg"/></div>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">6</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">root.mainloop()</span></p>
+</td>
+<td class="w50">
+<p class="txts dl">생성한 창 띄우기</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/652_1.jpg"/></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="783">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 텍스트 레이블에 사용 가능한 옵션</p>
+<p class="txt bl">레이블로 텍스트를 나타낼 때 글꼴, 글씨 크기, 색상, 테두리 모양 등 다양한 옵션을 추가할 수 있습니다. 주요 옵션은 다음과 같습니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 15-2</span> 주요 옵션</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w30">
+<p class="txts dm">옵션</p>
+</td>
+<td class="w70">
+<p class="txts dm">설명</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">font=('글꼴', 크기)</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">글꼴과 크기 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">fg='색상'</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">텍스트 색상 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">bg='색상'</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">텍스트 바탕색 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">relief=테두리모양</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 테두리 모양 설정</p>
+<p class="txts dl"><span class="cd">flat</span>(테두리 없음, 기본값), <span class="cd">solid</span>(굵은 테두리), <span class="cd">groove</span>(움푹 파인 테두리), <span class="cd">ridge</span>(돌출된 테두리), <span class="cd">raised</span>(레이블 전체가 돌출), <span class="cd">sunken</span>(레이블 전체가 파임)</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">borderwidth=테두리두께</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 테두리 두께 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">width=너비</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 너비 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">height=높이</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 높이 설정</p>
+</td>
+</tr>
+<tr>
+<td class="w30">
+<p class="txts dl"><span class="cd">anchor=정렬</span></p>
+</td>
+<td class="w70">
+<p class="txts dl">레이블 내부 정렬 방법 설정(<span class="cd">center</span>, <span class="cd">e</span>, <span class="cd">w</span>, <span class="cd">s</span>, <span class="cd">n</span>, <span class="cd">se</span>, <span class="cd">sw</span>, <span class="cd">ne</span>, <span class="cd">nw</span>)</p>
+<div class="w60c"><img alt="" class="w100" src="https://thebook.io/img/080251/652_2.jpg"/></div>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">다음처럼 레이블의 객체를 생성할 때 필요한 옵션을 추가합니다.</p>
+<div class="highlight">
+<pre>label1 = Label(root, text=<span class="red2">'Hello'</span>, font=(<span class="red2">'Malgun Gothic'</span>, <span class="green">20</span>), fg=<span class="red2">'blue'</span>, bg=<span class="red2">'gray'</span>, width= <span class="green">20</span>, height=<span class="green">5</span>, anchor=<span class="red2">'se'</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/653.jpg"/></div>
+</div>
+<p class="txt bl">더 많은 옵션은 <a href="https://tkdocs.com/shipman/label.html">https://tkdocs.com/shipman/label.html</a> 문서를 참고하세요.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="784">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">이미지 레이블 만들기</p>
+<p class="txt bl">이미지 레이블도 만들 수 있습니다. 텍스트 레이블과 다르게 이미지 레이블은 레이블 생성 전에 이미지 객체인 <span class="cd">PhotoImage</span> 클래스의 객체를 만들어야 합니다. <span class="cd">PhotoImage</span>의 객체를 생성한 후, 레이블 객체를 생성할 때 <span class="cd">image</span> 옵션으로 나타낼 <span class="cd">PhotoImage</span> 객체를 추가합니다. 이미지 크기에 맞게 <span class="cd">tkinter</span> 창의 크기도 800x400으로 늘려 봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="cd2 red2">'800x400'</span>)
+
+<span class="cd2">letsgetit = PhotoImage(file=</span><span class="cd2 red2">'lets get it.png'</span><span class="cd2">)</span>  <span class="cd2 green"># PhotoImage 객체 생성</span>
+<span class="cd2">img_label = Label(root, image=letsgetit)      </span>  <span class="cd2 green"># 레이블 객체 생성</span>
+<span class="cd2">img_label.pack()</span>
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/654.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="785">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">창에 표시할 이미지 파일 하나를 가져와 현재 작업 중인 파이썬 파일과 같은 폴더에 넣습니다(제공하는 lets get it.png 파일을 사용해도 됩니다). <span class="cd">PhotoImage</span> 클래스로 이미지 객체 <span class="cd">letsgetit</span>을 만듭니다. 이때 <span class="cd">file</span> 옵션으로 같은 폴더에 있는 lets get it.png 파일(확장자까지 적어야 합니다)을 불러옵니다. 그 다음 레이블 객체인 <span class="cd">img_label</span>을 생성하며 <span class="cd">image</span> 옵션으로 레이블에 띄울 이미지 객체를 설정합니다. <span class="cd">pack()</span> 메서드를 호출해 이미지 레이블을 창에 표시합니다.</p>
+<p class="txt bl">기존보다 커진 화면에 추가한 이미지가 잘 나옵니다. <span class="cd">PhotoImage</span>는 GIF, PNG, PGM, PPM 형식만 사용할 수 있습니다. 이미지 파일을 읽을 수 없다는 오류가 발생하면 파일의 확장자를 확인해 보세요!</p>
+<p class="txt bl">이처럼 <span class="cd">Label</span>로 객체를 만들 때 <span class="cd">text</span>를 설정하면 문자를, <span class="cd">image</span>를 설정하면 이미지를 나타낼 수 있습니다.</p>
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 알 수 없는 오류 발생 시</p>
+<p class="txt bl">이미지 레이블을 만들 때 다음처럼 <span class="cd">TclError</span>가 발생하진 않았나요? 심지어 코드를 올바르게 작성했는데도요.</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+----&gt; 6 img_label = Label(root, image=letsgetit)
+
+<span class="red2">TclError</span>: image "pyimage4" doesn't exist</pre>
+</div>
+<p class="txt bl">이전 코드를 실행했을 때 오류가 발생하면 올바른 코드로 수정하더라도 해당 코드에서 오류가 발생합니다. 재실행해도 <span class="cd">pyimage</span> 뒤의 숫자만 증가할 뿐이죠. 해결책은 간단합니다. 에디터 프로그램의 커널을 재실행하면 됩니다. 주피터 노트북에서는 상단 [RUN] 버튼 옆의 [restart] 버튼을 클릭하세요.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="786">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">창에 띄운 이미지가 조금 커 보이니 이미지 크기를 줄여 봅시다. 이미지 크기는 <span class="cd">PhotoImage</span> 클래스의 <span class="cd">subsample()</span> 메서드로 조절합니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'800x400'</span>)
+
+letsgetit = PhotoImage(file=<span class="red2">'lets get it.png'</span>)
+<span class="cd2">letsgetit = letsgetit.subsample(</span><span class="cd2 green">2</span><span class="cd2">,</span> <span class="cd2 green">2</span><span class="cd2">)</span>
+img_label = Label(root, image=letsgetit)
+img_label.pack()
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/655.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="787">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이미지 크기가 줄어듭니다. <span class="cd">letsgetit</span> 객체의 크기를 <span class="cd">letsgetit.subsample(2, 2)</span>로 줄이고 이를 다시 <span class="cd">letsgetit</span>에 저장했습니다.</p>
+<p class="txt bl"><span class="cd">subsample()</span>은 그림의 n개 픽셀 중 1개 픽셀을 선택해 그림 크기를 줄일 때 사용합니다. 이미지는 보통 픽셀로 이루어져 있는데 크기를 줄이려면 픽셀의 크기를 줄이는 것이 아니라 픽셀 개수를 줄여야 합니다(픽셀 크기는 고정입니다). 그런데 전체 그림의 형태가 훼손되도록 그림 한 쪽의 픽셀만 선택하거나 제거하면 안 되겠죠. 그래서 균일하게 n번째 픽셀만 제거하는 겁니다. <span class="cd">letsgetit.subsample(2, 2)</span>는 가로, 세로 모두 픽셀을 2개마다 하나씩 제거하고 하나만 선택한다는 의미입니다. 그림으로 표현하면 다음과 같습니다. 이렇게 되면 가로와 세로 길이가 각각 1/2로 줄어듭니다.</p>
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/656.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-3</span> 픽셀 줄이기</p>
+<p class="txt bl">가령 <span class="cd">subsample(5, 3)</span>은 가로 픽셀은 다섯 번째마다, 세로 픽셀은 세 번째마다 선택하므로 가로는 1/5, 세로는 1/3로 줄어듭니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="788">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_119"><span class="yellow">15.2.2</span> 위젯 배치하기</h4>
+<p class="txt bl">가장 기본 위젯인 레이블을 배웠습니다. 보통 위젯은 단독으로 있는 경우가 많지 않고 대부분 여러 위젯이 모여서 기능합니다. 그래서 다른 레이블을 배우기 전에 여러 위젯을 배치하는 방법을 먼저 배워 보겠습니다.</p>
+<p class="txt bl">앞의 코드에서 봤듯이 위젯을 창에 표시하려면 생성한 위젯마다 위젯을 배치하는 명령어(<span class="cd">pack()</span>)를 설정해야 합니다. 그렇지 않으면 위젯이 화면에서 표시되지 않습니다. <span class="cd">tkinter</span>에서 위젯을 배치할 때는 절대위치를 활용하는 방법과 상대위치를 활용하는 방법이 있습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">절대위치로 배치하기</p>
+<p class="txt bl"><span class="dm">절대위치</span>는 다음과 같이 위젯이 표시될 위치의 좌표를 숫자로 정확하게 제시하는 방법입니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>place(x=<span class="green">x좌표</span>, y=<span class="green">y좌표</span>)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="789">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">값을 넣어 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()
+root.geometry(<span class="red2">'400x200'</span>)
+
+<span class="cd2">label1 = Label(root, text=</span><span class="cd2 red2">'절대위치 x = 200, y = 100'</span><span class="cd2">)</span>
+<span class="cd2">label1.place(x=</span><span class="cd2 green">200</span><span class="cd2">, y=</span><span class="cd2 green">100</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/657.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="790">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">레이블 객체 <span class="cd">label1</span>을 생성하면서 위치를 (200, 100)으로 설정했습니다. 화면 크기가 너비 400픽셀, 높이 200픽셀이므로 텍스트 레이블의 왼쪽 상단 모서리 부분이 <span class="cd">place()</span>로 설정한 위치에 해당함을 알 수 있습니다.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/658.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-4</span> 위젯의 절대위치 기준점</p>
+<p class="txts"> </p>
+<p class="txtex dm">상대위치로 배치하기: pack()</p>
+<p class="txt bl">절대위치는 위치를 세밀하게 정할 수 있다는 장점이 있으나 위젯 위치를 일일이 지정해야 하므로 위젯이 많은 경우에는 코드가 복잡합니다. 그래서 상대위치를 사용합니다.</p>
+<p class="txt bl"><span class="dm">상대위치</span>는 위치 좌표 대신에 위젯 간 상대적 위치로 위젯을 배치하는 방법입니다. 예를 들어, ‘위젯 A는 위젯 B보다 위에 있어야 하고, 위젯 C는 위젯 B의 오른쪽에 있어야 한다’는 기준으로 위치를 설정하는 것이죠. <span class="cd">tkinter</span>에서 상대위치를 설정하는 방법은 앞에서 배운 <span class="cd">pack()</span>과 뒤에 나올 <span class="cd">grid()</span>가 있습니다. <span class="cd">pack()</span>부터 살펴봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="791">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">pack()</span>은 별다른 위치를 설정하지 않으면 창 중앙에 위에서 아래의 순서로 위젯을 배치합니다. 위젯을 구분할 수 있게 <span class="cd">groove</span> 옵션으로 테두리 모양을 설정한 레이블 4개를 만든 후 <span class="cd">pack()</span>으로 배치해 봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+<span class="cd2">label1 = Label(root, text=</span><span class="cd2 red2">'안녕하세요!'</span><span class="cd2">, relief=</span><span class="cd2 red2">'groove'</span><span class="cd2">)</span>
+<span class="cd2">label1.pack()</span>
+<span class="cd2">label2 = Label(root, text=</span><span class="cd2 red2">'Hello!'</span><span class="cd2">, relief=</span><span class="cd2 red2">'groove'</span><span class="cd2">)</span>
+<span class="cd2">label2.pack()</span>
+<span class="cd2">label3 = Label(root, text=</span><span class="cd2 red2">'니하오!'</span><span class="cd2">, relief=</span><span class="cd2 red2">'groove'</span><span class="cd2">)</span>
+<span class="cd2">label3.pack()</span>
+<span class="cd2">label4 = Label(root, text=</span><span class="cd2 red2">'봉쥬르!'</span><span class="cd2">, relief=</span><span class="cd2 red2">'groove'</span><span class="cd2">)</span>
+<span class="cd2">label4.pack()</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/659.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="792">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">4개의 레이블을 만들고, 각 레이블의 위치를 각각 <span class="cd">label1.pack()</span>, <span class="cd">label2.pack()</span>, <span class="cd">label3.pack()</span>, <span class="cd">label4.pack()</span>으로 정합니다. 위젯을 만들고 배치하는 명령어가 없으면 창에 표시되지 않으므로 모든 위젯에서 <span class="cd">pack()</span>을 실행해야 합니다. 위치를 설정하지 않아 창 중앙에 순서대로 배치됐습니다.</p>
+<p class="txt bl">이번에는 <span class="cd">pack()</span>에 위치를 설정하는 옵션을 추가해 보겠습니다. 위치를 설정하는 옵션은 <span class="cd">side</span>이며, <span class="cd">left</span>, <span class="cd">right</span>, <span class="cd">top</span>, <span class="cd">bottom</span>을 옵션 값으로 넣을 수 있습니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>, relief=<span class="red2">'groove'</span>)
+label1.pack(<span class="cd2">side=</span><span class="cd2 red2">'left'</span>)
+label2 = Label(root, text=<span class="red2">'Hello!'</span>, relief=<span class="red2">'groove'</span>)
+label2.pack(<span class="cd2">side=</span><span class="cd2 red2">'right'</span>)
+label3 = Label(root, text=<span class="red2">'니하오!'</span>, relief=<span class="red2">'groove'</span>)
+label3.pack(<span class="cd2">side=</span><span class="cd2 red2">'top'</span>)
+label4 = Label(root, text=<span class="red2">'봉쥬르!'</span>, relief=<span class="red2">'groove'</span>)
+label4.pack(<span class="cd2">side=</span><span class="cd2 red2">'bottom'</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/660_1.jpg"/></div>
+</div>
+<p class="txt bl">레이블이 사방으로 배치됩니다. 이처럼 <span class="cd">pack()</span>은 창 내에서 상대위치를 활용해 위젯을 정렬합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="793">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">상대위치로 배치하기: grid()</p>
+<p class="txt bl">위젯을 상대위치로 배치하는 다른 방법으로 <span class="cd">grid()</span>가 있습니다. <span class="cd">grid()</span>는 이름 그대로 격자를 만들어 격자 한 칸에 위젯을 배치하는 방법입니다. <span class="cd">grid()</span>는 배치할 위치를 <span class="cd">row</span>와 <span class="cd">column</span> 옵션으로 지정해야 합니다. <span class="cd">row</span>는 행, <span class="cd">column</span>은 열을 의미하죠.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/660_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-5</span> grid()에 옵션주기</p>
+<p class="txt bl">그림처럼 창을 지정한 행과 열 수로 나눈 후에 위젯을 배치하려는 위치의 행과 열을 <span class="cd">row</span>와 <span class="cd">column</span> 옵션에 숫자로 지정합니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label1.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+label2 = Label(root, text=<span class="red2">'Hello!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label2.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">1</span><span class="cd2">)</span>
+label3 = Label(root, text=<span class="red2">'니하오!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label3.grid(row=</span><span class="cd2 green">1</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+label4 = Label(root, text=<span class="red2">'봉쥬르!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label4.grid(row=</span><span class="cd2 green">1</span><span class="cd2">, column=</span><span class="cd2 green">1</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/661_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="794">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">지정한 행과 열에 각 위젯이 나타납니다. 창에 표시된 위젯의 행과 열은 다음 그림과 같습니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/661_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-6</span> 위젯의 상대위치 배치</p>
+<p class="txt bl"><span class="cd">grid()</span>는 특히 위젯이 여러 개일 때 사용하기 편합니다. 격자에서 칸에 맞는 숫자만 적어 주면 되기 때문이죠. 그런데 레이블이 너무 붙어 있어서 중간에 공간을 넣는다고 해 봅시다. 두 번째 행의 위치를 <span class="cd">(row=9, column=0)</span>, <span class="cd">(row=9, column=9)</span>로 설정하면 될까요?</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>, relief=<span class="red2">'groove'</span>)
+label1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+label2 = Label(root, text=<span class="red2">'Hello!'</span>, relief=<span class="red2">'groove'</span>)
+label2.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+label3 = Label(root, text=<span class="red2">'니하오!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label3.grid(row=</span><span class="cd2 green">9</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+label4 = Label(root, text=<span class="red2">'봉쥬르!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label4.grid(row=</span><span class="cd2 green">9</span><span class="cd2">, column=</span><span class="cd2 green">9</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/662.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="795">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">공간이 의도한 대로 벌어지지 않습니다. <span class="cd">label3</span>은 그대로 <span class="cd">(row=1, column=0)</span> 위치에, <span class="cd">label4</span>는 <span class="cd">(row=1, column=2)</span>에 배치됐습니다.</p>
+<p class="txt bl">이런 결과가 나오는 이유는 <span class="cd">grid()</span>의 특성 때문입니다. <span class="cd">grid()</span>는 <span class="cd">row</span>와 <span class="cd">column</span>에 숫자가 차례대로 나오지 않으면 직전에 나온 숫자의 바로 다음 숫자를 자동으로 설정합니다. 코드에서 <span class="cd">row</span>는 0까지 나왔기 때문에 <span class="cd">(row=9, column=0)</span>으로 설정해도 자동으로 <span class="cd">row</span>의 값을 9에서 1로 바꿔 위젯을 배치합니다. <span class="cd">column</span>은 그 전에 0이 등장한 적이 있으므로(<span class="cd">label1</span>) 지정한 위치 0에 배치하고요. <span class="cd">label4.grid(row=9, column=9)</span>도 마찬가지입니다. 이전에 <span class="cd">row</span>는 0까지 나타났으므로 1로, <span class="cd">column</span>은 1까지 나타났으므로 2로 변경해 화면에 배치합니다.</p>
+<p class="txt bl">이번에는 위젯의 크기를 설정하고 <span class="cd">grid()</span>로 어떻게 표현되는지 살펴봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>, <span class="cd2">width=</span><span class="cd2 green">20</span><span class="cd2">, height=</span><span class="cd2 green">5</span><span class="cd2">,</span> relief=<span class="red2">'groove'</span>)
+label1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+label2 = Label(root, text=<span class="red2">'Hello!'</span>, <span class="cd2">width=</span><span class="cd2 green">10</span><span class="cd2">, height=</span><span class="cd2 green">5</span><span class="cd2">,</span> relief=<span class="red2">'groove'</span>)
+label2.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+label3 = Label(root, text=<span class="red2">'니하오!'</span>, <span class="cd2">width=</span><span class="cd2 green">10</span><span class="cd2">, height=</span><span class="cd2 green">5</span><span class="cd2">,</span> relief=<span class="red2">'groove'</span>)
+label3.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)
+label4 = Label(root, text=<span class="red2">'봉쥬르!'</span>, <span class="cd2">width=</span><span class="cd2 green">20</span><span class="cd2">, height=</span><span class="cd2 green">5</span><span class="cd2">,</span> relief=<span class="red2">'groove'</span>)
+label4.grid(row=<span class="green">1</span>, column=<span class="green">1</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/663.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="796">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">설정한 위젯 크기에 맞게 격자 크기도 커졌습니다. 결과를 보면 각 줄의 가장 긴 길이에 맞춰진 것이 보입니다. <span class="cd">label1</span>의 너비가 20이므로 같은 열에 있는 <span class="cd">label3</span>도 20만큼의 공간을 확보합니다. 단 <span class="cd">label3</span>은 너비가 10이므로 해당 칸을 꽉 채우지 못하고 중간에 위치합니다. <span class="cd">label2</span>와 <span class="cd">label4</span>도 마찬가지로 더 긴 칸의 너비만큼 공간을 배치했습니다.</p>
+<p class="txt bl">이처럼 위젯을 생성할 때 너비와 높이를 설정해서 <span class="cd">grid()</span>를 사용하면 원하는 모양에 가깝게 표현할 수 있습니다.</p>
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 크기 단위</p>
+<p class="txt bl">창 크기를 설정할 때는 픽셀을 단위로 사용했지만, 위젯의 <span class="cd">width</span>와 <span class="cd">height</span>는 한 글자의 너비와 높이를 각각의 단위로 사용합니다. 예를 들어 <span class="cd">weight=10</span>은 문자(숫자 혹은 알파벳)가 10개 들어갈 너비를 의미하고, <span class="cd">height=3</span>은 문자가 3개 들어갈 수 있는 높이를 의미합니다.</p>
+<div class="highlight">
+<pre>root = Tk() 
+root.title(<span class="red2">'my first tkinter'</span>) 
+root.geometry(<span class="red2">'400x200'</span>) 
+
+label1 = Label(root, <span class="cd2">text=</span><span class="cd2 red2">'1234567890'</span><span class="cd2">, width=</span><span class="cd2 green">10</span><span class="cd2">, height=</span><span class="cd2 green">3</span>, relief=<span class="red2">'groove'</span>) 
+label1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>) 
+label2 = Label(root, <span class="cd2">text=</span><span class="cd2 red2">'ABC\nABC\nABC\nABC\nABC'</span><span class="cd2">, width=</span><span class="cd2 green">3</span><span class="cd2">, height=</span><span class="cd2 green">5</span>,
+relief=<span class="red2">'groove'</span>) 
+label2.grid(row=<span class="green">0</span>, column=<span class="green">1</span>) 
+label3 = Label(root, <span class="cd2">text=</span><span class="cd2 red2">'python\npython'</span><span class="cd2">, width=</span><span class="cd2 green">6</span><span class="cd2">, height=</span><span class="cd2 green">2</span>, relief=<span class="red2">'groove'</span>) 
+label3.grid(row=<span class="green">1</span>, column=<span class="green">0</span>) 
+label4 = Label(root, <span class="cd2">text=</span><span class="cd2 red2">'일이삼사오육칠팔구십일이삼사오육칠팔구십'</span><span class="cd2">, width=</span><span class="cd2 green">20</span><span class="cd2">, 
+height=</span><span class="cd2 green">7</span>, relief=<span class="red2">'groove'</span>) 
+label4.grid(row=<span class="green">1</span>, column=<span class="green">1</span>) 
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/664.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">ABC\nABC\nABC\nABC\nABC</span>에 나오는 <span class="cd">\n</span>은 줄바꿈을 의미합니다. ABC 출력 후 4번 줄바꿈하고 마지막 줄에 ABC를 출력하므로 ABC가 총 5줄 출력됩니다. 화면 결과를 보면 <span class="cd">width</span>와 <span class="cd">height</span>가 숫자 또는 알파벳 한 자를 기준으로 길이를 설정하는 것을 확인할 수 있습니다. <span class="cd">width=10</span>, <span class="cd">height=3</span>인 <span class="cd">label1</span>은 10개 숫자가 <span class="cd">label1</span>의 가로 공간을 꽉 채웁니다. <span class="cd">label2</span>는 <span class="cd">width=3</span>, <span class="cd">height=5</span>인데, 다섯 줄의 <span class="cd">ABC</span>가 세로 공간을 꽉 채웠습니다. <span class="cd">label3</span>도 마찬가지입니다.</p>
+<p class="txt bl">한글을 넣은 <span class="cd">label4</span>를 봅시다. 한글 20자를 넣었는데 앞뒤로 글자가 잘려서 표시됩니다. 이는 숫자나 알파벳 한 자보다 한글 한 자의 너비가 넓어서 그렇습니다. <span class="cd">width</span>, <span class="cd">height</span>를 사용할 때는 이 부분을 유의하세요.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="797">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이번에는 격자의 여러 칸을 합칠 때 사용하는 <span class="cd">rowspan</span>과 <span class="cd">columnspan</span>을 살펴보겠습니다. <span class="cd">rowspan</span>, <span class="cd">columnspan</span>은 엑셀에서 사용하는 셀 병합 기능과 비슷합니다. <span class="cd">rowspan=n</span>은 n개 행을 병합하고, <span class="cd">columnspan=n</span>은 n개 열을 병합합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>rowspan=n     <span class="green"># n은 숫자</span>
+columnspan=n  <span class="green"># n은 숫자</span></pre>
+</div>
+<p class="txt bl">코드에 적용해 봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>, width=<span class="green">15</span>, relief=<span class="red2">'groove'</span>)
+label1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+label2 = Label(root, text=<span class="red2">'Hello!'</span>, width=<span class="green">15</span>, relief=<span class="red2">'groove'</span>)
+label2.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+label3 = Label(root, text=<span class="red2">'니하오!'</span>, width=<span class="green">15</span>, relief=<span class="red2">'groove'</span>)
+label3.grid(row=<span class="green">1</span>, column=<span class="green">0</span>, <span class="cd2">columnspan=</span><span class="cd2 green">2</span>)
+label4 = Label(root, text=<span class="red2">'봉쥬르!'</span>, width=<span class="green">15</span>, relief=<span class="red2">'groove'</span>)
+label4.grid(row=<span class="green">0</span>, column=<span class="green">2</span>, <span class="cd2">rowspan=</span><span class="cd2 green">2</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/666.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="798">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">label3</span>에 <span class="cd">columnspan=2</span>를 설정하니 가로 두 칸이 병합된 위치에 레이블이 배치됩니다. <span class="cd">label3</span>의 <span class="cd">width</span>는 15이기 때문에 병합된 칸을 모두 채우지 않고 중앙에 있습니다. <span class="cd">label4</span>도 <span class="cd">rowspan=2</span>를 설정하니 세로 두 칸을 병합하고 중앙에 레이블을 배치합니다. 각 레이블의 너비와 높이를 조절하면 병합한 칸의 크기에 딱 맞게 위젯을 만들 수 있습니다.</p>
+<p class="txt bl"><span class="cd">grid()</span>를 활용해 텍스트와 이미지를 함께 창에 띄울 수도 있습니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="cd2 red2">'700x450'</span>)
+
+label_txt = Label(root, text=<span class="cd2 red2">'파이썬 프로그래밍'</span><span class="cd2">, font=(</span><span class="cd2 red2">'Malgun Gothic'</span><span class="cd2">,</span> <span class="cd2 green">30</span><span class="cd2">)</span>)
+label_txt.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+<span class="cd2">letsgetit = PhotoImage(file=</span><span class="cd2 red2">'lets get it.png'</span><span class="cd2">)</span>
+<span class="cd2">label_img = Label(root, image=letsgetit)</span>
+<span class="cd2">label_img.grid(row=</span><span class="cd2 green">1</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/667.jpg"/></div>
+</div>
+<p class="txt bl">앞에서 배운 내용을 조합해 코드를 작성했으니 자세한 설명은 생략하겠습니다. 본인이 원하는 이미지와 텍스트를 조합해 다양한 화면을 만들어 보세요!</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="799">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_120"><span class="yellow">15.2.3</span> 버튼</h4>
+<p class="txt bl">이번에는 <span class="cd">tkinter</span>에서 <span class="dm">버튼</span><span class="txts gray">(Button)</span> 만드는 방법을 알아보겠습니다. 버튼 역시 <span class="cd">tkinter</span>에 미리 정의되어 있는 클래스입니다. 클래스의 생성자 옵션은 <span class="cd">help()</span>를 실행해 직접 확인해 보세요.</p>
+<p class="txts"> </p>
+<p class="txtex dm">버튼 만들기</p>
+<p class="txt bl">레이블을 만들 때처럼 버튼이 위치할 창과 <span class="cd">Button</span> 클래스의 객체를 만듭니다. 버튼에 표시할 글자는 <span class="cd">text</span> 옵션으로 넣고, 버튼의 크기 역시 레이블처럼 <span class="cd">width</span>와 <span class="cd">height</span>로 설정합니다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()
+root.title(<span class="red2">'Button'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+btn1 = Button(root, text=<span class="red2">'버튼'</span>, width=<span class="green">10</span>, height=<span class="green">3</span>)
+btn1.pack()
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/668_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="800">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">Button</span>의 <span class="cd">btn1</span> 객체를 만듭니다. 창에 <span class="cd">btn1</span> 객체가 나타나고, <span class="cd">text</span> 옵션으로 설정한 텍스트(버튼)가 표시됩니다. 이때 버튼을 클릭하면 아무 일도 일어나지 않습니다. 버튼을 클릭했을 때 실행할 내용을 작성하지 않았기 때문이죠.</p>
+<p class="txt bl">이 부분은 뒤에서 배우고 먼저 다른 위젯과 버튼을 <span class="cd">grid()</span>로 창에 배치해 보겠습니다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'Button'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+<span class="cd2">lbl1 = Label(root, text=</span><span class="cd2 red2">'안녕하세요!'</span><span class="cd2">, width=</span><span class="cd2 green">40</span>)
+<span class="cd2">lbl1.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+btn1 = Button(root, text=<span class="cd2 red2">'확인'</span>, width=<span class="green">10</span>)
+<span class="cd2">btn1.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">1</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/668_2.jpg"/></div>
+</div>
+<p class="txt bl">텍스트 레이블 옆에 버튼이 나타납니다. 투박하긴 하지만, 이런 식으로 여러 위젯을 함께 배치할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="801">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">버튼 클릭 시 실행될 이벤트 추가하기</p>
+<p class="txt bl">그럼 버튼을 클릭했을 때 어떤 반응이 나타나게 만들어 봅시다. 버튼을 클릭했을 때 일어나는 일을 <span class="dm">이벤트</span>라고 합니다. 이벤트는 13장에서 배운 사용자 정의 함수를 활용해 만듭니다. 그리고 버튼 객체를 만들 때 <span class="cd">command</span> 옵션을 사용해 함수명을 지정하면 해당 버튼을 클릭할 때마다 <span class="cd">command</span>에 지정한 함수가 실행됩니다.</p>
+<div class="highlight">
+<pre><span class="cd2 blue2">def</span> <span class="cd2 gold">sayhello</span><span class="cd2">():</span>
+    <span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'Hello!! '</span> <span class="cd2">*</span> <span class="cd2 green">3</span><span class="cd2">)</span>
+
+root = Tk()
+root.title(<span class="red2">'Button'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+lbl1 = Label(root, text=<span class="red2">'안녕하세요! '</span>, width=<span class="green">40</span>)
+lbl1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+btn1 = Button(root, text=<span class="red2">'확인'</span>, width=<span class="green">10</span>, <span class="cd2">command=sayhello</span>)
+btn1.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/669.jpg"/></div>
+<pre>Hello!! Hello!! Hello!!</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="802">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">sayhello()</span>라는 함수를 만들고, 버튼 객체를 생성할 때 <span class="cd">command</span> 옵션에 <span class="cd">sayhello</span> 함수를 넣었습니다. command는 ‘명령하다’라는 뜻이죠. 단어 뜻 그대로 버튼을 클릭할 때 실행될 명령어가 바로 함수 <span class="cd">sayhello()</span>라는 의미입니다. <span class="cd">sayhello()</span>는 <span class="cd">'Hello!! '</span>를 3번 출력하는 함수입니다.</p>
+<p class="txt bl">확인 버튼을 클릭해도 <span class="cd">tkinter</span> 화면에는 아무 일도 벌어지지 않습니다. 그런데 결과창에 ‘Hello!! ’가 3번 출력됩니다. 왜 <span class="cd">tkinter</span> 화면이 아닌 결과창에 출력될까요?</p>
+<p class="txt bl"><span class="cd">print()</span>는 화면이 아닌 결과창에 출력하는 명령어입니다. 지금까지 <span class="cd">tkinter</span> 화면에 텍스트를 나타내려면 레이블을 만들고 <span class="cd">text</span> 옵션으로 레이블에 표시할 텍스트를 설정했습니다. 배운 대로라면 다음처럼 만듭니다.</p>
+<div class="highlight">
+<pre>lbl2 = Label(root, text=<span class="red2">'Hello!! Hello!! Hello!!</span> <span class="red2">'</span>)
+lbl2.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/670.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="803">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">기존 코드에 앞의 코드를 더해 실행해 보면 오류는 발생하지 않지만, 의도치 않은 문제가 생깁니다. 버튼을 클릭하지 않아도 텍스트가 보이죠. 버튼을 클릭할 때 텍스트가 보이게 하려면 화면을 처음 생성할 때 두 번째 레이블(<span class="cd">lbl2</span>)에는 어떤 글자도 보이지 않아야 합니다. 그리고 버튼을 클릭했을 때만 텍스트가 보여야 하죠. 따라서 <span class="cd">lbl2</span> 객체에 들어가는 값이 화면을 생성할 때와 버튼을 클릭할 때에 달라야 합니다.</p>
+<p class="txt bl">이처럼 화면이 생성된 후에 변하는 값을 저장하는 변수를 <span class="dm">동적변수</span>라고 합니다. 동적변수는 화면이 만들어진 이후 다양한 이벤트에 의해 값이 변합니다. 동적변수도 변수이므로 사용하려면 먼저 만들어야 합니다. 동적변수의 값이 문자열일 때는 <span class="cd">StringVar()</span>, 정수형일 때는 <span class="cd">IntVar()</span>로 만듭니다. 그리고 실수형은 <span class="cd">float()</span>가 아닌 <span class="cd">DoubleVar()</span>로 만듭니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>변수명 = StringVar() <span class="green"># 또는 IntVar(), DoubleVar()</span></pre>
+</div>
+<p class="txt bl">그리고 객체에 <span class="cd">textvariable</span> 옵션을 줘서 사용할 동적변수를 지정합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>레이블명 = Label(root, textvariable=동적변수)</pre>
+</div>
+<p class="txt bl">동적변수를 만들고 실행해 보면 동적변수가 들어 있는 공간은 아무것도 없는 빈 공간으로 보입니다. 이런 동적변수의 값을 변경하고 싶을 때 <span class="cd">set()</span>을 사용합니다. <span class="cd">set()</span>에 변경하려는 값을 넣고 실행하면 동적변수 위치에 변경하려는 값이 나타납니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>동적변수.set(변경값)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="804">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">앞의 코드를 동적변수를 사용하는 방식으로 수정해 봅시다.</p>
+<div class="highlight">
+<pre><span class="green"># ----- 프로그램 기능 부분</span> <span class="green">-----</span>
+<span class="blue2">def</span> <span class="gold">sayhello</span>():
+    <span class="cd2">txt.set(</span><span class="cd2 red2">'Hello!! '</span> <span class="cd2">*</span> <span class="cd2 green">3</span><span class="cd2">)</span> <span class="green"># sayhello() 함수 실행 시 동적변수 txt에 값 넣기</span>
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+root = Tk()
+root.title(<span class="red2">'Button'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+lbl1 = Label(root, text=<span class="red2">'안녕하세요! '</span>, width=<span class="green">40</span>)
+lbl1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+btn1 = Button(root, text=<span class="red2">'확인'</span>, width=<span class="green">10</span>, command=sayhello)
+btn1.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+<span class="cd2">txt = StringVar()</span> <span class="cd2 green"># 동적변수 txt 정의</span>
+lbl2 = Label(root, <span class="cd2">textvariable=txt, width=</span><span class="cd2 green">40</span><span class="cd2">, height=</span><span class="cd2 green">3</span>) <span class="cd2 green"># 레이블에 동적변수 txt 설정</span>
+lbl2.grid(row=<span class="green">1</span>, column=<span class="green">0</span>, <span class="cd2">columnspan=</span><span class="cd2 green">2</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/672_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="805">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">프로그램 화면 부분에 추가된 코드부터 봅시다. <span class="cd">StringVar()</span>로 문자를 받는 동적변수 <span class="cd">txt</span>를 만들었습니다. 레이블 객체를 생성할 때 <span class="cd">textvariable</span> 옵션으로 동적변수 <span class="cd">txt</span>를 설정했습니다. 레이블의 크기와 위치도 적절하게 추가했고요. 동적변수는 레이블을 생성하기 전에 만들어야 레이블의 <span class="cd">textvariable</span> 옵션에 설정할 수 있습니다. 이를 그림으로 표현하면 다음과 같습니다. 레이블 <span class="cd">lbl2</span> 안에 동적변수 <span class="cd">txt</span>가 들어 있는 형태입니다.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/672_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-7</span> 레이블에 설정된 동적변수</p>
+<p class="txt bl"><span class="cd">sayhello()</span> 함수도 수정했습니다. 두 번째 레이블인 <span class="cd">lbl2</span> 객체는 처음에 아무것도 없다가 버튼을 클릭하고 나면 ‘Hello!! Hello!! Hello!! ’로 변경돼야 합니다. <span class="cd">sayhello()</span> 함수는 버튼을 클릭했을 때 실행될 이벤트이므로 <span class="cd">set()</span>에 변경될 <span class="cd">txt</span>의 값 <span class="cd">'Hello!! ' * 3</span>을 넣습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="806">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">코드를 실행하면 초기 화면은 이전과 동일합니다. 확인 버튼을 누르면 화면에 ‘Hello!! Hello!! Hello!! ’가 나타납니다. 이때 코드가 실행되는 순서는 다음과 같습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/673.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-8</span> 버튼 클릭 시 코드 실행 순서</p>
+<p class="txt bl">버튼을 클릭하면 <span class="cd">command</span>로 설정된 <span class="cd">sayhello()</span> 함수가 호출됩니다. 호출된 <span class="cd">sayhello()</span> 내부에서 <span class="cd">txt.set('Hello!! ' * 3)</span>이 실행되면 <span class="cd">lbl2</span> 객체에 설정된 <span class="cd">txt</span>의 값이 변경되어 레이블에 표시됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="807">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">버튼으로 구구단 프로그램의 화면 만들기</p>
+<p class="txt bl">배운 내용을 활용해 구구단 프로그램의 화면을 작성해 봅시다. 구구단 문제는 반복문을 배울 때부터 꾸준히 접했기 때문에 이제 익숙해졌을 겁니다. 화면은 다음처럼 구성합니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/674.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-9</span> 구구단 프로그램 화면 구성</p>
+<p class="txt bl">첫 번째 행의 오른쪽에 있는 [새로운 문제] 버튼을 클릭하면 첫 번째 행 왼쪽에 문제가 나타납니다. 그리고 두 번째 행의 오른쪽에 있는 [정답 확인] 버튼을 클릭하면 두 번째 행의 왼쪽에 정답이 나타납니다. [새로운 문제] 버튼을 클릭할 때마다 이전과는 다른 문제가 나와야 합니다. 따라서 새로운 문제가 나타나는 위치에는 화면이 생성된 후 값이 변하는 동적변수를 사용합니다. 답이 나타나는 부분도 동일합니다. 문제가 변하면 정답도 변해야 하므로 동적변수를 사용합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="808">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">정리한 내용을 코드로 작성해 봅시다. 프로그램 화면 부분부터 작성해 보겠습니다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()
+root.title(<span class="red2">'구구단'</span>)
+
+question = StringVar() <span class="green"># 무작위로 생성된 구구단 문제를 저장하는 동적변수</span>
+q_lbl = Label(root, textvariable=question, width=<span class="green">30</span>) <span class="green"># 구구단 문제가 나타나는 레이블</span>
+q_lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+
+q_btn = Button(root, text=<span class="red2">'새로운 문제'</span>, width=<span class="green">10</span>)
+q_btn.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+a_btn = Button(root, text=<span class="red2">'정답 확인'</span>, width=<span class="green">10</span>)
+a_btn.grid(row=<span class="green">1</span>, column=<span class="green">1</span>)
+
+answer = StringVar() <span class="green"># 구구단 문제의 정답을 저장하는 동적변수</span>
+a_lbl = Label(root, textvariable=answer, width=<span class="green">30</span>) <span class="green"># 구구단 정답이 나타나는 레이블</span>
+a_lbl.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w40"><img alt="" class="w100" src="https://thebook.io/img/080251/675.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="809">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">프로그램 화면 구성은 어렵지 않습니다. 구구단 프로그램을 띄울 창을 만듭니다. 그리고 문제와 정답을 출력할 레이블, 새로운 문제를 출력할 버튼과 정답을 확인할 버튼 4가지 위젯을 만들면 됩니다.</p>
+<p class="txt bl">먼저 2개의 레이블은 <span class="cd">q_lbl</span>과 <span class="cd">a_lbl</span>로 만듭니다. 이때 레이블에서 동적변수를 사용하므로 동적변수를 레이블보다 먼저 만들어야 합니다. <span class="cd">StringVar()</span>로 바뀌는 문제를 저장할 동적변수 <span class="cd">question</span>과 문제에 따라 바뀌는 정답을 저장할 <span class="cd">answer</span>를 만듭니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> <span class="cd">answer</span>를 <span class="cd">IntVar()</span>로 정의하면 처음에 자동으로 0을 저장하게 되어 실행한 직후 정답 레이블에 0을 표시합니다. 그래서 동적변수를 <span class="cd">StringVar()</span>로 만듭니다.</p>
+</div>
+<p class="txt bl">첫 번째 레이블은 버튼을 클릭할 때마다 문제가 바뀌어야 하므로 <span class="cd">textvariable=question</span>으로 동적변수를 설정해 문제를 가져옵니다. 두 번째 레이블도 버튼을 클릭할 때마다 정답이 바뀌어야 하므로 <span class="cd">textvariable=answer</span>로 동적변수를 설정해 정답을 가져옵니다. 버튼 2개도 각각 <span class="cd">q_btn</span>, <span class="cd">a_btn</span>으로 만듭니다. 레이블 크기는 너비 30, 버튼 크기는 너비 10으로 통일했고, 높이는 둘 다 설정하지 않았습니다. <span class="cd">root</span> 창의 크기도 설정하지 않았습니다. 창의 크기를 설정하지 않으면 자동으로 위젯 크기에 맞춥니다.</p>
+<p class="txt bl">이제 프로그램 기능 부분을 하나씩 구현해 봅시다. [새로운 문제] 버튼을 클릭하면 동적변수 <span class="cd">question</span>의 값이 바뀌고, <span class="cd">question</span>의 값을 표시하는 <span class="cd">q_lbl</span> 레이블에 새로운 문제가 나타나야죠. <span class="cd">q_btn</span>을 클릭하면 실행되는 사용자 정의 함수 <span class="cd">make_question()</span>을 다음과 같이 만듭니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+<span class="green"># 무작위로 구구단 문제를 출제하는 함수</span>
+<span class="blue2">def</span> <span class="gold">make_question</span>():
+    num1, num2 = random.randint(<span class="green">2</span>, <span class="green">9</span>), random.randint(<span class="green">1</span>, <span class="green">9</span>)
+    question.set(str(num1) + <span class="red2">'x'</span> + str(num2) + <span class="red2">'? '</span>)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="810">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">random</span> 라이브러리를 추가하고 <span class="cd">make_question()</span> 함수에 무작위로 구구단 문제를 내는 코드를 작성합니다. 구구단 문제는 앞에서 여러 번 다루었으므로 여기서는 설명을 생략하겠습니다.<br/>
+  5장을 참고해 코드를 작성하고 마지막에 출제한 문제를 동적변수 <span class="cd">question</span>에 <span class="cd">set()</span> 함수로 설정하는 부분만 추가하면 됩니다.</p>
+<p class="txt bl">[정답 확인] 버튼을 누르면 실행되는 이벤트도 작성해 봅시다. <span class="cd">a_btn</span>을 누르면 문제에 해당하는 답이 <span class="cd">a_lbl</span> 레이블에 나타나야 합니다. 구구단 문제의 정답은 <span class="cd">num1 * num2</span>이죠. <span class="cd">a_btn</span> 버튼을 누르면 정답인 <span class="cd">num1 * num2</span>를 동적변수 <span class="cd">answer</span>에 설정하는 사용자 정의 함수 <span class="cd">check_answer()</span>를 만듭니다.</p>
+<div class="highlight">
+<pre><span class="blue2">def</span> <span class="gold">check_answer</span>():
+    answer.set(num1 * num2)</pre>
+</div>
+<p class="txt bl">이제 만들어진 코드를 합치면 됩니다. 합치기 전에 <span class="cd">make_question()</span>과 <span class="cd">check_answer()</span> 함수에 사용하는 변수 <span class="cd">num1</span>, <span class="cd">num2</span>를 봅시다. <span class="cd">num1</span>, <span class="cd">num2</span>는 두 함수에서 공통으로 사용합니다. 특정 함수에서만 사용하는 지역변수로 만들면 다른 함수에서는 두 변수를 읽거나 쓸 수 없겠죠? 따라서 <span class="cd">num1</span>, <span class="cd">num2</span>는 함수 외부에 정의해 전역변수로 만들고, <span class="cd">make_question()</span>에서 <span class="cd">global</span> 키워드를 사용해 값을 변경할 수 있게 합니다.</p>
+<p class="txt bl">설명대로 프로그램 기능 부분을 모두 작성하고 버튼에 두 함수를 연결합니다. 최종 코드는 다음과 같습니다(기존과 동일한 코드는 생략 표시했습니다).</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="811">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+<span class="purple">import</span> random
+
+<span class="green"># ----- 프로그램 기능 부분</span> <span class="green">-----</span>
+<span class="cd2">num1, num2 =</span> <span class="cd2 green">0</span><span class="cd2">,</span> <span class="cd2 green">0</span> <span class="green"># 전역변수</span>
+
+<span class="blue2">def</span> <span class="gold">make_question</span>():
+    <span class="cd2 blue2">global</span> <span class="cd2">num1, num2</span>
+    num1, num2 = random.randint(<span class="green">2</span>, <span class="green">9</span>), random.randint(<span class="green">1</span>, <span class="green">9</span>)
+    question.set(str(num1) + <span class="red2">'x'</span> + str(num2) + <span class="red2">'?</span> <span class="red2">'</span>)
+<span class="blue2">def</span> <span class="gold">check_answer</span>():
+    answer.set(num1 * num2)
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+…
+q_btn = Button(root, text=<span class="red2">'새로운 문제'</span>, width=<span class="green">10</span>, <span class="cd2">command=make_question</span>)
+q_btn.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+a_btn = Button(root, text=<span class="red2">'정답 확인'</span>, width=<span class="green">10</span>, <span class="cd2">command=check_answer</span>)
+a_btn.grid(row=<span class="green">1</span>, column=<span class="green">1</span>)
+…</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/677.jpg"/></div>
+</div>
+<p class="txt bl">[새로운 문제] 버튼을 클릭하면 문제가 출제되고 [정답 확인] 버튼을 클릭하면 문제에 맞는 답이 나옵니다. 정상적으로 실행되지 않는다면 버튼에 <span class="cd">command</span>로 함수를 연결했는지 확인해 보세요. [새로운 문제] 버튼을 계속 클릭해서 이전과는 다른 문제가 출제되는지, [정답 확인] 버튼을 클릭하면 정답이 제대로 나오는지 확인해 보세요.</p>
+<p class="txt bl">이처럼 버튼은 사용자 정의 함수와 동적변수를 적절히 활용해 다양한 기능을 구현할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="812">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_121"><span class="yellow">15.2.4</span> 엔트리</h4>
+<p class="txt bl">세 번째 위젯으로 화면에서 값을 입력받을 수 있는 <span class="dm">엔트리</span><span class="txts gray">(Entry)</span>를 배워 보겠습니다. entry는 ‘들어옴’, ‘입장’ 등을 의미하죠. 단어의 의미처럼 엔트리를 사용하면 화면을 통해 들어오는 값을 프로그램에서 입력받을 수 있습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">엔트리 만들기</p>
+<p class="txt bl">간단한 엔트리를 하나 만들어 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()
+root.title(<span class="red2">'entry'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+ent = Entry(root, width=<span class="green">25</span>)
+ent.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/678.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="813">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">화면에 흰 칸이 하나 생겼습니다. 이렇게 생긴 입력칸이 바로 엔트리입니다. 엔트리 역시 <span class="cd">tkinter</span>에 <span class="cd">Entry</span> 클래스가 정의돼 있어서 클래스를 활용해 엔트리 객체를 만듭니다. 다른 위젯처럼 엔트리를 배치할 창(<span class="cd">root</span>)을 가장 먼저 만듭니다. 엔트리도 <span class="cd">width</span>, <span class="cd">height</span>로 너비와 높이를 지정합니다.</p>
+<p class="txt bl">텍스트 레이블도 추가해서 다음과 같이 나타내 봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'entry'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+<span class="cd2">lbl = Label(root, text=</span><span class="cd2 red2">'이름 : '</span> <span class="cd2">, width=</span><span class="cd2 green">10</span><span class="cd2">)</span>
+<span class="cd2">lbl.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+ent = Entry(root, width=<span class="green">25</span>)
+ent.grid(row=<span class="green">0</span>, column=<span class="cd2 green">1</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/679.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="814">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">엔트리 앞에 레이블을 추가해서 입력칸에 이름을 적도록 안내합니다. 입력칸에 텍스트를 입력해 보면 잘 입력됩니다.</p>
+<p class="txt bl">입력된 텍스트를 프로그램으로 읽어 들여 봅시다. 엔트리에 입력된 값을 가져올 때는 <span class="cd">get()</span> 함수를 사용합니다. 버튼 하나를 추가하고, 버튼이 클릭될 때 엔트리에 입력된 값을 가져와 보겠습니다.</p>
+<div class="highlight">
+<pre><span class="cd2 blue2">def</span> <span class="cd2 gold">entry_value</span><span class="cd2">():</span>
+    <span class="cd2 gold">print</span><span class="cd2">(ent.get())</span> <span class="green"># 함수 실행 시 get()으로 ent의 값을 읽어 들여 출력함</span>
+
+root = Tk()
+root.title(<span class="red2">'entry'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+lbl = Label(root, text=<span class="red2">'이름 : '</span> , width=<span class="green">10</span>)
+lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+ent = Entry(root, width=<span class="green">25</span>)
+ent.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+<span class="cd2">btn = Button(root, text=</span><span class="cd2 red2">'확인'</span><span class="cd2">, width=</span><span class="cd2 green">0</span><span class="cd2">, command=entry_value)</span>
+<span class="cd2">btn.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">2</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/680_1.jpg"/></div>
+<pre>James</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="815">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">버튼 객체 <span class="cd">btn</span>을 만들고 엔트리의 오른쪽에 배치했습니다(<span class="cd">(row=0, column=2)</span>). 버튼을 클릭하면 <span class="cd">command</span>로 연결된 <span class="cd">entry_value()</span>가 실행됩니다. 사용자 정의 함수 <span class="cd">entry_value()</span>는 <span class="cd">ent</span>에 입력된 값을 읽어와 결과창에 출력합니다. <span class="cd">ent</span>에 입력된 값은 <span class="cd">ent.get()</span>으로 읽어옵니다.</p>
+<p class="txt bl">앞서 동적변수의 값을 창에 표시할 때는 <span class="cd">set()</span>을 사용했죠. <span class="cd">get()</span>은 <span class="cd">set()</span>과 반대로 창에 입력된 값을 읽어옵니다.</p>
+<div class="w70"><img alt="" class="w100" src="https://thebook.io/img/080251/680_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-10</span> get()과 set() 함수의 동작</p>
+<p class="txt bl">[확인] 버튼을 누르면 창에서는 아무 일도 일어나지 않지만, 코드의 결과창에는 창에 입력한 이름이 출력됩니다. James를 입력하니 결과창에 James가 출력됩니다. 창에서 값을 제대로 읽어왔다는 것이죠.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="816">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">로그인 화면 만들기</p>
+<p class="txt bl">지금까지 배운 레이블, 버튼, 엔트리는 사용자 화면을 구성하는 가장 기본적인 요소입니다. 기본 요소들로 로그인 화면을 만들어 봅시다. 가장 흔하게 접하는 로그인 화면은 대부분 다음과 같은 형태입니다. 로그인 화면에서 아이디와 비밀번호를 입력하고 로그인 버튼을 누르면 회원으로 입장할 수 있습니다.</p>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/681.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-11</span> 로그인 화면</p>
+<p class="txt bl">먼저 화면을 구성해 봅시다. 첫 번째 행에는 아이디와 관련한 텍스트 레이블과 엔트리, 두 번째 행에는 비밀번호와 관련한 텍스트 레이블과 엔트리가 배치되면 됩니다. 그리고 가장 오른쪽에는 두 행을 병합해 [로그인] 버튼을 만듭니다. 먼저 코드를 직접 작성해 본 후 책을 참고하세요.</p>
+<div class="highlight">
+<pre><span class="green"># ----- 프로그램 화면 부분 -----</span>
+root = Tk()
+root.title(<span class="red2">'Login'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+id_lbl = Label(root, text=<span class="red2">'아이디 '</span>, width=<span class="green">10</span>)
+id_lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+id_ent = Entry(root, width=<span class="green">20</span>)
+id_ent.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+pw_lbl = Label(root, text=<span class="red2">'비밀번호'</span>, width=<span class="green">10</span>)
+pw_lbl.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)
+pw_ent = Entry(root, width=<span class="green">20</span>)
+pw_ent.grid(row=<span class="green">1</span>, column=<span class="green">1</span>)
+
+btn = Button(root, text=<span class="red2">'로그인'</span>, width=<span class="green">5</span>, height=<span class="green">3</span>)
+btn.grid(row=<span class="green">0</span>, column=<span class="green">2</span>, rowspan=<span class="green">2</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/682.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="817">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">위젯 5개를 만들고 <span class="cd">grid()</span>로 배치합니다. 첫 번째 행의 텍스트 레이블과 엔트리는 각각 <span class="cd">id_lbl</span>, <span class="cd">id_ent</span>로, 두 번째 행의 텍스트 레이블과 엔트리는 각각 <span class="cd">pw_lbl</span>, <span class="cd">pw_ent</span>로 만듭니다. [로그인] 버튼인 <span class="cd">btn</span>은 두 행을 병합해야 하므로 <span class="cd">rowspan</span>을 2로 설정합니다.</p>
+<p class="txt bl">다음으로 기능 부분을 구현해 봅시다. [로그인] 버튼을 누르면 입력된 아이디와 비밀번호를 검증해 로그인 성공 또는 로그인 실패를 안내해야 합니다. 사용자 정의 함수 <span class="cd">login()</span>을 만들고 <span class="cd">btn</span> 버튼에 <span class="cd">command</span>로 연결합니다. 보통은 회원이 여러 명이지만, 여기에서는 간단하게 한 명의 회원만 로그인할 수 있게 합니다. 아이디 Lian, 비밀번호 1234로만 로그인되고 그밖의 조합은 로그인 실패로 처리합시다. 로그인 결과는 세 번째 행에 새로운 텍스트 레이블을 만들어 알려 주겠습니다. 이 코드도 먼저 작성해 본 후 책을 참고하세요. 앞 코드와 동일한 내용은 생략하고 추가되거나 달라진 부분만 나타냈습니다.</p>
+<div class="highlight">
+<pre><span class="cd2"><span class="green"># ------ 프로그램 기능 부분 -----</span>
+<span class="blue2">def</span> <span class="gold">login</span>():
+    <span class="purple">if</span> id_ent.get() == <span class="red2">'Lian'</span> <span class="blue2">and</span> pw_ent.get() == <span class="red2">'1234'</span>:
+        result.set(<span class="red2">'로그인 성공!'</span>)
+    <span class="purple">else</span>:
+        result.set(<span class="red2">'로그인 실패</span><span class="red2">. \</span><span class="red2">n아이디와 비밀번호를 다시 확인하세요!'</span>)</span>
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+…
+btn = Button(root, text=<span class="red2">'로그인'</span>, width=<span class="green">5</span>, height=<span class="green">3</span>, <span class="cd2">command=login</span>)
+btn.grid(row=<span class="green">0</span>, column=<span class="green">2</span>, rowspan=<span class="green">2</span>)
+
+<span class="cd2">result = StringVar()</span> <span class="green"># 로그인 성공 여부를 저장하는 동적변수</span>
+<span class="green"># 로그인 성공 여부를 나타내는 텍스트 레이블</span>
+<span class="cd2">result_lbl = Label(root, textvariable=result, width=</span><span class="cd2 green">30</span><span class="cd2">)</span>
+<span class="cd2">result_lbl.grid(row=</span><span class="cd2 green">2</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">, columnspan=</span><span class="cd2 green">3</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/683.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="818">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">동적변수 <span class="cd">result</span>를 정의하고 세 번째 행에 로그인 결과를 나타내는 <span class="cd">result_lbl</span> 레이블을 생성한 뒤 연결했습니다. <span class="cd">result_lbl</span> 레이블은 처음에 아무것도 없다가 로그인 버튼을 클릭하면 결과를 표시해야 하므로 변하는 값을 저장하는 동적변수를 사용했습니다.</p>
+<p class="txt bl">로그인 결과는 [로그인] 버튼을 눌렀을 때 결정됩니다. 로그인 성공 또는 로그인 실패 둘 중 하나죠. [로그인] 버튼을 눌렀을 때 <span class="cd">login()</span> 함수가 실행됩니다. 입력된 아이디와 비밀번호는 <span class="cd">id_ent.get()</span>과 <span class="cd">pw_ent.get()</span>으로 읽어옵니다. 조건문을 이용해 읽어온 아이디와 비밀번호가 Lian, 1234와 같으면 <span class="cd">result</span>에 ‘로그인 성공!’을 저장합니다. 아이디와 비밀번호 중 하나라도 다르면 ‘로그인 실패’를 저장합니다.</p>
+<p class="txt bl">다양한 조합의 아이디와 비밀번호를 입력해 보세요. 입력값을 읽어서 조건문으로 판별한 후 결과를 화면에 나타내는 프로세스를 잘 알아두면 ‘사용자 - 화면 – 코드’의 상호작용을 이해하기 쉽습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="819">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_122"><span class="yellow">15.2.5</span> 콤보박스</h4>
+<p class="txt bl">이번에는 콤보박스를 만들어 보겠습니다. 여러 선택지 중 일부를 선택하는 위젯은 콤보박스 외에도 라디오버튼, 체크박스 등이 있지만 이 책에서는 콤보박스만 다루겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">콤보박스 만들기</p>
+<p class="txt bl"><span class="dm">콤보박스</span><span class="txts gray">(Combobox)</span>는 클릭했을 때 여러 선택지가 드롭다운 형태로 나타나는 위젯입니다. 한 번에 여러 개를 보여줘야 하기 때문에 리스트로 데이터를 설정합니다. 콤보박스를 사용하려면 <span class="cd">from tkinter.ttk import *</span>를 추가해야 합니다. <span class="cd">ttk</span>는 <span class="cd">tkinter</span> 패키지 내부에 있는 모듈인데, <span class="cd">from tkinter import *</span>로는 추가되지 않아서 <span class="cd">from tkinter.ttk import *</span>를 추가로 작성해야 합니다. <span class="cd">ttk</span>는 콤보박스를 만드는 <span class="cd">Combobox</span> 클래스를 포함하고 있습니다.</p>
+<p class="txt bl"><span class="cd">Combobox</span> 클래스로 콤보박스 객체를 생성하고, <span class="cd">values</span> 옵션으로 선택지를 담은 리스트를 설정합니다. 콤보박스를 만들어 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+<span class="purple">from</span> tkinter.ttk <span class="purple">import</span> *
+
+root = Tk()
+root.title(<span class="red2">'ComboBox'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+<span class="green"># 콤보박스에 나타낼 리스트</span>
+characters = [<span class="red2">'죠르디'</span>, <span class="red2">'프로도'</span>, <span class="red2">'라이언'</span>, <span class="red2">'무지'</span>, <span class="red2">'어피치'</span>]
+<span class="green"># 콤보박스 객체 생성, characters 리스트 연결</span>
+combo = Combobox(root, values=characters)
+combo.pack()
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/684.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="820">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">캐릭터 이름 5개가 들어간 <span class="cd">characters</span> 리스트를 만듭니다. 그리고 <span class="cd">Combobox</span> 클래스의 객체 <span class="cd">combo</span>를 만들면서 <span class="cd">values</span> 옵션에 <span class="cd">characters</span> 리스트를 값으로 설정합니다. 생성된 콤보박스를 클릭하면 리스트의 요소가 드롭다운 형태로 나타납니다.</p>
+<p class="txt bl">이번에는 <span class="cd">grid()</span>를 사용해 콤보박스 왼쪽에 ‘캐릭터 이름’이라는 텍스트 레이블을, 오른쪽에 [선택]이라는 버튼을 추가해 봅시다. 버튼을 누르면 선택된 캐릭터의 이름을 출력합니다. 코드를 작성해 봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'ComboBox'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+<span class="cd2 blue2">def</span> <span class="cd2 gold">select</span><span class="cd2">():</span>
+    <span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'선택된 캐릭터는'</span><span class="cd2">, combo.get())</span>
+
+<span class="cd2">lbl = Label(root, text=</span><span class="cd2 red2">'캐릭터 이름'</span><span class="cd2">, width=</span><span class="cd2 green">10</span><span class="cd2">, anchor=</span><span class="cd2 red2">'center'</span><span class="cd2">)</span>
+<span class="cd2">lbl.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+
+characters = [<span class="red2">'죠르디'</span>, <span class="red2">'프로도'</span>, <span class="red2">'라이언'</span>, <span class="red2">'무지'</span>, <span class="red2">'어피치'</span>]
+combo = Combobox(root, values=characters, <span class="cd2">width=</span><span class="cd2 green">30</span>)
+<span class="cd2">combo.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">1</span><span class="cd2">)</span>
+
+<span class="cd2">btn = Button(root, text=</span><span class="cd2 red2">'선택'</span><span class="cd2">, command=select, width=</span><span class="cd2 green">10</span><span class="cd2">)</span>
+<span class="cd2">btn.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">2</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/685.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="821">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">화면 코드부터 봅시다. 레이블(<span class="cd">lbl</span>)과 버튼(<span class="cd">btn</span>)을 만들고 <span class="cd">grid()</span>로 콤보박스와 같은 행에 배치했습니다. 그리고 버튼을 클릭하면 <span class="cd">select()</span>가 실행되도록 <span class="cd">command</span>로 설정했습니다.</p>
+<p class="txt bl"><span class="cd">select()</span> 함수 부분을 봅시다. 콤보박스에서 선택된 캐릭터 이름을 가져와 출력합니다. 콤보박스의 값은 엔트리처럼 <span class="cd">get()</span>으로 가져옵니다. 콤보박스에서도 화면에 값을 표시할 때는 <span class="cd">set()</span>을, 화면에서 값을 가져올 때는 <span class="cd">get()</span>을 주로 활용합니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">콤보박스로 구구단 프로그램의 화면 만들기</p>
+<p class="txt bl">콤보박스를 사용해 구구단 프로그램의 화면을 바꿔 봅시다. 이번에는 구구단 문제를 내면 콤보박스에서 5개의 선택지를 보여 주고 답을 고르도록 프로그램을 작성합니다. 이때 콤보박스의 선택지 중 하나는 정답이고 나머지는 오답입니다. 정답을 선택한 후 [정답 확인] 버튼을 클릭하면 정답과 오답을 안내하겠습니다. 화면은 다음과 같이 구성합니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/686.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-12</span> 변경된 구구단 프로그램 화면</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="822">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">프로그램 화면부터 작성해 봅시다. 앞에서 작성한 코드에서 정답을 출력하는 레이블 부분을 콤보박스로 변경하면 됩니다. 콤보박스에 표시할 선택지 리스트의 이름은 <span class="cd">selection</span>으로 하겠습니다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+<span class="cd2 purple">from</span> <span class="cd2">tkinter.ttk</span> <span class="cd2 purple">import</span> <span class="cd2">*</span>
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+root = Tk()
+root.title(<span class="red2">'구구단'</span>)
+<span class="cd2">root.geometry(</span><span class="cd2 red2">'400x200'</span><span class="cd2">)</span>
+
+question = StringVar()
+q_lbl = Label(root, textvariable= question, width=<span class="green">30</span>, <span class="cd2">anchor=</span><span class="cd2 red2">'center'</span><span class="cd2">)</span>
+q_lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+q_btn = Button(root, text=<span class="red2">'새로운 문제'</span>, width=<span class="green">10</span>)
+q_btn.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+<span class="cd2">selection = []</span> <span class="cd2 green"># 콤보박스에 연결할 리스트</span>
+<span class="cd2">a_combo = Combobox(root, values=selection, width=</span><span class="cd2 green">30</span><span class="cd2">)</span>
+<span class="cd2">a_combo.grid(row=</span><span class="cd2 green">1</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+a_btn = Button(root, text=<span class="red2">'정답 확인'</span>, width=<span class="green">10</span>)
+a_btn.grid(row=<span class="green">1</span>, column=<span class="green">1</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/687.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="823">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">앞에서 작성한 구구단 프로그램에서 창 크기를 추가하고, 정답을 보여 주는 레이블 대신 콤보박스를 추가했습니다.</p>
+<p class="txt bl">버튼을 클릭할 때 실행되는 새로운 이벤트를 작성해 보겠습니다. [새로운 문제] 버튼을 클릭하면 <span class="cd">make_question()</span> 함수가 실행됩니다. 이때 구구단 문제를 무작위로 만들면서 동시에 콤보박스에 넣을 5개의 숫자도 만들어야 합니다. <span class="cd">selection</span>에는 정답 1개와 오답 4개가 필요합니다. 그리고 정답이 항상 같은 위치에 있으면 안 되겠죠? 정답 위치도 무작위로 결정돼야 합니다.</p>
+<p class="txt bl">문제를 만드는 부분은 기존 코드를 그대로 사용하고 <span class="cd">selection</span> 부분만 추가하면 됩니다. [새로운 문제] 버튼을 클릭할 때마다 선택지 <span class="cd">selection</span>을 초기화해야 합니다. 이전 문제의 선택지를 비워야 하기 때문이죠. 그리고 오답으로 제시할 무작위 숫자 4개를 <span class="cd">selection</span>에 추가해야 하고요. 오답은 구구단 결괏값 중 가장 작은 숫자인 2부터 가장 큰 숫자인 81까지 중에서 4개를 무작위로 넣겠습니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+<span class="green"># ----- 프로그램 기능 부분 -----</span>
+num1, num2 = <span class="green">0</span>, <span class="green">0</span>
+
+<span class="blue2">def</span> <span class="gold">make_question</span>():
+    <span class="blue2">global</span> num1, num2
+    <span class="green"># 문제 만들기</span>
+    num1, num2 = random.randint(<span class="green">2</span>, <span class="green">9</span>), random.randint(<span class="green">1</span>, <span class="green">9</span>)
+    question.set(str(num1) + <span class="red2">'x'</span> + str(num2) + <span class="red2">'? '</span>)
+    <span class="cd2 green"># 선택지 초기화하고 새로 만들기</span>
+    <span class="cd2">selection = []</span>
+    <span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">4</span><span class="cd2">):</span>
+        <span class="cd2">selection.append(random.randint(</span><span class="cd2 green">2</span><span class="cd2">,</span> <span class="cd2 green">81</span><span class="cd2">))</span></pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="824">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">정답을 끼워 넣을 차례입니다. 현재 <span class="cd">selection</span>에는 4개의 요소가 있으므로 인덱스 [0]부터 [3]까지 있습니다. 정답을 추가하면 인덱스는 [4]까지로 늘겠죠. 정답은 <span class="cd">selection</span>의 무작위 위치에 들어가야 하므로 0~4 중 하나를 무작위로 선택해야 합니다. 6장에서 다루지는 않았지만 리스트 중간에도 값을 추가할 수 있습니다. 형식은 다음과 같습니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>리스트명.insert(인덱스, 값)</pre>
+</div>
+<p class="txt bl"><span class="cd">randint()</span>를 활용해 0부터 4 사이에서 인덱스를 구하고, 해당 인덱스에 정답인 <span class="cd">num1 * num2</span>를 끼워 넣으면 됩니다. 다음으로 완성된 선택지 <span class="cd">selection</span>을 콤보박스와 다시 연결해야겠죠? 콤보박스의 <span class="cd">values</span>에 새로운 값은 <span class="cd">콤보박스명['vaules'] = 리스트명</span> 형식으로 넣습니다. 따라서 여기에서는 <span class="cd">a_combo['values'] = selection</span>이 됩니다. <span class="cd">set()</span>을 사용하면 <span class="cd">selection</span>의 각 요소가 모두 한 줄로 표시되어 선택지가 하나로 나오기 때문에 이 방식을 사용합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+<span class="green"># ----- 프로그램 기능 부분 -----</span>
+num1, num2 = <span class="green">0</span>, <span class="green">0</span>
+
+<span class="blue2">def</span> <span class="gold">make_question</span>():
+    <span class="blue2">global</span> num1, num2
+    <span class="green"># 문제 만들기</span>
+    num1, num2 = random.randint(<span class="green">2</span>, <span class="green">9</span>), random.randint(<span class="green">1</span>, <span class="green">9</span>)
+    question.set(str(num1) + <span class="red2">'x'</span> + str(num2) + <span class="red2">'?</span> <span class="red2">'</span>)
+    <span class="green"># 선택지 초기화하고 새로 만들기</span>
+    selection = []
+    <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">4</span>):
+        selection.append(random.randint(<span class="green">2</span>, <span class="green">81</span>))
+    <span class="green"># 무작위 위치에 정답 끼워 넣기</span>
+    <span class="cd2">idx = random.randint(</span><span class="cd2 green">0</span><span class="cd2">,</span> <span class="cd2 green">4</span><span class="cd2">)</span>
+    <span class="cd2">selection.insert(idx, num1 * num2)</span>
+
+    <span class="green"># 콤보박스에 변경된 리스트 연결하기</span>
+    <span class="cd2">a_combo[</span><span class="cd2 red2">'values'</span><span class="cd2">] = selection</span></pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="825">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">[새로운 문제] 버튼(<span class="cd">q_btn</span>)에 완성된 <span class="cd">make_question</span> 함수를 이벤트로 연결한 후 프로그램을 실행해 봅시다. 프로그램 기능 부분과 화면 부분 코드를 합쳐서 실행해야 합니다. 통상적으로 함수를 위에 작성하니 <span class="dm">프로그램 기능 → 프로그램 화면</span> 순서로 작성하는 것이 좋습니다.</p>
+<div class="highlight">
+<pre>q_btn = Button(root, text=<span class="red2">'새로운 문제'</span>, width=<span class="green">10</span>, <span class="cd2">command=make_question</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/689.jpg"/></div>
+</div>
+<p class="txt bl">[새로운 문제] 버튼을 클릭할 때마다 다른 구구단 문제가 나타나고, 콤보박스에도 새로운 선택지가 나옵니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="826">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_123"><span class="yellow">15.2.6</span> 메시지박스</h4>
+<p class="txt bl"><span class="dm">메시지박스</span><span class="txts gray">(Messagebox)</span>는 웹에서 흔히 볼 수 있는 알림창입니다. 메시지박스는 메시지 종류에 따라 기본, 정보, 경고, 질문 유형이 있는데, 여기서는 정보와 오류 유형의 메시지박스를 사용하겠습니다. 다른 유형은 <a href="https://docs.python.org/3/library/tkinter.messagebox.html?highlight=messagebox">https://docs.python.org/3/library/tkinter.messagebox.html?highlight=messagebox</a>를 참고해 주세요.</p>
+<p class="txts"> </p>
+<p class="txtex dm">메시지박스 만들기</p>
+<p class="txt bl">메시지박스를 사용하려면 <span class="cd">tkinter</span> 패키지의 <span class="cd">messagebox</span> 모듈을 포함해야 합니다. 콤보박스 때처럼 <span class="cd">from tkinter.messagebox import *</span>로 작성하면 됩니다. 이렇게 모듈을 포함한 후 <span class="cd">help(messagebox)</span>를 실행하면 메시지박스에 대한 정보를 확인할 수 있습니다.</p>
+<p class="txt bl">정보 유형의 메시지박스는 <span class="cd">showinfo()</span> 함수로 표시합니다. <span class="cd">showinfo()</span>는 다음과 같이 사용합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>showinfo(title=<span class="red2">'팝업창명'</span>, message=<span class="red2">'메시지'</span>)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="827">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">다음 코드를 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+<span class="purple">from</span> tkinter.messagebox <span class="purple">import</span> *
+
+root = Tk()
+root.geometry(<span class="red2">'400x200'</span>)
+showinfo(title=<span class="red2">'메시지박스'</span>, message =<span class="red2">'회원가입이 완료됐습니다!'</span>)
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/691_1.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">showinfo()</span>는 information의 약자인 i가 이미지로 나타납니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="828">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">오류 유형의 메시지 박스는 <span class="cd">showerror()</span>를 사용합니다. 사용 방식은 동일합니다. 앞의 코드에서 <span class="cd">showinfo()</span> 부분만 변경한 후 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="cd2">showerror</span>(title=<span class="red2">'메시지박스'</span>, message=<span class="cd2 red2">'이미 가입한 회원입니다!'</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/691_2.jpg"/></div>
+</div>
+<p class="txt bl"><span class="cd">showerror()</span>는 <span class="dl">X</span> 표시가 이미지로 나타납니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">구구단 프로그램에 메시지박스 추가하기</p>
+<p class="txt bl">구구단 프로그램에서 정답을 확인하는 부분을 아직 작성하지 않았습니다. 이번에는 선택한 답이 맞는지 확인하는 <span class="cd">check_answer()</span> 함수를 작성한 후 [정답 확인] 버튼을 클릭하면 선택한 콤보박스의 값이 정답인지 아닌지를 알려 주는 메시지박스를 추가해 보겠습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="829">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">앞의 구구단 프로그램에서 [정답 확인] 버튼을 클릭했을 때 <span class="cd">check_answer()</span> 함수가 실행되게 합니다. <span class="cd">check_answer()</span> 함수에서는 선택한 값이 정답이면 ‘정답입니다!’를, 정답이 아닐 때는 ‘다시 한번 풀어 보세요.’를 메시지박스로 표시합니다. 전체 코드를 작성해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+<span class="purple">from</span> tkinter.ttk <span class="purple">import</span> *
+<span class="cd2 purple">from</span> <span class="cd2">tkinter.messagebox</span> <span class="cd2 purple">import</span> <span class="cd2">*</span>
+<span class="purple">import</span> random
+
+<span class="green"># ----- 프로그램 기능 부분 -----</span>
+<span class="green"># 전역변수</span>
+num1, num2 = <span class="green">0</span>, <span class="green">0</span>
+selection = [] <span class="green"># 전역변수로 위치 이동</span>
+
+<span class="blue2">def</span> <span class="gold">make_question</span>():
+    <span class="blue2">global</span> num1, num2
+    <span class="green"># 문제 만들기</span>
+    num1, num2 = random.randint(<span class="green">2</span>, <span class="green">9</span>), random.randint(<span class="green">1</span>, <span class="green">9</span>)
+    question.set(str(num1) + <span class="red2">'x'</span> + str(num2) + <span class="red2">'?</span> <span class="red2">'</span>)
+
+    <span class="green"># 선택지 만들기</span>
+    <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">4</span>):
+        selection.append(random.randint(<span class="green">2</span>, <span class="green">81</span>))
+    idx = random.randint(<span class="green">0</span>, <span class="green">4</span>)
+    selection.insert(idx, num1 * num2)
+    a_combo[<span class="red2">'values'</span>] = selection
+
+<span class="blue2">def</span> <span class="gold">check_answer</span>():
+    <span class="cd2 purple">if</span> <span class="cd2">int(a_combo.get())</span> <span class="cd2">=</span><span class="cd2">= num1 * num2:</span>
+        <span class="cd2">showinfo(title=</span><span class="cd2 red2">'정답 확인!'</span><span class="cd2">, message=</span><span class="cd2 red2">'정답입니다</span><span class="cd2 red2">.'</span><span class="cd2">)</span>
+    <span class="cd2 purple">else</span><span class="cd2">:</span>
+        <span class="cd2">showerror(title=</span><span class="cd2 red2">'정답 확인!'</span><span class="cd2">, message=</span><span class="cd2 red2">'다시 한번 풀어 보세요!'</span><span class="cd2">)</span>
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+root = Tk()
+root.title(<span class="red2">'구구단'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+question = StringVar()
+q_lbl = Label(root, textvariable=question, width=<span class="green">30</span>, anchor=<span class="red2">'center'</span>)
+q_lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+q_btn = Button(root, text=<span class="red2">'새로운 문제'</span>, width=<span class="green">10</span>, <span class="cd2">command=make_question</span>)
+
+q_btn.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+a_combo = Combobox(root, values=selection, width=<span class="green">30</span>)
+a_combo.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)
+a_btn = Button(root, text=<span class="red2">'정답 확인'</span>, width=<span class="green">10</span>, <span class="cd2">command=check_answer</span>)
+a_btn.grid(row=<span class="green">1</span>, column=<span class="green">1</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/693.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="830">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">[정답 확인] 버튼(<span class="cd">a_btn</span>)에 <span class="cd">command</span>로 <span class="cd">check_answer()</span> 함수를 연결했습니다. 기존의 <span class="cd">check_answer()</span> 함수는 정답을 계산해 동적변수 <span class="cd">answer</span>에 넣는 함수였죠. 여기서는 콤보박스의 값을 읽어와 정답과 비교하는 함수로 바꿨습니다. 콤보박스의 값은 <span class="cd">a_combo.get()</span>으로 읽어오는데, 이때 유의할 점이 있습니다. 읽어온 값은 문자열로 인식되기 때문에 정수형 정답(<span class="cd">num1 * num2</span>)과 비교하려면 <span class="cd">int()</span>로 감싸서 정수형으로 바꿔야 합니다. 그리고 이 값을 정답과 비교해 일치하는 경우에는 <span class="cd">showinfo()</span>를, 일치하지 않는 경우에는 <span class="cd">showerror()</span>를 실행하도록 조건문을 작성했습니다. 함수 내부에 있던 <span class="cd">selection = []</span>는 프로그램 전체에서 사용하므로 전역변수 정의 부분으로 올렸습니다. 정답도 선택하고 오답도 선택하며 메시지박스가 잘 뜨는지 확인해 보세요.</p>
+<p class="txt bl">이제 그럴듯한 구구단 프로그램이 됐습니다. 일부 위젯만 알아봤지만, ‘사용자 - 화면 - 코드’ 간의 흐름을 이해한다면 다른 위젯도 사용하기 어렵지 않을 겁니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="831">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_124"><span class="yellow">15.2.7</span> 프레임</h4>
+<p class="txt bl">웹 페이지를 보면 화면을 구역별로 나눠 비슷한 콘텐츠끼리 묶어 놓는 것을 볼 수 있습니다. 이렇게 웹 페이지 화면을 구역별로 나누는 것을 <span class="dm">프레임</span><span class="txts gray">(frame)</span>이라고 합니다.</p>
+<p class="txt bl">예를 들어, 우리에게 익숙한 포털 사이트 화면은 다음 그림처럼 구역을 나눌 수 있습니다.</p>
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/694.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-13</span> 웹 사이트 화면의 프레임</p>
+<p class="txt bl"><span class="cd">tkinter</span>에서도 프레임 위젯을 활용해 비슷한 성격을 가진 위젯이나 위치가 가까운 위젯끼리 묶어 구역을 설정할 수 있습니다. 다른 위젯과 마찬가지로 <span class="cd">Frame</span> 클래스의 객체를 만들고, 이 객체에 위젯을 배치하면 해당 프레임에 위젯이 나타납니다. 프레임도 여러 개를 만들어 배치할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="832">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">로그인 화면에 프레임 만들기</p>
+<p class="txt bl">엔트리에서 만든 로그인 화면을 수정해 2개의 프레임으로 구성해 보겠습니다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+root = Tk()
+<span class="cd2">root.title(</span><span class="cd2 red2">'frame'</span><span class="cd2">)</span>
+root.geometry(<span class="red2">'400x200'</span>)
+<span class="cd2">frame_A = Frame(root, relief=</span><span class="cd2 red2">'groove'</span><span class="cd2">, borderwidth=</span><span class="cd2 green">2</span><span class="cd2">)</span>
+<span class="cd2">frame_A.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+<span class="cd2">frame_B = Frame(root, relief=</span><span class="cd2 red2">'groove'</span><span class="cd2">, borderwidth=</span><span class="cd2 green">2</span><span class="cd2">)</span>
+<span class="cd2">frame_B.grid(row=</span><span class="cd2 green">1</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+
+id_lbl = Label(<span class="cd2">frame_A</span>, text=<span class="red2">'아이디 '</span>, width=<span class="green">10</span>, <span class="cd2">height=</span><span class="cd2 green">2</span>)
+id_lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+id_ent = Entry(<span class="cd2">frame_A</span>, width=<span class="green">20</span>)
+id_ent.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+pw_lbl = Label(<span class="cd2">frame_B</span>, text=<span class="red2">'비밀번호'</span>, width=<span class="green">10</span>, <span class="cd2">height=</span><span class="cd2 green">2</span>)
+pw_lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+pw_ent = Entry(<span class="cd2">frame_B</span>, width=<span class="green">20</span>)
+pw_ent.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/695.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="833">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">기본 창인 <span class="cd">root</span>를 먼저 만들었듯이 위젯을 만들기 전에 위젯을 배치할 프레임을 먼저 만들어야 합니다. 여기서는 <span class="cd">frame_A</span>와 <span class="cd">frame_B</span>라는 2개의 프레임 객체를 만들었습니다. 이렇게 만든 프레임도 기존 창에 구역을 만드는 것이므로 <span class="cd">root</span>를 기본 창으로 설정했습니다. 그리고 프레임을 확실하게 표현하기 위해 테두리 모양은 <span class="cd">relief='groove'</span>로, 테두리 두께는 <span class="cd">borderwidth=2</span>로 설정했습니다. <span class="cd">frame_B</span>도 같은 방법으로 만듭니다. 프레임 역시 <span class="cd">place()</span>, <span class="cd">pack()</span>, <span class="cd">grid()</span>로 배치할 수 있는데, 여기서는 <span class="cd">grid()</span>를 사용해 <span class="cd">frame_A</span>를 첫 번째 행에, <span class="cd">frame_B</span>를 두 번째 행에 배치했습니다.</p>
+<div class="w50"><img alt="" class="w100" src="https://thebook.io/img/080251/696.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-14</span> 프레임의 화면 배치</p>
+<p class="txt bl">프레임 생성과 배치가 끝나면 위젯을 배치합니다. 아이디를 출력하는 레이블 객체 <span class="cd">id_lbl</span>과 아이디를 입력받는 엔트리 객체 <span class="cd">id_ent</span>를 만들 때, 위치할 곳을 <span class="cd">root</span>가 아닌 <span class="cd">frame_A</span>로 지정합니다. 그래야 <span class="cd">frame_A</span> 구역에 두 위젯이 배치됩니다. <span class="cd">pw_lbl</span>과 <span class="cd">pw_ent</span>도 마찬가지로 위치할 곳을 <span class="cd">frame_B</span>로 지정합니다. 위젯을 배치할 때는 전체 창(<span class="cd">root</span>)이 아닌, 해당 프레임 내에서의 위치를 지정하면 됩니다. 예를 들어 <span class="cd">pw_lbl</span>과 <span class="cd">pw_ent</span>는 <span class="cd">root</span>를 기준으로 하면 <span class="cd">row=1</span> 위치에 있지만, <span class="cd">frame_B</span>를 기준으로 했을 때 <span class="cd">row=0</span>에 위치합니다. 따라서 <span class="cd">row=0</span>으로 설정합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="834">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">프레임을 설정한 웹 페이지 화면 만들기</p>
+<p class="txt bl">이번에는 포털 사이트의 메인 화면을 단순하게 만들어 보겠습니다. 가장 위에 사이트 로고와 이름이 있고, 그 아래에는 정보를 검색할 수 있도록 검색 구역과 오늘의 날씨를 알려 주는 날씨 구역을 넣어 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()
+root.title(<span class="red2">'렛츠기릿 포털 사이트'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+<span class="green"># ----- 프레임 생성 -----</span>
+frame_logo = Frame(root)
+frame_logo.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+frame_search = Frame(root)
+frame_search.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)
+frame_weather = Frame(root)
+frame_weather.grid(row=<span class="green">2</span>, column=<span class="green">0</span>)
+
+<span class="green"># ----- 로고 프레임 -----</span>
+logo = PhotoImage(file=<span class="red2">'lets get it.png'</span>)
+logo = logo.subsample(<span class="green">6</span>, <span class="green">6</span>)
+logo_label = Label(frame_logo, image=logo)
+logo_label.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+site_title = Label(frame_logo, text=<span class="red2">'렛츠기릿'</span>, font=(<span class="red2">'Malgun Gothic'</span>, <span class="green">20</span>))
+site_title.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+<span class="green"># ----- 검색 프레임 -----</span>
+search_lbl = Label(frame_search, text=<span class="red2">'검색어 입력'</span>, width=<span class="green">10</span>)
+search_lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+search_ent = Entry(frame_search, width = <span class="green">35</span>)
+search_ent.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+search_btn = Button(frame_search, text=<span class="red2">'검색'</span>, width=<span class="green">8</span>)
+search_btn.grid(row=<span class="green">0</span>, column=<span class="green">2</span>)
+
+<span class="green"># ----- 날씨 프레임 -----</span>
+weather_title = Label(frame_weather, text=<span class="red2">'오늘의 날씨'</span>, font=(<span class="red2">'Malgun Gothic'</span>, <span class="green">10</span>), width=<span class="green">10</span>)
+weather_title.grid(row=<span class="green">0</span>, column=<span class="green">0</span>, rowspan =<span class="green">2</span>)
+weather_temperature = Label(frame_weather, text=<span class="red2">'28도'</span>, font=(<span class="red2">'Malgun Gothic'</span>, <span class="green">14</span>), width=<span class="green">5</span>)
+weather_temperature.grid(row=<span class="green">0</span>, column=<span class="green">1</span>, rowspan=<span class="green">2</span>)
+weather_explain = Label(frame_weather, text=<span class="red2">'흐림, 어제보다 0도 높아요</span><span class="red2">. 체감온도</span> <span class="red2">30.4'</span>, width=<span class="green">35</span>)
+weather_explain.grid(row=<span class="green">0</span>, column=<span class="green">2</span>)
+weather_info = Label(frame_weather, text=<span class="red2">'미세먼지 좋음 / 초미세먼지 좋음'</span>, width=<span class="green">35</span>)
+weather_info.grid(row=<span class="green">1</span>, column=<span class="green">2</span>)
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/697.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="835">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">총 3개의 프레임을 만들고 프레임에 각각 위젯을 넣었습니다. <span class="cd">frame_logo</span>, <span class="cd">frame_search</span>, <span class="cd">frame_weather</span>를 위에서부터 순서대로 배치하고 <span class="cd">frame_logo</span>에는 텍스트 레이블과 이미지 레이블로 사이트 이름과 로고를, <span class="cd">frame_search</span>에는 레이블, 엔트리, 버튼으로 ‘검색어 입력’ 텍스트, 검색창, 검색 버튼을 일렬로 배치했습니다. <span class="cd">frame_weather</span>에는 레이블로 ‘오늘의 날씨’ 텍스트, 기온과 날씨 상세 내용을 배치했습니다.</p>
+<p class="txt bl">코드의 전체 구조는 다음과 같습니다.</p>
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/698.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-15</span> 프레임과 위젯의 구조</p>
+<p class="txt bl">프레임을 사용하지 않고 앞의 위젯을 전부 <span class="cd">root</span>에 <span class="cd">grid()</span>로 배치한다면 격자의 칸별로 너비와 높이를 통일해야 하기 때문에 유연하게 배치하기가 어렵습니다. 그리고 추가하거나 수정할 사항이 생겼을 때 위젯의 배치를 모두 수정해야 할 수도 있어서 매우 비효율적입니다.</p>
+<p class="txt bl">유사한 기능이나 인접한 위젯끼리 프레임으로 묶으면 해당 프레임 안에서는 다른 프레임과 다른 새로운 배치를 사용할 수도 있고, 위젯을 추가 또는 삭제하더라도 해당 프레임 안에서만 수정하면 되기 때문에 프로그램의 유지 보수가 훨씬 쉽습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="836">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a2"><span class="dm brown">2</span> 다음은 <span class="cd">sayhello</span> 리스트의 값을 화면에 보여 주는 프로그램입니다. [--&gt;] 버튼을 누를 때마다 화면에 현재 보이는 값의 오른쪽 요소 값이 화면에 표시됩니다. 코드를 보고 <span class="bg_black_line">틀린</span> 설명을 고르세요.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> * 
+
+sayhello = [<span class="red2">'안녕하세요'</span>, <span class="red2">'hello'</span>, <span class="red2">'니하오'</span>, <span class="red2">'봉쥬르'</span>] 
+idx = <span class="green">0    # sayhello 리스트의 인덱스</span>
+
+<span class="green"># ----- 프로그램 기능 부분 -----</span> 
+<span class="blue2">def</span> <span class="gold">plus</span>(): 
+    <span class="cd2">(가)</span> 
+    idx = (idx + <span class="green">1</span>) % <span class="green">4</span> 
+    <span class="cd2">(나)</span> 
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span> 
+root = Tk() 
+root.geometry(<span class="red2">'200x100'</span>) 
+
+hello_txt = StringVar() 
+hello_lbl = Label(root, textvariable=hello_txt, width=<span class="green">20</span>) 
+hello_lbl.grid(row=<span class="green">0</span>, column=<span class="green">0</span>) 
+
+btn_plus = Button(root, text=<span class="red2">'--&gt;'</span>, command=plus, width=<span class="green">5</span>) 
+btn_plus.grid(row=<span class="green">0</span>, column=<span class="green">1</span>) 
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/699.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/700.jpg"/></div>
+</div>
+<div class="ind10">
+<p class="txt bl">① <span class="cd">idx</span>는 전역변수다.</p>
+<p class="txt bl">② <span class="cd">plus()</span> 함수에서 <span class="cd">idx</span>를 변경하려면 (가)에는 <span class="cd">global idx</span>가 들어가야 한다.</p>
+<p class="txt bl">③ (나)에 들어갈 코드는 <span class="cd">hello_txt.get(sayhello[idx])</span>다.</p>
+<p class="txt bl">④ <span class="cd">hello_txt</span>는 동적변수다.</p>
+<p class="txt bl s12_12">⑤ 버튼을 클릭할 때마다 <span class="cd">plus()</span>가 실행된다.</p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0895/">정답 및 해설</a></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="837">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown9">15.3</span><br/>
+    핫플레이스 프로젝트에 화면 입히기</h3>
+</div>
+<p class="txt bl">핫플레이스 프로젝트에 <span class="cd">tkinter</span>를 사용해 화면을 입혀 보겠습니다. 지금까지는 코드 결과창에 지역별 그래프를 그렸는데, 이번에는 코드를 숨기고 프로그램 화면으로만 표현해 결과가 더 직관적으로 보이는 프로그램을 만들어 봅시다.</p>
+<p class="txt bl">기본 기능은 13장에서 완성했으므로 코드를 프로그램 화면에 맞게 수정하는 방향으로 작성해 보겠습니다. 13장에서 완성한 핫플레이스 프로젝트 파일을 열어 두고, 주피터 노트북에 새로운 파이썬 파일을 하나 만듭니다. 인구 데이터 파일(LOCAL_PEOPLE_DONG_201912.csv)과 행정동코드 파일(dong_code.csv), 위치 데이터 파일(dong_location.csv)도 새로 만든 파이썬 파일과 같은 폴더에 있어야 합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="838">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_125"><span class="yellow">15.3.1</span> 프로그램 화면 만들기</h4>
+<p class="txt bl">화면부터 구성해 봅시다. 핫플레이스 프로젝트에서 화면에 보여야 하는 부분은 어디일까요? 입력이 필요한 부분과 결과겠죠.</p>
+<p class="txt bl">입력 부분부터 봅시다. 분석이 시작되려면 행정동명을 입력받아야 합니다. 그리고 입력받은 행정동명의 행정동코드를 찾아야죠. 입력은 엔트리로 받고, 행정동코드를 찾는 함수가 실행되도록 버튼으로 이벤트를 설정합니다. 버튼은 각 엔트리 옆에 배치합시다. 입력할 부분이 또 있습니다. 하위 목표 4에서 두 지역을 비교할 때도 비교할 행정동명을 입력받는 엔트리와 행정동코드로 변환하는 버튼이 필요합니다.</p>
+<p class="txt bl">추가로 사용자가 보기 편하게, 분석을 시작하기 전에 인구 분석을 시작한다는 안내 문구를 넣겠습니다. 입력된 행정동명에 따라 출력되는 내용이 달라지므로 동적변수를 활용한 레이블을 만들면 됩니다.</p>
+<p class="txt bl">프로젝트에서 진행하는 분석은 총 4가지입니다. 따라서 어떤 분석을 진행할지도 입력받아야 합니다. 이런 경우에는 버튼을 사용하면 좋겠죠? 분석별로 각각 버튼을 만듭시다. 마지막으로 버튼을 클릭하면 결과 분석 그래프가 화면에 보이게 합니다.</p>
+<p class="txt bl">정리해서 화면을 스케치해 보겠습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/702.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-16</span> 핫플레이스 프로젝트 프로그램 화면</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="839">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">화면을 스케치하고 보니 구역이 보입니다. 프레임을 활용해 위젯을 묶을 수 있겠네요. 크게 메뉴 영역과 그래프 영역으로 나눠 프레임을 구성하고 개별 위젯을 만들어 보겠습니다.</p>
+<p class="txt bl">코드를 작성해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+root = Tk()
+root.geometry(<span class="red2">'800x500'</span>)
+root.title(<span class="red2">'핫플레이스는 언제 가야 가장 덜 붐빌까</span><span class="red2">?'</span>)
+
+<span class="green"># ----- 프레임 -----</span>
+Menu = Frame(root)
+Menu.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+Graph = Frame(root)
+Graph.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)
+
+<span class="green"># ----- 메뉴 프레임 -----</span>
+dong_ent1 = Entry(Menu, width=<span class="green">20</span>)
+dong_ent1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+
+dong_btn1 = Button(Menu, text=<span class="red2">'핫플레이스 행정동 설정'</span>, width=<span class="green">20</span>)
+dong_btn1.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+dong_ent2 = Entry(Menu, width=<span class="green">20</span>)
+dong_ent2.grid(row=<span class="green">0</span>, column=<span class="green">2</span>)
+
+dong_btn2 = Button(Menu, text=<span class="red2">'비교할 행정동 설정'</span>, width=<span class="green">20</span>)
+dong_btn2.grid(row=<span class="green">0</span>, column=<span class="green">3</span>)
+
+info = StringVar()
+dong_lbl = Label(Menu, textvariable=info, font=(<span class="red2">'Malgun Gothic'</span>, <span class="green">12</span>))
+dong_lbl.grid(row=<span class="green">1</span>, columnspan=<span class="green">4</span>)
+
+<span class="green"># ----- 그래프 프레임 -----</span>
+btn1 = Button(Graph, text=<span class="red2">'1. 시간대별 그래프'</span>, width=<span class="green">20</span>)
+btn1.grid(row=<span class="green">0</span>, column=0)
+
+btn2 = Button(Graph, text=<span class="red2">'2. 주중</span><span class="red2">/주말 그래프'</span>, width=<span class="green">20</span>)
+btn2.grid(row=<span class="green">0</span>, column=1)
+
+btn3 = Button(Graph, text=<span class="red2">'3. 남녀 그래프'</span>, width=<span class="green">20</span>)
+btn3.grid(row=<span class="green">0</span>, column=<span class="green">2</span>)
+
+btn4 = Button(Graph, text=<span class="red2">'4. 지역별 그래프'</span>, width=<span class="green">20</span>)
+btn4.grid(row=<span class="green">0</span>, column=<span class="green">3</span>)
+
+graph_lbl = Label(Graph)
+graph_lbl.grid(row=<span class="green">1</span>, column=<span class="green">0</span>, columnspan=<span class="green">5</span>)
+
+root.mainloop()</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="840">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/704.jpg"/></div>
+</div>
+<p class="txt bl">기본 창 <span class="cd">root</span>에 <span class="cd">Menu</span>와 <span class="cd">Graph</span>, 2개의 프레임을 배치했습니다. <span class="cd">Menu</span> 프레임에는 핫플레이스 행정동을 텍스트로 입력받는 <span class="cd">dong_ent1</span> 엔트리, 행정동코드로 변환하는 버튼의 <span class="cd">dong_btn1</span>, 비교할 행정동을 입력받는 <span class="cd">dong_ent2</span> 엔트리, 비교할 지역을 행정동코드로 변환하는 <span class="cd">dong_btn2</span>를 배치했습니다. <span class="cd">Menu</span>의 두 번째 행에는 ‘행정동명-행정동코드를 분석합니다!’가 출력되도록 동적변수 <span class="cd">info</span>를 정의하고 <span class="cd">dong_lbl</span> 레이블 객체를 만들었습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="841">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_126"><span class="yellow">15.3.2</span> 프로그램 기능 구현하기</h4>
+<p class="txt bl">이번에는 13장 코드를 기반으로 프로그램 기능 부분을 수정해 봅시다..</p>
+<p class="txts"> </p>
+<p class="txtex dm">파일 읽기</p>
+<p class="txt bl">가장 먼저 인구 분석에 필요한 파일을 읽어야 하죠. 파일을 읽는 <span class="cd">file_open()</span> 함수를 화면에 맞게 수정해 보겠습니다. 화면 구현 부분과 프로그램 기능 구현 부분을 분리하기 위해(코드의 가독성이 좋아집니다) 에디터에서 <span class="cd">tkinter</span> 화면을 만드는 코드를 작성한 셀 위에 셀을 하나 추가하고 <span class="cd">file_open()</span>을 작성합니다. 13장에서 만든 함수와 같으니 그대로 복사해도 됩니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> csv
+
+<span class="green"># ----- 프로그램 기능 부분 -----</span>
+<span class="blue2">def</span> <span class="gold">file_open</span>():
+    f = <span class="gold">open</span>(<span class="red2">'LOCAL_PEOPLE_DONG_201912.csv'</span>, encoding=<span class="red2">'utf8'</span>) <span class="green"># 또는 'eur-kr', 'cp949'</span>
+    data = csv.reader(f)
+    <span class="gold">next</span>(data)
+    data = list(data)
+
+    f2 = <span class="gold">open</span>(<span class="red2">'dong_code.csv'</span>, encoding = <span class="red2">'cp949'</span>) <span class="green"># 또는 'eur-kr', 'utf8'</span>
+    code_data = csv.reader(f2)
+    <span class="gold">next</span>(code_data)
+    <span class="gold">next</span>(code_data)
+    code_data = list(code_data)
+
+    <span class="purple">for</span> row <span class="blue2">in</span> data:
+        <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">1</span>, <span class="green">32</span>):
+            <span class="purple">if</span> i &lt;= <span class="green">2</span>:
+                row[i] = int(row[i])
+            <span class="purple">else</span>:
+                row[i] = float(row[i])
+
+    <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+        row[<span class="green">1</span>] = int(row[<span class="green">1</span>])
+
+    <span class="purple">return</span> data, code_data</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="842">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">화면이 만들어지기 전에 데이터를 읽어야 합니다. 화면에는 파일 읽기를 실행하는 버튼이 없기 때문입니다. 따라서 파일 읽기 함수와 화면 코드 사이에 파일을 읽고 전역변수를 정의하는 <span class="cd">data</span>, <span class="cd">code_data = file_open()</span>을 넣습니다.</p>
+<div class="highlight">
+<pre><span class="green"># ----- 프로그램 기능 부분 -----</span>
+<span class="blue2">def</span> <span class="gold">file_open</span>():
+    ...
+
+<span class="green"># 전역변수</span>
+<span class="cd2">data, code_data = file_open()</span>
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+root = Tk()
+…</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="843">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">행정동명을 행정동코드로 변환하기</p>
+<p class="txt bl">입력받은 행정동명의 행정동코드를 찾는 함수를 만들어 봅시다. 엔트리에 입력된 행정동명을 가져와 행정동코드 데이터인 <span class="cd">code_data</span>에서 검색해야 하죠? 비교 지역까지 2개의 행정동명을 입력받기 때문에 4개의 전역변수를 만들고 검색 함수도 2개를 만듭니다.</p>
+<div class="highlight">
+<pre><span class="green"># ----- 프로그램 기능 부분 -----</span>
+<span class="blue2">def</span> <span class="gold">file_open</span>():
+    ...
+
+<span class="green"># 핫플레이스가 있는 행정동명의 행정동코드(dong_code1)를 찾는 함수</span>
+<span class="cd2 blue2">def</span> <span class="cd2 gold">dong_search1</span><span class="cd2">():</span>
+    <span class="cd2 blue2">global</span> <span class="cd2">dong_name1, dong_code1</span>
+    <span class="cd2">dong_name1 = dong_ent1.get()</span>
+
+    <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+        <span class="purple">if</span> row[<span class="green">-1</span>] == <span class="cd2">dong_name1:</span>
+            <span class="cd2">dong_code1</span> = row[<span class="green">1</span>]
+    <span class="cd2">info.set(dong_name1 +</span> <span class="cd2 red2">'-'</span> <span class="cd2">+ str(dong_code1) +</span> <span class="cd2 red2">'을(를</span><span class="cd2 red2">)</span> <span class="cd2 red2">분석합니다!'</span><span class="cd2">)</span>
+
+<span class="green"># 비교할 행정동명의 행정동코드</span><span class="green">(dong_code2)를 찾는 함수</span>
+<span class="cd2 blue2">def</span> <span class="cd2 gold">dong_search2</span><span class="cd2">():</span>
+    <span class="cd2 blue2">global</span> <span class="cd2">dong_name2, dong_code2</span>
+    <span class="cd2">dong_name2 = dong_ent2.get()</span>
+
+    <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+        <span class="purple">if</span> row[<span class="green">-1</span>] == <span class="cd2">dong_name2:</span>
+            <span class="cd2">dong_code2</span> = row[<span class="green">1</span>]
+    <span class="cd2">info.set(dong_name1 +</span> <span class="cd2 red2">'과 '</span><span class="cd2">+ dong_name2 +</span> <span class="cd2 red2">'을(를) 비교합니다!'</span><span class="cd2">)</span>
+
+<span class="green"># 전역변수</span>
+data, code_data = file_open()
+<span class="cd2">dong_name1, dong_code1 =</span> <span class="red2">''</span>, <span class="red2">''</span>   <span class="green"># 핫플레이스가 있는 행정동명과 행정동코드</span>
+<span class="cd2">dong_name2, dong_code2 =</span> <span class="red2">''</span>, <span class="red2">''</span>   <span class="green"># 비교할 행정동명과 행정동코드</span></pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="844">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">dong_name1</span>, <span class="cd">dong_name2</span>와 <span class="cd">dong_code1</span>, <span class="cd">dong_code2</span>를 전역변수로 정의해야 합니다. 함수에서 사용하는 전역변수는 함수 정의 전에 있는 것이 인지 순서상 더 편하지만, 코드의 가독성을 위해 기존 전역변수가 있는 곳 아래에 작성하겠습니다. 함수에서 사용하는 전역변수는 해당 함수 호출 전에만 정의되면 됩니다. 네 변수 모두 초깃값으로 빈 값을 넣어 줍니다.</p>
+<p class="txt bl"><span class="cd">tkinter</span>에서 버튼의 이벤트로 연결되는 함수는 인자를 넣어서 전달할 수 없습니다. 예를 들어 <span class="cd">command=dong_search('합정동')</span>이 아닌 <span class="cd">command=dong_search</span>로 작성해야 합니다. 그래서 기존 <span class="cd">dong_search()</span> 함수를 <span class="cd">dong_search1()</span>, <span class="cd">dong_search2()</span>로 나누고 매개변수 없이 정의합니다. 각각 핫플레이스가 있는 행정동코드와 비교할 행정동의 코드를 찾는 함수입니다.</p>
+<p class="txt bl">행정동명을 엔트리 입력에서 읽어와야 하므로 <span class="cd">dong_ent1.get()</span>, <span class="cd">dong_ent2.get()</span>으로 읽어와서 전역변수 <span class="cd">dong_name1</span>과 <span class="cd">dong_name2</span>에 값을 저장합니다. 이때 함수에서 전역변수의 값을 변경하므로 <span class="cd">global</span>로 선언합니다. 그리고 이 값을 <span class="cd">code_data</span>의 <span class="cd">row[-1]</span>과 비교합니다. 기존 코드에서 함수 <span class="cd">dong_search()</span>는 <span class="cd">dong_code</span>를 반환하는 부분이 있었지만, 여기서는 전역변수 <span class="cd">dong_code1</span>, <span class="cd">dong_code2</span>에 저장되므로 <span class="cd">return</span>으로 값을 반환하는 부분은 삭제해도 됩니다. 그리고 행정동명이 행정동코드로 제대로 변환됐다는 것을 사용자가 알 수 있게 <span class="cd">set()</span> 함수로 <span class="cd">info</span> 레이블에 값을 보여 줍니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 사실 <span class="cd">lambda</span>라는 익명함수를 사용하면 버튼 이벤트 연결에서도 인자를 전달할 수 있지만, 이 책에서는 다루지 않았기 때문에 전역변수를 활용합니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="845">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이제 함수를 버튼에 이벤트로 연결할 차례입니다. 프로그램 화면 부분에서 [핫플레이스 행정동 설정] 버튼에는 <span class="cd">dong_search1()</span> 함수를, [비교할 행정동 설정] 버튼에는 <span class="cd">dong_search2()</span> 함수를 이벤트로 연결해 봅시다.</p>
+<div class="highlight">
+<pre><span class="green"># ----- 메뉴 프레임 -----</span>
+…
+dong_btn1 = Button(Menu, text=<span class="red2">'핫플레이스 행정동 설정'</span>, width=<span class="green">20</span>, <span class="cd2">command=dong_search1</span>)
+dong_btn1.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+…
+dong_btn2 = Button(Menu, text=<span class="red2">'비교할 행정동 설정'</span>, width=<span class="green">20</span>, <span class="cd2">command=dong_search2</span>)
+dong_btn2.grid(row=<span class="green">0</span>, column=<span class="green">3</span>)
+
+…</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/708.jpg"/></div>
+</div>
+<p class="txt bl">엔트리 두 곳에 행정동명을 입력해서 이벤트 연결이 잘 되나 확인해 보세요. 행정동명을 입력하고 버튼을 차례대로 클릭하면 <span class="cd">info</span> 레이블에 행정동명과 코드가 나타납니다. 이렇게 <span class="cd">Menu</span> 프레임을 완성했습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="846">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">그래프 그리기</p>
+<p class="txt bl">다음으로 <span class="cd">Graph</span> 프레임 부분을 작성해 봅시다. 먼저 그래프 그리는 <span class="cd">graph_plot()</span> 함수입니다. <span class="cd">graph_plot()</span> 함수는 네 가지 분석 버튼을 눌렀을 때 분석 버튼에 이벤트로 연결된 함수들이 공통으로 호출하는 함수입니다. 따라서 그래프로 그릴 인구와 그래프 제목 등을 인자로 입력받아 그래프를 그리고 레이블 <span class="cd">graph_lbl</span> 위치에 나타내면 됩니다.</p>
+<p class="txt bl">화면 위에 <span class="cd">matplotlib</span>으로 그래프를 직접 그릴 수 있으나 방법이 복잡해 이 책에서는 다루지 않습니다. 그래서 화면에 그래프를 직접 그리는 대신 그래프를 이미지로 저장한 후, 이를 <span class="cd">PhotoImage</span> 객체로 저장해 <span class="cd">graph_lbl</span> 레이블에 표시하는 방법을 사용하겠습니다. <span class="cd">dong_search2()</span> 함수 아래에 <span class="cd">graph_plot()</span> 함수를 정의하는 코드를 다음과 같이 추가합니다. <span class="cd">graph_plot()</span>은 버튼에 이벤트로 연결될 함수가 아니기 때문에 매개변수를 사용할 수 있습니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+
+<span class="green"># 그래프 그리는 함수</span>
+<span class="blue2">def</span> <span class="gold">graph_plot</span>(<span class="blue2">popu_list</span>, <span class="blue2">label_list</span>, <span class="blue2">graph_title</span>):
+    <span class="cd2">plt.figure(figsize=(</span><span class="cd2 green">10</span><span class="cd2">,</span> <span class="cd2 green">5</span><span class="cd2">))</span> <span class="green"># 그래프 크기 설정</span>
+    plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+    plt.title(graph_title)
+    <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(popu_list)):
+        plt.plot(<span class="gold">range</span>(<span class="green">24</span>), popu_list[i], label=label_list[i])
+    plt.legend()
+    plt.xlabel(<span class="red2">'시간대'</span>)
+    plt.ylabel(<span class="red2">'평균인구수'</span>)
+    plt.xticks(<span class="gold">range</span>(<span class="green">24</span>), <span class="gold">range</span>(<span class="green">24</span>))
+    <span class="cd2">plt.savefig(</span><span class="cd2 red2">'graph.png'</span><span class="cd2">)</span> <span class="green"># 결과 그래프를 이미지로 저장하기</span>
+    plt.show()
+
+    <span class="green"># 그래프 이미지를 PhotoImage의 객체로 만들고, graph_lbl 레이블에 표시하기</span>
+    <span class="cd2">graph_img = PhotoImage(file=</span><span class="cd2 red2">'graph.png'</span><span class="cd2">)</span>
+    <span class="cd2">graph_lbl.configure(image=graph_img)</span>
+    <span class="cd2">graph_lbl.image = graph_img</span></pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="847">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그래프를 이미지로 저장하는 명령어는 <span class="cd">plt.savefig('이미지 파일')</span>입니다(확장자도 있어야 합니다). 실행하면 파이썬 파일이 위치한 폴더에 지정한 이름으로 그래프가 저장됩니다. 이 명령어는 <span class="cd">plt.show()</span> 바로 앞에 있어야 합니다. 이렇게 <span class="cd">graph_plot()</span> 함수에서 저장한 그래프 이미지가 <span class="cd">graph_lbl</span> 레이블에 표시되어야 합니다. 처음에는 비어 있던 <span class="cd">graph_lbl</span>에 이미지를 나타내는 방법은 다음과 같습니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>이미지명 = PhotoImage(file=<span class="red2">'이미지 파일'</span>)
+레이블명.configure(image=이미지명)
+레이블명.image = 이미지명</pre>
+</div>
+<p class="txt bl">먼저 이미지로 저장한 그래프를 <span class="cd">PhotoImage</span>의 객체로 만듭니다. 그리고 <span class="cd">configure(image=이미지명)</span>으로 레이블에 이미지를 보여 주게 합니다. 마지막으로 <span class="cd">레이블명.image = 이미지명</span>으로 이미지를 레이블에 나타냅니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> <span class="cd">configure()</span> 메서드에 관한 자세한 내용은 <span class="cd">help(Label.configure)</span>를 실행해 확인해 보세요.</p>
+</div>
+<p class="txt bl">이 방법에 따라 <span class="cd">graph_img = PhotoImage(file='graph.png')</span>로 이미지 객체를 만든 후 <span class="cd">graph_lbl.configure(image=graph_img)</span>와 <span class="cd">graph_lbl.image = graph_img</span>로 <span class="cd">graph_lbl</span> 레이블에 이미지 객체 <span class="cd">graph_img</span>를 보여 주게 설정하면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="848">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">인구 비교하기</p>
+<p class="txt bl">첫 번째 버튼인 [1. 시간대별 그래프] 버튼에 연결할 이벤트인 <span class="cd">analysis1()</span> 함수를 13장을 참고해서 작성해 봅시다. 버튼에 연결되는 이벤트 함수라서 인자로 데이터를 전달받는 매개변수가 없어야 합니다. 그리고 두 지역을 비교하는 [4. 지역별 그래프] 버튼에서는 <span class="cd">analysis1()</span>을 호출하기 때문에 매개변수 <span class="cd">graph_yn = 'y'</span>는 필요합니다(코드는 거의 같으므로 변경된 부분만 표시합니다).</p>
+<div class="highlight">
+<pre><span class="blue2">def</span> <span class="gold">analysis1</span>(<span class="blue2">graph_yn</span> = <span class="red2">'y'</span>):
+    population = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+    <span class="purple">for</span> row <span class="blue2">in</span> data:
+        <span class="purple">if</span> row[<span class="green">2</span>] == <span class="cd2">dong_code1</span>:
+            time, p = row[<span class="green">1</span>], row[<span class="green">3</span>]
+            population[time] += p
+    population = [p/<span class="green">31</span> <span class="purple">for</span> p <span class="blue2">in</span> population]
+    <span class="purple">if</span> graph_yn == <span class="red2">'n'</span>:
+        <span class="purple">return</span> population
+
+    population = [population]
+    labels = [<span class="red2">'평균인구'</span>]
+    title = <span class="cd2">dong_name1</span> + <span class="red2">' 시간대별 평균인구'</span>
+    graph_plot(popu_list = population, label_list = labels, graph_title = title)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="849">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">analysis1()</span> 함수 작성이 끝나면 [1. 시간대별 그래프] 버튼에 이벤트로 연결합니다. 그리고 프로그램을 실행해 그래프가 나타나는지 확인해 보세요.</p>
+<div class="highlight">
+<pre>btn1 = Button(Graph, text=<span class="red2">'1. 시간대별 그래프'</span>, width=<span class="green">20</span>, <span class="cd2">command=analysis1</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/711.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="850">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">다른 분석도 동일하게 진행하면 됩니다. 데이터를 분석하는 함수는 매개변수를 삭제하고, <span class="cd">dong_name</span>과 <span class="cd">dong_code</span>를 각각 <span class="cd">dong_name1</span>, <span class="cd">dong_code1</span>로 변경하는 것 외에는 다른 점이 없습니다. <span class="cd">analysis2()</span>, <span class="cd">analysis3()</span>도 작성합시다(코드는 거의 같으므로 변경된 부분만 표시합니다).</p>
+<div class="highlight">
+<pre><span class="purple">import</span> datetime
+
+<span class="blue2">def</span> <span class="gold">analysis2</span>():
+    weekday = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+    weekend = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+
+    <span class="purple">for</span> row <span class="blue2">in</span> data:
+        <span class="purple">if</span> row[<span class="green">2</span>] == <span class="cd2">dong_code1</span>:
+            time, p = row[<span class="green">1</span>], row[<span class="green">3</span>]
+            year, mon, day = int(row[<span class="green">0</span>][:<span class="green">4</span>]), int(row[<span class="green">0</span>][<span class="green">4</span>:<span class="green">6</span>]), int(row[<span class="green">0</span>][<span class="green">6</span>:])
+            num = datetime.date(year, mon, day).weekday()
+            <span class="purple">if</span> num &lt; <span class="green">5</span>:
+                weekday[time] += p
+            <span class="purple">else</span>:
+                weekend[time] += p
+
+    weekday_cnt, weekend_cnt = <span class="green">0</span>, <span class="green">0</span>
+    <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">1</span>, <span class="green">32</span>):
+        <span class="purple">if</span> datetime.date(<span class="green">2019</span>, <span class="green">12</span>, i).weekday() &lt; <span class="green">5</span>:
+            weekday_cnt += <span class="green">1</span>
+        <span class="purple">else</span>:
+            weekend_cnt += <span class="green">1</span>
+    weekday = [w/weekday_cnt <span class="purple">for</span> w <span class="blue2">in</span> weekday]
+    weekend = [w/weekend_cnt <span class="purple">for</span> w <span class="blue2">in</span> weekend]
+
+    data_set = [weekday, weekend]
+    labels = [<span class="red2">'주중'</span>, <span class="red2">'주말'</span>]
+    title = <span class="cd2">dong_name1</span> + <span class="red2">' 주중/주말 시간대별 평균인구'</span>
+    graph_plot(popu_list = data_set, label_list = labels, graph_title = title)
+
+<span class="blue2">def</span> <span class="gold">analysis3</span>():
+    male = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+    female = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+
+    <span class="purple">for</span> row <span class="blue2">in</span> data:
+        <span class="purple">if</span> row[<span class="green">2</span>] == <span class="cd2">dong_code1</span>:
+            time = int(row[<span class="green">1</span>])
+            male[time] += <span class="gold">sum</span>(row[<span class="green">4</span>:<span class="green">18</span>])
+            female[time] += <span class="gold">sum</span>(row[<span class="green">18</span>:<span class="green">32</span>])
+
+    male = [m/<span class="green">31</span> <span class="purple">for</span> m <span class="blue2">in</span> male]
+    female = [f/<span class="green">31</span> <span class="purple">for</span> f <span class="blue2">in</span> female]
+
+    data_set = [male, female]
+    labels = [<span class="red2">'남성'</span>, <span class="red2">'여성'</span>]
+    title = <span class="cd2">dong_name1</span> + <span class="red2">' 남녀 시간대별 평균인구'</span>
+    graph_plot(popu_list = data_set, label_list = labels, graph_title = title)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="851">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">완성된 함수는 버튼에 이벤트로 연결합니다.</p>
+<div class="highlight">
+<pre><span class="green"># ----- 프로그램 화면 부분 -----</span>
+<span class="green">…</span>
+btn2 = Button(Graph, text=<span class="red2">'2. 주중/주말 그래프'</span>, width=<span class="green">20</span>, <span class="cd2">command=analysis2</span>)
+…
+btn3 = Button(Graph, text=<span class="red2">'3. 남녀 그래프'</span>, width=<span class="green">20</span>, <span class="cd2">command=analysis3</span>)
+<span class="green">…</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/713.jpg"/></div>
+</div>
+<p class="txt bl">각각의 버튼을 클릭했을 때 두 그래프가 화면에 잘 나타납니다. 화면에 그래프 이미지가 나타나지 않으면 코드 결과창을 보면서 어떤 부분에서 오류가 발생하는지 추적해 틀린 부분을 수정해 보세요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="852">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">마지막으로 [4. 지역별 그래프] 버튼을 클릭할 때 실행되는 <span class="cd">analysis4()</span> 함수를 작성해 봅시다. 13장에서는 <span class="cd">analysis1()</span> 함수에 매개변수 <span class="cd">dong_name</span>, <span class="cd">dong_code</span>가 있어서 핫플레이스가 있는 행정동명과 코드, 비교할 행정동명과 코드를 인자로 전달하기만 하면 두 행정동의 평균인구를 구해 비교했습니다. 하지만 <span class="cd">tkinter</span>에서는 매개변수를 사용하지 않으므로 13장의 코드와는 다른 방식으로 접근해야 합니다.</p>
+<p class="txt bl"><span class="cd">analysis1()</span>에서 이미 핫플레이스 행정동의 평균인구를 구했으므로 <span class="cd">analysis4()</span>에서는 <span class="cd">dong_name2</span>, <span class="cd">dong_code2</span>로 비교할 행정동의 평균인구를 직접 구하고 주중/주말 인구나 성별 인구를 비교할 때처럼 비교 그래프를 그리면 됩니다.</p>
+<div class="highlight">
+<pre><span class="blue2">def</span> <span class="gold">analysis4</span>():
+    population1 = <span class="cd2">analysis1(graph_yn =</span> <span class="cd2 red2">'n'</span><span class="cd2">)</span>
+    population2 = <span class="cd2">[</span><span class="cd2 green">0</span> <span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="gold">range</span><span class="cd2">(</span><span class="cd2 green">24</span><span class="cd2">)]</span>
+    <span class="cd2 purple">for</span> <span class="cd2">row</span> <span class="cd2 blue2">in</span> <span class="cd2">data:</span>
+        <span class="cd2 purple">if</span> <span class="cd2">row[</span><span class="cd2 green">2</span><span class="cd2">]</span> <span class="cd2">=</span><span class="cd2">= dong_code2:</span>
+            <span class="cd2">time, p = row[</span><span class="cd2 green">1</span><span class="cd2">], row[</span><span class="cd2 green">3</span><span class="cd2">]</span>
+            <span class="cd2">population2[time] += p</span>
+    <span class="cd2">population2 = [p/</span><span class="cd2 green">31</span> <span class="cd2">for p</span> <span class="cd2 blue2">in</span> <span class="cd2">population2]</span>
+
+    data_set = [population1, population2]
+    labels = [dong_name1, dong_name2]
+    title = dong_name1 + <span class="red2">'과 '</span> + dong_name2 + <span class="red2">' 시간대별 평균인구'</span>
+    graph_plot(popu_list = data_set, label_list = labels, graph_title = title)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="853">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">작성한 함수를 <span class="cd">btn4</span> 버튼에 이벤트로 연결한 후 실행해 봅시다.</p>
+<div class="highlight">
+<pre>btn4 = Button(Graph, text=<span class="red2">'4. 지역별 그래프'</span>, width=<span class="green">20</span>, <span class="cd2">command=analysis4</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/714.jpg"/></div>
+</div>
+<p class="txt bl">두 지역의 인구 그래프가 잘 나타납니다. 핫플레이스 프로젝트에 화면을 입히니 좀 더 프로그램다워지고 인구 분석하기도 좀 더 편해졌습니다. 이를 응용해 다양한 프로젝트를 직접 작성해 보세요! 프로그래밍 실력이 느는 것이 느껴질 겁니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="854">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">전체 프로그램 구조는 다음과 같습니다(전체 코드는 소스 코드에서 확인해 주세요).</p>
+<div class="highlight">
+<pre><span class="green"># ----- 프로그램 기능 부분 -----</span>
+<span class="purple">import</span> csv
+<span class="purple">import</span> datetime
+<span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+<span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+<span class="blue2">def</span> <span class="gold">file_open</span>() :
+    …
+<span class="blue2">def</span> <span class="gold">dong_search1</span>() :
+    …
+<span class="blue2">def</span> <span class="gold">dong_search2</span>() :
+    …
+<span class="blue2">def</span> <span class="gold">graph_plot</span>(<span class="blue2">popu_list</span>, <span class="blue2">label_list</span>, <span class="blue2">graph_title</span>):
+    …
+<span class="blue2">def</span> <span class="gold">analysis1</span>(<span class="blue2">graph_yn</span> = <span class="red2">'y'</span>):
+    …
+<span class="blue2">def</span> <span class="gold">analysis2</span>():
+    …
+<span class="blue2">def</span> <span class="gold">analysis3</span>():
+    …
+<span class="blue2">def</span> <span class="gold">analysis4</span>():
+    …
+
+<span class="green"># 전역변수</span>
+data, code_data = file_open()     <span class="green"># 파일 읽기</span>
+dong_name1, dong_code1 = <span class="red2">''</span>, <span class="red2">''</span>   <span class="green"># 핫플레이스가 있는 행정동명과 행정동코드</span>
+dong_name2, dong_code2 = <span class="red2">''</span>, <span class="red2">'' </span>  <span class="green"># 비교할 행정동명과 행정동코드</span>
+
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+root = Tk()
+root.geometry(<span class="red2">'800x500'</span>)
+root.title(<span class="red2">'핫플레이스는 언제 가야 가장 덜 붐빌까?'</span>)
+<span class="green"># ----- 프레임 -----</span>
+…
+<span class="green"># ----- 메뉴 프레임 -----</span>
+…
+<span class="green"># ----- 그래프 프레임 -----</span>
+…
+root.mainloop()</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="855">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">파이썬의 기본적인 개념과 사용법을 배우고 이를 적용해 프로젝트까지 구현해 봤습니다. 책에서는 인구 데이터 분석을 진행했지만 직접 데이터를 선정해 나만의 프로젝트를 작성해 보길 권장합니다.</p>
+<p class="txt bl">프로그래밍은 아이디어를 현실화할 수 있는 효율적인 도구입니다. 아이디어를 논리적인 순서로 정리하고, 이를 프로그래밍으로 구현해 자동화할 수 있죠. 또한, 프로그래밍은 창의적인 발상을 현실화할 수 있는 훌륭한 도구입니다. 그렇기 때문에 프로그래밍을 전공자만 배워야 하는 것이 아니라, 모든 사람이 자신의 창의성을 실체화할 수 있는 방법으로 프로그래밍을 배워야 한다고 생각합니다.</p>
+<p class="txt bl">그래서 이 책은 입문자가 배우기 어렵다고 판단되는 심화적인 부분은 배제하고 핵심 개념을 중심으로 설명했습니다. 예를 들어 클래스와 객체에서 상속 개념을 설명하지 않았고, <span class="cd">matplotlib</span>을 <span class="cd">fig</span>, <span class="cd">ax = plt.subplot()</span> 방식 대신 <span class="cd">plt.plot()</span>으로 설명한 것 등이 해당됩니다. 하지만 심화 부분을 알지 못하더라도 나만의 프로젝트를 할 수 있습니다. 그래서 이 책은 프로그래밍을 처음 배우는 분도 차근차근 혼자 공부할 수 있게 구성하려 노력했습니다. 만약 이 책을 통해 프로그래밍에 흥미를 느꼈다면 심화 내용을 다룬 다른 도서나 인터넷 검색을 통해 이 흥미를 지속하길 진심으로 기원합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="856">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown10">15</span><br/>
+      마무리</h3>
+</div>
+<p class="txtex dm s10_10"><span class="dm brown">1</span> tkinter 창 나타내기</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()
+<span class="green"># ----- 프로그램 화면 부분 -----</span>
+root.mainloop()</pre>
+</div>
+<p class="txtex dm s10_10"><span class="dm brown">2</span> tkinter 창 설정하기</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w30">
+<p class="txts dm">구분</p>
+</td>
+<td class="w70">
+<p class="txts dm">형식</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">창의 제목 설정</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">root.title('창의 제목')</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">창의 크기 설정</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">root.geometry('가로 크기x세로 크기')</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">창이 나타나는 위치 설정</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">root.geometry('가로 크기x세로 크기+가로 위치+세로 위치')</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">창 크기 변경가능 여부 설정</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">root.resizable(너비변경여부, 높이변경여부)</span></p>
+<p class="txts dl">변경할 수 있다면 <span class="cd">True</span>, 변경할 수 없다면 <span class="cd">False</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="857">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<p class="txtex dm s10_10"><span class="dm brown">3</span> 위젯</p>
+<div class="ind10">
+<p class="txt dl">1) 위젯 만들기</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre><span class="green"># 텍스트 레이블 객체 생성하기</span>
+레이블명 = Label(레이블위치, text=<span class="red2">'텍스트'</span>)
+<span class="green"># 이미지 레이블 객체 생성하기</span>
+이미지명 = PhotoImage(file=<span class="red2">'이미지 파일'</span>)
+레이블명 = Label(레이블위치, image=이미지저장변수)
+<span class="green"># 버튼 객체 생성</span>
+버튼명 = Button(버튼위치, text=<span class="red2">'버튼에 나타낼 텍스트'</span>)
+<span class="green"># 엔트리 객체 생성</span>
+엔트리명 = Entry(입력칸위치)
+    <span class="green"># 콤보박스 객체 생성</span> 
+    <span class="purple">from</span> tkinter.ttk <span class="purple">import</span> * 
+    콤보박스명 = Combobox(콤보박스위치, values=<span class="red2">'콤보박스에 나타낼 값(리스트)'</span>) 
+    <span class="green"># 정보제공 메시지박스 띄우기</span> 
+    <span class="purple">from</span> tkinter.messagebox <span class="purple">import</span> * 
+    showinfo(title=<span class="red2">'메시지 창 제목'</span>, message=<span class="red2">'나타낼 메시지'</span>) 
+    <span class="green"># 오류 메시지박스 띄우기</span> 
+    <span class="purple">from</span> tkinter.messagebox <span class="purple">import</span> * 
+    showerror(title=<span class="red2">'메시지 창 제목'</span>, message=<span class="red2">'나타낼 메시지'</span>)</pre>
+</div>
+<p class="txts"> </p>
+<p class="txtex2 dl">2) 위젯에 공통으로 적용할 수 있는 옵션</p>
+<table>
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w20">
+<p class="txts dm">구분</p>
+</td>
+<td class="w30">
+<p class="txts dm">형식</p>
+</td>
+<td class="w50">
+<p class="txts dm">옵션 값</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">위젯 너비 설정</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">width=너비</span></p>
+</td>
+<td class="w50">
+<p class="txts"> </p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">위젯 높이 설정</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">height=높이</span></p>
+</td>
+<td class="w50">
+<p class="txts"> </p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">위젯 내 텍스트 또는 이미지 정렬</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">anchor=정렬방식</span></p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">center</span>, <span class="cd">e</span>, <span class="cd">w</span>, <span class="cd">s</span>, <span class="cd">n</span>, <span class="cd">se</span>, <span class="cd">sw</span>, <span class="cd">ne</span>, <span class="cd">nw</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">테두리 설정</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">relief=테두리모양</span></p>
+</td>
+<td class="w350">
+<p class="txts dl"><span class="cd">flat</span>, <span class="cd">groove</span>, <span class="cd">raised</span>, <span class="cd">ridge</span>, <span class="cd">solid</span>, <span class="cd">sunken</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">테두리 두께 설정</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">borderwidth=테두리두께</span></p>
+</td>
+<td class="w50">
+<p class="txts"> </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txts"> </p>
+<p class="txtex2 dl">3) 위젯에 추가로 적용할 수 있는 옵션과 명령어</p>
+<table>
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w20">
+<p class="txts dm">위젯</p>
+</td>
+<td class="w40">
+<p class="txts dm">설명</p>
+</td>
+<td class="w40">
+<p class="txts dm">형식</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">버튼</p>
+</td>
+<td class="w40">
+<p class="txts dl">이벤트 설정 옵션</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">command=함수명</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl">콤보박스</p>
+</td>
+<td class="w40">
+<p class="txts dl">콤보박스에 보여 줄 값 설정</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">콤보박스명.current(숫자)</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts"> </p>
+</td>
+<td class="w40">
+<p class="txts dl">콤보박스에 새로운 값 설정</p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">콤보박스명['values'] = 리스트</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">4</span> 위젯 배치하기</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w15">
+<p class="txts dm">구분</p>
+</td>
+<td class="w15">
+<p class="txts dm">함수</p>
+</td>
+<td class="w40">
+<p class="txts dm">형식</p>
+</td>
+<td class="w30">
+<p class="txts dm">설명</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w15">
+<p class="txts dl">절대위치</p>
+</td>
+<td class="w15">
+<p class="txts dl"><span class="cd">place()</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">위젯명.place(x=x좌표, y=y좌표)</span></p>
+</td>
+<td class="w30">
+<p class="txts dl">좌표를 숫자로 직접 입력</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w15" rowspan="2">
+<p class="txts dl">상대위치</p>
+</td>
+<td class="w15">
+<p class="txts dl"><span class="cd">pack()</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">위젯명.pack()</span></p>
+</td>
+<td class="w30">
+<p class="txts dl">위젯 간 상대위치 사용</p>
+<p class="txts dl">위치 설정 옵션 <span class="cd">side</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w15">
+<p class="txts dl"><span class="cd">grid()</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">위젯명.grid(row=행, column=열)</span></p>
+</td>
+<td class="w30">
+<p class="txts dl">격자를 활용한 상대위치 사용</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="858">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5" id="s1">
+<p class="txt1 dm"><span class="brown">Self Check</span></p>
+<p class="txts"> </p>
+<div class="box_white2">
+<p class="txtex bl s10_10"><span class="dm brown">1</span> 1분 퀴즈 2의 코드에 버튼 하나를 추가해 다음 화면처럼 나타나도록 작성해 보세요. [&lt;--] 버튼은 [--&gt;] 버튼과는 반대되는 기능으로, 현재 <span class="cd">sayhello</span> 리스트의 위치에서 왼쪽에 위치한 값을 화면에 나타냅니다.</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/719_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/719_2.jpg"/></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="859">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5" id="s1"><div class="box_white2">
+<p class="txtex bl s10_10"><span class="dm brown">2</span> 퀴즈 프로그램을 <span class="cd">tkinter</span>를 활용해 작성하려고 합니다. 문제 3개를 출제한 후, 맞는지 틀린지 콤보박스로 된 O, X 중 하나를 선택하게 하고 몇 개가 맞았는지 알려 줍니다.</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/719_3.jpg"/></div>
+</div>
+<p class="txt bl ind10">다음은 앞의 프로그램을 만드는 코드입니다. <span class="cd">summit</span>을 정의하고, (가)~(마)에 알맞은 코드를 작성해 프로그램을 완성하세요. 퀴즈 프로그램의 정답은 1번은 O, 2번은 X, 3번은 O입니다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+<span class="purple">from</span> tkinter.ttk <span class="purple">import</span> *
+
+<span class="blue2">def</span> <span class="gold">summit</span>():
+    <span class="cd2 green"># 이 부분을 작성하세요.</span>
+
+root = Tk()
+root.title(<span class="red2">'수도맞히기 퀴즈'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+result = StringVar()
+ox =[<span class="red2">'O'</span>, <span class="red2">'X'</span>]
+
+<span class="green"># 1번 문제</span>
+lbl1 = Label(root, text=<span class="red2">'1번</span><span class="red2">. 핀란드의 수도는 헬싱키다</span><span class="red2">.'</span>, width=<span class="green">40</span>)
+lbl1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+
+combo1 = Combobox(root, <span class="cd2">(가)</span>, width=<span class="green">3</span>)
+combo1.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+
+<span class="green"># 2번 문제</span>
+lbl2 = Label(root, text=<span class="red2">'2번</span><span class="red2">. 몰디브의 수도는 몰디브다</span><span class="red2">.'</span>, width=<span class="green">40</span>)
+lbl2.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)
+
+combo2 = Combobox(root, <span class="cd2">(가)</span>, width=<span class="green">3</span>)
+combo2.grid(row=<span class="green">1</span>, column=<span class="green">1</span>)
+
+<span class="green"># 3번 문제</span>
+lbl3 = Label(root, text=<span class="red2">'3번</span><span class="red2">. 오스트레일리아의 수도는 캔버라다</span><span class="red2">.'</span>, width=<span class="green">40</span>)
+lbl3.grid(row=<span class="green">2</span>, column=<span class="green">0</span>)
+
+combo3 = Combobox(root, <span class="cd2">(가)</span>, width=<span class="green">3</span>)
+combo3.grid(row=<span class="green">2</span>, column=<span class="green">1</span>)
+
+btn = Button(root, text=<span class="red2">'제출'</span>, <span class="cd2">(나)</span>)
+btn.grid(<span class="cd2">(다)</span>, <span class="cd2">(라)</span>, columnspan=<span class="green">2</span>)
+
+lbl_result = Label(root, <span class="cd2">(마)</span>, width=<span class="green">35</span>, anchor=<span class="red2">'center'</span>)
+lbl_result.grid(row=<span class="green">4</span>, column=<span class="green">0</span>, columnspan=<span class="green">3</span>)
+
+root.mainloop()</pre>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0896/">정답 및 해설</a></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div>
+    </div>
+</body>
+</html>

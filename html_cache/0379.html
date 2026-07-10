@@ -1,0 +1,23 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">as로 명령어 줄여 쓰기</p>
+<p class="txt bl">사용하고 싶은 명령어가 패키지나 모듈에 속해 있으면 명령어를 사용할 때마다 패키지 이름이나 모듈 이름을 넣어야 해서 번거롭습니다. 명령어가 길어지기도 하고요. 가령 <span class="cd">matplotlib</span>의 <span class="cd">pyplot</span> 모듈에 속한 명령어를 사용한다고 해 봅시다. 명령어 <span class="cd">b()</span>와 <span class="cd">c()</span>를 사용하려면 다음과 같이 작성해야겠죠.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib
+matplotlib.pyplot.b()
+matplotlib.pyplot.c()</pre>
+</div>
+<p class="txt bl">이런 경우 <span class="cd">as</span> 키워드를 사용해 줄여 표현하는 방법이 있습니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt</pre>
+</div>
+<p class="txt bl"><span class="cd">import matplotlib.pyplot</span>은 <span class="cd">matplotlib</span>의 <span class="cd">pyplot</span> 모듈을 포함한다는 의미입니다. 이때 코드 마지막에 <span class="cd">as plt</span>를 추가하면 앞에 있는 <span class="cd">matplotlib.pyplot</span>을 앞으로 <span class="cd">plt</span>로 부르겠다는 의미가 됩니다. 따라서 <span class="cd">pyplot</span>에 있는 명령어를 다음과 같이 줄여서 사용할 수 있습니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+plt.b()
+plt.c()</pre>
+</div>
+</div>
+</section>
+</section>

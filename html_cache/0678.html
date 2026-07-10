@@ -1,0 +1,37 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">숫자 2개를 받아 곱해야 하므로 매개변수도 2개가 필요합니다. 매개변수는 <span class="cd">num1</span>, <span class="cd">num2</span>를 사용합니다. 문제를 내고 사용자로부터 입력받은 값이 정답인 경우와 오답인 경우를 <span class="cd">if-else</span>로 나누어 작성합니다. 원래 코드와 달리 변수 <span class="cd">a</span>, <span class="cd">b</span>가 매개변수 <span class="cd">num1</span>, <span class="cd">num2</span>로 변경됐으므로 이 부분을 알맞게 변경해야 합니다. 그리고 정답과 오답 여부를 함수 외부에 알려 줘야 하므로 정답일 경우 <span class="cd">0</span>을, 오답일 경우 <span class="cd">-1</span>을 반환합니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 프로그래밍에서는 관습적으로 <span class="cd">return 0</span>은 정상 종료, <span class="cd">return -1</span>은 오류라는 의미로 사용합니다.</p>
+</div>
+<p class="txt bl">앞에서 작성한 <span class="cd">gugudan()</span> 함수를 호출해 구구단 게임을 완성합시다. 원래 코드를 참고해 프로그램을 작성합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+<span class="blue2">def</span> <span class="gold">gugudan</span>(<span class="blue2">num1</span>, <span class="blue2">num2</span>):
+    answer = int(<span class="gold">input</span>(str(num1) + <span class="red2">'x'</span> + str(num2) + <span class="red2">'?</span> <span class="red2">'</span>))
+
+    <span class="purple">if</span> answer == num1 * num2:
+        <span class="purple">return</span> <span class="green">0</span>
+    <span class="purple">else</span>:
+        <span class="gold">print</span>(<span class="red2">'땡! 정답은'</span>, num1 * num2)
+        <span class="purple">return</span> <span class="green">-1</span>
+
+<span class="gold">print</span>(<span class="red2">'구구단을 외자! 구구단을 외자</span><span class="red2">!'</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">20</span>):
+    a, b = random.randint(<span class="green">2</span>, <span class="green">9</span>), random.randint(<span class="green">1</span>, <span class="green">9</span>)
+    <span class="purple">if</span> <span class="cd2">gugudan(a, b)</span> != <span class="cd2 green">0</span><span class="cd2">:</span>
+        <span class="purple">break</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+구구단을 외자! 구구단을 외자!
+6x3? <span class="cd2">18</span>
+2x2? <span class="cd2">4</span>
+9x6? <span class="cd2">4</span>
+땡! 정답은 54</pre>
+</div>
+</div>
+</section>
+</section>

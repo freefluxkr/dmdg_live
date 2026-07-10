@@ -1,0 +1,30 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>12.7.3 실습 준비</h3>
+<p class="x00--"><span class="A------">rerere</span> 기능을 활성화해 봅시다. 실습을 위해 저장소를 하나 생성합니다.</p>
+<pre><code><p class="N------1">$ <span class="x--">cd </span><span class="N--------1 x--">실습폴더</span></p>
+<p class="N-----">$<span class="x--"> mkdir git-rerere </span><span class="ingd">새 폴더 만들기</span></p>
+<p class="N-----">$ <span class="x--">cd git-rerere</span></p>
+<p class="N-----"> </p>
+<p class="N-----">infoh@DESKTOP MINGW64 /e/<span class="x--">git-rerere (master)</span></p>
+<p class="N-----">$ <span class="x--">git init</span><span class="x--"> </span><span class="ingd">저장소 초기화</span></p>
+<p class="N----">Initialized empty Git repository in E:/git-rerere/.git/</p></code></pre>
+<p class="x00--">환경 설정에서 <span class="A------">rerere</span> 기능을 활성화합니다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/<span class="x--">git-rerere (master)</span></p>
+<p class="N----">$<span class="x--"> git config rerere.enabled true </span><span class="ingd">rerere 활성화</span></p></code></pre>
+<p class="x00--">전체 저장소가 아닌 현재의 로컬 저장소에서만 <span class="A------">rerere</span> 기능을 활성화했습니다. 설정된 정보는 .<span class="A------">git</span>/<span class="A------">config</span>에 저장합니다. 설정 정보를 확인해 봅시다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/<span class="x--">git-rerere (master)</span></p>
+<p class="N-----">$<span class="x--"> cat .git/config </span><span class="ingd">설정 확인</span></p>
+<p class="N-----">[core]</p>
+<p class="N-----">        repositoryformatversion = 0</p>
+<p class="N-----">        filemode = false</p>
+<p class="N-----">        bare = false</p>
+<p class="N-----">        logallrefupdates = true</p>
+<p class="N-----">        symlinks = false</p>
+<p class="N-----">        ignorecase = true</p>
+<p class="N----- para-style-override-49">[rerere]</p>
+<p class="N----"><span class="char-style-override-24">        enabled = true</span></p></code></pre>
+</div>
+</section>
+</section>

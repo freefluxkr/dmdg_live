@@ -1,0 +1,127 @@
+<h1 class="page-subject">07-6. 백그라운드 큐레이터(Curator)</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: 이 페이지는 v0.16.0 소스 코드(<code>agent/curator.py</code>, <code>hermes_cli/curator.py</code>, <code>tools/skill_manager_tool.py</code>, <code>tools/skill_usage.py</code>)를 대조해 확인했습니다. 큐레이터는 7일 주기·비활성 가드로 백그라운드에서 조용히 실행되므로, 실제 자동 실행을 관찰하는 검증은 하지 않았습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">한 줄 요약</a></li>
+<li><a href="#_2">작동 방식</a></li>
+<li><a href="#_3">보고서</a></li>
+<li><a href="#_4">기본 주기와 안전장치</a></li>
+<li><a href="#cli">CLI 명령</a></li>
+<li><a href="#auxiliarycurator">모델 선택 — auxiliary.curator</a></li>
+<li><a href="#_5">실패와 복구</a></li>
+<li><a href="#_6">자기 진화 시스템과의 위치</a></li>
+</ul>
+</div>
+<p>스킬 라이브러리는 시간이 지날수록 늘어나기 마련입니다. 자동 생성된 스킬, 한 번 쓰고 잊은 스킬, 비슷한 작업을 다른 이름으로 흩어 둔 스킬이 쌓이면 어느 순간 어떤 스킬이 살아 있고 어떤 스킬이 죽어 있는지 알기 어려워집니다.</p>
+<p><strong>Curator(큐레이터)</strong>는 이 문제를 자동으로 정리하는 백그라운드 에이전트입니다. v0.12에서 게이트웨이의 정식 기능으로 들어왔습니다.</p>
+<h3 id="_1">한 줄 요약</h3>
+<blockquote>
+<p>CLI 시작 시점과 게이트웨이 크론 티커에서 비활성·주기(기본 7일) 조건을 만족하면 깨어나, 스킬을 등급 매기고·합치고·치우는 백그라운드 리뷰 패스. 매 실행마다 사람이 읽는 보고서를 남기고, 잘못된 정리는 한 명령으로 롤백한다.</p>
+</blockquote>
+<h3 id="_2">작동 방식</h3>
+<p>큐레이터는 두 단계로 일합니다.</p>
+<p><strong>1단계 — 휴리스틱(LLM 호출 없음)</strong></p>
+<p>마지막 사용 시각 기준으로 스킬을 자동 전이시킵니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>active</code></td>
+<td>최근에 쓰인 스킬</td>
+</tr>
+<tr>
+<td><code>stale</code></td>
+<td><code>stale_after_days</code> 동안 안 쓰인 스킬 (기본 30일)</td>
+</tr>
+<tr>
+<td><code>archived</code></td>
+<td><code>archive_after_days</code> 동안 안 쓰인 스킬 (기본 90일). <code>~/.hermes/skills/.archive/</code>로 이동</td>
+</tr>
+</tbody>
+</table>
+<p><code>pin</code>된 스킬은 이 자동 전이를 받지 않습니다.</p>
+<p><strong>2단계 — LLM 리뷰 패스</strong></p>
+<p>활성 스킬 묶음을 보조 모델(<code>auxiliary.curator</code> 슬롯)에 보내, 다음을 판단합니다.</p>
+<ul>
+<li>비슷한 스킬을 <strong>합칠지(consolidated)</strong> — 그러면 한쪽을 다른 쪽에 흡수시키고 원본은 아카이브</li>
+<li>살아 있어도 가치가 낮은 스킬을 <strong>솎아낼지(pruned)</strong> — 아카이브로 보냄</li>
+<li>살릴 만한 활성 스킬에는 사용 흔적을 반영해 가벼운 정리</li>
+</ul>
+<p>리뷰 패스는 「자동 생성」 절의 세션 단위 백그라운드 리뷰와 마찬가지로 포크된 보조 에이전트가 수행합니다. 다만 세션 단위 리뷰가 <code>memory</code>·<code>skills</code> 도구로 제한되는 것과 달리, 큐레이터 포크는 스킬 디렉터리를 <code>.archive/</code>로 옮기거나 참조 파일을 재배치하기 위해 스킬 도구에 더해 <code>terminal</code>을 사용합니다.</p>
+<h3 id="_3">보고서</h3>
+<p>매 실행마다 다음 두 파일이 생성됩니다.</p>
+<pre><code>~/.hermes/logs/curator/&lt;YYYYMMDD-HHMMSS&gt;/
+├── run.json     # 기계 판독용: 전이 내역, 합쳐짐/솎임 분류, 점수
+└── REPORT.md    # 사람이 읽는 한 페이지 요약
+</code></pre>
+<p><code>REPORT.md</code> 마지막에는 "이번 실행에 무엇이 바뀌었나"가 한눈에 보이도록 정리됩니다. 의심스러운 전이가 있으면 이 파일에서 확인하고, 필요하면 아래 롤백으로 되돌립니다.</p>
+<h3 id="_4">기본 주기와 안전장치</h3>
+<ul>
+<li><strong>기본 주기</strong>: <strong>7일 (168시간)</strong>. <code>curator.interval_hours</code> 설정으로 변경 가능</li>
+<li><strong>첫 실행 시점</strong>: 처음 설치한 직후에는 라이브러리가 충분히 익기 전이므로, 설치 시점부터 한 주기(기본 7일)를 그대로 기다린 다음에야 첫 실제 패스가 돕니다. 그동안 무엇이 정리될지 미리 보고 싶다면 <code>hermes curator run --dry-run</code>을 직접 호출합니다(상태·아카이브에 영향 없음)</li>
+<li><strong>idle 가드</strong>: 최근까지 도구가 활발히 호출됐다면 큐레이터를 미룹니다(<code>curator.min_idle_hours</code>, 기본 2시간)</li>
+<li><strong>자동 백업</strong>: 모든 실제 실행 직전에 <code>~/.hermes/skills/</code>의 tar.gz 스냅숏이 자동으로 만들어집니다</li>
+<li><strong>허브 스킬 보호</strong>: 허브에서 받은 스킬은 큐레이터의 변경 대상에서 항상 제외됩니다. 번들 기본 스킬은 <code>curator.prune_builtins</code>(기본값 켜짐)에 따라 큐레이션 후보에 포함되며, 비활성 기간이 지나면 아카이브될 수 있습니다(삭제는 없음). <code>hermes update</code>로 다시 복사되지 않도록 별도 억제 목록으로 관리됩니다</li>
+<li><strong>핀 보호</strong>: <code>pin</code>된 스킬은 자동 전이와 <code>skill_manage</code>의 <strong>삭제</strong>에서 제외됩니다. 패치·편집은 핀 여부와 무관하게 허용됩니다</li>
+</ul>
+<h3 id="cli">CLI 명령</h3>
+<pre><code class="language-bash">hermes curator status                # 현재 상태와 스킬 통계
+hermes curator run                   # 지금 한 번 돌리기 (수동 실행은 기본적으로 LLM 패스가 끝날 때까지 대기)
+hermes curator run --background      # LLM 패스를 백그라운드로 돌리고 즉시 반환
+hermes curator run --dry-run         # 미리 보기 — 상태 변경/아카이브/통합 없이 보고서만
+hermes curator pause                 # 큐레이터 일시 정지
+hermes curator resume                # 재개
+hermes curator pin &lt;skill&gt;           # 자동 전이로부터 보호
+hermes curator unpin &lt;skill&gt;
+hermes curator restore &lt;skill&gt;       # 아카이브된 스킬 되살리기
+hermes curator backup                # 수동 스냅숏 생성
+hermes curator backup --reason "before-cleanup"
+hermes curator rollback --list       # 스냅숏 목록
+hermes curator rollback              # 최신 스냅숏으로 복원
+hermes curator rollback --id &lt;id&gt; -y # 특정 스냅숏으로 복원, 확인 생략
+hermes curator archive &lt;skill&gt;       # 한 스킬을 지금 아카이브 (핀이면 거부)
+hermes curator prune --days 90       # N일 이상 비활성 자동 생성 스킬 일괄 아카이브
+hermes curator list-archived         # 아카이브된 스킬 목록
+</code></pre>
+<p><code>hermes curator status</code>는 자동 생성된 스킬 목록을 사용 빈도(가장 많이 쓴 / 가장 안 쓴)로 정렬해서 보여줍니다. 라이브러리에 어떤 스킬이 살아 있고 어떤 스킬이 죽어 있는지 한눈에 파악할 수 있습니다.</p>
+<h3 id="auxiliarycurator">모델 선택 — <code>auxiliary.curator</code></h3>
+<p>큐레이터는 보조 모델 슬롯 중 <code>curator</code>를 사용합니다(2장 「클라우드 API 연동」과 「설정 파일」 참고). 라이브러리가 클수록 한 번의 패스가 토큰을 많이 씁니다(수백 개 후보 스킬에 대한 우산형 평가). 메인 모델로 그대로 돌리면 비용이 부담스러우므로, 보통은 저렴한 보조 모델을 지정합니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-yaml">auxiliary:
+  curator:
+    provider: openrouter
+    model: google/gemini-3-flash-preview
+    timeout: 600   # 보조 모델 슬롯 중 가장 길게 잡혀 있음
+</code></pre>
+<p><code>hermes model</code> → 보조 모델 → Curator 메뉴, 또는 웹 대시보드의 Models 탭에서도 직접 바꿀 수 있습니다.</p>
+<h3 id="_5">실패와 복구</h3>
+<p>큐레이터가 잘못 판단해 멀쩡한 스킬을 솎아 버렸다면:</p>
+<ol>
+<li><code>hermes curator status</code>로 현재 상태 확인</li>
+<li>단일 스킬만 되살릴 거면 <code>hermes curator restore &lt;name&gt;</code></li>
+<li>패스 전체를 되돌릴 거면 <code>hermes curator rollback --list</code>로 스냅숏을 본 다음, <code>hermes curator rollback --id &lt;id&gt;</code></li>
+</ol>
+<p>수동으로 잘 다듬어 둔 스킬은 미리 <code>hermes curator pin &lt;name&gt;</code>으로 고정해 두면 안전합니다.</p>
+<h3 id="_6">자기 진화 시스템과의 위치</h3>
+<p>큐레이터는 12장 「자기 진화 시스템」에서 다루는 자기 진화 루프(메모리 + 스킬 자동 갱신)의 <strong>장기 정리 단계</strong>에 해당합니다.</p>
+<pre><code>턴 단위:    메인 대화에서 도구 사용
+세션 단위:  백그라운드 리뷰 포크가 메모리/스킬 갱신 (7장 「자동 생성」)
+주 단위:    큐레이터가 라이브러리 전체 재정렬 (이 절)
+</code></pre>
+<p>세 층 모두 같은 리뷰 포크 메커니즘 위에 있고, 시간 단위만 다릅니다. 자주 쓰는 스킬은 갈고닦이고, 오래 안 쓰는 스킬은 자연스럽게 정리되는 흐름이 만들어집니다.</p>
+<fieldset><legend>처음에는 dry-run으로 감을 잡으세요</legend><p style="margin-top: 0.2em;">설치 후 한 주기(7일) 동안 사용한 다음, 첫 자동 패스가 돌기 전에 <code>hermes curator run --dry-run</code>을 한 번 직접 호출해 <code>REPORT.md</code>를 읽어 보세요. 큐레이터가 무엇을 정리하려고 하는지 미리 파악한 뒤에 자동 실행을 받으면, 의도와 다른 결정을 줄일 수 있습니다.</p></fieldset>
+</div>

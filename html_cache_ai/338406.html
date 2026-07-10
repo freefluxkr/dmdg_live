@@ -1,0 +1,973 @@
+<div class="page-content tex2jax_process">
+<p>이번 챕터에서는 LLM이 외부 함수나 도구를 호출할 수 있게 해주는 <strong>Function Calling</strong>(함수 호출) / <strong>Tool Use</strong>(도구 사용) 개념을 학습합니다. OpenAI, Gemini, Claude 각 플랫폼의 구현 방법을 비교하고, Google Search API와 연동하여 실시간 웹 검색 결과를 LLM 응답에 반영하는 시스템을 구축합니다.</p>
+<hr/>
+<h2 id="161-function-calling-tool-use">16.1 Function Calling / Tool Use란 무엇인가</h2>
+<p><strong>Function Calling</strong>(함수 호출)은 LLM이 응답을 생성하는 과정에서 미리 정의된 외부 함수를 호출하고, 그 결과를 받아 최종 답변에 반영할 수 있도록 하는 기능입니다. OpenAI에서는 <strong>Function Calling</strong>, Google Gemini와 Anthropic Claude에서는 <strong>Tool Use</strong>라는 이름으로 제공하지만 동작 원리는 동일합니다.</p>
+<blockquote>
+<p>LLM은 스스로 코드를 실행하거나 인터넷을 검색하지 않습니다. Function Calling은 LLM이 "어떤 함수를 어떤 인자로 호출해야 하는지"를 결정하면, 실제 실행은 개발자 코드가 담당하는 방식입니다.</p>
+</blockquote>
+<h3 id="_1">동작 흐름</h3>
+<p>Function Calling의 전체 흐름은 다음과 같습니다.</p>
+<p align="center">
+<img alt="Function Calling 6단계 동작 흐름 — 사용자·앱·LLM·함수의 협력" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338406/ch16_function_calling_flow.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<blockquote>
+<p>💡 <strong>핵심</strong>: LLM은 함수를 <strong>직접 실행하지 않습니다.</strong> "어떤 함수를 어떤 인자로 호출할지"만 결정하고, 실제 실행은 항상 앱(개발자 코드) 쪽에서 책임집니다.</p>
+</blockquote>
+<h3 id="_2">주요 활용 사례</h3>
+<table>
+<thead>
+<tr>
+<th>활용 사례</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>웹 검색</td>
+<td>최신 정보를 검색 API로 조회하여 답변</td>
+</tr>
+<tr>
+<td>날씨 조회</td>
+<td>현재 날씨 API 호출 후 자연어로 안내</td>
+</tr>
+<tr>
+<td>데이터베이스 조회</td>
+<td>SQL 쿼리 실행 결과를 바탕으로 분석</td>
+</tr>
+<tr>
+<td>계산기</td>
+<td>수식 계산 함수 호출 후 결과 설명</td>
+</tr>
+<tr>
+<td>일정 관리</td>
+<td>캘린더 API 연동으로 일정 추가/조회</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="162-openai-function-calling">16.2 OpenAI Function Calling 구현</h2>
+<p>OpenAI의 <strong>Function Calling</strong>은 <code>tools</code> 파라미터에 <strong>JSON Schema</strong> 형식으로 함수를 정의하고, 모델이 필요 시 해당 함수 호출을 요청하는 방식으로 동작합니다.</p>
+<h3 id="json-schema">함수 정의 (JSON Schema)</h3>
+<pre><code class="language-python">import json
+import openai
+
+client = openai.OpenAI()
+
+# 함수 스키마 정의
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "search_web",
+            "description": "웹에서 최신 정보를 검색합니다. 실시간 뉴스, 날씨, 최신 사건 등을 조회할 때 사용합니다.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "검색할 키워드 또는 문장"
+                    },
+                    "num_results": {
+                        "type": "integer",
+                        "description": "반환할 검색 결과 수 (기본값: 5)",
+                        "default": 5
+                    }
+                },
+                "required": ["query"]
+            }
+        }
+    }
+]
+</code></pre>
+<h3 id="1">1단계: 모델에 함수 목록 전달 및 호출 요청 수신</h3>
+<pre><code class="language-python">def run_function_calling(user_message: str):
+    messages = [{"role": "user", "content": user_message}]
+
+    # 1단계: 모델에 tools 전달하여 함수 호출 여부 판단 요청
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages,
+        tools=tools,
+        tool_choice="auto"  # "auto": 모델이 자동 판단, "required": 반드시 호출
+    )
+
+    response_message = response.choices[0].message
+
+    # 함수 호출이 필요 없는 경우 바로 응답 반환
+    if not response_message.tool_calls:
+        return response_message.content
+
+    return response_message
+</code></pre>
+<h3 id="2">2단계: 함수 실행 및 결과 반환</h3>
+<pre><code class="language-python">def execute_tool_calls(response_message, messages: list):
+    """모델이 요청한 함수를 실제로 실행합니다."""
+    messages.append(response_message)  # 어시스턴트 메시지 추가
+
+    for tool_call in response_message.tool_calls:
+        function_name = tool_call.function.name
+        function_args = json.loads(tool_call.function.arguments)
+
+        print(f"[함수 호출] {function_name}({function_args})")
+
+        # 실제 함수 실행
+        if function_name == "search_web":
+            result = search_web(**function_args)
+        else:
+            result = {"error": f"알 수 없는 함수: {function_name}"}
+
+        # 함수 실행 결과를 tool 메시지로 추가
+        messages.append({
+            "role": "tool",
+            "tool_call_id": tool_call.id,
+            "content": json.dumps(result, ensure_ascii=False)
+        })
+
+    return messages
+</code></pre>
+<h3 id="3">3단계: 최종 응답 생성</h3>
+<pre><code class="language-python">def get_final_response(messages: list) -&gt; str:
+    """함수 결과를 포함한 최종 응답을 생성합니다."""
+    final_response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages
+    )
+    return final_response.choices[0].message.content
+
+
+# 전체 흐름 통합
+def chat_with_tools(user_message: str) -&gt; str:
+    messages = [{"role": "user", "content": user_message}]
+
+    # 1단계: 함수 호출 요청 수신
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages,
+        tools=tools,
+        tool_choice="auto"
+    )
+    response_message = response.choices[0].message
+
+    if not response_message.tool_calls:
+        return response_message.content
+
+    # 2단계: 함수 실행
+    messages = execute_tool_calls(response_message, messages)
+
+    # 3단계: 최종 응답 생성
+    return get_final_response(messages)
+
+
+# 테스트
+result = chat_with_tools("오늘 서울 날씨 알려줘")
+print(result)
+</code></pre>
+<hr/>
+<h2 id="163-gemini-function-calling">16.3 Gemini의 Function Calling 구현 방법</h2>
+<p>Google <strong>Gemini</strong>에서는 <code>tools</code> 파라미터에 <code>FunctionDeclaration</code>을 사용하여 함수를 정의합니다. <strong>google-generativeai</strong> 라이브러리를 사용합니다.</p>
+<pre><code class="language-python">import google.generativeai as genai
+import json
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+
+# 함수 선언 정의
+search_web_declaration = genai.protos.FunctionDeclaration(
+    name="search_web",
+    description="웹에서 최신 정보를 검색합니다.",
+    parameters=genai.protos.Schema(
+        type=genai.protos.Type.OBJECT,
+        properties={
+            "query": genai.protos.Schema(
+                type=genai.protos.Type.STRING,
+                description="검색할 키워드 또는 문장"
+            ),
+            "num_results": genai.protos.Schema(
+                type=genai.protos.Type.INTEGER,
+                description="반환할 검색 결과 수"
+            )
+        },
+        required=["query"]
+    )
+)
+
+# Tool 객체 생성
+search_tool = genai.protos.Tool(
+    function_declarations=[search_web_declaration]
+)
+
+def chat_with_gemini_tools(user_message: str) -&gt; str:
+    model = genai.GenerativeModel(
+        model_name="gemini-1.5-pro",
+        tools=[search_tool]
+    )
+    chat = model.start_chat()
+
+    # 1단계: 사용자 메시지 전송
+    response = chat.send_message(user_message)
+    candidate = response.candidates[0]
+
+    # 함수 호출 요청 확인
+    if candidate.content.parts[0].function_call.name:
+        function_call = candidate.content.parts[0].function_call
+        function_name = function_call.name
+        function_args = dict(function_call.args)
+
+        print(f"[Gemini 함수 호출] {function_name}({function_args})")
+
+        # 2단계: 함수 실행
+        if function_name == "search_web":
+            result = search_web(**function_args)
+
+        # 3단계: 함수 결과 반환 및 최종 응답 생성
+        function_response = genai.protos.Part(
+            function_response=genai.protos.FunctionResponse(
+                name=function_name,
+                response={"result": result}
+            )
+        )
+        final_response = chat.send_message(function_response)
+        return final_response.text
+    else:
+        return candidate.content.parts[0].text
+
+
+result = chat_with_gemini_tools("최신 AI 뉴스를 알려줘")
+print(result)
+</code></pre>
+<hr/>
+<h2 id="164-claude-tool-use">16.4 Claude의 Tool Use 구현 방법</h2>
+<p>Anthropic <strong>Claude</strong>에서는 <strong>Tool Use</strong>라는 이름으로 동일한 기능을 제공합니다. <code>anthropic</code> 라이브러리를 사용하며, <code>tools</code> 파라미터에 <strong>input_schema</strong> 형식으로 도구를 정의합니다.</p>
+<pre><code class="language-python">import anthropic
+import json
+
+client = anthropic.Anthropic(api_key="YOUR_CLAUDE_API_KEY")
+
+# 도구 정의
+tools = [
+    {
+        "name": "search_web",
+        "description": "웹에서 최신 정보를 검색합니다. 실시간 뉴스, 날씨, 최신 사건 등을 조회할 때 사용합니다.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "검색할 키워드 또는 문장"
+                },
+                "num_results": {
+                    "type": "integer",
+                    "description": "반환할 검색 결과 수 (기본값: 5)"
+                }
+            },
+            "required": ["query"]
+        }
+    }
+]
+
+def chat_with_claude_tools(user_message: str) -&gt; str:
+    messages = [{"role": "user", "content": user_message}]
+
+    # 1단계: 도구 사용 요청
+    response = client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=1024,
+        tools=tools,
+        messages=messages
+    )
+
+    # 도구 호출 여부 확인 (stop_reason이 "tool_use"인 경우)
+    if response.stop_reason == "tool_use":
+        # 어시스턴트 응답을 메시지에 추가
+        messages.append({"role": "assistant", "content": response.content})
+
+        tool_results = []
+        for content_block in response.content:
+            if content_block.type == "tool_use":
+                tool_name = content_block.name
+                tool_input = content_block.input
+                tool_use_id = content_block.id
+
+                print(f"[Claude 도구 호출] {tool_name}({tool_input})")
+
+                # 2단계: 도구 실행
+                if tool_name == "search_web":
+                    result = search_web(**tool_input)
+
+                tool_results.append({
+                    "type": "tool_result",
+                    "tool_use_id": tool_use_id,
+                    "content": json.dumps(result, ensure_ascii=False)
+                })
+
+        # 3단계: 도구 결과를 포함한 최종 응답 생성
+        messages.append({"role": "user", "content": tool_results})
+
+        final_response = client.messages.create(
+            model="claude-opus-4-5",
+            max_tokens=1024,
+            tools=tools,
+            messages=messages
+        )
+        return final_response.content[0].text
+    else:
+        return response.content[0].text
+
+
+result = chat_with_claude_tools("현재 비트코인 가격을 알려줘")
+print(result)
+</code></pre>
+<h3 id="function-calling-tool-use">플랫폼별 Function Calling / Tool Use 비교</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>OpenAI</th>
+<th>Gemini</th>
+<th>Claude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>용어</td>
+<td>Function Calling</td>
+<td>Function Calling</td>
+<td>Tool Use</td>
+</tr>
+<tr>
+<td>정의 방식</td>
+<td><code>tools</code> + JSON Schema</td>
+<td><code>FunctionDeclaration</code></td>
+<td><code>tools</code> + <code>input_schema</code></td>
+</tr>
+<tr>
+<td>라이브러리</td>
+<td><code>openai</code></td>
+<td><code>google-generativeai</code></td>
+<td><code>anthropic</code></td>
+</tr>
+<tr>
+<td>호출 판단 필드</td>
+<td><code>tool_calls</code></td>
+<td><code>function_call</code></td>
+<td><code>stop_reason == "tool_use"</code></td>
+</tr>
+<tr>
+<td>결과 전달 역할</td>
+<td><code>role: "tool"</code></td>
+<td><code>FunctionResponse</code></td>
+<td><code>type: "tool_result"</code></td>
+</tr>
+<tr>
+<td>자동 호출 여부</td>
+<td><code>tool_choice="auto"</code></td>
+<td>자동</td>
+<td>자동</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="165-google-search-api">16.5 Google Search API 연동</h2>
+<p><strong>Google Custom Search JSON API</strong>를 사용하면 프로그래밍 방식으로 Google 검색 결과를 가져올 수 있습니다. Function Calling과 결합하여 LLM에 실시간 정보를 제공하는 데 활용합니다.</p>
+<h3 id="api">API 키 발급 절차</h3>
+<ol>
+<li><a href="https://console.cloud.google.com/">Google Cloud Console</a>에서 프로젝트 생성</li>
+<li><strong>Custom Search API</strong> 활성화</li>
+<li><strong>API 키</strong> 발급 (Credentials 메뉴)</li>
+<li><a href="https://programmablesearchengine.google.com/">Programmable Search Engine</a>에서 검색 엔진 생성</li>
+<li><strong>Search Engine ID (cx)</strong> 확인</li>
+</ol>
+<h3 id="_3">검색 함수 구현</h3>
+<pre><code class="language-python">import requests
+import os
+
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+GOOGLE_CSE_ID = os.environ.get("GOOGLE_CSE_ID")  # Custom Search Engine ID
+
+def search_web(query: str, num_results: int = 5) -&gt; dict:
+    """
+    Google Custom Search API를 사용하여 웹을 검색합니다.
+
+    Args:
+        query: 검색 키워드
+        num_results: 반환할 결과 수 (최대 10)
+
+    Returns:
+        검색 결과 딕셔너리
+    """
+    url = "https://www.googleapis.com/customsearch/v1"
+    params = {
+        "key": GOOGLE_API_KEY,
+        "cx": GOOGLE_CSE_ID,
+        "q": query,
+        "num": min(num_results, 10),  # API 제한: 최대 10개
+        "hl": "ko"  # 한국어 결과 우선
+    }
+
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        results = []
+        for item in data.get("items", []):
+            results.append({
+                "title": item.get("title", ""),
+                "link": item.get("link", ""),
+                "snippet": item.get("snippet", ""),
+                "displayLink": item.get("displayLink", "")
+            })
+
+        return {
+            "query": query,
+            "total_results": data.get("searchInformation", {}).get("totalResults", "0"),
+            "results": results
+        }
+
+    except requests.exceptions.RequestException as e:
+        return {"error": str(e), "query": query, "results": []}
+
+
+# 테스트
+result = search_web("2024년 노벨 물리학상 수상자", num_results=3)
+for item in result["results"]:
+    print(f"제목: {item['title']}")
+    print(f"URL: {item['link']}")
+    print(f"요약: {item['snippet']}")
+    print("---")
+</code></pre>
+<h3 id="env-api">.env 파일로 API 키 관리</h3>
+<pre><code class="language-python"># .env 파일
+OPENAI_API_KEY=sk-...
+GOOGLE_API_KEY=AIza...
+GOOGLE_CSE_ID=12345...abc
+
+# Python에서 로드
+from dotenv import load_dotenv
+load_dotenv()
+</code></pre>
+<hr/>
+<h2 id="166-llm">16.6 웹 검색 결과를 LLM에 전달하여 응답 생성</h2>
+<p>검색 결과를 LLM에 효과적으로 전달하려면 검색 결과를 적절히 포맷팅하여 컨텍스트로 제공해야 합니다.</p>
+<h3 id="_4">검색 결과 포맷팅</h3>
+<pre><code class="language-python">def format_search_results(search_result: dict) -&gt; str:
+    """검색 결과를 LLM이 이해하기 쉬운 형식으로 변환합니다."""
+    if "error" in search_result:
+        return f"검색 중 오류가 발생했습니다: {search_result['error']}"
+
+    query = search_result.get("query", "")
+    results = search_result.get("results", [])
+
+    if not results:
+        return f"'{query}'에 대한 검색 결과가 없습니다."
+
+    formatted = f"검색어: {query}\n검색 결과:\n\n"
+    for i, item in enumerate(results, 1):
+        formatted += f"{i}. **{item['title']}**\n"
+        formatted += f"   출처: {item['displayLink']}\n"
+        formatted += f"   내용: {item['snippet']}\n\n"
+
+    return formatted
+</code></pre>
+<h3 id="openai">검색 결과 기반 응답 생성 (OpenAI)</h3>
+<pre><code class="language-python">def search_and_answer(user_question: str) -&gt; str:
+    """
+    사용자 질문에 대해 웹 검색 후 LLM으로 답변을 생성합니다.
+    """
+    # 1단계: 검색 수행
+    search_result = search_web(user_question, num_results=5)
+    formatted_results = format_search_results(search_result)
+
+    # 2단계: 검색 결과를 컨텍스트로 LLM에 전달
+    system_prompt = """당신은 웹 검색 결과를 바탕으로 정확한 정보를 제공하는 AI 어시스턴트입니다.
+제공된 검색 결과를 참고하여 사용자의 질문에 답변하되, 다음 사항을 지켜주세요:
+1. 검색 결과에서 관련 정보를 찾아 정확히 인용합니다.
+2. 불확실한 정보는 "검색 결과에 따르면" 등의 표현으로 출처를 명시합니다.
+3. 검색 결과에 없는 내용은 추측하지 않습니다."""
+
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": f"다음 검색 결과를 바탕으로 질문에 답해주세요.\n\n{formatted_results}\n\n질문: {user_question}"}
+    ]
+
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages,
+        temperature=0.3  # 정확성을 위해 낮은 temperature 사용
+    )
+
+    return response.choices[0].message.content
+
+
+# 테스트
+answer = search_and_answer("최근 AI 규제 법안 현황은 어떻게 되나요?")
+print(answer)
+</code></pre>
+<hr/>
+<h2 id="167">16.7 실시간 정보 기반 대화 시스템</h2>
+<p>멀티턴 대화에서 Function Calling을 활용하면 대화 흐름을 유지하면서 필요할 때만 웹 검색을 수행하는 스마트한 대화 시스템을 구축할 수 있습니다.</p>
+<pre><code class="language-python">import json
+import openai
+import os
+from typing import Optional
+
+client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+# 도구 정의
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "search_web",
+            "description": "웹에서 최신 정보를 검색합니다. 실시간 데이터, 뉴스, 날씨, 주가 등 최신 정보가 필요할 때 사용합니다.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "검색 쿼리"},
+                    "num_results": {"type": "integer", "description": "결과 수", "default": 5}
+                },
+                "required": ["query"]
+            }
+        }
+    }
+]
+
+class RealtimeChatBot:
+    """실시간 웹 검색 기능을 갖춘 대화 시스템"""
+
+    def __init__(self, system_prompt: Optional[str] = None):
+        self.messages = []
+        if system_prompt:
+            self.messages.append({"role": "system", "content": system_prompt})
+        else:
+            self.messages.append({
+                "role": "system",
+                "content": """당신은 실시간 웹 검색 기능을 갖춘 AI 어시스턴트입니다.
+최신 정보가 필요한 질문에는 search_web 도구를 사용하여 정확한 정보를 제공합니다.
+검색 결과를 바탕으로 명확하고 유익한 답변을 한국어로 제공합니다."""
+            })
+
+    def _process_tool_calls(self, response_message) -&gt; list:
+        """도구 호출을 처리하고 결과를 반환합니다."""
+        self.messages.append(response_message)
+        tool_results = []
+
+        for tool_call in response_message.tool_calls:
+            function_name = tool_call.function.name
+            function_args = json.loads(tool_call.function.arguments)
+
+            print(f"  [검색 중] {function_args.get('query', '')}")
+
+            if function_name == "search_web":
+                result = search_web(**function_args)
+                formatted = format_search_results(result)
+            else:
+                formatted = json.dumps({"error": f"알 수 없는 도구: {function_name}"})
+
+            tool_results.append({
+                "role": "tool",
+                "tool_call_id": tool_call.id,
+                "content": formatted
+            })
+
+        self.messages.extend(tool_results)
+        return tool_results
+
+    def chat(self, user_message: str) -&gt; str:
+        """사용자 메시지를 처리하고 응답을 반환합니다."""
+        self.messages.append({"role": "user", "content": user_message})
+
+        # 최대 3번의 도구 호출 루프 (무한 루프 방지)
+        for _ in range(3):
+            response = client.chat.completions.create(
+                model="gpt-4o",
+                messages=self.messages,
+                tools=tools,
+                tool_choice="auto"
+            )
+            response_message = response.choices[0].message
+
+            if not response_message.tool_calls:
+                # 도구 호출 없음: 최종 응답 반환
+                self.messages.append({
+                    "role": "assistant",
+                    "content": response_message.content
+                })
+                return response_message.content
+
+            # 도구 호출 처리
+            self._process_tool_calls(response_message)
+
+        return "응답 생성 중 오류가 발생했습니다."
+
+    def reset(self):
+        """대화 기록을 초기화합니다."""
+        system_msg = self.messages[0] if self.messages else None
+        self.messages = [system_msg] if system_msg else []
+
+
+# 대화 시스템 실행
+def run_chatbot():
+    bot = RealtimeChatBot()
+    print("실시간 웹 검색 챗봇입니다. 종료하려면 'quit'을 입력하세요.\n")
+
+    while True:
+        user_input = input("사용자: ").strip()
+        if not user_input:
+            continue
+        if user_input.lower() in ["quit", "exit", "종료"]:
+            print("챗봇을 종료합니다.")
+            break
+
+        response = bot.chat(user_input)
+        print(f"챗봇: {response}\n")
+
+
+if __name__ == "__main__":
+    run_chatbot()
+</code></pre>
+<hr/>
+<h2 id="_5">[실습] 실시간 웹 검색 봇 만들기</h2>
+<p>이번 실습에서는 GPT를 메인으로 하는 완전한 실시간 웹 검색 봇을 구현하고, Gemini와 Claude로 전환하는 방법도 함께 살펴봅니다.</p>
+<h3 id="gpt">전체 코드 (GPT 메인)</h3>
+<pre><code class="language-python"># realtime_search_bot.py
+import json
+import os
+import requests
+import openai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# API 클라이언트 초기화
+openai_client = openai.OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+GOOGLE_API_KEY = os.environ["GOOGLE_API_KEY"]
+GOOGLE_CSE_ID = os.environ["GOOGLE_CSE_ID"]
+
+
+# ── 검색 함수 ──────────────────────────────────────────────────────────────────
+
+def search_web(query: str, num_results: int = 5) -&gt; dict:
+    """Google Custom Search API로 웹 검색을 수행합니다."""
+    url = "https://www.googleapis.com/customsearch/v1"
+    params = {
+        "key": GOOGLE_API_KEY,
+        "cx": GOOGLE_CSE_ID,
+        "q": query,
+        "num": min(num_results, 10),
+        "hl": "ko"
+    }
+    try:
+        resp = requests.get(url, params=params, timeout=10)
+        resp.raise_for_status()
+        data = resp.json()
+        results = [
+            {
+                "title": item.get("title", ""),
+                "link": item.get("link", ""),
+                "snippet": item.get("snippet", ""),
+                "source": item.get("displayLink", "")
+            }
+            for item in data.get("items", [])
+        ]
+        return {"query": query, "results": results}
+    except Exception as e:
+        return {"query": query, "results": [], "error": str(e)}
+
+
+def format_search_results(result: dict) -&gt; str:
+    """검색 결과를 읽기 좋은 형식으로 변환합니다."""
+    if not result.get("results"):
+        return f"'{result['query']}'에 대한 결과가 없습니다."
+
+    lines = [f"[검색어: {result['query']}]\n"]
+    for i, item in enumerate(result["results"], 1):
+        lines.append(f"{i}. {item['title']}")
+        lines.append(f"   출처: {item['source']}")
+        lines.append(f"   {item['snippet']}\n")
+    return "\n".join(lines)
+
+
+# ── 도구 스키마 ────────────────────────────────────────────────────────────────
+
+TOOLS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "search_web",
+            "description": (
+                "웹에서 최신 정보를 검색합니다. "
+                "뉴스, 날씨, 주가, 스포츠 결과, 신제품 정보 등 "
+                "학습 데이터 이후의 최신 정보가 필요할 때 사용합니다."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "검색할 키워드나 문장"
+                    },
+                    "num_results": {
+                        "type": "integer",
+                        "description": "반환할 검색 결과 수 (1-10, 기본값 5)",
+                        "default": 5
+                    }
+                },
+                "required": ["query"]
+            }
+        }
+    }
+]
+
+SYSTEM_PROMPT = """당신은 실시간 웹 검색 기능을 갖춘 AI 어시스턴트입니다.
+
+[행동 지침]
+- 최신 정보나 실시간 데이터가 필요한 경우 반드시 search_web 도구를 사용합니다.
+- 일반 지식이나 개념 설명은 도구 없이 직접 답변합니다.
+- 검색 결과를 인용할 때는 출처를 함께 언급합니다.
+- 한국어로 친절하고 명확하게 답변합니다."""
+
+
+# ── GPT 기반 검색 봇 ───────────────────────────────────────────────────────────
+
+class GPTSearchBot:
+    def __init__(self):
+        self.messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+
+    def _execute_tools(self, tool_calls) -&gt; list:
+        tool_messages = []
+        for tc in tool_calls:
+            args = json.loads(tc.function.arguments)
+            print(f"  🔍 검색: {args.get('query', '')}")
+            result = search_web(**args)
+            tool_messages.append({
+                "role": "tool",
+                "tool_call_id": tc.id,
+                "content": format_search_results(result)
+            })
+        return tool_messages
+
+    def chat(self, user_message: str) -&gt; str:
+        self.messages.append({"role": "user", "content": user_message})
+
+        for _ in range(3):  # 최대 3회 도구 호출 루프
+            resp = openai_client.chat.completions.create(
+                model="gpt-4o",
+                messages=self.messages,
+                tools=TOOLS,
+                tool_choice="auto"
+            )
+            msg = resp.choices[0].message
+
+            if not msg.tool_calls:
+                self.messages.append({"role": "assistant", "content": msg.content})
+                return msg.content
+
+            # 도구 호출 처리
+            self.messages.append(msg)
+            tool_results = self._execute_tools(msg.tool_calls)
+            self.messages.extend(tool_results)
+
+        return "오류: 응답 생성에 실패했습니다."
+
+
+# ── 메인 실행 ─────────────────────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    bot = GPTSearchBot()
+    print("=" * 50)
+    print("실시간 웹 검색 봇 (GPT-4o)")
+    print("종료: quit 또는 exit 입력")
+    print("=" * 50)
+
+    while True:
+        user_input = input("\n사용자: ").strip()
+        if not user_input:
+            continue
+        if user_input.lower() in ["quit", "exit", "종료"]:
+            break
+        print(f"\n봇: {bot.chat(user_input)}")
+</code></pre>
+<hr/>
+<h3 id="gemini">Gemini로 전환하기</h3>
+<p>GPT 메인 코드에서 Gemini로 전환할 때 변경해야 하는 부분만 정리했습니다.</p>
+<pre><code class="language-python"># gemini_search_bot.py (변경 부분만 표시)
+import google.generativeai as genai
+
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+
+# Gemini용 함수 선언
+search_declaration = genai.protos.FunctionDeclaration(
+    name="search_web",
+    description="웹에서 최신 정보를 검색합니다.",
+    parameters=genai.protos.Schema(
+        type=genai.protos.Type.OBJECT,
+        properties={
+            "query": genai.protos.Schema(
+                type=genai.protos.Type.STRING,
+                description="검색할 키워드나 문장"
+            ),
+            "num_results": genai.protos.Schema(
+                type=genai.protos.Type.INTEGER,
+                description="반환할 결과 수"
+            )
+        },
+        required=["query"]
+    )
+)
+gemini_tool = genai.protos.Tool(function_declarations=[search_declaration])
+
+
+class GeminiSearchBot:
+    def __init__(self):
+        self.model = genai.GenerativeModel(
+            model_name="gemini-1.5-pro",
+            tools=[gemini_tool],
+            system_instruction=SYSTEM_PROMPT
+        )
+        self.chat = self.model.start_chat()
+
+    def chat_message(self, user_message: str) -&gt; str:
+        response = self.chat.send_message(user_message)
+
+        for _ in range(3):
+            part = response.candidates[0].content.parts[0]
+            if not hasattr(part, "function_call") or not part.function_call.name:
+                return part.text
+
+            fc = part.function_call
+            args = dict(fc.args)
+            print(f"  🔍 검색 (Gemini): {args.get('query', '')}")
+            result = search_web(**args)
+
+            function_response = genai.protos.Part(
+                function_response=genai.protos.FunctionResponse(
+                    name=fc.name,
+                    response={"result": format_search_results(result)}
+                )
+            )
+            response = self.chat.send_message(function_response)
+
+        return response.text
+</code></pre>
+<h3 id="claude">Claude로 전환하기</h3>
+<pre><code class="language-python"># claude_search_bot.py (변경 부분만 표시)
+import anthropic
+
+claude_client = anthropic.Anthropic(api_key=os.environ["CLAUDE_API_KEY"])
+
+# Claude용 도구 정의 (input_schema 사용)
+CLAUDE_TOOLS = [
+    {
+        "name": "search_web",
+        "description": "웹에서 최신 정보를 검색합니다.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "검색할 키워드나 문장"
+                },
+                "num_results": {
+                    "type": "integer",
+                    "description": "반환할 결과 수 (기본값 5)"
+                }
+            },
+            "required": ["query"]
+        }
+    }
+]
+
+
+class ClaudeSearchBot:
+    def __init__(self):
+        self.messages = []
+
+    def chat(self, user_message: str) -&gt; str:
+        self.messages.append({"role": "user", "content": user_message})
+
+        for _ in range(3):
+            resp = claude_client.messages.create(
+                model="claude-opus-4-5",
+                max_tokens=2048,
+                system=SYSTEM_PROMPT,
+                tools=CLAUDE_TOOLS,
+                messages=self.messages
+            )
+
+            if resp.stop_reason != "tool_use":
+                answer = resp.content[0].text
+                self.messages.append({"role": "assistant", "content": answer})
+                return answer
+
+            # 도구 호출 처리
+            self.messages.append({"role": "assistant", "content": resp.content})
+            tool_results = []
+            for block in resp.content:
+                if block.type == "tool_use":
+                    print(f"  🔍 검색 (Claude): {block.input.get('query', '')}")
+                    result = search_web(**block.input)
+                    tool_results.append({
+                        "type": "tool_result",
+                        "tool_use_id": block.id,
+                        "content": format_search_results(result)
+                    })
+            self.messages.append({"role": "user", "content": tool_results})
+
+        return "오류: 응답 생성에 실패했습니다."
+</code></pre>
+<h3 id="_6">플랫폼별 전환 포인트 요약</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>GPT (OpenAI)</th>
+<th>Gemini</th>
+<th>Claude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클라이언트</td>
+<td><code>openai.OpenAI()</code></td>
+<td><code>genai.GenerativeModel()</code></td>
+<td><code>anthropic.Anthropic()</code></td>
+</tr>
+<tr>
+<td>도구 정의</td>
+<td><code>tools</code> 리스트 + JSON Schema</td>
+<td><code>FunctionDeclaration</code></td>
+<td><code>tools</code> 리스트 + <code>input_schema</code></td>
+</tr>
+<tr>
+<td>호출 판단</td>
+<td><code>msg.tool_calls</code> 존재 여부</td>
+<td><code>part.function_call.name</code></td>
+<td><code>stop_reason == "tool_use"</code></td>
+</tr>
+<tr>
+<td>결과 전달</td>
+<td><code>role: "tool"</code> 메시지</td>
+<td><code>FunctionResponse</code> Part</td>
+<td><code>type: "tool_result"</code></td>
+</tr>
+<tr>
+<td>멀티턴</td>
+<td><code>messages</code> 리스트</td>
+<td><code>ChatSession</code> 객체</td>
+<td><code>messages</code> 리스트</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<blockquote>
+<p><strong>핵심 정리</strong></p>
+<ul>
+<li><strong>Function Calling / Tool Use</strong>는 LLM이 외부 함수 실행을 요청하고, 개발자 코드가 실행 후 결과를 LLM에 반환하는 패턴입니다.</li>
+<li><strong>OpenAI</strong>는 <code>tool_calls</code> / <code>role: "tool"</code>, <strong>Gemini</strong>는 <code>FunctionDeclaration</code> / <code>FunctionResponse</code>, <strong>Claude</strong>는 <code>input_schema</code> / <code>tool_result</code> 방식으로 구현합니다.</li>
+<li><strong>Google Custom Search API</strong>와 결합하면 LLM의 지식 한계를 넘어 실시간 정보를 응답에 반영할 수 있습니다.</li>
+<li>실시간 대화 시스템에서는 <strong>멀티턴 메시지 관리</strong>와 <strong>도구 호출 루프</strong>를 올바르게 구현하는 것이 핵심입니다.</li>
+</ul>
+</blockquote>
+<p>다음 챕터에서는 날씨 API, 주식 API 등 다양한 <strong>외부 데이터 API</strong>를 LLM과 연동하는 방법을 학습합니다.</p>
+</div>

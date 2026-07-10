@@ -1,0 +1,27 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_120"><span class="yellow">15.2.3</span> 버튼</h4>
+<p class="txt bl">이번에는 <span class="cd">tkinter</span>에서 <span class="dm">버튼</span><span class="txts gray">(Button)</span> 만드는 방법을 알아보겠습니다. 버튼 역시 <span class="cd">tkinter</span>에 미리 정의되어 있는 클래스입니다. 클래스의 생성자 옵션은 <span class="cd">help()</span>를 실행해 직접 확인해 보세요.</p>
+<p class="txts"> </p>
+<p class="txtex dm">버튼 만들기</p>
+<p class="txt bl">레이블을 만들 때처럼 버튼이 위치할 창과 <span class="cd">Button</span> 클래스의 객체를 만듭니다. 버튼에 표시할 글자는 <span class="cd">text</span> 옵션으로 넣고, 버튼의 크기 역시 레이블처럼 <span class="cd">width</span>와 <span class="cd">height</span>로 설정합니다.</p>
+<div class="highlight">
+<pre><span class="purple">from</span> tkinter <span class="purple">import</span> *
+
+root = Tk()
+root.title(<span class="red2">'Button'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+btn1 = Button(root, text=<span class="red2">'버튼'</span>, width=<span class="green">10</span>, height=<span class="green">3</span>)
+btn1.pack()
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/668_1.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

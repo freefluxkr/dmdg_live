@@ -1,0 +1,74 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">반복문을 실행하기 전에 첫째 줄에서 반복문에 사용할 변수 <span class="cd">num</span>을 만들고 초깃값을 0으로 저장했습니다. 둘째 줄에서는 <span class="cd">while</span> 문으로 조건을 충족하는지 확인합니다. 현재 <span class="cd">num</span>에 저장된 값은 0이므로 <span class="cd">num &lt; 10</span>을 충족합니다. 따라서 반복문 내부의 <span class="cd">num = int(input('숫자 입력: '))</span>을 실행해 입력받은 숫자가 <span class="cd">num</span>에 저장됩니다. 이때 입력받은 숫자가 10 미만이면 셋째 줄의 명령어가 반복되고, 입력받은 숫자가 10 이상이면 반복문을 종료합니다. 프로그램을 실행해 10 미만의 숫자를 몇 개 입력한 후 10 이상의 숫자를 입력해 보세요.</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+숫자 입력: <span class="cd2">5</span> 
+숫자 입력: <span class="cd2">6</span>
+숫자 입력: <span class="cd2">12</span></pre>
+</div>
+<p class="txt bl">숫자 5, 6에서는 다음 반복이 실행되지만, 12를 입력하면 프로그램이 종료됩니다. 반복 회차별로 일어나는 일을 정리하면 다음과 같습니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 5-4</span> 반복문의 실행과정</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w33">
+<p class="txts dm">num에 저장되는 값</p>
+</td>
+<td class="w33">
+<p class="txts dm">반복 조건</p>
+</td>
+<td class="w33">
+<p class="txts dm">반복 명령어</p>
+</td>
+</tr>
+<tr>
+<td class="w33">
+<p class="txts dl">0</p>
+</td>
+<td class="w33">
+<p class="txts dl">충족</p>
+</td>
+<td class="w33">
+<p class="txts dl">실행 → 5 입력</p>
+</td>
+</tr>
+<tr>
+<td class="w33">
+<p class="txts dl">5</p>
+</td>
+<td class="w33">
+<p class="txts dl">충족</p>
+</td>
+<td class="w33">
+<p class="txts dl">실행 → 6 입력</p>
+</td>
+</tr>
+<tr>
+<td class="w33">
+<p class="txts dl">6</p>
+</td>
+<td class="w33">
+<p class="txts dl">충족</p>
+</td>
+<td class="w33">
+<p class="txts dl">실행 → 12 입력</p>
+</td>
+</tr>
+<tr>
+<td class="w33">
+<p class="txts dl">12</p>
+</td>
+<td class="w33">
+<p class="txts dl">충족하지 않음</p>
+</td>
+<td class="w33">
+<p class="txts dl">실행되지 않음 → 반복문 종료</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>

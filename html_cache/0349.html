@@ -1,0 +1,30 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">key=operator.itemgetter(1)</span> 옵션을 주니 값을 기준으로 정렬합니다.</p>
+<p class="txt bl">이번에는 높은 가격부터 낮은 가격 순서로 물건과 가격을 정렬해 봅시다. 값을 기준으로 정렬하고 내림차순 옵션만 추가하면 됩니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> operator
+
+mart = {<span class="red2">'과자'</span>: <span class="green">1500</span>, <span class="red2">'아이스크림'</span>: <span class="green">1700</span>, <span class="red2">'휴지'</span>: <span class="green">4800</span>, <span class="red2">'고기'</span>: <span class="green">10500</span>, <span class="red2">'우유'</span>: <span class="green">2600</span>}
+<span class="gold">print</span>(<span class="gold">sorted</span>(mart.items(), key=operator.itemgetter(<span class="green">1</span>), <span class="cd2">reverse=</span><span class="cd2 blue2">True</span>))</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[('고기', 10500), ('휴지', 4800), ('우유', 2600), ('아이스크림', 1700), ('과자', 1500)]</pre>
+</div>
+<p class="txt bl">가장 비싼 고기부터 가장 싼 과자까지 가격순으로 정렬합니다.</p>
+<p class="txt bl">그러면 더 나가서 가장 저렴한 물건 두 가지와 그 가격을 출력해 봅시다. 책의 코드를 확인하기 전에 앞에서 배운 내용을 참고해 직접 작성해 보세요!</p>
+<div class="highlight">
+<pre><span class="purple">import</span> operator
+
+mart = {<span class="red2">'과자'</span>: <span class="green">1500</span>, <span class="red2">'아이스크림'</span>: <span class="green">1700</span>, <span class="red2">'휴지'</span>: <span class="green">4800</span>, <span class="red2">'고기'</span>: <span class="green">10500</span>, <span class="red2">'우유'</span>: <span class="green">2600</span>}
+<span class="gold">print</span>(<span class="gold">sorted</span>(mart.items(), key=operator.itemgetter(<span class="green">1</span>))<span class="cd2">[:</span><span class="cd2 green">2</span><span class="cd2">]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[('과자', 1500), ('아이스크림', 1700)]</pre>
+</div>
+</div>
+</section>
+</section>

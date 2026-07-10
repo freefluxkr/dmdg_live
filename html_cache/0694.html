@@ -1,0 +1,25 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그럼 <span class="cd">graph_plot()</span> 함수를 작성해 봅시다. 앞에서 원래 코드를 함수로 구성할 때 <span class="cd">graph_plot()</span>의 매개변수는 총 3개였습니다. 각각 인구 데이터, 그래프 라벨, 그래프 제목을 의미하는 <span class="cd">popu_list</span>, <span class="cd">label_list</span>, <span class="cd">graph_title</span>였죠. 프로그램에서 <span class="cd">graph_plot()</span> 함수를 호출할 때 <span class="cd">popu_list</span>에는 이차원 리스트를, <span class="cd">label_list</span>에는 일차원 리스트를, <span class="cd">graph_title</span>에는 문자를 입력하는 함수를 작성합니다.</p>
+<div class="ind10">
+<p class="txts cd2"><span class="bg_yellow">graph_plot()</span></p>
+<div class="highlight6">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+
+<span class="cd2 blue2">def</span> <span class="cd2 gold">graph_plot</span><span class="cd2">(</span><span class="cd2 blue3">popu_list</span><span class="cd2">,</span> <span class="cd2 blue3">label_list</span><span class="cd2">,</span> <span class="cd2 blue3">graph_title</span><span class="cd2">):</span>
+    plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+    plt.title(<span class="cd2">graph_title</span>)
+    <span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 gold">len</span><span class="cd2">(popu_list)):</span>
+        plt.plot(<span class="gold">range</span>(<span class="green">24</span>), <span class="cd2">popu_list[i]</span>, <span class="cd2">label=label_list[i]</span>)
+    plt.legend()
+    plt.xlabel(<span class="red2">'시간대'</span>)
+    plt.ylabel(<span class="red2">'평균인구수'</span>)
+    plt.xticks(<span class="gold">range</span>(<span class="green">24</span>), <span class="gold">range</span>(<span class="green">24</span>))
+    plt.show()</pre>
+</div>
+</div>
+<p class="txt bl">한글 글꼴을 설정하고, 전달받은 매개변수 <span class="cd">graph_title</span>로 그래프 제목을 넣었습니다. 그 다음 인구 데이터로 입력받은 <span class="cd">popu_list</span>의 첫 행부터 마지막 행까지 반복합니다. 그리고 반복문 내부에서 <span class="cd">popu_list</span>의 인덱스와 <span class="cd">label_list</span>의 인덱스를 맞춰 <span class="cd">plt.plot()</span>으로 그래프를 그립니다. 그래프 색상은 자동으로 설정되도록 따로 지정하지 않았습니다. 나머지 공통 부분을 추가해서 함수를 완성했습니다.</p>
+</div>
+</section>
+</section>

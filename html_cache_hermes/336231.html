@@ -1,0 +1,397 @@
+<h1 class="page-subject">03-4. 슬래시 명령어</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<div class="toc">
+<ul>
+<li><a href="#_1">세션 관리</a></li>
+<li><a href="#_2">백그라운드·다중 작업</a></li>
+<li><a href="#_3">모델·응답 작동</a></li>
+<li><a href="#_4">표시·입력 작동</a></li>
+<li><a href="#mcp">도구·스킬·MCP</a></li>
+<li><a href="#_5">정보·도움말</a></li>
+<li><a href="#_6">게이트웨이 전용</a></li>
+<li><a href="#_7">종료</a></li>
+<li><a href="#_8">퀵 커맨드</a></li>
+</ul>
+</div>
+<p>Hermes Agent는 대화 중 <code>/</code>로 시작하는 슬래시 명령어를 제공합니다. CLI와 메시징 플랫폼 모두에서 사용할 수 있으며, 접두사 매칭을 지원합니다(예: <code>/ver</code>만 입력해도 <code>/verbose</code>로 확장).</p>
+<p>명령어는 <code>~/hermes-agent/hermes_cli/commands.py</code>의 <code>COMMAND_REGISTRY</code>가 단일 진실의 원천입니다. 이 절은 v0.13.0 기준으로 정리한 것입니다.</p>
+<h3 id="_1">세션 관리</h3>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/new</code> (별칭: <code>/reset</code>)</td>
+<td>새 세션 시작 (세션 ID와 히스토리 초기화)</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>화면 지우고 새 세션 시작</td>
+</tr>
+<tr>
+<td><code>/redraw</code></td>
+<td>터미널 화면이 깨졌을 때 강제 재페인트</td>
+</tr>
+<tr>
+<td><code>/history</code></td>
+<td>대화 히스토리 표시</td>
+</tr>
+<tr>
+<td><code>/save</code></td>
+<td>현재 세션 저장</td>
+</tr>
+<tr>
+<td><code>/retry</code></td>
+<td>마지막 메시지 재전송</td>
+</tr>
+<tr>
+<td><code>/undo</code></td>
+<td>마지막 사용자/어시스턴트 교환 제거</td>
+</tr>
+<tr>
+<td><code>/title [name]</code></td>
+<td>세션 제목 설정/표시</td>
+</tr>
+<tr>
+<td><code>/branch [name]</code> (별칭: <code>/fork</code>)</td>
+<td>현재 세션을 분기해 다른 경로 탐색</td>
+</tr>
+<tr>
+<td><code>/compress [focus]</code></td>
+<td>컨텍스트 수동 압축. 주제를 인자로 주면 그 주제 중심으로 요약</td>
+</tr>
+<tr>
+<td><code>/compress here [N]</code></td>
+<td>경계 인식형 부분 압축. 최근 N개 교환은 그대로 두고 그 이전만 요약 (5장 참고)</td>
+</tr>
+<tr>
+<td><code>/rollback [number]</code></td>
+<td>파일 시스템 체크포인트 목록/복원</td>
+</tr>
+<tr>
+<td><code>/snapshot [create|restore &lt;id&gt;|prune]</code> (별칭: <code>/snap</code>)</td>
+<td>Hermes 설정·상태의 스냅숏</td>
+</tr>
+<tr>
+<td><code>/stop</code></td>
+<td>실행 중인 백그라운드 프로세스 모두 종료</td>
+</tr>
+<tr>
+<td><code>/resume [name]</code></td>
+<td>이전 세션 재개</td>
+</tr>
+<tr>
+<td><code>/status</code></td>
+<td>세션 정보 표시</td>
+</tr>
+<tr>
+<td><code>/profile</code></td>
+<td>활성 프로파일과 홈 디렉터리 표시(전환은 CLI에서, 11-6절 참고)</td>
+</tr>
+<tr>
+<td><code>/sessions</code></td>
+<td>이전 세션 목록 탐색 및 재개</td>
+</tr>
+<tr>
+<td><code>/handoff &lt;target&gt;</code></td>
+<td>현재 세션을 라이브 이관 — 메시지·도구 호출·컨텍스트를 전부 보존한 채 다른 모델, 성격, 프로파일, 또는 메시징 플랫폼(Telegram, Discord 등)으로 옮김. 디버깅 중 빠른 모델에서 깊은 추론 모델로 넘기는 식으로 사용</td>
+</tr>
+<tr>
+<td><code>/sethome</code> (별칭: <code>/set-home</code>)</td>
+<td>현재 채널을 홈 채널로 지정(게이트웨이 전용)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">백그라운드·다중 작업</h3>
+<p>여러 작업을 동시에 진행하거나, 실행 중인 에이전트를 살짝 돌려세우는 명령어들입니다.</p>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/background &lt;prompt&gt;</code> (별칭: <code>/bg</code>, <code>/btw</code>)</td>
+<td>서브에이전트로 백그라운드 작업 시작. 메인 대화는 계속 진행</td>
+</tr>
+<tr>
+<td><code>/queue &lt;prompt&gt;</code> (별칭: <code>/q</code>)</td>
+<td>다음 턴에 처리할 프롬프트를 큐에 넣음(현재 턴은 끊지 않음)</td>
+</tr>
+<tr>
+<td><code>/steer &lt;prompt&gt;</code></td>
+<td>실행 중인 에이전트가 다음 도구 호출 후에 받아 보도록 메시지 주입(인터럽트 없음, 프롬프트 캐시 유지)</td>
+</tr>
+<tr>
+<td><code>/goal [text|pause|resume|clear|status]</code></td>
+<td>영속 목표 설정 — 매 턴 후 백그라운드에서 진행 점검(Ralph loop). 한 턴에 끝나지 않는 작업을 며칠에 걸쳐 누적 진행할 때 사용</td>
+</tr>
+<tr>
+<td><code>/agents</code> (별칭: <code>/tasks</code>)</td>
+<td>활성 서브에이전트와 진행 중 작업 표시</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">모델·응답 작동</h3>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/model [model] [--provider name] [--global]</code> (별칭: <code>/provider</code>)</td>
+<td>모델·프로바이더 전환. 인자 없이 부르면 인터랙티브 피커가 뜨고, 모든 게이트웨이 플랫폼(텔레그램·디스코드·슬랙)에서도 작동</td>
+</tr>
+<tr>
+<td><code>/fast [normal|fast|status|on|off]</code></td>
+<td>Fast Mode 토글 — OpenAI Priority Processing / Anthropic Fast Mode 사용 여부</td>
+</tr>
+<tr>
+<td><code>/codex-runtime [on|off|auto]</code></td>
+<td>OpenAI/Codex 모델 턴을 Codex app-server로 위임하는 런타임 전환(4-4절)</td>
+</tr>
+<tr>
+<td><code>/reasoning [level|show|hide]</code></td>
+<td>추론 노력 수준(none/minimal/low/medium/high/xhigh) 또는 추론 과정 표시/숨김</td>
+</tr>
+<tr>
+<td><code>/footer [on|off|status]</code></td>
+<td>게이트웨이 최종 응답에 런타임 메타데이터 푸터(모델·토큰·소요시간) 표시 토글</td>
+</tr>
+<tr>
+<td><code>/yolo</code></td>
+<td>위험 명령 자동 승인 토글(세션 한정, 프로세스 종료 시 초기화)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">표시·입력 작동</h3>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/verbose</code></td>
+<td>도구 표시 수준 순환 (off → new → all → verbose)</td>
+</tr>
+<tr>
+<td><code>/voice [on|off|tts|status]</code></td>
+<td>음성 모드 토글(자세한 내용은 3-5절)</td>
+</tr>
+<tr>
+<td><code>/busy [queue|steer|interrupt|status]</code></td>
+<td>작업 중 Enter 키 작동 변경</td>
+</tr>
+<tr>
+<td><code>/indicator [kaomoji|emoji|unicode|ascii]</code></td>
+<td>TUI의 busy 인디케이터 스타일</td>
+</tr>
+<tr>
+<td><code>/skin [name]</code></td>
+<td>디스플레이 테마(스킨) 변경</td>
+</tr>
+<tr>
+<td><code>/statusbar</code> (별칭: <code>/sb</code>)</td>
+<td>컨텍스트/모델 상태바 토글</td>
+</tr>
+<tr>
+<td><code>/personality [name]</code></td>
+<td>성격 프리셋 적용(없이 부르면 현재 표시)</td>
+</tr>
+<tr>
+<td><code>/usage</code></td>
+<td>현재 세션 토큰 사용량과 레이트 리밋</td>
+</tr>
+<tr>
+<td><code>/insights [days]</code></td>
+<td>사용 통계 분석</td>
+</tr>
+</tbody>
+</table>
+<p>성격 프리셋(14가지): <code>helpful</code>, <code>concise</code>, <code>technical</code>, <code>creative</code>, <code>teacher</code>, <code>kawaii</code>, <code>catgirl</code>, <code>pirate</code>, <code>shakespeare</code>, <code>surfer</code>, <code>noir</code>, <code>uwu</code>, <code>philosopher</code>, <code>hype</code>. <code>/personality none</code> 또는 <code>/personality default</code>로 초기화합니다.</p>
+<fieldset><legend>/personality는 세션을 넘어 지속됩니다</legend><p style="margin-top: 0.2em;">공식 문서에는 세션 수준의 임시 변경이라고 되어 있지만, 소스 코드에서는 config 파일에 저장되어 다음 세션에도 유지됩니다.</p></fieldset>
+<h3 id="mcp">도구·스킬·MCP</h3>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/tools [list|disable|enable] [name...]</code></td>
+<td>도구 활성/비활성</td>
+</tr>
+<tr>
+<td><code>/toolsets</code></td>
+<td>사용 가능한 도구 세트 목록</td>
+</tr>
+<tr>
+<td><code>/skills [search|browse|inspect|install]</code></td>
+<td>스킬 검색·설치·관리</td>
+</tr>
+<tr>
+<td><code>/&lt;skill-name&gt;</code></td>
+<td>특정 스킬 실행</td>
+</tr>
+<tr>
+<td><code>/cron [list|add|create|edit|pause|resume|run|remove]</code></td>
+<td>크론 작업 관리</td>
+</tr>
+<tr>
+<td><code>/curator [status|run|pause|resume|pin|unpin|restore]</code></td>
+<td>백그라운드 스킬 큐레이터(7장 참고)</td>
+</tr>
+<tr>
+<td><code>/kanban [list|show|create|claim|complete|...]</code></td>
+<td>다중 프로필 협업 보드</td>
+</tr>
+<tr>
+<td><code>/reload-mcp</code> (별칭: <code>/reload_mcp</code>)</td>
+<td>MCP 서버 재로드. 프롬프트 캐시 무효화 비용 경고 후 진행</td>
+</tr>
+<tr>
+<td><code>/reload-skills</code> (별칭: <code>/reload_skills</code>)</td>
+<td><code>~/.hermes/skills/</code> 재스캔 — 새로 설치하거나 삭제한 스킬 즉시 반영</td>
+</tr>
+<tr>
+<td><code>/reload</code></td>
+<td><code>.env</code> 변수 재로드(현재 세션에 반영)</td>
+</tr>
+<tr>
+<td><code>/browser [connect|disconnect|status]</code></td>
+<td>Chrome CDP 연결 관리</td>
+</tr>
+<tr>
+<td><code>/plugins</code></td>
+<td>설치된 플러그인 상태</td>
+</tr>
+<tr>
+<td><code>/platforms</code> (별칭: <code>/gateway</code>)</td>
+<td>게이트웨이/메시징 플랫폼 상태</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">정보·도움말</h3>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/help</code></td>
+<td>사용 가능한 명령어 도움말</td>
+</tr>
+<tr>
+<td><code>/whoami</code></td>
+<td>현재 사용자의 슬래시 명령 접근 수준(admin/user) 표시</td>
+</tr>
+<tr>
+<td><code>/commands [page]</code></td>
+<td>전체 명령어/스킬 목록 페이지네이션(게이트웨이 전용)</td>
+</tr>
+<tr>
+<td><code>/config</code></td>
+<td>현재 설정 표시</td>
+</tr>
+<tr>
+<td><code>/copy [number]</code></td>
+<td>마지막 어시스턴트 응답을 클립보드로</td>
+</tr>
+<tr>
+<td><code>/paste</code></td>
+<td>클립보드 이미지를 다음 프롬프트에 첨부</td>
+</tr>
+<tr>
+<td><code>/image &lt;path&gt;</code></td>
+<td>로컬 이미지 파일을 다음 프롬프트에 첨부</td>
+</tr>
+<tr>
+<td><code>/gquota</code></td>
+<td>Google Gemini Code Assist 할당량</td>
+</tr>
+<tr>
+<td><code>/debug</code></td>
+<td>시스템 정보 + 로그를 묶어 공유용 디버그 리포트 업로드</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">게이트웨이 전용</h3>
+<p>메시징 플랫폼에서 추가로 쓰는 명령어:</p>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/topic [off|help|session-id]</code></td>
+<td>Telegram DM 토픽 세션 관리</td>
+</tr>
+<tr>
+<td><code>/approve [session|always]</code></td>
+<td>보류 중인 위험 명령 승인</td>
+</tr>
+<tr>
+<td><code>/deny</code></td>
+<td>보류 중인 위험 명령 거부</td>
+</tr>
+<tr>
+<td><code>/restart</code></td>
+<td>진행 중 작업 정리 후 게이트웨이 재시작</td>
+</tr>
+<tr>
+<td><code>/update</code></td>
+<td>Hermes Agent 업데이트</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">종료</h3>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/quit</code> (별칭: <code>/exit</code>)</td>
+<td>CLI 종료(<code>/q</code>는 <code>/queue</code> 별칭이므로 종료에는 <code>/quit</code> 사용)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>사라진 명령어</strong>: 이전 버전에 있던 <code>/plan</code>은 v0.11에서 제거됐습니다. <code>/provider</code>는 별도 명령이 아니라 <code>/model</code>의 별칭으로 통합됐습니다(인터랙티브 모델 피커가 뜹니다).</p>
+</blockquote>
+<h3 id="_8">퀵 커맨드</h3>
+<p><code>config.yaml</code>에 사용자 정의 명령어를 등록하면 LLM을 거치지 않고 바로 셸 명령을 실행할 수 있습니다.</p>
+<pre><code class="language-yaml">quick_commands:
+  status:
+    type: exec
+    command: systemctl status hermes-agent
+  disk:
+    type: exec
+    command: df -h /
+</code></pre>
+<p>등록 후 <code>/status</code>, <code>/disk</code>로 실행합니다. <code>type</code>은 <code>exec</code>(셸 명령 실행)과 <code>alias</code>(다른 명령 별칭) 두 가지를 지원합니다. 토큰 소비 없이 즉시 결과를 볼 수 있습니다.</p>
+</div>

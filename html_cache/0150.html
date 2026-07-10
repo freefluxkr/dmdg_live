@@ -1,0 +1,28 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">입장료와 같은 금액을 넣어도 돈을 거슬러 준다고 출력됩니다. 왜 이런 결과가 나왔는지 코드를 살펴봅시다. <span class="cd">if-else</span> 조건문에서 <span class="cd">if</span> 조건을 충족하지 않으면 모두 <span class="cd">else</span>가 됩니다. 따라서 이 코드에서 투입금액과 입장료가 같을 때, 즉 <span class="cd">price_input</span>와 <span class="cd">price</span>가 같은 값일 때는 <span class="cd">price_input &lt; price</span> 조건을 충족하지 않으므로 <span class="cd">else</span>로 넘어가게 됩니다.</p>
+<p class="txt bl">이 부분을 고쳐 봅시다. 조건을 바꿔 <span class="cd">price_input &lt;= price</span> 또는 <span class="cd">price_input &gt; price</span>로 수정하면 될까요? 이렇게 바꿔도 문제는 해결되지 않습니다. 결과가 궁금하다면 직접 코드를 수정하고 확인해 보세요. 바로 다음 절에서 이 문제를 해결해 보겠습니다.</p>
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a2"><span class="dm brown">2</span> 다음 코드를 해석한 것으로 옳지 <span class="bg_black_line">않은</span> 것을 고르세요.</p>
+<div class="highlight">
+<pre>a = int(<span class="gold">input</span>(<span class="red2">'숫자 입력: '</span>))
+<span class="purple">if</span> a &lt; <span class="green">0</span>:
+    a = -a
+<span class="purple">else</span>:
+    a *= <span class="green">5</span>
+<span class="gold">print</span>(a)</pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">① <span class="cd">a</span>는 정수를 저장하는 변수다.</p>
+<p class="txt bl s12_12">② 음수가 입력되면 <span class="cd">a &lt; 0</span> 조건을 충족하므로 결과는 양수로 바뀐다.</p>
+<p class="txt bl s12_12">③ 양수가 입력되면 <span class="cd">a</span>에 5를 곱한 값이 출력된다.</p>
+<p class="txt bl s12_12">④ 0이 입력되면 오류가 발생한다.</p>
+<p class="txt bl s12_12">⑤ 마지막 줄의 <span class="cd">print(a)</span>는 항상 실행된다.</p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0865/">정답 및 해설</a></p>
+</div>
+</div>
+</section>
+</section>

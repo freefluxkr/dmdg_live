@@ -1,0 +1,246 @@
+<h1 class="page-subject">4) PDF 다루기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<h1 id="1-pypdf2">1.  PyPDF2란?</h1>
+<p>PyPDF2는 이름에서 직관적으로 알 수 있듯이 Python으로 PDF 문서를 다룰 수 있게 해주는 라이브러리입니다.</p>
+<p>참고로 설치는 아래의 코드 한 줄을 커맨드 창에 입력해주시면 됩니다. 대소문자에 주의해주세요!</p>
+<pre><code>pip install PyPDF2
+</code></pre>
+<p>아래의 링크는 PyPDF2 공식 문서이며, 그 안에는 여러 기능들이 있지만 이번 시간에는 코딩유치원 컨셉에 맞게 최대한 쉽고 가장 자주 사용할 만한 기능 위주로 설명드리겠습니다.</p>
+<p><a href="https://pypdf2.readthedocs.io/en/3.0.0/">PyPDF2 공식문서</a></p>
+<p>PyPDF2는 크게 3가지 클래스)로 나눌 수 있습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/q4z21/btrYRxfoL68/ckZNqaBNj4SUBgpN5b5zYK/img.png"/></p>
+<p>1) 원하는 작업을 하기 위해 pdf 파일을 불러올 때 사용하는  <strong>Pdf<del>File</del>Reader</strong></p>
+<p>2) 회전, 추출, 분리 등의 페이지 단위 작업을 할 때 사용하는  <strong>Pdf<del>File</del>Writer</strong></p>
+<p>(참고로, 회전은 한번에 하는 것이 아니라, 페이지 하나씩 돌려서 새로운 pdf에 붙여넣는 방식입니다)</p>
+<p>3) 여러 pdf 파일을 하나의 pdf로 병합할 때 사용하는  <strong>Pdf<del>File</del>Merger</strong></p>
+<p><strong>&lt;2023.02.11 - PyPDF2 버전 3.0.1 기준 변경 사항&gt;</strong></p>
+<p>PdfFileReader → <strong>PdfReader</strong></p>
+<p>PdfFileWriter →  <strong>PdfWriter</strong></p>
+<p>PdfFileMerger →  <strong>PdfMerger</strong></p>
+<h1 id="2">2. 페이지 추출</h1>
+<p>가장 처음으로 원하는 페이지를 추출해보겠습니다.</p>
+<p>저는 쉬운 이해를 위해서 테스트용 PDF를 만들어서 사용하였으나, 여러분들은 각자의 PDF 파일을 사용하시면 되는 점 참고바랍니다.</p>
+<p>테스트 PDF 파일 1.pdf에서 2번째 페이지만 추출해서 따로 저장해보겠습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cZEefb/btrkWONSJOf/yn3Adef1Gw4SKxPxBOdSS0/img.png"/></p>
+<p><strong>&lt;코드&gt; PyPDF2 (ver 3.0.0 이상)</strong></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>*** 변경점**</p>
+<p>addPage(page_number) → add_page(page_number)</p>
+<p>.getPage(page_number) → .pages[page_number]</p>
+<pre><code># step1.관련 모듈 import
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
+# step2.기존 pdf 불러오기
+pdfReader = PdfReader("테스트 PDF 파일 1.pdf", "rb")
+
+# step3.새로 만들 pdf 객체 생성
+pdfWriter = PdfWriter()
+
+# step4.기존의 1번 페이지를 가져와서 새로만든 pdf에 붙여넣기
+pdfWriter.add_page(pdfReader.pages[1])
+
+# step5.1번 페이지가 붙여진 새로운 pdf 파일을 현재 경로('./')에 원하는 이름으로 저장
+pdfWriter.write(open("./추출한 테스트 PDF 파일.pdf", "wb"))
+</code></pre>
+<p><strong>&lt;변경 전 코드_주로 ChatGPT가 주로 추천해줘서 오류가 남.&gt;</strong></p>
+<pre><code># step1.관련 모듈 import
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
+# step2.기존 pdf 불러오기
+pdfReader = PdfFileReader("테스트 PDF 파일 1.pdf", "rb")
+
+# step3.새로 만들 pdf 객체 생성
+pdfWriter = PdfFileWriter()
+
+# step4.기존의 1번 페이지를 가져와서 새로만든 pdf에 붙여넣기
+pdfWriter.addPage(pdfReader.getPage(1))
+
+# step5.1번 페이지가 붙여진 새로운 pdf 파일을 현재 경로('./')에 원하는 이름으로 저장
+pdfWriter.write(open("./추출한 테스트 PDF 파일.pdf", "wb"))
+</code></pre>
+<p><strong>&lt;결과물&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/uXiKm/btrkWPzhKNc/qxW65g4CifSPm9fam2deJ0/img.png"/></p>
+<h1 id="3-pdf">3. PDF 분할</h1>
+<p>다음으로 구현해 볼 기능은 페이지를 회전하는 것입니다.</p>
+<p>거의 비슷하지만 2가지가 다릅니다.</p>
+<p><strong>1) 기존 PDF의 페이지 수를 파악해서 for문으로 한 페이지씩 처리</strong></p>
+<ul>
+<li>
+<p>numPages 함수로 기존 PDF 파일의 전체 페이지 수 파악</p>
+</li>
+<li>
+<p>getPage( ) 함수로 지정한 PDF 페이지 한 장 가져오기</p>
+</li>
+</ul>
+<p><strong>2) 마지막 저장 시, f 문자열 포매팅 개념을 이용해서 pageNum 변수를 파일명에 반영</strong></p>
+<p><strong>&lt;코드&gt; PyPDF2 (ver 3.0.0 이상)</strong></p>
+<p>*** 변경점**</p>
+<p><strong>pdfReader.numPages → len(pdfReader.pages)</strong></p>
+<p>addPage(page_number) → add_page(page_number)</p>
+<p>.getPage(page_number)  → .pages[page_number]</p>
+<pre><code># step1.관련 모듈 import
+from PyPDF2 import PdfReader, PdfWriter
+
+# step2.기존 PDF 불러오기
+pdfReader = PdfReader("테스트 PDF 파일 1.pdf", "rb")
+
+# 페이지 하나씩 받아와서 저장하는 반복문
+for pageNum in range(len(pdfReader.pages)):
+
+    # step3.새로 만들 pdf 객체 생성 (계속 누적되지 않기 위해 for문 안으로 넣음)
+    pdfWriter = PdfWriter()
+
+    # step4.기존 PDF에서 한 페이지씩 가져오기
+    page = pdfReader.pages[pageNum]
+
+    # step5.위에서 가져온 페이지를 새로 만든 PDF에 붙여넣기
+    pdfWriter.add_page(page)
+
+    # step6.새로운 PDF 파일을 해당 경로('./')에 원하는 이름으로 저장
+    # (이름을 계속 다르게 해주기 위해서 f 문자열 포매팅 개념을 이용)
+    pdfWriter.write(open(f"./분할한 PDF 파일 {pageNum+1}.pdf", "wb"))
+</code></pre>
+<p><strong>&lt;변경 전 코드_주로 ChatGPT가 주로 추천해줘서 오류가 남.&gt;</strong></p>
+<pre><code># step1.관련 모듈 import
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
+# step2.기존 PDF 불러오기
+pdfReader = PdfFileReader("테스트 PDF 파일 1.pdf", "rb")
+
+# 페이지 하나씩 받아와서 저장하는 반복문
+for pageNum in range(pdfReader.numPages):
+
+    # step3.새로 만들 pdf 객체 생성 (계속 누적되지 않기 위해 for문 안으로 넣음)
+    pdfWriter = PdfFileWriter()
+
+    # step4.기존 PDF에서 한 페이지씩 가져오기
+    page = pdfReader.getPage(pageNum)
+
+    # step5.위에서 가져온 페이지를 새로 만든 PDF에 붙여넣기
+    pdfWriter.addPage(page)
+
+    # step6.새로운 PDF 파일을 해당 경로('./')에 원하는 이름으로 저장
+    # (이름을 계속 다르게 해주기 위해서 f 문자열 포매팅 개념을 이용)
+    pdfWriter.write(open(f"./분할한 PDF 파일 {pageNum+1}.pdf", "wb"))
+</code></pre>
+<p><strong>&lt;결과물&gt;</strong></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/basZy3/btrk6LIV1DU/gT2MNkuyKTRgTu1qxOa5pK/img.png"/></p>
+<h1 id="4-pdf">4. PDF 회전</h1>
+<p>위에서 배운 PDF 분할에서 딱 2가지만 달라졌습니다.</p>
+<p><strong>1) rotate( ) 함수로 회전</strong></p>
+<p><strong>2) pdfWriter가 for문 밖으로 나감 (기존의 pdf를 회전시키고 새로운 PDF에 계속 붙여넣어 주어야하기 때문)</strong></p>
+<p>이 부분에 유의하시면서 아래의 코드를 보시면 좋을 것 같습니다.</p>
+<p><strong>&lt;코드&gt; PyPDF2 (ver 3.0.0 이상)</strong></p>
+<p>*** 변경점**</p>
+<p><strong>rotateClockwise( ) → rotate( )</strong></p>
+<p>pdfReader.numPages  → len(pdfReader.pages)</p>
+<p>addPage(page_number) → add_page(page_number)</p>
+<p>.getPage(page_number)  → .pages[page_number]</p>
+<pre><code># step1.관련 모듈 import
+from PyPDF2 import PdfReader, PdfWriter
+
+# step2.기존 pdf 불러오기
+pdfReader = PdfReader("데이터 자격시험 일정_2022.pdf", "rb")
+
+# step3.새로 만들 pdf 객체 생성
+pdfWriter = PdfWriter()
+
+# 페이지 하나씩 받아와서 돌린 후, 붙여넣는 반복문
+for pageNum in range(len(pdfReader.pages)):
+
+    # step4.기존 PDF에서 한 페이지씩 가져오기
+    page = pdfReader.pages[pageNum]
+
+    # step5.시계 방향으로 90도 회전 (반시계로 90도 회전은 270 입력하면 됨)
+    page.rotate(90)
+
+    # step6.회전된 페이지 새로운 PDF에 붙여넣기
+    pdfWriter.add_page(page)
+
+# step7.새로운 pdf 파일을 해당 경로('./')에 원하는 이름으로 저장
+pdfWriter.write(open('./회전한 테스트 PDF 파일.pdf', 'wb'))
+</code></pre>
+<p><strong>&lt;변경 전 코드_주로 ChatGPT가 주로 추천해줘서 오류가 남.&gt;</strong></p>
+<pre><code># step1.관련 모듈 import
+from PyPDF2 import PdfFileReader,PdfFileWriter
+
+# step2.기존 pdf 불러오기
+pdfReader = PdfFileReader(open("테스트 PDF 파일 1.pdf","rb"))
+
+# step3.새로 만들 pdf 객체 생성
+pdfWriter = PdfFileWriter()
+
+# 페이지 하나씩 받아와서 돌린 후, 붙여넣는 반복문
+for pageNum in range(pdfReader.numPages):
+
+    # step4.기존 PDF에서 한 페이지씩 가져오기
+    page = pdfReader.getPage(pageNum)
+
+    # step5.시계 방향으로 90도 회전 (반시계로 90도 회전은 270 입력하면 됨)
+    page.rotateClockwise(90)
+
+    # step6.회전된 페이지 새로운 PDF에 붙여넣기
+    pdfWriter.addPage(page)
+
+# step7.새로운 pdf 파일을 해당 경로('./')에 원하는 이름으로 저장
+pdfWriter.write(open('./회전한 테스트 PDF 파일.pdf', 'wb'))
+</code></pre>
+<p><strong>&lt;결과물&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/NDx7J/btrk18LTT7k/NKrM7N4HLOJsc8giIEkPf0/img.png"/></p>
+<h1 id="4-pdf_1">4. PDF 병합</h1>
+<p>병합은 앞서 배운 분할과 회전에 비해서 매우 간단합니다.</p>
+<p>PdfFileWriter가 아니라 PdfFileMerger를 import 해준 점만 주의 하시면 아래 코드 이해하시는데에 어려움 없으시리라 생각합니다.</p>
+<p><strong>&lt;코드&gt; PyPDF2 (ver 3.0.0 이상)</strong></p>
+<p>*** 변경점**</p>
+<p>PdfReader와 PdfMerger 클래스 외에는 따로 변경점 없음</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code># step1.관련 모듈 import (Writer 대신 Merger를 사용하는 것에 주의!)
+from PyPDF2 import PdfReader, PdfMerger
+
+# step2.기존 pdf 불러오기
+pdfReader1 = PdfReader(open("테스트 PDF 파일 1.pdf","rb")) # 3장
+pdfReader2 = PdfReader(open("테스트 PDF 파일 2.pdf","rb")) # 2장
+
+# step3.새로 만들 pdf 객체 생성 (병합용)
+pdfMerger = PdfMerger()
+
+# step4.PDF 하나씩 가져와서 차례대로 병합
+pdfMerger.append(pdfReader1)
+pdfMerger.append(pdfReader2)
+
+# step5.새로운 pdf 파일을 해당 경로('./')에 원하는 이름으로 저장
+pdfMerger.write("./병합한 테스트 PDF 파일.pdf")
+</code></pre>
+<p><strong>&lt;변경 전 코드_주로 ChatGPT가 주로 추천해줘서 오류가 남.&gt;</strong></p>
+<pre><code># step1.관련 모듈 import (Writer 대신 Merger를 사용하는 것에 주의!)
+from PyPDF2 import PdfFileReader, PdfFileMerger
+
+# step2.기존 pdf 불러오기
+pdfReader1 = PdfFileReader(open("테스트 PDF 파일 1.pdf","rb")) # 3장
+pdfReader2 = PdfFileReader(open("테스트 PDF 파일 2.pdf","rb")) # 2장
+
+# step3.새로 만들 pdf 객체 생성 (병합용)
+pdfMerger = PdfFileMerger()
+
+# step4.PDF 하나씩 가져와서 차례대로 병합
+pdfMerger.append(pdfReader1)
+pdfMerger.append(pdfReader2)
+
+# step5.새로운 pdf 파일을 해당 경로('./')에 원하는 이름으로 저장
+pdfMerger.write("./병합한 테스트 PDF 파일.pdf")
+</code></pre>
+<p><strong>&lt;결과물&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/tLfVB/btrk5M2srX7/cSgLAUUQW9bgz3iHpZTs50/img.png"/></p>
+</div>

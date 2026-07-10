@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>04_4장_데이터베이스_및_ORM_사용하기</title>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Fira+Code:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Fira Code', 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    
+    <div class="thebook-content">
+        <h1>4장. 데이터베이스와 ORM 사용하기</h1>
+        <p>로컬 메모리 데이터 구조는 애플리케이션 재기동 시 데이터가 초기화된다는 치명적인 한계가 있습니다. 본 장에서는 가볍고 이식성이 뛰어난 관계형 데이터베이스인 <strong>SQLite</strong>를 연동하고, 파이썬 ORM 라이브러리의 업계 표준인 <strong>SQLAlchemy</strong>를 활용해 데이터의 영속성을 처리하는 과정을 상세히 실습합니다.</p>
+        
+        <h2>4.1 SQLite와 ORM의 이해</h2>
+        <p>SQLite는 서버 구동이 필요 없이 단일 파일 형태로 동작하는 가볍고 신속한 관계형 DB 엔진입니다. ORM(Object-Relational Mapping)은 객체 지향 언어의 <strong>객체(클래스)</strong>와 관계형 데이터베이스의 <strong>테이블</strong>을 자동으로 매핑시켜 주어 개발자가 SQL 질의문 없이도 코드로 쿼리를 실행할 수 있게 해줍니다.</p>
+
+        <h2>4.2 SQLAlchemy 커넥션 설정</h2>
+        <p>먼저 데이터베이스 연결 및 세션 생성을 관리할 <code>database.py</code> 파일을 생성합니다.</p>
+        <div class="highlight">
+            <pre><code># database.py
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+# SQLite 로컬 파일 경로 정의 (프로젝트 내 todos.db 생성)
+SQLALCHEMY_DATABASE_URL = "sqlite:///./todos.db"
+
+# SQLite는 멀티스레드 접근 시 기본적으로 커넥션을 제어하므로 check_same_thread 옵션 필요
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+)
+
+# 데이터베이스 세션을 가동할 클래스 생성
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# ORM 모델들이 상속받아 정의할 Base 클래스
+Base = declarative_base()
+</code></pre>
+        </div>
+
+        <h2>4.3 ORM 데이터베이스 모델 설계</h2>
+        <p>SQLite 데이터베이스 내 테이블과 1대1 매핑될 파이썬 클래스를 정의합니다. `Base`를 상속합니다.</p>
+        <div class="highlight">
+            <pre><code># models.py
+from sqlalchemy import Column, Integer, String, Boolean
+from database import Base
+
+class TodoModel(Base):
+    __tablename__ = "todos"
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String(50), nullable=False)
+    content = Column(String(200))
+    is_done = Column(Boolean, default=False)
+</code></pre>
+        </div>
+
+        <h2>4.4 데이터베이스 세션 주입 및 테이블 자동 생성</h2>
+        <p>FastAPI 구동 시 SQLite 테이블을 생성하고, 의존성 주입(`Depends`) 기능을 사용해 API 요청마다 세션을 열고 닫는 과정을 구조화합니다. 최신 파이썬의 파이프(`|`) 타입 힌트를 적극 사용합니다.</p>
+        <div class="highlight">
+            <pre><code># main.py
+from fastapi import FastAPI, Depends, HTTPException
+from sqlalchemy.orm import Session
+from database import SessionLocal, engine, Base
+from models import TodoModel
+from pydantic import BaseModel
+
+# 테이블 초기 자동 생성
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI()
+
+# 🧪 Pydantic 스키마 정의 (데이터 검증용)
+class TodoBase(BaseModel):
+    title: str
+    content: str | None = None
+    is_done: bool = False
+
+class TodoResponse(TodoBase):
+    id: int
+
+    class Config:
+        from_attributes = True  # SQLAlchemy 객체를 Pydantic으로 자동 파싱 (Pydantic v2 표준)
+
+# 🔑 DB 세션을 얻기 위한 의존성 주입 함수
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close() # API 요청 완료 후 커넥션 풀 반환 및 자동 세션 닫기
+</code></pre>
+        </div>
+
+        <h2>4.5 DB 연동 CRUD API 완성</h2>
+        <p>의존성이 주입된 `db: Session`을 바탕으로 SQLite 테이블에 데이터를 직접 삽입, 조회, 갱신하는 코드를 작성합니다.</p>
+        <div class="highlight">
+            <pre><code>@app.post("/todos", response_model=TodoResponse, status_code=201)
+def create_todo(todo: TodoBase, db: Session = Depends(get_db)) -> TodoModel:
+    db_todo = TodoModel(
+        title=todo.title,
+        content=todo.content,
+        is_done=todo.is_done
+    )
+    db.add(db_todo)
+    db.commit()      # 데이터베이스 반영
+    db.refresh(db_todo) # 생성된 자동증가 ID 값 등을 로드
+    return db_todo
+
+@app.get("/todos", response_model=list[TodoResponse])
+def get_todos(db: Session = Depends(get_db)) -> list[TodoModel]:
+    return db.query(TodoModel).all()
+
+@app.get("/todos/{todo_id}", response_model=TodoResponse)
+def get_todo(todo_id: int, db: Session = Depends(get_db)) -> TodoModel:
+    db_todo = db.query(TodoModel).filter(TodoModel.id == todo_id).first()
+    if not db_todo:
+        raise HTTPException(status_code=404, detail="할 일을 찾을 수 없습니다.")
+    return db_todo
+
+@app.put("/todos/{todo_id}", response_model=TodoResponse)
+def update_todo(todo_id: int, todo: TodoBase, db: Session = Depends(get_db)) -> TodoModel:
+    db_todo = db.query(TodoModel).filter(TodoModel.id == todo_id).first()
+    if not db_todo:
+        raise HTTPException(status_code=404, detail="수정할 항목이 없습니다.")
+    db_todo.title = todo.title
+    db_todo.content = todo.content
+    db_todo.is_done = todo.is_done
+    db.commit()
+    db.refresh(db_todo)
+    return db_todo
+</code></pre>
+        </div>
+    </div>
+    
+</body>
+</html>

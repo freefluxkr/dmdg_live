@@ -1,0 +1,28 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="ind10">
+<p class="txtex dm">하위 목표 2</p>
+<div class="box_green_line">
+<p class="txtex2 dl">핫플레이스가 있는 행정동의 주중/주말 시간대별 평균인구 그래프를 그려 분석하기</p>
+</div>
+<p class="txtex dm">알고리즘</p>
+<div class="box_green_line">
+<p class="txtex dl s12_12">1. 주중 시간대별 생활인구를 저장할 리스트(weekday)와 주말 시간대별 생활인구를 저장할 리스트(weekend)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">2. 인구 데이터(data)의 첫 행부터 마지막 행까지 돌며 반복하기</p>
+<p class="txtex dl ind12">2.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind26">2.1.1 해당 행의 시간대(time)와 총생활인구수(p), 기준일ID의 연도(year), 월(mon), 일(day)을 각각 변수에 저장하기</p>
+<p class="txtex dl ind26">2.1.2 과정 2.1.1에서 저장한 연도(year), 월(mon), 일(day)을 datetime.date().weekday()에 넣어 주중/주말 구분하기</p>
+<p class="txtex dl ind26">2.1.3 주중이면 주중 리스트(weekday[time])에 총생활인구수(p), 주말이면 주말 리스트(weekend[time])에 총생활인구수(p) 더하기</p>
+<p class="txtex dl s12_12">3. 반복이 끝나면 2019년 12월의 주중 일수(weekday_cnt)와 주말 일수(weekend_cnt)를 저장할 변수를 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">4. 2019년 12월의 일수만큼 반복하기</p>
+<p class="txtex dl ind12">4.1 주중이면 주중 일수(weekday_cnt)에 1, 주말이면 주말 일수(weekend_cnt)에 1 더하기</p>
+<p class="txtex dl s12_12">5. 주중 리스트(weekday)의 각 요소를 주중 일수(weekday_cnt)로, 주말 리스트(weekend)의 각 요소를 주말 일수(weekend_cnt)로 나누어 주중/주말 평균인구 구하기</p>
+<p class="txtex dl s12_12">6. 완성된 weekday와 weekend 리스트로 주중/주말 시간대별 평균인구 그래프 그리기</p>
+</div>
+</div>
+<a id="section_1"></a>
+<p class="txt bl">하위 목표 1의 알고리즘과 비교했을 때 과정 2가 가장 크게 변했네요. 과정 2.1.1에서 구한 연도, 월, 일을 활용해 각 행이 주중인지 주말인지를 판단하고, 주중이면 주중 리스트, 주말이면 주말 리스트에 총생활인구수를 더합니다. 과정 3에서는 2019년 12월의 주중 일수와 주말 일수를 반복문으로 구합니다. 그리고 과정 4에서 오차가 생기지 않게 주중 일수와 주말 일수로 정확히 나눕니다.</p>
+</div>
+</section>
+</section>

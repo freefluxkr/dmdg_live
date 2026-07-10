@@ -1,0 +1,431 @@
+<div class="page-content tex2jax_process">
+<p>지금까지 우리는 정답(레이블)이 있는 데이터로 모델을 학습시키는 지도학습을 살펴보았습니다. 하지만 현실 세계의 데이터 대부분은 레이블이 없습니다. 이 챕터에서는 레이블 없이도 데이터 속 패턴을 스스로 찾아내는 <strong>비지도학습(Unsupervised Learning)</strong>과, 시행착오를 통해 스스로 최선의 행동을 학습하는 <strong>강화학습(Reinforcement Learning)</strong>을 소개합니다.</p>
+<h3 id="_1">학습 목표</h3>
+<ul>
+<li>비지도학습의 개념과 지도학습과의 차이를 설명할 수 있다.</li>
+<li>K-Means, DBSCAN, 계층적 클러스터링의 원리와 차이를 이해한다.</li>
+<li>PCA를 통한 차원 축소의 개념을 이해한다.</li>
+<li>이상탐지와 연관규칙의 실제 활용 사례를 설명할 수 있다.</li>
+<li>강화학습의 핵심 구성요소(에이전트, 환경, 상태, 행동, 보상)를 설명할 수 있다.</li>
+<li>Q-Learning의 기초 원리를 이해한다.</li>
+<li>강화학습이 실제로 적용되는 분야를 열거할 수 있다.</li>
+</ul>
+<h2 id="31">3.1 비지도학습의 개요 — 레이블 없는 학습</h2>
+<p><strong>비지도학습(Unsupervised Learning)</strong>이란 정답(레이블)이 없는 데이터에서 숨겨진 구조나 패턴을 스스로 찾아내는 기계학습 방식입니다.</p>
+<p>예를 들어, 수천 명의 고객 구매 데이터가 있을 때 "이 고객은 VIP다", "이 고객은 일반 고객이다"라는 레이블 없이도, 구매 패턴이 비슷한 고객끼리 자동으로 묶어주는 것이 비지도학습입니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>지도학습</th>
+<th>비지도학습</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>레이블</td>
+<td>필요</td>
+<td>불필요</td>
+</tr>
+<tr>
+<td>목표</td>
+<td>정답 예측</td>
+<td>패턴·구조 발견</td>
+</tr>
+<tr>
+<td>대표 알고리즘</td>
+<td>회귀, 분류</td>
+<td>클러스터링, 차원축소</td>
+</tr>
+<tr>
+<td>예시</td>
+<td>스팸 메일 분류</td>
+<td>고객 군집화</td>
+</tr>
+</tbody>
+</table>
+<p>비지도학습의 주요 분야는 다음과 같습니다.</p>
+<ul>
+<li><strong>클러스터링(Clustering)</strong>: 비슷한 데이터끼리 그룹으로 묶기</li>
+<li><strong>차원 축소(Dimensionality Reduction)</strong>: 데이터의 특징을 줄여 핵심만 남기기</li>
+<li><strong>이상 탐지(Anomaly Detection)</strong>: 정상 패턴에서 벗어난 데이터 찾기</li>
+<li><strong>연관 규칙(Association Rule)</strong>: 함께 발생하는 패턴 찾기</li>
+</ul>
+<blockquote>
+<p>💡 비지도학습은 레이블 작업 비용이 없어 실무에서 매우 광범위하게 사용됩니다. 인터넷에 쌓이는 방대한 비레이블 데이터를 활용할 수 있다는 점이 큰 장점입니다.</p>
+</blockquote>
+<h2 id="32-k-means-dbscan">3.2 클러스터링 — K-Means, DBSCAN, 계층적 클러스터링</h2>
+<p><strong>클러스터링(Clustering)</strong>은 데이터를 비슷한 것끼리 묶어 <strong>군집(Cluster)</strong>을 형성하는 기법입니다. 사람이 직접 분류 기준을 정하지 않아도, 알고리즘이 데이터의 유사성을 기반으로 자동으로 그룹을 나눕니다.</p>
+<h3 id="k-means">K-Means 클러스터링</h3>
+<p><strong>K-Means</strong>는 가장 널리 쓰이는 클러스터링 알고리즘입니다. 사용자가 군집 수 K를 미리 지정하면, 알고리즘이 데이터를 K개의 군집으로 나눕니다.</p>
+<p><strong>작동 원리:</strong></p>
+<ol>
+<li>K개의 중심점(<strong>센트로이드, Centroid</strong>)을 임의로 초기화합니다.</li>
+<li>각 데이터를 가장 가까운 센트로이드에 할당합니다.</li>
+<li>각 군집의 평균값으로 센트로이드를 재계산합니다.</li>
+<li>센트로이드가 더 이상 변하지 않을 때까지 2~3을 반복합니다.</li>
+</ol>
+<blockquote>
+<p>⚠️ K-Means는 K를 미리 정해야 하고, 원형 군집에 적합합니다. 불규칙한 형태의 군집이나 이상치가 많은 데이터에는 성능이 떨어질 수 있습니다.</p>
+</blockquote>
+<h3 id="dbscan">DBSCAN</h3>
+<p><strong>DBSCAN(Density-Based Spatial Clustering of Applications with Noise)</strong>은 밀도 기반 클러스터링 알고리즘입니다. K처럼 군집 수를 미리 정하지 않아도 되며, 불규칙한 모양의 군집도 잘 찾아냅니다.</p>
+<p>핵심 개념은 "가까운 데이터가 충분히 많이 모여 있으면 하나의 군집"이라는 것입니다. 밀도가 낮은 곳에 홀로 있는 데이터는 <strong>노이즈(Noise)</strong>로 처리합니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>K-Means</th>
+<th>DBSCAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>군집 수</td>
+<td>사전 지정 필요</td>
+<td>자동 결정</td>
+</tr>
+<tr>
+<td>군집 형태</td>
+<td>원형에 적합</td>
+<td>임의 형태 가능</td>
+</tr>
+<tr>
+<td>이상치 처리</td>
+<td>취약</td>
+<td>노이즈로 처리</td>
+</tr>
+<tr>
+<td>속도</td>
+<td>빠름</td>
+<td>데이터 크기에 따라 느려질 수 있음</td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+<img alt="K-Means vs DBSCAN — 같은 데이터라도 형태와 노이즈 유무에 따라 결과가 달라집니다" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338388/ch03_clustering_compare.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<h3 id="_2">계층적 클러스터링</h3>
+<p><strong>계층적 클러스터링(Hierarchical Clustering)</strong>은 데이터를 계층 구조로 묶어가는 방식입니다. 결과를 <strong>덴드로그램(Dendrogram)</strong>이라는 나무 형태의 그림으로 표현하여 어떤 데이터가 먼저 묶이는지 한눈에 볼 수 있습니다.</p>
+<ul>
+<li><strong>병합(Agglomerative) 방식</strong>: 각 데이터를 개별 군집으로 시작해 점점 합쳐나감 (아래에서 위로)</li>
+<li><strong>분할(Divisive) 방식</strong>: 전체를 하나의 군집으로 시작해 점점 나눠나감 (위에서 아래로)</li>
+</ul>
+<blockquote>
+<p>📌 계층적 클러스터링은 K를 미리 정하지 않아도 되고, 덴드로그램으로 군집 구조를 시각적으로 파악할 수 있다는 장점이 있습니다. 다만 데이터가 많아질수록 계산 비용이 급격히 증가합니다.</p>
+</blockquote>
+<h2 id="33-pca">3.3 차원 축소 — PCA(주성분 분석)</h2>
+<p>데이터의 특징(Feature) 수가 너무 많으면 학습이 느려지고, 시각화도 어려워집니다. 이를 해결하기 위해 <strong>차원 축소(Dimensionality Reduction)</strong> 기법을 사용합니다.</p>
+<p><strong>PCA(Principal Component Analysis, 주성분 분석)</strong>는 대표적인 차원 축소 알고리즘입니다. 데이터의 분산(정보)을 최대한 보존하면서 새로운 축(<strong>주성분, Principal Component</strong>)으로 데이터를 변환하여 차원을 줄입니다.</p>
+<blockquote>
+<p>💡 예를 들어 키와 몸무게, 허리둘레 3가지 특징이 있을 때, PCA는 이 3가지 정보를 최대한 담는 2개(또는 1개)의 새로운 축을 만들어 냅니다.</p>
+</blockquote>
+<p><strong>PCA의 주요 활용:</strong></p>
+<ul>
+<li>고차원 데이터를 2D/3D로 줄여 시각화</li>
+<li>머신러닝 모델 학습 속도 향상</li>
+<li>중복되거나 불필요한 특징 제거 (노이즈 감소)</li>
+</ul>
+<p><strong>PCA 핵심 파라미터:</strong></p>
+<ul>
+<li><code>n_components</code>: 축소할 차원 수 (예: 2이면 2차원으로 축소)</li>
+<li><code>explained_variance_ratio_</code>: 각 주성분이 전체 분산 중 몇 %를 설명하는지 나타냄</li>
+</ul>
+<blockquote>
+<p>⚠️ PCA로 축소된 축은 원래 특징의 의미를 잃어버리므로, "첫 번째 주성분이 무엇을 의미하는지" 직관적으로 해석하기 어렵습니다.</p>
+</blockquote>
+<h2 id="34">3.4 이상탐지와 연관규칙</h2>
+<h3 id="_3">이상탐지</h3>
+<p><strong>이상탐지(Anomaly Detection)</strong>는 정상 패턴에서 크게 벗어난 데이터(<strong>이상치, Anomaly</strong>)를 찾아내는 기법입니다. 대부분의 데이터가 정상이고 이상치는 매우 드물기 때문에 레이블 없이 학습하는 비지도학습 방식이 많이 사용됩니다.</p>
+<p><strong>실제 활용 사례:</strong></p>
+<ul>
+<li>금융: 신용카드 부정 사용(사기) 탐지</li>
+<li>제조: 공장 설비의 이상 징후 감지</li>
+<li>네트워크: 사이버 침입 탐지</li>
+<li>의료: 비정상적인 진단 수치 감지</li>
+</ul>
+<p>대표 알고리즘으로는 <strong>Isolation Forest</strong>, <strong>One-Class SVM</strong>, <strong>Autoencoder</strong> 등이 있습니다.</p>
+<h3 id="_4">연관규칙</h3>
+<p><strong>연관규칙(Association Rule)</strong>은 대량의 거래 데이터에서 "함께 자주 등장하는 항목들의 규칙"을 찾는 기법입니다. 대형마트의 장바구니 분석이 가장 유명한 예시입니다.</p>
+<blockquote>
+<p>💡 "기저귀를 산 고객은 맥주도 함께 산다"는 실제 마트 데이터 분석에서 발견된 유명한 연관규칙 사례입니다.</p>
+</blockquote>
+<p>주요 지표:</p>
+<ul>
+<li><strong>지지도(Support)</strong>: 전체 거래 중 해당 조합이 등장하는 비율</li>
+<li><strong>신뢰도(Confidence)</strong>: A를 샀을 때 B도 살 확률</li>
+<li><strong>향상도(Lift)</strong>: 연관규칙이 우연보다 얼마나 강한지 나타내는 값 (1보다 크면 양의 연관)</li>
+</ul>
+<p>대표 알고리즘: <strong>Apriori</strong>, <strong>FP-Growth</strong></p>
+<h2 id="35">3.5 강화학습의 개요 — 에이전트, 환경, 상태, 행동, 보상</h2>
+<p><strong>강화학습(Reinforcement Learning, RL)</strong>은 <strong>에이전트(Agent)</strong>가 <strong>환경(Environment)</strong>과 상호작용하면서 시행착오를 통해 최대 <strong>보상(Reward)</strong>을 얻는 방법을 스스로 학습하는 방식입니다.</p>
+<p>게임을 처음 배우는 아이를 떠올려보세요. 규칙을 누가 알려주지 않아도, 여러 번 플레이하면서 어떤 행동이 점수를 올리는지 스스로 터득하는 것과 같은 원리입니다.</p>
+<p><strong>강화학습의 핵심 구성요소:</strong></p>
+<table>
+<thead>
+<tr>
+<th>구성요소</th>
+<th>설명</th>
+<th>예시 (체스 게임)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>에이전트(Agent)</td>
+<td>학습하고 행동하는 주체</td>
+<td>AI 체스 플레이어</td>
+</tr>
+<tr>
+<td>환경(Environment)</td>
+<td>에이전트가 상호작용하는 세계</td>
+<td>체스 보드</td>
+</tr>
+<tr>
+<td>상태(State)</td>
+<td>현재 환경의 상황</td>
+<td>현재 말의 위치</td>
+</tr>
+<tr>
+<td>행동(Action)</td>
+<td>에이전트가 취할 수 있는 선택</td>
+<td>말을 어디로 이동할지</td>
+</tr>
+<tr>
+<td>보상(Reward)</td>
+<td>행동의 결과로 받는 피드백</td>
+<td>상대 말을 잡으면 +1, 지면 -1</td>
+</tr>
+<tr>
+<td>정책(Policy)</td>
+<td>상태에서 행동을 선택하는 전략</td>
+<td>"이 상황에서는 이 말을 움직이자"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>강화학습의 학습 흐름:</strong></p>
+<ol>
+<li>에이전트가 현재 <strong>상태(State)</strong>를 관찰합니다.</li>
+<li><strong>정책(Policy)</strong>에 따라 <strong>행동(Action)</strong>을 선택합니다.</li>
+<li>환경이 <strong>보상(Reward)</strong>과 다음 <strong>상태(Next State)</strong>를 반환합니다.</li>
+<li>에이전트는 누적 보상이 최대가 되도록 정책을 업데이트합니다.</li>
+<li>1~4를 반복합니다.</li>
+</ol>
+<p align="center">
+<img alt="강화학습 순환 — 에이전트가 행동을 보내고 환경으로부터 상태·보상을 받습니다" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338388/ch03_rl_cycle.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<blockquote>
+<p>📌 강화학습은 지도학습처럼 정답을 알려주지 않습니다. 오직 보상 신호만으로 좋은 행동과 나쁜 행동을 스스로 구분하며 학습합니다.</p>
+</blockquote>
+<h2 id="36-q-learning">3.6 Q-Learning 기초 개념</h2>
+<p><strong>Q-Learning</strong>은 강화학습의 가장 기초적인 알고리즘 중 하나입니다. 각 (상태, 행동) 쌍에 대해 <strong>Q값(Q-value)</strong>이라는 "기대 누적 보상"을 계산하고, 이 Q값을 기반으로 행동을 선택합니다.</p>
+<p>Q값을 저장하는 표를 <strong>Q-테이블(Q-Table)</strong>이라고 합니다. 행은 상태(State), 열은 행동(Action)을 나타내며, 학습이 진행될수록 Q값이 점점 정확해집니다.</p>
+<p><strong>Q값 업데이트 공식 (벨만 방정식):</strong></p>
+<p>$$Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]$$</p>
+<ul>
+<li><code>s</code>: 현재 상태, <code>a</code>: 선택한 행동</li>
+<li><code>r</code>: 받은 보상</li>
+<li><code>s'</code>: 다음 상태</li>
+<li><code>α</code> (알파): 학습률 — 새 정보를 얼마나 빠르게 반영할지</li>
+<li><code>γ</code> (감마): 할인율 — 미래 보상을 현재 가치로 얼마나 환산할지</li>
+</ul>
+<blockquote>
+<p>💡 할인율 γ가 1에 가까울수록 먼 미래의 보상도 중요하게 여기고, 0에 가까울수록 당장의 보상만 중요하게 여깁니다.</p>
+</blockquote>
+<p><strong>Q-Learning의 한계와 발전:</strong></p>
+<p>Q-테이블은 상태와 행동의 수가 적을 때는 잘 동작하지만, 체스나 바둑처럼 상태 공간이 거대할 때는 테이블 자체를 만들 수 없습니다. 이 한계를 극복하기 위해 딥러닝을 결합한 <strong>DQN(Deep Q-Network)</strong>이 등장했습니다.</p>
+<h2 id="37">3.7 강화학습의 실제 적용 사례</h2>
+<p>강화학습은 다양한 분야에서 놀라운 성과를 거두고 있습니다.</p>
+<h3 id="_5">게임</h3>
+<ul>
+<li><strong>AlphaGo / AlphaZero (DeepMind)</strong>: 바둑 세계 챔피언을 이긴 AI. 강화학습으로 자기 자신과 대국하며 스스로 실력을 키웠습니다.</li>
+<li><strong>OpenAI Five</strong>: 팀 협동 게임 Dota 2에서 프로 팀을 이긴 AI.</li>
+<li><strong>Atari 게임</strong>: DQN이 픽셀만 보고 수십 가지 아타리 게임을 사람 수준 이상으로 플레이했습니다.</li>
+</ul>
+<h3 id="_6">로봇공학</h3>
+<p>로봇 팔이 물체를 집는 방법, 두발로 걷는 방법 등을 사람이 일일이 코딩하지 않고 강화학습으로 스스로 터득합니다. Boston Dynamics의 로봇 등이 대표적인 연구 사례입니다.</p>
+<h3 id="_7">자율주행</h3>
+<p>차선 변경, 교차로 통과 등 복잡한 교통 상황에서의 의사결정에 강화학습이 활용됩니다. 시뮬레이터 환경에서 수백만 번의 가상 주행을 통해 안전한 주행 정책을 학습합니다.</p>
+<h3 id="rlhf">RLHF — 대형 언어 모델의 핵심 기술</h3>
+<p><strong>RLHF(Reinforcement Learning from Human Feedback, 인간 피드백 강화학습)</strong>는 ChatGPT, Claude와 같은 대형 언어 모델(LLM)을 사람의 선호에 맞게 정렬(Alignment)하는 핵심 기술입니다.</p>
+<p><strong>RLHF 학습 과정:</strong></p>
+<ol>
+<li>사전 학습된 언어 모델이 여러 응답을 생성합니다.</li>
+<li>사람이 응답의 품질을 평가하고 순위를 매깁니다.</li>
+<li>이 데이터로 <strong>보상 모델(Reward Model)</strong>을 학습합니다.</li>
+<li>보상 모델을 환경으로 삼아 언어 모델을 강화학습으로 미세조정합니다.</li>
+</ol>
+<p align="center">
+<img alt="RLHF 4단계 — 응답 생성 → 사람 평가 → 보상 모델 → 강화학습 미세조정" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338388/ch03_rlhf_steps.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<blockquote>
+<p>📌 RLHF 덕분에 AI가 단순히 다음 단어를 예측하는 것을 넘어, 사람이 원하는 유용하고 안전한 응답을 생성하도록 발전할 수 있었습니다.</p>
+</blockquote>
+<h2 id="k-means_1">[실습] K-Means 클러스터링으로 데이터 군집화하기</h2>
+<p>이제 Python으로 K-Means 클러스터링을 직접 실습해 보겠습니다. scikit-learn의 내장 데이터셋을 활용하여 데이터를 군집화하고 시각화합니다.</p>
+<h3 id="_8">환경 준비</h3>
+<p>다음 라이브러리가 필요합니다. 설치되어 있지 않다면 아래 명령어로 설치하세요.</p>
+<pre><code class="language-bash">pip install scikit-learn matplotlib numpy
+</code></pre>
+<h3 id="1-k-means">실습 1: 기본 K-Means 클러스터링</h3>
+<p>먼저 샘플 데이터를 생성하고 K-Means로 군집화합니다.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+
+# 1. 샘플 데이터 생성 (300개 데이터, 4개 군집)
+X, y_true = make_blobs(n_samples=300, centers=4,
+                        cluster_std=0.60, random_state=42)
+
+# 2. K-Means 모델 생성 및 학습
+kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
+kmeans.fit(X)
+
+# 3. 군집 레이블과 중심점 확인
+labels = kmeans.labels_
+centers = kmeans.cluster_centers_
+
+print("군집 레이블 (처음 10개):", labels[:10])
+print("군집 중심점:\n", centers)
+
+# 4. 결과 시각화
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis',
+            s=50, alpha=0.8, label='데이터')
+plt.scatter(centers[:, 0], centers[:, 1],
+            c='red', marker='X', s=200, label='중심점')
+plt.title('K-Means 클러스터링 결과')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+plt.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+<p>실행하면 4개의 군집이 서로 다른 색으로 표시되고, 빨간 X가 각 군집의 중심점입니다.</p>
+<h3 id="2-k">실습 2: 최적의 K 찾기 — 엘보우 방법</h3>
+<p>K-Means에서 가장 중요한 것은 적절한 K를 선택하는 것입니다. <strong>엘보우 방법(Elbow Method)</strong>은 K를 바꿔가며 <strong>관성(Inertia)</strong> — 각 데이터와 소속 중심점 사이의 거리 합 — 을 계산하여 최적의 K를 찾습니다.</p>
+<pre><code class="language-python"># 엘보우 방법으로 최적 K 탐색
+inertia_list = []
+k_range = range(1, 11)
+
+for k in k_range:
+    km = KMeans(n_clusters=k, random_state=42, n_init=10)
+    km.fit(X)
+    inertia_list.append(km.inertia_)
+
+# 엘보우 그래프 시각화
+plt.figure(figsize=(8, 5))
+plt.plot(k_range, inertia_list, marker='o', color='steelblue')
+plt.axvline(x=4, color='red', linestyle='--', label='최적 K=4')
+plt.title('엘보우 방법 — 최적 K 찾기')
+plt.xlabel('군집 수 (K)')
+plt.ylabel('관성 (Inertia)')
+plt.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+<p>그래프에서 기울기가 급격히 완만해지는 "팔꿈치" 지점이 최적의 K입니다.</p>
+<blockquote>
+<p>💡 위 예시에서는 K=4 근방에서 기울기가 꺾이는 것을 확인할 수 있습니다. 실제 데이터에서는 명확한 엘보우가 나타나지 않을 수도 있으며, 이때는 실루엣 계수(Silhouette Score) 등 다른 지표를 함께 사용합니다.</p>
+</blockquote>
+<h3 id="3-iris">실습 3: 실제 데이터에 적용 — 붓꽃(Iris) 데이터셋</h3>
+<p>이번에는 유명한 붓꽃 데이터셋에 K-Means를 적용하고 PCA로 시각화합니다.</p>
+<pre><code class="language-python">from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+# 1. 데이터 로드
+iris = load_iris()
+X_iris = iris.data          # 4개 특징 (꽃잎 길이/너비 등)
+y_iris = iris.target        # 실제 종 (시각화 비교용)
+
+# 2. 데이터 표준화 (K-Means는 거리 기반이므로 스케일링 필수)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_iris)
+
+# 3. K-Means 클러스터링 (K=3, 붓꽃 종류가 3가지)
+kmeans_iris = KMeans(n_clusters=3, random_state=42, n_init=10)
+kmeans_iris.fit(X_scaled)
+labels_iris = kmeans_iris.labels_
+
+# 4. PCA로 2차원 축소 후 시각화
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+# K-Means 군집 결과
+axes[0].scatter(X_pca[:, 0], X_pca[:, 1],
+                c=labels_iris, cmap='Set1', s=60, alpha=0.8)
+axes[0].set_title('K-Means 군집화 결과 (PCA 2D)')
+axes[0].set_xlabel('PC1')
+axes[0].set_ylabel('PC2')
+
+# 실제 정답 레이블
+axes[1].scatter(X_pca[:, 0], X_pca[:, 1],
+                c=y_iris, cmap='Set1', s=60, alpha=0.8)
+axes[1].set_title('실제 붓꽃 종류 (정답)')
+axes[1].set_xlabel('PC1')
+axes[1].set_ylabel('PC2')
+
+print(f"PCA 설명 분산 비율: {pca.explained_variance_ratio_}")
+print(f"PC1+PC2 누적 설명력: {sum(pca.explained_variance_ratio_):.1%}")
+
+plt.tight_layout()
+plt.show()
+</code></pre>
+<blockquote>
+<p>📌 K-Means 결과와 실제 정답을 나란히 비교해보세요. 레이블 없이도 실제 종 분류와 상당히 유사한 군집을 만들어 낸 것을 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="_9">마치며</h2>
+<p>이번 챕터에서는 레이블 없는 데이터에서 패턴을 찾는 비지도학습과, 시행착오를 통해 스스로 학습하는 강화학습의 핵심 개념을 살펴보았습니다.</p>
+<p><strong>핵심 요약:</strong></p>
+<table>
+<thead>
+<tr>
+<th>주제</th>
+<th>핵심 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>비지도학습</td>
+<td>레이블 없이 데이터의 패턴·구조를 스스로 발견</td>
+</tr>
+<tr>
+<td>K-Means</td>
+<td>K개 군집 중심을 반복 업데이트하여 군집화</td>
+</tr>
+<tr>
+<td>DBSCAN</td>
+<td>밀도 기반 군집화, 이상치 처리 가능</td>
+</tr>
+<tr>
+<td>PCA</td>
+<td>분산을 최대 보존하며 차원을 축소</td>
+</tr>
+<tr>
+<td>이상탐지</td>
+<td>정상 패턴 학습 후 이탈 데이터 감지</td>
+</tr>
+<tr>
+<td>연관규칙</td>
+<td>함께 등장하는 항목의 규칙 발견 (장바구니 분석)</td>
+</tr>
+<tr>
+<td>강화학습</td>
+<td>에이전트가 환경과 상호작용하며 보상을 최대화</td>
+</tr>
+<tr>
+<td>Q-Learning</td>
+<td>Q-테이블로 (상태, 행동)의 가치를 학습</td>
+</tr>
+<tr>
+<td>RLHF</td>
+<td>인간 피드백으로 LLM을 사람의 선호에 정렬</td>
+</tr>
+</tbody>
+</table>
+<p><strong>다음 챕터 예고:</strong></p>
+<p>Chapter 4에서는 인간의 뇌를 모방한 <strong>딥러닝(Deep Learning)</strong>의 기초를 배웁니다. 인공 신경망의 구조와 학습 원리, 그리고 이미지 인식에 탁월한 <strong>CNN(합성곱 신경망)</strong>의 개념을 살펴보겠습니다.</p>
+</div>

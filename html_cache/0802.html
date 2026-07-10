@@ -1,0 +1,17 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">sayhello()</span>라는 함수를 만들고, 버튼 객체를 생성할 때 <span class="cd">command</span> 옵션에 <span class="cd">sayhello</span> 함수를 넣었습니다. command는 ‘명령하다’라는 뜻이죠. 단어 뜻 그대로 버튼을 클릭할 때 실행될 명령어가 바로 함수 <span class="cd">sayhello()</span>라는 의미입니다. <span class="cd">sayhello()</span>는 <span class="cd">'Hello!! '</span>를 3번 출력하는 함수입니다.</p>
+<p class="txt bl">확인 버튼을 클릭해도 <span class="cd">tkinter</span> 화면에는 아무 일도 벌어지지 않습니다. 그런데 결과창에 ‘Hello!! ’가 3번 출력됩니다. 왜 <span class="cd">tkinter</span> 화면이 아닌 결과창에 출력될까요?</p>
+<p class="txt bl"><span class="cd">print()</span>는 화면이 아닌 결과창에 출력하는 명령어입니다. 지금까지 <span class="cd">tkinter</span> 화면에 텍스트를 나타내려면 레이블을 만들고 <span class="cd">text</span> 옵션으로 레이블에 표시할 텍스트를 설정했습니다. 배운 대로라면 다음처럼 만듭니다.</p>
+<div class="highlight">
+<pre>lbl2 = Label(root, text=<span class="red2">'Hello!! Hello!! Hello!!</span> <span class="red2">'</span>)
+lbl2.grid(row=<span class="green">1</span>, column=<span class="green">0</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/670.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

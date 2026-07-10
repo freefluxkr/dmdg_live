@@ -1,0 +1,418 @@
+<h1 class="page-subject">12-1. 내부 구조</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<blockquote>
+<p>⚠️ <strong>부분 검증</strong>: 이 페이지는 v0.16.0 소스 분석으로 확인했습니다. 에이전트 루프·트랜스포트·프롬프트 조립·캐싱·컨텍스트 압축·세션 영속화(SQLite/FTS5)·서브에이전트·플러그인 훅의 구조와 핵심 상수를 소스와 대조했습니다. 토큰 오버헤드 수치와 콜드 스타트 단축 폭은 부록의 실측·릴리스 노트 기반입니다. v0.14 이후 일부 코드가 모듈로 분리됐고(루프는 <code>agent/conversation_loop.py</code>, 프롬프트 조립은 <code>agent/system_prompt.py</code>), 시스템 프롬프트는 stable·context·volatile 3계층으로 재구성됐습니다. 내부 구조 설명 위주라 별도 실행 테스트는 하지 않았습니다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">내부 구조 개요</a></li>
+<li><a href="#run_agentpy">에이전트 루프 (run_agent.py)</a><ul>
+<li><a href="#react">ReAct 루프의 실제 구현</a></li>
+<li><a href="#_2">이터레이션 버짓</a></li>
+<li><a href="#_3">도구 실행 모드</a></li>
+<li><a href="#transport-abc-4">Transport ABC와 4개 트랜스포트</a></li>
+</ul>
+</li>
+<li><a href="#_4">매 턴 재전송 구조</a></li>
+<li><a href="#agentprompt_builderpy">프롬프트 조립 (agent/prompt_builder.py)</a><ul>
+<li><a href="#3">시스템 프롬프트 3계층 구조</a></li>
+<li><a href="#vs">캐시된 프롬프트 vs 에페메럴 레이어</a></li>
+<li><a href="#_5">컨텍스트 파일 보안 검사</a></li>
+</ul>
+</li>
+<li><a href="#agentprompt_cachingpy">프롬프트 캐싱 (agent/prompt_caching.py)</a><ul>
+<li><a href="#system_and_3">system_and_3 전략</a></li>
+</ul>
+</li>
+<li><a href="#agentcontext_compressorpy">컨텍스트 압축 (agent/context_compressor.py)</a><ul>
+<li><a href="#_6">트리거 조건</a></li>
+<li><a href="#_7">압축 알고리즘</a></li>
+<li><a href="#_8">압축 후 세션 계보</a></li>
+</ul>
+</li>
+<li><a href="#hermes_statepy">세션 영속화 (hermes_state.py)</a><ul>
+<li><a href="#sqlite">SQLite 기반 상태 저장</a></li>
+<li><a href="#_9">데이터베이스 스키마</a></li>
+<li><a href="#fts5">FTS5 전문 검색</a></li>
+<li><a href="#wal">WAL 모드와 동시성</a></li>
+</ul>
+</li>
+<li><a href="#toolsdelegate_toolpy">서브에이전트 위임 (tools/delegate_tool.py)</a><ul>
+<li><a href="#_10">아키텍처</a></li>
+<li><a href="#_11">실행 모드</a></li>
+<li><a href="#_12">깊이 제한</a></li>
+</ul>
+</li>
+<li><a href="#_13">플러그인 호스트 아키텍처</a></li>
+<li><a href="#_14">성능</a><ul>
+<li><a href="#cold-start">Cold start</a></li>
+<li><a href="#browser_console">browser_console 영속 연결</a></li>
+</ul>
+</li>
+<li><a href="#_15">버전별 변경</a></li>
+<li><a href="#_16">설계 원칙</a></li>
+</ul>
+</div>
+<h3 id="_1">내부 구조 개요</h3>
+<p>Hermes Agent는 모놀리식이 아닌, 느슨하게 결합된 서브시스템들로 구성되어 있습니다. 이 절에서는 소스 코드(<code>run_agent.py</code>, <code>agent/</code> 패키지, <code>hermes_state.py</code>)를 직접 분석하여 핵심 내부 작동을 설명합니다.</p>
+<h3 id="run_agentpy">에이전트 루프 (<code>run_agent.py</code>)</h3>
+<h4 id="react">ReAct 루프의 실제 구현</h4>
+<p><code>AIAgent.run_conversation()</code> 메서드가 에이전트의 핵심 실행 루프입니다. 소스 코드에서 확인한 실제 흐름은 다음과 같습니다.</p>
+<pre><code>run_conversation(user_message)
+  1. 이터레이션 버짓 초기화 (IterationBudget)
+  2. 대화 히스토리 준비, todo 상태 복원
+  3. 시스템 프롬프트 빌드 또는 캐시에서 로드
+  4. 프리플라이트 압축 (필요시)
+  5. while 루프 진입:
+     a. 인터럽트 체크
+     b. 이터레이션 버짓 소비
+     c. API 메시지 조립 (에페메럴 레이어 주입)
+     d. 프롬프트 캐싱 적용
+     e. 고아 도구 페어 정리 (sanitize)
+     f. API 호출 (스트리밍 또는 비스트리밍)
+     g. 도구 호출이 있으면 → 실행 후 루프 계속
+     h. 최종 텍스트면 → 세션 저장, 결과 반환
+</code></pre>
+<h4 id="_2">이터레이션 버짓</h4>
+<p>부모 에이전트와 서브에이전트가 <strong>공유 이터레이션 버짓</strong>을 사용합니다. <code>IterationBudget</code> 클래스가 스레드 안전한 카운터를 제공합니다.</p>
+<pre><code class="language-python"># 소스 코드 (run_agent.py)에서 확인한 구조
+class IterationBudget:
+    def __init__(self, max_total: int):  # 기본값 90
+        self.max_total = max_total
+        self._used = 0
+        self._lock = threading.Lock()
+
+    def consume(self) -&gt; bool:  # 1회 소비, 초과 시 False
+    def refund(self) -&gt; None:   # execute_code 턴은 환불
+</code></pre>
+<p><code>execute_code</code>(프로그래매틱 도구 호출)로 소비된 이터레이션은 <code>refund()</code>로 되돌려집니다. 이는 스크립트 실행이 실제 추론 턴이 아니기 때문입니다.</p>
+<h4 id="_3">도구 실행 모드</h4>
+<p>Hermes는 두 가지 도구 실행 전략을 사용합니다.</p>
+<p><strong>순차 실행</strong>: 단일 도구 호출이거나, 인터랙티브 도구(<code>clarify</code> 등)가 포함된 경우</p>
+<p><strong>병렬 실행</strong>: 여러 도구가 동시에 요청되고, 안전 조건을 만족하는 경우. 소스 코드에서 확인한 안전 판단 로직은 다음과 같습니다.</p>
+<ul>
+<li><code>_NEVER_PARALLEL_TOOLS</code>: <code>clarify</code>처럼 절대 병렬 실행하지 않는 도구</li>
+<li><code>_PARALLEL_SAFE_TOOLS</code>: <code>read_file</code>, <code>web_search</code>, <code>session_search</code> 등 읽기 전용 도구</li>
+<li><code>_PATH_SCOPED_TOOLS</code>: <code>read_file</code>, <code>write_file</code>, <code>patch</code> — 대상 경로가 겹치지 않으면 병렬 허용</li>
+<li>최대 동시 워커 수: 8개 (<code>_MAX_TOOL_WORKERS</code>)</li>
+</ul>
+<h4 id="transport-abc-4">Transport ABC와 4개 트랜스포트</h4>
+<p>API 호출 경로는 v0.11에서 <strong>트랜스포트 추상화</strong>(<code>agent/transports/</code>)로 분리됐습니다. 포맷 변환과 HTTP 실행이 한 클래스에서 책임지는 구조라, 새 프로바이더를 추가할 때 핵심 에이전트 루프를 건드리지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>트랜스포트</th>
+<th><code>api_mode</code></th>
+<th>대상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ChatCompletionsTransport</code></td>
+<td><code>chat_completions</code></td>
+<td>OpenAI 호환 엔드포인트 (OpenRouter, Ollama, DeepSeek 등 16개+ 프로바이더)</td>
+</tr>
+<tr>
+<td><code>ResponsesApiTransport</code></td>
+<td><code>codex_responses</code></td>
+<td>OpenAI Responses API (OpenAI 직접 연결, xAI)</td>
+</tr>
+<tr>
+<td><code>AnthropicTransport</code></td>
+<td><code>anthropic_messages</code></td>
+<td>Anthropic Messages API (네이티브)</td>
+</tr>
+<tr>
+<td><code>BedrockTransport</code></td>
+<td><code>bedrock_converse</code></td>
+<td>AWS Bedrock Converse API (네이티브)</td>
+</tr>
+</tbody>
+</table>
+<p>OpenAI는 Chat Completions API(<code>/v1/chat/completions</code>)와 Responses API(<code>/v1/responses</code>)를 모두 제공합니다. Hermes는 OpenAI에 직접 연결할 때 Responses API를, OpenRouter 같은 호환 프로바이더를 경유할 때는 Chat Completions API를 사용합니다. 트랜스포트 선택은 아래의 자동 판별 로직이 처리합니다.</p>
+<p>트랜스포트 선택은 대부분 자동입니다. <code>base_url</code>의 호스트명을 보고 판별합니다.</p>
+<ul>
+<li><code>api.openai.com</code> → <code>codex_responses</code></li>
+<li><code>api.x.ai</code> → <code>codex_responses</code></li>
+<li>URL 끝이 <code>/anthropic</code> → <code>anthropic_messages</code></li>
+<li>그 외 → <code>chat_completions</code> (기본값)</li>
+</ul>
+<p><code>config.yaml</code>의 <code>model.api_mode</code>로 명시적으로 지정할 수도 있지만, 프로바이더를 바꿀 때 이전 프로바이더의 <code>api_mode</code>가 남아 충돌하지 않도록 자동 무효화 로직이 들어 있습니다.</p>
+<h3 id="_4">매 턴 재전송 구조</h3>
+<p>트랜스포트가 어느 것이든, Hermes가 사용하는 LLM API는 모두 <strong>무상태(stateless)</strong>입니다. 서버는 이전 대화를 기억하지 않으므로, Hermes Agent는 매 API 호출마다 다음을 모두 전송합니다.</p>
+<ol>
+<li><strong>시스템 프롬프트</strong>: 에이전트 정체성, 메모리, 스킬 인덱스, 컨텍스트 파일 등 (아래 프롬프트 조립 참조)</li>
+<li><strong>도구 정의</strong>: 등록된 모든 도구의 이름, 설명, 파라미터 스키마</li>
+<li><strong>대화 이력 전체</strong>: 첫 턴부터 현재까지의 모든 메시지</li>
+</ol>
+<p>소스 코드(<code>run_agent.py</code>)에서 확인하면, <code>run_conversation()</code>의 while 루프 안에서 매 이터레이션마다 <code>messages</code> 리스트 전체를 순회하여 <code>api_messages</code>를 새로 구성하고, 시스템 프롬프트를 맨 앞에 삽입한 뒤 API에 전달합니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>이 구조가 <strong>토큰 오버헤드의 근본 원인</strong>입니다. 부록 「로컬 LLM 가이드」에서 실측한 바와 같이, 도구 29개와 스킬 116개가 등록된 상태에서 단순한 질문 하나에도 약 14,000토큰이 소비됩니다. 턴이 쌓일수록 대화 이력도 함께 재전송되므로 토큰 소비는 가속됩니다.</p>
+<p>이 비효율은 Hermes만의 문제가 아니라 무상태 LLM API를 사용하는 모든 에이전트 프레임워크의 공통 특성입니다. Claude API의 프롬프트 캐싱(아래 참조)은 시스템 프롬프트 부분의 실질 비용을 줄여주지만, 로컬 모델(Ollama 등)에서는 캐싱이 적용되지 않으므로 오버헤드가 그대로 컨텍스트 윈도우를 압박합니다.</p>
+<h3 id="agentprompt_builderpy">프롬프트 조립 (<code>agent/prompt_builder.py</code>)</h3>
+<h4 id="3">시스템 프롬프트 3계층 구조</h4>
+<p>v0.16 기준 <code>build_system_prompt_parts()</code>(<code>agent/system_prompt.py</code>)는 프롬프트를 세 계층으로 나눠 조립합니다. 캐시 친화 순서로 잘 변하지 않는 안정 계층을 앞에, 매 세션·턴 변동하는 휘발 계층을 뒤에 둡니다.</p>
+<table>
+<thead>
+<tr>
+<th>계층</th>
+<th>포함 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stable (불변)</td>
+<td>에이전트 아이덴티티(<code>SOUL.md</code> 우선, 없으면 <code>DEFAULT_AGENT_IDENTITY</code>) → Hermes 도움말 안내 → 작업 완수 가이던스 → 도구 기반 행동 가이던스(memory·session_search·skills 도구 로드 시) → 스킬 인덱스 → 실행 환경 힌트 → 플랫폼 힌트</td>
+</tr>
+<tr>
+<td>context (cwd 의존)</td>
+<td>호출자 제공 시스템 메시지 → 컨텍스트 파일(AGENTS.md, .cursorrules, .hermes.md)</td>
+</tr>
+<tr>
+<td>volatile (변동·캐시 안 됨)</td>
+<td>메모리 스냅숏(MEMORY.md) → 유저 프로필(USER.md) → 외부 메모리 프로바이더 블록 → 타임스탬프·모델 정보</td>
+</tr>
+</tbody>
+</table>
+<p>예전의 평면 10단 구조에서 바뀐 점은, 스킬 인덱스·플랫폼 힌트가 안정 계층으로 올라가고 MEMORY·USER가 휘발 계층(맨 뒤)으로 내려간 것입니다. Honcho 전용 레이어는 일반 외부 메모리 프로바이더 블록으로 일반화됐습니다.</p>
+<h4 id="vs">캐시된 프롬프트 vs 에페메럴 레이어</h4>
+<p>Hermes의 프롬프트 설계에서 가장 중요한 아키텍처 결정은 <strong>캐시되는 부분과 일시적인 부분의 분리</strong>입니다.</p>
+<p><strong>캐시 대상</strong> (세션 DB에 저장, 세션 내내 불변):</p>
+<ul>
+<li>위 stable·context·volatile 세 계층을 합친 시스템 프롬프트 전체(한 덩어리로 캐시)</li>
+</ul>
+<p><strong>에페메럴</strong> (API 호출 시에만 주입, 저장 안 됨):</p>
+<ul>
+<li><code>ephemeral_system_prompt</code> (서브에이전트 태스크 프롬프트 등)</li>
+<li><code>prefill_messages</code> (few-shot 프라이밍)</li>
+<li>Honcho 후속 턴 리콜 (현재 턴 user 메시지에 주입)</li>
+</ul>
+<p>소스 코드에서 명시적으로 확인되는 패턴입니다.</p>
+<pre><code class="language-python"># run_conversation()에서 발췌한 흐름
+if self._cached_system_prompt is None:
+    if stored_prompt:  # 기존 세션이면 DB에서 로드
+        self._cached_system_prompt = stored_prompt
+    else:              # 새 세션이면 빌드
+        self._cached_system_prompt = self._build_system_prompt(system_message)
+
+# API 호출 시에만 에페메럴 추가
+effective_system = active_system_prompt
+if self.ephemeral_system_prompt:
+    effective_system = effective_system + "\n\n" + self.ephemeral_system_prompt
+</code></pre>
+<p>이 분리의 목적은 <strong>Anthropic 프롬프트 캐싱의 히트율을 극대화</strong>하는 것입니다. 시스템 프롬프트가 매 턴 변하면 캐시가 무효화되어 비용이 크게 증가합니다.</p>
+<h4 id="_5">컨텍스트 파일 보안 검사</h4>
+<p><code>prompt_builder.py</code>는 AGENTS.md, .cursorrules 등 외부 컨텍스트 파일을 주입하기 전에 <strong>프롬프트 인젝션 스캔</strong>을 수행합니다. 소스 코드에서 확인한 탐지 패턴의 예시입니다.</p>
+<ul>
+<li><code>ignore previous instructions</code> 같은 프롬프트 인젝션 패턴</li>
+<li>숨겨진 HTML (<code>display:none</code>)</li>
+<li>비가시 유니코드 문자 (zero-width space 등)</li>
+<li><code>curl</code>을 통한 시크릿 유출 시도</li>
+<li><code>.env</code>, <code>.netrc</code> 등 민감 파일 읽기 시도</li>
+</ul>
+<p>탐지되면 해당 파일 내용이 차단되고 <code>[BLOCKED: ...]</code> 메시지로 대체됩니다.</p>
+<h3 id="agentprompt_cachingpy">프롬프트 캐싱 (<code>agent/prompt_caching.py</code>)</h3>
+<h4 id="system_and_3">system_and_3 전략</h4>
+<p>소스 코드에서 확인한 캐싱 전략입니다. Anthropic의 <code>cache_control</code> 마커를 최대 4개 배치합니다.</p>
+<table>
+<thead>
+<tr>
+<th>브레이크포인트</th>
+<th>대상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>시스템 프롬프트</td>
+</tr>
+<tr>
+<td>2~4</td>
+<td>마지막 3개 비시스템 메시지 (롤링 윈도우)</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-python"># prompt_caching.py에서 확인한 구조
+marker = {"type": "ephemeral"}  # 기본 TTL: 5분
+if cache_ttl == "1h":
+    marker["ttl"] = "1h"
+</code></pre>
+<p>이 전략은 Anthropic 공식 문서의 브레이크포인트 상한(4개)을 정확히 활용합니다. 시스템 프롬프트에 1개, 나머지 3개를 최근 메시지에 배치하여 프리픽스 캐시 히트를 극대화합니다.</p>
+<fieldset><legend>OpenRouter 경유 시에도 캐싱 자동 적용</legend><p style="margin-top: 0.2em;">OpenRouter를 통해 Claude 모델을 사용할 때도 이 캐싱이 자동 적용됩니다. 모델 이름에 "claude"가 포함되어 있으면 <code>_use_prompt_caching</code>이 활성화됩니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+</fieldset>
+<h3 id="agentcontext_compressorpy">컨텍스트 압축 (<code>agent/context_compressor.py</code>)</h3>
+<h4 id="_6">트리거 조건</h4>
+<p>압축은 두 시점에서 발생할 수 있습니다.</p>
+<ol>
+<li><strong>프리플라이트 압축</strong>: <code>run_conversation()</code> 진입 시, 기존 대화 히스토리가 이미 임계값을 초과하는 경우 (예: 더 작은 컨텍스트 윈도우 모델로 전환 시)</li>
+<li><strong>인라인 압축</strong>: API 응답의 실제 토큰 카운트가 임계값을 초과하는 경우</li>
+</ol>
+<p>임계값은 기본적으로 <strong>모델 컨텍스트 길이의 50%</strong>입니다.</p>
+<pre><code class="language-python"># context_compressor.py에서 확인
+threshold_percent = 0.50  # 기본값
+protect_first_n = 3       # 보호할 앞부분 턴 수
+protect_last_n = 20       # 보호할 뒷부분 턴 수
+summary_target_ratio = 0.20   # 요약 목표 비율 (임계 토큰 대비)
+</code></pre>
+<h4 id="_7">압축 알고리즘</h4>
+<p>소스 코드에서 확인한 압축 절차입니다.</p>
+<ol>
+<li>앞의 3턴과 뒤의 20턴을 <strong>보호 영역</strong>으로 지정합니다</li>
+<li>보호 영역 사이의 <strong>중간 턴</strong>들을 요약 대상으로 선택합니다</li>
+<li>경계 조정: 도구 호출/결과 쌍이 분리되지 않도록 경계를 앞뒤로 밀어냅니다</li>
+<li>보조 LLM(<code>call_llm</code>의 <code>compression</code> 태스크)으로 중간 턴을 요약합니다</li>
+<li>요약을 <code>[CONTEXT COMPACTION]</code> 프리픽스와 함께 단일 메시지로 삽입합니다</li>
+<li><strong>고아 도구 페어 정리</strong>: 요약으로 잘린 tool_call/tool_result 쌍을 수복합니다</li>
+</ol>
+<p>고아 페어 정리는 두 가지 경우를 처리합니다.</p>
+<ul>
+<li><strong>고아 결과</strong>: tool_call이 요약에 포함되어 사라졌는데 result만 남은 경우 → 해당 result 삭제</li>
+<li><strong>고아 호출</strong>: tool_call은 남았는데 result가 요약에 포함되어 사라진 경우 → 스텁 result 삽입</li>
+</ul>
+<h4 id="_8">압축 후 세션 계보</h4>
+<p>압축이 발생하면 <strong>새 세션 ID</strong>로 분할될 수 있으며, <code>parent_session_id</code>로 원래 세션과의 계보가 유지됩니다. 이로써 검색 시 세션 가족 단위로 추적할 수 있습니다.</p>
+<h3 id="hermes_statepy">세션 영속화 (<code>hermes_state.py</code>)</h3>
+<h4 id="sqlite">SQLite 기반 상태 저장</h4>
+<p>소스 코드에서 확인한 저장소는 <strong>SQLite</strong> (<code>~/.hermes/state.db</code>)이며, JSONL이 아닙니다.</p>
+<fieldset><legend>SQLite가 주 저장소, JSONL은 레거시</legend><p style="margin-top: 0.2em;">공식 문서에도 "some legacy JSON/JSONL artifacts still exist for compatibility, but SQLite is the main historical store"라고 명시되어 있습니다. 즉 SQLite가 주 저장소이고, 레거시 JSONL은 호환용으로만 남아 있습니다.</p></fieldset>
+<h4 id="_9">데이터베이스 스키마</h4>
+<p>소스 코드에서 확인한 핵심 테이블 구조입니다 (스키마 버전 14).</p>
+<p><strong>sessions 테이블:</strong></p>
+<ul>
+<li><code>id</code>: 세션 고유 ID (TEXT PRIMARY KEY)</li>
+<li><code>source</code>: 플랫폼 (cli, telegram, discord 등)</li>
+<li><code>parent_session_id</code>: 압축 분할 시 부모 세션 참조</li>
+<li><code>model</code>, <code>system_prompt</code>: 사용 모델 및 시스템 프롬프트 스냅숏</li>
+<li><code>title</code>: 세션 제목 (고유, 100자 제한)</li>
+<li>토큰 카운트: <code>input_tokens</code>, <code>output_tokens</code>, <code>cache_read_tokens</code>, <code>cache_write_tokens</code>, <code>reasoning_tokens</code></li>
+<li>비용 추적: <code>estimated_cost_usd</code>, <code>actual_cost_usd</code>, <code>billing_provider</code></li>
+</ul>
+<p><strong>messages 테이블:</strong></p>
+<ul>
+<li><code>session_id</code>, <code>role</code>, <code>content</code>, <code>tool_call_id</code>, <code>tool_calls</code>, <code>tool_name</code>, <code>timestamp</code></li>
+</ul>
+<h4 id="fts5">FTS5 전문 검색</h4>
+<p><code>messages_fts</code>라는 FTS5 가상 테이블이 메시지 내용의 전문 검색을 제공합니다. 트리거로 메시지 삽입/삭제/수정 시 자동 동기화됩니다. <code>session_search</code> 도구가 이 인덱스를 사용합니다.</p>
+<p>검색 문법은 FTS5 표준을 따릅니다. 키워드, <code>"정확한 구문"</code>, <code>OR</code>/<code>NOT</code> 불리언, <code>접두사*</code> 등이 지원됩니다. 하이픈이 포함된 용어(예: <code>chat-send</code>)는 자동으로 따옴표로 감싸서 구문 매칭됩니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h4 id="wal">WAL 모드와 동시성</h4>
+<p>데이터베이스는 <strong>WAL(Write-Ahead Logging) 모드</strong>로 작동합니다. 게이트웨이 환경에서 여러 읽기 스레드와 하나의 쓰기 스레드가 동시에 작동할 수 있게 합니다. 스레드 잠금(<code>threading.Lock</code>)으로 쓰기 작업의 직렬화를 보장합니다.</p>
+<h3 id="toolsdelegate_toolpy">서브에이전트 위임 (<code>tools/delegate_tool.py</code>)</h3>
+<h4 id="_10">아키텍처</h4>
+<p><code>delegate_task</code> 도구는 자식 <code>AIAgent</code> 인스턴스를 생성하여 독립된 컨텍스트에서 작업을 수행합니다.</p>
+<p>자식 에이전트의 특징:</p>
+<ul>
+<li><strong>격리된 대화</strong>: 부모의 히스토리를 상속하지 않습니다</li>
+<li><strong>독립된 터미널 세션</strong>: 별도의 작업 디렉터리와 상태</li>
+<li><strong>제한된 도구셋</strong>: <code>delegate_task</code>, <code>clarify</code>, <code>memory</code>, <code>send_message</code>, <code>execute_code</code>는 차단됩니다</li>
+<li><strong>공유 이터레이션 버짓</strong>: 부모와 동일한 <code>IterationBudget</code> 인스턴스를 사용합니다</li>
+</ul>
+<h4 id="_11">실행 모드</h4>
+<ul>
+<li><strong>단일 태스크</strong>: <code>goal</code>만 제공하면 직접 실행 (스레드 풀 오버헤드 없음)</li>
+<li><strong>배치 (병렬)</strong>: <code>tasks</code> 배열로 최대 3개를 <code>ThreadPoolExecutor</code>로 병렬 실행</li>
+</ul>
+<h4 id="_12">깊이 제한</h4>
+<p>소스 코드에서 확인한 재귀 제한입니다.</p>
+<pre><code class="language-python">MAX_DEPTH = 1          # 기본은 평면: parent(0) -&gt; child(1), grandchild 거부
+MAX_CONCURRENT_CHILDREN = 3
+DEFAULT_MAX_ITERATIONS = 50  # 자식 에이전트 기본 이터레이션
+</code></pre>
+<p>서브에이전트는 기본적으로 다른 서브에이전트를 생성할 수 없습니다(설정 <code>max_spawn_depth</code>를 높이지 않는 한 grandchild는 거부됩니다).</p>
+<h3 id="_13">플러그인 호스트 아키텍처</h3>
+<p>v0.11~v0.12에서 게이트웨이가 <strong>플러그인 호스트</strong>로 정착했습니다. 메시징 플랫폼 어댑터, 옵저버빌리티 플러그인, 컨텍스트 엔진 — 모두 같은 플러그인 슬롯을 통해 코어 외부에서 결합됩니다.</p>
+<p>플러그인이 끼워 넣을 수 있는 주요 훅:</p>
+<table>
+<thead>
+<tr>
+<th>훅</th>
+<th>시점</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>on_session_start</code> / <code>on_session_finalize</code> / <code>on_session_reset</code></td>
+<td>세션 라이프사이클</td>
+<td>세션별 자원 정리, 외부 트래킹 시스템 동기화</td>
+</tr>
+<tr>
+<td><code>pre_tool_call</code> (veto 가능)</td>
+<td>도구 호출 직전</td>
+<td>도구 호출을 거부하거나 통과</td>
+</tr>
+<tr>
+<td><code>post_tool_call</code> (<code>duration_ms</code> 포함)</td>
+<td>도구 호출 직후</td>
+<td>메트릭, 결과 사후 처리</td>
+</tr>
+<tr>
+<td><code>transform_tool_result</code></td>
+<td>결과를 모델에 돌려주기 직전</td>
+<td>결과 가공·필터링</td>
+</tr>
+<tr>
+<td><code>transform_terminal_output</code></td>
+<td>터미널 출력 직전</td>
+<td>출력 가공·요약</td>
+</tr>
+<tr>
+<td><code>pre_gateway_dispatch</code></td>
+<td>메시지가 게이트웨이로 들어오는 시점</td>
+<td>라우팅·필터링</td>
+</tr>
+<tr>
+<td><code>pre_approval_request</code> / <code>post_approval_response</code></td>
+<td>위험 명령 승인 전후</td>
+<td>외부 감사·SOC 통합</td>
+</tr>
+</tbody>
+</table>
+<p>또한 <strong>컨텍스트 엔진</strong>이 플러그형 슬롯이 됐습니다. <code>hermes plugins</code>로 등록한 사용자 정의 컨텍스트 엔진이 매 턴 모델에 전달할 컨텍스트를 가공할 수 있습니다 — 도메인 특화 인젝션·필터링·요약을 코어 변경 없이 끼워 넣을 수 있습니다.</p>
+<h3 id="_14">성능</h3>
+<p>내부 구조 변경으로 가시 응답 속도가 크게 줄어든 두 항목을 한 곳에 모았습니다. 버전별 변경 시점은 다음 「버전별 변경」 절에서 함께 정리합니다.</p>
+<h4 id="cold-start">Cold start</h4>
+<p>게이트웨이·CLI 진입 시점의 가시 cold start가 누적적으로 줄었습니다. 두 단계 변경이 있습니다.</p>
+<ul>
+<li><strong>모듈 lazy import</strong> — OpenAI·Anthropic·Firecrawl·account_usage 모듈을 시작 시점이 아닌 첫 사용 시점에 로드</li>
+<li><strong>설정·도구 정의 캐시</strong> — <code>load_config()</code>·<code>read_raw_config()</code>을 mtime 기반으로 캐시, <code>get_tool_definitions()</code> 메모이즈, <code>check_fn</code> 결과 TTL 캐시</li>
+<li><strong>정규식 사전 컴파일</strong> — <code>DANGEROUS_PATTERNS</code>·<code>HARDLINE_PATTERNS</code> 정규식을 모듈 로드 시 한 번만 컴파일</li>
+<li><strong>스킬 카탈로그·HTTP 호출 정리</strong> — 스킬 캐시, Feishu lazy 로드, Nous HTTP 호출 제거, 모델 카탈로그 디스크 캐시, doctor 검사 병렬화, <code>chat -q</code>에서 환영 배너 생략</li>
+</ul>
+<p>부가 효과로 <code>hermes -z</code> 일회성 모드의 응답 시작도 같이 빨라지고, <code>hermes tools</code> All-Platforms 화면이 14초에서 1.5초 미만으로 떨어졌습니다.</p>
+<h4 id="browser_console"><code>browser_console</code> 영속 연결</h4>
+<p>브라우저 도구가 페이지를 검사하거나 JavaScript를 실행할 때, 매번 새 DevTools 세션을 띄우는 대신 <strong>하나의 영속 Chrome 연결</strong>을 공유합니다. 호출당 수 초 걸리던 작업이 밀리초 단위로 회신되며, 실제 페이지 조작이 즉각 반응합니다.</p>
+<h3 id="_15">버전별 변경</h3>
+<p>내부 구조와 관련된 변경 시점을 한 곳에 모았습니다. 자세한 내용은 위 본문의 해당 절에서 다룹니다.</p>
+<ul>
+<li><strong>v0.14</strong> — Cold start 추가 단축(~19초). <code>browser_console</code>이 영속 Chrome 연결을 공유하며 ~180× 속도 향상.</li>
+<li><strong>v0.12</strong> — Cold start가 약 57% 줄어듦(모듈 lazy import·설정 캐시·정규식 사전 컴파일). 게이트웨이 플러그인 호스트 정착.</li>
+<li><strong>v0.11</strong> — 트랜스포트 추상화(Transport ABC) 도입으로 4개 트랜스포트가 분리. 게이트웨이가 플러그인 호스트로 발전 시작.</li>
+</ul>
+<h3 id="_16">설계 원칙</h3>
+<p>소스 코드 분석과 공식 개발자 가이드에서 일관되게 확인되는 설계 원칙입니다.</p>
+<ol>
+<li><strong>프롬프트 안정성</strong>: 시스템 프롬프트를 세션 내에서 불변으로 유지하여 캐시 히트율을 극대화합니다</li>
+<li><strong>관찰 가능하고 중단 가능한 도구 실행</strong>: 콜백 시스템(<code>tool_progress_callback</code>, <code>step_callback</code> 등)으로 모든 도구 호출을 추적하고, 사용자가 새 메시지를 보내면 루프를 중단할 수 있습니다</li>
+<li><strong>영속 세션과 계보</strong>: SQLite에 세션과 메시지를 저장하고, 압축 분할 시에도 <code>parent_session_id</code>로 계보를 유지합니다</li>
+<li><strong>통합 에이전트 코어</strong>: CLI, 게이트웨이, 크론, ACP 모든 플랫폼에서 동일한 <code>AIAgent</code> 클래스를 사용합니다</li>
+<li><strong>느슨한 결합</strong>: Honcho, 스킬, 메모리, 컨텍스트 엔진, 메시징 플랫폼 어댑터 등 선택적 서브시스템이 독립적으로 활성화/비활성화됩니다 — 그 부분을 플러그인이 채울 수 있습니다</li>
+</ol>
+</div>

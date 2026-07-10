@@ -1,0 +1,138 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<p class="txtex dl s10_10"><span class="dm brown">9</span> <span class="dm">데이터 타입</span> 변수가 가진 데이터의 유형이나 형태를 의미한다.</p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w50" colspan="2">
+<p class="txts dm">데이터 타입</p>
+</td>
+<td class="w50">
+<p class="txts dm">파이썬 데이터 타입 표기</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w25" rowspan="2">
+<p class="txts dl">숫자형</p>
+</td>
+<td class="w25">
+<p class="txts dl">정수형</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">int</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w25">
+<p class="txts dl">실수형</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">float</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w50" colspan="2">
+<p class="txts dl">문자열</p>
+</td>
+<td class="w50">
+<p class="txts dl"><span class="cd">str</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txts"> </p>
+<p class="txtex dl s14_14"><span class="dm brown">10</span> 데이터 타입을 잘못 사용해 연산하면 <span class="cd">TypeError</span>가 발생한다.</p>
+<p class="txts"> </p>
+<p class="txtex dl s14_14"><span class="dm brown">11</span> 데이터 타입을 바꾸려면 바꾸려는 데이터 타입으로 데이터를 감싼다.</p>
+<table class="ind14">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w20">
+<p class="txts dm">명령어</p>
+</td>
+<td class="w20">
+<p class="txts dm">의미</p>
+</td>
+<td class="w20">
+<p class="txts dm">예시</p>
+</td>
+<td class="w40">
+<p class="txts dm">설명</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20" rowspan="2">
+<p class="txts dl"><span class="cd">int(a)</span></p>
+</td>
+<td class="w20" rowspan="2">
+<p class="txts dl"><span class="cd">a</span>를 정수형으로 바꿔라</p>
+</td>
+<td class="w20">
+<p class="txts dl"><span class="cd">x = 99.9</span></p>
+<p class="txts dl"><span class="cd">x = int(x)</span></p>
+</td>
+<td class="w40">
+<p class="txts dl">값이 정수형으로 바뀌어 99를 저장한다.</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl"><span class="cd">r = int(input())</span></p>
+</td>
+<td class="w40">
+<p class="txts dl">입력받은 데이터를 정수형으로 바꿔 <span class="cd">r</span>에 저장한다. 단, 숫자가 아닌 문자가 입력되면 <span class="cd">ValueError</span>가 발생한다.</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20" rowspan="2">
+<p class="txts dl"><span class="cd">float(a)</span></p>
+</td>
+<td class="w20" rowspan="2">
+<p class="txts dl"><span class="cd">a</span>를 실수형으로 바꿔라</p>
+</td>
+<td class="w20">
+<p class="txts dl"><span class="cd">y = 99</span></p>
+<p class="txts dl"><span class="cd">y = float(y)</span></p>
+</td>
+<td class="w40">
+<p class="txts dl">값이 실수형으로 바뀌어 <span class="cd">y</span>에 99.0을 저장한다.</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl"><span class="cd">avg = '1.2'</span></p>
+<p class="txts dl"><span class="cd">print(avg * 3)</span></p>
+<p class="txts dl"><span class="cd">avg = float(avg)</span></p>
+<p class="txts dl"><span class="cd">print(avg * 3)</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">avg</span> 값은 현재 문자형이므로 처음에 1.21.21.2가 출력된다.</p>
+<p class="txts dl"><span class="cd">avg</span>를 실수형으로 바꿔 <span class="cd">avg</span>에 다시 저장한다.</p>
+<p class="txts dl"><span class="cd">avg</span>가 실수형이므로 3.6이 출력된다.</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w20">
+<p class="txts dl"><span class="cd">str(a)</span></p>
+</td>
+<td class="w20">
+<p class="txts dl"><span class="cd">a</span>를 문자열로 바꿔라</p>
+</td>
+<td class="w20">
+<p class="txts dl"><span class="cd">z = 4.5</span></p>
+<p class="txts dl"><span class="cd">z = str(z)</span></p>
+<p class="txts dl"><span class="cd">print('학점은 ' + z)</span></p>
+</td>
+<td class="w40">
+<p class="txts dl"><span class="cd">z</span>를 문자열로 바꾼다.</p>
+<p class="txts dl">문자 + 문자이므로 ‘학점은 4.5’가 출력된다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>

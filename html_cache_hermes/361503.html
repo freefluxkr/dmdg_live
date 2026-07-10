@@ -1,0 +1,77 @@
+<h1 class="page-subject">05-3-2. Mem0 — 간편 설정·사실 추출</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>Honcho가 기능이 가장 풍부한 백엔드라면, Mem0는 설정이 가장 단순한 백엔드입니다. 사용자의 사고방식·패턴까지 모델링하는 Honcho와 달리, Mem0는 대화에서 <strong>사실(fact)을 추출·압축</strong>하는 데 집중합니다. 과거 프로젝트의 세부 사항, 선호 설정, 반복 지시 같은 구체적인 정보를 정확히 기억하는 용도에 적합합니다.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">작동 방식</a></li>
+<li><a href="#mem0">Mem0 도구</a></li>
+<li><a href="#_2">설정</a></li>
+</ul>
+</div>
+<h3 id="_1">작동 방식</h3>
+<p>대화가 끝나면 (사용자 메시지 + 에이전트 응답) 쌍이 Mem0 서버로 전송되고, 서버 측 LLM이 중요한 사실을 추출·압축하면서 중복을 제거합니다. 회수 시에는 의미 검색에 리랭킹(reranking)을 더해 관련도가 높은 기억을 골라냅니다. 추출·저장·중복 제거가 모두 서버에서 처리되므로, 에이전트가 무엇을 저장할지 직접 판단하지 않아도 됩니다.</p>
+<h3 id="mem0">Mem0 도구</h3>
+<p>Mem0가 활성화되면 3개의 도구가 등록됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mem0_profile</code></td>
+<td>사용자에 대해 저장된 기억 전체 조회</td>
+</tr>
+<tr>
+<td><code>mem0_search</code></td>
+<td>의미 검색(필요 시 리랭킹)</td>
+</tr>
+<tr>
+<td><code>mem0_conclude</code></td>
+<td>LLM 추출을 거치지 않고 사실을 그대로 저장</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>서버 측 LLM 비용</strong>: Mem0도 사실 추출·중복 제거에 서버 측 LLM을 사용하는 클라우드 서비스입니다. 무료 티어를 넘어서면 사용량에 따라 Mem0 측에서 별도로 과금되며, 이는 Hermes가 쓰는 LLM 비용과 무관합니다.</p>
+</blockquote>
+<h3 id="_2">설정</h3>
+<p>API 키만 있으면 됩니다.</p>
+<pre><code class="language-bash">hermes memory setup    # 목록에서 mem0 선택
+</code></pre>
+<p>또는 수동으로 지정합니다.</p>
+<pre><code class="language-bash">hermes config set memory.provider mem0
+echo "MEM0_API_KEY=발급받은-키" &gt;&gt; ~/.hermes/.env
+</code></pre>
+<p>API 키는 <code>app.mem0.ai</code>에서 발급합니다. <code>mem0ai</code> 패키지가 설치돼 있지 않으면 설정 과정에서 자동으로 설치됩니다.</p>
+<p>세부 설정은 <code>$HERMES_HOME/mem0.json</code>에 둡니다.</p>
+<table>
+<thead>
+<tr>
+<th>키</th>
+<th>기본값</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user_id</code></td>
+<td><code>hermes-user</code></td>
+<td>Mem0 상의 사용자 식별자</td>
+</tr>
+<tr>
+<td><code>agent_id</code></td>
+<td><code>hermes</code></td>
+<td>에이전트 식별자</td>
+</tr>
+<tr>
+<td><code>rerank</code></td>
+<td><code>true</code></td>
+<td>회수 정확도를 높이는 리랭킹 사용</td>
+</tr>
+</tbody>
+</table>
+</div>

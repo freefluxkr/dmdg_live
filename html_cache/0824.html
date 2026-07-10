@@ -1,0 +1,34 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">정답을 끼워 넣을 차례입니다. 현재 <span class="cd">selection</span>에는 4개의 요소가 있으므로 인덱스 [0]부터 [3]까지 있습니다. 정답을 추가하면 인덱스는 [4]까지로 늘겠죠. 정답은 <span class="cd">selection</span>의 무작위 위치에 들어가야 하므로 0~4 중 하나를 무작위로 선택해야 합니다. 6장에서 다루지는 않았지만 리스트 중간에도 값을 추가할 수 있습니다. 형식은 다음과 같습니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>리스트명.insert(인덱스, 값)</pre>
+</div>
+<p class="txt bl"><span class="cd">randint()</span>를 활용해 0부터 4 사이에서 인덱스를 구하고, 해당 인덱스에 정답인 <span class="cd">num1 * num2</span>를 끼워 넣으면 됩니다. 다음으로 완성된 선택지 <span class="cd">selection</span>을 콤보박스와 다시 연결해야겠죠? 콤보박스의 <span class="cd">values</span>에 새로운 값은 <span class="cd">콤보박스명['vaules'] = 리스트명</span> 형식으로 넣습니다. 따라서 여기에서는 <span class="cd">a_combo['values'] = selection</span>이 됩니다. <span class="cd">set()</span>을 사용하면 <span class="cd">selection</span>의 각 요소가 모두 한 줄로 표시되어 선택지가 하나로 나오기 때문에 이 방식을 사용합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+<span class="green"># ----- 프로그램 기능 부분 -----</span>
+num1, num2 = <span class="green">0</span>, <span class="green">0</span>
+
+<span class="blue2">def</span> <span class="gold">make_question</span>():
+    <span class="blue2">global</span> num1, num2
+    <span class="green"># 문제 만들기</span>
+    num1, num2 = random.randint(<span class="green">2</span>, <span class="green">9</span>), random.randint(<span class="green">1</span>, <span class="green">9</span>)
+    question.set(str(num1) + <span class="red2">'x'</span> + str(num2) + <span class="red2">'?</span> <span class="red2">'</span>)
+    <span class="green"># 선택지 초기화하고 새로 만들기</span>
+    selection = []
+    <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">4</span>):
+        selection.append(random.randint(<span class="green">2</span>, <span class="green">81</span>))
+    <span class="green"># 무작위 위치에 정답 끼워 넣기</span>
+    <span class="cd2">idx = random.randint(</span><span class="cd2 green">0</span><span class="cd2">,</span> <span class="cd2 green">4</span><span class="cd2">)</span>
+    <span class="cd2">selection.insert(idx, num1 * num2)</span>
+
+    <span class="green"># 콤보박스에 변경된 리스트 연결하기</span>
+    <span class="cd2">a_combo[</span><span class="cd2 red2">'values'</span><span class="cd2">] = selection</span></pre>
+</div>
+</div>
+</section>
+</section>

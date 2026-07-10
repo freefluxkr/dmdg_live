@@ -1,0 +1,326 @@
+<div class="page-content tex2jax_process">
+<p>우리는 지금까지 머신러닝의 기초부터 딥러닝, 그리고 RNN과 자연어 처리까지 살펴보았습니다. 이제 Part 3에 접어들며 본격적으로 오늘날 가장 뜨거운 기술인 <strong>생성형 AI(Generative AI)</strong>를 다룹니다.</p>
+<p>"ChatGPT로 리포트를 썼다", "AI가 그림을 그려줬다"는 말을 들어보셨나요? 그 모든 것이 생성형 AI의 산물입니다. 이번 챕터에서는 생성형 AI가 무엇인지 개념부터 역사, 종류, 그리고 폭발적 성장의 이유까지 차근차근 살펴보겠습니다.</p>
+<h2 id="_1">학습 목표</h2>
+<p>이번 챕터를 마치면 다음을 할 수 있습니다.</p>
+<ul>
+<li>생성형 AI의 정의와 핵심 개념을 설명할 수 있습니다.</li>
+<li>판별 모델과 생성 모델의 차이를 이해하고 비교할 수 있습니다.</li>
+<li>텍스트, 이미지, 음성, 영상, 코드 등 생성형 AI의 다양한 종류를 파악할 수 있습니다.</li>
+<li>GAN에서 멀티모달까지 생성형 AI의 발전 역사를 흐름으로 이해할 수 있습니다.</li>
+<li>ChatGPT와 Gemini에 직접 가입하고 첫 대화를 나눌 수 있습니다.</li>
+</ul>
+<h2 id="71-ai">7.1 생성형 AI의 정의</h2>
+<p><strong>생성형 AI(Generative AI)</strong>란 학습한 데이터를 바탕으로 새로운 콘텐츠를 스스로 만들어 내는 인공지능을 말합니다. 텍스트, 이미지, 음악, 영상, 코드 등 다양한 형태의 결과물을 생성할 수 있습니다.</p>
+<p>기존의 AI가 "이 사진은 고양이인가 개인가?"처럼 주어진 데이터를 분류하거나 예측하는 데 집중했다면, 생성형 AI는 "고양이 사진을 하나 만들어봐"처럼 존재하지 않던 데이터를 새로 창조합니다.</p>
+<blockquote>
+<p>💡 <strong>핵심 포인트</strong>: 생성형 AI의 핵심은 "분류"가 아니라 "창조"입니다. 학습 데이터의 패턴을 익혀 새로운 무언가를 만들어낸다는 점에서 기존 AI와 근본적으로 다릅니다.</p>
+</blockquote>
+<p>일상적인 예를 들어보겠습니다.</p>
+<ul>
+<li>수천 편의 소설을 읽고 새로운 소설을 쓰는 작가</li>
+<li>수백만 장의 그림을 보고 비슷한 스타일로 새 그림을 그리는 화가</li>
+<li>수많은 음악을 듣고 새로운 멜로디를 작곡하는 음악가</li>
+</ul>
+<p>생성형 AI는 이와 비슷한 방식으로 동작합니다. 방대한 데이터에서 패턴을 학습하고, 그 패턴을 활용해 새롭고 그럴듯한 결과물을 만들어냅니다.</p>
+<h2 id="72-discriminative-vs-generative">7.2 판별 모델(Discriminative) vs 생성 모델(Generative)</h2>
+<p>AI 모델은 크게 두 가지 방식으로 나뉩니다. 데이터를 구분하고 분류하는 <strong>판별 모델(Discriminative Model)</strong>과, 새로운 데이터를 만들어내는 <strong>생성 모델(Generative Model)</strong>입니다.</p>
+<p>아래 표에서 두 모델의 주요 차이점을 정리합니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>판별 모델 (Discriminative)</th>
+<th>생성 모델 (Generative)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>목적</td>
+<td>입력 데이터를 분류·예측</td>
+<td>새로운 데이터를 생성</td>
+</tr>
+<tr>
+<td>학습 방식</td>
+<td>입력(X)과 레이블(Y)의 관계 학습</td>
+<td>데이터의 분포(확률) 자체를 학습</td>
+</tr>
+<tr>
+<td>대표 예시</td>
+<td>스팸 필터, 이미지 분류, 감정 분석</td>
+<td>ChatGPT, DALL-E, Stable Diffusion</td>
+</tr>
+<tr>
+<td>핵심 질문</td>
+<td>"이것은 무엇인가?"</td>
+<td>"이것과 비슷한 새것을 만들 수 있는가?"</td>
+</tr>
+<tr>
+<td>출력</td>
+<td>클래스 레이블, 확률값</td>
+<td>텍스트, 이미지, 음성 등 콘텐츠</td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+<img alt="판별 모델 vs 생성 모델 - 좌측은 분류·예측, 우측은 새 데이터 생성을 5가지 기준으로 비교" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338394/ch07_disc_vs_gen.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<p>판별 모델과 생성 모델은 서로 대립하는 개념이 아니라, 목적에 따라 쓰임새가 다릅니다. 실제로 <strong>GAN(Generative Adversarial Network, 생성적 적대 신경망)</strong>처럼 두 모델을 함께 활용하는 방식도 존재합니다.</p>
+<blockquote>
+<p>📌 <strong>기억하세요</strong>: 판별 모델은 "A인가 B인가"를 결정하고, 생성 모델은 "A처럼 보이는 새로운 것"을 만들어냅니다. 스팸 메일 필터는 판별 모델이고, ChatGPT는 생성 모델입니다.</p>
+</blockquote>
+<h2 id="73-ai">7.3 생성형 AI의 종류</h2>
+<p>생성형 AI는 만들어내는 콘텐츠의 유형에 따라 다양하게 분류됩니다. 현재 실용화된 주요 분야를 하나씩 살펴보겠습니다.</p>
+<h3 id="gpt-claude-gemini">텍스트 생성 (GPT, Claude, Gemini)</h3>
+<p><strong>텍스트 생성 AI</strong>는 사람이 쓴 것과 같은 자연스러운 글을 만들어냅니다. 질문에 답하고, 글을 요약하고, 번역하고, 코드를 설명하는 등 언어와 관련된 거의 모든 작업을 수행할 수 있습니다.</p>
+<p>대표적인 서비스는 다음과 같습니다.</p>
+<ul>
+<li><strong>GPT(OpenAI)</strong>: OpenAI가 개발한 대규모 언어 모델. ChatGPT 서비스의 기반이 됩니다.</li>
+<li><strong>Claude(Anthropic)</strong>: 안전성과 정확성에 집중한 Anthropic의 언어 모델. 긴 문서 처리에 강점이 있습니다.</li>
+<li><strong>Gemini(Google DeepMind)</strong>: Google이 개발한 멀티모달 언어 모델. 검색과 연동된 최신 정보 제공이 특징입니다.</li>
+</ul>
+<blockquote>
+<p>💡 이 세 가지 모델은 "대형 언어 모델(LLM, Large Language Model)"이라고 부르며, 다음 챕터(Ch.8)에서 더 깊이 다룹니다.</p>
+</blockquote>
+<h3 id="dall-e-midjourney-stable-diffusion">이미지 생성 (DALL-E, Midjourney, Stable Diffusion)</h3>
+<p><strong>이미지 생성 AI</strong>는 텍스트 설명(프롬프트)을 입력하면 그에 맞는 이미지를 만들어냅니다. "노을 지는 바다 위 등대를 수채화로 그려줘"와 같은 요청을 처리할 수 있습니다.</p>
+<ul>
+<li><strong>DALL-E(OpenAI)</strong>: ChatGPT와 연동되어 대화 중 이미지를 생성할 수 있습니다.</li>
+<li><strong>Midjourney</strong>: 높은 예술적 품질로 유명하며, Discord를 통해 사용합니다.</li>
+<li><strong>Stable Diffusion</strong>: 오픈소스로 공개되어 로컬 설치 및 자유로운 커스터마이징이 가능합니다.</li>
+</ul>
+<h3 id="tts">음성 생성 (TTS, 음악)</h3>
+<p><strong>음성 생성 AI</strong>는 텍스트를 자연스러운 사람 목소리로 변환하거나, 멜로디와 가사를 갖춘 음악을 만들어냅니다.</p>
+<ul>
+<li><strong>TTS(Text-to-Speech, 텍스트 음성 변환)</strong>: ElevenLabs, OpenAI TTS 등이 특정 인물의 목소리를 학습해 자연스러운 음성을 생성합니다.</li>
+<li><strong>음악 생성</strong>: Suno, Udio 등은 장르, 분위기, 가사를 지정하면 완성된 노래를 만들어냅니다.</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>주의</strong>: 특정 인물의 목소리나 음악을 무단으로 학습·생성하는 것은 초상권·저작권 침해에 해당할 수 있습니다. 생성형 AI 사용 시 윤리적·법적 규범을 반드시 준수해야 합니다.</p>
+</blockquote>
+<h3 id="sora-runway">영상 생성 (Sora, Runway)</h3>
+<p><strong>영상 생성 AI</strong>는 텍스트 설명이나 이미지를 바탕으로 동영상을 만들어냅니다. 아직 발전 단계이지만 급격한 품질 향상이 이루어지고 있습니다.</p>
+<ul>
+<li><strong>Sora(OpenAI)</strong>: 최대 수십 초 분량의 고품질 영상을 텍스트 설명만으로 생성합니다.</li>
+<li><strong>Runway</strong>: 기존 영상을 편집하거나 새 장면을 생성하는 전문 영상 제작 도구입니다.</li>
+</ul>
+<h3 id="copilot-cursor">코드 생성 (Copilot, Cursor)</h3>
+<p><strong>코드 생성 AI</strong>는 자연어로 설명하면 그에 맞는 프로그램 코드를 작성해 줍니다. 개발자의 생산성을 크게 높여주는 분야입니다.</p>
+<ul>
+<li><strong>GitHub Copilot</strong>: Microsoft와 OpenAI가 협력해 만든 AI 코딩 보조 도구. VS Code 등 에디터에서 실시간으로 코드를 제안합니다.</li>
+<li><strong>Cursor</strong>: AI 기능이 내장된 코드 에디터로, 코드 설명, 자동 완성, 버그 수정을 통합 지원합니다.</li>
+</ul>
+<p>다음 표는 생성형 AI의 종류를 한눈에 정리한 것입니다.</p>
+<table>
+<thead>
+<tr>
+<th>분야</th>
+<th>대표 서비스</th>
+<th>입력</th>
+<th>출력</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>텍스트 생성</td>
+<td>ChatGPT, Claude, Gemini</td>
+<td>텍스트(질문/지시)</td>
+<td>텍스트(답변/글쓰기)</td>
+</tr>
+<tr>
+<td>이미지 생성</td>
+<td>DALL-E, Midjourney, Stable Diffusion</td>
+<td>텍스트(프롬프트)</td>
+<td>이미지</td>
+</tr>
+<tr>
+<td>음성 생성</td>
+<td>ElevenLabs, Suno</td>
+<td>텍스트/장르 지정</td>
+<td>음성/음악 파일</td>
+</tr>
+<tr>
+<td>영상 생성</td>
+<td>Sora, Runway</td>
+<td>텍스트/이미지</td>
+<td>동영상</td>
+</tr>
+<tr>
+<td>코드 생성</td>
+<td>GitHub Copilot, Cursor</td>
+<td>자연어 설명/코드 일부</td>
+<td>완성된 코드</td>
+</tr>
+</tbody>
+</table>
+<h2 id="74-ai">7.4 생성형 AI의 발전 역사</h2>
+<p>생성형 AI는 하루아침에 등장한 기술이 아닙니다. 수십 년간 이어진 연구의 결실입니다. 주요 이정표를 시간 순으로 살펴보겠습니다.</p>
+<h3 id="gan-2014">GAN — 서로 경쟁하며 성장하다 (2014)</h3>
+<p><strong>GAN(Generative Adversarial Network, 생성적 적대 신경망)</strong>은 2014년 Ian Goodfellow가 제안한 혁신적인 모델입니다. "생성자(Generator)"와 "판별자(Discriminator)" 두 신경망이 경쟁하며 서로를 발전시키는 방식으로 학습합니다.</p>
+<ul>
+<li><strong>생성자</strong>: 진짜처럼 보이는 가짜 이미지를 만들어 판별자를 속이려 합니다.</li>
+<li><strong>판별자</strong>: 진짜와 가짜를 구분하려 합니다.</li>
+</ul>
+<p>이 경쟁이 반복될수록 생성자는 점점 더 진짜 같은 이미지를 만들게 됩니다. GAN은 처음으로 사람 얼굴 같은 현실적인 이미지 생성을 가능하게 했습니다.</p>
+<h3 id="vae-20132014">VAE — 잠재 공간에서 의미를 찾다 (2013~2014)</h3>
+<p><strong>VAE(Variational Autoencoder, 변분 오토인코더)</strong>는 데이터를 압축된 "잠재 공간(Latent Space)"으로 표현한 뒤, 그 공간에서 새로운 데이터를 샘플링해 생성합니다. 이미지 생성뿐 아니라 데이터의 구조를 이해하는 데에도 활용됩니다.</p>
+<h3 id="transformer-2017">Transformer — 언어 이해의 새 지평을 열다 (2017)</h3>
+<p>2017년 Google 연구팀이 발표한 논문 "Attention Is All You Need"는 <strong>Transformer</strong> 아키텍처를 세상에 내놓았습니다. <strong>어텐션 메커니즘(Attention Mechanism)</strong>을 핵심으로 삼아 문장 내 단어 간 관계를 병렬로 처리합니다.</p>
+<p>Transformer는 RNN의 한계였던 긴 문장에서의 정보 손실 문제를 해결하며, 이후 모든 대형 언어 모델의 기반 구조가 됩니다.</p>
+<blockquote>
+<p>💡 Transformer의 원리는 다음 챕터(Ch.8)에서 상세히 다룹니다.</p>
+</blockquote>
+<h3 id="gpt-2018">GPT — 대규모 사전 학습의 시대 (2018~현재)</h3>
+<p><strong>GPT(Generative Pre-trained Transformer)</strong>는 Transformer를 기반으로 방대한 텍스트 데이터를 사전 학습(Pre-training)한 모델입니다. 2018년 GPT-1을 시작으로, GPT-2(2019), GPT-3(2020), GPT-4(2023)로 발전하며 모델 규모와 성능이 폭발적으로 성장했습니다.</p>
+<p>2022년 11월 공개된 <strong>ChatGPT</strong>는 GPT-3.5를 기반으로 대화에 특화된 서비스로, 출시 5일 만에 100만 사용자를 돌파하며 AI 대중화의 신호탄이 되었습니다.</p>
+<h3 id="2021">멀티모달 — 텍스트를 넘어 세상을 이해하다 (2021~현재)</h3>
+<p><strong>멀티모달(Multimodal) AI</strong>는 텍스트뿐 아니라 이미지, 음성, 영상 등 여러 형태의 데이터를 동시에 처리하는 모델입니다. GPT-4V, Gemini, Claude 3 등이 대표적입니다.</p>
+<p>"이 사진에서 무엇이 보이나요?"처럼 이미지를 입력해 텍스트로 설명받거나, 텍스트로 이미지를 생성하는 것이 모두 멀티모달 기능입니다.</p>
+<p>다음 표에서 생성형 AI의 발전 흐름을 한눈에 정리합니다.</p>
+<table>
+<thead>
+<tr>
+<th>연도</th>
+<th>기술/모델</th>
+<th>핵심 의의</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2013~14</td>
+<td>VAE</td>
+<td>잠재 공간 표현, 데이터 생성의 이론적 토대</td>
+</tr>
+<tr>
+<td>2014</td>
+<td>GAN</td>
+<td>경쟁 학습으로 사실적 이미지 생성 성공</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>Transformer</td>
+<td>어텐션 메커니즘, 병렬 처리로 언어 모델 혁신</td>
+</tr>
+<tr>
+<td>2018~20</td>
+<td>GPT-1/2/3</td>
+<td>대규모 사전 학습, 범용 언어 AI 등장</td>
+</tr>
+<tr>
+<td>2021~22</td>
+<td>DALL-E, Stable Diffusion</td>
+<td>텍스트→이미지 생성의 실용화</td>
+</tr>
+<tr>
+<td>2022.11</td>
+<td>ChatGPT</td>
+<td>생성형 AI 대중화의 시작</td>
+</tr>
+<tr>
+<td>2023~24</td>
+<td>GPT-4, Gemini 1.5, Claude 3</td>
+<td>멀티모달, 더 강력한 추론 능력</td>
+</tr>
+<tr>
+<td>2025~현재</td>
+<td>GPT-5, Gemini 2.5, Claude 4.5 / Opus 4.7</td>
+<td>에이전트형 추론, 초장기 컨텍스트</td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+<img alt="생성형 AI 발전 타임라인 - GAN(2014)부터 GPT-5/Claude 4.5/Gemini 2.5(2025)까지 주요 이정표" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338394/ch07_genai_timeline.png" style="max-width:900px; width:100%; height:auto;"/>
+</p>
+<h2 id="75-ai">7.5 왜 지금 생성형 AI가 폭발적으로 성장했는가</h2>
+<p>생성형 AI 기술은 오래전부터 연구되어 왔지만, 최근 몇 년 사이 폭발적인 성장을 이룬 이유가 있습니다. 전문가들은 이를 세 가지 요소의 결합, 즉 <strong>"데이터, 컴퓨팅 파워, 알고리즘의 삼위일체"</strong>로 설명합니다.</p>
+<h3 id="_2">데이터 — 학습 재료의 폭발적 증가</h3>
+<p>인터넷과 스마트폰의 보급으로 전 세계에서 매일 엄청난 양의 텍스트, 이미지, 영상 데이터가 생성됩니다. AI 모델이 학습할 수 있는 재료가 기하급수적으로 늘어난 것입니다.</p>
+<ul>
+<li>위키피디아, 웹 페이지, 책, SNS, 코드 저장소 등 수천억 개의 텍스트 데이터</li>
+<li>수억 장의 이미지와 그에 달린 설명 텍스트</li>
+<li>유튜브 등 플랫폼의 방대한 영상 및 자막 데이터</li>
+</ul>
+<blockquote>
+<p>📌 데이터는 AI의 "영양분"입니다. 더 많은 고품질 데이터가 더 똑똑한 AI를 만듭니다.</p>
+</blockquote>
+<h3 id="gpu">컴퓨팅 파워 — GPU와 클라우드의 발전</h3>
+<p>대형 AI 모델을 학습시키려면 엄청난 연산 능력이 필요합니다. <strong>GPU(Graphics Processing Unit)</strong>의 성능이 비약적으로 발전하고 가격이 내려가면서, 이전에는 불가능했던 대규모 학습이 현실이 되었습니다.</p>
+<p>또한 AWS, Google Cloud, Azure 같은 <strong>클라우드 컴퓨팅</strong> 서비스가 등장해, 스타트업이나 연구자도 필요한 만큼 컴퓨팅 자원을 빌려 쓸 수 있게 되었습니다.</p>
+<ul>
+<li>NVIDIA A100, H100 등 AI 전용 GPU 등장</li>
+<li>TPU(Tensor Processing Unit) 등 AI 특화 반도체 개발</li>
+<li>분산 학습 기술의 발전으로 수천 개의 GPU를 동시에 활용</li>
+</ul>
+<h3 id="transformer">알고리즘 — Transformer의 혁신</h3>
+<p>아무리 데이터와 컴퓨팅 파워가 있어도, 효율적인 학습 알고리즘이 없으면 좋은 모델을 만들 수 없습니다. 2017년 등장한 <strong>Transformer 아키텍처</strong>가 바로 그 게임 체인저였습니다.</p>
+<ul>
+<li>병렬 처리가 가능해 학습 속도가 크게 향상</li>
+<li>어텐션 메커니즘으로 문맥(Context)을 훨씬 잘 이해</li>
+<li>스케일링 법칙(Scaling Law): 모델이 커질수록 성능도 예측 가능하게 향상</li>
+</ul>
+<blockquote>
+<p>💡 <strong>삼위일체 정리</strong>: 방대한 데이터(원료) + 강력한 GPU·클라우드(공장) + Transformer 알고리즘(설계도)이 맞아떨어지며 생성형 AI의 황금기가 열렸습니다.</p>
+</blockquote>
+<p align="center">
+<img alt="생성형 AI 폭발의 삼위일체 - 데이터·컴퓨팅·알고리즘 세 원이 교차하는 중앙에 생성형 AI 황금기 표시" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338394/ch07_trinity.png" style="max-width:680px; width:100%; height:auto;"/>
+</p>
+<p>세 요소 모두 동시에 성숙한 시점이 바로 2020년대 초입니다. 어느 하나만으로는 불가능했던 것이, 셋이 합쳐지며 ChatGPT처럼 대중이 쉽게 쓸 수 있는 도구가 탄생했습니다.</p>
+<h2 id="chatgpt-gemini">[실습] ChatGPT, Gemini 회원가입 및 첫 대화 체험</h2>
+<p>이론으로 배운 생성형 AI를 직접 체험해 봅니다. ChatGPT와 Gemini에 가입하고 첫 대화를 나눠보겠습니다.</p>
+<h3 id="1-chatgpt">실습 1. ChatGPT 가입 및 첫 대화</h3>
+<p><strong>접속 주소</strong>: https://chat.openai.com</p>
+<ol>
+<li>위 주소에 접속한 뒤 <strong>[Sign up]</strong> 버튼을 클릭합니다.</li>
+<li>이메일 주소 또는 Google/Microsoft 계정으로 가입합니다.</li>
+<li>이메일로 인증 링크를 받아 계정을 활성화합니다.</li>
+<li>로그인 후 하단 입력창에 아래 메시지를 입력하고 Enter를 누릅니다.</li>
+</ol>
+<pre><code>안녕하세요! 생성형 AI에 대해 한 문장으로 설명해 주세요.
+</code></pre>
+<ol start="5">
+<li>ChatGPT의 답변을 확인합니다.</li>
+</ol>
+<blockquote>
+<p>📌 무료 플랜(Free)으로도 GPT-4o를 일정 횟수 사용할 수 있습니다. 처음 가입 시 유료 플랜 안내가 나오더라도 무료로 시작할 수 있습니다.</p>
+</blockquote>
+<h3 id="2-gemini">실습 2. Gemini 가입 및 첫 대화</h3>
+<p><strong>접속 주소</strong>: https://gemini.google.com</p>
+<ol>
+<li>Google 계정이 있다면 바로 로그인합니다. 없다면 Google 계정을 먼저 만듭니다.</li>
+<li>로그인 후 입력창에 아래 메시지를 입력합니다.</li>
+</ol>
+<pre><code>오늘 날씨가 어떤지 알려주고, 생성형 AI의 특징을 세 가지만 설명해 줘.
+</code></pre>
+<ol start="3">
+<li>Gemini의 답변을 확인하고, ChatGPT의 답변과 비교해 봅니다.</li>
+</ol>
+<blockquote>
+<p>💡 같은 질문을 두 AI에게 던지면 답변 스타일과 내용이 다를 수 있습니다. 어느 쪽이 더 유용한지 비교해 보는 것도 좋은 학습 방법입니다.</p>
+</blockquote>
+<h3 id="3">실습 3. 프롬프트를 바꾸며 탐색하기</h3>
+<p>아래 예시 프롬프트를 따라 입력하며 생성형 AI의 다양한 능력을 체험해 보세요.</p>
+<pre><code># 번역 요청
+"The quick brown fox jumps over the lazy dog"를 한국어로 번역하고 문장의 특징을 설명해 줘.
+</code></pre>
+<pre><code># 요약 요청
+다음 문단을 2문장으로 요약해 줘:
+생성형 AI는 텍스트, 이미지, 음악, 영상 등 다양한 콘텐츠를 만들어내는 인공지능입니다.
+최근 ChatGPT, DALL-E, Sora 같은 서비스가 등장하며 일상에 빠르게 스며들고 있습니다.
+</code></pre>
+<pre><code># 창의적 글쓰기 요청
+"AI와 인간이 함께 그림을 그리는" 장면을 묘사하는 짧은 시를 써줘.
+</code></pre>
+<blockquote>
+<p>⚠️ <strong>개인 정보 주의</strong>: ChatGPT나 Gemini에 실제 이름, 전화번호, 주민등록번호 등 민감한 개인 정보를 입력하지 마세요. 입력한 내용이 AI 학습에 활용될 수 있습니다.</p>
+</blockquote>
+<h2 id="_3">마치며</h2>
+<p>이번 챕터에서는 생성형 AI의 전반적인 개요를 살펴보았습니다. 핵심 내용을 정리합니다.</p>
+<ul>
+<li><strong>생성형 AI</strong>는 학습 데이터의 패턴을 익혀 텍스트, 이미지, 음성, 영상, 코드 등 새로운 콘텐츠를 창조합니다.</li>
+<li><strong>판별 모델</strong>은 "이것은 무엇인가?"를 답하고, <strong>생성 모델</strong>은 "이것과 비슷한 새것"을 만들어냅니다.</li>
+<li>생성형 AI는 텍스트(GPT, Claude, Gemini), 이미지(DALL-E, Midjourney), 음성(ElevenLabs, Suno), 영상(Sora, Runway), 코드(Copilot, Cursor) 분야로 발전했습니다.</li>
+<li>GAN → VAE → Transformer → GPT → 멀티모달로 이어지는 발전 역사가 있습니다.</li>
+<li>데이터의 폭증, GPU·클라우드의 발전, Transformer 알고리즘의 혁신이라는 <strong>삼위일체</strong>가 지금의 생성형 AI 붐을 이끌었습니다.</li>
+</ul>
+<p>다음 챕터(Ch.8)에서는 생성형 AI의 핵심 엔진인 <strong>Transformer</strong>의 구조와 원리를 깊이 파헤치고, 대형 언어 모델(LLM)이 어떻게 동작하는지 알아봅니다. 이번 챕터에서 소개된 개념들이 구체적인 수식과 구조로 연결되는 과정을 기대해 주세요.</p>
+</div>

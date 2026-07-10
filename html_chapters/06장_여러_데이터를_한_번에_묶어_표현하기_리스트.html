@@ -1,0 +1,2746 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>06장_여러_데이터를_한_번에_묶어_표현하기_리스트</title>
+    <style>table{width:100%;border-collapse:collapse}table,th,td{padding:.3em;border:1px solid #a4a4a4;vertical-align:top;margin-bottom:1em}tbody{border-top:2px solid #aaa;border-bottom:2px solid #a4a4a4;border-left:2px solid #fff;border-right:2px solid #fff}.tb_pink{background-color:#eaeaea;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #eaeaea}.tb_pink2{background-color:#f5f5f5;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #f5f5f5}.tb_brown_line{border-bottom:2px solid #aaa}.tb_white{background-color:#fff}.tb_white2{background-color:#fff;border:2px solid #fff}.tb_white3{background-color:#fff;border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff}.tb_blue{background-color:#fff;border:2px solid #cacaca}.tb_brown{background-color:#f7f7f7;border:2px solid #f7f7f7}.clear{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0;clear:both}pre{word-break:break-all;word-wrap:break-word;white-space:pre-wrap;font-family:"code";font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;text-align:left;text-indent:0;padding:0;margin:0}.txts{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txts2{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:2em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:.6em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txtex{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txtex2{font-size:.9em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt1{font-size:1.2em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt2{font-size:1.4em;font-style:normal;font-weight:normal;line-height:2em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt3{font-size:1.6em;font-style:normal;font-weight:normal;line-height:1.4em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.key{border:1px solid #000;padding:0 .3em;font-family:"gothic_l";border-radius:.3em;font-size:.85em}.highlight{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:1.2em 0 1.2em 1em}.highlight2{border:2px solid #c6c6c6;padding:.5em;border-radius:0 .3em .3em .3em;margin:-0.2em 0 1.2em 0;background-color:#fff}.highlight3{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:0 0 1.2em 1em}.highlight4{padding:.5em;margin:1.2em 0 1.2em 1em}.highlight5{padding:.5em;margin:0 0 1.2em .6em}.highlight6{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:-0.2em 0 1.2em 0}.highlight7{border:2px solid #d3d3d3;border-radius:.5em;padding:.5em;margin:1.2em 0}.bg_white{background-color:#fff;border-radius:.3em;padding:0 0 0 .3em}.bg_white2{background-color:#fff}.bg_blue{background-color:#cacaca;padding:.3em .2em .3em .2em;border-radius:.9em}.bg_brown{background-color:#dfdfdf;padding:.4em .3em .4em .3em;border-radius:3em}.bg_brown2{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown3{background-color:#dfdfdf;padding:.1em}.bg_brown4{background-color:#dfdfdf;padding:.5em .3em .5em .3em;border-radius:3em}.bg_brown5{background-color:#f6f6f6;padding:.3em;border-radius:.1em}.bg_brown6{background-color:#dfdfdf;padding:.4em .7em .4em .7em;border-radius:3em}.bg_brown7{background-color:#dfdfdf;padding:.1em;border-radius:0}.bg_brown8{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown9{background-color:#dfdfdf;padding:.45em .1em .45em .1em;border-radius:3em}.bg_brown10{background-color:#dfdfdf;padding:.4em .45em .4em .45em;border-radius:3em}.bg_gray{background-color:#a7a7a7;font-size:.85em;padding:.1em .3em;border-radius:.4em;color:#fff}.bg_pink2{background-color:#e5e5e5;padding:.2em;border-radius:.5em;color:#414141}.bg_red{border:2px solid #414141;padding:.3em;border-radius:1em;margin-bottom:1.2em}.bg_yellow{padding:.2em .5em;background-color:#c6c6c6;border-radius:.5em .5em 0 0}.bg_black_line{border-bottom:1px solid #000;padding:.1em}.box_brown{box-sizing:border-box;min-height:100vh;background-color:#b5b5b5;padding:1em 2em}.box_brown2{padding:.5em;border-radius:.5em;background-color:#eee;box-sizing:border-box;min-height:80vh;position:relative}.box_brown3{border-bottom:3px solid #acacac;border-top:3px solid #acacac;padding:1em .5em 1em .5em;margin-bottom:5em}.box_brown4{border:3px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;padding:.5em}.box_brown5{padding:.5em;border-radius:.3em;border:2px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;background-color:#f7f7f7}.box_brown6{box-sizing:border-box;padding:2em;background-color:#f7f7f7}.box_yellow{padding:.5em;border-radius:0 0 .3em .3em;border-top:3px solid #aeaeae;margin-bottom:1.2em;margin-top:1.2em;background-color:#f2f2f2}.box_pink{box-sizing:border-box;padding:2em;background-color:#f8f8f8}.box_white{padding:.5em;border-radius:.5em;background-color:#fff;box-sizing:border-box;min-height:80vh;position:relative}.box_white2{padding:.5em;border-radius:.5em;background-color:#fff}.box_yellow_line{border-bottom:3px solid #c4c4c4}.box_yellow_line2{border:2px solid#c4c4c4;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_yellow_line3{border-bottom:2px solid #c5c5c5;margin-bottom:.5em;margin-top:.5em}.box_green_line{border:2px solid #d3d3d3;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line2{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.bg_brown_line{border-bottom:3px solid #dedede;padding:0 .4em 0 0;color:#acacac}.bg_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_brown_line{border-bottom:3px solid #acacac}.box_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0 0 0 1em}.box_brown_line3{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_white_line{border:1px solid #fff;padding:0;margin-top:2em;margin-bottom:2em}.box_black_line{border:1px solid #000;padding:.3em}.box_black_line2{border:1px solid #000;padding:.3em;border-radius:.3em;margin-bottom:2em}.tcenter{text-align:center}.tright{text-align:right}.s07_07{margin-left:.7em;text-indent:-0.7em}.s08_08{margin-left:.8em;text-indent:-0.8em}.s10_10{margin-left:1em;text-indent:-1em}.s11_11{margin-left:1.1em;text-indent:-1.1em}.s12_12{margin-left:1.2em;text-indent:-1.2em}.s14_14{margin-left:1.4em;text-indent:-1.4em}.s22_22{margin-left:2.2em;text-indent:-2.2em}.s26_26{margin-left:2.6em;text-indent:-2.6em}.s28_28{margin-left:2.85em;text-indent:-2.85em}.ind10{margin-left:1em;margin-bottom:.6em}.ind11{margin-left:1.1em}.ind12{margin-left:1.2em}.ind14{margin-left:1.4em}.ind18{margin-left:1.8em}.ind20{margin-left:2em}.ind22{margin-left:2.2em}.ind24{margin-left:2.4em}.ind26{margin-left:2.65em}.ind30{margin-left:3em}.ind36{margin-left:3.6em}.ind40{margin-left:4em}.ind90{margin-left:9.5em}.fleft{float:left;margin:.5em .5em .5em 0}.blue{color:#d4d4d4}.blue2{color:#414141}.blue3{color:#282828}.blue4{color:#535353}.brown{color:#797979}.brown2{color:#a1a1a1;text-decoration:none}.gold{color:#646464}.gray{color:#646464}.green{color:#5b5b5b}.purple{color:#676767}.yellow{color:#adadad}.red{color:#636363}.red2{color:#414141}.white{color:#fff}.h10{height:1em;max-width:100%}.h20{height:2em;max-width:100%}.h22{height:2.2em;max-width:100%}.h28{height:2.8em;max-width:100%}.h30{height:3em;max-width:100%}.h35{height:3.5em;max-width:100%}.h40{height:4em;max-width:100%}.h50{height:5em;max-width:100%}.h60{height:6em;max-width:100%}.mb02{margin-bottom:-0.2em}.w7{width:7.6%}.w10{width:10%}.w15{width:15%}.w18{width:18%}.w20{width:20%}.w25{width:25%}.w30{width:30%}.w33{width:33%}.w40{width:40%}.w50{width:50%}.w60{width:60%}.w70{width:70%}.w75{width:75%}.w80{width:80%}.w90{width:90%}.w100{width:100%}.w40c{margin-left:30%;margin-right:30%}.w60c{margin-left:20%;margin-right:20%}.w80c{margin-left:10%;margin-right:10%}</style>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="thebook-content">
+        <div class="book-page-fragment" data-page="242">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown">
+<p class="txts"> </p>
+<div class="box_brown2">
+<h2 class="txt3 dm"><span class="brown">6장</span><br/>
+      여러 데이터를 한 번에 묶어 표현하기: 리스트</h2>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txt bl">지금까지 프로그래밍의 기본이 되는 입력과 출력, 변수, 조건문과 반복문을 살펴보았습니다. 수학의 사칙연산과 영어의 5형식을 배운 것과 같습니다.</p>
+<p class="txt bl">이제부터는 파이썬으로 조금 더 재미있고 복잡한 작업을 하는 데 필요한 개념을 배워 보겠습니다. 먼저 이 장에서는 리스트를 배웁니다. 리스트만 알아도 데이터 분석 프로젝트를 할 수 있으니 이 장에서 배운 내용을 확실히 자기 것으로 만들기 바랍니다.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="243">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown">6.1</span><br/>
+    여러 데이터 한 번에 묶기</h3>
+</div>
+<h4 class="txt1 dm" id="sigil_toc_id_45"><span class="yellow">6.1.1</span> 리스트란</h4>
+<p class="txt bl">여러분이 월별 지출을 정리하는 가계부 프로그램을 만든다고 가정해 봅시다. 지출을 월별로 저장해야 하므로 지금까지 배운 대로 한다면 다음처럼 12개의 변수가 필요하겠죠.</p>
+<div class="highlight">
+<pre>jan = <span class="green">25</span>
+feb = <span class="green">36</span>
+...
+nov = <span class="green">40</span>
+dec = <span class="green">25</span></pre>
+</div>
+<p class="txt bl">변수가 12개라서 적어 보일 수 있지만, 매일 지출을 정리한다면 어떨까요? 365개의 변수를 만들어야 합니다. 코드로 작성하기가 만만치 않습니다. 어떻게 해야 많은 데이터를 좀 더 효율적으로 다룰 수 있을까요?</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="244">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">데이터를 다룰 때 많이 사용하는 방법으로 표가 있습니다. 월별 지출을 표로 만들어 봅시다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 6-1</span> 월별 지출표</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w7">
+<p class="txts dm">월</p>
+</td>
+<td class="w7">
+<p class="txts dl">1월</p>
+</td>
+<td class="w7">
+<p class="txts dl">2월</p>
+</td>
+<td class="w7">
+<p class="txts dl">3월</p>
+</td>
+<td class="w7">
+<p class="txts dl">4월</p>
+</td>
+<td class="w7">
+<p class="txts dl">5월</p>
+</td>
+<td class="w7">
+<p class="txts dl">6월</p>
+</td>
+<td class="w7">
+<p class="txts dl">7월</p>
+</td>
+<td class="w7">
+<p class="txts dl">8월</p>
+</td>
+<td class="w7">
+<p class="txts dl">9월</p>
+</td>
+<td class="w7">
+<p class="txts dl">10월</p>
+</td>
+<td class="w7">
+<p class="txts dl">11월</p>
+</td>
+<td class="w7">
+<p class="txts dl">12월</p>
+</td>
+</tr>
+<tr>
+<td class="w7">
+<p class="txts dm">지출</p>
+</td>
+<td class="w7">
+<p class="txts dl">25</p>
+</td>
+<td class="w7">
+<p class="txts dl">36</p>
+</td>
+<td class="w7">
+<p class="txts dl">8</p>
+</td>
+<td class="w7">
+<p class="txts dl">53</p>
+</td>
+<td class="w7">
+<p class="txts dl">24</p>
+</td>
+<td class="w7">
+<p class="txts dl">56</p>
+</td>
+<td class="w7">
+<p class="txts dl">38</p>
+</td>
+<td class="w7">
+<p class="txts dl">79</p>
+</td>
+<td class="w7">
+<p class="txts dl">94</p>
+</td>
+<td class="w7">
+<p class="txts dl">20</p>
+</td>
+<td class="w7">
+<p class="txts dl">40</p>
+</td>
+<td class="w7">
+<p class="txts dl">25</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">헤더를 제외하고 총 12칸짜리 표를 만들 수 있습니다. 표에서 지출은 월을 기준으로 순서대로 나열됩니다. 첫 번째 칸은 1월 지출, 두 번째 칸은 2월 지출, 열두 번째 칸은 12월 지출입니다. 12월 지출이 궁금하면 ‘지출표의 열두 번째 칸’ 또는 ‘지출표의 마지막 칸’으로 찾을 수 있습니다. 표로 구조화하니 데이터를 보기가 한결 편합니다.</p>
+<p class="txt bl">파이썬에서도 이런 표 형태로 데이터를 저장할 수 있는데, 이를 <span class="dm">리스트</span><span class="txts gray">(list)</span>라고 합니다. 리스트는 여러 개의 데이터를 묶어서 변수 하나에 담아 표현하는 파이썬의 데이터 타입입니다. 리스트를 만드는 방법은 다음과 같습니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>리스트명 = [데이터, 데이터…]</pre>
+</div>
+<p class="txt bl">간단하게 1월부터 6월까지 상반기 지출만 넣어 리스트로 만들어 봅시다.</p>
+<div class="highlight">
+<pre>spending = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="245">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이처럼 데이터를 묶어 대괄호(<span class="cd">[]</span>)에 넣으면 리스트가 됩니다(반복문을 배울 때 사용한 적이 있는데, 이것이 리스트였습니다). 리스트 안에 넣은 데이터는 <span class="dm">요소</span><span class="txts gray">(element)</span> 또는 원소라고 하고, 각 요소는 콤마(<span class="cd">,</span>)로 구분합니다. 이를 <span class="cd">spending</span>이라는 이름의 변수에 담아 저장합니다. 코드를 실행하면 컴퓨터 내부에서는 다음 형태로 리스트가 만들어집니다.</p>
+<div class="ind12"><img alt="" class="w100" src="https://thebook.io/img/080251/215.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">그럼 예제를 보며 리스트를 좀 더 자세히 알아봅시다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">리스트의 데이터 타입 확인하기</p>
+<p class="txt bl">앞의 코드를 실행하면 아무것도 출력되지 않습니다. 이제는 왜 그런지 압니다. <span class="cd">print()</span>로 출력하지 않았기 때문이죠. 그럼 <span class="cd">abc</span>라는 리스트를 만들고 <span class="cd">print(abc)</span>로 출력해 봅시다.</p>
+<div class="highlight">
+<pre>abc = [<span class="green">1</span>, <span class="green">2</span>, <span class="green">3</span>, <span class="green">4</span>, <span class="green">5</span>]
+<span class="gold">print</span>(abc)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[1, 2, 3, 4, 5]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="246">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">리스트가 출력됩니다. 콤마로 구분된 5개 데이터와 대괄호까지 출력됩니다. 이처럼 리스트를 출력하면 각각의 데이터가 아니라 데이터를 대괄호로 묶어 전체를 보여 줍니다.</p>
+<p class="txt bl"><span class="cd">type()</span>으로 <span class="cd">abc</span>의 데이터 타입을 출력해 봅시다.</p>
+<div class="highlight">
+<pre>abc = [<span class="green">1</span>, <span class="green">2</span>, <span class="green">3</span>, <span class="green">4</span>, <span class="green">5</span>]
+<span class="gold">print</span>(type(abc), abc)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+&lt;class 'list'&gt; [1, 2, 3, 4, 5]</pre>
+</div>
+<p class="txt bl">데이터 타입과 리스트가 동시에 출력됩니다. <span class="cd">abc</span>는 리스트 타입이며 <span class="cd">[1, 2, 3, 4, 5]</span>를 저장하고 있다는 것을 보여 줍니다(3장에서 <span class="cd">class</span>는 ‘그룹’으로 이해하면 된다고 했으니 여기서도 리스트 그룹이라고 보면 됩니다). 그러므로 리스트도 정수형, 실수형, 문자열처럼 하나의 데이터 타입임을 알 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="247">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">len()으로 리스트 길이 알아내기</p>
+<p class="txt bl">이번에는 처음에 예로 든 일년 지출과 상반기 지출을 각각 리스트로 만든 후 데이터 타입과 그 값을 출력해 봅시다.</p>
+<div class="highlight">
+<pre><span class="green"># 일년 지출</span>
+spending_year = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>, <span class="green">38</span>, <span class="green">79</span>, <span class="green">94</span>, <span class="green">20</span>, <span class="green">40</span>, <span class="green">25</span>]
+<span class="gold">print</span>(type(spending_year), spending_year)
+<span class="green"># 상반기 지출</span>
+spending_6mon = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="gold">print</span>(type(spending_6mon), spending_6mon)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+&lt;class 'list'&gt; [25, 36, 8, 53, 24, 56, 38, 79, 94, 20, 40, 25]
+&lt;class 'list'&gt; [25, 36, 8, 53, 24, 56]</pre>
+</div>
+<p class="txt bl"><span class="cd">spending_year</span>와 <span class="cd">spending_6mon</span>에 각각 12개와 6개 데이터가 잘 들어갔는지 확인해 봅시다. 이럴 때 사용하기 좋은 명령어가 있습니다. 리스트 길이를 알려 주는 <span class="cd">len()</span>입니다. <span class="cd">len</span>은 length의 앞 세 글자를 딴 명령어로, <span class="cd">len(spending_year)</span>처럼 소괄호 안에 길이를 알고 싶은 리스트를 넣으면 됩니다.</p>
+<div class="highlight">
+<pre><span class="green"># 일년 지출</span>
+spending_year = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>, <span class="green">38</span>, <span class="green">79</span>, <span class="green">94</span>, <span class="green">20</span>, <span class="green">40</span>, <span class="green">25</span>]
+<span class="gold">print</span>(<span class="gold">len</span>(spending_year))
+
+<span class="green"># 상반기 지출</span>
+spending_6mon = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="gold">print</span>(<span class="gold">len</span>(spending_6mon))</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+12
+6</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="248">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">결과로 12와 6이 나옵니다. 다른 숫자가 나온다면 데이터 개수가 제대로 입력되지 않았다는 뜻이니 코드를 다시 살펴보세요.</p>
+<p class="txt bl">리스트가 어떤 것인지 조금 알게 됐으니 이번에는 숫자가 아닌 문자를 넣어 보겠습니다. 다음은 음식을 좋아하는 순서대로 리스트에 저장해 출력하는 코드입니다.</p>
+<div class="highlight">
+<pre><span class="green"># 좋아하는 음식</span>
+food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'떡볶이'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'딸기'</span>, <span class="red2">'파스타'</span>]
+<span class="gold">print</span>(food)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['피자', '치킨', '떡볶이', '스테이크', '딸기', '파스타']</pre>
+</div>
+<p class="txt bl">숫자와 마찬가지로 각 문자를 콤마(<span class="cd">,</span>)로 구분해 리스트에 넣었습니다. 이때 문자임을 표시하기 위해 작은따옴표로 감쌉니다. 좋아하는 순서대로 입력했으니 가장 좋아하는 음식은 <span class="cd">food</span> 리스트의 첫 번째 요소고, 두 번째로 좋아하는 음식은 <span class="cd">food</span> 리스트의 두 번째 요소겠죠.</p>
+<p class="txt bl"><span class="cd">food</span> 리스트의 길이도 출력해 볼까요? 출력하는 내용이 뭔지 알 수 있게 ‘좋아하는 음식 개수:’와 ‘좋아하는 음식 순서:’를 넣어 출력하겠습니다.</p>
+<div class="highlight">
+<pre><span class="green"># 좋아하는 음식</span>
+food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'떡볶이'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'딸기'</span>, <span class="red2">'파스타'</span>]
+<span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'좋아하는 음식 개수:'</span><span class="cd2">,</span> <span class="cd2 gold">len</span><span class="cd2">(food))</span>
+<span class="gold">print</span>(<span class="cd2 red2">'좋아하는 음식 순서:'</span><span class="cd2">,</span> food)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+좋아하는 음식 개수: 6
+좋아하는 음식 순서: ['피자', '치킨', '떡볶이', '스테이크', '딸기', '파스타']</pre>
+</div>
+<p class="txt bl">좋아하는 음식 개수가 6개네요. 이처럼 리스트를 다룰 때 <span class="cd">len()</span>을 자주 사용하니 사용법을 잘 익혀 두세요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="249">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_46"><span class="yellow">6.1.2</span> 리스트 사용하기</h4>
+<p class="txt bl">리스트가 무엇이고 어떻게 만드는지 알아봤습니다. 이번에는 리스트의 데이터를 어떻게 사용하는지 알아보겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">리스트의 인덱스</p>
+<p class="txt bl">리스트는 일상생활에서도 흔히 쓰는 단어입니다. 마트에 장 보러 갈 때 사야 할 물건 리스트를 작성하거나 해 보고 싶은 일을 버킷 리스트로 적기도 합니다. 리스트의 사전적 정의는 ‘물품이나 사람의 이름 따위를 일정한 순서로 적어 놓은 명단, 목록’입니다. 여기서 ‘일정한 순서로 적어 놓은’이라는 부분을 주목해 봅시다.</p>
+<p class="txt bl">버킷 리스트는 순서를 나타내는 숫자를 적고, 가장 하고 싶은 일부터 나열합니다. 번호와 데이터가 대응된 형태죠. 파이썬의 리스트도 비슷합니다. 리스트의 요소에는 순서가 있고, 이 순서를 숫자로 표현할 수 있습니다. 다음을 보면 리스트 위에 번호가 있습니다. 이는 리스트 안에서 요소의 위치를 알려 주는 숫자로, <span class="dm">인덱스</span><span class="txts gray">(index)</span>라고 합니다.</p>
+<div class="ind12"><img alt="" class="w100" src="https://thebook.io/img/080251/219.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">그래서 인덱스를 알면 리스트의 요소를 알 수 있습니다. 리스트의 요소에는 <span class="cd">리스트명[인덱스]</span> 형식으로 접근합니다. 즉, <span class="cd">spending[0]</span>은 25를, <span class="cd">spending[1]</span>은 36을, <span class="cd">spending[5]</span>는 56을 나타냅니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="250">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그런데 그림을 보면 인덱스가 1이 아닌 0부터 시작합니다. 실생활에서는 번호나 순서, 범위를 셀 때는 1부터 시작하지만, 컴퓨터에서는 0부터 시작합니다. 앞서 배운 <span class="cd">range()</span>도 시작 숫자를 생략하면 자동으로 시작 숫자를 0으로 간주했습니다. 리스트도 인덱스를 0부터 시작해서 요소가 6개 있으면 마지막 인덱스는 5가 됩니다(인덱스가 0부터 시작해서 편리한 부분이 있는데, 이는 뒤에서 다루겠습니다). 예를 들어, 다음과 같이 코드를 작성하면 ‘리스트 <span class="cd">spending</span>의 첫 번째 값을 출력해.’라는 뜻입니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(spending[<span class="green">0</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+25</pre>
+</div>
+<p class="txt bl">리스트는 앞에서 보듯이 표현 방법이 매우 직관적입니다. 리스트명과 인덱스만 알면 되죠. 인덱스 1에 들어 있는 값은 <span class="cd">spending[1]</span>, 인덱스 2에 들어 있는 값은 <span class="cd">spending[2]</span>로 표현합니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/220_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/220_2.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/220_3.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/220_4.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/220_5.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/220_6.jpg"/></div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="251">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">코드로 직접 확인해 봅시다. 상반기 지출을 담은 <span class="cd">spending</span> 리스트를 다시 만들고 첫 번째 값을 출력해 봅시다.</p>
+<div class="highlight">
+<pre>spending = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="gold">print</span>(spending[<span class="green">0</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+25</pre>
+</div>
+<p class="txt bl">25가 출력됩니다. <span class="cd">spending</span>이 1월부터 6월까지의 지출을 차례대로 담은 리스트이므로 25는 1월 지출입니다. 인덱스가 0부터 시작하므로 <span class="cd">spending[0]</span>을 하면 1월 지출이 출력됩니다.</p>
+<p class="txt bl">4월 지출은 어떻게 출력할까요? 앞의 코드에서 인덱스 숫자만 3으로 바꾸면 됩니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(spending[<span class="cd2 green">3</span>])</pre>
+</div>
+<p class="txt bl">4월 지출은 <span class="cd">spending</span> 리스트의 네 번째 요소입니다. 따라서 <span class="cd">spending[3]</span>을 출력하면 4월 지출이 나옵니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="252">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">만약 리스트에 없는 인덱스를 출력하면 어떻게 될까요? 다음 코드를 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(spending[<span class="cd2 green">6</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+----&gt; 1 print(spending[6])
+<span class="red2">IndexError</span>: list index out of range</pre>
+</div>
+<p class="txt bl"><span class="cd">IndexError</span>가 발생합니다. 오류 메시지를 보면 리스트 인덱스가 범위를 벗어났다고 되어 있네요. 존재하지 않는 인덱스 <span class="cd">[6]</span>의 데이터에 접근하려고 해서 컴퓨터가 오류를 낸 겁니다. 이는 프로그래밍 입문자가 가장 흔하게 겪는 오류입니다. 인덱스를 살펴보면 금방 해결할 수 있으니 당황하지 마세요.</p>
+<p class="txts"> </p>
+<p class="txtex dm">리스트의 값 변경하기</p>
+<p class="txt bl">이번에는 리스트의 값을 바꿔 보겠습니다. 3월에 현금으로 사용한 10만 원이 누락되어 3월 지출에 10을 더해야 한다고 합시다. 3월 지출은 <span class="cd">spending[2]</span>에 있습니다. 여기에 10만 원을 더하면 되므로 <span class="cd">spending[2] = spending[2] + 10</span>으로 작성합니다. 이는 <span class="cd">spending[2] += 10</span>으로 줄여 쓸 수 있습니다. 변수에 값을 더하고 빼는 방법과 같죠. 추가로 변경 전과 변경 후의 값을 비교하기 위해 덧셈 연산 전후로 리스트 값을 확인할 수 있는 코드를 넣어 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="cd2 red2">'3월 지출 변경 전:'</span><span class="cd2">, spending</span>)
+<span class="cd2">spending[</span><span class="cd2 green">2</span><span class="cd2">] +=</span> <span class="cd2 green">10</span>
+<span class="gold">print</span>(<span class="cd2 red2">'3월 지출 변경 후:'</span><span class="cd2">, spending</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+3월 지출 변경 전: [25, 36, 8, 53, 24, 56]
+3월 지출 변경 후: [25, 36, 18, 53, 24, 56]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="253">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">결과를 보면 세 번째 데이터가 8에서 18로 바뀌었습니다.</p>
+<p class="txt bl">이번에는 5월 지출에 환불받은 2만 원이 포함됐다고 해 봅시다. 그럼 5월 지출에서 2를 빼야 합니다.</p>
+<div class="highlight">
+<pre>spending[<span class="cd2 green">4</span>] <span class="cd2">-=</span> <span class="cd2 green">2</span>
+<span class="gold">print</span>(<span class="cd2 red2">'5월 지출 변경 후:'</span>, spending)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+5월 지출 변경 후: [25, 36, 18, 53, 22, 56]</pre>
+</div>
+<p class="txt bl">리스트의 다섯 번째 요소가 24에서 22로 바뀌었습니다. 이처럼 리스트 안에 있는 개별 요소가 필요할 때는 해당 위치의 인덱스를 활용하면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="254">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_47"><span class="yellow">6.1.3</span> 반복문으로 리스트 다루기</h4>
+<p class="txt bl">이번에는 반복문으로 리스트의 요소를 출력해 보겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">리스트명 사용하기</p>
+<p class="txt bl">반복문의 형식은 <span class="cd">for i in data</span>입니다. <span class="cd">data</span>에는 데이터 묶음이 들어가므로 리스트는 <span class="cd">data</span> 부분에 넣습니다. <span class="cd">spending</span> 리스트를 그대로 <span class="cd">data</span> 위치에 넣고 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="CharOverride-67">for</span> i <span class="blue2">in</span> [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]:
+   <span class="gold">print</span>(i)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+25 
+36 
+8 
+53 
+24
+56</pre>
+</div>
+<p class="txt bl">리스트의 첫 번째 데이터인 25부터 마지막 데이터인 56까지 차례대로 <span class="cd">i</span>에 들어가 <span class="cd">print(i)</span>가 실행됐습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="255">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이제 데이터 묶음이 리스트라는 것을 알았으니 반복문에 데이터를 직접 넣는 대신에 리스트를 넣어도 됩니다. 반복문에서 리스트를 사용하면 보통 변수에 인덱스를 의미하는 <span class="cd">i</span> 대신 리스트의 첫 글자를 따서 넣습니다. 여기서도 <span class="cd">spending</span> 리스트의 앞 글자를 딴 <span class="cd">s</span>를 넣어 <span class="cd">for s in spending</span>로 작성해 보겠습니다.</p>
+<p class="txt bl"><span class="cd">spending</span> 리스트를 다시 만든 다음 반복문에서 리스트를 사용하도록 코드를 바꿔 실행합니다.</p>
+<div class="highlight">
+<pre><span class="cd2">spending =</span> [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="purple">for</span> <span class="cd2">s</span> <span class="blue2">in</span> <span class="cd2">spending</span>:
+    <span class="gold">print</span>(<span class="cd2">s</span>)</pre>
+</div>
+<p class="txt bl">결과가 기존과 동일하게 나옵니다. <span class="cd">spending</span> 리스트에 <span class="cd">[25, 36, 8, 53, 24, 56]</span>이 담겨 있으니 컴퓨터는 <span class="cd">for s in spending</span>과 <span class="cd">for s in [25, 36, 8, 53, 24, 56]</span>이 같다고 인식합니다. 앞으로는 반복문에 데이터를 일일이 넣는 대신 리스트명을 넣어 리스트의 요소에 접근하면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="256">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">인덱스 사용하기</p>
+<p class="txt bl">이번에는 인덱스로 리스트의 요소를 출력해 보겠습니다. <span class="cd">spending</span> 리스트의 요소는 <span class="cd">spending[0]</span>, <span class="cd">spending[1]… spending[5]</span>로 접근할 수 있습니다. 반복되는 부분과 변하는 부분이 보이나요? <span class="cd">spending[]</span>은 6번 반복되고 대괄호 안의 숫자인 인덱스만 0부터 5까지 1씩 증가합니다. 따라서 반복문에서 배운 <span class="cd">range()</span>를 사용해 다음처럼 코드를 작성할 수 있습니다.</p>
+<div class="highlight">
+<pre>spending = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="purple">for</span> <span class="cd2">i</span> <span class="blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">6</span><span class="cd2">)</span>:
+    <span class="gold">print</span>(<span class="cd2">spending[i]</span>)</pre>
+</div>
+<p class="txt bl">리스트를 반복문에서 활용할 때 <span class="cd">for a in</span> 리스트처럼 리스트를 반복문에 직접 넣을 수도 있고(이때 <span class="cd">a</span>는 리스트명의 첫 글자), <span class="cd">for i in range()</span>처럼 인덱스를 활용할 수도 있습니다. 선택한 방법에 따라 반복해서 실행되는 코드가 조금 달라집니다.</p>
+<p class="txt bl">이번에는 좀 더 정보를 보여 줄 수 있게 ‘1월 지출은 25’ 형태로 출력해 보겠습니다. 먼저 월은 1부터 6까지 1씩 증가합니다. 0부터 5까지 증가하는 인덱스보다 월이 항상 1만큼 큽니다. 따라서 출력 부분은 <span class="cd">print(i, '월 지출은')</span>이 아닌 <span class="cd">print(i + 1, '월 지출은')</span>이 돼야 합니다. 이를 기존 반복문에 추가해 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">6</span>):
+    <span class="gold">print</span>(<span class="cd2">i +</span> <span class="cd2 green">1</span><span class="cd2">,</span><span class="cd2 red2">'월 지출은'</span><span class="cd2">,</span> spending[i])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+1 월 지출은 25 
+2 월 지출은 36 
+3 월 지출은 8 
+4 월 지출은 53 
+5 월 지출은 24
+6 월 지출은 56</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="257">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이처럼 인덱스를 활용할 때는 인덱스가 0부터 시작한다는 점을 유의해야 합니다.</p>
+<p class="txt bl">이번에는 반복문에서 리스트를 사용할 때 입문자가 자주 겪는 또 다른 오류 상황을 살펴보겠습니다. 리스트를 사용하다 보면 리스트의 요소 개수를 헷갈릴 때가 종종 있습니다. 다음처럼 <span class="cd">range()</span> 안의 숫자를 7로 바꾸고 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="cd2 green">7</span>):
+    <span class="gold">print</span>(i + <span class="green">1</span>,<span class="red2">'월 지출은'</span>, spending[i])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+1 월 지출은 25 
+2 월 지출은 36 
+3 월 지출은 8 
+4 월 지출은 53 
+5 월 지출은 24 
+6 월 지출은 56 
+<span class="red2">-------------------------------------------------------------------------</span> 
+      1 for i in range(7): 
+----&gt; 2 print(i + 1, '월 지출은', spending[i])
+<span class="red2">IndexError</span>: list index out of range</pre>
+</div>
+<p class="txt bl"><span class="cd">i</span>가 0부터 5일 때까지 정상적으로 출력되다가 6이 될 때 <span class="cd">IndexError</span>가 발생합니다. 인덱스는 6개인데 이를 초과한 7로 범위를 설정해서 그렇습니다. 지금처럼 코드가 짧을 때는 리스트 길이를 기억해 이런 오류가 거의 발생하지 않습니다. 하지만 리스트가 여러 개거나 데이터가 많으면 리스트 길이를 일일이 기억하기가 어렵습니다. 이럴 때 앞에서 나온 <span class="cd">len()</span>을 사용하면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="258">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">리스트의 인덱스는 항상 0부터 시작하기 때문에 인덱스 범위는 0~(리스트 길이 - 1)입니다. <span class="cd">spending</span> 리스트도 길이는 6이지만, 인덱스는 0부터 5까지입니다. 이를 <span class="cd">range()</span> 명령어에 활용할 수 있습니다. <span class="cd">range(종료 숫자)</span>는 자동으로 0부터 (종료 숫자 - 1) 사이의 연속된 숫자를 의미했죠. 이때 종료 숫자 대신 리스트 길이를 넣으면 어떻게 될까요? 코드로 작성해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="cd2 gold">len</span><span class="cd2">(spending)</span>):
+    <span class="gold">print</span>(i + <span class="green">1</span>, <span class="red2">'월 지출은'</span>, spending[i], <span class="cd2">end=</span><span class="red2">', '</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+1 월 지출은 25, 2 월 지출은 36, 3 월 지출은 8, 4 월 지출은 53, 5 월 지출은 24, 6 월 지출은 56</pre>
+</div>
+<p class="txt bl">인덱스로 범위를 정했을 때와 마찬가지로 1월부터 6월까지 지출이 출력됩니다. 이처럼 리스트의 첫 인덱스부터 마지막 인덱스까지 반복 범위를 설정하고 싶을 때, 인덱스를 입력하지 않고도 <span class="cd">range(len(리스트명))</span>으로 리스트 안의 모든 데이터에 접근할 수 있습니다.</p>
+<p class="txt bl">새로운 리스트를 만들어 봅시다. 앞에서처럼 좋아하는 음식을 순서대로 저장한 <span class="cd">food</span> 리스트를 만듭니다. 이 리스트에서 가장 좋아하는 음식, 세 번째로 좋아하는 음식, 가장 덜 좋아하는 음식을 출력해 봅시다. 직접 코드를 작성하고 책과 비교해 보세요. 앞에서 배운 내용이니 작성하기 어렵지 않을 겁니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="259">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre>food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'떡볶이'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'파스타'</span>]
+<span class="green"># 가장 좋아하는 음식은?</span>
+<span class="gold">print</span>(food<span class="cd2">[</span><span class="cd2 green">0</span><span class="cd2">]</span>)
+<span class="green"># 세 번째로 좋아하는 음식은?</span>
+<span class="gold">print</span>(food<span class="cd2">[</span><span class="cd2 green">2</span><span class="cd2">]</span>)
+<span class="green"># 가장 덜 좋아하는 음식은?</span>
+<span class="gold">print</span>(food<span class="cd2">[</span><span class="cd2 green">4</span><span class="cd2">]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+피자
+떡볶이
+파스타</pre>
+</div>
+<p class="txt bl">가장 좋아하는 음식은 <span class="cd">food[0]</span>을, 세 번째로 좋아하는 음식은 <span class="cd">food[2]</span>를, 가장 덜 좋아하는 음식은 마지막 데이터이므로 <span class="cd">food[4]</span>를 출력합니다.</p>
+<p class="txt bl">그런데 리스트의 마지막 인덱스는 (리스트 길이 - 1)이었죠. 그렇다면 가장 덜 좋아하는 음식을 출력할 때 인덱스를 직접 넣는 대신 (리스트 길이 - 1)로 바꿔 봅시다.</p>
+<div class="highlight">
+<pre><span class="green"># 가장 덜 좋아하는 음식은?</span>
+<span class="gold">print</span>(food<span class="cd2">[</span><span class="cd2 gold">len</span><span class="cd2">(food) -</span> <span class="cd2 green">1</span><span class="cd2">]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+파스타</pre>
+</div>
+<p class="txt bl">이처럼 인덱스 위치에 식이 들어가도 됩니다. 인덱스 역시 숫자이므로 연산이 가능한 수식이 들어가도 정상적으로 실행됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="260">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">음수 인덱스 사용하기</p>
+<p class="txt bl">지금까지는 인덱스가 모두 양수였습니다. 양수 인덱스는 왼쪽부터 시작해 오른쪽으로 1씩 증가합니다. 그런데 인덱스에 음수도 들어갈 수 있습니다. 음수 인덱스는 오른쪽에서 시작해 왼쪽으로 1씩 감소합니다.</p>
+<div class="ind12"><img alt="" class="w70" src="https://thebook.io/img/080251/226.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">리스트 위에 있는 숫자는 지금까지 배운 양수 인덱스입니다. 리스트 아래 있는 숫자를 봅시다. 가장 오른쪽 숫자는 -1이고, 왼쪽으로 갈수록 1씩 감소해 -2, -3, -4, -5가 됩니다.</p>
+<p class="txt bl">코드로 확인해 봅시다. 가장 덜 좋아하는 음식은 <span class="cd">food[4]</span>였으니 음수 인덱스로 <span class="cd">food[-1]</span>을 출력하면 됩니다.</p>
+<div class="highlight">
+<pre><span class="green"># 가장 덜 좋아하는 음식은?</span>
+<span class="gold">print</span>(food[<span class="cd2 green">-1</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+파스타</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="261">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">food</span> 리스트의 마지막에 있는 파스타가 출력됩니다. 두 번째로 덜 좋아하는 음식과 세 번째로 덜 좋아하는 음식도 출력해 봅시다.</p>
+<div class="highlight">
+<pre><span class="green"># 두 번째로 덜 좋아하는 음식?</span>
+<span class="gold">print</span>(food[<span class="cd2 green">-2</span>])
+<span class="green"># 세 번째로 덜 좋아하는 음식?</span>
+<span class="gold">print</span>(food[<span class="cd2 green">-3</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+스테이크
+떡볶이</pre>
+</div>
+<p class="txt bl"><span class="cd">food[-2]</span>는 뒤에서 두 번째 데이터를 의미하므로 ‘스테이크’가 출력되고, <span class="cd">food[-3]</span>은 뒤에서 세 번째 데이터인 ‘떡볶이’를 출력합니다. 지금은 음수 인덱스의 유용성이 와닿지 않겠지만, 방대한 데이터를 분석할 때 큰 위력을 발휘하니 잘 알아 두기 바랍니다.</p>
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 음수 인덱스는 왜 0부터 시작하지 않을까요?</p>
+<p class="txt bl">인덱스에 0을 2개나 쓸 수 없기 때문입니다. 음수 인덱스가 0부터 시작한다면 첫 번째 데이터와 마지막 데이터 모두 인덱스가 0이 되겠죠. 그러면 컴퓨터는 인덱스 0이 어떤 데이터를 의미하는지 헷갈릴 수밖에 없습니다. 그래서 왼쪽에서 시작하는 인덱스는 0부터, 오른쪽에서 시작하는 음수 인덱스는 -1부터 시작합니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="262">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_48"><span class="yellow">6.1.4</span> 리스트에 요소 추가하고 삭제하기</h4>
+<p class="txt bl">리스트에 요소를 추가하고 삭제해 보겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">요소 추가하기</p>
+<p class="txt bl">추가하는 방법부터 살펴봅시다. 리스트에 요소를 추가할 때는 <span class="cd">append()</span> 명령어를 사용합니다. <span class="cd">append()</span> 명령어는 다음과 같이 사용합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>리스트명.append(데이터)</pre>
+</div>
+<p class="txt bl">명령어 형식도 일종의 규칙이므로 잘 기억해 두세요. ‘<span class="cd">food</span> 리스트에 ‘감자칩’을 추가하라’고 하고 싶으면 <span class="cd">food.append('감자칩')</span>을 실행하면 됩니다. 참고로 append는 ‘덧붙이다’는 의미가 있으니 단어의 의미를 생각하면 어떤 일을 하는지 이해하기 쉽습니다.</p>
+<div class="ind12"><img alt="" class="h30" src="https://thebook.io/img/080251/228.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">바로 확인해 봅시다.</p>
+<div class="highlight">
+<pre>food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'떡볶이'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'파스타'</span>]
+<span class="cd2">food.append(</span><span class="cd2 red2">'감자칩'</span><span class="cd2">)</span>
+<span class="gold">print</span>(food)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['피자', '치킨', '떡볶이', '스테이크', '파스타', '감자칩']</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="263">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">food</span>는 처음에 데이터가 5개인 리스트였습니다. <span class="cd">food.append('감자칩')</span>을 실행하고 나면 리스트의 맨 뒤에 감자칩이 추가되어 데이터는 6개가 됩니다. 데이터를 하나 더 추가해 볼까요? ‘카레’를 추가해 봅시다.</p>
+<div class="highlight">
+<pre>food.append(<span class="cd2 red2">'카레'</span>)
+<span class="gold">print</span>(food)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['피자', '치킨', '떡볶이', '스테이크', '파스타', '감자칩', '카레']</pre>
+</div>
+<p class="txt bl"><span class="cd">food</span> 리스트 맨 뒤에 카레가 추가됐습니다. 이처럼 <span class="cd">append()</span> 명령어는 리스트의 맨 뒤에 데이터를 추가합니다. <span class="cd">append()</span>가 실행될 때 컴퓨터 내부에서는 다음과 같은 일이 일어납니다.</p>
+<div class="ind12"><img alt="" class="w100" src="https://thebook.io/img/080251/229.jpg"/></div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="264">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">리스트에 데이터가 추가되면 리스트 길이도 늘어나고 인덱스도 추가됩니다. 또한, 빈 리스트를 만들어 데이터를 추가할 수도 있습니다. 다음 코드를 봅시다.</p>
+<div class="highlight">
+<pre>abc = [] <span class="green"># 빈 리스트 만들기</span>
+abc.append(<span class="green">24</span>)
+abc.append(<span class="green">38</span>)
+abc.append(<span class="green">19</span>)
+abc.append(<span class="green">40</span>)
+<span class="gold">print</span>(abc)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[24, 38, 19, 40]</pre>
+</div>
+<p class="txt bl"><span class="cd">abc = []</span>처럼 리스트명에 아무런 데이터 없이 대괄호만 넣으면 빈 리스트가 생성됩니다. 그다음 <span class="cd">append()</span>로 빈 리스트에 24, 38, 18, 40을 순서대로 추가하면 됩니다.</p>
+<p class="txt bl">직접 값을 입력받아 리스트에 넣을 수도 있습니다. 해야 할 일을 입력받아 <span class="cd">to_do</span> 리스트에 저장해 봅시다. 어떤 값이 입력될지 모르니 데이터가 없는 빈 리스트를 만듭니다. <span class="cd">input()</span>으로 해야 할 일을 입력받고 <span class="cd">append()</span>로 리스트에 추가합니다.</p>
+<div class="highlight">
+<pre>to_do = []
+task = <span class="gold">input</span>(<span class="red2">'해야 할 일을 입력해 주세요. --&gt; '</span>)
+to_do.append(task)
+<span class="gold">print</span>(to_do)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+해야 할 일을 입력해 주세요. --&gt; <span class="cd2">파이썬 공부하기</span>
+['파이썬 공부하기']</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="265">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">to_do</span>라는 이름으로 빈 리스트를 만들고 해야 할 일을 입력받아 변수 <span class="cd">task</span>에 저장합니다. 그리고 <span class="cd">task</span>를 <span class="cd">append()</span> 명령어로 <span class="cd">to_do</span>에 추가합니다(<span class="cd">to_do</span>와 <span class="cd">append()</span> 사이에 도트(<span class="cd">.</span>)가 있음에 유의하세요). 이때 <span class="cd">task</span> 변수를 사용하지 않고 바로 <span class="cd">input()</span>으로 입력받은 내용을 <span class="cd">append()</span> 명령어에 넣어도 됩니다.</p>
+<div class="highlight">
+<pre>to_do = []
+<span class="cd2">to_do.append(</span><span class="gold">input</span>(<span class="red2">'해야 할 일을 입력해 주세요</span><span class="red2">. --&gt; '</span>)<span class="cd2">)</span>
+<span class="gold">print</span>(to_do)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+해야 할 일을 입력해 주세요. --&gt; <span class="cd2">파이썬 공부하기</span>
+['파이썬 공부하기']</pre>
+</div>
+<p class="txt bl">이번에는 해야 할 일 5개를 입력받아 <span class="cd">to_do</span> 리스트에 추가해 보겠습니다. 입력을 5번 반복해야 하니 반복문을 사용합니다.</p>
+<div class="highlight">
+<pre>to_do = []
+<span class="gold">print</span>(<span class="cd2 red2">'해야 할 일을 차례대로 입력해 주세요.'</span>)
+<span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">5</span><span class="cd2">):</span>
+    <span class="cd2">to_do.append(</span><span class="cd2 gold">input</span><span class="cd2">())</span>
+<span class="gold">print</span>(to_do)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+해야 할 일을 차례대로 입력해 주세요. 
+<span class="cd2">생일선물 사기</span> 
+<span class="cd2">인강 듣기</span>
+<span class="cd2">파이썬 6장 공부하기</span> 
+<span class="cd2">책 읽기</span> 
+<span class="cd2">영단어 외우기</span>
+['생일선물 사기', '인강 듣기', '파이썬 6장 공부하기', '책 읽기', '영단어 외우기']</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="266">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">먼저 빈 리스트를 만듭니다. 리스트를 만들지 않은 채 데이터를 추가하면 오류가 발생합니다(물론 기존 셀의 결괏값이 남아 있는 경우에는 오류가 발생하지 않지만, 단독 코드일 때는 오류가 발생합니다). <span class="cd">to_do.append(input())</span>으로 입력받은 값을 변수에 따로 저장하지 않고 바로 리스트에 추가합니다. 괄호 안의 <span class="cd">input()</span>을 먼저 실행하고 나서 <span class="cd">to_do.append()</span>를 실행하므로 입력받은 값을 바로 <span class="cd">to_do</span> 리스트에 추가할 수 있습니다. 입력을 5번 받아야 하므로 이 코드를 반복문 안에 넣습니다.</p>
+<p class="txt bl">반복문 안에 <span class="cd">print()</span> 명령어를 넣어 반복문이 진행되는 동안 리스트가 어떻게 변하는지 확인해 보세요.</p>
+<div class="highlight">
+<pre>to_do = []
+<span class="gold">print</span>(<span class="red2">'해야 할 일을 차례대로 입력해 주세요.'</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">5</span>):
+    to_do.append(<span class="gold">input</span>())
+    <span class="cd2 gold">print</span><span class="cd2">(to_do)</span></pre>
+</div>
+<p class="txt bl">반복할 때마다 리스트 맨 뒤에 입력한 데이터가 추가될 겁니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="267">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">요소 삭제하기</p>
+<p class="txt bl">리스트에 있는 데이터를 삭제하는 방법도 배워 보겠습니다. 리스트의 데이터를 삭제하는 방법은 크게 두 가지가 있습니다. 먼저 리스트에 추가할 때처럼 리스트명 뒤에 <span class="cd">remove(데이터)</span>를 붙여 리스트의 데이터를 삭제할 수 있습니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>리스트명.remove(데이터)</pre>
+</div>
+<p class="txt bl"><span class="cd">food</span> 리스트에서 떡볶이만 삭제해 봅시다.</p>
+<div class="highlight">
+<pre>food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'떡볶이'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'파스타'</span>]
+<span class="cd2">food.remove(</span><span class="cd2 red2">'떡볶이'</span><span class="cd2">)</span>
+<span class="gold">print</span>(food)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['피자', '치킨', '스테이크', '파스타']</pre>
+</div>
+<p class="txt bl">이처럼 삭제할 데이터를 <span class="cd">remove()</span>를 사용해 직접 삭제합니다. 또는 인덱스를 사용해서 데이터를 삭제할 수 있습니다. 형식은 다음과 같습니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre><span class="blue2">del</span> 리스트명[인덱스]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="268">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">food</span> 리스트에서 가장 마지막에 있는 음식을 지워 볼까요?</p>
+<div class="highlight">
+<pre>food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'떡볶이'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'파스타'</span>]
+<span class="cd2 purple">del</span> <span class="cd2">food[</span><span class="cd2 green">-1</span><span class="cd2">]</span>
+<span class="gold">print</span>(food)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['피자', '치킨', '떡볶이', '스테이크']</pre>
+</div>
+<p class="txt bl">음수 인덱스로 가장 마지막에 있는 파스타를 삭제했습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="269">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_49"><span class="yellow">6.1.5</span> 리스트에서 필요한 요소만 꺼내기</h4>
+<p class="txt bl">지금까지 사용한 리스트는 매우 간단했습니다. 그러나 리스트에 더 많은 요소를 담을 수도 있습니다. 많은 요소가 있으면 때때로 필요한 부분과 필요하지 않은 부분이 섞일 수 있습니다. 그래서 원하는 정보를 얻으려면 필요한 부분만 꺼내 쓸 수 있어야 합니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">리스트 슬라이싱하기</p>
+<p class="txt bl">연, 월, 일, 시, 분을 <span class="cd">[2020, 4, 5, 11, 30]</span> 형태로 저장한 리스트가 있다고 가정해 봅시다. 이 리스트에서 월, 일만 필요하다면 인덱스 1과 2의 데이터만 추출해야 합니다. 또는 날짜를 제외한 시간 데이터만 필요한 경우에는 마지막 요소 2개만 골라내야죠. 앞서 사용한 <span class="cd">food</span> 리스트에서도 가장 좋아하는 음식 3개나 가장 덜 좋아하는 음식 2개 등 원하는 부분만 추출해야 할 수도 있습니다.</p>
+<p class="txt bl">이처럼 원하는 부분만 골라내는 것을 <span class="dm">리스트 슬라이싱</span>이라고 합니다. 슬라이싱<span class="txts gray">(slicing)</span>은 (얇게) 자르는 것을 말합니다. 리스트를 자르는 게 어떤 건지 이해하기 쉽게 예를 들어 보겠습니다. 보통 ‘1일부터 5일까지’를 간략하게 ‘1~5일’로 물결표(~)를 써서 나타냅니다. 리스트 슬라이싱도 이와 비슷합니다. ‘여기에서 저기까지 데이터를 뽑아줘’라는 뜻입니다. ‘여기’와 ‘저기’는 데이터의 위치를 나타내니 인덱스가 필요하겠죠. 그럼 ‘인덱스 a에서 b까지 데이터를 뽑아줘’라고 표현할 수 있습니다. 물결표를 사용해 더 간단히 나타내면 ‘인덱스 a~b’, 더 줄여서 [a~b]라고 표현할 수 있습니다. 다만, 파이썬에서는 물결표 대신 콜론(:)을 사용합니다. 예를 들어, ‘<span class="cd">food</span> 리스트의 인덱스 0부터 2까지’를 표현하면 <span class="cd">food[0:3]</span>이 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="270">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">잠깐만요! 왜 <span class="cd">food[0:2]</span>가 아닌 <span class="cd">food[0:3]</span>일까요? <span class="cd">range(a, b)</span> 명령어를 생각해 보세요. <span class="cd">range(a, b)</span> 명령어처럼 <span class="cd">리스트명[a:b]</span>에서도 <span class="cd">a</span>는 시작 위치, <span class="cd">b</span>는 종료 위치입니다. <span class="cd">b</span>까지 실행되는 것이 아니라 <span class="cd">b-1</span>까지만 실행됩니다. 실제로는 <span class="cd">b</span>가 아닌 <span class="cd">b-1</span> 인덱스까지만 포함하는 것이죠.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/233.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">코드로 확인해 봅시다.</p>
+<div class="highlight">
+<pre>food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'떡볶이'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'파스타'</span>]
+<span class="gold">print</span>(food<span class="cd2">[</span><span class="cd2 green">0</span><span class="cd2">:</span><span class="cd2 green">3</span><span class="cd2">]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['피자', '치킨', '떡볶이']</pre>
+</div>
+<p class="txt bl"><span class="cd">food[0:3]</span>은 <span class="cd">food[0]</span>부터 f<span class="cd">ood[2]</span>까지를 의미하므로 <span class="cd">food</span> 리스트에서 앞부터 3개의 데이터, 즉 피자부터 떡볶이까지만 출력됩니다.</p>
+<a id="section_1"></a>
+<p class="txt bl">이번에는 떡볶이부터 스테이크까지 출력하는 코드를 작성해 볼까요? 떡볶이는 <span class="cd">food[2]</span>에 있고, 스테이크는 <span class="cd">food[3]</span>에 있으니 <span class="cd">food[2:4]</span>로 슬라이싱하면 됩니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(food[<span class="cd2 green">2</span>:<span class="cd2 green">4</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['떡볶이', '스테이크']</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="271">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">리스트 슬라이싱할 때 <span class="cd">range()</span>와 비슷해서 시작 인덱스가 0이면 생략할 수 있습니다. 따라서 <span class="cd">food[0:3]</span>에서 0을 생략하고 <span class="cd">food[:3]</span>으로도 사용합니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(food[:<span class="cd2 green">3</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['피자', '치킨', '떡볶이']</pre>
+</div>
+<p class="txt bl"><span class="cd">food[0:3]</span>일 때와 같은 결과가 나옵니다.</p>
+<p class="txt bl">그런데 리스트 슬라이싱에서는 <span class="cd">range()</span>와 달리 종료 인덱스도 생략할 수 있습니다. 종료 인덱스를 생략하면 시작 위치부터 리스트 끝까지 데이터를 슬라이싱합니다. 가장 덜 좋아하는 음식 2개를 추출하는 코드를 작성해 보겠습니다. <span class="cd">food</span> 리스트의 맨 뒤 데이터 2개를 선택하면 되겠죠. 뒤에서 세는 것이 편하니 음수 인덱스를 사용해 봅시다. 시작 위치는 뒤에서 두 번째이므로 <span class="cd">[-2]</span>가 되고 종료 인덱스는 생략해도 되니 <span class="cd">food[-2:]</span>면 됩니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(food[<span class="cd2 green">-2</span>:])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['스테이크', '파스타']</pre>
+</div>
+<p class="txt bl">뒤에서 두 번째 데이터인 스테이크부터 마지막 데이터인 파스타까지 출력됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="272">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">리스트 슬라이싱의 생략 규칙을 정리하면 다음과 같습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/235_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/235_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">앞에서 사용한 상반기 지출 리스트로 리스트 슬라이싱해 봅시다. 1월부터 3월까지, 3월부터 5월까지, 5월부터 6월까지 지출을 각각 출력해 봅시다.</p>
+<div class="highlight">
+<pre>spending_6mon = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="gold">print</span>(<span class="cd2 red2">'1월부터 3월 지출:'</span><span class="cd2">, spending_6mon[:</span><span class="cd2 green">3</span><span class="cd2">]</span>)
+<span class="gold">print</span>(<span class="cd2 red2">'3월부터 5월 지출:'</span><span class="cd2">, spending_6mon[</span><span class="cd2 green">2</span><span class="cd2">:</span><span class="cd2 green">5</span><span class="cd2">]</span>)
+<span class="gold">print</span>(<span class="cd2 red2">'5월부터 6월 지출:'</span><span class="cd2">, spending_6mon[</span><span class="cd2 green">-2</span><span class="cd2">:]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+1월부터 3월 지출: [25, 36, 8] 
+3월부터 5월 지출: [8, 53, 24]
+5월부터 6월 지출: [24, 56]</pre>
+</div>
+<p class="txt bl">1~3월까지 지출은 <span class="cd">spending_6mon</span> 리스트의 인덱스 <span class="cd">[0]</span>부터 <span class="cd">[2]</span>까지이므로 <span class="cd">spending_6mon[0:3]</span>이 됩니다. 시작 인덱스가 0이라서 이를 생략하고 <span class="cd">spending_6mon[:3]</span>으로 작성합니다. 3~5월 지출액만 슬라이싱하려면 리스트의 인덱스 <span class="cd">[2]</span>부터 <span class="cd">[4]</span>까지 추출하면 됩니다. 따라서 <span class="cd">spending_6mon[2:5]</span>가 됩니다. 5~6월은 <span class="cd">spending_6mon</span> 리스트의 뒤에서 데이터 2개를 뽑는 것과 같습니다. 5월은 뒤에서 두 번째 데이터이므로 음수 인덱스를 사용하고, 종료 인덱스를 생략하면 <span class="cd">spending_6mon[-2:]</span>가 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="273">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">문자열 슬라이싱하기</p>
+<p class="txt bl">문자열에서도 리스트와 마찬가지 슬라이싱할 수 있습니다. 문자열은 어떻게 슬라이싱할까요? 한 번 알아봅시다.</p>
+<p class="txt bl">문자열도 리스트처럼 글자에 번호를 붙일 수 있습니다. ‘나는야 우주최강’이라는 문자열에 번호를 붙이면 다음과 같습니다. 이때 띄어쓰기로 생긴 공백도 문자열에 포함되므로 번호를 붙입니다.</p>
+<div class="ind12"><img alt="" class="w60" src="https://thebook.io/img/080251/236_1.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">문자열 슬라이싱은 리스트와 형식이 같습니다. 문자열이 <span class="cd">a</span> 변수에 저장되어 있을 때 앞의 세 글자인 ‘나는야’만 슬라이싱해 봅시다. 형식이 같으니 <span class="cd">a[0:3]</span> 또는 <span class="cd">a[:3]</span>이면 되겠죠? 코드로 확인해 봅시다.</p>
+<div class="highlight">
+<pre>a = <span class="red2">'나는야 우주최강'</span>
+<span class="gold">print</span>(a[:<span class="green">3</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+나는야</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="274">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">3번째 글자까지 슬라이싱이 잘 됐습니다. 이번에는 ‘우주최강’을 슬라이싱해 봅시다. 뒤에서 네 글자만 골라내면 됩니다. 뒤에서부터 세므로 음수 인덱스를 사용해 <span class="cd">a[-4:]</span>로 작성하면 됩니다.</p>
+<div class="ind12"><img alt="" class="w60" src="https://thebook.io/img/080251/236_2.jpg"/></div>
+<p class="txts"> </p>
+<div class="highlight">
+<pre><span class="gold">print</span>(a[<span class="cd2 green">-4</span>:])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+우주최강</pre>
+</div>
+<p class="txt bl">이번에는 ‘우주’만 뽑아봅시다. 어떻게 하면 될까요? 책을 보고 그대로 작성하기 전에 스스로 생각해 봅시다! 그다음 코드를 작성하고 자신의 생각이 맞는지 책을 확인하세요.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(a[<span class="green">-4</span>:<span class="cd2 green">-2</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+우주</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="275">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">책처럼 음수 인덱스를 사용해도 되고, 양수 인덱스를 사용해도 됩니다. 바로 앞에 음수 인덱스가 나와서 그대로 음수 인덱스를 사용했습니다. 리스트 슬라이싱을 사용할 때 <span class="cd">리스트[a:b]</span>에서 <span class="cd">[b]</span>는 종료 인덱스이므로 <span class="cd">[b-1]</span>까지 슬라이싱됩니다. 따라서 ‘우주’를 출력하려면 <span class="cd">a[-4:-2]</span>로 작성해야 합니다.</p>
+<p class="txt bl">다른 문자열로 확인해 봅시다. ‘2021-04-15’라는 날짜를 <span class="cd">date</span> 변수에 넣은 뒤 연도, 월, 일을 각각 슬라이싱해 봅시다.</p>
+<div class="highlight">
+<pre>date = <span class="red2">'2021-04-15'</span>
+<span class="gold">print</span>(<span class="red2">'연도:'</span>, date[:<span class="green">4</span>])
+<span class="gold">print</span>(<span class="red2">'월:'</span>, date[<span class="green">5</span>:<span class="green">7</span>])
+<span class="gold">print</span>(<span class="red2">'일:'</span>, date[<span class="green">-2</span>:])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+연도: 2021 
+월: 04
+일: 15</pre>
+</div>
+<p class="txt bl">글자 위치에 맞춰 양수든 음수든 편한 쪽을 사용하면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="276">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">split()으로 문자열 나누기</p>
+<p class="txt bl">문자열을 슬라이싱할 때 인덱스를 사용하면 간단하기는 하지만, 인덱스를 일일이 세야 하기 때문에 문자열이 길어지면 결괏값이 잘못 나올 수도 있습니다. 이럴 때 유용한 <span class="cd">split()</span> 명령어가 있습니다. split에는 ‘나누다, 찢다’는 의미가 있습니다. 단어의 의미처럼 <span class="cd">split()</span>은 지정한 글자를 기준으로 좌우로 문자를 나눕니다. 형식은 리스트에서 명령어를 사용할 때와 비슷합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>문자열.split()</pre>
+</div>
+<p class="txt bl">다음 코드를 실행해 봅시다.</p>
+<div class="highlight">
+<pre>a = <span class="red2">'나는야 우주최강'</span>
+<span class="gold">print</span>(<span class="cd2">a.split()</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['나는야', '우주최강']</pre>
+</div>
+<p class="txt bl"><span class="cd">split()</span>의 소괄호 안에 아무것도 지정하지 않으면 공백을 기준으로 나눕니다. 그런데 실행결과가 리스트로 나옵니다. <span class="cd">split()</span> 명령어를 사용하면 데이터가 1개에서 여러 개로 나뉘므로 데이터 묶음인 리스트로 출력합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="277">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">a.split()</span>은 결괏값이 리스트이므로 인덱스를 붙일 수 있습니다. 확인해 봅시다.</p>
+<div class="highlight">
+<pre>a = <span class="red2">'나는야 우주최강'</span>
+<span class="gold">print</span>(a.split())
+<span class="cd2 gold">print</span><span class="cd2">(a.split()[</span><span class="cd2 green">0</span><span class="cd2">])</span>
+<span class="cd2 gold">print</span><span class="cd2">(a.split()[</span><span class="cd2 green">1</span><span class="cd2">])</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['나는야', '우주최강'] 
+나는야
+우주최강</pre>
+</div>
+<p class="txt bl">이처럼 <span class="cd">split()</span>을 실행한 결괏값에 인덱스로 접근할 수 있습니다.</p>
+<p class="txt bl">날짜가 들어 있는 <span class="cd">date</span> 변수도 <span class="cd">split()</span>으로 나눠 봅시다. <span class="cd">date</span>에는 공백이 없지만, 그 대신 하이픈(<span class="cd">-</span>)이 있으니 하이픈을 기준으로 나눠 보겠습니다. 나누는 글자를 지정하고 싶을 때는 <span class="cd">split()</span> 명령어 안에 넣으면 됩니다. 하이픈은 문자열이므로 양옆을 작은따옴표로 감싸야 합니다.</p>
+<div class="highlight">
+<pre>date = <span class="red2">'2021-04-15'</span>
+<span class="gold">print</span>(<span class="cd2">date.split(</span><span class="red2">'-'</span><span class="cd2">)</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['2021', '04', '15']</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="278">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">date</span>에는 하이픈(<span class="cd">-</span>)이 2개 있어서 하이픈을 기준으로 나누면 세 부분으로 나뉩니다. 공백을 기준으로 나눴을 때처럼 하이픈은 사라지고 연, 월, 일 숫자만 결과 리스트에 들어갑니다.</p>
+<p class="txt bl">이번에는 인덱스를 사용해 연, 월, 일을 각각 출력해 봅시다.</p>
+<div class="highlight">
+<pre>date = <span class="red2">'2021-04-15'</span>
+<span class="gold">print</span>(date.split(<span class="red2">'-'</span>)<span class="cd2">[</span><span class="cd2 green">0</span><span class="cd2">]</span>)
+<span class="cd2 gold">print</span><span class="cd2">(date.split(</span><span class="cd2 red2">'-'</span><span class="cd2">)[</span><span class="cd2 green">1</span><span class="cd2">])</span>
+<span class="cd2 gold">print</span><span class="cd2">(date.split(</span><span class="cd2 red2">'-'</span><span class="cd2">)[</span><span class="cd2 green">2</span><span class="cd2">])</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+2021 
+04
+15</pre>
+</div>
+<p class="txt bl">코드가 중복되긴 하지만, 인덱스를 일일이 세지 않아도 돼서 편합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="279">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_50"><span class="yellow">6.1.6</span> 다양한 리스트 명령어 사용하기</h4>
+<p class="txt bl">리스트에는 정말 많은 기능이 있습니다. 이 책에서 전부 배우면 좋겠지만, 시작 단계에서 너무 많은 지식을 배우면 오히려 지칠 뿐입니다. 그래서 여기서는 몇 가지 기능만 간단히 짚어보겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">정렬하기</p>
+<p class="txt bl">리스트에 들어 있는 데이터를 일정한 기준에 따라 정렬할 수 있는데, 이때 명령어 <span class="cd">sort()</span>를 사용합니다. 사용법은 <span class="cd">append()</span>와 같습니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>리스트명.sort()</pre>
+</div>
+<p class="txt bl">예를 들어 <span class="cd">food</span> 리스트를 정렬하고 싶다면 <span class="cd">food.sort()</span>라고 하면 됩니다.</p>
+<div class="highlight">
+<pre>food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'된장찌개'</span>, <span class="red2">'바나나'</span>, <span class="red2">'파스타'</span>, <span class="red2">'감자칩'</span>]
+food.sort()
+<span class="gold">print</span>(<span class="red2">'정렬 후:'</span>, food)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+정렬 후: ['감자칩', '된장찌개', '바나나', '스테이크', '치킨', '파스타', '피자']</pre>
+</div>
+<p class="txt bl"><span class="cd">food</span> 리스트에 데이터 7개를 넣고 <span class="cd">food.sort()</span>로 정렬하니 맨 뒤에 있던 감자칩이 첫 번째 데이터가 됐습니다. <span class="cd">sort()</span> 명령어를 사용할 때 아무것도 지정하지 않으면 이처럼 오름차순으로 데이터를 정렬합니다. 여기서는 한글의 가나다순으로 데이터를 정렬했습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="280">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">반대로 내림차순으로 정렬하려면 <span class="cd">sort()</span> 명령어에 <span class="cd">reverse=True</span> 옵션을 추가하면 됩니다. <span class="cd">reverse</span>는 ‘뒤집다, 반전시키다’ 등의 의미가 있으니 의미를 생각하면 이해하기 쉬울 거예요. 단어 의미 그대로 <span class="cd">reverse=True</span>는 ‘뒤집기=참’으로 보면 됩니다. 그리고 <span class="cd">True</span>는 첫 글자만 대문자임에 유의하세요!</p>
+<p class="txt bl">옵션을 추가하고 실행해 봅시다.</p>
+<div class="highlight">
+<pre>food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'된장찌개'</span>, <span class="red2">'바나나'</span>, <span class="red2">'파스타'</span>, <span class="red2">'감자칩'</span>]
+food.sort(<span class="cd2">reverse=</span><span class="cd2 blue2">True</span>)
+<span class="gold">print</span>(<span class="red2">'정렬 후:'</span>, food)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+정렬 후: ['피자', '파스타', '치킨', '스테이크', '바나나', '된장찌개', '감자칩']</pre>
+</div>
+<p class="txt bl">앞의 실행결과와 반대로 피자가 맨 앞으로 왔습니다. 만약 옵션을 <span class="cd">reverse=False</span>로 하면 어떨까요? ‘뒤집기=거짓’이므로 순서를 반전하지 않겠다는 뜻이 되어 오름차순으로 데이터를 정렬합니다. 그래서 오름차순 정렬일 때는 <span class="cd">reverse</span> 옵션을 생략하고 <span class="cd">food.sort()</span>만 해도 됩니다.</p>
+<p class="txt bl">이번에는 상반기 지출 중 가장 큰 금액 2개를 뽑아 보겠습니다. 배운 내용을 중심으로 생각해 봅시다. 가장 큰 금액과 두 번째로 큰 금액을 찾으면 됩니다. 지출을 큰 금액부터 작은 금액순으로(내림차순) 정렬한 후 앞의 2개 데이터 뽑아내면 될 것 같습니다. 코드를 작성해 봅시다.</p>
+<div class="highlight">
+<pre>spending_6mon = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="cd2">spending_6mon.sort(reverse=</span><span class="cd2 blue2">True</span><span class="cd2">)</span>
+<span class="gold">print</span>(spending_6mon[<span class="green">0</span>:<span class="green">2</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[56, 53]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="281">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">내림차순으로 정렬해야 하니 <span class="cd">sort()</span> 명령어에 <span class="cd">reverse=True</span> 옵션을 추가합니다. 그런 다음 앞의 2개 데이터를 슬라이싱하면 가장 큰 금액 2개가 나옵니다.</p>
+<p class="txt bl">그럼 가장 적은 금액 2개도 알아볼까요? 내림차순으로 정렬했으므로 가장 적은 금액은 리스트의 맨 뒤에 있을 겁니다. 뒤에서 두 번째 인덱스인 <span class="cd">[-2]</span>부터 끝까지 슬라이싱해 봅시다.</p>
+<div class="highlight">
+<pre>spending_6mon = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+spending_6mon.sort(reverse=<span class="blue2">True</span>)
+<span class="gold">print</span>(spending_6mon[<span class="cd2 green">-2</span>:])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[24, 8]</pre>
+</div>
+<p class="txt bl">이처럼 리스트의 기능을 복합적으로 사용하면 원하는 결과를 빠르게 얻을 수 있습니다. 데이터가 많은 리스트일수록 더욱더 그렇습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="282">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">최댓값과 최솟값, 합 구하기</p>
+<p class="txt bl">앞에서처럼 리스트를 정렬하고 슬라이싱하면 리스트의 최댓값과 최솟값을 구할 수 있습니다. 그런데 리스트를 정렬해 슬라이싱하지 않고도 간단한 명령어로 최댓값과 최솟값을 구할 수 있습니다. 리스트의 최댓값을 구하는 명령어는 <span class="cd">max()</span>, 최솟값을 구하는 명령어 <span class="cd">min()</span>입니다. 코드로 사용법을 확인해 봅시다.</p>
+<div class="highlight">
+<pre>spending_6mon = [<span class="green">25</span>, <span class="green">36</span>, <span class="green">8</span>, <span class="green">53</span>, <span class="green">24</span>, <span class="green">56</span>]
+<span class="gold">print</span>(<span class="cd2 gold">max</span><span class="cd2">(spending_6mon),</span> <span class="cd2 gold">min</span><span class="cd2">(spending_6mon)</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+56, 8</pre>
+</div>
+<p class="txt bl"><span class="cd">max()</span>와 <span class="cd">min()</span>은 리스트와 명령어를 도트(<span class="cd">.</span>)로 연결하지 않고 명령어 안에 리스트를 넣는 형태로 사용합니다. <span class="cd">len()</span>과 같은 형식이죠. 이 부분만 유의하세요.</p>
+<p class="txt bl">리스트 데이터의 합을 구하는 <span class="cd">sum()</span> 명령어도 있습니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="cd2 gold">sum</span><span class="cd2">(spending_6mon)</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+202</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="283">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">인덱스 찾기</p>
+<p class="txt bl">마지막 기능은 인덱스를 찾는 <span class="cd">index()</span> 명령어입니다. 찾으려는 데이터를 <span class="cd">index()</span> 명령어의 소괄호 안에 넣으면 해당 데이터가 리스트의 어느 위치에 있는지, 즉 인덱스 번호를 알려줍니다. 예를 들어, <span class="cd">spending_6mon</span> 리스트에서 숫자 24의 인덱스를 알고 싶다면 다음과 같이 작성하면 됩니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="cd2">spending_6mon.index(</span><span class="cd2 green">24</span><span class="cd2">)</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+4</pre>
+</div>
+<p class="txt bl">결과로 4가 나옵니다. 인덱스 <span class="cd">[4]</span>를 뜻하므로 실제로는 4에 1을 더한 5월 지출액을 의미합니다.</p>
+<p class="txt bl">여기서 설명한 기능만 알고 있어도 리스트를 사용한 대부분의 코드를 이해할 수 있고, 리스트를 충분히 다룰 수 있습니다. 프로그래밍하다가 리스트와 관련한 다른 기능이 필요하다면 인터넷에서 검색해 보길 추천합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="284">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a1"><span class="dm brown">1</span> 다음 중 옳지 <span class="bg_black_line">않은</span> 것을 고르세요.</p>
+<div class="ind10">
+<p class="txt bl s12_12">① 리스트는 여러 개의 요소를 모아 놓은 데이터 묶음으로, <span class="cd">[]</span>를 사용해 표현한다.</p>
+<p class="txt bl s12_12">② <span class="cd">a</span> 리스트에 새로운 요소를 추가하려면 <span class="cd">a.append()</span> 명령어를 사용한다.</p>
+<p class="txt bl s12_12">③ 범위를 지정해 리스트의 요소를 추출할 수 있는데, 이를 리스트 슬라이싱이라고 한다.</p>
+<p class="txt bl s12_12">④ 반복문으로 리스트의 전체 요소를 차례대로 출력할 수 있다.</p>
+<p class="txt bl s12_12">⑤ <span class="cd">a</span> 리스트의 최댓값, 최솟값을 구하는 명령어는 <span class="cd">a.max()</span>, <span class="cd">a.min()</span>이다.</p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0873/">정답 및 해설</a></p>
+<p class="txts"> </p>
+<p class="txt bl s10_10" id="a2"><span class="dm brown">2</span> 다음과 같은 리스트가 있을 때, 이와 관련해 옳지 <span class="bg_black_line">않은</span> 설명을 고르세요.</p>
+<div class="highlight">
+<pre>menu = ['아메리카노', '라떼', '바닐라라떼', '카푸치노', '핸드드립']</pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">① 마지막 메뉴인 핸드드립을 출력하려면 <span class="cd">print(menu[-1])</span>을 실행한다.</p>
+<p class="txt bl s12_12">② 새로운 메뉴를 사용자로부터 직접 입력받아 <span class="cd">menu</span>에 추가하려면 <span class="cd">menu.append(input('신메뉴를 입력하세요.'))</span>라고 작성한다.</p>
+<p class="txt bl s12_12">③ 세 번째 데이터부터 마지막 데이터까지 출력하는 코드는 <span class="cd">print(menu[2:])</span>이다.</p>
+<p class="txt bl s12_12">④ <span class="cd">print(menu[len(menu)])</span>를 실행하면 ‘핸드드립’이 출력된다.</p>
+<p class="txt bl s12_12">⑤ 메뉴를 오름차순으로 정렬하는 코드는 <span class="cd">menu.sort(reverse=False)</span>이며, <span class="cd">reverse =False</span>를 생략해도 같은 결과가 나온다.</p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0873/">정답 및 해설</a></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="285">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown">6.2</span><br/>
+    제어구조로 리스트 다루기</h3>
+</div>
+<h4 class="txt1 dm" id="sigil_toc_id_51"><span class="yellow">6.2.1</span> 조건문으로 리스트 다루기</h4>
+<p class="txt bl">반복문에서도 리스트를 사용하지만, 조건문에서도 리스트를 사용할 수 있습니다. 이번에는 조건문에서 리스트를 어떻게 활용하는지 배워 보겠습니다.</p>
+<p class="txt bl">음식을 좋아하는 순서대로 저장한 <span class="cd">food</span> 리스트를 만들고 음식 이름을 입력받아 해당 음식의 순위를 출력해 봅시다. 만약 입력받은 음식이 리스트에 없으면 순위에 없다고 출력합니다. 코드를 봅시다.</p>
+<div class="highlight">
+<pre>food = [<span class="red2">'피자'</span>, <span class="red2">'치킨'</span>, <span class="red2">'스테이크'</span>, <span class="red2">'된장찌개'</span>]
+search = <span class="gold">input</span>(<span class="red2">'찾는 음식은? '</span>)
+<span class="purple">if</span> search <span class="blue2">in</span> food:
+    <span class="gold">print</span>(food.index(search) + <span class="green">1</span>, <span class="red2">'위입니다</span><span class="red2">.'</span>)
+<span class="purple">else</span>:
+    <span class="gold">print</span>(search, <span class="red2">'은/는 순위에 없습니다</span><span class="red2">.'</span>)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="286">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">food</span> 리스트를 만들고 음식 이름을 입력받아 <span class="cd">search</span> 변수에 저장합니다. <span class="cd">if-else</span> 조건문으로 해당 음식이 <span class="cd">food</span> 리스트에 있는 경우와 없는 경우를 나눕니다. 반복문에서 리스트에 원하는 데이터가 있는지 확인할 때 <span class="cd">in</span>을 사용했습니다. 조건문에서도 <span class="cd">in</span>을 사용해 <span class="cd">if search in food</span>로 작성합니다. 입력받은 음식이 리스트 <span class="cd">food</span>에 있으면 <span class="cd">index()</span>로 해당 음식의 인덱스를 구합니다. 인덱스는 0부터 시작하고 순위는 1위부터 시작합니다. 따라서 <span class="cd">index()</span>로 찾은 결과에 1을 더해야 순위가 제대로 나옵니다. 입력받은 음식이 리스트에 없다면 <span class="cd">else</span>로 가서 해당 음식이 순위에 없다고 출력합니다. 리스트에 있는 음식도 넣고, 없는 음식도 넣어서 실행해 보세요!</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+찾는 음식은? <span class="cd2">치킨</span> 
+2 위입니다. 
+찾는 음식은? <span class="cd2">파스타</span>
+파스타 은/는 순위에 없습니다.</pre>
+</div>
+<p class="txt bl">이번에는 영상 추천 프로그램을 만들어 보겠습니다. 유튜브에서 어떤 영상을 시청하고 나면 해당 영상과 관련한 영상을 추천하는 것을 본 적이 있을 겁니다. 또는 어떤 단어를 검색하면 해당 키워드와 연관된 영상을 추천하죠. 이런 추천 시스템은 매우 고도화되고 정교한 알고리즘으로 운영되지만, 우리는 프로그래밍을 처음 배우는 단계이므로 추천 알고리즘의 외형만 흉내내 봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="287">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">우선 시청 내역을 보관하는 리스트가 하나 있어야 하니 <span class="cd">history</span>라는 이름으로 만듭니다. 그리고 <span class="cd">a</span>가 시청 내역에 있으면 <span class="cd">a</span>와 관련된 <span class="cd">a</span>’ 영상을 추천하게 합니다. 예를 들어, 시청 내역에 ‘강아지’가 있으면 ‘고양이’ 영상을 추천하는 겁니다. 여기에서는 ‘강아지’가 시청 내역에 있으면 ‘고양이’ 영상을, ‘댄스’가 시청 내역에 있으면 ‘음악방송’ 영상을 추천하는 코드를 작성해 봅시다.</p>
+<div class="highlight">
+<pre>history = [<span class="red2">'먹방'</span>, <span class="red2">'강아지'</span>, <span class="red2">'요리'</span>, <span class="red2">'댄스'</span>]
+<span class="purple">if</span> <span class="red2">'강아지'</span> <span class="blue2">in</span> history:
+    <span class="gold">print</span>(<span class="red2">'강아지 영상을 좋아하시면 고양이 영상도 추천합니다!'</span>)
+<span class="purple">if</span> <span class="red2">'댄스'</span> <span class="blue2">in</span> history:
+    <span class="gold">print</span>(<span class="red2">'댄스 영상을 좋아하시면 음악방송 영상도 추천합니다!'</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+강아지 영상을 좋아하시면 고양이 영상도 추천합니다!
+댄스 영상을 좋아하시면 음악방송 영상도 추천합니다!</pre>
+</div>
+<p class="txt bl"><span class="cd">history</span> 리스트에 시청 내역을 간단히 4개만 저장했습니다. 시청 내역에 강아지가 있으면 고양이 영상을 추천하는 코드를 작성하고, 시청 내역에 댄스가 있으면 음악방송 영상을 추천하는 코드를 각각 작성합니다. 다른 요소에도 조건문을 활용해 추천 알고리즘을 추가할 수 있습니다. 직접 조건문을 추가해 보세요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="288">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이번에는 새로운 영상을 시청했을 때 시청 내역에 추가하는 코드를 작성해 봅시다. 시청 내역을 저장하는 <span class="cd">history</span>를 빈 리스트로 만들고 시청한 영상 5개를 입력받아 <span class="cd">history</span>에 추가해 봅시다.</p>
+<div class="highlight">
+<pre>history = []
+<span class="green"># 새로운 종류의 영상 시청</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">5</span>):
+    history.append(<span class="gold">input</span>(<span class="red2">'시청한 영상은? '</span>))
+<span class="gold">print</span>(<span class="red2">'지금까지 시청한 영상은'</span>, history)
+<span class="purple">if</span> <span class="red2">'다이어트'</span> <span class="blue2">in</span> history:
+    <span class="gold">print</span>(<span class="red2">'다이어트 영상을 좋아하시면 홈트레이닝 영상도 좋아하실 것 같아요!'</span>)
+<span class="purple">if</span> <span class="red2">'뉴스'</span> <span class="blue2">in</span> history:
+    <span class="gold">print</span>(<span class="red2">'뉴스 영상을 좋아하시면 속보 영상도 추천합니다!'</span>)</pre>
+</div>
+<p class="txt bl"><span class="cd">input()</span>으로 시청한 영상을 입력받고 <span class="cd">append()</span>로 리스트에 추가합니다. <span class="cd">input()</span>이 먼저 실행돼야 하므로 <span class="cd">append()</span> 안에 <span class="cd">input()</span>을 넣어 입력받은 값을 바로 <span class="cd">history</span>에 추가합니다. 이를 5번 반복하므로 반복문을 사용합니다. 그러고 나서 이전 코드처럼 추천 알고리즘을 작성합니다. 재미를 위해 여기서는 내용을 조금 바꿨습니다. 프로그램을 실행해 5개의 영상 주제를 입력해 봅시다.</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+시청한 영상은? <span class="cd2">뉴스</span> 
+시청한 영상은? <span class="cd2">가성비 맛집</span> 
+시청한 영상은? <span class="cd2">다이어트</span> 
+시청한 영상은? <span class="cd2">마스크 사용법</span> 
+시청한 영상은? <span class="cd2">스마트폰 후기</span> 
+지금까지 시청한 영상은 ['뉴스', '가성비 맛집', '다이어트', '마스크 사용법', '스마트폰 후기'] 
+다이어트 영상을 좋아하시면 홈트레이닝 영상도 좋아하실 것 같아요!
+뉴스 영상을 좋아하시면 속보 영상도 추천합니다!</pre>
+</div>
+<p class="txt bl">이처럼 실생활의 다양한 상황을 리스트로 표현할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="289">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_52"><span class="yellow">6.2.2</span> 중첩 제어구조로 리스트 다루기</h4>
+<p class="txt bl">이번에는 조건문과 반복문을 함께 사용해 봅시다. 한 반에 25명의 학생이 있습니다. 모든 학생의 점수를 리스트에 저장하고, 70점 이상인 학생의 학생 번호와 점수를 출력합니다. 점수 25개를 직접 넣기에는 너무 많으니 <span class="cd">random</span> 라이브러리를 활용해 0부터 100 사이의 무작위 정수를 리스트에 추가하겠습니다. 학생 번호는 리스트에 저장된 순서대로 1번부터 25번이라고 가정합니다.</p>
+<p class="txt bl">먼저 <span class="cd">score</span>라는 빈 리스트를 만듭니다. 그런 다음 <span class="cd">score</span> 리스트에 무작위 정수를 25개 넣습니다. 무작위 정수는 <span class="cd">random.randint()</span>로 만들 수 있습니다. 이를 <span class="cd">score.append()</span>에 넣어 무작위 정수를 <span class="cd">score</span> 리스트에 추가하는 코드를 작성합니다. 그리고 이 코드를 반복문으로 25번 반복하면 리스트에 점수 25개가 채워집니다. 반복하는 동안 변하는 <span class="cd">score</span> 리스트를 확인할 수 있게 <span class="cd">print()</span> 명령어도 반복문 내부에 넣어 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+score = []
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">25</span>):
+    score.append(random.randint(<span class="green">0</span>, <span class="green">100</span>))
+    <span class="gold">print</span>(score)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[44] 
+[44, 33]
+… 
+[44, 33, 27, 24, 4, 76, 45, 58, 84, 98, 60, 80, 19, 41, 94, 88, 83, 67, 44, 43, 70, 56, 69, 79, 14]
+[44, 33, 27, 24, 4, 76, 45, 58, 84, 98, 60, 80, 19, 41, 94, 88, 83, 67, 44, 43, 70, 56, 69, 79, 14]</pre>
+</div>
+<p class="txt bl"><span class="cd">score</span> 리스트가 변하는 과정이 보입니다(실행결과가 길어서 중간 결과는 생략했습니다). 무작위 정수를 넣으므로 이 책과 실행결과는 다를 수 있습니다.</p>
+<p class="txt bl"><span class="cd">score</span> 리스트를 채웠으니 반에서 70점 이상인 학생의 번호와 점수를 출력해 봅시다. 먼저 리스트의 요소 값이 70 이상인 하나씩 확인해야 합니다. 리스트에 25개의 요소가 있으니 총 25번을 해야 합니다. 여기에서도 반복문을 사용합니다.</p>
+<p class="txt bl">반복문으로 리스트의 요소에 접근하는 방법은 <span class="dm">6.1 여러 데이터 한 번에 묶기</span>에서 배웠듯이 두 가지입니다. 반복문 형식인 <span class="cd">for i in data</span>의 <span class="cd">data</span> 부분에 리스트를 그대로 넣어 요소에 직접 접근하는 방법과 <span class="cd">range()</span>를 사용해 인덱스로 접근하는 방법입니다. <span class="cd">data</span>에 어떤 것을 넣느냐에 따라 <span class="cd">i</span> 변수에 담기는 값이 달라집니다. 사실 반복문에서 다룬 부분이지만, 리스트를 배우기 전이었으므로 이번에 확실히 이해하고 넘어갑시다.</p>
+<p class="txt bl">간단히 설명하기 위해 <span class="cd">score</span>에 저장된 값이 <span class="cd">[25, 94, 63, 34, 86]</span>이라고 가정합니다. 반복문에서 <span class="cd">data</span> 위치에 <span class="cd">score</span> 리스트를 넣으면 컴퓨터는 다음과 같이 해석합니다.</p>
+<div class="ind12"><img alt="" class="w100" src="https://thebook.io/img/080251/248_1.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl"><span class="cd">score</span>라고 리스트명을 적었지만, <span class="cd">score</span>는 <span class="cd">[25, 94, 63, 34, 86]</span>을 담고 있으므로 컴퓨터는 코드를 오른쪽 그림처럼 인식하죠. 따라서 <span class="cd">s</span> 변수에(인덱스가 아니므로 변수를 <span class="cd">i</span>가 아닌 <span class="cd">score</span>의 <span class="cd">s</span>로 설정) 25, 94, 63, 34, 86이 차례대로 저장됩니다. 가장 먼저 <span class="cd">s</span>에 25가 저장되면 <span class="cd">print(s)</span>가 실행되어 25가 출력되고, 다음으로 <span class="cd">s</span>에 94가 저장되면 94가 출력됩니다. 이처럼 <span class="cd">s</span>에 리스트의 요소가 직접 저장됩니다.</p>
+<p class="txt bl">이번에는 <span class="cd">data</span> 위치에 리스트가 아닌 인덱스를 넣어 리스트를 다뤄 봅시다. 0부터 4까지의 인덱스 범위를 나타낸다면 <span class="cd">range(5)</span>를 사용합니다.</p>
+<div class="ind12"><img alt="" class="w90" src="https://thebook.io/img/080251/248_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl"><span class="cd">range(5)</span>는 <span class="cd">[0, 1, 2, 3, 4]</span>로 표현할 수 있습니다(실제로는 리스트 타입이 아니지만, 여기서는 설명하기 쉽게 데이터 묶음으로 표현했습니다). 따라서 <span class="cd">i</span> 변수에는 0부터 1씩 증가한 숫자가 차례대로 들어갑니다. 이때 <span class="cd">i</span> 변수는 <span class="cd">score</span> 리스트의 인덱스가 되어 <span class="cd">score</span> 리스트의 모든 요소를 출력할 수 있습니다.</p>
+<p class="txt bl">그럼 두 방법 모두 코드로 작성해 보겠습니다. 이번에는 <span class="cd">print()</span>를 반복문 외부로 빼서 한 번만 실행하게 합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+score = []
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">25</span>):
+    score.append(random.randint(<span class="green">0</span>, <span class="green">100</span>))
+<span class="cd2 gold">print</span><span class="cd2">(score)</span>
+
+<span class="cd2 gold">print</span><span class="cd2">(</span><span class="red2">'리스트를 사용해 70점 이상인 점수 출력하기'</span><span class="cd2">)</span>
+<span class="cd2 purple">for</span> <span class="cd2">s</span> <span class="cd2 blue2">in</span> <span class="cd2">score:</span>
+    <span class="cd2 purple">if</span> <span class="cd2">s &gt;=</span> <span class="cd2 green">70</span><span class="cd2">:</span>
+        <span class="cd2 gold">print</span><span class="cd2">(score.index(s) +</span> <span class="cd2 green">1</span><span class="cd2">, '번'</span><span class="cd2">, s)</span>
+
+<span class="cd2 gold">print</span><span class="cd2">(</span><span class="red2">'인덱스를 사용해 70점 이상인 점수 출력하기'</span><span class="cd2">)</span>
+<span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 gold">len</span><span class="cd2">(score)):</span>   <span class="green"># 또는 for i in range(25)</span>
+    <span class="cd2 purple">if</span> <span class="cd2">score[i] &gt;=</span> <span class="cd2 green">70</span><span class="cd2">:</span>
+        <span class="cd2 gold">print</span><span class="cd2">(i +</span> <span class="cd2 green">1</span><span class="cd2">,</span> <span class="red2">'번'</span><span class="cd2">, score[i])</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[93, 37, 94, 38, 73, 75, 99, 40, 87, 93, 9, 76, 31, 40, 54, 31, 25, 77, 40, 46, 40, 39, 45, 9, 68] 
+리스트를 사용해 70점 이상인 점수 출력하기 
+1 번 93 
+3 번 94 
+… 
+인덱스를 사용해 70점 이상인 점수 출력하기 
+1 번 93 
+3 번 94
+…</pre>
+</div>
+<p class="txt bl">첫 번째 코드에서는 리스트를 그대로 반복문의 <span class="cd">data</span> 부분에 넣습니다. 점수가 <span class="cd">s</span> 변수에 담기고 <span class="cd">s</span>의 값이 70 이상일 때만 학생 번호와 점수를 출력합니다. 이때 학생 번호는 1부터 시작하므로 <span class="cd">s</span> 값의 인덱스인 <span class="cd">score.index(s)</span>에 1을 더해 출력하고, 점수는 <span class="cd">s</span> 변수의 값을 그대로 출력합니다.</p>
+<p class="txt bl">두 번째 코드에서는 반복문의 <span class="cd">data</span> 부분에 연속된 숫자 범위를 나타내는 <span class="cd">range()</span>를 넣습니다. 또는 리스트 길이를 사용하면 <span class="cd">range(len(score))</span>가 됩니다. <span class="cd">score</span>에는 25개의 요소가 있으므로 <span class="cd">range(25)</span>로 작성해도 됩니다. 이때 <span class="cd">i</span> 변수는 리스트의 인덱스가 되어 <span class="cd">score[i]</span>가 70 이상일 때만 학생 번호와 점수를 출력하는 명령어가 실행됩니다. 여기서 학생 번호는 인덱스에 1을 더한 <span class="cd">i + 1</span>이 되고, 점수는 <span class="cd">score[i]</span>가 됩니다.</p>
+<p class="txt bl">두 방법 모두 결과는 같습니다. 인덱스로 반복문을 작성하는 방법이 어렵다면 다음을 참고하세요.</p>
+<div class="ind12"><img alt="" class="w90" src="https://thebook.io/img/080251/250.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">이처럼 조건문과 반복문에서 리스트를 자주 사용하니 확실하게 이해하고 넘어가기 바랍니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="290">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_53"><span class="yellow">6.2.3</span> 리스트로 간단한 프로그램 만들기</h4>
+<p class="txt bl">이번에는 익숙한 게임을 리스트를 사용해 프로그램으로 구현해 보겠습니다. 지하철 게임이라는 놀이가 있습니다. 술래가 호선을 지정하면 오른쪽으로 돌아가며 해당 호선에 있는 역을 차례대로 말합니다. 틀린 역을 말하거나 박자가 늦으면 벌칙을 받는 게임이죠. 예를 들어, 술래가 ‘2호선’을 외치면 2호선에 포함된 역만 말해야 합니다. 2호선이 아닌 다른 호선에 있는 역을 말하면 벌칙을 받습니다.</p>
+<p class="txt bl">실제로는 모든 호선을 포함하지만, 여기서는 간단하게 서울 지하철 2호선을 대상으로 지하철 게임을 만들어 보겠습니다. 코드를 작성하기 전에 프로그램을 구상해 봅시다. 우선 역 이름을 입력받아야 합니다. 입력받은 역 이름이 2호선에 있으면 다음 역 이름을 입력받습니다. 입력받은 역 이름이 2호선에 없으면 게임을 멈춰야 합니다. 정리하면, 역 이름을 입력받는 것이 반복되고 입력받은 역 이름이 2호선이 아니라면 반복을 중단하는 것이죠. 이럴 때는 반복문과 반복문을 탈출하는 <span class="cd">break</span>를 사용하면 됩니다. 이해하기 쉽게 순서도로 표현해 보겠습니다.</p>
+<div class="ind12"><img alt="" class="w90" src="https://thebook.io/img/080251/251.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">두 순서도는 동일하게 동작합니다. 왼쪽 순서도부터 봅시다. 입력받은 역이 2호선에 있으면 게임을 계속해야 하므로 ‘예’ 화살표를 따라가서 다시 입력받는 명령어를 수행합니다. 이때 ‘예’ 화살표는 반복문을 의미합니다. 입력받은 역이 2호선에 없으면 틀렸으므로 ‘아니요’ 화살표를 따라가서 프로그램을 종료합니다. 눈치챘겠지만 두 갈래로 갈라지는 초록색 상자는 조건문을 의미합니다. ‘입력받은 역 이름이 2호선에 있는가?’가 조건이 되겠죠.</p>
+<p class="txt bl">오른쪽 순서도는 왼쪽 순서도에서 조건문의 조건을 조금 변경했습니다. 조건이 ‘입력받은 역 이름이 2호선에 있는가?’에서 ‘입력받은 역 이름이 2호선에 없는가?’로 바뀌었습니다. 조건이 변경되면 ‘예’와 ‘아니요’ 부분도 변경됩니다. 여기에서는 오른쪽 순서도를 기준으로 프로그램을 작성하겠습니다.</p>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txtex2 dl">순서도는 원래 사용하는 모양이 따로 있지만, 여기서는 간단하게 표현했습니다. 순서도는 프로그램의 흐름을 도식화한 것이고, 요소들을 화살표로 연결해 순서를 나타낸다고 알면 됩니다.</p>
+</div>
+<p class="txt bl">컴퓨터는 입력받은 역 이름이 2호선에 없는지를 어떻게 판단할까요? 2호선에는 총 43개의 역이 있습니다(지선을 제외하고 본선만 센 숫자입니다). 43개 역 이름을 하나의 리스트로 묶으면 입력받은 역이 리스트에 없는지 <span class="cd">not in</span>으로 판단할 수 있습니다. 앞의 순서도에서 반복문과 조건문인 부분을 코드로 표현하면 다음과 같습니다.</p>
+<div class="ind12"><img alt="" class="w90" src="https://thebook.io/img/080251/252.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl">그림을 참고해 2호선 지하철 게임을 작성해 보겠습니다. 먼저 2호선 43개 역 이름을 담은 리스트를 만듭니다. 리스트명은 line2로 하고 43개 역 이름을 리스트에 넣은 후 리스트 길이를 출력해 봅시다.</p>
+<div class="highlight">
+<pre>line2 = [<span class="red2">'성수'</span>, <span class="red2">'뚝섬'</span>, <span class="red2">'한양대'</span>, <span class="red2">'왕십리'</span>, <span class="red2">'상왕십리'</span>, <span class="red2">'신당'</span>, <span class="red2">'동대문역사문화공원'</span>,<span class="red2">'을지로</span><span class="red2">4</span><span class="red2">가'</span>, <span class="red2">'을지로</span><span class="red2">3</span><span class="red2">가'</span>, <span class="red2">'을지로입구'</span>, <span class="red2">'시청'</span>, <span class="red2">'충정로'</span>, <span class="red2">'아현'</span>, <span class="red2">'이대'</span>, <span class="red2">'신촌'</span>, <span class="red2">'홍대입구'</span>, <span class="red2">'합정'</span>, <span class="red2">'당산'</span>, <span class="red2">'영등포구청'</span>, <span class="red2">'문래'</span>, <span class="red2">'신도림'</span>, <span class="red2">'대림'</span>, <span class="red2">'구로디지털단지'</span>, <span class="red2">'신대방'</span>, <span class="red2">'신림'</span>, <span class="red2">'봉천'</span>, <span class="red2">'서울대입구'</span>, <span class="red2">'낙성대'</span>, <span class="red2">'사당'</span>, <span class="red2">'방배'</span>, <span class="red2">'서초'</span>, <span class="red2">'교대'</span>, <span class="red2">'강남'</span>, <span class="red2">'역삼'</span>, <span class="red2">'선릉'</span>, <span class="red2">'삼성'</span>, <span class="red2">'종합운동장'</span>, <span class="red2">'잠실새내'</span>, <span class="red2">'잠실'</span>, <span class="red2">'잠실나루'</span>, <span class="red2">'강변'</span>, <span class="red2">'구의'</span>, <span class="red2">'건대입구'</span>]
+<span class="gold">print</span>(<span class="gold">len</span>(line2))</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+4</pre>
+</div>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txtex2 dl">43개 역을 직접 입력하기 어려우면 이 책의 소스 코드에서 해당 부분만 복사해서 사용해도 됩니다. 또는 간략하게 몇 개의 역만 리스트로 작성해도 됩니다. 실습을 위한 프로그램이므로 완벽하게 만들 필요는 없습니다.</p>
+</div>
+<p class="txt bl"><span class="cd">line2</span> 리스트의 길이가 43이라고 나옵니다. 제대로 입력됐네요.</p>
+<p class="txt bl">순서도를 보면 반복문 안에서 역 이름을 입력받고 해당 역이 2호선 안에 없는지를 확인합니다. 반복문을 사용하려면 반복 횟수를 정해야 하는데 여기서는 10회를 반복한다고 가정하겠습니다. 역 이름을 입력받아야 하므로 반복문 내부에 <span class="cd">input()</span>이 있어야 합니다. 그리고 <span class="cd">input()</span> 값이 <span class="cd">line2</span> 리스트에 없으면 프로그램을 종료합니다.</p>
+<p class="txt bl">코드로 작성하면 다음과 같습니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="red2">'지하철~ '</span> * <span class="green">4</span>)
+<span class="green"># 10번 반복한다고 가정</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">10</span>):
+    station = <span class="gold">input</span>()
+    <span class="purple">if</span> station <span class="blue2">not in</span> line2:
+        <span class="gold">print</span>(<span class="red2">'땡! 해당 역은 2호선이 아닙니다!'</span>)
+        <span class="purple">break</span></pre>
+</div>
+<p class="txt bl"><span class="cd">input()</span>으로 입력받은 값을 <span class="cd">station</span> 변수에 저장하고 <span class="cd">station</span> 값이 <span class="cd">line2</span> 리스트에 없으면 반복을 멈추도록 <span class="cd">break</span>를 넣습니다. 입력이 틀리면 프로그램을 종료하기 전에 입력이 틀렸다는 메시지도 출력합니다. 프로그램을 실행해 다양한 값을 넣어 봅시다.</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+지하철~ 지하철~ 지하철~ 지하철~ 
+<span class="cd2">강남</span> 
+<span class="cd2">합정</span> 
+<span class="cd2">역삼</span> 
+<span class="cd2">낙성대</span> 
+<span class="cd2">홍대</span>
+땡! 해당 역은 2호선이 아닙니다!</pre>
+</div>
+<p class="txt bl">단순하긴 하지만 실제 놀이를 파이썬으로 작성해 봤습니다. 본인이 아는 다른 놀이로도 한번 작성해 보세요.</p>
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a3"><span class="dm brown">3</span> 다음 코드에 대한 설명으로 옳지 <span class="bg_black_line">않은</span> 것을 고르세요.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random
+
+score = []
+A = []
+B = []
+C = []
+
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">30</span>):
+    score.append(random.randint(<span class="green">0</span>, <span class="green">100</span>))
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(score)):
+    <span class="purple">if</span> score[i] &gt; <span class="green">80</span>:
+        A.append(score[i])
+    <span class="purple">elif</span> score[i] &gt; <span class="green">40</span>:
+        B.append(score[i])
+    <span class="purple">else</span>:
+        C.append(score[i])</pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">① <span class="cd">score</span>에는 총 30개의 무작위 정수가 저장된다.</p>
+<p class="txt bl s12_12">② <span class="cd">score</span>에서 80을 초과하는 숫자는 <span class="cd">A</span> 리스트에 저장된다.</p>
+<p class="txt bl s12_12">③ <span class="cd">score</span>에 숫자 40이 있다면 <span class="cd">C</span> 리스트에 저장된다.</p>
+<p class="txt bl s12_12">④ <span class="cd">A</span>, <span class="cd">B</span>, <span class="cd">C</span> 리스트 중 하나에 저장된 숫자는 <span class="cd">score</span> 리스트에서 삭제된다.</p>
+<p class="txt bl s12_12">⑤ 두 번째 반복문은 다음과 같이 바꿔도 결과가 동일하다.</p>
+</div>
+<div class="highlight">
+<pre><span class="purple">for</span> s <span class="blue2">in</span> score:
+    <span class="purple">if</span> s &gt; <span class="green">80</span>:
+        A.append(s)
+    <span class="purple">elif</span> score[i] &gt; <span class="green">40</span>:
+        B.append(s)
+    <span class="purple">else</span>:
+        C.append(s)</pre>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0873/">정답 및 해설</a></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="291">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown">6.3</span><br/>
+    여러 개의 리스트 묶기</h3>
+</div>
+<h4 class="txt1 dm" id="sigil_toc_id_54"><span class="yellow">6.3.1</span> 이차원 리스트란</h4>
+<p class="txt bl">지금까지 여러 데이터를 묶어 하나의 리스트로 만들었습니다. 그런데 이런 리스트가 여러 개 있을 때 이를 다시 리스트로 묶을 수 있습니다. 리스트 안에 리스트가 있는 것이죠. 예를 들면 다음과 같은 형태입니다.</p>
+<div class="highlight">
+<pre>abc = <span>[</span>[<span class="green">1</span>, <span class="green">2</span>, <span class="green">3</span>], [<span class="green">4</span>, <span class="green">5</span>, <span class="green">6</span>], [<span class="green">7</span>, <span class="green">8</span>, <span class="green">9</span><span>]</span>]</pre>
+</div>
+<p class="txt bl"><span class="cd">abc</span> 리스트에 3개의 요소가 들어 있습니다. <span class="cd">abc</span> 리스트의 각 요소 또한 리스트입니다. 이처럼 리스트 안에 리스트가 들어 있는 형태를 <span class="dm">이차원 리스트</span>라고 합니다. 따라서 앞서 배운 리스트는 일차원 리스트가 됩니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 리스트를 표현하는 대괄호가 많으므로 개수에 유의하세요. 빨간색은 전체 리스트를 의미하고 파란색은 abc 리스트의 요소가 되는 리스트를 의미합니다.</p>
+<p class="txts"> </p>
+<div class="ind18">
+<pre>abc = <span class="red">[</span><span class="blue4">[</span>1, 2, 3<span class="blue4">]</span>, <span class="blue4">[</span>4, 5, 6<span class="blue4">]</span>, <span class="blue4">[</span>7, 8, 9<span class="blue4">]</span><span class="red">]</span></pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="292">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이차원 리스트를 앞의 코드처럼 한 줄로 작성하면 이차원 리스트인지 한눈에 파악하기 어렵기 때문에 다음처럼 줄바꿈하기도 합니다.</p>
+<div class="highlight">
+<pre>abc = <span>[</span>[<span class="green">1</span>, <span class="green">2</span>, <span class="green">3</span>],
+       [<span class="green">4</span>, <span class="green">5</span>, <span class="green">6</span>],
+       [<span class="green">7</span>, <span class="green">8</span>, <span class="green">9</span><span>]</span>]</pre>
+</div>
+<p class="txt bl">두 코드는 같은 코드입니다. 줄바꿈이 있고 없고의 차이일 뿐이니 편한 방식으로 코드를 작성하면 됩니다.</p>
+<p class="txt bl">코드를 실행하면 다음 그림처럼 리스트가 만들어집니다. 일차원 리스트는 한 행만 있는 일차원 데이터였다면 이차원 리스트는 행과 열이 있는 이차원 데이터입니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/256_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-1</span> 이차원 리스트의 구조</p>
+<p class="txt bl">그럼 이차원 리스트의 데이터에는 어떻게 접근할까요? 일차원 리스트는 인덱스 1개로 개별 데이터를 불러올 수 있었는데, 이차원 리스트에서는 인덱스가 2개(행과 열)입니다.</p>
+<div class="w40"><img alt="" class="w100" src="https://thebook.io/img/080251/256_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-2</span> 이차원 리스트의 인덱스</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="293">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">인덱스가 2개이기 때문에 두 인덱스를 함께 사용해 데이터에 접근합니다. 인덱스가 2개이니 어떻게 읽어야 할지 모르겠죠? 쉬운 예를 들어 봅시다. 아파트에는 여러 층이 있고, 각 층에는 여러 집이 있습니다. 층은 1층, 2층, 3층으로 구분하고, 한 층의 집은 1호, 2호, 3호로 구분합니다. 그리고 이 둘을 합쳐서 1층의 3호는 103호로 부릅니다. 6층의 12호면 612호가 되겠죠. 규칙을 파악했나요? 층과 호를 결합하는데, 층이 먼저 오고 그 뒤에 호가 붙는 방식으로 아파트의 호수를 붙입니다.</p>
+<div class="w100"><img alt="" class="w80" src="https://thebook.io/img/080251/257_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-3</span> 아파트 호수 구조</p>
+<p class="txt bl">이차원 리스트도 동일합니다. 층에 해당하는 행 인덱스를 먼저 쓰고 바로 뒤에 호에 해당하는 열 인덱스를 써서 개별 데이터를 가리킵니다. 다만, 아파트와 다른 부분은 행 인덱스가 위에서 아래로 내려가는 형태라는 점입니다. 리스트는 위에서 시작하므로 가장 윗줄이 행 인덱스 <span class="cd">[0]</span>이 됩니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/257_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-4</span> 이차원 리스트의 행 인덱스</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="294">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이차원 리스트를 구성하는 요소는 일차원 리스트입니다. 이차원 리스트의 각 요소를 출력해 봅시다. 일차원 리스트처럼 리스트명 옆에 인덱스를 붙이면 됩니다.</p>
+<div class="highlight">
+<pre>abc = <span>[</span>[<span class="green">1</span>, <span class="green">2</span>, <span class="green">3</span>], [<span class="green">4</span>, <span class="green">5</span>, <span class="green">6</span>], [<span class="green">7</span>, <span class="green">8</span>, <span class="green">9</span><span>]</span>] 
+<span class="gold">print</span>(abc[<span class="green">0</span>]) 
+<span class="gold">print</span>(abc[<span class="green">1</span>]) 
+<span class="gold">print</span>(abc[<span class="green">2</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[1, 2, 3] 
+[4, 5, 6] 
+[7, 8, 9]</pre>
+</div>
+<p class="txt bl">이차원 리스트의 요소는 일차원 리스트이므로 <span class="cd">abc[i]</span> 형태를 출력하면 각각의 일차원 리스트가 출력됩니다. 이렇게 이차원 리스트명 옆에 붙인 인덱스가 행 인덱스입니다.</p>
+<p class="txt bl">행 인덱스와 열 인덱스를 결합해 보겠습니다. 예로 든 아파트 형태와 읽는 방법이 동일합니다. 숫자 2가 들어 있는 칸을 봅시다. 행 인덱스가 <span class="cd">[0]</span>이고 열 인덱스가 <span class="cd">[1]</span>이므로 <span class="cd">abc[0][1]</span>로 나타냅니다. 숫자 6이 들어 있는 칸도 확인해 봅시다. 행 인덱스가 <span class="cd">[1]</span>이고 열 인덱스가 <span class="cd">[2]</span>이니 <span class="cd">abc[1][2]</span>입니다.</p>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txtex2 dl">행과 열은 다소 헷갈릴 수 있습니다. 그럴 때 행렬을 떠올려 보세요. 이때 가로가 행이고, 세로가 열입니다. 행과 열은 가로와 세로를 한 글자로 표현한 용어입니다. 일반적으로 ‘가로 세로’라고 하지 ‘세로 가로’라고 하지 않죠? 가로(행) 세로(열)로 인지하면 덜 헷갈릴 거예요.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="295">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/258.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-5</span> 이차원 리스트에서 숫자 2와 6의 인덱스</p>
+<div class="highlight">
+<pre>abc = <span>[</span>[<span class="green">1</span>, <span class="green">2</span>, <span class="green">3</span>], [<span class="green">4</span>, <span class="green">5</span>, <span class="green">6</span>], [<span class="green">7</span>, <span class="green">8</span>, <span class="green">9</span><span>]</span>]
+<span class="cd2 gold">print</span><span class="cd2">(abc[</span><span class="cd2 green">0</span><span class="cd2">][</span><span class="cd2 green">1</span><span class="cd2">])</span>
+<span class="cd2 gold">print</span><span class="cd2">(abc[</span><span class="cd2 green">1</span><span class="cd2">][</span><span class="cd2 green">2</span><span class="cd2">])</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+2
+6</pre>
+</div>
+<p class="txt bl">그럼 9는 어떻게 출력할까요? 행 인덱스가 <span class="cd">[2]</span>, 열 인덱스가 <span class="cd">[2]</span>이므로 <span class="cd">print(abc[2][2])</span>를 실행하면 됩니다. 1도 출력해 볼까요? 행 인덱스가 <span class="cd">[0]</span>, 열 인덱스가 <span class="cd">[0]</span>이므로 <span class="cd">print(abc[0][0])</span>을 실행하면 됩니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/259.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-6</span> 이차원 리스트에서 숫자 9와 1의 인덱스</p>
+<p class="txt bl">이처럼 2개의 인덱스를 사용해 이차원 리스트의 데이터에 쉽게 접근할 수 있습니다. 행 인덱스와 열 인덱스를 확인하고 행과 열 순서로 결합해 작성합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="296">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 이차원 리스트 안의 일차원 리스트 길이</p>
+<p class="txt bl">이차원 리스트에는 다음 코드처럼 각기 다른 길이의 일차원 리스트도 들어갈 수 있습니다.</p>
+<div class="highlight">
+<pre>abc = <span>[</span>[<span class="green">1</span>, <span class="green">2</span>],
+       [<span class="green">3</span>, <span class="green">4</span>, <span class="green">5</span>, <span class="green">6</span>],
+       [<span class="green">7</span>, <span class="green">8</span>, <span class="green">9</span>],
+       [<span class="green">10</span>, <span class="green">11</span><span>]</span>]
+<span class="gold">print</span>(abc)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+<span>[</span>[1, 2], [3, 4, 5, 6], [7, 8, 9], [10, 11<span>]</span>]</pre>
+</div>
+<p class="txtex bl"><span class="cd">abc[0]</span>, <span class="cd">abc[1]</span>, <span class="cd">abc[2]</span>, <span class="cd">abc[3]</span>은 길이가 각각 다른 일차원 리스트지만 이들을 합쳐 이차원 리스트를 만들 수 있습니다. 다만, 이 경우에는 행 인덱스마다 열 인덱스가 다르기 때문에 코딩할 때 열 인덱스의 범위를 알고 사용해야 합니다. 그렇지 않으면 <span class="cd">IndexError</span>가 발생할 수 있어요.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="297">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_55"><span class="yellow">6.3.2</span> 반복문으로 이차원 리스트 다루기</h4>
+<p class="txt bl">이번에는 반복문에 이차원 리스트를 직접 넣어 보겠습니다. 반복문으로 이차원 리스트를 다룰 때에는 일반적으로 <span class="cd">row</span>라는 변수를 사용합니다. <span class="cd">row</span>는 우리말로 열(줄)을 뜻합니다. 간단하게 한 열, 한 줄이라는 의미인데 왜 이차원 리스트의 반복문의 변수로 <span class="cd">row</span>를 사용할까요? 다음 코드를 실행해 보고 그 이유를 생각해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> abc:
+    <span class="gold">print</span>(row)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[1, 2, 3] 
+[4, 5, 6]
+[7, 8, 9]</pre>
+</div>
+<p class="txt bl">새로운 변수 <span class="cd">row</span>가 나왔지만 형식은 그대로입니다. <span class="cd">for i in data</span>에서 <span class="cd">data</span>에 리스트를 넣으면 리스트에 들어 있는 값 자체가 차례대로 <span class="cd">i</span> 변수에 들어갔습니다. 여기서도 같습니다.</p>
+<p class="txt bl">이차원 리스트의 반복문은 다음 그림처럼 진행됩니다. 이차원 리스트의 요소는 일차원 리스트입니다. 이차원 리스트 <span class="cd">abc</span>의 첫 번째 요소(일차원 리스트)부터 마지막 요소(일차원 리스트)까지 순서대로 <span class="cd">row</span> 변수에 담깁니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/260.jpg"/></div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="298">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">반복이 시작되면 <span class="cd">abc</span> 리스트의 첫 번째 데이터인 <span class="cd">[1, 2, 3]</span>이 <span class="cd">row</span> 변수에 들어가고 <span class="cd">print(row)</span>를 실행합니다. 두 번째 반복에서 두 번째 데이터인 <span class="cd">[4, 5, 6]</span>이, 마지막 반복에서 <span class="cd">[7, 8, 9]</span>가 <span class="cd">row</span>에 들어가고 <span class="cd">print(row)</span>를 실행합니다. 반복할 때마다 이차원 리스트의 한 행이 <span class="cd">row</span> 변수에 담깁니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 6-2</span> 반복문의 실행과정</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w10">
+<p class="txts dm">반복 회차</p>
+</td>
+<td class="w15">
+<p class="txts dm">row에 담기는 요소</p>
+</td>
+<td class="w75">
+<p class="txts dm">반복문 내부</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">1</p>
+</td>
+<td class="w15">
+<p class="txts dl">[1, 2, 3]</p>
+</td>
+<td class="w75">
+<p class="txts cd"><img alt="" class="h20 mb02" src="https://thebook.io/img/080251/261_1.jpg"/> <span class="red2">row 첫 번째 요소 [1, 2, 3] 넣고</span></p>
+<pre>    print(row)  <span class="red2">print(row) 실행</span></pre>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">2</p>
+</td>
+<td class="w15">
+<p class="txts dl">[4, 5, 6]</p>
+</td>
+<td class="w75">
+<p class="txts cd"><img alt="" class="h20 mb02" src="https://thebook.io/img/080251/261_2.jpg"/> <span class="red2">row에 두 번째 요소 [4, 5, 6] 넣고</span></p>
+<pre>    print(row)  <span class="red2">print(row) 실행</span></pre>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">3</p>
+</td>
+<td class="w15">
+<p class="txts dl">[7, 8, 9]</p>
+</td>
+<td class="w75">
+<p class="txts cd"><img alt="" class="h20 mb02" src="https://thebook.io/img/080251/261_3.jpg"/> <span class="red2">row에 세 번째 요소 [7, 8, 9] 넣고</span></p>
+<pre>    print(row)  <span class="red2">print(row) 실행</span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">이차원 리스트는 일차원 리스트 여러 개로 구성되기 때문에 반복문의 변수에는 이차원 리스트의 요소인 일차원 리스트가 순서대로 저장됩니다. 그런데 일차원 리스트가 눈으로 보기에는 옆으로 늘어진 한 줄처럼 보이기 때문에 변수 <span class="cd">row</span>를 사용하는 것이죠.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="299">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">한 단계 더 들어가 보겠습니다. <span class="cd">row</span>에는 일차원 리스트가 담깁니다. 따라서 <span class="cd">row</span>에도 인덱스를 적용할 수 있습니다. <span class="cd">row[0]</span>, <span class="cd">row[1]</span>, <span class="cd">row[2]</span>처럼요. <span class="cd">row</span>에 첫 번째 리스트 <span class="cd">[1, 2, 3]</span>이 들어 있을 때 <span class="cd">row[0]</span>은 1, <span class="cd">row[1]</span>은 2, <span class="cd">row[2]</span>는 3입니다. <span class="cd">row</span>에 두 번째 리스트 <span class="cd">[4, 5, 6]</span>이 들어 있으면 <span class="cd">row[0]</span>, <span class="cd">row[1]</span>, <span class="cd">row[2]</span>는 각각 4, 5, 6이죠. 다음 코드를 실행해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> abc:
+    <span class="gold">print</span>(row<span class="cd2">[</span><span class="cd2 green">0</span><span class="cd2">]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+1 
+4
+7</pre>
+</div>
+<p class="txt bl"><span class="cd">row</span>에 <span class="cd">[1, 2, 3]</span>이 들어 있을 때 <span class="cd">row[0]</span>은 1, <span class="cd">[4, 5, 6]</span>이 있을 때는 4, <span class="cd">[7, 8, 9]</span>가 있을 때는 7이 출력됩니다. 즉, 이차원 리스트 <span class="cd">abc</span>의 첫 번째 열이 출력됩니다.</p>
+<p class="txt bl">이번에는 마지막 열만 출력해 보겠습니다. <span class="cd">row</span>의 마지막이므로 인덱스를 <span class="cd">row[-1]</span>로 작성합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="300">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> abc:
+    <span class="gold">print</span>(row[<span class="cd2 green">-1</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+3 
+6
+9</pre>
+</div>
+<a id="section_1"></a>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 6-3</span> 반복문의 실행과정</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w10">
+<p class="txts dm">반복 회차</p>
+</td>
+<td class="w30">
+<p class="txts dm">row에 담기는 요소</p>
+</td>
+<td class="w30">
+<p class="txts dm">row[0]</p>
+</td>
+<td class="w30">
+<p class="txts dm">row[-1]</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">1</p>
+</td>
+<td class="w30">
+<p class="txts dl">[1, 2, 3]</p>
+</td>
+<td class="w30">
+<p class="txts dl">1</p>
+</td>
+<td class="w30">
+<p class="txts dl">3</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">2</p>
+</td>
+<td class="w30">
+<p class="txts dl">[4, 5, 6]</p>
+</td>
+<td class="w30">
+<p class="txts dl">4</p>
+</td>
+<td class="w30">
+<p class="txts dl">6</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">3</p>
+</td>
+<td class="w30">
+<p class="txts dl">[7, 8, 9]</p>
+</td>
+<td class="w30">
+<p class="txts dl">7</p>
+</td>
+<td class="w30">
+<p class="txts dl">9</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">이처럼 반복문의 <span class="cd">data</span> 위치에는 이차원 리스트도 넣을 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="301">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_56"><span class="yellow">6.3.3</span> 이차원 리스트로 간단한 프로그램 만들기</h4>
+<p class="txt bl">그럼 이차원 리스트는 언제, 어떻게 쓰일까요? 사실 일상생활에는 이차원 리스트가 정말 많습니다. 표로 표현되는 것은 대부분 이차원 리스트로 작성할 수 있습니다. 표는 데이터가 잘 정리되고 구조화된 형태입니다. 우리는 하루에도 몇 번씩 표를 봅니다. 뉴스에서 흔하게 접할 수 있고 게임에서도 플레이어들의 랭킹 순위를 표 형태로 제공합니다. 다음 제시된 카드 내역도 표입니다.</p>
+<div class="w100"><img alt="" class="w80" src="https://thebook.io/img/080251/263.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-7</span> 표로 된 카드 내역</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="302">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">표는 행과 열이 있으므로 이차원 리스트로 만들 수 있습니다. 카드 내역을 이차원 리스트로 만들면 다음과 같습니다.</p>
+<div class="highlight">
+<pre>card = <span>[</span>[<span class="red2">'2020/03/04'</span>, <span class="red2">'주식회사 카카오페이'</span>, <span class="green">1000</span>],
+        [<span class="red2">'2020/03/03'</span>, <span class="red2">'네이버페이'</span>, <span class="green">51100</span>],
+        [<span class="red2">'2020/03/02'</span>, <span class="red2">'스타벅스코리아'</span>, <span class="green">10000</span>],
+        [<span class="red2">'2020/03/01'</span>, <span class="red2">'11</span><span class="red2">번가'</span>, <span class="green">27500</span>],
+        [<span class="red2">'2020/02/26'</span>, <span class="red2">'주식회사 카카오페이'</span>, <span class="green">32500</span>],
+        [<span class="red2">'2020/02/26'</span>, <span class="red2">'주식회사 카카오페이'</span>, <span class="green">32500</span>],
+        [<span class="red2">'2020/02/22'</span>, <span class="red2">'G</span><span class="red2">마켓'</span>, <span class="green">81500</span>],
+        [<span class="red2">'2020/02/22'</span>, <span class="red2">'네이버페이'</span>,<span class="green">131000</span><span>]</span>]</pre>
+</div>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/264.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-8</span> 이차원 리스트로 구현한 카드 내역</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="303">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">카드 내역에 8건이 있으므로 총 8개의 행이 만들어집니다. 각 행은 [이용일시, 가맹점명, 이용금액]이 있는 일차원 리스트가 됩니다. 그리고 일차원 리스트는 이차원 리스트 <span class="cd">card</span>의 각 요소로 저장됩니다. 따라서 <span class="cd">card</span> 리스트에 인덱스를 붙이면 원하는 카드 내역을 알 수 있습니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(card[<span class="green">0</span>])
+<span class="gold">print</span>(card[<span class="green">3</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['2020/03/04', '주식회사 카카오페이', 1000]
+['2020/03/01', '11번가', 27500]</pre>
+</div>
+<p class="txt bl"><span class="cd">card[0]</span>을 출력하니 첫 번째 행이, <span class="cd">card[3]</span>을 출력하니 네 번째 행이 리스트로 출력됩니다.</p>
+<p class="txt bl">그럼 첫 번째 카드 내역과 네 번째 카드 내역의 가맹점명만 출력해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(card[<span class="green">0</span>]<span class="cd2">[</span><span class="cd2 green">1</span><span class="cd2">]</span>)
+<span class="gold">print</span>(card[<span class="green">3</span>]<span class="cd2">[</span><span class="cd2 green">1</span><span class="cd2">]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+주식회사 카카오페이
+11번가</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="304">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">가맹점명은 각 행의 두 번째 열에 있으므로 열 인덱스는 <span class="cd">[1]</span>이 됩니다. 따라서 첫 번째 카드 내역과 네 번째 카드 내역의 가맹점명은 각각 <span class="cd">card[0][1]</span>과 <span class="cd">card[3][1]</span>로 구할 수 있습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/265.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-9</span> 첫 번째와 네 번째 카드 내역의 가맹점명</p>
+<p class="txt bl">이번에는 마지막 행의 가맹점명과 이용금액을 동시에 출력해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(card[<span class="cd2 green">-1</span>][<span class="cd2 green">1</span>]<span class="cd2">, card[</span><span class="cd2 green">-1</span><span class="cd2">][</span><span class="cd2 green">-1</span><span class="cd2">]</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+네이버페이 131000</pre>
+</div>
+<p class="txt bl">마지막 행의 인덱스는 <span class="cd">[-1]</span>이죠. 따라서 <span class="cd">card[-1]</span>은 <span class="cd">['2020/02/22', 네이버페이', 131000]</span>입니다. 리스트에서 가맹점명과 이용금액은 두 번째 요소와 마지막 요소이므로 <span class="cd">card[-1][1]</span>, <span class="cd">card[-1][-1]</span>로 작성할 수 있습니다. 물론 <span class="cd">card[-1][1]</span>, <span class="cd">card[-1][2]</span>로 작성해도 결과는 같습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="305">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">다른 예를 들어 볼까요? 스포츠 경기에서 순위를 나타낼 때도 표 형태를 볼 수 있습니다. 다음은 2016년 브라질에서 열린 제31회 리우데자네이루 올림픽의 순위를 나타낸 표입니다.</p>
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 6-4</span> 올림픽 순위<sup id="footnote-001-backlink"><a class="dm brown2" epub:type="noteref" href="#footnote-001">1</a></sup></p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w10">
+<p class="txts dm">순위</p>
+</td>
+<td class="w18">
+<p class="txts dm">국가</p>
+</td>
+<td class="w18">
+<p class="txts dm">금메달</p>
+</td>
+<td class="w18">
+<p class="txts dm">은메달</p>
+</td>
+<td class="w18">
+<p class="txts dm">동메달</p>
+</td>
+<td class="w18">
+<p class="txts dm">합계</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">1</p>
+</td>
+<td class="w18">
+<p class="txts dl">미국</p>
+</td>
+<td class="w18">
+<p class="txts dl">46</p>
+</td>
+<td class="w18">
+<p class="txts dl">37</p>
+</td>
+<td class="w18">
+<p class="txts dl">38</p>
+</td>
+<td class="w18">
+<p class="txts dl">121</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">2</p>
+</td>
+<td class="w18">
+<p class="txts dl">영국</p>
+</td>
+<td class="w18">
+<p class="txts dl">27</p>
+</td>
+<td class="w18">
+<p class="txts dl">23</p>
+</td>
+<td class="w18">
+<p class="txts dl">17</p>
+</td>
+<td class="w18">
+<p class="txts dl">67</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">3</p>
+</td>
+<td class="w18">
+<p class="txts dl">중국</p>
+</td>
+<td class="w18">
+<p class="txts dl">26</p>
+</td>
+<td class="w18">
+<p class="txts dl">18</p>
+</td>
+<td class="w18">
+<p class="txts dl">26</p>
+</td>
+<td class="w18">
+<p class="txts dl">70</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">4</p>
+</td>
+<td class="w18">
+<p class="txts dl">러시아</p>
+</td>
+<td class="w18">
+<p class="txts dl">19</p>
+</td>
+<td class="w18">
+<p class="txts dl">17</p>
+</td>
+<td class="w18">
+<p class="txts dl">19</p>
+</td>
+<td class="w18">
+<p class="txts dl">55</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">5</p>
+</td>
+<td class="w18">
+<p class="txts dl">독일</p>
+</td>
+<td class="w18">
+<p class="txts dl">17</p>
+</td>
+<td class="w18">
+<p class="txts dl">10</p>
+</td>
+<td class="w18">
+<p class="txts dl">15</p>
+</td>
+<td class="w18">
+<p class="txts dl">42</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">6</p>
+</td>
+<td class="w18">
+<p class="txts dl">일본</p>
+</td>
+<td class="w18">
+<p class="txts dl">12</p>
+</td>
+<td class="w18">
+<p class="txts dl">8</p>
+</td>
+<td class="w18">
+<p class="txts dl">21</p>
+</td>
+<td class="w18">
+<p class="txts dl">41</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">7</p>
+</td>
+<td class="w18">
+<p class="txts dl">프랑스</p>
+</td>
+<td class="w18">
+<p class="txts dl">10</p>
+</td>
+<td class="w18">
+<p class="txts dl">18</p>
+</td>
+<td class="w18">
+<p class="txts dl">14</p>
+</td>
+<td class="w18">
+<p class="txts dl">42</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">8</p>
+</td>
+<td class="w18">
+<p class="txts dl">대한민국</p>
+</td>
+<td class="w18">
+<p class="txts dl">9</p>
+</td>
+<td class="w18">
+<p class="txts dl">3</p>
+</td>
+<td class="w18">
+<p class="txts dl">9</p>
+</td>
+<td class="w18">
+<p class="txts dl">21</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">1위부터 8위까지 순위로 이차원 리스트를 만들어 보겠습니다.</p>
+<div class="highlight">
+<pre>olympic =<span>[</span>[<span class="green">1</span>, <span class="red2">'미국'</span>, <span class="green">46</span>, <span class="green">37</span>, <span class="green">38</span>, <span class="green">121</span>],
+          [<span class="green">2</span>, <span class="red2">'영국'</span>, <span class="green">27</span>, <span class="green">23</span>, <span class="green">17</span>, <span class="green">67</span>],
+          [<span class="green">3</span>, <span class="red2">'중국'</span>, <span class="green">26</span>, <span class="green">18</span>, <span class="green">26</span>, <span class="green">70</span>],
+          [<span class="green">4</span>, <span class="red2">'러시아'</span>, <span class="green">19</span>, <span class="green">18</span>, <span class="green">19</span>, <span class="green">55</span>],
+          [<span class="green">5</span>, <span class="red2">'독일'</span>, <span class="green">17</span>, <span class="green">10</span>, <span class="green">15</span>, <span class="green">42</span>],
+          [<span class="green">6</span>, <span class="red2">'일본'</span>, <span class="green">12</span>, <span class="green">8</span>, <span class="green">21</span>, <span class="green">41</span>],
+          [<span class="green">7</span>, <span class="red2">'프랑스'</span>, <span class="green">10</span>, <span class="green">18</span>, <span class="green">14</span>, <span class="green">42</span>],
+          [<span class="green">8</span>, <span class="red2">'대한민국'</span>, <span class="green">9</span>, <span class="green">3</span>, <span class="green">9</span>, <span class="green">21</span><span>]</span>]</pre>
+</div>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<hr/>
+<div epub:type="footnote" id="footnote-001">
+<p class="txtex dl s08_08"><a class="dm brown2" href="#footnote-001-backlink">1</a> <a href="https://ko.wikipedia.org/wiki/2016%EB%85%84_%ED%95%98%EA%B3%84_%EC%98%AC%EB%A6%BC%ED%94%BD_%EB%A9%94%EB%8B%AC_%EC%A7%91%EA%B3%84">https://ko.wikipedia.org/wiki/2016년_하계_올림픽_메달_집계</a></p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="306">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">olympic</span> 리스트에 1위부터 8위까지의 순위와 국가명, 금은동 메달 개수를 넣었습니다. 각 행에는 [순위, 국가명, 금메달 개수, 은메달 개수, 동메달 개수, 메달 합계]가 일차원 리스트 형태로 들어갑니다. 1위와 5위의 국가명과 금메달 개수를 한번 출력해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(olympic[<span class="green">0</span>][<span class="green">1</span>], <span class="red2">'금메달 개수:'</span>, olympic[<span class="green">0</span>][<span class="green">2</span>])
+<span class="gold">print</span>(olympic[<span class="green">4</span>][<span class="green">1</span>], <span class="red2">'금메달 개수:'</span>, olympic[<span class="green">4</span>][<span class="green">2</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+미국 금메달 개수: 46
+독일 금메달 개수: 17</pre>
+</div>
+<p class="txt bl">1위는 행 인덱스 <span class="cd">[0]</span>에, 5위는 행 인덱스 <span class="cd">[4]</span>에 있습니다. 국가명은 열 인덱스로 <span class="cd">[1]</span>, 금메달 개수는 열 인덱스 <span class="cd">[2]</span>에 있고요. 따라서 이를 조합하고 중간에 적절한 출력 메시지를 추가하면 원하는 결과를 얻을 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="307">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">이차원 리스트 슬라이싱하기</p>
+<p class="txt bl">이번에는 미국과 독일의 금은동 메달 개수를 한 번에 출력해 봅시다. 금메달 개수는 열 인덱스 <span class="cd">[2]</span>에, 은메달 개수는 열 인덱스 <span class="cd">[3]</span>에, 동메달 개수는 열 인덱스 <span class="cd">[4]</span>에 있습니다. 열 인덱스 <span class="cd">[2]</span>부터 <span class="cd">[4]</span>까지입니다. 이를 슬라이싱 형식으로 표현하면 <span class="cd">[2:5]</span>입니다. 따라서 미국이 들어 있는 행 인덱스 <span class="cd">[0]</span>에 열 인덱스 <span class="cd">[2:5]</span>를 붙여 출력하면 됩니다. 독일도 마찬가지로 행 인덱스 <span class="cd">[4]</span>에 행 인덱스 <span class="cd">[2:5]</span>를 붙이면 됩니다. 코드로 확인해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(olympic[<span class="green">0</span>][<span class="green">1</span>], <span class="cd2 red2">'금은동 메달 개수:'</span>, olympic[<span class="green">0</span>][<span class="cd2 green">2:5</span>])
+<span class="gold">print</span>(olympic[<span class="green">4</span>][<span class="green">1</span>], <span class="cd2 red2">'금은동 메달 개수:'</span>, olympic[<span class="green">4</span>][<span class="cd2 green">2:5</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+미국 금은동 메달 개수: [46, 37, 38]
+독일 금은동 메달 개수: [17, 10, 15]</pre>
+</div>
+<p class="txt bl">금은동 메달 개수가 리스트로 나왔습니다. 이처럼 이차원 리스트에서도 슬라이싱할 수 있습니다. 열 인덱스에 슬라이싱을 적용하면 한 행 안에서 슬라이싱하게 됩니다.</p>
+<p class="txt bl">그럼 행 인덱스에도 슬라이싱을 적용할 수 있을까요? 물론 가능합니다! 다음 코드를 실행해 보세요.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(olympic[<span class="cd2">:</span><span class="cd2 green">4</span>])
+<span class="gold">print</span>(olympic[<span class="cd2">:</span><span class="cd2 green">4</span>][<span class="green">1</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+<span>[</span>[1, '미국', 46, 37, 38, 121], [2, '영국', 27, 23, 17, 67], [3, '중국', 26, 18, 26, 70], [4, '러시아', 19, 18, 19, 55<span>]</span>]
+[2, '영국', 27, 23, 17, 67]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="308">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">olympic[:4]</span>는 <span class="cd">olympic</span> 리스트의 행 인덱스 <span class="cd">[0]</span>부터 <span class="cd">[3]</span>까지 슬라이싱합니다. 그래서 결과로 4개의 리스트가 나옵니다. 리스트 안에 4개의 리스트가 들어 있으므로 이 역시 또 다른 이차원 리스트입니다. 다음 그림을 참고하세요.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/268.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 6-10</span> 이차원 리스트의 슬라이싱 결과</p>
+<p class="txt bl"><span class="cd">olympic[:4]</span>가 이차원 리스트이므로 <span class="cd">olympic[:4][1]</span>을 실행하면 행 인덱스 <span class="cd">[1]</span>에 있는 일차원 리스트 <span class="cd">[2, '영국', 27, 23, 17, 67]</span>이 출력됩니다.</p>
+<p class="txt bl">앞에서 실생활에서 접할 수 있는 표를 이차원 리스트로 표현해 보고 원하는 부분만 골라 출력해 보았습니다. 이차원 리스트를 처음 접하면 다소 어려울 수 있으나 사실 개념은 간단합니다. 흩어져 있는 데이터를 한눈에 보기 좋게 정리한 표를 컴퓨터가 인식하는 방식이 바로 이차원 리스트인 셈입니다.</p>
+<p class="txt bl">앞에서 배운 내용을 바탕으로 조금 더 적극적으로 이차원 리스트를 다뤄 보겠습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="309">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">앞에서 2016년 올림픽의 메달 순위를 이차원 리스트로 만들고, 행 인덱스와 열 인덱스로 슬라이싱해 보았습니다. 이번에는 <span class="cd">olympic</span> 리스트에서 순위와 국가명만 골라 출력해 봅시다. 먼저 행 인덱스 <span class="cd">[0]</span>일 때 열 인덱스 <span class="cd">[0:2]</span>를 슬라이싱하면 되겠죠? 다음으로 행 인덱스 <span class="cd">[1]</span>일 때 <span class="cd">[0:2]</span>를 슬라이싱해 출력합니다. 이렇게 모든 행 인덱스에서 열 인덱스 <span class="cd">[0:2]</span>를 슬라이싱해 출력하면 됩니다. 반복되는 부분이 보이나요? 코드를 작성해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> olympic:
+    <span class="gold">print</span>(row[:<span class="green">2</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[1, '미국'] 
+[2, '영국'] 
+[3, '중국'] 
+[4, '러시아'] 
+[5, '독일'] 
+[6, '일본'] 
+[7, '프랑스']
+[8, '대한민국']</pre>
+</div>
+<p class="txt bl">반복문으로 이차원 리스트의 모든 행(일차원 리스트)을 차례대로 <span class="cd">row</span> 변수에 넣은 후, 반복문 안에서 일차원 리스트의 처음 두 요소를 <span class="cd">[:2]</span>로 선택하면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="310">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">중첩 제어구조로 이차원 리스트 다루기</p>
+<p class="txt bl">이번에는 금메달보다 은메달이 더 많은 나라를 찾아보겠습니다. 일차원 리스트에서도 각 요소에 접근하려면 반복문을 사용해야 했습니다. 이와 마찬가지로 이차원 리스트 <span class="cd">olympic</span>에서 금메달보다 은메달이 많은 나라를 찾으려면 각 행에 접근해서 ‘금메달 개수보다 은메달 개수가 많은가?’를 일일이 확인해야 합니다. 앞서 반복문으로 이차원 리스트를 다루는 방법을 배웠으니 이를 바탕으로 프로그램을 작성해 봅시다.</p>
+<div class="highlight">
+<pre><span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'금메달보다 은메달이 더 많은 나라'</span><span class="cd2">)</span>
+<span class="purple">for</span> row <span class="blue2">in</span> olympic:
+    <span class="cd2 purple">if</span> <span class="cd2">row[</span><span class="cd2 green">2</span><span class="cd2">] &lt; row[</span><span class="cd2 green">3</span><span class="cd2">]:</span>
+        <span class="cd2 gold">print</span><span class="cd2">(row[</span><span class="cd2 green">1</span><span class="cd2">])</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+금메달보다 은메달이 더 많은 나라
+프랑스</pre>
+</div>
+<p class="txt bl">반복문을 한 번 실행할 때마다 일차원 리스트 하나가 <span class="cd">row</span>에 들어갑니다. 첫 번째 실행에서는 <span class="cd">row</span>에 <span class="cd">[1, '미국', 46, 37, 38, 121]</span>이 저장됩니다. 그리고 반복문 내부에서 조건문으로 금메달 개수 <span class="cd">row[2]</span>와 은메달 개수 <span class="cd">row[3]</span>을 비교합니다. <span class="cd">row[3]</span>이 큰 리스트가 있으면 해당 리스트의 <span class="cd">row[1]</span> 값을 출력합니다. 금메달보다 은메달 개수가 많은 나라는 프랑스뿐이네요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="311">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txts dl s12_12"><span class="dm gray">▼ 표 6-5</span> 중첩 제어구조 실행 과정</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w10">
+<p class="txts dm">반복 회차</p>
+</td>
+<td class="w30">
+<p class="txts dm">row에 저장되는 데이터</p>
+</td>
+<td class="w30">
+<p class="txts dm">row[2]와 row[3]</p>
+</td>
+<td class="w30">
+<p class="txts dm">조건문 충족 여부</p>
+<p class="txts dm">(if row[2] &lt; row[3])</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">첫 번째</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">[1, '미국', 46, 37, 38, 121]</span></p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">row[2]</span>는 46, <span class="cd">row[3]</span>은 37</p>
+</td>
+<td class="w30">
+<p class="txts dl">충족함</p>
+<p class="txts dl"><span class="cd">print(row[1])</span> 실행 안 함</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">두 번째</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">[2, '영국', 27, 23, 17, 67]</span></p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">row[2]</span>는 27, <span class="cd">row[3]</span>은 23</p>
+</td>
+<td class="w30">
+<p class="txts dl">충족하지 않음</p>
+<p class="txts dl"><span class="cd">print(row[1])</span> 실행 안 함</p>
+</td>
+</tr>
+<tr>
+<td class="w10" colspan="4">
+<p class="txts dl tcenter">…</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">일곱 번째</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">[7, '프랑스', 10, 18, 14, 42]</span></p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">row[2]</span>는 10, <span class="cd">row[3]</span>은 18</p>
+</td>
+<td class="w30">
+<p class="txts dl">충족함</p>
+<p class="txts dl"><span class="cd">print(row[1])</span> 실행</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">마지막</p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">[8, '대한민국', 9, 3, 9, 21]</span></p>
+</td>
+<td class="w30">
+<p class="txts dl"><span class="cd">row[2]</span>는 9, <span class="cd">row[3]</span>은 3</p>
+</td>
+<td class="w30">
+<p class="txts dl">충족하지 않음</p>
+<p class="txts dl"><span class="cd">print(row[1])</span> 실행 안 함</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">이번에는 앞의 코드를 수정해 금메달보다 동메달이 많은 나라를 출력해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="cd2 red2">'금메달보다 동메달이 더 많은 나라'</span>)
+<span class="purple">for</span> row <span class="blue2">in</span> olympic:
+    <span class="purple">if</span> row[<span class="green">2</span>] &lt; row[<span class="cd2 green">4</span>]:
+        <span class="gold">print</span>(row[<span class="green">1</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+금메달보다 동메달이 더 많은 나라 
+일본
+프랑스</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="312">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이전 코드에서 은메달 개수인 <span class="cd">row[3]</span>을 동메달 개수인 <span class="cd">row[4]</span>로 변경하기만 하면 됩니다. 결과는 일본과 프랑스입니다. 프랑스는 금메달보다 은메달, 동메달이 더 많군요.</p>
+<p class="txt bl">이번에는 1위부터 8위까지 모든 국가가 획득한 금메달 개수의 합을 구해 봅시다.</p>
+<div class="highlight">
+<pre><span class="cd2">total_gold =</span> <span class="cd2 green">0</span>
+<span class="purple">for</span> row <span class="blue2">in</span> olympic:
+    <span class="cd2">total_gold += row[</span><span class="cd2 green">2</span><span class="cd2">]</span>
+<span class="cd2 gold">print</span><span class="cd2">(total_gold)</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+166</pre>
+</div>
+<p class="txt bl">1위부터 8위까지 금메달의 총 개수를 저장하는 변수로 <span class="cd">total_gold</span>를 만들었습니다. <span class="cd">total_gold</span>를 만들 때는 아직 금메달 개수를 더한 상태가 아니므로 초깃값 0을 넣어 줍니다. 그런 다음 모든 일차원 리스트(이차원 리스트의 행)를 차례대로 <span class="cd">row</span>에 넣는 반복문을 작성합니다. 금메달 개수는 <span class="cd">row[2]</span>에 있으므로 일차원 리스트의 <span class="cd">row[2]</span>를 <span class="cd">total_gold</span>에 모두 더하면 모든 나라의 금메달 개수가 구해집니다. 최종 값은 166이 나옵니다. 이 결과가 맞는지 확인하고 싶으면 직접 더해 보세요.</p>
+<p class="txt bl">이번에는 나라별 총 메달 개수 중 금메달이 차지하는 비율이 40%가 넘는 나라를 구해 보겠습니다. 총 메달 개수는 마지막 열 인덱스 즉, <span class="cd">[-1]</span>에 있고, 금메달 개수는 열 인덱스 <span class="cd">[2]</span>에 있습니다. 따라서 금메달이 총 매달 개수에서 차지하는 비율은 <span class="cd">row[2] / row[-1] * 100</span>으로 구할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="313">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> olympic:
+    <span class="cd2">gold = row[</span><span class="cd2 green">2</span><span class="cd2">] / row[</span><span class="cd2 green">-1</span><span class="cd2">] *</span> <span class="cd2 green">100</span>
+    <span class="cd2 purple">if</span> <span class="cd2">gold &gt;</span> <span class="cd2 green">40</span><span class="cd2">:</span>
+        <span class="cd2 gold">print</span><span class="cd2">(row[</span><span class="cd2 green">1</span><span class="cd2">], gold, '%'</span><span class="cd2">)</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+영국 40.298507462686565 % 
+독일 40.476190476190474 %
+대한민국 42.857142857142854 %</pre>
+</div>
+<p class="txt bl">먼저 행마다 금메달 비율을 구해 <span class="cd">gold</span> 변수에 저장합니다. 그리고 <span class="cd">gold</span> 변수의 값이 40을 초과하면 해당 국가명과 비율을 출력합니다.</p>
+<p class="txt bl">이처럼 실생활의 데이터를 이차원 리스트로 변경하고 반복문과 조건문을 사용해 재미있는 결과를 얻을 수 있습니다. 올림픽 참가국 전체 데이터나 이전 올림픽 데이터도 있다면 더 다양한 결과를 얻을 수 있답니다. 예를 들어, 각 나라의 메달 성적 추이가 어떻게 되는지도 알 수 있겠죠. 그러면 올림픽에 참여할수록 메달 성적이 좋아지는지도 알 수 있습니다. 경제 성장 데이터가 있다면 ‘올림픽 개최 이후 경제가 성장하는가?’도 직접 확인해 볼 수 있고요. 또는 ‘경제 규모와 올림픽 순위는 비례하는가?’에 대한 답도 직접 분석할 수 있습니다.</p>
+<p class="txt bl">6장에서 배운 리스트와 제어구조를 이용한 리스트 다루기는 뒤에서 진행할 데이터 분석의 바탕이 됩니다. 지금까지 과정을 잘 이해했다면 데이터 분석 프로젝트에서 잘 활용할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="314">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5">
+<p class="txt dm bg_white">1분 퀴즈</p>
+<p class="txt bl s10_10" id="a4"><span class="dm brown">4</span> 다음 그림은 모의고사의 목표 점수와 실제 점수를 나타낸 표입니다.</p>
+<div class="ind10">
+<table>
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w33">
+<p class="txts dm">월</p>
+</td>
+<td class="w33">
+<p class="txts dm">목표 점수</p>
+</td>
+<td class="w33">
+<p class="txts dm">실제 점수</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">3월</p>
+</td>
+<td class="w33">
+<p class="txts dl">82</p>
+</td>
+<td class="w40">
+<p class="txts dl">83</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">4월</p>
+</td>
+<td class="w33">
+<p class="txts dl">85</p>
+</td>
+<td class="w40">
+<p class="txts dl">69</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">6월</p>
+</td>
+<td class="w33">
+<p class="txts dl">75</p>
+</td>
+<td class="w33">
+<p class="txts dl">88</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">9월</p>
+</td>
+<td class="w33">
+<p class="txts dl">92</p>
+</td>
+<td class="w33">
+<p class="txts dl">89</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w33">
+<p class="txts dl">10월</p>
+</td>
+<td class="w33">
+<p class="txts dl">100</p>
+</td>
+<td class="w33">
+<p class="txts dl">97</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">이 표를 이차원 리스트로 만들면 다음 코드와 같습니다. 다음 설명 중 <span class="bg_black_line">틀린</span> 것을 고르세요.</p>
+</div>
+<div class="highlight">
+<pre>exam_score = <span>[</span>[<span class="red2">'3월'</span>, <span class="green">82</span>, <span class="green">83</span>],
+              [<span class="red2">'4월'</span>, <span class="green">85</span>, <span class="green">69</span>],
+              [<span class="red2">'6월'</span>, <span class="green">75</span>, <span class="green">88</span>],
+              [<span class="red2">'9월'</span>, <span class="green">92</span>, <span class="green">89</span>],
+              [<span class="red2">'10월'</span>, <span class="green">100</span>, <span class="green">97</span><span>]</span>]
+<span class="purple">for</span> row <span class="blue2">in</span> exam_score:
+    <span class="purple">if</span> <span class="cd2">(가):</span>
+        <span class="cd2">(나)</span></pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">① 6월의 목표 점수와 실제 점수를 출력하려면 (가)에 <span class="cd">row[0] == '6월'</span>, (나)에 <span class="cd">print (row[1:])</span>이 들어가야 한다.</p>
+<p class="txt bl s12_12">② 목표 점수가 90점 이상인 월을 출력하려면 (가)에 <span class="cd">row[1] &gt;= 90</span>, (나)에 <span class="cd">print (row[0])</span>이 들어가야 한다.</p>
+<p class="txt bl s12_12">③ 실제 점수가 85점 이상인 월을 출력하려면 (가)에 <span class="cd">row[-1] &gt;= 85</span>, (나)에 <span class="cd">print (row[0])</span>이 들어가야 한다.</p>
+<p class="txt bl s12_12">④ 목표 점수보다 더 높은 점수를 받은 월을 출력하려면 (가)에 <span class="cd">row[-1] &gt; row[1]</span>, (나)에 <span class="cd">print(row[0])</span>이 들어가야 한다.</p>
+<p class="txt bl s12_12">⑤ 목표 점수보다 더 낮은 점수를 받았을 때, 목표 점수와 실제 점수의 차이를 출력하려면 (가)에 <span class="cd">row[-1] &gt; row[1]</span>, (나)에 <span class="cd">print(row[-1] - row[1])</span>이 들어가야 한다.</p>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0873/">정답 및 해설</a></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="315">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown6">6</span><br/>
+      마무리</h3>
+</div>
+<p class="txtex dm s10_10"><span class="dm brown">1</span> <span class="dm">리스트</span></p>
+<p class="txt dl">여러 요소를 묶어 표현한 데이터 타입으로, 각 요소가 숫자 인덱스와 대응된다. 인덱스는 0부터 시작하는 점에 유의한다.</p>
+<div class="ind10">
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>리스트명 = [요소1, 요소2 …]</pre>
+</div>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">2</span> <span class="dm">리스트에 사용할 수 있는 명령어</span></p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w30">
+<p class="txts dm">구분</p>
+</td>
+<td class="w70">
+<p class="txts dm">형식</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">리스트 길이 구하기</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">len(리스트명)</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">리스트에 데이터 추가하기</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">리스트명.append(데이터)</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">리스트의 데이터 삭제하기</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">리스트명.remove(데이터)</span></p>
+<p class="txts dl"><span class="cd">del 리스트명[인덱스]</span></p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">리스트 슬라이싱하기</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">리스트명[시작 인덱스:종료 인덱스]</span></p>
+<p class="txts dl">(시작 인덱스부터 종료 인덱스 - 1까지 슬라이싱)</p>
+<p class="txts dl"><span class="cd">리스트명[:종료 인덱스]</span></p>
+<p class="txts dl">(처음부터 종료 인덱스 - 1까지 슬라이싱)</p>
+<p class="txts dl"><span class="cd">리스트명[시작 인덱스:]</span></p>
+<p class="txts dl">(시작 인덱스부터 끝까지 슬라이싱)</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">리스트 정렬하기</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">리스트명.sort()</span></p>
+<p class="txts dl">(<span class="cd">reverse=True</span> 옵션을 사용하면 내림차순 정렬, 옵션을 사용하지 않으면 오름차순 정렬이 기본값)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="316">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown6">
+<p class="txtex dm s10_10"><span class="dm brown">3</span> <span class="dm">문자열 슬라이싱하기</span></p>
+<table class="ind10">
+<tbody>
+<tr class="tb_brown_line tb_white">
+<td class="w30">
+<p class="txts dm">구분</p>
+</td>
+<td class="w70">
+<p class="txts dm">형식</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl">인덱스를 사용한 문자열 슬라이싱</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">변수[시작 인덱스:종료 인덱스]</span></p>
+<p class="txts dl"><span class="cd">변수[:종료 인덱스]</span></p>
+<p class="txts dl">(처음부터 종료 인덱스 - 1까지 슬라이싱)</p>
+<p class="txts dl"><span class="cd">변수[시작 인덱스:]</span></p>
+<p class="txts dl">(시작 인덱스부터 끝까지 슬라이싱)</p>
+</td>
+</tr>
+<tr class="tb_white">
+<td class="w30">
+<p class="txts dl"><span class="cd">split()</span>을 사용한 문자열 나누기</p>
+</td>
+<td class="w70">
+<p class="txts dl"><span class="cd">변수.split(기준 문자)</span></p>
+<p class="txts dl">(기준 문자를 설정하지 않으면 공백을 기준으로 자동 분리)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txts"> </p>
+<p class="txtex dm s10_10"><span class="dm brown">4</span> <span class="dm">이차원 리스트</span></p>
+<p class="txt dl ind10">리스트 안에 리스트가 있는 리스트다. 행 인덱스와 열 인덱스가 있으며, 행 인덱스를 먼저 쓰고 열 인덱스를 뒤에 쓴다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="317">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5" id="s1">
+<p class="txt1 dm"><span class="brown">Self Check</span></p>
+<p class="txts"> </p>
+<div class="box_white2">
+<p class="txt bl s10_10"><span class="dm brown">1</span> 다음 그림처럼 2개의 리스트로 도서 제목과 도서 가격을 관리하려고 합니다. 도서 제목을 저장하는 리스트는 <span class="cd">book_name</span>이고, 도서 가격을 저장하는 리스트는 <span class="cd">book_price</span>입니다. <span class="cd">book_name[0]</span>에 저장된 도서의 가격은 <span class="cd">book_price[0]</span>에, <span class="cd">book_name[1]</span> 도서의 가격은 <span class="cd">book_price[1]</span>에 저장하는 방식으로 도서 제목과 가격을 저장한다고 합시다.</p>
+<div class="ind10"><img alt="" class="w100" src="https://thebook.io/img/080251/275_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="ind10"><img alt="" class="w100" src="https://thebook.io/img/080251/275_2.jpg"/></div>
+<p class="txts"> </p>
+<p class="txt bl ind10">정리한 내용을 이차원 리스트로 만들면 다음과 같습니다. 이 코드를 바탕으로 물음에 답하세요.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> random 
+book_name = [<span class="red2">'역사탐험대'</span>, <span class="red2">'파이썬'</span>, <span class="red2">'학습법'</span>, <span class="red2">'영단어'</span>, <span class="red2">'여행에세이'</span>, <span class="red2">'삼국지'</span>] 
+book_price = []</pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">1) <span class="cd">book_name</span>이 코드와 같을 때 15,000~25,000원 사이의 무작위 정수를 <span class="cd">book_price</span>에 도서 가격으로 추가하는 코드를 이어서 작성하세요. 그리고 <span class="cd">book_name</span>과 <span class="cd">book_price</span>를 출력하세요.</p>
+<p class="txt bl s12_12">2) 가장 비싼 가격의 도서 제목을 출력해 보세요.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="318">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown5" id="s1"><div class="box_white2">
+<p class="txt bl"><span class="dm brown">2</span> 다음 그림은 오디션 프로그램 참가자들의 순위표입니다.</p>
+<div class="ind10">
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w10">
+<p class="txts dm">순위</p>
+</td>
+<td class="w30">
+<p class="txts dm">참가자</p>
+</td>
+<td class="w30">
+<p class="txts dm">이번 주 득표수</p>
+</td>
+<td class="w30">
+<p class="txts dm">지난주 득표수</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">1</p>
+</td>
+<td class="w30">
+<p class="txts dl">라이언</p>
+</td>
+<td class="w30">
+<p class="txts dl">956412</p>
+</td>
+<td class="w30">
+<p class="txts dl">564553</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">2</p>
+</td>
+<td class="w30">
+<p class="txts dl">니니즈</p>
+</td>
+<td class="w30">
+<p class="txts dl">861832</p>
+</td>
+<td class="w30">
+<p class="txts dl">927175</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">3</p>
+</td>
+<td class="w30">
+<p class="txts dl">어피치</p>
+</td>
+<td class="w30">
+<p class="txts dl">796354</p>
+</td>
+<td class="w30">
+<p class="txts dl">593175</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">4</p>
+</td>
+<td class="w30">
+<p class="txts dl">프로도</p>
+</td>
+<td class="w30">
+<p class="txts dl">534840</p>
+</td>
+<td class="w30">
+<p class="txts dl">864326</p>
+</td>
+</tr>
+<tr>
+<td class="w10">
+<p class="txts dl">5</p>
+</td>
+<td class="w30">
+<p class="txts dl">네오</p>
+</td>
+<td class="w30">
+<p class="txts dl">387896</p>
+</td>
+<td class="w30">
+<p class="txts dl">648367</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txt bl">이 표를 이차원 리스트로 만들면 다음과 같습니다. 이 코드를 바탕으로 물음에 답하세요.</p>
+</div>
+<div class="highlight">
+<pre>ranking = <span>[</span>[<span class="green">1</span>, <span class="red2">'라이언'</span>, <span class="green">956412</span>, <span class="green">564553</span>], 
+           [<span class="green">2</span>, <span class="red2">'니니즈'</span>, <span class="green">861832</span>, <span class="green">927175</span>], 
+           [<span class="green">3</span>, <span class="red2">'어피치'</span>, <span class="green">796354</span>, <span class="green">593175</span>], 
+           [<span class="green">4</span>, <span class="red2">'프로도'</span>, <span class="green">534840</span>, <span class="green">864326</span>], 
+           [<span class="green">5</span>, <span class="red2">'네오'</span>, <span class="green">387896</span>, <span class="green">648367</span><span>]</span>]</pre>
+</div>
+<div class="ind10">
+<p class="txt bl s12_12">1) 참가자의 순위-이름을 쌍으로 한 번에 출력하는 코드를 작성하세요.</p>
+<p class="txt bl s12_12">2) 이번 주 득표수가 50만 표가 넘는 참가자의 이름과 이번 주 득표수를 같이 출력하세요.</p>
+<p class="txt bl s12_12">3) 지난주보다 득표수가 떨어진 참가자가 누구인지 득표수가 얼마나 떨어졌는지를 출력하세요.</p>
+<p class="txt bl s12_12">4) 지난주와 이번 주 득표수 중 한 번이라도 80만 표를 넘은 참가자를 출력하세요.</p>
+</div>
+<p class="txts dl tright"><a href="https://thebook.io/080251/0874/">정답 및 해설</a></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div>
+    </div>
+</body>
+</html>

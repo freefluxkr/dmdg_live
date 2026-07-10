@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>01_1장_깃과_버전_관리</title>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Fira+Code:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Fira Code', 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div>
+<h1>1장 깃과 버전 관리</h1>
+<p class="x----2">이 장에서는 본격적으로 학습하기에 앞서 깃의 필요성과 특징을 간단히 알아보겠습니다. 깃의 유용성과 다양한 적용 분야를 발견할 수 있습니다.</p>
+<p class="x0-----1"><span class="DIN------- x100">1</span><span class="DIN-------">.</span><span class="DIN------- x100">1</span><span class="DIN-------"> </span>버전 관리</p>
+<p class="x0-----1"><span class="DIN------- x100">1</span><span class="DIN-------">.</span><span class="DIN------- x100">2</span><span class="DIN-------"> </span>버전 관리 시스템</p>
+<p class="x0-----1"><span class="DIN------- x100">1</span><span class="DIN-------">.</span><span class="DIN------- x100">3</span><span class="DIN-------"> </span>깃</p>
+<p class="x0-----1"><span class="DIN------- x100">1</span><span class="DIN-------">.</span><span class="DIN------- x100">4</span><span class="DIN-------"> </span>깃의 동작 한눈에 보기</p>
+<p class="x0-----1"><span class="DIN------- x100">1</span><span class="DIN-------">.</span><span class="DIN------- x100">5</span><span class="DIN-------"> </span>정리</p>
+</div>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>1.1 버전 관리</h2>
+<p class="x00--">프로그래밍은 컴퓨터 언어로 글을 작성하는 창작 활동이라고 할 수 있습니다. 또 프로그래밍 개발 과정은 수많은 코드를 변경하고 테스트하는 것입니다. 지속적으로 변경되는 과정 속에서 코드는 잠시 불안정한 수정 상태와 안정된 상태를 반복합니다. 개발자는 안정된 상태의 코드와 불안정한 상태의 코드를 인지하고, 항상 안정된 상태를 유지하도록 노력해야 합니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>1.1.1 버전이란?</h3>
+<p class="x00--">버전이란 무엇일까요? 컴퓨터 프로그램을 사용하면서 버전<span class="x3------">(</span><span class="A------ x3------">version</span><span class="x3------">)</span>이라는 단어를 많이 들어 보았을 것입니다. 대부분은 윈도 <span class="A------">10</span>, 한글 <span class="A------">9</span>.<span class="A------">7</span> 등 프로그램 이름 뒤에 붙어 있는 숫자가 버전을 의미한다고 알고 있을 것입니다. 맞습니다. 이 숫자가 버전입니다. 사전을 찾아보면 <span class="x3---------">이전의 것과 다른 또는 약간 비슷한 것</span>으로 정의되어 있습니다. </p>
+<p class="x00--">버전은 이전과 약간씩 다른 변화들을 구분하는 표시입니다. 버전을 표시하는 데 숫자를 많이 사용하지만 꼭 숫자만 사용해야 하는 것은 아닙니다. <span class="A------">2016</span>에디션, <span class="A------">2017</span>에디션, 윈도 <span class="A------">XP</span>, <span class="A------">macOS</span> <span class="A------">X</span> 엘카피탠처럼 연도나 다른 기호를 사용하기도 합니다.</p>
+<p class="x00--">그렇다면 서브버전은 무엇일까요? 보통 버전과 버전 사이에도 코드가 수없이 변화되며 이 중간에도 버전이 있습니다. 이처럼 버전과 버전 사이에 변화된 것을 서브버전이라고 합니다. <span class="A------">1</span>.<span class="A------">0</span> 버전과 <span class="A------">2</span>.<span class="A------">0</span> 버전 사이에는 <span class="A------">1</span>.<span class="A------">01</span>, <span class="A------">1</span>.<span class="A------">02</span>, <span class="A------">1</span>.<span class="A------">03</span>처럼 수많은 서브버전이 있습니다. </p>
+<p class="x00--">이러한 버전의 숫자나 기호 역시 일련의 규칙들이 있습니다. 버전을 부여하려면 소스 코드를 구별할 수 있는 의미 있는 변화가 있어야 합니다. 개발 도중 임시로 작업한 것을 버전이라고 말하지는 않습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>1.1.2 버전 관리는 왜 필요할까?</h3>
+<p class="x00--">어릴 적부터 많이 듣던 말 중에 “공부에는 왕도가 없다.”가 있습니다. 마찬가지로 프로그램 코드도 한 번에 모두 완성되지 않습니다. 일반적으로 프로그램 코드는 한 단계씩 살을 붙여 가면서 기능들을 추가해 나갑니다. 오랜 시간 동안 수많은 작업을 개선하면서 데이터는 변하고 끊임없이 증가합니다. 이러한 변화와 작업을 진행하면서 하나의 완성된 프로그램을 만드는 것입니다.</p>
+<p class="x00--">개발 도중에는 많은 기능이 추가되고, 수많은 코드가 변경됩니다. 변경되는 동안 코드들은 잠시 불안정한 상태가 되고, 이후 정상적인 테스트와 동작을 확인하고 나면 다시 안정된 상태의 코드가 됩니다.</p>
+<p class="x00--">숙련된 개발자라면 작업 과정에서 코드들을 안정되게 유지해야 한다는 것을 잘 압니다. 개발 또는 테스트하는 과정에서 불안정한 코드가 있다면 계속 이어서 작업하기 불안할 것입니다. 때에 따라 더 이상 작업하기 어려울 수도 있습니다. 이때는 이전 상태로 돌아가 다시 시작할 수 있는 코드의 복귀(포인트) 지점이 필요합니다.</p>
+<p class="fcap">▼ 그림 1-1 코드 복귀 지점</p>
+<img alt="270502.png" class="frame-12" src="https://thebook.io/img/080212/270502.png"/>
+<p class="x00--">코드 복귀 지점은 반드시 안정된 코드 상태를 기준으로 설정해야 합니다. 이렇게 복귀 지점을 기록해 두면 좀 더 자유롭고 안정적으로 개발할 수 있습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>1.2 버전 관리 시스템</h2>
+<p class="x00--">우리는 컴퓨터를 사용하면서 이미 다양한 방법으로 버전을 기록하고 있습니다. 예를 들어 워드프로세서로 보고서를 작성할 때 갑자기 컴퓨터 전원이 꺼져서 작업한 내용이 사라진 적이 있을 것입니다. 이러한 경험을 하게 되면 자신도 모르게 작업 상태를 수시로 저장하는 습관이 생깁니다. 이처럼 작업 상태를 저장하는 것 또한 변화의 기록입니다. </p>
+<p class="x00--">일반적으로 우리는 한 파일에 계속 덮어 쓰면서 저장합니다. 이때 변화되는 버전을 표시하지 않았기 때문에 이전 상태로는 돌아가지 못합니다. 변화가 있는 문서 상태를 구분하고 싶을 때는 보통 ‘파일이름_<span class="A------">1</span>, 파일이름_<span class="A------">2</span>’처럼 파일 이름을 다르게 저장하곤 합니다. 이 <span class="x3---------">다른 이름으로 저장하는 방식</span>은 한 문서를 여러 파일로 계속 저장하는 방식이라, 시간 차이를 두고 저장하다 보면 이름 규칙을 잊곤 합니다. 다음과 같이 통일성 없이 파일 이름을 만들어 저장했다면 버전을 알아보기 힘듭니다.</p>
+<p class="fcap">▼ 그림 1-2 새 파일로 계속 저장</p>
+<img alt="0102.jpg" class="frame-13" src="https://thebook.io/img/080212/0102_fmt.jpeg"/>
+<p class="x00--">그렇다면 파일 버전을 좀 더 편리하고 정확하게 관리할 수는 없을까요? 이때 사용하는 것이 버전 관리 소프트웨어입니다. 특히 프로그래밍 코드는 일반 문서와 달리 복잡하고 많이 변경되므로 버전 관리 소프트웨어를 사용하는 것이 좋습니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>1.2.1 버전 관리 소프트웨어</h3>
+<p class="x00--">코드와 콘텐츠의 변화를 관리하고 추적하는 소프트웨어를 버전 관리 시스템<span class="x3------">(</span><span class="A------ x3------">VCS</span><span class="x3------">, </span><span class="A------ x3------">Version</span><span class="x3------"> </span><span class="A------ x3------">Control</span><span class="x3------"> </span><span class="A------ x3------">System</span><span class="x3------">)</span>이라고 합니다. 최초의 버전 관리 시스템은 유닉스 환경에서 사용 가능한 <span class="A------">SCCS</span><span class="x3------">(</span><span class="A------ x3------">Source</span><span class="x3------"> </span><span class="A------ x3------">Code</span><span class="x3------"> </span><span class="A------ x3------">Control</span><span class="x3------"> </span><span class="A------ x3------">System</span><span class="x3------">)</span>입니다. <span class="A------">SCCS</span>는 <span class="A------">1970</span>년대 마크 로치킨드<span class="x3------">(</span><span class="A------ x3------">Marc</span><span class="x3------"> </span><span class="A------ x3------">J</span><span class="x3------">. </span><span class="A------ x3------">Rochkind</span><span class="x3------">)</span>가 개발했으며, 이후 다양한 <span class="A------">VCS</span> 프로그램이 등장합니다. <span class="A------">VCS</span>에서 버전 파일들을 관리하고 저장하는 공간을 저장소<span class="x3------">(</span><span class="A------ x3------">repository</span><span class="x3------">)</span>(리포지터리)라고 합니다. </p>
+<p class="x00--">현재 사용하는 <span class="A------">VCS</span>는 크게 집중형과 분산형, 두 종류로 구분할 수 있습니다.</p>
+<p class="x03---">집중형</p>
+<p class="x00-- para-style-override-14">집중형 시스템은 말 그대로 모든 소스 코드가 한곳에 집중되어 있는 형태입니다. 하나의 메인 중앙 서버에서 개발 구성원의 모든 소스 코드를 통합적으로 관리합니다. <span class="x3---------">클라이언트</span><span class="x----- x3---------">-</span><span class="x3---------">서버</span> 모델이라고도 합니다.</p>
+<ul>
+<li class="x06----"><span class="x3---------">장점</span>: 저장소 하나를 중심으로 관리하기 때문에 시스템을 운영하기 수월합니다.</li>
+<li class="x06---- para-style-override-28"><span class="x3---------">단점</span>: 중앙 저장 공간인 서버에 문제가 생기면, 소스 코드가 있는 메인 저장소에 모든 개발자가 접근할 수 없는 심각한 상황이 발생할 수 있습니다. 또 동시에 여러 개발자가 접근하면 충돌이 발생하기에 코드 수정을 안정적으로 할 수 있게 잠금 모델을 적용합니다. 파일을 변경하려면 개발자들은 순서대로 대기하고 있어야 합니다.</li>
+</ul>
+<section class="tipbox tipbox-type4">
+<header><span class="type">Note</span> <span class="title">잠금 모델</span></header>
+<hr/>
+<p>
+	  보통 다수의 클라이언트가 서버에 동시 접속하곤 합니다. 파일 하나를 다수의 사용자가 동시에 접근하여 수정하려고 한다면 충돌이 발생합니다. 누군가 먼저 파일을 수정하고 있다면 다른 사용자는 수정을 못하도록 잠금을 설정하여 방지할 수 있습니다.
+  </p>
+</section>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>1.3 깃</h2>
+<p class="x00--">깃은 <span class="A------">2005</span>년에 리눅스 개발자인 리누스 베네딕트 토르발스<span class="x3------">(</span><span class="A------ x3------">Linus</span><span class="x3------"> </span><span class="A------ x3------">Benedict</span><span class="x3------"> </span><span class="A------ x3------">Torvalds</span><span class="x3------">)</span>가 개발했습니다.<span class="x8-----"><a class="footnote-link" href="https://thebook.io/080212/0015/#footnote-254289-1" id="footnote-254289-1-backlink">1</a></span> 깃의 모든 소스는 깃허브<span class="x8-----"><a class="footnote-link" href="https://thebook.io/080212/0015/#footnote-254289-2" id="footnote-254289-2-backlink">2</a></span>에 공개되어 있으며, 깃허브에서 <span class="A------">git</span>으로 검색하면 됩니다.</p>
+<p><a href="https://github.com/git/git">https://github.com/git/git</a></p>
+<p class="fcap">▼ 그림 1-3 깃 소스</p>
+<img alt="0103.jpg" class="w80" src="https://thebook.io/img/080212/0103_fmt.jpeg"/>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>1.3.1 백업 기능</h3>
+<p class="x00--">분산형 깃은 자신의 로컬 컴퓨터에서 <span class="x3---------">독립적으로 소스의 버전 관리</span>를 할 수 있습니다. 독립적이란 것은 로컬 컴퓨터에서 자체적으로 버전을 기록하고 관리할 수 있는 시스템을 의미합니다. 혼자 진행하는 프로젝트에서는 이것만으로도 충분합니다. 하지만 컴퓨터에 문제가 생긴다면 지금까지 개발한 모든 소스를 잃을 수 있습니다. 이에 대비하여 별도의 외부 저장 장치에 데이터를 백업하곤 합니다. 하지만 외부 저장 장치에 백업하는 코드는 단순히 파일을 복사하는 것으로 기존 소스 코드와는 동기화하지 않은 별개의 파일입니다. 프로젝트 개발자라면 코드를 좀 더 안전하게 유지하고 백업하는 데 항상 신경 써야 합니다.</p>
+<p class="x00--">이때 깃을 사용하면 편리합니다. 깃을 사용하면 코드를 원격 저장소에 저장할 수 있습니다. 또 로컬 컴퓨터의 저장소를 동기화하여 원격 저장소에 백업합니다. 그리고 사무실, 집 등 여러 공간에서 원격 저장소에 저장된 내용을 다시 내려받아 프로젝트 개발을 이어서 할 수 있습니다.</p>
+<p class="x02--- para-style-override-16"><span> </span></p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>1.3.2 협업 개발</h3>
+<p class="x00--">깃은 다수의 개발자와 코드를 공유하고 협업할 때 매우 유용합니다.</p>
+<p class="x03---">코드 공유</p>
+<p class="x00--"><span>예전에는 팀 내에서 코드를 공유하려고 외부 저장 장치를 이용하곤 했습니다. 이는 매우 번거로운 작업입니다. 깃을 사용하면 네트워크를 통해 코드를 좀 더 쉽게 공유할 수 있습니다. 심지어 인터넷이 연결되지 않은 상태에서도 코드 이력을 관리하고, 다른 개발자와 공유하여 협업할 수 있습니다.</span></p>
+<p class="x03---">책임과 기록</p>
+<p class="x00--">깃은 변경된 모든 이력을 저장합니다. 누가 언제 어떤 파일을 수정했는지 기록하기 때문에 코드를 좀 더 책임감 있게 작성하고 유지할 수 있습니다. 깃은 커밋<span class="x3------">(</span><span class="A------ x3------">commit</span><span class="x3------">)</span><span class="x8-----"><a class="footnote-link" href="https://thebook.io/080212/0015/#footnote-254289-5" id="footnote-254289-5-backlink">5</a></span>을 거쳐 모든 코드의 수정 이력을 기록합니다. 따라서 깃의 커밋은 신중하게 작업해야 합니다. 커밋으로 저장된 원본 객체는 수정할 수 없습니다. </p>
+<p class="x03---">원격 공유</p>
+<p class="x00--">분산된 여러 저장소 간에 정보를 주고받으려면 중앙 서버가 필요합니다. 깃에서는 원격 저장소가 중앙 서버 역할을 합니다. 자신의 코드 저장소를 원격 서버에 푸시<span class="x3------">(</span><span class="A------ x3------">push</span><span class="x3------">)</span><span class="x8-----"><a class="footnote-link" href="https://thebook.io/080212/0015/#footnote-254289-6" id="footnote-254289-6-backlink">6</a></span>하여 저장(동기화)합니다. 또 다른 개발자의 소스를 원격 서버에서 풀<span class="x3------">(</span><span class="A------ x3------">pull</span><span class="x3------">)</span><span class="x8-----"><a class="footnote-link" href="https://thebook.io/080212/0015/#footnote-254289-7" id="footnote-254289-7-backlink">7</a></span> 또는 페치<span class="x3------">(</span><span class="A------ x3------">fetch</span><span class="x3------">)</span><span class="x8-----"><a class="footnote-link" href="https://thebook.io/080212/0015/#footnote-254289-8" id="footnote-254289-8-backlink">8</a></span>하여 언제든지 내려받을 수 있습니다.</p>
+<p class="x00--">깃을 사용하면 개발 구성원 간에 소스 코드를 쉽게 주고받을 수 있습니다. 원격 저장소로 전송된 코드는 여러 개발자와 소스 코드를 공유합니다. 협업하여 코드를 개발할 때 공유 기능은 매우 중요합니다. </p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>1.4 깃의 동작 한눈에 보기</h2>
+<p class="x00--">앞으로 깃의 다양한 동작을 살펴볼 것입니다. 깃은 크게 다섯 단계로 진행됩니다.</p>
+<p class="x00-- para-style-override-16"><span> </span></p>
+<p class="fcap">▼ 그림 1-4 깃의 다섯 단계</p>
+<img alt="270583.png" class="frame-17" src="https://thebook.io/img/080212/270583.png"/>
+<ul>
+<li class="x06----"><span class="x3---------">초기화</span>: 폴더를 깃 저장소로 변경합니다.</li>
+<li class="x06----"><span class="x3---------">커밋</span>: 변경된 코드의 이력을 기록합니다.</li>
+<li class="x06----"><span class="x3---------">브랜치</span>: 분리 격리된 코드 이력을 기록합니다.</li>
+<li class="x06----"><span class="x3---------">병합</span>: 기존 이력과 분리된 이력을 통합합니다.</li>
+<li class="x06---- para-style-override-28"><span class="x3---------">푸시</span>: 로컬 저장소의 이력을 서버로 전송 및 공유합니다.</li>
+</ul>
+<p class="x00--">다음 장부터 각 단계를 순차적으로 학습할 것입니다.</p>
+</div>
+</section>
+</section></div>
+<div class="book-page-fragment"><section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h2>1.5 정리</h2>
+<p class="x00--">깃은 다양한 알고리즘과 기술로 무장하고 있습니다. 또 많은 프로젝트를 깃으로 관리하면서 안정성과 가치를 인정받고 있습니다. 깃을 잘 활용하려면 깃의 개념을 이해하고 많이 사용해 보아야 합니다. 앞으로 장별로 제공하는 실습을 따라 하면서 여러 가지 깃의 기능을 학습할 것입니다. 깃을 잘 활용하여 자신의 개발 능력을 한 단계 더 높일 수 있는 계기가 되었으면 합니다.</p>
+<div class="footnotes">
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0009/#footnote-254289-1-backlink" id="footnote-254289-1">1</a><span class="x8-------- x8--------"></span>  영국 영어에서 <span class="x100 x100">G</span><span class="x100 x100">it</span>은 ‘바보, 가치 없는 사람’이라는 반어적 표현입니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0009/#footnote-254289-2-backlink" id="footnote-254289-2">2</a><span class="x8-------- x8--------"></span>  깃허브는 나중에 배웁니다. 여기서는 깃 소스가 모두 공개되어 있다는 점만 알고 넘어갑니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0010/#footnote-254289-3-backlink" id="footnote-254289-3">3</a><span class="x8-------- x8--------"></span>  원격 서버에서 관리하는 저장소(외부 저장소)입니다. 자신의 원격 저장소 외에 타인의 저장소도 포함하며, 여러 명과 공유할 수 있습니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0010/#footnote-254289-4-backlink" id="footnote-254289-4">4</a><span class="x8-------- x8--------"></span>  간단히 두 소스 코드를 합치는 것입니다. 자세한 내용은 <span class="x100 x100">8</span>장에서 설명합니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0012/#footnote-254289-5-backlink" id="footnote-254289-5">5</a><span class="x8-------- x8--------"></span>  파일 및 폴더의 추<span>가·</span>변경 사항들을 기록하는 것을 의미합니다. 이 커밋을 기준으로 코드<span xml:lang="ko-KR">를</span> 관리<span xml:lang="ko-KR">합</span>니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0012/#footnote-254289-6-backlink" id="footnote-254289-6">6</a><span class="x8-------- x8--------"></span>  자신의 로컬 저장소(개인 <span class="x100 x100">PC</span>의 저장소)에서 변경된 파일을 원격 저장소로 업로드하는 것입니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0012/#footnote-254289-7-backlink" id="footnote-254289-7">7</a><span class="x8-------- x8--------"></span>  원격 저장소의 변경 사항을 자신의 로컬 저장소에 적용하는 것입니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0012/#footnote-254289-8-backlink" id="footnote-254289-8">8</a><span class="x8-------- x8--------"></span>  원격 저장소의 변경 사항을 내려받는 것으로, 적용(병합)은 하지 않습니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0013/#footnote-254289-9-backlink" id="footnote-254289-9">9</a><span class="x8-------- x8--------"></span>  메인 개발 라인에서 분기된 하나의 갈래를 의미합니다. 새로운 기능을 안전하게 개발하고 싶을 때 추가로 메인 개발 라인에서 분기된 새 개발 라인을 만들어 개발하고, 개발이 완료되면 다시 메인 개발 라인에 병합합니다. <span class="x100 x100">6</span>장에서 자세히 설명합니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0013/#footnote-254289-10-backlink" id="footnote-254289-10">10</a><span class="x8-------- x8--------"></span>  다른 사람의 원격 저장소를 가져와(복사하여) 자신의 원격 저장소를 만드는 것을 의미합니다.</p>
+</div>
+<div class="footnote">
+<p class="x8-----"><a class="footnote-anchor" href="https://thebook.io/080212/0013/#footnote-254289-11-backlink" id="footnote-254289-11">11</a><span class="x8-------- x8--------"></span>  자신의 로컬 저장소에서 작업한 후 이 작업을 원본 저장소에 반영해 달라고 요청하는 것을 의미합니다.</p>
+</div>
+</div>
+</div>
+</section>
+</section></div>
+</body>
+</html>

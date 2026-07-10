@@ -1,0 +1,22 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">if-elif-else</span>와 결과는 동일하나 구조가 조금 다릅니다. <span class="cd">if</span> 문 안에 <span class="cd">if</span> 문이 있습니다. 이처럼 조건문 안에 조건문이 있는 형태를 <span class="dm">중첩 조건문</span>이라 합니다. 기존 코드의 구조만 바꾸면 되니 바로 작성해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="red2">'미세먼지 저감 조치에 따른 차량 2부제를 시행합니다!'</span>)
+
+date = int(<span class="gold">input</span>(<span class="red2">'오늘은 며칠입니까? '</span>))
+<span class="purple">if</span> date <span class="cd2">&lt;=</span> <span class="green">31</span>:
+    <span class="cd2 purple">if</span> date % <span class="green">2</span> == <span class="green">1</span>: <span class="red">→ if 문 안에 if 문이 들어 있는 형태</span>
+        <span class="gold">print</span>(<span class="red2">'홀수번호 차량만 통행 가능합니다.'</span>)
+        <span class="gold">print</span>(<span class="red2">'짝수번호 차주는 오늘 대중교통을 이용하세요.'</span>)
+    <span class="purple">else</span>:
+        <span class="gold">print</span>(<span class="red2">'짝수번호 차량만 통행 가능합니다.'</span>)
+        <span class="gold">print</span>(<span class="red2">'홀수번호 차주는 오늘 대중교통을 이용하세요.'</span>)
+<span class="cd2 purple">else</span><span class="cd2">:</span>
+    <span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'올바른 날짜를 입력하세요.'</span><span class="cd2">)</span></pre>
+</div>
+<p class="txt bl">홀수와 짝수를 판단하는 <span class="cd">if-else</span> 문은 첫 번째 <span class="cd">if</span> 문(<span class="cd">if date &lt;= 31</span>)이 충족될 때 실행되어야 하므로 들여쓰기를 합니다. 조건의 범위만 잘 파악하면 <span class="cd">if</span> 안에 <span class="cd">if</span>를 사용하는 중첩 조건문도 쉽게 작성할 수 있습니다.</p>
+</div>
+</section>
+</section>

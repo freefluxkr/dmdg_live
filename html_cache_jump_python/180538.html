@@ -1,0 +1,268 @@
+<h1 class="page-subject">05-7 외부 라이브러리</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>파이썬 설치 시 기본으로 설치되는 라이브러리를 '파이썬 표준 라이브러리'라고 한다. 이번에 소개하는 외부 라이브러리는 파이썬 표준 라이브러리가 아니므로 사용하려면 먼저 설치 도구를 이용해 설치해야 한다.</p>
+<blockquote>
+<p>pip은 '핍'이라고 읽는다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#pip">pip</a><ul>
+<li><a href="#pip-install">pip install</a></li>
+<li><a href="#pip-uninstall">pip uninstall</a></li>
+<li><a href="#_1">특정 버전으로 설치하기</a></li>
+<li><a href="#_2">최신 버전으로 업그레이드하기</a></li>
+<li><a href="#_3">설치된 패키지 확인하기</a></li>
+</ul>
+</li>
+<li><a href="#faker">Faker</a><ul>
+<li><a href="#faker_1">Faker 사용해 보기</a></li>
+<li><a href="#faker_2">Faker 활용하기</a></li>
+</ul>
+</li>
+<li><a href="#sympy">sympy</a><ul>
+<li><a href="#sympy_1">sympy 사용해 보기</a></li>
+<li><a href="#sympy_2">sympy 활용</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="pip">pip</h2>
+<p>pip은 파이썬 모듈이나 패키지를 쉽게 설치할 수 있도록 도와주는 도구이다. pip의 가장 큰 장점은 의존성 있는 모듈이나 패키지를 자동으로 함께 설치해 준다는 것이다. 예를 들어 B 패키지를 설치하려면 A 패키지가 먼저 필요하다면, pip은 B 패키지를 설치할 때 A 패키지도 자동으로 함께 설치해 준다.</p>
+<p>pip 사용법을 간략하게 알아보자.</p>
+<h3 id="pip-install">pip install</h3>
+<p>PyPI(Python Package Index)는 파이썬 소프트웨어가 모인 저장 공간이다. 많은 파이썬 패키지가 등록되어 있으며, 누구나 내려받아 사용할 수 있다. 직접 내려받아 설치해도 되지만, pip을 이용하면 다음과 같이 간편하게 설치할 수 있다.</p>
+<pre><code class="language-plaintext">python -m pip install SomePackage
+</code></pre>
+<blockquote>
+<p>맥에서도 동일하게 <code>python3 -m pip install SomePackage</code> 또는 <code>python -m pip install SomePackage</code> 형태로 실행할 수 있다.</p>
+</blockquote>
+<p>여기서 SomePackage는 설치할 패키지 이름이다.</p>
+<h3 id="pip-uninstall">pip uninstall</h3>
+<p>설치한 패키지를 삭제하려면 다음 명령어를 사용한다.</p>
+<pre><code class="language-plaintext">python -m pip uninstall SomePackage
+</code></pre>
+<h3 id="_1">특정 버전으로 설치하기</h3>
+<p>특정 버전의 패키지를 설치하려면 다음과 같이 버전을 지정한다. 아래 명령어를 실행하면 1.0.4 버전의 SomePackage를 설치한다.</p>
+<pre><code class="language-plaintext">python -m pip install SomePackage==1.0.4
+</code></pre>
+<p>버전을 생략하면 최신 버전으로 자동 설치된다.</p>
+<pre><code class="language-plaintext">python -m pip install SomePackage
+</code></pre>
+<h3 id="_2">최신 버전으로 업그레이드하기</h3>
+<p>패키지를 최신 버전으로 업그레이드하려면 <code>--upgrade</code> 옵션을 사용한다.</p>
+<pre><code class="language-plaintext">python -m pip install --upgrade SomePackage
+</code></pre>
+<h3 id="_3">설치된 패키지 확인하기</h3>
+<p>다음 명령은 pip으로 설치한 패키지 목록을 출력한다.</p>
+<pre><code class="language-plaintext">python -m pip list
+</code></pre>
+<p>다음과 같이 설치된 패키지 목록을 출력한다.</p>
+<pre><code class="language-plaintext">Package                  Version
+------------------------ --------
+amqp                     2.1.4
+anyjson                  0.3.3
+billiard                 3.3.0.23
+celery                   3.1.0
+defusedxml               0.4.1
+diff-match-patch         20121119
+(... 생략 ...)
+</code></pre>
+<h2 id="faker">Faker</h2>
+<p>이번에는 pip을 사용하여 유용한 외부 라이브러리 중 하나인 Faker를 설치하고 사용해 보자. Faker는 테스트용 가짜 데이터를 생성할 때 사용하는 라이브러리이다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>Faker 라이브러리는 pip을 이용하여 설치해야 한다.</p>
+<pre><code class="language-plaintext">C:\&gt; python -m pip install Faker
+</code></pre>
+<h3 id="faker_1">Faker 사용해 보기</h3>
+<p>다음과 같은 형식의 테스트 데이터 30건이 필요하다고 가정해 보자. 직접 데이터를 작성하지 않고 좀 더 편리하게 테스트 데이터를 만들려면 어떻게 해야 할까?</p>
+<pre><code class="language-plaintext">[(이름1, 주소1), (이름2, 주소2), ..., (이름30, 주소30)]
+</code></pre>
+<p>Faker를 사용하면 매우 쉽게 만들 수 있다. 이름은 다음처럼 만든다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; from faker import Faker
+&gt;&gt;&gt; fake = Faker()
+&gt;&gt;&gt; fake.name()
+'Matthew Estrada'
+</code></pre>
+<p>한글 이름이 필요하다면 다음과 같이 한국을 의미하는 ko-KR을 전달하여 fake 객체를 생성하면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; fake = Faker('ko-KR')
+&gt;&gt;&gt; fake.name()
+'김하은'
+</code></pre>
+<p>주소는 다음과 같이 만든다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; fake.address()
+'충청북도 수원시 잠실6길 (경자주이읍)'
+</code></pre>
+<p>따라서 이름과 주소를 쌍으로 하는 30건의 테스트 데이터는 다음과 같이 만들 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; test_data = [(fake.name(), fake.address()) for i in range(30)]
+</code></pre>
+<p>실행 결과는 다음과 같다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; test_data
+[('이예진', '인천광역시 동대문구 언주거리 (경자김면)'), ('윤도윤', '광주광역시 서초구 삼성로 (주원최박리)'), ('서동현', '인천광역시 관악구 잠실가 (민석엄김마을)'), ('김광수', '울산광역시 양천구 서초대로'), (... 생략 ...), ('박성현', '전라남도 서산시 가락27길 (준영박문읍)'), ('김성호', '경상남도 영월군 학동거리'), ('백지우', '경기도 계룡시 서초대1로'), ('권유진', '경기도 양주시 서초중앙313가 (춘자나리)'), ('윤서준', '경상남도 청주시 서원 구 서초대64가')]
+</code></pre>
+<h3 id="faker_2">Faker 활용하기</h3>
+<p>Faker는 앞서 살펴본 name, address 이외에 다른 항목도 제공한다. 대표적인 몇 가지만 알아보자.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fake.name()</td>
+<td>이름</td>
+</tr>
+<tr>
+<td>fake.address()</td>
+<td>주소</td>
+</tr>
+<tr>
+<td>fake.postcode()</td>
+<td>우편 번호</td>
+</tr>
+<tr>
+<td>fake.country()</td>
+<td>국가명</td>
+</tr>
+<tr>
+<td>fake.company()</td>
+<td>회사명</td>
+</tr>
+<tr>
+<td>fake.job()</td>
+<td>직업명</td>
+</tr>
+<tr>
+<td>fake.phone_number()</td>
+<td>전화 번호</td>
+</tr>
+<tr>
+<td>fake.email()</td>
+<td>이메일 주소</td>
+</tr>
+<tr>
+<td>fake.user_name()</td>
+<td>사용자명</td>
+</tr>
+<tr>
+<td>fake.pyint(min_value=0, max_value=100)</td>
+<td>0부터 100 사이의 임의의 숫자</td>
+</tr>
+<tr>
+<td>fake.ipv4_private()</td>
+<td>IP 주소</td>
+</tr>
+<tr>
+<td>fake.text()</td>
+<td>임의의 문장 (한글 임의의 문장은 <code>fake.catch_phrase()</code> 사용)</td>
+</tr>
+<tr>
+<td>fake.color_name()</td>
+<td>색상명</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<h2 id="sympy">sympy</h2>
+<p>sympy는 방정식 기호(symbol)를 사용하게 해 주는 외부 라이브러리이다. 마찬가지로 pip을 이용하여 sympy를 설치하자.</p>
+<pre><code class="language-plaintext">C:\&gt; python -m pip install sympy
+</code></pre>
+<h3 id="sympy_1">sympy 사용해 보기</h3>
+<p>시윤이는 가진 돈의 $2/5$로 학용품을 샀다고 한다. 학용품을 사는 데 쓴 돈이 1,760원이라면 남은 돈은 어떻게 구하면 될까?</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/180538/05_7_pic1.png"/></p>
+<p>이 문제는 연습장과 연필만 있으면 쉽게 구할 수 있는 일차방정식 문제이다. 파이썬에서는 sympy를 사용하면 방정식을 쉽게 풀 수 있다. 먼저 다음과 같이 fractions 모듈과 sympy 모듈이 필요하다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; from fractions import Fraction
+&gt;&gt;&gt; import sympy
+</code></pre>
+<p>시윤이가 가진 돈을 x라고 하면 sympy 모듈을 사용하여 다음과 같이 표현할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; x = sympy.symbols("x")
+</code></pre>
+<p>sympy.symbols()는 x처럼 방정식에 사용하는 미지수를 나타내는 기호를 생성할 때 사용한다.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>여러 개의 기호 사용하기</strong></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>x, y 2개의 미지수가 필요하다면 다음처럼 표현할 수 있다.</p>
+<pre><code class="language-python">x, y = sympy.symbols('x y')
+</code></pre></fieldset>
+<p>시윤이가 가진 돈의 $2/5$는 1,760원, 즉 일차방정식 $x * (2/5) = 1760$이므로 이를 코드로 표현하면 다음과 같다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; f = sympy.Eq(x*Fraction('2/5'), 1760)
+</code></pre>
+<p><code>sympy.Eq(a, b)</code>는 a와 b가 같다는 방정식이다. 여기서 사용한 Fraction은 유리수를 표현할 때 사용하는 표준 라이브러리로, $2/5$를 정확하게 계산하려고 사용했다.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>fractions.Fraction으로 유리수 연산하기</strong></p>
+<p>파이썬에서 유리수 연산을 정확하게 하려면 fractions.Fraction을 사용해야 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; from fractions import Fraction
+</code></pre>
+<p>유리수는 다음처럼 Fraction(분자, 분모) 형태로 만들 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = Fraction(1, 5)
+&gt;&gt;&gt; a
+Fraction(1, 5)
+</code></pre>
+<p>또는 다음과 같이 Fraction('분자 / 분모')처럼 문자열로 만들 수도 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = Fraction('1/5')
+&gt;&gt;&gt; a
+Fraction(1, 5)
+</code></pre></fieldset>
+<p>f라는 방정식을 세웠으므로 <code>sympy.solve(f)</code>로 x에 해당하는 값을 구할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; result = sympy.solve(f)
+&gt;&gt;&gt; result
+[4400]
+</code></pre>
+<p>방정식의 해는 여러 개일 수 있으므로 solve() 함수는 결괏값으로 리스트를 반환한다. 결과를 보면 시윤이가 원래 가진 돈이 4,400원이라는 것을 알 수 있다. 따라서 남은 돈은 다음처럼 가진 돈에서 1,760원을 빼면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; remains = result[0] - 1760
+&gt;&gt;&gt; remains
+2640
+</code></pre>
+<p>지금까지 내용을 종합한 풀이는 다음과 같다.</p>
+<pre><code class="language-python"># sympy_test.py
+from fractions import Fraction
+import sympy
+
+# 가지고 있던 돈을 x라고 하자.
+x = sympy.symbols("x")
+
+# 가지고 있던 돈의 2/5가 1760원이므로 방정식은 x * (2/5) = 1760 이다.
+f = sympy.Eq(x*Fraction('2/5'), 1760)
+
+# 방정식을 만족하는 값(result)을 구한다.
+result = sympy.solve(f)  # 결괏값은 리스트
+
+# 남은 돈은 다음과 같이 가지고 있던 돈에서 1760원을 빼면 된다.
+remains = result[0] - 1760
+
+print(f'남은 돈은 {remains}원입니다.')
+</code></pre>
+<p>프로그램을 실행한 결과는 다음과 같다.</p>
+<pre><code class="language-plaintext">남은 돈은 2640원입니다.
+</code></pre>
+<h3 id="sympy_2">sympy 활용</h3>
+<p>$x^2=1$과 같은 2차 방정식의 해를 구해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; import sympy
+&gt;&gt;&gt; x = sympy.symbols("x")
+&gt;&gt;&gt; f = sympy.Eq(x**2, 1)
+&gt;&gt;&gt; sympy.solve(f)
+[-1, 1]
+</code></pre>
+<p>또한 다음과 같은 연립방정식의 해도 구할 수 있다.</p>
+<pre><code class="language-plaintext">x + y = 10
+x - y = 4
+</code></pre>
+<pre><code class="language-python">&gt;&gt;&gt; import sympy
+&gt;&gt;&gt; x, y = sympy.symbols('x y')
+&gt;&gt;&gt; f1 = sympy.Eq(x+y, 10)
+&gt;&gt;&gt; f2 = sympy.Eq(x-y, 4)
+&gt;&gt;&gt; sympy.solve([f1, f2])
+{x: 7, y: 3}
+</code></pre>
+<p>미지수가 2개 이상이면 결괏값이 리스트가 아닌 딕셔너리라는 점에 주의하자.</p>
+</div>

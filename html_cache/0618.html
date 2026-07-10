@@ -1,0 +1,26 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">비어 있던 <span class="cd">dong_population</span> 딕셔너리에 데이터가 저장됩니다.</p>
+<p class="txt bl">코드를 한 줄씩 살펴봅시다. 먼저 반복문으로 <span class="cd">data</span>를 돌며 행정동코드(<span class="cd">row[2]</span>)와 총생활인구수(<span class="cd">row[3]</span>)를 변수 <span class="cd">dong_code</span>와 <span class="cd">p</span>에 각각 저장합니다. 이때 해당 행의 <span class="cd">dong_code</span>를 키로 하는 항목이 없다면 {키:값}이 <span class="cd">{dong_code:p}</span>인 항목을 <span class="cd">dong_population</span> 딕셔너리에 추가합니다. 만약 <span class="cd">dong_code</span>를 키로 하는 항목이 있다면 해당 키의 값에 현재 행의 인구수 <span class="cd">p</span>를 더합니다. 결과를 보면 <span class="cd">dong_code</span>가 11215710인 행정동은 2019년 12월 한 달간 총 생활인구수가 약 32,699,578명입니다(결과가 길게 출력되므로 한 번만 확인하고 그 이후에는 주석 처리하거나 삭제해도 됩니다).</p>
+<p class="txt bl">이제 과정 3에서 총인구수를 기준으로 딕셔너리를 내림차순 정렬할 차례입니다.</p>
+<div class="highlight">
+<pre><span class="green"># 3. 인구수를 기준으로 내림차순 정렬하고</span><span class="green">, 앞에서</span> <span class="green">10개 항목만 별도로 저장하기</span>
+<span class="purple">import</span> operator
+
+top10 = <span class="gold">sorted</span>(dong_population.items(), key=operator.itemgetter(<span class="green">1</span>),
+reverse=<span class="blue2">True</span>)[:<span class="green">10</span>]
+<span class="green"># print(top10)</span>
+
+top10_code8 = []
+<span class="green">for</span> t <span class="blue2">in</span> top10:
+    top10_code8.append(t[<span class="green">0</span>])
+<span class="gold">print</span>(top10_code8)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[11680640, 11560540, 11440660, 11110615, 11650530, 11410585, 11380690, 11545510, 11680650, 11680610]</pre>
+</div>
+</div>
+</section>
+</section>

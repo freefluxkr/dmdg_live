@@ -1,0 +1,39 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 정수와 실수의 연산</p>
+<p class="txt bl">결과에서 조금 이상한 점이 있죠. 할인 전 금액은 정수였는데, 할인 후 금액은 소수점이 붙은 실수로 나옵니다. 이는 컴퓨터가 숫자를 연산할 때 두 값 중 하나라도 실수면 실수를 기준으로 연산해서 그렇습니다. 정수보다 범위가 더 큰 실수를 기준으로 연산해야 버림하는 부분 없이 더 정확하게 계산 결과가 나오기 때문입니다. 확인해 볼까요?</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="green">9</span> + <span class="green">2.0</span>) 
+<span class="gold">print</span>(<span class="green">9</span> - <span class="green">2.0</span>) 
+<span class="gold">print</span>(<span class="green">9</span> * <span class="green">2.0</span>) 
+<span class="gold">print</span>(<span class="green">9</span> / <span class="green">2.0</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+11.0 
+7.0 
+18.0
+4.5</pre>
+</div>
+<p class="txt bl">정수와 실수의 사칙연산 결과는 모두 실수로 나옵니다. 이를 정수 형태로 바꾸어 출력하고 싶다면 앞에서 배운 대로 <span class="cd">int()</span>로 감싸면 됩니다.</p>
+<p class="txt bl">그런데 정수와 정수를 연산해도 결과가 실수로 나올 때가 있습니다. 바로 나눗셈입니다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="green">5</span> + <span class="green">3</span>)
+<span class="gold">print</span>(<span class="green">5</span> - <span class="green">3</span>)
+<span class="gold">print</span>(<span class="green">5</span> * <span class="green">3</span>)
+<span class="gold">print</span>(<span class="green">5</span> / <span class="green">3</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+8
+2
+15
+1.6666666666666667</pre>
+</div>
+<p class="txtex bl">정수 5와 3을 사칙연산하면 나눗셈에서만 결과가 실수로 나옵니다. 나머지가 발생하지 않는 나눗셈도 실수로 나오므로 파이썬에서는 나눗셈을 하면 결과는 무조건 실수로 나온다는 점을 기억해 두세요.</p>
+</div>
+</div>
+</section>
+</section>

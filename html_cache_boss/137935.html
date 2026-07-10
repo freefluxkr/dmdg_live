@@ -1,0 +1,46 @@
+<h1 class="page-subject">4) 파이썬에서 VBA 코드 실행시키기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>이번 파트에서는 파이썬에서 VBA 코드를 실행시키는 방법을 알아보겠습니다.</p>
+<h1 id="1-vba">1. VBA 코드 작성</h1>
+<p>아래와 같이 "py1.xlsm" 파일에 VBA 코드를 작성해보겠습니다. 1열에 1~10행까지 "xlwings 테스트" 라는 문자열을 출력하는 코드입니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code>Sub test()
+    Dim i As Integer
+    Dim sht As Worksheet
+
+    Set sht = Sheets(1)
+    With sht
+        For i = 1 To 10
+            .Cells(i, 1).Value = "xlwings 테스트" &amp; i
+        Next i
+    End With
+End Sub
+</code></pre>
+<p>&lt;결과&gt;</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137935/3-3.JPG"/></p>
+<p>이제 위 코드를 파이썬 코드에서 호출해보겠습니다. VBA 엑셀 파일의 파일명은 "py1.xlsm"입니다. 위 VBA 프로시저의 명칭이 "test"임을 기억해둡시다.</p>
+<h1 id="2-vba">2. 파이썬에서 VBA 코드 호출하기</h1>
+<p>파이썬 "py1.py"라는 파일을 생성하였습니다. "py1.py"  파일은 .xlsm과 같은 경로에 있다고 가정하고 코드를 작성해보겠습니다. 아래 이미지는 VBA 매크로 파일과 .py 파일이 같은 경로에 있음을 보여줍니다.</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/137935/3-4.JPG"/></p>
+<p>&lt;코드&gt;</p>
+<pre><code>import  xlwings  as  xw
+
+#엑셀 매크로파일 열기(path는 매크로 파일이 있는 경로)
+wb = xw.Book("py1.xlsm")
+
+#엑셀 VBA의 매크로 함수 'test'를 파이썬 함수로 지정
+macro_test = wb.macro('test')
+
+#VBA 함수 실행
+macro_test()
+
+#함수를 실행한 엑셀파일 따로 저장하기
+wb.save("py1_result.xlsm")
+
+#WorkBook 객체 닫기
+wb.close
+
+</code></pre>
+<p>파이썬에서 엑셀 VBA를 호출하는 방법은 어렵지 않습니다. Workbook 객체 "wb"를 생성하고 객체의 매크로를 macro_test라는 이름으로 바인딩해줍니다. 그 다음, macro_test( )구문으로 실행시키면 됩니다. 위 코드의 주석을 통해 이해해보시기 바랍니다. </p>
+</div>

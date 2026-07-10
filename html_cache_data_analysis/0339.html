@@ -1,0 +1,68 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt1 dm"><span class="cap blue">■</span> 논리 연산자(logical operator)</p>
+<p class="txtex bl">어렵게 느껴지던 연산자도 벌써 마지막 논리 연산자만을 남겨두고 있습니다. 논리 연산자는 앞에서 보았던 참과 거짓. 즉, True와 False와 관련된 연산입니다. 여기에서 다루지 않는 논리 연산자도 있지만, 병아리반에서는 다음의 and, or, not 3가지 연산자만 알면 충분합니다.</p>
+<p class="txt bl">먼저 논리곱은 A and B와 같은 형태로 표현합니다. 다음 표에서 보는 것처럼 A와 B 중 하나라도 False일 경우에 결과는 False이고 둘 다 True일 때만 결과가 True가 됩니다.</p>
+<p class="txts"> </p>
+<table>
+<tbody>
+<tr>
+<td class="tb_gold w50">
+<p class="txts dm tcenter">논리식</p>
+<p class="txts dm tcenter">(A and B)</p>
+</td>
+<td class="tb_gold">
+<p class="txts dm tcenter">결과</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">True and True</p>
+</td>
+<td>
+<p class="txts dl tcenter">True</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">True and False</p>
+</td>
+<td>
+<p class="txts dl tcenter">False</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">False and True</p>
+</td>
+<td>
+<p class="txts dl tcenter">False</p>
+</td>
+</tr>
+<tr class="td_gold">
+<td>
+<p class="txts dl tcenter">False and False</p>
+</td>
+<td>
+<p class="txts dl tcenter">False</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="txts dl blue"><span class="dm bg_blue_line">표 부록-1</span> 논리곱 진리표</p>
+<p class="txts"> </p>
+<div class="box_blue_line">
+<pre><span class="red"># 다양한 값을 넣어보며 연습해보세요.</span>
+<span class="blue">print</span>(1 == 1 and 2 != 1)           <span class="red"># True and True</span>
+<span class="blue">print</span>(10 % 2 != 0 and 1 + 1 &gt; 0)   <span class="red"># True and False</span></pre>
+</div>
+<p class="txts"> </p>
+<p class="txt dm"><span class="bg_pink6">실행 결과</span></p>
+<div class="box_blue_line">
+<pre>False
+True</pre>
+</div>
+</div>
+</section>
+</section>

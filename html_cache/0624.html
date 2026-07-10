@@ -1,0 +1,11 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">위도와 경도 리스트가 출력됩니다. 그런데 두 리스트의 인덱스 [1]의 값이 0으로 나옵니다. 다른 9개 값은 잘 저장됐는데 인덱스 [1]만 다를까요?</p>
+<p class="txt bl">답은 데이터에 있습니다. 과정 3 코드를 실행한 결과에서 두 번째 행정동코드는 11560540입니다. <span class="cd">code_data</span>(dong_code.csv)에서 8자리 행정동코드가 11560540인 곳은 ‘여의동’입니다. 따라서 <span class="cd">top10_name[i]</span>에 ‘여의동’이 저장됩니다. 그런데 <span class="cd">location_data</span>(dong_location.csv)에는 여의동이 아닌 ‘여의도동’으로 저장되어 있습니다. dong_location.csv가 오래전에 작성된 파일이라서 그간의 행정동명 변화가 반영되어 않아서 그렇습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/517.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-15</span> 데이터가 일치하지 않는 경우(행정동명이 바뀐 경우)</p>
+<p class="txt bl">이렇게 위치 정보가 누락된 경우에는 7자리 행정동코드를 매개로 찾습니다. 데이터 파일에서 7자리 행정동코드가 1119054로 같은 것이 보이죠. 그래서 위도 리스트와 경도 리스트의 값 중에서 하나라도 0인 요소는 7자리 행정동코드로 다시 위치 정보를 찾게 합니다.</p>
+</div>
+</section>
+</section>

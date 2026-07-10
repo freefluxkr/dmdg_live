@@ -1,0 +1,22 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">조건을 <span class="cd">in</span>에 사용할 수 있는 문자열로 수정해 봅시다. 3, 6, 9 모두 문자로 바꾸고 변수 <span class="cd">i</span>도 숫자이므로 <span class="cd">str()</span>로 감싸 문자열로 바꿉시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(<span class="red2">'3~ 6~ 9~ 369~ 3~ 6~ 9~ 369~ '</span>)
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">1</span>, <span class="green">101</span>):
+    <span class="purple">if</span> <span class="cd2 red2">'3'</span> <span class="cd2 blue2">in</span> <span class="cd2">str(i)</span> <span class="cd2 blue2">or</span> <span class="cd2 red2">'6'</span> <span class="cd2 blue2">in</span> <span class="cd2">str(i)</span> <span class="cd2 blue2">or</span> <span class="cd2 red2">'9'</span> <span class="cd2 blue2">in</span> <span class="cd2">str(i):</span>
+        <span class="gold">print</span>(<span class="red2">'짝!'</span>, end=<span class="red2">' '</span>)
+    <span class="purple">else</span>:
+        <span class="gold">print</span>(i, end=<span class="purple">'</span> <span class="purple">'</span>)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+1 2 짝! 4 5 짝! 7 8 짝! 10 11 12 짝! 14 15 짝! 17 18 짝! 20 21 22 짝! 24 25 짝! 27 28 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 40 41 42 짝! 44 45 짝! 47 48 짝! 50 51 52 짝! 54 55 짝! 57 58 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 70 71 72 짝! 74 75 짝! 77 78 짝! 80 81 82 짝! 84 85 짝! 87 88 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 짝! 100</pre>
+</div>
+<p class="txt bl">1부터 100까지 오류 없이 잘 출력됩니다. <span class="cd">end</span> 옵션을 줘서 결과가 줄바꿈되지 않게 했습니다.</p>
+<p class="txt bl">결과를 보니 계속해서 박수를 치는 구간이 있습니다. 사람이 369 게임을 하면 중간에 누군가는 틀리기 때문에 100까지 진행되는 경우가 거의 없습니다. 그런데 컴퓨터는 틀린 부분 없이 빠르게 게임을 끝냅니다.</p>
+<p class="txt bl">이렇게 출력만 하고 끝나면 너무 시시하니 구구단 게임처럼 답을 입력받아 틀리면 프로그램이 끝나게 해 봅시다. 이 부분은 다음 절에서 다루니 코드를 잠깐 저장해 두었다가 <span class="dm">5.4.2 break를 사용한 게임 만들기</span>에서 다시 열겠습니다.</p>
+</div>
+</section>
+</section>

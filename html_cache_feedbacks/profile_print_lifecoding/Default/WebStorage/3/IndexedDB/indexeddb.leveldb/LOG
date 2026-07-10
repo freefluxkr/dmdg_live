@@ -1,0 +1,12 @@
+2026/06/29-08:37:06.278 eac Creating DB C:\Users\user\Downloads\DMDG_LIVE\html_cache_feedbacks\profile_print_lifecoding\Default\WebStorage\3\IndexedDB\indexeddb.leveldb since it was missing.
+2026/06/29-08:37:06.288 eac Reusing MANIFEST C:\Users\user\Downloads\DMDG_LIVE\html_cache_feedbacks\profile_print_lifecoding\Default\WebStorage\3\IndexedDB\indexeddb.leveldb/MANIFEST-000001
+2026/06/29-08:37:10.389 eac Level-0 table #5: started
+2026/06/29-08:37:10.392 eac Level-0 table #5: 3616 bytes OK
+2026/06/29-08:37:10.395 eac Delete type=0 #3
+2026/06/29-08:37:10.396 eac Manual compaction at level-0 from '\x00\x03\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x04\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/06/29-08:37:10.634 6d9c Manual compaction at level-0 from '\x00\x08\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x09\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/06/29-08:37:11.666 eac Level-0 table #7: started
+2026/06/29-08:37:11.671 eac Level-0 table #7: 165926 bytes OK
+2026/06/29-08:37:11.673 eac Delete type=0 #4
+2026/06/29-08:37:11.674 40e8 Manual compaction at level-0 from '\x00\x0e\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/06/29-08:37:12.813 eac Manual compaction at level-0 from '\x00\x0d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at (end)

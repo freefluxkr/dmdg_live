@@ -1,0 +1,49 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_25"><span class="yellow">4.1.2</span> 선택구조를 조건문으로 표현하기</h4>
+<p class="txts"> </p>
+<p class="txtex dm">조건문의 형식</p>
+<p class="txt bl">‘조건 A를 충족할 때만 B를 하라’는 선택구조를 파이썬에서는 다음 형식으로 표현합니다. <span class="cd">if</span>와 콜론(:) 사이에 조건을 넣고, 다음 줄에 실행할 내용을 넣습니다. 이를 <span class="dm">조건문</span>이라고 합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre><span class="purple">if</span> A: <span class="green"># 조건</span>
+    B <span class="green"># 실행할 내용</span></pre>
+</div>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 2장에서 컴퓨터는 명령어만 알아듣기 때문에 미리 정의된 명령어를 사용해야 한다고 했습니다. 명령어는 대부분 앞에서 배운 <span class="cd">print()</span>와 <span class="cd">input()</span>처럼 영단어 뒤에 소괄호가 붙는 형태지만, <span class="cd">if</span>처럼 프로그램의 흐름을 조절하는 명령어는 영단어 뒤에 괄호가 붙지 않기도 합니다. 형식에 맞게 입력하면 에디터에서 해당 명령어 부분이 강조 표시되어 미리 정의된 명령어임을 알 수 있습니다.</p>
+</div>
+<p class="txt bl">그럼 앞서 예로 든 사례를 파이썬 코드로 작성해 조건문을 어떻게 만드는지 알아봅시다.</p>
+<p class="txt bl">먼저 편의점에서 주류를 판매할 때 성인이면 주류를 구매할 수 있다고 출력해 봅시다. 코딩하기 전에 어떻게 작성할지 구상해 보죠. 일단 성인인지 구분하려면 나이를 알아야 합니다. 따라서 나이를 저장하는 변수가 있어야죠. 변수명은 <span class="cd">age</span>로 정합시다. 조건문 형식에서 조건(<span class="cd">A</span>)과 실행할 내용(<span class="cd">B</span>)에 해당하는 부분을 찾아봅시다. 조건은 ‘성인’이고, 조건을 충족할 때 실행할 내용은 ‘주류를 구매할 수 있다고 출력하기’가 됩니다. 정리하면 다음과 같습니다.</p>
+<table>
+<tbody>
+<tr class="tb_brown_line">
+<td class="w20">
+<p class="txts dm">조건문 형식</p>
+</td>
+<td class="w40">
+<p class="txts dm">형식에 맞춰 조건과 실행할 내용 넣기</p>
+</td>
+<td class="w40">
+<p class="txts dm">실제 코드</p>
+</td>
+</tr>
+<tr>
+<td class="w20">
+<pre>if A:
+   B</pre>
+</td>
+<td class="w40">
+<pre>if 성인:
+    주류를 구매할 수 있다고 출력하라</pre>
+</td>
+<td class="w40">
+<pre>if age &gt; 19:
+    print(' 성인은 주류를 구매할 수 있습니다 .')</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>

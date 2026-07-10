@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>[피드백 리포트] 송지현님 포트폴리오 심층진단</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+
+        :root {
+            --primary: #0A2540;
+            --secondary: #0056B3;
+            --text-dark: #2c3e50;
+            --text-light: #64748b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Area */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .company-badge {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.05em;
+            margin: 0 0 0.2rem 0;
+        }
+
+        .report-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .candidate-info {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Recruiter Profile Card */
+        .profile-section {
+            border-radius: 12px;
+            padding: 1.3rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .recruiter-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .recruiter-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .recruiter-role {
+            font-size: 0.85rem;
+            background: #ffffff;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .recruiter-quote {
+            font-style: italic;
+            margin: 0.4rem 0 0 0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        /* Evaluation Score Summary */
+        .score-section {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .rating-box {
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rating-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .rating-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-box {
+            border-radius: 12px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fit-score-container {
+            margin-bottom: 0.8rem;
+        }
+
+        .fit-score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .fit-score-label {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .fit-score-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+        }
+
+        .summary-text {
+            font-size: 0.92rem;
+            color: #334155;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            padding-left: 0.6rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        /* Cards Design */
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.1rem;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .card-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .card-body p {
+            font-size: 0.92rem;
+            color: #334155;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .strength-card {
+            border-left: 4px solid #22c55e;
+        }
+
+        .weakness-card {
+            border-left: 4px solid #ef4444;
+        }
+
+        /* Icons */
+        .icon-success {
+            width: 18px;
+            height: 18px;
+            color: #22c55e;
+        }
+
+        .icon-danger {
+            width: 18px;
+            height: 18px;
+            color: #ef4444;
+        }
+
+        .icon-info {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Advice List */
+        .advice-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .advice-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.92rem;
+            color: #334155;
+            line-height: 1.5;
+            page-break-inside: avoid;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+
+        /* Cover Page Styling */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 3rem 2rem;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #0A2540 0%, #1A365D 50%, #2A4365 100%);
+            color: #ffffff;
+        }
+
+        .cover-top {
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 2rem;
+        }
+
+        .cover-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            line-height: 1.35;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.03em;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            color: #63b3ed;
+            margin: 0;
+        }
+
+        .cover-middle {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .cover-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .cover-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            border-bottom: 2px solid #63b3ed;
+            padding-bottom: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .cover-bottom {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.2rem;
+        }
+
+        @media print {
+            .cover-page {
+                height: 100vh;
+                page-break-after: always;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .page-break:last-child {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 📄 PAGE 1: COVER PAGE -->
+        <div class="cover-page">
+            <div class="cover-top">
+                <h1 class="cover-title">SW 개발자 포트폴리오<br>다자(Multi-Agent) 심층 진단 보고서</h1>
+                <p class="cover-subtitle">5대 IT 대기업 채용담당자 공동 심사 결과</p>
+            </div>
+            
+            <div class="cover-middle">
+                <div class="cover-card">
+                    <h2 class="cover-card-title">평가 대상자 및 핵심 요약</h2>
+                    <div class="info-grid">
+                        <div>
+                            <div class="info-label">지원 학생명</div>
+                            <div class="info-value" style="color: #63b3ed; font-size: 1.3rem;">송지현님</div>
+                        </div>
+                        <div>
+                            <div class="info-label">지원 분야 및 타깃 상태</div>
+                            <div class="info-value">데이터 분석가 및 AI 엔지니어 지망 (경력 전환자)</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="font-size: 1.05rem; font-weight: 700; color: #e2e8f0; margin-bottom: 0.5rem;">📋 다차원 종합 총평</h3>
+                    <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.55; margin: 0;">
+                        오랜 고객센터(CS) 직무 경력을 살려 사용자 중심의 기능 기획과 비즈니스 가치 창출 관점을 훌륭히 어필하고 있습니다. 발표 및 UI/UX 설계 리더십이 돋보이며, 맛집 RAG 챗봇이나 자해 감지 등 사용자가 필요로 하는 핵심 기능을 설계한 점이 뛰어납니다. 다만, 기술 스택에 나열한 LangGraph, Kafka, Docker 등에 비해 포트폴리오 상의 기여도가 '발표, 기획, Prompt'에 지나치게 편중되어 있습니다. 실제로 본인이 백엔드 API나 핵심 개발 로직을 직접 코딩했는지 증명되지 않아 엔지니어로서의 코딩 역량이 큰 약점으로 지적됩니다. 또한 공모전을 '미정 진행 중' 상태로 방치한 문서의 완결성 부족도 보완해야 합니다.
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; padding: 1.2rem; border: 1px solid rgba(255,255,255,0.05); page-break-inside: avoid;">
+                <h3 style="font-size: 1.05rem; color: #ffffff; margin-top: 0; margin-bottom: 0.8rem; text-align: center;">📊 기업별 인사담당자 의견 및 평가 요약</h3>
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid rgba(255,255,255,0.15);">
+                            <th style="padding: 10px; color: #cbd5e1; width: 15%;">평가 기업</th>
+                            <th style="padding: 10px; color: #cbd5e1; width: 18%;">담당자</th>
+                            <th style="padding: 10px; color: #cbd5e1; width: 47%;">인사담당자 피드백 의견</th>
+                            <th style="padding: 10px; color: #cbd5e1; width: 10%; text-align: center;">부합도</th>
+                            <th style="padding: 10px; color: #cbd5e1; width: 10%; text-align: center;">추천 등급</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: #cbd5e1;">
+                        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">삼성SDS</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 책임</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">비즈니스 기획과 발표 역량은 준수하나, 코어 엔지니어링 관점의 코딩 및 아키텍처 구현 수준이 지극히 낮아 보이며, 삼성SDS의 기술 장벽인 알고리즘 코딩테스트 및 시스템 면접 통과가 불가능해 보입니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">45점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #FFEBEE; color: #C62828; border: 1px solid #EF9A9A; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">C</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">LG CNS</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 책임전문위원</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">Roberta Zero-shot 및 RAG 챗봇 등 최신 Generative AI 기술을 비즈니스 문제에 접목하려는 기획 아이디어가 좋습니다. 그러나 시스템을 직접 튜닝하거나 구축한 디버깅 흔적이 부족합니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">62점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #FFF3E0; color: #EF6C00; border: 1px solid #FFCC80; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">B-</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">신세계I&C</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 과장</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">소통 리더십, UI/UX 설계 능력, 그리고 고객의 경험을 ROI 관점으로 변환하여 설득할 수 있는 발표 역량이 매우 뛰어납니다. 리테일테크 기획/BA 인재로 활약할 가능성이 큽니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">88점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">A-</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">롯데이노베이트</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 수석</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">민감 개인정보 암호화 및 DB 격리를 기획한 안정성 추구는 좋으나, 완료되지 않은 공모전을 미정 상태로 방치하여 롯데이노베이트의 품질 및 문서 규격 신뢰를 얻기 힘듭니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">58점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #F3E5F5; color: #6A1B9A; border: 1px solid #CE93D8; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">C+</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 700; color: #ffffff; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">CJ올리브네트웍스</td>
+            <td style="color: #63b3ed; font-weight: 600; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15);">*** 과장</td>
+            <td style="color: #cbd5e1; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; line-height: 1.45; text-align: left;">자신의 커리어 극복 스토리를 트렌디한 AI 서비스 개발 이력과 엮어내는 스토리텔링이 매우 참신합니다. 주도적인 도전 정신('하고잡이')이 돋보입니다.</td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; color: #ffffff;">84점</span>
+            </td>
+            <td style="padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.15); text-align: center;">
+                <span style="background-color: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: 'Outfit', sans-serif; font-size: 0.85rem;">A-</span>
+            </td>
+        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cover-bottom">
+                <span>DMDG AI & Cloud Boot Camp | Portfolio Multi-Evaluation Report</span>
+                <span>Confidential</span>
+            </div>
+        </div>
+
+        <!-- 📄 PAGES 2-6: AGENT DETAILS -->
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #0A2540;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #0A2540;">삼성SDS</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 송지현님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #0A2540; background-color: #f4f7fa;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #0A2540; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 책임</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">인사팀</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 11년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"기초가 흔들리는 아키텍처는 사상누각일 뿐입니다. 자료구조와 알고리즘, CS 기본기를 철저히 검증합니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #EF9A9A; background-color: #FFEBEE;">
+                    <span class="rating-label" style="color: #C62828;">평가 등급</span>
+                    <span class="rating-value" style="color: #C62828;">C</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #0A2540;">45점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #0A2540, #0056B3); width: 45%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 비즈니스 기획과 발표 역량은 준수하나, 코어 엔지니어링 관점의 코딩 및 아키텍처 구현 수준이 지극히 낮아 보이며, 삼성SDS의 기술 장벽인 알고리즘 코딩테스트 및 시스템 면접 통과가 불가능해 보입니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #0A2540;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>사용자 편의적 안전망 기획</h3>
+                </div>
+                <div class="card-body">
+                    <p>정서 케어 AI 개발 시 Function Calling을 도입하여 위기 상황을 실시간 감지하겠다는 논리 구조는 비즈니스 안전성 관점에서 준수함.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #0A2540;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>코어 엔지니어링 구현력 입증 실패</h3>
+                </div>
+                <div class="card-body">
+                    <p>기술 스택에는 Kafka, Docker 등을 명시했으나 실제 본인의 기여는 '기획, UI/UX 설계, 발표, 단순 Prompt 작성'에 머물러 있어, 실제 백엔드 데이터 처리나 프레임워크 구현 역량을 전혀 파악할 수 없음.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #0A2540;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #0056B3;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>단순 AI API 연동 기획에서 벗어나 Java/Spring Boot 또는 Python/FastAPI 기반의 API 설계, ORM 쿼리 튜닝 등 실질적인 코드 기여 내역을 코드로 증명할 것.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 삼성SDS HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #A50034;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #A50034;">LG CNS</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 송지현님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #A50034; background-color: #faf4f5;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #A50034; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 책임전문위원</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">DX인재개발팀</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 12년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"안주하지 않는 자가 DX 판도를 바꿉니다. 당신이 겪은 시행착오(Troubleshooting)와 기술적 도전의 크기를 보여주세요."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #FFCC80; background-color: #FFF3E0;">
+                    <span class="rating-label" style="color: #EF6C00;">평가 등급</span>
+                    <span class="rating-value" style="color: #EF6C00;">B-</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #A50034;">62점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #A50034, #4E5B6A); width: 62%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> Roberta Zero-shot 및 RAG 챗봇 등 최신 Generative AI 기술을 비즈니스 문제에 접목하려는 기획 아이디어가 좋습니다. 그러나 시스템을 직접 튜닝하거나 구축한 디버깅 흔적이 부족합니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #A50034;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>트렌디한 AI 기술 시도</h3>
+                </div>
+                <div class="card-body">
+                    <p>단순 별점 추천의 한계를 극복하기 위해 Roberta-base 모델의 Zero-shot 텍스트 문맥 이해 기능을 도입하고 RAG AI 챗봇을 설계하려 한 시도는 긍정적임.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #A50034;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>기술적 해결 과정(삽질)의 부재</h3>
+                </div>
+                <div class="card-body">
+                    <p>RAG 성능을 높이기 위해 벡터 DB 인덱싱을 어떻게 튜닝했는지, 혹은 배포 환경에서 어떤 시스템 부하 에러를 겪고 해결했는지와 같은 실질적인 엔지니어링 '삽질' 기록이 없음.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #A50034;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #4E5B6A;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>RAG 아키텍처 구성 시 데이터 임베딩 모델 비교, 벡터 DB 검색 성능 최적화, LangChain/LangGraph의 컴포넌트 튜닝 이력을 구체적으로 서술할 것.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 LG CNS HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #B9975B;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #B9975B;">신세계I&C</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 송지현님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #B9975B; background-color: #f9f7f4;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #B9975B; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 과장</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">Retail Tech 인사파트</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 10년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"아무리 훌륭한 기술이라도 고객에게 닿지 못하면 무용지물입니다. 비즈니스 실용성과 완성도를 확인합니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #90CAF9; background-color: #E3F2FD;">
+                    <span class="rating-label" style="color: #1565C0;">평가 등급</span>
+                    <span class="rating-value" style="color: #1565C0;">A-</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #B9975B;">88점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #B9975B, #111111); width: 88%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 소통 리더십, UI/UX 설계 능력, 그리고 고객의 경험을 ROI 관점으로 변환하여 설득할 수 있는 발표 역량이 매우 뛰어납니다. 리테일테크 기획/BA 인재로 활약할 가능성이 큽니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #B9975B;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>최상의 비즈니스 가치 포착 및 UI 설계</h3>
+                </div>
+                <div class="card-body">
+                    <p>ME슐랭 서비스 개발 시 맛, 서비스, 분위기 등 5가지 다차원 가중치 조절 슬라이더 UI를 배치하여 개인화 추천의 편의성을 극대화한 점은 리테일테크 기획의 정석임.</p>
+                </div>
+            </div>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>공감 기반의 설득 및 소통 리더십</h3>
+                </div>
+                <div class="card-body">
+                    <p>고객센터 경력의 도메인을 살려 고객 중심 마인드로 팀의 목표를 조율하고, 2차례의 발표를 통해 비즈니스 가치를 ROI 수치로 설득한 협업 리더십이 탁월함.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #B9975B;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>개발 기여 명세의 얇음</h3>
+                </div>
+                <div class="card-body">
+                    <p>리테일테크 기획가로서는 만점이나, 엔지니어 지원자임에도 백엔드 시스템 동시성 처리나 로직의 예외 처리 등 핵심 개발 역량 서술이 매우 얇은 상태임.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #B9975B;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #111111;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>비전공 코어 백엔드 개발자 직군 외에, 기술과 비즈니스를 잇는 제품 기획자(PM/PO) 또는 데이터 비즈니스 분석가(BA) 직무로의 전환 지원도 적극 고려할 것.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 신세계I&C HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #E11B22;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #E11B22;">롯데이노베이트</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 송지현님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #E11B22; background-color: #fcf5f5;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #E11B22; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 수석</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">HR혁신팀</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 13년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"시스템의 기본은 타협 없는 안정성과 빈틈없는 예외 처리입니다. 성실함이 깃든 테스트 코드가 신뢰를 증명합니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #CE93D8; background-color: #F3E5F5;">
+                    <span class="rating-label" style="color: #6A1B9A;">평가 등급</span>
+                    <span class="rating-value" style="color: #6A1B9A;">C+</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #E11B22;">58점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #E11B22, #2C3E50); width: 58%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 민감 개인정보 암호화 및 DB 격리를 기획한 안정성 추구는 좋으나, 완료되지 않은 공모전을 미정 상태로 방치하여 롯데이노베이트의 품질 및 문서 규격 신뢰를 얻기 힘듭니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #E11B22;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>데이터 보안 고려 설계</h3>
+                </div>
+                <div class="card-body">
+                    <p>임상급 정서 데이터를 다룰 때 개인정보 노출 우려를 방어하기 위해 AES-256-GCM 양방향 암호화를 기획하고 DB 격리 구조를 구상한 안전 지향성은 칭찬함.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #E11B22;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>문서의 완결성 및 규격성 미흡</h3>
+                </div>
+                <div class="card-body">
+                    <p>한국 관광 데이터 공모전에 대해 장표를 할당했으나 성과와 역할을 '현재 미정 진행 중'으로만 써서 비워둠. 이는 신중함과 문서 제출 태도 점수에서 감점 요소가 됨.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #E11B22;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #2C3E50;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>아직 완료되지 않은 프로젝트는 포트폴리오에서 배제하거나, 기획 의도와 기술적 아키텍처 배포 계획을 논리적으로 완성해 작성하십시오.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 롯데이노베이트 HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+        <div class="page-break" style="page-break-before: always; padding-top: 1cm;">
+            <!-- Header -->
+            <div class="header" style="border-bottom: 2px solid #E06F1D;">
+                <div class="header-left">
+                    <span class="company-badge" style="color: #E06F1D;">CJ올리브네트웍스</span>
+                    <h1 class="report-title">포트폴리오 개별 평가 리포트</h1>
+                </div>
+                <div class="candidate-info">
+                    <strong>지원자:</strong> 송지현님 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>진단 분야:</strong> SW 개발
+                </div>
+            </div>
+
+            <!-- Recruiter Profile -->
+            <div class="profile-section" style="border-left: 4px solid #E06F1D; background-color: #f5faf6;">
+                <div class="profile-container">
+                    <div class="avatar" style="background-color: #E06F1D; font-size: 1.1rem;">HR</div>
+                    <div class="profile-details">
+                        <div class="recruiter-meta">
+                            <span class="recruiter-name">*** 과장</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">테크HR파트</span>
+                            <span class="recruiter-role" style="border: 1px solid var(--border-color); color: var(--text-light);">경력 10년 차</span>
+                        </div>
+                        <p class="recruiter-quote" style="color: #475569;">"남들이 하지 않은 차별화된 독창성(ONLYONE)과 주도적인 학습 태도(하고잡이)에서 진짜 개발자의 잠재력이 드러납니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score & Summary -->
+            <div class="score-section">
+                <div class="rating-box" style="border: 2px solid #90CAF9; background-color: #E3F2FD;">
+                    <span class="rating-label" style="color: #1565C0;">평가 등급</span>
+                    <span class="rating-value" style="color: #1565C0;">A-</span>
+                </div>
+                <div class="score-box" style="border: 1px solid var(--border-color);">
+                    <div class="fit-score-container">
+                        <div class="fit-score-header">
+                            <span class="fit-score-label">인재상 부합도</span>
+                            <span class="fit-score-value" style="color: #E06F1D;">84점</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: linear-gradient(90deg, #E06F1D, #22B14C); width: 84%;"></div>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        <strong>[총평]</strong> 자신의 커리어 극복 스토리를 트렌디한 AI 서비스 개발 이력과 엮어내는 스토리텔링이 매우 참신합니다. 주도적인 도전 정신('하고잡이')이 돋보입니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <h2 class="section-title" style="border-left: 5px solid #E06F1D;">👍 좋은 점 (Strengths)</h2>
+            
+            <div class="card strength-card">
+                <div class="card-header">
+                    <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>ONLYONE 스토리를 담은 전향 노력</h3>
+                </div>
+                <div class="card-body">
+                    <p>단순 기획에 멈추지 않기 위해 CS 직무 역량에 RAG 챗봇 및 감정 케어 에이전트와 같은 최신 기술 트렌드를 학습하여 도입한 진정성 있는 성장 궤적이 눈에 띔.</p>
+                </div>
+            </div>
+            
+
+            <!-- Weaknesses -->
+            <h2 class="section-title" style="border-left: 5px solid #E06F1D;">⚠️ 부족한 점 및 개선 사항 (Areas for Improvement)</h2>
+            
+            <div class="card weakness-card">
+                <div class="card-header">
+                    <svg class="icon-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3>코딩 구현 깊이 보강 필요</h3>
+                </div>
+                <div class="card-body">
+                    <p>기획력과 트렌드 캐치 능력에 비해 코드를 직접 설계하고 아키텍처 전문성을 해결한 디테일이 얇아, 주도적 1인 개발 역량을 더 보여줄 필요가 있음.</p>
+                </div>
+            </div>
+            
+
+            <!-- Advice -->
+            <h2 class="section-title" style="border-left: 5px solid #E06F1D;">💡 인사담당자 실무자의 합격 조언</h2>
+            <ul class="advice-list">
+                
+            <li class="advice-item">
+                <svg class="icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #22B14C;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span>단순 API를 호출하는 프론트 뷰 중심 구현에서 나아가, 챗봇 대화 이력을 효율적으로 파이프라인화하여 데이터 레이크에 저장하는 흐름을 개발해 이력을 다변화해 보세요.</span>
+            </li>
+            
+            </ul>
+
+            <!-- Footer -->
+            <div class="footer">
+                <span>&copy; 2026 CJ올리브네트웍스 HR Expert Feedback. All rights reserved.</span>
+                <span>Confidential | For Coaching Purpose Only</span>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

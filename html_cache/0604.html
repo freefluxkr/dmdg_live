@@ -1,0 +1,19 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">반복문으로 마커 표시하기</p>
+<p class="txt bl">이번에는 반복문을 사용해 여러 개의 마커를 표시해 보겠습니다. 코드를 보면 <span class="cd">folium.Marker().add_to()</span> 부분이 마커 개수만큼 반복되는 것을 알 수 있습니다. 이 부분을 반복문으로 만들면 다음과 같습니다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">마커개수</span>):
+    folium.Marker(
+        [위도, 경도], tooltip=<span class="red2">'위치 이름'</span>,
+        icon=folium.Icon(color=<span class="red2">'아이콘 색상'</span>, icon=<span class="red2">'아이콘 모양'</span>, prefix=<span class="red2">'fa'</span>)
+        ).add_to(지도이름)</pre>
+</div>
+<p class="txt bl">코드에서 반복할 때마다 변하는 것은 위도, 경도, 위치 이름, 아이콘 색상, 아이콘 모양입니다. 따라서 다섯 가지 요소를 리스트로 각각 만들고, 각 리스트의 인덱스를 활용합니다. 예를 들어, 첫 번째 반복에서는 5개의 리스트의 첫 번째 요소([0])가 자동으로 위도, 경도, 위치 이름, 아이콘 색상, 아이콘 모양에 들어가고, 두 번째 반복에서는 각 리스트의 두 번째 요소([1])가 자동으로 들어가면 되죠.</p>
+<p class="txt bl">다음처럼 총 5개의 리스트를 만들 수 있습니다. 위도 리스트의 첫 번째 요소와 경도 리스트의 첫 번째 요소를 결합하면 첫 번째 마커의 좌표가 됩니다.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/501.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 12-4</span> 위도, 경도, 위치 이름, 아이콘 색상, 아이콘 모양으로 리스트 만들기</p>
+</div>
+</section>
+</section>

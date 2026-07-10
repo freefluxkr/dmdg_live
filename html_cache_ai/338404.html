@@ -1,0 +1,963 @@
+<div class="page-content tex2jax_process">
+<p>이전 챕터에서는 <strong>Chat Completions API</strong>를 사용하여 대화형 AI 애플리케이션을 만드는 방법을 배웠습니다. 이번 챕터에서는 OpenAI가 새롭게 선보인 <strong>Responses API</strong>를 소개하고, 기존 API와의 차이점, 마이그레이션 방법을 살펴봅니다. 또한 이미지와 파일을 함께 처리하는 <strong>멀티모달(Multimodal)</strong> 기능을 GPT, Gemini, Claude 세 가지 모델로 비교하며 실습합니다.</p>
+<blockquote>
+<p>이 챕터를 마치면 최신 Responses API를 자유롭게 다루고, 텍스트와 이미지를 함께 처리하는 멀티모달 챗봇을 직접 만들 수 있습니다.</p>
+<p>📌 <strong>[2026 업데이트] 최신 모델 매핑</strong></p>
+<p>이 챕터의 코드 예시는 Responses API가 공개된 2025년 3월 시점 모델 ID(<code>gpt-4o</code>, <code>gemini-1.5-*</code>, <code>claude-opus-4-5</code>)를 사용합니다. <strong>2026년 5월 기준 동급 최신 모델</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>챕터 코드 ID</th>
+<th>2026년 동급 최신 모델</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gpt-4o</code></td>
+<td><code>gpt-5</code> (Responses API 권장)</td>
+</tr>
+<tr>
+<td><code>gemini-1.5-flash</code></td>
+<td><code>gemini-2.5-flash</code></td>
+</tr>
+<tr>
+<td><code>gemini-1.5-pro</code></td>
+<td><code>gemini-2.5-pro</code> 또는 <code>gemini-3-pro</code></td>
+</tr>
+<tr>
+<td><code>claude-opus-4-5</code></td>
+<td><code>claude-opus-4-7</code> (1M 컨텍스트)</td>
+</tr>
+</tbody>
+</table>
+<p>Gemini SDK는 <code>google.generativeai</code> → <code>google-genai</code>로 마이그레이션이 권장됩니다. OpenAI는 멀티모달·도구 호출·추론을 Responses API + GPT-5로 단일화하는 추세입니다.</p>
+</blockquote>
+<hr/>
+<h2 id="151-openai-responses-api">15.1 OpenAI Responses API 소개와 등장 배경</h2>
+<h3 id="api">왜 새로운 API가 필요했을까?</h3>
+<p>2025년 3월, OpenAI는 기존 <strong>Chat Completions API</strong>를 대체하는 <strong>Responses API</strong>를 공개했습니다. 이 변화는 단순한 인터페이스 개편이 아니라, AI 에이전트(Agent) 시대에 맞는 새로운 패러다임으로의 전환을 의미합니다.</p>
+<p>기존 Chat Completions API는 한 번의 요청-응답(Request-Response) 구조로 설계되었습니다. 하지만 실제 서비스에서는 다음과 같은 한계가 드러났습니다.</p>
+<ul>
+<li><strong>상태 관리 부재</strong>: 매 요청마다 전체 대화 기록을 다시 전송해야 했습니다.</li>
+<li><strong>도구 연동 복잡성</strong>: 웹 검색, 코드 실행 등 내장 도구를 사용하려면 별도의 복잡한 처리가 필요했습니다.</li>
+<li><strong>에이전트 흐름 지원 미흡</strong>: 멀티스텝 작업을 처리하는 에이전트 패턴을 구현하기 어려웠습니다.</li>
+</ul>
+<p><strong>Responses API</strong>는 이러한 문제를 해결하기 위해 다음 특징을 중심으로 설계되었습니다.</p>
+<table>
+<thead>
+<tr>
+<th>특징</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>서버 사이드 상태 관리</strong></td>
+<td>대화 기록을 OpenAI 서버가 저장하고 관리합니다.</td>
+</tr>
+<tr>
+<td><strong>내장 도구(Built-in Tools)</strong></td>
+<td>웹 검색, 파일 검색, 코드 인터프리터를 기본 제공합니다.</td>
+</tr>
+<tr>
+<td><strong>에이전트 친화적 구조</strong></td>
+<td>멀티스텝 추론과 도구 호출 흐름을 자연스럽게 지원합니다.</td>
+</tr>
+<tr>
+<td><strong>통합 인터페이스</strong></td>
+<td>Assistants API, Chat Completions API의 기능을 하나로 통합합니다.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>참고</strong>: OpenAI는 Responses API가 기존 Chat Completions API를 완전히 대체하는 것은 아니라고 밝혔습니다. 단순한 단일 턴 요청에는 Chat Completions API도 계속 사용할 수 있습니다.</p>
+</blockquote>
+<hr/>
+<h2 id="152-chat-completions-api-vs-responses-api">15.2 Chat Completions API vs Responses API 차이점</h2>
+<p>두 API의 핵심 차이점을 표로 정리합니다.</p>
+<p align="center">
+<img alt="Chat Completions vs Responses API - 좌측은 클라이언트가 messages 전체를 매번 전송, 우측은 서버가 응답을 저장하고 previous_response_id로 연결" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338404/ch15_chat_vs_responses_xfLmtye.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>Chat Completions API</th>
+<th>Responses API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>상태 관리</strong></td>
+<td>클라이언트(개발자)가 직접 관리</td>
+<td>서버(OpenAI)가 자동 관리</td>
+</tr>
+<tr>
+<td><strong>대화 기록 전송</strong></td>
+<td>매 요청마다 전체 기록 전송</td>
+<td><code>previous_response_id</code>로 연결</td>
+</tr>
+<tr>
+<td><strong>내장 도구</strong></td>
+<td>없음 (별도 구현 필요)</td>
+<td>웹 검색, 파일 검색, 코드 인터프리터 내장</td>
+</tr>
+<tr>
+<td><strong>주요 반환 객체</strong></td>
+<td><code>ChatCompletion</code></td>
+<td><code>Response</code></td>
+</tr>
+<tr>
+<td><strong>응답 접근 경로</strong></td>
+<td><code>response.choices[0].message.content</code></td>
+<td><code>response.output_text</code></td>
+</tr>
+<tr>
+<td><strong>입력 파라미터</strong></td>
+<td><code>messages</code></td>
+<td><code>input</code></td>
+</tr>
+<tr>
+<td><strong>모델 파라미터</strong></td>
+<td><code>model</code></td>
+<td><code>model</code> (동일)</td>
+</tr>
+<tr>
+<td><strong>에이전트 지원</strong></td>
+<td>제한적</td>
+<td>기본 지원</td>
+</tr>
+<tr>
+<td><strong>Assistants API 대체</strong></td>
+<td>불가</td>
+<td>가능</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_1">응답 구조 비교</h3>
+<p><strong>Chat Completions API 응답 구조</strong>:</p>
+<pre><code class="language-python"># Chat Completions API
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "안녕하세요"}]
+)
+
+# 응답 접근 방법
+text = response.choices[0].message.content
+print(text)
+</code></pre>
+<p><strong>Responses API 응답 구조</strong>:</p>
+<pre><code class="language-python"># Responses API
+response = client.responses.create(
+    model="gpt-4o",
+    input="안녕하세요"
+)
+
+# 응답 접근 방법 (훨씬 간결)
+text = response.output_text
+print(text)
+</code></pre>
+<hr/>
+<h2 id="153-">15.3 마이그레이션 가이드 - 코드 변환 예시</h2>
+<p>기존 Chat Completions API 코드를 Responses API로 변환하는 방법을 단계별로 살펴보겠습니다.</p>
+<h3 id="_2">기본 단일 턴 요청 변환</h3>
+<p><strong>기존 코드 (Chat Completions API)</strong>:</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[
+        {"role": "system", "content": "당신은 친절한 AI 어시스턴트입니다."},
+        {"role": "user", "content": "파이썬의 장점을 3가지 알려주세요."}
+    ],
+    temperature=0.7,
+    max_tokens=500
+)
+
+print(response.choices[0].message.content)
+</code></pre>
+<p><strong>변환된 코드 (Responses API)</strong>:</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+response = client.responses.create(
+    model="gpt-4o",
+    instructions="당신은 친절한 AI 어시스턴트입니다.",  # system 역할 대체
+    input="파이썬의 장점을 3가지 알려주세요.",          # user 메시지
+    temperature=0.7,
+    max_output_tokens=500                              # max_tokens → max_output_tokens
+)
+
+print(response.output_text)
+</code></pre>
+<h3 id="_3">다중 턴 대화 변환</h3>
+<p><strong>기존 코드 (Chat Completions API)</strong>:</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+# 대화 기록을 개발자가 직접 관리
+conversation_history = [
+    {"role": "system", "content": "당신은 친절한 AI 어시스턴트입니다."}
+]
+
+def chat(user_message):
+    conversation_history.append({"role": "user", "content": user_message})
+
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=conversation_history  # 매번 전체 기록 전송
+    )
+
+    assistant_message = response.choices[0].message.content
+    conversation_history.append({"role": "assistant", "content": assistant_message})
+
+    return assistant_message
+
+print(chat("파이썬이란 무엇인가요?"))
+print(chat("그렇다면 주요 활용 분야는?"))  # 앞 대화 맥락 유지
+</code></pre>
+<p><strong>변환된 코드 (Responses API)</strong>:</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+# 대화 기록을 서버가 관리 - 개발자는 response_id만 저장
+previous_response_id = None
+
+def chat(user_message):
+    global previous_response_id
+
+    kwargs = {
+        "model": "gpt-4o",
+        "instructions": "당신은 친절한 AI 어시스턴트입니다.",
+        "input": user_message,
+    }
+
+    # 이전 응답이 있으면 연결
+    if previous_response_id:
+        kwargs["previous_response_id"] = previous_response_id
+
+    response = client.responses.create(**kwargs)
+
+    # 다음 요청을 위해 현재 응답 ID 저장
+    previous_response_id = response.id
+
+    return response.output_text
+
+print(chat("파이썬이란 무엇인가요?"))
+print(chat("그렇다면 주요 활용 분야는?"))  # 서버가 자동으로 이전 맥락 참조
+</code></pre>
+<h3 id="_4">스트리밍 응답 변환</h3>
+<p><strong>기존 코드 (Chat Completions API)</strong>:</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+stream = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "AI의 미래를 설명해주세요."}],
+    stream=True
+)
+
+for chunk in stream:
+    if chunk.choices[0].delta.content is not None:
+        print(chunk.choices[0].delta.content, end="", flush=True)
+</code></pre>
+<p><strong>변환된 코드 (Responses API)</strong>:</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+with client.responses.stream(
+    model="gpt-4o",
+    input="AI의 미래를 설명해주세요."
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
+</code></pre>
+<h3 id="_5">주요 파라미터 변환 요약</h3>
+<table>
+<thead>
+<tr>
+<th>Chat Completions API</th>
+<th>Responses API</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>messages</code></td>
+<td><code>input</code></td>
+<td>단순 문자열 또는 메시지 배열</td>
+</tr>
+<tr>
+<td><code>messages[system]</code></td>
+<td><code>instructions</code></td>
+<td>시스템 프롬프트 전용 파라미터</td>
+</tr>
+<tr>
+<td><code>max_tokens</code></td>
+<td><code>max_output_tokens</code></td>
+<td>파라미터명 변경</td>
+</tr>
+<tr>
+<td><code>response.choices[0].message.content</code></td>
+<td><code>response.output_text</code></td>
+<td>응답 접근 경로 간소화</td>
+</tr>
+<tr>
+<td>없음</td>
+<td><code>previous_response_id</code></td>
+<td>서버 사이드 대화 연결</td>
+</tr>
+<tr>
+<td>없음</td>
+<td><code>store=True/False</code></td>
+<td>응답 저장 여부 제어</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="154-sdk">15.4 최신 SDK 활용법</h2>
+<h3 id="sdk">SDK 설치 및 버전 확인</h3>
+<p>Responses API를 사용하려면 <strong>openai Python SDK</strong> 버전 1.66.0 이상이 필요합니다.</p>
+<pre><code class="language-python"># SDK 설치 또는 업그레이드
+# pip install --upgrade openai
+
+import openai
+print(openai.__version__)  # 1.66.0 이상인지 확인
+</code></pre>
+<h3 id="built-in-tools">내장 도구(Built-in Tools) 활용</h3>
+<p>Responses API의 가장 강력한 기능 중 하나는 별도 구현 없이 사용할 수 있는 <strong>내장 도구</strong>입니다.</p>
+<p><strong>웹 검색 도구 사용 예시</strong>:</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+response = client.responses.create(
+    model="gpt-4o",
+    tools=[{"type": "web_search_preview"}],  # 웹 검색 도구 활성화
+    input="2025년 최신 AI 모델 트렌드를 알려주세요."
+)
+
+print(response.output_text)
+</code></pre>
+<p><strong>파일 검색 도구 사용 예시</strong>:</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+# 파일 업로드 (사전에 진행)
+# file = client.files.create(file=open("document.pdf", "rb"), purpose="assistants")
+
+response = client.responses.create(
+    model="gpt-4o",
+    tools=[{
+        "type": "file_search",
+        "vector_store_ids": ["vs_xxxxx"]  # 벡터 스토어 ID
+    }],
+    input="문서에서 환불 정책을 찾아주세요."
+)
+
+print(response.output_text)
+</code></pre>
+<h3 id="_6">응답 저장 및 비용 관리</h3>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+# store=False: 응답을 서버에 저장하지 않음 (개인정보 보호, 비용 절감)
+response = client.responses.create(
+    model="gpt-4o",
+    input="임시 분석 요청입니다.",
+    store=False  # 기본값은 True
+)
+
+# 저장된 응답 조회
+retrieved = client.responses.retrieve(response.id)
+
+# 저장된 응답 삭제
+client.responses.delete(response.id)
+</code></pre>
+<hr/>
+<h2 id="155">15.5 멀티모달 입력 처리 (이미지, 파일 첨부)</h2>
+<p><strong>멀티모달(Multimodal)</strong>이란 텍스트뿐만 아니라 이미지, 오디오, 파일 등 다양한 형식의 입력을 함께 처리하는 능력을 말합니다. GPT-4o는 이미지를 포함한 멀티모달 입력을 기본으로 지원합니다.</p>
+<p align="center">
+<img alt="멀티모달 입력 처리 흐름 - 텍스트·이미지 URL·로컬 파일(Base64)이 content 블록으로 합쳐져 비전 LLM에 전달되고 텍스트 응답 반환" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/338404/ch15_multimodal_input.png" style="max-width:780px; width:100%; height:auto;"/>
+</p>
+<h3 id="url">이미지 URL로 분석하기</h3>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+response = client.responses.create(
+    model="gpt-4o",
+    input=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "input_text",
+                    "text": "이 이미지에서 무엇이 보이나요? 자세히 설명해주세요."
+                },
+                {
+                    "type": "input_image",
+                    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png"
+                }
+            ]
+        }
+    ]
+)
+
+print(response.output_text)
+</code></pre>
+<h3 id="_7">로컬 이미지 파일 분석하기</h3>
+<pre><code class="language-python">import base64
+from openai import OpenAI
+
+client = OpenAI()
+
+def encode_image(image_path: str) -&gt; str:
+    """이미지 파일을 Base64로 인코딩합니다."""
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")
+
+# 로컬 이미지 파일 경로
+image_path = "sample_chart.png"
+base64_image = encode_image(image_path)
+
+response = client.responses.create(
+    model="gpt-4o",
+    input=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "input_text",
+                    "text": "이 차트를 분석하고 주요 인사이트를 알려주세요."
+                },
+                {
+                    "type": "input_image",
+                    "image_url": f"data:image/png;base64,{base64_image}"
+                }
+            ]
+        }
+    ]
+)
+
+print(response.output_text)
+</code></pre>
+<h3 id="_8">여러 이미지 동시 분석하기</h3>
+<pre><code class="language-python">import base64
+from openai import OpenAI
+
+client = OpenAI()
+
+def encode_image(image_path: str) -&gt; str:
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")
+
+# 여러 이미지 분석
+image_paths = ["before.png", "after.png"]
+
+content = [
+    {
+        "type": "input_text",
+        "text": "두 이미지의 차이점을 비교하여 설명해주세요."
+    }
+]
+
+for path in image_paths:
+    content.append({
+        "type": "input_image",
+        "image_url": f"data:image/png;base64,{encode_image(path)}"
+    })
+
+response = client.responses.create(
+    model="gpt-4o",
+    input=[{"role": "user", "content": content}]
+)
+
+print(response.output_text)
+</code></pre>
+<h3 id="detail">이미지 해상도 제어 (detail 파라미터)</h3>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+response = client.responses.create(
+    model="gpt-4o",
+    input=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "input_text",
+                    "text": "이 이미지의 텍스트를 모두 읽어주세요."
+                },
+                {
+                    "type": "input_image",
+                    "image_url": "https://example.com/document.png",
+                    "detail": "high"  # "low", "high", "auto" 중 선택
+                }
+            ]
+        }
+    ]
+)
+
+# detail 파라미터:
+# - "auto": 이미지 크기에 따라 자동 선택 (기본값)
+# - "low": 빠른 처리, 낮은 비용 (512x512 크롭 사용)
+# - "high": 정밀 분석, 높은 비용 (고해상도 처리)
+
+print(response.output_text)
+</code></pre>
+<hr/>
+<h2 id="156-gemini">15.6 Gemini의 멀티모달 처리 방법</h2>
+<p>Google의 <strong>Gemini</strong> 모델도 강력한 멀티모달 처리 능력을 갖추고 있습니다. <code>google-generativeai</code> 라이브러리를 사용합니다.</p>
+<h3 id="gemini-sdk">Gemini SDK 설치</h3>
+<pre><code class="language-python"># pip install google-generativeai pillow
+</code></pre>
+<h3 id="url_1">이미지 URL 분석</h3>
+<pre><code class="language-python">import google.generativeai as genai
+from PIL import Image
+import requests
+from io import BytesIO
+
+# API 키 설정
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+
+# 모델 초기화
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+# URL에서 이미지 로드
+image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png"
+response_img = requests.get(image_url)
+image = Image.open(BytesIO(response_img.content))
+
+# 이미지와 텍스트를 함께 전송
+response = model.generate_content([
+    "이 이미지에서 무엇이 보이나요? 자세히 설명해주세요.",
+    image
+])
+
+print(response.text)
+</code></pre>
+<h3 id="_9">로컬 이미지 파일 분석</h3>
+<pre><code class="language-python">import google.generativeai as genai
+from PIL import Image
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+
+model = genai.GenerativeModel("gemini-1.5-pro")
+
+# 로컬 이미지 파일 열기
+image = Image.open("sample_chart.png")
+
+response = model.generate_content([
+    "이 차트를 분석하고 주요 인사이트 3가지를 알려주세요.",
+    image
+])
+
+print(response.text)
+</code></pre>
+<h3 id="gemini">Gemini로 여러 이미지 비교</h3>
+<pre><code class="language-python">import google.generativeai as genai
+from PIL import Image
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+
+model = genai.GenerativeModel("gemini-1.5-pro")
+
+# 여러 이미지 로드
+image1 = Image.open("product_front.jpg")
+image2 = Image.open("product_back.jpg")
+
+response = model.generate_content([
+    "다음 두 이미지를 비교하여 공통점과 차이점을 분석해주세요.",
+    image1,
+    image2
+])
+
+print(response.text)
+</code></pre>
+<h3 id="gemini_1">Gemini 멀티모달 스트리밍</h3>
+<pre><code class="language-python">import google.generativeai as genai
+from PIL import Image
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+
+model = genai.GenerativeModel("gemini-1.5-flash")
+image = Image.open("complex_diagram.png")
+
+# 스트리밍으로 응답 받기
+for chunk in model.generate_content(
+    ["이 다이어그램의 구조를 상세히 설명해주세요.", image],
+    stream=True
+):
+    print(chunk.text, end="", flush=True)
+</code></pre>
+<hr/>
+<h2 id="157-claude-vision">15.7 Claude의 Vision 기능 활용</h2>
+<p>Anthropic의 <strong>Claude</strong> 모델도 강력한 비전(Vision) 기능을 제공합니다. <code>anthropic</code> 라이브러리를 사용합니다.</p>
+<h3 id="anthropic-sdk">Anthropic SDK 설치</h3>
+<pre><code class="language-python"># pip install anthropic
+</code></pre>
+<h3 id="url_2">이미지 URL 분석</h3>
+<pre><code class="language-python">import anthropic
+
+client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
+
+message = client.messages.create(
+    model="claude-opus-4-5",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": "이 이미지에서 무엇이 보이나요? 자세히 설명해주세요."
+                }
+            ]
+        }
+    ]
+)
+
+print(message.content[0].text)
+</code></pre>
+<h3 id="base64">로컬 이미지 파일 분석 (Base64 인코딩)</h3>
+<pre><code class="language-python">import anthropic
+import base64
+
+client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
+
+def encode_image(image_path: str) -&gt; tuple[str, str]:
+    """이미지를 Base64로 인코딩하고 미디어 타입을 반환합니다."""
+    extension = image_path.split(".")[-1].lower()
+    media_type_map = {
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "png": "image/png",
+        "gif": "image/gif",
+        "webp": "image/webp"
+    }
+    media_type = media_type_map.get(extension, "image/jpeg")
+
+    with open(image_path, "rb") as f:
+        image_data = base64.b64encode(f.read()).decode("utf-8")
+
+    return image_data, media_type
+
+image_data, media_type = encode_image("sample_chart.png")
+
+message = client.messages.create(
+    model="claude-opus-4-5",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": media_type,
+                        "data": image_data
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": "이 차트를 분석하고 주요 인사이트를 알려주세요."
+                }
+            ]
+        }
+    ]
+)
+
+print(message.content[0].text)
+</code></pre>
+<h3 id="_10">세 가지 모델 멀티모달 비교</h3>
+<pre><code class="language-python">import anthropic
+import google.generativeai as genai
+from openai import OpenAI
+import base64
+from PIL import Image
+import requests
+from io import BytesIO
+
+def analyze_image_gpt(image_url: str, question: str) -&gt; str:
+    """GPT-4o로 이미지 분석"""
+    client = OpenAI()
+    response = client.responses.create(
+        model="gpt-4o",
+        input=[{
+            "role": "user",
+            "content": [
+                {"type": "input_text", "text": question},
+                {"type": "input_image", "image_url": image_url}
+            ]
+        }]
+    )
+    return response.output_text
+
+def analyze_image_gemini(image_url: str, question: str) -&gt; str:
+    """Gemini로 이미지 분석"""
+    genai.configure(api_key="YOUR_GEMINI_API_KEY")
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
+    img_response = requests.get(image_url)
+    image = Image.open(BytesIO(img_response.content))
+
+    response = model.generate_content([question, image])
+    return response.text
+
+def analyze_image_claude(image_url: str, question: str) -&gt; str:
+    """Claude로 이미지 분석"""
+    client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
+
+    message = client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=1024,
+        messages=[{
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {"type": "url", "url": image_url}
+                },
+                {"type": "text", "text": question}
+            ]
+        }]
+    )
+    return message.content[0].text
+
+# 비교 실행
+IMAGE_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png"
+QUESTION = "이 이미지를 설명해주세요."
+
+print("=== GPT-4o ===")
+print(analyze_image_gpt(IMAGE_URL, QUESTION))
+
+print("\n=== Gemini 1.5 Flash ===")
+print(analyze_image_gemini(IMAGE_URL, QUESTION))
+
+print("\n=== Claude Opus ===")
+print(analyze_image_claude(IMAGE_URL, QUESTION))
+</code></pre>
+<hr/>
+<h2 id="responses-api">[실습] Responses API로 멀티모달 챗봇 만들기</h2>
+<p>이번 실습에서는 <strong>Responses API</strong>의 서버 사이드 상태 관리와 <strong>멀티모달</strong> 처리 기능을 결합하여 이미지를 이해하고 대화를 이어가는 챗봇을 만들어 보겠습니다.</p>
+<h3 id="_11">실습 목표</h3>
+<ul>
+<li>Responses API의 <code>previous_response_id</code>를 활용한 대화 연속성 구현</li>
+<li>이미지와 텍스트를 함께 처리하는 멀티모달 챗봇 구현</li>
+<li>간단한 CLI 인터페이스로 인터랙티브 챗봇 완성</li>
+</ul>
+<h3 id="_12">전체 코드</h3>
+<pre><code class="language-python">import base64
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+def encode_image_to_base64(image_path: str) -&gt; str:
+    """로컬 이미지 파일을 Base64 문자열로 인코딩합니다."""
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")
+
+def build_user_message(text: str, image_source: str | None = None) -&gt; list:
+    """
+    사용자 메시지 콘텐츠 블록을 생성합니다.
+    image_source가 있으면 이미지를 포함합니다.
+    """
+    content = []
+
+    if image_source:
+        # URL인지 로컬 파일인지 판단
+        if image_source.startswith("http://") or image_source.startswith("https://"):
+            content.append({
+                "type": "input_image",
+                "image_url": image_source
+            })
+        else:
+            # 로컬 파일 → Base64 인코딩
+            base64_image = encode_image_to_base64(image_source)
+            # 확장자로 MIME 타입 결정
+            ext = image_source.split(".")[-1].lower()
+            mime_map = {"jpg": "jpeg", "jpeg": "jpeg", "png": "png", "gif": "gif", "webp": "webp"}
+            mime = mime_map.get(ext, "jpeg")
+            content.append({
+                "type": "input_image",
+                "image_url": f"data:image/{mime};base64,{base64_image}"
+            })
+
+    content.append({
+        "type": "input_text",
+        "text": text
+    })
+
+    return content
+
+def multimodal_chatbot():
+    """
+    Responses API를 사용한 멀티모달 챗봇 메인 함수.
+    서버 사이드 상태 관리로 대화 기록을 자동 유지합니다.
+    """
+    print("=" * 60)
+    print("  멀티모달 챗봇 (Responses API)")
+    print("=" * 60)
+    print("명령어 안내:")
+    print("  이미지 분석: '이미지: [경로 또는 URL]' 입력 후 Enter")
+    print("  일반 대화:   텍스트를 입력하고 Enter")
+    print("  종료:        'quit' 또는 'exit' 입력")
+    print("-" * 60)
+
+    previous_response_id = None  # 대화 연결을 위한 이전 응답 ID
+
+    while True:
+        user_input = input("\n나: ").strip()
+
+        if not user_input:
+            continue
+
+        if user_input.lower() in ["quit", "exit", "종료"]:
+            print("챗봇을 종료합니다. 안녕히 가세요!")
+            break
+
+        # 이미지 포함 여부 확인
+        image_source = None
+        message_text = user_input
+
+        if user_input.lower().startswith("이미지:"):
+            parts = user_input.split(" ", 1)
+            if len(parts) &gt; 1:
+                image_source = parts[1].strip()
+                message_text = input("이미지에 대해 질문하세요: ").strip()
+                if not message_text:
+                    message_text = "이 이미지를 자세히 설명해주세요."
+
+        # 메시지 콘텐츠 블록 생성
+        content = build_user_message(message_text, image_source)
+
+        # Responses API 요청 구성
+        request_params = {
+            "model": "gpt-4o",
+            "instructions": (
+                "당신은 도움이 되는 AI 어시스턴트입니다. "
+                "이미지가 제공되면 상세히 분석하고, "
+                "이전 대화 맥락을 유지하며 자연스럽게 대화합니다. "
+                "한국어로 답변합니다."
+            ),
+            "input": [{"role": "user", "content": content}]
+        }
+
+        # 이전 응답이 있으면 대화 연결
+        if previous_response_id:
+            request_params["previous_response_id"] = previous_response_id
+
+        try:
+            print("\nAI: ", end="", flush=True)
+
+            # 스트리밍으로 응답 받기
+            with client.responses.stream(**request_params) as stream:
+                response_text = ""
+                for text in stream.text_stream:
+                    print(text, end="", flush=True)
+                    response_text += text
+
+                # 완료된 응답에서 ID 추출
+                final_response = stream.get_final_response()
+                previous_response_id = final_response.id
+
+            print()  # 줄바꿈
+
+        except Exception as e:
+            print(f"\n오류가 발생했습니다: {e}")
+            print("다시 시도해주세요.")
+
+if __name__ == "__main__":
+    multimodal_chatbot()
+</code></pre>
+<h3 id="_13">실행 방법</h3>
+<pre><code class="language-bash"># 환경 변수 설정
+export OPENAI_API_KEY="your-api-key-here"
+
+# 챗봇 실행
+python multimodal_chatbot.py
+</code></pre>
+<h3 id="_14">실행 예시</h3>
+<pre><code>============================================================
+  멀티모달 챗봇 (Responses API)
+============================================================
+명령어 안내:
+  이미지 분석: '이미지: [경로 또는 URL]' 입력 후 Enter
+  일반 대화:   텍스트를 입력하고 Enter
+  종료:        'quit' 또는 'exit' 입력
+------------------------------------------------------------
+
+나: 이미지: https://example.com/chart.png
+이미지에 대해 질문하세요: 이 차트의 전체적인 트렌드를 알려주세요.
+
+AI: 이 차트는 2020년부터 2024년까지의 매출 추이를 보여주고 있습니다.
+전반적으로 상승 트렌드를 보이며, 특히 2022년에 급격한 성장이 있었습니다...
+
+나: 가장 성장률이 높은 분기는 언제인가요?
+
+AI: 앞서 보여드린 차트를 바탕으로 분석하면, 2022년 3분기의 성장률이
+가장 높았습니다. 이 기간에는 전 분기 대비 약 35% 성장을 기록했습니다...
+</code></pre>
+<h3 id="_15">핵심 포인트 정리</h3>
+<p>이번 실습에서 구현한 핵심 기능은 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>구현 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>대화 연속성</strong></td>
+<td><code>previous_response_id</code>로 서버 사이드 대화 기록 연결</td>
+</tr>
+<tr>
+<td><strong>이미지 URL 처리</strong></td>
+<td><code>input_image</code> 타입에 URL 직접 전달</td>
+</tr>
+<tr>
+<td><strong>로컬 파일 처리</strong></td>
+<td>Base64 인코딩 후 Data URL 형식으로 전달</td>
+</tr>
+<tr>
+<td><strong>실시간 출력</strong></td>
+<td><code>client.responses.stream()</code> 컨텍스트 매니저 활용</td>
+</tr>
+<tr>
+<td><strong>오류 처리</strong></td>
+<td><code>try-except</code>로 API 오류 안전하게 처리</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="_16">정리</h2>
+<p>이번 챕터에서는 OpenAI의 최신 <strong>Responses API</strong>와 멀티모달 처리 기능을 학습했습니다.</p>
+<ul>
+<li><strong>Responses API</strong>는 서버 사이드 상태 관리, 내장 도구, 에이전트 지원을 통해 더 강력하고 간결한 AI 애플리케이션 개발을 가능하게 합니다.</li>
+<li><strong>Chat Completions API</strong>에서 Responses API로의 마이그레이션은 주요 파라미터명 변경과 응답 접근 방식 수정으로 비교적 간단하게 진행할 수 있습니다.</li>
+<li><strong>GPT-4o</strong>, <strong>Gemini</strong>, <strong>Claude</strong> 모두 멀티모달 처리를 지원하며, 각각 고유한 API 인터페이스를 갖습니다.</li>
+<li>실습에서는 Responses API의 <code>previous_response_id</code>를 활용해 대화 맥락을 유지하는 멀티모달 챗봇을 구현했습니다.</li>
+</ul>
+<p>다음 챕터에서는 <strong>Function Calling</strong>을 학습합니다. AI 모델이 외부 함수와 API를 호출하는 방법을 통해 더욱 실용적인 애플리케이션을 만들어 보겠습니다.</p>
+</div>

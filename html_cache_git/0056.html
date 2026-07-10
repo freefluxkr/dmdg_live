@@ -1,0 +1,16 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>2.4.2 로컬 사용자</h3>
+<p class="x00--">깃은 여러 사람과 함께 개발할 수 있는 협업 도구입니다. 프로젝트 하나를 다수의 개발자와 함께 작업할 때를 대비하여 각 <span class="x3---------">개발자를 구분</span>해야 합니다. 따라서 깃은 각 <span class="x3---------">개발자의 작업을 구분하려고 사용자를 등록하는 과정</span>을 거칩니다. 로컬 저장소에서 사용자 등록은 별도의 웹 사이트에서 회원 가입을 하는 것이 아니라, 소스 코드의 변경 내역을 기록할 때 구분할 수 있는 사용자 설정 값만 등록하면 됩니다. 사용자 등록은 최초로 깃을 사용하거나 커밋할 때 한 번만 합니다. </p>
+<p class="x00--">사용자 등록은 크게 두 가지로 구분합니다. 선택한 로컬<span class="x3------">(</span><span class="A------ x3------">local</span><span class="x3------">)</span> 저장소에만 적용되는 로컬 사용자 설정 값과 모든 로컬 저장소에 공통으로 적용되는 글로벌 사용자 설정 값입니다. 깃에서는 사용자를 구분하려고 ‘사용자 이름’과 ‘이메일 주소’를 사용하며, <span class="A------ x3-------1">config</span> 명령어로 환경 설정 파일에 등록합니다.</p>
+<p class="x00--">로컬 저장소에서는 다음 형태로 사용자를 등록합니다. 이때 사용자 이름과 이메일 주소는 <span class="x3---------">한글로 입력하면 오류가 발생하므로 영문으로 작성</span>해야 합니다. 이메일 주소는 주로 사용하는 이메일 주소를 입력합니다.</p>
+<div class="frame-73">
+<p class="N------2 para-style-override-41">$ cd <span class="N--------1 N--------1">저장소</span> <span class="N--------1 N--------1">폴더</span> <span class="ingd">깃 저장소 폴더</span></p>
+<p class="N------2 para-style-override-41">$ git config user.name "<span class="N--------1 N--------1">사용자이름</span>"</p>
+<p class="N------2 para-style-override-41">$ git config user.email "<span class="N--------1 N--------1">이메일주소</span>"</p>
+</div>
+<p class="x00--">깃에서 사용자를 구분하는 데 쓰는 ‘사용자 이름’과 ‘이메일 주소’ 중 이메일 주소는 깃이 개발자를 구별하는 고유의 키 값으로 사용합니다. 자신의 저장소를 외부로 공개하면 등록한 이메일 주소도 외부에 공개되므로, 공개해도 무관한 이메일 주소를 사용하길 권장합니다.</p>
+</div>
+</section>
+</section>

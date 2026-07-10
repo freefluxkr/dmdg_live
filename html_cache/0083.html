@@ -1,0 +1,29 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">변수를 만들어 값을 저장하면 코드도 길어지고 번거로워 보입니다. 그런데도 변수를 사용하는 이유는 뭘까요?</p>
+<p class="txt bl">첫 번째 이유는 기억하기 힘든 긴 데이터를 간단하게 저장할 수 있기 때문입니다. 원주율은 소수점 아래로 무한한 값이 있습니다. 이 많은 숫자를 기억하기가 어려워서 보통 3.14라고 줄여서 표현합니다. 변수를 활용하면 원주율처럼 긴 데이터를 계산할 때마다 기억하지 않아도 됩니다. 그저 변수 <span class="cd">p</span>에 저장한 긴 원주율 숫자를 불러오기만 하면 됩니다. 원의 넓이뿐만 아니라 원의 둘레, 반지름이 같은 구의 겉넓이도 변수 <span class="cd">p</span>에 저장된 값으로 구할 수 있습니다.</p>
+<p class="txt bl">다음 코드를 실행해 보면 좀 더 이해하기 쉬울 겁니다. 참고로 원의 둘레를 구하는 공식은 2πr, 구의 겉넓이를 구하는 공식은 4πr<sup>2</sup>입니다.</p>
+<div class="highlight">
+<pre>p = <span class="green">3.141592</span>
+r = <span class="green">5</span>
+
+<span class="green"># 원의 넓이</span>
+result1 = p * r ** <span class="green">2</span>
+<span class="gold">print</span>(<span class="cd2 red2">'원의 넓이 ='</span><span class="cd2">, result1</span>)
+<span class="green"># 원의 둘레</span>
+<span class="cd2">result2 =</span> <span class="cd2 green">2</span> <span class="cd2">* p * r</span>
+<span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'원의 둘레 ='</span><span class="cd2">, result2)</span>
+<span class="green"># 구의 겉넓이</span>
+<span class="cd2">result3 =</span> <span class="cd2 green">4</span> <span class="cd2">* p * r **</span> <span class="cd2 green">2</span>
+<span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'구의 겉넓이 ='</span><span class="cd2">, result3)</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+원의 넓이 = 78.5398 
+원의 둘레 = 31.41592
+구의 겉넓이 = 314.1592</pre>
+</div>
+</div>
+</section>
+</section>

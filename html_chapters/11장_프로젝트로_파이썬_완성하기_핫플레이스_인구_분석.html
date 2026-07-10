@@ -1,0 +1,1498 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>11장_프로젝트로_파이썬_완성하기_핫플레이스_인구_분석</title>
+    <style>table{width:100%;border-collapse:collapse}table,th,td{padding:.3em;border:1px solid #a4a4a4;vertical-align:top;margin-bottom:1em}tbody{border-top:2px solid #aaa;border-bottom:2px solid #a4a4a4;border-left:2px solid #fff;border-right:2px solid #fff}.tb_pink{background-color:#eaeaea;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #eaeaea}.tb_pink2{background-color:#f5f5f5;border-top:2px solid #fff;border-right:2px solid #fff;border-bottom:2px solid #f5f5f5}.tb_brown_line{border-bottom:2px solid #aaa}.tb_white{background-color:#fff}.tb_white2{background-color:#fff;border:2px solid #fff}.tb_white3{background-color:#fff;border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff}.tb_blue{background-color:#fff;border:2px solid #cacaca}.tb_brown{background-color:#f7f7f7;border:2px solid #f7f7f7}.clear{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0;clear:both}pre{word-break:break-all;word-wrap:break-word;white-space:pre-wrap;font-family:"code";font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;text-align:left;text-indent:0;padding:0;margin:0}.txts{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txts2{font-size:.8em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:2em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:.6em;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txtex{font-size:1em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txtex2{font-size:.9em;font-style:normal;font-weight:normal;line-height:1.8em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:justify;text-indent:0}.txt1{font-size:1.2em;font-style:normal;font-weight:normal;line-height:1.6em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt2{font-size:1.4em;font-style:normal;font-weight:normal;line-height:2em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.txt3{font-size:1.6em;font-style:normal;font-weight:normal;line-height:1.4em;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;text-align:left;text-indent:0}.key{border:1px solid #000;padding:0 .3em;font-family:"gothic_l";border-radius:.3em;font-size:.85em}.highlight{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:1.2em 0 1.2em 1em}.highlight2{border:2px solid #c6c6c6;padding:.5em;border-radius:0 .3em .3em .3em;margin:-0.2em 0 1.2em 0;background-color:#fff}.highlight3{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:0 0 1.2em 1em}.highlight4{padding:.5em;margin:1.2em 0 1.2em 1em}.highlight5{padding:.5em;margin:0 0 1.2em .6em}.highlight6{border-bottom:2px solid #c6c6c6;border-top:2px solid #c6c6c6;padding:.5em;margin:-0.2em 0 1.2em 0}.highlight7{border:2px solid #d3d3d3;border-radius:.5em;padding:.5em;margin:1.2em 0}.bg_white{background-color:#fff;border-radius:.3em;padding:0 0 0 .3em}.bg_white2{background-color:#fff}.bg_blue{background-color:#cacaca;padding:.3em .2em .3em .2em;border-radius:.9em}.bg_brown{background-color:#dfdfdf;padding:.4em .3em .4em .3em;border-radius:3em}.bg_brown2{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown3{background-color:#dfdfdf;padding:.1em}.bg_brown4{background-color:#dfdfdf;padding:.5em .3em .5em .3em;border-radius:3em}.bg_brown5{background-color:#f6f6f6;padding:.3em;border-radius:.1em}.bg_brown6{background-color:#dfdfdf;padding:.4em .7em .4em .7em;border-radius:3em}.bg_brown7{background-color:#dfdfdf;padding:.1em;border-radius:0}.bg_brown8{background-color:#dfdfdf;padding:.3em;border-radius:.3em}.bg_brown9{background-color:#dfdfdf;padding:.45em .1em .45em .1em;border-radius:3em}.bg_brown10{background-color:#dfdfdf;padding:.4em .45em .4em .45em;border-radius:3em}.bg_gray{background-color:#a7a7a7;font-size:.85em;padding:.1em .3em;border-radius:.4em;color:#fff}.bg_pink2{background-color:#e5e5e5;padding:.2em;border-radius:.5em;color:#414141}.bg_red{border:2px solid #414141;padding:.3em;border-radius:1em;margin-bottom:1.2em}.bg_yellow{padding:.2em .5em;background-color:#c6c6c6;border-radius:.5em .5em 0 0}.bg_black_line{border-bottom:1px solid #000;padding:.1em}.box_brown{box-sizing:border-box;min-height:100vh;background-color:#b5b5b5;padding:1em 2em}.box_brown2{padding:.5em;border-radius:.5em;background-color:#eee;box-sizing:border-box;min-height:80vh;position:relative}.box_brown3{border-bottom:3px solid #acacac;border-top:3px solid #acacac;padding:1em .5em 1em .5em;margin-bottom:5em}.box_brown4{border:3px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;padding:.5em}.box_brown5{padding:.5em;border-radius:.3em;border:2px solid #dfdfdf;margin-bottom:1.2em;margin-top:1.2em;background-color:#f7f7f7}.box_brown6{box-sizing:border-box;padding:2em;background-color:#f7f7f7}.box_yellow{padding:.5em;border-radius:0 0 .3em .3em;border-top:3px solid #aeaeae;margin-bottom:1.2em;margin-top:1.2em;background-color:#f2f2f2}.box_pink{box-sizing:border-box;padding:2em;background-color:#f8f8f8}.box_white{padding:.5em;border-radius:.5em;background-color:#fff;box-sizing:border-box;min-height:80vh;position:relative}.box_white2{padding:.5em;border-radius:.5em;background-color:#fff}.box_yellow_line{border-bottom:3px solid #c4c4c4}.box_yellow_line2{border:2px solid#c4c4c4;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_yellow_line3{border-bottom:2px solid #c5c5c5;margin-bottom:.5em;margin-top:.5em}.box_green_line{border:2px solid #d3d3d3;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.box_blue_line2{border:2px solid #cacaca;padding:.3em;border-radius:.3em;margin-bottom:1.2em}.bg_brown_line{border-bottom:3px solid #dedede;padding:0 .4em 0 0;color:#acacac}.bg_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_brown_line{border-bottom:3px solid #acacac}.box_brown_line2{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0 0 0 1em}.box_brown_line3{border:2px solid #acacac;padding:.3em;border-radius:.3em;margin:0}.box_white_line{border:1px solid #fff;padding:0;margin-top:2em;margin-bottom:2em}.box_black_line{border:1px solid #000;padding:.3em}.box_black_line2{border:1px solid #000;padding:.3em;border-radius:.3em;margin-bottom:2em}.tcenter{text-align:center}.tright{text-align:right}.s07_07{margin-left:.7em;text-indent:-0.7em}.s08_08{margin-left:.8em;text-indent:-0.8em}.s10_10{margin-left:1em;text-indent:-1em}.s11_11{margin-left:1.1em;text-indent:-1.1em}.s12_12{margin-left:1.2em;text-indent:-1.2em}.s14_14{margin-left:1.4em;text-indent:-1.4em}.s22_22{margin-left:2.2em;text-indent:-2.2em}.s26_26{margin-left:2.6em;text-indent:-2.6em}.s28_28{margin-left:2.85em;text-indent:-2.85em}.ind10{margin-left:1em;margin-bottom:.6em}.ind11{margin-left:1.1em}.ind12{margin-left:1.2em}.ind14{margin-left:1.4em}.ind18{margin-left:1.8em}.ind20{margin-left:2em}.ind22{margin-left:2.2em}.ind24{margin-left:2.4em}.ind26{margin-left:2.65em}.ind30{margin-left:3em}.ind36{margin-left:3.6em}.ind40{margin-left:4em}.ind90{margin-left:9.5em}.fleft{float:left;margin:.5em .5em .5em 0}.blue{color:#d4d4d4}.blue2{color:#414141}.blue3{color:#282828}.blue4{color:#535353}.brown{color:#797979}.brown2{color:#a1a1a1;text-decoration:none}.gold{color:#646464}.gray{color:#646464}.green{color:#5b5b5b}.purple{color:#676767}.yellow{color:#adadad}.red{color:#636363}.red2{color:#414141}.white{color:#fff}.h10{height:1em;max-width:100%}.h20{height:2em;max-width:100%}.h22{height:2.2em;max-width:100%}.h28{height:2.8em;max-width:100%}.h30{height:3em;max-width:100%}.h35{height:3.5em;max-width:100%}.h40{height:4em;max-width:100%}.h50{height:5em;max-width:100%}.h60{height:6em;max-width:100%}.mb02{margin-bottom:-0.2em}.w7{width:7.6%}.w10{width:10%}.w15{width:15%}.w18{width:18%}.w20{width:20%}.w25{width:25%}.w30{width:30%}.w33{width:33%}.w40{width:40%}.w50{width:50%}.w60{width:60%}.w70{width:70%}.w75{width:75%}.w80{width:80%}.w90{width:90%}.w100{width:100%}.w40c{margin-left:30%;margin-right:30%}.w60c{margin-left:20%;margin-right:20%}.w80c{margin-left:10%;margin-right:10%}</style>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 조각 간 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code, .cd {
+    font-family: 'Source Code Pro', Consolas, Monaco, monospace;
+}
+.cd {
+    background-color: #f5f5f5;
+    padding: 0.1em 0.3em;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.highlight, .highlight4, .highlight7 {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-left: 4px solid #adb5bd;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+/* 책 내부 안내 박스 스타일 */
+.box_brown, .box_brown2, .box_brown3, .box_brown4, .box_brown5, .box_brown6, .box_yellow, .box_pink {
+    background-color: #fcfcfc;
+    border: 2px solid #e2e2e2;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+.box_brown {
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.box_brown h1, .box_brown p, .box_brown span {
+    color: #fff !important;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+.txts2 {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+table, th, td {
+    border: 1px solid #dee2e6;
+    padding: 0.6em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    .thebook-content {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    /* 인쇄 시 페이지가 이상하게 잘리는 문제 방지 */
+    pre, .highlight, .box_brown, .box_brown5, table, img {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="thebook-content">
+        <div class="book-page-fragment" data-page="522">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown">
+<p class="txts"> </p>
+<div class="box_brown2">
+<h2 class="txt3 dm"><span class="brown">11장</span><br/>
+      프로젝트로 파이썬 완성하기: 핫플레이스 인구 분석</h2>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txts"> </p>
+<p class="txt bl">지금까지 배운 내용을 바탕으로 실제 파이썬 프로젝트를 진행해 보겠습니다. 프로젝트 로드맵에 따라 프로젝트 목표를 수립하고 프로그램을 구현한 후 실행결과를 분석합니다. Part 2 시작 부분에서 언급했듯이 핫플레이스의 인구 데이터를 분석합니다. 유명한 맛집이나 카페 등에는 언제 가야 가장 덜 붐빌지 인구 분석을 통해 사람이 적은 시간대를 구해 보겠습니다.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="523">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown9">11.1</span><br/>
+    프로젝트 목표 수립하기</h3>
+</div>
+<p class="txt bl">10장에서 배운 대로 첫 단계인 데이터를 선정해 수집하고 프로젝트 목표를 수립해 봅시다. 여기서는 핫플레이스 인구를 표현할 수 있는 데이터를 수집한 후, 수집한 데이터를 바탕으로 목표를 수립해 보겠습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="524">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_88"><span class="yellow">11.1.1</span> 데이터 선정하기</h4>
+<p class="txt bl">핫플레이스의 인구 분석이므로 인구 데이터가 필요하겠네요. 그리고 사람이 적은 시간대를 구하니 시간대별 인구 데이터가 있어야 하고요. 그런데 찾는 범위를 전국으로 하면 데이터가 너무 커질 테니 지역을 서울로 한정하겠습니다.</p>
+<p class="txt bl">데이터를 찾을 때는 구글을 추천합니다. 찾으려는 키워드 옆에 ‘데이터’를 붙여 구글에서 검색하면 적절한 데이터를 찾을 수 있습니다. 우리에게 필요한 데이터는 서울의 시간대별 인구죠. 그럼 구글에서 ‘서울 시간대별 인구 데이터’를 검색해 봅시다(다른 지역을 알고 싶다면 해당 지역으로 바꿔서 검색하면 됩니다).</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/439_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-1</span> 구글에서 데이터 찾기</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="525">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">검색 결과가 뜨면 하나씩 클릭하면서 찾는 데이터가 맞는지 확인합니다. 첫 번째로 나온 <span class="dm">서울 생활인구&gt; 데이터즐기기 | 서울열린데이터광장</span>을 클릭해 봅시다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/439_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-2</span> 서울 생활인구 페이지</p>
+<p class="txt bl">‘서울 열린데이터 광장’이라는 사이트의 <span class="dm">서울 생활인구</span> 페이지가 뜨네요. ‘생활인구’라는 단어가 조금 생소한데, <span class="dm">생활인구</span>란 거주 인구가 아닌 실제로 생활하는 인구로, 통신기지국을 기반으로 1시간 단위로 추정한 인구 데이터입니다(이 책에서 인구는 생활인구를 의미합니다).</p>
+<p class="txt bl">페이지를 좀 내려 보면 중간쯤에 <span class="dm">데이터 내려받기</span>가 있습니다. 집계구 단위, 행정동 단위, 자치구 단위로 나뉘어 있는데, 용어가 다소 생소합니다. 주소는 ‘서울시 00구 00동’으로 표현하죠. 여기에서 ‘00구’에 해당하는 것이 자치구입니다. 서울에는 총 25개 자치구가 있습니다. 그다음 00동에 해당하는 것이 행정동입니다. 행정동은 자치구를 한 번 더 하위 지역을 나눈 것으로, 강남구를 보면 개포동, 논현동, 도곡동, 삼성동 등의 행정동이 있죠. 서울에는 총 424개의 행정동이 있습니다. 당연히 행정동이 자치구보다 더 세밀하게 지역을 분석할 수 있겠죠? 그래서 행정동 데이터로 데이터 분석 프로젝트를 진행하겠습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="526">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그럼 데이터를 내려받아 봅시다. <span class="dm">행정동 단위</span>에서 [서울 생활인구 (내국인)]을 클릭합니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/440.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-3</span> 데이터 내려받기</p>
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 집계구가 아닌 행정동 단위를 선택한 이유</p>
+<p class="txt bl">집계구는 인구 규모(최적 500명), 사회경제적 동질성(주택유형, 평균지가), 집계구의 형태와 크기를 고려해 행정동을 더 세부적으로 나눈 통계 단위입니다. 서울 생활인구 페이지에 따르면 2020년 12월 기준 서울에는 총 19,153개의 집계구가 있습니다. 집계구 숫자가 압도적으로 많으니 집계구 데이터로 더 정확한 분석이 가능하다고 생각할 수 있어요. 그러나 집계구 데이터를 확인해 보면 해당 집계구가 속한 행정동코드와 집계구코드만 나와 있을 뿐이고, 집계구의 위치가 정확하게 어디인지는 없습니다. 그래서 분석하려는 지역을 찾기도, 자료를 보고 분석하기도 어렵습니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="527">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="dm">파일 내려받기</span> 항목에 몇 개 파일만 뜨는데, 파일 목록 아래에 있는 [전체 파일보기]를 클릭하면 전체 파일 목록이 나열됩니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/441_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-4</span> 파일 내려받기</p>
+<p class="txt bl">파일명을 잘 보면 마지막에 연도-월이 있습니다. 한 달을 기준으로 데이터가 올라와 있네요. 모든 데이터로 분석하는 것이 원래 취지에 맞으나 규모가 너무 커지므로 파일 하나만으로 진행하겠습니다. 2019년 12월 데이터인 LOCAL_PEOPLE_DONG_201912.zip을 클릭해 파일을 내려받아 봅시다(가장 최근 데이터를 분석하는 것이 좋지만 2020년 1월부터 코로나19 때문에 인구 이동이 감소됐죠. 그래서 2019년 12월 데이터로 진행합니다).</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="528">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">파일을 내려받고 압축을 풀면 폴더 안에 LOCAL_PEOPLE_DONG_201912.csv 파일이 있습니다. 파일을 마우스로 우클릭한 후 연결 프로그램을 Excel로 선택해 열어 보세요.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/441_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-5</span> 내려받은 서울 생활인구 데이터 파일</p>
+<p class="txt bl">굉장히 많은 데이터가 있네요. 첫 번째 행에 있는 헤더를 살펴봅시다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/442_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-6</span> 서울 생활인구 데이터 파일의 헤더</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="529">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">총 32개의 항목이 있습니다. 기준일ID와 시간대구분, 행정동코드, 총 생활인구수가 있고, 남자 연령대별 인구수와 여자 연령대별 인구수가 차례대로 있습니다. 성별, 연령대별 인구수는 나중에 확인하고 먼저 앞의 4개 항목만 보겠습니다.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/442_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-7</span> 데이터 파일의 일부 항목</p>
+<p class="txt bl">헤더 다음의 첫 번째 행을 해석하면 2019년 12월 1일 0시에 행정동코드 11215710인 지역의 총 생활인구가 45694.9988명이라는 의미입니다. 인구가 소수점으로 나오네요. 서울 열린데이터 광장에서 제공하는 생활인구 매뉴얼을 잘 살펴보면 인구는 통계 추정치이기 때문에 소수점이 발생할 수 있다고 되어 있습니다. 두 번째 행은 2019년 12월 1일 0시에 행정동코드 11680545인 지역의 총 생활인구가 37375.4506명임을 나타냅니다.</p>
+<p class="txt bl">그런데 데이터에는 행정동코드 8자리만 나와 있고 실제 어느 지역인지를 알 수가 없어요. 행정동코드 11215710이 어떤 동인지를 알아야 프로젝트를 진행하기 쉬울 텐데 말이죠. 이때 참고할 자료가 있습니다. 서울 열린데이터 광장에서는 행정동코드와 코드에 해당하는 행정동명을 별도의 파일로 제공합니다. 서울 생활인구 페이지(<a href="https://data.seoul.go.kr/dataVisual/seoul/seoulLivingPopulation.do">https://data.seoul.go.kr/dataVisual/seoul/seoulLivingPopulation.do</a>)로 다시 가서 이번에는 <span class="dm">자치구 단위</span>의 [행정구역 코드정보]를 클릭해 파일을 내려받습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/443_1.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-8</span> 행정구역 코드정보 내려받기</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="530">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">내려받은 ‘행정동코드_매핑정보.xlsl’ 파일을 열어 보면 하단에 ‘행정동코드’와 ‘유입지코드’라는 2개의 시트가 있습니다. 우리에게 필요한 것은 행정동코드이므로 [행정동코드] 시트를 클릭합니다.</p>
+<div class="w70"><img alt="" class="w100" src="https://thebook.io/img/080251/443_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-9</span> 행정동코드 정보</p>
+<p class="txt bl">헤더에 2가지 행정동코드와 시도명, 시군구명, 행정동명이 보입니다. 그런데 통계청 코드는 숫자 7자리, 행자부 코드는 8자리입니다. 앞서 내려받은 LOCAL_PEOPLE_DONG_201912.csv 파일의 행정동코드는 8자리고요. 따라서 여기서는 두 번째 열에 있는 8자리 행자부 행정동코드를 사용하면 됩니다. 행정동코드_매핑정보.xlsl 파일에서 11215710과 11680545를 찾아 보니 광진구 화양동과 강남구 압구정동입니다.</p>
+<p class="txt bl">이처럼 LOCAL_PEOPLE_DONG_201912.csv 파일로는 인구 데이터를, 행정동코드_매핑정보.xlsl 파일로는 행정동명을 알 수 있으므로 필요한 데이터는 다음과 같이 선정합니다.</p>
+<p class="txtex dm">1. 프로젝트 목표 수립</p>
+<div class="ind10">
+<p class="txtex dm">1) 데이터 선정하기</p>
+<p class="txtex dm">데이터</p>
+<div class="box_yellow_line2">
+<p class="txtex2 dl">인구 데이터: 서울 생활인구(내국인)</p>
+<p class="txtex2 dl">행정동코드 데이터: 행정구역 코드정보</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="531">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">파이썬에서 csv 라이브러리를 사용할 수 있도록 내려받은 파일의 파일명과 확장자를 수정하겠습니다. 행정동코드_매핑정보.xlsl 파일을 dong_code.csv로 바꿉니다. 행정동코드_매핑정보.xlsl 파일의 [행정동코드] 시트에서 [파일 → 다른 이름으로 저장]을 누르고 LOCAL_PEOPLE_DONG_201912.csv 파일과 같은 폴더를 선택합니다. 팝업 창이 뜨면 파일명은 dong_code로 하고, 파일 형식은 CSV (쉼표로 분리) (<span class="cd">*</span>.csv) 또는 CSV UTF-8(쉼표로 분리) (.csv)를 선택합니다. 이때 2개의 시트를 하나의 파일로 만들기 때문에 경고창이 뜹니다. [확인] 버튼을 누르면 현재 열려 있는 시트만 CSV 파일로 변환합니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/444_1.jpg"/></div>
+<p class="txts"> </p>
+<div class="w70"><img alt="" class="w100" src="https://thebook.io/img/080251/444_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-10</span> 파일명과 파일 형식 바꾸기</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="532">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_89"><span class="yellow">11.1.2</span> 목표 수립하기</h4>
+<p class="txt bl">다음으로 프로젝트의 목표를 수립해 봅시다. 우리는 핫플레이스가 덜 붐비는 시간을 알고 싶습니다. 핫플레이스가 혜화동에 있다면 혜화동의 인구가 가장 적은 시간을 찾으면 됩니다. 따라서 프로젝트의 목표는 <span class="dm">핫플레이스가 있는 행정동에서 인구가 가장 적은 시간대 파악하기</span>로 정리할 수 있습니다.</p>
+<p class="txtex dm">2) 목표 수립하기</p>
+<p class="txtex dm">목표</p>
+<div class="box_yellow_line2">
+<p class="txtex2 dl">핫플레이스가 있는 행정동에서 인구가 가장 적은 시간대 파악하기</p>
+</div>
+<p class="txt bl">목표를 달성할 수 있는 하위 목표를 수립해 봅시다. 하위 목표는 더 구체적으로 분석할 요소를 정하는 것이어서 데이터 항목을 보면서 실제로 달성할 수 있는 내용으로 수립하는 것이 좋습니다.</p>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txtex2 dl">행정동보다 더 세부적으로 접근할 수 있다면, 즉 구체적인 가게명이나 주소를 입력하고 이 지역의 시간대별 인구를 구할 수 있다면 더 정확한 답을 구할 수 있습니다. 하지만 더 세부적인 데이터는 구글 검색만으로 구할 수 없습니다. 데이터 분석은 데이터를 구하는 것(수집)에서 시작합니다. 이처럼 원하는 데이터를 구하기 어려울 때는 구할 수 있는 데이터를 활용해 프로젝트 방향을 정해야 합니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="533">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">우리가 가장 궁금한 것은 핫플레이스가 있는 행정동의 시간대별 인구입니다. 행정동의 시간대별 인구는 어떻게 구할까요?</p>
+<p class="txt bl">먼저 dong_code.csv 파일에서 핫플레이스가 있는 행정동의 행정동코드를 알아내야죠. LOCAL_PEOPLE_DONG_201912.csv 파일에서 알아낸 행정동코드와 일치하는 행만 골라냅니다. 그리고 시간대별로 나뉜, 네 번째 항목에 있는 생활인구수를 더한 후 평균을 구하면 됩니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/445.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-11</span> 행정동코드로 평균인구 구하기</p>
+<p class="txt bl">구한 평균인구를 시간대별 그래프로 표현하면 인구 변화가 시각적으로 더 잘 보이겠죠? 따라서 첫 번째 하위 목표는 <span class="dm">핫플레이스가 있는 행정동의 시간대별 평균인구 그래프를 그려 분석하기</span>로 정합니다. 목표와 함께 그래프를 어떻게 그릴지 간단히 스케치합니다. 꺾은선 그래프가 시간대별 추이를 잘 보여 줄 것 같네요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="534">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">2) 목표 수립</p>
+<p class="txtex dm">목표</p>
+<div class="box_yellow_line2">
+<p class="txtex2 dl">핫플레이스가 있는 행정동에서 인구가 가장 적은 시간대 파악하기</p>
+</div>
+<p class="txtex dm">하위 목표 1</p>
+<div class="box_yellow_line2">
+<p class="txtex2 dl">핫플레이스가 있는 행정동의 시간대별 평균인구 그래프를 그려 분석하기</p>
+<div class="w60c"><img alt="" class="w100" src="https://thebook.io/img/080251/446.jpg"/></div>
+</div>
+<p class="txt bl">그런데 주중과 주말의 생활인구가 비슷할까요? 놀이공원 입장료나 숙박비나 항공 요금 등을 보면 주말과 주중에 따라 금액을 달리 하는 경우가 많습니다. 이는 사람들이 몰리는 정도가 다르기 때문이죠. 핫플레이스 역시 주중 인구와 주말 인구가 다를 수 있으므로 둘을 나눠서 비교하는 것도 의미 있을 것 같습니다.</p>
+<p class="txt bl">데이터 파일은 주중과 주말로 구분되어 있지 않은데, 어떻게 구분할까요? 간단합니다. 데이터 파일을 보면 첫 번째 항목에 일자를 나타내는 기준일ID가 있습니다. 파이썬에는 일자를 입력하면 숫자로 요일을 알려 주는 <span class="cd">datetime</span> 라이브러리가 있습니다. 이를 활용하면 기준일ID로 요일을 알아내 주중과 주말을 구분할 수 있습니다.</p>
+<p class="txt bl">그럼 두 번째 목표는 <span class="dm">핫플레이스가 있는 행정동의 주중/주말 시간대별 평균인구 그래프를 그려 분석하기</span>로 하겠습니다. 이 역시 그래프를 미리 스케치합니다. 막대그래프로도 비교 그래프를 그릴 수도 있겠죠. 같은 데이터를 사용하므로 두 그래프 모두 스케치합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="535">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">하위 목표 2</p>
+<div class="box_yellow_line2">
+<p class="txt dl">핫플레이스가 있는 행정동의 주중/주말 시간대별 평균인구 그래프를 그려 분석하기</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/447_1.jpg"/></div>
+</div>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txtex2 dl">두 번째 하위 목표를 결정할 때 주중과 주말을 어떻게 구분할지 생각해 보는 과정이 있었습니다. 이처럼 목표 수립 단계에서는 프로그래밍이 가능할지, 가능하다면 어떻게 구현할지 확인하고 하위 목표를 수립하길 추천합니다. 구현 단계에서 시행착오를 줄일 수 있습니다.</p>
+</div>
+<p class="txt bl">더 분석할 거리가 없을까요? 인구 데이터 파일을 보면 다섯 번째 항목부터 남녀의 연령별 생활인구가 나와 있습니다. 이를 사용해 성별 인구도 비교할 수 있습니다. 가려는 곳이 여성이 선호하는 곳인지, 남성이 선호하는 곳인지에 따라 붐비는 시간대가 다를 수 있으니까요. 그럼 세 번째 목표는 <span class="dm">핫플레이스가 있는 행정동의 남녀 시간대별 평균인구 그래프를 그려 분석하기</span>로 하고 그래프를 스케치해 봅시다. 이번에는 꺾은선 그래프와 좌우로 펼쳐진 가로형 막대그래프로 표현합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="536">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">하위 목표 3</p>
+<div class="box_yellow_line2">
+<p class="txt dl">핫플레이스가 있는 행정동의 남녀 시간대별 평균인구 그래프를 그려 분석하기</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/447_2.jpg"/></div>
+</div>
+<p class="txt bl">지금까지 ‘핫플레이스가 있는 행정동에서 인구가 가장 적은 시간대 파악하기’라는 목표를 달성하는 데 필요한 하위 목표 3가지를 세웠습니다. 핫플레이스가 위치한 행정동의 인구 그래프를 다양한 기준으로 그려 분석하는 것이었죠. 그런데 인구를 한 장소의 절대치로만 보니 실제 어느 정도 붐비는지 잘 와닿지 않을 것 같습니다. 천 명 또는 만 명일 때 어느 정도 붐비는지 실감이 안 나죠. 이럴 때는 자신이 잘 아는 지역과 핫플레이스가 속한 지역을 비교하면 사람이 얼마나 많은지 적은지를 판단할 수 있지 않을까요? 그래서 마지막 하위 목표로 <span class="dm">핫플레이스가 있는 행정동과 나에게 익숙한 행정동의 시간대별 평균인구 그래프를 그려 비교 분석하기</span>로 정하고 그래프를 스케치해 봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="537">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">하위 목표 4</p>
+<div class="box_yellow_line2">
+<p class="txt dl">핫플레이스가 있는 행정동과 나에게 익숙한 행정동의 시간대별 평균인구 그래프를 그려 비교 분석하기</p>
+<div class="w60c"><img alt="" class="w100" src="https://thebook.io/img/080251/448.jpg"/></div>
+</div>
+<p class="txt bl">프로젝트 목표를 수립하고 하위 목표까지 모두 작성했습니다. 지금처럼 목표 수립 단계에서 모든 목표를 도출해도 되지만, 실제로는 프로젝트를 진행하면서 새로운 목표가 추가되는 일이 많습니다. 데이터 분석 결과를 보고 나면 이와 연관된 새로운 궁금증이 생기기 때문이죠. 그러니 프로젝트 로드맵을 유연하게 활용하기를 추천합니다!</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="538">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 공공 데이터</p>
+<p class="txt bl">데이터를 내려받은 서울 열린데이터 광장(<a href="https://data.seoul.go.kr">https://data.seoul.go.kr</a>)은 누구나 공공 데이터를 이용할 수 있도록 서울시에서 운영하는 사이트입니다. 공공 데이터는 공공 기관이 업무상 작성하거나 취득해 관리하는 자료를 말합니다. 공개된 데이터라면 특별한 인증이나 절차 없이 내려받을 수 있습니다. 인구 데이터는 물론 교통, 교육, 행정 등 여러 분야의 다양한 데이터를 제공합니다. 대표적인 공공 데이터 사이트로 공공데이터포털(<a href="https://www.data.go.kr">https://www.data.go.kr</a>)이 있습니다. 공공데이터포털은 서울시뿐만 아니라 대한민국 정부가 보유한 다양한 공공 데이터를 제공합니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/449.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-12</span> 공공데이터포털</p>
+<p class="txtex bl">이외에도 구글에서 검색하면 민간 기업이 제공하는 데이터도 구할 수 있습니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="539">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown3">
+<h3 class="txt2 dm tcenter"><span class="dm brown bg_brown9">11.2</span><br/>
+    프로그램으로 구현하기</h3>
+</div>
+<p class="txt bl">두 번째 단계인 프로젝트 구현으로 들어가 보겠습니다. 하위 목표 4가지의 알고리즘을 작성하고 코드로 구현해야죠. 하위 목표를 코드로 구현하기 전에 먼저 해야 할 작업이 있습니다. 내려받은 데이터를 프로그램에서 사용하려면 파이썬 파일에서 읽어 들여야 합니다. 그리고 앞에서 언급했듯이 행정동명에 해당하는 행정동코드를 알아내야 합니다. 그럼 2가지 작업부터 진행해 보겠습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="540">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_90"><span class="yellow">11.2.1</span> 데이터 파일 읽고 행정동명과 행정동코드 연결하기</h4>
+<p class="txt bl">먼저 인구 데이터인 LOCAL_PEOPLE_DONG_201912.csv와 행정동코드 데이터인 dong_code.csv 파일이 <span class="dm">같은 폴더 안에 있는지 확인</span>하세요. 그러고 나서 <span class="dm">동일한 폴더에 파이썬 파일을 생성</span>하세요(코랩에서 실행할 경우 파일을 직접 선택할 수 있으므로 같은 폴더가 아니어도 됩니다).</p>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txtex2 dl">생활인구 데이터 파일이 매우 크므로 이 장에서는 구글 코랩이 아닌 주피터 노트북으로 실습하기를 추천합니다. 코랩을 사용하면 파일을 업로드하는 데 시간이 오래 걸립니다. 주피터 노트북은 파일을 업로드하는 방식이 아니어서 파일을 빠르게 읽을 수 있습니다.</p>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm">데이터 파일 읽어 들이기</p>
+<p class="txt bl">9장에서 배운 대로 파이썬 파일에 데이터 파일을 읽어 들여 봅시다. 인구 데이터 파일을 읽어 리스트로 변환한 후 이를 변수(<span class="cd">data</span>)에 저장합니다. 마지막에 전체 데이터 길이도 출력해 보겠습니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> csv
+
+f = <span class="gold">open</span>(<span class="red2">'LOCAL_PEOPLE_DONG_201912.csv'</span>, encoding=<span class="red2">'utf8'</span>) <span class="green"># 또는 'eur-kr', 'cp949'</span>
+data = csv.reader(f)
+<span class="gold">next</span>(data)
+data = list(data)
+<span class="gold">print</span>(<span class="gold">len</span>(data))</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+315456</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="541">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">결과가 출력된다면 데이터 읽기에 성공한 겁니다. 결과를 보니 파일에 약 31만 개의 행이 있네요. 데이터 양이 많으므로 처음 파일을 읽을 때 시간이 좀 걸립니다.</p>
+<div class="box_yellow">
+<p class="txtex dm">졔졔쌤의 조언</p>
+<p class="txtex2 dl">인코딩 에러가 발생한다면 utf8 대신 eur-kr 또는 cp949를 넣거나 인코딩 옵션 자체를 삭제해 보세요. 사용하는 PC 환경에 따라 인코딩 옵션이 다르게 적용됩니다.</p>
+</div>
+<p class="txt bl">두 번째 파일인 dong_code.csv도 읽어 봅시다. 앞서 인구 데이터를 읽을 때 <span class="cd">f</span>와 <span class="cd">data</span>를 사용했으므로 dong_code.csv 파일을 읽을 때는 다른 변수를 사용해야 데이터가 겹치지 않습니다. 이번에는 <span class="cd">f2</span>와 <span class="cd">code_data</span>를 사용하겠습니다.</p>
+<div class="highlight">
+<pre>f2 = <span class="gold">open</span>(<span class="red2">'dong_code.csv'</span>, encoding = <span class="red2">'utf8'</span>)
+code_data = csv.reader(f2)
+<span class="gold">next</span>(code_data)
+<span class="gold">next</span>(code_data)
+code_data = list(code_data)
+<span class="gold">print</span>(<span class="gold">len</span>(code_data))</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+424</pre>
+</div>
+<p class="txt bl">dong_code.csv 파일에는 총 424개 행이 있습니다. 행정동 개수가 총 424개라는 의미죠. 그런데 이번에는 <span class="cd">next(code_data)</span>가 두 줄입니다. dong_code.csv 파일을 보면 헤더가 두 줄이고, 실제 데이터는 세 번째 행부터 있습니다. 그래서 <span class="cd">next(code_data)</span>를 두 번 실행해 한글 헤더와 영문 헤더를 모두 제거합니다.</p>
+<div class="w70"><img alt="" class="w100" src="https://thebook.io/img/080251/452.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-13</span> dong_code.csv 파일 헤더</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="542">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">데이터 타입 변환하기</p>
+<p class="txt bl">읽어 들인 데이터의 실제 값을 확인해 봅시다. 인구 데이터의 첫 번째 행만 출력해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(data[<span class="green">0</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['20191201', '00', '11215710', '45694.998800000001', '452.3937', '208.7971', '1267.7678000000001', '5642.9234999999999', '5433.6800999999996', …]</pre>
+</div>
+<p class="txt bl">데이터가 잘 보입니다. 그런데 숫자가 모두 작은 따옴표로 감싸져 있습니다. CSV 파일을 읽어 들였기 때문에 실제 데이터가 숫자라 할지라도 문자열로 저장돼서 그렇습니다. 우리는 행정동의 평균인구를 구하기 위해 인구수를 더하고 나누는 작업을 해야 합니다. 따라서 데이터는 연산이 가능한 숫자형이어야 하므로 데이터 타입을 변환해야 합니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/453.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-14</span> 서울 생활인구 데이터 파일의 헤더</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="543">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">헤더를 보고 각 항목(열)을 어떻게 변환해야 할지 생각해 봅시다. 먼저 네 번째 열인 총생활인구수부터 마지막 열까지는 모두 소수점이 있는 실수입니다. 따라서 읽어 들인 데이터를 <span class="cd">float()</span>를 사용해 실수형으로 변환해야 합니다.</p>
+<p class="txt bl">그리고 두 번째와 세 번째 열은 모두 정수입니다. 따라서 <span class="cd">int()</span>를 사용해 정수형으로 변환하면 되죠. 그런데 날짜를 의미하는 첫 번째 열인 기준일ID는 읽어 들인 문자열 그대로 두어야 합니다. 기준일ID는 '20191201' 형태입니다. 날짜는 나중에 슬라이싱해서 연도, 월, 일을 분리합니다. 문자열이 슬라이싱하기가 편하므로 기준일ID만 문자열 그대로 두겠습니다(6장에 나온 문자열 슬라이싱을 참고하세요).</p>
+<p class="txt bl">정리하면 시간대구분, 행정동코드는 정수형으로, 총생활인구수부터 마지막 열까지는 실수형으로 변환해야 합니다. 데이터 타입을 변환하는 코드는 다음과 같이 작성할 수 있습니다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> data:
+    row[<span class="green">1</span>] = int(row[<span class="green">1</span>])       <span class="green"># 시간대구분</span>
+    row[<span class="green">2</span>] = int(row[<span class="green">1</span>])       <span class="green"># 행정동코드</span>
+    row[<span class="green">3</span>] = float(row[<span class="green">1</span>])     <span class="green"># 총생활인구수</span>
+    row[<span class="green">4</span>] = float(row[<span class="green">1</span>])     <span class="green"># 남자0세부터9세생활인구수</span>
+    ...
+    row[<span class="green">31</span>] = float(row[<span class="green">31</span>])   <span class="green"># 여자70세이상생활인구수</span></pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="544">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">row[1]</span>부터 <span class="cd">row[31]</span>까지 모두 바꿔야 하므로 반복문을 사용합니다. 변경해야 할 열이 총 31개이므로 데이터 타입을 31번 변환해야 합니다. 그런데 잘 살펴보면 여기서도 반복되는 부분이 보입니다. 인덱스가 1부터 31까지 1씩 증가하며 데이터 타입을 변환하고 있죠. 이 부분에 반복문을 사용할 수 있습니다. 그리고 인덱스가 2보다 작거나 같을 때는 정수형으로, 2보다 클 때는 실수형으로 변환하면 됩니다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">32</span><span class="cd2">):</span>
+        <span class="cd2 purple">if</span> <span class="cd2">i &lt;=</span> <span class="cd2 green">2</span><span class="cd2">:</span>      <span class="cd2 green"># 인덱스가 2 이하인 경우 정수형으로 변환</span>
+            <span class="cd2">row[i] = int(row[i])</span>
+        <span class="cd2 purple">else</span><span class="cd2">:</span>           <span class="cd2 green"># 인덱스가 2 초과인 경우 실수형으로 변환</span>
+            <span class="cd2">row[i] = float(row[i])</span>
+<span class="cd2 gold">print</span><span class="cd2">(data[</span><span class="cd2 green">0</span><span class="cd2">])</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['20191201', 0, 11215710, 45694.9988, 452.3937, 208.7971, 1267.7678, 5642.9235, 5433.6801, 2494.5993, 1691.4831, 1042.7096, 1058.3378, 895.4639, 875.9212, 601.9097, 496.2165, 850.682, 388.4005, 180.3721, 1586.7039, 6973.6176, 4259.7022, 2036.1446, 1285.42, 794.6241, 833.7179, 772.1417, 773.2152, 827.1455, 565.5378, 1405.3707, '']</pre>
+</div>
+<p class="txt bl">첫 번째 열인 기준일ID를 제외하고 모든 데이터가 숫자형으로 변경됐습니다. 마지막의 <span class="cd">''</span>는 존재하지 않는 열인데 파일을 읽어 들이는 과정에서 포함됐습니다. 연산에 활용할 데이터는 아니니 그대로 둬도 괜찮습니다. 인구 데이터를 분석하기 편하도록 데이터 타입을 변환하는 작업을 완료했습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="545">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이번에는 행정동코드 데이터를 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(code_data[<span class="green">0</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['1101053', '11110530', '서울', '종로구', '사직동']</pre>
+</div>
+<p class="txt bl">역시 모든 값이 문자열로 저장되어 있습니다. 이 중에서 사용할 항목은 두 번째 열의 행자부 행정동코드와 마지막 열인 행정동명입니다. 행정동명은 문자열 그대로 사용하므로 행자부 행정동코드만 숫자형으로 변경합니다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> <span class="cd2">row</span> <span class="blue2">in</span> <span class="cd2">code_data</span>:
+<span class="cd2">row[</span><span class="green">1</span><span class="cd2">] = int(row[</span><span class="green">1</span><span class="cd2">])</span>
+<span class="gold">print</span>(code_data[0])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['1101053', 11110530, '서울', '종로구', '사직동']</pre>
+</div>
+<p class="txt bl">행정동코드 데이터도 데이터 타입 변환이 잘 됐습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="546">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">행정동명과 행정동코드 연결하기</p>
+<p class="txt bl">필요한 데이터를 모두 읽고, 적절한 데이터 타입으로 변환했으니 행정동명과 행정동코드를 연결해 봅시다. 여기서부터는 코드가 복잡하니 먼저 알고리즘을 작성하고 나서 이를 코드로 구현하겠습니다.</p>
+<p class="txt bl">분석할 핫플레이스가 위치한 행정동을 선택해야 합니다. 사용자가 알고 싶은 행정동명을 직접 입력하게 해 봅시다. 사용자가 서울시의 행정동 중 하나를 입력하면 행정동명과 행정동코드의 매핑 정보가 담긴 dong_code.csv에서 해당하는 행정동코드를 찾습니다.</p>
+<div class="ind10">
+<p class="txtex dm">알고리즘</p>
+<div class="box_green_line">
+<p class="txtex dl s12_12">1. 사용자에게서 행정동명을 입력받아 변수(dong_name)에 저장하기</p>
+<p class="txtex dl s12_12">2. 행정동코드 데이터(code_data)를 돌며 반복하기</p>
+<p class="txtex dl ind12">2.1 행정동코드 데이터의 마지막 열인 행정동명(열 인덱스[-1])이 입력된 행정동명(dong_name)과 같다면</p>
+<p class="txtex dl ind26">2.1.1 해당하는 행정동코드를 변수(dong_code)에 저장하기</p>
+</div>
+</div>
+<p class="txt bl">과정 1은 간단하게 행정동명을 <span class="cd">input()</span>으로 입력받아 변수 <span class="cd">dong_name</span>에 저장하면 됩니다. 과정 2에서 행정동코드를 구하려면 dong_code.csv 파일의 데이터를 담고 있는 <span class="cd">code_data</span>를 사용해야 합니다. <span class="cd">code_data</span>에서 행정동명은 마지막 열에 있죠(dong_code.csv 파일을 확인해 보세요). <span class="cd">code_data</span> 전체를 돌면서 입력받은 행정동명(<span class="cd">dong_name</span>)이 <span class="cd">code_data</span>의 마지막 열(열 인덱스 [-1])과 같을 때 해당 행의 행정동코드를 <span class="cd">dong_code</span>에 저장합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="547">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">알고리즘에 해당하는 코드를 작성해 봅시다(지면상 코드 부분은 들여쓰기를 생략합니다).</p>
+<div class="highlight">
+<p class="txtex dm tcenter yellow">&lt;알고리즘&gt;</p>
+<p class="txtex dl s12_12">1. 사용자에게서 행정동명을 입력받아 변수(dong_name)에 저장하기</p>
+<p class="txtex dl s12_12">2. 행정동코드 데이터(code_data)를 돌며 반복하기</p>
+<p class="txtex dl ind12">2.1 행정동코드 데이터의 마지막 열인 행정동명(열 인덱스 [-1])이 입력된 행정동명(dong_name)과 같다면</p>
+<p class="txtex dl ind26">2.1.1 해당하는 행정동코드를 변수(dong_code)에 저장하기</p>
+<hr/>
+<p class="txtex dm tcenter yellow">&lt;코드&gt;</p>
+<pre>1. dong_name = input()
+2. for row in code_data:
+    2.1 if row[-1] == dong_name:
+        2.1.1 dong_code = row[1]</pre>
+</div>
+<p class="txt bl">코드를 프로그램으로 옮겨 봅시다. 알아보기 쉽게 안내문도 적당히 추가합니다.</p>
+<div class="highlight">
+<pre>dong_name = <span class="gold">input</span>(<span class="red2">'핫플레이스가 위치한 행정동을 입력하세요. --&gt; '</span>)
+<span class="purple">for</span> row <span class="blue2">in</span> code_data:
+    <span class="purple">if</span> row[<span class="green">-1</span>] == dong_name:
+        dong_code = row[<span class="green">1</span>]
+<span class="gold">print</span>(dong_name, <span class="red2">'-'</span>, dong_code, <span class="red2">'을(를) 분석합니다!'</span>)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="548">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">프로그램을 실행해 압구정동을 입력해 봅시다.</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+핫플레이스가 위치한 행정동을 입력하세요. --&gt; 압구정동
+압구정동 - 11680545 을(를) 분석합니다!</pre>
+</div>
+<p class="txt bl">입력된 행정동명(압구정동)과 행정동코드(11680545)가 각각 <span class="cd">dong_name</span>, <span class="cd">dong_code</span>에 저장됐음을 확인할 수 있습니다. 이후 구현 과정에서 <span class="cd">dong_name</span>과 <span class="cd">dong_code</span> 변수를 활용합니다.</p>
+<p class="txt bl">이 책에서는 압구정동을 기준으로 프로젝트를 진행합니다. 다른 지역이 궁금하다면 바꿔서 입력해 보고 결과가 어떻게 달라지는지 직접 확인해 보세요.</p>
+<p class="txt bl">핫플레이스 인구 분석 프로젝트에서 실행해야 하는 기본 코드를 정리하면 다음과 같습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="549">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="purple">import</span> csv
+
+<span class="green"># 데이터 파일 읽어 들이기</span>
+f = <span class="gold">open</span>(<span class="red2">'LOCAL_PEOPLE_DONG_201912.csv'</span>, encoding=<span class="red2">'utf8'</span>) <span class="green"># 또는</span> <span class="green">'</span><span class="green">eur-kr</span><span class="green">'</span><span class="green">,</span> <span class="green">'</span><span class="green">cp949</span><span class="green">'</span>
+data = csv.reader(f)
+<span class="gold">next</span>(data)
+data = list(data)
+
+f2 = <span class="gold">open</span>(<span class="red2">'dong_code.csv'</span>, encoding = <span class="red2">'utf8'</span>) <span class="green"># 또는 'eur-kr', 'cp949'</span>
+code_data = csv.reader(f2)
+<span class="gold">next</span>(code_data)
+<span class="gold">next</span>(code_data)
+code_data = list(code_data)
+
+<span class="green"># 데이터 타입 변환하기</span>
+<span class="green"># 인구 데이터 변환하기</span>
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">1</span>, <span class="green">32</span>):
+        <span class="purple">if</span> i &lt;= <span class="green">2</span>:      <span class="green"># 인덱스가 2 이하인 경우 정수형으로 변환</span>
+            row[i] = int(row[i])
+        <span class="purple">else</span>:           <span class="green"># 인덱스가 2 초과인 경우 실수형으로 변환</span>
+            row[i] = float(row[i])
+
+<span class="green"># 행정동코드 변환하기</span>
+<span class="purple">for</span> row <span class="blue2">in</span> code_data:
+    row[<span class="green">1</span>] = int(row[<span class="green">1</span>])
+
+<span class="green"># 행정동명과 행정동코드 연결하기</span>
+dong_name = <span class="gold">input</span>(<span class="red2">'핫플레이스가 위치한 행정동을 입력하세요. --&gt; '</span>)
+<span class="purple">for</span> row <span class="blue2">in</span> code_data:
+    <span class="purple">if</span> row[<span class="green">-1</span>] == dong_name:
+        dong_code = row[<span class="green">1</span>]
+<span class="gold">print</span>(dong_name, <span class="red2">'-'</span>,dong_code, <span class="red2">'을(를) 분석합니다!'</span>)</pre>
+</div>
+<p class="txt bl">이제 프로젝트 목표 수립 단계에서 정리한 하위 목표를 하나씩 프로그램으로 구현해 봅시다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="550">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_91"><span class="yellow">11.2.2</span> 하위 목표 1 - 시간대별 인구 분석하기</h4>
+<p class="txt bl">첫 번째 하위 목표는 ‘핫플레이스가 있는 행정동의 시간대별 평균인구 그래프를 그려 분석하기’입니다. 알고리즘부터 작성해 봅시다.</p>
+<div class="ind10">
+<p class="txtex dm">하위 목표 1</p>
+<div class="box_green_line">
+<p class="txt dl">핫플레이스가 있는 행정동의 시간대별 평균인구 그래프를 그려 분석하기</p>
+<div class="w60c"><img alt="" class="w100" src="https://thebook.io/img/080251/458_1.jpg"/></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="551">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">알고리즘 작성하기</p>
+<p class="txt bl">하위 목표 1에서는 x축을 시간대, y축을 시간대별 평균인구로 하는 꺾은선 그래프를 그려야 합니다. 꺾은선 그래프는 <span class="cd">plt.plot()</span>으로 그립니다. <span class="cd">plt.plot()</span>에는 x축 리스트와 y축 리스트를 각각 넣어야 하죠. x축은 0~23이라는 연속된 숫자 범위를 나타내므로 <span class="cd">range(24)</span>로 작성할 수 있습니다. y축에 넣는 리스트는 행정동의 시간대별 평균인구를 담고 있어야 합니다. 인구를 저장하니 리스트명은 <span class="cd">population</span>으로 합시다. <span class="cd">population</span> 리스트의 구조는 다음과 같습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/458_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-15</span> population 리스트의 구조</p>
+<p class="txt bl">y축 리스트는 x축과 개수가 같아야 하므로 24개 요소가 있는 일차원 리스트입니다. <span class="cd">population</span>은 시간대별 평균인구를 담고 있으므로 0시 평균인구는 <span class="cd">population[0]</span>에, 1시 평균인구는 <span class="cd">population[1]</span>에 각각 저장하는 방식으로 <span class="cd">population[23]</span>까지 저장합니다. 그림을 보면 <span class="cd">population</span> 리스트의 인덱스는 시간대를 의미합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="552">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">리스트 구조를 알았으니 데이터를 채우면 됩니다. 리스트에 데이터는 어떻게 채울까요? 현재 <span class="cd">dong_name</span>과 <span class="cd">dong_code</span>에 저장된 ‘압구정’과 ‘11680545’를 기준으로 생각해 봅시다. <span class="cd">data</span> 리스트에는 2019년 12월 1일부터 2019년 12월 31일까지 총 31일간의 시간대별 인구 데이터가 들어 있습니다. 이 중에서 압구정동 인구 데이터만 고르면 31일 × 24시 = 744개 행입니다. LOCAL_PEOPLE_DONG_201912.csv 파일에서 압구정동 부분만 잘라서 보면 다음과 같습니다. 이 데이터가 <span class="cd">data</span> 리스트에서 행정동코드가 ‘11680545’인 행에 들어갑니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/459.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-16</span> population 리스트에 인구 데이터 저장하기</p>
+<p class="txt bl">744개 행에서 같은 시간대의 인구를 더하면 시간대별 총생활인구수를 구할 수 있습니다. 예를 들어, 0시의 총생활인구라면 각 날짜의 0시 총생활인구(12월 1일 0시 총생활인구 + 12월 2일 0시 총생활인구 + … + 12월 31일 0시 총생활인구)를 모두 더해 구합니다. 그리고 이 값을 <span class="cd">population[0]</span>에 저장하면 됩니다. 같은 방법으로 <span class="cd">population[1]</span>에는 12월 1일부터 31일까지의 1시 총생활인구 합을 구해 넣습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="553">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">정리하면 <span class="cd">data</span>의 행정동코드(열 인덱스 [2])가 <span class="cd">dong_code</span>의 값과 같은 행을 찾고 해당 행의 시간대구분과 총생활인구수를 구합니다. 시간대구분은 <span class="cd">population</span>의 인덱스이므로 시간대구분에 해당하는 총생활인구수를 <span class="cd">population[시간대]</span>에 더하면 됩니다. 이 과정을 <span class="cd">data</span>의 첫 행부터 마지막 행까지 반복합니다. <span class="cd">population</span>의 각 요소에는 <span class="cd">dong_code</span> 시간대별 총생활인구수의 합이 저장됩니다. 이를 평균인구로 바꾸기 위해 <span class="cd">population</span> 리스트의 모든 요소를 31로 나눈 후 다시 저장합니다. 이 과정을 거치면 입력한 행정동(<span class="cd">dong_code</span>)의 시간대별 평균인구가 <span class="cd">population</span> 리스트에 차례대로 담기게 됩니다. 이 과정을 알고리즘으로 작성해 봅시다.</p>
+<div class="ind10">
+<p class="txtex dm">하위 목표 1</p>
+<div class="box_green_line">
+<p class="txtex2 dl">핫플레이스가 있는 행정동의 시간대별 평균인구 그래프를 그려 분석하기</p>
+</div>
+<p class="txtex dm">알고리즘</p>
+<div class="box_green_line">
+<p class="txtex dl s12_12">1. 시간대별 평균인구를 저장할 리스트(population)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">2. 인구 데이터(data)의 첫 행부터 마지막 행까지 반복하기</p>
+<p class="txtex dl ind12">2.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드 (열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind26">2.1.1 해당 행의 시간대(열 인덱스 [1])와 총생활인구수(열 인덱스 [3])를 각각 변수(time, p)에 저장하기</p>
+<p class="txtex dl ind26">2.1.2 과정 2.1.1에서 저장한 시간대(time)가 population의 인덱스이므로 population[time]에 총생활인구수(p) 더하기</p>
+<p class="txtex dl s12_12">3. 반복이 끝나면 population 리스트의 모든 값을 31로 나눈 후 population에 다시 저장하기</p>
+<p class="txtex dl s12_12">4. 완성된 population 리스트로 시간대별 평균인구 그래프 그리기</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="554">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">코드 작성하기</p>
+<p class="txt bl">작성한 알고리즘대로 프로그래밍해 봅시다. 카드 이용내역 분석에서 한 것처럼 알고리즘 옆에 단계별 코드를 작성하면 편합니다.</p>
+<p class="txt bl">과정 1부터 작성해 봅시다. 시간대별 평균인구를 저장할 리스트 <span class="cd">population</span>을 만듭니다. 배운 대로 구현한다면 다음처럼 빈 리스트를 만들고 0을 추가하는 작업을 24번 반복할 겁니다.</p>
+<div class="highlight">
+<pre>population = []
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>):
+    population.append(<span class="green">0</span>)</pre>
+</div>
+<p class="txt bl">이렇게 작성하면 코드는 세 줄입니다. 그런데 이 코드를 한 줄로 줄일 방법이 있습니다. 리스트를 처음 배울 때는 어려울 수 있어서 언급하지 않았지만, 실제 프로그램을 작성할 때는 알아 두면 유용하므로 여기서 설명하겠습니다.</p>
+<p class="txt bl">반복문을 리스트 안에 넣어 리스트를 만드는 동시에 초기화하는 방법입니다.</p>
+<div class="w90"><img alt="" class="w100" src="https://thebook.io/img/080251/460.jpg"/></div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="555">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">코드는 매우 비슷합니다. 빈 리스트를 만들 때처럼 리스트를 선언하고 대괄호(<span class="cd">[]</span>) 안에 초깃값과 반복문을 넣어 줍니다. 초깃값은 0이고 24번 반복하므로 <span class="cd">population = [0 for i in range(24)]</span>가 됩니다. 이때 반복문에 콜론(:)은 넣지 않습니다. 구조를 잘 살펴보면 <span class="cd">population.append()</span>가 빠지고 나머지 코드가 대괄호 안에 들어갑니다. 이처럼 리스트 안에 반복문을 포함하는 것을 <span class="dm">리스트 내포</span>라고 합니다.</p>
+<div class="highlight">
+<pre>population = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+<span class="gold">print</span>(<span class="gold">len</span>(population), population)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+24 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</pre>
+</div>
+<p class="txt bl">길이가 24인 <span class="cd">population</span> 리스트가 생성됐고, 각 요소에도 초깃값 0이 저장됐습니다.</p>
+<p class="txt bl">이를 조금만 변형해서 <span class="cd">population</span>에 숫자 0부터 23까지 차례대로 넣는 방법을 생각해 봅시다. 반복문 <span class="cd">for i in range(24)</span>를 실행하면 <span class="cd">i</span>에 0부터 23까지 차례대로 담기죠. 따라서 앞의 초깃값 0 대신 <span class="cd">i</span>를 넣어 <span class="cd">population = [i for i in range(24)]</span>라고 작성하면 됩니다. 실행해 봅시다.</p>
+<div class="highlight">
+<pre>population = [<span class="cd2">i</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+<span class="gold">print</span>(<span class="gold">len</span>(population), population)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+24 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]</pre>
+</div>
+<p class="txt bl">이처럼 리스트 생성과 동시에 초기화하는 방법을 활용하면 코드가 더욱 간결해집니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="556">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">과정 1의 설명이 길어졌네요. 마무리하고 나머지 코드도 작성해 봅니다. 스스로 코드를 완성해 보고 싶으면 표의 오른쪽 부분은 가리고 코드를 작성해 보세요.</p>
+<div class="highlight">
+<p class="txtex dm tcenter yellow">&lt;알고리즘&gt;</p>
+<p class="txtex dl s12_12">1. 시간대별 평균인구를 저장할 리스트(population)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">2. 인구 데이터(data)의 첫 행부터 마지막 행까지 돌며 반복하기</p>
+<p class="txtex dl ind12">2.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind20">2.1.1 해당 행의 시간대(열 인덱스 [1])와 총생활인구수(열 인덱스 [3])를 각각 변수(time, p)에 저장하기</p>
+<p class="txtex dl ind20">2.1.2 과정 2.1.1에서 저장한 시간대(time)가 population의 인덱스이므로 population[time]에 총생활인구수(p) 더하기</p>
+<p class="txtex dl s12_12">3. 반복이 끝나면 population 리스트의 모든 값을 31로 나눈 후 population에 다시 저장하기</p>
+<p class="txtex dl s12_12">4. 완성된 population 리스트로 시간대별 평균인구 그래프 그리기</p>
+<hr/>
+<p class="txtex dm tcenter yellow">&lt;코드&gt;</p>
+<pre>1. population = [0 for i in range(24)]
+2. for row in data:
+    2.1 if row[2] == dong_code:
+        2.1.1 time, p = row[1], row[3]
+        2.1.2 population[time] += p
+3. population = [p/31 for p in population]
+4. plt.plot(range(24), population)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="557">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">카드 이용내역을 분석할 때도 같은 형식으로 했기 때문에 익숙할 테니 데이터의 차이만 짚고 넘어가겠습니다. <span class="cd">data</span>에는 총 32개 항목(열)이 있습니다. 데이터 항목 위에 열 인덱스를 넣어보면 다음과 같습니다. 실제로 <span class="cd">data</span>에는 헤더가 없지만, 각 열이 의미하는 바를 파악하기 쉽게 데이터 파일의 헤더를 보면서 진행하겠습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/462.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-17</span> 인구 데이터의 헤더와 인덱스</p>
+<p class="txt bl">과정 1에서 만든 <span class="cd">population</span> 리스트에 시간대별 평균인구를 담는 과정을 인구 데이터(<span class="cd">data</span>)의 첫 행부터 마지막 행까지 반복해야 하므로 과정 2에서는 이를 수행할 반복문을 작성합니다. 반복문에서 <span class="cd">data</span>의 한 행씩 <span class="cd">row</span> 변수에 담깁니다.</p>
+<p class="txt bl">과정 2.1에서는 사용자가 입력한 행정동의 행정동코드(<span class="cd">dong_code</span>)와 <span class="cd">data</span>의 행정동코드가 같은지 한 행씩 확인합니다. <span class="cd">data</span>에서 행정동코드는 열 인덱스 [2]에 있으므로 <span class="cd">row[2]</span>가 됩니다. 따라서 <span class="cd">dong_code</span>와 <span class="cd">row[2]</span>가 같은지 <span class="cd">if</span> 조건문으로 확인합니다. 일치하는 행을 찾으면 과정 2.1.1로 가고 조건을 충족하지 않으면 다음 반복 회차로 넘어갑니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="558">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">과정 2.1.1에서는 뒤에서 계산하는 데 필요한 시간대와 총생활인구수를 각각 변수 <span class="cd">time</span>과 <span class="cd">p</span>에 저장합니다. 이때 시간대는 열 인덱스 [1]에, 총생활인구수는 열 인덱스 [3]에 있으므로 <span class="cd">time, p = row[1], row[3]</span>으로 한 번에 저장합니다. 과정 2.1.2에서는 시간대(<span class="cd">time</span>)를 인덱스로 하는 <span class="cd">population</span> 리스트의 요소에 총생활인구수(<span class="cd">p</span>)를 더합니다.</p>
+<p class="txt bl">그럼 과정 2 전체를 코드로 작성한 후 <span class="cd">population</span> 값을 확인해 봅시다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 이 코드를 작성할 때는 앞서 작성한 파일 읽기와 행정동명 검색하기가 이미 실행되어야 합니다. 즉, <span class="cd">dong</span>_<span class="cd">code</span>에 11680545가 저장된 상태여야 오류가 발생하지 않습니다.</p>
+</div>
+<div class="highlight">
+<pre>population = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+<span class="cd2 purple">for</span> <span class="cd2">row</span> <span class="cd2 blue2">in</span> <span class="cd2">data:</span>
+    <span class="cd2 purple">if</span> <span class="cd2">row[</span><span class="cd2 green">2</span><span class="cd2">]</span> <span class="cd2">=</span><span class="cd2">= dong_code:</span>
+        <span class="cd2">time, p = row[</span><span class="cd2 green">1</span><span class="cd2">], row[</span><span class="cd2 green">3</span><span class="cd2">]</span>
+        <span class="cd2">population[time] += p</span>
+<span class="cd2 gold">print</span><span class="cd2">(population)</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[1150057.7245, 1112646.2784000002 … 1350683.4461, 1220104.0514]</pre>
+</div>
+<p class="txt bl">압구정동의 시간대별 총생활인구수의 합이 나옵니다. 이 숫자는 12월 한 달간의 시간대별 총생활인구이니 이제 하루 평균인구를 구해야 합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="559">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="box_brown4">
+<p class="txt dm"><span class="txts bg_brown2">NOTE</span> 코드 줄이기</p>
+<p class="txt bl">반복문의 코드 줄 수를 줄이고 싶다면 변수 <span class="cd">time</span>과 <span class="cd">p</span>를 사용하지 않아도 됩니다. <span class="cd">time</span>은 곧 <span class="cd">row[1]</span>이고, <span class="cd">p</span>는 <span class="cd">row[3]</span>이므로 이를 대체해 작성해도 결과는 같습니다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="purple">if</span> row[<span class="green">2</span>] == dong_code:
+        <span class="cd2">population[row[</span><span class="green">1</span><span class="cd2"><span>]</span>] += row[</span><span class="green">3</span><span class="cd2">]</span></pre>
+</div>
+</div>
+<p class="txt bl">반복문이 끝나면 과정 3에서 <span class="cd">population</span> 리스트를 31로 나누어 시간대별 평균인구를 구합니다. 이때도 리스트 내포를 활용합니다. <span class="cd">population</span>의 각 요소를 <span class="cd">p</span>에 차례대로 담은 후 <span class="cd">p</span>를 31로 나눈 값을 리스트에 다시 저장하면 됩니다.</p>
+<div class="highlight">
+<pre><span class="cd2">population = [p/</span><span class="cd2 green">31</span> <span class="cd2 purple">for</span> <span class="cd2">p</span> <span class="cd2 blue2">in</span> <span class="cd2">population]</span>
+<span class="gold">print</span>(population)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[37098.63627419355, 35891.815432258074 … 43570.433745161296, 39358.195206451615]</pre>
+</div>
+<p class="txt bl"><span class="cd">population</span>의 모든 요소를 31로 나누니 숫자가 확 줄었습니다. 0시 인구는 3만7천 명, 1시 인구는 3만6천 명 정도입니다. 오후에 사람이 많을 때는 대략 6만3천 명까지 있고요.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="560">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">이제 과정 4의 그래프만 그리면 됩니다. 그래프를 그릴 때 필요한 라이브러리인 <span class="cd">matplotlib</span>을 추가해 꺾은선 그래프를 그려 봅시다. 제목과 x축, y축 이름도 적절히 추가해 보세요. 완성된 코드는 다음과 같습니다.</p>
+<div class="highlight">
+<pre><span class="cd2 purple">import</span> <span class="cd2">matplotlib.pyplot</span> <span class="cd2 purple">as</span> <span class="cd2">plt</span>
+
+population = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="purple">if</span> row[<span class="green">2</span>] == dong_code:
+        time, p = row[<span class="green">1</span>], row[<span class="green">3</span>]
+        population[time] += p
+population = [p/<span class="green">31</span> <span class="purple">for</span> p <span class="blue2">in</span> population]
+
+<span class="cd2">plt.rc(</span><span class="cd2 red2">'font'</span><span class="cd2">, family=</span><span class="cd2 red2">'Malgun Gothic'</span><span class="cd2">)</span>          <span class="cd2 green"># macOS에서는 AppleGothic</span>
+<span class="cd2">plt.title(dong_name +</span> <span class="cd2 red2">' 시간대별 평균인구'</span><span class="cd2">)</span>     <span class="cd2 green"># 그래프 제목</span>
+<span class="cd2">plt.plot(</span><span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">24</span><span class="cd2">), population, color=</span><span class="cd2 red2">'indigo'</span><span class="cd2">)</span> <span class="cd2 green"># 그래프 그리기</span>
+<span class="cd2">plt.xticks(</span><span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">24</span><span class="cd2">),</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">24</span><span class="cd2">))</span>                <span class="cd2 green"># x축 눈금</span>
+<span class="cd2">plt.xlabel(</span><span class="cd2 red2">'시간대'</span><span class="cd2">)                         </span>   <span class="cd2 green"># x축 이름</span>
+<span class="cd2">plt.ylabel(</span><span class="cd2 red2">'평균인구수'</span><span class="cd2">)</span>                        <span class="cd2 green"># y축 이름</span>
+<span class="cd2">plt.show()</span></pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/465.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="561">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">indigo</span> 색상의 꺾은선 그래프가 그려집니다. <span class="cd">plt.xlabel()</span>, <span class="cd">plt.ylabel()</span>로 x축과 y축 이름도 붙였습니다. <span class="cd">plt.title()</span>에서 <span class="cd">dong_name</span> 변수를 넣어 입력한 행정동에 맞춰 그래프 제목이 출력되도록 했습니다. 그리고 <span class="cd">plt.xticks(range(24), range(24))</span>를 추가해 x축을 1시간 단위로 표기했습니다(넣지 않으면 눈금이 5시간 단위로 표시됩니다).</p>
+<p class="txts"> </p>
+<p class="txtex dm">결과 분석하기</p>
+<p class="txt bl">하위 목표 1의 결과를 보니 압구정동에서 인구가 가장 적을 때는 1시에서 6시 사이입니다. 새벽에는 인구 움직임이 매우 적으니 새벽 생활인구 대부분은 압구정에 거주하는 사람일 것 같네요. 8시부터 인구가 증가합니다. 직장인들이 출근하거나 학생들이 등교하나 봅니다. 가장 인구가 많은 시간대는 12시부터 18시까지입니다. 이 시간대에는 평균인구가 약 6만 명이므로 이 시간에 압구정을 방문하면 평소보다 붐비겠네요. 압구정에서는 12~18시를 피해 오전 10~11시쯤 브런치 약속이나 19시 이후에 저녁 약속을 잡으면 좋을 것 같습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="562">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_92"><span class="yellow">11.2.3</span> 하위 목표 2 - 주중/주말 시간대별 인구 분석하기</h4>
+<p class="txt bl">이번에는 두 번째 하위 목표인 ‘핫플레이스가 있는 행정동의 주중/주말 시간대별 평균인구 그래프를 그려 분석하기’를 구현해 보겠습니다.</p>
+<div class="ind10">
+<p class="txtex dm">하위 목표 2</p>
+<div class="box_green_line">
+<p class="txt dl">핫플레이스가 있는 행정동의 주중/주말 시간대별 평균인구 그래프를 그려 분석하기</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/466.jpg"/></div>
+</div>
+</div>
+<p class="txt bl">주중과 주말 2개의 그래프를 그려야 하므로 주중 인구와 주말 인구가 담긴 리스트가 필요합니다. 목표 수립 단계에서 주중과 주말 구분은 <span class="cd">datetime</span> 라이브러리를 사용한다고 했죠. 정확히는 <span class="cd">datetime</span> 라이브러리의 <span class="cd">date().weekday()</span> 명령어를 사용합니다. <span class="cd">date()</span> 안에 연도, 월, 일을 순서대로 넣은 후 <span class="cd">weekday()</span>를 붙이면 월, 화, 수, 목, 금, 토, 일을 각각 숫자 0, 1, 2, 3, 4, 5, 6으로 나타냅니다. 따라서 실행했을 때 0부터 4 사이의 숫자가 나오면 주중이고 5와 6이 나오면 주말입니다. 이를 활용해 주중 인구 리스트와 주말 인구 리스트를 만들 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="563">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">2019년 12월 15일의 요일을 확인해 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> datetime
+
+<span class="green"># 0-월, 1-화, 2-수, 3-목, 4-금, 5-토, 6-일</span>
+datetime.date(<span class="green">2019</span>, <span class="green">12</span>, <span class="green">15</span>).weekday()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+6</pre>
+</div>
+<p class="txt bl">6이 나오므로 일요일이네요. 달력을 확인해 보면 2019년 12월 15일은 일요일이 맞습니다. 오늘 날짜를 넣어서 실행해 보고 요일에 대응하는 숫자가 올바르게 출력되는지 확인해 보세요.</p>
+<p class="txts"> </p>
+<p class="txtex dm">알고리즘 작성하기</p>
+<p class="txt bl">그럼 알고리즘을 작성해 봅시다. 일단 큰 틀은 평균인구를 구할 때와 비슷하지만, 다른 점도 있습니다. 평균인구는 리스트 하나를 사용했지만, 이번에는 그래프 2개를 겹쳐 그리기 때문에 주중 인구와 주말 인구를 저장한 2개의 리스트가 필요합니다. 그리고 반복문으로 시간대별 총생활인구수를 구할 때 주중과 주말을 판단해 주중이면 주중 인구 리스트에, 주말이면 주말 인구 리스트에 더해야 합니다. 주중 인구의 평균과 주말 인구의 평균도 각각 구해야죠. 주중이 주말보다 날짜가 많으니 평균 작업을 제대로 해 주지 않으면 심한 데이터 왜곡이 생길 수 있습니다. 따라서 2019년 12월의 주중 일수와 주말 일수를 구한 후, 이를 활용해 주중과 주말 인구의 평균을 구해야 합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="564">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="ind10">
+<p class="txtex dm">하위 목표 2</p>
+<div class="box_green_line">
+<p class="txtex2 dl">핫플레이스가 있는 행정동의 주중/주말 시간대별 평균인구 그래프를 그려 분석하기</p>
+</div>
+<p class="txtex dm">알고리즘</p>
+<div class="box_green_line">
+<p class="txtex dl s12_12">1. 주중 시간대별 생활인구를 저장할 리스트(weekday)와 주말 시간대별 생활인구를 저장할 리스트(weekend)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">2. 인구 데이터(data)의 첫 행부터 마지막 행까지 돌며 반복하기</p>
+<p class="txtex dl ind12">2.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind26">2.1.1 해당 행의 시간대(time)와 총생활인구수(p), 기준일ID의 연도(year), 월(mon), 일(day)을 각각 변수에 저장하기</p>
+<p class="txtex dl ind26">2.1.2 과정 2.1.1에서 저장한 연도(year), 월(mon), 일(day)을 datetime.date().weekday()에 넣어 주중/주말 구분하기</p>
+<p class="txtex dl ind26">2.1.3 주중이면 주중 리스트(weekday[time])에 총생활인구수(p), 주말이면 주말 리스트(weekend[time])에 총생활인구수(p) 더하기</p>
+<p class="txtex dl s12_12">3. 반복이 끝나면 2019년 12월의 주중 일수(weekday_cnt)와 주말 일수(weekend_cnt)를 저장할 변수를 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">4. 2019년 12월의 일수만큼 반복하기</p>
+<p class="txtex dl ind12">4.1 주중이면 주중 일수(weekday_cnt)에 1, 주말이면 주말 일수(weekend_cnt)에 1 더하기</p>
+<p class="txtex dl s12_12">5. 주중 리스트(weekday)의 각 요소를 주중 일수(weekday_cnt)로, 주말 리스트(weekend)의 각 요소를 주말 일수(weekend_cnt)로 나누어 주중/주말 평균인구 구하기</p>
+<p class="txtex dl s12_12">6. 완성된 weekday와 weekend 리스트로 주중/주말 시간대별 평균인구 그래프 그리기</p>
+</div>
+</div>
+<a id="section_1"></a>
+<p class="txt bl">하위 목표 1의 알고리즘과 비교했을 때 과정 2가 가장 크게 변했네요. 과정 2.1.1에서 구한 연도, 월, 일을 활용해 각 행이 주중인지 주말인지를 판단하고, 주중이면 주중 리스트, 주말이면 주말 리스트에 총생활인구수를 더합니다. 과정 3에서는 2019년 12월의 주중 일수와 주말 일수를 반복문으로 구합니다. 그리고 과정 4에서 오차가 생기지 않게 주중 일수와 주말 일수로 정확히 나눕니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="565">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">코드 작성하기</p>
+<p class="txt bl">알고리즘을 바탕으로 코드를 작성해 봅시다. 하위 목표 1의 알고리즘과 비슷하기 때문에 알고리즘을 코드로 옮기기는 어렵지 않습니다. 다음 표의 오른쪽 부분을 가리고 직접 작성해 본 후 책과 비교해 보세요. 참고로 2019년 12월의 주중은 총 22일, 주말은 총 9일입니다.</p>
+<div class="highlight">
+<p class="txtex dm tcenter yellow">&lt;알고리즘&gt;</p>
+<p class="txtex dl s12_12">1. 주중 시간대별 생활인구를 저장할 리스트(weekday)와 주말 시간대별 생활인구를 저장할 리스트(weekend)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">2. 인구 데이터(data)의 첫 행부터 마지막 행까지 반복하기</p>
+<p class="txtex dl ind12">2.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind20">2.1.1 해당 행의 시간대(time)와 총생활인구수(p), 기준일ID의 연도(year), 월(mon), 일(day)을 각각 변수에 저장하기</p>
+<p class="txtex dl ind20">2.1.2 과정 2.1.1에서 저장한 연도(year), 월(mon), 일(day)을 datetime.date().weekday()에 넣어 주중/주말 구분하기</p>
+<p class="txtex dl ind20">2.1.3 주중이면 주중 리스트(weekday[time])에 총생활인구수(p), 주말이면 주말 리스트(weekend[time])에 총생활인구수(p) 더하기</p>
+<p class="txtex dl s12_12">3. 반복이 끝나면 2019년 12월의 주중 일수(weekday_cnt)와 주말 일수(weekend_cnt)를 저장할 변수를 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">4. 2019년 12월의 일수만큼 반복하기</p>
+<p class="txtex dl ind12">4.1 주중이면 주중 일수(weekday_cnt)에 1, 주말이면 주말 일수(weekend_cnt)에 1 더하기</p>
+<p class="txtex dl s12_12">5. 주중 리스트(weekday)의 각 요소를 주중 일수(weekday_cnt)로, 주말 리스트(weekend)의 각 요소를 주말 일수(weekend_cnt)로 나누어 주중/주말 평균인구 구하기</p>
+<p class="txtex dl s12_12">6. 완성된 weekday와 weekend 리스트로 주중/주말 시간대별 평균인구 그래프 그리기</p>
+<hr/>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="566">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<p class="txtex dm tcenter yellow">&lt;코드&gt;</p>
+<pre>1. weekday = [0 for i in range(24)]
+   weekend = [0 for i in range(24)]
+2. for row in data:
+    2.1 if row[2] == dong_code:
+        2.1.1 time, p = row[1], row[3]
+              year, mon, day = int(row[0][:4]), int(row[0][4:6]), int(row[0][6:])
+        2.1.2 num = datetime.date(year, mon, day).weekday()
+        2.1.3 if num &lt; 5:
+                  weekday[time] += p
+              else:
+                  weekend[time] += p
+3. weekday_cnt, weekend_cnt = 0,0
+4. for i in range(1, 32):
+    4.1 if datetime.date(2019, 12, i).weekday() &lt; 5:
+            weekday_cnt += 1
+        else:
+            weekend_cnt += 1
+5. weekday = [w/weekday_cnt for w in weekday]
+   weekend = [w/weekend_cnt for w in weekend]
+6. plt.plot(range(24), weekday)
+   plt.plot(range(24), weekend)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="567">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">과정 2.1까지는 하위 목표 1과 리스트명만 다르고 거의 비슷하므로 바로 과정 2.1.1을 봅시다. 기준일ID는 <span class="cd">data</span>의 열 인덱스 [0]<span class="cd">(row[0])</span>에 있습니다. 뒤에서 주중과 주말을 구분하는 작업할 때 연도, 월, 일이 각각 필요합니다. 그런데 날짜가 ‘20191201’처럼 공백 없이 붙어 있으므로 이를 분리하는 작업이 필요합니다. 6장에서 배운 문자열 슬라이싱을 적용하면 됩니다. <span class="cd">row[0]</span>에 들어 있는 여덟 글자 중 연도를 의미하는 앞 네 자리만 잘라내려면 <span class="cd">row[0][:4]</span>로 작성합니다. 잘라낸 값은 데이터 타입이 문자열이므로 <span class="cd">int()</span>로 감싸 정수형으로 변경한 후 변수 <span class="cd">year</span>에 저장합니다. 같은 방법으로 월(<span class="cd">mon</span>)과 일(<span class="cd">day</span>)을 저장합니다.</p>
+<p class="txt bl">과정 2.1.2에서는 과정 2.1.1에서 구한 연도(<span class="cd">year</span>), 월(<span class="cd">mon</span>), 일(<span class="cd">day</span>)을 <span class="cd">datetime.date().weekday()</span>에 넣어 결과로 나온 값을 변수 <span class="cd">num</span>에 저장합니다. <span class="cd">num</span>이 4 이하면 주중, 5 또는 6이면 주말이므로 과정 2.1.3에서 <span class="cd">if-else</span> 문으로 주중, 주말을 판단합니다. 판단 결과 주중이면 <span class="cd">weekday</span> 리스트의 같은 시간대(<span class="cd">[time]</span>)에, 주말이면 <span class="cd">weekend</span> 리스트의 같은 시간대(<span class="cd">[time]</span>)에 총생활인구수 <span class="cd">p</span>를 더하면 됩니다.</p>
+<p class="txt bl">과정 4에서는 주중과 주말 일수를 구합니다. 연도와 월은 2019년 12월로 같지만, 일은 1일부터 31일까지 바뀌기 때문에 반복문을 사용합니다. <span class="cd">datetime.date().weekday(2019, 12, 일)</span>이 5 미만이면 주중이므로 주중 일수를 의미하는 <span class="cd">weekday_cnt</span>에 1을 더하고, 아니라면 주말이므로 주말 일수인 <span class="cd">weekend_cnt</span>에 1을 더합니다.</p>
+<p class="txt bl">과정 5에서는 주중과 주말 일수를 활용해 주중과 주말의 평균인구를 구합니다. <span class="cd">weekday</span> 리스트의 모든 요소를 <span class="cd">weekday_cnt</span>로, <span class="cd">weekend</span> 리스트의 모든 요소를 <span class="cd">weekend_cnt</span>로 나누면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="568">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그럼 처음부터 과정 5까지 프로그램으로 옮겨 봅시다. 필요한 라이브러리를 추가하고 알고리즘 옆의 코드를 차례대로 적습니다. 리스트 <span class="cd">weekday</span>와 <span class="cd">weekend</span>에 값이 제대로 들어갔는지 확인하기 위해 마지막에 <span class="cd">print()</span>를 추가합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> datetime
+
+weekday = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+weekend = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="purple">if</span> row[<span class="green">2</span>] == dong_code:
+        time, p = row[<span class="green">1</span>], row[<span class="green">3</span>]
+        year, mon, day = int(row[<span class="green">0</span>][:<span class="green">4</span>]), int(row[<span class="green">0</span>][<span class="green">4</span>:<span class="green">6</span>]), int(row[<span class="green">0</span>][<span class="green">6</span>:])
+        num = datetime.date(year, mon, day).weekday()
+        <span class="purple">if</span> num &lt; <span class="green">5</span>:
+            weekday[time] += p
+        <span class="purple">else</span>:
+            weekend[time] += p
+
+<span class="green"># 2019년 12월의 주중/주말 일수 구하기</span>
+weekday_cnt, weekend_cnt = <span class="green">0</span>, <span class="green">0</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">1</span>, <span class="green">32</span>):
+    <span class="purple">if</span> datetime.date(<span class="green">2019</span>, <span class="green">12</span>, i).weekday() &lt; <span class="green">5</span>:
+        weekday_cnt += <span class="green">1</span>
+    <span class="purple">else</span>:
+        weekend_cnt += <span class="green">1</span>
+
+<span class="gold">print</span>(<span class="red2">'2019년 12월의 주중 일수 ='</span>, weekday_cnt, <span class="red2">'주말 일수 ='</span>,weekend_cnt)
+
+weekday = [w/weekday_cnt <span class="purple">for</span> w <span class="blue2">in</span> weekday]
+weekend = [w/weekend_cnt <span class="purple">for</span> w <span class="blue2">in</span> weekend]
+
+<span class="gold">print</span>(<span class="red2">'주중 인구:'</span>, weekday)
+<span class="gold">print</span>(<span class="red2">'주말 인구:'</span>, weekend)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+2019년 12월의 주중 일수 = 22 주말 일수 = 9
+주중 인구: [36348.0879, 35284.529854545464… 45000.37916363635, 40292.146422727266]
+주말 인구: [38933.31007777777, 37376.29128888888… 40075.01161111111, 37075.203344444446]</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="569">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">시간대별로 주중과 주말 인구가 조금씩 차이납니다.</p>
+<p class="txt bl">마지막 과정 6도 작성해 봅시다. 주중과 주말 리스트를 각각 꺾은선 그래프로 그리고, 주중과 주말을 구분하기 위해 범례를 추가하고 그래프 색상도 다르게 합니다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(dong_name + <span class="red2">' 주중</span><span class="red2">/주말 시간대별 평균인구'</span>)
+plt.plot(weekday, color=<span class="red2">'indigo'</span>, label=<span class="red2">'주중'</span>)
+plt.plot(weekend, color=<span class="red2">'orangered'</span>, label=<span class="red2">'주말'</span>)
+plt.legend()
+plt.xlabel(<span class="red2">'시간대'</span>)
+plt.ylabel(<span class="red2">'평균인구수'</span>)
+plt.xticks(<span class="gold">range</span>(<span class="green">24</span>), <span class="gold">range</span>(<span class="green">24</span>))
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/471.jpg"/></div>
+</div>
+<p class="txt bl">주중과 주말 인구의 꺾은선 그래프가 겹쳐 그려집니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="570">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">하위 목표를 세울 때 막대그래프도 제시했죠? 막대그래프도 한번 그려 봅시다. 그래프 그리는 명령어를 바꾸고 x축 눈금을 조정하면 됩니다.</p>
+<div class="highlight">
+<pre><span class="cd2">plt.figure(figsize=(</span><span class="cd2 green">20</span><span class="cd2">,</span> <span class="cd2 green">10</span><span class="cd2">))</span>
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(dong_name+ <span class="red2">' 주중/주말 시간대별 평균인구'</span>)
+<span class="cd2">plt.bar</span>(<span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">0</span><span class="cd2">,</span> <span class="cd2 green">72</span><span class="cd2">,</span> <span class="cd2 green">3</span><span class="cd2">),</span> weekday, color=<span class="red2">'indigo'</span>, label=<span class="red2">'주중'</span>)
+<span class="cd2">plt.bar</span>(<span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">1</span><span class="cd2">,</span> <span class="cd2 green">73</span><span class="cd2">,</span> <span class="cd2 green">3</span><span class="cd2">),</span> weekend, color=<span class="red2">'orangered'</span>, label=<span class="red2">'주말'</span>)
+plt.legend()
+plt.xlabel(<span class="red2">'시간대'</span>)
+plt.ylabel(<span class="red2">'평균인구수'</span>)
+plt.xticks(<span class="gold">range</span>(<span class="cd2 green">0</span>, <span class="cd2 green">72</span>, <span class="cd2 green">3</span>), <span class="gold">range</span>(<span class="green">24</span>))
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/472.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="571">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그래프 크기가 작으면 구분이 잘 안 될 수 있어서 <span class="cd">plt.figure()</span>로 그래프 크기를 키웠습니다. 여기서는 가로 크기를 20인치, 세로 크기를 10인치로 지정했습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">결과 분석하기</p>
+<p class="txt bl">압구정에는 맛집이나 예쁜 카페가 많아서 당연히 주중보다는 주말에 사람이 더 많을 거라 생각했는데 예상과는 정반대의 결과가 나왔습니다. 대체로 주말보다 주중 인구가 훨씬 더 많군요. 주말에 압구정에 간다면 그리 걱정하지 않아도 되겠어요. 예외적으로 0시에서 4시 사이에 주중 인구보다 주말 인구가 더 많은 것으로 나오네요. 아마 유흥을 즐기는 인구가 아닐까 추측해 볼 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="572">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_93"><span class="yellow">11.2.4</span> 하위 목표 3 - 남녀 시간대별 평균인구 분석하기</h4>
+<p class="txt bl">세 번째 하위 목표를 구현할 차례입니다. 목표 수립 단계에서 ‘핫플레이스가 있는 행정동의 남녀 시간대별 평균인구 그래프를 그려 분석하기’로 하위 목표를 잡았습니다.</p>
+<div class="ind10">
+<p class="txtex dm">하위 목표 3</p>
+<div class="box_green_line">
+<p class="txt dl">핫플레이스가 있는 행정동의 남녀 시간대별 평균인구 그래프를 그려 분석하기</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/473_1.jpg"/></div>
+</div>
+</div>
+<p class="txts"> </p>
+<p class="txtex dm">알고리즘 작성하기</p>
+<p class="txt bl">주중과 주말처럼 남성과 여성의 시간대별 평균인구 그래프를 겹쳐 그려 비교하면 됩니다. 여기에서도 역시 리스트가 2개 필요합니다. 남성의 시간대별 평균인구를 담은 24칸짜리 리스트와 여성의 시간대별 평균인구를 담은 24칸짜리 리스트입니다. 남성 생활인구 리스트의 이름은 <span class="cd">male</span>, 여성 생활인구 리스트의 이름은 <span class="cd">female</span>로 하겠습니다. 성별은 주중/주말과 달리 데이터에 이미 구분되어 있어서 작업하기 쉽습니다.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/473_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-18</span> 인구 데이터의 헤더와 인덱스</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="573">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">data</span>의 열 인덱스 [4]부터 [17]까지 남성 생활인구 데이터가, [18]부터 [31]까지는 여성 생활인구 데이터가 들어 있습니다. 행정동코드가 11680545(압구정동)인 행을 골라낸 후 열 인덱스 [4]부터 [17]까지 들어 있는 값을 합하면 해당 행의 총 남성 생활인구가 됩니다. 열 인덱스 [18]부터 [31]까지 합을 구하면 해당 행의 총 여성 생활인구가 되죠. 즉, 행마다 남성 생활인구와 여성 생활인구의 합이 나오며 이 값을 성별에 맞는 리스트에 각각 더하면 됩니다. 여기에서도 각 행의 시간대가 곧 리스트의 인덱스입니다. 그림으로 정리해 보겠습니다. 번호 순서대로 흐름을 확인하세요.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/474.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-19</span> 2019년 12월 1일 0시의 남녀 생활인구 구하기</p>
+<p class="txt bl">그림은 <span class="cd">data</span>에서 행정동코드가 11680545(압구정동)인 행만 보여 줍니다. <span class="cd">data</span>가 날짜와 시간순으로 되어 있으므로 2019년 12월 1일 0시 데이터가 가장 먼저 선택됩니다. 첫 번째 행에서 열 인덱스 [4]~[17]의 합이 2019년 12월 1일 0시의 남성 생활인구가 되죠. <span class="cd">row[4] + row[5] + ... + row[17]</span>로 표현할 수 있습니다. 이 값을 <span class="cd">male[0]</span>에 더합니다. 열 인덱스 [18]~[31]의 합은 2019년 12월 1일의 0시의 여성 생활인구입니다. <span class="cd">row[18] + row[19] + ... + row[31]</span>로 합을 구하고 합한 값을 <span class="cd">female[0]</span>에 더합니다. 이렇게 하면 2019년 12월 1일 0시의 남성과 여성 생활인구가 각각 구해집니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="574">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">두 번째 행도 봅시다. 과정은 동일합니다. 2019년 12월 1일 1시 데이터가 <span class="cd">row</span>에 들어 있다는 점만 다를 뿐이죠. 마찬가지로 열 인덱스 [4]부터 [17]까지의 합을 구한 후 <span class="cd">male[1]</span>에 더합니다. 열 인덱스 [18]부터 [31]까지의 합은 <span class="cd">female[1]</span>에 더하고요.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/475.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-20</span> 2019년 12월 1일 1시의 남녀 생활인구 구하기</p>
+<p class="txt bl">이 과정을 <span class="cd">data</span>의 행정동코드가 11680545인 모든 행에서 반복합니다. 그러면 가장 마지막 행은 2019년 12월 31일 23시 데이터가 됩니다. 마지막 행까지 반복하고 나면 남성과 여성 생활인구의 합이 시간대별로 구해집니다. 이때 <span class="cd">male</span>과 <span class="cd">female</span> 리스트 역시 한 달간의 생활인구 총합을 저장하고 있으므로 평균인구를 알려면 31로 나누어 저장하는 과정이 필요합니다. 그리고 구한 리스트로 마지막에 그래프를 그립니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="575">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="ind10">
+<p class="txtex dm">하위 목표 3</p>
+<div class="box_green_line">
+<p class="txtex2 dl">핫플레이스가 있는 행정동의 남녀 시간대별 평균인구 그래프를 그려 분석하기</p>
+</div>
+<p class="txtex dm">하위 목표 3</p>
+<div class="box_green_line">
+<p class="txtex dl s12_12">1. 남성 시간대별 생활인구를 저장할 리스트(male)와 여성 시간대별 생활인구를 저장할 리스트(female)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">2. 인구 데이터(data)의 첫 행부터 마지막 행까지 반복하기</p>
+<p class="txtex dl ind12">2.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind26">2.1.1 해당 행의 시간대(열 인덱스 [1])를 변수(time)에 저장하기</p>
+<p class="txtex dl ind26">2.1.2 열 인덱스 [4]부터 [17]까지의 합을 male[time]에 더하기</p>
+<p class="txtex dl ind26">2.1.3 열 인덱스 [18]부터 [31]까지의 합을 female[time]에 더하기</p>
+<p class="txtex dl s12_12">3. 반복이 끝나면 남성 생활인구 리스트(male)와 여성 생활인구 리스트(female)를 각각 31로 나누어 시간대별 평균인구 구하기</p>
+<p class="txtex dl s12_12">4. 완성된 male과 female 리스트로 시간대별 평균인구 그래프 그리기</p>
+</div>
+</div>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> ‘남성 생활인구를 구한 후 총생활인구에서 남성 생활인구를 빼면 여성 생활인구를 구할 수 있지 않을까’ 하고 생각할 수 있습니다. 그런데 그렇게 하지 않은 이유가 있습니다. 인구 데이터를 내려받은 서울 열린데이터 광장 페이지를 보면 ‘추정된 데이터이기 때문에 각 값의 합은 전체합계와 일치하지 않을 수 있다’는 유의사항 있습니다. 이는 열 인덱스 [4]부터 [31]까지의 합이 해당 열의 총생활인구와 일치하지 않을 수 있다는 얘기입니다. 실제로 계산해 보면 인구 오차는 한 자리나 그 이하 소수점으로 크지 않습니다. 전체 통계에 큰 영향을 미치지 않는 수준이죠. 이런 사항을 인지하고 있다면 여성 생활인구를 총생활인구 - 남성 인구(<span class="cd">f = float(row[3]) - m</span>)로 계산해도 됩니다. 다만, 정확하지 않은 숫자이니 중요한 데이터를 분석할 때는 유의해야 합니다.</p>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="576">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">코드 작성하기</p>
+<p class="txt bl">알고리즘을 코드로 구현해 보겠습니다.</p>
+<div class="highlight">
+<p class="txtex dm tcenter yellow">&lt;알고리즘&gt;</p>
+<p class="txtex dl s12_12">1. 남성 시간대별 생활인구를 저장할 리스트(male)와 여성 시간대별 생활인구를 저장할 리스트(female)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">2. 인구 데이터(data)의 첫 행부터 마지막 행까지 반복하기</p>
+<p class="txtex dl ind12">2.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind20">2.1.1 해당 행의 시간대(열 인덱스 [1])를 변수(time)에 저장하기</p>
+<p class="txtex dl ind20">2.1.2 열 인덱스 [4]부터 [17]까지의 합을 male[time]에 더하기</p>
+<p class="txtex dl ind20">2.1.3 열 인덱스 [18]부터 [31]까지의 합을 female[time]에 더하기</p>
+<p class="txtex dl s12_12">3. 반복이 끝나면 남성 생활인구 리스트(male)와 여성 생활인구 리스트(female)를 각각 31로 나누어 시간대별 평균인구 구하기</p>
+<p class="txtex dl s12_12">4. 완성된 male과 female 리스트로 시간대별 평균인구 그래프 그리기</p>
+<hr/>
+<p class="txtex dm tcenter yellow">&lt;코드&gt;</p>
+<pre>1. male = [0 for i in range(24)]
+   female = [0 for i in range(24)]
+2. for row in data:
+    2.1 if row[2] == dong_code:
+        2.1.1 time = row[1]
+        2.1.2 male[time] += sum(row[4:18])
+        2.1.3 female[time] += sum(row[18:32])
+3. male = [m/31 for m in male]
+   female = [f/31 for f in female]
+4. plt.plot(range(24), male)
+   plt.plot(range(24), female)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="577">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">과정 2.1.1까지는 하위 목표 2와 비슷하므로 과정 2.1.2부터 살펴보겠습니다. 남성 생활인구는 <span class="cd">row[4] + row[5] + … + row[17]</span>로 구하는데, 이를 리스트 슬라이싱과 리스트 요소의 합을 구하는 <span class="cd">sum()</span>을 활용하면 간단해집니다(<span class="dm">6.1.6</span> <span class="dm">다양한 리스트 명령어 사용하기</span> 참고). 먼저 <span class="cd">row[4:18]</span>로 리스트를 슬라이싱해 <span class="cd">row[4]</span>부터 <span class="cd">row[17]</span>까지 잘라냅니다. 이렇게 슬라이싱한 결과도 리스트이므로 <span class="cd">sum()</span>으로 요소의 합을 구합니다. <span class="cd">sum(row[4:18])</span>으로 해당 행의 남성 생활인구의 합을 구한 후 시간대별 남성 총생활인구인 <span class="cd">male[time]</span>에 합산합니다. 여성도 동일한 방법으로 <span class="cd">sum(row[18:32])</span>로 해당 행의 여성 생활인구의 합을 구한 후 시간대별 여성 총생활인구인 <span class="cd">female[time]</span>에 합산합니다.</p>
+<p class="txt bl">성별 생활인구의 합이 모두 더해지면 과정 3에서 <span class="cd">male</span> 리스트와 <span class="cd">female</span> 리스트의 모든 요소를 31로 나누어 평균인구를 구합니다.</p>
+<p class="txt bl">앞에서 작성한 코드를 프로그램으로 옮겨 봅시다. 전체 과정을 모두 작성합니다. 중간에 리스트에 담긴 값을 확인하고 싶다면 반복문 내부에 <span class="cd">print()</span>를 적절히 넣어 값을 확인해 보세요. 남성 평균인구 그래프와 여성 평균인구 그래프는 색을 다르게 해서 구분합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="578">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+
+<span class="cd2">male</span> = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+<span class="cd2">female</span> = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="purple">if</span> row[<span class="green">2</span>] == dong_code:
+        time = row[<span class="green">1</span>]
+        <span class="cd2">male[time] +=</span> <span class="cd2 gold">sum</span><span class="cd2">(row[</span><span class="cd2 green">4</span><span class="cd2">:</span><span class="cd2 green">18</span><span class="cd2">])</span>      <span class="cd2 green"># 남성 인구 총합 구하기</span>
+        <span class="cd2">female[time] +=</span> <span class="cd2 gold">sum</span><span class="cd2">(row[</span><span class="cd2 green">18</span><span class="cd2">:</span><span class="cd2 green">32</span><span class="cd2">]) </span>  <span class="cd2 green"># 여성 인구 총합 구하기</span>
+<span class="cd2">male = [m/</span><span class="cd2 green">31</span> <span class="cd2 purple">for</span> <span class="cd2">m</span> <span class="cd2 blue2">in</span> <span class="cd2">male]</span>
+<span class="cd2">female = [f/</span><span class="cd2 green">31</span> <span class="cd2 purple">for</span> <span class="cd2">f</span> <span class="cd2 blue2">in</span> <span class="cd2">female]</span>
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(dong_name + <span class="cd2 red2">' 남녀 시간대별 평균인구'</span>)
+plt.plot(male, color=<span class="cd2 red2">'b'</span>, label=<span class="cd2 red2">'남성'</span>)
+plt.plot(female, color=<span class="cd2 red2">'r'</span>, label=<span class="cd2 red2">'여성'</span>)
+plt.xlabel(<span class="red2">'시간대'</span>)
+plt.ylabel(<span class="red2">'평균인구수'</span>)
+plt.legend()
+plt.xticks(<span class="gold">range</span>(<span class="green">24</span>), <span class="gold">range</span>(<span class="green">24</span>))
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/478.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="579">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">비교 그래프가 잘 그려집니다. 목표 수립 단계에서 스케치한 두 번째 그래프도 그려 봅시다. 좌우로 펼쳐진 가로형 막대그래프였죠. 남성 평균인구를 왼쪽에 여성 평균인구를 오른쪽에 표현해 보겠습니다. 그래프를 왼쪽에 표현하려면 데이터를 음수 처리해야 합니다. 적용해서 그려 봅시다.</p>
+<div class="highlight">
+<pre><span class="cd2 purple">import</span> <span class="cd2">matplotlib</span>
+
+<span class="cd2">male = [-m</span> <span class="cd2 purple">for</span> <span class="cd2">m</span> <span class="cd2 blue2">in</span> <span class="cd2">male]</span>
+<span class="cd2">matplotlib.rcParams[</span><span class="cd2 red2">'axes.unicode_minus'</span><span class="cd2">] =</span> <span class="cd2 blue2">False</span>
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(dong_name + <span class="red2">' 남녀 시간대별 평균인구'</span>)
+<span class="cd2">plt.barh(</span><span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">24</span><span class="cd2">)</span>, male, color=<span class="red2">'b'</span>, label =<span class="red2">'남성'</span>)
+<span class="cd2">plt.barh(</span><span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">24</span><span class="cd2">)</span>, female, color=<span class="red2">'r'</span>, label=<span class="red2">'여성'</span>)
+plt.xlabel(<span class="cd2 red2">'평균인구수'</span>)
+plt.ylabel(<span class="cd2 red2">'시간대'</span>)
+plt.legend()
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/479.jpg"/></div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="580">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">왼쪽에 남성 데이터를 표시하기 위해 <span class="cd">male</span>의 모든 요소를 음수로 바꾸었습니다. 리스트 내포를 사용하면 반복문을 사용하면서도 간결하게 모든 요소를 음수로 바꿀 수 있습니다.</p>
+<p class="txt bl">마이너스를 그래프에 표시하는 <span class="cd">matplotlib.rcParams['axes.unicode_minus'] = False</span> 코드도 잊지 마세요. 그리고 꺾은선 그래프와 달리 y축이 시간대, x축이 평균인구수이므로 <span class="cd">plt.xlabel()</span>과 <span class="cd">plt.ylabel()</span>도 바꿔야 합니다. y축이 시간대이므로 가장 작은 숫자인 0이 가장 밑에, 가장 큰 숫자인 23이 가장 위에 있습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">결과 분석하기</p>
+<p class="txt bl">압구정동에는 여성이 남성보다 항상 더 많은 것으로 나타납니다. 남성보다 여성 인구가 출근 시간에 급격하게 늘어나고 퇴근 시간 이후 급격히 줄어듭니다. 물론 남성 인구의 증감 패턴도 비슷합니다. 하지만 그 증가폭과 감소폭이 여성보다는 훨씬 덜하죠. 아무래도 압구정동으로 출퇴근하는 여성이 남성보다 더 많은 것 같습니다. 그러니 만약 가고 싶은 핫플레이스가 여성이 선호하는 장소라면 점심 시간에 붐빌 수도 있겠네요. 막대그래프에서 그래프의 부피를 비교해봐도 여성 평균인구가 더 많은 것을 알 수 있습니다. 평소에 막연하게 느끼던 것을 그래프로 시각화하니 확실히 비교할 수 있습니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="581">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_94"><span class="yellow">11.2.5</span> 하위 목표 4 - 다른 지역과 인구 비교 분석하기</h4>
+<p class="txt bl">마지막 하위 목표를 작성해 봅시다. 지금까지는 인구의 절대치로만 그래프를 그렸기 때문에 실제로 어느 정도 붐비는지 실감나지 않습니다. 이를 위해 잘 아는 지역과 핫플레이스가 있는 지역의 인구 그래프를 비교해 보겠습니다. 목표 수립 단계에서 ‘핫플레이스가 있는 행정동과 익숙한 행정동의 시간대별 평균인구 그래프를 그려 비교 분석하기’로 하위 목표를 잡았습니다.</p>
+<div class="ind10">
+<p class="txtex dm">하위 목표 4</p>
+<div class="box_green_line">
+<p class="txt dl">핫플레이스가 있는 행정동과 익숙한 행정동의 시간대별 평균인구 그래프를 그려 비교 분석하기</p>
+<div class="w60c"><img alt="" class="w100" src="https://thebook.io/img/080251/480.jpg"/></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="582">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">알고리즘 작성하기</p>
+<p class="txt bl">그래프 2개를 겹쳐 그려야 하므로 역시 리스트가 2개 필요합니다. 두 지역의 시간대별 평균인구로 그래프를 그려 봅시다. 그런데 핫플레이스가 있는 행정동의 평균인구를 구하는 것은 이미 하위 목표 1에서 진행했습니다. 그러므로 여기에서는 잘 아는 지역을 입력받아 평균인구를 구하는 것만 추가로 하면 됩니다. 이 역시 어렵지 않습니다. 평균인구를 구하는 방법은 동일하기 때문이죠.</p>
+<p class="txt bl">다만, 두 데이터가 겹치지 않게 서로 다른 변수를 사용해야 합니다. 핫플레이스가 있는 행정동코드와 인구 데이터는 <span class="cd">dong_code</span>와 <span class="cd">population</span>에, 비교할 지역의 행정동코드와 인구 데이터는 <span class="cd">dong_code2</span>와 <span class="cd">population2</span>에 저장합시다.</p>
+<p class="txt bl">그리고 앞서 구현한 <span class="dm">행정동명과 행정동코드 연결하기</span> 코드를 두 번 반복해 한 번은 핫플레이스의 행정동을 입력받고(<span class="cd">dong_name</span>, <span class="cd">dong_code</span> 사용), 다른 한 번은 비교할 지역의 행정동을 입력받습니다(<span class="cd">dong_name2</span>, <span class="cd">dong_code2</span> 사용). 반복문으로 data의 첫 행부터 마지막 행까지 돌면서 행정동코드가 <span class="cd">dong_code</span>인 행의 총생활인구수를 <span class="cd">population</span>에, 행정동코드가 <span class="cd">dong_code2</span>인 행의 총생활인구수를 <span class="cd">population2</span>에 더합니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="583">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">알고리즘으로 정리하면 다음과 같습니다.</p>
+<div class="ind10">
+<p class="txtex dm">하위 목표 4</p>
+<div class="box_green_line">
+<p class="txtex2 dl">핫플레이스가 있는 행정동과 익숙한 행정동의 시간대별 평균인구 그래프를 그려 비교 분석하기</p>
+</div>
+<p class="txtex dm">알고리즘</p>
+<div class="box_green_line">
+<p class="txtex dl s12_12">1. 사용자에게서 행정동명을 입력받아 행정동코드를 구한 후 이 값을 dong_code에 저장하기</p>
+<p class="txtex dl s12_12">2. 비교할 행정동명을 입력받아 행정동코드를 구한 후 이 값을 dong_code2에 저장하기</p>
+<p class="txtex dl s12_12">3. 핫플레이스의 행정동 인구를 저장할 리스트(population)와 비교할 행정동 인구를 저장할 리스트(population2)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">4. 인구 데이터(data)의 첫 행부터 마지막 행까지 반복하기</p>
+<p class="txtex dl ind12">4.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind26">4.1.1 해당 행의 시간대(열 인덱스 [1])와 총생활인구수(열 인덱스 [3])를 각각 변수(time, p)에 저장하기</p>
+<p class="txtex dl ind26">4.1.2 인덱스가 time인 population 리스트의 요소(population[time])에 총생활인구수(p)를 더하기</p>
+<p class="txtex dl ind12">4.2 비교할 행정동의 행정동코드(dong_code2)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind26">4.2.1 해당 행의 시간대(열 인덱스[1])와 총생활인구수(열 인덱스[3])를 각각 변수(time, p)에 저장하기</p>
+<p class="txtex dl ind26">4.2.2 인덱스가 time인 population2 리스트의 요소(population2[time])에 총생활인구수(p)를 더하기</p>
+<p class="txtex dl s12_12">5. 반복이 끝나면 두 리스트(population, population2)의 모든 값을 31로 나누어 다시 저장하기</p>
+<p class="txtex dl s12_12">6. 완성된 리스트로 두 지역의 시간대별 평균인구 그래프 그리기</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="584">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">코드 작성하기</p>
+<p class="txt bl">동일한 원리가 반복되는 구조라 코드로 구현하기 어렵진 않습니다. 각 알고리즘 과정에 해당하는 코드를 작성해 봅시다.</p>
+<div class="highlight">
+<p class="txtex dm tcenter yellow">&lt;알고리즘&gt;</p>
+<p class="txtex dl s12_12">1. 사용자에게서 행정동명을 입력받아 행정동코드를 구한 후 이 값을 dong_code에 저장하기</p>
+<p class="txtex dl s12_12">2. 비교할 행정동명을 입력받아 행정동코드를 구한 후 이 값을 dong_code2에 저장하기</p>
+<p class="txtex dl s12_12">3. 핫플레이스의 행정동 인구를 저장할 리스트(population)와 비교할 행정동 인구를 저장할 리스트(population2)를 길이 24로 만들고 초깃값 0 저장하기</p>
+<p class="txtex dl s12_12">4. 인구 데이터(data)의 첫 행부터 마지막 행까지 반복하기</p>
+<p class="txtex dl ind12">4.1 사용자가 입력한 행정동의 행정동코드(dong_code)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind20">4.1.1 해당 행의 시간대(열 인덱스 [1])와 총생활인구수(열 인덱스 [3])를 각각 변수(time, p)에 저장하기</p>
+<p class="txtex dl ind20">4.1.2 인덱스가 time인 population 리스트의 요소(population[time])에 총생활인구수(p)를 더하기</p>
+<p class="txtex dl ind12">4.2 비교할 행정동의 행정동코드(dong_code2)와 인구 데이터(data)의 행정동코드(열 인덱스 [2])가 같다면</p>
+<p class="txtex dl ind20">4.2.1 해당 행의 시간대(열 인덱스[1])와 총생활인구수(열 인덱스[3])를 각각 변수(time, p)에 저장하기</p>
+<p class="txtex dl ind12">4.2.2 인덱스가 time인 population2 리스트의 요소(population2[time])에 총생활인구수(p)를 더하기</p>
+<p class="txtex dl s12_12">5. 반복이 끝나면 두 리스트(population, population2)의 모든 값을 31로 나누어 다시 저장하기</p>
+<p class="txtex dl s12_12">6. 완성된 리스트로 두 지역의 시간대별 평균인구 그래프 그리기</p>
+<hr/>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="585">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<p class="txtex dm tcenter yellow">&lt;코드&gt;</p>
+<pre>1. 행정동명과 행정동코드 연결하기 코드 재사용
+2. 행정동명과 행정동코드 연결하기 코드 재사용
+3. population = [0 for i in range(24)]
+   population2 = [0 for i in range(24)]
+4. for row in data:
+    4.1 if row[2] == dong_code:
+        4.1.1 time, p = row[1], row[3]
+        4.1.2 population[time] += p
+    4.2 elif row[2] == dong_code2 :
+        4.2.1 time, p = row[1], row[3]
+        4.2.2 population2[time] += p
+5. population = [p/31 for p in population]
+   population2 = [p/31 for p in population2]
+6. plt.plot(population)
+   plt.plot(population2)</pre>
+</div>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="586">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">과정 1과 2만 프로그램으로 옮겨 봅시다.</p>
+<div class="highlight">
+<pre><span class="green"># 핫플레이스가 있는 행정동</span>
+dong_name = <span class="gold">input</span>(<span class="red2">'핫플레이스가 위치한 행정동을 입력하세요. --&gt; '</span>)
+<span class="purple">for</span> row <span class="blue2">in</span> code_data:
+    <span class="purple">if</span> row[<span class="green">-1</span>] == dong_name:
+        dong_code = row[<span class="green">1</span>]
+
+<span class="cd2 green"># 비교할 행정동</span>
+<span class="cd2">dong_name2 =</span> <span class="cd2 gold">input</span><span class="cd2">(</span><span class="cd2 red2">'비교할 행정동을 입력하세요. --&gt; '</span><span class="cd2">)</span>
+<span class="cd2 purple">for</span> <span class="cd2">row</span> <span class="cd2 blue2">in</span> <span class="cd2">code_data:</span>
+    <span class="cd2 purple">if</span> <span class="cd2">row[</span><span class="cd2 green">-1</span><span class="cd2">] == dong_name2:</span>
+        <span class="cd2">dong_code2 = row[</span><span class="cd2 green">1</span><span class="cd2">]</span></pre>
+</div>
+<a id="section_1"></a>
+<p class="txt bl">핫플레이스가 있는 행정동은 ‘압구정동’, 비교할 행정동은 ‘역삼2동’으로 입력해 실행합니다.</p>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+핫플레이스가 위치한 행정동을 입력하세요. --&gt; <span class="cd2">압구정동</span>
+비교할 행정동을 입력하세요. --&gt; <span class="cd2">역삼2동</span></pre>
+</div>
+<p class="txt bl">앞에서 설명한 대로 행정동명과 행정동코드 연결하기 코드를 두 번 반복하되 변수만 다르게 넣습니다.</p>
+<p class="txt bl">과정 4는 <span class="cd">data</span>를 반복문으로 돌며 반복문 내부에서 <span class="cd">data</span>의 행정동코드(<span class="cd">row[2]</span>)가 <span class="cd">dong_code</span>와 같은지, <span class="cd">dong_code2</span>와 같은지를 <span class="cd">if-elif</span> 문으로 판단합니다. 그리고 조건에 맞는 시간대별 총생활인구(<span class="cd">p</span>)를 인덱스(<span class="cd">[time]</span>)에 맞게 저장하도록 코딩합니다. 나머지 과정은 기존 코드와 거의 같습니다. 그래프는 그래프 제목과 x축 이름, y축 이름만 바꿔 그리면 됩니다.</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="587">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">그럼 나머지 과정을 프로그램으로 옮겨 봅시다.</p>
+<div class="highlight">
+<pre><span class="purple">import</span> matplotlib.pyplot <span class="purple">as</span> plt
+
+population = [<span class="green">0</span> <span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="green">24</span>)]
+<span class="cd2">population2 = [</span><span class="cd2 green">0</span> <span class="cd2 purple">for</span> <span class="cd2">i</span> <span class="cd2 blue2">in</span> <span class="cd2 gold">range</span><span class="cd2">(</span><span class="cd2 green">24</span><span class="cd2">)]</span>
+
+<span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="green"># 핫플레이스가 있는 행정동인 경우</span>
+    <span class="purple">if</span> row[<span class="green">2</span>] == dong_code:
+        time, p = row[<span class="green">1</span>], row[<span class="green">3</span>]
+        population[time] += p
+    <span class="cd2 green"># 비교할 지역의 행정동인 경우</span>
+    <span class="cd2 purple">elif</span> <span class="cd2">row[</span><span class="cd2 green">2</span><span class="cd2">]</span> <span class="cd2">=</span><span class="cd2">= dong_code2:</span>
+        <span class="cd2">time, p = row[</span><span class="cd2 green">1</span><span class="cd2">], row[</span><span class="cd2 green">3</span><span class="cd2">]</span>
+        <span class="cd2">population2[time] += p</span>
+
+population = [p/<span class="green">31</span> <span class="purple">for</span> p <span class="blue2">in</span> population]
+<span class="cd2">population2 = [p/</span><span class="cd2 green">31</span> <span class="cd2 purple">for</span> <span class="cd2">p</span> <span class="cd2 blue2">in</span> <span class="cd2">population2]</span>
+
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(dong_name + <span class="cd2 red2">'과 '</span> <span class="cd2">+ dong_name2 +</span> <span class="cd2 red2">' 시간대별 평균인구 비교'</span>)
+plt.plot(population, color=<span class="red2">'m'</span>, label=dong_name)
+<span class="cd2">plt.plot(population2, color=</span><span class="cd2 red2">'orange'</span><span class="cd2">, label=dong_name2)</span>
+plt.legend()
+plt.xlabel(<span class="red2">'시간대'</span>)
+plt.ylabel(<span class="red2">'평균인구수'</span>)
+plt.xticks(<span class="gold">range</span>(<span class="green">24</span>), <span class="gold">range</span>(<span class="green">24</span>))
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/484.jpg"/></div>
+</div>
+<p class="txt bl">그래프가 그려졌으니 결과를 분석하는 시간을 가져 볼까요?</p>
+</div>
+</section>
+</section>
+</div><div class="book-page-fragment" data-page="588">
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">결과 분석하기</p>
+<p class="txt bl">역삼2동은 새벽에 인구수가 4만 7천~4만 8천 명 정도인데 압구정동은 3만 5천 명 내외네요. 새벽에는 인구 이동이 적으므로 새벽 인구가 해당 동에 거주하는 인구라 가정한다면, 역삼2동이 압구정동보다 거주 인구가 많은 것으로 보입니다.</p>
+<p class="txt bl">그런데 인구 이동은 역삼2동보다 압구정동이 더 많은 것으로 나타나죠. 압구정동의 등락폭은 약 2만 9천 명이고 역삼2동의 등락폭은 약 2만 명입니다. 대부분의 시간에는 역삼2동이 인구가 더 많지만, 17~20시 사이에는 역전되네요. 이 시간대에 압구정동이 역삼2동보다 더 붐빌 것 같습니다. 이 시간대 외에는 압구정동으로 가는 것이 더 나을 것 같고요. 이처럼 잘 아는 지역을 직접 입력해 인구 그래프를 비교해 보세요. 막연하게 느낀 부분들이 그래프에 정확한 수치로 나타날 겁니다.</p>
+<p class="txt bl">사실 두 행정동의 크기 차이까지 고려하면 붐비는 정도는 다를 수 있습니다. 여기서는 단순히 평균인구수로만 비교하고 있으니 참고해 주세요.</p>
+</div>
+</section>
+</section>
+</div>
+    </div>
+</body>
+</html>

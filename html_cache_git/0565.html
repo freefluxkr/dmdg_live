@@ -1,0 +1,24 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>12.2.2 기록 확인</h3>
+<p class="x00--"><span class="A------">re</span><span class="A------">f</span><span class="A------">log</span>의 기록들은 <span class="A------">HEAD</span>@{숫자} 형태입니다. 각 숫자는 작업을 수행한 해시 값을 가리킵니다. 따라서 <span class="A------">re</span><span class="A------">f</span><span class="A------">log</span>에 기록된 <span class="A------">HEAD</span>@{숫자} 포인터를 이용하여 커밋 정보를 확인할 수 있습니다. </p>
+<p class="x00--">마지막에 참조한 <span class="A------">refs</span> 로그의 해시 값 정보를 확인해 봅시다.</p>
+<pre><code><p class="N------1">infoh@DESKTOP MINGW64 /e/<span class="x--">gitstudy12 (master)</span></p>
+<p class="N-----">$ <span class="x--">git show HEAD@{0} </span><span class="ingd">커밋 정보</span></p>
+<p class="N-----">commit d0943cfbc5e092668be3b96e98f32e363e05feb1 (HEAD -&gt; master, feature)</p>
+<p class="N-----">Author: hojin &lt;infohojin@gmail.com&gt;</p>
+<p class="N-----">Date:   Sat May 25 18:06:47 2019 +0900</p>
+<p class="N-----">    first</p>
+<p class="N-----"> </p>
+<p class="N-----">diff --git a/index.htm b/index.htm</p>
+<p class="N-----">new file mode 100644</p>
+<p class="N-----">index 0000000..95d09f2</p>
+<p class="N-----">--- /dev/null</p>
+<p class="N-----">+++ b/index.htm</p>
+<p class="N-----">@@ -0,0 +1 @@</p>
+<p class="N-----">+hello world</p>
+<p class="N----">\ No newline at end of file</p></code></pre>
+</div>
+</section>
+</section>

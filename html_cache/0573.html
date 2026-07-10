@@ -1,0 +1,10 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl"><span class="cd">data</span>의 열 인덱스 [4]부터 [17]까지 남성 생활인구 데이터가, [18]부터 [31]까지는 여성 생활인구 데이터가 들어 있습니다. 행정동코드가 11680545(압구정동)인 행을 골라낸 후 열 인덱스 [4]부터 [17]까지 들어 있는 값을 합하면 해당 행의 총 남성 생활인구가 됩니다. 열 인덱스 [18]부터 [31]까지 합을 구하면 해당 행의 총 여성 생활인구가 되죠. 즉, 행마다 남성 생활인구와 여성 생활인구의 합이 나오며 이 값을 성별에 맞는 리스트에 각각 더하면 됩니다. 여기에서도 각 행의 시간대가 곧 리스트의 인덱스입니다. 그림으로 정리해 보겠습니다. 번호 순서대로 흐름을 확인하세요.</p>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/474.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 11-19</span> 2019년 12월 1일 0시의 남녀 생활인구 구하기</p>
+<p class="txt bl">그림은 <span class="cd">data</span>에서 행정동코드가 11680545(압구정동)인 행만 보여 줍니다. <span class="cd">data</span>가 날짜와 시간순으로 되어 있으므로 2019년 12월 1일 0시 데이터가 가장 먼저 선택됩니다. 첫 번째 행에서 열 인덱스 [4]~[17]의 합이 2019년 12월 1일 0시의 남성 생활인구가 되죠. <span class="cd">row[4] + row[5] + ... + row[17]</span>로 표현할 수 있습니다. 이 값을 <span class="cd">male[0]</span>에 더합니다. 열 인덱스 [18]~[31]의 합은 2019년 12월 1일의 0시의 여성 생활인구입니다. <span class="cd">row[18] + row[19] + ... + row[31]</span>로 합을 구하고 합한 값을 <span class="cd">female[0]</span>에 더합니다. 이렇게 하면 2019년 12월 1일 0시의 남성과 여성 생활인구가 각각 구해집니다.</p>
+</div>
+</section>
+</section>

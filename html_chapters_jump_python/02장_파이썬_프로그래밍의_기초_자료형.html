@@ -1,0 +1,2474 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>02장_파이썬_프로그래밍의_기초_자료형</title>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Fira+Code:wght@400;600&display=swap');
+
+body {
+    font-family: 'Nanum Gothic', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2c3e50;
+    margin: 0;
+    padding: 2cm;
+    background-color: #fff;
+}
+
+/* 개별 페이지 분할 */
+.book-page-fragment {
+    page-break-before: always;
+    padding-top: 1cm;
+}
+.book-page-fragment:first-child {
+    page-break-before: avoid;
+    padding-top: 0;
+}
+
+/* 코드 블록 스타일 */
+pre, code {
+    font-family: 'Fira Code', Consolas, Monaco, monospace;
+}
+code {
+    background-color: #f7f9fa;
+    color: #e06c75;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1em;
+}
+pre {
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: 1.2em;
+    margin: 1.5em 0;
+    border-radius: 6px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9em;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* 인용구 스타일 */
+blockquote {
+    border-left: 4px solid #00adb5;
+    background-color: #f8f9fa;
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    color: #555;
+    font-style: italic;
+    border-radius: 0 6px 6px 0;
+}
+
+/* 이미지 및 캡션 */
+img {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.95em;
+}
+table, th, td {
+    border: 1px solid #e9ecef;
+    padding: 0.8em;
+}
+th {
+    background-color: #f1f3f5;
+    font-weight: bold;
+    color: #495057;
+}
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* 제목 스타일 */
+h1 {
+    font-size: 2.2em;
+    color: #1a202c;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.4em;
+    margin-bottom: 1em;
+}
+h1.page-subject {
+    font-size: 2.2em;
+    color: #1a202c;
+    margin-top: 0;
+    margin-bottom: 0.2em;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.title-divider {
+    border: none;
+    border-top: 2px solid #00adb5;
+    margin-bottom: 1.5em;
+}
+h2 {
+    font-size: 1.6em;
+    color: #2d3748;
+    margin-top: 1.8em;
+    margin-bottom: 0.8em;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 0.2em;
+}
+h3 {
+    font-size: 1.25em;
+    color: #4a5568;
+    margin-top: 1.5em;
+}
+
+/* 인쇄 최적화 설정 */
+@media print {
+    body {
+        padding: 0;
+    }
+    pre, blockquote, table, img, tr {
+        page-break-inside: avoid;
+    }
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+    <div class="thebook-content">
+        <div class="book-page-fragment" data-page-id="11">
+<h1 class="page-subject">02장 파이썬 프로그래밍의 기초, 자료형</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>'어떤 프로그래밍 언어이든 그 언어의 자료형을 알고 이해할 수 있다면 이미 그 언어의 절반을 터득한 것이나 다름없다'라는 말이 있다. 자료형이란 프로그래밍을 할 때 쓰이는 숫자, 문자열 등과 같이 자료 형태로 사용하는 모든 것을 뜻한다. 프로그램의 기본이자 핵심 단위가 바로 자료형이다. 계산 프로그램을 만들려면 어떤 것을 계산할 것인지부터 알아야 하고 데이터베이스 프로그램을 만들려면 어떤 자료를 저장할 것인지부터 알아야 하는 것처럼 기본 중의 기본이다. 따라서 자료형을 충분히 이해하지 않고 프로그래밍을 시작하려는 것은 기초 공사가 마무리되지 않은 상태에서 빌딩을 세우는 것과 같다.</p>
+<p>02장에서는 파이썬의 주요 자료형을 하나씩 알아본다.</p>
+<fieldset class="sub-pages-fieldset" style="margin: 20px 0; padding: 10px;"><legend style="margin-bottom: 0px; padding: 0 10px; font-weight: bold;">목차</legend><div class="page_child" style="margin: 0;"><ul style="margin-top: 0; margin-bottom: 10px; padding-top: 0;"><li><small><a class="sub-page-link" href="/12">02-1 숫자형</a></small></li><li><small><a class="sub-page-link" href="/13">02-2 문자열 자료형</a></small></li><li><small><a class="sub-page-link" href="/14">02-3 리스트 자료형</a></small></li><li><small><a class="sub-page-link" href="/15">02-4 튜플 자료형</a></small></li><li><small><a class="sub-page-link" href="/16">02-5 딕셔너리 자료형</a></small></li><li><small><a class="sub-page-link" href="/1015">02-6 집합 자료형</a></small></li><li><small><a class="sub-page-link" href="/17">02-7 불 자료형</a></small></li><li><small><a class="sub-page-link" href="/18">02-8 자료형의 값을 저장하는 공간, 변수</a></small></li><li><small><a class="sub-page-link" href="/180351">02장 되새김 문제</a></small></li></ul></div></fieldset>
+</div>
+</div><div class="book-page-fragment" data-page-id="12">
+<h1 class="page-subject">02-1 숫자형</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>숫자형(Number)은 숫자 형태로 이루어진 자료형이다. 정수, 실수, 8진수, 16진수 등이 여기에 해당한다.</p>
+<p>다음 표는 파이썬에서 숫자를 사용하는 예이다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>파이썬 사용 예</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정수</td>
+<td>123, -345, 0</td>
+</tr>
+<tr>
+<td>실수</td>
+<td>123.45, -1234.5, 3.4e10</td>
+</tr>
+<tr>
+<td>8진수</td>
+<td>0o34, 0o25</td>
+</tr>
+<tr>
+<td>16진수</td>
+<td>0x2A, 0xFF</td>
+</tr>
+</tbody>
+</table>
+<p>이제 숫자를 파이썬에서 어떻게 만들고 사용하는지 자세히 알아보자.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">숫자형은 어떻게 만들고 사용할까?</a><ul>
+<li><a href="#_2">정수형</a></li>
+<li><a href="#_3">실수형</a></li>
+<li><a href="#8-16">8진수와 16진수</a></li>
+</ul>
+</li>
+<li><a href="#_4">숫자형을 활용하기 위한 연산자</a><ul>
+<li><a href="#_5">사칙 연산</a></li>
+<li><a href="#x-y">x의 y제곱을 나타내는 ** 연산자</a></li>
+<li><a href="#_6">나눗셈 후 나머지를 반환하는 % 연산자</a></li>
+<li><a href="#_7">나눗셈 후 몫을 반환하는 // 연산자</a></li>
+<li><a href="#_8">복합 연산자</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">숫자형은 어떻게 만들고 사용할까?</h2>
+<h3 id="_2">정수형</h3>
+<p>정수형(integer)은 말 그대로 정수를 뜻하는 자료형이다. 다음은 양의 정수, 음의 정수, 숫자 0을 변수 a에 대입하는 예이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 123
+&gt;&gt;&gt; a = -178
+&gt;&gt;&gt; a = 0
+</code></pre>
+<h3 id="_3">실수형</h3>
+<p>실수형(floating-point)은 소수점이 포함된 숫자를 말한다. 다음은 실수를 변수 a에 대입하는 예이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 1.2
+&gt;&gt;&gt; a = -3.45
+</code></pre>
+<blockquote>
+<p>정수 1과 실수 1.0은 값은 같지만 자료형이 다르다. </p>
+</blockquote>
+<p>아주 크거나 아주 작은 숫자를 표현할 때는 지수 표현 방식을 사용하면 편리하다. 파이썬에서는 4.24e10 또는 4.24E10처럼 표현할 수 있다(e와 E 둘 중 어느 것을 사용해도 된다).</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 4.24E10
+&gt;&gt;&gt; a = 4.24e-10
+</code></pre>
+<p>여기서 4.24E10은 $4.24 * 10^{10}$, 4.24e-10은 $4.24 * 10^{-10}$을 의미한다.</p>
+<h3 id="8-16">8진수와 16진수</h3>
+<p>8진수(octal)는 0o 또는 0O(숫자 0 + 알파벳 소문자 o 또는 대문자 O)로 시작한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 0o177
+&gt;&gt;&gt; print(a)
+127
+</code></pre>
+<blockquote>
+<p>0o177 = $1×8^2+7×8^1+7=127$</p>
+</blockquote>
+<p>16진수(hexadecimal)는 0x로 시작한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 0x8ff
+&gt;&gt;&gt; b = 0xABC
+&gt;&gt;&gt; print(b)
+2748
+</code></pre>
+<blockquote>
+<p>0xABC = $10×16^2+11×16^1+12=2748$  (A:10, B:11, C:12)</p>
+</blockquote>
+<p>8진수나 16진수는 파이썬에서 자주 사용하지 않으므로 간단히 눈으로만 익히고 넘어가자. 다만 파일 권한이나 색상 코드 등에서 가끔 볼 수 있으므로 이런 표현이 있다는 정도만 기억해 두자.</p>
+<h2 id="_4">숫자형을 활용하기 위한 연산자</h2>
+<h3 id="_5">사칙 연산</h3>
+<p>프로그래밍을 처음 접하더라도 사칙 연산(<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>)은 알고 있을 것이다. 파이썬도 계산기처럼 연산자를 사용해 사칙 연산을 수행한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 3
+&gt;&gt;&gt; b = 4
+&gt;&gt;&gt; a + b
+7
+&gt;&gt;&gt; a - b
+-1
+&gt;&gt;&gt; a * b
+12
+&gt;&gt;&gt; a / b
+0.75
+</code></pre>
+<h3 id="x-y">x의 y제곱을 나타내는 <code>**</code> 연산자</h3>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><code>**</code> 연산자는 <code>x ** y</code>처럼 사용하면 x의 y제곱($x^y$) 값을 반환한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 3
+&gt;&gt;&gt; b = 4
+&gt;&gt;&gt; a ** b
+81
+</code></pre>
+<h3 id="_6">나눗셈 후 나머지를 반환하는 % 연산자</h3>
+<p><code>%</code>는 나눗셈의 나머지 값을 반환하는 연산자이다. 7을 3으로 나누면 나머지는 1, 3을 7로 나누면 나머지는 3이 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; 7 % 3
+1
+&gt;&gt;&gt; 3 % 7
+3
+</code></pre>
+<blockquote>
+<p>3을 7로 나누면 몫이 0이고 나머지가 3이므로 <code>3 % 7</code>의 결과는 3이다.</p>
+</blockquote>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/12/02_1_mod1.png"/></p>
+<h3 id="_7">나눗셈 후 몫을 반환하는 // 연산자</h3>
+<p><code>/</code> 연산자를 사용하여 7 나누기 4를 하면 결과는 1.75가 된다. 반면 <code>//</code> 연산자를 사용하면 나눗셈 후 몫만 반환한다. 두 연산자의 차이를 비교해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; 7 / 4
+1.75
+&gt;&gt;&gt; 7 // 4
+1
+</code></pre>
+<p><code>/</code>는 소수점까지 포함한 결과를, <code>//</code>는 몫에 해당하는 정수값 1만 반환한다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/12/02_1_mod2.png"/></p>
+<h3 id="_8">복합 연산자</h3>
+<p>복합 연산자는 산술 연산자(<code>+</code>, <code>-</code> 등)와 대입 연산자(<code>=</code>)를 합친 것이다.</p>
+<p>먼저 a에 1을 대입한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 1
+</code></pre>
+<p>a의 값을 1만큼 증가시키려면 다음과 같이 할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = a + 1  # a + 1로 계산된 값을 다시 a에 대입한다.
+&gt;&gt;&gt; print(a)
+2
+</code></pre>
+<p><code>a = a + 1</code>은 다음과 같이 간략하게 표현할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a += 1
+</code></pre>
+<p><code>a += 1</code>은 <code>a = a + 1</code>과 동일하다. 이처럼 <code>+=</code>를 복합 연산자라 부른다.</p>
+<p>a의 값을 1만큼 감소시키려면 <code>-=</code> 복합 연산자를 사용한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 1
+&gt;&gt;&gt; a -= 1  # a = a - 1과 같음
+&gt;&gt;&gt; print(a)
+0
+</code></pre>
+<p>복합 연산자에는 다음과 같은 것들이 있다.</p>
+<pre><code class="language-plaintext">+=, -=, *=, /=, //=, %=, **=
+</code></pre>
+<p>예를 들어 <code>*=</code>는 다음과 같이 사용한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 2
+&gt;&gt;&gt; a *= 3  # a = a * 3과 같음
+&gt;&gt;&gt; print(a)
+6
+</code></pre>
+<p>복합 연산자를 사용하면 코드를 더 간결하게 작성할 수 있다.</p>
+</div>
+</div><div class="book-page-fragment" data-page-id="13">
+<h1 class="page-subject">02-2 문자열 자료형</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>문자열(string)은 연속된 문자들의 나열이다. 예를 들면 다음과 같다.</p>
+<pre><code class="language-plaintext">"Life is too short, You need Python"
+"a"
+"123"
+</code></pre>
+<p>모든 예문이 큰따옴표(")로 둘러싸여 있다. '123은 숫자인데 왜 문자열이지?'라는 의문이 들 수 있다. 따옴표로 둘러싸여 있으면 모두 문자열이다.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">문자열은 어떻게 만들고 사용할까?</a><ul>
+<li><a href="#1">1. 큰따옴표로 양쪽 둘러싸기</a></li>
+<li><a href="#2">2. 작은따옴표로 양쪽 둘러싸기</a></li>
+<li><a href="#3-3">3. 큰따옴표 3개를 연속으로 써서 양쪽 둘러싸기</a></li>
+<li><a href="#4-3">4. 작은따옴표 3개를 연속으로 써서 양쪽 둘러싸기</a></li>
+</ul>
+</li>
+<li><a href="#_2">문자열 안에 작은따옴표나 큰따옴표를 포함시키고 싶을 때</a><ul>
+<li><a href="#1_1">1. 문자열에 작은따옴표 포함하기</a></li>
+<li><a href="#2_1">2. 문자열에 큰따옴표 포함하기</a></li>
+<li><a href="#3">3. 역슬래시를 사용해서 작은따옴표와 큰따옴표를 문자열에 포함하기</a></li>
+</ul>
+</li>
+<li><a href="#_3">여러 줄인 문자열을 변수에 대입하고 싶을 때</a><ul>
+<li><a href="#1-n">1. 줄을 바꾸기 위한 이스케이프 코드 \n 삽입하기</a></li>
+<li><a href="#2-3-3">2. 연속된 작은따옴표 3개 또는 큰따옴표 3개 사용하기</a></li>
+</ul>
+</li>
+<li><a href="#_4">문자열 연산하기</a><ul>
+<li><a href="#_5">문자열 더해서 연결하기</a></li>
+<li><a href="#_6">문자열 곱하기</a></li>
+<li><a href="#_7">문자열 곱하기 응용하기</a></li>
+</ul>
+</li>
+<li><a href="#_8">문자열 길이 구하기</a></li>
+<li><a href="#_9">문자열 인덱싱과 슬라이싱</a><ul>
+<li><a href="#_10">문자열 인덱싱</a></li>
+<li><a href="#_11">문자열 인덱싱 활용하기</a></li>
+<li><a href="#_12">문자열 슬라이싱</a></li>
+<li><a href="#_13">문자열을 슬라이싱하는 방법</a></li>
+<li><a href="#_14">슬라이싱으로 문자열 나누기</a></li>
+</ul>
+</li>
+<li><a href="#_15">문자열 포매팅이란?</a></li>
+<li><a href="#_16">문자열 포매팅 따라 하기</a><ul>
+<li><a href="#1_2">1. 숫자 바로 대입</a></li>
+<li><a href="#2_2">2. 문자열 바로 대입</a></li>
+<li><a href="#3_1">3. 숫자 값을 나타내는 변수로 대입</a></li>
+<li><a href="#4-2">4. 2개 이상의 값 넣기</a></li>
+</ul>
+</li>
+<li><a href="#_17">문자열 포맷 코드</a></li>
+<li><a href="#_18">포맷 코드와 숫자 함께 사용하기</a><ul>
+<li><a href="#1_3">1. 정렬과 공백</a></li>
+<li><a href="#2_3">2. 소수점 표현하기</a></li>
+</ul>
+</li>
+<li><a href="#format">format 함수를 사용한 포매팅</a><ul>
+<li><a href="#_19">숫자 바로 대입하기</a></li>
+<li><a href="#_20">문자열 바로 대입하기</a></li>
+<li><a href="#_21">숫자 값을 가진 변수로 대입하기</a></li>
+<li><a href="#2_4">2개 이상의 값 넣기</a></li>
+<li><a href="#_22">이름으로 넣기</a></li>
+<li><a href="#_23">인덱스와 이름을 혼용해서 넣기</a></li>
+<li><a href="#_24">왼쪽 정렬</a></li>
+<li><a href="#_25">오른쪽 정렬</a></li>
+<li><a href="#_26">가운데 정렬</a></li>
+<li><a href="#_27">공백 채우기</a></li>
+<li><a href="#_28">소수점 표현하기</a></li>
+<li><a href="#_29">{ 또는 } 문자 표현하기</a></li>
+</ul>
+</li>
+<li><a href="#f">f 문자열 포매팅</a></li>
+<li><a href="#_30">문자열 관련 함수들</a><ul>
+<li><a href="#-count">문자 개수 세기 - count</a></li>
+<li><a href="#1-find">위치 알려 주기 1 - find</a></li>
+<li><a href="#2-index">위치 알려 주기 2 - index</a></li>
+<li><a href="#-join">문자열 삽입 - join</a></li>
+<li><a href="#-upper">소문자를 대문자로 바꾸기 - upper</a></li>
+<li><a href="#-lower">대문자를 소문자로 바꾸기 - lower</a></li>
+<li><a href="#-lstrip">왼쪽 공백 지우기 - lstrip</a></li>
+<li><a href="#-rstrip">오른쪽 공백 지우기 - rstrip</a></li>
+<li><a href="#-strip">양쪽 공백 지우기 - strip</a></li>
+<li><a href="#-replace">문자열 바꾸기 - replace</a></li>
+<li><a href="#-split">문자열 나누기 - split</a></li>
+<li><a href="#-isalpha">문자열이 알파벳으로만 구성되어 있는지 확인하기 - isalpha</a></li>
+<li><a href="#-isdigit">문자열이 숫자로만 구성되어 있는지 확인하기 - isdigit</a></li>
+<li><a href="#-startswith">문자열이 특정 문자(열)로 시작하는지 확인하기 - startswith</a></li>
+<li><a href="#-endswith">문자열이 특정 문자(열)로 끝나는지 확인하기 - endswith</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">문자열은 어떻게 만들고 사용할까?</h2>
+<p>파이썬에서 문자열을 만드는 방법은 총 4가지다.</p>
+<h3 id="1">1. 큰따옴표로 양쪽 둘러싸기</h3>
+<pre><code class="language-python">"Hello World"
+</code></pre>
+<h3 id="2">2. 작은따옴표로 양쪽 둘러싸기</h3>
+<pre><code class="language-python">'Python is fun'
+</code></pre>
+<h3 id="3-3">3. 큰따옴표 3개를 연속으로 써서 양쪽 둘러싸기</h3>
+<pre><code class="language-python">"""Life is too short, You need python"""
+</code></pre>
+<h3 id="4-3">4. 작은따옴표 3개를 연속으로 써서 양쪽 둘러싸기</h3>
+<pre><code class="language-python">'''Life is too short, You need python'''
+</code></pre>
+<p>단순함이 자랑인 파이썬이 문자열을 만드는 방법은 왜 4가지일까? 그 이유를 알아보자.</p>
+<h2 id="_2">문자열 안에 작은따옴표나 큰따옴표를 포함시키고 싶을 때</h2>
+<p>문자열 안에 작은따옴표와 큰따옴표가 들어 있어야 할 경우가 있다. 이때는 특별한 방법이 필요하다. 예제를 하나씩 살펴보면서 원리를 익혀 보자.</p>
+<h3 id="1_1">1. 문자열에 작은따옴표 포함하기</h3>
+<pre><code class="language-plaintext">Python's favorite food is perl
+</code></pre>
+<p>위 문자열을 food 변수에 저장하려면 문자열을 큰따옴표로 둘러싸야 한다. 큰따옴표 안에 들어 있는 작은따옴표는 문자열을 나타내는 기호로 인식되지 않는다. 대화형 인터프리터를 열고 다음과 같이 입력해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; food = "Python's favorite food is perl"
+</code></pre>
+<p>프롬프트에 <code>food</code>를 입력하면 변수에 저장된 문자열이 그대로 출력된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; food
+"Python's favorite food is perl"
+</code></pre>
+<p>만약 문자열을 큰따옴표가 아닌 작은따옴표로 둘러싸면 'Python'이 문자열로 인식되어 <a class="wiki_link" data-title="구문 오류" data-wiki="/page/wiki/3/구문 오류/" href="javascript:void(0)">구문 오류</a>(SyntaxError)가 발생한다.</p>
+<pre><code class="language-plaintext">&gt;&gt;&gt; food = 'Python's favorite food is perl'
+  File "&lt;stdin&gt;", line 1
+    food = 'Python's favorite food is perl'
+                   ^
+SyntaxError: invalid syntax
+</code></pre>
+<h3 id="2_1">2. 문자열에 큰따옴표 포함하기</h3>
+<pre><code class="language-plaintext">"Python is very easy." he says.
+</code></pre>
+<p>큰따옴표가 포함된 문자열은 작은따옴표로 둘러싸면 된다. 다음과 같이 입력해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; say = '"Python is very easy." he says.'
+</code></pre>
+<p>작은따옴표 안에 사용된 큰따옴표는 문자열을 만드는 기호로 인식되지 않는다.</p>
+<h3 id="3">3. 역슬래시를 사용해서 작은따옴표와 큰따옴표를 문자열에 포함하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; food = 'Python\'s favorite food is perl'
+&gt;&gt;&gt; say = "\"Python is very easy.\" he says."
+</code></pre>
+<p>작은따옴표나 큰따옴표를 문자열에 포함시키는 또 다른 방법은 역슬래시(<code>\</code>)를 사용하는 것이다. 역슬래시를 작은따옴표나 큰따옴표 앞에 삽입하면 역슬래시 뒤의 작은따옴표나 큰따옴표는 문자열을 둘러싸는 기호가 아니라 문자 그 자체를 뜻한다.</p>
+<p>어떤 방법을 사용할지는 자유롭게 선택하면 된다. 대화형 인터프리터를 실행한 후 위 예문을 직접 작성해 보자.</p>
+<h2 id="_3">여러 줄인 문자열을 변수에 대입하고 싶을 때</h2>
+<p>다음과 같은 여러 줄의 문자열을 변수에 대입하려면 어떻게 해야 할까?</p>
+<pre><code class="language-plaintext">Life is too short
+You need python
+</code></pre>
+<h3 id="1-n">1. 줄을 바꾸기 위한 이스케이프 코드 <code>\n</code> 삽입하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; multiline = "Life is too short\nYou need python"
+</code></pre>
+<p>줄바꿈 문자인 <code>\n</code>을 삽입하는 방법이 있지만, 읽기가 불편하고 줄이 길어지는 단점이 있다.</p>
+<h3 id="2-3-3">2. 연속된 작은따옴표 3개 또는 큰따옴표 3개 사용하기</h3>
+<p>1번 방법의 단점을 극복하기 위해 작은따옴표 3개(''') 또는 큰따옴표 3개(""")를 사용한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; multiline='''
+... Life is too short
+... You need python
+... '''
+</code></pre>
+<p><em>작은따옴표 3개를 사용한 경우</em></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; multiline="""
+... Life is too short
+... You need python
+... """
+</code></pre>
+<p><em>큰따옴표 3개를 사용한 경우</em></p>
+<p><code>print(multiline)</code>을 입력하면 어떻게 출력되는지 확인해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; print(multiline)
+Life is too short
+You need python
+</code></pre>
+<p>두 경우 모두 결과는 동일하다. 문자열이 여러 줄인 경우, 이스케이프 코드를 쓰는 것보다 따옴표 3개를 사용하는 것이 훨씬 깔끔하다.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>이스케이프 코드란?</strong></p>
+<p>문자열 예제에서 여러 줄의 문장을 처리할 때 역슬래시 문자와 소문자 n을 조합한 <code>\n</code> 이스케이프 코드를 사용했다. 이스케이프(escape) 코드란 프로그래밍할 때 사용할 수 있도록 미리 정의해 둔 '문자 조합'이다. 주로 출력물을 보기 좋게 정렬하는 용도로 사용한다. 몇 가지 이스케이프 코드를 정리하면 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>코드</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\n</code></td>
+<td>문자열 안에서 줄을 바꿀 때 사용</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>문자열 사이에 탭 간격을 줄 때 사용</td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td><code>\</code>를 그대로 표현할 때 사용</td>
+</tr>
+<tr>
+<td><code>\'</code></td>
+<td>작은따옴표(')를 그대로 표현할 때 사용</td>
+</tr>
+<tr>
+<td><code>\"</code></td>
+<td>큰따옴표(")를 그대로 표현할 때 사용</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>캐리지 리턴(줄 바꿈 문자, 커서를 현재 줄의 가장 앞으로 이동)</td>
+</tr>
+<tr>
+<td><code>\f</code></td>
+<td>폼 피드(줄 바꿈 문자, 커서를 현재 줄의 다음 줄로 이동)</td>
+</tr>
+<tr>
+<td><code>\a</code></td>
+<td>벨 소리(출력할 때 PC 스피커에서 '삑' 소리가 난다)</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>백 스페이스</td>
+</tr>
+<tr>
+<td><code>\000</code></td>
+<td>널 문자</td>
+</tr>
+</tbody>
+</table>
+<p>이 중에서 활용 빈도가 높은 것은 <code>\n</code>, <code>\t</code>, <code>\\</code>, <code>\'</code>, <code>\"</code>이다. 나머지는 잘 사용하지 않는다.</p></fieldset>
+<h2 id="_4">문자열 연산하기</h2>
+<p>파이썬에서는 문자열을 더하거나 곱할 수 있다. 다른 언어에서는 쉽게 찾아볼 수 없는 재미있는 기능이다.</p>
+<h3 id="_5">문자열 더해서 연결하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; head = "Python"
+&gt;&gt;&gt; tail = " is fun!"
+&gt;&gt;&gt; head + tail
+'Python is fun!'
+</code></pre>
+<p>"Python"이라는 head 변수와 " is fun!"이라는 tail 변수를 더한 결과는 'Python is fun!'이다. 즉, head와 tail 변수가 +에 의해 합쳐진 것이다. 직접 실행해 보자.</p>
+<h3 id="_6">문자열 곱하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "python"
+&gt;&gt;&gt; a * 2
+'pythonpython'
+</code></pre>
+<p><code>a * 2</code>는 a를 2번 반복하라는 뜻이다. 즉, <code>*</code>는 문자열의 반복을 뜻한다.</p>
+<h3 id="_7">문자열 곱하기 응용하기</h3>
+<p>문자열 곱하기를 응용해 보자. 다음 소스를 IDLE 에디터를 열어 작성해 보자.</p>
+<pre><code class="language-python"># multistring.py
+
+print("=" * 50)
+print("My Program")
+print("=" * 50)
+</code></pre>
+<p>입력한 소스는 <code>C:\doit</code> 디렉터리에 'multistring.py'라는 파일 이름으로 저장하자.</p>
+<p>프로그램을 실행해 보자. [실행 창 열기(<code>윈도우 + R</code>) → 'cmd' 입력 → <code>Enter</code> 입력]으로 명령 프롬프트 창을 열고 다음을 따라 해 보자.</p>
+<pre><code class="language-plaintext">C:\Users&gt;cd C:\doit
+C:\doit&gt;python multistring.py
+==================================================
+My Program
+==================================================
+</code></pre>
+<p>이런 식의 표현은 앞으로 자주 사용하게 될 것이다. 프로그램 실행 시 출력 화면의 제일 위쪽에 프로그램 제목을 이와 같이 표시하면 보기 좋다.</p>
+<h2 id="_8">문자열 길이 구하기</h2>
+<p>문자열의 길이는 len 함수를 사용하면 구할 수 있다. len 함수는 print 함수처럼 파이썬의 기본 내장 함수로, 별다른 설정 없이 바로 사용할 수 있다.</p>
+<blockquote>
+<p>문자열의 길이에는 공백 문자도 포함된다.</p>
+</blockquote>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short"
+&gt;&gt;&gt; len(a)
+17
+</code></pre>
+<h2 id="_9">문자열 인덱싱과 슬라이싱</h2>
+<p>인덱싱(indexing)은 무엇인가를 '가리킨다', 슬라이싱(slicing)은 무엇인가를 '잘라 낸다'라는 의미다. 이런 의미를 생각하면서 다음 내용을 살펴보자.</p>
+<h3 id="_10">문자열 인덱싱</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short, You need Python"
+</code></pre>
+<p>변수 a에 저장한 문자열의 각 문자마다 번호를 매겨 보면 다음과 같다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/13/02_2_indexing.png"/></p>
+<p>"Life is too short, You need Python" 문자열에서 L은 첫 번째 자리를 뜻하는 숫자 0, i는 1 이런 식으로 계속 번호를 붙인 것이다. 중간에 있는 short의 s는 12가 된다.</p>
+<p>이제 다음 예를 실행해 보자.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short, You need Python"
+&gt;&gt;&gt; a[3]
+'e'
+</code></pre>
+<p>a[3]이 뜻하는 것은 a라는 문자열의 네 번째 문자 e다. a[3]에서 숫자 3이 왜 네 번째 문자를 뜻하는지 의아할 수 있다. 다음과 같이 생각하면 쉽다.</p>
+<p><strong>"파이썬은 0부터 숫자를 센다."</strong></p>
+<p>따라서 파이썬은 위 문자열을 다음과 같이 바라본다.</p>
+<pre><code class="language-python">a[0]:'L', a[1]:'i', a[2]:'f', a[3]:'e', a[4]:' ', ...
+</code></pre>
+<p>0부터 숫자를 센다는 것이 처음에는 익숙하지 않겠지만, 계속 사용하다 보면 자연스러워진다. a[번호]는 문자열 안의 특정한 값을 뽑아 내는 역할을 한다. 이러한 작업을 '인덱싱'이라고 한다.</p>
+<h3 id="_11">문자열 인덱싱 활용하기</h3>
+<p>인덱싱의 예를 몇 가지 더 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short, You need Python"
+&gt;&gt;&gt; a[0]
+'L'
+&gt;&gt;&gt; a[12]
+'s'
+&gt;&gt;&gt; a[-1]
+'n'
+</code></pre>
+<p>앞의 a[0]과 a[12]는 쉽게 이해할 수 있는데, 마지막의 a[-1]이 뜻하는 것은 뭘까? 문자열을 뒤에서부터 읽기 위해 -(빼기) 기호를 붙인 것이다. 즉, a[-1]은 뒤에서부터 세어 첫 번째가 되는 문자다. a의 값은 "Life is too short, You need Python" 문자열이므로 뒤에서부터 첫 번째 문자는 가장 마지막 문자 'n'이다.</p>
+<p>뒤에서부터 첫 번째 문자를 표시할 때도 0부터 세어 'a[-0]이라고 해야 하지 않을까?'라는 의문이 들 수 있다. 하지만 0과 -0은 똑같은 것이기 때문에 a[-0]은 a[0]과 똑같은 값을 보여 준다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[-0]
+'L'
+</code></pre>
+<p>계속해서 몇 가지 예를 더 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[-2]
+'o'
+&gt;&gt;&gt; a[-5]
+'y'
+</code></pre>
+<p>첫 번째 예는 뒤에서부터 두 번째 문자, 두 번째 예는 뒤에서부터 다섯 번째 문자를 가리킨다.</p>
+<h3 id="_12">문자열 슬라이싱</h3>
+<p>"Life is too short, You need Python" 문자열에서 한 문자만이 아니라 'Life' 또는 'You'와 같은 단어를 뽑아 내는 방법은 없을까?</p>
+<p>다음과 같이 하면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short, You need Python"
+&gt;&gt;&gt; b = a[0] + a[1] + a[2] + a[3]
+&gt;&gt;&gt; b
+'Life'
+</code></pre>
+<p>위와 같이 단순하게 접근할 수도 있지만 파이썬에서는 더 좋은 방법을 제공한다. 바로 슬라이싱(slicing) 기법이다. 위 예는 슬라이싱 기법으로 다음과 같이 간단하게 처리할 수 있다.</p>
+<blockquote>
+<p>인덱싱 기법과 슬라이싱 기법은 뒤에서 배울 자료형인 리스트나 튜플에서도 사용할 수 있다.</p>
+</blockquote>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short, You need Python"
+&gt;&gt;&gt; a[0:4]
+'Life'
+</code></pre>
+<p>a[0:4]는 a 문자열, 즉 "Life is too short, You need Python" 문자열에서 자리 번호 0부터 4까지의 문자를 뽑아 낸다는 뜻이다.</p>
+<p>하지만 'a[0]은 L, a[1]은 i, a[2]는 f, a[3]은 e이므로 a[0:3]으로도 Life라는 단어를 뽑아 낼 수 있지 않을까?'라는 의문이 생길 것이다. 다음 예로 확인해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[0:3]
+'Lif'
+</code></pre>
+<p>이렇게 되는 이유는 슬라이싱 기법으로 a[시작_번호:끝_번호]를 지정할 때 끝 번호에 해당하는 문자는 포함하지 않기 때문이다. 즉, a[0:3]을 수식으로 나타내면 다음과 같다.</p>
+<pre><code class="language-python">0 &lt;= a &lt; 3
+</code></pre>
+<p>이 수식을 만족하는 것은 a[0], a[1], a[2]다. 따라서 a[0:3]은 'Lif', a[0:4]는 'Life'가 되는 것이다. 이 부분이 문자열 연산에서 가장 혼동하기 쉬운 부분이므로 02장의 마지막 부분에 있는 되새김 문제를 많이 풀어 보면서 익히기 바란다.</p>
+<h3 id="_13">문자열을 슬라이싱하는 방법</h3>
+<p>슬라이싱의 예를 좀 더 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[0:5]
+'Life '
+</code></pre>
+<p>위 예는 a[0] + a[1] + a[2] + a[3] + a[4]와 동일하다. a[4]는 공백 문자이기 때문에 'Life'가 아닌 'Life '가 출력된다. 공백 문자 역시 L, i, f, e 와 같은 문자와 동일하게 취급된다. 'Life'와 'Life '는 완전히 다른 문자열이다.</p>
+<p>슬라이싱할 때 항상 시작 번호가 0일 필요는 없다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[0:2]
+'Li'
+&gt;&gt;&gt; a[5:7]
+'is'
+&gt;&gt;&gt; a[12:17]
+'short'
+</code></pre>
+<p>a[시작_번호:끝_번호]에서 끝 번호 부분을 생략하면 시작 번호부터 그 문자열의 끝까지 뽑아 낸다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[19:]
+'You need Python'
+</code></pre>
+<p>a[시작_번호:끝_번호]에서 시작 번호를 생략하면 문자열의 처음부터 끝 번호까지 뽑아 낸다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[:17]
+'Life is too short'
+</code></pre>
+<p>a[시작_번호:끝_번호]에서 시작 번호와 끝 번호를 생략하면 문자열의 처음부터 끝까지 뽑아 낸다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[:]
+'Life is too short, You need Python'
+</code></pre>
+<p>슬라이싱에서도 인덱싱과 마찬가지로 -(빼기) 기호를 사용할 수 있다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; a[19:-7]
+'You need'
+</code></pre>
+<p>a[19:-7]은 a[19]에서 a[-8]까지를 의미한다. 이때에도 a[-7]은 포함하지 않는다.</p>
+<h3 id="_14">슬라이싱으로 문자열 나누기</h3>
+<p>다음은 자주 사용하는 슬라이싱 기법 중 하나다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "20230331Rainy"
+&gt;&gt;&gt; date = a[:8]
+&gt;&gt;&gt; weather = a[8:]
+&gt;&gt;&gt; date
+'20230331'
+&gt;&gt;&gt; weather
+'Rainy'
+</code></pre>
+<p>위 예는 문자열 a를 두 부분으로 나누는 기법이다. 숫자 8을 기준으로 문자열 a를 양쪽으로 한 번씩 슬라이싱했다. a[:8]은 a[8]을 포함하지 않고 a[8:]은 a[8]을 포함하기 때문에 8을 기준으로 두 부분으로 나눌 수 있다. "20230331Rainy" 문자열을 날짜를 나타내는 부분인 '20230331'과 날씨를 나타내는 부분인 'Rainy'로 나누었다.</p>
+<p>"20230331Rainy"를 연도인 2023, 월과 일을 나타내는 0331, 날씨를 나타내는 Rainy까지 세 부분으로 나누는 방법은 다음과 같다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "20230331Rainy"
+&gt;&gt;&gt; year = a[:4]
+&gt;&gt;&gt; day = a[4:8]
+&gt;&gt;&gt; weather = a[8:]
+&gt;&gt;&gt; year
+'2023'
+&gt;&gt;&gt; day
+'0331'
+&gt;&gt;&gt; weather
+'Rainy'
+</code></pre>
+<p>위 예는 숫자 4와 8로 "20230331Rainy" 문자열을 세 부분으로 나누는 방법을 보여 준다.</p>
+<p>인덱싱과 슬라이싱은 프로그래밍할 때 자주 사용하는 기법이므로 반복해서 연습해 두자.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>Pithon 문자열을 Python으로 바꾸려면?</strong></p>
+<p>Pithon 문자열을 Python으로 바꾸려면 어떻게 해야 할까? 제일 먼저 떠오르는 생각은 다음과 같을 것이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Pithon"
+&gt;&gt;&gt; a[1]
+'i'
+&gt;&gt;&gt; a[1] = 'y'
+</code></pre>
+<p>즉, a 변수에 "Pithon" 문자열을 대입하고 a[1]의 값이 i이므로 a[1]을 y로 바꾸어 준다는 생각이다. 하지만 오류가 발생한다. 문자열의 요솟값은 바꿀 수 없는 값이기 때문이다(그래서 문자열을 '변경 불가능한(immutable) 자료형'이라고도 부른다).</p>
+<p>하지만 슬라이싱 기법을 사용하면 Pithon 문자열을 사용해 Python 문자열을 만들 수 있다. 다음 예를 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Pithon"
+&gt;&gt;&gt; a[:1]
+'P'
+&gt;&gt;&gt; a[2:]
+'thon'
+&gt;&gt;&gt; a[:1] + 'y' + a[2:]
+'Python'
+</code></pre>
+<p>슬라이싱을 사용하면 "Pithon" 문자열을 'P' 부분과 'thon' 부분으로 나눌 수 있고, 그 사이에 'y' 문자를 추가하면 'Python'이라는 새로운 문자열을 만들 수 있다.</p></fieldset>
+<h2 id="_15">문자열 포매팅이란?</h2>
+<p>문자열에서 또 하나 알아야 할 것으로 '문자열 포매팅(string formatting)'이 있다. 다음과 같은 문자열을 출력하는 프로그램을 작성했다고 가정해 보자.</p>
+<pre><code class="language-plaintext">"현재 온도는 18도입니다."
+</code></pre>
+<p>시간이 지나서 20도가 되면 다음 문장을 출력한다.</p>
+<pre><code class="language-plaintext">"현재 온도는 20도입니다."
+</code></pre>
+<p>두 문자열은 모두 같은데 20이라는 숫자와 18이라는 숫자만 다르다. 이렇게 문자열 안의 특정한 값을 바꿔야 할 경우가 있을 때 이것을 가능하게 해 주는 것이 바로 문자열 포매팅이다.</p>
+<p>쉽게 말해 문자열 포매팅은 문자열 안에 어떤 값을 삽입하는 방법이다. 다음 예를 직접 실행해 보면서 사용법을 알아보자.</p>
+<h2 id="_16">문자열 포매팅 따라 하기</h2>
+<h3 id="1_2">1. 숫자 바로 대입</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "I eat %d apples." % 3
+'I eat 3 apples.'
+</code></pre>
+<p>위 예제는 문자열 안에 정수 3을 삽입하는 방법을 보여 준다. 문자열 안의 숫자를 넣고 싶은 자리에 <code>%d</code> 문자를 넣어 주고 삽입할 숫자 3은 가장 뒤에 있는 <code>%</code> 문자 다음에 써 넣었다. 여기에서 <code>%d</code>는 '문자열 포맷 코드'라고 부른다.</p>
+<h3 id="2_2">2. 문자열 바로 대입</h3>
+<p>문자열 안에 꼭 숫자만 넣으라는 법은 없다. 이번에는 숫자 대신 문자열을 넣어 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; "I eat %s apples." % "five"
+'I eat five apples.'
+</code></pre>
+<p>문자열 안에 또 다른 문자열을 삽입하기 위해 앞에서 사용한 문자열 포맷 코드 <code>%d</code>가 아닌 <code>%s</code>를 썼다. 숫자를 넣기 위해서는 <code>%d</code>, 문자열을 넣기 위해서는 <code>%s</code>를 써야 한다.</p>
+<blockquote>
+<p>앞에서 배운 것처럼 문자열을 대입할 때는 반드시 큰따옴표나 작은따옴표를 써야 한다.</p>
+</blockquote>
+<h3 id="3_1">3. 숫자 값을 나타내는 변수로 대입</h3>
+<pre><code class="language-python">&gt;&gt;&gt; number = 3
+&gt;&gt;&gt; "I eat %d apples." % number
+'I eat 3 apples.'
+</code></pre>
+<p>1번처럼 숫자를 바로 대입하든, 위 예제처럼 숫자 값을 나타내는 변수를 대입하든 결과는 같다.</p>
+<h3 id="4-2">4. 2개 이상의 값 넣기</h3>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>문자열 안에 여러 개의 값을 넣고 싶을 때는 어떻게 해야 할까?</p>
+<pre><code class="language-python">&gt;&gt;&gt; number = 10
+&gt;&gt;&gt; day = "three"
+&gt;&gt;&gt; "I ate %d apples. so I was sick for %s days." % (number, day)
+'I ate 10 apples. so I was sick for three days.'
+</code></pre>
+<p>2개 이상의 값을 넣으려면 마지막 <code>%</code> 다음 괄호 안에 쉼표(,)로 구분하여 각각의 값을 넣어 주면 된다.</p>
+<h2 id="_17">문자열 포맷 코드</h2>
+<p>문자열 포매팅 예제에서는 대입해 넣는 자료형으로 정수와 문자열을 사용했지만, 이 밖에도 다양한 것을 대입할 수 있다. 문자열 포맷 코드의 종류는 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>코드</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%s</td>
+<td>문자열(String)</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>문자 1개(character)</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>정수(Integer)</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>부동소수(floating-point)</td>
+</tr>
+<tr>
+<td>%o</td>
+<td>8진수</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>16진수</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>Literal % (문자 <code>%</code> 자체)</td>
+</tr>
+</tbody>
+</table>
+<p>여기에서 재미있는 것은 <code>%s</code> 포맷 코드인데, 이 코드에는 어떤 형태의 값이든 변환해 넣을 수 있다. 예를 통해 확인해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; "I have %s apples" % 3
+'I have 3 apples'
+&gt;&gt;&gt; "rate is %s" % 3.234
+'rate is 3.234'
+</code></pre>
+<p>3을 문자열 안에 삽입하려면 <code>%d</code>를 사용해야 하고 3.234를 삽입하려면 <code>%f</code>를 사용해야 한다. 하지만 <code>%s</code>를 사용하면 <code>%s</code>는 자동으로 <code>%</code> 뒤에 있는 3이나 3.234와 같은 값을 문자열로 바꾸어 대입한다.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>포매팅 연산자 <code>%d</code>와 <code>%</code>를 같이 쓸 때는 <code>%%</code>를 쓴다</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; "Error is %d%." % 98
+</code></pre>
+<p>결괏값으로 당연히 "Error is 98%."가 출력될 것이라고 예상하겠지만, 파이썬은 '형식이 불완전하다'라는 오류 메시지를 보여 준다.</p>
+<pre><code class="language-plaintext">Traceback (most recent call last):
+File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ValueError: incomplete format
+</code></pre>
+<p>그 이유는 '문자열 포맷 코드인 <code>%d</code>와 <code>%</code>가 같은 문자열 안에 존재하는 경우, <code>%</code>를 나타내려면 반드시 <code>%%</code>를 써야 한다'라는 법칙이 있기 때문이다. 이 점은 꼭 기억해 두어야 한다. 하지만 문자열 안에 <code>%d</code>와 같은 포매팅 연산자가 없으면 <code>%</code>는 홀로 쓰여도 상관없다. 따라서 위 예를 제대로 실행하려면 다음과 같이 작성해야 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; "Error is %d%%." % 98
+'Error is 98%.'
+</code></pre></fieldset>
+<h2 id="_18">포맷 코드와 숫자 함께 사용하기</h2>
+<p><code>%d</code>, <code>%s</code> 등과 같은 포맷 코드는 문자열 안에 어떤 값을 삽입할 때 사용한다. 하지만 포맷 코드를 숫자와 함께 사용하면 더 유용하다. 다음 예를 따라해 보자.</p>
+<h3 id="1_3">1. 정렬과 공백</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "%10s" % "hi"
+'        hi'
+</code></pre>
+<p><code>%10s</code>는 전체 길이가 10개인 문자열 공간에서 대입되는 값을 오른쪽으로 정렬하고 그 앞의 나머지는 공백으로 남겨 두라는 의미다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/13/02_2_formating1.png"/></p>
+<p>반대쪽인 왼쪽 정렬은 <code>%-10s</code>가 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; "%-10sjane." % 'hi'
+'hi        jane.'
+</code></pre>
+<p>hi를 왼쪽으로 정렬하고 나머지는 공백으로 채웠다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/13/02_2_formating2.png"/></p>
+<h3 id="2_3">2. 소수점 표현하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "%0.4f" % 3.42134234
+'3.4213'
+</code></pre>
+<p>3.42134234를 소수점 네 번째 자리까지만 나타내고 싶은 경우에는 위와 같이 작성한다. <code>%0.4f</code>에서 '.'는 소수점 포인트, 그 뒤의 숫자 4는 소수점 뒤에 나올 숫자의 개수다. 소수점 포인트 앞의 숫자는 문자열의 전체 길이를 의미하는데, <code>%0.4f</code>에서 사용한 숫자 0은 길이에 상관하지 않겠다는 의미다.</p>
+<blockquote>
+<p><code>%0.4f</code>는 0을 생략하여 <code>%.4f</code>처럼 사용하기도 한다.</p>
+</blockquote>
+<p>다음 예를 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; "%10.4f" % 3.42134234
+'    3.4213'
+</code></pre>
+<p>위는 숫자 3.42134234를 소수점 네 번째 자리까지만 표시하고 전체 길이가 10개인 문자열 공간에서 오른쪽으로 정렬하는 예를 보여 준다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/13/02_2_formating3.png"/></p>
+<h2 id="format">format 함수를 사용한 포매팅</h2>
+<p>문자열의 format 함수를 사용하면 좀 더 발전된 스타일로 문자열 포맷을 지정할 수 있다. 앞에서 살펴본 문자열 포매팅 예제를 format 함수를 사용해서 바꾸면 다음과 같다.</p>
+<h3 id="_19">숫자 바로 대입하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "I eat {0} apples".format(3)
+'I eat 3 apples'
+</code></pre>
+<p>"I eat {0} apples" 문자열 중 {0} 부분이 숫자 3으로 바뀌었다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h3 id="_20">문자열 바로 대입하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "I eat {0} apples".format("five")
+'I eat five apples'
+</code></pre>
+<p>문자열의 {0} 항목이 'five'라는 문자열로 바뀌었다.</p>
+<h3 id="_21">숫자 값을 가진 변수로 대입하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; number = 3
+&gt;&gt;&gt; "I eat {0} apples".format(number)
+'I eat 3 apples'
+</code></pre>
+<p>문자열의 {0} 항목이 number 변수의 값인 3으로 바뀌었다.</p>
+<h3 id="2_4">2개 이상의 값 넣기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; number = 10
+&gt;&gt;&gt; day = "three"
+&gt;&gt;&gt; "I ate {0} apples. so I was sick for {1} days.".format(number, day)
+'I ate 10 apples. so I was sick for three days.'
+</code></pre>
+<p>2개 이상의 값을 넣을 경우, 문자열의 <code>{0}</code>, <code>{1}</code>과 같은 인덱스 항목이 format 함수의 입력값으로 순서에 맞게 바뀐다. 위 예에서 <code>{0}</code>은 format 함수의 첫 번째 입력값인 number, <code>{1}</code>은 format 함수의 두 번째 입력값인 day로 바뀐다.</p>
+<h3 id="_22">이름으로 넣기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "I ate {number} apples. so I was sick for {day} days.".format(number=10, day=3)
+'I ate 10 apples. so I was sick for 3 days.'
+</code></pre>
+<p><code>{0}</code>, <code>{1}</code>과 같은 인덱스 항목 대신 더 편리한 <code>{name}</code> 형태를 사용하는 방법도 있다. <code>{name}</code> 형태를 사용할 경우, format 함수에는 반드시 <code>name=value</code>와 같은 형태의 입력값이 있어야 한다. 위 예는 문자열의 <code>{number}</code>, <code>{day}</code>가 format 함수의 입력값인 <code>number=10, day=3</code> 값으로 각각 바뀌는 것을 보여 준다.</p>
+<h3 id="_23">인덱스와 이름을 혼용해서 넣기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "I ate {0} apples. so I was sick for {day} days.".format(10, day=3)
+'I ate 10 apples. so I was sick for 3 days.'
+</code></pre>
+<p>인덱스 항목과 <code>name=value</code> 형태를 혼용하는 것도 가능하다.</p>
+<h3 id="_24">왼쪽 정렬</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "{0:&lt;10}".format("hi")
+'hi        '
+</code></pre>
+<p><code>:&lt;10</code> 표현식을 사용하면 치환되는 문자열을 왼쪽으로 정렬하고 문자열의 총 자릿수를 10으로 맞출 수 있다.</p>
+<h3 id="_25">오른쪽 정렬</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "{0:&gt;10}".format("hi")
+'        hi'
+</code></pre>
+<p>오른쪽 정렬은 <code>:&lt;</code> 대신 <code>:&gt;</code>을 사용하면 된다. 화살표의 방향을 생각하면 어느 쪽으로 정렬되는지 바로 알 수 있다.</p>
+<h3 id="_26">가운데 정렬</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "{0:^10}".format("hi")
+'    hi    '
+</code></pre>
+<p><code>:^</code>를 사용하면 가운데 정렬도 가능하다.</p>
+<h3 id="_27">공백 채우기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "{0:=^10}".format("hi")
+'====hi===='
+&gt;&gt;&gt; "{0:!&lt;10}".format("hi")
+'hi!!!!!!!!'
+</code></pre>
+<p>정렬할 때 공백 문자 대신 지정한 문자 값으로 채워 넣을 수도 있다. 채워 넣을 문자 값은 정렬 문자 <code>&lt;</code>, <code>&gt;</code>, <code>^</code> 바로 앞에 넣어야 한다. 위 예에서 첫 번째 예제는 가운데(<code>^</code>)로 정렬하고 빈 공간을 <code>=</code>로 채웠고, 두 번째 예제는 왼쪽(<code>&lt;</code>)으로 정렬하고 빈 공간을 <code>!</code>로 채웠다.</p>
+<h3 id="_28">소수점 표현하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; y = 3.42134234
+&gt;&gt;&gt; "{0:0.4f}".format(y)
+'3.4213'
+</code></pre>
+<p>위는 format 함수를 사용해 소수점을 4자리까지만 표현하는 방법을 보여 준다. 앞에서 살펴보았던 표현식 0.4f를 그대로 사용한 것을 알 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; "{0:10.4f}".format(y)
+'    3.4213'
+</code></pre>
+<p>위와 같이 자릿수를 10으로 맞출 수도 있다. 이 또한 앞에서 살펴본 10.4f의 표현식을 그대로 사용한 것을 알 수 있다.</p>
+<h3 id="_29">{ 또는 } 문자 표현하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; "{{ and }}".format()
+'{ and }'
+</code></pre>
+<p>format 함수를 사용해 문자열을 포매팅할 경우, <code>{}</code>와 같은 중괄호 문자를 포매팅 문자가 아닌 문자 그대로 사용하고 싶은 경우에는 위 예의 <code>{{}}</code>처럼 2개를 연속해서 사용하면 된다.</p>
+<h2 id="f">f 문자열 포매팅</h2>
+<p>파이썬 3.6 버전부터는 f 문자열 포매팅 기능을 사용할 수 있다. 파이썬 3.6 미만 버전에서는 사용할 수 없는 기능이므로 주의해야 한다.</p>
+<p>다음과 같이 문자열 앞에 f 접두사를 붙이면 f 문자열 포매팅 기능을 사용할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; name = '홍길동'
+&gt;&gt;&gt; age = 30
+&gt;&gt;&gt; f'나의 이름은 {name}입니다. 나이는 {age}입니다.'
+'나의 이름은 홍길동입니다. 나이는 30입니다.'
+</code></pre>
+<p>f 문자열 포매팅은 위와 같이 name, age와 같은 변숫값을 생성한 후에 그 값을 참조할 수 있다. 또한 f 문자열 포매팅은 표현식을 지원하기 때문에 다음과 같은 것도 가능하다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<blockquote>
+<p>표현식이란 중괄호 안의 변수를 계산식과 함께 사용하는 것이다.</p>
+</blockquote>
+<pre><code class="language-python">&gt;&gt;&gt; age = 30
+&gt;&gt;&gt; f'나는 내년이면 {age + 1}살이 된다.'
+'나는 내년이면 31살이 된다.'
+</code></pre>
+<p>딕셔너리는 f 문자열 포매팅에서 다음과 같이 사용할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; d = {'name':'홍길동', 'age':30}
+&gt;&gt;&gt; f'나의 이름은 {d["name"]}입니다. 나이는 {d["age"]}입니다.'
+'나의 이름은 홍길동입니다. 나이는 30입니다.'
+</code></pre>
+<blockquote>
+<p>딕셔너리는 Key와 Value라는 것을 한 쌍으로 가지는 자료형이다. 02-5에서 자세히 알아본다.</p>
+</blockquote>
+<p>정렬은 다음과 같이 할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; f'{"hi":&lt;10}'  # 왼쪽 정렬
+'hi        '
+&gt;&gt;&gt; f'{"hi":&gt;10}'  # 오른쪽 정렬
+'        hi'
+&gt;&gt;&gt; f'{"hi":^10}'  # 가운데 정렬
+'    hi    '
+</code></pre>
+<p>공백 채우기는 다음과 같이 할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; f'{"hi":=^10}'  # 가운데 정렬하고 '=' 문자로 공백 채우기
+'====hi===='
+&gt;&gt;&gt; f'{"hi":!&lt;10}'  # 왼쪽 정렬하고 '!' 문자로 공백 채우기
+'hi!!!!!!!!'
+</code></pre>
+<p>소수점은 다음과 같이 표현할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; y = 3.42134234
+&gt;&gt;&gt; f'{y:0.4f}'  # 소수점 4자리까지만 표현
+'3.4213'
+&gt;&gt;&gt; f'{y:10.4f}'  # 소수점 4자리까지 표현하고 총 자리수를 10으로 맞춤
+'    3.4213'
+</code></pre>
+<p>f 문자열에서 <code>{}</code>를 문자 그대로 표시하려면 다음과 같이 2개를 동시에 사용해야 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; f'{{ and }}'
+'{ and }'
+</code></pre>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>f 문자열을 사용하여 금액에 콤마(,) 삽입하기</strong></p>
+<p>다음 문장을 살펴보자.</p>
+<blockquote>
+<p>"난 1500000원이 필요해"</p>
+</blockquote>
+<p>이 문장에서 1500000(백오십만)원에 해당하는 금액 부분은 콤마가 없어서 읽기가 쉽지 않다. 이때, f 문자열을 활용하면 숫자에 자동으로 <strong>콤마(,)</strong>를 삽입하여 가독성을 높일 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; f"난 {1500000:,}원이 필요해"
+'난 1,500,000원이 필요해'
+</code></pre>
+<p>출력 결과를 보면 1,500,000처럼 숫자 사이에 콤마가 삽입되어 금액을 더 쉽게 읽을 수 있다.</p></fieldset>
+<p>지금까지는 문자열을 가지고 할 수 있는 기본적인 것에 대해 알아보았다. 이제부터는 문자열을 좀 더 자유자재로 다루기 위해 공부해야 할 것을 설명한다.</p>
+<h2 id="_30">문자열 관련 함수들</h2>
+<p>문자열 자료형은 자체적으로 함수를 가지고 있다. 이들 함수를 다른 말로 '문자열 내장 함수'라고 한다. 이 내장 함수를 사용하려면 문자열 변수 이름 뒤에 '.'를 붙인 후 함수 이름을 써 주면 된다. 이제 문자열의 내장 함수에 대해서 알아보자.</p>
+<h3 id="-count">문자 개수 세기 - count</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "hobby"
+&gt;&gt;&gt; a.count('b')
+2
+</code></pre>
+<p>count 함수로 문자열 중 문자 b의 개수를 반환했다.</p>
+<h3 id="1-find">위치 알려 주기 1 - find</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Python is the best choice"
+&gt;&gt;&gt; a.find('b')
+14
+&gt;&gt;&gt; a.find('k')
+-1
+</code></pre>
+<p>find 함수로 문자열 중 문자 b가 처음으로 나온 위치를 반환했다. 만약 찾는 문자나 문자열이 존재하지 않는다면 -1을 반환한다.</p>
+<blockquote>
+<p>파이썬은 숫자를 0부터 세기 때문에 b의 위치는 15가 아닌 14가 된다.</p>
+</blockquote>
+<h3 id="2-index">위치 알려 주기 2 - index</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short"
+&gt;&gt;&gt; a.index('t')
+8
+&gt;&gt;&gt; a.index('k')
+Traceback (most recent call last):
+File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ValueError: substring not found
+</code></pre>
+<p>index 함수로 문자열 중 문자 t가 맨 처음으로 나온 위치를 반환했다. 만약 찾는 문자나 문자열이 존재하지 않는다면 오류가 발생한다. 앞의 find 함수와 다른 점은 문자열 안에 존재하지 않는 문자를 찾으면 오류가 발생한다는 것이다.</p>
+<h3 id="-join">문자열 삽입 - join</h3>
+<pre><code class="language-python">&gt;&gt;&gt; ",".join('abcd')
+'a,b,c,d'
+</code></pre>
+<p>join 함수로 abcd 문자열의 각각의 문자 사이에 ','를 삽입했다.</p>
+<p>join 함수는 문자열뿐만 아니라 앞으로 배울 리스트나 튜플도 입력으로 사용할 수 있다(리스트와 튜플은 곧 배울 내용이므로 여기에서는 잠시 눈으로만 살펴보자). join 함수의 입력으로 리스트를 사용하는 예는 다음과 같다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; ",".join(['a', 'b', 'c', 'd'])
+'a,b,c,d'
+</code></pre>
+<h3 id="-upper">소문자를 대문자로 바꾸기 - upper</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "hi"
+&gt;&gt;&gt; a.upper()
+'HI'
+</code></pre>
+<p>upper 함수는 소문자를 대문자로 바꾸어 준다. 만약 문자열이 이미 대문자라면 아무런 변화도 일어나지 않는다.</p>
+<h3 id="-lower">대문자를 소문자로 바꾸기 - lower</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "HI"
+&gt;&gt;&gt; a.lower()
+'hi'
+</code></pre>
+<p>lower 함수는 대문자를 소문자로 바꾸어 준다.</p>
+<h3 id="-lstrip">왼쪽 공백 지우기 - lstrip</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = " hi "
+&gt;&gt;&gt; a.lstrip()
+'hi '
+</code></pre>
+<p>lstrip 함수는 문자열 중 가장 왼쪽에 있는 한 칸 이상의 연속된 공백들을 모두 지운다. lstrip에서 l은 left를 의미한다.</p>
+<h3 id="-rstrip">오른쪽 공백 지우기 - rstrip</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a= " hi "
+&gt;&gt;&gt; a.rstrip()
+' hi'
+</code></pre>
+<p>rstrip 함수는 문자열 중 가장 오른쪽에 있는 한 칸 이상의 연속된 공백을 모두 지운다. rstrip에서 r은 right를 의미한다.</p>
+<h3 id="-strip">양쪽 공백 지우기 - strip</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = " hi "
+&gt;&gt;&gt; a.strip()
+'hi'
+</code></pre>
+<p>strip 함수는 문자열 양쪽에 있는 한 칸 이상의 연속된 공백을 모두 지운다.</p>
+<h3 id="-replace">문자열 바꾸기 - replace</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short"
+&gt;&gt;&gt; a.replace("Life", "Your leg")
+'Your leg is too short'
+</code></pre>
+<p>replace 함수는 replace(바뀔_문자열, 바꿀_문자열)처럼 사용해서 문자열 안의 특정한 값을 다른 값으로 치환해 준다.</p>
+<h3 id="-split">문자열 나누기 - split</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = "Life is too short"
+&gt;&gt;&gt; a.split()
+['Life', 'is', 'too', 'short']
+&gt;&gt;&gt; b = "a:b:c:d"
+&gt;&gt;&gt; b.split(':')
+['a', 'b', 'c', 'd']
+</code></pre>
+<p>split 함수는 a.split()처럼 괄호 안에 아무 값도 넣어 주지 않으면 공백(<code>[Space]</code>, <code>[Tab]</code>, <code>[Enter]</code>)을 기준으로 문자열을 나누어 준다. 만약 b.split(':')처럼 괄호 안에 특정 값이 있을 경우에는 괄호 안의 값을 구분자로 해서 문자열을 나누어 준다. 이렇게 나눈 값은 리스트에 하나씩 들어간다. <code>['Life', 'is', 'too', 'short']</code>나 <code>['a', 'b', 'c', 'd']</code>가 리스트인데, 02-3에서 자세히 알아볼 것이므로 여기에서는 너무 신경 쓰지 않아도 된다.</p>
+<h3 id="-isalpha">문자열이 알파벳으로만 구성되어 있는지 확인하기 - isalpha</h3>
+<pre><code class="language-python">&gt;&gt;&gt; s = "Python"
+&gt;&gt;&gt; s.isalpha()
+True
+&gt;&gt;&gt; s = "Python3"
+&gt;&gt;&gt; s.isalpha()
+False
+&gt;&gt;&gt; s = "Hello World"
+&gt;&gt;&gt; s.isalpha()
+False
+</code></pre>
+<p>isalpha 함수는 문자열이 문자(letters)로만 이루어져 있는지 검사한다. 문자열의 모든 문자가 문자이면 <code>True</code>를 반환하며, 공백이나 숫자, 특수 문자가 포함되어 있으면 <code>False</code>를 반환한다.</p>
+<p>"Python3"의 경우 숫자가 포함되어 있어서 <code>False</code>를 반환하고, "Hello World"의 경우 공백 문자가 포함되어 있어 <code>False</code>를 반환한다.</p>
+<h3 id="-isdigit">문자열이 숫자로만 구성되어 있는지 확인하기 - isdigit</h3>
+<pre><code class="language-python">&gt;&gt;&gt; s = "12345"
+&gt;&gt;&gt; s.isdigit()
+True
+&gt;&gt;&gt; s = "1234a"
+&gt;&gt;&gt; s.isdigit()
+False
+&gt;&gt;&gt; s = "12 34"
+&gt;&gt;&gt; s.isdigit()
+False
+</code></pre>
+<p><code>isdigit</code> 함수는 문자열이 숫자 문자로만 이루어져 있는지를 검사한다. 문자열의 모든 문자가 숫자 문자일 경우 <code>True</code>를 반환하고, 하나라도 숫자 문자가 아닌 문자가 포함되어 있으면 <code>False</code>를 반환한다.</p>
+<p>예를 들어 <code>"1234a"</code>는 알파벳 <code>a</code>가 포함되어 있어 <code>False</code>를 반환하며, <code>"12 34"</code>는 숫자 사이에 공백이 있으므로 <code>False</code>를 반환한다.</p>
+<h3 id="-startswith">문자열이 특정 문자(열)로 시작하는지 확인하기 - startswith</h3>
+<pre><code class="language-python">&gt;&gt;&gt; s = "Life is too short"
+&gt;&gt;&gt; s.startswith("Life")
+True
+&gt;&gt;&gt; s.startswith("short")
+False
+</code></pre>
+<p><code>startswith</code> 함수는 문자열이 지정한 문자(열)로 시작하는지를 검사한다. 지정한 문자열로 <strong>시작하면</strong> <code>True</code>를 반환하고, 그렇지 않으면 <code>False</code>를 반환한다.</p>
+<h3 id="-endswith">문자열이 특정 문자(열)로 끝나는지 확인하기 - endswith</h3>
+<pre><code class="language-python">&gt;&gt;&gt; s = "Life is too short"
+&gt;&gt;&gt; s.endswith("short")
+True
+&gt;&gt;&gt; s.endswith("too")
+False
+</code></pre>
+<p><code>endswith</code> 함수는 문자열이 지정한 문자(열)로 끝나는지를 검사한다. 지정한 문자열로 <strong>끝나면</strong> <code>True</code>를 반환하고, 그렇지 않으면 <code>False</code>를 반환한다.</p>
+<p>앞에서 소개한 문자열 관련 함수는 문자열 처리에서 사용 빈도가 매우 높고 유용하다. 이 밖에도 몇 가지가 더 있지만 자주 사용하지는 않는다.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>착각하기 쉬운 문자열 함수</strong></p>
+<p>소문자를 대문자로 바꾸어 주는 다음의 예를 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 'hi'
+&gt;&gt;&gt; a.upper()
+'HI'
+</code></pre>
+<p>이와 같이 실행한 후에 a 변수의 값은 'HI'로 변했을까? 아니면 'hi' 값을 유지할까? 다음과 같이 확인해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a
+'hi'
+</code></pre>
+<p>a.upper()를 수행하더라도 a 변수의 값은 변하지 않았다. 왜냐하면 a.upper()를 실행하면 upper 함수는 a 변수의 값 자체를 변경하는 것이 아니라 대문자로 바꾼 값을 반환하기 때문이다. 문자열은 이전에도 잠깐 언급했지만 자체의 값을 변경할 수 없는 immutable 자료형이다. 따라서 a 값을 'HI' 로 바꾸고 싶다면 다음과 같이 대입문을 사용해야 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = a.upper()
+&gt;&gt;&gt; a
+'HI'
+</code></pre>
+<p>upper 뿐만 아니라 lower, join, lstrip, rstrip, strip, replace, split 함수는 모두 이와 같은 규칙이 적용되어 문자열 자체의 값이 변경되는 것이 아니라 변경된 값을 반환한다는 사실에 주의하자.</p></fieldset>
+</div>
+</div><div class="book-page-fragment" data-page-id="14">
+<h1 class="page-subject">02-3 리스트 자료형</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>지금까지 우리는 숫자와 문자열에 대해서 알아보았다. 하지만 숫자와 문자열만으로 프로그래밍을 하기에는 부족한 점이 많다. 예를 들어 1부터 10까지의 숫자 중 홀수의 모음인 1, 3, 5, 7, 9의 집합을 생각해 보자. 이런 숫자의 모음을 숫자나 문자열로 표현하기는 어렵다. 파이썬에는 이러한 불편함을 해소할 수 있는 자료형이 존재한다. 이것이 바로 지금부터 공부할 리스트(list)이다.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">리스트는 어떻게 만들고 사용할까?</a></li>
+<li><a href="#_2">리스트의 인덱싱과 슬라이싱</a><ul>
+<li><a href="#_3">리스트의 인덱싱</a></li>
+<li><a href="#_4">리스트의 슬라이싱</a></li>
+</ul>
+</li>
+<li><a href="#_5">리스트 연산하기</a><ul>
+<li><a href="#_6">리스트 더하기(+)</a></li>
+<li><a href="#_7">리스트 반복하기(*)</a></li>
+<li><a href="#_8">리스트 길이 구하기</a></li>
+</ul>
+</li>
+<li><a href="#_9">리스트의 수정과 삭제</a><ul>
+<li><a href="#_10">리스트의 값 수정하기</a></li>
+<li><a href="#del">del로 리스트 요소 삭제하기</a></li>
+</ul>
+</li>
+<li><a href="#_11">리스트 관련 함수</a><ul>
+<li><a href="#-append">리스트에 요소 추가하기 - append</a></li>
+<li><a href="#-sort">리스트 정렬 - sort</a></li>
+<li><a href="#-reverse">리스트 뒤집기 - reverse</a></li>
+<li><a href="#-index">인덱스 반환 - index</a></li>
+<li><a href="#-insert">리스트에 요소 삽입 - insert</a></li>
+<li><a href="#-remove">리스트 요소 제거 - remove</a></li>
+<li><a href="#-pop">리스트 요소 꺼내기 - pop</a></li>
+<li><a href="#x-count">리스트에 포함된 요소 x의 개수 세기 - count</a></li>
+<li><a href="#-extend">리스트 확장 - extend</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">리스트는 어떻게 만들고 사용할까?</h2>
+<p>리스트를 사용하면 1, 3, 5, 7, 9의 숫자 모음을 다음과 같이 간단하게 표현할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; odd = [1, 3, 5, 7, 9]
+</code></pre>
+<p>리스트를 만들 때는 위에서 보는 것과 같이 대괄호([])로 감싸 주고 각 요솟값은 쉼표(,)로 구분해 준다.</p>
+<pre><code class="language-plaintext">리스트명 = [요소1, 요소2, 요소3, ...]
+</code></pre>
+<p>여러 가지 리스트의 생김새는 다음과 같다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = []
+&gt;&gt;&gt; b = [1, 2, 3]
+&gt;&gt;&gt; c = ['Life', 'is', 'too', 'short']
+&gt;&gt;&gt; d = [1, 2, 'Life', 'is']
+&gt;&gt;&gt; e = [1, 2, ['Life', 'is']]
+</code></pre>
+<blockquote>
+<p>비어 있는 리스트는 <code>a = list()</code>로 생성할 수 있다.</p>
+</blockquote>
+<p>리스트는 a처럼 아무것도 포함하지 않아 비어 있는 리스트([])일 수도 있고, b처럼 숫자를 요솟값으로 가질 수도 있으며, c처럼 문자열을 요솟값으로 가질 수도 있다. 또한 d처럼 숫자와 문자열을 함께 요솟값으로 가질 수도 있고, e처럼 리스트 자체를 요솟값으로 가질 수도 있다. 즉, 리스트 안에는 어떠한 자료형도 포함할 수 있다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/14/02_3_list.png"/></p>
+<h2 id="_2">리스트의 인덱싱과 슬라이싱</h2>
+<p>리스트도 문자열처럼 인덱싱과 슬라이싱이 가능하다. 직접 예를 실행해 보면서 리스트의 기본 구조를 이해해 보자. 대화형 인터프리터로 따라 하면서 확실하게 이해하자.</p>
+<h3 id="_3">리스트의 인덱싱</h3>
+<p>리스트 역시 문자열처럼 인덱싱을 적용할 수 있다. 먼저 a 변수에 [1, 2, 3] 값을 설정한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a
+[1, 2, 3]
+</code></pre>
+<p>a[0]은 리스트 a의 첫 번째 요솟값을 말한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[0]
+1
+</code></pre>
+<p>다음 예는 리스트의 첫 번째 요소인 a[0]과 세 번째 요소인 a[2]의 값을 더한 것이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[0] + a[2]
+4
+</code></pre>
+<p>이것은 1 + 3으로 해석되어 값 4를 출력한다.</p>
+<p>문자열을 공부할 때 이미 살펴보았지만, 파이썬은 숫자를 0부터 세기 때문에 a[1]이 리스트 a의 첫 번째 요소가 아니라 a[0]이 리스트 a의 첫 번째 요소라는 것을 명심하자. a[-1]은 문자열에서와 마찬가지로 리스트 a의 마지막 요솟값을 말한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[-1]
+3
+</code></pre>
+<p>이번에는 다음 예처럼 리스트 a를 숫자 1, 2, 3과 또 다른 리스트인 ['a', 'b', 'c']를 포함하도록 만들어 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, ['a', 'b', 'c']]
+</code></pre>
+<p>그리고 다음 예를 따라 해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[0]
+1
+&gt;&gt;&gt; a[-1]
+['a', 'b', 'c']
+&gt;&gt;&gt; a[3]
+['a', 'b', 'c']
+</code></pre>
+<p>예상한 대로 a[-1]은 마지막 요솟값 ['a', 'b', 'c']를 나타낸다. a[3]은 리스트 a의 네 번째 요소를 나타내기 때문에 마지막 요소를 나타내는 a[-1]과 동일한 결괏값을 보여 준다.</p>
+<p>그렇다면 리스트 a에 포함된 ['a', 'b', 'c'] 리스트에서 'a' 값을 인덱싱을 사용해 꺼낼 수 있는 방법은 없을까? 다음 예를 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[-1][0]
+'a'
+</code></pre>
+<p>위와 같이 하면 'a'를 꺼낼 수 있다. a[-1]이 ['a', 'b', 'c'] 리스트라는 것은 이미 설명했다. 바로 이 리스트에서 첫 번째 요소를 불러오기 위해 [0]을 붙여 준 것이다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>다음 예도 마찬가지이므로 어렵지 않게 이해할 수 있을 것이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[-1][1]
+'b'
+&gt;&gt;&gt; a[-1][2]
+'c'
+</code></pre>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>삼중 리스트에서 인덱싱하기</strong></p>
+<p>조금 복잡하지만, 리스트를 다음과 같이 작성할 수도 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, ['a', 'b', ['Life', 'is']]]
+</code></pre>
+<p>리스트 a 안에 ['a', 'b', ['Life', 'is']] 리스트가 포함되어 있고 그 리스트 안에 다시 ['Life', 'is'] 리스트가 포함되어 있다. 즉, 삼중 구조의 리스트이다.</p>
+<p>이 경우, 'Life' 문자열만 꺼내려면 다음과 같이 해야 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[2][2][0]
+'Life'
+</code></pre>
+<p>위 예는 리스트 a의 세 번째 요소인 리스트 ['a', 'b', ['Life', 'is']]에서 세 번째 요소인 리스트 ['Life', 'is']의 첫 번째 요소를 나타낸다.</p>
+<p>리스트를 다중으로 중첩해서 사용하면 혼란스럽기 때문에 자주 사용하지는 않는다.</p></fieldset>
+<h3 id="_4">리스트의 슬라이싱</h3>
+<p>문자열과 마찬가지로 리스트에서도 슬라이싱 기법을 적용할 수 있다. 슬라이싱은 '잘라 낸다'라는 뜻이라고 했다. 리스트의 슬라이싱에 대해서 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; a[0:2]
+[1, 2]
+</code></pre>
+<p>앞의 예를 문자열에서 슬라이싱했던 예와 비교해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = "12345"
+&gt;&gt;&gt; a[0:2]
+'12'
+</code></pre>
+<p>2가지가 완전히 동일하게 사용되었다. 문자열에서 했던 것과 사용법이 완전히 동일하다.</p>
+<p>몇 가지 예를 더 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; b = a[:2]
+&gt;&gt;&gt; c = a[2:]
+&gt;&gt;&gt; b
+[1, 2]
+&gt;&gt;&gt; c
+[3, 4, 5]
+</code></pre>
+<p>b 변수는 리스트 a의 첫 번째 요소부터 두 번째 요소인 a[1]까지 나타내는 리스트이다. 물론 a[2] 값인 3은 포함되지 않는다. c 변수는 리스트 a의 세 번째 요소부터 끝까지 나타내는 리스트이다.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>중첩된 리스트에서 슬라이싱하기</strong></p>
+<p>리스트가 포함된 중첩 리스트 역시 슬라이싱 방법은 똑같이 적용된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, ['a', 'b', 'c'], 4, 5]
+&gt;&gt;&gt; a[2:5]
+[3, ['a', 'b', 'c'], 4]
+&gt;&gt;&gt; a[3][:2]
+['a', 'b']
+</code></pre>
+<p>위 예에서 a[3]은 ['a', 'b', 'c']를 나타낸다. 따라서 a[3][:2]는 ['a', 'b', 'c']의 첫 번째 요소부터 세 번째 요소 직전까지의 값, 즉 ['a', 'b']를 나타내는 리스트가 된다.</p></fieldset>
+<p></p>
+<h2 id="_5">리스트 연산하기</h2>
+<p>리스트 역시 +를 사용해서 더할 수 있고 <code>*</code>를 사용해서 반복할 수 있다. 문자열과 마찬가지로 리스트에서도 되는지 직접 확인해 보자.</p>
+<h3 id="_6">리스트 더하기(+)</h3>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; b = [4, 5, 6]
+&gt;&gt;&gt; a + b
+[1, 2, 3, 4, 5, 6]
+</code></pre>
+<p>리스트 사이에서 +는 2개의 리스트를 합치는 기능을 한다. 문자열에서 <code>"abc" + "def" = "abcdef"</code>가 되는 것과 같은 이치이다.</p>
+<h3 id="_7">리스트 반복하기(<code>*</code>)</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a * 3
+[1, 2, 3, 1, 2, 3, 1, 2, 3]
+</code></pre>
+<p>위에서 볼 수 있듯이 [1, 2, 3] 리스트가 세 번 반복되어 새로운 리스트를 만들어 낸다. 문자열에서 <code>"abc" * 3 = "abcabcabc"</code> 가 되는 것과 같은 이치이다.</p>
+<h3 id="_8">리스트 길이 구하기</h3>
+<p>리스트 길이를 구하려면 다음처럼 len 함수를 사용한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; len(a)
+3
+</code></pre>
+<p>len은 문자열, 리스트 외에 앞으로 배울 튜플과 딕셔너리에도 사용할 수 있는 함수이다. 실습에서 자주 사용하므로 잘 기억해 두자.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>초보자가 범하기 쉬운 리스트 연산 오류</strong></p>
+<p>다음 소스 코드를 입력했을 때 결괏값은 어떻게 나올까?</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a[2] + "hi"
+</code></pre>
+<p>a[2]의 값인 3과 문자열 hi가 더해져서 3hi가 출력될 것이라고 생각할 수 있다. 하지만 다음 결과를 보면 오류가 발생했다. 오류의 원인은 무엇일까?</p>
+<pre><code class="language-python">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+</code></pre>
+<p>a[2]에 저장된 값은 3이라는 정수인데 "hi"는 문자열이다. 정수와 문자열은 서로 더할 수 없기 때문에 오류가 발생한 것이다.</p>
+<p>숫자와 문자열을 더해서 '3hi'를 만들고 싶다면 다음처럼 숫자 3을 문자 '3'으로 바꾸어야 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; str(a[2]) + "hi"
+'3hi'
+</code></pre>
+<p>str은 정수나 실수를 문자열로 바꾸어 주는 파이썬의 내장 함수이다.</p></fieldset>
+<h2 id="_9">리스트의 수정과 삭제</h2>
+<p>리스트는 값을 수정하거나 삭제할 수 있다.</p>
+<h3 id="_10">리스트의 값 수정하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a[2] = 4
+&gt;&gt;&gt; a
+[1, 2, 4]
+</code></pre>
+<p>a[2]의 요솟값 3이 4로 바뀌었다.</p>
+<h3 id="del">del로 리스트 요소 삭제하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; del a[1]
+&gt;&gt;&gt; a
+[1, 3]
+</code></pre>
+<p><code>del a[x]</code>는 x번째 요솟값을 삭제한다. 위에서는 a 리스트에서 a[1]을 삭제했다. del은 파이썬이 기본으로 제공하는 명령어로 객체를 삭제할 때 사용하며 다음과 같이 사용한다.</p>
+<pre><code class="language-plaintext">del 객체
+</code></pre>
+<blockquote>
+<p>객체란 파이썬에서 사용되는 모든 자료형을 말한다.</p>
+</blockquote>
+<p>다음처럼 슬라이싱 기법을 사용하여 리스트의 요소 여러 개를 한꺼번에 삭제할 수도 있다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; del a[2:]
+&gt;&gt;&gt; a
+[1, 2]
+</code></pre>
+<p>a[2:]에 해당하는 리스트의 요소들이 삭제되었다.</p>
+<p>리스트의 요소를 삭제하는 방법에는 2가지가 더 있다. 바로 리스트의 remove와 pop 메서드를 사용하는 것인데, 이는 리스트 관련 함수에서 설명한다.</p>
+<blockquote>
+<p>remove, pop 메서드는 리스트에 딸려있는 전용 기능을 뜻한다.</p>
+</blockquote>
+<h2 id="_11">리스트 관련 함수</h2>
+<p>문자열과 마찬가지로 리스트 변수 이름 뒤에 '.'를 붙여 여러 가지 리스트 관련 함수를 사용할 수 있다. 유용하게 사용하는 리스트 관련 함수 몇 가지만 알아보자.</p>
+<h3 id="-append">리스트에 요소 추가하기 - append</h3>
+<p>append의 사전적 의미는 '덧붙이다, 첨부하다'이다. 이 뜻을 안다면 다음 예가 바로 이해될 것이다. append(x)는 리스트의 맨 마지막에 x를 추가하는 함수이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a.append(4)
+&gt;&gt;&gt; a
+[1, 2, 3, 4]
+</code></pre>
+<p>리스트 안에는 어떤 자료형도 추가할 수 있다. 다음 예는 리스트에 다시 리스트를 추가한 결과이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a.append([5, 6])
+&gt;&gt;&gt; a
+[1, 2, 3, 4, [5, 6]]
+</code></pre>
+<h3 id="-sort">리스트 정렬 - sort</h3>
+<p>sort 함수는 리스트의 요소를 순서대로 정렬해 준다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 4, 3, 2]
+&gt;&gt;&gt; a.sort()
+&gt;&gt;&gt; a
+[1, 2, 3, 4]
+</code></pre>
+<p>문자 역시 알파벳 순서로 정렬할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = ['a', 'c', 'b']
+&gt;&gt;&gt; a.sort()
+&gt;&gt;&gt; a
+['a', 'b', 'c']
+</code></pre>
+<h3 id="-reverse">리스트 뒤집기 - reverse</h3>
+<p>reverse 함수는 리스트를 역순으로 뒤집어 준다. 이때 리스트 요소들을 순서대로 정렬한 다음 다시 역순으로 정렬하는 것이 아니라 현재의 리스트를 그대로 거꾸로 뒤집는다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = ['a', 'c', 'b']
+&gt;&gt;&gt; a.reverse()
+&gt;&gt;&gt; a
+['b', 'c', 'a']
+</code></pre>
+<h3 id="-index">인덱스 반환 - index</h3>
+<p>index(x) 함수는 리스트에 x 값이 있으면 x의 인덱스 값(위칫값)을 반환한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a.index(3)
+2
+&gt;&gt;&gt; a.index(1)
+0
+</code></pre>
+<p>위 예에서 리스트 a에 있는 숫자 3의 위치는 a[2]이므로 2, 숫자 1의 위치는 a[0]이므로 0을 반환한다.</p>
+<p>다음 예에서 값 0은 a 리스트에 존재하지 않기 때문에 오류가 발생한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a.index(0)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ValueError: 0 is not in list
+</code></pre>
+<h3 id="-insert">리스트에 요소 삽입 - insert</h3>
+<p>insert(a, b)는 리스트의 a번째 위치에 b를 삽입하는 함수이다. 파이썬은 숫자를 0부터 센다는 것을 반드시 기억하자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a.insert(0, 4)
+&gt;&gt;&gt; a
+[4, 1, 2, 3]
+</code></pre>
+<p>위 예는 0번째 자리, 즉 첫 번째 요소인 a[0] 위치에 값 4를 삽입하라는 뜻이다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; a.insert(3, 5)
+&gt;&gt;&gt; a
+[4, 1, 2, 5, 3]
+</code></pre>
+<p>위 예는 리스트 a의 a[3], 즉 네 번째 요소 위치에 값 5를 삽입하라는 뜻이다.</p>
+<h3 id="-remove">리스트 요소 제거 - remove</h3>
+<p>remove(x)는 리스트에서 첫 번째로 나오는 x를 삭제하는 함수이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, 1, 2, 3]
+&gt;&gt;&gt; a.remove(3)
+&gt;&gt;&gt; a
+[1, 2, 1, 2, 3]
+</code></pre>
+<p>a가 3이라는 값을 2개 가지고 있을 경우, 첫 번째 3만 제거되는 것을 알 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a.remove(3)
+&gt;&gt;&gt; a
+[1, 2, 1, 2]
+</code></pre>
+<p>remove(3)을 한 번 더 실행하면 다시 3이 삭제된다.</p>
+<h3 id="-pop">리스트 요소 꺼내기 - pop</h3>
+<p>pop()은 리스트의 맨 마지막 요소를 반환하고 그 요소는 삭제한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a.pop()
+3
+&gt;&gt;&gt; a
+[1, 2]
+</code></pre>
+<p>a 리스트를 다시 보면 [1, 2, 3]에서 3을 꺼내고 최종적으로 [1, 2]만 남는 것을 확인할 수 있다.</p>
+<p>pop(x)는 리스트의 x번째 요소를 반환하고 그 요소는 삭제한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a.pop(1)
+2
+&gt;&gt;&gt; a
+[1, 3]
+</code></pre>
+<p>a.pop(1)은 a[1]의 값을 꺼내어 반환한다. 다시 a를 출력해 보면 꺼낸 값이 삭제된 것을 확인할 수 있다.</p>
+<h3 id="x-count">리스트에 포함된 요소 x의 개수 세기 - count</h3>
+<p>count(x)는 리스트 안에 x가 몇 개 있는지 조사하여 그 개수를 반환하는 함수이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, 1]
+&gt;&gt;&gt; a.count(1)
+2
+</code></pre>
+<p>1이라는 값이 리스트 a에 2개 들어 있으므로 2를 반환한다.</p>
+<h3 id="-extend">리스트 확장 - extend</h3>
+<p>extend(x)에서 x에는 리스트만 올 수 있으며 원래의 a 리스트에 x 리스트를 더하게 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; a.extend([4, 5])
+&gt;&gt;&gt; a
+[1, 2, 3, 4, 5]
+&gt;&gt;&gt; b = [6, 7]
+&gt;&gt;&gt; a.extend(b)
+&gt;&gt;&gt; a
+[1, 2, 3, 4, 5, 6, 7]
+</code></pre>
+<p>a.extend([4, 5])는 <code>a += [4, 5]</code>와 동일하다.</p>
+<blockquote>
+<p><code>a += [4, 5]</code>는 <code>a = a + [4, 5]</code>와 동일한 표현식이다.</p>
+</blockquote>
+</div>
+</div><div class="book-page-fragment" data-page-id="15">
+<h1 class="page-subject">02-4 튜플 자료형</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>튜플(tuple)은 몇 가지 점을 제외하면 리스트와 거의 비슷하다. 리스트와 다른 점은 다음과 같다.</p>
+<ul>
+<li>리스트는 [], 튜플은 ()으로 둘러싼다.</li>
+<li>리스트는 요솟값의 생성, 삭제, 수정이 가능하지만, 튜플은 요솟값을 바꿀 수 없다.</li>
+</ul>
+<div class="toc">
+<ul>
+<li><a href="#_1">튜플은 어떻게 만들까?</a></li>
+<li><a href="#_2">튜플의 요솟값을 지우거나 변경하려고 하면 어떻게 될까?</a><ul>
+<li><a href="#1">1. 튜플 요솟값을 삭제하려 할 때</a></li>
+<li><a href="#2">2. 튜플 요솟값을 변경하려 할 때</a></li>
+</ul>
+</li>
+<li><a href="#_3">튜플 다루기</a><ul>
+<li><a href="#_4">인덱싱하기</a></li>
+<li><a href="#_5">슬라이싱하기</a></li>
+<li><a href="#_6">튜플 더하기</a></li>
+<li><a href="#_7">튜플 곱하기</a></li>
+<li><a href="#_8">튜플 길이 구하기</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">튜플은 어떻게 만들까?</h2>
+<p>튜플은 다음과 같이 여러 가지 모습으로 생성할 수 있다.</p>
+<pre><code class="language-python">t1 = ()
+t2 = (1,)
+t3 = (1, 2, 3)
+t4 = 1, 2, 3
+t5 = ('a', 'b', ('ab', 'cd'))
+</code></pre>
+<p>모습은 리스트와 거의 비슷하지만, 튜플에서는 리스트와 다른 2가지 차이점을 찾아볼 수 있다. <code>t2 = (1,)</code>처럼 단지 1개의 요소만을 가질 때는 요소 뒤에 쉼표(,)를 반드시 붙여야 한다는 것과 <code>t4 = 1, 2, 3</code>처럼 소괄호(())를 생략해도 된다는 점이다.</p>
+<p>튜플과 리스트는 비슷해 보이지만, 구별해서 사용하는 것이 좋다. 가장 큰 차이는 요솟값을 변경할 수 있는지 여부이다. 리스트의 요솟값은 변경 가능하고, 튜플의 요솟값은 변경 불가능하다.</p>
+<p>프로그램 실행 중 요솟값이 변하지 않기를 바란다면 튜플을 사용하자. 반대로 값을 수시로 변경해야 한다면 리스트를 사용하자. 실제 프로그램에서는 값이 자주 변경되는 경우가 많아 튜플보다 리스트를 더 자주 사용한다.</p>
+<h2 id="_2">튜플의 요솟값을 지우거나 변경하려고 하면 어떻게 될까?</h2>
+<p>튜플의 요솟값은 한 번 정하면 지우거나 변경할 수 없다. 다음 두 예를 살펴보자.</p>
+<h3 id="1">1. 튜플 요솟값을 삭제하려 할 때</h3>
+<pre><code class="language-python">&gt;&gt;&gt; t1 = (1, 2, 'a', 'b')
+&gt;&gt;&gt; del t1[0]
+Traceback (most recent call last):
+File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: 'tuple' object doesn't support item deletion
+</code></pre>
+<p>튜플의 요소를 리스트처럼 del 명령어로 지우려고 한 예이다. 튜플은 요솟값을 지울 수 없다는 오류 메시지를 확인할 수 있다.</p>
+<h3 id="2">2. 튜플 요솟값을 변경하려 할 때</h3>
+<pre><code class="language-python">&gt;&gt;&gt; t1 = (1, 2, 'a', 'b')
+&gt;&gt;&gt; t1[0] = 'c'
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: 'tuple' object does not support item assignment
+</code></pre>
+<p>튜플의 요솟값을 변경하려고 해도 오류가 발생한다.</p>
+<h2 id="_3">튜플 다루기</h2>
+<p>튜플은 요솟값을 변경할 수 없다는 점만 제외하면 리스트와 동일하다. 다음 예제는 서로 연관되어 있으므로 차례대로 수행해 보자.</p>
+<h3 id="_4">인덱싱하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; t1 = (1, 2, 'a', 'b')
+&gt;&gt;&gt; t1[0]
+1
+&gt;&gt;&gt; t1[3]
+'b'
+</code></pre>
+<p>문자열, 리스트와 마찬가지로 t1[0], t1[3]처럼 인덱싱이 가능하다.</p>
+<h3 id="_5">슬라이싱하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; t1 = (1, 2, 'a', 'b')
+&gt;&gt;&gt; t1[1:]
+(2, 'a', 'b')
+</code></pre>
+<p>t1[1]부터 튜플의 마지막 요소까지 슬라이싱하는 예이다.</p>
+<h3 id="_6">튜플 더하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; t1 = (1, 2, 'a', 'b')
+&gt;&gt;&gt; t2 = (3, 4)
+&gt;&gt;&gt; t3 = t1 + t2
+&gt;&gt;&gt; t3
+(1, 2, 'a', 'b', 3, 4)
+</code></pre>
+<p>튜플을 더하는 예이다. 이때 t1, t2 튜플의 요솟값이 바뀌는 것은 아니다. t1, t2 튜플을 더하여 새로운 튜플 t3를 생성한 것이다.</p>
+<h3 id="_7">튜플 곱하기</h3>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; t2 = (3, 4)
+&gt;&gt;&gt; t3 = t2 * 3
+&gt;&gt;&gt; t3
+(3, 4, 3, 4, 3, 4)
+</code></pre>
+<p>튜플의 곱하기(반복) 예이다.</p>
+<h3 id="_8">튜플 길이 구하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; t1 = (1, 2, 'a', 'b')
+&gt;&gt;&gt; len(t1)
+4
+</code></pre>
+<p>튜플의 길이를 구하는 예이다.</p>
+<blockquote>
+<p>튜플은 요솟값을 변경할 수 없기 때문에 sort, insert, remove, pop과 같은 메서드가 없다.</p>
+</blockquote>
+</div>
+</div><div class="book-page-fragment" data-page-id="16">
+<h1 class="page-subject">02-5 딕셔너리 자료형</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>사람은 누구든지 "이름" = "홍길동", "생일" = "몇 월 며칠" 등과 같은 방식으로 그 사람이 가진 정보를 나타낼 수 있다. 파이썬은 영리하게도 이러한 대응 관계를 나타낼 수 있는 딕셔너리(dictionary) 자료형을 가지고 있다. 이번에는 이 자료형에 대해 알아보자.</p>
+<blockquote>
+<p>요즘 사용하는 대부분의 언어도 이러한 대응 관계를 나타내는 자료형을 가지고 있는데 이를 딕셔너리라고 하고, '<a class="wiki_link" data-title="연관 배열" data-wiki="/page/wiki/3/연관 배열/" href="javascript:void(0)">연관 배열</a>(associative array)'또는 '<a class="wiki_link" data-title="해시" data-wiki="/page/wiki/3/해시/" href="javascript:void(0)">해시</a>(hash)'라고도 한다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">딕셔너리란?</a></li>
+<li><a href="#_2">딕셔너리는 어떻게 만들까?</a></li>
+<li><a href="#_3">딕셔너리 쌍 추가, 삭제하기</a><ul>
+<li><a href="#_4">딕셔너리 쌍 추가하기</a></li>
+<li><a href="#_5">딕셔너리 요소 삭제하기</a></li>
+</ul>
+</li>
+<li><a href="#_6">딕셔너리를 사용하는 방법</a><ul>
+<li><a href="#key-value">딕셔너리에서 Key를 사용해 Value 얻기</a></li>
+<li><a href="#_7">딕셔너리 만들 때 주의할 사항</a></li>
+</ul>
+</li>
+<li><a href="#_8">딕셔너리 관련 함수</a><ul>
+<li><a href="#key-keys">Key 리스트 만들기 - keys</a></li>
+<li><a href="#value-values">Value 리스트 만들기 - values</a></li>
+<li><a href="#key-value-items">Key, Value 쌍 얻기 - items</a></li>
+<li><a href="#key-value-clear">Key: Value 쌍 모두 지우기 - clear</a></li>
+<li><a href="#key-value-get">Key로 Value 얻기 - get</a></li>
+<li><a href="#key-in">해당 Key가 딕셔너리 안에 있는지 조사하기 - in</a></li>
+<li><a href="#key-value-pop">Key로 Value 꺼내기 - pop</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">딕셔너리란?</h2>
+<p>딕셔너리는 단어 그대로 '사전'이라는 뜻이다. 즉 "people"이라는 단어에 "사람", "baseball"이라는 단어에 "야구"라는 뜻이 부합되듯이 딕셔너리는 Key와 Value를 한 쌍으로 가지는 자료형이다. 예컨대 Key가 "baseball"이라면 Value는 "야구"가 될 것이다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/16/02_5_baseball.png"/></p>
+<p>딕셔너리는 리스트나 튜플처럼 순차적으로(sequential) 해당 요솟값을 구하지 않고 Key를 통해 Value를 얻는다. 이것이 바로 딕셔너리의 가장 큰 특징이다. baseball이라는 단어의 뜻을 찾기 위해 사전의 내용을 순차적으로 모두 검색하는 것이 아니라 baseball이라는 단어가 있는 곳만 펼쳐 보는 것이다.</p>
+<blockquote>
+<p><strong>파이썬 3.7 이후 딕셔너리 순서 보장</strong><br/>
+파이썬 3.7 이전에는 딕셔너리에 데이터를 저장할 때 입력한 순서가 보장되지 않았다. 하지만 파이썬 3.7부터는 딕셔너리에 아이템을 삽입한 순서가 유지된다. 즉, 딕셔너리를 순회할 때 아이템이 추가된 순서대로 나온다.</p>
+</blockquote>
+<h2 id="_2">딕셔너리는 어떻게 만들까?</h2>
+<p>다음은 딕셔너리의 기본 모습이다.</p>
+<pre><code class="language-plaintext">{Key1: Value1, Key2: Value2, Key3: Value3, ...}
+</code></pre>
+<p>Key와 Value의 쌍 여러 개가 {}로 둘러싸여 있다. 각각의 요소는 Key: Value 형태로 이루어져 있고 쉼표(,)로 구분되어 있다.</p>
+<p>다음 딕셔너리의 예를 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; dic = {'name': 'pey', 'phone': '010-9999-1234', 'birth': '1118'}
+</code></pre>
+<p>위에서 Key는 각각 'name', 'phone', 'birth'이고, 각각의 Key에 해당하는 Value는 'pey', '010-9999-1234', '1118'이다.</p>
+<p><em>딕셔너리 dic의 정보</em></p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>pey</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>010-9999-1234</td>
+</tr>
+<tr>
+<td>birth</td>
+<td>1118</td>
+</tr>
+</tbody>
+</table>
+<p>다음은 Key로 정숫값 1, Value로 문자열 'hi'를 사용한 예이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = {1: 'hi'}
+</code></pre>
+<p>또한 다음 예처럼 Value에 리스트도 넣을 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = {'a': [1, 2, 3]}
+</code></pre>
+<h2 id="_3">딕셔너리 쌍 추가, 삭제하기</h2>
+<p>딕셔너리 쌍을 추가하거나 삭제하는 방법을 살펴보자.</p>
+<h3 id="_4">딕셔너리 쌍 추가하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = {1: 'a'}
+&gt;&gt;&gt; a[2] = 'b'
+&gt;&gt;&gt; a
+{1: 'a', 2: 'b'}
+</code></pre>
+<p>{1: 'a'} 딕셔너리에 a[2] = 'b'와 같이 입력하면 딕셔너리 a에 Key와 Value가 각각 2와 'b'인 {2: 'b'} 딕셔너리 쌍이 추가된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a['name'] = 'pey'
+&gt;&gt;&gt; a
+{1: 'a', 2: 'b', 'name': 'pey'}
+</code></pre>
+<p>딕셔너리 a에 {'name': 'pey'} 쌍이 추가되었다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[3] = [1, 2, 3]
+&gt;&gt;&gt; a
+{1: 'a', 2: 'b', 'name': 'pey', 3: [1, 2, 3]}
+</code></pre>
+<p>Key는 3, Value는 [1, 2, 3]을 가지는 한 쌍이 또 추가되었다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h3 id="_5">딕셔너리 요소 삭제하기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; del a[1]
+&gt;&gt;&gt; a
+{2: 'b', 'name': 'pey', 3: [1, 2, 3]}
+</code></pre>
+<p>위 예제는 딕셔너리 요소를 지우는 방법을 보여 준다. del은 파이썬의 예약어로, <code>del a[key]</code>처럼 사용하면 지정한 Key에 해당하는 {Key: Value} 쌍이 삭제된다.</p>
+<h2 id="_6">딕셔너리를 사용하는 방법</h2>
+<p>'딕셔너리는 주로 어떤 것을 표현하는 데 사용할까?'라는 의문이 들 것이다. 예를 들어 4명의 사람이 있다고 가정하고 각자의 특기를 표현할 수 있는 좋은 방법에 대해서 생각해 보자. 리스트나 문자열로는 표현하기가 매우 까다로울 것이다. 하지만 파이썬의 딕셔너리를 사용하면 이 상황을 표현하기가 정말 쉽다.</p>
+<p>다음 예를 살펴보자.</p>
+<pre><code class="language-python">{"김연아": "피겨스케이팅", "류현진": "야구", "손흥민": "축구", "귀도": "파이썬"}
+</code></pre>
+<p>사람 이름과 특기를 한 쌍으로 묶은 딕셔너리이다. 정말 간편하지 않은가?</p>
+<p>지금까지 딕셔너리를 만드는 방법을 살펴보았다. 이제 딕셔너리를 제대로 활용하기 위해 알아야 할 것들을 하나씩 알아보자.</p>
+<h3 id="key-value">딕셔너리에서 Key를 사용해 Value 얻기</h3>
+<pre><code class="language-python">&gt;&gt;&gt; grade = {'pey': 10, 'julliet': 99}
+&gt;&gt;&gt; grade['pey']
+10
+&gt;&gt;&gt; grade['julliet']
+99
+</code></pre>
+<p>리스트나 튜플, 문자열은 요솟값을 얻고자 할 때 인덱싱이나 슬라이싱 기법 중 하나를 사용했다. 하지만 딕셔너리는 단 1가지 방법뿐이다. 바로 Key를 사용해서 Value를 구하는 방법이다. 위 예에서 'pey'라는 Key의 Value를 얻기 위해 <code>grade['pey']</code>를 사용한 것처럼 어떤 Key의 Value를 얻으려면 '딕셔너리_변수_이름[Key]'를 사용해야 한다.</p>
+<p>몇 가지 예를 더 살펴보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = {1:'a', 2:'b'}
+&gt;&gt;&gt; a[1]
+'a'
+&gt;&gt;&gt; a[2]
+'b'
+</code></pre>
+<p>먼저 a 변수에 {1: 'a', 2: 'b'} 딕셔너리를 대입하였다. 위 예에서 볼 수 있듯이 a[1]은 'a' 값을 반환한다.</p>
+<blockquote>
+<p><strong>주의!</strong> 딕셔너리의 a[1]은 리스트의 a[1]과 전혀 다르다. 리스트에서 a[1]은 "두 번째 요소(인덱스 1)"를 의미하지만, 딕셔너리에서 a[1]은 "Key가 1인 Value"를 의미한다.</p>
+</blockquote>
+<p>딕셔너리는 리스트나 튜플에 있는 인덱싱 방법을 적용할 수 없다. 따라서 a[1]은 딕셔너리 {1: 'a', 2: 'b'}에서 Key가 1인 것의 Value인 'a'를 반환한다. a[2] 역시 마찬가지이다.</p>
+<p>이번에는 a라는 변수에 앞의 예에서 사용한 딕셔너리의 Key와 Value를 뒤집어 놓은 딕셔너리를 대입해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = {'a': 1, 'b': 2}
+&gt;&gt;&gt; a['a']
+1
+&gt;&gt;&gt; a['b']
+2
+</code></pre>
+<p>역시 a['a'], a['b']처럼 Key를 사용해서 Value를 얻을 수 있다. 정리하면, 딕셔너리 a는 a[Key]로 Key에 해당하는 Value를 얻는다.</p>
+<p>다음 예는 이전에 한 번 언급한 딕셔너리인데, Key를 사용해서 Value를 얻는 방법을 잘 보여 준다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; dic = {'name':'pey', 'phone':'010-9999-1234', 'birth': '1118'}
+&gt;&gt;&gt; dic['name']
+'pey'
+&gt;&gt;&gt; dic['phone']
+'010-9999-1234'
+&gt;&gt;&gt; dic['birth']
+'1118'
+</code></pre>
+<h3 id="_7">딕셔너리 만들 때 주의할 사항</h3>
+<p>딕셔너리에서 Key는 고유한 값이므로 중복되는 Key 값을 설정하면 하나를 제외한 나머지 것들이 모두 무시된다. 다음 예에서 볼 수 있듯이 동일한 Key가 2개 존재할 경우, 1: 'a' 쌍이 무시된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = {1:'a', 1:'b'}
+&gt;&gt;&gt; a
+{1: 'b'}
+</code></pre>
+<p>Key가 중복되면 1개를 제외한 나머지 Key: Value 값이 모두 무시되는 이유는 Key를 통해서 Value를 얻는 딕셔너리의 특징 때문이다. 즉, 딕셔너리에는 동일한 Key가 중복으로 존재할 수 없다.</p>
+<p>또 한 가지 주의할 점은 Key에 리스트는 쓸 수 없다는 것이다. 하지만 튜플은 Key로 쓸 수 있다. 딕셔너리의 Key로 쓸 수 있느냐, 없느냐는 Key가 변하는(mutable) 값인지, 변하지 않는(immutable) 값인지에 달려 있다. 리스트는 그 값이 변할 수 있기 때문에 Key로 쓸 수 없다. 다음 예처럼 리스트를 Key로 설정하면 리스트를 키 값으로 사용할 수 없다는 오류가 발생한다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; a = {[1,2] : 'hi'}
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unhashable type: 'list'
+</code></pre>
+<blockquote>
+<p>오류 메시지의 "unhashable"은 "해시할 수 없다"는 뜻으로, 변경 가능한(mutable) 자료형은 딕셔너리의 Key로 사용할 수 없다는 의미이다.</p>
+</blockquote>
+<p>단, Value에는 변하는 값이든, 변하지 않는 값이든 아무 값이나 넣을 수 있다.</p>
+<h2 id="_8">딕셔너리 관련 함수</h2>
+<p>딕셔너리를 자유자재로 사용하기 위해 딕셔너리가 자체적으로 가지고 있는 관련 함수를 사용해 보자.</p>
+<h3 id="key-keys">Key 리스트 만들기 - keys</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = {'name': 'pey', 'phone': '010-9999-1234', 'birth': '1118'}
+&gt;&gt;&gt; a.keys()
+dict_keys(['name', 'phone', 'birth'])
+</code></pre>
+<p>a.keys()는 딕셔너리 a의 Key만을 모아 dict_keys 객체를 반환한다. dict_keys는 리스트와 비슷하게 사용할 수 있는 객체로, for 문에서 바로 사용하거나 <code>list()</code> 함수로 리스트로 변환할 수 있다.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>dict_keys 객체와 리스트 변환</strong></p>
+<p>keys, values, items 함수는 리스트가 아닌 dict_keys, dict_values, dict_items 객체를 반환한다. 이 객체들은 for 문 등 반복 구문에서 리스트처럼 사용할 수 있다. 만약 리스트가 필요한 경우에는 <code>list(a.keys())</code>처럼 변환하면 된다.</p></fieldset>
+<p>dict_keys 객체는 다음과 같이 사용할 수 있다. 리스트를 사용하는 것과 별 차이는 없지만, 리스트 고유의 append, insert, pop, remove, sort 함수는 수행할 수 없다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; for k in a.keys():
+...    print(k)
+...
+name
+phone
+birth
+</code></pre>
+<blockquote>
+<ul>
+<li>print(k)를 입력할 때 들여쓰기를 하지 않으면 오류가 발생하므로 주의하자.</li>
+<li>for 문 등 반복 구문에 대해서는 03장에서 자세히 살펴본다.</li>
+</ul>
+</blockquote>
+<p>dict_keys 객체를 리스트로 변환하려면 다음과 같이 하면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; list(a.keys())
+['name', 'phone', 'birth']
+</code></pre>
+<h3 id="value-values">Value 리스트 만들기 - values</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a.values()
+dict_values(['pey', '010-9999-1234', '1118'])
+</code></pre>
+<p>Key를 얻는 것과 마찬가지 방법으로 Value만 얻고 싶다면 values 함수를 사용하면 된다. values 함수를 호출하면 dict_values 객체를 반환한다.</p>
+<h3 id="key-value-items">Key, Value 쌍 얻기 - items</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a.items()
+dict_items([('name', 'pey'), ('phone', '010-9999-1234'), ('birth', '1118')])
+</code></pre>
+<p>items 함수는 Key와 Value의 쌍을 튜플로 묶은 값을 dict_items 객체로 반환한다.</p>
+<h3 id="key-value-clear">Key: Value 쌍 모두 지우기 - clear</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a.clear()
+&gt;&gt;&gt; a
+{}
+</code></pre>
+<p>clear 함수는 딕셔너리 안의 모든 요소를 삭제한다.</p>
+<blockquote>
+<p>빈 리스트를 [], 빈 튜플을 ()로 표현하는 것과 마찬가지로 빈 딕셔너리도 {}로 표현한다.</p>
+</blockquote>
+<h3 id="key-value-get">Key로 Value 얻기 - get</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = {'name': 'pey', 'phone': '010-9999-1234', 'birth': '1118'}
+&gt;&gt;&gt; a.get('name')
+'pey'
+&gt;&gt;&gt; a.get('phone')
+'010-9999-1234'
+</code></pre>
+<p>get(x) 함수는 x라는 Key에 대응되는 Value를 반환한다. 앞에서 살펴보았듯이 <code>a.get('name')</code>은 <code>a['name']</code>을 사용했을 때와 동일한 결괏값을 반환한다.</p>
+<p>다만, 다음 예제에서 볼 수 있듯이 <code>a['nokey']</code>처럼 딕셔너리에 존재하지 않는 키로 값을 가져오려고 할 경우, <code>a['nokey']</code> 방식은 오류를 발생시키고 <code>a.get('nokey')</code> 방식은 None을 반환한다는 차이가 있다. Key가 반드시 존재한다고 확신할 수 있을 때는 <code>a[key]</code> 방식을, Key가 없을 수도 있을 때는 <code>a.get(key)</code> 방식을 사용하면 된다.</p>
+<blockquote>
+<p>여기에서 None은 값이 없음을 나타내는 객체이며, 조건문에서는 False처럼 평가된다.</p>
+</blockquote>
+<pre><code class="language-python">&gt;&gt;&gt; a = {'name':'pey', 'phone':'010-9999-1234', 'birth': '1118'}
+&gt;&gt;&gt; a.get('nokey')
+None
+&gt;&gt;&gt; a['nokey']
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+KeyError: 'nokey'
+</code></pre>
+<p>딕셔너리 안에 찾으려는 Key가 없을 경우, 미리 정해 둔 디폴트 값을 대신 가져오게 하고 싶을 때는 get(x, '디폴트 값')을 사용하면 편리하다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a.get('nokey', '정보없음')
+'정보없음'
+</code></pre>
+<p>딕셔너리 a에는 'nokey'에 해당하는 Key가 없다. 따라서 디폴트 값인 '정보없음'을 반환한다.</p>
+<h3 id="key-in">해당 Key가 딕셔너리 안에 있는지 조사하기 - in</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = {'name':'pey', 'phone':'010-9999-1234', 'birth': '1118'}
+&gt;&gt;&gt; 'name' in a
+True
+&gt;&gt;&gt; 'email' in a
+False
+</code></pre>
+<p>'name' 문자열은 a 딕셔너리의 Key 중 하나이다. 따라서 'name' in a를 호출하면 참(True)을 반환한다. 반대로 'email'은 a 딕셔너리 안에 존재하지 않는 Key이므로 거짓(False)을 반환한다.</p>
+<h3 id="key-value-pop">Key로 Value 꺼내기 - pop</h3>
+<pre><code class="language-python">&gt;&gt;&gt; a = {'name':'pey', 'phone':'010-9999-1234', 'birth': '1118'}
+&gt;&gt;&gt; phone = a.pop('phone')
+&gt;&gt;&gt; phone
+'010-9999-1234'
+&gt;&gt;&gt; a
+{'name': 'pey', 'birth': '1118'}
+</code></pre>
+<p>pop(x) 함수는 딕셔너리에서 Key가 x인 항목을 삭제한 후 그 Value를 반환한다. get 함수와 달리 pop은 해당 항목을 딕셔너리에서 삭제한다는 차이가 있다. 존재하지 않는 Key에 대해서는 디폴트 값을 지정할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; email = a.pop('email', '정보없음')
+&gt;&gt;&gt; email
+'정보없음'
+</code></pre>
+</div>
+</div><div class="book-page-fragment" data-page-id="1015">
+<h1 class="page-subject">02-6 집합 자료형</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>집합(set)은 수학의 집합 개념과 동일한 자료형이다. 중복을 허용하지 않고 순서가 없는 데이터의 모임으로, 교집합, 합집합, 차집합 등의 집합 연산을 쉽게 처리할 수 있다.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">집합 자료형은 어떻게 만들까?</a></li>
+<li><a href="#_2">집합 자료형의 특징</a></li>
+<li><a href="#_3">교집합, 합집합, 차집합 구하기</a><ul>
+<li><a href="#_4">교집합 구하기</a></li>
+<li><a href="#_5">합집합 구하기</a></li>
+<li><a href="#_6">차집합 구하기</a></li>
+</ul>
+</li>
+<li><a href="#_7">집합 자료형 관련 함수</a><ul>
+<li><a href="#1-add">값 1개 추가하기 - add</a></li>
+<li><a href="#-update">값 여러 개 추가하기 - update</a></li>
+<li><a href="#-remove">특정 값 제거하기 - remove</a></li>
+<li><a href="#-discard">특정 값 제거하기 - discard</a></li>
+<li><a href="#-clear">모든 값 제거하기 - clear</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">집합 자료형은 어떻게 만들까?</h2>
+<p>집합 자료형은 다음과 같이 set 함수를 사용해 만들 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 = set([1, 2, 3])
+&gt;&gt;&gt; s1
+{1, 2, 3}
+</code></pre>
+<p>set()의 괄호 안에 리스트를 입력하거나, 다음과 같이 문자열을 입력해서 만들 수도 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s2 = set("Hello")
+&gt;&gt;&gt; s2
+{'e', 'H', 'l', 'o'}
+</code></pre>
+<p>또한 중괄호({})를 사용해서 집합 자료형을 직접 만들 수도 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s3 = {1, 2, 3}
+&gt;&gt;&gt; s3
+{1, 2, 3}
+&gt;&gt;&gt; s4 = {'a', 'b', 'c'}
+&gt;&gt;&gt; s4
+{'a', 'c', 'b'}
+</code></pre>
+<blockquote>
+<p>비어 있는 집합 자료형은 <code>s = set()</code>로 만들 수 있다. <code>s = {}</code>로 만들면 딕셔너리가 되므로 주의하자.</p>
+</blockquote>
+<h2 id="_2">집합 자료형의 특징</h2>
+<p>그런데 위에서 살펴본 <code>set("Hello")</code>의 결과가 좀 이상하지 않은가? 분명 "Hello" 문자열로 집합 자료형을 만들었는데 생성된 자료형에는 l 문자가 하나 빠져 있고 순서도 뒤죽박죽이다. 그 이유는 집합에 다음과 같은 2가지 특징이 있기 때문이다.</p>
+<ul>
+<li>중복을 허용하지 않는다.</li>
+<li>순서가 없다(Unordered).</li>
+</ul>
+<blockquote>
+<p>집합은 중복을 허용하지 않는 특징 때문에 데이터의 중복을 제거하는 필터로 종종 사용된다.</p>
+</blockquote>
+<p>리스트나 튜플은 순서가 있기(ordered) 때문에 인덱싱으로 요솟값을 얻을 수 있지만, 집합 자료형은 순서가 없기(unordered) 때문에 인덱싱으로 요솟값을 얻을 수 없다.</p>
+<p>만약 집합 자료형에 저장된 값을 인덱싱으로 접근하려면 다음과 같이 리스트나 튜플로 변환한 후에 해야 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 = set([1, 2, 3])
+&gt;&gt;&gt; l1 = list(s1)
+&gt;&gt;&gt; l1
+[1, 2, 3]
+&gt;&gt;&gt; l1[0]
+1
+&gt;&gt;&gt; t1 = tuple(s1)
+&gt;&gt;&gt; t1
+(1, 2, 3)
+&gt;&gt;&gt; t1[0]
+1
+</code></pre>
+<h2 id="_3">교집합, 합집합, 차집합 구하기</h2>
+<p>집합 자료형을 정말 유용하게 사용하는 경우는 교집합, 합집합, 차집합을 구할 때이다.</p>
+<p>먼저 다음과 같이 2개의 집합을 만들어 보자. s1에는 1부터 6까지의 값, s2에는 4부터 9까지의 값을 넣었다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 = set([1, 2, 3, 4, 5, 6])
+&gt;&gt;&gt; s2 = set([4, 5, 6, 7, 8, 9])
+</code></pre>
+<h3 id="_4">교집합 구하기</h3>
+<p>s1과 s2의 교집합을 구해 보자. <code>&amp;</code>를 사용하면 교집합을 간단히 구할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 &amp; s2
+{4, 5, 6}
+</code></pre>
+<p>intersection 함수를 사용해도 동일한 결과를 얻는다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1.intersection(s2)
+{4, 5, 6}
+</code></pre>
+<p>s2.intersection(s1)을 사용해도 결과는 동일하다.</p>
+<h3 id="_5">합집합 구하기</h3>
+<p>이번에는 합집합을 구해 보자. <code>|</code>를 사용하면 합집합을 구할 수 있다. 4, 5, 6처럼 중복된 값은 1개씩만 표현된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 | s2
+{1, 2, 3, 4, 5, 6, 7, 8, 9}
+</code></pre>
+<p>union 함수를 사용해도 된다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; s1.union(s2)
+{1, 2, 3, 4, 5, 6, 7, 8, 9}
+</code></pre>
+<p>s2.union(s1)을 사용해도 결과는 동일하다.</p>
+<h3 id="_6">차집합 구하기</h3>
+<p>마지막으로 차집합을 구해 보자. <code>-</code>(빼기)를 사용하면 차집합을 구할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 - s2
+{1, 2, 3}
+&gt;&gt;&gt; s2 - s1
+{8, 9, 7}
+</code></pre>
+<p>difference 함수를 사용해도 차집합을 구할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1.difference(s2)
+{1, 2, 3}
+&gt;&gt;&gt; s2.difference(s1)
+{8, 9, 7}
+</code></pre>
+<h2 id="_7">집합 자료형 관련 함수</h2>
+<h3 id="1-add">값 1개 추가하기 - add</h3>
+<p>이미 만들어진 집합에 값을 추가할 수 있다. 1개의 값만 추가할 때는 다음과 같이 하면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 = set([1, 2, 3])
+&gt;&gt;&gt; s1.add(4)
+&gt;&gt;&gt; s1
+{1, 2, 3, 4}
+</code></pre>
+<h3 id="-update">값 여러 개 추가하기 - update</h3>
+<p>여러 개의 값을 한꺼번에 추가할 때는 다음과 같이 하면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 = set([1, 2, 3])
+&gt;&gt;&gt; s1.update([4, 5, 6])
+&gt;&gt;&gt; s1
+{1, 2, 3, 4, 5, 6}
+</code></pre>
+<h3 id="-remove">특정 값 제거하기 - remove</h3>
+<p>특정 값을 제거하고 싶을 때는 다음과 같이 하면 된다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 = set([1, 2, 3])
+&gt;&gt;&gt; s1.remove(2)
+&gt;&gt;&gt; s1
+{1, 3}
+</code></pre>
+<h3 id="-discard">특정 값 제거하기 - discard</h3>
+<p>remove와 비슷하지만, 존재하지 않는 값을 제거하려 해도 오류가 발생하지 않는다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 = set([1, 2, 3])
+&gt;&gt;&gt; s1.discard(2)
+&gt;&gt;&gt; s1
+{1, 3}
+&gt;&gt;&gt; s1.discard(4)  # 없는 값이어도 오류가 발생하지 않음
+&gt;&gt;&gt; s1
+{1, 3}
+</code></pre>
+<h3 id="-clear">모든 값 제거하기 - clear</h3>
+<p>집합의 모든 값을 제거할 때는 clear 함수를 사용한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s1 = set([1, 2, 3])
+&gt;&gt;&gt; s1.clear()
+&gt;&gt;&gt; s1
+set()
+</code></pre>
+</div>
+</div><div class="book-page-fragment" data-page-id="17">
+<h1 class="page-subject">02-7 불 자료형</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>불(bool) 자료형이란 참(True)과 거짓(False)을 나타내는 자료형이다. 불 자료형은 다음 2가지 값만을 가질 수 있다.</p>
+<ul>
+<li>True: 참을 의미한다.</li>
+<li>False: 거짓을 의미한다.</li>
+</ul>
+<blockquote>
+<p>True나 False는 파이썬의 예약어로, true, false와 같이 작성하면 안 되고 첫 문자를 항상 대문자로 작성해야 한다.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_1">불 자료형은 어떻게 사용할까?</a></li>
+<li><a href="#_2">자료형의 참과 거짓</a></li>
+<li><a href="#_3">불 연산</a></li>
+<li><a href="#_4">논리 연산자</a><ul>
+<li><a href="#and">and 연산자</a></li>
+<li><a href="#or">or 연산자</a></li>
+<li><a href="#not">not 연산자</a></li>
+<li><a href="#_5">실제 활용 예제</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">불 자료형은 어떻게 사용할까?</h2>
+<p>다음과 같이 변수 a에는 True, 변수 b에는 False를 지정해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = True
+&gt;&gt;&gt; b = False
+</code></pre>
+<p>따옴표로 감싸지 않은 문자열을 변수에 지정해서 오류가 발생할 것 같지만, 잘 실행된다. type 함수로 변수 a와 b를 확인하면 자료형이 bool인 것을 알 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; type(a)
+&lt;class 'bool'&gt;
+&gt;&gt;&gt; type(b)
+&lt;class 'bool'&gt;
+</code></pre>
+<blockquote>
+<p>type(x)는 x의 자료형을 확인하는 파이썬의 내장 함수이다.</p>
+</blockquote>
+<p>불 자료형은 조건문의 반환값으로도 사용된다. 조건문은 if 문에서 자세히 배우겠지만 잠시 살펴보고 넘어가자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; 1 == 1
+True
+</code></pre>
+<p><code>1 == 1</code>은 '1과 1이 같은가?'를 묻는 조건문이다. 이런 조건문은 결과로 True 또는 False에 해당하는 불 자료형을 반환한다. 1과 1은 같으므로 True를 반환한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; 2 &gt; 1
+True
+</code></pre>
+<p>2는 1보다 크므로 <code>2 &gt; 1</code> 조건문은 참이다. 즉, True를 반환한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; 2 &lt; 1
+False
+</code></pre>
+<p>2는 1보다 작지 않으므로 <code>2 &lt; 1</code> 조건문은 거짓이다. 즉, False를 반환한다.</p>
+<h2 id="_2">자료형의 참과 거짓</h2>
+<p>'자료형에 참과 거짓이 있다?'라는 말이 조금 이상하게 들리겠지만, 참과 거짓은 분명히 있다. 이는 매우 중요한 특징이며 실제로도 자주 쓰인다.</p>
+<p>자료형의 참과 거짓을 구분하는 기준은 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>값</th>
+<th>참 or 거짓</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"python"</td>
+<td>참</td>
+</tr>
+<tr>
+<td>""</td>
+<td>거짓</td>
+</tr>
+<tr>
+<td>[1, 2, 3]</td>
+<td>참</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>거짓</td>
+</tr>
+<tr>
+<td>(1, 2, 3)</td>
+<td>참</td>
+</tr>
+<tr>
+<td>()</td>
+<td>거짓</td>
+</tr>
+<tr>
+<td>{'a': 1}</td>
+<td>참</td>
+</tr>
+<tr>
+<td>{}</td>
+<td>거짓</td>
+</tr>
+<tr>
+<td>1</td>
+<td>참</td>
+</tr>
+<tr>
+<td>0</td>
+<td>거짓</td>
+</tr>
+<tr>
+<td>None</td>
+<td>거짓</td>
+</tr>
+</tbody>
+</table>
+<p>문자열, 리스트, 튜플, 딕셔너리 등의 값이 비어 있으면("", [], (), {}) 거짓이 되고 비어 있지 않으면 참이 된다. 숫자에서는 그 값이 0일 때 거짓이 된다. 위 표에 있는 None은 뒷부분에서 배우므로 아직은 신경 쓰지 말자. 그저 None은 값이 없음을 나타내는 객체이며, 참/거짓을 따질 때는 False처럼 동작한다는 것만 알아 두자.</p>
+<p>다음 예를 보고 자료형의 참과 거짓이 프로그램에서 어떻게 쓰이는지 간단히 알아보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, 4]
+&gt;&gt;&gt; while a:
+...     print(a.pop())
+...
+4
+3
+2
+1
+</code></pre>
+<p>먼저 <code>a = [1, 2, 3, 4]</code>라는 리스트를 만들었다. while 문은 03장에서 자세히 다루지만, 간단히 알아보면 다음과 같다. 조건문이 참인 동안 조건문 안에 있는 문장을 반복해서 수행한다.</p>
+<pre><code class="language-python">while 조건문:
+    수행할_문장
+</code></pre>
+<p>위 예는 a가 참인 경우 a.pop()을 계속 실행하여 출력하라는 의미이다. a.pop() 함수는 리스트 a의 마지막 요소를 꺼내는 함수이므로 리스트 안에 요소가 있는 한(a가 참인 동안) 마지막 요소를 계속 꺼낸다. 결국 더 이상 꺼낼 것이 없으면 a가 빈 리스트([])가 되어 거짓이 된다. 따라서 while 문에서 조건문이 거짓이 되므로 while 문을 빠져나가게 된다. 이는 파이썬 프로그래밍에서 매우 자주 사용하는 기법 중 하나이다.</p>
+<p>위 예가 너무 복잡하다면 다음 예를 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; if []:
+...     print("참")
+... else:
+...     print("거짓")
+...
+거짓
+</code></pre>
+<p>[]는 앞의 표에서 볼 수 있듯이 비어 있는 리스트이므로 거짓이다. 따라서 "거짓"이라는 문자열이 출력된다. if 문에 대해서 잘 모르는 독자라도 위 문장을 해석하는 데는 무리가 없을 것이다.</p>
+<blockquote>
+<p>if 문에 대해서는 03장에서 자세히 다룬다.</p>
+</blockquote>
+<p>다른 예도 하나만 더 살펴보자.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; if [1, 2, 3]:
+...     print("참")
+... else:
+...     print("거짓")
+... 
+참
+</code></pre>
+<p>이 코드를 해석해 보면 다음과 같다.</p>
+<pre><code class="language-no-highlight">만약 [1, 2, 3]이 참이면 "참"이라는 문자열을 출력하고, 그렇지 않으면 "거짓"이라는 문자열을 출력하라.
+</code></pre>
+<p>[1, 2, 3]은 요솟값이 있는 리스트이므로 참이다. 따라서 "참"을 출력한다.</p>
+<h2 id="_3">불 연산</h2>
+<p>bool 함수를 사용하면 자료형의 참과 거짓을 정확하게 확인할 수 있다.</p>
+<p>다음 예제를 따라 해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; bool('python')
+True
+</code></pre>
+<p>'python' 문자열은 비어 있지 않으므로 bool 연산의 결과로 True를 반환한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; bool('')
+False
+</code></pre>
+<p>'' 문자열은 비어 있으므로 bool 연산의 결과로 False를 반환한다.</p>
+<p>앞에서 알아본 몇 가지 예제를 더 수행해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; bool([1, 2, 3])
+True
+&gt;&gt;&gt; bool([])
+False
+&gt;&gt;&gt; bool(0)
+False
+&gt;&gt;&gt; bool(3)
+True
+</code></pre>
+<p>앞에서 알아본 것과 동일한 참과 거짓에 대한 결과를 반환하는 것을 확인할 수 있다.</p>
+<h2 id="_4">논리 연산자</h2>
+<p>불 자료형에서는 and, or, not과 같은 논리 연산자를 사용할 수 있다.</p>
+<h3 id="and">and 연산자</h3>
+<p>and 연산자는 양쪽 조건이 모두 참일 때만 True를 반환한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; True and True
+True
+&gt;&gt;&gt; True and False
+False
+&gt;&gt;&gt; False and True
+False
+&gt;&gt;&gt; False and False
+False
+</code></pre>
+<h3 id="or">or 연산자</h3>
+<p>or 연산자는 양쪽 조건 중 하나라도 참이면 True를 반환한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; True or True
+True
+&gt;&gt;&gt; True or False
+True
+&gt;&gt;&gt; False or True
+True
+&gt;&gt;&gt; False or False
+False
+</code></pre>
+<h3 id="not">not 연산자</h3>
+<p>not 연산자는 참과 거짓을 반대로 바꾼다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; not True
+False
+&gt;&gt;&gt; not False
+True
+&gt;&gt;&gt; not 1
+False
+&gt;&gt;&gt; not 0
+True
+</code></pre>
+<h3 id="_5">실제 활용 예제</h3>
+<pre><code class="language-python">&gt;&gt;&gt; x = 5
+&gt;&gt;&gt; y = 10
+&gt;&gt;&gt; x &gt; 0 and y &gt; 0
+True
+&gt;&gt;&gt; x &gt; 10 or y &gt; 5
+True
+&gt;&gt;&gt; not (x &gt; y)
+True
+</code></pre>
+<p>지금까지 파이썬의 가장 기본이 되는 자료형인 숫자, 문자열, 리스트, 튜플, 딕셔너리, 집합, 불에 대해서 알아보았다. 여기까지 잘 따라온 독자라면 파이썬에 대해서 대략 50% 정도 습득했다고 보아도 된다. 그만큼 자료형은 중요하고 프로그램의 근간이 되기 때문에 확실하게 해 놓지 않으면 좋은 프로그램을 만들 수 없다. 이 책의 예제만 따라 하지 말고 직접 여러 가지 예들을 테스트해 보면서 02-1~02-7에 나오는 자료형에 익숙해지기 바란다.</p>
+</div>
+</div><div class="book-page-fragment" data-page-id="18">
+<h1 class="page-subject">02-8 자료형의 값을 저장하는 공간, 변수</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>변수의 기본 개념은 쉽게 이해할 수 있지만, 이 챕터의 후반부에서 다루는 메모리와 객체 참조에 관한 내용은 프로그래밍 초보자에게 다소 어려울 수 있다. 당장 이해되지 않는 부분이 있다면 그냥 읽고 지나가도 된다. 파이썬을 더 사용하다 보면 자연스럽게 이해하게 될 것이다.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">변수는 어떻게 만들까?</a></li>
+<li><a href="#_2">변수 명명 규칙</a><ul>
+<li><a href="#_3">변수명 규칙</a></li>
+<li><a href="#_4">파이썬 예약어</a></li>
+<li><a href="#_5">변수명 권장 사항</a></li>
+</ul>
+</li>
+<li><a href="#_6">변수란?</a></li>
+<li><a href="#_7">리스트를 복사할 때</a><ul>
+<li><a href="#1">1. [:] 이용하기</a></li>
+<li><a href="#2-copy">2. copy 모듈 이용하기</a></li>
+</ul>
+</li>
+<li><a href="#_8">변수를 만드는 여러 가지 방법</a></li>
+</ul>
+</div>
+<h2 id="_1">변수는 어떻게 만들까?</h2>
+<p>우리는 앞에서 이미 변수를 사용해 왔다. 다음 예와 같은 a, b, c를 '변수'라고 한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 1
+&gt;&gt;&gt; b = "python"
+&gt;&gt;&gt; c = [1, 2, 3]
+</code></pre>
+<p>변수를 만들 때는 위 예처럼 =(assignment) 기호를 사용한다.</p>
+<pre><code class="language-plaintext">변수_이름 = 변수에_저장할_값
+</code></pre>
+<p>C나 JAVA 같은 언어에서는 변수를 만들 때 자료형을 직접 지정해야 한다. 하지만 파이썬은 변수에 저장된 값을 스스로 판단하여 자료형을 지정하므로 더 편리하다.</p>
+<h2 id="_2">변수 명명 규칙</h2>
+<p>변수를 만들 때는 다음 규칙을 지켜야 한다.</p>
+<h3 id="_3">변수명 규칙</h3>
+<ol>
+<li>영문자, 숫자, 언더스코어(<code>_</code>)만 사용할 수 있다.</li>
+<li>숫자로 시작할 수 없다.</li>
+<li>예약어는 사용할 수 없다.</li>
+<li>대소문자를 구분한다.</li>
+</ol>
+<pre><code class="language-python"># 올바른 변수명 예시
+name = "홍길동"
+age = 25
+user_name = "gildong"
+userName = "gildong"  # 카멜 케이스
+_private = "비공개"
+count1 = 10
+
+# 잘못된 변수명 예시
+# 1name = "홍길동"    # 숫자로 시작 (오류)
+# user-name = "홍길동"  # 하이픈 사용 (오류)
+# if = 10             # 예약어 사용 (오류)
+</code></pre>
+<h3 id="_4">파이썬 예약어</h3>
+<p>파이썬에서 특별한 의미로 사용되는 예약어들은 변수명으로 사용할 수 없다.</p>
+<pre><code class="language-plaintext">False, None, True, and, as, assert, break, class, continue, def, 
+del, elif, else, except, finally, for, from, global, if, import, 
+in, is, lambda, nonlocal, not, or, pass, raise, return, try, 
+while, with, yield
+</code></pre>
+<h3 id="_5">변수명 권장 사항</h3>
+<ul>
+<li>의미가 명확한 이름을 사용한다.</li>
+<li>snake_case(단어 사이에 언더스코어)를 권장한다.</li>
+<li>너무 짧거나 긴 이름은 피한다.</li>
+</ul>
+<pre><code class="language-python"># 좋은 예
+student_name = "김철수"
+total_score = 95
+user_age = 20
+
+# 피해야 할 예  
+a = "김철수"  # 의미 불명확
+studentNameFromKorea = "김철수"  # 너무 긴 이름
+</code></pre>
+<h2 id="_6">변수란?</h2>
+<p>파이썬에서 변수는 객체를 가리키는 것이라고 말할 수 있다. 객체란 우리가 지금까지 보아 온 자료형의 데이터(값)와 같은 것을 의미한다. 예를 들어 숫자 1, 문자열 'python', 리스트 [1, 2, 3] 모두 객체이다(객체에 대해서는 05-1절에서 자세히 공부한다).</p>
+<p>변수와 객체의 관계를 쉽게 이해하려면 변수를 이름표라고 생각하면 된다. 물건에 이름표를 붙이듯이 데이터(객체)에 변수라는 이름표를 붙여 두면, 나중에 그 이름표를 통해 데이터를 찾을 수 있다.</p>
+<pre><code class="language-python">a = [1, 2, 3]
+</code></pre>
+<p>위 코드처럼 <code>a = [1, 2, 3]</code>이라고 하면 [1, 2, 3] 값을 가지는 리스트 객체가 자동으로 메모리에 생성되고, 변수 a는 [1, 2, 3] 리스트가 저장된 메모리의 주소를 가리키게 된다.</p>
+<blockquote>
+<p>메모리란 컴퓨터가 프로그램에서 사용하는 데이터를 기억하는 공간이다.</p>
+</blockquote>
+<p>a 변수가 가리키는 메모리의 주소는 다음과 같이 확인할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; id(a)
+4303029896
+</code></pre>
+<p>id는 변수가 가리키는 객체의 주소 값을 반환하는 파이썬 내장 함수이다. 위 예에서 변수 a가 가리키는 [1, 2, 3] 리스트의 주소 값은 4303029896이다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/18/02_8_memory.png"/></p>
+<h2 id="_7">리스트를 복사할 때</h2>
+<p>리스트 자료형에서 가장 혼동하기 쉬운 '복사'에 대해 알아보자. 이 개념을 모르면 "분명히 a만 바꿨는데 b도 바뀌어 있다"는 예상치 못한 버그를 만나게 되므로 꼭 이해하고 넘어가자.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; b = a
+</code></pre>
+<p>b 변수에 a 변수를 대입하면 어떻게 될까? b와 a는 같을까, 다를까? 결론부터 말하면 b는 a와 완전히 동일하다. 다만 [1, 2, 3]이라는 리스트 객체를 참조하는 변수가 a 하나에서 b가 추가되어 2개로 늘어났다는 차이만 있을 뿐이다.</p>
+<p>id 함수를 사용하면 이 사실을 확인할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; id(a)
+4303029896
+&gt;&gt;&gt; id(b)
+4303029896
+</code></pre>
+<p>id(a)의 값이 id(b)의 값과 동일하다. 즉, a가 가리키는 대상과 b가 가리키는 대상이 같다. 동일한 객체를 가리키는지 판단하는 is 명령어를 사용해도 참을 반환한다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a is b  # a와 b가 가리키는 객체가 같을까?
+True
+</code></pre>
+<p>다음 예를 계속 수행해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[1] = 4
+&gt;&gt;&gt; a
+[1, 4, 3]
+&gt;&gt;&gt; b
+[1, 4, 3]
+</code></pre>
+<p>a 리스트의 두 번째 요소를 4로 바꾸었더니 a만 바뀌는 것이 아니라 b도 똑같이 바뀌었다. a, b 모두 동일한 리스트를 가리키고 있기 때문이다.</p>
+<p>그렇다면 b 변수를 생성할 때 a 변수의 값을 가져오면서 a와는 다른 주소를 가리키도록 만들 수는 없을까? 다음 2가지 방법이 있다.</p>
+<h3 id="1">1. [:] 이용하기</h3>
+<p>첫 번째 방법은 리스트 전체를 가리키는 [:]을 사용해서 복사하는 것이다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; b = a[:]
+&gt;&gt;&gt; a[1] = 4
+&gt;&gt;&gt; a
+[1, 4, 3]
+&gt;&gt;&gt; b
+[1, 2, 3]
+</code></pre>
+<p>a 리스트 값을 바꾸더라도 b 리스트에는 영향이 없다.</p>
+<h3 id="2-copy">2. copy 모듈 이용하기</h3>
+<p>두 번째 방법은 copy 모듈을 사용하는 것이다. 다음 예에서 <code>from copy import copy</code>라는 처음 보는 문장이 나오는데, 이것은 뒤에서 다룰 파이썬 모듈 부분에서 자세히 설명한다. 여기서는 copy 함수를 쓰기 위한 것이라고만 알아 두자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; from copy import copy
+&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; b = copy(a)
+</code></pre>
+<p>위 예에서 b = copy(a)는 b = a[:]과 동일하다.</p>
+<p>두 변수의 값은 같지만, 서로 다른 객체를 가리키는지 확인해 보자.</p>
+<pre><code class="language-python">&gt;&gt;&gt; b is a
+False
+</code></pre>
+<p><code>b is a</code>가 False를 반환하므로 b와 a가 가리키는 객체는 서로 다르다.</p>
+<fieldset><legend>점프 투 파이썬</legend><p style="margin-top: 0.2em;"><strong>copy 함수 사용하기</strong></p>
+<p>리스트 자료형의 자체 함수인 copy 함수를 사용해도 copy 모듈을 사용하는 것과 동일한 결과를 얻을 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; b = a.copy()
+&gt;&gt;&gt; b is a
+False
+</code></pre></fieldset>
+<blockquote>
+<p>리스트를 복사하는 방법으로 <code>b = a[:]</code>, <code>b = copy(a)</code>, <code>b = a.copy()</code> 세 가지를 배웠다. 셋 다 동일한 결과를 얻을 수 있지만, 별도의 모듈을 가져올 필요 없이 간편하게 사용할 수 있는 <code>b = a[:]</code> 또는 <code>b = a.copy()</code>를 주로 사용한다.</p>
+</blockquote>
+<h2 id="_8">변수를 만드는 여러 가지 방법</h2>
+<p>튜플로 a, b에 값을 대입할 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a, b = ('python', 'life')
+</code></pre>
+<p>이 방법은 다음 예문과 완전히 동일하다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; (a, b) = 'python', 'life'
+</code></pre>
+<p>튜플 부분에서도 언급했지만, 튜플은 괄호를 생략해도 된다.</p>
+<p>리스트로 변수를 만들 수도 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; [a, b] = ['python', 'life']
+</code></pre>
+<p>여러 개의 변수에 같은 값을 대입할 수도 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = b = 'python'
+</code></pre>
+<p>파이썬에서는 이 방법을 사용하여 두 변수의 값을 간단하게 바꿀 수 있다.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 3
+&gt;&gt;&gt; b = 5
+&gt;&gt;&gt; a, b = b, a
+&gt;&gt;&gt; a
+5
+&gt;&gt;&gt; b
+3
+</code></pre>
+<p>처음에 a에 값 3, b에는 값 5가 대입되어 있었지만 <code>a, b = b, a</code> 문장을 수행한 후에는 그 값이 서로 바뀌었다. 다른 프로그래밍 언어에서는 두 변수의 값을 바꾸려면 임시 변수가 필요하지만, 파이썬에서는 이처럼 한 줄로 간단히 처리할 수 있다.</p>
+</div>
+</div><div class="book-page-fragment" data-page-id="180351">
+<h1 class="page-subject">02장 되새김 문제</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process book-content-font-large">
+<p>죄송합니다. 되새김 문제는 위키독스 웹 사이트에서 비공개 처리되어 있습니다.<br/>
+<strong>되새김 문제에 대한 상세한 내용은 유료 E-book 또는 종이책에서 확인할 수 있습니다.</strong></p>
+<ul>
+<li><a href="https://wikidocs.net/4321">책 구입 안내</a></li>
+</ul>
+</div>
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">영어로 된 x축은 문제없이 잘 출력되지만, 한글로 입력한 제목은 제대로 표시되지 않습니다. 이는 <span class="cd">matplotlib</span>이 기본으로 한글을 지원하지 않아서 그렇습니다. 한글이 나오게 하려면 다음 형식으로 한글 글꼴을 지정하는 명령어를 추가해야 합니다.</p>
+<p class="txts dm"><span class="bg_yellow">형식</span></p>
+<div class="highlight2">
+<pre>plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'글꼴 이름'</span>)</pre>
+</div>
+<p class="txt bl">다음처럼 코드를 추가해 봅시다.</p>
+<div class="highlight">
+<pre>sales = [<span class="green">1</span>, <span class="green">5</span>, <span class="green">7</span>, <span class="green">3</span>, <span class="green">7</span>]
+month = [<span class="red2">'mar'</span>, <span class="red2">'apr'</span>, <span class="red2">'may'</span>, <span class="red2">'jun'</span>, <span class="red2">'jul'</span>]
+<span class="cd2">plt.rc('</span><span class="cd2 red2">font'</span><span class="cd2">, family='</span><span class="cd2 red2">Malgun Gothic'</span><span class="cd2">)</span> <span class="green"># 글꼴 설정, macOS에서는 AppleGothic</span>
+plt.title(<span class="red2">'월별 판매 실적'</span>)            <span class="green"># 그래프 제목 넣기</span>
+plt.plot(month, sales)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/330.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

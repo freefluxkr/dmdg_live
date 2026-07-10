@@ -1,0 +1,27 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">한 행 출력하기</p>
+<p class="txt bl">이번에는 <span class="cd">data</span>의 첫 행을 출력해 봅시다.</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(data[<span class="green">0</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['2019-10-12 9:13', '1972753', '본', 'S&amp;', '185', '네이버파이낸셜(주)', '546800', '일시불(A)', '부분취소']</pre>
+</div>
+<p class="txt bl">첫 행은 2019년 10월 12일에 네이버파이낸셜(주)에서 546,800원을 결제한 건입니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">여러 행 한꺼번에 출력하기</p>
+<p class="txt bl">이번에는 처음부터 세 번째 이용내역까지 출력해 봅시다. 인덱스 [0]부터 [2]까지 출력하면 됩니다. 이때 슬라이싱을 사용해 <span class="cd">data[0:3]</span> 또는 0을 빼고 <span class="cd">data[:3]</span>으로 작성하면 되겠죠?</p>
+<div class="highlight">
+<pre><span class="gold">print</span>(data[<span class="cd2">:</span><span class="cd2 green">3</span>])</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+<span>[</span>['2019-10-12 9:13', '1972753', '본', 'S&amp;', '185', '네이버파이낸셜(주)', '546800', '일시불(A)', '부분취소'], ['2019-10-12 11:56', '3399357', '본', 'S&amp;', '185', 'GS샵', '60440', '일시불(A)', '전표매입'], ['2019-10-13 9:16', '12621902', '본', 'S&amp;', '185', 'G마켓', '91520', 'P(A)', '전표매입'<span>]</span>]</pre>
+</div>
+<p class="txt bl">여러 건을 한 번에 출력하면 이처럼 결과가 이차원 리스트로 나옵니다. CSV 파일을 열어서 가장 위에 있는 세 건의 이용내역이 맞는지 직접 확인해 보세요.</p>
+</div>
+</section>
+</section>

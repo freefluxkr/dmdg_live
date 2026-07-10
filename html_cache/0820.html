@@ -1,0 +1,32 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">캐릭터 이름 5개가 들어간 <span class="cd">characters</span> 리스트를 만듭니다. 그리고 <span class="cd">Combobox</span> 클래스의 객체 <span class="cd">combo</span>를 만들면서 <span class="cd">values</span> 옵션에 <span class="cd">characters</span> 리스트를 값으로 설정합니다. 생성된 콤보박스를 클릭하면 리스트의 요소가 드롭다운 형태로 나타납니다.</p>
+<p class="txt bl">이번에는 <span class="cd">grid()</span>를 사용해 콤보박스 왼쪽에 ‘캐릭터 이름’이라는 텍스트 레이블을, 오른쪽에 [선택]이라는 버튼을 추가해 봅시다. 버튼을 누르면 선택된 캐릭터의 이름을 출력합니다. 코드를 작성해 봅시다.</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'ComboBox'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+<span class="cd2 blue2">def</span> <span class="cd2 gold">select</span><span class="cd2">():</span>
+    <span class="cd2 gold">print</span><span class="cd2">(</span><span class="cd2 red2">'선택된 캐릭터는'</span><span class="cd2">, combo.get())</span>
+
+<span class="cd2">lbl = Label(root, text=</span><span class="cd2 red2">'캐릭터 이름'</span><span class="cd2">, width=</span><span class="cd2 green">10</span><span class="cd2">, anchor=</span><span class="cd2 red2">'center'</span><span class="cd2">)</span>
+<span class="cd2">lbl.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+
+characters = [<span class="red2">'죠르디'</span>, <span class="red2">'프로도'</span>, <span class="red2">'라이언'</span>, <span class="red2">'무지'</span>, <span class="red2">'어피치'</span>]
+combo = Combobox(root, values=characters, <span class="cd2">width=</span><span class="cd2 green">30</span>)
+<span class="cd2">combo.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">1</span><span class="cd2">)</span>
+
+<span class="cd2">btn = Button(root, text=</span><span class="cd2 red2">'선택'</span><span class="cd2">, command=select, width=</span><span class="cd2 green">10</span><span class="cd2">)</span>
+<span class="cd2">btn.grid(row=</span><span class="cd2 green">0</span><span class="cd2">, column=</span><span class="cd2 green">2</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w100"><img alt="" class="w100" src="https://thebook.io/img/080251/685.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

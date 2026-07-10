@@ -1,0 +1,181 @@
+<h1 class="page-subject">8) WorkSheet(=Sheet) 조작하기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>이번 챕터에서는 openpyxl을 이용해 엑셀의 시트를 조작하는 여러가지 방법을 배워보겠습니다. </p>
+<p>먼저, 새로운 Workbook 객체를 생성하고 해당 Workbook의 시트명을 출력하는 코드를 작성해보겠습니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code class="language-python">import  openpyxl  as  op
+
+#새로운 Workbook 객체 생성
+wb = op.Workbook()
+
+#새로운 Workbook의 시트명 리스트 출력해보기
+print(wb.sheetnames)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code class="language-python">['Sheet']
+</code></pre>
+<p>새로운 Workbook 객체를 생성하고 sheet 리스트를 출력해보면 'Sheet' 라는 리스트 요소 1개가 출력됩니다.  이전 "2) Workbook 설정하기, Sheet 설정하기" 파트에서 새로운 Workbook을 생성할시 'Sheet'라는 시트가 자동 생성된다고 언급한 바가 있습니다.</p>
+<blockquote>
+<p>.sheetnames 함수는 해당 Workbook(엑셀파일)의 시트명을 리스트로 출력해주는 함수입니다. openpyxl을 통해 자동화를 진행할 때, 자주 사용하는 부분으로 기억해두도록 합시다.</p>
+</blockquote>
+<p>위에서 새롭게 생성한 Workbook 객체를 기준으로 아래 4가지 시트 조작 방법을 연습해보겠습니다.</p>
+<h1 id="1">1. 시트 생성/삭제하기</h1>
+<p>Workbook 객체에 시트를 새로 생성하는 방법은 .create_sheet 함수를 사용하는 것입니다.  시트 생성 함수는 이전 "2) WorkBook, WorkSheet 설정하기" 파트에서도 다룬 적이 있습니다. 이번 편은 해당 내용에 대해 좀더 자세히 다뤄보겠습니다.</p>
+<p>create_sheet 함수 사용법은 아래와 같습니다.</p>
+<pre><code class="language-python">'Workbook 객체명'.create_sheet('시트명',위치값(정수))
+</code></pre>
+<p>아래 예시 코드를 보며 이해해봅시다.</p>
+<h2 id="1_1">1) 시트 생성</h2>
+<p>&lt;코드&gt;</p>
+<pre><code class="language-python">import  openpyxl  as  op
+
+#새로운 Workbook 객체 생성
+wb = op.Workbook()
+
+#시트 새로 생성하기(create sheet)
+ws = wb.create_sheet("연습")
+print(wb.sheetnames)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code class="language-python">['Sheet', '연습']
+</code></pre>
+<p>시트를 생성하는 방법은 간단합니다. 위 사용법과 같이 create_sheet("시트명")을 입력해주면 자동으로 해당 Workbook 객체(=wb)에 새로운 Sheet가 자동으로 생성됩니다. 추가로, 변수로 지정한 ws는 새롭게 생성한 '연습' Sheet의 객체가 됩니다.</p>
+<p>만약, 기존에 생성 된 시트가 많아 시트의 위치를 지정해주고 싶다면 아래 코드와 같이 사용하시면 됩니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code class="language-python">#첫번째 위치에 생성
+ws = wb.create_sheet("첫번째", 0)
+print("첫번째 : ", wb.sheetnames)
+
+#마지막에서 두번재 위치에 생성
+ws = wb.create_sheet("뒤에서 두번째",-1)
+print("뒤에서 두번째 : ", wb.sheetnames)
+
+#두번째 위치에 생성
+ws = wb.create_sheet("두번째",1)
+print("두번째 : ", wb.sheetnames)
+
+#세번째 위치에 생성
+ws = wb.create_sheet('세번째',2)
+print("세번째 : ", wb.sheetnames)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code class="language-python">첫번째 : ['첫번째', 'Sheet', '연습'] 
+뒤에서 두번째 : ['첫번째', 'Sheet', '뒤에서 두번째', '연습']
+두번째 : ['첫번째', '두번째', 'Sheet', '뒤에서 두번째', '연습'] 
+세번째 : ['첫번째', '두번째', '세번째', 'Sheet', '뒤에서 두번째', '연습']  
+</code></pre>
+<p>위 코드와 결과를 대조해서 확인해보시기 바랍니다. create_sheet( ) 내부의 숫자 입력값에 따라 시트의 위치가 다르게 생성 되는 것을 확인하실 수 있습니다.</p>
+<blockquote>
+<p>한가지 주의할 점은 위 생성한 시트 내용은 wb.save( ) 함수를 통해 저장을 해야 원본에 반영이 됩니다.  자동화 프로그램을 작성할 때는 save( ) 를 꼭 넣도록 합시다. 이 부분은 시트 생성뿐만 아니라 시트를 제어하는 모든 기능에 해당됩니다.</p>
+</blockquote>
+<h2 id="2">2) 시트 삭제</h2>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p>그럼 이번에는 생성한 시트를 다시 삭제하는 코드를 작성해보도록 하겠습니다. 시트를 삭제하는 방법은 간단합니다. Workbook 객체의 remove 함수를 사용하면 됩니다.</p>
+<p>사용법은 아래와 같습니다.</p>
+<pre><code class="language-python">'Workbook 객체명'.remove('Workbook 객체명'['Sheet명'])
+</code></pre>
+<p>이렇게 설명하니 뭔가 복잡하네요. 예시 코드를 보며 쉽게 이해해봅시다. 주의할 점은 괄호 안의 내용을 Sheet명만 쓰는게 아니라 wb['시트명']과 같이 Worksheet 객체로 설정해주어야 한다는 것입니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code class="language-python">#원본 시트 리스트 출력
+print("원본 : ", wb.sheetnames)
+
+#시트 삭제 : 삭제시 괄호 안의 내용은 Worksheet 객체이다.
+ws = wb['First']
+wb.remove(ws)
+
+#삭제 후 시트 리스트 출력
+print("삭제 후 :", wb.sheetnames)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code class="language-python">원본 :  ['First', 'Second', '세번째', 'Sheet', '뒤에서 두번째', '연습', 'Second Copy']
+삭제 후 : ['Second', '세번째', 'Sheet', '뒤에서 두번째', '연습', 'Second Copy']
+</code></pre>
+<h1 id="2_1">2. 시트 이름 변경하기</h1>
+<p>시트 이름을 변경하는 방법은 WorkSheet 객체의 title 속성을 사용하면 됩니다. 아래 예시 코드를 확인해보겠습니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code class="language-python">#'첫번째'라는 이름을 가진 시트를 'First'로 변경
+ws1 = wb["첫번째"]
+ws1.title = "First"
+print(wb.sheetnames)
+
+#'두번째'라는 이름을 가진 시트를 'Second'로 변경
+ws2 = wb["두번째"]
+ws2.title = "Second"
+print(wb.sheetnames)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code class="language-python">['First', '두번째', '세번째', 'Sheet', '뒤에서 두번째', '연습']
+['First', 'Second', '세번째', 'Sheet', '뒤에서 두번째', '연습']
+</code></pre>
+<p>이름을 바꾸려고 하는 WorkSheet 객체의 title 속성 값을 변경 할시트명으로 지정해주시면 결과와 같이 시트명을 변경할 수 있습니다.</p>
+<h1 id="3">3. 시트 이동/복사(같은 파일)</h1>
+<p>이번엔 같은 파일에서 시트의 위치를 변경하고 복사하는 방법을 알아보겠습니다. 시트 위치 이동과 복사는 .move_sheet 함수와 copy_worksheet 함수를 사용하면 됩니다. "1-2) 시트 삭제"에서 다뤘던 내용과 마찬가지로 함수 괄호 안의 내용은 Worksheet 객체가 들어가야 합니다.</p>
+<p>아래 코드를 보며 이해해보겠습니다.</p>
+<blockquote>
+<p>다른 파일로 시트를 이동,복사하는 기능은 Openpyx로 구현할 수 없습니다. 파일 간 시트 이동/복사는 win32com.client 모듈을 사용해주시기 바랍니다. 해당 내용은 책의 챕터 3-3에서 배웁니다.</p>
+</blockquote>
+<h2 id="1_2">1) 시트 이동</h2>
+<p>move_sheet는 현재 위치(기준)에서 상대적인 위치 값(offset)을 입력하여 시트를 이동시킵니다.</p>
+<pre><code class="language-python">#원본 출력
+print("원본 : ", wb.sheetnames)
+
+#Workshet 객체 설정(시트명 : Second Sheet)
+ws = wb['Second sheet']
+
+#'Second sheet'를 기준점에서 앞으로 5칸 이동
+wb.move_sheet(ws, -5)
+
+#위치 이동 후 출력 
+print("이동 후 : " , wb.sheetnames)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code class="language-python">원본 :  ['First', 'Second', '세번째', 'Sheet', '뒤에서 두번째', '연습', 'Second Copy']
+이동 후 :  ['First', 'Second Copy', 'Second', '세번째', 'Sheet', '뒤에서 두번째', '연습']
+</code></pre>
+<h2 id="2_2">2) 시트 복사</h2>
+<p>copy_worksheet를 사용하면 시트를 복사할 수 있습니다. 특정시트 복사시 '해당 시트명' + 'Copy'라는 이름으로 시트가 생성됩니다. 아래 예시를 보겠습니다.</p>
+<p>&lt;코드&gt;</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code class="language-python">#'Second' 시트를 Worksheet 객체로 설정
+sht = wb["Second"]
+#'Second' 시트를 복사하고 복사한 시트를 ws_copy 객체로 설정
+ws_copy = wb.copy_worksheet(sht)
+
+#출력해보기
+print("복사한 시트명 : ", ws_copy)
+print("시트리스트 : ", wb.sheetnames)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code class="language-python">복사한 시트명 :  &lt;Worksheet "Second Copy"&gt;
+시트리스트 :  ['First', 'Second', '세번째', 'Sheet', '뒤에서 두번째', '연습', 'Second Copy']
+</code></pre>
+<p>결과를 보시면 'Second Copy'라는 시트가 생성된 것이 확인할 수 있습니다.</p>
+<h1 id="4">4. 시트 탭 속성 설정</h1>
+<p>Worksheet 객체의 sheet_properties 속성을 활용하면 탭의 색을 변경할 수 있습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/k9CJE/btrkkWZO723/MJakPDJzac0uHlGpkfyb0K/img.png"/></p>
+<p>위에서 복사했던 'Second Copy' 시트의 탭 색을 변경해보겠습니다.</p>
+<p>&lt;코드&gt;</p>
+<pre><code class="language-python">#시트 탭 색깔 변경(하늘색)
+ws_copy.sheet_properties.tabColor = '00FFFF'
+
+#다시 저장하여 확인
+wb.save("./Project/15. openpyxl 시트 조작 관련/after.xlsx")
+</code></pre>
+<p>&lt;결과&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/XiSAa/btrkj95EzVV/F7XVQKiL64JO38t3LuBJLk/img.png"/></p>
+<p>sheet_propertie.tabColor 속성을 활용하면 위 결과와 같이 탭의 색을 변경할 수 있습니다. 참고로 탭색을 확인하시려면 결과파일을 열어봐야 하므로 wb.save( )를 통해 엑셀파일을 저장했습니다.</p>
+<blockquote>
+<p>~~.tabColor ='00FFFF' 에서 '00FFFF'는 하늘색을 가르키는 Color Index입니다. 참고로 이전 OpenPyxl 셀서식 편에서 Color Index에 대해 잠깐 언급한 적이 있으니 내용 참고하시면 되겠습니다.</p>
+</blockquote>
+</div>

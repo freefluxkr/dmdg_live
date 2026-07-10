@@ -1,0 +1,30 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">지정한 행과 열에 각 위젯이 나타납니다. 창에 표시된 위젯의 행과 열은 다음 그림과 같습니다.</p>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/661_2.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 15-6</span> 위젯의 상대위치 배치</p>
+<p class="txt bl"><span class="cd">grid()</span>는 특히 위젯이 여러 개일 때 사용하기 편합니다. 격자에서 칸에 맞는 숫자만 적어 주면 되기 때문이죠. 그런데 레이블이 너무 붙어 있어서 중간에 공간을 넣는다고 해 봅시다. 두 번째 행의 위치를 <span class="cd">(row=9, column=0)</span>, <span class="cd">(row=9, column=9)</span>로 설정하면 될까요?</p>
+<div class="highlight">
+<pre>root = Tk()
+root.title(<span class="red2">'my first tkinter'</span>)
+root.geometry(<span class="red2">'400x200'</span>)
+
+label1 = Label(root, text=<span class="red2">'안녕하세요!'</span>, relief=<span class="red2">'groove'</span>)
+label1.grid(row=<span class="green">0</span>, column=<span class="green">0</span>)
+label2 = Label(root, text=<span class="red2">'Hello!'</span>, relief=<span class="red2">'groove'</span>)
+label2.grid(row=<span class="green">0</span>, column=<span class="green">1</span>)
+label3 = Label(root, text=<span class="red2">'니하오!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label3.grid(row=</span><span class="cd2 green">9</span><span class="cd2">, column=</span><span class="cd2 green">0</span><span class="cd2">)</span>
+label4 = Label(root, text=<span class="red2">'봉쥬르!'</span>, relief=<span class="red2">'groove'</span>)
+<span class="cd2">label4.grid(row=</span><span class="cd2 green">9</span><span class="cd2">, column=</span><span class="cd2 green">9</span><span class="cd2">)</span>
+
+root.mainloop()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/662.jpg"/></div>
+</div>
+</div>
+</section>
+</section>

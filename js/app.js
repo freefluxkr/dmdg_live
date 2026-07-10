@@ -926,6 +926,18 @@ lucide.createIcons();
 
     var micAnalyser = null;
     var micAudioCtx = null;
+    var micGainNode = null;
+
+    window.updateMicGain = function(val) {
+      document.getElementById('mic-gain-value').textContent = val + "x";
+      if (micGainNode && micAudioCtx) {
+        try {
+          micGainNode.gain.setValueAtTime(parseFloat(val), micAudioCtx.currentTime);
+        } catch (e) {
+          console.warn("게인 변경 오류:", e);
+        }
+      }
+    };
 
     function openAudioPopup(mode, text = "", analyser = null) {
       popupMode = mode;
@@ -1076,6 +1088,7 @@ lucide.createIcons();
             micAudioCtx.close();
             micAudioCtx = null;
             micAnalyser = null;
+            micGainNode = null;
           }
         } catch (err) {
           console.error("녹음 중지 오류:", err);
@@ -1100,11 +1113,20 @@ lucide.createIcons();
           const source = micAudioCtx.createMediaStreamSource(stream);
           micAnalyser = micAudioCtx.createAnalyser();
           micAnalyser.fftSize = 256;
-          source.connect(micAnalyser);
+          
+          micGainNode = micAudioCtx.createGain();
+          const currentGainVal = parseFloat(document.getElementById('mic-gain-slider')?.value || 1.5);
+          micGainNode.gain.setValueAtTime(currentGainVal, micAudioCtx.currentTime);
+          
+          const dest = micAudioCtx.createMediaStreamDestination();
+          
+          source.connect(micGainNode);
+          micGainNode.connect(micAnalyser);
+          micGainNode.connect(dest);
 
           audioChunks = [];
           
-          mediaRecorder = new MediaRecorder(stream, { mimeType: mimeType });
+          mediaRecorder = new MediaRecorder(dest.stream, { mimeType: mimeType });
           mediaRecorder.ondataavailable = (e) => {
             if (e.data.size > 0) audioChunks.push(e.data);
           };

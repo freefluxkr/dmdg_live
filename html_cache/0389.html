@@ -1,0 +1,22 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txtex dm">크기 바꾸기</p>
+<p class="txt bl">화면은 큰데 결과 그래프가 조금 작아 보입니다. 이럴 때는 <span class="cd">plt.figure()</span>를 사용해 그래프 크기를 조절합니다. 크기를 조절할 때는 <span class="cd">figsize</span>와 <span class="cd">dpi</span>라는 2가지 옵션을 줄 수 있습니다. <span class="cd">figsize</span>는 <span class="cd">figsize=(가로, 세로)</span> 형식으로, 그래프의 가로와 세로 크기를 인치 단위로 직접 지정합니다. <span class="cd">dpi</span>는 해상도로 크기를 조절합니다. dpi는 dot per inch의 약어로, 해상도를 나타내는 단위입니다. 1제곱인치 안에 점<span class="txts gray">(dot)</span>, 즉 픽셀이 몇 개 있는지를 의미합니다.</p>
+<p class="txt bl">여기서는 <span class="cd">dpi</span> 옵션으로 크기를 조절합니다. 값을 150으로 설정하고 실행합니다.</p>
+<div class="highlight">
+<pre><span class="cd2">plt.figure(dpi=</span><span class="cd2 green">150</span><span class="cd2">)</span> <span class="green"># 그래프 크기 바꾸기</span>
+<span class="green"># plt.figure(figsize=(8, 4))</span>
+plt.rc(<span class="red2">'font'</span>, family=<span class="red2">'Malgun Gothic'</span>)
+plt.title(<span class="red2">'월별 판매 실적</span>')
+plt.plot(month, sales, color=<span class="cd2 red2">'b'</span>)
+plt.show()</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span></pre>
+<div class="w80"><img alt="" class="w100" src="https://thebook.io/img/080251/332.jpg"/></div>
+</div>
+<p class="txt bl">그래프 크기가 커지면서 글자가 조금 더 잘 보입니다. 크기를 더 키우고 싶을 때는 더 큰 숫자를 넣으면 됩니다. <span class="cd">figsize</span>로도 실습해 보세요.</p>
+</div>
+</section>
+</section>

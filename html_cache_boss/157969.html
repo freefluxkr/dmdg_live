@@ -1,0 +1,186 @@
+<h1 class="page-subject">3) win32com 통해 엑셀 다루기 - Cell 영역을 선택하는 방법</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>이번 파트에서는 엑셀에서 셀 영역을 선택하는 방법을 알아보겠습니다. 엑셀에서는 원하는 영역의 데이터를 읽어오거나 쓰는 등 셀 영역을 선택하는 방법이 상당히 중요합니다. win32com.client 모듈을 사용하면 엑셀 영역을 선택하는 여러가지 방법이 있으며 업무자동화에 여러 방면으로 활용할 수 있습니다. 추가로 엑셀 VBA에서도 비슷하게 적용할 수 있는 내용으로 알아두시면 유용합니다.</p>
+<hr/>
+<h3 id="1-range">1. Range</h3>
+<h3 id="2-usedrange">2. UsedRange</h3>
+<h3 id="3-currentregion">3. CurrentRegion</h3>
+<h3 id="4-specialcells">4. SpecialCells</h3>
+<hr/>
+<p>내용을 설명하기 전에 import 및 Workbook, Worksheet 객체 설정을 해볼까요? 해당 코드는 이전 편에서도 설명한 동일한 내용이므로 별도의 내용은 생략하겠습니다. 자세한 내용은 아래 주석을 확인해주세요.</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>import win32com.client
+
+excel = win32com.client.Dispatch("Excel.Application") #엑셀 프로그램 실행
+
+excel.Visible = True  #앞으로 실행과정을 보이게
+
+wb = excel.Workbooks.Open("test.xlsx") #기존에 생성된 문서를 Workbook 객체로 생성
+ws = wb.ActiveSheet #활성화 된 시트 "Sheet1"을 객체로 생성
+</code></pre>
+<p><br/></p>
+<h1 id="1-range_1">1. Range</h1>
+<p>win32com.client를 통해 엑셀 셀 영역을 선택할 수 있는 방법 중 가장 대표적인 방법입니다. 이전 OpenPyxl 챕터 중 "3-1-1) 엑셀의 구성요소"에서 공부했던 이미지를 가져와보겠습니다.</p>
+<p>아래 이미지의 파일명은 "test.xlsx"이고 위 코드에서 Workbook(wb)및 Worksheet(ws) 객체를 생성했다고 가정하였습니다.</p>
+<p><img alt="enter image description here" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/135795/1-1.png"/></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://static.wikidocs.net/images/page/135795/1-2.png"/></p>
+<p>위 4가지 예시를 사용하여 셀을 선택하는 방법은 아래와 같습니다. Range(영역) 뒤에 .Select( )를 붙이면 엑셀 파일에서 실제 영역을 선택하게 됩니다.</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>ws.Range("A1").Select() # "a1" 영역을 선택
+
+ws.Range("A1,B2").Select() # "A1", "B2" 영역을 각 각 선택
+
+ws.Range("A2:B3").Select() # "A2:B3"의 연속 된 영역 선택
+</code></pre>
+<p>위 코드에서 "A2:B3" 영역을 선택하는 코드를 실행하여 엑셀 파일에서 어떤 변화가 일어나는지 확인해봅시다. 코드를 실행하면 아래 이미지와 같이 "A2:B3" 영역이 선택됩니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bmpI4Q/btrpJQMjPmK/fqKAXSdABsEPh4Wo81rPe1/img.png"/></p>
+<p>만약, 특정 영역의 값을 실제로 출력해보고 싶다면 어떻게 해야할까요? 위 코드 에서 Select( )를 지우고 .value를 대신 입력해보겠습니다. </p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>ws.Range("A2:B3").value # "A2:B3"의 연속 된 영역 선택
+</code></pre>
+<p><strong>&lt;결과&gt;</strong></p>
+<pre><code>((pywintypes.datetime(2021, 6, 8, 0, 0, tzinfo=TimeZoneInfo('GMT Standard Time', True)), '식비'), (pywintypes.datetime(2021, 6, 8, 0, 0, tzinfo=TimeZoneInfo('GMT Standard Time', True)), '식비'))
+</code></pre>
+<p>뭔가 복잡해 보이죠? 앞에 괄호가 2개 있는 것을 보시면  2차원 튜플 형태로 "A2:B3" 영역이 출력 된 것을 아실 수 있습니다. 위 결과를 아래 표와 같이 도식화 해보았습니다. 표를 참고하며 이해해봅시다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/ekLuan/btrpGzdgX4V/kRNYOpKhqdD1LqASqyCvN0/img.png"/></p>
+<p><br/></p>
+<h1 id="2-usedrange_1">2. UsedRange</h1>
+<p>엑셀에서는 1번에서 다뤘던 Range 이외에도 셀 영역을 선택하는 다양한 방법을 제공합니다. 그 중  가장 많이 쓰이는 코드 중 하나가 UsedRange입니다. UsedRange는 WorkSheet 객체의 사용 된 영역을 모두 선택합니다.</p>
+<p>이렇게 설명하면 이해가 어려우니 바로 예시로 들어가겠습니다. 엑셀 파일은 아래 이미지를 예시로 사용하겠습니다. 위 1번에서 다뤘던 코드와 동일하게  Workbook 및 WorkSheet 객체를 wb, ws로 설정하였습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bCNd1Y/btrpIysNhyS/6PqaJDGvoDrH1YTRgATtw1/img.png"/></p>
+<p>먼저 위 영역의 값을 UsedRange를 통해 출력해보겠습니다. 아래 코드와 같이 작성하여 실행해보세요.</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>#사용 영역 출력해보기  
+ws.UsedRange()
+</code></pre>
+<p><strong>&lt;결과&gt;</strong></p>
+<pre><code>(('text1', 'text2', 'text3'), ('text4', None, 'text5'), (None, 'text6', None))
+</code></pre>
+<p>결과를 보시면 1번에서 Range로 다뤘던 내용과 마찬가지로 2차원 튜플형태로 출력 되었습니다. 해당 결과를 표로 요약해보면 아래와 같습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cQ8p0T/btrpMRLFo8H/DbfQUgKOnZYMpdlADXLKS0/img.png"/></p>
+<p>각 값들을 2차원 튜플을 통해 출력하거나 접근할 수 있습니다. 예를 들면 아래처럼요.</p>
+<p><br/>
+<strong>&lt;코드&gt;</strong></p>
+<pre><code>#사용 영역 출력해보기  
+print("A1 값 :", ws.UsedRange()[0][1])
+print("B3 값 :", ws.UsedRange()[1][2])
+</code></pre>
+<p><strong>&lt;결과&gt;</strong></p>
+<pre><code>A1 값 : text2 
+B3 값 : text5
+</code></pre>
+<p>해당 내용은 OpenPyxl의 "3-1-4) rows, columns 속성 이해하기"와 상당히 비슷한 부분이 많습니다. 2차원 튜플이므로 이중 for 문을 통해 모든 요소를 출력할 수 있습니다.  자세한 내용이 필요하신 분은 해당 파트를 참고하세요.</p>
+<p>위 내용에 이어서 이번에는 해당 영역을 직접 엑셀에서 선택 처리하는 코드를 작성해보겠습니다. "1. Range"에서도 다뤘지만 UsedRange 뒤에 Select( ) 함수를 사용하면 실제 영역을 선택합니다.</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>#사용 영역 선택처리하기
+ws.UsedRange.Select()
+</code></pre>
+<p><br/>
+<strong>&lt;결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/biipKH/btrpKlGuM5Z/mjctdxqrXoPEIZK368OuZK/img.png"/></p>
+<p>이 결과에서 보시다시피 해당 시트의 사용 영역은 모두 선택 처리 됐습니다. UsedRange를 정확히 이해 하기 위해 한가지 예시를 더 들어보겠습니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/IpQS0/btrpHFyczdw/gOeZawD2vyM0I48zb7EhxK/img.png"/></p>
+<p>위 이미지에서 동일한 코드를 실행시키면 어떻게 될까요?</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>#사용 영역 선택처리하기
+ws.UsedRange.Select()
+</code></pre>
+<p><strong>&lt;결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bnE0s0/btrpLsSVp1U/JS9sOmQKf83KGOOG0UoYrk/img.png"/></p>
+<p>위 결과에서 보시다시피, text7까지 사용 영역으로 인식하여 연속 된 범위가 모두 선택되었습니다. UsedRange는 위 결과처럼 시트의 연속 된 사용 영역을 모두 선택 처리한다는 점을 이해하시면 됩니다.</p>
+<p>참고로, data가 입력되어있는 것 뿐만 아니라 셀 서식이 적용되어있거나 셀의 행/열 높이가 수정 된 경우에도 사용 영역으로 인식합니다.</p>
+<p><br/></p>
+<h1 id="3-currentregion_1">3. CurrentRegion</h1>
+<p>세번째 내용은 CurrentRegion에 대한 내용입니다. CurrentRegion은 단어 뜻에 보자면 사실 UsedRange와 무슨 차이가 있나라는 생각이 들 수 있습니다. </p>
+<p>먼저, 사용법에서 차이점이 있습니다. UsedRange는 앞에 대상이 되는 객체가 WorkSheet(=ws)였습니다. CurrentRegion의 대상이 되는 객체는 Range입니다.</p>
+<p>예시 코드를 보며 이해해보겠습니다.</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>#A:C 열의 사용 영역 선택하기
+ws.Range("A:C").CurrentRegion.Select()
+</code></pre>
+<p><strong>&lt;결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/biipKH/btrpKlGuM5Z/mjctdxqrXoPEIZK368OuZK/img.png"/></p>
+<p>앞에서 설명드렸지만 CurrentRegion은 대상이 되는 객체가 Range입니다.  UsedRange에서는 대상이 되는 객체가 ws였던 것 기억하시죠??
+기억이 안나시면 2번 내용을 다시 확인해보세요!</p>
+<p>따라서, 아래 와 같은 코드 구성도 가능합니다. </p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>#시트 사용 영역 선택하기
+ws.UsedRange.CurrentRegion.Select()
+</code></pre>
+<p>위 코드는 위에서 Range("A:C")라고 표현한 코드와 동일한 결과를 출력합니다. 여기까지 공부해보면 자연스럽게 궁금증이 생기실 수도 있습니다. 결과 만을 놓고 보면 UsedRange와 별 차이가 없기 때문이죠.</p>
+<p>차이점을 알기 위해 아래 이미지와 같이 다른 예시를 들어보겠습니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/IpQS0/btrpHFyczdw/gOeZawD2vyM0I48zb7EhxK/img.png"/></p>
+<p>위 UsedRange를 설명했을 때, 사용했던 엑셀 파일 E3에 "text7"이라는 데이터를 추가했습니다. 위 코드를 사용하여 결과가 어떻게 나오는지 확인해보겠습니다.</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>#CurrentRegion 사용하기
+ws.UsedRange.CurrentRegion.Select()
+</code></pre>
+<p><strong>&lt;결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bBPwgu/btrp01tci5I/bupq5swEpuBEoBB3kvInYK/img.png"/></p>
+<p>"2. UsedRange" 에서 배웠던 내용을 생각해봅시다. ws.UsedRange.Select()를 사용하면 "text7"의 영역까지 전부 선택처리되었습니다. 위 코드를 확인하시면 CurrentRegion을 사용하니 "text7"은 선택되지 않았네요.</p>
+<p>CurrentRegion은 사용 영역의 첫 번째 영역을 기준으로 연속 된 영역 만을 선택합니다. 즉, "text1"을 기준으로 연속 된 영역(사각형)을 선택하는 것이죠.</p>
+<p>이해를 위해 한 가지 더 예시를 들어보겠습니다. 이번에는 위 이미지의 D3에 "text8"을 입력하고 똑같은 코드를 실행시켜보겠습니다.</p>
+<p><strong>&lt;결과&gt;</strong></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cLYESg/btrpWy6BOso/j88qkksvA86JZK7PtXJd8k/img.png"/></p>
+<p>위 결과와 같이 사용 영역이 전부 선택되었습니다. "text8"이 입력되면서 "text7"까지 연속 된 영역으로 설정됐기 때문입니다. 따라서, 아래처럼 코드를 작성하셔도 같은 결과가 나옵니다. "A1"을 기준으로 연속 된 영역을 선택한다는 코드입니다.</p>
+<p><strong>&lt;코드&gt;</strong></p>
+<pre><code>ws.Range("A1").CurrentRegion.Select()
+</code></pre>
+<p>궁금하신 부분은 한번 실행시켜보시기 바랍니다. 따라서, CurrentRegion을 사용해야 할 경우 선택되는 영역이 어딘지 반드시 확인하고 코드를 작성하시기 바랍니다.</p>
+<p><br/></p>
+<h1 id="4-specialcells_1">4. SpecialCells</h1>
+<p>마지막으로 배울 셀 선택 방법은 SpecialCells 이라는 함수를 사용하는 것입니다. SpecialCells는 특정 조건을 만족하는 셀을 선택 할 수 있습니다. 예를 들면, 데이터만 있는 셀만 선택하기, 빈 공간 선택하기가 있습니다.</p>
+<p>CurrentRegion( )과 마찬가지로 대상이 되는 객체는 Range입니다. 몇 가지 예시를 통해 알아보겠습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cgSOlq/btrp18k4Zno/FVLfp20F3TmRV7spQMGJh1/img.png"/></p>
+<p>예시는 위 엑셀 시트를 사용하겠습니다. 지금까지 설명해왔던 것과 마찬가지로 WorkSheet의 객체명은 ws임을 가정하고 아래 코드를 작성하겠습니다.</p>
+<h3 id="1-usedrange">&lt;사용 예시1 : 사용 영역(UsedRange) 중 연속 된 영역 모두 선택&gt;</h3>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code>#연속 된 사용영역 선택
+ws.UsedRange.SpecialCells(12).Select()
+</code></pre>
+<h3 id="_1">&lt;결과&gt;</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/nx4vc/btrpU1aqiY4/Vv72IsnfD5BOF4INrGYGaK/img.png"/></p>
+<p>사실상 위 결과는 ws.UsedRange.Select( ) 동일합니다. SpecialCells(12)의 숫자 12는 옵션을 뜻합니다. 12는 데이터가 있는 연속 된 영역을 모두 선택하겠다는 옵션 값입니다. 괄호 안의 여러 가지 숫자에 따라 영역 선택 조건을 변경할 수 있습니다. </p>
+<p>참고로, 앞 과정과 같이 데이터를 2차원 튜플로 읽어오시려면 Select( ) 대신 Value( ) 를 사용하시면 됩니다.</p>
+<h3 id="2-usedrange_2">&lt;사용 예시2 : 사용 영역(UsedRange) 중 데이터가 없는 빈 셀만 선택&gt;</h3>
+<pre><code>#연속 된 사용역역에서 빈 셀만 선택하기
+ws.UsedRange.SpecialCells(4).Select()
+</code></pre>
+<h3 id="_2">&lt;결과&gt;</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/ceWR5a/btrp0JzyV8l/CHavK87uGuv2skXvuS2Ydk/img.png"/></p>
+<p>위 시트에서 ws.UsedRange.Select( ) 코드를 실행하면 "A1:E3"의 연속 된 영역을 모두 선택합니다. 추가로, SpecialCells(4)를 사용하면 위 이미지와 같이 사용 영역(UsedRange) 에서 빈 셀만 선택합니다.</p>
+<h3 id="3-usedrange">&lt;사용 예시3 : 사용 영역(UsedRange) 중 마지막 셀 선택&gt;</h3>
+<pre><code>#연속 된 사용역역에서 마지막 셀 선택
+ws.UsedRange.SpecialCells(11).Select()
+</code></pre>
+<h3 id="_3">&lt;결과&gt;</h3>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/xchhc/btrp0ajQ1zj/4HPsMKjzx4B6ucCsRJKPk0/img.png"/></p>
+<p>SpecialCells(11)을 사용하면 이미지와 같이 사용 영역(UsedRange) 중 마지막 셀을 선택하게 됩니다. 즉, "text7"을 선택합니다.</p>
+<p>SpecialCells( )의 옵션 값은 Microsoft에서 제공하는 공식 Document를 확하시면 됩니다. 아래 이미지는 그 내용입니다. 엑셀 VBA를 아시는 분이라면 지금까지 배웠던 내용이 엑셀 VBA와 동일한 내용임을 아실 수 있습니다. win32com은 엑셀 VBA와 마찬가지로 Microsoft에서 개발한 라이브러리이기 때문입니다.</p>
+<p>궁금하신 분은 아래 표의 Value를 참고하여 테스트해보세요!</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/vQdUz/btrpwO9ihEx/tDIUjAex67ytwQBXN1CpjK/img.png"/></p>
+</div>

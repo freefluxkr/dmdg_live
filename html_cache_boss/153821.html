@@ -1,0 +1,201 @@
+<h1 class="page-subject">9) win32com 통해 전자메일(Outlook) 다루기</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>win32com.client 모듈을 사용하면 사내에서 사용하는 Outlook 전자메일을 자동화할 수 있습니다. 대표적인 자동화 예로, Outlook 메일을 다수의 사람들에게 자동 발송할 수 있습니다. 또한, 첨부파일들을 한번에 다운받거나 메일의 내용들을 엑셀 파일에 한번에 취합하는 것도 가능합니다.</p>
+<p>위와 같은 자동화 기능을 구현하려면 win32com.client를 사용해서 outlook 전자메일을 제어할 수 있는 기초적인 방법에 대해 알아야 합니다. 이번 파트에서는 Outlook 이메일을 파이썬을 통해 제어하는 방법에 대해 알아보겠습니다.</p>
+<p><br/></p>
+<h1 id="1-import">1. import</h1>
+<p>이 부분은 엑셀을 제어하는 방법과 동일합니다. win32com.client를 아래 코드로 import 시켜줍니다.</p>
+<pre><code>import win32com.client
+</code></pre>
+<p><br/></p>
+<h1 id="2">2. 메일 보내기(송신)</h1>
+<p>코드를 공부하기 전에 먼저 메일을 보내는 과정을 생각해봅시다. Outlook 프로그램을 열고, 메일 보내기 창을 선택하여 메일 정보(내용, 수신자 등)을 입력합니다. 그 다음, 메일 보내기 버튼을 누르면 지정한 수신자에게 메일을 보낼 수 있습니다.</p>
+<p>win32com.client를 통해 메일을 제어하는 과정도 동일합니다. 그 과정을 아래와 같이 도식화해보았습니다. 앞으로의 작성 코드는 그림과 같이 순서대로 과정을 따라가도록 하겠습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bedit8/btroeAqZBRq/DP3ZKZNq7buw9nnty5RhS0/img.png"/></p>
+<p><br/></p>
+<h3 id="1-outlook-application">1) Outlook Application에 대한 객체 생성하기</h3>
+<p>Outlook을 제어할 때 가장 첫번째로 해야할 일은 Outlook 프로그램을 여는 것입니다. 코드에서는 Outlook 프로그램에 대한 객체를 설정해준다고 표현합니다.  (위 이미지에서 첫번째 과정) </p>
+<pre><code>outlook=win32com.client.Dispatch("Outlook.Application")
+</code></pre>
+<h3 id="2_1">2) 메일을 보내기 위한 객체 생성</h3>
+<p>1)에서 생성한 outlook 객체를 이용해 "메일 보내기" 창을 열어보겠습니다. CreateItem( )이라는 함수를 사용합니다. CreateItem(0)은 메일 보내기 창을 새로 생성하는 코드입니다. send_mail이라는 변수로 설정하여 이 변수가 메일보내기 창의 객체 성질을 가질 수 있게 합니다.</p>
+<pre><code>send_mail = outlook.CreateItem(0)
+</code></pre>
+<h3 id="3">3) 메일 보내기에 필요한 정보 입력</h3>
+<p>2)에서 send_mail은 메일 보내기 창의 객체 성질을 가진다고 언급했습니다. 저희가 메일을 보낼 때, 기본적으로 입력해야 하는 정보들이 있습니다. send_mail은 이 메일 보내기 창의 성질(속성)들을 가지게 됩니다. 아래 코드처럼요.</p>
+<p>수신인, 참조, 제목, 메일내용 등을 문자열을 입력해보겠습니다.</p>
+<pre><code>send_mail.To = "수신인@gmail.com" #메일 수신인
+send.mail.CC = "참조@gmail.com" #메일 참조
+send_mail.Subject = "사장님 몰래 하는 파이썬 업무 자동화" #메일 제목
+send_mail.HTMLBody = "들키면 일이 많아지니 몰래할 것!" #내용
+</code></pre>
+<p>한가지 알아두어야 할 점은 메일의 본문 작성은 HTML 형태라는 것입니다. HTML의 각 태그를 통해 메일을 꾸밀 수도 있다는 점 참고하시면 됩니다.</p>
+<h3 id="4">4) 메일 보내기</h3>
+<p>메일은 Send( ) 라는 함수를 통해 보낼 수 있습니다. 위에서 설정했던 send_mail 변수를 통해 Send( ) 를 사용해봅시다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code>send_mail.Send() #메일 보내기
+</code></pre>
+<p>코드를 작성해서 실행해보면 Outlook에서 아래 메일이 작성되어 수신자, 참조자에게 송신된 것을 확인하실 수 있습니다.</p>
+<p><br/>
+<img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/rBHH6/btrnvoR6TJU/9BCaBbsBQ0QPPa28oVl890/img.png"/></p>
+<p><br/></p>
+<h1 id="3_1">3. 메일 받기(수신)</h1>
+<p>지금까지 2번 항목에서는 win32com.client 모듈을 사용하여 Outlook 메일을 보내는 법을 순서대로 설명했습니다. 이번에는 반대로 받아온 메일을 어떻게 파이썬을 통해 읽어올 수 있는지 설명해보도록 하겠습니다.</p>
+<p>먼저, 메일을 받는 수신 과정을 코드로 구현하는 것은 아래 그림으로 요악할 수 있습니다. 앞으로의 과정은 이 그림을 기준으로 설명하겠습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/c6u4Yo/btrobGTphPT/P02K0gaECcLbD0BNSw12V0/img.png"/></p>
+<p><br/></p>
+<h3 id="1-outlook-application_1">1) Outlook Application에 대한 객체 생성하기</h3>
+<p>메일 송신과 마찬가지로 수신시에도 Outlook에 대한 객체를 생성해주어야 합니다. 위 그림에서 Outlook App 객체를 생성하는 부분입니다. 아래와 같이 코드를 작성해보겠습니다.</p>
+<pre><code>outlook=win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+</code></pre>
+<p>메일 송신시와 차이가 있는 부분은 뒤에 .GetNamespace("MAPI")라는 부분입니다. </p>
+<p>MAPI는 메일을 수신할 때 필요한 프로토콜입니다. 프로토콜은 표준, 규약이라는 의미입니다. Outlook 메일을 사용할 때 송신자와 수신자 간의 약속이라고 생각하시면 됩니다. 자세한 내용은 모르셔도 사용하시는데 무관하며, win32com.client를 사용하여 메일 수신시 사용해야 하는 코드라고 이해하시면 됩니다.</p>
+<h3 id="2_2">2) 메일 수신함 설정하기</h3>
+<p>Outlook 전자메일을 사용할 때, 받은 메일을 확인하는 과정을 생각해봅시다. Outlook 프로그램을 실행하고 받은 편지함을 선택합니다. 그 다음, 오른쪽 메일 리스트에서 보고 싶은 메일을 선택합니다. 위 그림에서 inboxfolder와 messges에 해당하는 부분입니다.</p>
+<p><br/>
+<img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/3pInO/btrnBhmcUBR/C8ZotDUITzc0n7ctK9wAEK/img.png"/></p>
+<p><br/>
+파이썬 코드에서도 이 과정은 동일합니다. 아래 코드 및 주석을 통해 확인해보겠습니다.</p>
+<pre><code># 받은 편지함 선택(객체 생성), 6번은 받은 편지함(inbox folder) 의미
+inboxfolder = outlook.GetDefaultFolder(6) 
+
+#받은 편지함의 messgae 받아오기(모든 메시지)
+messages = inboxfolder.Items
+</code></pre>
+<p>위 코드에서 messages는 받은 편지함의 메시지 목록을 의미합니다. 따라서 반복문을 통해 접근할 수 있습니다.  for문을 통해 메시지 목록을 출력해보겠습니다.</p>
+<pre><code>#메시지 목록 출력해보기
+for  mail  in  messages:
+    print(mail)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code>#메일 목록 출력
+&lt;COMObject &lt;unknown&gt;&gt;
+&lt;COMObject &lt;unknown&gt;&gt;
+</code></pre>
+<p>메일 목록을 출력해보니 COMObject 라는 텍스트가 2건 출력 됐습니다. 
+ COMObject는 Win32com.client 모듈을 사용할 때, COM 객체를 의미합니다. 업무 자동화에 이용하려는 목적에서는 COM 객체가 무엇인지 자세히 모르셔도 무관합니다. 단순히, 각각 1개의 COM객체는 메일 1건을 의미하는 것이라고 이해하시면 됩니다.</p>
+<p>COMObject가 2건 출력됐다는 것은 현재 "받은 편지함"에 메일이 2건이 있는 것을 의미합니다. 받은 편지함의 메일 건수를 실제 숫자로 확인해보고 싶다면 아래와 같이 코드를 작성합니다.</p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<pre><code>#메일 건수 출력하기
+msg_count = messages.count
+print("받은편지함의 메일 건수는? : ", msg_count,"건")
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code>받은편지함의 메일 건수는? : 2 건
+</code></pre>
+<p>추가로, 받은 편지함의 특정 메일함에 접근하려면 어떻게 할까요?
+예를 들면, 아래 이미지처럼 받은 편지함 내부에서도 "test" 폴더와 같이 여러 폴더로 구분하여 관리하는 경우입니다. </p>
+<p><br/></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/b36k9r/btrnB7wNzQu/mkiszPbgDQoRhXtG47Tkn0/img.png"/></p>
+<p>받은편지함 - test 폴더에 접근하려면 위 코드 중 inboxfolder를 아래와 같이 작성하시면 됩니다.</p>
+<pre><code>#받은편지함 중 "test" 메일함을 객체로 설정
+inboxfolder = outlook.GetDefaultFolder(6).Folders["test"]
+</code></pre>
+<h3 id="3_2">3) 받은 메일 내용 출력해보기</h3>
+<p>이번에는 실제로 받은 메일의 보낸이, 제목, 메일 내용 등 메일 정보를 출력하는 코드를 작성해보겠습니다.</p>
+<pre><code>#받은 편지함 설정
+inboxfolder = outlook.GetDefaultFolder(6) 
+
+#받은 편지함의 messgae 받아오기(모든 메시지)
+messages = inboxfolder.Items
+</code></pre>
+<p>위에서 생성했던 2)에서 설정했던 객체인 messges를 for 반복문을 사용해서 각 메일의 정보를 출력해보겠습니다.</p>
+<pre><code>i=1 #여러 메일 출력을 위한 인덱싱
+
+#각 메일에 대한 정보를 for 반복문을 통해 출력
+for  mail  in  messages:
+    print(str(i) + "번째 메일의 발신인 : " + mail.SenderName)
+    print(str(i) + "번째 메일의 수신인 : " + mail.To)
+    print(str(i) + "번째 메일의 제목 : " + mail.Subject)
+    print(str(i) + "번째 메일의 받은시간 : " + str(mail.ReceivedTime))
+    print(str(i) + "번째 메일의 내부내용 : " + mail.Body)
+    print('\n')
+    i = i+1
+</code></pre>
+<p>위 코드에서 SenderName(보낸이), To(받는이), Subject(메일제목), Body(메일내용), ReceivedTime(받은시간) 등은 mail 1개 객체가 가진 속성입니다. 이 속성들을 활용해서 메일의 내용들을 읽어올 수 있습니다. 위 코드의 결과는 아래와 같습니다.</p>
+<p>ReceivedTime의 경우 문자열이 아니기에 문자열로 변경시켜주기 위해 str( )을 사용했습니다.</p>
+<p>&lt;결과&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/353QY/btqYE7arie6/e69NB6EObUodHgt3ftINp1/img.png"/></p>
+<h3 id="4_1">4) 첨부파일 다운 받기</h3>
+<p>메일에는 내용뿐만 아니라 별도 파일이 첨부되어 있는 경우도 있습니다. 만약, 업무자동화 내용 중 메일의 첨부파일을 모두 자동으로 다운 받아야하는 경우에는 해당 코드를 응용하시면 됩니다.</p>
+<pre><code>#받은 편지함 설정
+inboxfolder = outlook.GetDefaultFolder(6) 
+
+#받은 편지함의 messgae 받아오기(모든 메시지)
+messages = inboxfolder.Items
+</code></pre>
+<p>마찬가지로 받은 편지함의 메일 목록을 가진 위 코드의 messages 객체를 통해 기능을 구현해보겠습니다.  먼저, 전체 코드부터 볼까요?</p>
+<p><br/>
+&lt;전체코드&gt;</p>
+<pre><code>no = 1 #중복 파일명이 있을 것을 대비해 추가한 파일명 인덱스
+m_count = 1 #메일 카운트
+#각 메일마다 첨부파일을 다운로드 하는 루프
+for ms in messages:
+
+    attachments = ms.Attachments #해당 메일의 첨부파일 객체 설정
+    r = attachments.count #해당 메일의 첨부파일 개수(integer)
+    print(str(m_count)+"번째 메일 첨부파일 개수 : ",str(r)+"개")
+    m_count=m_count+1
+    #해당 메일의 첨부파일을 모두 저장
+    for i in range(1, r + 1):
+        attachment = attachments.Item(i)
+        attachment.SaveASFile("경로" + str(no) + "_" + str(attachment))  # 파일명 설정
+        no = no + 1
+</code></pre>
+<p><br/>
+각 코드마다 주석을 달아 놨으나 중요한 부분만 다시 짚고 넘어가도록 하겠습니다. 먼저 첫번째 메일의 첨부파일 객체를 생성하는 부분입니다.</p>
+<pre><code>#각 메일마다 첨부파일 객체 생성
+for  ms  in  messages:
+
+    attachments = ms.Attachments #해당 메일의 첨부파일 객체 설정
+    print("첨부파일 목록 객체 생성 :", attachments)
+    #첨부파일 개수 확인하기
+    print("첨부파일 개수 : ", attachments.count)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code>첨부파일 목록 객체 생성 : &lt;COMObject &lt;unknown&gt;&gt; 첨부파일 개수 : 1
+첨부파일 목록 객체 생성 : &lt;COMObject &lt;unknown&gt;&gt; 첨부파일 개수 : 2
+첨부파일 목록 객체 생성 : &lt;COMObject &lt;unknown&gt;&gt; 첨부파일 개수 : 1
+</code></pre>
+<p>"2) 메일 수신함 설정하기"에서도 다뤘지만 inboxFolder.Items 라는 구문을 통해 받은 편지함의 메일 리스트를 객체로 생성할 수 있다고 언급했습니다.(위 변수 중  messages)</p>
+<p>객체 변수 messages가 for문을 통해 반복하면 각 받은편지함의 1개 메일의 특성을 갖게 됩니다. 따라서 위 코드처럼 ms.Attachments의 의미는 각 메일 1개에 포함되어있는 첨부파일 목록을 의미합니다.</p>
+<p>ms.attachments는 첨부파일 목록이므로 다시 아래 코드와 같이 개별 파일에 접근할 수 있게됩니다.</p>
+<pre><code>#각 메일마다 첨부파일 객체 생성
+for  ms  in  messages:
+    attachments = ms.Attachments #해당 메일의 첨부파일 목록 객체 설정
+        for  onefile  in  attachments: #첨부파일 목록을 다시 개별파일로 접근
+            print(onefile)
+</code></pre>
+<p>&lt;결과&gt;</p>
+<pre><code>요청1.xlsx 
+요청2.xlsx 
+요청3.xlsx 
+요청4.xlsx
+</code></pre>
+<p>전 과정에서 첨부파일 개수가 총 4개였던 것 기억하시죠?? 그에 맞게 첨부파일 4개가 파일명으로 출력 되었습니다. 위 코드를 응용해서 첨부파일을 저장하는 코드를 작성할 수 있습니다.</p>
+<pre><code>#각 메일에 접근하는 루프
+for  ms  in  messages:
+
+    attachments = ms.Attachments #해당 메일의 첨부파일 객체 설정
+    file_num = attachments.count #해당 메일의 첨부파일 개수 확인
+    print("현 메일의 파일 건수 : ", file_num)
+
+#파일을 저장하는 루프
+    for  i  in  range(1, file_num+1):
+        one_file = attachments.Item(i) #메일의 개별 첨부 파일을 객체로 생성
+        print(one_file) #파일명 출력
+
+        one_file.SaveASFile(str(one_file)) #파일 명 그대로 저장
+</code></pre>
+</div>

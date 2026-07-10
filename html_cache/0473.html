@@ -1,0 +1,10 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<p class="txt bl">y축에 들어갈 월별 지출액 리스트는 spend_month를 줄인 <span class="cd">s_mon</span> 변수에 저장하겠습니다. 그럼 10~12월 지출액은 각각 <span class="cd">s_mon[0]</span>, <span class="cd">s_mon[1]</span>, <span class="cd">s_mon[2]</span>에 들어갑니다. 카드 이용월과 <span class="cd">s_mon</span> 인덱스 사이의 규칙이 보이나요? (카드 이용월 - 10)을 하면 리스트 <span class="cd">s_mon</span>의 인덱스가 됩니다. 따라서 <span class="cd">data</span>에 저장된 이용내역 건마다 이용월에서 10을 빼서 <span class="cd">s_mon</span>의 인덱스를 구합니다. 그리고 해당 인덱스의 값에 이용금액을 누적해서 더하면 됩니다.</p>
+<div class="w60"><img alt="" class="w100" src="https://thebook.io/img/080251/401.jpg"/></div>
+<p class="txts2 dl s12_12"><span class="dm gray">▲ 그림 9-12</span> 카드 이용월과 인덱스의 관계</p>
+<p class="txt bl">그럼 월별 지출액은 어떻게 구할까요? 먼저 첫 번째 열의 이용일시에서 월에 해당하는 부분을 골라냅니다. 이용일시는 2019-10-12처럼 연-월-일 사이에 하이픈(-)이 있으므로 하이픈을 기준으로 <span class="cd">split()</span> 명령어를 사용해 이용일시를 분리할 수 있습니다.</p>
+</div>
+</section>
+</section>

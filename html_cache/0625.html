@@ -1,0 +1,31 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<div class="highlight">
+<pre><span class="green"># 추가. 행정동명으로 위치 정보를 찾지 못하면 7자리 행정동코드로 찾기</span>
+<span class="purple">for</span> i <span class="blue2">in</span> <span class="gold">range</span>(<span class="gold">len</span>(top10_lat)):
+    <span class="green"># 위도나 경도가 0인 요소가 있다면</span>
+    <span class="purple">if</span> top10_lat[i] == <span class="green">0</span> <span class="blue2">or</span> top10_long[i] == <span class="green">0</span>:
+        <span class="green"># code_data에서</span> <span class="green">7자리 행정동코드를 구해 dong7에 저장하기</span>
+        <span class="purple">for</span> row <span class="blue2">in</span> code_data:
+            <span class="purple">if</span> top10_code8[i] == row[<span class="green">1</span>]:
+                dong7 = row[<span class="green">0</span>]
+        <span class="green"># location_data에서 7자리 행정동코드가 dong7인 행을 찾아 위도와 경도를 구하기</span>
+        <span class="purple">for</span> row <span class="blue2">in</span> location_data:
+            <span class="purple">if</span> dong7 == row[<span class="green">2</span>]:
+                top10_lat[i], top10_long[i] = row[<span class="green">-1</span>], row[<span class="green">-2</span>]
+<span class="gold">print</span>(top10_lat)
+<span class="gold">print</span>(top10_long)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+[37.4999211, 37.5286662, 37.5550337, 37.5777701, 37.4856591, 37.5659638, 37.64193, 37.4756389, 37.4984733, 37.4955294]
+[127.0367584, 126.9290731, 126.9228533, 126.9892737, 127.0097616, 126.9384315, 126.9387277, 126.8850721, 127.0449272, 127.0662436]</pre>
+</div>
+<p class="txt bl"><span class="cd">top10_lat[1]</span>과 <span class="cd">top10_long[1]</span>에 정상적인 값이 저장됐습니다. 데이터 파일이 서로 잘 맞으면 작성하지 않아도 될 코드입니다. 사실 데이터 분석을 진행하다 보면 데이터 자체에 문제가 있는 경우가 상당히 많습니다.</p>
+<div class="box_blue_line">
+<p class="txts dl s22_22"><span class="dm bg_blue">TIP</span> 행정동명이 일치하지 않으면 위도와 경도 모두 값이 제대로 저장되지 않습니다. 그래서 <span class="cd">if top10_lat[i] == 0 or top10_long[i] == 0</span> 대신 <span class="cd">if top10_lat[i] == 0</span> 또는 <span class="cd">if top10_long[i] == 0</span>으로 작성해도 이 프로그램에서는 같은 결과가 나옵니다.</p>
+</div>
+</div>
+</section>
+</section>

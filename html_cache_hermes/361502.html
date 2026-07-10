@@ -1,0 +1,120 @@
+<h1 class="page-subject">05-3-1. Honcho — 변증법적 사용자 모델</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<p>외부 메모리 백엔드 중 기능이 가장 풍부한 Honcho를 중심으로 작동 방식을 살펴봅니다. Honcho는 Plastic Labs가 개발한 사용자 모델링 서비스로, Hermes 외에도 여러 에이전트 프레임워크와 연동됩니다.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">변증법적 사용자 모델</a></li>
+<li><a href="#honcho">Honcho 도구</a></li>
+<li><a href="#_2">리콜 모드</a></li>
+<li><a href="#honcho_1">Honcho 서버 구성</a></li>
+<li><a href="#_3">설정</a></li>
+</ul>
+</div>
+<h3 id="_1">변증법적 사용자 모델</h3>
+<p>Honcho의 가장 큰 특징은 단순히 사실을 나열하는 것이 아니라, 사용자의 선호·패턴·의도를 <strong>변증법적(dialectic)으로</strong> 모델링한다는 점입니다. 예를 들어, 사용자가 평소에는 간결한 답변을 선호하지만 새로운 개념을 배울 때는 상세한 설명을 원한다는 미묘한 패턴까지 파악할 수 있습니다.</p>
+<p>Honcho 서버의 deriver(추출기)가 대화를 분석하여 관찰을 자동으로 뽑아내고, 이 관찰들이 축적되면 서로 모순되는 패턴까지 고려한 종합적인 사용자 모델을 구축합니다.</p>
+<h3 id="honcho">Honcho 도구</h3>
+<p>Honcho가 활성화되면 5개의 전용 도구가 등록됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>프로필 조회·갱신</td>
+<td>피어 카드(이름, 역할, 선호, 패턴) 조회 또는 갱신</td>
+</tr>
+<tr>
+<td>의미 검색</td>
+<td>축적된 관찰에서 관련 정보를 검색</td>
+</tr>
+<tr>
+<td>심층 추론</td>
+<td>Honcho의 LLM에게 사용자에 대한 질문 (추론 깊이 5단계)</td>
+</tr>
+<tr>
+<td>컨텍스트 조회</td>
+<td>현재 세션의 전체 컨텍스트(요약, 관찰, 피어 카드, 최근 메시지) 확인</td>
+</tr>
+<tr>
+<td>결론 저장</td>
+<td>사용자에 대한 결론을 Honcho 메모리에 영구 저장 또는 삭제</td>
+</tr>
+</tbody>
+</table>
+<p>심층 추론은 Honcho 서버의 LLM을 호출하여 종합적인 답변을 생성합니다. 단순 의미 검색보다 비용이 높지만, 축적된 관찰을 바탕으로 더 깊은 분석을 제공합니다.</p>
+<h3 id="_2">리콜 모드</h3>
+<p>Honcho는 세 가지 리콜 모드를 지원합니다.</p>
+<table>
+<thead>
+<tr>
+<th>모드</th>
+<th>자동 컨텍스트 주입</th>
+<th>Honcho 도구 사용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hybrid</code> (기본)</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td>O</td>
+<td>X</td>
+</tr>
+<tr>
+<td><code>tools</code></td>
+<td>X</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<p>기본값인 <code>hybrid</code> 모드에서는 매 턴 시작 시 Honcho의 컨텍스트가 자동으로 주입되고, 에이전트가 필요할 때 Honcho 도구를 추가로 호출할 수도 있습니다.</p>
+<h3 id="honcho_1">Honcho 서버 구성</h3>
+<p>Honcho는 클라우드 서비스(<code>app.honcho.dev</code>)를 이용하거나 직접 서버를 구축할 수 있습니다. 셀프 호스팅 시 Docker Compose로 4개 컨테이너를 실행합니다.</p>
+<table>
+<thead>
+<tr>
+<th>서비스</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api</td>
+<td>REST API (FastAPI)</td>
+</tr>
+<tr>
+<td>deriver</td>
+<td>백그라운드 워커 — 관찰 추출, 요약, 임베딩</td>
+</tr>
+<tr>
+<td>database</td>
+<td>PostgreSQL + pgvector (벡터 검색)</td>
+</tr>
+<tr>
+<td>redis</td>
+<td>캐시</td>
+</tr>
+</tbody>
+</table>
+<p>Honcho 서버는 자체적으로 LLM을 호출합니다. 클라이언트(Hermes)의 LLM을 빌려 쓰는 구조가 아니므로, 서버 측에도 별도의 LLM API 키가 필요합니다. 기본값은 OpenAI API(gpt-5.4-mini + text-embedding-3-small)이며, Hermes가 사용하는 LLM 설정과는 완전히 독립입니다.</p>
+<blockquote>
+<p>⚠️ <strong>별도 비용 발생</strong>: 클라우드 서비스를 이용하든 셀프 호스팅을 하든, Honcho가 사용하는 LLM 비용은 Hermes의 LLM 비용과 별개로 청구됩니다. 대화할 때마다 관찰 추출·요약·임베딩이 백그라운드에서 돌아가므로, 유료 API를 쓰면 그만큼 비용이 추가됩니다. 로컬 LLM(Ollama 등)을 연결하면 이 비용을 없앨 수 있습니다(부록 「로컬 LLM 가이드」의 Honcho 절 참고).</p>
+</blockquote>
+<h3 id="_3">설정</h3>
+<p>Hermes에서 Honcho를 활성화하는 방법은 간단합니다.</p>
+<pre><code class="language-bash">hermes memory setup honcho
+</code></pre>
+<p>설정 마법사에서 클라우드와 셀프 호스팅 중 선택하고, 접속 정보를 입력하면 됩니다. 또는 수동으로 지정할 수도 있습니다.</p>
+<pre><code class="language-bash">hermes config set memory.provider honcho
+echo "HONCHO_API_KEY=발급받은-키" &gt;&gt; ~/.hermes/.env
+</code></pre>
+<p>API 키는 <code>app.honcho.dev</code>에서 발급하며, 셀프 호스팅 인스턴스를 쓸 경우 접속 URL을 지정합니다.</p>
+</div>

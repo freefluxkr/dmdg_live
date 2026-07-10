@@ -1,0 +1,21 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h4 class="txt1 dm" id="sigil_toc_id_80"><span class="yellow">9.2.2</span> 제어구조로 원하는 데이터 추출하기</h4>
+<p class="txt bl">앞에서 반복문과 조건문을 활용하면 이차원 리스트를 다루기가 쉬웠습니다. 수많은 데이터가 들어 있는 데이터 파일에서도 반복문과 조건문을 사용하면 전체 데이터에서 원하는 데이터를 추출하기도 쉽고 코드도 덜 복잡해집니다. 이번에는 반복문을 활용해 카드 이용내역에서 원하는 데이터를 뽑아 보겠습니다.</p>
+<p class="txts"> </p>
+<p class="txtex dm">반복문으로 데이터 추출하기</p>
+<p class="txt bl">현재 카드 이용내역은 변수 <span class="cd">data</span>에 이차원 리스트 형태로 저장되어 있습니다. <span class="cd">data</span>에서 한 행은 한 건의 이용내역입니다. 따라서 반복문의 반복 구간에 이차원 리스트를 넣으면 한 행(일차원 리스트)씩 변수에 저장됩니다. 이를 이용해 다음과 같이 이용내역을 한 건씩 출력할 수 있습니다.</p>
+<div class="highlight">
+<pre><span class="purple">for</span> row <span class="blue2">in</span> data:
+    <span class="gold">print</span>(row)</pre>
+</div>
+<div class="highlight4">
+<pre><span class="bg_brown3">실행결과</span>
+['2019-10-12 9:13', '1972753', '본', 'S&amp;', '185', '네이버파이낸셜(주)', '546800', '일시불(A)', '부분취소']
+['2019-10-12 11:56', '3399357', '본', 'S&amp;', '185', 'GS샵', '60440', '일시불(A)', '전표매입']
+…</pre>
+</div>
+</div>
+</section>
+</section>

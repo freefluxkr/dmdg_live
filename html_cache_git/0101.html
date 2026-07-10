@@ -1,0 +1,23 @@
+<section class="thebook-container" id="page_content">
+<section class="thebook-section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<div class="thebook-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+<h3>3.6.3 복제 명령어</h3>
+<p class="x00--">깃의 저장소를 복제하는 명령어는 <span class="A------ x3-------1">clone</span>입니다. 복제하려면 공개된 저장소의 <span class="A------">URL</span>이 필요합니다. 복제할 때 폴더 이름을 지정하지 않으면 공개 저장소에서 사용된 폴더와 동일한 이름으로 새 폴더를 만듭니다. 다른 이름으로 복제하길 원한다면 새 폴더 이름을 추가 인자로 적어 줍니다.</p>
+<div class="frame-62">
+<p class="N------2 para-style-override-39">$ git clone <span class="N--------1 N--------1">원격저장소</span>URL <span class="N--------1 N--------1">새폴더이름</span></p>
+</div>
+<p class="x00--">다음은 필자가 운영하는 <span class="A------">jinyphp</span> 오픈 소스 사이트의 주소를 이용하여 저장소를 복제하는 예입니다. 새 폴더 이름을 적지 않아 공개 저장소에서 사용된 폴더와 동일한 이름으로 새 폴더를 만들 것입니다.</p>
+<p class="lbl"><span class="ex">예</span></p>
+<pre><code><p class="N-----">$ <span class="x--">git clone https://github.com/jinyphp/jiny</span> <span class="ingd">저장소 복제</span></p>
+<p class="N-----"></p>
+<p class="N-----">Cloning into 'jiny'...</p>
+<p class="N-----">remote: Enumerating objects: 975, done.</p>
+<p class="N-----">remote: Total 975 (delta 0), reused 0 (delta 0), pack-reused 975</p>
+<p class="N-----">Receiving objects: 100% (975/975), 4.98 MiB | 3.67 MiB/s, done.</p>
+<p class="N----">Resolving deltas: 100% (307/307), done.</p></code></pre>
+<p class="x00--"><span class="A------ x3-------1">git</span><span class="x3-------1"> </span><span class="A------ x3-------1">clone</span> 명령어를 사용하면 깃은 자동으로 깃 서버에 접속합니다. 그리고 저장소의 모든 소스 코드를 자동으로 내려받습니다. </p>
+<p class="x00--">깃은 저장소 안에 있는 파일들과 .<span class="A------">git</span> 리포지터리를 기반으로 이력을 관리합니다. 따라서 복제한 후에는 복제된 폴더 이름을 그대로 사용하지 않아도 됩니다. 필요에 따라 깃의 폴더 이름을 변경해도 괜찮습니다.</p>
+<p class="x05----- para-style-override-16"><span> </span></p>
+</div>
+</section>
+</section>

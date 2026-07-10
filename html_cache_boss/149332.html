@@ -1,0 +1,73 @@
+<h1 class="page-subject">3) os 모듈</h1>
+<hr class="title-divider"/>
+<div class="page-content tex2jax_process">
+<h1 id="1-os">1. os 모듈 불러오기</h1>
+<p>os 모듈은 기본적으로 설치되어 있는 파이썬 내장 라이브러리에 포함된 모듈입니다. 참고로 파이썬 내장 라이브러리에는 우리가 자주 사용하는 sys, time, random 모듈도 있답니다.</p>
+<p>이미 설치되어 있기에 간단하게 import 해주면 되겠습니다.</p>
+<pre><code>import os
+</code></pre>
+<h1 id="2-os">2. os 모듈의 함수들</h1>
+<p>아래의 os 모듈 공식 문서를 보시면 os 모듈에는 정말 많은 함수들이 내장되어 있습니다.</p>
+<p><a href="https://docs.python.org/ko/3/library/os.html">https://docs.python.org/ko/3/library/os.html</a></p>
+<p>수 십 가지의 함수를 모두 공부하는 것은 너무나도 비효율적인 일이니, 제가 생각하기에 가장 많이 쓸만한 함수만 골라서 알려드리겠습니다.</p>
+<h3 id="1-osgetcwd"><strong>1) os.getcwd( )</strong></h3>
+<p>현재 작업중인 경로를 문자열로 돌려주는 getcwd( ) 함수입니다. 저의 경우는 실행한 파이썬 파일이 위치한 VSCODE BASIC이라는 디렉토리(폴더)의 경로를 출력해주는 것을 확인할 수 있습니다.</p>
+<pre><code>print(os.getcwd())
+
+&lt;결과&gt;
+&gt;&gt;&gt; /Users/sangwoo/Desktop/VSCODE BASIC
+</code></pre>
+<h3 id="2-osmkdir"><strong>2) os.mkdir( )</strong></h3>
+<p>괄호 안에 '원하는 경로' + '/새로운 디렉토리'를 써주면 새로운 디렉토리가 생겨납니다. 만약 이미 있는 디렉토리를 생성해주려고 하면 에러가 발생하니 주의하세요.</p>
+<pre><code>os.mkdir("/Users/sangwoo/Desktop/test_mkdir")
+</code></pre>
+<p>&lt;결과&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/PlpW1/btq6L5nFqpf/ozykKSgdP9Zn3uYVQfQA10/img.png"/></p>
+<h3 id="3-osmakedirs"><strong>3) os.makedirs( )</strong></h3>
+<p>os.mkdir( )과 비슷하지만 조금 다릅니다. 뭐랄까.. 디렉토리를 연달아서 적어주면 줄줄이 소세지 처럼 디렉토리가 생성됩니다.</p>
+<pre><code>os.mkdir("/Users/sangwoo/Desktop/test_mkdir/a/b/c")
+</code></pre>
+<p>&lt;결과&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/dHH8TV/btq6LdM4Qs2/M5yDMsGLvMq7Tbd8wdBvpk/img.gif"/></p>
+<h3 id="4-oslistdir"><strong>4) os.listdir( )</strong></h3>
+<p>정말 많이 사용하는 함수인 해당 경로에 위치하는 파일, 디렉토리 이름(확장자 포함)을 리스트로 돌려주는 함수입니다.</p>
+<pre><code># os.listdir("/디렉토리")
+
+# 현재 작업 경로에 있는 파일, 디렉토리 리스트 얻기
+print(os.listdir(os.getcwd()))
+</code></pre>
+<p>좌측의 실제 디렉토리 목록들이 터미널에 출력되는 것을 보실 수 있습니다. 가만보니 .DS_Store라는 이상한 친구가 끼어 있는데 뭔지 나중에 알아봐야겠네요.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bwBsui/btq6McmDLJA/g6HKcUw601KTU1YEk61umK/img.gif"/></p>
+<div class="ad-wrapper markdown_tags">
+
+<!-- markdown_tags -->
+
+
+</div>
+<h3 id="5-oschdir"><strong>5) os.chdir( )</strong></h3>
+<p>원하는 경로를 현재 작업 경로로 변환해주는 함수입니다. 함수를 사용하기 전과 후의 경로 차이가 나는 것을 확인할 수 있습니다.</p>
+<pre><code>print(os.getcwd())
+os.chdir("/Users/sangwoo/Desktop/")
+print(os.getcwd())
+
+&lt;결과&gt;
+&gt;&gt;&gt; /Users/sangwoo/Desktop/RPA BASIC
+&gt;&gt;&gt; /Users/sangwoo/Desktop
+</code></pre>
+<h3 id="6-osremovedirs"><strong>6) os.removedirs( )</strong></h3>
+<p>함수 이름에서 알 수 있듯이 디렉토리를 제거하는 함수입니다. 만들 때와 같이 제거하고자 하는 디렉토리의 경로를 써주시면 됩니다.</p>
+<p>만약 경로가 열려있거나 존재하지 않으면 에러가 발생하니 주의하세요.</p>
+<pre><code>os.removedirs("/Users/sangwoo/Desktop/test_mkdir/a/b/c")
+</code></pre>
+<p>&lt;결과&gt;</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/cmVNhz/btq6KQR2isR/RBGJaV8SMkc06kfSWvidK0/img.gif"/></p>
+<h3 id="7-osremove-osunlink"><strong>7) os.remove( ) / os.unlink( )</strong></h3>
+<p>위의 removedirs( ) 함수가 디렉토리를 삭제하는 함수였다면 이 함수는 파일을 삭제하는 함수입니다. 두 함수 모두 같은 기능을 합니다.</p>
+<pre><code>os.remove("/Users/sangwoo/Desktop/test_mkdir/a/b/ex_hello.py")
+</code></pre>
+<p>&lt;결과&gt;</p>
+<p>ex_hello.py 사라짐. (귀찮아서 결과 사진 안올린거 아님.. 암튼 아님..)</p>
+<h3 id="8-osrenamepath-1-path-2"><strong>8) os.rename(path 1, path 2)</strong></h3>
+<p>파일의 이름을 바꿔주는 함수입니다. 기존 파일의 경로와 바꾸고자 하는 파일명이 들어간 경로를 차례대로 써주시면 되겠습니다.</p>
+<p><img alt="" decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/dbl1ri/btq6HPTCNkU/CF8M3R0Jf9k02vWhV4j4dK/img.gif"/></p>
+</div>
