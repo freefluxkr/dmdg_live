@@ -10,8 +10,11 @@ def main():
     builders_dir = "00_Textbook_Builders"
     caches_dir = "00_HTML_Caches"
     books_dir = "00_Textbooks"
+    assets_dir = "01_Assets"
+    docs_dir = "02_Documents"
+    scripts_dir = "03_Scripts"
 
-    for d in [builders_dir, caches_dir, books_dir]:
+    for d in [builders_dir, caches_dir, books_dir, assets_dir, docs_dir, scripts_dir]:
         if not os.path.exists(d):
             os.makedirs(d)
             print(f"✓ 폴더 생성: {d}")
@@ -25,9 +28,9 @@ def main():
     for item in items:
         # 이 클리너 스크립트 자신과 핵심 보존 파일은 제외
         if item in ["clean_workspace.py", "index.html", "admin.html", "sw.js", "manifest.json", 
-                    "firebase.json", "firebase-config.js", "serviceAccountKey.json", "happy_scrapper.py",
-                    "js", "css", ".git", ".github", ".gitignore", ".venv", ".agent", ".agents",
-                    "WEEKEND_TODO.md", "HOMEWORK_GUIDE.md", "GEMINI.md", "README.md"]:
+                    "firebase.json", "firebase-config.js", "serviceAccountKey.json", "firebase-adminsdk-api_key.json", "happy_scrapper.py",
+                    "js", "css", ".git", ".github", ".gitignore", ".venv", ".env", ".agent", ".agents",
+                    "WEEKEND_TODO.md", "HOMEWORK_GUIDE.md", "GEMINI.md", "README.md", "FOLDER_STRUCTURE.md"]:
             continue
 
         try:
@@ -76,6 +79,30 @@ def main():
                     if os.path.exists(dest):
                         os.remove(dest)
                     shutil.move(item, builders_dir)
+                    moved_files_count += 1
+                
+                # D. 이미지 에셋 격리
+                elif item.endswith((".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp")):
+                    dest = os.path.join(assets_dir, item)
+                    if os.path.exists(dest):
+                        os.remove(dest)
+                    shutil.move(item, assets_dir)
+                    moved_files_count += 1
+                
+                # E. 문서 및 데이터 격리
+                elif item.endswith((".txt", ".csv", ".pdf", ".pptx", ".xlsx", ".docx")):
+                    dest = os.path.join(docs_dir, item)
+                    if os.path.exists(dest):
+                        os.remove(dest)
+                    shutil.move(item, docs_dir)
+                    moved_files_count += 1
+                
+                # F. 기타 파이썬 스크립트 격리
+                elif item.endswith(".py"):
+                    dest = os.path.join(scripts_dir, item)
+                    if os.path.exists(dest):
+                        os.remove(dest)
+                    shutil.move(item, scripts_dir)
                     moved_files_count += 1
         except Exception as e:
             print(f"⚠️ {item} 이동 실패: {e}")

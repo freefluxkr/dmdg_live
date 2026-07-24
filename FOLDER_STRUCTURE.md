@@ -14,6 +14,9 @@ c:\Users\user\Downloads\DMDG_LIVE\
 ├── 📂 00_Textbook_Builders/       # [정리완료] 교재 빌드용 파이썬 스크립트 및 윈도우 배치 파일 (.bat) 모음
 ├── 📂 00_HTML_Caches/             # [정리완료] 크롤링 시 수집된 임시 HTML 캐시 및 장별 조각 폴더 모음
 ├── 📂 00_Textbooks/               # [정리완료] 최종 컴파일 완료된 PDF 결과물 및 교재 폴더 모음
+├── 📂 01_Assets/                  # [정리완료] 이미지 파일 등 디자인 에셋 모음 (.png, .jpg 등)
+├── 📂 02_Documents/               # [정리완료] PDF, PPTX, CSV, TXT 등 문서 및 데이터 파일 모음
+├── 📂 03_Scripts/                 # [정리완료] 기타 테스트 및 유틸리티 파이썬 스크립트 모음
 │
 ├── 📂 csv_test/                   # 판다스 데이터 실습 및 실시간 박스오피스 대시보드 공간
 │   ├── bc_card_out2020_03.txt     # BC카드 소비 패턴 원본 데이터 (UTF-8)
