@@ -54,7 +54,7 @@ def main():
                               "OpenSQL pgvector를 활용한 Tibero 매뉴얼 챗봇 미니 프로젝트 구축기", 
                               "PDF_3주차 Hermes Agent - 성장하는 AI 에이전트 실전 가이드", 
                               "PDF_인공지능생성형 AI 개발 입문", "학생들", "portfolio_feedbacks", 
-                              "0629", "0704보강"]:
+                              "0629", "0704보강", "2주차 교재 생활코딩 머신러닝 실습편"]:
                     
                     dest = os.path.join(books_dir, item)
                     if os.path.exists(dest):
