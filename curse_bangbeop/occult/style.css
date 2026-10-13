@@ -1,0 +1,71 @@
+body { font-family: 'Noto Serif KR', serif; }
+
+#tree-container {
+    background-image: url('tree_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.talisman {
+    position: absolute;
+    width: 35px;
+    height: 55px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #7f1d1d;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.8);
+    transform-origin: top center;
+    animation: swing 3s infinite ease-in-out alternate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.talisman:hover {
+    transform: scale(1.2);
+    z-index: 100;
+}
+
+.talisman::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(185, 28, 28, 0.4);
+    mix-blend-mode: multiply;
+}
+
+.talisman-name {
+    position: relative;
+    z-index: 10;
+    color: #fff;
+    font-size: 10px;
+    writing-mode: vertical-rl;
+    text-shadow: 1px 1px 2px #000, -1px -1px 2px #000;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.neon-glow {
+    animation: neonGlow 1.5s infinite alternate, popIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    border: 2px solid #ff0055;
+    z-index: 50;
+}
+
+@keyframes neonGlow {
+    0% { box-shadow: 0 0 5px #ff0055, 0 0 10px #ff0055, inset 0 0 5px #ff0055; filter: brightness(1.2); }
+    100% { box-shadow: 0 0 15px #ff0055, 0 0 30px #ff0055, inset 0 0 10px #ff0055; filter: brightness(1.5); }
+}
+
+@keyframes popIn {
+    0% { transform: scale(3) translateY(100px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes swing {
+    0% { transform: rotate(-5deg); }
+    100% { transform: rotate(5deg); }
+}

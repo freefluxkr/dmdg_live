@@ -1,12 +1,14 @@
-# 🤖 IT 대기업 5대사 인사담당자 에이전트 명세서
+# 🤖 IT/반도체 대기업 인사담당자 에이전트 명세서
 
-이 폴더는 취업 준비생의 포트폴리오를 다차원 심층 분석하기 위해 설정된 5개 IT 대기업 채용담당자 에이전트의 페르소나 및 시스템 지침(System Instruction) 설정 파일을 보관합니다.
+이 폴더는 취업 준비생의 포트폴리오를 다차원 심층 분석하기 위해 설정된 주요 대기업 채용담당자 에이전트의 페르소나 및 시스템 지침(System Instruction) 설정 파일을 보관합니다.
 
 ---
 
 ## 📂 에이전트 설정 파일 목록
 
-* **[samsung_sds.json](file:///c:/Users/user/Downloads/DMDG_LIVE/.agents/hr_agents/samsung_sds.json)**: 삼성SDS 채용담당자 (이성적/CS기본기 검증 특화)
+* **[samsung_ds_cae.json](file:///c:/Users/tuesv/Downloads/DMDG_LIVE_CODE/.agents/hr_agents/samsung_ds_cae.json)**: 삼성전자 DS부문 CAE 담당 (분석적/수치해석 및 시뮬레이션 검증 특화)
+* **[samsung_memory_process.json](file:///c:/Users/tuesv/Downloads/DMDG_LIVE_CODE/.agents/hr_agents/samsung_memory_process.json)**: 삼성전자 메모리사업부 공정기술 담당 (현장적응/8대공정 트러블슈팅 검증 특화)
+* **[samsung_sds.json](file:///c:/Users/tuesv/Downloads/DMDG_LIVE_CODE/.agents/hr_agents/samsung_sds.json)**: 삼성SDS 채용담당자 (이성적/CS기본기 검증 특화)
 * **[lg_cns.json](file:///c:/Users/user/Downloads/DMDG_LIVE/.agents/hr_agents/lg_cns.json)**: LG CNS 채용담당자 (DX 신기술/트러블슈팅 검증 특화)
 * **[shinsegae_inc.json](file:///c:/Users/user/Downloads/DMDG_LIVE/.agents/hr_agents/shinsegae_inc.json)**: 신세계I&C 채용담당자 (리테일테크/비즈니스/UX 검증 특화)
 * **[lotte_innovate.json](file:///c:/Users/user/Downloads/DMDG_LIVE/.agents/hr_agents/lotte_innovate.json)**: 롯데이노베이트 채용담당자 (보안/안정성/예외처리 검증 특화)

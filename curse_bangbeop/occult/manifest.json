@@ -1,0 +1,15 @@
+{
+  "name": "謗法 (방법)",
+  "short_name": "방법",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#7f1d1d",
+  "icons": [
+    {
+      "src": "https://cdn.iconscout.com/icon/premium/png-256-thumb/voodoo-doll-1887265-1598114.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
+}

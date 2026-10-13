@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>謗法 (방법) - 원한의 신목</title>
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-red-600 h-screen w-screen overflow-hidden flex flex-col select-none relative">
+    
+    <!-- Tree Background & Talisman Container -->
+    <div id="tree-container" class="absolute inset-0 z-0">
+        <!-- The background image will be set via CSS -->
+    </div>
+
+    <!-- Bottom Input Panel -->
+    <div id="input-panel" class="absolute bottom-0 w-full bg-black/80 backdrop-blur-md border-t border-red-900 p-6 z-20 rounded-t-2xl shadow-[0_-10px_30px_rgba(185,28,28,0.2)] transition-transform duration-500 transform translate-y-0">
+        
+        <h2 class="text-center text-red-500 font-serif text-2xl font-bold tracking-widest mb-4" style="text-shadow: 0 0 10px red;">신목에 원한 묶기</h2>
+        
+        <div class="flex space-x-4 mb-4">
+            <label class="cursor-pointer flex-shrink-0">
+                <div id="photo-preview" class="w-20 h-20 border border-red-900 bg-red-950/30 flex items-center justify-center overflow-hidden relative shadow-[inset_0_0_10px_rgba(185,28,28,0.5)]">
+                    <span id="photo-icon" class="text-red-900 text-xs tracking-widest text-center">寫眞<br>(사진)</span>
+                    <img id="preview-img" class="hidden w-full h-full object-cover grayscale sepia hue-rotate-[320deg] contrast-150 brightness-75">
+                </div>
+                <input type="file" id="photo-upload" class="hidden" accept="image/*">
+            </label>
+            
+            <div class="flex-grow space-y-2">
+                <input type="text" id="target-name" placeholder="대상 이름 (姓名)" class="w-full p-2 bg-black border border-red-900 text-red-500 focus:outline-none focus:border-red-500 text-sm">
+                <textarea id="target-story" rows="2" placeholder="어떤 원한이 있으신가요?" class="w-full p-2 bg-black border border-red-900 text-red-500 focus:outline-none focus:border-red-500 text-sm resize-none"></textarea>
+            </div>
+        </div>
+        
+        <button id="start-btn" class="w-full py-3 bg-red-950 border border-red-700 text-red-500 font-bold tracking-[0.2em] hover:bg-red-900 transition-colors shadow-[0_0_10px_rgba(185,28,28,0.3)]">묶어서 털어내기 (結)</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

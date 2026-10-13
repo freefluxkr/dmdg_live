@@ -522,8 +522,11 @@ lucide.createIcons();
         }
       });
 
-      // body 배경색 부드럽게 전환은 CSS 변수(--theme-bg-circle) 트랜지션으로 대체하여 깜빡임 제거
-      document.body.style.backgroundColor = theme.bodyBg;
+      // body 배경색 부드럽게 전환
+      document.body.style.background = theme.bodyBg;
+      document.body.style.backgroundImage =
+        `radial-gradient(ellipse 70% 50% at 20% 10%, ${theme['--theme-bg-circle1']} 0%, transparent 60%),
+         radial-gradient(ellipse 60% 50% at 80% 90%, ${theme['--theme-bg-circle2']} 0%, transparent 60%)`;
 
       // 🎨 국기 상징 요소(Motif) 적용 — 국가별 기하학적 정체성 부여
       applyThemeMotif(theme.motif || 'none');
@@ -708,7 +711,7 @@ lucide.createIcons();
 
     async function loadPrimersFromDB() {
       try {
-        const isOnline = navigator.onLine && typeof firestore !== 'undefined' && firestore !== null;
+        const isOnline = navigator.onLine;
         
         if (isOnline) {
           console.log("Firebase Firestore에서 마중물 데이터를 로드합니다.");
@@ -877,6 +880,8 @@ lucide.createIcons();
       '평온': 'emotion_calm'
     };
 
+    const emotions = ['전체', '위로', '설렘', '평온'];
+
     emotions.forEach(e => {
       const btn = document.createElement('button');
       btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition-all touch-target select-none ${
@@ -926,18 +931,6 @@ lucide.createIcons();
 
     var micAnalyser = null;
     var micAudioCtx = null;
-    var micGainNode = null;
-
-    window.updateMicGain = function(val) {
-      document.getElementById('mic-gain-value').textContent = val + "x";
-      if (micGainNode && micAudioCtx) {
-        try {
-          micGainNode.gain.setValueAtTime(parseFloat(val), micAudioCtx.currentTime);
-        } catch (e) {
-          console.warn("게인 변경 오류:", e);
-        }
-      }
-    };
 
     function openAudioPopup(mode, text = "", analyser = null) {
       popupMode = mode;
@@ -1088,7 +1081,6 @@ lucide.createIcons();
             micAudioCtx.close();
             micAudioCtx = null;
             micAnalyser = null;
-            micGainNode = null;
           }
         } catch (err) {
           console.error("녹음 중지 오류:", err);
@@ -1113,20 +1105,11 @@ lucide.createIcons();
           const source = micAudioCtx.createMediaStreamSource(stream);
           micAnalyser = micAudioCtx.createAnalyser();
           micAnalyser.fftSize = 256;
-          
-          micGainNode = micAudioCtx.createGain();
-          const currentGainVal = parseFloat(document.getElementById('mic-gain-slider')?.value || 1.5);
-          micGainNode.gain.setValueAtTime(currentGainVal, micAudioCtx.currentTime);
-          
-          const dest = micAudioCtx.createMediaStreamDestination();
-          
-          source.connect(micGainNode);
-          micGainNode.connect(micAnalyser);
-          micGainNode.connect(dest);
+          source.connect(micAnalyser);
 
           audioChunks = [];
           
-          mediaRecorder = new MediaRecorder(dest.stream, { mimeType: mimeType });
+          mediaRecorder = new MediaRecorder(stream, { mimeType: mimeType });
           mediaRecorder.ondataavailable = (e) => {
             if (e.data.size > 0) audioChunks.push(e.data);
           };
@@ -2062,8 +2045,8 @@ lucide.createIcons();
       const stars = [];
       const numStars = 150;
       
-      canvas.width = 144;
-      canvas.height = 144;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
       for(let i=0; i<numStars; i++) {
         stars.push({
