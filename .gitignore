@@ -12,3 +12,17 @@ add_AGENTS/
 node_modules/
 .env
 .DS_Store
+.venv/
+venv/
+csv_test/bc_card_out2020_03.txt
+
+# Sensitive Keys Vault (Local Only)
+docs/api_keys_vault.md
+*vault*.md
+PayPal 가입계정.txt
+
+# Caches & Temporary
+00_HTML_Caches/
+__pycache__/
+*.pyc
+

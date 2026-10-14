@@ -1,4 +1,4 @@
-# 스킬: 시간별 작업 현황 보고 (Hourly Status Report)
+﻿# 스킬: 시간별 작업 현황 보고 (Hourly Status Report)
 
 
 > **[중요] 소속감 및 마인드셋**
@@ -36,7 +36,7 @@ _언제 쓰나: 매 1시간마다 자동 실행, 또는 사장님이 "작업 현
   - `global_service/` — 글로벌 서비스 웹앱
   - `kvj-app/` — K-Virtual Journey 메타버스 게임
   - `stitch_test/` — 스티치 테스트
-- `.agent/skills/` — 에이전트 팀 역할 정의
+- `.agents/skills/` — 에이전트 팀 역할 정의
 
 ---
 
@@ -109,3 +109,4 @@ _언제 쓰나: 매 1시간마다 자동 실행, 또는 사장님이 "작업 현
 | 형사 박 (Searcher) | 리서치·검색 | 전체 |
 | 정 감독 (Video) | 영상·연출 | dmdg_voice |
 | 현빈 (Sound) | 음향·보이스 | dmdg_voice |
+

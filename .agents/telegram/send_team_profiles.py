@@ -1,4 +1,4 @@
-"""팀 프로필 사진 + 정보를 텔레그램으로 순차 전송"""
+﻿"""팀 프로필 사진 + 정보를 텔레그램으로 순차 전송"""
 import urllib.request, urllib.parse, json, sys, io, time, os
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
@@ -85,8 +85,9 @@ send_text(
     '  /h - 도움말 (단축키 안내)\n'
     '  단축어 (예: /d, /demis, @demis) - 에이전트와 직접 대화\n'
     '  파일 전송 -> 자동 인박스 저장\n\n'
-    '인박스: .agent/inbox/[직원이름]/\n'
-    '사진: .agent/portraits/\n\n'
-    '봇 실행: python .agent/telegram/bot.py'
+    '인박스: .agents/inbox/[직원이름]/\n'
+    '사진: .agents/portraits/\n\n'
+    '봇 실행: python .agents/telegram/bot.py'
 )
 print('완료!')
+
