@@ -234,7 +234,12 @@
     <!-- Chapter Header -->
     <div class="chapter-header">
       <div class="chapter-num" id="chapter-num">Chapter 01</div>
-      <h1 class="chapter-title" id="chapter-title">01. CNN 합성곱 신경망</h1>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 8px;">
+        <h1 class="chapter-title" id="chapter-title" style="margin-bottom: 0;">01. CNN (합성곱 신경망)</h1>
+        <a id="btn-wiki-link" href="https://dmdg.wikidocs.net/451772" target="_blank" class="btn btn-secondary" style="font-size: 13px; padding: 6px 14px; border-radius: 8px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+          <span>📖 교재 해당 목차 바로가기</span> ↗
+        </a>
+      </div>
       <p class="chapter-subtitle" id="chapter-subtitle">로딩 중...</p>
     </div>
 
@@ -592,6 +597,11 @@
       titleEl.textContent = ch.title;
       subtitleEl.textContent = ch.subtitle;
       ahaTextEl.textContent = ch.aha;
+      
+      const wikiLinkEl = document.getElementById('btn-wiki-link');
+      if (wikiLinkEl) {
+        wikiLinkEl.href = `https://dmdg.wikidocs.net/${451771 + ch.id}`;
+      }
 
       renderPipeline(ch);
     }
