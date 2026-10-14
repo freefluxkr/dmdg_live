@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12. 과소적합 (Underfitting) - 비전공자를 위한 인터랙티브 시뮬레이터</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --primary: #f97316;
+      --accent: #38bdf8;
+      --bg: #090d16;
+      --card-bg: rgba(22, 30, 49, 0.9);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
+    body {
+      background: radial-gradient(circle at top, #1e293b 0%, #090d16 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .container { max-width: 900px; width: 100%; }
+    .header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block; padding: 6px 14px;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      color: white; font-size: 13px; font-weight: 700;
+      border-radius: 9999px; margin-bottom: 12px;
+    }
+    h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .subtitle { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+    
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+    .aha-box {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(236, 72, 153, 0.15));
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .aha-icon { font-size: 32px; flex-shrink: 0; }
+    .aha-title { font-weight: 700; color: #fb923c; font-size: 15px; margin-bottom: 4px; }
+    .aha-desc { font-size: 13.5px; color: #cbd5e1; line-height: 1.5; }
+    
+    .pipeline-view {
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .stage-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .stage-box {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      min-width: 180px;
+      max-width: 240px;
+      transition: all 0.3s ease;
+    }
+    .stage-box.active {
+      border-color: #f97316;
+      box-shadow: 0 0 16px rgba(249, 115, 22, 0.5);
+      transform: translateY(-3px);
+    }
+    .stage-tag { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 6px; }
+    .stage-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .stage-desc { font-size: 12px; color: #cbd5e1; line-height: 1.4; }
+    .stage-arrow { font-size: 24px; color: #f97316; font-weight: 900; }
+
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+    .btn {
+      padding: 10px 20px; font-size: 13.5px; font-weight: 700; border-radius: 10px;
+      border: none; cursor: pointer; transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      color: white; box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+    }
+    .btn-secondary { background: #334155; color: #e2e8f0; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: scale(0.96); }
+    
+    .interactive-panel {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px dashed rgba(249, 115, 22, 0.4);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="badge">Chapter 12 · Interactive Pipeline</div>
+      <h1>12. 과소적합 (Underfitting)</h1>
+      <p class="subtitle">구불구불한 비선형 가격 곡선에 단순 직선(1차)을 그어 실수가 많은 상태를 은닉층으로 치료하는 파이프라인</p>
+    </div>
+
+    <div class="card">
+      <div class="aha-box">
+        <div class="aha-icon">💡</div>
+        <div>
+          <div class="aha-title">비전공자를 위한 '아하!' 한 줄 원리</div>
+          <div class="aha-desc">
+            공부를 너무 안 해서 곡선 시험 문제에 자로 1자 직선만 긋고 있는 꼴입니다! 뇌 용량(은닉 레이어와 뉴런)을 늘려주면 곡선 모양을 찰떡같이 배웁니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline-view">
+        <div class="stage-row">
+          <div class="stage-box active" id="box-0">
+            <div class="stage-tag">1단계: 진단</div>
+            <div class="stage-name">📏 단순 1차 직선</div>
+            <div class="stage-desc">훈련 손실도 높고 검증 손실도 높은 멍텅구리 상태</div>
+          </div>
+          <div class="stage-arrow">➔</div>
+          <div class="stage-box" id="box-1">
+            <div class="stage-tag">2단계: 처방</div>
+            <div class="stage-name">🧠 은닉층(Dense 64) 증설</div>
+            <div class="stage-desc">비선형 활성화 함수(ReLU)와 함께 뉴런 용량을 증대</div>
+          </div>
+          <div class="stage-arrow">➔</div>
+          <div class="stage-box" id="box-2">
+            <div class="stage-tag">3단계: 피팅 완료</div>
+            <div class="stage-name">📈 유연한 곡선 피팅</div>
+            <div class="stage-desc">데이터의 굽이치는 패턴을 유연하게 학습 완료</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="interactive-panel">
+        <div style="font-size:14px; font-weight:bold; color:#38bdf8; margin-bottom:6px;" id="status-title">1단계 진행 중: 데이터 입력 대기</div>
+        <div style="font-size:13px; color:#cbd5e1;" id="status-desc">훈련 손실도 높고 검증 손실도 높은 멍텅구리 상태</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-primary" id="btn-next">▶ 다음 단계로 데이터 전달 (Next Step)</button>
+        <button class="btn btn-secondary" id="btn-auto">⚡ 자동 시뮬레이션 (Auto)</button>
+        <button class="btn btn-secondary" id="btn-reset">🔄 처음부터 다시</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let stage = 0;
+    let autoTimer = null;
+    const stagesInfo = [
+      { title: "1단계 진행: 📏 단순 1차 직선", desc: "훈련 손실도 높고 검증 손실도 높은 멍텅구리 상태" },
+      { title: "2단계 실행: 🧠 은닉층(Dense 64) 증설", desc: "비선형 활성화 함수(ReLU)와 함께 뉴런 용량을 증대" },
+      { title: "3단계 완료: 📈 유연한 곡선 피팅", desc: "데이터의 굽이치는 패턴을 유연하게 학습 완료" }
+    ];
+
+    function updateStageUI() {
+      for (let i = 0; i < 3; i++) {
+        const b = document.getElementById('box-' + i);
+        if (i === stage) b.classList.add('active');
+        else b.classList.remove('active');
+      }
+      document.getElementById('status-title').textContent = stagesInfo[stage].title;
+      document.getElementById('status-desc').textContent = stagesInfo[stage].desc;
+    }
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      stage = (stage + 1) % 3;
+      updateStageUI();
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = null;
+      document.getElementById('btn-auto').textContent = '⚡ 자동 시뮬레이션 (Auto)';
+      stage = 0;
+      updateStageUI();
+    });
+
+    document.getElementById('btn-auto').addEventListener('click', function() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+        this.textContent = '⚡ 자동 시뮬레이션 (Auto)';
+      } else {
+        this.textContent = '⏸ 일시 정지 (Pause)';
+        autoTimer = setInterval(() => {
+          stage = (stage + 1) % 3;
+          updateStageUI();
+        }, 1400);
+      }
+    });
+
+    updateStageUI();
+  </script>
+</body>
+</html>

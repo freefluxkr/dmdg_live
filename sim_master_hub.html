@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 와 데이터 분석 22대 핵심 단원 - 마스터 인터랙티브 시뮬레이터 허브</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #f97316;
+      --primary-gradient: linear-gradient(135deg, #f97316, #ec4899);
+      --bg: #090d16;
+      --card-bg: rgba(22, 30, 49, 0.9);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', -apple-system, sans-serif; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e293b 0%, #090d16 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .wrapper { max-width: 960px; width: 100%; }
+    
+    /* Top Navigation bar */
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 12px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+    }
+    .brand-badge {
+      background: var(--primary-gradient);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 800;
+      color: white;
+    }
+    .chapter-select {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      max-width: 320px;
+      width: 100%;
+    }
+    .chapter-select:focus { border-color: var(--primary); }
+
+    /* Chapter Header */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .chapter-num {
+      color: #fb923c;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .chapter-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .chapter-subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Simulation Canvas Card */
+    .sim-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+
+    /* Aha Box */
+    .aha-box {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.12), rgba(236, 72, 153, 0.12));
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .aha-icon { font-size: 32px; flex-shrink: 0; }
+    .aha-title { font-weight: 800; color: #fb923c; font-size: 14.5px; margin-bottom: 4px; }
+    .aha-text { font-size: 13.5px; color: #e2e8f0; line-height: 1.5; }
+
+    /* Pipeline Stages View */
+    .pipeline-container {
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 20px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Interactive Controls */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(249, 115, 22, 0.6); }
+    .btn-secondary { background: #334155; color: #f1f5f9; }
+    .btn-secondary:hover { background: #475569; }
+    .btn:active { transform: scale(0.96); }
+
+    /* Visual Blocks for Pipeline */
+    .stage-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .stage-box {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      min-width: 180px;
+      transition: all 0.3s ease;
+    }
+    .stage-box.active {
+      border-color: #f97316;
+      box-shadow: 0 0 16px rgba(249, 115, 22, 0.4);
+      transform: translateY(-2px);
+    }
+    .stage-tag { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 6px; }
+    .stage-name { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .stage-content { font-size: 13px; color: #cbd5e1; }
+    .stage-arrow { font-size: 22px; color: #f97316; font-weight: 900; }
+
+    /* Quick Chapter Navigator Pills */
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+      justify-content: center;
+    }
+    .pill {
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .pill:hover, .pill.active {
+      background: #f97316;
+      color: white;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Top Nav -->
+    <div class="nav-bar">
+      <div class="brand">
+        <span class="brand-badge">22대 핵심 단원</span>
+        <span>AI 파이프라인 시뮬레이터 허브</span>
+      </div>
+      <select id="chapter-select" class="chapter-select"></select>
+    </div>
+
+    <!-- Chapter Header -->
+    <div class="chapter-header">
+      <div class="chapter-num" id="chapter-num">Chapter 01</div>
+      <h1 class="chapter-title" id="chapter-title">01. CNN 합성곱 신경망</h1>
+      <p class="chapter-subtitle" id="chapter-subtitle">로딩 중...</p>
+    </div>
+
+    <!-- Main Simulator Box -->
+    <div class="sim-card">
+      <div class="aha-box">
+        <div class="aha-icon">💡</div>
+        <div>
+          <div class="aha-title">비전공자 '아하!' 핵심 전달 원리</div>
+          <div class="aha-text" id="aha-text">로딩 중...</div>
+        </div>
+      </div>
+
+      <div class="pipeline-container" id="pipeline-view">
+        <!-- Dynamic pipeline render -->
+      </div>
+
+      <div class="controls-bar">
+        <button class="btn btn-primary" id="btn-next">▶ 다음 단계로 데이터 전달 (Next Step)</button>
+        <button class="btn btn-secondary" id="btn-auto">⚡ 자동 시뮬레이션 (Auto)</button>
+        <button class="btn btn-secondary" id="btn-reset">🔄 처음부터 다시</button>
+      </div>
+    </div>
+
+    <!-- Pills Grid -->
+    <div class="pills-container" id="pills-container"></div>
+  </div>
+
+  <script>
+    // 22개 단원 메타데이터 및 시뮬레이션 파이프라인 정의
+    const CHAPTERS = [
+      {
+        id: 1,
+        code: "01",
+        title: "01. CNN (합성곱 신경망)",
+        subtitle: "이미지 픽셀 위로 3×3 돋보기 커널이 슬라이딩하며 모서리 특징 맵을 추출하는 비전 파이프라인",
+        aha: "CNN은 돋보기(필터)로 사진을 구석구석 훑으면서 '여기에 옷깃이나 모서리가 있나?'를 콕 집어 점수로 환산해 다음 층으로 넘겨주는 과정입니다.",
+        stages: [
+          { tag: "1단계: 입력", name: "의류 픽셀 (5×5)", desc: "옷 사진의 픽셀 명암 숫자들이 그리드로 배열됨" },
+          { tag: "2단계: 내부 함수", name: "커널 곱셈 & 합산", desc: "3×3 필터와 겹치는 부분을 원소별 곱셈 후 더함 (내적)" },
+          { tag: "3단계: 전달", name: "특징 맵 (3×3)", desc: "강한 윤곽선이 발견된 위치에 높은 점수가 찍혀 다음 층으로 전달" }
+        ]
+      },
+      {
+        id: 2,
+        code: "02",
+        title: "02. MaxPooling2D (최대 풀링)",
+        subtitle: "2×2 영역에서 가장 강렬한 특징(최대값)만 보존하고 해상도를 75% 다이어트하는 파이프라인",
+        aha: "4개의 숫자 중 가장 강한 놈(최대값) 하나만 살리고 나머지는 버립니다. 사진 크기는 1/4로 줄어들어 연산이 가벼워지면서도 윤곽선은 살아있습니다!",
+        stages: [
+          { tag: "1단계: 입력", name: "특징 맵 (4×4)", desc: "16개의 세부 특징 수치들이 밀집된 그리드" },
+          { tag: "2단계: 내부 함수", name: "max() 윈도우", desc: "2×2 격자 안에서 가장 큰 숫자 1개만 추출" },
+          { tag: "3단계: 전달", name: "압축 맵 (2×2)", desc: "해상도가 절반으로 축소된 채 Dense 레이어 또는 다음 Conv로 전달" }
+        ]
+      },
+      {
+        id: 3,
+        code: "03",
+        title: "03. Flatten과 Dense (평탄화와 전결합층)",
+        subtitle: "2D/3D 바둑판 형태의 특징 맵을 1D 기차로 펴서 분류 뉴런들과 가중치로 연결하는 파이프라인",
+        aha: "바둑판(2D)으로 모은 단서들을 1줄 기차(1D)로 촤르륵 편 뒤, '티셔츠일 확률', '바지일 확률'을 판별하는 전결합 노드에 가중치 선을 쫙 연결합니다.",
+        stages: [
+          { tag: "1단계: 입력", name: "2D 풀링 맵 (2×2)", desc: "가로×세로 격자 형태의 시각적 특징들" },
+          { tag: "2단계: 내부 함수", name: "Flatten() 평탄화", desc: "격자를 1차원 벡터 [w1, w2, w3, w4]로 납작하게 폄" },
+          { tag: "3단계: 전달", name: "Dense(W·X + b)", desc: "가중치와 곱하고 바이어스를 더해 최종 10개 의류 노드로 전달" }
+        ]
+      },
+      {
+        id: 4,
+        code: "04",
+        title: "04. Softmax와 ReLU (활성화 함수)",
+        subtitle: "음수를 싹둑 잘라내는 ReLU와, 점수들을 다 합쳐 100% 확률로 정규화하는 Softmax 파이프라인",
+        aha: "중간 층에서는 음수 잡음을 0으로 잘라내는 ReLU를 쓰고, 마지막 최종 출력층에서는 모든 점수를 합이 100%(1.0)가 되는 깔끔한 확률로 변환합니다.",
+        stages: [
+          { tag: "1단계: 입력", name: "원시 점수(Logits)", desc: "[-2.5, 4.2, 0.8] 음수와 양수가 뒤섞인 점수들" },
+          { tag: "2단계: 내부 함수", name: "ReLU / exp() 지수화", desc: "ReLU(음수=0) 처리 후 Softmax 지수 함수로 모두 양수화" },
+          { tag: "3단계: 전달", name: "확률 벡터 (합=100%)", desc: "[1%, 95%, 4%] ➔ '95% 확률로 티셔츠입니다!' 최종 판별" }
+        ]
+      },
+      {
+        id: 5,
+        code: "05",
+        title: "05. RNN (순환 신경망)",
+        subtitle: "이전 시점의 기억(은닉 상태)이 쳇바퀴처럼 돌아 현재 데이터와 만나 익일 수요를 예측하는 파이프라인",
+        aha: "어제의 매장 방문객 기억($h_{t-1}$)을 머릿속에 품은 채로 오늘 날씨($x_t$)를 받아들여, 내일 방문객 수를 연쇄적으로 추론합니다.",
+        stages: [
+          { tag: "1단계: 입력", name: "현재 입력 (x_t)", desc: "오늘의 일별 매장 방문객 수 및 요일 데이터" },
+          { tag: "2단계: 내부 함수", name: "순환 루프 (tanh)", desc: "이전 은닉상태(h_{t-1})와 현재 입력을 결합하여 상태 업데이트" },
+          { tag: "3단계: 전달", name: "차기 기억 (h_t)", desc: "업데이트된 기억을 다음 날(t+1) 시점으로 넘겨 익일 수요 예측" }
+        ]
+      },
+      {
+        id: 6,
+        code: "06",
+        title: "06. LSTM (장단기 메모리)",
+        subtitle: "망각 게이트(지우기)와 입력 게이트(담기)로 수주일 전의 중요한 기억을 유실 없이 보존하는 파이프라인",
+        aha: "단순 RNN이 과거를 금방 까먹는다면, LSTM은 '필요 없는 과거는 지우개로 지우고(Forget), 중요한 사실만 공책에 적어(Cell State)' 먼 미래까지 전송합니다.",
+        stages: [
+          { tag: "1단계: 망각 게이트", name: "f_t = σ(W_f · [h, x])", desc: "오래된 기억 중 버릴 것은 0, 유지할 것은 1로 필터링" },
+          { tag: "2단계: 입력 게이트", name: "i_t = σ(W_i · [h, x])", desc: "현재 들어온 새로운 정보 중 장기 기억에 담을 중요도 판별" },
+          { tag: "3단계: 전달", name: "Cell State (C_t)", desc: "고속도로 레일을 타고 24시간 뒤 계절성 전력 예측 레이어로 전달" }
+        ]
+      },
+      {
+        id: 7,
+        code: "07",
+        title: "07. 의사 결정 트리 (Decision Tree)",
+        subtitle: "스무고개처럼 꽃잎 길이를 기준으로 예/아니오 분기하며 불순도를 떨어뜨리는 화이트박스 머신러닝",
+        aha: "'꽃잎 길이가 2.45cm 이하인가요?'라는 명확한 If-Else 질문을 던져 붓꽃 종류를 분필처럼 딱딱 갈라내는 가장 직관적인 모델입니다.",
+        stages: [
+          { tag: "1단계: 루트 노드", name: "전체 150송이 붓꽃", desc: "세 종류의 붓꽃이 뒤섞여 불순도(Gini=0.66)가 높은 상태" },
+          { tag: "2단계: 질문 분기", name: "If 꽃잎길이 <= 2.45", desc: "불순도를 가장 많이 낮춰주는 최적 기준선으로 데이터 분할" },
+          { tag: "3단계: 전달", name: "순수한 잎 노드(Leaf)", desc: "Setosa 품종 100% 순수 분리 완료 ➔ 설명가능한 AI(XAI)" }
+        ]
+      },
+      {
+        id: 8,
+        code: "08",
+        title: "08. Random Forest (랜덤 포레스트)",
+        subtitle: "수백 그루의 나무가 각자 데이터를 무작위로 뽑아 학습한 뒤 다수결 투표(Voting)로 판정하는 앙상블",
+        aha: "한 명의 의사보다 100명의 전문의가 각자 차트를 보고 다수결 투표로 유방암 양성/음성을 판정하듯, 훨씬 안전하고 정확한 진단을 내립니다.",
+        stages: [
+          { tag: "1단계: 부트스트랩", name: "데이터 무작위 샘플링", desc: "복원추출로 조금씩 다른 100개의 환자 하위 데이터셋 생성" },
+          { tag: "2단계: 개별 트리", name: "100개 나무의 독립 진단", desc: "각 나무가 5대 핵심 생체 지표를 기반으로 독립적 결과 도출" },
+          { tag: "3단계: 전달", name: "다수결 투표 (Voting)", desc: "85표 양성 vs 15표 음성 ➔ 안정적인 최종 판정 결과 배출" }
+        ]
+      },
+      {
+        id: 9,
+        code: "09",
+        title: "09. XGBoost (그래디언트 부스팅)",
+        subtitle: "이전 나무가 틀린 오차(잔차, Residual)만을 집중적으로 다음 나무가 학습해 정답을 맞추는 부스팅",
+        aha: "시험 보고 틀린 문제(오차)만 모아 오답 노트를 만들고, 다음 나무가 그 오답 노트만 맹훈련하여 와인 품질 등급을 극도로 정밀하게 맞춥니다.",
+        stages: [
+          { tag: "1단계: 기준 모델", name: "1차 예측 & 잔차 계산", desc: "평균값 예측 후 실제 와인 품질과의 오차(Residual) 산출" },
+          { tag: "2단계: 오차 학습", name: "경사 부스팅 트리", desc: "이전 트리가 놓친 오차만을 집중 보정하는 새로운 나무 적합" },
+          { tag: "3단계: 전달", name: "축적된 정밀 모델", desc: "학습률(Learning Rate)을 곱해 누적 합산 ➔ 최고 정밀도 달성" }
+        ]
+      },
+      {
+        id: 10,
+        code: "10",
+        title: "10. LightGBM (리프 중심 부스팅)",
+        subtitle: "균형 있게 키우는 대신 손실이 가장 큰 이파리(Leaf)부터 집중 공략해 초고속으로 학습하는 부스팅",
+        aha: "모든 가지를 공평하게 펼치면 시간이 오래 걸리죠. LightGBM은 '가장 실수가 잦은 골칫거리 잎' 하나만 콕 집어 깊게 파고들어 수초 만에 끝냅니다.",
+        stages: [
+          { tag: "1단계: 데이터 히스토그램", name: "연속형 변수 버킷팅", desc: "부동산 실거래가 수치를 몇 개 바구니(Bin)로 묶어 메모리 절감" },
+          { tag: "2단계: 리프 중심 분할", name: "최대 손실 리프 탐색", desc: "트리의 좌우 균형을 무시하고 오차가 가장 큰 노드 우선 분기" },
+          { tag: "3단계: 전달", name: "초고속 부동산 예측기", desc: "학습 속도 10배 향상 & 결측치 자동 처리 완료" }
+        ]
+      },
+      {
+        id: 11,
+        code: "11",
+        title: "11. 과적합과 드롭아웃 (Dropout)",
+        subtitle: "훈련할 때마다 뉴런의 30%를 무작위로 전원을 꺼버려 특정 노드에 대한 의존증을 치료하는 일반화",
+        aha: "에이스 한 명만 일하고 나머지가 놀면 그 사람 결근 시 망하겠죠? 일부러 직원 몇 명을 랜덤으로 쉬게 해서 모든 뉴런이 스스로 일하도록 단련시킵니다.",
+        stages: [
+          { tag: "1단계: 입력 레이어", name: "활성화된 전체 뉴런", desc: "모든 노드가 데이터를 받아 신호를 방출하는 상태" },
+          { tag: "2단계: 드롭아웃 (p=0.3)", name: "30% 무작위 비활성화", desc: "주사위를 굴려 30%의 뉴런 전원을 OFF(0)로 강제 차단" },
+          { tag: "3단계: 전달", name: "강건한 일반화 신호", desc: "소수 노드에 편중되지 않은 건강한 신호가 다음 층으로 전달" }
+        ]
+      },
+      {
+        id: 12,
+        code: "12",
+        title: "12. 과소적합 (Underfitting)",
+        subtitle: "구불구불한 비선형 가격 곡선에 단순 직선(1차)을 그어 실수가 많은 상태를 은닉층으로 치료하는 파이프라인",
+        aha: "공부를 너무 안 해서 곡선 시험 문제에 자로 1자 직선만 긋고 있는 꼴입니다! 뇌 용량(은닉 레이어와 뉴런)을 늘려주면 곡선 모양을 찰떡같이 배웁니다.",
+        stages: [
+          { tag: "1단계: 진단", name: "단순 선형 모델 (1차)", desc: "훈련 손실도 높고 검증 손실도 높은 멍텅구리 상태" },
+          { tag: "2단계: 처방", name: "은닉층(Dense 64) 증설", desc: "비선형 활성화 함수(ReLU)와 함께 뉴런 용량을 증대" },
+          { tag: "3단계: 전달", name: "비선형 곡선 피팅 완료", desc: "데이터의 굽이치는 패턴을 유연하게 학습하여 다음 단계로 이동" }
+        ]
+      },
+      {
+        id: 13,
+        code: "13",
+        title: "13. 편향과 분산 (Bias-Variance Trade-off)",
+        subtitle: "너무 고집불통(높은 편향)인 1차 모델과 너무 예민한(높은 분산) 15차 모델 사이의 황금 스윗스팟",
+        aha: "고집불통(1차 직선)도 나쁘고, 사소한 점 하나에 일희일비 요동치는 15차 파도선도 나쁩니다. 적당히 유연한 3~4차 곡선이 진정한 챔피언입니다.",
+        stages: [
+          { tag: "높은 편향 (과소적합)", name: "1차 모델 (너무 단순)", desc: "데이터의 흐름을 읽지 못하고 고집부리는 직선" },
+          { tag: "높은 분산 (과적합)", name: "15차 다항식 (너무 예민)", desc: "훈련 데이터의 잡음까지 외워 널뛰기하는 파도선" },
+          { tag: "황금 스윗스팟", name: "3~4차 다항 모델", desc: "새로운 실전 데이터에서도 오차가 가장 적은 최적 복잡도" }
+        ]
+      },
+      {
+        id: 14,
+        code: "14",
+        title: "14. 조기 종료 (Early Stopping)",
+        subtitle: "모의고사(검증 손실) 성적이 3회 연속 떨어지기 시작하면 훈련을 멈추고 최고 전성기 모델로 되돌리는 브레이크",
+        aha: "밤새 공부하다가 피곤해서 오히려 오답이 늘어날 때, 딱 멈추고 '가장 성적이 좋았던 어제 저녁 상태'로 되돌려 실전 시험장에 내보내는 똑똑한 브레이크입니다.",
+        stages: [
+          { tag: "1단계: 모니터링", name: "Val Loss 추적", desc: "에포크마다 검증 데이터 손실이 줄어드는지 감시" },
+          { tag: "2단계: 이상 감지", name: "patience=3 연속 악화", desc: "훈련 손실은 주는데 검증 손실이 3번 연속 반등 감지" },
+          { tag: "3단계: 전달", name: "최적 가중치 자동 롤백", desc: "과적합되기 직전의 최고 점수 모델을 복원하여 저장" }
+        ]
+      },
+      {
+        id: 15,
+        code: "15",
+        title: "15. Keras 콜백 (ModelCheckpoint & ReduceLROnPlateau)",
+        subtitle: "최고 점수 나올 때마다 금고에 자동 세이브하고, 성적이 정체되면 학습 보폭(학습률)을 줄여주는 인공지능 매니저",
+        aha: "게임할 때 보스전 직전에 자동 세이브(ModelCheckpoint)해주고, 골목길에서 벽에 부딪히면 걷는 속도를 줄여 정밀하게 빠져나오게(ReduceLR) 돕습니다.",
+        stages: [
+          { tag: "콜백 1: 체크포인트", name: "save_best_only=True", desc: "역대 최저 검증 손실이 나올 때만 하드디스크에 모델 덮어쓰기" },
+          { tag: "콜백 2: 학습률 감속", name: "factor=0.5 (LR 축소)", desc: "손실 개선이 멈추면 학습률을 절반으로 줄여 세밀하게 탐색" },
+          { tag: "3단계: 전달", name: "안정적 프로덕션 모델", desc: "사람의 밤샘 모니터링 없이도 완벽한 가중치 파일 완성" }
+        ]
+      },
+      {
+        id: 16,
+        code: "16",
+        title: "16. 트랜스포머 (Multi-Head Self-Attention)",
+        subtitle: "문장 안의 모든 단어가 서로 '누가 누구와 관련이 깊지?'를 내적으로 계산하여 집중(Attention)하는 LLM 핵심",
+        aha: "'은행에 가서 돈을 찾았다'에서 '은행'이 금융기관인지 강가(Bank)인지, 뒤의 '돈'이라는 단어와 어텐션 광선을 강하게 쏴서 의미를 알아냅니다.",
+        stages: [
+          { tag: "1단계: Query, Key, Value", name: "Q, K, V 벡터 투영", desc: "각 단어를 질문(Q), 이름표(K), 본문 내용(V)으로 변환" },
+          { tag: "2단계: 내적 & Softmax", name: "어텐션 점수 행렬", desc: "Q와 K를 내적하여 단어 간의 관련도(궁합)를 %로 계산" },
+          { tag: "3단계: 전달", name: "문맥이 반영된 새 벡터", desc: "관련도가 높은 단어들의 정보를 가중 합산해 다음 어텐션 층으로 전달" }
+        ]
+      },
+      {
+        id: 17,
+        code: "17",
+        title: "17. GPT와 BERT (어텐션 마스킹 비교)",
+        subtitle: "빈칸 앞뒤를 다 보고 맞추는 수능 빈칸채우기(BERT) vs 미래 단어를 가리고 다음 말을 잇는 작가(GPT)",
+        aha: "BERT는 문장 전체를 다 훑어보며 [MASK] 단어를 맞추는 '이해/분류 천재'이고, GPT는 오른쪽 미래 단어를 가려놓고 말을 술술 지어내는 '생성 천재'입니다.",
+        stages: [
+          { tag: "BERT (인코더)", name: "양방향 문맥 마스크", desc: "앞뒤 단어를 모두 참조하여 문장의 참뜻과 감성을 분류" },
+          { tag: "GPT (디코더)", name: "인과적 미래 마스크", desc: "뒷 단어를 못 보게 삼각형 마스크를 씌워 다음 단어 순차 생성" },
+          { tag: "3단계: 전달", name: "맞춤형 AI 모델 배포", desc: "검색/요약에는 BERT, 챗봇/창작에는 GPT 파이프라인 활용" }
+        ]
+      },
+      {
+        id: 18,
+        code: "18",
+        title: "18. GAN (생성적 적대 신경망)",
+        subtitle: "가짜 지폐를 만드는 위조범(생성자)과 이를 악착같이 잡아내는 경찰(판별자)의 적대적 경쟁 학습 루프",
+        aha: "위조범은 경찰을 속이려고 더 정교한 가짜를 만들고, 경찰은 안 속으려고 눈을 더 번뜩입니다. 둘이 경쟁하다 보면 마침내 진짜와 똑같은 완벽한 데이터가 탄생합니다!",
+        stages: [
+          { tag: "위조범 (Generator)", name: "무작위 잡음 ➔ 가짜 신호", desc: "정상 공장 센서 파형과 유사한 가짜 데이터 생성" },
+          { tag: "경찰 (Discriminator)", name: "진짜 vs 가짜 판별 (D)", desc: "진짜 센서와 가짜 센서를 비교해 가짜를 색출" },
+          { tag: "3단계: 전달", name: "적대적 줄다리기 수렴", desc: "경찰조차 50% 확률로 헷갈릴 만큼 정교한 합성 데이터 완성" }
+        ]
+      },
+      {
+        id: 19,
+        code: "19",
+        title: "19. 피지컬 AI 로봇 팔 심층 제어 실무 마스터",
+        subtitle: "목표 3차원 위치(X, Y, Z)를 3개 모터의 회전 각도(θ1, θ2, θ3)로 변환해 물건을 집어올리는 역기구학 파이프라인",
+        aha: "로봇에게 '사과를 집어!'라고 손끝 목표 좌표만 주면, 삼각함수와 역기구학 수학이 3개 관절 모터를 몇 도 돌려야 할지 역산하여 부드럽게 팔을 뻗습니다.",
+        stages: [
+          { tag: "1단계: 목표 설정", name: "피킹 타겟 (X, Y, Z)", desc: "카메라 비전이 인식한 물류 상자의 3차원 공간 좌표" },
+          { tag: "2단계: 역기구학(IK)", name: "3축 각도 역산(θ1, θ2, θ3)", desc: "기하학적 삼각공식(atan2, law of cosines)으로 각 관절 각도 계산" },
+          { tag: "3단계: 전달", name: "모터 서보 PWM 제어", desc: "물류 로봇 팔의 실시간 궤적 부드럽게 이동 및 집기 완료" }
+        ]
+      },
+      {
+        id: 20,
+        code: "20",
+        title: "20. 반도체 생산라인 스마트 팩토리 AI 실무 마스터",
+        subtitle: "웨이퍼 8대 공정의 미세 센서 시계열 데이터를 실시간 수집해 결함을 사전 감지하고 수율을 극대화하는 파이프라인",
+        aha: "웨이퍼 한 장에 수억 원인 반도체 공장에서, 챔버 온도가 0.1도만 튀어도 센서 이상을 즉시 감지해 불량품이 쏟아지는 참사를 사전에 방어합니다.",
+        stages: [
+          { tag: "1단계: 센서 수집", name: "초당 100회 온도/압력/가스", desc: "에칭 및 증착 챔버의 다차원 시계열 데이터 수집" },
+          { tag: "2단계: AI 이상 탐지", name: "FDC 이상 스파이크 감지", desc: "정상 센서 패턴과의 통계적 거리(Mahalanobis) 계산" },
+          { tag: "3단계: 전달", name: "수율 보전 & 자동 알람", desc: "불량 웨이퍼 라인 격리 및 공정 파라미터 자동 재보정" }
+        ]
+      },
+      {
+        id: 21,
+        code: "21",
+        title: "21. 머신러닝 & 딥러닝 18대 핵심 기술 올인원 마스터",
+        subtitle: "원시 데이터 수집부터 전처리, 지도/비지도 모델 선정, 손실 최적화 및 프로덕션 서빙까지의 전주기 파이프라인",
+        aha: "요리사가 신선한 재료를 다듬고(전처리), 요리에 맞는 레시피(모델)를 골라, 간을 맞추며(최적화) 손님 상에 올리는(서빙) 인공지능의 전체 여정입니다.",
+        stages: [
+          { tag: "1단계: 파이프라인", name: "수집 & 피처 엔지니어링", desc: "결측치 보정, 정규화(StandardScaler), 원-핫 인코딩" },
+          { tag: "2단계: 모델 오케스트라", name: "18대 핵심 알고리즘", desc: "정형은 LightGBM, 비전은 CNN, 시계열은 LSTM, 생성은 Transformer" },
+          { tag: "3단계: 전달", name: "REST API 모델 서빙", desc: "도커 컨테이너와 클라우드에 탑재되어 실제 서비스로 배포" }
+        ]
+      },
+      {
+        id: 22,
+        code: "22",
+        title: "22. 신경망 모델 훈련과 과적합 완전 정복",
+        subtitle: "훈련 손실은 떨어지는데 검증 손실이 치솟는 '과적합의 절벽'을 진단하고 4대 백신으로 치료하는 마스터 솔루션",
+        aha: "문제집만 달달 외워 실전 모의고사에서 점수가 곤두박질치는 과적합을 발견하면, '데이터 더 풀기, 드롭아웃 넣기, 규제 걸기, 조기 종료'로 완벽 치료합니다!",
+        stages: [
+          { tag: "1단계: 손실 곡선 진단", name: "Train ↓ vs Val ↑ 분기", desc: "모의고사 손실이 오르기 시작하는 골든 크로스 지점 포착" },
+          { tag: "2단계: 4대 백신 투여", name: "드롭아웃 + L2 + 증강", desc: "데이터 증강(Augmentation)과 가중치 규제로 모델 억제" },
+          { tag: "3단계: 전달", name: "완벽한 일반화 달성", desc: "실전 테스트 데이터셋에서도 흔들림 없는 최고 성능 도출" }
+        ]
+      }
+    ];
+
+    let currentChapterIndex = 0;
+    let currentStageIndex = 0;
+    let autoInterval = null;
+
+    const selectEl = document.getElementById('chapter-select');
+    const pillsEl = document.getElementById('pills-container');
+    const titleEl = document.getElementById('chapter-title');
+    const subtitleEl = document.getElementById('chapter-subtitle');
+    const numEl = document.getElementById('chapter-num');
+    const ahaTextEl = document.getElementById('aha-text');
+    const pipelineViewEl = document.getElementById('pipeline-view');
+
+    // Populate Selector and Pills
+    CHAPTERS.forEach((ch, idx) => {
+      // Select option
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = `${ch.code}. ${ch.title.split(' ')[1] || ch.title}`;
+      selectEl.appendChild(opt);
+
+      // Pill button
+      const pill = document.createElement('a');
+      pill.className = `pill ${idx === 0 ? 'active' : ''}`;
+      pill.textContent = ch.code;
+      pill.title = ch.title;
+      pill.href = `#${ch.code}`;
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadChapter(idx);
+      });
+      pillsEl.appendChild(pill);
+    });
+
+    selectEl.addEventListener('change', (e) => {
+      loadChapter(parseInt(e.target.value));
+    });
+
+    function loadChapter(idx) {
+      currentChapterIndex = idx;
+      currentStageIndex = 0;
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+        document.getElementById('btn-auto').textContent = '⚡ 자동 시뮬레이션 (Auto)';
+      }
+
+      selectEl.value = idx;
+      window.location.hash = CHAPTERS[idx].code;
+
+      // Update pills
+      document.querySelectorAll('.pill').forEach((p, i) => {
+        if (i === idx) p.classList.add('active');
+        else p.classList.remove('active');
+      });
+
+      const ch = CHAPTERS[idx];
+      numEl.textContent = `Chapter ${ch.code}`;
+      titleEl.textContent = ch.title;
+      subtitleEl.textContent = ch.subtitle;
+      ahaTextEl.textContent = ch.aha;
+
+      renderPipeline(ch);
+    }
+
+    function renderPipeline(ch) {
+      pipelineViewEl.innerHTML = '';
+      const row = document.createElement('div');
+      row.className = 'stage-row';
+
+      ch.stages.forEach((st, sIdx) => {
+        const box = document.createElement('div');
+        box.className = `stage-box ${sIdx === currentStageIndex ? 'active' : ''}`;
+        box.id = `stage-box-${sIdx}`;
+        box.innerHTML = `
+          <div class="stage-tag">${st.tag}</div>
+          <div class="stage-name">${st.name}</div>
+          <div class="stage-content">${st.desc}</div>
+        `;
+        row.appendChild(box);
+
+        if (sIdx < ch.stages.length - 1) {
+          const arrow = document.createElement('div');
+          arrow.className = 'stage-arrow';
+          arrow.textContent = '➔';
+          row.appendChild(arrow);
+        }
+      });
+
+      pipelineViewEl.appendChild(row);
+    }
+
+    function nextStage() {
+      const ch = CHAPTERS[currentChapterIndex];
+      currentStageIndex = (currentStageIndex + 1) % ch.stages.length;
+
+      document.querySelectorAll('.stage-box').forEach((box, i) => {
+        if (i === currentStageIndex) box.classList.add('active');
+        else box.classList.remove('active');
+      });
+    }
+
+    document.getElementById('btn-next').addEventListener('click', nextStage);
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+        document.getElementById('btn-auto').textContent = '⚡ 자동 시뮬레이션 (Auto)';
+      }
+      currentStageIndex = 0;
+      document.querySelectorAll('.stage-box').forEach((box, i) => {
+        if (i === 0) box.classList.add('active');
+        else box.classList.remove('active');
+      });
+    });
+
+    document.getElementById('btn-auto').addEventListener('click', function() {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+        this.textContent = '⚡ 자동 시뮬레이션 (Auto)';
+      } else {
+        this.textContent = '⏸ 일시 정지 (Pause)';
+        autoInterval = setInterval(nextStage, 1400);
+      }
+    });
+
+    // Check URL hash on load (e.g. #01, #07, #19)
+    function checkHash() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        const found = CHAPTERS.findIndex(c => c.code === hash || c.id.toString() === hash);
+        if (found !== -1) {
+          loadChapter(found);
+          return;
+        }
+      }
+      loadChapter(0);
+    }
+
+    window.addEventListener('hashchange', checkHash);
+    checkHash();
+  </script>
+</body>
+</html>

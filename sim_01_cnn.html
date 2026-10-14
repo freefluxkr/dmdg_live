@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01. CNN 합성곱 신경망 - 비전공자를 위한 인터랙티브 시뮬레이터</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #f97316;
+      --primary-light: #ffedd5;
+      --primary-dark: #ea580c;
+      --accent: #06b6d4;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
+    body {
+      background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .container { max-width: 900px; width: 100%; }
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .subtitle { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+    
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      margin-bottom: 20px;
+    }
+    
+    .aha-box {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(236, 72, 153, 0.15));
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .aha-icon { font-size: 32px; flex-shrink: 0; }
+    .aha-title { font-weight: 700; color: #fb923c; font-size: 15px; margin-bottom: 4px; }
+    .aha-desc { font-size: 13.5px; color: #cbd5e1; line-height: 1.5; }
+
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 768px) {
+      .pipeline-grid { grid-template-columns: 1fr; gap: 20px; }
+      .arrow { transform: rotate(90deg); margin: 0 auto; }
+    }
+    
+    .block {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+    }
+    .block-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    
+    .grid {
+      display: inline-grid;
+      gap: 4px;
+      padding: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+    }
+    .grid-5x5 { grid-template-columns: repeat(5, 34px); }
+    .grid-3x3 { grid-template-columns: repeat(3, 34px); }
+    
+    .cell {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 6px;
+      background: #1e293b;
+      color: #94a3b8;
+      transition: all 0.25s ease;
+    }
+    .cell.active-input {
+      background: #f97316;
+      color: white;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+    }
+    .cell.kernel-cell {
+      background: #0ea5e9;
+      color: white;
+    }
+    .cell.active-output {
+      background: #10b981;
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+    }
+    .cell.empty { background: rgba(255, 255, 255, 0.03); color: #475569; }
+
+    .arrow {
+      color: var(--primary);
+      font-size: 24px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .math-panel {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px dashed rgba(249, 115, 22, 0.4);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-size: 13px;
+      color: #cbd5e1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .calc-step { font-family: monospace; font-size: 13px; color: #38bdf8; }
+    .calc-result { font-weight: 800; color: #10b981; font-size: 15px; }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      color: white;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(249, 115, 22, 0.6); }
+    .btn-secondary {
+      background: #334155;
+      color: #e2e8f0;
+    }
+    .btn-secondary:hover { background: #475569; }
+    .btn:active { transform: scale(0.96); }
+
+    .filter-selector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #475569;
+      background: transparent;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .filter-btn.active {
+      background: #0ea5e9;
+      color: white;
+      border-color: #0ea5e9;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="badge">Chapter 01 · Computer Vision</div>
+      <h1>01. CNN 합성곱 신경망 시뮬레이터</h1>
+      <p class="subtitle">돋보기 필터(Kernel)가 원본 이미지를 슬라이딩하며 윤곽선 특징 맵(Feature Map)을 추출하는 데이터 파이프라인</p>
+    </div>
+
+    <div class="card">
+      <div class="aha-box">
+        <div class="aha-icon">💡</div>
+        <div>
+          <div class="aha-title">비전공자를 위한 '아하!' 한 줄 원리</div>
+          <div class="aha-desc" id="aha-text">
+            CNN은 마치 <strong>3×3 크기의 특수 돋보기(필터)</strong>를 들고 옷 사진 구석구석을 훑으면서, "어? 여기에 옷깃(세로선)이 있네!" 하고 중요한 특징만 콕 집어 다음 층으로 넘겨주는 과정입니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline-grid">
+        <!-- 1. 원본 이미지 -->
+        <div class="block">
+          <div class="block-title">
+            <span>📷</span> 1. 원본 이미지 (5×5)
+          </div>
+          <div class="grid grid-5x5" id="input-grid"></div>
+        </div>
+
+        <div class="arrow">✖</div>
+
+        <!-- 2. 합성곱 필터 -->
+        <div class="block">
+          <div class="block-title">
+            <span>🔍</span> 2. 커널 필터 (3×3)
+          </div>
+          <div class="grid grid-3x3" id="kernel-grid"></div>
+        </div>
+
+        <div class="arrow">➔</div>
+
+        <!-- 3. 추출된 특징 맵 -->
+        <div class="block">
+          <div class="block-title">
+            <span>✨</span> 3. 특징 맵 (3×3)
+          </div>
+          <div class="grid grid-3x3" id="output-grid"></div>
+        </div>
+      </div>
+
+      <div class="math-panel">
+        <div>
+          <strong>연산 공식:</strong> <span class="calc-step" id="calc-formula">각 위치의 원본 픽셀 × 필터 가중치를 모두 곱해 합산(내적)</span>
+        </div>
+        <div class="calc-result" id="calc-summary">출력값 = 계산 대기 중</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-primary" id="btn-next">▶ 다음 위치로 슬라이딩 (Next Step)</button>
+        <button class="btn btn-secondary" id="btn-auto">⚡ 자동 재생 (Auto Play)</button>
+        <button class="btn btn-secondary" id="btn-reset">🔄 처음부터 다시</button>
+      </div>
+
+      <div class="filter-selector">
+        <span>탐지할 패턴(필터):</span>
+        <button class="filter-btn active" data-filter="vertical">세로선 탐지기</button>
+        <button class="filter-btn" data-filter="horizontal">가로선 탐지기</button>
+        <button class="filter-btn" data-filter="diagonal">대각선 탐지기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 5x5 의류 패턴 이미지 (가운데 세로선이 있는 패턴)
+    const inputData = [
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 1, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 0, 0]
+    ];
+
+    // 필터 프리셋
+    const filters = {
+      vertical: [
+        [-1, 2, -1],
+        [-1, 2, -1],
+        [-1, 2, -1]
+      ],
+      horizontal: [
+        [-1, -1, -1],
+        [ 2,  2,  2],
+        [-1, -1, -1]
+      ],
+      diagonal: [
+        [ 2, -1, -1],
+        [-1,  2, -1],
+        [-1, -1,  2]
+      ]
+    };
+
+    let currentFilterKey = 'vertical';
+    let currentFilter = filters[currentFilterKey];
+    let stepIndex = 0; // 0 ~ 8 (3x3 결과)
+    let autoInterval = null;
+
+    const inputGridEl = document.getElementById('input-grid');
+    const kernelGridEl = document.getElementById('kernel-grid');
+    const outputGridEl = document.getElementById('output-grid');
+    const formulaEl = document.getElementById('calc-formula');
+    const summaryEl = document.getElementById('calc-summary');
+    const ahaTextEl = document.getElementById('aha-text');
+
+    function renderGrids() {
+      // 1. Input Grid
+      inputGridEl.innerHTML = '';
+      for (let r = 0; r < 5; r++) {
+        for (let c = 0; c < 5; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          cell.id = `in-${r}-${c}`;
+          cell.textContent = inputData[r][c];
+          inputGridEl.appendChild(cell);
+        }
+      }
+
+      // 2. Kernel Grid
+      kernelGridEl.innerHTML = '';
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell kernel-cell';
+          cell.textContent = currentFilter[r][c];
+          kernelGridEl.appendChild(cell);
+        }
+      }
+
+      // 3. Output Grid
+      outputGridEl.innerHTML = '';
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell empty';
+          cell.id = `out-${r}-${c}`;
+          cell.textContent = '-';
+          outputGridEl.appendChild(cell);
+        }
+      }
+    }
+
+    function updateStep() {
+      const outRow = Math.floor(stepIndex / 3);
+      const outCol = stepIndex % 3;
+
+      // Reset previous highlights on input
+      document.querySelectorAll('#input-grid .cell').forEach(c => c.classList.remove('active-input'));
+      document.querySelectorAll('#output-grid .cell').forEach(c => c.classList.remove('active-output'));
+
+      // Highlight 3x3 patch on input
+      let sum = 0;
+      let terms = [];
+      for (let kr = 0; kr < 3; kr++) {
+        for (let kc = 0; kc < 3; kc++) {
+          const inR = outRow + kr;
+          const inC = outCol + kc;
+          const inVal = inputData[inR][inC];
+          const kVal = currentFilter[kr][kc];
+          const mult = inVal * kVal;
+          sum += mult;
+
+          const cell = document.getElementById(`in-${inR}-${inC}`);
+          if (cell) cell.classList.add('active-input');
+
+          if (inVal !== 0 && kVal !== 0) {
+            terms.push(`(${inVal}×${kVal})`);
+          }
+        }
+      }
+
+      // Fill Output cell
+      const outCell = document.getElementById(`out-${outRow}-${outCol}`);
+      if (outCell) {
+        outCell.textContent = sum;
+        outCell.classList.remove('empty');
+        outCell.classList.add('active-output');
+      }
+
+      // Update Math
+      formulaEl.textContent = terms.length > 0 ? terms.join(' + ') + ` = ${sum}` : `모두 0 = ${sum}`;
+      summaryEl.textContent = `[${outRow}, ${outCol}] 출력값 = ${sum} ${sum > 3 ? '🔥 강한 특징 감지!' : ''}`;
+
+      // Aha Guide text update
+      if (sum >= 4) {
+        ahaTextEl.innerHTML = `<strong>와우! [${outRow}, ${outCol}] 구역</strong>에서 필터와 일치하는 패턴을 강하게 발견했습니다 (점수: <strong>${sum}</strong>점)! 이 높은 숫자가 다음 합성곱 층이나 풀링 레이어로 전달되어 "이 사진은 옷이다!"라는 결정적 단서가 됩니다.`;
+      } else {
+        ahaTextEl.innerHTML = `현재 돋보기 위치에서는 해당 특징이 약하게 감지되었습니다 (점수: <strong>${sum}</strong>점). 필터는 1칸씩 오른쪽/아래로 이동하며 9개 전 구역을 남김없이 스캔합니다.`;
+      }
+    }
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      stepIndex = (stepIndex + 1) % 9;
+      updateStep();
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if (autoInterval) clearInterval(autoInterval);
+      document.getElementById('btn-auto').textContent = '⚡ 자동 재생 (Auto Play)';
+      autoInterval = null;
+      stepIndex = 0;
+      renderGrids();
+      updateStep();
+    });
+
+    document.getElementById('btn-auto').addEventListener('click', function() {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+        this.textContent = '⚡ 자동 재생 (Auto Play)';
+      } else {
+        this.textContent = '⏸ 일시 정지 (Pause)';
+        autoInterval = setInterval(() => {
+          stepIndex = (stepIndex + 1) % 9;
+          updateStep();
+        }, 1200);
+      }
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilterKey = this.dataset.filter;
+        currentFilter = filters[currentFilterKey];
+        renderGrids();
+        updateStep();
+      });
+    });
+
+    // Initial render
+    renderGrids();
+    updateStep();
+  </script>
+</body>
+</html>

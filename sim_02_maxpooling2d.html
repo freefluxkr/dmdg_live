@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02. MaxPooling2D - 비전공자를 위한 인터랙티브 시뮬레이터</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #f97316;
+      --accent: #38bdf8;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
+    body {
+      background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .container { max-width: 900px; width: 100%; }
+    .header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block; padding: 6px 14px;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      color: white; font-size: 13px; font-weight: 700;
+      border-radius: 9999px; margin-bottom: 12px;
+    }
+    h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .subtitle { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+    
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      margin-bottom: 20px;
+    }
+    
+    .aha-box {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(99, 102, 241, 0.15));
+      border-left: 4px solid #0ea5e9;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .aha-icon { font-size: 32px; flex-shrink: 0; }
+    .aha-title { font-weight: 700; color: #38bdf8; font-size: 15px; margin-bottom: 4px; }
+    .aha-desc { font-size: 13.5px; color: #cbd5e1; line-height: 1.5; }
+
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    @media (max-width: 768px) {
+      .pipeline-grid { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); margin: 0 auto; }
+    }
+    
+    .block {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+    .block-title {
+      font-size: 13.5px; font-weight: 700; color: var(--text-muted);
+      margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    
+    .grid { display: inline-grid; gap: 6px; padding: 8px; background: rgba(255, 255, 255, 0.03); border-radius: 10px; }
+    .grid-4x4 { grid-template-columns: repeat(4, 46px); }
+    .grid-2x2 { grid-template-columns: repeat(2, 46px); }
+    
+    .cell {
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700; border-radius: 8px;
+      background: #1e293b; color: #94a3b8; transition: all 0.25s ease;
+    }
+    .cell.active-window {
+      border: 2px solid #38bdf8;
+      background: rgba(56, 189, 248, 0.2);
+      color: #fff;
+    }
+    .cell.winner {
+      background: #f97316 !important;
+      color: white !important;
+      transform: scale(1.12);
+      box-shadow: 0 0 14px rgba(249, 115, 22, 0.9);
+      z-index: 2;
+    }
+    .cell.active-output {
+      background: #10b981;
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+    }
+    .cell.empty { background: rgba(255, 255, 255, 0.03); color: #475569; }
+
+    .arrow { color: #0ea5e9; font-size: 28px; font-weight: 900; text-align: center; }
+
+    .math-panel {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px dashed rgba(14, 165, 233, 0.4);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-size: 13.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .calc-step { font-family: monospace; color: #38bdf8; }
+    .calc-result { font-weight: 800; color: #f97316; font-size: 15px; }
+
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+    .btn {
+      padding: 10px 20px; font-size: 13.5px; font-weight: 700; border-radius: 10px;
+      border: none; cursor: pointer; transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      color: white; box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+    }
+    .btn-secondary { background: #334155; color: #e2e8f0; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: scale(0.96); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="badge">Chapter 02 · Downsampling & Feature Pooling</div>
+      <h1>02. MaxPooling2D 최대 풀링 시뮬레이터</h1>
+      <p class="subtitle">2×2 윈도우 영역에서 가장 강렬한 특징(최대값)만 보존하고 해상도를 75% 다이어트하는 데이터 파이프라인</p>
+    </div>
+
+    <div class="card">
+      <div class="aha-box">
+        <div class="aha-icon">💡</div>
+        <div>
+          <div class="aha-title">비전공자를 위한 '아하!' 한 줄 원리</div>
+          <div class="aha-desc" id="aha-text">
+            4개의 픽셀 중 <strong>"가장 특징이 뚜렷한 대장(최대값)"</strong> 하나만 남기고 나머지는 버리는 다이어트 단계입니다. 사진 크기는 1/4로 줄어들어 계산 속도가 빨라지면서도 모서리 윤곽선은 고스란히 보존됩니다!
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline-grid">
+        <!-- 1. 합성곱 통과 후 특징 맵 -->
+        <div class="block">
+          <div class="block-title">
+            <span>📊</span> 1. 합성곱 특징 맵 (4×4 = 16개 픽셀)
+          </div>
+          <div class="grid grid-4x4" id="input-grid"></div>
+        </div>
+
+        <div class="arrow">
+          <div>max()</div>
+          ➔
+        </div>
+
+        <!-- 2. 풀링 후 축소된 특징 맵 -->
+        <div class="block">
+          <div class="block-title">
+            <span>🎯</span> 2. 압축된 특징 맵 (2×2 = 4개 픽셀)
+          </div>
+          <div class="grid grid-2x2" id="output-grid"></div>
+        </div>
+      </div>
+
+      <div class="math-panel">
+        <div>
+          <strong>선택된 구역 비교:</strong> <span class="calc-step" id="calc-formula">max(값1, 값2, 값3, 값4)</span>
+        </div>
+        <div class="calc-result" id="calc-summary">최종 생존 = 대기 중</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-primary" id="btn-next">▶ 다음 2×2 영역 풀링 (Next Step)</button>
+        <button class="btn btn-secondary" id="btn-auto">⚡ 자동 재생 (Auto Play)</button>
+        <button class="btn btn-secondary" id="btn-reset">🔄 처음부터 다시</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 4x4 합성곱 특징 맵 샘플 데이터
+    const featureMap = [
+      [12, 20, 30,  0],
+      [ 8, 15,  2, 45],
+      [34, 78, 11, 23],
+      [19,  5, 92, 64]
+    ];
+
+    let step = 0; // 0: 좌상, 1: 우상, 2: 좌하, 3: 우하
+    let autoInterval = null;
+
+    const inputGridEl = document.getElementById('input-grid');
+    const outputGridEl = document.getElementById('output-grid');
+    const formulaEl = document.getElementById('calc-formula');
+    const summaryEl = document.getElementById('calc-summary');
+    const ahaTextEl = document.getElementById('aha-text');
+
+    function renderGrids() {
+      // 1. Input Grid (4x4)
+      inputGridEl.innerHTML = '';
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 4; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          cell.id = `in-${r}-${c}`;
+          cell.textContent = featureMap[r][c];
+          inputGridEl.appendChild(cell);
+        }
+      }
+
+      // 2. Output Grid (2x2)
+      outputGridEl.innerHTML = '';
+      for (let r = 0; r < 2; r++) {
+        for (let c = 0; c < 2; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell empty';
+          cell.id = `out-${r}-${c}`;
+          cell.textContent = '-';
+          outputGridEl.appendChild(cell);
+        }
+      }
+    }
+
+    function updateStep() {
+      const regionR = Math.floor(step / 2) * 2;
+      const regionC = (step % 2) * 2;
+      const outR = Math.floor(step / 2);
+      const outC = step % 2;
+
+      // Clear previous classes
+      document.querySelectorAll('#input-grid .cell').forEach(c => {
+        c.classList.remove('active-window', 'winner');
+      });
+      document.querySelectorAll('#output-grid .cell').forEach(c => {
+        c.classList.remove('active-output');
+      });
+
+      // Find max in 2x2
+      let maxVal = -Infinity;
+      let winnerR = -1, winnerC = -1;
+      let values = [];
+
+      for (let r = 0; r < 2; r++) {
+        for (let c = 0; c < 2; c++) {
+          const cr = regionR + r;
+          const cc = regionC + c;
+          const val = featureMap[cr][cc];
+          values.push(val);
+          const cell = document.getElementById(`in-${cr}-${cc}`);
+          if (cell) cell.classList.add('active-window');
+
+          if (val > maxVal) {
+            maxVal = val;
+            winnerR = cr;
+            winnerC = cc;
+          }
+        }
+      }
+
+      // Winner highlight
+      const winnerCell = document.getElementById(`in-${winnerR}-${winnerC}`);
+      if (winnerCell) winnerCell.classList.add('winner');
+
+      // Set output cell
+      const outCell = document.getElementById(`out-${outR}-${outC}`);
+      if (outCell) {
+        outCell.textContent = maxVal;
+        outCell.classList.remove('empty');
+        outCell.classList.add('active-output');
+      }
+
+      // Math text
+      formulaEl.textContent = `max(${values.join(', ')}) = ${maxVal}`;
+      summaryEl.textContent = `🏆 [${outR}, ${outC}] 영역 승자 = ${maxVal} (다음 레이어로 전달!)`;
+
+      const quadrantNames = ["왼쪽 상단(1사분면)", "오른쪽 상단(2사분면)", "왼쪽 하단(3사분면)", "오른쪽 하단(4사분면)"];
+      ahaTextEl.innerHTML = `<strong>${quadrantNames[step]}</strong> 2×2 영역 중 가장 강한 특징점인 <strong>${maxVal}</strong>만 주황색으로 번쩍이며 살아남았습니다! 16개 데이터가 단 4개로 압축되어 신경망 연산 효율이 극대화됩니다.`;
+    }
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      step = (step + 1) % 4;
+      updateStep();
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if (autoInterval) clearInterval(autoInterval);
+      document.getElementById('btn-auto').textContent = '⚡ 자동 재생 (Auto Play)';
+      autoInterval = null;
+      step = 0;
+      renderGrids();
+      updateStep();
+    });
+
+    document.getElementById('btn-auto').addEventListener('click', function() {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+        this.textContent = '⚡ 자동 재생 (Auto Play)';
+      } else {
+        this.textContent = '⏸ 일시 정지 (Pause)';
+        autoInterval = setInterval(() => {
+          step = (step + 1) % 4;
+          updateStep();
+        }, 1300);
+      }
+    });
+
+    // Initial run
+    renderGrids();
+    updateStep();
+  </script>
+</body>
+</html>
