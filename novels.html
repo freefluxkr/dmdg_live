@@ -781,9 +781,12 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
 /* Audio Playing Highlight */
 .audio-speaking {
-  background: rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.18) !important;
+  border-left: 4px solid var(--accent-gold) !important;
+  padding-left: 0.85rem !important;
   border-radius: 4px;
-  transition: background 0.2s ease;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);
+  transition: all 0.3s ease;
 }
 
 /* Bottom Navigation */
@@ -1454,6 +1457,20 @@ const NOVELS_DATA = [
     // Render Body HTML
     el.readerContent.innerHTML = parseMarkdownToHtml(chapter.content);
 
+    // 문단 더블클릭 시 해당 위치부터 즉시 낭독 시작
+    el.readerContent.querySelectorAll('p, blockquote').forEach(node => {
+      node.style.cursor = 'pointer';
+      node.title = '더블 클릭하면 이 문단부터 AI 음성 낭독을 시작합니다';
+      node.addEventListener('dblclick', (e) => {
+        e.stopPropagation();
+        const allNodes = Array.from(el.readerContent.querySelectorAll('p, blockquote, h1, h2, h3')).filter(n => n.innerText && n.innerText.trim().length > 0);
+        const targetIdx = allNodes.indexOf(node);
+        if (targetIdx !== -1) {
+          startAudio(targetIdx);
+        }
+      });
+    });
+
     // Update Bottom Nav Buttons
     el.btnPrevChapter.disabled = (idx === 0);
     el.btnNextChapter.disabled = (idx === STATE.currentNovel.chapters.length - 1);
@@ -1520,48 +1537,105 @@ const NOVELS_DATA = [
     el.progressBar.style.width = `${Math.min(100, Math.max(0, scrolled))}%`;
   }
 
-  // ── Web Speech API TTS Audio Reader ──────────────────────────────────────
+  // ── Web Speech API TTS Audio Reader (Enhanced Paragraph Engine) ──────────
+  let ttsParagraphs = [];
+  let ttsCurrentIdx = 0;
+  let ttsKeepAliveTimer = null;
+  let koreanVoice = null;
+
+  function loadVoices() {
+    if (!STATE.tts.synth) return;
+    const voices = STATE.tts.synth.getVoices();
+    koreanVoice = voices.find(v => v.lang === 'ko-KR' || v.lang.startsWith('ko')) || null;
+  }
+
   function initTts() {
     if (!STATE.tts.synth) {
       el.btnTtsPlay.style.display = 'none';
       el.btnTtsSpeed.style.display = 'none';
       return;
     }
+    loadVoices();
+    if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = loadVoices;
+    }
   }
 
   function toggleAudio() {
     if (!STATE.tts.synth) return;
-
     if (STATE.tts.isPlaying) {
       stopAudio();
     } else {
-      startAudio();
+      startAudio(0);
     }
   }
 
-  function startAudio() {
+  function startAudio(startFromIdx = 0) {
     stopAudio();
 
-    const plainText = el.readerContent.innerText.replace(/[#*`_>\[\]]/g, ' ').trim();
-    if (!plainText) return;
+    // 낭독 대상 문단/단락 추출
+    const nodes = el.readerContent.querySelectorAll('p, blockquote, h1, h2, h3');
+    ttsParagraphs = Array.from(nodes).filter(n => n.innerText && n.innerText.trim().length > 0);
 
-    const utterance = new SpeechSynthesisUtterance(plainText);
+    if (ttsParagraphs.length === 0) return;
+
+    ttsCurrentIdx = Math.max(0, Math.min(startFromIdx, ttsParagraphs.length - 1));
+    STATE.tts.isPlaying = true;
+    el.ttsIcon.textContent = '⏸️';
+    el.ttsText.textContent = '정지';
+    el.btnTtsPlay.classList.add('active');
+
+    // Chrome 15초 슬립 방지용 Keep-Alive 타이머
+    clearInterval(ttsKeepAliveTimer);
+    ttsKeepAliveTimer = setInterval(() => {
+      if (STATE.tts.isPlaying && STATE.tts.synth && STATE.tts.synth.speaking) {
+        STATE.tts.synth.pause();
+        STATE.tts.synth.resume();
+      }
+    }, 10000);
+
+    speakNextParagraph();
+  }
+
+  function speakNextParagraph() {
+    if (!STATE.tts.isPlaying || ttsCurrentIdx >= ttsParagraphs.length) {
+      stopAudio();
+      return;
+    }
+
+    // 이전 하이라이트 제거
+    ttsParagraphs.forEach(p => p.classList.remove('audio-speaking'));
+
+    const currentEl = ttsParagraphs[ttsCurrentIdx];
+    currentEl.classList.add('audio-speaking');
+    currentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    let textToSpeak = currentEl.innerText.replace(/[#*`_>\[\]]/g, ' ').trim();
+    if (!textToSpeak) {
+      ttsCurrentIdx++;
+      speakNextParagraph();
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
     utterance.lang = 'ko-KR';
+    if (koreanVoice) utterance.voice = koreanVoice;
     utterance.rate = STATE.tts.speedRate;
 
-    utterance.onstart = () => {
-      STATE.tts.isPlaying = true;
-      el.ttsIcon.textContent = '⏸️';
-      el.ttsText.textContent = '정지';
-      el.btnTtsPlay.classList.add('active');
-    };
-
     utterance.onend = () => {
-      stopAudio();
+      if (!STATE.tts.isPlaying) return;
+      currentEl.classList.remove('audio-speaking');
+      ttsCurrentIdx++;
+      speakNextParagraph();
     };
 
-    utterance.onerror = () => {
-      stopAudio();
+    utterance.onerror = (e) => {
+      console.warn('TTS 재생 에러 또는 사용자 중지:', e);
+      if (STATE.tts.isPlaying) {
+        currentEl.classList.remove('audio-speaking');
+        ttsCurrentIdx++;
+        speakNextParagraph();
+      }
     };
 
     STATE.tts.utterance = utterance;
@@ -1569,9 +1643,16 @@ const NOVELS_DATA = [
   }
 
   function stopAudio() {
-    if (STATE.tts.synth && (STATE.tts.isPlaying || STATE.tts.synth.speaking)) {
+    clearInterval(ttsKeepAliveTimer);
+    ttsKeepAliveTimer = null;
+
+    if (STATE.tts.synth) {
       STATE.tts.synth.cancel();
     }
+    if (ttsParagraphs && ttsParagraphs.length > 0) {
+      ttsParagraphs.forEach(p => p.classList.remove('audio-speaking'));
+    }
+
     STATE.tts.isPlaying = false;
     el.ttsIcon.textContent = '🎧';
     el.ttsText.textContent = '낭독';
