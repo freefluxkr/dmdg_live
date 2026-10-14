@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DMDG 엔터프라이즈 AI 자율 관제 센터</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --primary: #f59e0b;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --red: #ef4444;
+      --purple: #a855f7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #172554 0%, #090d16 65%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .wrapper { max-width: 1400px; margin: 0 auto; }
+
+    /* Top Command Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #f59e0b, #ea580c);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+    }
+    .brand h1 { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+    .brand p { font-size: 12px; color: var(--muted); }
+    .header-pills { display: flex; gap: 10px; align-items: center; }
+    .pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      font-size: 12px; font-weight: 600;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+    /* KPI Cards Banner */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+    }
+    .kpi-title { font-size: 12px; color: var(--muted); text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+    .kpi-value { font-size: 22px; font-weight: 800; color: #fff; }
+    .kpi-sub { font-size: 11px; color: var(--green); margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+
+    /* Navigation Tabs */
+    .tab-nav {
+      display: flex; gap: 8px; margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 12px;
+    }
+    .tab-btn {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-size: 14px; font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { background: rgba(56, 189, 248, 0.15); color: #fff; }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(245, 158, 11, 0.25));
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Tab Content Panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Panel 1: Agent Mission Control */
+    .mission-layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 1000px) { .mission-layout { grid-template-columns: 1fr; } }
+    .panel-box {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .panel-box h3 { font-size: 16px; margin-bottom: 14px; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+    .scenario-picker {
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 12px;
+      color: #fff;
+      font-size: 13px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .btn-action {
+      width: 100%;
+      background: linear-gradient(135deg, #f59e0b, #ea580c);
+      color: #fff; font-weight: 800; font-size: 15px;
+      padding: 14px; border: none; border-radius: 10px;
+      cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4);
+      transition: transform 0.15s, opacity 0.2s;
+    }
+    .btn-action:hover { transform: translateY(-2px); opacity: 0.95; }
+    .btn-action:active { transform: translateY(0); }
+
+    /* Pipeline Step Cards Flow */
+    .flow-stream {
+      display: flex; flex-direction: column; gap: 12px;
+      max-height: 560px; overflow-y: auto; padding-right: 6px;
+    }
+    .step-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 14px 16px;
+      transition: all 0.2s;
+    }
+    .step-card.active { border-left-color: var(--primary); box-shadow: 0 0 14px rgba(245, 158, 11, 0.2); }
+    .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .step-badge {
+      font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
+      background: rgba(56, 189, 248, 0.2); color: var(--accent);
+    }
+    .step-thought { font-size: 13px; color: #e2e8f0; line-height: 1.5; margin-bottom: 8px; }
+    .step-data {
+      background: #030712; padding: 10px; border-radius: 6px;
+      font-family: Consolas, monospace; font-size: 12px; color: #34d399;
+      overflow-x: auto;
+    }
+
+    /* Final Report Banner */
+    .final-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(56, 189, 248, 0.1));
+      border: 1px solid var(--green);
+      border-radius: 12px;
+      padding: 18px; margin-top: 14px;
+      display: none;
+    }
+    .final-banner h4 { color: var(--green); font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .final-banner pre { font-family: -apple-system, sans-serif; font-size: 13px; color: #f8fafc; white-space: pre-wrap; }
+
+    /* Panel 2: Interactive SVG Network Map */
+    .map-container {
+      background: #050811;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 20px;
+      position: relative;
+      height: 480px;
+      overflow: hidden;
+    }
+    svg.network-svg { width: 100%; height: 100%; }
+
+    /* Panel 3: ERP Table */
+    .erp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .erp-table th, .erp-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    .erp-table th { background: rgba(30, 41, 59, 0.6); color: var(--muted); text-transform: uppercase; font-size: 11px; }
+    .progress-bar-bg { width: 120px; height: 8px; background: #1e293b; border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; border-radius: 999px; }
+
+    /* Panel 4: Animated MLOps Conveyor */
+    .conveyor-pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-bottom: 20px;
+    }
+    @media (max-width: 900px) { .conveyor-pipeline { grid-template-columns: 1fr; } }
+    .stage-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 18px;
+      position: relative;
+      text-align: center;
+    }
+    .stage-card.glow { border-color: var(--accent); box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
+    .stage-icon { font-size: 32px; margin-bottom: 10px; }
+    .stage-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .stage-desc { font-size: 11px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    
+    <!-- Top Command Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">🏭</div>
+        <div>
+          <h1>DMDG SCM AI 에이전트 & MLOps 관제 센터</h1>
+          <p>엔터프라이즈 자율 추론(LLM Brain) + 의미망 도서관(Dual Memory) + 무한 MLOps 컨베이어</p>
+        </div>
+      </div>
+      <div class="header-pills">
+        <a href="/download/total_prj.zip" class="pill" style="border-color: #10b981; color: #10b981; text-decoration: none; font-weight: bold; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.15)'" onmouseout="this.style.background='transparent'">📥 실무 코드 ZIP 즉시 다운로드</a>
+        <div class="pill"><div class="pulse-dot"></div> <span id="hdr-engine-status">AUTONOMOUS ONLINE</span></div>
+        <div class="pill" style="border-color: var(--accent); color: var(--accent);">⚡ <span id="hdr-active-model">DeepSeek-LoRA v2.4</span></div>
+      </div>
+    </header>
+
+    <!-- Top KPI Banners -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">공장 라인 방어율</div>
+        <div class="kpi-value" style="color: var(--green);">100.0%</div>
+        <div class="kpi-sub">✓ 셧다운 0시간 완벽 방어</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">배터리 잔여 일수</div>
+        <div class="kpi-value" id="kpi-stock-days" style="color: var(--primary);">1.75일 ➔ 5.75일</div>
+        <div class="kpi-sub">▲ 긴급 발주 +320개 승인됨</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">MLOps 데이터 드리프트</div>
+        <div class="kpi-value" id="kpi-drift-score" style="color: var(--accent);">0.942</div>
+        <div class="kpi-sub">⚡ 야간 LoRA 자율 치유 활성</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">무중단 메모리 핫스왑</div>
+        <div class="kpi-value" id="kpi-hotswap-count" style="color: var(--purple);">1회 성공</div>
+        <div class="kpi-sub">Zero-Downtime Serving</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('tab-agent')">🧠 1. 자율 에이전트 관제실</button>
+      <button class="tab-btn" onclick="switchTab('tab-map')">🗺️ 2. 공급망 지식그래프 레이더</button>
+      <button class="tab-btn" onclick="switchTab('tab-erp')">📊 3. 사내 ERP 실시간 장부</button>
+      <button class="tab-btn" onclick="switchTab('tab-mlops')">🔄 4. MLOps 컨베이어 벨트</button>
+    </div>
+
+    <!-- TAB 1: Agent Mission Control -->
+    <div id="tab-agent" class="tab-panel active">
+      <div class="mission-layout">
+        <!-- Control Box -->
+        <div class="panel-box">
+          <h3>🎯 위기 대응 미션 설정</h3>
+          <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">발생된 공급망 이상 징후 시나리오를 선택하고 자율 오케스트레이터를 가동합니다.</p>
+          
+          <label style="font-size: 12px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">시나리오 선택</label>
+          <select class="scenario-picker" id="scenario-selector">
+            <option value="1">🌪️ [실제상황] 태풍 카눈 북상에 따른 부산항 통제 및 배터리 셧다운 방어</option>
+            <option value="2">⚡ [시나리오 B] 평택 차량용 MCU 수급 급변 및 스팟 긴급 조달</option>
+            <option value="3">❄️ [시나리오 C] 중부권 폭설에 따른 충주 물류창고 대체 우회</option>
+          </select>
+
+          <button class="btn-action" onclick="executeAgentMission()">
+            <span>🚀 자율 위기대응 시작 (Execute Mission)</span>
+          </button>
+
+          <div style="margin-top: 20px; font-size: 12px; color: var(--muted); line-height: 1.6;">
+            <strong>시스템 연동 도구:</strong><br>
+            • 사내 ERP 재고 및 발주 API (`query_erp_inventory`)<br>
+            • 기상청 실시간 도로 통제 API (`check_weather_and_routes`)<br>
+            • 공급망 지식그래프 추론 엔진 (`InlineSupplyGraph`)<br>
+            • 과거 재난 조치 SOP 벡터 검색 (`InlineVectorStore`)<br>
+            • 비상 공문 및 메일 발송 (`send_alert_dispatch`)
+          </div>
+        </div>
+
+        <!-- Real-time Flow Stream -->
+        <div class="panel-box">
+          <h3>⚡ StateGraph 실시간 자율 추론 & 도구 집행 스트림</h3>
+          <div class="flow-stream" id="agent-flow-container">
+            <div style="text-align: center; color: var(--muted); padding: 40px 0; font-size: 14px;">
+              좌측의 <strong>[자율 위기대응 시작]</strong> 버튼을 누르면 실시간 추론 과정이 카드로 순차 렌더링됩니다.
+            </div>
+          </div>
+          
+          <div class="final-banner" id="agent-final-banner">
+            <h4>🏆 자율 에이전트 위기 대응 최종 보고서</h4>
+            <pre id="agent-final-text"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Supply Chain Network Map -->
+    <div id="tab-map" class="tab-panel">
+      <div class="panel-box">
+        <h3>🗺️ 공급망 지식그래프 & 실시간 물류 관제 레이더</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px;">
+          지식그래프(Graph DB)가 도로 통제 상황을 실시간 감지하여, 통제된 남해선 대신 경부선 대체 공급망(세종테크)을 자율 추론하는 시각화입니다.
+        </p>
+        <div class="map-container">
+          <svg class="network-svg" viewBox="0 0 900 400">
+            <!-- Background Grid -->
+            <defs>
+              <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="900" height="400" fill="url(#grid)" />
+
+            <!-- Edge 1: Hanlim to Namhae (Blocked) -->
+            <line x1="200" y1="300" x2="450" y2="300" stroke="#ef4444" stroke-width="4" stroke-dasharray="8 4"/>
+            <text x="325" y="290" fill="#ef4444" font-size="12" text-anchor="middle" font-weight="bold">남해고속도로 (침수 차단 ❌)</text>
+
+            <!-- Edge 2: Namhae to Ulsan -->
+            <line x1="450" y1="300" x2="700" y2="200" stroke="#ef4444" stroke-width="3" stroke-dasharray="6 3"/>
+
+            <!-- Edge 3: Sejong to Gyeongbu (Active Route) -->
+            <line x1="200" y1="100" x2="450" y2="100" stroke="#10b981" stroke-width="4"/>
+            <text x="325" y="90" fill="#10b981" font-size="12" text-anchor="middle" font-weight="bold">경부고속도로 (정상 소통 🟢)</text>
+
+            <!-- Edge 4: Gyeongbu to Ulsan (Bypass Delivery) -->
+            <line x1="450" y1="100" x2="700" y2="200" stroke="#10b981" stroke-width="4"/>
+            <text x="590" y="140" fill="#38bdf8" font-size="12" text-anchor="middle" font-weight="bold">🚀 긴급 우회 3시간 30분 도착</text>
+
+            <!-- Node: Hanlim (Busan) -->
+            <g transform="translate(200, 300)">
+              <circle r="28" fill="#1e293b" stroke="#ef4444" stroke-width="3"/>
+              <text y="5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">한림에너지</text>
+              <text y="42" text-anchor="middle" fill="#94a3b8" font-size="10">부산 (1차 공급사)</text>
+            </g>
+
+            <!-- Node: Sejong (Cheongju) -->
+            <g transform="translate(200, 100)">
+              <circle r="30" fill="#1e293b" stroke="#10b981" stroke-width="4"/>
+              <text y="5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">세종테크</text>
+              <text y="44" text-anchor="middle" fill="#34d399" font-size="10">청주 (대체 승인 징발!)</text>
+            </g>
+
+            <!-- Node: Plant Ulsan -->
+            <g transform="translate(700, 200)">
+              <circle r="36" fill="#1e293b" stroke="#f59e0b" stroke-width="4"/>
+              <text y="5" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">울산 제1공장</text>
+              <text y="50" text-anchor="middle" fill="#f59e0b" font-size="10">EV 조립 라인 (방어 성공)</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Live ERP Ledger -->
+    <div id="tab-erp" class="tab-panel">
+      <div class="panel-box" style="margin-bottom: 20px;">
+        <h3>📦 사내 ERP 실시간 재고 장부 (Live Inventory)</h3>
+        <table class="erp-table">
+          <thead>
+            <tr>
+              <th>부품 코드</th>
+              <th>품목명</th>
+              <th>현재 재고</th>
+              <th>안전 재고</th>
+              <th>재고 게이지</th>
+              <th>주 공급 파트너</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody id="erp-inventory-rows">
+            <tr>
+              <td><strong>BAT-800K</strong></td>
+              <td>차세대 하이니켈 배터리 셀 모듈</td>
+              <td><span id="stock-val-bat">140개</span></td>
+              <td>500개</td>
+              <td>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="stock-bar-bat" style="width: 28%; background: #ef4444;"></div></div>
+              </td>
+              <td>한림에너지(주) 부산공장</td>
+              <td><span style="color:#ef4444; font-weight:bold;">CRITICAL_LOW</span></td>
+            </tr>
+            <tr>
+              <td><strong>MCU-3200</strong></td>
+              <td>차량용 고성능 32비트 MCU</td>
+              <td>2,400개</td>
+              <td>1,200개</td>
+              <td>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: #10b981;"></div></div>
+              </td>
+              <td>넥스트실리콘 경기공장</td>
+              <td><span style="color:#10b981; font-weight:bold;">HEALTHY</span></td>
+            </tr>
+            <tr>
+              <td><strong>RELAY-HV</strong></td>
+              <td>전기차용 800V 고전압 안전 릴레이</td>
+              <td>310개</td>
+              <td>400개</td>
+              <td>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 77%; background: #f59e0b;"></div></div>
+              </td>
+              <td>동진전장 울산공장</td>
+              <td><span style="color:#f59e0b; font-weight:bold;">WARNING</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel-box">
+        <h3>📑 실시간 긴급 구매발주(PO) 원장</h3>
+        <table class="erp-table">
+          <thead>
+            <tr>
+              <th>발주 번호</th>
+              <th>부품 코드</th>
+              <th>발주 수량</th>
+              <th>협력사</th>
+              <th>상태</th>
+              <th>생성 일시</th>
+            </tr>
+          </thead>
+          <tbody id="erp-po-rows">
+            <tr>
+              <td colspan="6" style="text-align:center; color: var(--muted);">에이전트가 긴급 발주를 실행하면 이곳에 실시간 등록됩니다.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 4: MLOps Conveyor Belt -->
+    <div id="tab-mlops" class="tab-panel">
+      <div class="panel-box">
+        <h3>🔄 4단계 무한 MLOps 컨베이어 벨트 파이프라인</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">
+          데이터 드리프트 발생 시, 야간 비동기 배치를 통해 LoRA 어댑터를 자율 재학습하고 서버 무중단(Zero-Downtime) 핫스왑으로 교체합니다.
+        </p>
+
+        <!-- 4 Stages Visual -->
+        <div class="conveyor-pipeline">
+          <div class="stage-card glow">
+            <div class="stage-icon">📥</div>
+            <div class="stage-name">1. 자동 수집기</div>
+            <div class="stage-desc">현장 텔레메트리 & 피드백 스트리밍</div>
+          </div>
+          <div class="stage-card glow">
+            <div class="stage-icon">🧹</div>
+            <div class="stage-name">2. 전처리 & 임베딩</div>
+            <div class="stage-desc">데이터 드리프트 감지 (Radar)</div>
+          </div>
+          <div class="stage-card glow">
+            <div class="stage-icon">🌙</div>
+            <div class="stage-name">3. 야간 LoRA 재학습</div>
+            <div class="stage-desc">Epoch 3/3 파인튜닝 & 벤치마크</div>
+          </div>
+          <div class="stage-card glow">
+            <div class="stage-icon">🚀</div>
+            <div class="stage-name">4. 무중단 서빙 배포</div>
+            <div class="stage-desc">Zero-Downtime Hot-Swap</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-bottom: 20px;">
+          <button class="btn-action" style="max-width: 280px;" onclick="triggerMLOpsCycle()">
+            <span>⚡ 컨베이어 1사이클 가동 (Trigger)</span>
+          </button>
+          <button class="btn-action" style="max-width: 240px; background: #1e293b; border: 1px solid #475569;" onclick="toggleAutoLoop()" id="btn-autoloop">
+            <span>🔁 자동 무한 루프 시작</span>
+          </button>
+        </div>
+
+        <div style="background: #030712; padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); font-family: Consolas, monospace; font-size: 12px; color: #60a5fa; height: 260px; overflow-y: auto;" id="mlops-console">
+[READY] MLOps 컨베이어 벨트가 정상 대기 중입니다.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+      }
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+    }
+
+    // 모의 시뮬레이션 데이터 (GitHub Pages 등 정적 서버 환경용)
+    const MOCK_AGENT_STEPS = [
+      {
+        step: 1,
+        badge: "GraphQueryTool",
+        tool: "query_supply_graph(part_id='BAT-800K', filter='alternative_suppliers')",
+        thought: "태풍 카눈의 경로를 감안하여 울산 주공급망의 위험도를 계산하고, 내륙 지역의 대체 2차 공급사를 온톨로지 지식 그래프에서 긴급 탐색합니다.",
+        obs: { "found_suppliers": ["세종테크놀로지 청주공장", "한화솔루션 진천센터"], "selected": "세종테크놀로지 청주공장", "lead_time_hours": 12, "risk_score": 0.12 }
+      },
+      {
+        step: 2,
+        badge: "ErpQueryTool",
+        tool: "check_erp_stock_and_price(supplier='세종테크놀로지', part_id='BAT-800K')",
+        thought: "식별된 세종테크놀로지 청주공장의 가용 재고 및 납품 단가 협약 기준을 ERP 시스템에서 실시간으로 대조합니다.",
+        obs: { "current_stock": 580, "request_qty": 320, "unit_price": 2850000, "status": "AVAILABLE_FOR_DISPATCH" }
+      },
+      {
+        step: 3,
+        badge: "VectorSearchTool",
+        tool: "search_contract_clauses(query='긴급 발주 시 프리미엄 상한선 및 위약금 면책 조항')",
+        thought: "비상시 조달 단가 할증률(최대 15%)과 법적 면책 조항을 계약서 벡터 저장소에서 RAG 검색하여 감사 리스크를 사전에 제거합니다.",
+        obs: { "clause_matched": "제14조(천재지변 및 긴급조달)", "max_premium": "10% 허용", "compliance_status": "APPROVED" }
+      },
+      {
+        step: 4,
+        badge: "ActionExecutionTool",
+        tool: "create_emergency_purchase_order(po_id='PO-EMERGENCY-0001', qty=320, destination='울산 조립라인 3')",
+        thought: "모든 검증이 완료되었으므로 인간 개입 없이 자율적으로 전자 결재를 집행하고 긴급 배차 지시를 전송합니다.",
+        obs: { "po_id": "PO-EMERGENCY-0001", "dispatch_trucks": 4, "eta": "2026-10-15 08:30:00", "status": "CONFIRMED" }
+      }
+    ];
+
+    async function executeAgentMission() {
+      const container = document.getElementById('agent-flow-container');
+      const finalBanner = document.getElementById('agent-final-banner');
+      const finalText = document.getElementById('agent-final-text');
+      container.innerHTML = '<div style="color:var(--accent); padding:20px; text-align:center;"><div style="font-size:24px; margin-bottom:8px;">🛰️</div>오케스트레이터 StateGraph 자율 추론 가동 중...</div>';
+      finalBanner.style.display = 'none';
+
+      let data = null;
+      try {
+        const resp = await fetch('/api/run_agent', { method: 'POST', signal: AbortSignal.timeout(2000) });
+        if (resp.ok) {
+          data = await resp.json();
+        }
+      } catch (err) {
+        // 정적 웹 호스팅 환경: 내장 시뮬레이션 모드로 원활하게 전환
+        console.log("백엔드 서버 미감지 - 정적 시뮬레이션 모드로 구동합니다.");
+      }
+
+      if (!data) {
+        // 시뮬레이션 스텝별 순차 연출 (리얼 타임 느낌)
+        container.innerHTML = '';
+        for (let i = 0; i < MOCK_AGENT_STEPS.length; i++) {
+          const s = MOCK_AGENT_STEPS[i];
+          await new Promise(r => setTimeout(r, 600));
+          const card = document.createElement('div');
+          card.className = 'step-card' + (i === MOCK_AGENT_STEPS.length - 1 ? ' active' : '');
+          card.innerHTML = `
+            <div class="step-header">
+              <span style="font-weight:bold; font-size:13px; color:#fff;">[Step ${s.step}] 🧠 BRAIN REASONING</span>
+              <span class="step-badge">${s.badge}</span>
+            </div>
+            <div class="step-thought">${s.thought}</div>
+            <div class="step-data"><strong>🛠️ CALL:</strong> ${s.tool}<br><strong>👁️ RESULT:</strong> ${JSON.stringify(s.obs)}</div>
+          `;
+          container.appendChild(card);
+          container.scrollTop = container.scrollHeight;
+        }
+
+        finalText.textContent = "✅ 위기 대응 완료: 세종테크놀로지 청주공장으로부터 320개 긴급 조달 확정 (배차 완료, 내일 08:30 울산 공장 도착 예정). 라인 셧다운 리스크 100% 방어 성공!";
+        finalBanner.style.display = 'block';
+
+        // ERP 장부 실시간 업데이트
+        document.getElementById('stock-val-bat').textContent = '460개 (+320 긴급입고)';
+        document.getElementById('stock-bar-bat').style.width = '92%';
+        document.getElementById('stock-bar-bat').style.background = '#10b981';
+
+        const poRows = document.getElementById('erp-po-rows');
+        poRows.innerHTML = `
+          <tr>
+            <td><strong style="color:var(--accent);">PO-EMERGENCY-0001</strong></td>
+            <td>BAT-800K</td>
+            <td>320개</td>
+            <td>세종테크놀로지 청주공장</td>
+            <td><span style="color:#10b981; font-weight:bold;">APPROVED_DISPATCH</span></td>
+            <td>방금 전 (AI 자율 승인)</td>
+          </tr>
+        `;
+        return;
+      }
+
+      // 실제 백엔드 응답이 있을 때의 렌더링
+      container.innerHTML = '';
+      data.steps.forEach((s, idx) => {
+        const card = document.createElement('div');
+        card.className = 'step-card' + (idx === data.steps.length - 1 ? ' active' : '');
+        card.innerHTML = `
+          <div class="step-header">
+            <span style="font-weight:bold; font-size:13px; color:#fff;">[Step ${s.step}] 🧠 BRAIN REASONING</span>
+            <span class="step-badge">${s.badge || s.tool}</span>
+          </div>
+          <div class="step-thought">${s.thought}</div>
+          <div class="step-data"><strong>🛠️ CALL:</strong> ${s.tool}<br><strong>👁️ RESULT:</strong> ${JSON.stringify(s.obs)}</div>
+        `;
+        container.appendChild(card);
+      });
+
+      finalText.textContent = data.final_result;
+      finalBanner.style.display = 'block';
+
+      document.getElementById('stock-val-bat').textContent = '460개 (+320 긴급입고)';
+      document.getElementById('stock-bar-bat').style.width = '92%';
+      document.getElementById('stock-bar-bat').style.background = '#10b981';
+
+      const poRows = document.getElementById('erp-po-rows');
+      poRows.innerHTML = `
+        <tr>
+          <td><strong style="color:var(--accent);">PO-EMERGENCY-0001</strong></td>
+          <td>BAT-800K</td>
+          <td>320개</td>
+          <td>세종테크놀로지 청주공장</td>
+          <td><span style="color:#10b981; font-weight:bold;">APPROVED_DISPATCH</span></td>
+          <td>방금 전 (자동 승인)</td>
+        </tr>
+      `;
+    }
+
+    let mlopsCycle = 1;
+    async function triggerMLOpsCycle() {
+      const consoleBox = document.getElementById('mlops-console');
+      let data = null;
+      try {
+        const resp = await fetch('/api/run_mlops?cycle=' + mlopsCycle, { method: 'POST', signal: AbortSignal.timeout(2000) });
+        if (resp.ok) {
+          data = await resp.json();
+        }
+      } catch (err) {
+        // 정적 웹 모의 시뮬레이션
+      }
+
+      if (!data) {
+        const newVer = "lora_model_v" + (8100 + mlopsCycle * 12);
+        const drift = (0.015 + Math.random() * 0.02).toFixed(4);
+        const nowTime = new Date().toLocaleTimeString();
+        const mockLogs = [
+          `[${nowTime}] 🔄 [Cycle ${mlopsCycle}] MLOps 컨베이어 벨트 가동 시작...`,
+          `[${nowTime}] 📥 [1/4 Ingestion] 실시간 운영 이벤트 35건 수집 완료 (Data Lake 적재)`,
+          `[${nowTime}] ⚙️ [2/4 Processing] Kolmogorov-Smirnov 검정 드리프트 스코어: ${drift} (임계치 0.05 미만 정상)`,
+          `[${nowTime}] 🏋️ [3/4 Retraining] 야간 LoRA 미세조정 완료 -> 신규 체크포인트 ${newVer} 생성`,
+          `[${nowTime}] 🚀 [4/4 Hot-Swap] FastAPI 무중단 메모리 핫스왑 성공! 현재 활성 모델: ${newVer}`
+        ];
+
+        mockLogs.forEach(line => {
+          consoleBox.innerHTML += '<div>' + line + '</div>';
+        });
+        consoleBox.scrollTop = consoleBox.scrollHeight;
+
+        document.getElementById('hdr-active-model').textContent = newVer;
+        document.getElementById('kpi-drift-score').textContent = drift;
+        document.getElementById('kpi-hotswap-count').textContent = mlopsCycle + '회 성공';
+        mlopsCycle++;
+        return;
+      }
+
+      data.logs.forEach(line => {
+        consoleBox.innerHTML += '<div>' + line + '</div>';
+      });
+      consoleBox.scrollTop = consoleBox.scrollHeight;
+
+      document.getElementById('hdr-active-model').textContent = data.active_version;
+      document.getElementById('kpi-drift-score').textContent = data.drift_score;
+      document.getElementById('kpi-hotswap-count').textContent = data.hot_swap_count + '회 성공';
+      mlopsCycle++;
+    }
+
+    let autoLoopInterval = null;
+    function toggleAutoLoop() {
+      const btn = document.getElementById('btn-autoloop');
+      if (autoLoopInterval) {
+        clearInterval(autoLoopInterval);
+        autoLoopInterval = null;
+        btn.innerHTML = '<span>🔁 자동 무한 루프 시작</span>';
+        btn.style.borderColor = '#475569';
+      } else {
+        triggerMLOpsCycle();
+        autoLoopInterval = setInterval(triggerMLOpsCycle, 5000);
+        btn.innerHTML = '<span>⏸️ 자동 무한 루프 정지 중</span>';
+        btn.style.borderColor = '#10b981';
+      }
+    }
+  </script>
+</body>
+</html>
