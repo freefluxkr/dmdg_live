@@ -1,0 +1,6 @@
+{"timestamp": "2026-10-14 15:07:47", "unix_time": 1791958067.3741252, "event_type": "SENSOR_ALERT", "payload": {"part": "BAT-800K", "issue": "셀 온도 42도 상승 감지", "hub": "부산1물류"}, "feedback_score": 0.95}
+{"timestamp": "2026-10-14 15:07:47", "unix_time": 1791958067.3741252, "event_type": "SCM_FEEDBACK", "payload": {"route": "남해고속도로", "condition": "집중호우로 화물차 40km 서행", "delay_hr": 2.5}, "feedback_score": 0.85}
+{"timestamp": "2026-10-14 15:07:47", "unix_time": 1791958067.3741252, "event_type": "NEW_SUPPLIER_REPORT", "payload": {"supplier": "천안 차세대전지(주)", "capacity": "450/day", "part": "BAT-900X"}, "feedback_score": 1.0}
+{"timestamp": "2026-10-14 15:08:29", "unix_time": 1791958109.278122, "event_type": "SENSOR_ALERT", "payload": {"part": "BAT-800K", "issue": "셀 온도 42도 상승 감지", "hub": "부산1물류"}, "feedback_score": 0.95}
+{"timestamp": "2026-10-14 15:08:29", "unix_time": 1791958109.278667, "event_type": "SCM_FEEDBACK", "payload": {"route": "남해고속도로", "condition": "집중호우로 화물차 40km 서행", "delay_hr": 2.5}, "feedback_score": 0.85}
+{"timestamp": "2026-10-14 15:08:29", "unix_time": 1791958109.2791703, "event_type": "NEW_SUPPLIER_REPORT", "payload": {"supplier": "천안 차세대전지(주)", "capacity": "450/day", "part": "BAT-900X"}, "feedback_score": 1.0}

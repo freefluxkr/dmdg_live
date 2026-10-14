@@ -1,0 +1,36 @@
+{
+  "nodes": [
+    {"id": "Supplier_Hanlim", "type": "Supplier", "label": "한림에너지(주) 부산공장", "location": "부산", "tier": 1},
+    {"id": "Supplier_Sejong", "type": "Supplier", "label": "세종테크놀로지 청주공장", "location": "청주", "tier": 2},
+    {"id": "Supplier_NextSilicon", "type": "Supplier", "label": "넥스트실리콘 경기공장", "location": "평택", "tier": 1},
+    {"id": "Supplier_Dongjin", "type": "Supplier", "label": "동진전장 울산공장", "location": "울산", "tier": 1},
+    
+    {"id": "Part_BAT800K", "type": "Part", "label": "BAT-800K 하이니켈 배터리", "criticality": "HIGH"},
+    {"id": "Part_MCU3200", "type": "Part", "label": "MCU-3200 32비트 마이크로컨트롤러", "criticality": "MEDIUM"},
+    {"id": "Part_RELAYHV", "type": "Part", "label": "RELAY-HV 고전압 릴레이", "criticality": "HIGH"},
+    
+    {"id": "Hub_Busan", "type": "LogisticsHub", "label": "부산 제1물류센터(부산항)", "location": "부산"},
+    {"id": "Hub_Pyeongtaek", "type": "LogisticsHub", "label": "평택 중앙물류허브", "location": "평택"},
+    
+    {"id": "Plant_Ulsan", "type": "Plant", "label": "울산 제1공장 EV라인", "location": "울산"},
+    
+    {"id": "Route_Namhae", "type": "Route", "label": "남해고속도로 (부산-울산)", "status": "TYPHOON_WARNING"},
+    {"id": "Route_Gyeongbu", "type": "Route", "label": "경부고속도로 (청주-울산)", "status": "CLEAR"}
+  ],
+  "edges": [
+    {"source": "Supplier_Hanlim", "target": "Part_BAT800K", "relation": "MANUFACTURES", "capacity": "500/day"},
+    {"source": "Supplier_Sejong", "target": "Part_BAT800K", "relation": "BACKUP_MANUFACTURES", "capacity": "300/day"},
+    {"source": "Supplier_NextSilicon", "target": "Part_MCU3200", "relation": "MANUFACTURES", "capacity": "2000/day"},
+    {"source": "Supplier_Dongjin", "target": "Part_RELAYHV", "relation": "MANUFACTURES", "capacity": "400/day"},
+    
+    {"source": "Supplier_Hanlim", "target": "Hub_Busan", "relation": "TRANSPORTS_TO"},
+    {"source": "Hub_Busan", "target": "Route_Namhae", "relation": "USES_ROUTE"},
+    {"source": "Route_Namhae", "target": "Plant_Ulsan", "relation": "DELIVERS_TO"},
+    
+    {"source": "Supplier_Sejong", "target": "Route_Gyeongbu", "relation": "USES_ROUTE"},
+    {"source": "Route_Gyeongbu", "target": "Plant_Ulsan", "relation": "DELIVERS_TO"},
+    
+    {"source": "Part_BAT800K", "target": "Plant_Ulsan", "relation": "REQUIRED_BY_LINE", "urgency": "CRITICAL"},
+    {"source": "Part_MCU3200", "target": "Plant_Ulsan", "relation": "REQUIRED_BY_LINE", "urgency": "NORMAL"}
+  ]
+}

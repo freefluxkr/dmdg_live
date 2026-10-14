@@ -1,0 +1,74 @@
+{
+  "inventory": [
+    {
+      "part_id": "BAT-800K",
+      "part_name": "차세대 하이니켈 배터리 셀 모듈",
+      "current_stock": 140,
+      "safety_stock": 500,
+      "unit": "개",
+      "primary_supplier": "한림에너지(주) 부산공장",
+      "status": "CRITICAL_LOW",
+      "lead_time_days": 4,
+      "storage_location": "부산 제1물류센터"
+    },
+    {
+      "part_id": "MCU-3200",
+      "part_name": "차량용 고성능 32비트 마이크로컨트롤러",
+      "current_stock": 2400,
+      "safety_stock": 1200,
+      "unit": "개",
+      "primary_supplier": "넥스트실리콘 경기공장",
+      "status": "HEALTHY",
+      "lead_time_days": 2,
+      "storage_location": "평택 중앙허브"
+    },
+    {
+      "part_id": "RELAY-HV",
+      "part_name": "전기차용 800V 고전압 안전 릴레이",
+      "current_stock": 310,
+      "safety_stock": 400,
+      "unit": "개",
+      "primary_supplier": "동진전장 울산공장",
+      "status": "WARNING",
+      "lead_time_days": 3,
+      "storage_location": "울산 통합창고"
+    }
+  ],
+  "production_lines": [
+    {
+      "line_id": "LINE-EV-ULSAN",
+      "plant_name": "울산 제1공장 전기차 EV 조립라인",
+      "target_output_per_day": 80,
+      "critical_part_needed": "BAT-800K",
+      "daily_part_consumption": 80,
+      "remaining_production_days": 1.75
+    }
+  ],
+  "purchase_orders": [
+    {
+      "po_number": "PO-2026-1049",
+      "part_id": "BAT-800K",
+      "quantity": 800,
+      "supplier_name": "한림에너지(주) 부산공장",
+      "status": "SHIPPED_IN_TRANSIT",
+      "expected_arrival": "2026-10-15 10:00",
+      "transit_route": "부산항 ➔ 남해고속도로 ➔ 울산공장"
+    },
+    {
+      "po_number": "PO-EMERGENCY-0002",
+      "part_id": "BAT-800K",
+      "quantity": 320,
+      "supplier_name": "세종테크놀로지 청주공장",
+      "status": "APPROVED_EMERGENCY_DISPATCH",
+      "created_at": "2026-10-14 15:30 (Auto-Agent Execution)"
+    },
+    {
+      "po_number": "PO-EMERGENCY-0003",
+      "part_id": "BAT-800K",
+      "quantity": 320,
+      "supplier_name": "세종테크놀로지 청주공장",
+      "status": "APPROVED_EMERGENCY_DISPATCH",
+      "created_at": "2026-10-14 15:30 (Auto-Agent Execution)"
+    }
+  ]
+}
