@@ -1266,15 +1266,34 @@ const NOVELS_DATA = [
     tocList: document.getElementById('toc-items-list')
   };
 
-  // ── LocalStorage Initialization ──────────────────────────────────────────
+  // ── Safe Storage Helper (Cross-origin iframe & third-party cookie safe) ──
+  const Storage = {
+    _mem: {},
+    getItem(key) {
+      try {
+        return window.localStorage ? window.localStorage.getItem(key) : (this._mem[key] || null);
+      } catch (e) {
+        return this._mem[key] || null;
+      }
+    },
+    setItem(key, val) {
+      try {
+        if (window.localStorage) window.localStorage.setItem(key, val);
+      } catch (e) {
+        this._mem[key] = val;
+      }
+    }
+  };
+
+  // ── Storage Initialization ──────────────────────────────────────────────
   function initStorage() {
-    const savedTheme = localStorage.getItem('dmdg_novel_theme');
+    const savedTheme = Storage.getItem('dmdg_novel_theme');
     if (savedTheme && STATE.themes.includes(savedTheme)) {
       STATE.themeIndex = STATE.themes.indexOf(savedTheme);
     }
     applyTheme();
 
-    const savedFontSize = localStorage.getItem('dmdg_novel_font_size');
+    const savedFontSize = Storage.getItem('dmdg_novel_font_size');
     if (savedFontSize) {
       STATE.fontSize = parseInt(savedFontSize, 10);
       applyFontSize();
@@ -1286,7 +1305,7 @@ const NOVELS_DATA = [
     document.body.className = STATE.themes[STATE.themeIndex];
     el.themeIcon.textContent = STATE.themeIcons[STATE.themeIndex];
     el.themeLabel.textContent = STATE.themeNames[STATE.themeIndex];
-    localStorage.setItem('dmdg_novel_theme', STATE.themes[STATE.themeIndex]);
+    Storage.setItem('dmdg_novel_theme', STATE.themes[STATE.themeIndex]);
   }
 
   function toggleTheme() {
@@ -1297,7 +1316,7 @@ const NOVELS_DATA = [
   // ── Font Size Management ─────────────────────────────────────────────────
   function applyFontSize() {
     document.documentElement.style.setProperty('--reader-font-size', `${STATE.fontSize}px`);
-    localStorage.setItem('dmdg_novel_font_size', STATE.fontSize);
+    Storage.setItem('dmdg_novel_font_size', STATE.fontSize);
   }
 
   function changeFontSize(delta) {
@@ -1483,8 +1502,8 @@ const NOVELS_DATA = [
     // Scroll to Top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Save Reading Position to Storage
-    localStorage.setItem(`dmdg_read_pos_${STATE.currentNovel.id}`, idx);
+    // Save Reading Position to Storage safely
+    Storage.setItem(`dmdg_read_pos_${STATE.currentNovel.id}`, idx);
   }
 
   function renderTocDrawer() {
