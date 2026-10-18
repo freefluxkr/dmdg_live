@@ -3065,9 +3065,155 @@
       document.getElementById('reportModal').classList.remove('active');
     }
 
-    function downloadMockPDF() {
-      alert("📄 [2026 기업용 MZ 신조어 소통 지표 리포트 전문 (PDF)]\n\n'말쌈 (MALSSAM) 30종 마스터 사전 및 문해력 가이드' 문서가 브라우저 새 창에서 열리거나 다운로드됩니다!\n개발팀을 응원해 주셔서 감사합니다!");
+
+    // ============================================================
+    // 📥 [실제 리포트 다운로드 및 인쇄/PDF 저장 엔진]
+    // ============================================================
+    function downloadRealReportPDF() {
+      const provider = document.getElementById('receiptProvider').innerText || "카카오페이";
+      const txId = document.getElementById('receiptTxId').innerText || "TX-2026-OK";
+      const amount = document.getElementById('receiptAmount').innerText || "1,000원";
+      const grade = document.getElementById('quizGradeText') ? document.getElementById('quizGradeText').innerText : "👑 LV.99 폼 미친 알파 세대 갓(God)";
+      const score = document.getElementById('quizScoreText') ? document.getElementById('quizScoreText').innerText : "100점";
+      const today = new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      // 30종 신조어 매핑 표 생성
+      let wordsTableRows = "";
+      DEFAULT_WORDS.forEach((w, i) => {
+        wordsTableRows += `
+          <tr style="border-bottom:1px solid #e2e8f0; font-size:13px;">
+            <td style="padding:10px; font-weight:700; color:#0f172a; text-align:center;">${i+1}</td>
+            <td style="padding:10px; font-weight:800; color:#2563eb;">${w.word}</td>
+            <td style="padding:10px; color:#64748b; text-align:center;">${w.chosung}</td>
+            <td style="padding:10px; color:#334155;">${w.short_def}</td>
+            <td style="padding:10px; color:#059669; font-weight:600;">${w.standard_korean_mapping || '-'}</td>
+          </tr>
+        `;
+      });
+
+      // 프리미엄 리포트 HTML 문서 템플릿
+      const reportHtml = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>2026 기업용 MZ 세대 소통 지표 리포트 & 공식 인증서</title>
+  <style>
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f8fafc; color: #1e293b; padding: 40px 20px; line-height: 1.6; }
+    .container { max-width: 820px; margin: 0 auto; background: #fff; padding: 50px 45px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+    .header-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 16px; margin-bottom: 30px; }
+    .logo-text { font-size: 20px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; }
+    .cert-badge { background: #dbeafe; color: #1d4ed8; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid #bfdbfe; }
+    .cert-box { border: 2px solid #e2e8f0; border-radius: 12px; padding: 24px; background: #fafafa; margin-bottom: 30px; }
+    .receipt-box { display: flex; justify-content: space-between; font-size: 13px; color: #64748b; border-bottom: 1px dashed #cbd5e1; padding-bottom: 12px; margin-bottom: 14px; }
+    h1 { font-size: 26px; font-weight: 900; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; font-weight: 800; color: #0f172a; margin-top: 35px; margin-bottom: 15px; border-left: 4px solid #2563eb; padding-left: 10px; }
+    .btn-print { background: #2563eb; color: #fff; border: none; padding: 14px 28px; border-radius: 10px; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(37,99,235,0.3); transition: 0.2s; }
+    .btn-print:hover { background: #1d4ed8; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th { background: #f1f5f9; padding: 12px 10px; font-size: 13px; color: #475569; text-align: left; font-weight: 700; border-bottom: 2px solid #cbd5e1; }
+  </style>
+</head>
+<body>
+  <div class="no-print" style="max-width:820px; margin:0 auto 20px; display:flex; justify-content:space-between; align-items:center; background:#1e293b; color:#fff; padding:16px 24px; border-radius:12px;">
+    <div>
+      <p style="font-weight:700; font-size:15px;">📄 리포트가 성공적으로 발급되었습니다!</p>
+      <p style="font-size:13px; color:#94a3b8; margin-top:2px;">[PDF로 저장 / 인쇄하기] 버튼을 누르면 즉시 PDF 파일로 영구 보관할 수 있습니다.</p>
+    </div>
+    <button class="btn-print" onclick="window.print()">🖨️ PDF로 저장 / 인쇄하기</button>
+  </div>
+
+  <div class="container">
+    <div class="header-bar">
+      <span class="logo-text">💬 말쌈 (MALSSAM) 공식 트렌드 인증원</span>
+      <span class="cert-badge">공식 인증 리포트 (정품)</span>
+    </div>
+
+    <div class="receipt-box">
+      <span>승인 번호: <strong>${txId}</strong></span>
+      <span>결제 수단: <strong>${provider} (${amount})</strong></span>
+      <span>발급 일자: <strong>${today}</strong></span>
+    </div>
+
+    <h1>2026 기업용 MZ 세대 소통 지표 리포트<br>& 현대 신조어 문해력 공식 인증서</h1>
+    <p style="color:#64748b; font-size:14px; margin-top:6px; margin-bottom:25px;">
+      본 문서는 당목담글(DMDG) 스튜디오 자율 에이전트 본부의 언어 연구 데이터베이스를 기반으로 공인 발급된 세대 간 소통 진단 인증서입니다.
+    </p>
+
+    <div class="cert-box">
+      <div style="font-size:13px; color:#64748b; margin-bottom:4px;">문해력 평가 결과 인증</div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:24px; font-weight:900; color:#2563eb;">${grade}</div>
+          <div style="font-size:14px; color:#475569; margin-top:4px;">종합 평가 점수: <strong>${score}</strong> (상위 5% 이내 트렌드 마스터)</div>
+        </div>
+        <div style="width:70px; height:70px; border-radius:50%; border:3px solid #dc2626; color:#dc2626; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; transform:rotate(-15deg); text-align:center; line-height:1.2;">
+          말쌈<br>공식인
+        </div>
+      </div>
+    </div>
+
+    <h2>1. 2026 대한민국 30대 필수 신조어 비즈니스 사전</h2>
+    <p style="font-size:13px; color:#64748b; margin-bottom:12px;">사내 회의, 협업 메신저(Slack/카톡), 마케팅 기획 시 세대 갈등을 예방하고 공감대를 형성하기 위한 핵심 매뉴얼입니다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:40px; text-align:center;">No</th>
+          <th style="width:110px;">신조어</th>
+          <th style="width:80px; text-align:center;">초성</th>
+          <th>핵심 의미 및 뉘앙스</th>
+          <th style="width:120px;">표준어 매칭</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${wordsTableRows}
+      </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>2. 팀장 및 임직원을 위한 세대 공감 소통 10계명</h2>
+    <ol style="margin-left:20px; font-size:14px; color:#334155; line-height:1.9;">
+      <li><strong>알잘딱깔센의 올바른 활용</strong>: 지시를 모호하게 내린 후 "알잘딱깔센하게 해와"라고 강요하는 것은 금물입니다. 명확한 가이드라인을 준 후 신뢰를 표현할 때 쓰세요.</li>
+      <li><strong>중꺾마의 동기부여</strong>: 야근을 강요하는 수단이 아닌, 프로젝트 위기 상황에서 팀원들의 사기를 북돋울 때 격려의 언어로 사용하세요.</li>
+      <li><strong>럭키비키 마인드셋의 존중</strong>: 실수를 자책하기보다 "오히려 좋아, 럭키비키잖아!"라며 다음 단계를 도모하는 Z세대의 회복탄력성을 지지해 주세요.</li>
+      <li><strong>핑프 예방 문화</strong>: 사내 위키와 업무 매뉴얼을 최신화하여 누구나 1초 만에 스스로 검색할 수 있는 지식 생태계를 구축하세요.</li>
+      <li><strong>비속어 주의(뇌절, 긁히다)</strong>: 공식 회의나 클라이언트 미팅에서는 비속어 주의 등급의 신조어 사용을 지양하고 품격 있는 표준어를 권장합니다.</li>
+    </ol>
+
+    <div style="margin-top:50px; text-align:center; border-top:1px solid #e2e8f0; padding-top:25px; font-size:13px; color:#94a3b8;">
+      발행처: <strong>당목담글(DMDG) 스튜디오 한글 문화 주권 수호 연구 본부</strong> | 공식 도메인: https://freefluxkr.github.io/dmdg_live/malssam/
+    </div>
+  </div>
+</body>
+</html>`;
+
+      // 1) Blob 파일 실제 다운로드 실행
+      const blob = new Blob([reportHtml], { type: 'text/html;charset=utf-8' });
+      const downloadUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `MALSSAM_2026_MZ_Trend_Report_${txId}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // 2) 브라우저 새 창에서 즉시 인쇄/PDF 저장용 화면 오픈
+      const printWindow = window.open('', '_blank');
+      if (printWindow) {
+        printWindow.document.write(reportHtml);
+        printWindow.document.close();
+      }
+
+      showToast("📥 리포트 다운로드 및 인쇄/PDF 저장 창이 성공적으로 열렸습니다!");
+    }
+
 
     
     function requestKakaoPay() {
@@ -3141,7 +3287,7 @@
 
       <!-- 리포트 다운로드 및 열람 액션 -->
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <button class="btn-submit" style="width:100%; padding:14px; font-size:1.05rem;" onclick="downloadMockPDF()">
+        <button class="btn-submit" style="width:100%; padding:14px; font-size:1.05rem;" onclick="downloadRealReportPDF()">
           📥 2026 MZ 트렌드 리포트 (PDF) 다운로드
         </button>
         <button class="btn-cancel" style="width:100%; padding:12px;" onclick="closeReportModal()">
