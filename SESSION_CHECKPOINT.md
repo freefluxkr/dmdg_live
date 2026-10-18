@@ -104,7 +104,18 @@
       * `malssam.com`: **현재 미등록 (Available! 구매 가능 ⭐⭐⭐)**
       * `malssam.kr`: **현재 미등록 (Available! 구매 가능 ⭐⭐⭐)**
       * `malssam.co.kr`, `malssam.net`, `malssam.io`: **전부 미등록 (Available!)**
-   15. **🌉 `temp_dmdg_live` 폴더의 역할 영구 정의**:
+   15. **🔥 [Firebase 서울 리전 실시간 DB 전격 연동 완결]**:
+      * 사장님의 구글 계정(`tuesvonita@gmail.com`)에 잠자고 있던 **Firebase `dmdg-live` (서울 리전: `asia-northeast3`, 무료 티어)** 전격 발굴 및 연동.
+      * `firestore.rules` 보안 규칙 배포 완료 (`malssam_words` 컬렉션 전 세계 실시간 읽기/등록/투표 허용).
+      * 웹앱(`index.html`)에 **`🟢 실시간 DB 연결됨`** 펄스 뱃지 장착.
+      * **실시간 신조어 제보 & Firestore 저장**: 사용자가 제보 시 클라우드 DB에 `addDoc` 실시간 저장 및 최상단 카드 즉각 렌더링 검증 완료.
+      * **인정 👍 / 억지 👎 투표 실시간 증가**: `FieldValue.increment(1)` 연동으로 전 세계 투표수 실시간 합산.
+      * **오프라인 무결점 폴백**: 통신 불가 시 30종 기본 DB와 localStorage로 100% 무결점 작동.
+   16. **📚 [위키독스 제11장 공식 출간 및 목차 정렬 완결] Book 21733**:
+      * **[11. 제11장. Firebase 서울 리전 전격 연동: 전 세계 실시간 유저 등록과 집단지성 투표 파이프라인 실록](https://wikidocs.net/455552)** (Page ID: 455552) 신규 출간!
+      * **사이드바 목차 정렬**: 본문 `01~11장` 상단 완결, 부록 `12~14` 하단 배치.
+      * **FrontPage (455513)**: 11개 전 챕터 및 라이브 도메인 최신 동기화 완료.
+   17. **🌉 `temp_dmdg_live` 폴더의 역할 영구 정의**:
       * GitHub Pages 실시간 라이브 호스팅과 로컬 작업 공간을 이어주는 **'배포 전진기지(Git Deployment Bridge)'**이므로 절대 삭제 금지 및 보관 유지.
 
 ---
