@@ -1,0 +1,151 @@
+{
+  "project": "한글 어반 딕셔너리 (말모이 2.0)",
+  "version": "1.0.0",
+  "updated_at": "2026-10-18",
+  "words": [
+    {
+      "id": 1,
+      "word": "긁히다",
+      "pronunciation": "[글키다]",
+      "part_of_speech": "동사",
+      "chosung": "ㄱㅎㄷ",
+      "short_def": "상대방의 도발이나 정곡을 찌르는 팩트 폭격에 자존심이 상해 분노하거나 발끈한 상태.",
+      "origin": "마음의 평정심에 '흠집(스크래치)이 났다'는 표현에서 유래. 게임 채팅 및 인터넷 방송에서 폭발적으로 확산됨.",
+      "examples": [
+        "A: 야, 너 솔직히 키 프로필보다 3cm는 작지?\nB: 야 갑자기 키 얘기가 왜 나와? 너 선 넘네?\nA: ㅋㅋㅋ 왜 그래, 제대로 긁혔네?"
+      ],
+      "tags": ["감정", "도발", "심리전", "MZ유행어"],
+      "likes": 2845,
+      "dislikes": 84,
+      "toxicity_level": 2,
+      "standard_korean_mapping": "발끈하다, 약 오르다, 신경이 곤두서다",
+      "trend_status": "HOT"
+    },
+    {
+      "id": 2,
+      "word": "중꺾마",
+      "pronunciation": "[중껑마]",
+      "part_of_speech": "명사 / 관용구",
+      "chosung": "ㅈㄲㅁ",
+      "short_def": "'중요한 것은 꺾이지 않는 마음'의 줄임말. 어떤 역경이나 절망적인 상황에서도 포기하지 않는 강한 불굴의 의지.",
+      "origin": "2022년 LoL 월드 챔피언십(롤드컵) 당시 데프트(Deft) 선수의 서사에서 시작되어 국민적 유행어로 자리 잡음.",
+      "examples": [
+        "학점도 망하고 취업 시장도 꽁꽁 얼어붙었지만... 그래도 우리에겐 중꺾마가 있다!"
+      ],
+      "tags": ["동기부여", "명언", "스포츠", "긍정"],
+      "likes": 4920,
+      "dislikes": 31,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "백절불굴(百折不屈), 칠전팔기(七戰八起)",
+      "trend_status": "LEGEND"
+    },
+    {
+      "id": 3,
+      "word": "억까",
+      "pronunciation": "[억까]",
+      "part_of_speech": "명사 / 동사",
+      "chosung": "ㅇㄲ",
+      "short_def": "'억지로 까기'의 줄임말. 합리적인 이유나 정당한 근거 없이 맹목적으로 비난하거나, 불운이 연속되어 일이 꼬이는 상황.",
+      "origin": "인터넷 커뮤니티 및 스트리밍 게임 방송에서 무리한 비난이나 비상식적인 시스템 불운을 호소할 때 사용.",
+      "examples": [
+        "우산 놓고 온 날에만 기습 폭우 쏟아지는 거 실화냐? 세상이 나를 억까하네."
+      ],
+      "tags": ["불운", "비난", "게임", "일상"],
+      "likes": 3120,
+      "dislikes": 92,
+      "toxicity_level": 2,
+      "standard_korean_mapping": "생트집, 억지 비난, 불운의 연속",
+      "trend_status": "HOT"
+    },
+    {
+      "id": 4,
+      "word": "알잘딱깔센",
+      "pronunciation": "[알잘딱깔센]",
+      "part_of_speech": "부사 / 형용사",
+      "chosung": "ㅇㅈㄸㄲㅅ",
+      "short_def": "'알아서 잘 딱 깔끔하고 센스 있게'의 줄임말. 구구절절 설명하지 않아도 스스로 완벽하게 눈치껏 일이나 상황을 처리하는 태도.",
+      "origin": "스트리머 우왁굳의 방송에서 팬들과 소통 중 탄생하여 기업 직장인들 사이에서도 널리 쓰이게 됨.",
+      "examples": [
+        "팀장님: 김 대리, 이번 신규 프로젝트 제안서 알잘딱깔센하게 알지?\n김 대리: 넵, 퇴근 전까지 완벽히 뽑아놓겠습니다!"
+      ],
+      "tags": ["직장생활", "센스", "일잘러", "찬사"],
+      "likes": 3890,
+      "dislikes": 65,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "눈치껏 센스 있게, 명쾌하게 알아서",
+      "trend_status": "STEADY"
+    },
+    {
+      "id": 5,
+      "word": "폼 미쳤다",
+      "pronunciation": "[폼 미첟따]",
+      "part_of_speech": "감탄사 / 관용구",
+      "chosung": "ㅍㅁㅊㄷ",
+      "short_def": "스포츠의 'Form(기량/컨디션)'에서 유래한 말로, 실력이나 외모, 어떤 결과물이 상상을 초월할 정도로 엄청나게 뛰어남을 극찬하는 표현.",
+      "origin": "해외 축구 커뮤니티에서 선수의 전성기 기량을 칭송하던 은어가 대중화됨.",
+      "examples": [
+        "와, 오늘 새로 나온 AI 모델 코딩 실력 폼 미쳤는데? 에러를 1초 만에 다 잡아!"
+      ],
+      "tags": ["극찬", "감탄", "트렌드", "일상"],
+      "likes": 4210,
+      "dislikes": 45,
+      "toxicity_level": 1,
+      "standard_korean_mapping": "기량이 절정에 달하다, 눈부시게 활약하다",
+      "trend_status": "HOT"
+    },
+    {
+      "id": 6,
+      "word": "핑프",
+      "pronunciation": "[핑프]",
+      "part_of_speech": "명사",
+      "chosung": "ㅍㅍ",
+      "short_def": "'핑거 프린세스(Finger Princess) / 핑거 프린스'의 줄임말. 손가락 하나 까딱해서 스스로 검색해 볼 생각은 안 하고 남에게 다 떠먹여 달라고 묻는 게으른 사람.",
+      "origin": "인터넷 지식iN 및 대학생 에브리타임 등 커뮤니티에서 기초적인 정보조차 스스로 찾지 않는 사람을 비꼬며 정착.",
+      "examples": [
+        "공지사항 첫 줄에 강의실 적혀 있는데 단톡방에서 '강의실 어디예요?' 묻는 핑프들 진짜 답답하다."
+      ],
+      "tags": ["대학생활", "풍자", "검색", "게으름"],
+      "likes": 2730,
+      "dislikes": 110,
+      "toxicity_level": 3,
+      "standard_korean_mapping": "게으름뱅이, 자립심 부족한 사람",
+      "trend_status": "STEADY"
+    },
+    {
+      "id": 7,
+      "word": "분좋카",
+      "pronunciation": "[분조카]",
+      "part_of_speech": "명사",
+      "chosung": "ㅂㅈㅋ",
+      "short_def": "'분위기 좋은 카페'의 줄임말. 인테리어, 채광, 음악, 뷰 등이 감성적이고 예뻐서 사진 찍기 좋은 핫플레이스 카페.",
+      "origin": "인스타그램 등 SNS 맛집/카페 탐방 태그에서 자연스럽게 확산됨.",
+      "examples": [
+        "주말에 친구랑 성수동 분좋카 가서 커피 마시고 인생샷 건지고 옴!"
+      ],
+      "tags": ["라이프스타일", "카페", "데이트", "감성"],
+      "likes": 1980,
+      "dislikes": 75,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "아늑하고 운치 있는 찻집",
+      "trend_status": "STEADY"
+    },
+    {
+      "id": 8,
+      "word": "갓생",
+      "pronunciation": "[갇생]",
+      "part_of_speech": "명사 / 동사",
+      "chosung": "ㄱㅅ",
+      "short_def": "'God(신)'과 '생(生, 인생)'의 합성어. 하루하루를 매우 성실하고 생산적이며 알차게 살아가는 모범적인 생활 방식.",
+      "origin": "아이돌 팬덤에서 '현실 생활에 충실하자'는 의미로 쓰이다가 자기계발 트렌드로 전 국민적 확장.",
+      "examples": [
+        "새해에는 미라클 모닝 6시에 일어나서 운동하고 독서하며 갓생 살 거야!"
+      ],
+      "tags": ["자기계발", "모범생", "성실", "동기부여"],
+      "likes": 4650,
+      "dislikes": 38,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "모범적인 삶, 성실한 하루하루",
+      "trend_status": "LEGEND"
+    }
+  ]
+}

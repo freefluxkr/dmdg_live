@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>말쌈 (MALSSAM) | 나랏말싸미 힙해져라! 대한민국 실시간 오픈 신조어 사전</title>
+  <!-- Pretendard 폰트 -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --card-bg: #151d30;
+      --card-border: #23314e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-yellow: #facc15;
+      --accent-cyan: #38bdf8;
+      --accent-pink: #f43f5e;
+      --accent-green: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 헤더 */
+    header {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 14px 24px;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo {
+      font-size: 1.8rem;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #facc15 0%, #fb923c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      font-size: 0.72rem;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .global-lang-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(17, 24, 39, 0.8);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 20px;
+    }
+
+    .lang-pill {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 3px 8px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .lang-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .lang-pill.active {
+      background: var(--accent-yellow);
+      color: #0f172a;
+    }
+
+    .btn-add {
+      background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+      color: #0f172a;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 10px rgba(250, 204, 21, 0.25);
+    }
+
+    .btn-add:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(250, 204, 21, 0.4);
+    }
+
+    /* 히어로 & 검색 섹션 */
+    .hero-section {
+      max-width: 800px;
+      margin: 40px auto 20px;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.8px;
+    }
+
+    .hero-title span {
+      color: var(--accent-yellow);
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .search-box-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #111827;
+      border: 2px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 20px 16px 52px;
+      font-size: 1.1rem;
+      color: #fff;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-yellow);
+      box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+      color: var(--text-muted);
+    }
+
+    .hot-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+    }
+
+    .hot-tags-label {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .hot-tag {
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease;
+    }
+
+    .hot-tag:hover {
+      background: rgba(250, 204, 21, 0.15);
+      color: var(--accent-yellow);
+      border-color: rgba(250, 204, 21, 0.4);
+    }
+
+    /* 메인 피드 컨테이너 */
+    .container {
+      max-width: 860px;
+      margin: 20px auto 60px;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    .feed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .feed-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .filter-tab.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+    }
+
+    /* 단어 카드 스타일 (Urban Dictionary 시그니처 레이아웃) */
+    .word-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 26px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .word-card:hover {
+      border-color: rgba(250, 204, 21, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .word-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .word-title-group {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .word-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--accent-yellow);
+      letter-spacing: -0.5px;
+    }
+
+    .word-meta {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .word-badge {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-hot {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--accent-pink);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .badge-legend {
+      background: rgba(250, 204, 21, 0.15);
+      color: var(--accent-yellow);
+      border: 1px solid rgba(250, 204, 21, 0.3);
+    }
+
+    .badge-steady {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* 1줄 정의 */
+    .word-definition {
+      font-size: 1.12rem;
+      color: #f1f5f9;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    /* 실전 대화 예문 박스 */
+    .word-example-box {
+      background: rgba(10, 15, 29, 0.6);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      font-size: 0.98rem;
+      color: #cbd5e1;
+      font-style: italic;
+      white-space: pre-line;
+      line-height: 1.6;
+    }
+
+    /* AI 단어 분석 바 */
+    .word-ai-dna {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px dashed var(--card-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .word-ai-dna span strong {
+      color: #e2e8f0;
+    }
+
+    /* 하단 액션 바 (투표 & 공유) */
+    .word-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .vote-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-vote {
+      background: #1e293b;
+      border: 1px solid var(--card-border);
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-vote:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    .btn-vote.voted-up {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .btn-vote.voted-down {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: var(--accent-pink);
+      color: var(--accent-pink);
+    }
+
+    .word-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag-item {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .btn-share {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+
+    .btn-share:hover {
+      color: var(--accent-yellow);
+    }
+
+    /* 모달 팝업 */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #111827;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      max-width: 540px;
+      width: 100%;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--accent-yellow);
+    }
+
+    .modal-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #cbd5e1;
+    }
+
+    .form-control {
+      width: 100%;
+      background: #1f2937;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-yellow);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn-cancel {
+      background: #374151;
+      color: #e5e7eb;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-submit {
+      background: var(--accent-yellow);
+      color: #000;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* 중복 검사 피드백 */
+    .field-hint {
+      font-size: 0.8rem;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .field-hint.duplicate {
+      color: #f43f5e;
+      font-weight: 700;
+    }
+    .field-hint.valid {
+      color: #10b981;
+      font-weight: 700;
+    }
+    .btn-goto-existing {
+      background: rgba(244, 63, 94, 0.2);
+      border: 1px solid #f43f5e;
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+
+    /* 카드 등록 성공 시 시각 효과 */
+    @keyframes pulse-gold {
+      0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7); border-color: var(--accent-yellow); }
+      70% { box-shadow: 0 0 0 15px rgba(250, 204, 21, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); }
+    }
+    .just-added {
+      animation: pulse-gold 2s ease-out;
+      border-color: var(--accent-yellow) !important;
+    }
+
+    /* 퀴즈 배너 */
+    .quiz-banner {
+      max-width: 860px;
+      margin: 0 auto 20px;
+      padding: 0 20px;
+    }
+    .quiz-banner-inner {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.15) 0%, rgba(168, 85, 247, 0.15) 50%, rgba(56, 189, 248, 0.15) 100%);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      flex-wrap: wrap;
+    }
+    .quiz-banner-content h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quiz-banner-content p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-top: 4px;
+    }
+    .btn-start-quiz {
+      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    }
+    .btn-start-quiz:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+    }
+
+    /* 퀴즈 모달 & 결과 화면 */
+    .quiz-card {
+      background: #111827;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 600px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.15);
+      position: relative;
+    }
+    .quiz-progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .quiz-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ec4899, #8b5cf6, #38bdf8);
+      width: 20%;
+      transition: width 0.3s ease;
+    }
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .quiz-step-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #c084fc;
+      background: rgba(168, 85, 247, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .quiz-question {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .quiz-opt-btn {
+      background: #1f2937;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: #e2e8f0;
+      font-size: 0.98rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .quiz-opt-btn:hover {
+      background: #374151;
+      border-color: #a855f7;
+      transform: translateX(4px);
+    }
+    .quiz-opt-btn.selected {
+      background: rgba(168, 85, 247, 0.2);
+      border-color: #c084fc;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* 퀴즈 결과창 & 수익화 */
+    .quiz-result-box {
+      text-align: center;
+      padding: 10px 0;
+    }
+    .result-score {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #facc15 0%, #ec4899 50%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+    .result-grade {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .result-desc {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      background: rgba(31, 41, 55, 0.6);
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      border: 1px solid var(--card-border);
+    }
+    .monetize-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    .monetize-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .monetize-desc {
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .pay-btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pay-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .pay-toss { background: #0064FF; color: #fff; }
+    .pay-kakao { background: #FEE500; color: #191919; }
+    .pay-paypal { background: #003087; color: #fff; }
+    .pay-coffee { background: #FFDD00; color: #000; }
+    .pay-btn:hover { transform: translateY(-2px); opacity: 0.95; }
+
+    /* 토스트 알림 */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #1e293b;
+      border: 1px solid var(--accent-yellow);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      display: none;
+      z-index: 1000;
+      font-size: 0.9rem;
+    }
+
+    /* 푸터 */
+    footer {
+      background: #060913;
+      border-top: 1px solid var(--card-border);
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: auto;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="brand">
+        <span class="brand-logo">📖</span>
+        <span class="brand-title">말쌈 (MALSSAM)</span>
+        <span class="brand-badge">2026 실시간 언어 배틀</span>
+      </a>
+      <div class="header-actions">
+        <nav class="global-lang-group" title="글로벌 현지화 전용 에디션">
+          <span style="font-size:0.75rem; color:#64748b; font-weight:700; margin-right:2px;">GLOBAL:</span>
+          <a href="#" class="lang-pill active">🇰🇷 KR</a>
+          <a href="global/en.html" class="lang-pill" title="English Edition">🇺🇸 EN</a>
+          <a href="global/ja.html" class="lang-pill" title="Japanese Edition">🇯🇵 JA</a>
+          <a href="global/vi.html" class="lang-pill" title="Vietnamese Edition">🇻🇳 VI</a>
+          <a href="global/id.html" class="lang-pill" title="Indonesian Edition">🇮🇩 ID</a>
+          <a href="global/es.html" class="lang-pill" title="Spanish Edition">🇪🇸 ES</a>
+        </nav>
+        <button class="btn-add" onclick="openAddModal()">
+          <span>+</span>
+          <span>신조어 제보하기</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 히어로 & 검색 섹션 -->
+  <section class="hero-section">
+    <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(250,204,21,0.1); border:1px solid rgba(250,204,21,0.3); color:#facc15; font-size:0.85rem; font-weight:700; padding:4px 14px; border-radius:20px; margin-bottom:14px;">
+      🛡️ 한글 주권 문화 수호 & 실시간 집단지성 신조어 프로젝트
+    </div>
+    <h1 class="hero-title">지금 한국인이 쓰는 <span>진짜 한글</span> 사전</h1>
+    <p class="hero-subtitle">"한글은 1443년 세종대왕이 창제한 인류 최고의 독창적 글자이며, 오늘도 살아 숨 쉬며 진화합니다."</p>
+
+    <div class="search-box-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="신조어 검색 또는 초성 입력 (예: 긁히다, ㅈㄲㅁ, 억까)..." oninput="handleSearch()">
+    </div>
+
+    <div class="hot-tags">
+      <span class="hot-tags-label">🔥 실시간 트렌드:</span>
+      <a class="hot-tag" onclick="quickSearch('긁히다')">#긁히다</a>
+      <a class="hot-tag" onclick="quickSearch('중꺾마')">#중꺾마</a>
+      <a class="hot-tag" onclick="quickSearch('억까')">#억까</a>
+      <a class="hot-tag" onclick="quickSearch('알잘딱깔센')">#알잘딱깔센</a>
+      <a class="hot-tag" onclick="quickSearch('폼 미쳤다')">#폼 미쳤다</a>
+      <a class="hot-tag" onclick="quickSearch('갓생')">#갓생</a>
+    </div>
+  </section>
+
+  <!-- 바이럴 킬러 콘텐츠: 신조어 문해력 테스트 배너 (제니퍼 UI) -->
+  <section class="quiz-banner">
+    <div class="quiz-banner-inner">
+      <div class="quiz-banner-content">
+        <h3>⚡ 2026 나의 신조어 문해력 테스트</h3>
+        <p>친구들이 쓰는 유행어, 과연 나는 몇 개나 이해하고 있을까? 5문항으로 확인하는 내 MZ 트렌드 레벨!</p>
+      </div>
+      <button class="btn-start-quiz" onclick="startQuiz()">
+        <span>🔥 테스트 시작하기</span>
+        <span>→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 메인 피드 -->
+  <main class="container">
+    <div class="feed-header">
+      <div class="feed-title">
+        <span>📚</span>
+        <span id="feedTitleText">오늘의 핫한 신조어</span>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="setFilter('hot')">인기순</button>
+        <button class="filter-tab" onclick="setFilter('latest')">최신순</button>
+      </div>
+    </div>
+
+    <!-- 단어 리스트 렌더링 영역 -->
+    <div id="wordsContainer"></div>
+  </main>
+
+  <!-- 새 단어 등록 모달 (중복 검사 및 핵심 기능 강화) -->
+  <div class="modal-overlay" id="addModal">
+    <div class="modal-card">
+      <h2 class="modal-title">✨ 새로운 신조어 등록</h2>
+      <p class="modal-desc">요즘 친구들이나 인터넷에서 자주 쓰는 핫한 신조어를 정의해 주세요!</p>
+
+      <form id="addWordForm" onsubmit="submitNewWord(event)">
+        <div class="form-group">
+          <label class="form-label">표제어 (단어) <span style="color:#f43f5e;">*</span></label>
+          <input type="text" id="newWord" class="form-control" placeholder="예: 분좋카, 핑프, 억까" required oninput="checkDuplicateOnInput()">
+          <div id="wordDuplicateHint" class="field-hint"></div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-bottom:16px;">
+          <div style="flex:1;">
+            <label class="form-label">품사</label>
+            <select id="newPos" class="form-control" style="cursor:pointer;">
+              <option value="신조어">신조어</option>
+              <option value="명사">명사</option>
+              <option value="동사">동사</option>
+              <option value="형용사">형용사</option>
+              <option value="감탄사">감탄사</option>
+            </select>
+          </div>
+          <div style="flex:1;">
+            <label class="form-label">비속어/위험도</label>
+            <select id="newToxicity" class="form-control" style="cursor:pointer;">
+              <option value="0">0단계 (완전 무해/긍정)</option>
+              <option value="1" selected>1단계 (유쾌한 인터넷 슬랭)</option>
+              <option value="2">2단계 (주의/도발성)</option>
+              <option value="3">3단계 (비속어 주의)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">1줄 핵심 정의 <span style="color:#f43f5e;">*</span></label>
+          <input type="text" id="newDef" class="form-control" placeholder="단어의 의미를 명쾌하게 한 줄로 설명해 주세요." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">표준어 대응어 (기성 세대 번역)</label>
+          <input type="text" id="newStandard" class="form-control" placeholder="예: 약 오르다, 포기하지 않는 마음, 핑거 프린세스">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">실전 대화 예문</label>
+          <textarea id="newExample" class="form-control" placeholder="A: 오늘 진짜 폼 미쳤는데?&#10;B: 인정? 어 인정!"></textarea>
+        </div>
+
+        <div style="display:flex; gap:12px;">
+          <div class="form-group" style="flex:2;">
+            <label class="form-label">태그 (쉼표로 구분)</label>
+            <input type="text" id="newTags" class="form-control" placeholder="예: 대학생활, 게임, 일상, MZ">
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label class="form-label">제보자 닉네임</label>
+            <input type="text" id="newAuthor" class="form-control" placeholder="익명의 언어술사">
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeAddModal()">취소</button>
+          <button type="submit" class="btn-submit" id="btnSubmitWord">사전에 올리기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 바이럴 킬러 콘텐츠: 신조어 문해력 테스트 모달 (수익화 모델 탑재) -->
+  <div class="modal-overlay" id="quizModal">
+    <div class="quiz-card">
+      <div id="quizPlayView">
+        <div class="quiz-progress-bar-bg">
+          <div class="quiz-progress-bar-fill" id="quizProgressFill"></div>
+        </div>
+        <div class="quiz-header">
+          <span class="quiz-step-badge" id="quizStepText">QUESTION 1 / 5</span>
+          <button style="background:none; border:none; color:#94a3b8; font-size:1.2rem; cursor:pointer;" onclick="closeQuizModal()">✕</button>
+        </div>
+        <h3 class="quiz-question" id="quizQuestionText">질문이 여기에 표시됩니다.</h3>
+        <div class="quiz-options" id="quizOptionsContainer"></div>
+      </div>
+
+      <div id="quizResultView" style="display:none;" class="quiz-result-box">
+        <button style="position:absolute; top:20px; right:20px; background:none; border:none; color:#94a3b8; font-size:1.2rem; cursor:pointer;" onclick="closeQuizModal()">✕</button>
+        <div class="result-score" id="quizScoreText">100점</div>
+        <div class="result-grade" id="quizGradeText">👑 LV.99 폼 미친 알파 세대 갓(God)</div>
+        <p class="result-desc" id="quizDescText">당신은 현대 한국어의 최전선에서 신조어를 자유자재로 구사하는 트렌드 지배자입니다!</p>
+
+        <!-- 수익화 모델 섹션 -->
+        <div class="monetize-box">
+          <div class="monetize-title">
+            <span>💎 [수익화 모델] 2026 MZ 트렌드 심층 성적표 & 후원</span>
+          </div>
+          <p class="monetize-desc">
+            신조어 사전 《말쌈 (MALSSAM)》 프로젝트를 응원해 주세요! <strong>커피 한 잔 후원 시</strong> '2026 기업용 MZ 세대 소통 지표 리포트(PDF)' 및 '디지털 공식 인증서'를 즉시 발급해 드립니다.
+          </p>
+          <div class="pay-btn-group">
+            <button class="pay-btn pay-toss" onclick="simulatePayment('토스페이')">💙 토스페이 1,000원</button>
+            <button class="pay-btn pay-kakao" onclick="simulatePayment('카카오페이')">💛 카카오페이 1,000원</button>
+            <button class="pay-btn pay-paypal" onclick="simulatePayment('PayPal')">🌐 PayPal 0.99달러</button>
+            <button class="pay-btn pay-coffee" onclick="simulatePayment('Buy Me a Coffee')">☕ 커피 한 잔 후원</button>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+          <button class="btn-cancel" onclick="startQuiz()">🔄 다시 풀기</button>
+          <button class="btn-submit" style="background:linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); color:#fff;" onclick="shareQuizResult()">
+            <span>📢 친구에게 내 점수 자랑하기</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 토스트 알림 -->
+  <div class="toast" id="toast"></div>
+
+  <!-- 푸터 -->
+  <footer>
+    <p><strong>말쌈 (MALSSAM Project)</strong> | 당목담글(DMDG) 스튜디오 자율 에이전트 본부</p>
+    <p style="margin-top: 6px; font-size: 0.8rem; color: #64748b;">나랏말싸미 힙해져라! 한글 문화 주권 수호 및 집단지성 현대어 연구 프로젝트</p>
+  </footer>
+
+  <script>
+    // 초기 내장 데이터 (localStorage와 동기화)
+    const DEFAULT_WORDS = [
+      {
+        id: 1,
+        word: "긁히다",
+        pronunciation: "[글키다]",
+        part_of_speech: "동사",
+        chosung: "ㄱㅎㄷ",
+        short_def: "상대방의 도발이나 정곡을 찌르는 팩트 폭격에 자존심이 상해 분노하거나 발끈한 상태.",
+        examples: ["A: 야, 너 솔직히 키 프로필보다 3cm는 작지?\\nB: 야 갑자기 키 얘기가 왜 나와? 너 선 넘네?\\nA: ㅋㅋㅋ 왜 그래, 제대로 긁혔네?"],
+        tags: ["감정", "도발", "심리전", "MZ유행어"],
+        likes: 2845,
+        dislikes: 84,
+        toxicity_level: 2,
+        standard_korean_mapping: "발끈하다, 약 오르다",
+        trend_status: "HOT"
+      },
+      {
+        id: 2,
+        word: "중꺾마",
+        pronunciation: "[중껑마]",
+        part_of_speech: "명사 / 관용구",
+        chosung: "ㅈㄲㅁ",
+        short_def: "'중요한 것은 꺾이지 않는 마음'의 줄임말. 어떤 역경이나 절망적인 상황에서도 포기하지 않는 강한 불굴의 의지.",
+        examples: ["학점도 망하고 취업 시장도 꽁꽁 얼어붙었지만... 그래도 우리에겐 중꺾마가 있다!"],
+        tags: ["동기부여", "명언", "스포츠", "긍정"],
+        likes: 4920,
+        dislikes: 31,
+        toxicity_level: 0,
+        standard_korean_mapping: "백절불굴(百折不屈)",
+        trend_status: "LEGEND"
+      },
+      {
+        id: 3,
+        word: "억까",
+        pronunciation: "[억까]",
+        part_of_speech: "명사 / 동사",
+        chosung: "ㅇㄲ",
+        short_def: "'억지로 까기'의 줄임말. 합리적인 이유나 정당한 근거 없이 맹목적으로 비난하거나, 불운이 연속되어 일이 꼬이는 상황.",
+        examples: ["우산 놓고 온 날에만 기습 폭우 쏟아지는 거 실화냐? 세상이 나를 억까하네."],
+        tags: ["불운", "비난", "게임", "일상"],
+        likes: 3120,
+        dislikes: 92,
+        toxicity_level: 2,
+        standard_korean_mapping: "생트집, 불운의 연속",
+        trend_status: "HOT"
+      },
+      {
+        id: 4,
+        word: "알잘딱깔센",
+        pronunciation: "[알잘딱깔센]",
+        part_of_speech: "부사 / 형용사",
+        chosung: "ㅇㅈㄸㄲㅅ",
+        short_def: "'알아서 잘 딱 깔끔하고 센스 있게'의 줄임말. 구구절절 설명하지 않아도 스스로 완벽하게 눈치껏 일이나 상황을 처리하는 태도.",
+        examples: ["팀장님: 김 대리, 이번 신규 프로젝트 제안서 알잘딱깔센하게 알지?\\n김 대리: 넵, 퇴근 전까지 완벽히 뽑아놓겠습니다!"],
+        tags: ["직장생활", "센스", "일잘러", "찬사"],
+        likes: 3890,
+        dislikes: 65,
+        toxicity_level: 0,
+        standard_korean_mapping: "눈치껏 센스 있게",
+        trend_status: "STEADY"
+      },
+      {
+        id: 5,
+        word: "폼 미쳤다",
+        pronunciation: "[폼 미첟따]",
+        part_of_speech: "감탄사 / 관용구",
+        chosung: "ㅍㅁㅊㄷ",
+        short_def: "스포츠의 'Form(기량/컨디션)'에서 유래한 말로, 실력이나 외모, 어떤 결과물이 상상을 초월할 정도로 엄청나게 뛰어남을 극찬하는 표현.",
+        examples: ["와, 오늘 새로 나온 AI 모델 코딩 실력 폼 미쳤는데? 에러를 1초 만에 다 잡아!"],
+        tags: ["극찬", "감탄", "트렌드", "일상"],
+        likes: 4210,
+        dislikes: 45,
+        toxicity_level: 1,
+        standard_korean_mapping: "기량이 절정에 달하다",
+        trend_status: "HOT"
+      },
+      {
+        id: 6,
+        word: "핑프",
+        pronunciation: "[핑프]",
+        part_of_speech: "명사",
+        chosung: "ㅍㅍ",
+        short_def: "'핑거 프린세스(Finger Princess) / 핑거 프린스'의 줄임말. 손가락 하나 까딱해서 스스로 검색해 볼 생각은 안 하고 남에게 다 떠먹여 달라고 묻는 게으른 사람.",
+        examples: ["공지사항 첫 줄에 강의실 적혀 있는데 단톡방에서 '강의실 어디예요?' 묻는 핑프들 진짜 답답하다."],
+        tags: ["대학생활", "풍자", "검색", "게으름"],
+        likes: 2730,
+        dislikes: 110,
+        toxicity_level: 3,
+        standard_korean_mapping: "게으름뱅이, 자립심 부족",
+        trend_status: "STEADY"
+      },
+      {
+        id: 7,
+        word: "분좋카",
+        pronunciation: "[분조카]",
+        part_of_speech: "명사",
+        chosung: "ㅂㅈㅋ",
+        short_def: "'분위기 좋은 카페'의 줄임말. 인테리어, 채광, 음악, 뷰 등이 감성적이고 예뻐서 사진 찍기 좋은 핫플레이스 카페.",
+        examples: ["주말에 친구랑 성수동 분좋카 가서 커피 마시고 인생샷 건지고 옴!"],
+        tags: ["라이프스타일", "카페", "데이트", "감성"],
+        likes: 1980,
+        dislikes: 75,
+        toxicity_level: 0,
+        standard_korean_mapping: "아늑하고 운치 있는 찻집",
+        trend_status: "STEADY"
+      },
+      {
+        id: 8,
+        word: "갓생",
+        pronunciation: "[갇생]",
+        part_of_speech: "명사 / 동사",
+        chosung: "ㄱㅅ",
+        short_def: "'God(신)'과 '생(生, 인생)'의 합성어. 하루하루를 매우 성실하고 생산적이며 알차게 살아가는 모범적인 생활 방식.",
+        examples: ["새해에는 미라클 모닝 6시에 일어나서 운동하고 독서하며 갓생 살 거야!"],
+        tags: ["자기계발", "모범생", "성실", "동기부여"],
+        likes: 4650,
+        dislikes: 38,
+        toxicity_level: 0,
+        standard_korean_mapping: "모범적인 삶, 성실한 인생",
+        trend_status: "LEGEND"
+      }
+    ];
+
+    // 초성 추출 함수
+    function getChosung(str) {
+      const CHOSUNG = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+      let result = "";
+      for (let i = 0; i < str.length; i++) {
+        const code = str.charCodeAt(i) - 44032;
+        if (code >= 0 && code <= 11171) {
+          result += CHOSUNG[Math.floor(code / 588)];
+        } else {
+          result += str[i];
+        }
+      }
+      return result;
+    }
+
+    // 로컬 스토리지 로드
+    let words = JSON.parse(localStorage.getItem('malmoi_words')) || DEFAULT_WORDS;
+    let currentFilter = 'hot';
+    let userVotes = JSON.parse(localStorage.getItem('malmoi_votes')) || {};
+
+    function renderWords(items) {
+      const container = document.getElementById('wordsContainer');
+      container.innerHTML = "";
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 60px 20px; color: #94a3b8;">
+            <p style="font-size: 2.5rem; margin-bottom: 10px;">🤔</p>
+            <p style="font-size: 1.2rem; font-weight: 700; color: #f1f5f9;">찾으시는 신조어가 아직 등록되지 않았습니다!</p>
+            <p style="margin-top: 6px;">상단의 <strong>[+ 신조어 제보하기]</strong> 버튼을 눌러 가장 먼저 등록해 보세요!</p>
+          </div>
+        `;
+        return;
+      }
+
+      items.forEach(w => {
+        const badgeClass = w.trend_status === 'HOT' ? 'badge-hot' : (w.trend_status === 'LEGEND' ? 'badge-legend' : 'badge-steady');
+        const badgeText = w.trend_status === 'HOT' ? '🔥 급상승 HOT' : (w.trend_status === 'LEGEND' ? '👑 명예의 전당' : '✨ 스테디');
+        
+        const votedState = userVotes[w.id]; // 'up' or 'down'
+
+        const card = document.createElement('div');
+        card.className = 'word-card';
+        card.innerHTML = `
+          <div class="word-header">
+            <div class="word-title-group">
+              <span class="word-title">${w.word}</span>
+              <span class="word-meta">${w.pronunciation || ''} · ${w.part_of_speech || '신어'}</span>
+            </div>
+            <span class="word-badge ${badgeClass}">${badgeText}</span>
+          </div>
+
+          <div class="word-definition">${w.short_def}</div>
+
+          <div class="word-example-box">${(w.examples && w.examples[0]) ? w.examples[0].replace(/\\n/g, '<br>') : ''}</div>
+
+          <div class="word-ai-dna">
+            <span>🤖 <strong>AI 분석 지표:</strong></span>
+            <span>🚨 위험도: <strong>${w.toxicity_level === 0 ? '🟢 건전 (공식 석상 OK)' : (w.toxicity_level <= 2 ? '🟡 일상 (친구 사이 권장)' : '🔴 비속어 주의')}</strong></span>
+            <span>📖 기성 표준어 매칭: <strong>${w.standard_korean_mapping || '대응 단어 없음 (완전 신조어)'}</strong></span>
+          </div>
+
+          <div class="word-footer">
+            <div class="vote-group">
+              <button class="btn-vote ${votedState === 'up' ? 'voted-up' : ''}" onclick="vote(${w.id}, 'up')">
+                <span>👍 인정</span>
+                <span id="like-count-${w.id}">${w.likes.toLocaleString()}</span>
+              </button>
+              <button class="btn-vote ${votedState === 'down' ? 'voted-down' : ''}" onclick="vote(${w.id}, 'down')">
+                <span>👎 억지</span>
+                <span id="dislike-count-${w.id}">${w.dislikes.toLocaleString()}</span>
+              </button>
+            </div>
+
+            <div class="word-tags">
+              ${(w.tags || []).map(t => `<span class="tag-item">#${t}</span>`).join('')}
+            </div>
+
+            <button class="btn-share" onclick="shareWord('${w.word}', '${w.short_def}')">
+              <span>🔗 공유</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function handleSearch() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const qChosung = getChosung(q);
+
+      if (!q) {
+        applyFilterAndRender();
+        return;
+      }
+
+      const filtered = words.filter(w => {
+        const wordMatch = w.word.toLowerCase().includes(q);
+        const defMatch = w.short_def.toLowerCase().includes(q);
+        const chosungMatch = (w.chosung && w.chosung.includes(q)) || (getChosung(w.word).includes(qChosung));
+        return wordMatch || defMatch || chosungMatch;
+      });
+
+      document.getElementById('feedTitleText').innerText = `'${q}' 검색 결과 (${filtered.length}건)`;
+      renderWords(filtered);
+    }
+
+    function quickSearch(tag) {
+      document.getElementById('searchInput').value = tag;
+      handleSearch();
+    }
+
+    function setFilter(type) {
+      currentFilter = type;
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      applyFilterAndRender();
+    }
+
+    function applyFilterAndRender() {
+      let sorted = [...words];
+      if (currentFilter === 'hot') {
+        sorted.sort((a, b) => b.likes - a.likes);
+        document.getElementById('feedTitleText').innerText = "오늘의 핫한 신조어 (인기순)";
+      } else {
+        sorted.sort((a, b) => b.id - a.id);
+        document.getElementById('feedTitleText').innerText = "새로 등록된 신조어 (최신순)";
+      }
+      renderWords(sorted);
+    }
+
+    function vote(id, type) {
+      const target = words.find(w => w.id === id);
+      if (!target) return;
+
+      if (userVotes[id] === type) {
+        showToast("이미 투표하셨습니다!");
+        return;
+      }
+
+      if (type === 'up') {
+        target.likes++;
+        if (userVotes[id] === 'down') target.dislikes--;
+      } else {
+        target.dislikes++;
+        if (userVotes[id] === 'up') target.likes--;
+      }
+
+      userVotes[id] = type;
+      localStorage.setItem('malmoi_votes', JSON.stringify(userVotes));
+      localStorage.setItem('malmoi_words', JSON.stringify(words));
+
+      document.getElementById(`like-count-${id}`).innerText = target.likes.toLocaleString();
+      document.getElementById(`dislike-count-${id}`).innerText = target.dislikes.toLocaleString();
+      showToast(type === 'up' ? "👍 인정을 보냈습니다!" : "👎 억지 투표를 반영했습니다.");
+      applyFilterAndRender();
+    }
+
+    function shareWord(word, def) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(`[말쌈 (MALSSAM)] '${word}' 뜻: ${def}\nhttps://dmdg.wikidocs.net/`);
+        showToast("🔗 단어 정의와 링크가 클립보드에 복사되었습니다!");
+      } else {
+        showToast("공유하기를 지원하지 않는 브라우저입니다.");
+      }
+    }
+
+    function openAddModal() {
+      document.getElementById('addModal').classList.add('active');
+      document.getElementById('wordDuplicateHint').innerHTML = '';
+      document.getElementById('btnSubmitWord').disabled = false;
+      setTimeout(() => document.getElementById('newWord').focus(), 100);
+    }
+
+    function closeAddModal() {
+      document.getElementById('addModal').classList.remove('active');
+      document.getElementById('addWordForm').reset();
+      document.getElementById('wordDuplicateHint').innerHTML = '';
+      document.getElementById('btnSubmitWord').disabled = false;
+    }
+
+    // 실시간 중복 검사
+    function checkDuplicateOnInput() {
+      const input = document.getElementById('newWord');
+      const hint = document.getElementById('wordDuplicateHint');
+      const submitBtn = document.getElementById('btnSubmitWord');
+      const query = input.value.trim().replace(/\s+/g, '').toLowerCase();
+
+      if (!query) {
+        hint.innerHTML = '';
+        submitBtn.disabled = false;
+        return;
+      }
+
+      const existing = words.find(w => w.word.replace(/\s+/g, '').toLowerCase() === query);
+
+      if (existing) {
+        hint.className = 'field-hint duplicate';
+        hint.innerHTML = `⚠️ 이미 사전에 등록된 단어입니다! ('${existing.word}') <button type="button" class="btn-goto-existing" onclick="scrollToExistingWord('${existing.word}')">기존 단어 보기 🔍</button>`;
+        submitBtn.disabled = true;
+      } else {
+        hint.className = 'field-hint valid';
+        hint.innerHTML = `✅ 등록 가능한 참신한 신조어입니다!`;
+        submitBtn.disabled = false;
+      }
+    }
+
+    // 기존 등록 단어로 스크롤 및 하이라이트
+    function scrollToExistingWord(targetWord) {
+      closeAddModal();
+      quickSearch(targetWord);
+      setTimeout(() => {
+        const card = document.querySelector('.word-card');
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.classList.add('just-added');
+          setTimeout(() => card.classList.remove('just-added'), 2500);
+        }
+      }, 300);
+    }
+
+    function submitNewWord(e) {
+      e.preventDefault();
+      const word = document.getElementById('newWord').value.trim();
+      const pos = document.getElementById('newPos').value;
+      const toxicity = parseInt(document.getElementById('newToxicity').value, 10);
+      const def = document.getElementById('newDef').value.trim();
+      const standard = document.getElementById('newStandard').value.trim();
+      const example = document.getElementById('newExample').value.trim();
+      const tags = document.getElementById('newTags').value.split(',').map(t => t.trim()).filter(Boolean);
+      const author = document.getElementById('newAuthor').value.trim() || "익명의 언어술사";
+
+      if (!word || !def) return;
+
+      // 최종 중복 검증 방어
+      const normalizedQuery = word.replace(/\s+/g, '').toLowerCase();
+      if (words.some(w => w.word.replace(/\s+/g, '').toLowerCase() === normalizedQuery)) {
+        showToast("❌ 이미 사전에 존재하는 단어입니다!");
+        return;
+      }
+
+      const newId = Date.now();
+      const newEntry = {
+        id: newId,
+        word: word,
+        pronunciation: "",
+        part_of_speech: pos,
+        chosung: getChosung(word),
+        short_def: def,
+        examples: [example || "등록된 예문이 아직 없습니다."],
+        tags: tags.length ? tags : ["신규제보", "집단지성"],
+        likes: 1,
+        dislikes: 0,
+        toxicity_level: toxicity,
+        standard_korean_mapping: standard || "대응 단어 분석 중",
+        trend_status: "HOT",
+        author: author
+      };
+
+      words.unshift(newEntry);
+      localStorage.setItem('malmoi_words', JSON.stringify(words));
+      closeAddModal();
+      showToast(`🎉 신조어 '${word}'가 사전에 등록되었습니다!`);
+      
+      currentFilter = 'latest';
+      document.querySelectorAll('.filter-tab').forEach((b, i) => b.classList.toggle('active', i === 1));
+      applyFilterAndRender();
+
+      // 최상단 카드에 골드 펄스 애니메이션 부여
+      setTimeout(() => {
+        const firstCard = document.querySelector('.word-card');
+        if (firstCard) {
+          firstCard.classList.add('just-added');
+          firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+    }
+
+    /* ============================================================
+       바이럴 킬러 콘텐츠: 2026 신조어 문해력 테스트 (제니퍼 UI 로직)
+       ============================================================ */
+    const QUIZ_QUESTIONS = [
+      {
+        q: "1. 상대방의 팩트 폭격이나 도발에 자존심이 상해 얼굴이 붉어지며 발끈하는 상태를 뜻하는 말은?",
+        options: ["폼 미쳤다", "긁히다", "중꺾마", "알잘딱깔센"],
+        ans: 1,
+        expl: "'긁히다'는 마음의 상처나 자존심을 긁혔다는 뜻으로 2026년 가장 핫한 감정 슬랭입니다."
+      },
+      {
+        q: "2. 롤드컵 데프트(Deft) 선수의 명언에서 유래된 '어떤 역경에도 포기하지 않는 마음'의 줄임말은?",
+        options: ["중꺾마", "알잘딱", "억까", "분좋카"],
+        ans: 0,
+        expl: "'중요한 것은 꺾이지 않는 마음'의 줄임말로 전 국민적 불굴의 의지를 상징합니다."
+      },
+      {
+        q: "3. 아이돌의 무대 비주얼, 가창력, 또는 친구의 실력이 압도적으로 눈부실 때 외치는 극찬은?",
+        options: ["핑프", "폼 미쳤다", "억지 인정", "갓생"],
+        ans: 1,
+        expl: "스포츠의 'Form(몸 상태/경기력)'에서 유래하여 최고의 기량을 찬양할 때 씁니다."
+      },
+      {
+        q: "4. 아침 6시 기상, 운동, 독서, 공부 등 하루를 성실하고 모범적으로 채우는 생산적인 삶은?",
+        options: ["갓생", "분좋카", "극락", "뇌절"],
+        ans: 0,
+        expl: "God(신) + 생(生)의 합성어로 스스로를 가꾸는 건강한 라이프스타일을 뜻합니다."
+      },
+      {
+        q: "5. 내 잘못이 아닌데 게임 시스템이나 불합리한 상황 탓에 억울하게 손해를 보았을 때 쓰는 단어는?",
+        options: ["알잘딱깔센", "중꺾마", "억까", "긁힘"],
+        ans: 2,
+        expl: "'억지로 까이다'의 줄임말로 억울한 상황에 처했을 때 쓰는 표현입니다."
+      }
+    ];
+
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+
+    function startQuiz() {
+      currentQuizIndex = 0;
+      quizScore = 0;
+      document.getElementById('quizModal').classList.add('active');
+      document.getElementById('quizPlayView').style.display = 'block';
+      document.getElementById('quizResultView').style.display = 'none';
+      renderQuizStep();
+    }
+
+    function closeQuizModal() {
+      document.getElementById('quizModal').classList.remove('active');
+    }
+
+    function renderQuizStep() {
+      const qData = QUIZ_QUESTIONS[currentQuizIndex];
+      const total = QUIZ_QUESTIONS.length;
+      
+      document.getElementById('quizStepText').innerText = `QUESTION ${currentQuizIndex + 1} / ${total}`;
+      document.getElementById('quizProgressFill').style.width = `${((currentQuizIndex + 1) / total) * 100}%`;
+      document.getElementById('quizQuestionText').innerText = qData.q;
+
+      const optsContainer = document.getElementById('quizOptionsContainer');
+      optsContainer.innerHTML = '';
+
+      qData.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt-btn';
+        btn.innerHTML = `<span style="font-weight:800; color:#c084fc;">0${idx + 1}.</span> <span>${opt}</span>`;
+        btn.onclick = () => selectQuizOption(idx);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function selectQuizOption(selectedIdx) {
+      const qData = QUIZ_QUESTIONS[currentQuizIndex];
+      if (selectedIdx === qData.ans) {
+        quizScore += 20;
+      }
+
+      currentQuizIndex++;
+      if (currentQuizIndex < QUIZ_QUESTIONS.length) {
+        renderQuizStep();
+      } else {
+        showQuizResult();
+      }
+    }
+
+    function showQuizResult() {
+      document.getElementById('quizPlayView').style.display = 'none';
+      document.getElementById('quizResultView').style.display = 'block';
+
+      const scoreEl = document.getElementById('quizScoreText');
+      const gradeEl = document.getElementById('quizGradeText');
+      const descEl = document.getElementById('quizDescText');
+
+      scoreEl.innerText = `${quizScore}점`;
+
+      if (quizScore === 100) {
+        gradeEl.innerHTML = "👑 LV.99 폼 미친 알파 세대 갓(God)";
+        descEl.innerText = "당신은 한국어 신조어의 최전선에 서 있는 트렌드 선구자입니다! 신조어의 뜻과 뉘앙스를 200% 파악하고 있으며, 새로운 단어를 창조할 수 있는 경지입니다.";
+      } else if (quizScore >= 80) {
+        gradeEl.innerHTML = "⚡ LV.75 핫플레이스 힙스터 (인싸)";
+        descEl.innerText = "웬만한 신조어는 다 꿰뚫고 있는 트렌드세터! 대화에서 소통 단절이 전혀 없으며, 센스 넘치게 유행어를 구사하는 능력자입니다.";
+      } else if (quizScore >= 60) {
+        gradeEl.innerHTML = "☕ LV.50 무난한 현대인 (머글)";
+        descEl.innerText = "자주 쓰이는 대중적 신조어는 잘 알지만, 최신 인터넷 밈 앞에서는 살짝 버퍼링이 걸리시는군요? 말쌈(MALSSAM)을 즐겨찾기하고 트렌드를 충전하세요!";
+      } else {
+        gradeEl.innerHTML = "🧊 LV.20 해동이 시급한 냉동인간";
+        descEl.innerText = "혹시 90년대 하이텔 나우누리 감성에 머물러 계신가요? 요즘 Z세대의 언어를 배우기 위해 말쌈(MALSSAM) 사전 완독을 강력 추천합니다!";
+      }
+    }
+
+    // 수익화 결제 시뮬레이션
+    function simulatePayment(method) {
+      showToast(`🎉 [${method}] 결제 성공! '2026 MZ 트렌드 리포트(PDF)' 및 인증서가 발급되었습니다. 개발팀을 응원해 주셔서 감사합니다! ☕`);
+    }
+
+    // 결과 친구 공유
+    function shareQuizResult() {
+      const grade = document.getElementById('quizGradeText').innerText;
+      const text = `[말쌈 (MALSSAM)] 나의 2026 신조어 문해력 테스트 결과:\n점수: ${quizScore}점 (${grade})\n너도 지금 도전해봐! 👉 https://dmdg.wikidocs.net/`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+        showToast("📢 테스트 결과와 링크가 클립보드에 복사되었습니다! 카톡이나 SNS에 공유해보세요!");
+      } else {
+        showToast(text);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+
+    // 초기 렌더링
+    applyFilterAndRender();
+  </script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malssam Hispano | Diccionario Callejero de Slang Coreano para Fans de K-Pop y K-Dramas</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      --bg-dark: #0d0722;
+      --bg-card: #180d38;
+      --card-border: #351c6b;
+      --sunset-pink: #ff2a85;
+      --sunset-orange: #ff7a00;
+      --gold-yellow: #ffd166;
+      --text-main: #fbfbfe;
+      --text-muted: #a79dc2;
+      --gradient-sunset: linear-gradient(135deg, #ff2a85 0%, #ff7a00 100%);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard", -apple-system, sans-serif; }
+    body { background: var(--bg-dark); color: var(--text-main); line-height: 1.6; min-height: 100vh; background-image: radial-gradient(circle at 80% 20%, rgba(255, 42, 133, 0.08) 0%, transparent 40%), radial-gradient(circle at 20% 80%, rgba(255, 122, 0, 0.08) 0%, transparent 40%); }
+    
+    header { background: rgba(13, 7, 34, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; padding: 14px 24px; }
+    .header-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; font-weight: 800; font-size: 1.35rem; }
+    .brand span { background: var(--gradient-sunset); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    .lang-selector { display: flex; gap: 6px; flex-wrap: wrap; }
+    .lang-btn { background: #1f1145; color: #d1c7ea; border: 1px solid var(--card-border); padding: 5px 12px; border-radius: 8px; font-size: 0.82rem; text-decoration: none; font-weight: 600; transition: all 0.2s ease; }
+    .lang-btn:hover { border-color: var(--sunset-pink); color: #fff; }
+    .lang-btn.active { background: var(--gradient-sunset); color: #fff; border: none; box-shadow: 0 0 12px rgba(255, 42, 133, 0.4); }
+
+    .hero { max-width: 820px; margin: 40px auto 24px; padding: 0 20px; text-align: center; }
+    .badge { display: inline-block; background: rgba(255, 42, 133, 0.15); border: 1px solid rgba(255, 42, 133, 0.4); color: var(--sunset-pink); font-size: 0.85rem; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 16px; }
+    .hero h1 { font-size: 2.6rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.25; }
+    .hero h1 span { background: var(--gradient-sunset); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto; }
+
+    /* Hangul Sovereignty Fact Banner */
+    .fact-banner { max-width: 820px; margin: 28px auto 32px; background: rgba(255, 122, 0, 0.08); border: 1px solid rgba(255, 122, 0, 0.3); border-radius: 14px; padding: 16px 22px; font-size: 0.92rem; color: #ffd8be; display: flex; align-items: center; gap: 14px; box-shadow: 0 4px 20px rgba(255, 122, 0, 0.1); }
+    .fact-banner strong { color: var(--gold-yellow); }
+
+    .container { max-width: 840px; margin: 0 auto 70px; padding: 0 20px; }
+    
+    .word-card { background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 18px; padding: 28px 30px; margin-bottom: 26px; box-shadow: 0 6px 24px rgba(0,0,0,0.3); transition: all 0.25s ease; position: relative; overflow: hidden; }
+    .word-card::before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--gradient-sunset); }
+    .word-card:hover { border-color: rgba(255, 42, 133, 0.5); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255, 42, 133, 0.15); }
+    
+    .card-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .title-group { display: flex; align-items: baseline; gap: 10px; }
+    .hangul-title { font-size: 2.1rem; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(255, 42, 133, 0.3); }
+    .romanized { font-size: 1.15rem; color: var(--gold-yellow); font-weight: 600; }
+    
+    .audio-btn { background: rgba(255, 255, 255, 0.08); border: 1px solid var(--card-border); color: #fff; cursor: pointer; border-radius: 50%; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.2s; }
+    .audio-btn:hover { background: var(--sunset-pink); border-color: var(--sunset-pink); transform: scale(1.08); }
+
+    .slang-badge { background: rgba(255, 42, 133, 0.15); color: #ff80b5; border: 1px solid rgba(255, 42, 133, 0.35); padding: 5px 14px; border-radius: 20px; font-size: 0.88rem; font-weight: 700; }
+    
+    .definition { font-size: 1.12rem; color: #f1ecfc; margin-bottom: 16px; font-weight: 500; }
+    
+    .example-box { background: rgba(13, 7, 34, 0.7); border-left: 4px solid var(--sunset-orange); padding: 16px 20px; border-radius: 0 10px 10px 0; color: #e4dcf5; font-style: italic; white-space: pre-line; margin-bottom: 18px; font-size: 0.98rem; line-height: 1.65; }
+    
+    .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 16px; font-size: 0.88rem; color: var(--text-muted); flex-wrap: wrap; gap: 10px; }
+    .context-tag { display: inline-flex; align-items: center; gap: 6px; }
+    
+    .react-btn { background: rgba(255, 42, 133, 0.1); border: 1px solid rgba(255, 42, 133, 0.3); color: #ffd8be; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .react-btn:hover { background: var(--sunset-pink); color: #fff; border-color: var(--sunset-pink); }
+
+    footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--card-border); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="brand">📖 MALSSAM <span>HISPANO</span></a>
+      <nav class="lang-selector">
+        <a href="../index.html" class="lang-btn">🇰🇷 KR</a>
+        <a href="en.html" class="lang-btn">🇺🇸 EN</a>
+        <a href="ja.html" class="lang-btn">🇯🇵 JA</a>
+        <a href="vi.html" class="lang-btn">🇻🇳 VI</a>
+        <a href="id.html" class="lang-btn">🇮🇩 ID</a>
+        <a href="es.html" class="lang-btn active">🇪🇸 ES</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="badge">🔥 Diccionario Real de Slang Coreano</div>
+    <h1>Entiende el K-Pop y K-Dramas <span>Sin Filtros</span></h1>
+    <p>Las palabras vivas que los jóvenes de Seúl usan a diario en TikTok, Bubble y videojuegos, explicadas en español con su verdadero equivalente callejero.</p>
+
+    <!-- Hangul Sovereign Fact Banner -->
+    <div class="fact-banner">
+      <span style="font-size: 1.6rem;">🇰🇷</span>
+      <div>
+        <strong>Hecho Histórico Indiscutible:</strong> El alfabeto <strong>Hangul</strong> fue inventado científicamente en 1443 por el <strong>Rey Sejong el Grande</strong> de Corea. Cada letra imita los órganos de pronunciación humanos. Registrado por la UNESCO como patrimonio cultural 100% único coreano.
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Palabra 1: 긁히다 -->
+    <article class="word-card">
+      <div class="card-header">
+        <div class="title-group">
+          <h2 class="hangul-title">긁히다</h2>
+          <span class="romanized">[Geul-ki-da]</span>
+          <button class="audio-btn" onclick="speakKorean('긁히다')" title="Escuchar pronunciación">🔊</button>
+        </div>
+        <span class="slang-badge">Equivalente: Picar / Ardido / Le dolió</span>
+      </div>
+      <p class="definition">Cuando a alguien le hieren el orgullo con una verdad o burla directa y se molesta visiblemente, perdiendo la compostura defensivamente.</p>
+      <div class="example-box">A: "Sé honesto, ¿no mides lo que dice tu perfil de Tinder, verdad?"
+B: "¿Y a ti qué te importa mi estatura? ¡Te estás pasando de la raya!"
+A: "¡Jajaja mira cómo se ARDIÓ! ¡Le dolió en el ego! (긁혔네)"</div>
+      <div class="card-footer">
+        <span class="context-tag">🎮 Contexto: Chats de videojuegos, K-Pop Weverse</span>
+        <button class="react-btn" onclick="addLike(this)">🔥 ¡Exactamente así! <span>4,290</span></button>
+      </div>
+    </article>
+
+    <!-- Palabra 2: 중꺾마 -->
+    <article class="word-card">
+      <div class="card-header">
+        <div class="title-group">
+          <h2 class="hangul-title">중꺾마</h2>
+          <span class="romanized">[Joong-Kkeok-Ma]</span>
+          <button class="audio-btn" onclick="speakKorean('중꺾마')" title="Escuchar pronunciación">🔊</button>
+        </div>
+        <span class="slang-badge">Equivalente: Espíritu Inquebrantable / Corazón de Hierro</span>
+      </div>
+      <p class="definition">Abreviatura de "Lo importante es un corazón que nunca se rinde" (중요한 것은 꺾이지 않는 마음). La mentalidad de no rendirse jamás frente a la peor adversidad. (Nacido de la leyenda de Deft en Worlds 2022).</p>
+      <div class="example-box">"¡Aunque los exámenes salieron mal y la búsqueda de trabajo esté difícil, seguimos con el espíritu Joong-Kkeok-Ma hasta triunfar!"</div>
+      <div class="card-footer">
+        <span class="context-tag">👑 Contexto: Esports LoL, Motivación deportiva y de vida</span>
+        <button class="react-btn" onclick="addLike(this)">🔥 ¡Exactamente así! <span>6,180</span></button>
+      </div>
+    </article>
+
+    <!-- Palabra 3: 폼 미쳤다 -->
+    <article class="word-card">
+      <div class="card-header">
+        <div class="title-group">
+          <h2 class="hangul-title">폼 미쳤다</h2>
+          <span class="romanized">[Form Mi-chyeot-da]</span>
+          <button class="audio-btn" onclick="speakKorean('폼 미쳤다')" title="Escuchar pronunciación">🔊</button>
+        </div>
+        <span class="slang-badge">Equivalente: ¡En su Prime! / Nivel Dios / Rompiéndola</span>
+      </div>
+      <p class="definition">Proviene del "form" (estado de forma) deportivo. Se usa para alabar cuando el talento, voz o visual de un idol o deportista está en su momento más glorioso y espectacular.</p>
+      <div class="example-box">"¡¿Viste el nuevo MV de mi bias?! ¡Su coreografía y su estilo están a nivel dios, la está rompiendo totalmente! (폼 미쳤다!)"</div>
+      <div class="card-footer">
+        <span class="context-tag">🎤 Contexto: Comebacks de K-Pop, Fandoms globales</span>
+        <button class="react-btn" onclick="addLike(this)">🔥 ¡Exactamente así! <span>5,420</span></button>
+      </div>
+    </article>
+
+    <!-- Palabra 4: 갓생 -->
+    <article class="word-card">
+      <div class="card-header">
+        <div class="title-group">
+          <h2 class="hangul-title">갓생</h2>
+          <span class="romanized">[God-saeng]</span>
+          <button class="audio-btn" onclick="speakKorean('갓생')" title="Escuchar pronunciación">🔊</button>
+        </div>
+        <span class="slang-badge">Equivalente: Vida Soñada / Modo Ultra Productivo</span>
+      </div>
+      <p class="definition">Fusión de 'God' (Dios) + 'Saeng' (Vida en coreano). Llevar una rutina sumamente productiva, saludable y disciplinada (despertar a las 6 am, entrenar, leer y estudiar).</p>
+      <div class="example-box">"¡Me levanté a las 6 am, fui al gym y estudié dos horas de coreano! ¡Oficialmente estoy en mi era God-saeng!"</div>
+      <div class="card-footer">
+        <span class="context-tag">✨ Contexto: Vlogs diarios de YouTube, Rutinas de estudio</span>
+        <button class="react-btn" onclick="addLike(this)">🔥 ¡Exactamente así! <span>5,110</span></button>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>Proyecto de Salvaguarda Cultural del Hangul © 2026 MALSSAM LIVE. El Hangul es 100% creación coreana.</p>
+  </footer>
+
+  <script>
+    function speakKorean(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ko-KR';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert('Tu navegador no soporta síntesis de voz.');
+      }
+    }
+
+    function addLike(btn) {
+      const span = btn.querySelector('span');
+      let current = parseInt(span.textContent.replace(/,/g, ''));
+      span.textContent = (current + 1).toLocaleString();
+      btn.style.transform = 'scale(1.1)';
+      setTimeout(() => btn.style.transform = 'scale(1)', 200);
+    }
+  </script>
+</body>
+</html>

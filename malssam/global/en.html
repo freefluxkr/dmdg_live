@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malssam Live | Korean Urban Dictionary for K-Pop & K-Culture Fans</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: #131b2e;
+      --card-border: #22304d;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --neon-yellow: #facc15;
+      --neon-cyan: #38bdf8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard", -apple-system, sans-serif; }
+    body { background: var(--bg-dark); color: var(--text-main); line-height: 1.6; min-height: 100vh; }
+    header { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; padding: 14px 24px; }
+    .header-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; font-weight: 800; font-size: 1.3rem; }
+    .lang-selector { display: flex; gap: 6px; }
+    .lang-btn { background: #1e293b; color: #cbd5e1; border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; text-decoration: none; font-weight: 600; }
+    .lang-btn.active { background: var(--neon-yellow); color: #000; border-color: var(--neon-yellow); }
+    .hero { max-width: 800px; margin: 40px auto 20px; padding: 0 20px; text-align: center; }
+    .hero h1 { font-size: 2.4rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 12px; }
+    .hero h1 span { color: var(--neon-yellow); }
+    .hero p { color: var(--text-muted); font-size: 1.05rem; }
+    
+    /* Sovereign Hangul Fact Banner */
+    .fact-banner { max-width: 800px; margin: 24px auto; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 14px 20px; font-size: 0.88rem; color: #bae6fd; display: flex; align-items: center; gap: 12px; }
+    
+    .container { max-width: 820px; margin: 20px auto 60px; padding: 0 20px; }
+    .word-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 26px 28px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.25); transition: all 0.2s ease; }
+    .word-card:hover { border-color: rgba(250, 204, 21, 0.4); transform: translateY(-2px); }
+    .word-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+    .hangul-title { font-size: 2rem; font-weight: 900; color: var(--neon-yellow); }
+    .romanized { font-size: 1.1rem; color: var(--neon-cyan); margin-left: 8px; font-weight: 600; }
+    .slang-counterpart { background: rgba(250, 204, 21, 0.15); color: var(--neon-yellow); border: 1px solid rgba(250, 204, 21, 0.3); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; }
+    .definition { font-size: 1.1rem; color: #f1f5f9; margin-bottom: 16px; font-weight: 500; }
+    .example-box { background: rgba(9, 13, 22, 0.7); border-left: 4px solid var(--neon-cyan); padding: 14px 18px; border-radius: 0 8px 8px 0; color: #cbd5e1; font-style: italic; white-space: pre-line; margin-bottom: 16px; font-size: 0.95rem; }
+    .footer-bar { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 14px; font-size: 0.85rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="brand">📖 MALSSAM <span>GLOBAL</span></a>
+      <div class="lang-selector">
+        <a href="../index.html" class="lang-btn">🇰🇷 KR</a>
+        <a href="en.html" class="lang-btn active">🇺🇸 EN</a>
+        <a href="ja.html" class="lang-btn">🇯🇵 JA</a>
+        <a href="vi.html" class="lang-btn">🇻🇳 VI</a>
+        <a href="id.html" class="lang-btn">🇮🇩 ID</a>
+        <a href="es.html" class="lang-btn">🇪🇸 ES</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>The Real <span>Korean Slang</span> Dictionary</h1>
+    <p>Unlock the secret slang used by your favorite K-POP idols, K-dramas, and Gen-Z creators.</p>
+    
+    <div class="fact-banner">
+      <span style="font-size: 1.4rem;">🇰🇷</span>
+      <div><strong>Historical Fact:</strong> Hangul was scientifically invented by King Sejong the Great in 1443. Each letter is shaped after the human vocal organs—recognized by UNESCO as 100% uniquely Korean!</div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Card 1 -->
+    <div class="word-card">
+      <div class="word-top">
+        <div>
+          <span class="hangul-title">긁히다</span>
+          <span class="romanized">[Geul-ki-da]</span>
+        </div>
+        <span class="slang-counterpart">Triggered / Salty</span>
+      </div>
+      <div class="definition">When someone gets visibly upset, defensive, or angry because a cold hard truth hit them right in their ego.</div>
+      <div class="example-box">A: "Be honest, you're not even 5'8\", right?"
+B: "Bro why bring up height out of nowhere?! That's so uncalled for!"
+A: "LMAO look at you, you got totally TRIGGERED! (긁혔네)"</div>
+      <div class="footer-bar">
+        <span>🔥 Context: Gaming banter, K-POP Bubble chats</span>
+        <span>👍 2,845 Agreed</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="word-card">
+      <div class="word-top">
+        <div>
+          <span class="hangul-title">중꺾마</span>
+          <span class="romanized">[Joong-Kkeok-Ma]</span>
+        </div>
+        <span class="slang-counterpart">Unbreakable Spirit</span>
+      </div>
+      <div class="definition">Abbreviation for "What matters is an unbending heart." An indomitable mentality refusing to surrender against impossible odds. (Originated from Deft at Worlds 2022)</div>
+      <div class="example-box">"Grades are down and job interviews are brutal, but we keep pushing with our Joong-Kkeok-Ma spirit!"</div>
+      <div class="footer-bar">
+        <span>👑 Context: Esports, motivational quotes</span>
+        <span>👍 4,920 Agreed</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="word-card">
+      <div class="word-top">
+        <div>
+          <span class="hangul-title">폼 미쳤다</span>
+          <span class="romanized">[Form Mi-chyeot-da]</span>
+        </div>
+        <span class="slang-counterpart">He is COOKING / Absolute GOAT</span>
+      </div>
+      <div class="definition">Originally from sports "form". Used to praise when an idol's visuals, vocals, skill, or performance are mind-blowingly top tier.</div>
+      <div class="example-box">"Did you see our bias in the new comeback MV?! His vocals and visuals are literally COOKING right now!"</div>
+      <div class="footer-bar">
+        <span>🔥 Context: K-POP Comeback, Live streams</span>
+        <span>👍 4,210 Agreed</span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="word-card">
+      <div class="word-top">
+        <div>
+          <span class="hangul-title">갓생</span>
+          <span class="romanized">[God-saeng]</span>
+        </div>
+        <span class="slang-counterpart">Main Character Era / Boss Life</span>
+      </div>
+      <div class="definition">Compound of 'God' + 'Saeng (Life)'. Living an ultra-productive, healthy, and disciplined daily routine (early morning workout, study, reading).</div>
+      <div class="example-box">"Woke up at 6 AM, hit the gym, and studied Korean. I'm officially entering my God-saeng era!"</div>
+      <div class="footer-bar">
+        <span>✨ Context: Self-care, Study motivation</span>
+        <span>👍 4,650 Agreed</span>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

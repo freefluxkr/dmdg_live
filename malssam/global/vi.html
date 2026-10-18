@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malssam Live | Từ Điển Tiếng Lóng Hàn Quốc Cực 'Hot' Dành Cho Fan K-POP</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      --bg-dark: #071311;
+      --card-bg: #0f2420;
+      --card-border: #1a423b;
+      --text-main: #f8fafc;
+      --text-muted: #86efac;
+      --emerald: #10b981;
+      --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard", -apple-system, sans-serif; }
+    body { background: var(--bg-dark); color: var(--text-main); line-height: 1.8; min-height: 100vh; }
+    header { background: rgba(7, 19, 17, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; padding: 14px 24px; }
+    .header-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; font-weight: 800; font-size: 1.3rem; }
+    .brand span { color: var(--emerald); }
+    .lang-selector { display: flex; gap: 6px; }
+    .lang-btn { background: #132e29; color: #cbd5e1; border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; text-decoration: none; font-weight: 600; }
+    .lang-btn.active { background: var(--emerald); color: #000; border-color: var(--emerald); font-weight: 700; }
+    
+    .hero { max-width: 800px; margin: 35px auto 20px; padding: 0 20px; text-align: center; }
+    .hero h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.5px; }
+    .hero h1 span { color: var(--emerald); }
+    .hero p { color: #a7f3d0; font-size: 1.02rem; }
+    
+    .fact-banner { max-width: 800px; margin: 20px auto; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 14px 20px; font-size: 0.88rem; color: #d1fae5; display: flex; align-items: center; gap: 12px; text-align: left; }
+    
+    .container { max-width: 820px; margin: 20px auto 60px; padding: 0 20px; }
+    .word-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 26px 28px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: all 0.2s ease; }
+    .word-card:hover { border-color: var(--emerald); transform: translateY(-2px); }
+    
+    .word-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .hangul-title { font-size: 2rem; font-weight: 900; color: var(--gold); }
+    .romanized { font-size: 1.1rem; color: var(--emerald); margin-left: 8px; font-weight: 600; }
+    .slang-counterpart { background: rgba(16, 185, 129, 0.2); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.4); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; }
+    
+    .definition { font-size: 1.08rem; color: #f1f5f9; margin-bottom: 16px; font-weight: 500; }
+    .example-box { background: rgba(5, 15, 13, 0.7); border-left: 4px solid var(--emerald); padding: 14px 18px; border-radius: 0 8px 8px 0; color: #e2e8f0; font-size: 0.95rem; white-space: pre-line; margin-bottom: 16px; }
+    .footer-bar { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 14px; font-size: 0.85rem; color: #6ee7b7; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="brand">🌱 MALSSAM <span>VIỆT NAM</span></a>
+      <div class="lang-selector">
+        <a href="../index.html" class="lang-btn">🇰🇷 KR</a>
+        <a href="en.html" class="lang-btn">🇺🇸 EN</a>
+        <a href="ja.html" class="lang-btn">🇯🇵 JA</a>
+        <a href="vi.html" class="lang-btn active">🇻🇳 VI</a>
+        <a href="id.html" class="lang-btn">🇮🇩 ID</a>
+        <a href="es.html" class="lang-btn">🇪🇸 ES</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Bắt Trọn <span>Tiếng Lóng Hàn Quốc</span> 'Bão Mạng'</h1>
+    <p>Giải mã các từ lóng siêu độc lạ mà idol K-POP và phim Hàn hay dùng nhất hiện nay!</p>
+    
+    <div class="fact-banner">
+      <span style="font-size: 1.4rem;">🇰🇷</span>
+      <div><strong>Sự thật thú vị:</strong> Chữ Hangul được vua Sejong sáng tạo vào năm 1443 một cách hoàn toàn khoa học dựa trên hình dạng các cơ quan phát âm của con người. Được UNESCO công nhận là di sản văn hóa độc nhất vô nhị của Hàn Quốc!</div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Card 1 -->
+    <div class="word-card">
+      <div class="word-top">
+        <div>
+          <span class="hangul-title">긁히다</span>
+          <span class="romanized">[Geul-ki-da]</span>
+        </div>
+        <span class="slang-counterpart">Bị 'chọc trúng tim đen' / Cay cú</span>
+      </div>
+      <div class="definition">Trạng thái một người trở nên tức giận, xù lông phòng thủ vì bị người khác nói trúng điểm yếu hoặc sự thật mất lòng.</div>
+      <div class="example-box">A: "Nói thật đi, ông khai gian chiều cao đúng không?"
+B: "Tự dưng lôi chiều cao vào làm gì? Quá đáng vừa thôi!"
+A: "Haha, nhìn kìa, bị chọc trúng tim đen cay cú rồi chứ gì! (긁혔네)"</div>
+      <div class="footer-bar">
+        <span>🔥 Bối cảnh: Tranh luận mạng, livestream K-POP</span>
+        <span>👍 2,845 Đồng tình</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="word-card">
+      <div class="word-top">
+        <div>
+          <span class="hangul-title">중꺾마</span>
+          <span class="romanized">[Joong-Kkeok-Ma]</span>
+        </div>
+        <span class="slang-counterpart">Trái tim không khuất phục / Bất bại</span>
+      </div>
+      <div class="definition">Viết tắt của câu "Điều quan trọng nhất là một trái tim không bao giờ gục ngã." Quyết tâm vượt qua mọi nghịch cảnh để chạm đến thành công.</div>
+      <div class="example-box">"Dù điểm số kém và áp lực tìm việc chồng chất, chỉ cần có 'Joong-Kkeok-Ma' thì nhất định chúng ta sẽ chiến thắng!"</div>
+      <div class="footer-bar">
+        <span>👑 Bối cảnh: Động lực học tập, Esports, vượt khó</span>
+        <span>👍 4,920 Đồng tình</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="word-card">
+      <div class="word-top">
+        <div>
+          <span class="hangul-title">폼 미쳤다</span>
+          <span class="romanized">[Form Mi-chyeot-da]</span>
+        </div>
+        <span class="slang-counterpart">Đỉnh của chóp / Visual xuất thần</span>
+      </div>
+      <div class="definition">Bắt nguồn từ 'form' trong thể thao. Dùng để khen ngợi nhan sắc, tài năng hay phong độ đạt đến đẳng cấp siêu thực của idol hoặc bạn bè.</div>
+      <div class="example-box">"Trời ơi, xem MV mới chưa?! Visual của bias đợt này đúng là đỉnh của chóp, phong độ điên đảo luôn!"</div>
+      <div class="footer-bar">
+        <span>🔥 Bối cảnh: K-POP Comeback, Tik Tok challenge</span>
+        <span>👍 4,210 Đồng tình</span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="word-card">
+      <div class="word-top">
+        <div>
+          <span class="hangul-title">갓생</span>
+          <span class="romanized">[God-saeng]</span>
+        </div>
+        <span class="slang-counterpart">Sống kỷ luật chuẩn 'Pro' / Cực năng suất</span>
+      </div>
+      <div class="definition">Ghép từ 'God' (Thần) + 'Saeng' (Đời). Lối sống cực kỳ năng suất, dậy sớm, tập luyện và học tập đều đặn mỗi ngày để hoàn thiện bản thân.</div>
+      <div class="example-box">"Dậy từ 6 giờ sáng tập gym rồi học tiếng Hàn, chính thức bắt đầu chuỗi ngày sống kỷ luật chuẩn 'God-saeng'!"</div>
+      <div class="footer-bar">
+        <span>✨ Bối cảnh: Dậy sớm, học tập, rèn luyện bản thân</span>
+        <span>👍 4,650 Đồng tình</span>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

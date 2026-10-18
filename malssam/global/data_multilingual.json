@@ -1,0 +1,130 @@
+{
+  "project": "Malssam Global Multi-Language Editions",
+  "languages": ["en", "ja", "vi", "id", "es"],
+  "words": [
+    {
+      "id": 1,
+      "hangul": "긁히다",
+      "romanized": "Geul-ki-da",
+      "en": {
+        "slang": "Triggered / Salty / Got under your skin",
+        "definition": "When someone gets visibly upset, defensive, or angry because a roast or cold hard truth struck an emotional nerve.",
+        "example": "A: Be honest, you're not even 5'8\", right?\nB: Bro why bring up height out of nowhere?! That's uncalled for!\nA: LMAO look at you, you got totally TRIGGERED!"
+      },
+      "ja": {
+        "furigana": "クルキダ",
+        "slang": "煽られた / 効いてる草 / 図星でブチギレ",
+        "definition": "相手の痛いところを突く発言や挑発にプライドが傷つき、平静を失って本気で怒ってしまう状態。",
+        "example": "A: お前、正直プロフィールより身長低くね？\nB: は？急に身長の話とかマジ関係なくね？何様？\nA: 草www めっちゃ効いてるじゃん（긁혔네）！"
+      },
+      "vi": {
+        "slang": "Bị 'chọc trúng tim đen' / Cay cú / Tự ái",
+        "definition": "Trạng thái một người trở nên tức giận, xù lông phòng thủ vì bị người khác nói trúng điểm yếu hoặc sự thật mất lòng.",
+        "example": "A: Nói thật đi, ông khai gian chiều cao đúng không?\nB: Tự dưng lôi chiều cao vào làm gì? Quá đáng vừa thôi!\nA: Haha, nhìn kìa, bị chọc trúng tim đen cay cú rồi chứ gì!"
+      },
+      "id": {
+        "slang": "Kena Mental / Salty / Baper Parah",
+        "definition": "Kondisi saat seseorang tersinggung berat atau emosi karena ejekan atau fakta telak yang menusuk harga dirinya.",
+        "example": "A: Ngaku aja deh, tinggi aslimu nggak sampai 170 kan?\nB: Kok tiba-tiba ngomongin tinggi badan sih? Nggak sopan banget!\nA: Wkwk santai bro, langsung KENA MENTAL ya?"
+      },
+      "es": {
+        "slang": "Picar / Ardido / Le dolió la verdad",
+        "definition": "Cuando a alguien le hieren el orgullo con una verdad o burla directa y se molesta visiblemente.",
+        "example": "A: Sé honesto, ¿no mides lo que dice tu perfil, verdad?\nB: ¿Y a ti qué te importa mi estatura? ¡Te estás pasando!\nA: ¡Jajaja miren cómo se ardió! ¡Le dolió en el ego!"
+      }
+    },
+    {
+      "id": 2,
+      "hangul": "중꺾마",
+      "romanized": "Joong-Kkeok-Ma",
+      "en": {
+        "slang": "Unbreakable Spirit / Never Give Up Mentality",
+        "definition": "Abbreviation for 'What matters is an unbending heart.' An indomitable mindset that refuses to surrender against all odds.",
+        "example": "Grades are down and the job market is brutal, but we keep pushing with our Joong-Kkeok-Ma spirit!"
+      },
+      "ja": {
+        "furigana": "ジュンコクマ",
+        "slang": "折れない心 / 不撓不屈メンタル",
+        "definition": "「重要なのは折れない心」の略語。どんな逆境や絶望的な状況でも決して諦めない強い意志を表す言葉。（Deft選手の伝説から誕生）",
+        "example": "就活連敗中だけど…俺たちにはジュンコクマ（折れない心）があるから最後まで戦うぞ！"
+      },
+      "vi": {
+        "slang": "Tinh thần bất khuất / Trái tim không gục ngã",
+        "definition": "Viết tắt của câu 'Điều quan trọng nhất là một trái tim không bao giờ khuất phục.' Quyết tâm vượt qua mọi nghịch cảnh.",
+        "example": "Dù điểm số kém và áp lực tìm việc chồng chất, chỉ cần có 'Joong-Kkeok-Ma' thì nhất định sẽ thành công!"
+      },
+      "id": {
+        "slang": "Mental Baja / Pantang Menyerah",
+        "definition": "Singkatan dari 'Yang terpenting adalah hati yang pantang patah'. Semangat gigih pantang menyerah meski situasi sesulit apapun.",
+        "example": "Ujian gagal dan persaingan kerja ketat, tapi kita tetap maju dengan semangat Joong-Kkeok-Ma!"
+      },
+      "es": {
+        "slang": "Espíritu Inquebrantable / Corazón de Hierro",
+        "definition": "Abreviatura de 'Lo importante es un corazón que nunca se rinde'. La actitud de seguir adelante ante la mayor adversidad.",
+        "example": "¡Aunque las cosas se pongan difíciles, seguimos con el espíritu Joong-Kkeok-Ma hasta triunfar!"
+      }
+    },
+    {
+      "id": 3,
+      "hangul": "폼 미쳤다",
+      "romanized": "Form Mi-chyeot-da",
+      "en": {
+        "slang": "He is COOKING / In his PRIME / Absolute GOAT",
+        "definition": "Originally from sports 'form' (condition). Used to praise someone whose visuals, vocals, skill, or performance are mind-blowingly top tier.",
+        "example": "Did you see our bias in the new music video? His visuals and vocals are literally COOKING right now!"
+      },
+      "ja": {
+        "furigana": "ポム ミチョッタ",
+        "slang": "ビジュ神がかってる / 絶好調すぎる / 無双状態",
+        "definition": "スポーツの「Form（好調）」に由来し、アイドルのビジュアル、歌唱力、才能が神レベルで輝いている時の最大級の賛辞。",
+        "example": "今日の推しの新曲MV見た？！歌もビジュアルもポム・ミチョッタ（神無双）すぎるんだが！"
+      },
+      "vi": {
+        "slang": "Phong độ đỉnh chóp / Visual xuất thần / Đỉnh của chóp",
+        "definition": "Bắt nguồn từ 'form' trong thể thao. Dùng để khen ngợi nhan sắc, tài năng hay phong độ đạt đến đẳng cấp siêu thực.",
+        "example": "Trời ơi, xem MV mới chưa? Visual của bias đợt này đúng là đỉnh của chóp, phong độ điên đảo!"
+      },
+      "id": {
+        "slang": "Gokil Parah / Lagi di Puncak Kejayaan / Menyala Abangku",
+        "definition": "Berasal dari kata 'form'. Dipakai untuk memuji visual, vokal, atau penampilan seseorang yang luar biasa keren dan spektakuler.",
+        "example": "Visual idol kita di comeback kali ini beneran gokil parah, lagi di performa puncaknya!"
+      },
+      "es": {
+        "slang": "¡En su Prime! / Está Rompiéndola / Nivel Dios",
+        "definition": "Viene del 'form' deportivo. Se usa para alabar cuando el talento, voz o visual de alguien está en su nivel más épico.",
+        "example": "¡¿Viste el nuevo MV de mi bias?! ¡Su voz y estilo están a nivel dios, rompiéndola totalmente!"
+      }
+    },
+    {
+      "id": 4,
+      "hangul": "갓생",
+      "romanized": "God-saeng",
+      "en": {
+        "slang": "Main Character Energy / Living that Boss Life",
+        "definition": "Compound of 'God' + 'Saeng (Life)'. Living an ultra-productive, healthy, and disciplined routine (workout, reading, studying early).",
+        "example": "Woke up at 6 AM, hit the gym, and studied Korean. I'm officially entering my God-saeng era!"
+      },
+      "ja": {
+        "furigana": "ガッセン",
+        "slang": "神のような充実人生 / ガチ充実ライフ",
+        "definition": "「God（神）」＋「生（人生）」の造語。早起き、勉強、運動など、毎日をストイックかつ生産的に生きる理想のライフスタイル。",
+        "example": "朝6時に起きてランニングして韓国語の勉強！今日からガッセン（最高の充実人生）送るわ！"
+      },
+      "vi": {
+        "slang": "Sống kỷ luật chuẩn 'Pro' / Đời sống mẫu mực",
+        "definition": "Ghép từ 'God' (Thần) + 'Saeng' (Đời). Lối sống cực kỳ năng suất, dậy sớm, tập luyện và học tập đều đặn mỗi ngày.",
+        "example": "Dậy từ 6 giờ sáng tập gym rồi học bài, chính thức bắt đầu chuỗi ngày sống kỷ luật chuẩn 'God-saeng'!"
+      },
+      "id": {
+        "slang": "Hidup Produktif Maksimal / Slay Banget",
+        "definition": "Gabungan 'God' + 'Saeng (Hidup)'. Gaya hidup yang sangat produktif, rajin bangun pagi, olahraga, dan belajar dengan disiplin tinggi.",
+        "example": "Bangun jam 6 pagi, olahraga, terus belajar bahasa Korea. Fix aku lagi masuk era God-saeng!"
+      },
+      "es": {
+        "slang": "Viviendo la Vida Soñada / Modo Ultra Productivo",
+        "definition": "Combinación de 'God' (Dios) + 'Saeng' (Vida). Llevar una rutina sumamente productiva, saludable y disciplinada.",
+        "example": "¡Me levanté a las 6 am, fui al gym y estudié coreano! ¡Oficialmente en mi era God-saeng!"
+      }
+    }
+  ]
+}
