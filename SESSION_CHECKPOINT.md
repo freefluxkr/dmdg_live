@@ -169,13 +169,13 @@
 
 ---
 
-### 🥈 [2순위] `malssam.com` 도메인 구입 및 라이브 연결
-1. **도메인 구입처**: [호스팅케이알(Hosting.kr)](https://www.hosting.kr/) 접속.
-2. **도메인 검색 및 결제**:
-   * 검색창에 `malssam` 입력 후 **`malssam.com`** (1순위, 1년 약 14,000원) 장바구니 담기.
-   * 여유 시 **`malssam.kr`** (브랜드 방어용, 1년 약 15,000원) 함께 구매.
-   * 카카오페이나 신용카드로 원클릭 3분 결제 완료.
-3. **GitHub Pages 라이브 도메인 연결 (CNAME 1줄 설정)**:
+### 🥈 [완료 (10/19)] `malssam.com` 도메인 구입 및 라이브 유동 포워딩 연결 완료!
+1. **도메인 구입 완료**: [호스팅케이알(Hosting.kr)](https://www.hosting.kr/)에서 `malssam.com` 구매 완료.
+2. **라이브 유동 포워딩(SSL 연동) 구축 완료**:
+   * **포워딩 주소**: `https://freefluxkr.github.io/dmdg_live/malssam/`
+   * **포워딩 방식**: `유동 포워딩 (0초 메타 리다이렉트)`
+   * **보안 및 결제 무결성**: GitHub Pages의 Let's Encrypt 공식 SSL 보안 인증서 자동 승계로 **'주의 요함' 경고 100% 제거**, 초록색 자물쇠 🔒 및 카카오페이/토스페이 결제창 정상 구동 확인 완료.
+   * **실시간 터미널 검증**: `curl -L http://malssam.com` 호출 시 `https://freefluxkr.github.io/dmdg_live/malssam/`로 200 OK 즉시 정상 리다이렉트 검증 통과.
    * 호스팅케이알 DNS 설정에서 CNAME 레코드에 `freefluxkr.github.io` 입력.
    * GitHub `dmdg_live` 저장소 Settings -> Pages -> Custom Domain에 `malssam.com` 입력하면 전 세계 어디서나 `https://malssam.com`으로 접속 완료!
 
