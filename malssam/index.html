@@ -846,11 +846,151 @@
       font-size: 0.85rem;
       color: var(--text-muted);
     }
+
+    .fb-live-badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      animation: pulseGreen 2s infinite;
+    }
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
   </style>
   <!-- 포트원 (PortOne / 구 아임포트) 국내 1위 통합 결제 SDK -->
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <!-- 글로벌 1위 PayPal JavaScript SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+  <!-- ============================================================ -->
+  <!-- 🔥 Firebase Firestore 클라우드 실시간 DB 연동 (DMDG-LIVE 서울) -->
+  <!-- ============================================================ -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      projectId: "dmdg-live",
+      appId: "1:357433220336:web:1a8914811da09123a0f635",
+      storageBucket: "dmdg-live.firebasestorage.app",
+      apiKey: "AIzaSyBcS8aS5yHk2KFNYPImXslsFkSyoBwYrKI",
+      authDomain: "dmdg-live.firebaseapp.com",
+      messagingSenderId: "357433220336"
+    };
+
+    let firestoreDb = null;
+    let isFirebaseReady = false;
+
+    try {
+      if (typeof firebase !== 'undefined') {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+        firestoreDb = firebase.firestore();
+        isFirebaseReady = true;
+        console.log("🔥 Firebase Firestore connected successfully (asia-northeast3 / dmdg-live)");
+      }
+    } catch (e) {
+      console.warn("Firebase initialization warning:", e);
+    }
+
+    // 전역 실시간 함수들 바인딩
+    window.loadFirestoreWords = async function() {
+      if (!isFirebaseReady || !firestoreDb) return [];
+      try {
+        const snapshot = await firestoreDb.collection("malssam_words").get();
+        const fbWords = [];
+        snapshot.forEach(doc => {
+          const d = doc.data();
+          fbWords.push({
+            id: 'fb_' + doc.id,
+            docId: doc.id,
+            isFirestore: true,
+            word: d.word,
+            pronunciation: d.pronunciation || ('[' + d.word + ']'),
+            part_of_speech: d.part_of_speech || "신조어",
+            chosung: d.chosung || "",
+            short_def: d.short_def || "",
+            origin: d.origin || "사용자 실시간 등록",
+            examples: d.examples || [d.example || ""],
+            tags: d.tags || ["실시간커뮤니티"],
+            likes: Number(d.likes) || 1,
+            dislikes: Number(d.dislikes) || 0,
+            author: d.author || "익명",
+            toxicity_level: d.toxicity_level || 1,
+            standard_korean_mapping: d.standard_korean_mapping || "실시간 등록어",
+            trend_status: "HOT"
+          });
+        });
+        console.log("🔥 Loaded " + fbWords.length + " words from Firestore");
+        const b = document.getElementById('fbStatusBadge');
+        if (b) { b.innerText = "🟢 실시간 DB 연결됨 (" + fbWords.length + "건)"; }
+        return fbWords;
+      } catch (err) {
+        console.warn("Firestore fetch error:", err);
+        const b = document.getElementById('fbStatusBadge');
+        if (b) { b.innerText = "🟡 로컬 저장소 모드"; b.style.color = "#fbbf24"; }
+        return [];
+      }
+    };
+
+    window.saveWordToFirestore = async function(wordObj) {
+      if (!isFirebaseReady || !firestoreDb) return null;
+      try {
+        const docRef = await firestoreDb.collection("malssam_words").add({
+          word: wordObj.word,
+          pronunciation: wordObj.pronunciation,
+          part_of_speech: wordObj.part_of_speech,
+          chosung: wordObj.chosung,
+          short_def: wordObj.short_def,
+          origin: wordObj.origin,
+          examples: wordObj.examples,
+          tags: wordObj.tags,
+          likes: 1,
+          dislikes: 0,
+          author: wordObj.author,
+          toxicity_level: wordObj.toxicity_level,
+          standard_korean_mapping: wordObj.standard_korean_mapping,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        console.log("🔥 Saved new word to Firestore ID:", docRef.id);
+        return docRef.id;
+      } catch (err) {
+        console.error("Firestore save error:", err);
+        return null;
+      }
+    };
+
+    window.voteFirestoreWord = async function(docId, type) {
+      if (!isFirebaseReady || !firestoreDb) return;
+      try {
+        const docRef = firestoreDb.collection("malssam_words").doc(docId);
+        if (type === 'up') {
+          await docRef.update({ likes: firebase.firestore.FieldValue.increment(1) });
+        } else {
+          await docRef.update({ dislikes: firebase.firestore.FieldValue.increment(1) });
+        }
+        console.log("🔥 Firestore vote incremented:", docId, type);
+      } catch (err) {
+        console.error("Firestore vote error:", err);
+      }
+    };
+  </script>
+
+
+  <!-- ============================================================ -->
+  <!-- 🔥 Firebase Firestore 클라우드 실시간 DB 연동 (DMDG-LIVE) -->
+  <!-- ============================================================ -->
+  
+
 </head>
 <body>
 
@@ -861,6 +1001,7 @@
         <span class="brand-logo">📖</span>
         <span class="brand-title">말쌈 (MALSSAM)</span>
         <span class="brand-badge">2026 실시간 언어 배틀</span>
+        <span class="fb-live-badge" id="fbStatusBadge" title="Firebase asia-northeast3 (서울) 실시간 연동">🟢 실시간 DB 연결됨</span>
       </a>
       <div class="header-actions">
         <nav class="global-lang-group" title="글로벌 현지화 전용 에디션">
@@ -2706,12 +2847,20 @@
     // ============================================================
     // 신규 단어 제보 및 실시간 중복 방지
     // ============================================================
+    function openAddModal() {
+      document.getElementById('addModal').classList.add('active');
+    }
+
+    function closeAddModal() {
+      document.getElementById('addModal').classList.remove('active');
+    }
+
     function openSubmitModal() {
-      document.getElementById('submitModal').classList.add('active');
+      openAddModal();
     }
 
     function closeSubmitModal() {
-      document.getElementById('submitModal').classList.remove('active');
+      closeAddModal();
     }
 
     function checkDuplicateWord() {
@@ -3117,7 +3266,33 @@
     .btn-print:hover { background: #1d4ed8; }
     table { width: 100%; border-collapse: collapse; margin-top: 10px; }
     th { background: #f1f5f9; padding: 12px 10px; font-size: 13px; color: #475569; text-align: left; font-weight: 700; border-bottom: 2px solid #cbd5e1; }
+
+    .fb-live-badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      animation: pulseGreen 2s infinite;
+    }
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
   </style>
+
+  <!-- ============================================================ -->
+  <!-- 🔥 Firebase Firestore 클라우드 실시간 DB 연동 (DMDG-LIVE) -->
+  <!-- ============================================================ -->
+  
+
 </head>
 <body>
   <div class="no-print" style="max-width:820px; margin:0 auto 20px; display:flex; justify-content:space-between; align-items:center; background:#1e293b; color:#fff; padding:16px 24px; border-radius:12px;">
