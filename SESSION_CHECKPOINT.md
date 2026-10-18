@@ -104,9 +104,10 @@
       * `malssam.com`: **현재 미등록 (Available! 구매 가능 ⭐⭐⭐)**
       * `malssam.kr`: **현재 미등록 (Available! 구매 가능 ⭐⭐⭐)**
       * `malssam.co.kr`, `malssam.net`, `malssam.io`: **전부 미등록 (Available!)**
-   15. **🔥 [Firebase 서울 리전 실시간 DB 전격 연동 완결]**:
+   15. **🔥 [Firebase 서울 리전 실시간 DB 전격 연동 & 30종 마스터 DB 전량 이관 완결]**:
       * 사장님의 구글 계정(`tuesvonita@gmail.com`)에 잠자고 있던 **Firebase `dmdg-live` (서울 리전: `asia-northeast3`, 무료 티어)** 전격 발굴 및 연동.
       * `firestore.rules` 보안 규칙 배포 완료 (`malssam_words` 컬렉션 전 세계 실시간 읽기/등록/투표 허용).
+      * **💎 30종 마스터 신조어 Firestore 일괄 이관 완료**: `words_db.json`의 30개 전 단어(5개국 글로벌 번역 및 추천/비추천 데이터 포함)를 `malssam_words` 컬렉션에 Batch Commit으로 100% 영구 적재 완료!
       * 웹앱(`index.html`)에 **`🟢 실시간 DB 연결됨`** 펄스 뱃지 장착.
       * **실시간 신조어 제보 & Firestore 저장**: 사용자가 제보 시 클라우드 DB에 `addDoc` 실시간 저장 및 최상단 카드 즉각 렌더링 검증 완료.
       * **인정 👍 / 억지 👎 투표 실시간 증가**: `FieldValue.increment(1)` 연동으로 전 세계 투표수 실시간 합산.
