@@ -3069,6 +3069,41 @@
       alert("📄 [2026 기업용 MZ 신조어 소통 지표 리포트 전문 (PDF)]\n\n'말쌈 (MALSSAM) 30종 마스터 사전 및 문해력 가이드' 문서가 브라우저 새 창에서 열리거나 다운로드됩니다!\n개발팀을 응원해 주셔서 감사합니다!");
     }
 
+    
+    function requestKakaoPay() {
+      // 1. 카카오페이 전용 결제 모달 팝업
+      document.getElementById('kakaoPayModal').classList.add('active');
+      showToast("💛 카카오페이 결제창이 열렸습니다!");
+    }
+
+    function requestTossPay() {
+      // 2. 토스페이 전용 결제 모달 팝업
+      document.getElementById('tossPayModal').classList.add('active');
+      showToast("💙 토스페이 결제창이 열렸습니다!");
+    }
+
+    function openCoffeeSponsor() {
+      // 3. 커피 후원 모달 팝업
+      document.getElementById('coffeeModal').classList.add('active');
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('active');
+    }
+
+    // 결제 완료 승인 및 디지털 리포트 영수증 즉시 발급
+    function executePaymentComplete(provider, amount) {
+      closeModal('kakaoPayModal');
+      closeModal('tossPayModal');
+      closeModal('coffeeModal');
+      closeModal('paypalModal');
+      closeQuizModal();
+
+      const txId = 'TX-' + Date.now().toString(36).toUpperCase() + '-' + Math.floor(Math.random()*1000);
+      openReportModal(provider, txId, amount);
+    }
+
     // 초기 실행
     applyFilterAndRender();
 
@@ -3115,5 +3150,97 @@
       </div>
     </div>
   </div>
+
+  <!-- 💛 카카오페이 결제 팝업 모달 -->
+  <div class="modal-overlay" id="kakaoPayModal" style="z-index: 10000;">
+    <div class="modal-card" style="max-width: 440px; background: #fee500; color: #191919; border-radius: 20px; padding: 28px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 14px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.6rem; font-weight:900; letter-spacing:-1px;">kakaopay</span>
+          <span style="background:rgba(0,0,0,0.1); padding:2px 8px; border-radius:12px; font-size:0.75rem; font-weight:700;">테스트 샌드박스</span>
+        </div>
+        <button style="background:none; border:none; color:#191919; font-size:1.4rem; cursor:pointer; font-weight:800;" onclick="closeModal('kakaoPayModal')">✕</button>
+      </div>
+
+      <div style="background:#fff; border-radius:16px; padding:20px; margin-bottom:18px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <p style="font-size:0.85rem; color:#717171; margin-bottom:4px;">주문 상품</p>
+        <p style="font-size:1.05rem; font-weight:800; color:#191919; margin-bottom:12px;">2026 MZ 트렌드 리포트 (PDF) & 공식 인증서</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px dashed #e5e5e5; padding-top:12px;">
+          <span style="font-size:0.95rem; font-weight:600; color:#444;">최종 결제 금액</span>
+          <span style="font-size:1.4rem; font-weight:900; color:#ff3b30;">1,000원</span>
+        </div>
+      </div>
+
+      <!-- QR코드 시뮬레이션 -->
+      <div style="background: #fff; border-radius: 14px; padding: 16px; margin-bottom: 18px; display:inline-block;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://freefluxkr.github.io/dmdg_live/malssam/?pay=kakao" alt="카카오페이 QR" style="width:140px; height:140px; display:block; margin:0 auto;">
+        <p style="font-size:0.78rem; color:#888; margin-top:8px;">카카오톡 앱의 카메라로 QR을 스캔하세요</p>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button onclick="executePaymentComplete('카카오페이', '1,000원')" style="background:#191919; color:#fff; border:none; padding:15px; border-radius:12px; font-size:1.05rem; font-weight:800; cursor:pointer; width:100%; transition:0.2s;">
+          ⚡ [테스트] 카카오페이 1,000원 즉시 결제 승인
+        </button>
+        <button onclick="closeModal('kakaoPayModal')" style="background:transparent; border:none; color:#555; padding:8px; font-size:0.9rem; font-weight:600; cursor:pointer;">
+          결제 취소
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 💙 토스페이 결제 팝업 모달 -->
+  <div class="modal-overlay" id="tossPayModal" style="z-index: 10000;">
+    <div class="modal-card" style="max-width: 440px; background: #0064ff; color: #fff; border-radius: 20px; padding: 28px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 14px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.6rem; font-weight:900; letter-spacing:-1px;">toss pay</span>
+          <span style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:12px; font-size:0.75rem; font-weight:700;">간편결제</span>
+        </div>
+        <button style="background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; font-weight:800;" onclick="closeModal('tossPayModal')">✕</button>
+      </div>
+
+      <div style="background:#fff; color:#191f28; border-radius:16px; padding:20px; margin-bottom:18px; text-align:left;">
+        <p style="font-size:0.85rem; color:#8b95a1; margin-bottom:4px;">토스페이 결제</p>
+        <p style="font-size:1.05rem; font-weight:800; margin-bottom:14px;">2026 MZ 트렌드 리포트 (PDF)</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #f2f4f6; padding-top:12px;">
+          <span style="font-size:0.95rem; color:#4e5968;">결제 금액</span>
+          <span style="font-size:1.4rem; font-weight:900; color:#0064ff;">1,000원</span>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button onclick="executePaymentComplete('토스페이', '1,000원')" style="background:#fff; color:#0064ff; border:none; padding:15px; border-radius:12px; font-size:1.05rem; font-weight:800; cursor:pointer; width:100%;">
+          💙 토스 앱으로 1초 결제 승인하기
+        </button>
+        <button onclick="closeModal('tossPayModal')" style="background:transparent; border:none; color:rgba(255,255,255,0.8); padding:8px; font-size:0.9rem; cursor:pointer;">
+          취소
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ☕ 커피 한 잔 후원 모달 -->
+  <div class="modal-overlay" id="coffeeModal" style="z-index: 10000;">
+    <div class="modal-card" style="max-width: 440px; background: #181d2d; color: #fff; border: 1px solid #f59e0b; border-radius: 20px; padding: 26px; text-align: center;">
+      <div style="font-size: 2.8rem; margin-bottom: 8px;">☕</div>
+      <h3 style="color:#fbbf24; font-size:1.3rem; margin-bottom:6px;">신조어 사전 개발팀 커피 후원</h3>
+      <p style="color:#94a3b8; font-size:0.9rem; line-height:1.6; margin-bottom:20px;">
+        따뜻한 커피 한 잔(1,000원) 후원으로 한글 문화 주권 수호와 디지털 사전 생태계를 함께 응원해 주세요!
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button onclick="executePaymentComplete('커피 한 잔 후원 (카카오)', '1,000원')" style="background:#fee500; color:#191919; border:none; padding:13px; border-radius:10px; font-weight:800; cursor:pointer;">
+          💛 카카오페이로 1,000원 후원
+        </button>
+        <button onclick="executePaymentComplete('커피 한 잔 후원 (토스)', '1,000원')" style="background:#0064ff; color:#fff; border:none; padding:13px; border-radius:10px; font-weight:800; cursor:pointer;">
+          💙 토스로 1,000원 후원
+        </button>
+        <button onclick="closeModal('coffeeModal')" style="background:none; border:none; color:#64748b; font-size:0.85rem; cursor:pointer; padding:6px;">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
