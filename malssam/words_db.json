@@ -1,15 +1,11 @@
 {
   "project": "한글 어반 딕셔너리 (말쌈 / MALSSAM)",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "updated_at": "2026-10-18",
   "total_words": 30,
   "words": [
     {
-      "id": {
-        "slang": "Kena mental / Tersinggung berat",
-        "desc": "Kondisi tersinggung atau emosi ketika seseorang menyentuh titik sensitif atau fakta yang menyakitkan.",
-        "ex": "A: Kok mukanya langsung jutek? B: Cieee langsung kena mental ya haha."
-      },
+      "id": 1,
       "word": "긁히다",
       "pronunciation": "[글키다]",
       "part_of_speech": "동사",
@@ -49,14 +45,15 @@
         "slang": "Picar / Tocado en el orgullo",
         "desc": "Ponerse a la defensiva o enfadarse cuando alguien te da en el punto débil con una verdad dolorosa.",
         "ex": "A: ¿Por qué te alteras tanto? B: Jaja, ¡te diste por aludido y te picaste!"
+      },
+      "id_lang": {
+        "slang": "Kena mental / Tersinggung berat",
+        "desc": "Kondisi tersinggung atau emosi ketika seseorang menyentuh titik sensitif atau fakta yang menyakitkan.",
+        "ex": "A: Kok mukanya langsung jutek? B: Cieee langsung kena mental ya haha."
       }
     },
     {
-      "id": {
-        "slang": "Mental baja / Pantang menyerah",
-        "desc": "Yang paling penting adalah hati yang tak terpatahkan dalam situasi tersulit sekalipun.",
-        "ex": "Ujian hidup boleh berat, tapi yang penting mental baja tetap jalan terus!"
-      },
+      "id": 2,
       "word": "중꺾마",
       "pronunciation": "[중껑마]",
       "part_of_speech": "명사 / 관용구",
@@ -96,14 +93,15 @@
         "slang": "Espíritu inquebrantable",
         "desc": "Lo importante es nunca quebrantar el espíritu, mantener la fe hasta el último segundo.",
         "ex": "¡Vamos perdiendo pero el espíritu inquebrantable nos dará la victoria!"
+      },
+      "id_lang": {
+        "slang": "Mental baja / Pantang menyerah",
+        "desc": "Yang paling penting adalah hati yang tak terpatahkan dalam situasi tersulit sekalipun.",
+        "ex": "Ujian hidup boleh berat, tapi yang penting mental baja tetap jalan terus!"
       }
     },
     {
-      "id": {
-        "slang": "Hater maksa / Apes beruntun",
-        "desc": "Mencela tanpa alasan jelas, atau rentetan kesialan aneh yang terus menimpa bertubi-tubi.",
-        "ex": "Baru keluar rumah langsung hujan badai, dunia kayak sengaja benci banget sama gue."
-      },
+      "id": 3,
       "word": "억까",
       "pronunciation": "[억까]",
       "part_of_speech": "명사 / 동사",
@@ -143,14 +141,15 @@
         "slang": "Hate sin sentido / Mala pata total",
         "desc": "Criticar sin ningún fundamento, o sufrir una racha absurda de mala suerte.",
         "ex": "¡El único día que olvido las llaves se va la luz! El universo me tiene manía."
+      },
+      "id_lang": {
+        "slang": "Hater maksa / Apes beruntun",
+        "desc": "Mencela tanpa alasan jelas, atau rentetan kesialan aneh yang terus menimpa bertubi-tubi.",
+        "ex": "Baru keluar rumah langsung hujan badai, dunia kayak sengaja benci banget sama gue."
       }
     },
     {
-      "id": {
-        "slang": "Peka & Sat-set / Cerdas beres",
-        "desc": "Mengerjakan sesuatu dengan rapi, cepat, dan penuh inisiatif tanpa harus disuruh berkali-kali.",
-        "ex": "Keren banget kerjaannya, sat-set langsung beres tanpa banyak tanya!"
-      },
+      "id": 4,
       "word": "알잘딱깔센",
       "pronunciation": "[알잘딱깔센]",
       "part_of_speech": "부사 / 형용사",
@@ -190,14 +189,15 @@
         "slang": "Fino y al detalle / Impecable",
         "desc": "Hacer las cosas con iniciativa propia, de manera limpia, elegante y sin necesidad de instrucciones.",
         "ex": "Le pedí el informe y me lo entregó fino y al detalle, ¡un crack!"
+      },
+      "id_lang": {
+        "slang": "Peka & Sat-set / Cerdas beres",
+        "desc": "Mengerjakan sesuatu dengan rapi, cepat, dan penuh inisiatif tanpa harus disuruh berkali-kali.",
+        "ex": "Keren banget kerjaannya, sat-set langsung beres tanpa banyak tanya!"
       }
     },
     {
-      "id": {
-        "slang": "Lagi gacor / Menyala abangkuh",
-        "desc": "Pujian luar biasa saat performa, penampilan, atau kemampuan seseorang sedang di puncak terbaiknya.",
-        "ex": "Wah gila, codingan lu hari ini lagi gacor banget! Menyala abangkuh!"
-      },
+      "id": 5,
       "word": "폼 미쳤다",
       "pronunciation": "[폼 미첟따]",
       "part_of_speech": "감탄사 / 관용구",
@@ -237,14 +237,15 @@
         "slang": "Está en su prime / Modo Bestia",
         "desc": "Elogio rotundo cuando alguien muestra un nivel, físico o rendimiento fuera de serie.",
         "ex": "¡Ese delantero está en su prime, marca goles hasta con los ojos cerrados!"
+      },
+      "id_lang": {
+        "slang": "Lagi gacor / Menyala abangkuh",
+        "desc": "Pujian luar biasa saat performa, penampilan, atau kemampuan seseorang sedang di puncak terbaiknya.",
+        "ex": "Wah gila, codingan lu hari ini lagi gacor banget! Menyala abangkuh!"
       }
     },
     {
-      "id": {
-        "slang": "Si pemalas search / Maunya disuapin",
-        "desc": "Orang yang malas mencari info sendiri di Google dan cuma mengandalkan orang lain menyuapi info dasar.",
-        "ex": "Google gratis woi, jangan malas banget nanya hal yang ada di halaman depan!"
-      },
+      "id": 6,
       "word": "핑프",
       "pronunciation": "[핑프]",
       "part_of_speech": "명사",
@@ -284,14 +285,15 @@
         "slang": "Preguntón vago / Quiere todo masticado",
         "desc": "Persona que ni se molesta en buscar en Google y espera que otros le resuelvan la duda más simple.",
         "ex": "¡Está en el primer renglón del anuncio! Deja de ser tan vago y lee un poco."
+      },
+      "id_lang": {
+        "slang": "Si pemalas search / Maunya disuapin",
+        "desc": "Orang yang malas mencari info sendiri di Google dan cuma mengandalkan orang lain menyuapi info dasar.",
+        "ex": "Google gratis woi, jangan malas banget nanya hal yang ada di halaman depan!"
       }
     },
     {
-      "id": {
-        "slang": "Kafe estetik / Tempat nongkrong cozy",
-        "desc": "Kafe dengan suasana cantik, pencahayaan bagus, dan desain interior yang sangat Instagramable.",
-        "ex": "Kemarin nongkrong di kafe estetik baru, fotonya dapet angle cakep banget!"
-      },
+      "id": 7,
       "word": "분좋카",
       "pronunciation": "[분조카]",
       "part_of_speech": "명사",
@@ -331,14 +333,15 @@
         "slang": "Cafetería con buen rollo / Lugar Instagrameable",
         "desc": "Cafetería bonita, con buena iluminación y ambientación perfecta para fotos y relax.",
         "ex": "Descubrimos una cafetería con un rollo increíble para charlar y tomar fotos."
+      },
+      "id_lang": {
+        "slang": "Kafe estetik / Tempat nongkrong cozy",
+        "desc": "Kafe dengan suasana cantik, pencahayaan bagus, dan desain interior yang sangat Instagramable.",
+        "ex": "Kemarin nongkrong di kafe estetik baru, fotonya dapet angle cakep banget!"
       }
     },
     {
-      "id": {
-        "slang": "Hidup produktif pol / Gaya hidup panutan",
-        "desc": "Pola hidup yang sangat tertata, produktif, disiplin bangun pagi dan mengembangkan diri.",
-        "ex": "Mulai besok bangun subuh, jogging, belajar skill baru, pokoknya hidup produktif pol!"
-      },
+      "id": 8,
       "word": "갓생",
       "pronunciation": "[갇생]",
       "part_of_speech": "명사 / 동사",
@@ -378,14 +381,15 @@
         "slang": "Vivir como un crack / Rutina productiva",
         "desc": "Llevar un estilo de vida súper disciplinado, productivo y saludable día tras día.",
         "ex": "Me levanto a las 6 am, voy al gimnasio y estudio programación, ¡vida de crack!"
+      },
+      "id_lang": {
+        "slang": "Hidup produktif pol / Gaya hidup panutan",
+        "desc": "Pola hidup yang sangat tertata, produktif, disiplin bangun pagi dan mengembangkan diri.",
+        "ex": "Mulai besok bangun subuh, jogging, belajar skill baru, pokoknya hidup produktif pol!"
       }
     },
     {
-      "id": {
-        "slang": "Mindset Lucky Vicky / Selalu ada hikmah",
-        "desc": "Mengubah kejadian apes menjadi keberuntungan luar biasa dengan pola pikir super positif.",
-        "ex": "Antrean habis pas giliran gue, tapi jadinya dapet roti baru yang anget! Beneran Lucky Vicky!"
-      },
+      "id": 9,
       "word": "럭키비키",
       "pronunciation": "[너키비키]",
       "part_of_speech": "명사 / 감탄사",
@@ -425,14 +429,15 @@
         "slang": "Efecto Lucky Vicky / Optimismo radical",
         "desc": "Transformar cualquier contratiempo en una bendición de pura suerte con actitud positiva.",
         "ex": "Se canceló la reunión, ¡lo que significa que tengo 2 horas libres para relajarme! ¡Qué suerte!"
+      },
+      "id_lang": {
+        "slang": "Mindset Lucky Vicky / Selalu ada hikmah",
+        "desc": "Mengubah kejadian apes menjadi keberuntungan luar biasa dengan pola pikir super positif.",
+        "ex": "Antrean habis pas giliran gue, tapi jadinya dapet roti baru yang anget! Beneran Lucky Vicky!"
       }
     },
     {
-      "id": {
-        "slang": "Vibe idaman / Kiblat gaya",
-        "desc": "Gaya visual, estetika, atau aura yang ingin dicapai dan dijadikan inspirasi.",
-        "ex": "Vibe idaman gue tahun ini adalah street fashion minimalis ala Seoul."
-      },
+      "id": 10,
       "word": "추구미",
       "pronunciation": "[추구미]",
       "part_of_speech": "명사",
@@ -472,14 +477,15 @@
         "slang": "Estética soñada / Look ideal",
         "desc": "La vibra, estilo visual o estética que uno aspira proyectar y alcanzar.",
         "ex": "Mi estética soñada para este año es el estilo vintage clásico con tonos tierra."
+      },
+      "id_lang": {
+        "slang": "Vibe idaman / Kiblat gaya",
+        "desc": "Gaya visual, estetika, atau aura yang ingin dicapai dan dijadikan inspirasi.",
+        "ex": "Vibe idaman gue tahun ini adalah street fashion minimalis ala Seoul."
       }
     },
     {
-      "id": {
-        "slang": "Malah makin mantap / Hikmah tersembunyi",
-        "desc": "Menganggap kegagalan rencana awal justru membawa hal yang jauh lebih menguntungkan.",
-        "ex": "Hujan bikin batal jalan? Ya udah streaming seharian di rumah, malah makin mantap!"
-      },
+      "id": 11,
       "word": "오히려 좋아",
       "pronunciation": "[오히려 조아]",
       "part_of_speech": "관용구",
@@ -519,14 +525,15 @@
         "slang": "¡Casi que mejor! / Mucho mejor así",
         "desc": "Aceptar un cambio imprevisto de planes viéndolo como una opción aún más ventajosa.",
         "ex": "¿Se canceló la salida? ¡Casi que mejor, así nos quedamos viendo series calentitos!"
+      },
+      "id_lang": {
+        "slang": "Malah makin mantap / Hikmah tersembunyi",
+        "desc": "Menganggap kegagalan rencana awal justru membawa hal yang jauh lebih menguntungkan.",
+        "ex": "Hujan bikin batal jalan? Ya udah streaming seharian di rumah, malah makin mantap!"
       }
     },
     {
-      "id": {
-        "slang": "Ada yang nodongin pisau ke leher lu? / Risiko sendiri",
-        "desc": "Sentilan pedas buat orang yang suka mengeluh padahal itu pilihannya sendiri secara sukarela.",
-        "ex": "Lu sendiri yang milih gajinya gede walau lembur, emang ada yang nodongin pisau ke lu?"
-      },
+      "id": 12,
       "word": "누칼협",
       "pronunciation": "[누칼협]",
       "part_of_speech": "명사 / 관용구",
@@ -566,14 +573,15 @@
         "slang": "¿Alguien te puso una pistola en la cabeza? / Apechuga",
         "desc": "Duro recordatorio a quien se queja de las consecuencias de una decisión que tomó libremente.",
         "ex": "Tú elegiste mudarte allí por tu cuenta, ¿alguien te puso una pistola en la cabeza?"
+      },
+      "id_lang": {
+        "slang": "Ada yang nodongin pisau ke leher lu? / Risiko sendiri",
+        "desc": "Sentilan pedas buat orang yang suka mengeluh padahal itu pilihannya sendiri secara sukarela.",
+        "ex": "Lu sendiri yang milih gajinya gede walau lembur, emang ada yang nodongin pisau ke lu?"
       }
     },
     {
-      "id": {
-        "slang": "Garing berulang / Kebangetan lebay",
-        "desc": "Mengulang lelucon atau tingkah laku secara berlebihan sampai bikin suasana jadi canggung dan membosankan.",
-        "ex": "Sekali dua kali lucu bro, kalau diulang terus mah udah garing kebangetan."
-      },
+      "id": 13,
       "word": "뇌절",
       "pronunciation": "[뇌절]",
       "part_of_speech": "명사 / 동사",
@@ -613,14 +621,15 @@
         "slang": "Rayar el disco / Pasarse de la raya",
         "desc": "Repetir una broma o actitud hasta el cansancio, arruinando el ambiente.",
         "ex": "La primera vez tuvo gracia, pero ya estás rayando el disco, para un poco."
+      },
+      "id_lang": {
+        "slang": "Garing berulang / Kebangetan lebay",
+        "desc": "Mengulang lelucon atau tingkah laku secara berlebihan sampai bikin suasana jadi canggung dan membosankan.",
+        "ex": "Sekali dua kali lucu bro, kalau diulang terus mah udah garing kebangetan."
       }
     },
     {
-      "id": {
-        "slang": "Senjata makan tuan / Ulah sendiri",
-        "desc": "Menanggung penderitaan atau kerepotan akibat kecerobohan atau keputusan diri sendiri.",
-        "ex": "Nunda-nunda tugas sampai mepet deadline terus begadang, murni ulah sendiri ini mah."
-      },
+      "id": 14,
       "word": "스불재",
       "pronunciation": "[스불재]",
       "part_of_speech": "명사",
@@ -660,14 +669,15 @@
         "slang": "Cavar mi propia tumba / Buscarse la ruina",
         "desc": "Sufrir las consecuencias desagradables que uno mismo se buscó por pereza o imprudencia.",
         "ex": "Dejé todo el proyecto para la última noche, ¡yo solito me cavé la tumba!"
+      },
+      "id_lang": {
+        "slang": "Senjata makan tuan / Ulah sendiri",
+        "desc": "Menanggung penderitaan atau kerepotan akibat kecerobohan atau keputusan diri sendiri.",
+        "ex": "Nunda-nunda tugas sampai mepet deadline terus begadang, murni ulah sendiri ini mah."
       }
     },
     {
-      "id": {
-        "slang": "Bikin kesel tapi kocak / Muka ngeselin",
-        "desc": "Rasa jengkel bercampur geli melihat tingkah seseorang yang sok polos tapi sangat memancing emosi.",
-        "ex": "Mukanya songong banget pas bilang 'hoki doang dapet nilai 100', bener-bener bikin kesel!"
-      },
+      "id": 15,
       "word": "킹받네",
       "pronunciation": "[킹받네]",
       "part_of_speech": "감탄사 / 동사",
@@ -707,14 +717,15 @@
         "slang": "Da una rabia que flipas / Qué coraje da",
         "desc": "Estar molesto de forma cómica ante la actitud presumida y chulesca de alguien.",
         "ex": "¡Dice que no estudió nada y saca matrícula de honor! ¡Qué rabia y qué cara tiene!"
+      },
+      "id_lang": {
+        "slang": "Bikin kesel tapi kocak / Muka ngeselin",
+        "desc": "Rasa jengkel bercampur geli melihat tingkah seseorang yang sok polos tapi sangat memancing emosi.",
+        "ex": "Mukanya songong banget pas bilang 'hoki doang dapet nilai 100', bener-bener bikin kesel!"
       }
     },
     {
-      "id": {
-        "slang": "Terus kenapa? Nonton TV aja sana",
-        "desc": "Kalimat balasan tengil khas anak-anak untuk membungkam omelan orang lain secara cuek.",
-        "ex": "'Beresin kamar lu!' - 'Terus kenapa? Sana nonton TV aja gih!'"
-      },
+      "id": 16,
       "word": "어쩔티비",
       "pronunciation": "[어쩔티비]",
       "part_of_speech": "감탄사",
@@ -754,14 +765,15 @@
         "slang": "¿Y a mí qué? Vete a ver la tele",
         "desc": "Respuesta infantil y burlona para cortar en seco los reproches o regaños de los demás.",
         "ex": "¡Ponte a estudiar ya! - ¿Y a mí qué me cuentas? ¡Vete a ver la tele!"
+      },
+      "id_lang": {
+        "slang": "Terus kenapa? Nonton TV aja sana",
+        "desc": "Kalimat balasan tengil khas anak-anak untuk membungkam omelan orang lain secara cuek.",
+        "ex": "'Beresin kamar lu!' - 'Terus kenapa? Sana nonton TV aja gih!'"
       }
     },
     {
-      "id": {
-        "slang": "Rekomendasi makan siang / Makan apa nih?",
-        "desc": "Singkatan untuk meminta rekomendasi menu makan siang kepada teman saat bingung memilih.",
-        "ex": "Lagi buntu nih, ada rekomendasi makan siang yang seger-seger gak?"
-      },
+      "id": 17,
       "word": "점메추",
       "pronunciation": "[점메추]",
       "part_of_speech": "명사 / 동사",
@@ -801,14 +813,15 @@
         "slang": "¿Recomendación para comer? / ¿Qué comemos?",
         "desc": "Abreviatura para pedir sugerencias de qué almorzar cuando no se sabe qué elegir.",
         "ex": "No sé qué pedir hoy, ¿alguien me tira una buena recomendación para comer?"
+      },
+      "id_lang": {
+        "slang": "Rekomendasi makan siang / Makan apa nih?",
+        "desc": "Singkatan untuk meminta rekomendasi menu makan siang kepada teman saat bingung memilih.",
+        "ex": "Lagi buntu nih, ada rekomendasi makan siang yang seger-seger gak?"
       }
     },
     {
-      "id": {
-        "slang": "Auto ngiler / Bikin mupeng",
-        "desc": "Ekspresi ketika melihat makanan lezat atau hal seru yang langsung membuat air liur menetes.",
-        "ex": "Lihat keju lumer di atas tteokbokki langsung auto ngiler, pesan sekarang juga!"
-      },
+      "id": 18,
       "word": "군싹",
       "pronunciation": "[군싹]",
       "part_of_speech": "감탄사 / 형용사",
@@ -848,14 +861,15 @@
         "slang": "Se me hace la boca agua / Qué antojo",
         "desc": "Expresión al ver comida deliciosa o algo tan tentador que despierta las ganas al instante.",
         "ex": "¡Mira esa hamburguesa chorreando queso, se me hace la boca agua!"
+      },
+      "id_lang": {
+        "slang": "Auto ngiler / Bikin mupeng",
+        "desc": "Ekspresi ketika melihat makanan lezat atau hal seru yang langsung membuat air liur menetes.",
+        "ex": "Lihat keju lumer di atas tteokbokki langsung auto ngiler, pesan sekarang juga!"
       }
     },
     {
-      "id": {
-        "slang": "Kunci di kalender / Masuk jadwal",
-        "desc": "Memasukkan jadwal penting ke aplikasi kalender HP agar pasti terlaksana dan tidak bentrok.",
-        "ex": "Jangan lupa kumpul Jumat depan ya! Udah gue kunci di kalender nih."
-      },
+      "id": 19,
       "word": "캘박",
       "pronunciation": "[캘박]",
       "part_of_speech": "명사 / 동사",
@@ -895,14 +909,15 @@
         "slang": "Fichado en el calendario / Agendado a fuego",
         "desc": "Guardar un compromiso en el calendario del móvil para no olvidarlo bajo ninguna circunstancia.",
         "ex": "¡No te olvides de la cena del viernes! Ya la tengo agendada a fuego."
+      },
+      "id_lang": {
+        "slang": "Kunci di kalender / Masuk jadwal",
+        "desc": "Memasukkan jadwal penting ke aplikasi kalender HP agar pasti terlaksana dan tidak bentrok.",
+        "ex": "Jangan lupa kumpul Jumat depan ya! Udah gue kunci di kalender nih."
       }
     },
     {
-      "id": {
-        "slang": "Ikut selera / Co-sign beli samaan",
-        "desc": "Tren membeli atau mengikuti gaya seseorang secara persis karena percaya pada seleranya.",
-        "ex": "Tas yang dipakai temen gue keren banget, langsung ikut beli samaan tanpa mikir."
-      },
+      "id": 20,
       "word": "디토",
       "pronunciation": "[디토]",
       "part_of_speech": "명사 / 감탄사",
@@ -942,14 +957,15 @@
         "slang": "Copiar el estilo / Comprar a ciegas por recomendación",
         "desc": "Seguir fielmente el gusto o compra de otra persona por pura afinidad y confianza.",
         "ex": "Mi amiga recomendó estos auriculares y me los pillé de cabeza, ¡una maravilla!"
+      },
+      "id_lang": {
+        "slang": "Ikut selera / Co-sign beli samaan",
+        "desc": "Tren membeli atau mengikuti gaya seseorang secara persis karena percaya pada seleranya.",
+        "ex": "Tas yang dipakai temen gue keren banget, langsung ikut beli samaan tanpa mikir."
       }
     },
     {
-      "id": {
-        "slang": "Besok ngantor lagi / Derita buruh korporat",
-        "desc": "Keluhan khas pekerja di Minggu malam saat menyadari libur berakhir dan besok harus kembali bekerja.",
-        "ex": "Cepet banget weekend lewat, besok udah harus ngantor lagi hadap laptop."
-      },
+      "id": 21,
       "word": "내또출",
       "pronunciation": "[내또출]",
       "part_of_speech": "명사 / 감탄사",
@@ -989,14 +1005,15 @@
         "slang": "Mañana a currar otra vez / Depresión del domingo",
         "desc": "El lamento del domingo por la noche al recordar que toca volver a madrugar y trabajar al día siguiente.",
         "ex": "¿Ya son las 10 de la noche del domingo? ¡Mañana a currar otra vez, qué pereza!"
+      },
+      "id_lang": {
+        "slang": "Besok ngantor lagi / Derita buruh korporat",
+        "desc": "Keluhan khas pekerja di Minggu malam saat menyadari libur berakhir dan besok harus kembali bekerja.",
+        "ex": "Cepet banget weekend lewat, besok udah harus ngantor lagi hadap laptop."
       }
     },
     {
-      "id": {
-        "slang": "Gue banget / Tipe idaman",
-        "desc": "Pujian saat menemukan barang, gaya pakaian, atau orang yang benar-benar pas dengan selera pribadi.",
-        "ex": "Jaket vintage ini potongannya beneran gue banget, langsung bungkus!"
-      },
+      "id": 22,
       "word": "완내스",
       "pronunciation": "[완내스]",
       "part_of_speech": "명사 / 형용사",
@@ -1036,14 +1053,15 @@
         "slang": "Totalmente mi rollo / Justo mi estilo",
         "desc": "Expresión para indicar que algo o alguien encaja al cien por cien con tus gustos.",
         "ex": "Me probé este abrigo oversize y es totalmente mi rollo, ¡me lo quedo!"
+      },
+      "id_lang": {
+        "slang": "Gue banget / Tipe idaman",
+        "desc": "Pujian saat menemukan barang, gaya pakaian, atau orang yang benar-benar pas dengan selera pribadi.",
+        "ex": "Jaket vintage ini potongannya beneran gue banget, langsung bungkus!"
       }
     },
     {
-      "id": {
-        "slang": "Sesi Q&A / Tanya apa aja",
-        "desc": "Fitur stiker tanya jawab di Instagram story untuk berinteraksi bebas dengan pengikut.",
-        "ex": "Lagi gabut buka sesi tanya apa aja di IG, ternyata rame banget yang kepo!"
-      },
+      "id": 23,
       "word": "무물",
       "pronunciation": "[무물]",
       "part_of_speech": "명사 / 동사",
@@ -1083,14 +1101,15 @@
         "slang": "Pregúntame lo que sea / Cajita de preguntas",
         "desc": "Sesión de preguntas y respuestas en Instagram Stories donde te pueden preguntar cualquier tema.",
         "ex": "Puse una cajita de preguntas en Instagram por aburrimiento y me llovieron mensajes."
+      },
+      "id_lang": {
+        "slang": "Sesi Q&A / Tanya apa aja",
+        "desc": "Fitur stiker tanya jawab di Instagram story untuk berinteraksi bebas dengan pengikut.",
+        "ex": "Lagi gabut buka sesi tanya apa aja di IG, ternyata rame banget yang kepo!"
       }
     },
     {
-      "id": {
-        "slang": "Canda deng / Cuma becanda",
-        "desc": "Kalimat penutup setelah melempar gombalan atau candaan berlebihan biar gak canggung.",
-        "ex": "Cakep amat lu hari ini udah kayak artis Korea... canda deng haha!"
-      },
+      "id": 24,
       "word": "막이래",
       "pronunciation": "[마기래]",
       "part_of_speech": "감탄사",
@@ -1130,14 +1149,15 @@
         "slang": "Es broma / ¡Qué va, es coña!",
         "desc": "Frase que se añade tras un cumplido exagerado o una broma para quitarle seriedad entre risas.",
         "ex": "¡Hoy pareces una estrella de cine!... ¡qué va, es coña jaja!"
+      },
+      "id_lang": {
+        "slang": "Canda deng / Cuma becanda",
+        "desc": "Kalimat penutup setelah melempar gombalan atau candaan berlebihan biar gak canggung.",
+        "ex": "Cakep amat lu hari ini udah kayak artis Korea... canda deng haha!"
       }
     },
     {
-      "id": {
-        "slang": "Kode Rahasia 'Saranghae' Terbalik",
-        "desc": "Kode cinta rahasia di mana kata 'Saranghae' (Aku cinta kamu) jika dibalik terbaca seperti H워얼V.",
-        "ex": "Balik layar HP lu dan baca ini: H워얼V (Artinya cinta kamu lho!)"
-      },
+      "id": 25,
       "word": "H워얼V",
       "pronunciation": "[사랑해]",
       "part_of_speech": "감탄사 / 명사",
@@ -1177,14 +1197,15 @@
         "slang": "Código Secreto 'Te Quiero' Invertido",
         "desc": "Un código romántico donde al girar la palabra coreana 'Saranghae' parece el texto H워얼V.",
         "ex": "Gira la pantalla del móvil al revés y léelo: H워얼V (¡Significa te quiero en coreano!)"
+      },
+      "id_lang": {
+        "slang": "Kode Rahasia 'Saranghae' Terbalik",
+        "desc": "Kode cinta rahasia di mana kata 'Saranghae' (Aku cinta kamu) jika dibalik terbaca seperti H워얼V.",
+        "ex": "Balik layar HP lu dan baca ini: H워얼V (Artinya cinta kamu lho!)"
       }
     },
     {
-      "id": {
-        "slang": "Jodoh alami / Anti kencan buta",
-        "desc": "Lebih menyukai cinta yang tumbuh secara organik dari lingkungan hobi atau kerja daripada kencan buta.",
-        "ex": "Gue lebih suka jodoh yang ketemu alami di komunitas daripada dikenalin orang lain."
-      },
+      "id": 26,
       "word": "자만추",
       "pronunciation": "[자만추]",
       "part_of_speech": "명사",
@@ -1224,14 +1245,15 @@
         "slang": "Amor orgánico / Conocerse sin citas a ciegas",
         "desc": "Preferencia por enamorarse de manera espontánea en la vida cotidiana antes que en citas concertadas.",
         "ex": "Las citas a ciegas me ponen tenso, prefiero que surja el amor de forma orgánica."
+      },
+      "id_lang": {
+        "slang": "Jodoh alami / Anti kencan buta",
+        "desc": "Lebih menyukai cinta yang tumbuh secara organik dari lingkungan hobi atau kerja daripada kencan buta.",
+        "ex": "Gue lebih suka jodoh yang ketemu alami di komunitas daripada dikenalin orang lain."
       }
     },
     {
-      "id": {
-        "slang": "Tergantung orangnya / Beda-beda tiap orang",
-        "desc": "Menyatakan bahwa pengalaman atau pendapat sangat bervariasi tergantung masing-masing individu.",
-        "ex": "Kerja di sana enak gak? Wah itu tergantung orangnya dan timnya masing-masing."
-      },
+      "id": 27,
       "word": "사바사",
       "pronunciation": "[사바사]",
       "part_of_speech": "명사 / 관용구",
@@ -1271,14 +1293,15 @@
         "slang": "Depende de la persona / Cada quien es un mundo",
         "desc": "Indica que las circunstancias o experiencias cambian radicalmente según el individuo.",
         "ex": "¿Es duro trabajar allí? Depende de la persona y del jefe que te toque."
+      },
+      "id_lang": {
+        "slang": "Tergantung orangnya / Beda-beda tiap orang",
+        "desc": "Menyatakan bahwa pengalaman atau pendapat sangat bervariasi tergantung masing-masing individu.",
+        "ex": "Kerja di sana enak gak? Wah itu tergantung orangnya dan timnya masing-masing."
       }
     },
     {
-      "id": {
-        "slang": "Info gak penting tapi seru / Kebanyakan info",
-        "desc": "Membagikan detail acak yang sepele tentang diri sendiri untuk sekadar mencairkan suasana.",
-        "ex": "TMI hari ini: Gue baru sadar kaos kaki gue belang sebelah haha."
-      },
+      "id": 28,
       "word": "TMI",
       "pronunciation": "[티엠아이]",
       "part_of_speech": "명사",
@@ -1318,14 +1341,15 @@
         "slang": "Información innecesaria / Dato random",
         "desc": "Contar un detalle muy íntimo o trivial que nadie había pedido saber, en tono bromista.",
         "ex": "Dato random del día: Me he puesto un calcetín de cada color por las prisas."
+      },
+      "id_lang": {
+        "slang": "Info gak penting tapi seru / Kebanyakan info",
+        "desc": "Membagikan detail acak yang sepele tentang diri sendiri untuk sekadar mencairkan suasana.",
+        "ex": "TMI hari ini: Gue baru sadar kaos kaki gue belang sebelah haha."
       }
     },
     {
-      "id": {
-        "slang": "Mode santai / Ngomong lu-gue",
-        "desc": "Kesepakatan untuk berhenti memakai bahasa formal dan mulai berbicara santai akrab di media sosial.",
-        "ex": "Udah sering komenan bareng, yuk ngobrol santai lu-gue aja biar makin akrab!"
-      },
+      "id": 29,
       "word": "반모",
       "pronunciation": "[반모]",
       "part_of_speech": "명사 / 동사",
@@ -1365,14 +1389,15 @@
         "slang": "Tutearse / Hablar de tú a tú",
         "desc": "Acordar dejar el trato formal de usted para hablar con confianza y cercanía.",
         "ex": "Ya nos conocemos de comentar tanto, ¿nos tuteamos a partir de ahora?"
+      },
+      "id_lang": {
+        "slang": "Mode santai / Ngomong lu-gue",
+        "desc": "Kesepakatan untuk berhenti memakai bahasa formal dan mulai berbicara santai akrab di media sosial.",
+        "ex": "Udah sering komenan bareng, yuk ngobrol santai lu-gue aja biar makin akrab!"
       }
     },
     {
-      "id": {
-        "slang": "Bahagia sederhana / Sukacita kecil",
-        "desc": "Kebahagiaan kecil tapi pasti yang dirasakan dari momen-momen sederhana sehari-hari.",
-        "ex": "Makan jajanan anget sambil jalan pulang kantor, bahagia sederhana banget rasanya."
-      },
+      "id": 30,
       "word": "소확행",
       "pronunciation": "[소화캥]",
       "part_of_speech": "명사",
@@ -1412,6 +1437,11 @@
         "slang": "Pequeños placeres / Felicidad cotidiana",
         "desc": "La felicidad modesta pero certera que se encuentra en los pequeños momentos del día a día.",
         "ex": "Comer un pan recién horneado de camino a casa, ¡esos son los pequeños placeres de la vida!"
+      },
+      "id_lang": {
+        "slang": "Bahagia sederhana / Sukacita kecil",
+        "desc": "Kebahagiaan kecil tapi pasti yang dirasakan dari momen-momen sederhana sehari-hari.",
+        "ex": "Makan jajanan anget sambil jalan pulang kantor, bahagia sederhana banget rasanya."
       }
     }
   ]
