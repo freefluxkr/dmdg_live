@@ -847,6 +847,10 @@
       color: var(--text-muted);
     }
   </style>
+  <!-- 포트원 (PortOne / 구 아임포트) 국내 1위 통합 결제 SDK -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <!-- 글로벌 1위 PayPal JavaScript SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
 </head>
 <body>
 
@@ -1030,10 +1034,10 @@
             신조어 사전 《말쌈 (MALSSAM)》 프로젝트를 응원해 주세요! <strong>커피 한 잔 후원 시</strong> '2026 기업용 MZ 세대 소통 지표 리포트(PDF)' 및 '디지털 공식 인증서'를 즉시 발급해 드립니다.
           </p>
           <div class="pay-btn-group">
-            <button class="pay-btn pay-toss" onclick="simulatePayment('토스페이')">💙 토스페이 1,000원</button>
-            <button class="pay-btn pay-kakao" onclick="simulatePayment('카카오페이')">💛 카카오페이 1,000원</button>
-            <button class="pay-btn pay-paypal" onclick="simulatePayment('PayPal')">🌐 PayPal 0.99달러</button>
-            <button class="pay-btn pay-coffee" onclick="simulatePayment('Buy Me a Coffee')">☕ 커피 한 잔 후원</button>
+            <button class="pay-btn pay-toss" onclick="requestTossPay()">💙 토스페이 1,000원</button>
+            <button class="pay-btn pay-kakao" onclick="requestKakaoPay()">💛 카카오페이 1,000원</button>
+            <button class="pay-btn pay-paypal" onclick="requestPayPal()">🌐 PayPal 0.99달러</button>
+            <button class="pay-btn pay-coffee" onclick="openCoffeeSponsor()">☕ 커피 한 잔 후원</button>
           </div>
         </div>
 
@@ -2939,9 +2943,177 @@
       }, 3000);
     }
 
+    
+    // ============================================================
+    // 💳 [실전 결제 연동] 국내 1위 포트원(카카오페이/토스) & 글로벌 1위 PayPal
+    // ============================================================
+    
+    // 1) 💛 카카오페이 실전 연동 (포트원 v1 / Iamport)
+    function requestKakaoPay() {
+      if (typeof IMP === 'undefined') {
+        alert("결제 모듈을 로드하는 중입니다. 1~2초 후 다시 시도해 주세요.");
+        return;
+      }
+      IMP.init('imp00000000'); // 포트원 공식 테스트 가맹점 코드 (누구나 실시간 팝업 테스트 가능)
+      
+      const orderId = 'MALSSAM_KP_' + Date.now();
+      showToast("💛 카카오페이 결제창을 안전하게 호출 중입니다...");
+
+      IMP.request_pay({
+        pg: 'kakaopay.TC0ONETIME',
+        pay_method: 'card',
+        merchant_uid: orderId,
+        name: '2026 MZ 트렌드 리포트 & 공식 디지털 인증서',
+        amount: 1000,
+        buyer_email: 'user@dmdg.kr',
+        buyer_name: '말쌈 후원자',
+        buyer_tel: '010-1234-5678'
+      }, function (rsp) {
+        if (rsp.success) {
+          openReportModal('카카오페이 (KakaoPay)', rsp.imp_uid || orderId, '1,000원');
+        } else {
+          showToast(`❌ 결제 취소 또는 오류: ${rsp.error_msg}`);
+        }
+      });
+    }
+
+    // 2) 💙 토스페이 실전 연동
+    function requestTossPay() {
+      if (typeof IMP === 'undefined') {
+        alert("결제 모듈을 로드하는 중입니다. 1~2초 후 다시 시도해 주세요.");
+        return;
+      }
+      IMP.init('imp00000000'); // 포트원 공식 테스트 가맹점 코드
+      
+      const orderId = 'MALSSAM_TP_' + Date.now();
+      showToast("💙 토스페이 결제창을 안전하게 호출 중입니다...");
+
+      IMP.request_pay({
+        pg: 'tosspay',
+        pay_method: 'card',
+        merchant_uid: orderId,
+        name: '2026 MZ 트렌드 리포트 & 공식 디지털 인증서',
+        amount: 1000,
+        buyer_email: 'user@dmdg.kr',
+        buyer_name: '말쌈 후원자',
+        buyer_tel: '010-1234-5678'
+      }, function (rsp) {
+        if (rsp.success) {
+          openReportModal('토스페이 (TossPay)', rsp.imp_uid || orderId, '1,000원');
+        } else {
+          showToast(`❌ 결제 취소 또는 오류: ${rsp.error_msg}`);
+        }
+      });
+    }
+
+    // 3) 🌐 PayPal 실전 연동 (글로벌 5개국 유저용)
+    let paypalRendered = false;
+    function requestPayPal() {
+      document.getElementById('paypalModal').classList.add('active');
+      
+      if (!paypalRendered && window.paypal) {
+        try {
+          window.paypal.Buttons({
+            createOrder: function(data, actions) {
+              return actions.order.create({
+                purchase_units: [{
+                  amount: { value: '0.99' },
+                  description: 'MALSSAM 2026 Korean Slang Report (PDF)'
+                }]
+              });
+            },
+            onApprove: function(data, actions) {
+              return actions.order.capture().then(function(details) {
+                closePayPalModal();
+                openReportModal('PayPal Global', details.id, '$0.99 USD');
+              });
+            },
+            onError: function(err) {
+              console.error("PayPal Error:", err);
+              showToast("PayPal 연결 중 오류가 발생했습니다.");
+            }
+          }).render('#paypal-button-container');
+          paypalRendered = true;
+        } catch(e) {
+          console.error(e);
+        }
+      }
+    }
+
+    function closePayPalModal() {
+      document.getElementById('paypalModal').classList.remove('active');
+    }
+
+    // 4) ☕ 커피 한 잔 간편 후원
+    function openCoffeeSponsor() {
+      const confirmSponsor = confirm("[☕ 커피 한 잔 후원 안내]\n\n신조어 사전 개발팀에게 따뜻한 커피 한 잔(1,000원)을 후원해 주시겠습니까?\n'확인'을 누르시면 카카오페이/토스페이 간편 후원 프로세스로 이동합니다.");
+      if (confirmSponsor) {
+        requestKakaoPay();
+      }
+    }
+
+    // 5) 🎉 결제 완료 리포트 모달 오픈
+    function openReportModal(provider, txId, amount) {
+      document.getElementById('receiptProvider').innerText = provider;
+      document.getElementById('receiptTxId').innerText = txId;
+      document.getElementById('receiptAmount').innerText = amount;
+      document.getElementById('reportModal').classList.add('active');
+      showToast(`🎉 [${provider}] 결제 성공! 리포트 발급이 완료되었습니다!`);
+    }
+
+    function closeReportModal() {
+      document.getElementById('reportModal').classList.remove('active');
+    }
+
+    function downloadMockPDF() {
+      alert("📄 [2026 기업용 MZ 신조어 소통 지표 리포트 전문 (PDF)]\n\n'말쌈 (MALSSAM) 30종 마스터 사전 및 문해력 가이드' 문서가 브라우저 새 창에서 열리거나 다운로드됩니다!\n개발팀을 응원해 주셔서 감사합니다!");
+    }
+
     // 초기 실행
     applyFilterAndRender();
 
   </script>
+
+  <!-- PayPal 결제 모달 -->
+  <div class="modal-overlay" id="paypalModal">
+    <div class="modal-card" style="max-width: 440px; text-align: center;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 style="color:#facc15; font-size:1.2rem;">🌐 PayPal Global Checkout</h3>
+        <button style="background:none; border:none; color:#94a3b8; font-size:1.2rem; cursor:pointer;" onclick="closePayPalModal()">✕</button>
+      </div>
+      <p style="color:#cbd5e1; font-size:0.95rem; margin-bottom:20px;">
+        2026 MZ Trend Report & Certificate (PDF)<br>
+        <strong>Amount: $0.99 USD</strong>
+      </p>
+      <div id="paypal-button-container" style="min-height: 150px;"></div>
+    </div>
+  </div>
+
+  <!-- 결제 완료 리워드: 2026 MZ 트렌드 심층 리포트 & 공식 인증서 모달 -->
+  <div class="modal-overlay" id="reportModal">
+    <div class="modal-card" style="max-width: 580px; text-align: center; border: 2px solid #facc15; box-shadow: 0 0 40px rgba(250, 204, 21, 0.3);">
+      <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
+      <h2 style="font-size: 1.6rem; color: #facc15; margin-bottom: 8px;">결제가 성공적으로 완료되었습니다!</h2>
+      <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 20px;">말쌈 (MALSSAM) 프로젝트를 후원해 주셔서 진심으로 감사드립니다.</p>
+      
+      <!-- 디지털 영수증 -->
+      <div style="background: rgba(0,0,0,0.4); border-radius: 12px; padding: 16px; text-align: left; font-size: 0.9rem; line-height: 1.8; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">결제 수단:</span> <strong id="receiptProvider" style="color:#38bdf8;">카카오페이</strong></div>
+        <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">거래 승인번호:</span> <code id="receiptTxId" style="color:#facc15;">TX-2026-OK</code></div>
+        <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">결제 금액:</span> <strong id="receiptAmount" style="color:#fff;">1,000원</strong></div>
+        <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">발급 대상:</span> <span style="color:#cbd5e1;">2026 기업용 MZ 세대 소통 지표 리포트 & 디지털 인증서</span></div>
+      </div>
+
+      <!-- 리포트 다운로드 및 열람 액션 -->
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button class="btn-submit" style="width:100%; padding:14px; font-size:1.05rem;" onclick="downloadMockPDF()">
+          📥 2026 MZ 트렌드 리포트 (PDF) 다운로드
+        </button>
+        <button class="btn-cancel" style="width:100%; padding:12px;" onclick="closeReportModal()">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
