@@ -1,129 +1,1206 @@
 {
-  "project": "Malssam Global Multi-Language Editions",
-  "languages": ["en", "ja", "vi", "id", "es"],
+  "project": "MALSSAM Global Multilingual Dataset",
+  "version": "2.0.0",
+  "total": 30,
   "words": [
     {
-      "id": 1,
-      "hangul": "긁히다",
-      "romanized": "Geul-ki-da",
+      "id": {
+        "slang": "Kena mental / Tersinggung berat",
+        "desc": "Kondisi tersinggung atau emosi ketika seseorang menyentuh titik sensitif atau fakta yang menyakitkan.",
+        "ex": "A: Kok mukanya langsung jutek? B: Cieee langsung kena mental ya haha."
+      },
+      "word": "긁히다",
+      "pronunciation": "[글키다]",
+      "chosung": "ㄱㅎㄷ",
+      "part_of_speech": "동사",
+      "likes": 4845,
+      "dislikes": 114,
+      "tags": [
+        "감정",
+        "도발",
+        "심리전",
+        "MZ유행어"
+      ],
+      "trend_status": "HOT",
       "en": {
-        "slang": "Triggered / Salty / Got under your skin",
-        "definition": "When someone gets visibly upset, defensive, or angry because a roast or cold hard truth struck an emotional nerve.",
-        "example": "A: Be honest, you're not even 5'8\", right?\nB: Bro why bring up height out of nowhere?! That's uncalled for!\nA: LMAO look at you, you got totally TRIGGERED!"
+        "slang": "Triggered / Got under your skin",
+        "desc": "Getting visibly upset or defensive when someone hits a painful nerve or speaks uncomfortable truth.",
+        "ex": "A: Why are you so defensive? B: Stop, he's totally triggered right now lol."
       },
       "ja": {
-        "furigana": "クルキダ",
-        "slang": "煽られた / 効いてる草 / 図星でブチギレ",
-        "definition": "相手の痛いところを突く発言や挑発にプライドが傷つき、平静を失って本気で怒ってしまう状態。",
-        "example": "A: お前、正直プロフィールより身長低くね？\nB: は？急に身長の話とかマジ関係なくね？何様？\nA: 草www めっちゃ効いてるじゃん（긁혔네）！"
+        "slang": "煽られた / 効いてる草",
+        "desc": "図星を突かれたり挑発されてプライドが傷つき、カッとなって動揺している状態。",
+        "ex": "A: 何でそんな怒ってんの？ B: 図星突かれてめっちゃ効いてるじゃん草"
       },
       "vi": {
-        "slang": "Bị 'chọc trúng tim đen' / Cay cú / Tự ái",
-        "definition": "Trạng thái một người trở nên tức giận, xù lông phòng thủ vì bị người khác nói trúng điểm yếu hoặc sự thật mất lòng.",
-        "example": "A: Nói thật đi, ông khai gian chiều cao đúng không?\nB: Tự dưng lôi chiều cao vào làm gì? Quá đáng vừa thôi!\nA: Haha, nhìn kìa, bị chọc trúng tim đen cay cú rồi chứ gì!"
-      },
-      "id": {
-        "slang": "Kena Mental / Salty / Baper Parah",
-        "definition": "Kondisi saat seseorang tersinggung berat atau emosi karena ejekan atau fakta telak yang menusuk harga dirinya.",
-        "example": "A: Ngaku aja deh, tinggi aslimu nggak sampai 170 kan?\nB: Kok tiba-tiba ngomongin tinggi badan sih? Nggak sopan banget!\nA: Wkwk santai bro, langsung KENA MENTAL ya?"
+        "slang": "Bị chọc trúng tim đen / Cay cú",
+        "desc": "Trạng thái tự ái, nổi đóa khi bị người khác nói đúng điểm yếu hoặc khiêu khích.",
+        "ex": "A: Sao tự nhiên căng thế? B: Haha bị nói trúng tim đen nên cay rồi đấy!"
       },
       "es": {
-        "slang": "Picar / Ardido / Le dolió la verdad",
-        "definition": "Cuando a alguien le hieren el orgullo con una verdad o burla directa y se molesta visiblemente.",
-        "example": "A: Sé honesto, ¿no mides lo que dice tu perfil, verdad?\nB: ¿Y a ti qué te importa mi estatura? ¡Te estás pasando!\nA: ¡Jajaja miren cómo se ardió! ¡Le dolió en el ego!"
+        "slang": "Picar / Tocado en el orgullo",
+        "desc": "Ponerse a la defensiva o enfadarse cuando alguien te da en el punto débil con una verdad dolorosa.",
+        "ex": "A: ¿Por qué te alteras tanto? B: Jaja, ¡te diste por aludido y te picaste!"
       }
     },
     {
-      "id": 2,
-      "hangul": "중꺾마",
-      "romanized": "Joong-Kkeok-Ma",
+      "id": {
+        "slang": "Mental baja / Pantang menyerah",
+        "desc": "Yang paling penting adalah hati yang tak terpatahkan dalam situasi tersulit sekalipun.",
+        "ex": "Ujian hidup boleh berat, tapi yang penting mental baja tetap jalan terus!"
+      },
+      "word": "중꺾마",
+      "pronunciation": "[중껑마]",
+      "chosung": "ㅈㄲㅁ",
+      "part_of_speech": "명사 / 관용구",
+      "likes": 7920,
+      "dislikes": 41,
+      "tags": [
+        "동기부여",
+        "명언",
+        "스포츠",
+        "긍정"
+      ],
+      "trend_status": "LEGEND",
       "en": {
-        "slang": "Unbreakable Spirit / Never Give Up Mentality",
-        "definition": "Abbreviation for 'What matters is an unbending heart.' An indomitable mindset that refuses to surrender against all odds.",
-        "example": "Grades are down and the job market is brutal, but we keep pushing with our Joong-Kkeok-Ma spirit!"
+        "slang": "Unbreakable Spirit / Never-say-die",
+        "desc": "What matters most is an unbreakable heart; refusing to give up no matter how desperate.",
+        "ex": "We are 0-2 down in the series, but remember the Deft mentality: Unbreakable Spirit!"
       },
       "ja": {
-        "furigana": "ジュンコクマ",
-        "slang": "折れない心 / 不撓不屈メンタル",
-        "definition": "「重要なのは折れない心」の略語。どんな逆境や絶望的な状況でも決して諦めない強い意志を表す言葉。（Deft選手の伝説から誕生）",
-        "example": "就活連敗中だけど…俺たちにはジュンコクマ（折れない心）があるから最後まで戦うぞ！"
+        "slang": "折れない心 / 不屈のメンタル",
+        "desc": "どんな逆境や絶望的な状況でも絶対に諦めない強固な意志（Deft選手の名言から）。",
+        "ex": "就活連敗中だけど、一番大事なのは折れない心だよ！"
       },
       "vi": {
-        "slang": "Tinh thần bất khuất / Trái tim không gục ngã",
-        "definition": "Viết tắt của câu 'Điều quan trọng nhất là một trái tim không bao giờ khuất phục.' Quyết tâm vượt qua mọi nghịch cảnh.",
-        "example": "Dù điểm số kém và áp lực tìm việc chồng chất, chỉ cần có 'Joong-Kkeok-Ma' thì nhất định sẽ thành công!"
-      },
-      "id": {
-        "slang": "Mental Baja / Pantang Menyerah",
-        "definition": "Singkatan dari 'Yang terpenting adalah hati yang pantang patah'. Semangat gigih pantang menyerah meski situasi sesulit apapun.",
-        "example": "Ujian gagal dan persaingan kerja ketat, tapi kita tetap maju dengan semangat Joong-Kkeok-Ma!"
+        "slang": "Trái tim không khuất phục",
+        "desc": "Tinh thần bất khuất không bao giờ đầu hàng dù đối mặt với nghịch cảnh khắc nghiệt nhất.",
+        "ex": "Dù khó khăn đến đâu, điều quan trọng nhất là trái tim kiên định không bỏ cuộc!"
       },
       "es": {
-        "slang": "Espíritu Inquebrantable / Corazón de Hierro",
-        "definition": "Abreviatura de 'Lo importante es un corazón que nunca se rinde'. La actitud de seguir adelante ante la mayor adversidad.",
-        "example": "¡Aunque las cosas se pongan difíciles, seguimos con el espíritu Joong-Kkeok-Ma hasta triunfar!"
+        "slang": "Espíritu inquebrantable",
+        "desc": "Lo importante es nunca quebrantar el espíritu, mantener la fe hasta el último segundo.",
+        "ex": "¡Vamos perdiendo pero el espíritu inquebrantable nos dará la victoria!"
       }
     },
     {
-      "id": 3,
-      "hangul": "폼 미쳤다",
-      "romanized": "Form Mi-chyeot-da",
+      "id": {
+        "slang": "Hater maksa / Apes beruntun",
+        "desc": "Mencela tanpa alasan jelas, atau rentetan kesialan aneh yang terus menimpa bertubi-tubi.",
+        "ex": "Baru keluar rumah langsung hujan badai, dunia kayak sengaja benci banget sama gue."
+      },
+      "word": "억까",
+      "pronunciation": "[억까]",
+      "chosung": "ㅇㄲ",
+      "part_of_speech": "명사 / 동사",
+      "likes": 5120,
+      "dislikes": 98,
+      "tags": [
+        "불운",
+        "비난",
+        "게임",
+        "일상"
+      ],
+      "trend_status": "HOT",
       "en": {
-        "slang": "He is COOKING / In his PRIME / Absolute GOAT",
-        "definition": "Originally from sports 'form' (condition). Used to praise someone whose visuals, vocals, skill, or performance are mind-blowingly top tier.",
-        "example": "Did you see our bias in the new music video? His visuals and vocals are literally COOKING right now!"
+        "slang": "Forced Hating / RNG Screwed me",
+        "desc": "Hating unreasonably on someone, or being victimized by absurdly bad luck from the universe.",
+        "ex": "It only rains when I forget my umbrella. The universe is literally forcing hate on me!"
       },
       "ja": {
-        "furigana": "ポム ミチョッタ",
-        "slang": "ビジュ神がかってる / 絶好調すぎる / 無双状態",
-        "definition": "スポーツの「Form（好調）」に由来し、アイドルのビジュアル、歌唱力、才能が神レベルで輝いている時の最大級の賛辞。",
-        "example": "今日の推しの新曲MV見た？！歌もビジュアルもポム・ミチョッタ（神無双）すぎるんだが！"
+        "slang": "理不尽なアンチ / 運ゲー事故",
+        "desc": "根拠のない無理やりな批判、または不条理な不運が連続して物事が狂う状況。",
+        "ex": "傘忘れた日に限ってゲリラ豪雨とか、世界から理不尽にいじめられてるわ。"
       },
       "vi": {
-        "slang": "Phong độ đỉnh chóp / Visual xuất thần / Đỉnh của chóp",
-        "definition": "Bắt nguồn từ 'form' trong thể thao. Dùng để khen ngợi nhan sắc, tài năng hay phong độ đạt đến đẳng cấp siêu thực.",
-        "example": "Trời ơi, xem MV mới chưa? Visual của bias đợt này đúng là đỉnh của chóp, phong độ điên đảo!"
-      },
-      "id": {
-        "slang": "Gokil Parah / Lagi di Puncak Kejayaan / Menyala Abangku",
-        "definition": "Berasal dari kata 'form'. Dipakai untuk memuji visual, vokal, atau penampilan seseorang yang luar biasa keren dan spektakuler.",
-        "example": "Visual idol kita di comeback kali ini beneran gokil parah, lagi di performa puncaknya!"
+        "slang": "Bới lông tìm vết / Xui tận mạng",
+        "desc": "Bị chỉ trích vô cớ hoặc liên tiếp gặp vận đen phi lý ngoài tầm kiểm soát.",
+        "ex": "Đúng ngày quên mang áo mưa thì bão đổ bộ, số phận đang cố tình trêu ngươi tôi à?"
       },
       "es": {
-        "slang": "¡En su Prime! / Está Rompiéndola / Nivel Dios",
-        "definition": "Viene del 'form' deportivo. Se usa para alabar cuando el talento, voz o visual de alguien está en su nivel más épico.",
-        "example": "¡¿Viste el nuevo MV de mi bias?! ¡Su voz y estilo están a nivel dios, rompiéndola totalmente!"
+        "slang": "Hate sin sentido / Mala pata total",
+        "desc": "Criticar sin ningún fundamento, o sufrir una racha absurda de mala suerte.",
+        "ex": "¡El único día que olvido las llaves se va la luz! El universo me tiene manía."
       }
     },
     {
-      "id": 4,
-      "hangul": "갓생",
-      "romanized": "God-saeng",
+      "id": {
+        "slang": "Peka & Sat-set / Cerdas beres",
+        "desc": "Mengerjakan sesuatu dengan rapi, cepat, dan penuh inisiatif tanpa harus disuruh berkali-kali.",
+        "ex": "Keren banget kerjaannya, sat-set langsung beres tanpa banyak tanya!"
+      },
+      "word": "알잘딱깔센",
+      "pronunciation": "[알잘딱깔센]",
+      "chosung": "ㅇㅈㄸㄲㅅ",
+      "part_of_speech": "부사 / 형용사",
+      "likes": 5890,
+      "dislikes": 72,
+      "tags": [
+        "직장생활",
+        "센스",
+        "일잘러",
+        "찬사"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "On Point / Clean & Smart",
+        "desc": "Handling things impeccably, smartly, and cleanly on your own without needing micromanagement.",
+        "ex": "Our designer handled the entire UI pitch on point with zero revisions needed!"
+      },
+      "ja": {
+        "slang": "空気を読んで完璧にこなす (神センス)",
+        "desc": "言われなくても自ら状況を察し、スマートかつ完璧に仕上げる態度や能力。",
+        "ex": "部長：佐藤くん、次のプレゼン資料よろしくな！ 佐藤：はい、完璧に仕上げておきます！"
+      },
+      "vi": {
+        "slang": "Khéo léo chu toàn / Đỉnh chóp tự giác",
+        "desc": "Tự giác xử lý mọi việc một cách thông minh, gọn gàng và tinh tế mà không cần nhắc nhở.",
+        "ex": "Giao việc cho em ấy là yên tâm, lúc nào cũng tự giác chu toàn từ A đến Z!"
+      },
+      "es": {
+        "slang": "Fino y al detalle / Impecable",
+        "desc": "Hacer las cosas con iniciativa propia, de manera limpia, elegante y sin necesidad de instrucciones.",
+        "ex": "Le pedí el informe y me lo entregó fino y al detalle, ¡un crack!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Lagi gacor / Menyala abangkuh",
+        "desc": "Pujian luar biasa saat performa, penampilan, atau kemampuan seseorang sedang di puncak terbaiknya.",
+        "ex": "Wah gila, codingan lu hari ini lagi gacor banget! Menyala abangkuh!"
+      },
+      "word": "폼 미쳤다",
+      "pronunciation": "[폼 미첟따]",
+      "chosung": "ㅍㅁㅊㄷ",
+      "part_of_speech": "감탄사 / 관용구",
+      "likes": 6210,
+      "dislikes": 51,
+      "tags": [
+        "극찬",
+        "감탄",
+        "트렌드",
+        "일상"
+      ],
+      "trend_status": "HOT",
+      "en": {
+        "slang": "In his Prime / COOKING / Absolute GOAT",
+        "desc": "Exclamation of high praise meaning someone's performance, look, or skill is insanely outstanding.",
+        "ex": "Look at the new AI agent coding speed, bro is COOKING today!"
+      },
+      "ja": {
+        "slang": "ビジュ神 / 絶好調すぎる / 無双状態",
+        "desc": "技量やビジュアル、成果物が異常なほど圧倒的で神がかり的なレベルにあることへの称賛。",
+        "ex": "今日のリリーのビジュアル神がかってるんだけど！"
+      },
+      "vi": {
+        "slang": "Phong độ đỉnh chóp / Quá out trình",
+        "desc": "Khen ngợi phong độ, nhan sắc hoặc kỹ năng xuất sắc đến mức không thể tin nổi.",
+        "ex": "Hôm nay đá bóng phong độ đỉnh chóp thật sự, ghi hat-trick luôn!"
+      },
+      "es": {
+        "slang": "Está en su prime / Modo Bestia",
+        "desc": "Elogio rotundo cuando alguien muestra un nivel, físico o rendimiento fuera de serie.",
+        "ex": "¡Ese delantero está en su prime, marca goles hasta con los ojos cerrados!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Si pemalas search / Maunya disuapin",
+        "desc": "Orang yang malas mencari info sendiri di Google dan cuma mengandalkan orang lain menyuapi info dasar.",
+        "ex": "Google gratis woi, jangan malas banget nanya hal yang ada di halaman depan!"
+      },
+      "word": "핑프",
+      "pronunciation": "[핑프]",
+      "chosung": "ㅍㅍ",
+      "part_of_speech": "명사",
+      "likes": 3730,
+      "dislikes": 120,
+      "tags": [
+        "대학생활",
+        "풍자",
+        "검색",
+        "게으름"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Finger Princess / Spoon-fed Asker",
+        "desc": "Someone too lazy to Google anything for themselves, always demanding others to spoon-feed basic answers.",
+        "ex": "It's literally on page 1 of the syllabus, stop being a finger princess and read it!"
+      },
+      "ja": {
+        "slang": "ググレカス予備軍 / 自分で調べない民",
+        "desc": "指一本動かして検索すればすぐ分かることを、自分で調べず人に丸投げして聞く怠け者。",
+        "ex": "通知の1行目に書いてあるのにグループチャットで聞くやつ、まじでググれよ…"
+      },
+      "vi": {
+        "slang": "Thánh lười search / Đợi đút tận mồm",
+        "desc": "Người lười đến mức không thèm gõ Google tìm kiếm mà chỉ chăm chăm hỏi người khác để được dọn sẵn.",
+        "ex": "Thông báo to đùng thế kia không đọc, suốt ngày làm thánh lười hỏi han."
+      },
+      "es": {
+        "slang": "Preguntón vago / Quiere todo masticado",
+        "desc": "Persona que ni se molesta en buscar en Google y espera que otros le resuelvan la duda más simple.",
+        "ex": "¡Está en el primer renglón del anuncio! Deja de ser tan vago y lee un poco."
+      }
+    },
+    {
+      "id": {
+        "slang": "Kafe estetik / Tempat nongkrong cozy",
+        "desc": "Kafe dengan suasana cantik, pencahayaan bagus, dan desain interior yang sangat Instagramable.",
+        "ex": "Kemarin nongkrong di kafe estetik baru, fotonya dapet angle cakep banget!"
+      },
+      "word": "분좋카",
+      "pronunciation": "[분조카]",
+      "chosung": "ㅂㅈㅋ",
+      "part_of_speech": "명사",
+      "likes": 2980,
+      "dislikes": 81,
+      "tags": [
+        "라이프스타일",
+        "카페",
+        "데이트",
+        "감성"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Aesthetic Cafe / Vibe Spot",
+        "desc": "A cafe with great aesthetic ambience, lighting, and interior perfect for aesthetic Instagram shots.",
+        "ex": "We found this hidden aesthetic cafe in Seongsu with the best natural lighting!"
+      },
+      "ja": {
+        "slang": "エモいカフェ / 映えカフェ",
+        "desc": "インテリアや照明、音楽の雰囲気が最高で写真映えするお洒落なカフェ。",
+        "ex": "聖水洞のエモいカフェ巡りしてインスタ用の写真いっぱい撮ってきた！"
+      },
+      "vi": {
+        "slang": "Quán cafe vibe đỉnh / Góc sống ảo",
+        "desc": "Quán cà phê có không gian đẹp lung linh, âm nhạc êm dịu cực kỳ thích hợp để check-in sống ảo.",
+        "ex": "Cuối tuần lượn mấy quán cà phê vibe đỉnh để chụp bộ ảnh mới thôi!"
+      },
+      "es": {
+        "slang": "Cafetería con buen rollo / Lugar Instagrameable",
+        "desc": "Cafetería bonita, con buena iluminación y ambientación perfecta para fotos y relax.",
+        "ex": "Descubrimos una cafetería con un rollo increíble para charlar y tomar fotos."
+      }
+    },
+    {
+      "id": {
+        "slang": "Hidup produktif pol / Gaya hidup panutan",
+        "desc": "Pola hidup yang sangat tertata, produktif, disiplin bangun pagi dan mengembangkan diri.",
+        "ex": "Mulai besok bangun subuh, jogging, belajar skill baru, pokoknya hidup produktif pol!"
+      },
+      "word": "갓생",
+      "pronunciation": "[갇생]",
+      "chosung": "ㄱㅅ",
+      "part_of_speech": "명사 / 동사",
+      "likes": 6650,
+      "dislikes": 42,
+      "tags": [
+        "자기계발",
+        "모범생",
+        "성실",
+        "동기부여"
+      ],
+      "trend_status": "LEGEND",
       "en": {
         "slang": "Main Character Energy / Living that Boss Life",
-        "definition": "Compound of 'God' + 'Saeng (Life)'. Living an ultra-productive, healthy, and disciplined routine (workout, reading, studying early).",
-        "example": "Woke up at 6 AM, hit the gym, and studied Korean. I'm officially entering my God-saeng era!"
+        "desc": "Living an ultra-productive, disciplined, and fulfilling routine like a model citizen.",
+        "ex": "Waking up at 6 AM, gym, studying Korean, I am living that boss life this semester!"
       },
       "ja": {
-        "furigana": "ガッセン",
-        "slang": "神のような充実人生 / ガチ充実ライフ",
-        "definition": "「God（神）」＋「生（人生）」の造語。早起き、勉強、運動など、毎日をストイックかつ生産的に生きる理想のライフスタイル。",
-        "example": "朝6時に起きてランニングして韓国語の勉強！今日からガッセン（最高の充実人生）送るわ！"
+        "slang": "ガチ充実ライフ / 模範的ルーティン",
+        "desc": "怠惰を排し、早起きや運動、勉強などで一日一日を極めて誠実かつ生産的に生きるライフスタイル。",
+        "ex": "朝活してジム行って資格勉強、今月はガチ充実ライフ送るぞ！"
       },
       "vi": {
-        "slang": "Sống kỷ luật chuẩn 'Pro' / Đời sống mẫu mực",
-        "definition": "Ghép từ 'God' (Thần) + 'Saeng' (Đời). Lối sống cực kỳ năng suất, dậy sớm, tập luyện và học tập đều đặn mỗi ngày.",
-        "example": "Dậy từ 6 giờ sáng tập gym rồi học bài, chính thức bắt đầu chuỗi ngày sống kỷ luật chuẩn 'God-saeng'!"
-      },
-      "id": {
-        "slang": "Hidup Produktif Maksimal / Slay Banget",
-        "definition": "Gabungan 'God' + 'Saeng (Hidup)'. Gaya hidup yang sangat produktif, rajin bangun pagi, olahraga, dan belajar dengan disiplin tinggi.",
-        "example": "Bangun jam 6 pagi, olahraga, terus belajar bahasa Korea. Fix aku lagi masuk era God-saeng!"
+        "slang": "Sống kỷ luật chuẩn mực / Đời nở hoa",
+        "desc": "Lối sống kỷ luật, năng suất cao, dậy sớm tập thể dục và học tập không lãng phí một giây phút nào.",
+        "ex": "Năm mới quyết tâm dậy từ 5h sáng tập gym đọc sách, sống chuẩn mực năng suất!"
       },
       "es": {
-        "slang": "Viviendo la Vida Soñada / Modo Ultra Productivo",
-        "definition": "Combinación de 'God' (Dios) + 'Saeng' (Vida). Llevar una rutina sumamente productiva, saludable y disciplinada.",
-        "example": "¡Me levanté a las 6 am, fui al gym y estudié coreano! ¡Oficialmente en mi era God-saeng!"
+        "slang": "Vivir como un crack / Rutina productiva",
+        "desc": "Llevar un estilo de vida súper disciplinado, productivo y saludable día tras día.",
+        "ex": "Me levanto a las 6 am, voy al gimnasio y estudio programación, ¡vida de crack!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Mindset Lucky Vicky / Selalu ada hikmah",
+        "desc": "Mengubah kejadian apes menjadi keberuntungan luar biasa dengan pola pikir super positif.",
+        "ex": "Antrean habis pas giliran gue, tapi jadinya dapet roti baru yang anget! Beneran Lucky Vicky!"
+      },
+      "word": "럭키비키",
+      "pronunciation": "[너키비키]",
+      "chosung": "ㄹㅋㅂㅋ",
+      "part_of_speech": "명사 / 감탄사",
+      "likes": 8420,
+      "dislikes": 62,
+      "tags": [
+        "긍정",
+        "원영적사고",
+        "아이돌",
+        "행운"
+      ],
+      "trend_status": "HOT",
+      "en": {
+        "slang": "Lucky Vicky / Ultimate Positive Spin",
+        "desc": "Reframing literally any misfortune or inconvenience into a stroke of miraculous luck.",
+        "ex": "The train was delayed, but that means I didn't miss my favorite podcast episode! Totally Lucky Vicky mindset!"
+      },
+      "ja": {
+        "slang": "ラッキービッキー / 超ポジティブ思考",
+        "desc": "IVEウォニョンの前向きな思考法。どんな不運やハプニングも『結果的に超ラッキー！』と解釈する姿勢。",
+        "ex": "前の人でパン売り切れた！でも焼きたてが食べられるってことじゃん？完全ラッキービッキーじゃん！"
+      },
+      "vi": {
+        "slang": "Tư duy may mắn Vicky / Lạc quan vô đối",
+        "desc": "Biến mọi tình huống xui xẻo thành may mắn bất ngờ với góc nhìn siêu lạc quan.",
+        "ex": "Bị lỡ chuyến xe buýt, nhưng nhờ thế lại gặp quán bánh ngon! Đúng là tư duy Vicky may mắn!"
+      },
+      "es": {
+        "slang": "Efecto Lucky Vicky / Optimismo radical",
+        "desc": "Transformar cualquier contratiempo en una bendición de pura suerte con actitud positiva.",
+        "ex": "Se canceló la reunión, ¡lo que significa que tengo 2 horas libres para relajarme! ¡Qué suerte!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Vibe idaman / Kiblat gaya",
+        "desc": "Gaya visual, estetika, atau aura yang ingin dicapai dan dijadikan inspirasi.",
+        "ex": "Vibe idaman gue tahun ini adalah street fashion minimalis ala Seoul."
+      },
+      "word": "추구미",
+      "pronunciation": "[추구미]",
+      "chosung": "ㅊㄱㅁ",
+      "part_of_speech": "명사",
+      "likes": 4120,
+      "dislikes": 39,
+      "tags": [
+        "패션",
+        "스타일",
+        "트렌드",
+        "감성"
+      ],
+      "trend_status": "HOT",
+      "en": {
+        "slang": "Aesthetic Goal / Dream Vibe",
+        "desc": "The ideal visual style, aesthetic, or persona that one aspires to achieve.",
+        "ex": "My absolute aesthetic goal for this semester is dark academia vintage."
+      },
+      "ja": {
+        "slang": "理想の系統 / 目指す雰囲気",
+        "desc": "自分が憧れて目指しているファッション、スタイル、世界観のこと。",
+        "ex": "今年の秋冬の私の目指す系統はクラシックなフレンチシック！"
+      },
+      "vi": {
+        "slang": "Vibe lý tưởng / Phong cách hướng tới",
+        "desc": "Gu thẩm mỹ hoặc hình tượng phong cách mà một người đang theo đuổi và hướng tới.",
+        "ex": "Vibe lý tưởng của mình mùa đông này là phong cách cổ điển nhẹ nhàng."
+      },
+      "es": {
+        "slang": "Estética soñada / Look ideal",
+        "desc": "La vibra, estilo visual o estética que uno aspira proyectar y alcanzar.",
+        "ex": "Mi estética soñada para este año es el estilo vintage clásico con tonos tierra."
+      }
+    },
+    {
+      "id": {
+        "slang": "Malah makin mantap / Hikmah tersembunyi",
+        "desc": "Menganggap kegagalan rencana awal justru membawa hal yang jauh lebih menguntungkan.",
+        "ex": "Hujan bikin batal jalan? Ya udah streaming seharian di rumah, malah makin mantap!"
+      },
+      "word": "오히려 좋아",
+      "pronunciation": "[오히려 조아]",
+      "chosung": "ㅇㅎㄹㅈㅇ",
+      "part_of_speech": "관용구",
+      "likes": 5340,
+      "dislikes": 47,
+      "tags": [
+        "긍정",
+        "멘탈케어",
+        "일상",
+        "유행어"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Even Better / Blessing in Disguise",
+        "desc": "Embracing an unexpected mistake or change of plans as an even superior outcome.",
+        "ex": "Picnic cancelled due to rain? We can binge movies all day in bed, even better!"
+      },
+      "ja": {
+        "slang": "むしろ好都合 / 逆に最高",
+        "desc": "予定が狂ったりトラブルが起きても『これって逆にラッキーじゃない？』と前向きに捉える言葉。",
+        "ex": "雨で予定潰れた？家でピザ頼んでゴロゴロできるからむしろ好都合じゃん！"
+      },
+      "vi": {
+        "slang": "Thế lại càng hay / Càng tốt chứ sao",
+        "desc": "Xem những thay đổi bất ngờ hoặc trục trặc kế hoạch như một cơ hội tuyệt vời hơn.",
+        "ex": "Bị hủy hẹn hả? Ở nhà ngủ một giấc đã đời, thế lại càng hay!"
+      },
+      "es": {
+        "slang": "¡Casi que mejor! / Mucho mejor así",
+        "desc": "Aceptar un cambio imprevisto de planes viéndolo como una opción aún más ventajosa.",
+        "ex": "¿Se canceló la salida? ¡Casi que mejor, así nos quedamos viendo series calentitos!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Ada yang nodongin pisau ke leher lu? / Risiko sendiri",
+        "desc": "Sentilan pedas buat orang yang suka mengeluh padahal itu pilihannya sendiri secara sukarela.",
+        "ex": "Lu sendiri yang milih gajinya gede walau lembur, emang ada yang nodongin pisau ke lu?"
+      },
+      "word": "누칼협",
+      "pronunciation": "[누칼협]",
+      "chosung": "ㄴㅋㅎ",
+      "part_of_speech": "명사 / 관용구",
+      "likes": 4620,
+      "dislikes": 280,
+      "tags": [
+        "팩트폭격",
+        "사이다",
+        "직장",
+        "현실"
+      ],
+      "trend_status": "HOT",
+      "en": {
+        "slang": "Did someone put a gun to your head? / You chose this",
+        "desc": "A cold reality check fired at someone whining about consequences of their own voluntary decisions.",
+        "ex": "You picked that job for the high salary, did someone put a gun to your head?"
+      },
+      "ja": {
+        "slang": "誰かに脅されて頼まれたわけ？ (自己責任論)",
+        "desc": "自分が自分で選んでおきながら後から文句を言う人に対して冷たく突き放す言葉。",
+        "ex": "残業多いって愚痴るけど、高給だからって自分で選んだ会社でしょ？誰も脅してないよね？"
+      },
+      "vi": {
+        "slang": "Ai kề dao vào cổ bắt đâu? / Tự làm tự chịu",
+        "desc": "Câu nói châm chọc nhắc nhở người khác rằng họ tự nguyện lựa chọn nên đừng than vãn.",
+        "ex": "Than vãn gì, lúc trước ai kề dao vào cổ bắt bạn chọn công việc này đâu?"
+      },
+      "es": {
+        "slang": "¿Alguien te puso una pistola en la cabeza? / Apechuga",
+        "desc": "Duro recordatorio a quien se queja de las consecuencias de una decisión que tomó libremente.",
+        "ex": "Tú elegiste mudarte allí por tu cuenta, ¿alguien te puso una pistola en la cabeza?"
+      }
+    },
+    {
+      "id": {
+        "slang": "Garing berulang / Kebangetan lebay",
+        "desc": "Mengulang lelucon atau tingkah laku secara berlebihan sampai bikin suasana jadi canggung dan membosankan.",
+        "ex": "Sekali dua kali lucu bro, kalau diulang terus mah udah garing kebangetan."
+      },
+      "word": "뇌절",
+      "pronunciation": "[뇌절]",
+      "chosung": "ㄴㅈ",
+      "part_of_speech": "명사 / 동사",
+      "likes": 4180,
+      "dislikes": 95,
+      "tags": [
+        "눈치",
+        "선넘음",
+        "커뮤니티",
+        "경고"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Beating a dead horse / Taking it too far",
+        "desc": "Overusing a joke or repeating something excessively until it becomes utterly annoying.",
+        "ex": "Bro, that meme was funny the first time, now you're just beating a dead horse."
+      },
+      "ja": {
+        "slang": "やりすぎ / しつこい / 脳死連呼",
+        "desc": "適度なところでやめず、ウケたネタをしつこく繰り返して場の空気を壊すこと。",
+        "ex": "最初の1回は笑えたけど、何回も同じこと言うのはさすがにやりすぎで寒いよ。"
+      },
+      "vi": {
+        "slang": "Quá đà / Nhai lại phát ngấy",
+        "desc": "Lặp đi lặp lại một trò đùa quá nhiều lần đến mức phản cảm và làm mất vui.",
+        "ex": "Đùa một lần thì vui, đùa chục lần thì nhai lại phát ngấy rồi đấy bạn ơi."
+      },
+      "es": {
+        "slang": "Rayar el disco / Pasarse de la raya",
+        "desc": "Repetir una broma o actitud hasta el cansancio, arruinando el ambiente.",
+        "ex": "La primera vez tuvo gracia, pero ya estás rayando el disco, para un poco."
+      }
+    },
+    {
+      "id": {
+        "slang": "Senjata makan tuan / Ulah sendiri",
+        "desc": "Menanggung penderitaan atau kerepotan akibat kecerobohan atau keputusan diri sendiri.",
+        "ex": "Nunda-nunda tugas sampai mepet deadline terus begadang, murni ulah sendiri ini mah."
+      },
+      "word": "스불재",
+      "pronunciation": "[스불재]",
+      "chosung": "ㅅㅂㅈ",
+      "part_of_speech": "명사",
+      "likes": 3890,
+      "dislikes": 55,
+      "tags": [
+        "자업자득",
+        "일상",
+        "대학생",
+        "자조"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Self-inflicted misery / Dug my own grave",
+        "desc": "Suffering from a problem entirely caused by one's own reckless or greedy choices.",
+        "ex": "Procrastinated my paper until 2 hours before the deadline, truly a self-inflicted misery."
+      },
+      "ja": {
+        "slang": "自業自得 / 自分で招いた災難",
+        "desc": "自分の欲や怠惰によって自ら引き起こした苦境を自虐的に語る言葉。",
+        "ex": "課題を後回しにして前日に徹夜するハメに…完全に自分で招いた災難だわ。"
+      },
+      "vi": {
+        "slang": "Tự làm tự khổ / Gậy ông đập lưng ông",
+        "desc": "Tự chuốc lấy rắc rối hoặc vất vả do tính lười biếng hoặc quyết định bốc đồng của chính mình.",
+        "ex": "Nước đến chân mới nhảy, giờ thức trắng đêm làm bài tập đúng là tự làm tự khổ."
+      },
+      "es": {
+        "slang": "Cavar mi propia tumba / Buscarse la ruina",
+        "desc": "Sufrir las consecuencias desagradables que uno mismo se buscó por pereza o imprudencia.",
+        "ex": "Dejé todo el proyecto para la última noche, ¡yo solito me cavé la tumba!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Bikin kesel tapi kocak / Muka ngeselin",
+        "desc": "Rasa jengkel bercampur geli melihat tingkah seseorang yang sok polos tapi sangat memancing emosi.",
+        "ex": "Mukanya songong banget pas bilang 'hoki doang dapet nilai 100', bener-bener bikin kesel!"
+      },
+      "word": "킹받네",
+      "pronunciation": "[킹받네]",
+      "chosung": "ㅋㅂㄴ",
+      "part_of_speech": "감탄사 / 동사",
+      "likes": 5670,
+      "dislikes": 88,
+      "tags": [
+        "분노",
+        "얄미움",
+        "침착맨",
+        "인터넷밈"
+      ],
+      "trend_status": "HOT",
+      "en": {
+        "slang": "Infuriatingly annoying / Pisses me off in a funny way",
+        "desc": "Getting triggered by someone being playfully smug or ridiculously annoying.",
+        "ex": "Look at his smug face saying he didn't study after getting an A+, so infuriatingly annoying!"
+      },
+      "ja": {
+        "slang": "絶妙に腹立つ / ムカつくわ草",
+        "desc": "相手のドヤ顔や生意気な態度に、悔しいけれどクスッと笑える絶妙なイラ立ち。",
+        "ex": "『勉強全然してないのに満点だったわー』ってその顔、絶妙に腹立つんだけど！"
+      },
+      "vi": {
+        "slang": "Cay vãi chưởng / Nhìn ngứa mắt thật sự",
+        "desc": "Cảm giác vừa tức tối vừa buồn cười trước sự vênh váo, khiêu khích một cách đáng ghét của đối phương.",
+        "ex": "Bảo không học gì mà điểm cao chót vót, nhìn cái bản mặt vênh váo cay thật sự!"
+      },
+      "es": {
+        "slang": "Da una rabia que flipas / Qué coraje da",
+        "desc": "Estar molesto de forma cómica ante la actitud presumida y chulesca de alguien.",
+        "ex": "¡Dice que no estudió nada y saca matrícula de honor! ¡Qué rabia y qué cara tiene!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Terus kenapa? Nonton TV aja sana",
+        "desc": "Kalimat balasan tengil khas anak-anak untuk membungkam omelan orang lain secara cuek.",
+        "ex": "'Beresin kamar lu!' - 'Terus kenapa? Sana nonton TV aja gih!'"
+      },
+      "word": "어쩔티비",
+      "pronunciation": "[어쩔티비]",
+      "chosung": "ㅇㅉㅌㅂ",
+      "part_of_speech": "감탄사",
+      "likes": 4430,
+      "dislikes": 210,
+      "tags": [
+        "알파세대",
+        "초딩",
+        "반격",
+        "유치"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Cry about it / Go watch TV",
+        "desc": "A childishly cheeky comeback used to deflect nagging or unsolicited advice completely.",
+        "ex": "A: You need to clean your room right now! B: Cry about it, go watch TV!"
+      },
+      "ja": {
+        "slang": "だから何？テレビでも見てろ",
+        "desc": "相手の小言や説教を幼稚かつ小憎たらしくシャットアウトする煽りワード。",
+        "ex": "『部屋片付けなさい！』『知らんがな、テレビでも見てなよ〜』"
+      },
+      "vi": {
+        "slang": "Kệ tôi / Đi mà xem TV",
+        "desc": "Câu cãi cùn kiểu trẻ con dùng để gạt phăng mọi lời cằn nhằn hay dạy đời một cách khiêu khích.",
+        "ex": "'Dọn phòng ngay đi!' - 'Kệ con, mẹ đi mà xem tivi!'"
+      },
+      "es": {
+        "slang": "¿Y a mí qué? Vete a ver la tele",
+        "desc": "Respuesta infantil y burlona para cortar en seco los reproches o regaños de los demás.",
+        "ex": "¡Ponte a estudiar ya! - ¿Y a mí qué me cuentas? ¡Vete a ver la tele!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Rekomendasi makan siang / Makan apa nih?",
+        "desc": "Singkatan untuk meminta rekomendasi menu makan siang kepada teman saat bingung memilih.",
+        "ex": "Lagi buntu nih, ada rekomendasi makan siang yang seger-seger gak?"
+      },
+      "word": "점메추",
+      "pronunciation": "[점메추]",
+      "chosung": "ㅈㅁㅊ",
+      "part_of_speech": "명사 / 동사",
+      "likes": 3950,
+      "dislikes": 31,
+      "tags": [
+        "음식",
+        "직장인",
+        "일상",
+        "점심"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Lunch Recs Please / What's for Lunch?",
+        "desc": "Abbreviation asking friends or coworkers for lunch menu recommendations.",
+        "ex": "Can't decide what to eat today, drop your lunch recs in the chat please!"
+      },
+      "ja": {
+        "slang": "昼メニュ推薦 / ランチ何食べる？",
+        "desc": "『昼食（ランチ）のメニューおすすめ教えて！』の略語。毎日のランチ選びの定番フレーズ。",
+        "ex": "今日何食べるか全然決まらないから、おすすめランチ教えて！"
+      },
+      "vi": {
+        "slang": "Gợi ý món trưa / Trưa nay ăn gì?",
+        "desc": "Viết tắt của câu xin gợi ý thực đơn bữa trưa khi bị bế tắc không biết ăn gì.",
+        "ex": "Đau đầu vụ ăn uống quá, ai gợi ý món trưa ngon quanh đây với!"
+      },
+      "es": {
+        "slang": "¿Recomendación para comer? / ¿Qué comemos?",
+        "desc": "Abreviatura para pedir sugerencias de qué almorzar cuando no se sabe qué elegir.",
+        "ex": "No sé qué pedir hoy, ¿alguien me tira una buena recomendación para comer?"
+      }
+    },
+    {
+      "id": {
+        "slang": "Auto ngiler / Bikin mupeng",
+        "desc": "Ekspresi ketika melihat makanan lezat atau hal seru yang langsung membuat air liur menetes.",
+        "ex": "Lihat keju lumer di atas tteokbokki langsung auto ngiler, pesan sekarang juga!"
+      },
+      "word": "군싹",
+      "pronunciation": "[군싹]",
+      "chosung": "ㄱㅆ",
+      "part_of_speech": "감탄사 / 형용사",
+      "likes": 3810,
+      "dislikes": 44,
+      "tags": [
+        "음식",
+        "루피",
+        "식욕",
+        "기대"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Mouthwatering / Drooling already",
+        "desc": "Exclamation when seeing delicious food or an exciting prospect that makes you drool instantly.",
+        "ex": "Look at that melting cheese burger, mouth is watering already!"
+      },
+      "ja": {
+        "slang": "よだれドバドバ / めっちゃそそる",
+        "desc": "美味しそうな料理やワクワクする状況を見て、思わず食欲や期待が湧き上がること。",
+        "ex": "チーズたっぷりのトッポッキ見たらよだれ止まらん、今すぐ注文するわ。"
+      },
+      "vi": {
+        "slang": "Nuốt nước miếng ừng ực / Thèm xỉu",
+        "desc": "Cảm thán khi nhìn thấy món ăn quá ngon mắt hoặc một món hời khiến mình thèm muốn ngay tức khắc.",
+        "ex": "Nhìn đĩa tokbokki ngập phô mai thế kia nuốt nước miếng ừng ực luôn!"
+      },
+      "es": {
+        "slang": "Se me hace la boca agua / Qué antojo",
+        "desc": "Expresión al ver comida deliciosa o algo tan tentador que despierta las ganas al instante.",
+        "ex": "¡Mira esa hamburguesa chorreando queso, se me hace la boca agua!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Kunci di kalender / Masuk jadwal",
+        "desc": "Memasukkan jadwal penting ke aplikasi kalender HP agar pasti terlaksana dan tidak bentrok.",
+        "ex": "Jangan lupa kumpul Jumat depan ya! Udah gue kunci di kalender nih."
+      },
+      "word": "캘박",
+      "pronunciation": "[캘박]",
+      "chosung": "ㅋㅂ",
+      "part_of_speech": "명사 / 동사",
+      "likes": 3670,
+      "dislikes": 29,
+      "tags": [
+        "약속",
+        "일정",
+        "직장인",
+        "스마트폰"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Calendar locked / Bookmarked on calendar",
+        "desc": "Permanently locking a date and time into one's digital calendar to guarantee attendance.",
+        "ex": "Dinner next Friday is confirmed! I just locked it into my Google Calendar."
+      },
+      "ja": {
+        "slang": "カレンダー登録確定 / 日程キープ",
+        "desc": "大切な約束や予定を忘れないよう、即座にスマホのカレンダーに登録すること。",
+        "ex": "来週金曜の飲み会忘れないでね！今すぐカレンダーに登録完了！"
+      },
+      "vi": {
+        "slang": "Ghim lịch ngay / Note vào calendar",
+        "desc": "Lưu chắc chắn cuộc hẹn vào ứng dụng lịch trên điện thoại để không bị quên hoặc trùng lịch.",
+        "ex": "Hẹn tối thứ Sáu tuần sau nhé, mình đã ghim lịch vào calendar luôn rồi!"
+      },
+      "es": {
+        "slang": "Fichado en el calendario / Agendado a fuego",
+        "desc": "Guardar un compromiso en el calendario del móvil para no olvidarlo bajo ninguna circunstancia.",
+        "ex": "¡No te olvides de la cena del viernes! Ya la tengo agendada a fuego."
+      }
+    },
+    {
+      "id": {
+        "slang": "Ikut selera / Co-sign beli samaan",
+        "desc": "Tren membeli atau mengikuti gaya seseorang secara persis karena percaya pada seleranya.",
+        "ex": "Tas yang dipakai temen gue keren banget, langsung ikut beli samaan tanpa mikir."
+      },
+      "word": "디토",
+      "pronunciation": "[디토]",
+      "chosung": "ㄷㅌ",
+      "part_of_speech": "명사 / 감탄사",
+      "likes": 4210,
+      "dislikes": 38,
+      "tags": [
+        "소비",
+        "트렌드",
+        "뉴진스",
+        "동의"
+      ],
+      "trend_status": "HOT",
+      "en": {
+        "slang": "Ditto / Co-signing / Same taste",
+        "desc": "Strongly agreeing or following someone else's specific style, purchase, or lifestyle recommendation.",
+        "ex": "She bought that jacket and I totally dittoed her, it's gorgeous!"
+      },
+      "ja": {
+        "slang": "ディット消費 / 共感買い",
+        "desc": "信頼するインフルエンサーや友人の選択にそのまま共感して真似して購入する行動。",
+        "ex": "友だちが持ってたポーチが可愛すぎて、迷わずディット買いしちゃった！"
+      },
+      "vi": {
+        "slang": "Bắt chước gu / Mua theo thần tượng",
+        "desc": "Xu hướng mua sắm hoặc học theo phong cách của người mình tin tưởng một cách tuyệt đối.",
+        "ex": "Thấy bạn thân diện mẫu váy này xinh quá nên mình cũng chốt đơn theo ngay!"
+      },
+      "es": {
+        "slang": "Copiar el estilo / Comprar a ciegas por recomendación",
+        "desc": "Seguir fielmente el gusto o compra de otra persona por pura afinidad y confianza.",
+        "ex": "Mi amiga recomendó estos auriculares y me los pillé de cabeza, ¡una maravilla!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Besok ngantor lagi / Derita buruh korporat",
+        "desc": "Keluhan khas pekerja di Minggu malam saat menyadari libur berakhir dan besok harus kembali bekerja.",
+        "ex": "Cepet banget weekend lewat, besok udah harus ngantor lagi hadap laptop."
+      },
+      "word": "내또출",
+      "pronunciation": "[내또출]",
+      "chosung": "ㄴㄸㅊ",
+      "part_of_speech": "명사 / 감탄사",
+      "likes": 5910,
+      "dislikes": 40,
+      "tags": [
+        "직장인",
+        "월요병",
+        "출근",
+        "비명"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Work again tomorrow / Sunday Scaries",
+        "desc": "The dreadful feeling on Sunday evening knowing you have to go back to work tomorrow morning.",
+        "ex": "It's 10 PM on Sunday already? The Sunday scaries are real, work again tomorrow..."
+      },
+      "ja": {
+        "slang": "明日また出勤 (サザエさん症候群)",
+        "desc": "日曜日の夜、休日が終わって明日また会社に行かなければならない現実に絶望する嘆き。",
+        "ex": "日曜の夜とか一瞬すぎる…明日また出勤かよ、会社行きたくない！"
+      },
+      "vi": {
+        "slang": "Mai lại đi cày / Hội chứng tối Chủ Nhật",
+        "desc": "Nỗi ám ảnh kinh hoàng vào tối Chủ Nhật khi kỳ nghỉ cuối tuần trôi qua và mai lại phải đi làm.",
+        "ex": "Mới chớp mắt đã tối Chủ Nhật rồi, mai lại phải xách cặp đi cày tiếp, buồn thật sự!"
+      },
+      "es": {
+        "slang": "Mañana a currar otra vez / Depresión del domingo",
+        "desc": "El lamento del domingo por la noche al recordar que toca volver a madrugar y trabajar al día siguiente.",
+        "ex": "¿Ya son las 10 de la noche del domingo? ¡Mañana a currar otra vez, qué pereza!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Gue banget / Tipe idaman",
+        "desc": "Pujian saat menemukan barang, gaya pakaian, atau orang yang benar-benar pas dengan selera pribadi.",
+        "ex": "Jaket vintage ini potongannya beneran gue banget, langsung bungkus!"
+      },
+      "word": "완내스",
+      "pronunciation": "[완내스]",
+      "chosung": "ㅇㄴㅅ",
+      "part_of_speech": "명사 / 형용사",
+      "likes": 3450,
+      "dislikes": 32,
+      "tags": [
+        "취향저격",
+        "패션",
+        "쇼핑",
+        "호감"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Totally My Type / Hits My Taste",
+        "desc": "Exclamation that something or someone matches your exact personal taste and aesthetic.",
+        "ex": "Tried on this oversized vintage jacket and it's totally my type, bought it on the spot!"
+      },
+      "ja": {
+        "slang": "ドストライク / 完全に私好み",
+        "desc": "服や音楽、異性のタイプなどが自分の好みに100%ドンピシャでハマること。",
+        "ex": "このオーバーサイズカーディガン、シルエットが完全に私好みで即買いした！"
+      },
+      "vi": {
+        "slang": "Đúng gu tao luôn / Trúng tim đen",
+        "desc": "Khen ngợi một món đồ, bài hát hoặc phong cách cực kỳ hợp gu của mình một cách hoàn hảo.",
+        "ex": "Mặc thử chiếc áo khoác này lên chuẩn gu tao luôn, không mua hơi phí!"
+      },
+      "es": {
+        "slang": "Totalmente mi rollo / Justo mi estilo",
+        "desc": "Expresión para indicar que algo o alguien encaja al cien por cien con tus gustos.",
+        "ex": "Me probé este abrigo oversize y es totalmente mi rollo, ¡me lo quedo!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Sesi Q&A / Tanya apa aja",
+        "desc": "Fitur stiker tanya jawab di Instagram story untuk berinteraksi bebas dengan pengikut.",
+        "ex": "Lagi gabut buka sesi tanya apa aja di IG, ternyata rame banget yang kepo!"
+      },
+      "word": "무물",
+      "pronunciation": "[무물]",
+      "chosung": "ㅁㅁ",
+      "part_of_speech": "명사 / 동사",
+      "likes": 3210,
+      "dislikes": 25,
+      "tags": [
+        "인스타그램",
+        "SNS",
+        "소통",
+        "Q&A"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "AMA (Ask Me Anything) / Q&A Box",
+        "desc": "Interactive Q&A session where followers can ask anything on Instagram stories or streams.",
+        "ex": "Opened an AMA on Instagram stories because I was bored, got flooded with questions!"
+      },
+      "ja": {
+        "slang": "質問箱 / 何でも聞いて",
+        "desc": "インスタのストーリー機能などでフォロワーから何でも質問を受け付けるQ&Aコーナー。",
+        "ex": "暇だったからインスタで質問箱やったら、100件以上来て今必死で返信中！"
+      },
+      "vi": {
+        "slang": "Hỏi tôi đi / Hộp câu hỏi Q&A",
+        "desc": "Tính năng đặt câu hỏi trên Instagram story để giao lưu hỏi đáp cùng bạn bè và người theo dõi.",
+        "ex": "Buồn buồn mở hộp hỏi tôi đi trên story mà nổ inbox cả trăm câu hỏi luôn!"
+      },
+      "es": {
+        "slang": "Pregúntame lo que sea / Cajita de preguntas",
+        "desc": "Sesión de preguntas y respuestas en Instagram Stories donde te pueden preguntar cualquier tema.",
+        "ex": "Puse una cajita de preguntas en Instagram por aburrimiento y me llovieron mensajes."
+      }
+    },
+    {
+      "id": {
+        "slang": "Canda deng / Cuma becanda",
+        "desc": "Kalimat penutup setelah melempar gombalan atau candaan berlebihan biar gak canggung.",
+        "ex": "Cakep amat lu hari ini udah kayak artis Korea... canda deng haha!"
+      },
+      "word": "막이래",
+      "pronunciation": "[마기래]",
+      "chosung": "ㅁㅇㄹ",
+      "part_of_speech": "감탄사",
+      "likes": 2980,
+      "dislikes": 48,
+      "tags": [
+        "농담",
+        "너스레",
+        "유머",
+        "추임새"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Just kidding tho / JK JK / Kidding lol",
+        "desc": "A playful tag added after a cheesy compliment or bold statement to soften the mood.",
+        "ex": "You look like a Hollywood star today! ...just kidding tho lol!"
+      },
+      "ja": {
+        "slang": "なんちゃって / 冗談冗談",
+        "desc": "少し大げさな褒め言葉や冗談を言った後、照れ隠しで『なーんてね！』と茶化すフレーズ。",
+        "ex": "今日の君、アイドルかと思うくらい可愛いじゃん…なんちゃって！笑"
+      },
+      "vi": {
+        "slang": "Đùa đấy / Nói giỡn thôi nha",
+        "desc": "Câu đệm sau khi khen quá lời hoặc trêu đùa để chữa ngượng một cách duyên dáng.",
+        "ex": "Hôm nay nhìn bồ xinh lộng lẫy như hoa hậu luôn á... đùa đấy haha!"
+      },
+      "es": {
+        "slang": "Es broma / ¡Qué va, es coña!",
+        "desc": "Frase que se añade tras un cumplido exagerado o una broma para quitarle seriedad entre risas.",
+        "ex": "¡Hoy pareces una estrella de cine!... ¡qué va, es coña jaja!"
+      }
+    },
+    {
+      "id": {
+        "slang": "Kode Rahasia 'Saranghae' Terbalik",
+        "desc": "Kode cinta rahasia di mana kata 'Saranghae' (Aku cinta kamu) jika dibalik terbaca seperti H워얼V.",
+        "ex": "Balik layar HP lu dan baca ini: H워얼V (Artinya cinta kamu lho!)"
+      },
+      "word": "H워얼V",
+      "pronunciation": "[사랑해]",
+      "chosung": "ㅎㅇㅇㅂ",
+      "part_of_speech": "감탄사 / 명사",
+      "likes": 4720,
+      "dislikes": 65,
+      "tags": [
+        "연애",
+        "고백",
+        "암호",
+        "로맨스"
+      ],
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Upside-down 'I LOVE YOU' (Hangul Code)",
+        "desc": "A cute visual secret code where '사랑해' (I love you) looks like 'H워얼V' when flipped upside-down.",
+        "ex": "Turn your phone upside down and read this: H워얼V (It spells Saranghae!)"
+      },
+      "ja": {
+        "slang": "逆さサランヘ (逆転愛の暗号)",
+        "desc": "『사랑해（愛してる）』を上下反転させるとアルファベット『H워얼V』に見える恋人たちの暗号。",
+        "ex": "スマホを逆さにして読んでみて：H워얼V（愛してるって意味だよ！）"
+      },
+      "vi": {
+        "slang": "Mật mã 'Anh yêu em' đảo ngược",
+        "desc": "Mật mã tình yêu độc đáo khi lật ngược chữ tiếng Hàn 'Saranghae' trông giống các ký tự H워얼V.",
+        "ex": "Lật ngược điện thoại lại mà xem này: H워얼V (Nghĩa là yêu em đó!)"
+      },
+      "es": {
+        "slang": "Código Secreto 'Te Quiero' Invertido",
+        "desc": "Un código romántico donde al girar la palabra coreana 'Saranghae' parece el texto H워얼V.",
+        "ex": "Gira la pantalla del móvil al revés y léelo: H워얼V (¡Significa te quiero en coreano!)"
+      }
+    },
+    {
+      "id": {
+        "slang": "Jodoh alami / Anti kencan buta",
+        "desc": "Lebih menyukai cinta yang tumbuh secara organik dari lingkungan hobi atau kerja daripada kencan buta.",
+        "ex": "Gue lebih suka jodoh yang ketemu alami di komunitas daripada dikenalin orang lain."
+      },
+      "word": "자만추",
+      "pronunciation": "[자만추]",
+      "chosung": "ㅈㅁㅊ",
+      "part_of_speech": "명사",
+      "likes": 4820,
+      "dislikes": 50,
+      "tags": [
+        "연애",
+        "소개팅",
+        "가치관",
+        "일상"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Organic Romance / Natural Meeting",
+        "desc": "Preferring organic love that sparks naturally from hobbies or work over forced blind dates.",
+        "ex": "Blind dates are too awkward for me, I'm all about natural organic meetings."
+      },
+      "ja": {
+        "slang": "自然な出会い派 (合コン嫌い)",
+        "desc": "お見合いや合コンのような作為的な場ではなく、サークルや職場で自然に恋に落ちることを望む姿勢。",
+        "ex": "合コンは気まずくて無理！趣味の集まりとかで自然に出会いたい派だな。"
+      },
+      "vi": {
+        "slang": "Tìm duyên tự nhiên / Ghét mai mối",
+        "desc": "Thích để tình yêu nảy nở tự nhiên qua công việc, sở thích chung hơn là hẹn hò sắp đặt.",
+        "ex": "Đi xem mắt ngượng ngùng lắm, mình thích để duyên đến tự nhiên hơn."
+      },
+      "es": {
+        "slang": "Amor orgánico / Conocerse sin citas a ciegas",
+        "desc": "Preferencia por enamorarse de manera espontánea en la vida cotidiana antes que en citas concertadas.",
+        "ex": "Las citas a ciegas me ponen tenso, prefiero que surja el amor de forma orgánica."
+      }
+    },
+    {
+      "id": {
+        "slang": "Tergantung orangnya / Beda-beda tiap orang",
+        "desc": "Menyatakan bahwa pengalaman atau pendapat sangat bervariasi tergantung masing-masing individu.",
+        "ex": "Kerja di sana enak gak? Wah itu tergantung orangnya dan timnya masing-masing."
+      },
+      "word": "사바사",
+      "pronunciation": "[사바사]",
+      "chosung": "ㅅㅂㅅ",
+      "part_of_speech": "명사 / 관용구",
+      "likes": 3870,
+      "dislikes": 34,
+      "tags": [
+        "인간관계",
+        "다양성",
+        "케바케",
+        "직장"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Person by Person / It depends on the person",
+        "desc": "Meaning experiences and outcomes vary greatly depending on the individual person.",
+        "ex": "Is that company culture friendly? It completely varies person by person and team by team."
+      },
+      "ja": {
+        "slang": "人それぞれ / 個人差がある",
+        "desc": "状況や評価は人によって全く異なるため、一概には決められないという表現。",
+        "ex": "あの部署の雰囲気いい？ 人によるし、上司の性格次第で人それぞれだよ。"
+      },
+      "vi": {
+        "slang": "Tùy từng người / Mỗi người mỗi khác",
+        "desc": "Mỗi người có tính cách, trải nghiệm và quan điểm khác nhau không thể đánh đồng chung.",
+        "ex": "Môi trường công ty đó ổn không? Còn tùy từng người và từng sếp nữa bạn ơi."
+      },
+      "es": {
+        "slang": "Depende de la persona / Cada quien es un mundo",
+        "desc": "Indica que las circunstancias o experiencias cambian radicalmente según el individuo.",
+        "ex": "¿Es duro trabajar allí? Depende de la persona y del jefe que te toque."
+      }
+    },
+    {
+      "id": {
+        "slang": "Info gak penting tapi seru / Kebanyakan info",
+        "desc": "Membagikan detail acak yang sepele tentang diri sendiri untuk sekadar mencairkan suasana.",
+        "ex": "TMI hari ini: Gue baru sadar kaos kaki gue belang sebelah haha."
+      },
+      "word": "TMI",
+      "pronunciation": "[티엠아이]",
+      "chosung": "ㅌㅁㅇ",
+      "part_of_speech": "명사",
+      "likes": 4510,
+      "dislikes": 42,
+      "tags": [
+        "토크",
+        "스몰토크",
+        "일상",
+        "글로벌"
+      ],
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "TMI (Too Much Information)",
+        "desc": "Sharing way more details than anyone asked for, often used playfully for random fun facts about oneself.",
+        "ex": "Fun TMI of the day: I accidentally wore mismatched socks today lol."
+      },
+      "ja": {
+        "slang": "TMI / どうでもいいプチ情報",
+        "desc": "聞かれてもいないのに明かす、極めて個人的でどうでもいい日常の小ネタ。",
+        "ex": "今日のプチTMI：靴下を左右違うの履いてきちゃいました！"
+      },
+      "vi": {
+        "slang": "Thông tin thừa thãi / Chuyện bên lề",
+        "desc": "Chia sẻ những chi tiết nhỏ nhặt, riêng tư mà không ai hỏi tới một cách vui vẻ.",
+        "ex": "TMI hôm nay: Sáng nay vội quá đi nhầm hai chiếc tất khác màu nhau!"
+      },
+      "es": {
+        "slang": "Información innecesaria / Dato random",
+        "desc": "Contar un detalle muy íntimo o trivial que nadie había pedido saber, en tono bromista.",
+        "ex": "Dato random del día: Me he puesto un calcetín de cada color por las prisas."
+      }
+    },
+    {
+      "id": {
+        "slang": "Mode santai / Ngomong lu-gue",
+        "desc": "Kesepakatan untuk berhenti memakai bahasa formal dan mulai berbicara santai akrab di media sosial.",
+        "ex": "Udah sering komenan bareng, yuk ngobrol santai lu-gue aja biar makin akrab!"
+      },
+      "word": "반모",
+      "pronunciation": "[반모]",
+      "chosung": "ㅂㅁ",
+      "part_of_speech": "명사 / 동사",
+      "likes": 3120,
+      "dislikes": 55,
+      "tags": [
+        "친밀함",
+        "SNS",
+        "10대",
+        "친구"
+      ],
+      "trend_status": "STEADY",
+      "en": {
+        "slang": "Casual Mode / Dropping Honorifics",
+        "desc": "Agreeing to drop polite honorifics and speak casually as close friends online.",
+        "ex": "We talk in comments so often, want to switch to casual mode and drop honorifics?"
+      },
+      "ja": {
+        "slang": "タメ口モード (タメ語協定)",
+        "desc": "SNSやゲーム上で敬語をやめて、フランクなタメ口で話す約束をすること。",
+        "ex": "いつもコメントくれるし、そろそろタメ口モードにしない？よろしくね！"
+      },
+      "vi": {
+        "slang": "Nói chuyện ngang hàng / Bỏ kính ngữ",
+        "desc": "Thỏa thuận nói chuyện thoải mái xưng bạn - tôi không cần dùng kính ngữ khách sáo nữa.",
+        "ex": "Nói chuyện quen rồi, tụi mình chuyển qua xưng hô ngang hàng cho thân thiết nhé!"
+      },
+      "es": {
+        "slang": "Tutearse / Hablar de tú a tú",
+        "desc": "Acordar dejar el trato formal de usted para hablar con confianza y cercanía.",
+        "ex": "Ya nos conocemos de comentar tanto, ¿nos tuteamos a partir de ahora?"
+      }
+    },
+    {
+      "id": {
+        "slang": "Bahagia sederhana / Sukacita kecil",
+        "desc": "Kebahagiaan kecil tapi pasti yang dirasakan dari momen-momen sederhana sehari-hari.",
+        "ex": "Makan jajanan anget sambil jalan pulang kantor, bahagia sederhana banget rasanya."
+      },
+      "word": "소확행",
+      "pronunciation": "[소화캥]",
+      "chosung": "ㅅㅎㅎ",
+      "part_of_speech": "명사",
+      "likes": 7320,
+      "dislikes": 28,
+      "tags": [
+        "행복",
+        "힐링",
+        "일상",
+        "웰빙"
+      ],
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Small Joys / Little Pleasures of Life",
+        "desc": "Small but certain happiness found in everyday modest moments like fresh bread or a hot shower.",
+        "ex": "Eating hot fish bread on a cold walk home from work, this is true small joy."
+      },
+      "ja": {
+        "slang": "小確幸（しょうかっこう） / ささやかな幸せ",
+        "desc": "村上春樹由来の言葉。小さいけれど確かな日常の幸福のこと。",
+        "ex": "仕事帰りに温かいタイヤキを頬張る瞬間、これぞ最高の小確幸だね。"
+      },
+      "vi": {
+        "slang": "Hạnh phúc giản đơn / Niềm vui nhỏ bé",
+        "desc": "Niềm hạnh phúc nhỏ bé nhưng chắc chắn có thể cảm nhận được từ những khoảnh khắc đời thường.",
+        "ex": "Tan làm mua được chiếc bánh nóng hổi cắn một miếng, hạnh phúc giản đơn là đây chứ đâu."
+      },
+      "es": {
+        "slang": "Pequeños placeres / Felicidad cotidiana",
+        "desc": "La felicidad modesta pero certera que se encuentra en los pequeños momentos del día a día.",
+        "ex": "Comer un pan recién horneado de camino a casa, ¡esos son los pequeños placeres de la vida!"
       }
     }
   ]
