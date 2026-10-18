@@ -3,142 +3,502 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malssam Live | Từ Điển Tiếng Lóng Hàn Quốc Cực 'Hot' Dành Cho Fan K-POP</title>
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <title>MALSSAM: Từ điển tiếng lóng Hàn Quốc 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #071311;
-      --card-bg: #0f2420;
-      --card-border: #1a423b;
-      --text-main: #f8fafc;
-      --text-muted: #86efac;
+      --bg: #061412;
+      --card-bg: #0e2722;
       --emerald: #10b981;
       --gold: #fbbf24;
+      --text: #f0fdf4;
+      --subtext: #94a3b8;
+      --border: #134e43;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard", -apple-system, sans-serif; }
-    body { background: var(--bg-dark); color: var(--text-main); line-height: 1.8; min-height: 100vh; }
-    header { background: rgba(7, 19, 17, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; padding: 14px 24px; }
-    .header-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; font-weight: 800; font-size: 1.3rem; }
-    .brand span { color: var(--emerald); }
-    .lang-selector { display: flex; gap: 6px; }
-    .lang-btn { background: #132e29; color: #cbd5e1; border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; text-decoration: none; font-weight: 600; }
-    .lang-btn.active { background: var(--emerald); color: #000; border-color: var(--emerald); font-weight: 700; }
-    
-    .hero { max-width: 800px; margin: 35px auto 20px; padding: 0 20px; text-align: center; }
-    .hero h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.5px; }
-    .hero h1 span { color: var(--emerald); }
-    .hero p { color: #a7f3d0; font-size: 1.02rem; }
-    
-    .fact-banner { max-width: 800px; margin: 20px auto; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 14px 20px; font-size: 0.88rem; color: #d1fae5; display: flex; align-items: center; gap: 12px; text-align: left; }
-    
-    .container { max-width: 820px; margin: 20px auto 60px; padding: 0 20px; }
-    .word-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 26px 28px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: all 0.2s ease; }
-    .word-card:hover { border-color: var(--emerald); transform: translateY(-2px); }
-    
-    .word-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
-    .hangul-title { font-size: 2rem; font-weight: 900; color: var(--gold); }
-    .romanized { font-size: 1.1rem; color: var(--emerald); margin-left: 8px; font-weight: 600; }
-    .slang-counterpart { background: rgba(16, 185, 129, 0.2); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.4); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; }
-    
-    .definition { font-size: 1.08rem; color: #f1f5f9; margin-bottom: 16px; font-weight: 500; }
-    .example-box { background: rgba(5, 15, 13, 0.7); border-left: 4px solid var(--emerald); padding: 14px 18px; border-radius: 0 8px 8px 0; color: #e2e8f0; font-size: 0.95rem; white-space: pre-line; margin-bottom: 16px; }
-    .footer-bar { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 14px; font-size: 0.85rem; color: #6ee7b7; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; padding-bottom: 80px; line-height: 1.7; }
+    header { border-bottom: 1px solid var(--border); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(6, 20, 18, 0.95); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--emerald); text-decoration: none; }
+    .back-btn { color: var(--subtext); text-decoration: none; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; }
+    .sovereignty-banner { background: #064e3b; border-bottom: 1px solid var(--emerald); padding: 10px 15px; font-size: 0.82rem; text-align: center; color: #a7f3d0; }
+    .hero { max-width: 800px; margin: 30px auto 20px; padding: 0 20px; text-align: center; }
+    .hero h1 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .hero p { color: var(--subtext); font-size: 1rem; }
+    .feed { max-width: 800px; margin: 20px auto; padding: 0 15px; display: flex; flex-direction: column; gap: 16px; }
+    .word-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .hangul-title { font-size: 1.6rem; font-weight: 800; color: #fff; margin-right: 6px; }
+    .romanized { color: var(--subtext); font-size: 0.9rem; }
+    .slang-badge { background: rgba(16, 185, 129, 0.15); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 10px; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; }
+    .def-text { font-size: 0.95rem; line-height: 1.8; color: #d1fae5; margin-bottom: 12px; }
+    .ex-box { background: rgba(0, 0, 0, 0.25); border-left: 3px solid var(--gold); padding: 10px 12px; font-size: 0.88rem; line-height: 1.7; color: #fef3c7; border-radius: 4px; margin-bottom: 12px; }
+    .card-foot { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--subtext); border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 10px; }
   </style>
 </head>
 <body>
+  <div class="sovereignty-banner">
+    🛡️ <strong>Tuyên bố Chủ quyền Văn hóa Chữ Hangul:</strong> Chữ Hangul do Vua Sejong sáng tạo năm 1443 và được UNESCO công nhận là Di sản Tư liệu Thế giới.
+  </div>
   <header>
-    <div class="header-inner">
-      <a href="../index.html" class="brand">🌱 MALSSAM <span>VIỆT NAM</span></a>
-      <div class="lang-selector">
-        <a href="../index.html" class="lang-btn">🇰🇷 KR</a>
-        <a href="en.html" class="lang-btn">🇺🇸 EN</a>
-        <a href="ja.html" class="lang-btn">🇯🇵 JA</a>
-        <a href="vi.html" class="lang-btn active">🇻🇳 VI</a>
-        <a href="id.html" class="lang-btn">🇮🇩 ID</a>
-        <a href="es.html" class="lang-btn">🇪🇸 ES</a>
-      </div>
-    </div>
+    <a href="../index.html" class="logo">🌿 MALSSAM VIỆT NAM</a>
+    <a href="../index.html" class="back-btn">← Bản tiếng Hàn</a>
   </header>
+  <div class="hero">
+    <h1>Từ điển tiếng lóng & Văn hóa Gen Z Hàn Quốc 2026</h1>
+    <p>Khám phá 30 từ lóng đang bùng nổ trên TikTok và K-Drama hàng ngày!</p>
+  </div>
+  <main class="feed">
 
-  <section class="hero">
-    <h1>Bắt Trọn <span>Tiếng Lóng Hàn Quốc</span> 'Bão Mạng'</h1>
-    <p>Giải mã các từ lóng siêu độc lạ mà idol K-POP và phim Hàn hay dùng nhất hiện nay!</p>
-    
-    <div class="fact-banner">
-      <span style="font-size: 1.4rem;">🇰🇷</span>
-      <div><strong>Sự thật thú vị:</strong> Chữ Hangul được vua Sejong sáng tạo vào năm 1443 một cách hoàn toàn khoa học dựa trên hình dạng các cơ quan phát âm của con người. Được UNESCO công nhận là di sản văn hóa độc nhất vô nhị của Hàn Quốc!</div>
-    </div>
-  </section>
-
-  <main class="container">
-    <!-- Card 1 -->
-    <div class="word-card">
-      <div class="word-top">
+    <div class="word-card" id="word-{'slang': 'Kena mental / Tersinggung berat', 'desc': 'Kondisi tersinggung atau emosi ketika seseorang menyentuh titik sensitif atau fakta yang menyakitkan.', 'ex': 'A: Kok mukanya langsung jutek? B: Cieee langsung kena mental ya haha.'}">
+      <div class="card-head">
         <div>
           <span class="hangul-title">긁히다</span>
-          <span class="romanized">[Geul-ki-da]</span>
+          <span class="romanized">[글키다]</span>
         </div>
-        <span class="slang-counterpart">Bị 'chọc trúng tim đen' / Cay cú</span>
+        <span class="slang-badge">Bị chọc trúng tim đen / Cay cú</span>
       </div>
-      <div class="definition">Trạng thái một người trở nên tức giận, xù lông phòng thủ vì bị người khác nói trúng điểm yếu hoặc sự thật mất lòng.</div>
-      <div class="example-box">A: "Nói thật đi, ông khai gian chiều cao đúng không?"
-B: "Tự dưng lôi chiều cao vào làm gì? Quá đáng vừa thôi!"
-A: "Haha, nhìn kìa, bị chọc trúng tim đen cay cú rồi chứ gì! (긁혔네)"</div>
-      <div class="footer-bar">
-        <span>🔥 Bối cảnh: Tranh luận mạng, livestream K-POP</span>
-        <span>👍 2,845 Đồng tình</span>
+      <p class="def-text">Trạng thái tự ái, nổi đóa khi bị người khác nói đúng điểm yếu hoặc khiêu khích.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>A: Sao tự nhiên căng thế? B: Haha bị nói trúng tim đen nên cay rồi đấy!</div>
+      <div class="card-foot">
+        <span>#감정 #도발 #심리전</span>
+        <span>🔥 Đồng tình 4,845</span>
       </div>
     </div>
-
-    <!-- Card 2 -->
-    <div class="word-card">
-      <div class="word-top">
+    <div class="word-card" id="word-{'slang': 'Mental baja / Pantang menyerah', 'desc': 'Yang paling penting adalah hati yang tak terpatahkan dalam situasi tersulit sekalipun.', 'ex': 'Ujian hidup boleh berat, tapi yang penting mental baja tetap jalan terus!'}">
+      <div class="card-head">
         <div>
           <span class="hangul-title">중꺾마</span>
-          <span class="romanized">[Joong-Kkeok-Ma]</span>
+          <span class="romanized">[중껑마]</span>
         </div>
-        <span class="slang-counterpart">Trái tim không khuất phục / Bất bại</span>
+        <span class="slang-badge">Trái tim không khuất phục</span>
       </div>
-      <div class="definition">Viết tắt của câu "Điều quan trọng nhất là một trái tim không bao giờ gục ngã." Quyết tâm vượt qua mọi nghịch cảnh để chạm đến thành công.</div>
-      <div class="example-box">"Dù điểm số kém và áp lực tìm việc chồng chất, chỉ cần có 'Joong-Kkeok-Ma' thì nhất định chúng ta sẽ chiến thắng!"</div>
-      <div class="footer-bar">
-        <span>👑 Bối cảnh: Động lực học tập, Esports, vượt khó</span>
-        <span>👍 4,920 Đồng tình</span>
+      <p class="def-text">Tinh thần bất khuất không bao giờ đầu hàng dù đối mặt với nghịch cảnh khắc nghiệt nhất.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Dù khó khăn đến đâu, điều quan trọng nhất là trái tim kiên định không bỏ cuộc!</div>
+      <div class="card-foot">
+        <span>#동기부여 #명언 #스포츠</span>
+        <span>🔥 Đồng tình 7,920</span>
       </div>
     </div>
-
-    <!-- Card 3 -->
-    <div class="word-card">
-      <div class="word-top">
+    <div class="word-card" id="word-{'slang': 'Hater maksa / Apes beruntun', 'desc': 'Mencela tanpa alasan jelas, atau rentetan kesialan aneh yang terus menimpa bertubi-tubi.', 'ex': 'Baru keluar rumah langsung hujan badai, dunia kayak sengaja benci banget sama gue.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">억까</span>
+          <span class="romanized">[억까]</span>
+        </div>
+        <span class="slang-badge">Bới lông tìm vết / Xui tận mạng</span>
+      </div>
+      <p class="def-text">Bị chỉ trích vô cớ hoặc liên tiếp gặp vận đen phi lý ngoài tầm kiểm soát.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Đúng ngày quên mang áo mưa thì bão đổ bộ, số phận đang cố tình trêu ngươi tôi à?</div>
+      <div class="card-foot">
+        <span>#불운 #비난 #게임</span>
+        <span>🔥 Đồng tình 5,120</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Peka & Sat-set / Cerdas beres', 'desc': 'Mengerjakan sesuatu dengan rapi, cepat, dan penuh inisiatif tanpa harus disuruh berkali-kali.', 'ex': 'Keren banget kerjaannya, sat-set langsung beres tanpa banyak tanya!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">알잘딱깔센</span>
+          <span class="romanized">[알잘딱깔센]</span>
+        </div>
+        <span class="slang-badge">Khéo léo chu toàn / Đỉnh chóp tự giác</span>
+      </div>
+      <p class="def-text">Tự giác xử lý mọi việc một cách thông minh, gọn gàng và tinh tế mà không cần nhắc nhở.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Giao việc cho em ấy là yên tâm, lúc nào cũng tự giác chu toàn từ A đến Z!</div>
+      <div class="card-foot">
+        <span>#직장생활 #센스 #일잘러</span>
+        <span>🔥 Đồng tình 5,890</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Lagi gacor / Menyala abangkuh', 'desc': 'Pujian luar biasa saat performa, penampilan, atau kemampuan seseorang sedang di puncak terbaiknya.', 'ex': 'Wah gila, codingan lu hari ini lagi gacor banget! Menyala abangkuh!'}">
+      <div class="card-head">
         <div>
           <span class="hangul-title">폼 미쳤다</span>
-          <span class="romanized">[Form Mi-chyeot-da]</span>
+          <span class="romanized">[폼 미첟따]</span>
         </div>
-        <span class="slang-counterpart">Đỉnh của chóp / Visual xuất thần</span>
+        <span class="slang-badge">Phong độ đỉnh chóp / Quá out trình</span>
       </div>
-      <div class="definition">Bắt nguồn từ 'form' trong thể thao. Dùng để khen ngợi nhan sắc, tài năng hay phong độ đạt đến đẳng cấp siêu thực của idol hoặc bạn bè.</div>
-      <div class="example-box">"Trời ơi, xem MV mới chưa?! Visual của bias đợt này đúng là đỉnh của chóp, phong độ điên đảo luôn!"</div>
-      <div class="footer-bar">
-        <span>🔥 Bối cảnh: K-POP Comeback, Tik Tok challenge</span>
-        <span>👍 4,210 Đồng tình</span>
+      <p class="def-text">Khen ngợi phong độ, nhan sắc hoặc kỹ năng xuất sắc đến mức không thể tin nổi.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Hôm nay đá bóng phong độ đỉnh chóp thật sự, ghi hat-trick luôn!</div>
+      <div class="card-foot">
+        <span>#극찬 #감탄 #트렌드</span>
+        <span>🔥 Đồng tình 6,210</span>
       </div>
     </div>
-
-    <!-- Card 4 -->
-    <div class="word-card">
-      <div class="word-top">
+    <div class="word-card" id="word-{'slang': 'Si pemalas search / Maunya disuapin', 'desc': 'Orang yang malas mencari info sendiri di Google dan cuma mengandalkan orang lain menyuapi info dasar.', 'ex': 'Google gratis woi, jangan malas banget nanya hal yang ada di halaman depan!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">핑프</span>
+          <span class="romanized">[핑프]</span>
+        </div>
+        <span class="slang-badge">Thánh lười search / Đợi đút tận mồm</span>
+      </div>
+      <p class="def-text">Người lười đến mức không thèm gõ Google tìm kiếm mà chỉ chăm chăm hỏi người khác để được dọn sẵn.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Thông báo to đùng thế kia không đọc, suốt ngày làm thánh lười hỏi han.</div>
+      <div class="card-foot">
+        <span>#대학생활 #풍자 #검색</span>
+        <span>🔥 Đồng tình 3,730</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Kafe estetik / Tempat nongkrong cozy', 'desc': 'Kafe dengan suasana cantik, pencahayaan bagus, dan desain interior yang sangat Instagramable.', 'ex': 'Kemarin nongkrong di kafe estetik baru, fotonya dapet angle cakep banget!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">분좋카</span>
+          <span class="romanized">[분조카]</span>
+        </div>
+        <span class="slang-badge">Quán cafe vibe đỉnh / Góc sống ảo</span>
+      </div>
+      <p class="def-text">Quán cà phê có không gian đẹp lung linh, âm nhạc êm dịu cực kỳ thích hợp để check-in sống ảo.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Cuối tuần lượn mấy quán cà phê vibe đỉnh để chụp bộ ảnh mới thôi!</div>
+      <div class="card-foot">
+        <span>#라이프스타일 #카페 #데이트</span>
+        <span>🔥 Đồng tình 2,980</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Hidup produktif pol / Gaya hidup panutan', 'desc': 'Pola hidup yang sangat tertata, produktif, disiplin bangun pagi dan mengembangkan diri.', 'ex': 'Mulai besok bangun subuh, jogging, belajar skill baru, pokoknya hidup produktif pol!'}">
+      <div class="card-head">
         <div>
           <span class="hangul-title">갓생</span>
-          <span class="romanized">[God-saeng]</span>
+          <span class="romanized">[갇생]</span>
         </div>
-        <span class="slang-counterpart">Sống kỷ luật chuẩn 'Pro' / Cực năng suất</span>
+        <span class="slang-badge">Sống kỷ luật chuẩn mực / Đời nở hoa</span>
       </div>
-      <div class="definition">Ghép từ 'God' (Thần) + 'Saeng' (Đời). Lối sống cực kỳ năng suất, dậy sớm, tập luyện và học tập đều đặn mỗi ngày để hoàn thiện bản thân.</div>
-      <div class="example-box">"Dậy từ 6 giờ sáng tập gym rồi học tiếng Hàn, chính thức bắt đầu chuỗi ngày sống kỷ luật chuẩn 'God-saeng'!"</div>
-      <div class="footer-bar">
-        <span>✨ Bối cảnh: Dậy sớm, học tập, rèn luyện bản thân</span>
-        <span>👍 4,650 Đồng tình</span>
+      <p class="def-text">Lối sống kỷ luật, năng suất cao, dậy sớm tập thể dục và học tập không lãng phí một giây phút nào.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Năm mới quyết tâm dậy từ 5h sáng tập gym đọc sách, sống chuẩn mực năng suất!</div>
+      <div class="card-foot">
+        <span>#자기계발 #모범생 #성실</span>
+        <span>🔥 Đồng tình 6,650</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Mindset Lucky Vicky / Selalu ada hikmah', 'desc': 'Mengubah kejadian apes menjadi keberuntungan luar biasa dengan pola pikir super positif.', 'ex': 'Antrean habis pas giliran gue, tapi jadinya dapet roti baru yang anget! Beneran Lucky Vicky!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">럭키비키</span>
+          <span class="romanized">[너키비키]</span>
+        </div>
+        <span class="slang-badge">Tư duy may mắn Vicky / Lạc quan vô đối</span>
+      </div>
+      <p class="def-text">Biến mọi tình huống xui xẻo thành may mắn bất ngờ với góc nhìn siêu lạc quan.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Bị lỡ chuyến xe buýt, nhưng nhờ thế lại gặp quán bánh ngon! Đúng là tư duy Vicky may mắn!</div>
+      <div class="card-foot">
+        <span>#긍정 #원영적사고 #아이돌</span>
+        <span>🔥 Đồng tình 8,420</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Vibe idaman / Kiblat gaya', 'desc': 'Gaya visual, estetika, atau aura yang ingin dicapai dan dijadikan inspirasi.', 'ex': 'Vibe idaman gue tahun ini adalah street fashion minimalis ala Seoul.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">추구미</span>
+          <span class="romanized">[추구미]</span>
+        </div>
+        <span class="slang-badge">Vibe lý tưởng / Phong cách hướng tới</span>
+      </div>
+      <p class="def-text">Gu thẩm mỹ hoặc hình tượng phong cách mà một người đang theo đuổi và hướng tới.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Vibe lý tưởng của mình mùa đông này là phong cách cổ điển nhẹ nhàng.</div>
+      <div class="card-foot">
+        <span>#패션 #스타일 #트렌드</span>
+        <span>🔥 Đồng tình 4,120</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Malah makin mantap / Hikmah tersembunyi', 'desc': 'Menganggap kegagalan rencana awal justru membawa hal yang jauh lebih menguntungkan.', 'ex': 'Hujan bikin batal jalan? Ya udah streaming seharian di rumah, malah makin mantap!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">오히려 좋아</span>
+          <span class="romanized">[오히려 조아]</span>
+        </div>
+        <span class="slang-badge">Thế lại càng hay / Càng tốt chứ sao</span>
+      </div>
+      <p class="def-text">Xem những thay đổi bất ngờ hoặc trục trặc kế hoạch như một cơ hội tuyệt vời hơn.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Bị hủy hẹn hả? Ở nhà ngủ một giấc đã đời, thế lại càng hay!</div>
+      <div class="card-foot">
+        <span>#긍정 #멘탈케어 #일상</span>
+        <span>🔥 Đồng tình 5,340</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Ada yang nodongin pisau ke leher lu? / Risiko sendiri', 'desc': 'Sentilan pedas buat orang yang suka mengeluh padahal itu pilihannya sendiri secara sukarela.', 'ex': 'Lu sendiri yang milih gajinya gede walau lembur, emang ada yang nodongin pisau ke lu?'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">누칼협</span>
+          <span class="romanized">[누칼협]</span>
+        </div>
+        <span class="slang-badge">Ai kề dao vào cổ bắt đâu? / Tự làm tự chịu</span>
+      </div>
+      <p class="def-text">Câu nói châm chọc nhắc nhở người khác rằng họ tự nguyện lựa chọn nên đừng than vãn.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Than vãn gì, lúc trước ai kề dao vào cổ bắt bạn chọn công việc này đâu?</div>
+      <div class="card-foot">
+        <span>#팩트폭격 #사이다 #직장</span>
+        <span>🔥 Đồng tình 4,620</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Garing berulang / Kebangetan lebay', 'desc': 'Mengulang lelucon atau tingkah laku secara berlebihan sampai bikin suasana jadi canggung dan membosankan.', 'ex': 'Sekali dua kali lucu bro, kalau diulang terus mah udah garing kebangetan.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">뇌절</span>
+          <span class="romanized">[뇌절]</span>
+        </div>
+        <span class="slang-badge">Quá đà / Nhai lại phát ngấy</span>
+      </div>
+      <p class="def-text">Lặp đi lặp lại một trò đùa quá nhiều lần đến mức phản cảm và làm mất vui.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Đùa một lần thì vui, đùa chục lần thì nhai lại phát ngấy rồi đấy bạn ơi.</div>
+      <div class="card-foot">
+        <span>#눈치 #선넘음 #커뮤니티</span>
+        <span>🔥 Đồng tình 4,180</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Senjata makan tuan / Ulah sendiri', 'desc': 'Menanggung penderitaan atau kerepotan akibat kecerobohan atau keputusan diri sendiri.', 'ex': 'Nunda-nunda tugas sampai mepet deadline terus begadang, murni ulah sendiri ini mah.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">스불재</span>
+          <span class="romanized">[스불재]</span>
+        </div>
+        <span class="slang-badge">Tự làm tự khổ / Gậy ông đập lưng ông</span>
+      </div>
+      <p class="def-text">Tự chuốc lấy rắc rối hoặc vất vả do tính lười biếng hoặc quyết định bốc đồng của chính mình.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Nước đến chân mới nhảy, giờ thức trắng đêm làm bài tập đúng là tự làm tự khổ.</div>
+      <div class="card-foot">
+        <span>#자업자득 #일상 #대학생</span>
+        <span>🔥 Đồng tình 3,890</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Bikin kesel tapi kocak / Muka ngeselin', 'desc': 'Rasa jengkel bercampur geli melihat tingkah seseorang yang sok polos tapi sangat memancing emosi.', 'ex': "Mukanya songong banget pas bilang 'hoki doang dapet nilai 100', bener-bener bikin kesel!"}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">킹받네</span>
+          <span class="romanized">[킹받네]</span>
+        </div>
+        <span class="slang-badge">Cay vãi chưởng / Nhìn ngứa mắt thật sự</span>
+      </div>
+      <p class="def-text">Cảm giác vừa tức tối vừa buồn cười trước sự vênh váo, khiêu khích một cách đáng ghét của đối phương.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Bảo không học gì mà điểm cao chót vót, nhìn cái bản mặt vênh váo cay thật sự!</div>
+      <div class="card-foot">
+        <span>#분노 #얄미움 #침착맨</span>
+        <span>🔥 Đồng tình 5,670</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Terus kenapa? Nonton TV aja sana', 'desc': 'Kalimat balasan tengil khas anak-anak untuk membungkam omelan orang lain secara cuek.', 'ex': "'Beresin kamar lu!' - 'Terus kenapa? Sana nonton TV aja gih!'"}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">어쩔티비</span>
+          <span class="romanized">[어쩔티비]</span>
+        </div>
+        <span class="slang-badge">Kệ tôi / Đi mà xem TV</span>
+      </div>
+      <p class="def-text">Câu cãi cùn kiểu trẻ con dùng để gạt phăng mọi lời cằn nhằn hay dạy đời một cách khiêu khích.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>'Dọn phòng ngay đi!' - 'Kệ con, mẹ đi mà xem tivi!'</div>
+      <div class="card-foot">
+        <span>#알파세대 #초딩 #반격</span>
+        <span>🔥 Đồng tình 4,430</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Rekomendasi makan siang / Makan apa nih?', 'desc': 'Singkatan untuk meminta rekomendasi menu makan siang kepada teman saat bingung memilih.', 'ex': 'Lagi buntu nih, ada rekomendasi makan siang yang seger-seger gak?'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">점메추</span>
+          <span class="romanized">[점메추]</span>
+        </div>
+        <span class="slang-badge">Gợi ý món trưa / Trưa nay ăn gì?</span>
+      </div>
+      <p class="def-text">Viết tắt của câu xin gợi ý thực đơn bữa trưa khi bị bế tắc không biết ăn gì.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Đau đầu vụ ăn uống quá, ai gợi ý món trưa ngon quanh đây với!</div>
+      <div class="card-foot">
+        <span>#음식 #직장인 #일상</span>
+        <span>🔥 Đồng tình 3,950</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Auto ngiler / Bikin mupeng', 'desc': 'Ekspresi ketika melihat makanan lezat atau hal seru yang langsung membuat air liur menetes.', 'ex': 'Lihat keju lumer di atas tteokbokki langsung auto ngiler, pesan sekarang juga!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">군싹</span>
+          <span class="romanized">[군싹]</span>
+        </div>
+        <span class="slang-badge">Nuốt nước miếng ừng ực / Thèm xỉu</span>
+      </div>
+      <p class="def-text">Cảm thán khi nhìn thấy món ăn quá ngon mắt hoặc một món hời khiến mình thèm muốn ngay tức khắc.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Nhìn đĩa tokbokki ngập phô mai thế kia nuốt nước miếng ừng ực luôn!</div>
+      <div class="card-foot">
+        <span>#음식 #루피 #식욕</span>
+        <span>🔥 Đồng tình 3,810</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Kunci di kalender / Masuk jadwal', 'desc': 'Memasukkan jadwal penting ke aplikasi kalender HP agar pasti terlaksana dan tidak bentrok.', 'ex': 'Jangan lupa kumpul Jumat depan ya! Udah gue kunci di kalender nih.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">캘박</span>
+          <span class="romanized">[캘박]</span>
+        </div>
+        <span class="slang-badge">Ghim lịch ngay / Note vào calendar</span>
+      </div>
+      <p class="def-text">Lưu chắc chắn cuộc hẹn vào ứng dụng lịch trên điện thoại để không bị quên hoặc trùng lịch.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Hẹn tối thứ Sáu tuần sau nhé, mình đã ghim lịch vào calendar luôn rồi!</div>
+      <div class="card-foot">
+        <span>#약속 #일정 #직장인</span>
+        <span>🔥 Đồng tình 3,670</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Ikut selera / Co-sign beli samaan', 'desc': 'Tren membeli atau mengikuti gaya seseorang secara persis karena percaya pada seleranya.', 'ex': 'Tas yang dipakai temen gue keren banget, langsung ikut beli samaan tanpa mikir.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">디토</span>
+          <span class="romanized">[디토]</span>
+        </div>
+        <span class="slang-badge">Bắt chước gu / Mua theo thần tượng</span>
+      </div>
+      <p class="def-text">Xu hướng mua sắm hoặc học theo phong cách của người mình tin tưởng một cách tuyệt đối.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Thấy bạn thân diện mẫu váy này xinh quá nên mình cũng chốt đơn theo ngay!</div>
+      <div class="card-foot">
+        <span>#소비 #트렌드 #뉴진스</span>
+        <span>🔥 Đồng tình 4,210</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Besok ngantor lagi / Derita buruh korporat', 'desc': 'Keluhan khas pekerja di Minggu malam saat menyadari libur berakhir dan besok harus kembali bekerja.', 'ex': 'Cepet banget weekend lewat, besok udah harus ngantor lagi hadap laptop.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">내또출</span>
+          <span class="romanized">[내또출]</span>
+        </div>
+        <span class="slang-badge">Mai lại đi cày / Hội chứng tối Chủ Nhật</span>
+      </div>
+      <p class="def-text">Nỗi ám ảnh kinh hoàng vào tối Chủ Nhật khi kỳ nghỉ cuối tuần trôi qua và mai lại phải đi làm.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Mới chớp mắt đã tối Chủ Nhật rồi, mai lại phải xách cặp đi cày tiếp, buồn thật sự!</div>
+      <div class="card-foot">
+        <span>#직장인 #월요병 #출근</span>
+        <span>🔥 Đồng tình 5,910</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Gue banget / Tipe idaman', 'desc': 'Pujian saat menemukan barang, gaya pakaian, atau orang yang benar-benar pas dengan selera pribadi.', 'ex': 'Jaket vintage ini potongannya beneran gue banget, langsung bungkus!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">완내스</span>
+          <span class="romanized">[완내스]</span>
+        </div>
+        <span class="slang-badge">Đúng gu tao luôn / Trúng tim đen</span>
+      </div>
+      <p class="def-text">Khen ngợi một món đồ, bài hát hoặc phong cách cực kỳ hợp gu của mình một cách hoàn hảo.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Mặc thử chiếc áo khoác này lên chuẩn gu tao luôn, không mua hơi phí!</div>
+      <div class="card-foot">
+        <span>#취향저격 #패션 #쇼핑</span>
+        <span>🔥 Đồng tình 3,450</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Sesi Q&A / Tanya apa aja', 'desc': 'Fitur stiker tanya jawab di Instagram story untuk berinteraksi bebas dengan pengikut.', 'ex': 'Lagi gabut buka sesi tanya apa aja di IG, ternyata rame banget yang kepo!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">무물</span>
+          <span class="romanized">[무물]</span>
+        </div>
+        <span class="slang-badge">Hỏi tôi đi / Hộp câu hỏi Q&A</span>
+      </div>
+      <p class="def-text">Tính năng đặt câu hỏi trên Instagram story để giao lưu hỏi đáp cùng bạn bè và người theo dõi.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Buồn buồn mở hộp hỏi tôi đi trên story mà nổ inbox cả trăm câu hỏi luôn!</div>
+      <div class="card-foot">
+        <span>#인스타그램 #SNS #소통</span>
+        <span>🔥 Đồng tình 3,210</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Canda deng / Cuma becanda', 'desc': 'Kalimat penutup setelah melempar gombalan atau candaan berlebihan biar gak canggung.', 'ex': 'Cakep amat lu hari ini udah kayak artis Korea... canda deng haha!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">막이래</span>
+          <span class="romanized">[마기래]</span>
+        </div>
+        <span class="slang-badge">Đùa đấy / Nói giỡn thôi nha</span>
+      </div>
+      <p class="def-text">Câu đệm sau khi khen quá lời hoặc trêu đùa để chữa ngượng một cách duyên dáng.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Hôm nay nhìn bồ xinh lộng lẫy như hoa hậu luôn á... đùa đấy haha!</div>
+      <div class="card-foot">
+        <span>#농담 #너스레 #유머</span>
+        <span>🔥 Đồng tình 2,980</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': "Kode Rahasia 'Saranghae' Terbalik", 'desc': "Kode cinta rahasia di mana kata 'Saranghae' (Aku cinta kamu) jika dibalik terbaca seperti H워얼V.", 'ex': 'Balik layar HP lu dan baca ini: H워얼V (Artinya cinta kamu lho!)'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">H워얼V</span>
+          <span class="romanized">[사랑해]</span>
+        </div>
+        <span class="slang-badge">Mật mã 'Anh yêu em' đảo ngược</span>
+      </div>
+      <p class="def-text">Mật mã tình yêu độc đáo khi lật ngược chữ tiếng Hàn 'Saranghae' trông giống các ký tự H워얼V.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Lật ngược điện thoại lại mà xem này: H워얼V (Nghĩa là yêu em đó!)</div>
+      <div class="card-foot">
+        <span>#연애 #고백 #암호</span>
+        <span>🔥 Đồng tình 4,720</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Jodoh alami / Anti kencan buta', 'desc': 'Lebih menyukai cinta yang tumbuh secara organik dari lingkungan hobi atau kerja daripada kencan buta.', 'ex': 'Gue lebih suka jodoh yang ketemu alami di komunitas daripada dikenalin orang lain.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">자만추</span>
+          <span class="romanized">[자만추]</span>
+        </div>
+        <span class="slang-badge">Tìm duyên tự nhiên / Ghét mai mối</span>
+      </div>
+      <p class="def-text">Thích để tình yêu nảy nở tự nhiên qua công việc, sở thích chung hơn là hẹn hò sắp đặt.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Đi xem mắt ngượng ngùng lắm, mình thích để duyên đến tự nhiên hơn.</div>
+      <div class="card-foot">
+        <span>#연애 #소개팅 #가치관</span>
+        <span>🔥 Đồng tình 4,820</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Tergantung orangnya / Beda-beda tiap orang', 'desc': 'Menyatakan bahwa pengalaman atau pendapat sangat bervariasi tergantung masing-masing individu.', 'ex': 'Kerja di sana enak gak? Wah itu tergantung orangnya dan timnya masing-masing.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">사바사</span>
+          <span class="romanized">[사바사]</span>
+        </div>
+        <span class="slang-badge">Tùy từng người / Mỗi người mỗi khác</span>
+      </div>
+      <p class="def-text">Mỗi người có tính cách, trải nghiệm và quan điểm khác nhau không thể đánh đồng chung.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Môi trường công ty đó ổn không? Còn tùy từng người và từng sếp nữa bạn ơi.</div>
+      <div class="card-foot">
+        <span>#인간관계 #다양성 #케바케</span>
+        <span>🔥 Đồng tình 3,870</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Info gak penting tapi seru / Kebanyakan info', 'desc': 'Membagikan detail acak yang sepele tentang diri sendiri untuk sekadar mencairkan suasana.', 'ex': 'TMI hari ini: Gue baru sadar kaos kaki gue belang sebelah haha.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">TMI</span>
+          <span class="romanized">[티엠아이]</span>
+        </div>
+        <span class="slang-badge">Thông tin thừa thãi / Chuyện bên lề</span>
+      </div>
+      <p class="def-text">Chia sẻ những chi tiết nhỏ nhặt, riêng tư mà không ai hỏi tới một cách vui vẻ.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>TMI hôm nay: Sáng nay vội quá đi nhầm hai chiếc tất khác màu nhau!</div>
+      <div class="card-foot">
+        <span>#토크 #스몰토크 #일상</span>
+        <span>🔥 Đồng tình 4,510</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Mode santai / Ngomong lu-gue', 'desc': 'Kesepakatan untuk berhenti memakai bahasa formal dan mulai berbicara santai akrab di media sosial.', 'ex': 'Udah sering komenan bareng, yuk ngobrol santai lu-gue aja biar makin akrab!'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">반모</span>
+          <span class="romanized">[반모]</span>
+        </div>
+        <span class="slang-badge">Nói chuyện ngang hàng / Bỏ kính ngữ</span>
+      </div>
+      <p class="def-text">Thỏa thuận nói chuyện thoải mái xưng bạn - tôi không cần dùng kính ngữ khách sáo nữa.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Nói chuyện quen rồi, tụi mình chuyển qua xưng hô ngang hàng cho thân thiết nhé!</div>
+      <div class="card-foot">
+        <span>#친밀함 #SNS #10대</span>
+        <span>🔥 Đồng tình 3,120</span>
+      </div>
+    </div>
+    <div class="word-card" id="word-{'slang': 'Bahagia sederhana / Sukacita kecil', 'desc': 'Kebahagiaan kecil tapi pasti yang dirasakan dari momen-momen sederhana sehari-hari.', 'ex': 'Makan jajanan anget sambil jalan pulang kantor, bahagia sederhana banget rasanya.'}">
+      <div class="card-head">
+        <div>
+          <span class="hangul-title">소확행</span>
+          <span class="romanized">[소화캥]</span>
+        </div>
+        <span class="slang-badge">Hạnh phúc giản đơn / Niềm vui nhỏ bé</span>
+      </div>
+      <p class="def-text">Niềm hạnh phúc nhỏ bé nhưng chắc chắn có thể cảm nhận được từ những khoảnh khắc đời thường.</p>
+      <div class="ex-box">💬 <strong>Ví dụ thực tế:</strong><br>Tan làm mua được chiếc bánh nóng hổi cắn một miếng, hạnh phúc giản đơn là đây chứ đâu.</div>
+      <div class="card-foot">
+        <span>#행복 #힐링 #일상</span>
+        <span>🔥 Đồng tình 7,320</span>
       </div>
     </div>
   </main>
