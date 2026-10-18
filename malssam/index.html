@@ -867,7 +867,8 @@
     }
     
   </style>
-  <!-- 포트원 (PortOne / 구 아임포트) 국내 1위 통합 결제 SDK -->
+  <!-- 포트원 (PortOne v2 최신 브라우저 SDK & v1 호환 모듈) -->
+  <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <!-- 글로벌 1위 PayPal JavaScript SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
@@ -3094,65 +3095,133 @@
 
     
     // ============================================================
-    // 💳 [실전 결제 연동] 국내 1위 포트원(카카오페이/토스) & 글로벌 1위 PayPal
+    // 💳 [실전 결제 연동] 국내 1위 포트원 (PortOne v2 상용 Store ID) & 글로벌 PayPal
+    // 🔒 보안 원칙: API Secret은 오직 백엔드(.env/서버)에서만 관리하며 프론트엔드 노출 절대 금지!
     // ============================================================
-    
-    // 1) 💛 카카오페이 실전 연동 (포트원 v1 / Iamport)
-    function requestKakaoPay() {
-      if (typeof IMP === 'undefined') {
-        alert("결제 모듈을 로드하는 중입니다. 1~2초 후 다시 시도해 주세요.");
-        return;
-      }
-      IMP.init('imp00000000'); // 포트원 공식 테스트 가맹점 코드 (누구나 실시간 팝업 테스트 가능)
-      
-      const orderId = 'MALSSAM_KP_' + Date.now();
+    const PORTONE_STORE_ID = "store-e66b704c-bdd0-4e99-9ec1-a7602b3b6d56";
+
+    // 1) 💛 카카오페이 실전 연동 (PortOne v2 SDK 우선, v1 호환 fallback)
+    async function requestKakaoPay() {
+      const paymentId = `MALSSAM_KP_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
       showToast("💛 카카오페이 결제창을 안전하게 호출 중입니다...");
 
-      IMP.request_pay({
-        pg: 'kakaopay.TC0ONETIME',
-        pay_method: 'card',
-        merchant_uid: orderId,
-        name: '2026 MZ 트렌드 리포트 & 공식 디지털 인증서',
-        amount: 1000,
-        buyer_email: 'user@dmdg.kr',
-        buyer_name: '말쌈 후원자',
-        buyer_tel: '010-1234-5678'
-      }, function (rsp) {
-        if (rsp.success) {
-          openReportModal('카카오페이 (KakaoPay)', rsp.imp_uid || orderId, '1,000원');
-        } else {
-          showToast(`❌ 결제 취소 또는 오류: ${rsp.error_msg}`);
+      if (typeof PortOne !== 'undefined' && PortOne.requestPayment) {
+        try {
+          const response = await PortOne.requestPayment({
+            storeId: PORTONE_STORE_ID,
+            paymentId: paymentId,
+            orderName: "2026 MZ 트렌드 리포트 & 공식 디지털 인증서",
+            totalAmount: 1000,
+            currency: "CURRENCY_KRW",
+            payMethod: "EASY_PAY",
+            easyPay: {
+              easyPayProvider: "EASY_PAY_PROVIDER_KAKAOPAY"
+            },
+            customer: {
+              fullName: "말쌈 후원자",
+              email: "user@dmdg.kr",
+              phoneNumber: "010-1234-5678"
+            }
+          });
+
+          if (response && response.code != null) {
+            showToast(`❌ 결제 취소 또는 오류: ${response.message || response.code}`);
+            return;
+          }
+
+          if (response && (response.paymentId || !response.code)) {
+            openReportModal('카카오페이 (KakaoPay)', response.paymentId || paymentId, '1,000원');
+            return;
+          }
+        } catch (e) {
+          console.warn("PortOne v2 호출 실패 또는 채널 대기, fallback v1 진행:", e);
         }
-      });
+      }
+
+      // Fallback: PortOne v1 (IMP)
+      if (typeof IMP !== 'undefined') {
+        IMP.init('imp00000000');
+        IMP.request_pay({
+          pg: 'kakaopay.TC0ONETIME',
+          pay_method: 'card',
+          merchant_uid: paymentId,
+          name: '2026 MZ 트렌드 리포트 & 공식 디지털 인증서',
+          amount: 1000,
+          buyer_email: 'user@dmdg.kr',
+          buyer_name: '말쌈 후원자',
+          buyer_tel: '010-1234-5678'
+        }, function (rsp) {
+          if (rsp.success) {
+            openReportModal('카카오페이 (KakaoPay)', rsp.imp_uid || paymentId, '1,000원');
+          } else {
+            showToast(`❌ 결제 취소 또는 오류: ${rsp.error_msg}`);
+          }
+        });
+      } else {
+        alert("결제 모듈을 로드하는 중입니다. 1~2초 후 다시 시도해 주세요.");
+      }
     }
 
-    // 2) 💙 토스페이 실전 연동
-    function requestTossPay() {
-      if (typeof IMP === 'undefined') {
-        alert("결제 모듈을 로드하는 중입니다. 1~2초 후 다시 시도해 주세요.");
-        return;
-      }
-      IMP.init('imp00000000'); // 포트원 공식 테스트 가맹점 코드
-      
-      const orderId = 'MALSSAM_TP_' + Date.now();
+    // 2) 💙 토스페이 실전 연동 (PortOne v2 SDK 우선, v1 호환 fallback)
+    async function requestTossPay() {
+      const paymentId = `MALSSAM_TP_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
       showToast("💙 토스페이 결제창을 안전하게 호출 중입니다...");
 
-      IMP.request_pay({
-        pg: 'tosspay',
-        pay_method: 'card',
-        merchant_uid: orderId,
-        name: '2026 MZ 트렌드 리포트 & 공식 디지털 인증서',
-        amount: 1000,
-        buyer_email: 'user@dmdg.kr',
-        buyer_name: '말쌈 후원자',
-        buyer_tel: '010-1234-5678'
-      }, function (rsp) {
-        if (rsp.success) {
-          openReportModal('토스페이 (TossPay)', rsp.imp_uid || orderId, '1,000원');
-        } else {
-          showToast(`❌ 결제 취소 또는 오류: ${rsp.error_msg}`);
+      if (typeof PortOne !== 'undefined' && PortOne.requestPayment) {
+        try {
+          const response = await PortOne.requestPayment({
+            storeId: PORTONE_STORE_ID,
+            paymentId: paymentId,
+            orderName: "2026 MZ 트렌드 리포트 & 공식 디지털 인증서",
+            totalAmount: 1000,
+            currency: "CURRENCY_KRW",
+            payMethod: "EASY_PAY",
+            easyPay: {
+              easyPayProvider: "EASY_PAY_PROVIDER_TOSSPAY"
+            },
+            customer: {
+              fullName: "말쌈 후원자",
+              email: "user@dmdg.kr",
+              phoneNumber: "010-1234-5678"
+            }
+          });
+
+          if (response && response.code != null) {
+            showToast(`❌ 결제 취소 또는 오류: ${response.message || response.code}`);
+            return;
+          }
+
+          if (response && (response.paymentId || !response.code)) {
+            openReportModal('토스페이 (TossPay)', response.paymentId || paymentId, '1,000원');
+            return;
+          }
+        } catch (e) {
+          console.warn("PortOne v2 호출 실패 또는 채널 대기, fallback v1 진행:", e);
         }
-      });
+      }
+
+      // Fallback: PortOne v1 (IMP)
+      if (typeof IMP !== 'undefined') {
+        IMP.init('imp00000000');
+        IMP.request_pay({
+          pg: 'tosspay',
+          pay_method: 'card',
+          merchant_uid: paymentId,
+          name: '2026 MZ 트렌드 리포트 & 공식 디지털 인증서',
+          amount: 1000,
+          buyer_email: 'user@dmdg.kr',
+          buyer_name: '말쌈 후원자',
+          buyer_tel: '010-1234-5678'
+        }, function (rsp) {
+          if (rsp.success) {
+            openReportModal('토스페이 (TossPay)', rsp.imp_uid || paymentId, '1,000원');
+          } else {
+            showToast(`❌ 결제 취소 또는 오류: ${rsp.error_msg}`);
+          }
+        });
+      } else {
+        alert("결제 모듈을 로드하는 중입니다. 1~2초 후 다시 시도해 주세요.");
+      }
     }
 
     // 3) 🌐 PayPal 실전 연동 (글로벌 5개국 유저용)

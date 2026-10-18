@@ -233,3 +233,60 @@ exports.onVoiceDonated = onDocumentCreated("relays/{docId}", async (event) => {
     // 3회 도달 또는 초과 시 보상 없이 트랜잭션 종료
   });
 });
+
+// 4. 포트원(PortOne v2) 실전 결제 사후 위변조 검증 (API Secret 이용 - 서버 사이드 전용)
+// 🔒 보안 원칙: PORTONE_API_SECRET은 서버 환경 변수에서만 로드하며 클라이언트에 노출되지 않습니다.
+exports.verifyPortOnePayment = onCall({
+  secrets: ["PORTONE_API_SECRET"],
+  timeoutSeconds: 30,
+  memory: "256MiB"
+}, async (request) => {
+  const { paymentId, expectedAmount } = request.data || {};
+  if (!paymentId) {
+    throw new HttpsError("invalid-argument", "paymentId가 누락되었습니다.");
+  }
+
+  const apiSecret = process.env.PORTONE_API_SECRET;
+  if (!apiSecret) {
+    throw new HttpsError("failed-precondition", "서버 PORTONE_API_SECRET 환경변수가 구성되지 않았습니다.");
+  }
+
+  try {
+    const response = await fetch(`https://api.portone.io/payments/${encodeURIComponent(paymentId)}`, {
+      method: "GET",
+      headers: {
+        "Authorization": `PortOne ${apiSecret}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error("포트원 결제 조회 실패:", response.status, errText);
+      throw new HttpsError("internal", "포트원 결제 조회에 실패했습니다.");
+    }
+
+    const payment = await response.json();
+    const actualAmount = payment.amount?.total;
+    const status = payment.status;
+
+    if (status !== "PAID") {
+      throw new HttpsError("failed-precondition", `결제 미완료 상태입니다: ${status}`);
+    }
+
+    if (expectedAmount && Number(actualAmount) !== Number(expectedAmount)) {
+      throw new HttpsError("permission-denied", `결제 금액 불일치(위변조 의심): 결제금액(${actualAmount}) != 요청금액(${expectedAmount})`);
+    }
+
+    return {
+      success: true,
+      paymentId: paymentId,
+      paidAmount: actualAmount,
+      status: status,
+      paidAt: payment.paidAt || new Date().toISOString()
+    };
+  } catch (err) {
+    console.error("포트원 결제 검증 중 에러:", err);
+    throw new HttpsError("internal", err.message || "결제 검증 처리 중 오류가 발생했습니다.");
+  }
+});
