@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 06 시뮬레이터: 합성함수 연쇄법칙 & 오차 역전파 (Backpropagation)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(20, 27, 45, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --accent-cyan: #00f0ff;
+      --accent-pink: #ff007f;
+      --accent-yellow: #facc15;
+      --accent-green: #10b981;
+      --accent-blue: #3b82f6;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      padding: 24px;
+      min-height: 100vh;
+      background-image: radial-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .sim-container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000;
+      background: var(--accent-blue);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    h1 span { color: var(--accent-blue); }
+    p.sub { color: var(--muted); font-size: 0.95rem; }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      margin-bottom: 24px;
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    canvas {
+      width: 100%;
+      height: 320px;
+      background: #060911;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+    .ctrl-group { margin-bottom: 14px; }
+    .ctrl-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .ctrl-label b { color: var(--text); font-family: 'JetBrains Mono', monospace; }
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent-blue);
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      cursor: pointer;
+    }
+
+    .stat-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-name { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    .stat-val { font-size: 1.25rem; font-weight: 800; color: var(--accent-blue); font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+
+    .formula-callout {
+      background: rgba(59, 130, 246, 0.08);
+      border-left: 3px solid var(--accent-blue);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .formula-callout code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+<div class="sim-container">
+  <header>
+    <div class="badge">Part 2. 미적분 & 최적화 · Day 06 시뮬레이터</div>
+    <h1>합성함수 연쇄법칙 & <span>오차 역전파 (Backpropagation)</span></h1>
+    <p class="sub">신경망의 계산 그래프(Computation Graph)를 따라 순전파 출력과 역전파 미분값 전달 과정을 시각적으로 추적하세요.</p>
+  </header>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🕸️</span> 신경망 계산 그래프 (순전파: 파란색 ➔ / 역전파: 핑크색 ◀)</div>
+    <canvas id="graphCanvas"></canvas>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-title"><span class="icon">⚙️</span> 입력 파라미터 조작</div>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span>입력 데이터 (x)</span><b id="xVal">2.0</b></div>
+        <input type="range" id="xRange" min="-3" max="3" step="0.5" value="2.0" oninput="updateGraph()">
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span>가중치 (w)</span><b id="wVal">1.5</b></div>
+        <input type="range" id="wRange" min="-3" max="3" step="0.1" value="1.5" oninput="updateGraph()">
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span>편향 (b)</span><b id="bVal">0.5</b></div>
+        <input type="range" id="bRange" min="-3" max="3" step="0.5" value="0.5" oninput="updateGraph()">
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label"><span>정답 타깃 (y_true)</span><b id="yTrueVal">5.0</b></div>
+        <input type="range" id="yTrueRange" min="0" max="10" step="0.5" value="5.0" oninput="updateGraph()">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span> 연쇄법칙 단계별 미분값 (Chain Rule)</div>
+      <div class="stat-box">
+        <div class="stat-card">
+          <div class="stat-name">최종 오차 손실 (L = (y-y_t)²)</div>
+          <div class="stat-val" style="color:var(--accent-yellow);" id="lossVal">2.25</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-name">손실 미분 ∂L/∂y</div>
+          <div class="stat-val" style="color:var(--accent-pink);" id="dLdyVal">-3.00</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-name">가중치 미분 ∂L/∂w</div>
+          <div class="stat-val" style="color:var(--accent-cyan);" id="dLdwVal">-6.00</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-name">편향 미분 ∂L/∂b</div>
+          <div class="stat-val" style="color:var(--accent-green);" id="dLdbVal">-3.00</div>
+        </div>
+      </div>
+
+      <div class="formula-callout">
+        <code>∂L/∂w = (∂L/∂y) × (∂y/∂a) × (∂a/∂z) × (∂z/∂w)</code><br>
+        💡 <b>기울기 소실</b>: 활성화 입력 $z < 0$이면 ReLU 미분값이 0이 되어 역전파 가중치 갱신이 멈춥니다!
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('graphCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resizeCanvas() {
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = 320;
+  }
+  window.addEventListener('resize', () => { resizeCanvas(); updateGraph(); });
+  resizeCanvas();
+
+  function updateGraph() {
+    const x = parseFloat(document.getElementById('xRange').value);
+    const w = parseFloat(document.getElementById('wRange').value);
+    const b = parseFloat(document.getElementById('bRange').value);
+    const yTrue = parseFloat(document.getElementById('yTrueRange').value);
+
+    document.getElementById('xVal').textContent = x.toFixed(1);
+    document.getElementById('wVal').textContent = w.toFixed(1);
+    document.getElementById('bVal').textContent = b.toFixed(1);
+    document.getElementById('yTrueVal').textContent = yTrue.toFixed(1);
+
+    // Forward pass
+    const z = x * w;               // multiply
+    const a = z + b;               // add
+    const yPred = Math.max(0, a);  // ReLU
+    const loss = Math.pow(yPred - yTrue, 2); // MSE
+
+    // Backward pass (Chain rule)
+    const dL_dy = 2 * (yPred - yTrue);
+    const dy_da = (a > 0) ? 1.0 : 0.0; // ReLU derivative
+    const da_dz = 1.0;
+    const dz_dw = x;
+    const da_db = 1.0;
+
+    const dL_dw = dL_dy * dy_da * da_dz * dz_dw;
+    const dL_db = dL_dy * dy_da * da_db;
+
+    document.getElementById('lossVal').textContent = loss.toFixed(2);
+    document.getElementById('dLdyVal').textContent = dL_dy.toFixed(2);
+    document.getElementById('dLdwVal').textContent = dL_dw.toFixed(2);
+    document.getElementById('dLdbVal').textContent = dL_db.toFixed(2);
+
+    drawGraph(x, w, b, z, a, yPred, loss, dL_dy, dy_da, dL_dw, dL_db);
+  }
+
+  function drawGraph(x, w, b, z, a, yPred, loss, dL_dy, dy_da, dL_dw, dL_db) {
+    const cw = canvas.width;
+    const ch = canvas.height;
+    ctx.clearRect(0, 0, cw, ch);
+
+    // Node coordinates
+    const nodes = [
+      { name: "Input (x)", val: x.toFixed(1), grad: "", x: cw * 0.1, y: ch * 0.35, color: "#3b82f6" },
+      { name: "Weight (w)", val: w.toFixed(1), grad: `∂L/∂w=${dL_dw.toFixed(2)}`, x: cw * 0.1, y: ch * 0.75, color: "#00f0ff" },
+      { name: "Mult (z=x·w)", val: z.toFixed(1), grad: "", x: cw * 0.32, y: ch * 0.5, color: "#a855f7" },
+      { name: "Bias (b)", val: b.toFixed(1), grad: `∂L/∂b=${dL_db.toFixed(2)}`, x: cw * 0.45, y: ch * 0.82, color: "#10b981" },
+      { name: "Add (a=z+b)", val: a.toFixed(1), grad: `da=${dy_da.toFixed(1)}`, x: cw * 0.55, y: ch * 0.5, color: "#f97316" },
+      { name: "ReLU (ŷ)", val: yPred.toFixed(1), grad: `∂L/∂ŷ=${dL_dy.toFixed(2)}`, x: cw * 0.76, y: ch * 0.5, color: "#facc15" },
+      { name: "Loss (L)", val: loss.toFixed(2), grad: "1.0", x: cw * 0.92, y: ch * 0.5, color: "#ff007f" }
+    ];
+
+    // Draw connecting arrows
+    drawEdge(nodes[0], nodes[2], "#3b82f6", "#ff007f");
+    drawEdge(nodes[1], nodes[2], "#00f0ff", "#ff007f");
+    drawEdge(nodes[2], nodes[4], "#a855f7", "#ff007f");
+    drawEdge(nodes[3], nodes[4], "#10b981", "#ff007f");
+    drawEdge(nodes[4], nodes[5], "#f97316", "#ff007f");
+    drawEdge(nodes[5], nodes[6], "#facc15", "#ff007f");
+
+    // Draw node cards
+    nodes.forEach(n => {
+      ctx.fillStyle = "rgba(20, 27, 45, 0.95)";
+      ctx.strokeStyle = n.color;
+      ctx.lineWidth = 2;
+      const boxW = 86, boxH = 50;
+      ctx.beginPath();
+      ctx.roundRect(n.x - boxW/2, n.y - boxH/2, boxW, boxH, 8);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = n.color;
+      ctx.font = 'bold 11px "JetBrains Mono"';
+      ctx.textAlign = "center";
+      ctx.fillText(n.name, n.x, n.y - 8);
+
+      ctx.fillStyle = "#fff";
+      ctx.font = 'bold 13px "JetBrains Mono"';
+      ctx.fillText(n.val, n.x, n.y + 12);
+
+      if (n.grad) {
+        ctx.fillStyle = "#ff007f";
+        ctx.font = '10px "JetBrains Mono"';
+        ctx.fillText(n.grad, n.x, n.y + 36);
+      }
+    });
+  }
+
+  function drawEdge(from, to, forwardColor, backwardColor) {
+    ctx.strokeStyle = forwardColor;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(from.x + 40, from.y);
+    ctx.lineTo(to.x - 40, to.y);
+    ctx.stroke();
+  }
+
+  updateGraph();
+</script>
+
+</body>
+</html>

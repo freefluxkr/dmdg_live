@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 08 시뮬레이터: 최적화 알고리즘 (AdamW) & XGBoost 2차 테일러</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(20, 27, 45, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --accent-cyan: #00f0ff;
+      --accent-pink: #ff007f;
+      --accent-yellow: #facc15;
+      --accent-green: #10b981;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      padding: 24px;
+      min-height: 100vh;
+      background-image: radial-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .sim-container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000;
+      background: var(--accent-cyan);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    h1 span { color: var(--accent-cyan); }
+    p.sub { color: var(--muted); font-size: 0.95rem; }
+
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(16, 185, 129, 0.2));
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    canvas {
+      width: 100%;
+      height: 380px;
+      background: #060911;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .btn {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: rgba(0, 240, 255, 0.2); border-color: var(--accent-cyan); }
+    .btn.primary { background: var(--accent-cyan); color: #000; border: none; }
+
+    .stat-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .stat-card {
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+    .stat-name { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    .stat-val { font-size: 1.15rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+
+    .formula-callout {
+      background: rgba(0, 240, 255, 0.08);
+      border-left: 3px solid var(--accent-cyan);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .formula-callout code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+<div class="sim-container">
+  <header>
+    <div class="badge">Part 2. 미적분 & 최적화 · Day 08 시뮬레이터</div>
+    <h1>옵티마이저 레이스 (AdamW) & <span>XGBoost 2차 테일러</span></h1>
+    <p class="sub">협곡(Ravine) 지형에서 SGD, Momentum, AdamW의 학습 궤적 레이스와 2차 곡률(Hessian)을 활용하는 XGBoost의 수학을 탐험하세요.</p>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-race')">🏁 1. 옵티마이저 3자 레이스 (협곡 탈출)</button>
+    <button class="tab-btn" onclick="switchTab('tab-taylor')">📈 2. XGBoost 2차 테일러 급수 근사</button>
+  </div>
+
+  <!-- TAB 1: OPTIMIZER RACE -->
+  <div id="tab-race" class="tab-content active">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">🏔️</span> 좁고 깊은 협곡 손실 평면 (f = 0.1 x² + 2 y²)</div>
+        <canvas id="raceCanvas"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">⚙️</span> 레이스 관제탑</div>
+        <div class="btn-row">
+          <button class="btn primary" onclick="startRace()">🚀 레이스 시작</button>
+          <button class="btn" onclick="resetRace()">🔄 원점 리셋</button>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name" style="color:#ef4444;">SGD (빨강)</div>
+            <div class="stat-val" style="color:#ef4444;" id="sgdSteps">진동 중...</div>
+            <span style="font-size:0.7rem; color:var(--muted);">심한 진동</span>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name" style="color:#facc15;">Momentum (노랑)</div>
+            <div class="stat-val" style="color:#facc15;" id="momSteps">관성 가속</div>
+            <span style="font-size:0.7rem; color:var(--muted);">진동 감쇠</span>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name" style="color:#00f0ff;">AdamW (시안)</div>
+            <div class="stat-val" style="color:#00f0ff;" id="adamSteps">최단 탈출!</div>
+            <span style="font-size:0.7rem; color:var(--muted);">적응형 학습률</span>
+          </div>
+        </div>
+
+        <div class="formula-callout">
+          💡 <b>협곡 문제(Ravine Problem)</b>: $y$축 방향은 경사가 가파르고, $x$축 목표 지점은 완만합니다.<br>
+          • <b>SGD</b>: 벽면 사이를 지그재그로 튕겨 다니느라 전진하지 못함.<br>
+          • <b>Momentum</b>: 이전 속도 벡터의 관성으로 지그재그 진동을 상쇄.<br>
+          • <b>AdamW</b>: 1차 모멘텀(방향) + 2차 모멘텀(학습률 스케일링) + 가중치 감쇠 분리로 가장 빠르게 골인!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: TAYLOR EXPANSION -->
+  <div id="tab-taylor" class="tab-content">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">📐</span> 1차(기울기) vs 2차(곡률 포물선) 테일러 근사</div>
+        <canvas id="taylorCanvas"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">💡</span> XGBoost 부스팅의 2차 테일러 비결</div>
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name">1차 그래디언트 (g)</div>
+            <div class="stat-val" style="color:var(--accent-yellow);" id="gVal">-2.40</div>
+            <span style="font-size:0.7rem; color:var(--muted);">경사(기울기)</span>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">2차 헤시안 (h)</div>
+            <div class="stat-val" style="color:var(--accent-green);" id="hVal">+1.80</div>
+            <span style="font-size:0.7rem; color:var(--muted);">곡률(볼록한 정도)</span>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">최적 스텝 (Δw*)</div>
+            <div class="stat-val" style="color:var(--accent-cyan);" id="stepVal">+1.33</div>
+            <span style="font-size:0.7rem; color:var(--muted);">-g / h 단번에 도달!</span>
+          </div>
+        </div>
+
+        <div class="formula-callout" style="margin-top: 18px;">
+          <code>f(x + Δx) ≈ f(x) + g · Δx + ½ h · (Δx)²</code><br><br>
+          💡 <b>XGBoost의 천재성</b>: 일반 경사하강법은 조금씩 걸어가지만, XGBoost는 손실함수의 <b>2차 미분(곡률 $h$)</b>까지 계산하여 포물선의 꼭짓점($\Delta w^* = -g / h$)을 단 한 번의 수식으로 찾아내어 트리를 분기합니다!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+    if (tabId === 'tab-race') drawRace();
+    if (tabId === 'tab-taylor') drawTaylor();
+  }
+
+  // Race Canvas Logic
+  const rCanvas = document.getElementById('raceCanvas');
+  const rCtx = rCanvas.getContext('2d');
+
+  function resizeRCanvas() {
+    rCanvas.width = rCanvas.parentElement.clientWidth;
+    rCanvas.height = 380;
+  }
+  window.addEventListener('resize', () => { resizeRCanvas(); drawRace(); });
+  resizeRCanvas();
+
+  let sgd = { x: -4.0, y: 3.0, hist: [] };
+  let mom = { x: -4.0, y: 3.0, vx: 0, vy: 0, hist: [] };
+  let adam = { x: -4.0, y: 3.0, m_x: 0, m_y: 0, v_x: 0, v_y: 0, t: 0, hist: [] };
+  let raceTimer = null;
+
+  function resetRace() {
+    if (raceTimer) clearInterval(raceTimer);
+    sgd = { x: -4.0, y: 3.0, hist: [{x: -4.0, y: 3.0}] };
+    mom = { x: -4.0, y: 3.0, vx: 0, vy: 0, hist: [{x: -4.0, y: 3.0}] };
+    adam = { x: -4.0, y: 3.0, m_x: 0, m_y: 0, v_x: 0, v_y: 0, t: 0, hist: [{x: -4.0, y: 3.0}] };
+    document.getElementById('sgdSteps').textContent = "대기";
+    document.getElementById('momSteps').textContent = "대기";
+    document.getElementById('adamSteps').textContent = "대기";
+    drawRace();
+  }
+
+  function startRace() {
+    resetRace();
+    let step = 0;
+    raceTimer = setInterval(() => {
+      step++;
+      // Loss: f = 0.1 x^2 + 2 y^2 -> gx = 0.2 x, gy = 4 y
+      // SGD
+      const sgd_gx = 0.2 * sgd.x, sgd_gy = 4.0 * sgd.y;
+      sgd.x -= 0.12 * sgd_gx;
+      sgd.y -= 0.12 * sgd_gy;
+      sgd.hist.push({ x: sgd.x, y: sgd.y });
+
+      // Momentum
+      const mom_gx = 0.2 * mom.x, mom_gy = 4.0 * mom.y;
+      mom.vx = 0.85 * mom.vx + 0.08 * mom_gx;
+      mom.vy = 0.85 * mom.vy + 0.08 * mom_gy;
+      mom.x -= mom.vx;
+      mom.y -= mom.vy;
+      mom.hist.push({ x: mom.x, y: mom.y });
+
+      // AdamW
+      adam.t += 1;
+      const adam_gx = 0.2 * adam.x, adam_gy = 4.0 * adam.y;
+      adam.m_x = 0.9 * adam.m_x + 0.1 * adam_gx;
+      adam.m_y = 0.9 * adam.m_y + 0.1 * adam_gy;
+      adam.v_x = 0.99 * adam.v_x + 0.01 * (adam_gx * adam_gx);
+      adam.v_y = 0.99 * adam.v_y + 0.01 * (adam_gy * adam_gy);
+
+      const m_x_hat = adam.m_x / (1 - Math.pow(0.9, adam.t));
+      const m_y_hat = adam.m_y / (1 - Math.pow(0.9, adam.t));
+      const v_x_hat = adam.v_x / (1 - Math.pow(0.99, adam.t));
+      const v_y_hat = adam.v_y / (1 - Math.pow(0.99, adam.t));
+
+      adam.x -= (0.2 / (Math.sqrt(v_x_hat) + 1e-6)) * m_x_hat;
+      adam.y -= (0.2 / (Math.sqrt(v_y_hat) + 1e-6)) * m_y_hat;
+      adam.hist.push({ x: adam.x, y: adam.y });
+
+      if (Math.abs(adam.x) < 0.2 && Math.abs(adam.y) < 0.2 && document.getElementById('adamSteps').textContent === "대기") {
+        document.getElementById('adamSteps').textContent = `${step}스텝 골인! 🏆`;
+      }
+      if (Math.abs(mom.x) < 0.2 && Math.abs(mom.y) < 0.2 && document.getElementById('momSteps').textContent === "대기") {
+        document.getElementById('momSteps').textContent = `${step}스텝 골인! 🥈`;
+      }
+
+      drawRace();
+
+      if (step >= 60) {
+        clearInterval(raceTimer);
+        if (document.getElementById('sgdSteps').textContent === "대기") {
+          document.getElementById('sgdSteps').textContent = "진동 탈진 ❌";
+        }
+      }
+    }, 60);
+  }
+
+  function drawRace() {
+    const w = rCanvas.width;
+    const h = rCanvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+    const scale = 36;
+
+    rCtx.clearRect(0, 0, w, h);
+
+    // Draw Ravine contours (elongated horizontal ellipses)
+    [1, 4, 9, 16, 25, 36].forEach(val => {
+      const rx = Math.sqrt(val / 0.1) * (scale * 0.55);
+      const ry = Math.sqrt(val / 2.0) * scale;
+      rCtx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+      rCtx.beginPath();
+      rCtx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      rCtx.stroke();
+    });
+
+    // Goal
+    rCtx.fillStyle = '#10b981';
+    rCtx.beginPath(); rCtx.arc(cx, cy, 6, 0, Math.PI * 2); rCtx.fill();
+    rCtx.font = 'bold 11px "JetBrains Mono"';
+    rCtx.fillText("목표 골인점 (0, 0)", cx + 10, cy + 4);
+
+    // Trails
+    drawTrail(sgd.hist, '#ef4444', cx, cy, scale);
+    drawTrail(mom.hist, '#facc15', cx, cy, scale);
+    drawTrail(adam.hist, '#00f0ff', cx, cy, scale);
+
+    // Current Balls
+    drawBall(sgd.x, sgd.y, '#ef4444', cx, cy, scale);
+    drawBall(mom.x, mom.y, '#facc15', cx, cy, scale);
+    drawBall(adam.x, adam.y, '#00f0ff', cx, cy, scale);
+  }
+
+  function drawTrail(hist, color, cx, cy, scale) {
+    if (hist.length < 2) return;
+    rCtx.strokeStyle = color;
+    rCtx.lineWidth = 2;
+    rCtx.beginPath();
+    rCtx.moveTo(cx + hist[0].x * scale, cy - hist[0].y * scale);
+    for (let i = 1; i < hist.length; i++) {
+      rCtx.lineTo(cx + hist[i].x * scale, cy - hist[i].y * scale);
+    }
+    rCtx.stroke();
+  }
+
+  function drawBall(x, y, color, cx, cy, scale) {
+    rCtx.fillStyle = color;
+    rCtx.beginPath();
+    rCtx.arc(cx + x * scale, cy - y * scale, 5, 0, Math.PI * 2);
+    rCtx.fill();
+  }
+
+  // Taylor Canvas Logic
+  const tCanvas = document.getElementById('taylorCanvas');
+  const tCtx = tCanvas.getContext('2d');
+
+  function resizeTCanvas() {
+    tCanvas.width = tCanvas.parentElement.clientWidth;
+    tCanvas.height = 380;
+  }
+  window.addEventListener('resize', () => { resizeTCanvas(); drawTaylor(); });
+  resizeTCanvas();
+
+  function drawTaylor() {
+    const w = tCanvas.width;
+    const h = tCanvas.height;
+    const cx = w / 2;
+    const cy = h / 2 + 50;
+    const scale = 50;
+
+    tCtx.clearRect(0, 0, w, h);
+
+    // Draw Axes
+    tCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    tCtx.beginPath(); tCtx.moveTo(0, cy); tCtx.lineTo(w, cy); tCtx.stroke();
+    tCtx.beginPath(); tCtx.moveTo(cx, 0); tCtx.lineTo(cx, h); tCtx.stroke();
+
+    // Actual function: f(x) = 0.5 x^4 - 2 x^2 + 2
+    // Let expansion point be x0 = 1.6
+    const x0 = 1.6;
+    const f = (x) => 0.5 * Math.pow(x, 4) - 2 * Math.pow(x, 2) + 2;
+    const f_prime = (x) => 2 * Math.pow(x, 3) - 4 * x;       // g
+    const f_double = (x) => 6 * Math.pow(x, 2) - 4;          // h
+
+    const g = f_prime(x0);
+    const h_val = f_double(x0);
+    const y0 = f(x0);
+
+    // 1. Draw True f(x) (White)
+    tCtx.strokeStyle = '#ffffff';
+    tCtx.lineWidth = 2.5;
+    tCtx.beginPath();
+    for (let px = 0; px < w; px++) {
+      const rx = (px - cx) / scale;
+      const ry = f(rx);
+      const py = cy - ry * scale;
+      if (px === 0) tCtx.moveTo(px, py); else tCtx.lineTo(px, py);
+    }
+    tCtx.stroke();
+
+    // 2. Draw 1st Taylor (Yellow line: f(x0) + g*(x - x0))
+    tCtx.strokeStyle = '#facc15';
+    tCtx.lineWidth = 2;
+    tCtx.beginPath();
+    for (let px = cx + (x0 - 1.2) * scale; px < cx + (x0 + 1.2) * scale; px++) {
+      const rx = (px - cx) / scale;
+      const ry = y0 + g * (rx - x0);
+      const py = cy - ry * scale;
+      if (px === cx + (x0 - 1.2) * scale) tCtx.moveTo(px, py); else tCtx.lineTo(px, py);
+    }
+    tCtx.stroke();
+
+    // 3. Draw 2nd Taylor (Cyan parabola: f(x0) + g*(x - x0) + 0.5*h*(x-x0)^2)
+    tCtx.strokeStyle = '#00f0ff';
+    tCtx.lineWidth = 2.5;
+    tCtx.beginPath();
+    for (let px = cx + (x0 - 1.5) * scale; px < cx + (x0 + 1.5) * scale; px++) {
+      const rx = (px - cx) / scale;
+      const ry = y0 + g * (rx - x0) + 0.5 * h_val * Math.pow(rx - x0, 2);
+      const py = cy - ry * scale;
+      if (px === cx + (x0 - 1.5) * scale) tCtx.moveTo(px, py); else tCtx.lineTo(px, py);
+    }
+    tCtx.stroke();
+
+    // Point x0
+    tCtx.fillStyle = '#ff007f';
+    tCtx.beginPath(); tCtx.arc(cx + x0 * scale, cy - y0 * scale, 6, 0, Math.PI * 2); tCtx.fill();
+
+    // Stats
+    document.getElementById('gVal').textContent = g.toFixed(2);
+    document.getElementById('hVal').textContent = h_val.toFixed(2);
+    document.getElementById('stepVal').textContent = (-g / h_val).toFixed(2);
+  }
+
+  resetRace();
+  drawTaylor();
+</script>
+
+</body>
+</html>
