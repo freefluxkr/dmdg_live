@@ -1206,6 +1206,210 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.6; }
     }
+  
+    /* 🔥 오늘의 말쌈 배틀 (Live Battle #01) */
+    .live-battle-section {
+      max-width: 900px;
+      margin: 10px auto 24px;
+      padding: 0 20px;
+    }
+    .live-battle-card {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.15) 0%, rgba(30, 27, 75, 0.8) 50%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1.5px solid rgba(244, 63, 94, 0.4);
+      border-radius: 20px;
+      padding: 24px 26px;
+      box-shadow: 0 10px 30px rgba(244, 63, 94, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .live-battle-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f43f5e;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .live-battle-q {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .live-battle-desc {
+      font-size: 0.86rem;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+    }
+    .live-battle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 640px) {
+      .live-battle-grid { grid-template-columns: 1fr; }
+    }
+    .live-vote-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .live-vote-btn:hover {
+      background: rgba(51, 65, 85, 0.9);
+      border-color: #f43f5e;
+      transform: translateY(-2px);
+    }
+    .live-vote-btn.voted {
+      border-color: var(--accent-yellow);
+      background: rgba(250, 204, 21, 0.1);
+    }
+    .live-vote-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .live-vote-gauge-wrap {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .live-vote-gauge {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .gauge-a { background: #f43f5e; width: 76%; }
+    .gauge-b { background: #38bdf8; width: 24%; }
+    .live-vote-pct {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    /* 🔍 카카오톡 말풍선 Mockup 카드 */
+    .kakao-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      transition: all 0.2s;
+    }
+    .kakao-card:hover {
+      border-color: rgba(250, 204, 21, 0.4);
+      transform: translateY(-2px);
+    }
+    .kakao-chat-room {
+      background: #1e293b;
+      border-radius: 14px;
+      padding: 16px;
+      margin: 14px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .bubble-row-other {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .bubble-row-me {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .avatar-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .bubble-other {
+      background: #ffffff;
+      color: #0f172a;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border-top-left-radius: 2px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      max-width: 75%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      line-height: 1.45;
+    }
+    .bubble-me {
+      background: #fee500;
+      color: #111827;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border-top-right-radius: 2px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      max-width: 75%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      line-height: 1.45;
+    }
+    .traffic-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+    .traffic-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .traffic-yellow { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .traffic-red { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .btn-kakao-request {
+      background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 10px rgba(244, 63, 94, 0.3);
+    }
+    .btn-kakao-request:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(244, 63, 94, 0.5);
+    }
+
   </style>
 
   <!-- 포트원 (PortOne v2 브라우저 SDK) -->
@@ -1308,6 +1512,10 @@
           <a href="global/id.html" class="lang-pill" title="Indonesian Edition">🇮🇩 ID</a>
           <a href="global/es.html" class="lang-pill" title="Spanish Edition">🇪🇸 ES</a>
         </nav>
+        <button class="btn-kakao-request" onclick="openKakaoModal()">
+          <span>💬</span>
+          <span>카톡 판독 요청</span>
+        </button>
         <button class="btn-add" onclick="openAddModal()">
           <span>+</span>
           <span>신조어 제보하기</span>
@@ -1343,6 +1551,46 @@
   </section>
 
   <!-- ⚔️ 바이럴 킬러 콘텐츠: 세대 공감 배틀 퀴즈 (Family & Office Battle) -->
+    <!-- 🔥 오늘의 말쌈 배틀 (LIVE BATTLE #01) -->
+  <section class="live-battle-section">
+    <div class="live-battle-card">
+      <div class="live-battle-tag">🔥 LIVE BATTLE #01 · 실시간 말투 밸런스 게임</div>
+      <h2 class="live-battle-q">팀장님 공지에 신입이 <span style="color:#facc15;">"네."</span>라고 답장했다면?</h2>
+      <p class="live-battle-desc">물결(`~`)이나 느낌표(`!`) 없이 마침표만 찍힌 단답, 과연 사회생활 마이너스일까요?</p>
+
+      <div class="live-battle-grid">
+        <div class="live-vote-btn" id="liveBtnA" onclick="voteLiveBattle('A')">
+          <div class="live-vote-title">🅰️ 마침표는 차갑고 화난 것 같다… '넵!' 또는 '네~'가 기본이다</div>
+          <div>
+            <div class="live-vote-pct">
+              <span id="livePctA">76% 투표</span>
+              <span style="color:#f43f5e; font-weight:800;">예의중시파</span>
+            </div>
+            <div class="live-vote-gauge-wrap">
+              <div class="live-vote-gauge gauge-a" id="liveGaugeA"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="live-vote-btn" id="liveBtnB" onclick="voteLiveBattle('B')">
+          <div class="live-vote-title">🅱️ 맞춤법 맞게 대답한 건데 뭐가 문제? 마침표 과몰입 금지</div>
+          <div>
+            <div class="live-vote-pct">
+              <span id="livePctB">24% 투표</span>
+              <span style="color:#38bdf8; font-weight:800;">효율실용파</span>
+            </div>
+            <div class="live-vote-gauge-wrap">
+              <div class="live-vote-gauge gauge-b" id="liveGaugeB"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="liveVoteResultMsg" style="margin-top:12px; font-size:0.8rem; color:#facc15; font-weight:700; display:none; text-align:center;">
+        ✨ 집단지성 투표 반영 완료! (현재 참여자: 1,429명) — 카톡 단톡방에 공유하고 동료 의견도 확인해보세요!
+      </div>
+    </div>
+  </section>
+
   <section class="battle-banner">
     <div class="battle-banner-inner">
       <div class="battle-header">
@@ -1405,6 +1653,10 @@
       <button class="era-tab-btn" onclick="switchEra('shorts')">
         <span class="era-main">⚡ 3. 요즘 1020 밈</span>
         <span class="era-sub" id="countShorts">2020~2026 (42)</span>
+      </button>
+      <button class="era-tab-btn" id="tabKakaoBtn" onclick="switchEra('kakao')">
+        <span class="era-main">💬 4. 카톡 판독소</span>
+        <span class="era-sub" id="countKakao">BEST 6선 & 의뢰</span>
       </button>
     </div>
   </section>
@@ -7046,6 +7298,241 @@
       applyFilterAndRender();
     }
 
+    
+    // ==========================================
+    // 💬 카톡 판독소 SEED DATA (기획안 6대 핵심 에피소드)
+    // ==========================================
+    const KAKAO_SEED_CARDS = [
+      {
+        id: "kakao_1",
+        cat: "썸 / 연애",
+        title: "약속 시간 물어봤는데 상대방이 '영ㅋㅋ'라고만 답장함",
+        sender: "썸녀/썸남",
+        senderBubble: "약속 시간 3시 어때요?",
+        myBubble: "영ㅋㅋ",
+        optA: "'응ㅋㅋ / 엉ㅋㅋ' 치려다 난 순수 오타다",
+        optB: "'영 별로다ㅋㅋ'의 줄임말(거리두기)이다",
+        pctA: 82, pctB: 18, votes: 342,
+        traffic: "yellow", trafficLabel: "맥락주의 🟡"
+      },
+      {
+        id: "kakao_2",
+        cat: "썸 / 연애",
+        title: "밤 11시에 평소 쿨하던 이성 친구가 'H워얼V' 다섯 글자만 보냄",
+        sender: "이성 친구",
+        senderBubble: "자니?",
+        myBubble: "H워얼V",
+        optA: "스마트폰 뒤집으면 '사랑해'! 빼박 그린라이트다",
+        optB: "숏폼 릴스 보고 따라 한 단순 텍스트 장난이다",
+        pctA: 89, pctB: 11, votes: 521,
+        traffic: "green", trafficLabel: "친근함 🟢"
+      },
+      {
+        id: "kakao_3",
+        cat: "썸 / 연애",
+        title: "소개팅 애프터 신청 후: '제가 이번 주는 약속이 많아서요ㅠㅠ'",
+        sender: "소개팅 상대",
+        senderBubble: "이번 주말에 맛있는 거 먹으러 갈까요?",
+        myBubble: "제가 이번 주는 약속이 너무 많아서요ㅠㅠ",
+        optA: "'다음 주에 보자'는 말 없으면 100% 정중한 거절이다",
+        optB: "진짜 바쁠 수 있으니 다음 주 초에 딱 한 번 더 떠본다",
+        pctA: 85, pctB: 15, votes: 890,
+        traffic: "red", trafficLabel: "거절위험 🔴"
+      },
+      {
+        id: "kakao_4",
+        cat: "직장 / 비즈니스",
+        title: "업무 메일의 '금일 오후까지 제출 바랍니다', 금요일인 줄 알았어요",
+        sender: "팀장님",
+        senderBubble: "기획안 수정본 금일 18시까지 제출 바랍니다.",
+        myBubble: "넵! 금요일까지 준비하겠습니다.",
+        optA: "'금일·명일'은 기본 상식이다! 모르면 배워서 써야 한다",
+        optB: "오해 소지가 있으면 직관적으로 '오늘(10/19)'이라 쓰는 게 맞다",
+        pctA: 62, pctB: 38, votes: 1240,
+        traffic: "yellow", trafficLabel: "상식논쟁 🟡"
+      },
+      {
+        id: "kakao_5",
+        cat: "직장 / 일상",
+        title: "안 친한 타 부서 동료 결혼식 불참 시 축의금 카톡 멘트",
+        sender: "직장 동료",
+        senderBubble: "[모바일 청첩장] 저 결혼합니다^^",
+        myBubble: "선약이 있어 참석 못 해 너무 아쉽네요ㅠㅠ 축의금 보냅니다!",
+        optA: "선약 핑계라도 대며 사유를 정중히 덧붙이는 게 예의다",
+        optB: "안 궁금한 변명 생략하고 '결혼 축하드립니다!'만 깔끔히 보낸다",
+        pctA: 45, pctB: 55, votes: 670,
+        traffic: "green", trafficLabel: "비즈니스 🟢"
+      },
+      {
+        id: "kakao_6",
+        cat: "중고거래 / 당근",
+        title: "가격제안 불가 상품에 '쿨거래 시 네고 되나요?'",
+        sender: "당근 구매자",
+        senderBubble: "쿨거래 할 건데 2만 원 깎아주실 수 있나요?",
+        myBubble: "죄송합니다, 이미 최저가라 네고는 어렵습니다^^",
+        optA: "정중파: '죄송합니다, 이미 최저가라 어렵습니다^^'",
+        optB: "단호파: '안 팔리면 제가 알아서 가격 내릴게요~'",
+        pctA: 72, pctB: 28, votes: 489,
+        traffic: "yellow", trafficLabel: "네고대처 🟡"
+      }
+    ];
+
+    // Live Battle Vote Logic
+    function voteLiveBattle(choice) {
+      const elMsg = document.getElementById('liveVoteResultMsg');
+      const btnA = document.getElementById('liveBtnA');
+      const btnB = document.getElementById('liveBtnB');
+      
+      btnA.classList.remove('voted');
+      btnB.classList.remove('voted');
+
+      if (choice === 'A') {
+        btnA.classList.add('voted');
+        document.getElementById('livePctA').innerText = '77% (내 선택)';
+        document.getElementById('livePctB').innerText = '23%';
+        document.getElementById('liveGaugeA').style.width = '77%';
+        document.getElementById('liveGaugeB').style.width = '23%';
+        showToast('🅰️ "마침표는 차갑다" 선택 완료! 당신은 상위 12% 예의중시파입니다.');
+      } else {
+        btnB.classList.add('voted');
+        document.getElementById('livePctA').innerText = '75%';
+        document.getElementById('livePctB').innerText = '25% (내 선택)';
+        document.getElementById('liveGaugeA').style.width = '75%';
+        document.getElementById('liveGaugeB').style.width = '25%';
+        showToast('🅱️ "맞춤법 맞다" 선택 완료! 당신은 상위 18% 효율실용파입니다.');
+      }
+      elMsg.style.display = 'block';
+      localStorage.setItem('malssam_live_battle_01', choice);
+    }
+
+    // Kakao Card Vote Logic
+    function voteKakao(cardId, choice) {
+      const key = 'voted_' + cardId;
+      if (localStorage.getItem(key)) {
+        showToast('이미 투표에 참여하셨습니다!');
+        return;
+      }
+      localStorage.setItem(key, choice);
+      showToast(`✨ 판독 투표 완료! 집단지성에 기여하셨습니다.`);
+      
+      const elPctA = document.getElementById('pctA_' + cardId);
+      const elPctB = document.getElementById('pctB_' + cardId);
+      const elBarA = document.getElementById('barA_' + cardId);
+      const elBarB = document.getElementById('barB_' + cardId);
+      
+      if (choice === 'A') {
+        elPctA.innerText = parseInt(elPctA.innerText) + 1 + '% (내 선택)';
+        elBarA.style.width = (parseInt(elBarA.style.width) + 1) + '%';
+      } else {
+        elPctB.innerText = parseInt(elPctB.innerText) + 1 + '% (내 선택)';
+        elBarB.style.width = (parseInt(elBarB.style.width) + 1) + '%';
+      }
+    }
+
+    // Kakao Modal
+    function openKakaoModal() {
+      document.getElementById('kakaoModal').classList.add('active');
+    }
+    function closeKakaoModal() {
+      document.getElementById('kakaoModal').classList.remove('active');
+    }
+
+    function submitKakaoRequest(e) {
+      e.preventDefault();
+      const cat = document.getElementById('kakaoCat').value;
+      const title = document.getElementById('kakaoTitle').value.trim();
+      let text = document.getElementById('kakaoText').value.trim();
+      const optA = document.getElementById('kakaoOptA').value.trim();
+      const optB = document.getElementById('kakaoOptB').value.trim();
+
+      // Simple auto-masking guardrail
+      text = text.replace(/010[- ]?\d{4}[- ]?\d{4}/g, '010-****-****');
+
+      const customCard = {
+        id: 'custom_' + Date.now(),
+        cat: cat,
+        title: title,
+        sender: '상대방',
+        senderBubble: '최근 대화 상황',
+        myBubble: text,
+        optA: optA,
+        optB: optB,
+        pctA: 50, pctB: 50, votes: 1,
+        traffic: 'green', trafficLabel: '신규등록 🟢'
+      };
+
+      let customList = JSON.parse(localStorage.getItem('malssam_kakao_user_cards') || '[]');
+      customList.unshift(customCard);
+      localStorage.setItem('malssam_kakao_user_cards', JSON.stringify(customList));
+
+      closeKakaoModal();
+      showToast('🎉 카톡 판독 의뢰가 등록되었습니다! 판독소 탭에서 확인하세요.');
+      switchEra('kakao');
+    }
+
+    // Render Kakao Decoder Cards
+    function renderKakaoFeed() {
+      const container = document.getElementById('wordsContainer');
+      const userCards = JSON.parse(localStorage.getItem('malssam_kakao_user_cards') || '[]');
+      const allKakao = [...userCards, ...KAKAO_SEED_CARDS];
+
+      document.getElementById('feedTitleText').innerText = '실시간 카톡 맥락 판독소';
+      document.getElementById('feedCountBadge').innerText = allKakao.length + '개 안건';
+
+      let html = '';
+      allKakao.forEach(item => {
+        html += `
+          <div class="kakao-card" id="card_${item.id}">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="word-badge badge-hot">${item.cat}</span>
+                <span class="traffic-pill traffic-${item.traffic}">${item.trafficLabel}</span>
+              </div>
+              <span style="font-size:0.75rem; color:#94a3b8;">참여: ${item.votes}명</span>
+            </div>
+            
+            <h3 style="font-size:1.15rem; font-weight:800; color:#f8fafc; margin-bottom:10px;">${item.title}</h3>
+
+            <!-- Kakao Mockup Bubble -->
+            <div class="kakao-chat-room">
+              <div class="bubble-row-other">
+                <div class="avatar-circle" style="background:#64748b;">상대</div>
+                <div class="bubble-other">${item.senderBubble}</div>
+              </div>
+              <div class="bubble-row-me">
+                <div class="bubble-me">${item.myBubble}</div>
+              </div>
+            </div>
+
+            <!-- Vote Poll Options -->
+            <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
+              <button class="live-vote-btn" onclick="voteKakao('${item.id}', 'A')">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.88rem; font-weight:700; color:#fff;">🅰️ ${item.optA}</span>
+                  <span id="pctA_${item.id}" style="color:#f43f5e; font-weight:800;">${item.pctA}%</span>
+                </div>
+                <div class="live-vote-gauge-wrap">
+                  <div class="live-vote-gauge gauge-a" id="barA_${item.id}" style="width:${item.pctA}%;"></div>
+                </div>
+              </button>
+
+              <button class="live-vote-btn" onclick="voteKakao('${item.id}', 'B')">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.88rem; font-weight:700; color:#fff;">🅱️ ${item.optB}</span>
+                  <span id="pctB_${item.id}" style="color:#38bdf8; font-weight:800;">${item.pctB}%</span>
+                </div>
+                <div class="live-vote-gauge-wrap">
+                  <div class="live-vote-gauge gauge-b" id="barB_${item.id}" style="width:${item.pctB}%;"></div>
+                </div>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
     function applyFilterAndRender() {
       let pool = (currentEra === 'all') ? [...words] : words.filter(w => w.era === currentEra);
 
@@ -7703,6 +8190,58 @@
       발행처: <strong>당목담글(DMDG) 스튜디오 연구 본부</strong> | 공식 도메인: https://malssam.com/
     </div>
   </div>
+  <!-- 💬 내 카톡 맥락 판독 의뢰 모달 -->
+  <div class="modal-overlay" id="kakaoModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <h2 class="modal-title" style="color:#f43f5e;">💬 내 카톡 맥락 판독 요청</h2>
+        <button onclick="closeKakaoModal()" style="background:transparent; border:none; color:#94a3b8; font-size:1.5rem; cursor:pointer;">&times;</button>
+      </div>
+      <p class="modal-desc">"이 답장, 호감인가요 오타인가요?" 집단지성에게 10초 만에 판독을 맡기세요.</p>
+
+      <form id="kakaoRequestForm" onsubmit="submitKakaoRequest(event)">
+        <div class="form-group">
+          <label class="form-label">상황 카테고리 <span style="color:#f43f5e;">*</span></label>
+          <select id="kakaoCat" class="form-control" style="cursor:pointer;">
+            <option value="썸 / 연애">💖 썸 / 연애 (답장의 속뜻과 그린라이트 검증)</option>
+            <option value="직장 / 비즈니스">👔 직장 / 비즈니스 (팀장·선배의 완곡어법 해독)</option>
+            <option value="친구 / 일상">☕ 친구 / 일상 (단순 오타 vs 돌려까기 판독)</option>
+            <option value="중고거래 / 당근">🥕 중고거래 / 당근 (네고 요구 대처 및 거절 화법)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">상황 제목 및 의문점 <span style="color:#f43f5e;">*</span></label>
+          <input type="text" id="kakaoTitle" class="form-control" placeholder="예: 약속 시간 물어봤는데 '영ㅋㅋ'라고 답장 왔어요..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">상대방의 실제 카톡 문장 <span style="color:#f43f5e;">*</span></label>
+          <textarea id="kakaoText" class="form-control" placeholder="상대방이 보낸 정확한 문구를 적어주세요. (예: 영ㅋㅋ)" required></textarea>
+          <div style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">
+            🛡️ <strong>개인정보 안심 보호</strong>: 실명, 전화번호, 상호 등은 자동으로 마스킹 처리됩니다.
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" class="form-group">
+          <div>
+            <label class="form-label">투표 선택지 🅰️</label>
+            <input type="text" id="kakaoOptA" class="form-control" placeholder="예: 단순 오타다" required>
+          </div>
+          <div>
+            <label class="form-label">투표 선택지 🅱️</label>
+            <input type="text" id="kakaoOptB" class="form-control" placeholder="예: 돌려까기 거절이다" required>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeKakaoModal()">취소</button>
+          <button type="submit" class="btn-submit" style="background:#f43f5e;">🚀 판독 의뢰 등록하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>`;
 
