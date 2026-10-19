@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 17: NumPy 고속 텐서 연산 & 브로드캐스팅(Broadcasting) 시뮬레이터</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --primary: #38bdf8;
+      --accent: #a855f7;
+      --success: #34d399;
+      --danger: #f87171;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    .header { max-width: 1200px; margin: 0 auto 24px; text-align: center; }
+    .header h1 { font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .header p { color: var(--text-muted); font-size: 15px; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+    }
+    canvas {
+      width: 100%;
+      height: 480px;
+      background: #090d16;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    button {
+      background: var(--primary);
+      color: #0f172a;
+      border: none;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover { filter: brightness(1.1); }
+    button.btn-secondary { background: #334155; color: var(--text); }
+    .select-box {
+      width: 100%;
+      background: #090d16;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .benchmark-card {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .speed-bar-container { margin-top: 8px; }
+    .speed-bar {
+      height: 14px;
+      border-radius: 7px;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>⚡ Day 17: NumPy 고속 텐서 연산 & 브로드캐스팅(Broadcasting) 시뮬레이터</h1>
+    <p>NumPy의 차원 자동 복제 규칙(Broadcasting Rule)과 파이썬 순수 반복문 대비 500배 빠른 C-벡터화 연산 원리를 시각화합니다.</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-title">
+        <span>📐 텐서 형상(Shape) 확장 시각화</span>
+        <span id="compatBadge" style="font-size:12px; background:#065f46; color:#34d399; padding:3px 8px; border-radius:6px;">연산 가능 (Compatible)</span>
+      </div>
+      <canvas id="broadCanvas"></canvas>
+      <div class="btn-group">
+        <button onclick="animateBroadcasting()">▶️ 브로드캐스팅 확장 애니메이션</button>
+        <button class="btn-secondary" onclick="resetSim()">🔄 초기화</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="card">
+        <div class="card-title">🎛️ 브로드캐스팅 형상(Shape) 케이스</div>
+        <select class="select-box" id="caseSelect" onchange="changeCase()">
+          <option value="case1">케이스 1: (3, 1) + (1, 3) ➔ 양방향 확장 (3, 3)</option>
+          <option value="case2">케이스 2: (3, 3) + (1, 3) ➔ 행 복제 확장 (3, 3)</option>
+          <option value="case3">케이스 3: (3, 3) + (3, 1) ➔ 열 복제 확장 (3, 3)</option>
+          <option value="case4">케이스 4: (3, 2) + (2, 3) ➔ ❌ 호환 불가 (ValueError)</option>
+        </select>
+        <div id="ruleExplanation" style="font-size:13px; color:var(--text-muted); line-height:1.6; background:#090d16; padding:10px; border-radius:6px; border:1px solid var(--border);">
+          • <strong>브로드캐스팅 2대 법칙</strong>:<br>
+          1. 뒤쪽 차원(Trailing Dimension)부터 크기를 비교합니다.<br>
+          2. 두 차원의 크기가 <strong>서로 같거나, 둘 중 하나가 1</strong>이어야만 차원을 복제하여 연산할 수 있습니다.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🚀 벡터화 속도 벤치마크 (1,000만 개 원소)</div>
+        <div class="benchmark-card">
+          <div style="font-size:13px; color:var(--text-muted); display:flex; justify-content:space-between;">
+            <span>순수 Python for 루프:</span>
+            <span style="color:var(--danger); font-weight:bold;">1,820 ms</span>
+          </div>
+          <div class="speed-bar-container">
+            <div class="speed-bar" style="width:100%; background:var(--danger);"></div>
+          </div>
+
+          <div style="font-size:13px; color:var(--text-muted); display:flex; justify-content:space-between; margin-top:10px;">
+            <span>NumPy C-SIMD 벡터화:</span>
+            <span style="color:var(--success); font-weight:bold;">3.4 ms (535배 고속!)</span>
+          </div>
+          <div class="speed-bar-container">
+            <div class="speed-bar" style="width:2%; min-width:6px; background:var(--success);"></div>
+          </div>
+          <div style="font-size:11.5px; color:var(--text-muted); margin-top:8px;">
+            * CPU의 AVX-512 레지스터를 통해 1개 클럭에 16개의 float를 동시 계산합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('broadCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resize() {
+      width = canvas.parentElement.clientWidth - 40;
+      height = 480;
+      canvas.width = width;
+      canvas.height = height;
+      draw();
+    }
+    window.addEventListener('resize', resize);
+
+    let currentCase = 'case1';
+    let animProgress = 0; // 0 to 1
+    let isAnimating = false;
+
+    function changeCase() {
+      currentCase = document.getElementById('caseSelect').value;
+      animProgress = 0;
+      const badge = document.getElementById('compatBadge');
+      if (currentCase === 'case4') {
+        badge.innerText = '❌ 호환 불가 (ValueError)';
+        badge.style.background = '#7f1d1d';
+        badge.style.color = '#f87171';
+      } else {
+        badge.innerText = '✅ 연산 가능 (Compatible)';
+        badge.style.background = '#065f46';
+        badge.style.color = '#34d399';
+      }
+      draw();
+    }
+
+    function animateBroadcasting() {
+      if (currentCase === 'case4') return;
+      animProgress = 0;
+      isAnimating = true;
+      function loop() {
+        if (!isAnimating) return;
+        animProgress += 0.04;
+        if (animProgress >= 1) {
+          animProgress = 1;
+          isAnimating = false;
+        }
+        draw();
+        if (isAnimating) requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    function resetSim() {
+      isAnimating = false;
+      animProgress = 0;
+      draw();
+    }
+
+    function drawGrid(x, y, rows, cols, cellW, cellH, color, fillAlpha, label) {
+      ctx.save();
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          ctx.fillStyle = `rgba(${color}, ${fillAlpha})`;
+          ctx.fillRect(x + c * cellW, y + r * cellH, cellW - 2, cellH - 2);
+          ctx.strokeStyle = `rgb(${color})`;
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(x + c * cellW, y + r * cellH, cellW - 2, cellH - 2);
+        }
+      }
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = 'bold 12px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(label, x + (cols * cellW) / 2, y + rows * cellH + 20);
+      ctx.restore();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      const cellW = 36;
+      const cellH = 36;
+      const startY = 160;
+
+      if (currentCase === 'case1') {
+        // (3, 1) + (1, 3) ➔ (3, 3)
+        // Array A (3, 1) expanding to (3, 3)
+        const aCols = 1 + animProgress * 2;
+        drawGrid(60, startY, 3, aCols, cellW, cellH, '56, 189, 248', animProgress > 0 ? 0.35 : 0.6, `배열 A: (3, 1)${animProgress > 0 ? ' ➔ (3, 3) 확장' : ''}`);
+
+        // Plus symbol
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 24px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('+', 230, startY + 54);
+
+        // Array B (1, 3) expanding to (3, 3)
+        const bRows = 1 + animProgress * 2;
+        drawGrid(280, startY, bRows, 3, cellW, cellH, '168, 85, 247', animProgress > 0 ? 0.35 : 0.6, `배열 B: (1, 3)${animProgress > 0 ? ' ➔ (3, 3) 확장' : ''}`);
+
+        // Equals symbol
+        ctx.fillText('=', 450, startY + 54);
+
+        // Result Array (3, 3)
+        drawGrid(500, startY, 3, 3, cellW, cellH, '52, 211, 153', animProgress === 1 ? 0.7 : 0.2, '결과 C: (3, 3)');
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = '13.5px sans-serif';
+        ctx.fillText('💡 양쪽 모두 크기가 1인 축을 상대방 크기(3)에 맞추어 메모리 복제 없이 가상 확장합니다!', width / 2, 380);
+
+      } else if (currentCase === 'case2') {
+        // (3, 3) + (1, 3)
+        drawGrid(80, startY, 3, 3, cellW, cellH, '56, 189, 248', 0.6, '배열 A: (3, 3)');
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 24px sans-serif';
+        ctx.fillText('+', 240, startY + 54);
+
+        const bRows = 1 + animProgress * 2;
+        drawGrid(280, startY, bRows, 3, cellW, cellH, '168, 85, 247', animProgress > 0 ? 0.35 : 0.6, `배열 B: (1, 3)${animProgress > 0 ? ' ➔ (3, 3) 복제' : ''}`);
+        ctx.fillText('=', 450, startY + 54);
+        drawGrid(500, startY, 3, 3, cellW, cellH, '52, 211, 153', animProgress === 1 ? 0.7 : 0.2, '결과 C: (3, 3)');
+
+      } else if (currentCase === 'case3') {
+        // (3, 3) + (3, 1)
+        drawGrid(80, startY, 3, 3, cellW, cellH, '56, 189, 248', 0.6, '배열 A: (3, 3)');
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 24px sans-serif';
+        ctx.fillText('+', 240, startY + 54);
+
+        const bCols = 1 + animProgress * 2;
+        drawGrid(280, startY, 3, bCols, cellW, cellH, '168, 85, 247', animProgress > 0 ? 0.35 : 0.6, `배열 B: (3, 1)${animProgress > 0 ? ' ➔ (3, 3) 복제' : ''}`);
+        ctx.fillText('=', 450, startY + 54);
+        drawGrid(500, startY, 3, 3, cellW, cellH, '52, 211, 153', animProgress === 1 ? 0.7 : 0.2, '결과 C: (3, 3)');
+
+      } else if (currentCase === 'case4') {
+        // Incompatible: (3, 2) + (2, 3)
+        drawGrid(120, startY, 3, 2, cellW, cellH, '248, 113, 113', 0.5, '배열 A: (3, 2)');
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 24px sans-serif';
+        ctx.fillText('+', 260, startY + 54);
+        drawGrid(320, startY, 2, 3, cellW, cellH, '248, 113, 113', 0.5, '배열 B: (2, 3)');
+
+        ctx.fillStyle = '#f87171';
+        ctx.font = 'bold 15px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('ValueError: operands could not be broadcast together with shapes (3,2) (2,3)', width / 2, 340);
+        ctx.font = '13px sans-serif';
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText('마지막 차원 비교: 2 != 3 이며 어느 쪽도 1이 아니므로 브로드캐스팅 규칙 위반!', width / 2, 370);
+      }
+    }
+
+    resize();
+    changeCase();
+  </script>
+</body>
+</html>

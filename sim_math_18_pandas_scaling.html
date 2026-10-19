@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 18: Pandas 데이터 정제 & 스케일링(Scaling) 시뮬레이터</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --primary: #38bdf8;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    .header { max-width: 1200px; margin: 0 auto 24px; text-align: center; }
+    .header h1 { font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .header p { color: var(--text-muted); font-size: 15px; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+    }
+    canvas {
+      width: 100%;
+      height: 480px;
+      background: #090d16;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    button {
+      background: #334155;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 9px 13px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover { background: #475569; }
+    button.active {
+      background: var(--primary);
+      color: #0f172a;
+      border-color: var(--primary);
+      font-weight: 700;
+    }
+    .table-container {
+      max-height: 230px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      text-align: center;
+    }
+    th { background: #1e293b; color: var(--primary); }
+    td.nan { color: var(--danger); font-weight: bold; background: rgba(239, 68, 68, 0.1); }
+    td.imputed { color: var(--warning); font-weight: bold; background: rgba(245, 158, 11, 0.1); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📊 Day 18: Pandas 데이터 정제 & 스케일링(Scaling) 시뮬레이터</h1>
+    <p>결측치(NaN) 대체 전략과 특성 스케일링(StandardScaler, MinMaxScaler)에 따른 2D 데이터 공간의 기하학적 분포 변화를 실시간으로 체감하세요.</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-title">
+        <span>📍 2D 특성 분포 공간 (나이 vs 연봉)</span>
+        <span id="scalerBadge" style="font-size:12px; background:#334155; padding:3px 8px; border-radius:6px; color:#38bdf8;">원시 데이터 (Raw)</span>
+      </div>
+      <canvas id="scatterCanvas"></canvas>
+      <div class="btn-group">
+        <span style="font-size:13px; align-self:center; color:var(--text-muted); margin-right:4px;">스케일러:</span>
+        <button class="active" id="btnRaw" onclick="setScaler('raw')">원시 데이터</button>
+        <button id="btnStandard" onclick="setScaler('standard')">StandardScaler (z-score)</button>
+        <button id="btnMinMax" onclick="setScaler('minmax')">MinMaxScaler [0, 1]</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="card">
+        <div class="card-title">🧹 결측치(NaN) 및 이상치 처리</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:8px;">결측치 대체 전략:</div>
+        <div class="btn-group" style="margin-top:0; margin-bottom:14px;">
+          <button class="active" id="btnImputeNone" onclick="setImpute('none')">유지 (NaN)</button>
+          <button id="btnImputeMean" onclick="setImpute('mean')">평균값 (Mean)</button>
+          <button id="btnImputeMedian" onclick="setImpute('median')">중앙값 (Median)</button>
+        </div>
+        <div style="font-size:12px; color:var(--text-muted); line-height:1.5;">
+          • <strong>StandardScaler</strong>: $\mu=0, \sigma=1$로 변환하여 그래디언트 하강의 구형 수렴을 유도합니다.<br>
+          • <strong>MinMaxScaler</strong>: 최솟값 0, 최댓값 1로 압축하여 신경망 입력에 최적화합니다.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📋 정제된 데이터프레임 스냅샷</div>
+        <div class="table-container">
+          <table id="dataTable">
+            <thead><tr><th>ID</th><th>나이(Age)</th><th>연봉(Salary)</th></tr></thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('scatterCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resize() {
+      width = canvas.parentElement.clientWidth - 40;
+      height = 480;
+      canvas.width = width;
+      canvas.height = height;
+      draw();
+    }
+    window.addEventListener('resize', resize);
+
+    // Initial raw data: Age (20~65), Salary (30,000,000 ~ 120,000,000), some NaNs
+    const RAW_DATA = [
+      { id: 1, age: 24, salary: 32000000 },
+      { id: 2, age: 29, salary: 45000000 },
+      { id: 3, age: null, salary: 52000000 }, // NaN
+      { id: 4, age: 35, salary: 68000000 },
+      { id: 5, age: 41, salary: null }, // NaN
+      { id: 6, age: 48, salary: 85000000 },
+      { id: 7, age: 52, salary: 98000000 },
+      { id: 8, age: 58, salary: 110000000 },
+      { id: 9, age: 62, salary: 125000000 },
+      { id: 10, age: 31, salary: 49000000 }
+    ];
+
+    let currentScaler = 'raw';
+    let currentImpute = 'none';
+
+    function setScaler(s) {
+      currentScaler = s;
+      ['raw', 'standard', 'minmax'].forEach(t => {
+        document.getElementById('btn' + t.charAt(0).toUpperCase() + t.slice(1)).className = t === s ? 'active' : '';
+      });
+      document.getElementById('scalerBadge').innerText = s === 'raw' ? '원시 데이터' : s === 'standard' ? 'StandardScaler (z-score)' : 'MinMaxScaler [0, 1]';
+      updateTable();
+      draw();
+    }
+
+    function setImpute(imp) {
+      currentImpute = imp;
+      ['None', 'Mean', 'Median'].forEach(t => {
+        document.getElementById('btnImpute' + t).className = t.toLowerCase() === imp ? 'active' : '';
+      });
+      updateTable();
+      draw();
+    }
+
+    function getProcessedData() {
+      // 1. Imputation
+      const validAges = RAW_DATA.filter(d => d.age !== null).map(d => d.age);
+      const validSalaries = RAW_DATA.filter(d => d.salary !== null).map(d => d.salary);
+
+      const meanAge = validAges.reduce((a, b) => a + b, 0) / validAges.length;
+      const sortedAges = [...validAges].sort((a, b) => a - b);
+      const medianAge = sortedAges[Math.floor(sortedAges.length / 2)];
+
+      const meanSal = validSalaries.reduce((a, b) => a + b, 0) / validSalaries.length;
+      const sortedSal = [...validSalaries].sort((a, b) => a - b);
+      const medianSal = sortedSal[Math.floor(sortedSal.length / 2)];
+
+      let data = RAW_DATA.map(d => {
+        let age = d.age;
+        let sal = d.salary;
+        let ageImputed = false;
+        let salImputed = false;
+
+        if (age === null) {
+          if (currentImpute === 'mean') { age = meanAge; ageImputed = true; }
+          else if (currentImpute === 'median') { age = medianAge; ageImputed = true; }
+        }
+        if (sal === null) {
+          if (currentImpute === 'mean') { sal = meanSal; salImputed = true; }
+          else if (currentImpute === 'median') { sal = medianSal; salImputed = true; }
+        }
+        return { id: d.id, age, salary: sal, ageImputed, salImputed };
+      });
+
+      // 2. Scaling
+      const completeData = data.filter(d => d.age !== null && d.salary !== null);
+      if (completeData.length === 0) return data;
+
+      const ages = completeData.map(d => d.age);
+      const sals = completeData.map(d => d.salary);
+
+      const aMin = Math.min(...ages), aMax = Math.max(...ages);
+      const sMin = Math.min(...sals), sMax = Math.max(...sals);
+
+      const aMean = ages.reduce((a, b) => a + b, 0) / ages.length;
+      const aStd = Math.sqrt(ages.reduce((a, b) => a + Math.pow(b - aMean, 2), 0) / ages.length) || 1;
+
+      const sMean = sals.reduce((a, b) => a + b, 0) / sals.length;
+      const sStd = Math.sqrt(sals.reduce((a, b) => a + Math.pow(b - sMean, 2), 0) / sals.length) || 1;
+
+      return data.map(d => {
+        if (d.age === null || d.salary === null) return d;
+        let scaledAge = d.age;
+        let scaledSal = d.salary;
+
+        if (currentScaler === 'standard') {
+          scaledAge = (d.age - aMean) / aStd;
+          scaledSal = (d.salary - sMean) / sStd;
+        } else if (currentScaler === 'minmax') {
+          scaledAge = (d.age - aMin) / (aMax - aMin);
+          scaledSal = (d.salary - sMin) / (sMax - sMin);
+        }
+
+        return { ...d, scaledAge, scaledSal };
+      });
+    }
+
+    function updateTable() {
+      const data = getProcessedData();
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      data.forEach(d => {
+        const tr = document.createElement('tr');
+        let ageStr = d.age === null ? 'NaN' : (currentScaler === 'raw' ? d.age.toFixed(0) : d.scaledAge.toFixed(2));
+        let salStr = d.salary === null ? 'NaN' : (currentScaler === 'raw' ? d.salary.toLocaleString() : d.scaledSal.toFixed(2));
+
+        tr.innerHTML = `
+          <td>#${d.id}</td>
+          <td class="${d.age === null ? 'nan' : (d.ageImputed ? 'imputed' : '')}">${ageStr}</td>
+          <td class="${d.salary === null ? 'nan' : (d.salImputed ? 'imputed' : '')}">${salStr}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      const data = getProcessedData();
+
+      // Axis setup
+      const pad = 60;
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad, pad); ctx.lineTo(pad, height - pad);
+      ctx.lineTo(width - pad, height - pad);
+      ctx.stroke();
+
+      // Axis labels
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '12px sans-serif';
+      ctx.fillText('나이 (Age) ➔', width - pad - 60, height - pad + 30);
+      ctx.save();
+      ctx.translate(pad - 30, pad + 60);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText('연봉 (Salary) ➔', 0, 0);
+      ctx.restore();
+
+      // Determine ranges for mapping
+      let xMin, xMax, yMin, yMax;
+      if (currentScaler === 'raw') {
+        xMin = 15; xMax = 70;
+        yMin = 20000000; yMax = 140000000;
+      } else if (currentScaler === 'standard') {
+        xMin = -2.5; xMax = 2.5;
+        yMin = -2.5; yMax = 2.5;
+      } else {
+        xMin = -0.1; xMax = 1.1;
+        yMin = -0.1; yMax = 1.1;
+      }
+
+      function toX(v) { return pad + ((v - xMin) / (xMax - xMin)) * (width - 2 * pad); }
+      function toY(v) { return (height - pad) - ((v - yMin) / (yMax - yMin)) * (height - 2 * pad); }
+
+      // Draw points
+      data.forEach(d => {
+        if (d.age === null || d.salary === null) return;
+        const valX = currentScaler === 'raw' ? d.age : d.scaledAge;
+        const valY = currentScaler === 'raw' ? d.salary : d.scaledSal;
+        const px = toX(valX);
+        const py = toY(valY);
+
+        ctx.beginPath();
+        ctx.arc(px, py, d.ageImputed || d.salImputed ? 8 : 6, 0, Math.PI * 2);
+        ctx.fillStyle = d.ageImputed || d.salImputed ? '#f59e0b' : '#38bdf8';
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = '10.5px monospace';
+        ctx.fillText(`#${d.id}`, px, py - 10);
+      });
+    }
+
+    resize();
+    updateTable();
+  </script>
+</body>
+</html>

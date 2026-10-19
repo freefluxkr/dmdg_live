@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 20: asyncio 비동기 병렬 호출 & LLM 스트리밍 시뮬레이터</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --primary: #38bdf8;
+      --accent: #a855f7;
+      --success: #34d399;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    .header { max-width: 1200px; margin: 0 auto 24px; text-align: center; }
+    .header h1 { font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .header p { color: var(--text-muted); font-size: 15px; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+    }
+    .timeline-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .task-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .task-label { width: 110px; color: var(--text-muted); }
+    .bar-track { flex: 1; height: 16px; background: #1e293b; border-radius: 8px; overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 8px; width: 0%; transition: width 0.1s linear; }
+    .stream-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      height: 200px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #38bdf8;
+      white-space: pre-wrap;
+    }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    button {
+      background: #334155;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover { background: #475569; }
+    button.primary { background: var(--primary); color: #0f172a; border-color: var(--primary); font-weight: 700; }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .metric-card {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .metric-card .val { font-size: 18px; font-weight: bold; color: var(--primary); margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>⚡ Day 20: asyncio 비동기 병렬 호출 & LLM 스트리밍 시뮬레이터</h1>
+    <p>동기 순차(Sync) vs 비동기 동시성(asyncio.gather)의 대기 시간 단축과 서버-센트 이벤트(SSE) 토큰 스트리밍의 파이프라인을 체감하세요.</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-title">⏱️ 멀티 에이전트 동기 vs 비동기 병렬 호출</div>
+      <div class="timeline-box">
+        <div style="font-weight:bold; color:var(--text); margin-bottom:8px;" id="modeTitle">모드: 대기 중</div>
+        <div class="task-row">
+          <span class="task-label">검색 에이전트:</span>
+          <div class="bar-track"><div class="bar-fill" id="bar1" style="background:#38bdf8;"></div></div>
+        </div>
+        <div class="task-row">
+          <span class="task-label">DB 조회 에이전트:</span>
+          <div class="bar-track"><div class="bar-fill" id="bar2" style="background:#a855f7;"></div></div>
+        </div>
+        <div class="task-row">
+          <span class="task-label">수학 연산 에이전트:</span>
+          <div class="bar-track"><div class="bar-fill" id="bar3" style="background:#34d399;"></div></div>
+        </div>
+        <div class="task-row">
+          <span class="task-label">문서 요약 에이전트:</span>
+          <div class="bar-track"><div class="bar-fill" id="bar4" style="background:#f59e0b;"></div></div>
+        </div>
+        <div style="text-align:right; font-size:12.5px; color:var(--text-muted); margin-top:6px;">
+          경과 시간: <span id="elapsedTime" style="color:var(--primary); font-weight:bold;">0.00초</span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button onclick="runSync()">❌ 동기 순차 실행 (Sync: 5.4초 소요)</button>
+        <button class="primary" onclick="runAsync()">⚡ asyncio.gather 동시 실행 (1.8초 완성!)</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🌊 LLM 실시간 토큰 스트리밍 (SSE)</div>
+      <div class="stream-box" id="streamOutput">"실시간 스트리밍 시작" 버튼을 누르세요...</div>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div style="font-size:12px; color:var(--text-muted);">첫 토큰 도달 (TTFT)</div>
+          <div class="val" id="ttftVal">- ms</div>
+        </div>
+        <div class="metric-card">
+          <div style="font-size:12px; color:var(--text-muted);">초당 토큰 수 (TPS)</div>
+          <div class="val" id="tpsVal">- tokens/s</div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="primary" onclick="startStreaming()">▶️ 실시간 토큰 스트리밍 시작</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TASKS = [
+      { name: "검색", time: 1.5, id: 'bar1' },
+      { name: "DB조회", time: 1.2, id: 'bar2' },
+      { name: "수학", time: 0.9, id: 'bar3' },
+      { name: "요약", time: 1.8, id: 'bar4' }
+    ];
+
+    let timer = null;
+
+    function resetBars() {
+      if (timer) clearInterval(timer);
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`bar${i}`).style.width = '0%';
+      }
+      document.getElementById('elapsedTime').innerText = '0.00초';
+    }
+
+    function runSync() {
+      resetBars();
+      document.getElementById('modeTitle').innerText = '동기 순차 실행 중... (앞선 작업이 끝날 때까지 CPU 블로킹)';
+      const totalTime = TASKS.reduce((acc, t) => acc + t.time, 0);
+      let elapsed = 0;
+      let currTaskIdx = 0;
+      let taskElapsed = 0;
+
+      timer = setInterval(() => {
+        elapsed += 0.05;
+        taskElapsed += 0.05;
+        document.getElementById('elapsedTime').innerText = elapsed.toFixed(2) + '초';
+
+        const curr = TASKS[currTaskIdx];
+        const pct = Math.min(100, (taskElapsed / curr.time) * 100);
+        document.getElementById(curr.id).style.width = pct + '%';
+
+        if (taskElapsed >= curr.time) {
+          currTaskIdx++;
+          taskElapsed = 0;
+          if (currTaskIdx >= TASKS.length) {
+            clearInterval(timer);
+            document.getElementById('modeTitle').innerText = `✅ 동기 순차 완료: 총 ${elapsed.toFixed(2)}초 소요 (느림)`;
+          }
+        }
+      }, 50);
+    }
+
+    function runAsync() {
+      resetBars();
+      document.getElementById('modeTitle').innerText = '⚡ asyncio.gather 병렬 동시 실행 중! (I/O 유휴 시간 완전 회수)';
+      const maxTime = Math.max(...TASKS.map(t => t.time));
+      let elapsed = 0;
+
+      timer = setInterval(() => {
+        elapsed += 0.05;
+        document.getElementById('elapsedTime').innerText = elapsed.toFixed(2) + '초';
+
+        let allDone = true;
+        TASKS.forEach(t => {
+          const pct = Math.min(100, (elapsed / t.time) * 100);
+          document.getElementById(t.id).style.width = pct + '%';
+          if (elapsed < t.time) allDone = false;
+        });
+
+        if (allDone || elapsed >= maxTime) {
+          clearInterval(timer);
+          document.getElementById('modeTitle').innerText = `🚀 asyncio 동시 실행 완료: 단 ${elapsed.toFixed(2)}초 만에 4개 에이전트 완료! (3배 고속)`;
+        }
+      }, 50);
+    }
+
+    // Token Streaming
+    const STREAM_TEXT = "인공지능의 세계에서 비동기 프로그래밍은 단순한 선택이 아니라 필수적인 엔지니어링 패러다임입니다. 수십 개의 멀티 에이전트가 동시에 API를 호출할 때, asyncio는 단일 스레드 이벤트 루프를 통해 스레드 오버헤드 없이 수만 개의 소켓 연결을 동시에 처리합니다. 지금 당신이 읽고 있는 이 문장 역시 청크(Chunk) 단위로 실시간 수신되는 스트리밍 제너레이터(yield) 파이프라인의 결과물입니다.";
+
+    function startStreaming() {
+      const box = document.getElementById('streamOutput');
+      box.innerText = '';
+      const tokens = STREAM_TEXT.split(' ');
+      let idx = 0;
+      const startTime = performance.now();
+      let firstTokenTime = null;
+
+      function nextToken() {
+        if (idx >= tokens.length) {
+          const totalDuration = (performance.now() - startTime) / 1000;
+          const tps = (tokens.length / totalDuration).toFixed(1);
+          document.getElementById('tpsVal').innerText = tps + ' tokens/s';
+          return;
+        }
+
+        if (idx === 0) {
+          firstTokenTime = Math.round(performance.now() - startTime);
+          document.getElementById('ttftVal').innerText = firstTokenTime + ' ms';
+        }
+
+        box.innerText += tokens[idx] + ' ';
+        box.scrollTop = box.scrollHeight;
+        idx++;
+        setTimeout(nextToken, 45); // 45ms per token
+      }
+
+      nextToken();
+    }
+  </script>
+</body>
+</html>

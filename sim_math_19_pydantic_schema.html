@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 19: Pydantic v2 데이터 검증 & JSON Schema 시뮬레이터</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --primary: #38bdf8;
+      --accent: #a855f7;
+      --success: #34d399;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    .header { max-width: 1200px; margin: 0 auto 24px; text-align: center; }
+    .header h1 { font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .header p { color: var(--text-muted); font-size: 15px; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+    }
+    textarea {
+      width: 100%;
+      height: 220px;
+      background: #090d16;
+      color: #38bdf8;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 13px;
+      resize: vertical;
+    }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    button {
+      background: #334155;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover { background: #475569; }
+    button.primary { background: var(--primary); color: #0f172a; border-color: var(--primary); font-weight: 700; }
+    .result-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: monospace;
+      font-size: 13px;
+      min-height: 180px;
+      max-height: 320px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .badge-success { background: rgba(52, 211, 153, 0.2); color: var(--success); border: 1px solid var(--success); }
+    .badge-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🛡️ Day 19: Pydantic v2 데이터 검증 & JSON Schema 시뮬레이터</h1>
+    <p>LLM의 불확실한 자연어 출력을 100% 무결한 타입으로 검증하는 Pydantic v2 유효성 검사기와 OpenAI Structured Outputs JSON Schema를 실시간으로 확인하세요.</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-title">📝 LLM 원시 JSON 출력 입력</div>
+      <div class="btn-group" style="margin-top:0; margin-bottom:10px;">
+        <button onclick="loadSample('valid')">✅ 정상 케이스</button>
+        <button onclick="loadSample('coerce')">🔄 타입 자동 강제 (Coercion)</button>
+        <button onclick="loadSample('invalid')">❌ 유효성 에러 (ValidationError)</button>
+      </div>
+      <textarea id="jsonInput" oninput="validateLive()"></textarea>
+      <div style="font-size:12px; color:var(--text-muted); margin-top:8px;">
+        * JSON 텍스트를 직접 수정해 보세요. 실시간으로 Pydantic 모델 검증이 실행됩니다.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>⚙️ Pydantic v2 모델 검증 결과</span>
+        <span id="validStatusBadge" class="badge badge-success">통과 (Valid)</span>
+      </div>
+      <div class="result-box" id="resultOutput">검증 결과가 여기에 표시됩니다.</div>
+      <div class="btn-group">
+        <button class="primary" onclick="showJsonSchema()">📋 OpenAI 도구 호출용 JSON Schema 보기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SAMPLES = {
+      valid: {
+        name: "홍길동",
+        age: 32,
+        email: "gildong@dmdg.com",
+        role: "admin",
+        skills: ["Python", "FastAPI", "LangGraph"]
+      },
+      coerce: {
+        name: "이순신",
+        age: "45", // String that can be coerced to int!
+        email: "admiral@naval.go.kr",
+        role: "user",
+        skills: ["Tactics", "Archery"]
+      },
+      invalid: {
+        name: "불량유저",
+        age: -10, // Invalid: age must be >= 0
+        email: "not-an-email", // Invalid email format
+        role: "hacker", // Invalid literal (must be 'admin' or 'user')
+        skills: "None" // Invalid type (must be list)
+      }
+    };
+
+    function loadSample(key) {
+      document.getElementById('jsonInput').value = JSON.stringify(SAMPLES[key], null, 2);
+      validateLive();
+    }
+
+    function validateLive() {
+      const raw = document.getElementById('jsonInput').value;
+      const statusBadge = document.getElementById('validStatusBadge');
+      const out = document.getElementById('resultOutput');
+
+      let parsed;
+      try {
+        parsed = JSON.parse(raw);
+      } catch (e) {
+        statusBadge.className = 'badge badge-danger';
+        statusBadge.innerText = '❌ JSON 문법 오류 (SyntaxError)';
+        out.innerHTML = `<span style="color:var(--danger)">JSON 파싱 실패:\n${e.message}</span>`;
+        return;
+      }
+
+      // Pydantic Schema Validation Simulation
+      const errors = [];
+
+      // name: str required
+      if (!parsed.name || typeof parsed.name !== 'string') {
+        errors.push({ loc: ['name'], msg: 'Field required and must be string' });
+      }
+
+      // age: int, ge=0, le=120 (with coercion)
+      let finalAge = parsed.age;
+      if (typeof parsed.age === 'string' && !isNaN(Number(parsed.age))) {
+        finalAge = Number(parsed.age); // Coercion!
+      }
+      if (typeof finalAge !== 'number' || !Number.isInteger(finalAge)) {
+        errors.push({ loc: ['age'], msg: 'Input should be a valid integer' });
+      } else if (finalAge < 0 || finalAge > 120) {
+        errors.push({ loc: ['age'], msg: `Input must be between 0 and 120 (got ${finalAge})` });
+      }
+
+      // email: simple format check
+      if (!parsed.email || typeof parsed.email !== 'string' || !parsed.email.includes('@')) {
+        errors.push({ loc: ['email'], msg: 'The email address is not valid. It must have exactly one @-sign.' });
+      }
+
+      // role: Literal['admin', 'user']
+      if (!['admin', 'user'].includes(parsed.role)) {
+        errors.push({ loc: ['role'], msg: `Input should be 'admin' or 'user' (got '${parsed.role}')` });
+      }
+
+      // skills: List[str]
+      if (!Array.isArray(parsed.skills)) {
+        errors.push({ loc: ['skills'], msg: 'Input should be a valid list' });
+      }
+
+      if (errors.length === 0) {
+        statusBadge.className = 'badge badge-success';
+        statusBadge.innerText = '✅ 검증 통과 (Valid)';
+        const cleanObj = { ...parsed, age: finalAge };
+        out.innerHTML = `<span style="color:var(--success)">// Pydantic Model Instance (Clean Dict):\n` +
+          JSON.stringify(cleanObj, null, 2) + `</span>`;
+      } else {
+        statusBadge.className = 'badge badge-danger';
+        statusBadge.innerText = `❌ ValidationError (${errors.length}건)`;
+        let errStr = `<span style="color:var(--danger)">pydantic_core._pydantic_core.ValidationError: ${errors.length} validation errors for AgentProfile\n\n`;
+        errors.forEach(err => {
+          errStr += `• ${err.loc.join('.')}\n  Error: ${err.msg}\n`;
+        });
+        errStr += `</span>`;
+        out.innerHTML = errStr;
+      }
+    }
+
+    function showJsonSchema() {
+      const schema = {
+        title: "AgentProfile",
+        type: "object",
+        properties: {
+          name: { title: "Name", type: "string" },
+          age: { title: "Age", type: "integer", minimum: 0, maximum: 120 },
+          email: { title: "Email", type: "string", format: "email" },
+          role: { title: "Role", enum: ["admin", "user"], type: "string" },
+          skills: { title: "Skills", type: "array", items: { type: "string" } }
+        },
+        required: ["name", "age", "email", "role", "skills"]
+      };
+      document.getElementById('resultOutput').innerHTML =
+        `<span style="color:var(--accent)">// OpenAI Function Calling JSON Schema:\n` +
+        JSON.stringify(schema, null, 2) + `</span>`;
+      document.getElementById('validStatusBadge').className = 'badge badge-success';
+      document.getElementById('validStatusBadge').innerText = '📋 JSON Schema 규격';
+    }
+
+    // Initialize
+    loadSample('valid');
+  </script>
+</body>
+</html>
