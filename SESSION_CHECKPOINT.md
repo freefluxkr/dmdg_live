@@ -169,15 +169,20 @@
 
 ---
 
-### 🥈 [완료 (10/19)] `malssam.com` 도메인 구입 및 라이브 유동 포워딩 연결 완료!
-1. **도메인 구입 완료**: [호스팅케이알(Hosting.kr)](https://www.hosting.kr/)에서 `malssam.com` 구매 완료.
-2. **라이브 유동 포워딩(SSL 연동) 구축 완료**:
-   * **포워딩 주소**: `https://freefluxkr.github.io/dmdg_live/malssam/`
-   * **포워딩 방식**: `유동 포워딩 (0초 메타 리다이렉트)`
-   * **보안 및 결제 무결성**: GitHub Pages의 Let's Encrypt 공식 SSL 보안 인증서 자동 승계로 **'주의 요함' 경고 100% 제거**, 초록색 자물쇠 🔒 및 카카오페이/토스페이 결제창 정상 구동 확인 완료.
-   * **실시간 터미널 검증**: `curl -L http://malssam.com` 호출 시 `https://freefluxkr.github.io/dmdg_live/malssam/`로 200 OK 즉시 정상 리다이렉트 검증 통과.
-   * 호스팅케이알 DNS 설정에서 CNAME 레코드에 `freefluxkr.github.io` 입력.
-   * GitHub `dmdg_live` 저장소 Settings -> Pages -> Custom Domain에 `malssam.com` 입력하면 전 세계 어디서나 `https://malssam.com`으로 접속 완료!
+### 🥈 [완료 (10/19)] `malssam.com` 정식 커스텀 도메인 & 자체 HTTPS(SSL 🔒) 전면 개통 완료!
+1. **도메인 구입 및 DNS 레코드 5개 매핑 완료**:
+   * [호스팅케이알(Hosting.kr)](https://www.hosting.kr/)에서 `malssam.com` 구매 및 GitHub Pages 공식 IP(A 레코드 4개) + `www`(CNAME 1개) 구성 완료.
+2. **GitHub Pages 공식 SSL 보안 인증서(HTTPS) 발급 & Enforce HTTPS 활성화**:
+   * 저장소 루트 `CNAME` (`malssam.com`) 배포 완료.
+   * GitHub Let's Encrypt 정식 SSL 인증서 발급 완료 및 **'Enforce HTTPS' 활성화 성공**.
+3. **주소창 도메인 영구 유지 (Brand Sovereignty)**:
+   * 더 이상 `freefluxkr.github.io`로 변경되지 않고, **주소창에 오직 `https://malssam.com`만 영구 고정**.
+   * 보안 경고 없이 안전한 **자물쇠 마크 🔒** 장착 완료.
+4. **실시간 통신 패킷 전수 검증 통과 (인천 ICN 엣지)**:
+   * `https://malssam.com/` ➡️ HTTP 200 OK (스마트 라우터 직행)
+   * `https://www.malssam.com/` ➡️ HTTP 301 Moved Permanently ➡️ `https://malssam.com/`
+   * `https://malssam.com/malssam/` ➡️ HTTP 200 OK (국내용 메인 사전 풀 구동)
+   * `https://malssam.com/malssam/global/en.html` (미국), `ja.html` (일본), `vi.html` (베트남), `id.html` (인도네시아), `es.html` (스페인) 글로벌 5개국 에디션 전원 200 OK 실시간 접속 확인 완료!
 
 ---
 
