@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 04 시뮬레이터: 고유값·고유벡터, PCA & LoRA 원리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(20, 27, 45, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --accent-cyan: #00f0ff;
+      --accent-pink: #ff007f;
+      --accent-yellow: #facc15;
+      --accent-green: #10b981;
+      --accent-purple: #a855f7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      padding: 24px;
+      min-height: 100vh;
+      background-image: radial-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .sim-container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000;
+      background: var(--accent-green);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    h1 span { color: var(--accent-green); }
+    p.sub { color: var(--muted); font-size: 0.95rem; }
+
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(0, 240, 255, 0.2));
+      color: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    canvas {
+      width: 100%;
+      height: 380px;
+      background: #060911;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+
+    .ctrl-group { margin-bottom: 14px; }
+    .ctrl-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .ctrl-label b { color: var(--text); font-family: 'JetBrains Mono', monospace; }
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent-green);
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      cursor: pointer;
+    }
+
+    .stat-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-name { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    .stat-val { font-size: 1.25rem; font-weight: 800; color: var(--accent-green); font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+
+    .formula-callout {
+      background: rgba(16, 185, 129, 0.08);
+      border-left: 3px solid var(--accent-green);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .formula-callout code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+    }
+
+    /* LoRA visualizer styles */
+    .lora-matrices {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .matrix-box {
+      background: rgba(0,0,0,0.4);
+      border: 2px dashed rgba(255,255,255,0.2);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      min-width: 80px;
+      transition: all 0.3s;
+    }
+    .matrix-box.w0 { border-color: var(--muted); border-style: solid; }
+    .matrix-box.mat-b { border-color: var(--accent-pink); }
+    .matrix-box.mat-a { border-color: var(--accent-cyan); }
+    .matrix-box.delta { border-color: var(--accent-green); border-style: solid; }
+
+    .matrix-name { font-weight: 800; font-size: 0.9rem; margin-bottom: 4px; }
+    .matrix-dim { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<div class="sim-container">
+  <header>
+    <div class="badge">Part 1. 선형대수학 · Day 04 시뮬레이터</div>
+    <h1>고유값·고유벡터, PCA 차원 축소 & <span>LoRA 파인튜닝 원리</span></h1>
+    <p class="sub">데이터의 흩어짐(분산)을 가장 잘 보존하는 주성분 축 회전과, 거대 언어모델 파라미터 다이어트 기술 LoRA의 수학을 탐험하세요.</p>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-pca')">📉 1. 주성분 분석(PCA) & 고유벡터 회전</button>
+    <button class="tab-btn" onclick="switchTab('tab-lora')">🚀 2. LoRA 저순위 적응(Low-Rank Adaptation)</button>
+  </div>
+
+  <!-- TAB 1: PCA -->
+  <div id="tab-pca" class="tab-content active">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">🎯</span> 2D 분산 투영 평면 (슬라이더로 축을 회전해보세요)</div>
+        <canvas id="pcaCanvas"></canvas>
+        <div class="formula-callout">
+          💡 <b>PCA의 수학적 본질</b>: 회전 각도를 돌려 데이터 점들이 투영된 축 위의 <b>분산(Variance)이 최대</b>가 되는 순간, 그 축이 바로 <b>제1 주성분(PC1) 고유벡터</b>가 됩니다!
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">⚙️</span> 투영 축 제어 & 고유값 분석</div>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span>투영 축 회전 각도 (θ)</span><b id="angleDegVal">35°</b></div>
+          <input type="range" id="angleRange" min="0" max="180" step="1" value="35">
+        </div>
+
+        <div style="display:flex; gap:10px; margin-bottom:16px;">
+          <button class="tab-btn" style="flex:1;" onclick="setOptimalPCA()">⭐ 최적 PC1 축 자동 정렬</button>
+          <button class="tab-btn" style="flex:1;" onclick="toggleProjection()">👁️ 1D 차원 축소 투영 토글</button>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name">현재 축 분산 (Variance)</div>
+            <div class="stat-val" id="currVarVal">4.21</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">최대 고유값 (λ₁ - PC1)</div>
+            <div class="stat-val" style="color:var(--accent-yellow);" id="maxVarVal">4.85</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">최소 고유값 (λ₂ - PC2)</div>
+            <div class="stat-val" style="color:var(--accent-pink);" id="minVarVal">0.65</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">정보 보존율 (설명력)</div>
+            <div class="stat-val" style="color:var(--accent-cyan);" id="explainedRatio">86.7%</div>
+          </div>
+        </div>
+
+        <div class="formula-callout">
+          <code>A v = λ v  (공분산 행렬 × 고유벡터 = 고유값 × 고유벡터)</code><br>
+          <code>Total Variance = λ₁ + λ₂</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: LoRA -->
+  <div id="tab-lora" class="tab-content">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">🧩</span> LLM 가중치 업데이트 분해 (W = W₀ + B × A)</div>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom: 14px;">
+          수백억 파라미터의 원본 LLM 가중치 행렬 $W_0$를 동결(Freeze)하고, 아주 작은 저순위 랭크 $r$을 가진 두 행렬 $B$와 $A$만 학습시킵니다.
+        </p>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span>LoRA 랭크 (Rank r) 선택</span><b id="rankVal">r = 4</b></div>
+          <input type="range" id="rankRange" min="1" max="16" step="1" value="4" oninput="updateLora()">
+        </div>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span>기존 모델 은닉 차원 (Hidden Dimension d)</span><b id="dimVal">d = 4096 (Llama-3 표준)</b></div>
+        </div>
+
+        <div class="lora-matrices">
+          <div class="matrix-box w0">
+            <div class="matrix-name">W₀ (동결)</div>
+            <div class="matrix-dim">4096 × 4096</div>
+            <span style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">16.7M 파라미터</span>
+          </div>
+          <span style="font-size:1.5rem; font-weight:800; color:var(--muted);">+</span>
+          <div class="matrix-box mat-b">
+            <div class="matrix-name" style="color:var(--accent-pink);">B</div>
+            <div class="matrix-dim" id="bDim">4096 × 4</div>
+            <span style="font-size:0.75rem; color:var(--accent-pink); margin-top:4px;" id="bParam">16,384</span>
+          </div>
+          <span style="font-size:1.5rem; font-weight:800; color:var(--muted);">×</span>
+          <div class="matrix-box mat-a">
+            <div class="matrix-name" style="color:var(--accent-cyan);">A</div>
+            <div class="matrix-dim" id="aDim">4 × 4096</div>
+            <span style="font-size:0.75rem; color:var(--accent-cyan); margin-top:4px;" id="aParam">16,384</span>
+          </div>
+          <span style="font-size:1.5rem; font-weight:800; color:var(--muted);">=</span>
+          <div class="matrix-box delta">
+            <div class="matrix-name" style="color:var(--accent-green);">ΔW</div>
+            <div class="matrix-dim">4096 × 4096</div>
+            <span style="font-size:0.75rem; color:var(--accent-green); margin-top:4px;">저순위 복원</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">📊</span> 학습 파라미터 및 VRAM 절감 비교</div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name">전체 미세조정 (Full Fine-tune)</div>
+            <div class="stat-val" style="color:var(--accent-pink);">16,777,216 개</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">LoRA 학습 파라미터 (r × 2d)</div>
+            <div class="stat-val" style="color:var(--accent-green);" id="loraTotalParam">32,768 개</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">파라미터 압축 절감률</div>
+            <div class="stat-val highlight" id="reductionRate">99.80% 절감!</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">필요 GPU VRAM 절감</div>
+            <div class="stat-val" style="color:var(--accent-cyan);">~80% 절약 (1/5)</div>
+          </div>
+        </div>
+
+        <div class="formula-callout" style="margin-top: 18px;">
+          💡 <b>선형대수적 기저</b>: 거대 모델의 가중치 변화량 $\Delta W$는 실제로는 매우 낮은 '고유 랭크(Intrinsic Rank)' 공간에 머문다는 수학적 발견(Hu et al., 2021)에 기반합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+    if (tabId === 'tab-pca') drawPCA();
+  }
+
+  // PCA Canvas Logic
+  const pCanvas = document.getElementById('pcaCanvas');
+  const pCtx = pCanvas.getContext('2d');
+
+  function resizePCanvas() {
+    pCanvas.width = pCanvas.parentElement.clientWidth;
+    pCanvas.height = 380;
+  }
+  window.addEventListener('resize', () => { resizePCanvas(); drawPCA(); });
+  resizePCanvas();
+
+  // Synthetic 2D data points with covariance (correlated along ~35 deg)
+  const rawPoints = [];
+  const seedAngle = 35 * (Math.PI / 180);
+  for (let i = 0; i < 35; i++) {
+    const u1 = (Math.random() - 0.5) * 6; // major axis spread
+    const u2 = (Math.random() - 0.5) * 1.5; // minor axis spread
+    const x = u1 * Math.cos(seedAngle) - u2 * Math.sin(seedAngle);
+    const y = u1 * Math.sin(seedAngle) + u2 * Math.cos(seedAngle);
+    rawPoints.push({ x, y });
+  }
+
+  let currAngle = 35;
+  let showProjection = false;
+
+  const angleRange = document.getElementById('angleRange');
+  angleRange.addEventListener('input', () => {
+    currAngle = parseFloat(angleRange.value);
+    document.getElementById('angleDegVal').textContent = currAngle + '°';
+    drawPCA();
+  });
+
+  function setOptimalPCA() {
+    currAngle = 35;
+    angleRange.value = 35;
+    document.getElementById('angleDegVal').textContent = '35°';
+    drawPCA();
+  }
+
+  function toggleProjection() {
+    showProjection = !showProjection;
+    drawPCA();
+  }
+
+  function drawPCA() {
+    const w = pCanvas.width;
+    const h = pCanvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+    const scale = 38;
+
+    pCtx.clearRect(0, 0, w, h);
+
+    // Axes
+    pCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    pCtx.lineWidth = 1;
+    pCtx.beginPath(); pCtx.moveTo(0, cy); pCtx.lineTo(w, cy); pCtx.stroke();
+    pCtx.beginPath(); pCtx.moveTo(cx, 0); pCtx.lineTo(cx, h); pCtx.stroke();
+
+    // Direction vector of current projection axis
+    const rad = currAngle * (Math.PI / 180);
+    const dx = Math.cos(rad);
+    const dy = Math.sin(rad);
+
+    // Draw Projection Axis (Yellow Line)
+    pCtx.strokeStyle = '#facc15';
+    pCtx.lineWidth = 2.5;
+    pCtx.beginPath();
+    pCtx.moveTo(cx - dx * 280, cy + dy * 280);
+    pCtx.lineTo(cx + dx * 280, cy - dy * 280);
+    pCtx.stroke();
+
+    // Calculate Variance along this axis
+    let sumSq = 0;
+    rawPoints.forEach(p => {
+      // Dot product = scalar projection
+      const proj = p.x * dx + p.y * dy;
+      sumSq += proj * proj;
+
+      const px = cx + p.x * scale;
+      const py = cy - p.y * scale;
+
+      // Draw point
+      pCtx.fillStyle = '#00f0ff';
+      pCtx.beginPath(); pCtx.arc(px, py, 4, 0, Math.PI * 2); pCtx.fill();
+
+      // If projection toggled, draw drop-lines onto projection axis
+      if (showProjection) {
+        const projX = proj * dx;
+        const projY = proj * dy;
+        const projPx = cx + projX * scale;
+        const projPy = cy - projY * scale;
+
+        pCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        pCtx.lineWidth = 1;
+        pCtx.beginPath();
+        pCtx.moveTo(px, py);
+        pCtx.lineTo(projPx, projPy);
+        pCtx.stroke();
+
+        pCtx.fillStyle = '#facc15';
+        pCtx.beginPath(); pCtx.arc(projPx, projPy, 3, 0, Math.PI * 2); pCtx.fill();
+      }
+    });
+
+    const variance = sumSq / rawPoints.length;
+    document.getElementById('currVarVal').textContent = variance.toFixed(2);
+    const maxVar = 4.85;
+    const ratio = Math.min(100, (variance / (maxVar + 0.65)) * 100);
+    document.getElementById('explainedRatio').textContent = ratio.toFixed(1) + '%';
+  }
+
+  // LoRA Calculator
+  function updateLora() {
+    const r = parseInt(document.getElementById('rankRange').value);
+    const d = 4096;
+
+    document.getElementById('rankVal').textContent = `r = ${r}`;
+    document.getElementById('bDim').textContent = `${d} × ${r}`;
+    document.getElementById('aDim').textContent = `${r} × ${d}`;
+
+    const bCount = d * r;
+    const aCount = r * d;
+    const totalLora = bCount + aCount;
+    const fullParams = d * d; // 16,777,216
+
+    document.getElementById('bParam').textContent = bCount.toLocaleString();
+    document.getElementById('aParam').textContent = aCount.toLocaleString();
+    document.getElementById('loraTotalParam').textContent = totalLora.toLocaleString() + ' 개';
+
+    const reduction = ((1 - (totalLora / fullParams)) * 100).toFixed(2);
+    document.getElementById('reductionRate').textContent = `${reduction}% 절감!`;
+  }
+
+  // Init
+  drawPCA();
+  updateLora();
+</script>
+
+</body>
+</html>

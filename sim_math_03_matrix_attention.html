@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 03 시뮬레이터: 행렬 곱셈 & 트랜스포머 어텐션 투영</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(20, 27, 45, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --accent-cyan: #00f0ff;
+      --accent-pink: #ff007f;
+      --accent-yellow: #facc15;
+      --accent-green: #10b981;
+      --accent-purple: #a855f7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      padding: 24px;
+      min-height: 100vh;
+      background-image: radial-gradient(rgba(168, 85, 247, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .sim-container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000;
+      background: var(--accent-purple);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    h1 span { color: var(--accent-purple); }
+    p.sub { color: var(--muted); font-size: 0.95rem; }
+
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(0, 240, 255, 0.2));
+      color: var(--accent-purple);
+      border-color: var(--accent-purple);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    canvas {
+      width: 100%;
+      height: 380px;
+      background: #060911;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+
+    .matrix-input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+      background: rgba(0,0,0,0.3);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .matrix-cell { display: flex; flex-direction: column; gap: 4px; }
+    .matrix-cell span { font-size: 0.8rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .matrix-cell input {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .preset-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .preset-btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .preset-btn:hover { color: #fff; border-color: var(--accent-cyan); }
+
+    .stat-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-name { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    .stat-val { font-size: 1.25rem; font-weight: 800; color: var(--accent-purple); font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+
+    /* Attention Table */
+    .attn-matrix {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+    .attn-matrix th, .attn-matrix td {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+    .attn-matrix th { background: rgba(255,255,255,0.05); color: var(--muted); }
+    .heatmap-cell {
+      transition: background 0.3s;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .formula-callout {
+      background: rgba(168, 85, 247, 0.08);
+      border-left: 3px solid var(--accent-purple);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .formula-callout code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+<div class="sim-container">
+  <header>
+    <div class="badge">Part 1. 선형대수학 · Day 03 시뮬레이터</div>
+    <h1>행렬 곱셈, 선형변환 & <span>트랜스포머 어텐션 투영</span></h1>
+    <p class="sub">행렬이 공간을 회전·확장하는 기하학적 변환과, 이것이 어떻게 트랜스포머 Q·K·V 어텐션으로 이어지는지 시각적으로 관찰하세요.</p>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-transform')">🌀 1. 2D 행렬 선형 변환 & 공간 왜곡</button>
+    <button class="tab-btn" onclick="switchTab('tab-attention')">⚡ 2. 트랜스포머 Q·K·V 어텐션 투영</button>
+  </div>
+
+  <!-- TAB 1: 2D LINEAR TRANSFORMATION -->
+  <div id="tab-transform" class="tab-content active">
+    <div class="grid">
+      <!-- Canvas -->
+      <div class="card">
+        <div class="card-title"><span class="icon">📐</span> 변환된 2D 공간 (단위 격자와 기저 벡터)</div>
+        <canvas id="transformCanvas"></canvas>
+        <div class="formula-callout">
+          💡 <b>기저 벡터의 사상</b>: 행렬의 1열 $[a, c]^T$는 $x$축 단위벡터 $\hat{i}$가 이동한 위치이고, 2열 $[b, d]^T$는 $y$축 단위벡터 $\hat{j}$가 이동한 위치입니다.
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="card">
+        <div class="card-title"><span class="icon">⚙️</span> 변환 행렬 M = [[a, b], [c, d]]</div>
+        
+        <div class="preset-btns">
+          <button class="preset-btn" onclick="applyPreset(1, 0, 0, 1)">항등 행렬 (원래대로)</button>
+          <button class="preset-btn" onclick="applyPreset(0, -1, 1, 0)">90도 회전</button>
+          <button class="preset-btn" onclick="applyPreset(1.5, 0, 0, 1.5)">1.5배 균등 확대</button>
+          <button class="preset-btn" onclick="applyPreset(1, 1, 0, 1)">수평 층밀림 (Shear)</button>
+          <button class="preset-btn" onclick="applyPreset(-1, 0, 0, 1)">Y축 대칭 반사</button>
+        </div>
+
+        <div class="matrix-input-grid">
+          <div class="matrix-cell">
+            <span>성분 a (i_x)</span>
+            <input type="number" id="matA" step="0.1" value="1.0">
+          </div>
+          <div class="matrix-cell">
+            <span>성분 b (j_x)</span>
+            <input type="number" id="matB" step="0.1" value="0.0">
+          </div>
+          <div class="matrix-cell">
+            <span>성분 c (i_y)</span>
+            <input type="number" id="matC" step="0.1" value="0.0">
+          </div>
+          <div class="matrix-cell">
+            <span>성분 d (j_y)</span>
+            <input type="number" id="matD" step="0.1" value="1.0">
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name">행렬식 (det M = ad - bc)</div>
+            <div class="stat-val" id="detVal">1.00</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">면적 배율 / 방향</div>
+            <div class="stat-val" style="color:var(--accent-yellow);" id="areaVal">1.0x (정방향)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">새 기저 i' = [a, c]</div>
+            <div class="stat-val" style="color:var(--accent-pink);" id="iBasis">[1.0, 0.0]</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">새 기저 j' = [b, d]</div>
+            <div class="stat-val" style="color:var(--accent-cyan);" id="jBasis">[0.0, 1.0]</div>
+          </div>
+        </div>
+
+        <div class="formula-callout">
+          <code>[x', y']^T = [[a, b], [c, d]] × [x, y]^T = [ax + by, cx + dy]^T</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: TRANSFORMER QKV ATTENTION -->
+  <div id="tab-attention" class="tab-content">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">🔍</span> 트랜스포머 Self-Attention 메커니즘</div>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom: 14px;">
+          입력 문장 3개 토큰 <b>["AI", "수학", "정복"]</b>이 각각 $W_Q, W_K, W_V$ 행렬 곱셈을 거쳐 $Q, K, V$ 공간으로 사상됩니다.
+        </p>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size:0.85rem; color:var(--muted);">스케일링 인자 (√d_k): </label>
+          <span style="font-family:'JetBrains Mono'; color:var(--accent-cyan);" id="sqrtDkVal">1.414 (d_k=2)</span>
+        </div>
+
+        <div class="stat-card" style="margin-bottom: 14px;">
+          <div class="stat-name">어텐션 가중치 수식</div>
+          <div style="font-family:'JetBrains Mono'; font-size:0.95rem; color:#fff; margin-top:4px;">
+            Attention(Q, K, V) = softmax( (Q × K^T) / √d_k ) × V
+          </div>
+        </div>
+
+        <div class="card-title" style="margin-top: 18px; font-size: 1rem;"><span class="icon">🔥</span> Softmax Attention Heatmap (단어 간 주목도)</div>
+        <table class="attn-matrix" id="attnHeatmap">
+          <!-- Populated dynamically -->
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">🧠</span> 문맥화된 최종 출력 임베딩 (Contextual Vector)</div>
+        <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 12px;">
+          각 토큰은 다른 토큰들과의 어텐션 가중치 확률에 따라 Value($V$) 벡터들을 가중합(Weighted Sum)하여 고유한 문맥 의미를 획득합니다.
+        </p>
+
+        <div id="attnOutputs" style="display:flex; flex-direction:column; gap:12px;">
+          <!-- Populated dynamically -->
+        </div>
+
+        <div class="formula-callout" style="margin-top: 18px;">
+          💡 <b>선형대수와의 연결</b>: $W_Q, W_K, W_V$ 행렬이 고차원 임베딩을 '질문(Q)', '색인 키(K)', '의미 내용(V)' 공간으로 선형 변환하는 주역입니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+    if (tabId === 'tab-transform') drawTransform();
+    if (tabId === 'tab-attention') updateAttention();
+  }
+
+  // 2D Transformation Canvas
+  const tCanvas = document.getElementById('transformCanvas');
+  const tCtx = tCanvas.getContext('2d');
+
+  function resizeTCanvas() {
+    tCanvas.width = tCanvas.parentElement.clientWidth;
+    tCanvas.height = 380;
+  }
+  window.addEventListener('resize', () => { resizeTCanvas(); drawTransform(); });
+  resizeTCanvas();
+
+  let a = 1.0, b = 0.0, c = 0.0, d = 1.0;
+
+  const matA = document.getElementById('matA');
+  const matB = document.getElementById('matB');
+  const matC = document.getElementById('matC');
+  const matD = document.getElementById('matD');
+
+  function updateMatrix() {
+    a = parseFloat(matA.value) || 0;
+    b = parseFloat(matB.value) || 0;
+    c = parseFloat(matC.value) || 0;
+    d = parseFloat(matD.value) || 0;
+
+    const det = a * d - b * c;
+    document.getElementById('detVal').textContent = det.toFixed(2);
+    document.getElementById('areaVal').textContent = Math.abs(det).toFixed(2) + "x (" + (det >= 0 ? "정방향" : "면 뒤집힘") + ")";
+    document.getElementById('iBasis').textContent = `[${a.toFixed(1)}, ${c.toFixed(1)}]`;
+    document.getElementById('jBasis').textContent = `[${b.toFixed(1)}, ${d.toFixed(1)}]`;
+
+    drawTransform();
+  }
+
+  [matA, matB, matC, matD].forEach(inp => inp.addEventListener('input', updateMatrix));
+
+  function applyPreset(pa, pb, pc, pd) {
+    matA.value = pa; matB.value = pb;
+    matC.value = pc; matD.value = pd;
+    updateMatrix();
+  }
+
+  function drawTransform() {
+    const w = tCanvas.width;
+    const h = tCanvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+    const scale = 36;
+
+    tCtx.clearRect(0, 0, w, h);
+
+    // Draw background original grid (faint)
+    tCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+    tCtx.lineWidth = 1;
+    for (let x = -10; x <= 10; x++) {
+      tCtx.beginPath();
+      tCtx.moveTo(cx + x * scale, 0);
+      tCtx.lineTo(cx + x * scale, h);
+      tCtx.stroke();
+    }
+    for (let y = -10; y <= 10; y++) {
+      tCtx.beginPath();
+      tCtx.moveTo(0, cy + y * scale);
+      tCtx.lineTo(w, cy + y * scale);
+      tCtx.stroke();
+    }
+
+    // Draw transformed grid
+    tCtx.strokeStyle = 'rgba(168, 85, 247, 0.2)';
+    tCtx.lineWidth = 1.2;
+
+    const range = 6;
+    for (let i = -range; i <= range; i++) {
+      // vertical lines: vary y
+      const p1 = transformPoint(i, -range);
+      const p2 = transformPoint(i, range);
+      tCtx.beginPath();
+      tCtx.moveTo(cx + p1.x * scale, cy - p1.y * scale);
+      tCtx.lineTo(cx + p2.x * scale, cy - p2.y * scale);
+      tCtx.stroke();
+
+      // horizontal lines: vary x
+      const p3 = transformPoint(-range, i);
+      const p4 = transformPoint(range, i);
+      tCtx.beginPath();
+      tCtx.moveTo(cx + p3.x * scale, cy - p3.y * scale);
+      tCtx.lineTo(cx + p4.x * scale, cy - p4.y * scale);
+      tCtx.stroke();
+    }
+
+    // Draw transformed unit square (filled polygon)
+    const o = transformPoint(0, 0);
+    const u = transformPoint(1, 0);
+    const diag = transformPoint(1, 1);
+    const v = transformPoint(0, 1);
+
+    tCtx.fillStyle = 'rgba(0, 240, 255, 0.15)';
+    tCtx.beginPath();
+    tCtx.moveTo(cx + o.x * scale, cy - o.y * scale);
+    tCtx.lineTo(cx + u.x * scale, cy - u.y * scale);
+    tCtx.lineTo(cx + diag.x * scale, cy - diag.y * scale);
+    tCtx.lineTo(cx + v.x * scale, cy - v.y * scale);
+    tCtx.closePath();
+    tCtx.fill();
+
+    // Basis Vector i' (Pink)
+    drawArrow(cx, cy, cx + u.x * scale, cy - u.y * scale, '#ff007f', "i' [a, c]");
+
+    // Basis Vector j' (Cyan)
+    drawArrow(cx, cy, cx + v.x * scale, cy - v.y * scale, '#00f0ff', "j' [b, d]");
+
+    // Center dot
+    tCtx.fillStyle = '#fff';
+    tCtx.beginPath(); tCtx.arc(cx, cy, 4, 0, Math.PI * 2); tCtx.fill();
+  }
+
+  function transformPoint(x, y) {
+    return {
+      x: a * x + b * y,
+      y: c * x + d * y
+    };
+  }
+
+  function drawArrow(fromx, fromy, tox, toy, color, label) {
+    const headlen = 10;
+    const dx = tox - fromx;
+    const dy = toy - fromy;
+    const angle = Math.atan2(dy, dx);
+    tCtx.strokeStyle = color;
+    tCtx.fillStyle = color;
+    tCtx.lineWidth = 3;
+
+    tCtx.beginPath();
+    tCtx.moveTo(fromx, fromy);
+    tCtx.lineTo(tox, toy);
+    tCtx.stroke();
+
+    tCtx.beginPath();
+    tCtx.moveTo(tox, toy);
+    tCtx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+    tCtx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+    tCtx.closePath();
+    tCtx.fill();
+
+    tCtx.font = 'bold 12px "JetBrains Mono"';
+    tCtx.fillText(label, tox + 6, toy - 6);
+  }
+
+  // Attention Simulator Logic
+  const tokens = ["AI", "수학", "정복"];
+  // Mock 2D Q, K, V vectors for each token
+  const Q = [
+    [1.2, 0.4],  // "AI"
+    [0.3, 1.5],  // "수학"
+    [0.9, 1.1]   // "정복"
+  ];
+  const K = [
+    [1.1, 0.5],
+    [0.4, 1.4],
+    [0.8, 1.2]
+  ];
+  const V = [
+    [2.0, 0.2],
+    [0.1, 1.8],
+    [1.5, 1.4]
+  ];
+
+  function updateAttention() {
+    const dk = 2;
+    const sqrtDk = Math.sqrt(dk);
+    const n = tokens.length;
+
+    // 1. Compute raw dot products QK^T / sqrt(dk)
+    const rawScores = [];
+    for (let i = 0; i < n; i++) {
+      const row = [];
+      for (let j = 0; j < n; j++) {
+        const dot = Q[i][0] * K[j][0] + Q[i][1] * K[j][1];
+        row.push(dot / sqrtDk);
+      }
+      rawScores.push(row);
+    }
+
+    // 2. Softmax per row
+    const weights = [];
+    for (let i = 0; i < n; i++) {
+      const maxVal = Math.max(...rawScores[i]);
+      const exps = rawScores[i].map(s => Math.exp(s - maxVal));
+      const sumExp = exps.reduce((acc, v) => acc + v, 0);
+      weights.push(exps.map(v => v / sumExp));
+    }
+
+    // 3. Render Table
+    const table = document.getElementById('attnHeatmap');
+    let html = `<tr><th>Query \\ Key</th>`;
+    tokens.forEach(t => html += `<th>${t}</th>`);
+    html += `</tr>`;
+
+    for (let i = 0; i < n; i++) {
+      html += `<tr><th>${tokens[i]}</th>`;
+      for (let j = 0; j < n; j++) {
+        const w = weights[i][j];
+        const pct = (w * 100).toFixed(1);
+        const bgAlpha = (w * 0.7 + 0.1).toFixed(2);
+        html += `<td class="heatmap-cell" style="background: rgba(168, 85, 247, ${bgAlpha});">${pct}%</td>`;
+      }
+      html += `</tr>`;
+    }
+    table.innerHTML = html;
+
+    // 4. Render Context Outputs (Weighted sum of V)
+    const outContainer = document.getElementById('attnOutputs');
+    outContainer.innerHTML = '';
+    for (let i = 0; i < n; i++) {
+      let outX = 0, outY = 0;
+      for (let j = 0; j < n; j++) {
+        outX += weights[i][j] * V[j][0];
+        outY += weights[i][j] * V[j][1];
+      }
+      const div = document.createElement('div');
+      div.className = 'stat-card';
+      div.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:700; color:#fff;">토큰 "${tokens[i]}"의 문맥 임베딩</span>
+          <span style="font-family:'JetBrains Mono'; color:var(--accent-cyan); font-weight:700;">[${outX.toFixed(2)}, ${outY.toFixed(2)}]</span>
+        </div>
+      `;
+      outContainer.appendChild(div);
+    }
+  }
+
+  // Init
+  updateMatrix();
+  updateAttention();
+</script>
+
+</body>
+</html>
