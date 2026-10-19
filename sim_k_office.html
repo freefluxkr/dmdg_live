@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>K-오피스 생존 연구소 (K-Office Survival Lab) | DMDG 인터랙티브 시뮬레이터</title>
+  <meta name="description" content="꼰대력 진단, 넵(Nep) 감정 번역기, 회식 탈출 시뮬레이터 - K-오피스 생존 바이블 공식 인터랙티브 웹앱">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(18, 24, 38, 0.78);
+      --card-border: rgba(99, 102, 241, 0.22);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.45);
+      --pink: #ec4899;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --cyan: #06b6d4;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, var(--bg) 65%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 20px 14px 60px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid var(--accent);
+      color: #c7d2fe;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.25);
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Navigation Tabs */
+    .tab-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 6px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .tab-btn {
+      padding: 12px 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.88rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tab-btn span.emoji {
+      font-size: 1.25rem;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(79, 70, 229, 0.45);
+    }
+
+    /* Card Panels */
+    .panel {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 26px 22px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(16px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e0e7ff;
+    }
+
+    /* Questions / Quiz Form */
+    .question-box {
+      margin-bottom: 20px;
+      padding: 16px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+    }
+
+    .q-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin-bottom: 12px;
+      color: #f1f5f9;
+      line-height: 1.45;
+    }
+
+    .option-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .opt-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      transition: all 0.2s ease;
+    }
+
+    .opt-label:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    .opt-label input[type="radio"] {
+      accent-color: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .btn-action {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      color: white;
+      font-weight: 800;
+      font-size: 1.02rem;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+      transition: all 0.25s;
+      margin-top: 10px;
+    }
+
+    .btn-action:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+    }
+
+    /* Result Box */
+    .result-box {
+      display: none;
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1.5px solid var(--accent);
+      text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .score-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #6366f1, #312e81);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
+    }
+
+    .score-val {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .score-unit {
+      font-size: 0.75rem;
+      color: #c7d2fe;
+    }
+
+    .result-grade {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #fbbf24;
+    }
+
+    .result-desc {
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    /* Translator Tab */
+    .chat-simulator {
+      background: #0f172a;
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 20px;
+    }
+
+    .chat-bubble {
+      padding: 12px 16px;
+      border-radius: 14px;
+      max-width: 82%;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .bubble-boss {
+      background: #1e293b;
+      color: #f1f5f9;
+      border-top-left-radius: 2px;
+      margin-right: auto;
+    }
+
+    .bubble-reply {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+      border-top-right-radius: 2px;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .nep-picker {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .nep-btn {
+      padding: 12px 6px;
+      background: #1e293b;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nep-btn:hover, .nep-btn.selected {
+      background: #6366f1;
+      color: white;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+    }
+
+    .analysis-card {
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 12px;
+      padding: 16px;
+      border-left: 4px solid var(--accent);
+      margin-top: 14px;
+    }
+
+    .analysis-title {
+      font-weight: 800;
+      font-size: 0.96rem;
+      color: #a5b4fc;
+      margin-bottom: 6px;
+    }
+
+    .analysis-text {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    /* Escape Tab */
+    .timer-display {
+      text-align: center;
+      padding: 28px 16px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 70%);
+    }
+
+    .time-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #38bdf8;
+      letter-spacing: -2px;
+      text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    }
+
+    .fake-sms-box {
+      background: #000000;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid #334155;
+      margin-top: 20px;
+    }
+
+    .sms-header {
+      font-size: 0.8rem;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 6px;
+    }
+
+    .sms-content {
+      font-size: 0.95rem;
+      color: #f8fafc;
+      line-height: 1.5;
+    }
+
+    /* Footer Banner */
+    .wikidocs-banner {
+      margin-top: 36px;
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 1.5px solid #6366f1;
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.2);
+    }
+
+    .wb-text h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+
+    .wb-text p {
+      font-size: 0.86rem;
+      color: #94a3b8;
+    }
+
+    .wb-btn {
+      padding: 10px 18px;
+      background: #6366f1;
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      transition: all 0.2s;
+    }
+
+    .wb-btn:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="badge">🔥 Book 21746 공식 인터랙티브 랩</div>
+    <h1>K-오피스 생존 연구소</h1>
+    <p class="subtitle">꼰대력 테스트 · 넵(Nep) 감정 번역기 · 회식 틈새 탈출 타이머</p>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('quiz')">
+      <span class="emoji">👔</span>
+      <span>꼰대력 진단</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('nep')">
+      <span class="emoji">💬</span>
+      <span>넵 감정 번역기</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('escape')">
+      <span class="emoji">🏃‍♂️</span>
+      <span>회식 탈출 타이머</span>
+    </button>
+  </div>
+
+  <!-- Panel 1: 꼰대력 진단 -->
+  <div id="panel-quiz" class="panel active">
+    <div class="panel-title">
+      <span>📊</span>
+      <span>당신의 오피스 꼰대력 & 라떼 지수 진단기</span>
+    </div>
+
+    <form id="quiz-form">
+      <div class="question-box">
+        <div class="q-title">Q1. 신입사원이 출근 시간 8시 59분에 도착했을 때 나의 첫 생각은?</div>
+        <div class="option-list">
+          <label class="opt-label"><input type="radio" name="q1" value="0" checked> 제시간에 맞게 잘 도착했네.</label>
+          <label class="opt-label"><input type="radio" name="q1" value="10"> 최소 10분 전에는 와서 커피도 마시고 준비해야 하는 것 아닌가?</label>
+          <label class="opt-label"><input type="radio" name="q1" value="25"> 우리 때는 30분 전에 와서 선배들 책상 닦았는데... 요즘 애들은 참 편해.</label>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <div class="q-title">Q2. 후배가 퇴근 시간인 18시 00분에 노트북을 닫고 일어설 때?</div>
+        <div class="option-list">
+          <label class="opt-label"><input type="radio" name="q2" value="0" checked> 고생했어! 즐거운 저녁 보내길.</label>
+          <label class="opt-label"><input type="radio" name="q2" value="10"> 오늘 하던 일은 마무리 다 하고 가는 건가 살짝 궁금하다.</label>
+          <label class="opt-label"><input type="radio" name="q2" value="25"> 팀장이 아직 일하고 있는데 눈치도 없이 칼퇴하네?</label>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <div class="q-title">Q3. 부서 회식 메뉴를 정할 때 나의 행동 패턴은?</div>
+        <div class="option-list">
+          <label class="opt-label"><input type="radio" name="q3" value="0" checked> 막내에게 예산만 알려주고 먹고 싶은 곳 예약하게 한다.</label>
+          <label class="opt-label"><input type="radio" name="q3" value="10"> "아무거나 괜찮아"라고 해놓고 삼겹살에 소주 쪽으로 은근히 유도한다.</label>
+          <label class="opt-label"><input type="radio" name="q3" value="25"> "회식은 무조건 1차 삼겹살, 2차 호프집이지!" 단골집으로 직행한다.</label>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <div class="q-title">Q4. 후배가 슬랙/카톡으로 "네" 대신 "넵"이나 이모지를 보낼 때?</div>
+        <div class="option-list">
+          <label class="opt-label"><input type="radio" name="q4" value="0" checked> 친근하고 즉각적인 답장이라 마음이 편하다.</label>
+          <label class="opt-label"><input type="radio" name="q4" value="10"> 크게 상관은 없지만 이메일엔 좀 더 정중했으면 좋겠다.</label>
+          <label class="opt-label"><input type="radio" name="q4" value="25"> "네"라고 딱딱하게 하거나 가볍게 답장하면 예의가 없다고 느낀다.</label>
+        </div>
+      </div>
+
+      <button type="button" class="btn-action" onclick="calculateKondae()">내 꼰대력 점수 확인하기</button>
+    </form>
+
+    <div id="quiz-result" class="result-box">
+      <div class="score-circle">
+        <div class="score-val" id="score-text">0</div>
+        <div class="score-unit">/ 100점</div>
+      </div>
+      <div class="result-grade" id="grade-text">완벽한 MZ 천사 동료</div>
+      <div class="result-desc" id="desc-text">꼰대 지수 0%! 당신은 글로벌 IT 테크 기업에서도 사랑받을 열린 마인드의 소유자입니다.</div>
+    </div>
+  </div>
+
+  <!-- Panel 2: 넵 감정 번역기 -->
+  <div id="panel-nep" class="panel">
+    <div class="panel-title">
+      <span>💬</span>
+      <span>글자 하나로 갈리는 '넵병(Nep Syndrome)' 실시간 판독기</span>
+    </div>
+
+    <div class="chat-simulator">
+      <div class="chat-bubble bubble-boss">
+        김대리님, 오늘 부탁드린 시장 분석 보고서 17시까지 가능할까요?
+      </div>
+      <div class="chat-bubble bubble-reply" id="preview-reply">
+        넵! 지금 마무리 작업 중입니다.
+      </div>
+    </div>
+
+    <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; color: #a5b4fc;">
+      답변 뉘앙스 선택해보기:
+    </div>
+    <div class="nep-picker">
+      <button class="nep-btn selected" onclick="pickNep('넵')">넵</button>
+      <button class="nep-btn" onclick="pickNep('네!')">네!</button>
+      <button class="nep-btn" onclick="pickNep('네')">네.</button>
+      <button class="nep-btn" onclick="pickNep('넹')">넹~</button>
+    </div>
+
+    <div id="nep-analysis" class="analysis-card">
+      <div class="analysis-title" id="nep-type">💎 [넵]의 심리학: 사회화 완료 200%의 완충 쿠션어</div>
+      <div class="analysis-text" id="nep-desc">
+        '네'는 너무 차갑고 화난 것 같고, '넹'은 너무 가벼워 보일 때 대한민국 K-직장인이 발명해 낸 위대한 생존의 언어입니다. 0.1초의 즉답성과 충성도를 동시에 전달합니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel 3: 회식 탈출 타이머 -->
+  <div id="panel-escape" class="panel">
+    <div class="panel-title">
+      <span>🏃‍♂️</span>
+      <span>회식 1차 틈새 탈출 카운트다운 & 비상 탈출 메시지</span>
+    </div>
+
+    <div class="timer-display">
+      <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px;">1차 고깃집에서 2차로 이동하는 골든타임</div>
+      <div class="time-num" id="escape-timer">00:45:00</div>
+      <button class="btn-action" style="max-width: 200px; margin: 14px auto 0;" onclick="toggleTimer()">타이머 시작</button>
+    </div>
+
+    <div class="fake-sms-box">
+      <div class="sms-header">
+        <span>🚨 [비상 탈출용 자동 알림 템플릿]</span>
+        <span>오후 8:45</span>
+      </div>
+      <div class="sms-content" id="sms-text">
+        "[긴급] 어머니: 집 보일러에 누수가 생겨서 아랫집에 물이 샌다는데 당장 와서 밸브 좀 확인해 봐라!"
+      </div>
+    </div>
+    <button type="button" class="btn-action" style="background: #1e293b; border: 1px solid #475569; margin-top: 10px;" onclick="refreshSms()">
+      🔄 다른 핑계 템플릿 생성하기
+    </button>
+  </div>
+
+  <!-- Footer Banner -->
+  <div class="wikidocs-banner">
+    <div class="wb-text">
+      <h3>📖 더 깊은 K-오피스 생존술이 궁금하다면?</h3>
+      <p>위키독스 공식 연재 《K-오피스 생존 바이블》(Book 21746) 전 16개 챕터 열람</p>
+    </div>
+    <a href="https://wikidocs.net/book/21746" target="_blank" class="wb-btn">위키독스 무료 읽기 →</a>
+  </div>
+</div>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    
+    if (tab === 'quiz') {
+      document.querySelectorAll('.tab-btn')[0].classList.add('active');
+      document.getElementById('panel-quiz').classList.add('active');
+    } else if (tab === 'nep') {
+      document.querySelectorAll('.tab-btn')[1].classList.add('active');
+      document.getElementById('panel-nep').classList.add('active');
+    } else {
+      document.querySelectorAll('.tab-btn')[2].classList.add('active');
+      document.getElementById('panel-escape').classList.add('active');
+    }
+  }
+
+  function calculateKondae() {
+    const f = document.getElementById('quiz-form');
+    let total = 0;
+    ['q1', 'q2', 'q3', 'q4'].forEach(q => {
+      const val = f.querySelector(`input[name="${q}"]:checked`);
+      if (val) total += parseInt(val.value);
+    });
+
+    const box = document.getElementById('quiz-result');
+    const scoreText = document.getElementById('score-text');
+    const gradeText = document.getElementById('grade-text');
+    const descText = document.getElementById('desc-text');
+
+    scoreText.innerText = total;
+
+    if (total <= 20) {
+      gradeText.innerText = "🌟 완벽한 젠틀 동료 (청정 구역)";
+      descText.innerText = "꼰대 지수 최저! 상대방의 자율성과 시간을 극도로 존중하는 최고의 팀메이트입니다.";
+    } else if (total <= 50) {
+      gradeText.innerText = "☕ 영포티 낀 세대 (조심 단계)";
+      descText.innerText = "마음은 열려 있으나, 나도 모르게 '우리 때는 말이야'가 목 끝까지 차오르는 낀 세대 감성입니다.";
+    } else if (total <= 75) {
+      gradeText.innerText = "⚠️ 은밀한 마이크로매니저 (경보)";
+      descText.innerText = "조직의 룰을 지나치게 엄격하게 적용하여 후배들이 당신 앞에서 '넵병'에 걸리기 직전입니다.";
+    } else {
+      gradeText.innerText = "🚨 살아있는 조선시대 참모총장 (적색경보)";
+      descText.innerText = "신속히 《K-오피스 생존 바이블》 02장 '꼰대의 7가지 유형학'을 정독하여 자아 성찰이 필요합니다!";
+    }
+
+    box.style.display = 'block';
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  const nepData = {
+    '넵': {
+      reply: '넵! 지금 바로 확인하겠습니다.',
+      title: '💎 [넵]의 심리학: 사회화 완료 200%의 생존어',
+      desc: "'네'는 차갑고 '넹'은 가벼워서 탄생한 기적의 단어. 상사의 기분을 거스르지 않으면서 가장 안전하고 신속한 피드백을 전달하는 한국 직장인의 필수 생존어입니다."
+    },
+    '네!': {
+      reply: '네! 준비 다 되었습니다!',
+      title: '⚡ [네!]의 심리학: 의욕 넘치는 신입 모드',
+      desc: "느낌표를 붙여 밝고 긍정적인 에너지를 뿜어냅니다. 하지만 1년 차가 넘어가면 타이핑 에너지 고갈로 자연스럽게 '넵'으로 수렴하게 됩니다."
+    },
+    '네': {
+      reply: '네. 확인했습니다.',
+      title: '🧊 [네.]의 심리학: 분노와 피로의 경계선',
+      desc: "마침표가 찍힌 단호한 '네.'는 상대방에게 '내가 지금 화가 났거나 매우 지쳤다'는 무언의 신호를 줍니다. 상사가 이 답장을 받으면 살짝 긴장하게 됩니다."
+    },
+    '넹': {
+      reply: '넹~ 바로 보내드릴게요 ㅎㅎ',
+      title: '🌱 [넹]의 심리학: 친밀한 동기 전용 언어',
+      desc: "친한 동기나 사수에게만 허용되는 애교 섞인 어투입니다. 부장님이나 임원 단톡방에 보냈다가는 1초 만에 등골이 오싹해질 수 있습니다."
+    }
+  };
+
+  function pickNep(type) {
+    document.querySelectorAll('.nep-btn').forEach(b => b.classList.remove('selected'));
+    event.target.classList.add('selected');
+
+    const d = nepData[type];
+    document.getElementById('preview-reply').innerText = d.reply;
+    document.getElementById('nep-type').innerText = d.title;
+    document.getElementById('nep-desc').innerText = d.desc;
+  }
+
+  let timerRunning = false;
+  let secondsLeft = 2700;
+  let timerInterval = null;
+
+  function toggleTimer() {
+    const btn = event.target;
+    if (!timerRunning) {
+      timerRunning = true;
+      btn.innerText = "일시정지";
+      btn.style.background = "#ef4444";
+      timerInterval = setInterval(() => {
+        if (secondsLeft > 0) {
+          secondsLeft--;
+          const m = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
+          const s = String(secondsLeft % 60).padStart(2, '0');
+          document.getElementById('escape-timer').innerText = `00:${m}:${s}`;
+        } else {
+          clearInterval(timerInterval);
+          alert("🚨 1차 종료 골든타임 도달! 지금 신발 끈 묶고 지하철역으로 달리세요!");
+        }
+      }, 1000);
+    } else {
+      timerRunning = false;
+      btn.innerText = "타이머 재개";
+      btn.style.background = "linear-gradient(135deg, #6366f1, #ec4899)";
+      clearInterval(timerInterval);
+    }
+  }
+
+  const excuses = [
+    "[긴급] 어머니: 집 보일러에 누수가 생겨서 아랫집에 물이 샌다는데 당장 와서 밸브 좀 확인해 봐라!",
+    "[택배기사]: 냉동 신선식품이 문 앞에 배송되었는데 날이 더워 1시간 내로 냉동고에 넣으셔야 합니다.",
+    "[알림]: 내일 오전 8시 본사 대면 회의 자료 사전 검토 요청 (마감: 자정)",
+    "[동생]: 집에 강아지가 문을 열고 탈출한 것 같아. 빨리 와서 같이 찾아봐야 해!"
+  ];
+
+  function refreshSms() {
+    const pick = excuses[Math.floor(Math.random() * excuses.length)];
+    document.getElementById('sms-text').innerText = pick;
+  }
+</script>
+
+</body>
+</html>

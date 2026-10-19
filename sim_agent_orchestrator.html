@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>자율형 AI 멀티 에이전트 오케스트레이션 콘솔 (Multi-Agent Orchestrator Lab) | Book 21747</title>
+  <meta name="description" content="StateGraph 노드 순환 루프 시뮬레이션, 12대 페르소나 RBAC 아키텍처 및 자가 반성(Reflexion) 터미널">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030712;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --card-border: rgba(56, 189, 248, 0.25);
+      --cyan: #38bdf8;
+      --indigo: #6366f1;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #0f172a 0%, var(--bg) 70%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 20px 14px 60px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid var(--cyan);
+      color: #7dd3fc;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+    }
+
+    h1 {
+      font-size: clamp(1.7rem, 5vw, 2.3rem);
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      background: linear-gradient(135deg, #ffffff 40%, #7dd3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .tab-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 6px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .tab-btn {
+      padding: 12px 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.88rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45);
+    }
+
+    .panel {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-title {
+      font-size: 1.22rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e0f2fe;
+    }
+
+    /* StateGraph Interactive Visualizer */
+    .graph-container {
+      background: #090e1a;
+      border-radius: 16px;
+      padding: 22px 14px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .nodes-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .graph-node {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .graph-node.active-node {
+      border-color: var(--cyan);
+      background: rgba(56, 189, 248, 0.15);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+      transform: scale(1.02);
+    }
+
+    .node-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .node-icon {
+      font-size: 1.4rem;
+    }
+
+    .node-name {
+      font-weight: 800;
+      font-size: 0.98rem;
+      color: #f8fafc;
+    }
+
+    .node-desc {
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    .node-status {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(148, 163, 184, 0.15);
+      color: #cbd5e1;
+    }
+
+    .node-status.running {
+      background: rgba(56, 189, 248, 0.25);
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+      animation: pulse 1.2s infinite;
+    }
+
+    .node-status.done {
+      background: rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      border: 1px solid #10b981;
+    }
+
+    .node-status.rejected {
+      background: rgba(244, 63, 94, 0.25);
+      color: #fb7185;
+      border: 1px solid #f43f5e;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: #475569;
+      font-size: 1rem;
+      margin: -6px 0;
+    }
+
+    .loop-alert {
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+      font-size: 0.88rem;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .control-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn-step {
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-pass {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-reject {
+      background: linear-gradient(135deg, #e11d48, #f43f5e);
+      color: white;
+      box-shadow: 0 4px 14px rgba(244, 63, 94, 0.3);
+    }
+
+    /* Persona Inspector */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .persona-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .persona-card:hover, .persona-card.active-card {
+      border-color: var(--cyan);
+      background: rgba(56, 189, 248, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .p-avatar {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    .p-role {
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: #f1f5f9;
+    }
+
+    .p-name {
+      font-size: 0.74rem;
+      color: #94a3b8;
+    }
+
+    .inspector-detail {
+      background: #090e1a;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .insp-row {
+      margin-bottom: 12px;
+    }
+
+    .insp-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #7dd3fc;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .insp-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      background: #020617;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      line-height: 1.5;
+    }
+
+    /* Terminal Simulator */
+    .terminal-window {
+      background: #050811;
+      border-radius: 14px;
+      border: 1px solid #1e293b;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .term-bar {
+      background: #0f172a;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .term-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .term-body {
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      height: 280px;
+      overflow-y: auto;
+      color: #38bdf8;
+      line-height: 1.6;
+    }
+
+    .term-input-box {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .term-input {
+      flex: 1;
+      background: #090e1a;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: white;
+      font-size: 0.92rem;
+    }
+
+    .term-input:focus {
+      outline: none;
+      border-color: var(--cyan);
+    }
+
+    .wikidocs-banner {
+      margin-top: 36px;
+      background: linear-gradient(135deg, #0c2340 0%, #030712 100%);
+      border: 1.5px solid var(--cyan);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 8px 30px rgba(56, 189, 248, 0.2);
+    }
+
+    .wb-btn {
+      padding: 10px 18px;
+      background: var(--cyan);
+      border-radius: 10px;
+      color: #030712;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+
+    .wb-btn:hover {
+      background: #7dd3fc;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="badge">🤖 Book 21747 공식 인터랙티브 랩</div>
+    <h1>자율형 AI 멀티 에이전트 콘솔</h1>
+    <p class="subtitle">StateGraph 노드 순환 · 12대 페르소나 RBAC · 자가 반성(Reflexion) 루프</p>
+  </header>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('graph')">
+      <span>🕸️ StateGraph 루프</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('rbac')">
+      <span>👥 12대 페르소나 RBAC</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('terminal')">
+      <span>💻 가상 실행 터미널</span>
+    </button>
+  </div>
+
+  <!-- Panel 1: StateGraph 루프 -->
+  <div id="panel-graph" class="panel active">
+    <div class="panel-title">
+      <span>🔄</span>
+      <span>StateGraph 조건부 라우팅 및 자가 반성(Reflexion) 시뮬레이션</span>
+    </div>
+
+    <div class="graph-container">
+      <div class="nodes-flow">
+        <!-- Node 1 -->
+        <div class="graph-node active-node" id="node-planner">
+          <div class="node-info">
+            <span class="node-icon">🧠</span>
+            <div>
+              <div class="node-name">Planner Node (Demis)</div>
+              <div class="node-desc">요구사항 분해 및 PRD 로드맵 생성</div>
+            </div>
+          </div>
+          <div class="node-status running" id="status-planner">RUNNING</div>
+        </div>
+
+        <div class="flow-arrow">▼ conditional_edge</div>
+
+        <!-- Node 2 -->
+        <div class="graph-node" id="node-coder">
+          <div class="node-info">
+            <span class="node-icon">⚡</span>
+            <div>
+              <div class="node-name">Engineer Node (Craig)</div>
+              <div class="node-desc">풀스택 코드 구현 및 API 엔지니어링</div>
+            </div>
+          </div>
+          <div class="node-status" id="status-coder">WAITING</div>
+        </div>
+
+        <div class="flow-arrow">▼ conditional_edge</div>
+
+        <!-- Node 3 -->
+        <div class="graph-node" id="node-qa">
+          <div class="node-info">
+            <span class="node-icon">🔍</span>
+            <div>
+              <div class="node-name">Verifier Node (Sherlock)</div>
+              <div class="node-desc">단위 테스트, 정적 린팅 및 0-Defect 검증</div>
+            </div>
+          </div>
+          <div class="node-status" id="status-qa">WAITING</div>
+        </div>
+
+        <div class="flow-arrow">▼ conditional_edge</div>
+
+        <!-- Node 4 -->
+        <div class="graph-node" id="node-deploy">
+          <div class="node-info">
+            <span class="node-icon">🚀</span>
+            <div>
+              <div class="node-name">Deploy Node (Peggy)</div>
+              <div class="node-desc">GitHub 배포 및 텔레그램 실시간 알림</div>
+            </div>
+          </div>
+          <div class="node-status" id="status-deploy">WAITING</div>
+        </div>
+      </div>
+
+      <div class="loop-alert" id="loop-alert">
+        <span>🔄</span>
+        <span id="loop-text"><strong>[자가 반성 트리거]</strong> 셜록 검증 실패! 코드가 즉시 Craig Node로 자동 롤백되어 자체 수정(Reflexion) 루프를 돕니다.</span>
+      </div>
+    </div>
+
+    <div class="control-actions">
+      <button class="btn-step btn-pass" onclick="stepGraph(true)">✅ 다음 단계 승인 진행</button>
+      <button class="btn-step btn-reject" onclick="stepGraph(false)">🚨 셜록 검증 반려 (루프 회귀)</button>
+    </div>
+  </div>
+
+  <!-- Panel 2: 12대 페르소나 RBAC -->
+  <div id="panel-rbac" class="panel">
+    <div class="panel-title">
+      <span>🛡️</span>
+      <span>역할 기반 권한 분리 (RBAC) & 시스템 프롬프트 인스펙터</span>
+    </div>
+
+    <div class="persona-grid">
+      <div class="persona-card active-card" onclick="selectPersona('demis')">
+        <div class="p-avatar">👑</div>
+        <div class="p-role">총괄 기획</div>
+        <div class="p-name">Demis</div>
+      </div>
+      <div class="persona-card" onclick="selectPersona('craig')">
+        <div class="p-avatar">💻</div>
+        <div class="p-role">수석 엔지니어</div>
+        <div class="p-name">Craig</div>
+      </div>
+      <div class="persona-card" onclick="selectPersona('jennifer')">
+        <div class="p-avatar">🎨</div>
+        <div class="p-role">UI/UX 리드</div>
+        <div class="p-name">Jennifer</div>
+      </div>
+      <div class="persona-card" onclick="selectPersona('sherlock')">
+        <div class="p-avatar">🔍</div>
+        <div class="p-role">품질 검증관</div>
+        <div class="p-name">Sherlock</div>
+      </div>
+      <div class="persona-card" onclick="selectPersona('peggy')">
+        <div class="p-avatar">📋</div>
+        <div class="p-role">비서실장</div>
+        <div class="p-name">Peggy</div>
+      </div>
+    </div>
+
+    <div class="inspector-detail" id="inspector-content">
+      <div class="insp-row">
+        <div class="insp-label">System Persona</div>
+        <div class="insp-code" id="insp-persona">Demis (Strategic Product Director)</div>
+      </div>
+      <div class="insp-row">
+        <div class="insp-label">Permitted Tools (RBAC)</div>
+        <div class="insp-code" id="insp-tools">['search_web', 'read_url_content', 'write_prd'] (Shell/Deploy 실행 권한 격리됨)</div>
+      </div>
+      <div class="insp-row">
+        <div class="insp-label">System Prompt Core Directive</div>
+        <div class="insp-code" id="insp-directive">"당신은 DMDG의 CEO 데미스입니다. 사업적 가치와 ROI를 최우선으로 고려하여 제품 명세를 작성하고 불필요한 기능 개발을 엄격히 통제하십시오."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel 3: 가상 실행 터미널 -->
+  <div id="panel-terminal" class="panel">
+    <div class="panel-title">
+      <span>💻</span>
+      <span>자연어 목표 기반 가상 멀티 에이전트 오케스트레이션 실행</span>
+    </div>
+
+    <div class="term-input-box">
+      <input type="text" id="goal-input" class="term-input" value="원클릭 PDF 결제 영수증 SaaS 프로토타입 팩토리 가동">
+      <button class="btn-step btn-pass" style="max-width: 130px;" onclick="runTerminalSim()">실행</button>
+    </div>
+
+    <div class="terminal-window">
+      <div class="term-bar">
+        <div class="term-dot" style="background: #ef4444;"></div>
+        <div class="term-dot" style="background: #eab308;"></div>
+        <div class="term-dot" style="background: #22c55e;"></div>
+        <span style="font-size: 0.76rem; color: #64748b; margin-left: 8px;">agy-orchestrator@v2.0-engine</span>
+      </div>
+      <div class="term-body" id="term-logs">
+[00:00:00] [SYSTEM] StateGraph Initialized with 12 Agents.
+[00:00:01] [READY] 목표를 입력하고 [실행]을 누르면 자율 분업이 시작됩니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Banner -->
+  <div class="wikidocs-banner">
+    <div>
+      <h3 style="font-size: 1.05rem; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">📖 멀티 에이전트 실전 코드가 궁금하다면?</h3>
+      <p style="font-size: 0.86rem; color: #94a3b8;">위키독스 공식 연재 《자율형 AI 멀티 에이전트 실전 오케스트레이션》(Book 21747)</p>
+    </div>
+    <a href="https://wikidocs.net/book/21747" target="_blank" class="wb-btn">위키독스 무료 읽기 →</a>
+  </div>
+</div>
+
+<script>
+  function switchTab(t) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    
+    if (t === 'graph') {
+      document.querySelectorAll('.tab-btn')[0].classList.add('active');
+      document.getElementById('panel-graph').classList.add('active');
+    } else if (t === 'rbac') {
+      document.querySelectorAll('.tab-btn')[1].classList.add('active');
+      document.getElementById('panel-rbac').classList.add('active');
+    } else {
+      document.querySelectorAll('.tab-btn')[2].classList.add('active');
+      document.getElementById('panel-terminal').classList.add('active');
+    }
+  }
+
+  let currentNode = 0;
+  const nodes = ['planner', 'coder', 'qa', 'deploy'];
+
+  function stepGraph(isPass) {
+    const alertBox = document.getElementById('loop-alert');
+    alertBox.style.display = 'none';
+
+    if (!isPass) {
+      // 셜록 반려: QA(2)에서 Coder(1)로 롤백
+      currentNode = 1;
+      alertBox.style.display = 'flex';
+      updateNodeUI();
+      return;
+    }
+
+    if (currentNode < nodes.length - 1) {
+      currentNode++;
+    } else {
+      currentNode = 0; // 초기화
+    }
+    updateNodeUI();
+  }
+
+  function updateNodeUI() {
+    nodes.forEach((n, idx) => {
+      const el = document.getElementById(`node-${n}`);
+      const st = document.getElementById(`status-${n}`);
+      el.classList.remove('active-node');
+      st.className = 'node-status';
+
+      if (idx < currentNode) {
+        st.innerText = 'DONE';
+        st.classList.add('done');
+      } else if (idx === currentNode) {
+        el.classList.add('active-node');
+        st.innerText = 'RUNNING';
+        st.classList.add('running');
+      } else {
+        st.innerText = 'WAITING';
+      }
+    });
+  }
+
+  const personaDb = {
+    demis: {
+      persona: "Demis (Strategic Product Director)",
+      tools: "['search_web', 'read_url_content', 'write_prd'] (Shell/Deploy 격리)",
+      directive: "사업적 ROI 및 비즈니스 로드맵 설계. 불필요한 기능 추가를 사전에 차단하고 핵심 사용자 가치에 집중할 것."
+    },
+    craig: {
+      persona: "Craig (Lead Fullstack & AI Systems Engineer)",
+      tools: "['run_command', 'write_to_file', 'replace_file_content', 'multi_replace_file_content']",
+      directive: "TypeScript/Python 풀스택 코드 무결성 구현. 엄격한 타입 안정성과 예외 처리를 최우선으로 보장할 것."
+    },
+    jennifer: {
+      persona: "Jennifer (Modern UI/UX Designer)",
+      tools: "['write_to_file', 'generate_image', 'browser_subagent']",
+      directive: "와우 미학(Wow Aesthetics)과 글래스모피즘, 모바일 단일 그리드 보장. 가로 스크롤 결함 0% 엄수."
+    },
+    sherlock: {
+      persona: "Sherlock (Zero-Defect QA Verifier)",
+      tools: "['run_command', 'grep_search', 'view_file']",
+      directive: "0-Error, 0-Warning 사전 빌드 검증 및 다국어 오탈자 스캔. 결함 발견 시 승인을 거부하고 즉각 반려할 것."
+    },
+    peggy: {
+      persona: "Peggy (Chief Secretary & Operations Lead)",
+      tools: "['send_telegram', 'manage_task', 'schedule']",
+      directive: "체크포인트 실시간 기록, 일시 타임스탬프 준수 및 사장님 스마트폰 텔레그램 브리핑 발송."
+    }
+  };
+
+  function selectPersona(id) {
+    document.querySelectorAll('.persona-card').forEach(c => c.classList.remove('active-card'));
+    event.currentTarget.classList.add('active-card');
+
+    const d = personaDb[id];
+    document.getElementById('insp-persona').innerText = d.persona;
+    document.getElementById('insp-tools').innerText = d.tools;
+    document.getElementById('insp-directive').innerText = `"${d.directive}"`;
+  }
+
+  function runTerminalSim() {
+    const goal = document.getElementById('goal-input').value;
+    const term = document.getElementById('term-logs');
+    term.innerHTML = `[INIT] Target Goal: "${goal}"\n`;
+
+    const logs = [
+      "[00:00:01] 🧠 [Demis] 요구사항 분석 시작... 핵심 유저 플로우 도출 완료.",
+      "[00:00:03] 📐 [Craig] 아키텍처 다이어그램 및 Firebase + PortOne v2 스키마 정의.",
+      "[00:00:05] 🎨 [Jennifer] 모바일 퍼스트 네온 다크 테마 및 단일 파일 웹앱 코딩 중...",
+      "[00:00:07] 🔍 [Sherlock] 사전 빌드 무결점 검사 실행: ESLint 0 Errors, 0 Warnings 통과!",
+      "[00:00:09] 🚀 [Peggy] GitHub Pages 무인 자동 푸시 완료. 텔레그램 보고서 전송!",
+      "[00:00:10] ✨ [COMPLETED] 24시간 자율 가동 AI 서비스 팩토리 정상 배포 완결."
+    ];
+
+    logs.forEach((msg, i) => {
+      setTimeout(() => {
+        term.innerHTML += msg + "\n";
+        term.scrollTop = term.scrollHeight;
+      }, (i + 1) * 600);
+    });
+  }
+</script>
+
+</body>
+</html>
