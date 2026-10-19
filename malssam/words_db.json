@@ -1,9 +1,2113 @@
 {
   "project": "한글 어반 딕셔너리 (말쌈 / MALSSAM)",
-  "version": "3.0.0",
-  "updated_at": "2026-10-18",
-  "total_words": 30,
+  "version": "4.0.0",
+  "updated_at": "2026-10-19",
+  "total_words": 70,
+  "eras": [
+    {
+      "id": "all",
+      "label": "전체 보기 (All 70)",
+      "count": 70
+    },
+    {
+      "id": "latte",
+      "label": "1. 📟 라떼 추억 (삐삐/PC통신/싸이)",
+      "period": "1990s~2000s",
+      "count": 20
+    },
+    {
+      "id": "smartphone",
+      "label": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "period": "2010s",
+      "count": 20
+    },
+    {
+      "id": "shorts",
+      "label": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "period": "2020s~2026",
+      "count": 30
+    }
+  ],
   "words": [
+    {
+      "id": 101,
+      "word": "방가방가",
+      "pronunciation": "[방가방가]",
+      "part_of_speech": "감탄사 / 인사말",
+      "chosung": "ㅂㄱㅂㄱ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "X세대 & 초기 밀레니얼",
+      "short_def": "‘반갑습니다’를 귀엽고 경쾌하게 연타로 표현한 1990년대 PC통신 채팅의 시초 인사말.",
+      "origin": "1990년대 중반 하이텔, 천리안, 나우누리 채팅방에서 타수를 줄이고 친근감을 주기 위해 탄생함.",
+      "examples": [
+        "A: 방가방가~ 오늘 대화방 처음 들어왔어요!\nB: 앗 방가요! 몇 학번이세요?"
+      ],
+      "tags": [
+        "인사",
+        "PC통신",
+        "레트로",
+        "천리안"
+      ],
+      "likes": 3200,
+      "dislikes": 40,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "반갑습니다, 안녕하세요",
+      "trend_status": "RETRO",
+      "en": {
+        "slang": "Wazzup / Howdy",
+        "desc": "Iconic 1990s PC telecom chat greeting meaning 'Nice to meet you!'",
+        "ex": "A: Wazzup everyone in the room! B: Welcome!"
+      },
+      "ja": {
+        "slang": "ちーす / こんちゃ",
+        "desc": "90年代パソコン通信時代の伝説的挨拶「お会いできて嬉しいです」。",
+        "ex": "A: ちーす！今日初参加です！ B: いらっしゃい！"
+      },
+      "vi": {
+        "slang": "Hế lô / Chào xìn",
+        "desc": "Lời chào kinh điển thời kỳ đầu mạng chat thập niên 90 tại Hàn Quốc.",
+        "ex": "A: Hế lô cả nhà! B: Chào người mới nhé!"
+      },
+      "es": {
+        "slang": "¿Qué onda? / ¡Buenas!",
+        "desc": "El mítico saludo de los chats de PC en los años 90 en Corea.",
+        "ex": "A: ¡Buenas a todos! B: ¡Bienvenido al chat!"
+      },
+      "id_lang": {
+        "slang": "Halo semuanya / Met kenal",
+        "desc": "Salam sapa legendaris era chat PC 90-an di Korea Selatan.",
+        "ex": "A: Halo semuanya, baru gabung nih! B: Met kenal ya!"
+      }
+    },
+    {
+      "id": 102,
+      "word": "하이루",
+      "pronunciation": "[하이루]",
+      "part_of_speech": "감탄사 / 인사말",
+      "chosung": "ㅎㅇㄹ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "X세대 & 초기 밀레니얼",
+      "short_def": "영어 'Hi'에 친근한 어미 '~루'를 붙인 PC통신 및 2000년대 초반 인기 인사말.",
+      "origin": "‘하이’에 당시 유행하던 애교 섞인 어미를 붙여 네티즌 사이에서 번진 인사.",
+      "examples": [
+        "A: 모두들 하이루~ 방가방가!\nB: 오셨군요, 하이루!"
+      ],
+      "tags": [
+        "인사",
+        "PC통신",
+        "버디버디"
+      ],
+      "likes": 2890,
+      "dislikes": 35,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "안녕, 안녕하세요",
+      "trend_status": "RETRO",
+      "en": {
+        "slang": "Hiya / Heyo",
+        "desc": "Friendly chat greeting blending English 'Hi' with Korean cutesy suffix.",
+        "ex": "A: Heyo room! B: Hey there!"
+      },
+      "ja": {
+        "slang": "ハロー / うぃっす",
+        "desc": "英語のHiに可愛い語尾を付けた2000年代初頭のネット挨拶語。",
+        "ex": "A: みんなハロー！ B: おっす、いらっしゃい！"
+      },
+      "vi": {
+        "slang": "Hí anh em / Hê nhô",
+        "desc": "Lời chào kết hợp từ 'Hi' với đuôi thân mật thời đầu Internet.",
+        "ex": "A: Hê nhô cả phòng! B: Chào bạn nhé!"
+      },
+      "es": {
+        "slang": "¡Holis! / ¡Hey!",
+        "desc": "Saludo amistoso de internet de principios de los 2000.",
+        "ex": "A: ¡Holis a todos! B: ¡Hola, pasa!"
+      },
+      "id_lang": {
+        "slang": "Hai hai / Halo gengs",
+        "desc": "Salam gaul perpaduan kata 'Hi' dengan akhiran imut era 2000-an.",
+        "ex": "A: Hai hai semua! B: Halo juga!"
+      }
+    },
+    {
+      "id": 103,
+      "word": "즐",
+      "pronunciation": "[즐]",
+      "part_of_speech": "감탄사 / 은어",
+      "chosung": "ㅈ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (싸이월드 세대)",
+      "short_def": "상대방의 말을 칼같이 자르고 비웃거나 차단할 때 쓰던 2000년대 최고의 유행어.",
+      "origin": "원래 ‘즐거운 게임/시간 되세요’(즐겜)의 축약이었으나, 반어법적으로 ‘너나 잘해, 꺼져’라는 거절의 의미로 변질됨.",
+      "examples": [
+        "A: 야 너 나한테 만 원만 빌려주면 안 되냐?\nB: 즐. 절대 안 빌려줌."
+      ],
+      "tags": [
+        "거절",
+        "싸이월드",
+        "스타크래프트",
+        "차단"
+      ],
+      "likes": 5600,
+      "dislikes": 120,
+      "toxicity_level": 3,
+      "standard_korean_mapping": "거절합니다, 됐거든요, 꺼지세요",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Talk to the hand / Buzz off",
+        "desc": "Originally 'Have a pleasant day', turned into cold rejection slang meaning 'get lost'.",
+        "ex": "A: Can you lend me $10? B: Buzz off, not a chance."
+      },
+      "ja": {
+        "slang": "乙 / お断りします",
+        "desc": "元は「楽しく」だったが、転じて「お前には用ない、消えろ」という意味になった拒絶語。",
+        "ex": "A: 1万ウォン貸してくれない？ B: 乙。絶対に貸さん。"
+      },
+      "vi": {
+        "slang": "Next hộ cái / Miễn đi",
+        "desc": "Từ mang ý mỉa mai, từ chối thẳng thừng cực thịnh hành những năm 2000.",
+        "ex": "A: Cho vay ít tiền đi? B: Miễn đi cưng, không bao giờ nhé."
+      },
+      "es": {
+        "slang": "Pasa de largo / ¡A otro perro con ese hueso!",
+        "desc": "Sarcástica palabra para cortar a alguien y mandarlo a paseo.",
+        "ex": "¿Me prestas dinero? B: ¡Pasa de largo, ni loco!"
+      },
+      "id_lang": {
+        "slang": "Ogah ah / Sana pergi",
+        "desc": "Kata penolakan sinis paling populer era 2000-an di Korea.",
+        "ex": "A: Boleh pinjem duit? B: Ogah banget, mimpi!"
+      }
+    },
+    {
+      "id": 104,
+      "word": "OTL",
+      "pronunciation": "[오티엘 / 엎드려좌절]",
+      "part_of_speech": "이모티콘 / 명사",
+      "chosung": "ㅇㅌㄹ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (싸이월드 세대)",
+      "short_def": "머리(O), 팔과 몸통(T), 꿇은 다리(L)가 엎드려 좌절하는 모습을 본뜬 상형문자 신조어.",
+      "origin": "알파벳 세 글자로 사람이 고개 숙이고 바닥에 엎드린 모습을 완벽하게 형상화하여 전 아시아적 열풍을 일으킴.",
+      "examples": [
+        "A: 오늘 수강신청 올킬 실패했다...\nB: 헐 OTL 힘내라..."
+      ],
+      "tags": [
+        "좌절",
+        "상형문자",
+        "디시인사이드",
+        "이모티콘"
+      ],
+      "likes": 6100,
+      "dislikes": 50,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "좌절하다, 망연자실하다, 낙담하다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Facepalm / Defeated on all fours",
+        "desc": "Famous hieroglyphic emoticon: O=head, T=arms/torso, L=kneeling legs in complete despair.",
+        "ex": "Failed all my exam registrations... OTL"
+      },
+      "ja": {
+        "slang": "orz / ガックリ",
+        "desc": "頭(O)、手(T)、跪く足(L)でがっくりと地面に崩れ落ちる姿を描いた象形顔文字。",
+        "ex": "単位落とした… OTL"
+      },
+      "vi": {
+        "slang": "Quỳ gối tuyệt vọng / Sụp đổ",
+        "desc": "Biểu tượng chữ hình người quỳ gối gục đầu tuyệt vọng nổi tiếng.",
+        "ex": "Trượt môn rồi OTL đau lòng quá..."
+      },
+      "es": {
+        "slang": "Derrotado de rodillas / Hundido",
+        "desc": "Emoticono icónico donde O es la cabeza, T el torso y L las piernas arrodilladas de frustración.",
+        "ex": "Reprobé el examen... OTL"
+      },
+      "id_lang": {
+        "slang": "Tersungkur pasrah / Nangis di pojokan",
+        "desc": "Emotikon huruf legendaris menggambarkan orang bersujud frustrasi.",
+        "ex": "Gagal total tes hari ini... OTL"
+      }
+    },
+    {
+      "id": 105,
+      "word": "뷁",
+      "pronunciation": "[뷐]",
+      "part_of_speech": "감탄사 / 명사",
+      "chosung": "ㅂ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (아햏햏 세대)",
+      "short_def": "어처구니가 없거나 짜증, 허무, 분노가 한꺼번에 치밀어 오를 때 지르는 외마디 비명.",
+      "origin": "가수 문희준의 록 노래 가사 발음 논란에서 파생되어 2000년대 디시인사이드 '아햏햏' 문화의 상징이 됨.",
+      "examples": [
+        "A: 주말에 갑자기 출근하라고 하네?\nB: 아 뷁... 진짜 답 없다."
+      ],
+      "tags": [
+        "분노",
+        "황당",
+        "디시인사이드",
+        "아햏햏"
+      ],
+      "likes": 4700,
+      "dislikes": 90,
+      "toxicity_level": 1,
+      "standard_korean_mapping": "황당하다, 어이없다, 헛소리 마라",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "WTF / Total cringe & rage",
+        "desc": "Iconic gibberish scream expressing sheer absurd outrage and disbelief.",
+        "ex": "Boss asked me to work this Sunday. Argh, Bwehk!"
+      },
+      "ja": {
+        "slang": "ブエッ / なんじゃそりゃ",
+        "desc": "理不尽さやあきれ返る怒りを一音で表現した伝説のネットスラング。",
+        "ex": "週末出勤しろって？うわ、ブエッ…"
+      },
+      "vi": {
+        "slang": "Á đù / Cạn lời",
+        "desc": "Từ tượng thanh độc nhất vô nhị diễn tả sự phẫn nộ và cạn lời tột độ.",
+        "ex": "Cuối tuần bắt đi làm? Bwehk, hết cứu nổi!"
+      },
+      "es": {
+        "slang": "¡Qué rayada! / ¡Maldita sea!",
+        "desc": "Grito absurdo coreano de los 2000 para expresar frustración total.",
+        "ex": "¿Trabajar el domingo? ¡Bwehk, qué rabia!"
+      },
+      "id_lang": {
+        "slang": "Hadeeeh / Absurd banget",
+        "desc": "Jeritan satu suku kata khas Korea untuk melampiaskan kekesalan luar biasa.",
+        "ex": "Suruh lembur weekend? Bwehk, gak habis pikir!"
+      }
+    },
+    {
+      "id": 106,
+      "word": "간지",
+      "pronunciation": "[간지]",
+      "part_of_speech": "명사",
+      "chosung": "ㄱㅈ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 & X세대",
+      "short_def": "스타일이나 옷차림, 풍기는 분위기가 대단히 멋지고 세련됨을 뜻하는 2000년대 패션 은어.",
+      "origin": "일본어 느낌, 분위기를 뜻하는 '칸지(感じ)'에서 패션 스트리트 은어로 유입되어 '간지 난다', '간지남'으로 대유행.",
+      "examples": [
+        "A: 오늘 코트 입은 거 핏 완전 간지 난다!\nB: 소지섭 스타일로 좀 꾸며봤지 ㅋㅋㅋ"
+      ],
+      "tags": [
+        "패션",
+        "스타일",
+        "동대문",
+        "소지섭"
+      ],
+      "likes": 5300,
+      "dislikes": 65,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "멋지다, 맵시 있다, 세련되다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Swag / Drip / Super stylish",
+        "desc": "Vintage 2000s Korean slang for looking extremely cool, stylish, and charismatic.",
+        "ex": "Your leather jacket has serious swag today!"
+      },
+      "ja": {
+        "slang": "イケてる / カンペキな着こなし",
+        "desc": "日本語の「感じ」が韓国で独自のファッショナブルなスラングに定着した例。",
+        "ex": "今日のコートの着こなし、超イケてるじゃん！"
+      },
+      "vi": {
+        "slang": "Chất lừ / Ngầu đét",
+        "desc": "Tiếng lóng thời trang chỉ phong cách cực kỳ ngầu và sang chảnh.",
+        "ex": "Hôm nay diện áo khoác ngầu đét luôn nha!"
+      },
+      "es": {
+        "slang": "Estilazo / Porte brutal",
+        "desc": "Término clásico de los 2000 para alguien que viste con estilazo imponente.",
+        "ex": "¡Ese abrigo te da un estilazo tremendo!"
+      },
+      "id_lang": {
+        "slang": "Kece badai / Keren abis",
+        "desc": "Slang fashion 2000-an untuk penampilan yang luar biasa keren dan modis.",
+        "ex": "Gaya jaket lu hari ini kece badai banget bro!"
+      }
+    },
+    {
+      "id": 107,
+      "word": "지못미",
+      "pronunciation": "[지몬미]",
+      "part_of_speech": "감탄사 / 명사",
+      "chosung": "ㅈㅁㅁ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (싸이월드 세대)",
+      "short_def": "'지켜주지 못해 미안해'의 머리글자 축약어로, 엽기 사진이나 굴욕적인 상황을 위로할 때 쓰던 유행어.",
+      "origin": "연예인의 엽기 캡처 사진이나 흑역사 짤방에 팬들이 장난스럽게 위로를 건네며 폭발적인 유행을 탐.",
+      "examples": [
+        "A: 친구 졸업앨범 사진 눈 감았을 때 찍혔음 ㅋㅋㅋ\nB: 헐 지못미... 평생 박제되겠네."
+      ],
+      "tags": [
+        "엽기",
+        "싸이월드",
+        "흑역사",
+        "축약어"
+      ],
+      "likes": 4900,
+      "dislikes": 30,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "지켜주지 못해 미안하다, 안타깝다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Sorry I couldn't save you / RIP your dignity",
+        "desc": "Acronym for 'Sorry I couldn't protect you', used playfully over cringe or embarrassing photos.",
+        "ex": "Blinked in the graduation photo? Man, RIP your dignity lol."
+      },
+      "ja": {
+        "slang": "守ってあげられなくてごめん (ジモンミ)",
+        "desc": "黒歴史や恥ずかしい写真に対して同情と笑いを込めて使われた略語。",
+        "ex": "卒アルで目閉じて撮られちゃったの？うわぁ、ジモンミ…"
+      },
+      "vi": {
+        "slang": "Xin lỗi vì không thể cứu vớt bạn",
+        "desc": "Viết tắt của 'Xin lỗi vì không bảo vệ được bạn' khi bạn bè lộ ảnh dìm.",
+        "ex": "Chụp ảnh tốt nghiệp bị nhắm mắt à? Xin lỗi vì không cứu được bạn nha haha."
+      },
+      "es": {
+        "slang": "Perdón por no salvarte / F en el chat",
+        "desc": "Acrónimo cómico usado ante fotos vergonzosas o meteduras de pata épicas.",
+        "ex": "¿Saliste con los ojos cerrados? Jaja, ¡lo siento, no pude salvarte!"
+      },
+      "id_lang": {
+        "slang": "Maaf gak bisa nyelametin lu",
+        "desc": "Singkatan kocak untuk menertawakan foto aib teman.",
+        "ex": "Foto ijazah merem? Maaf gak bisa nyelametin lu bro wkwk."
+      }
+    },
+    {
+      "id": 108,
+      "word": "킹왕짱",
+      "pronunciation": "[킹왕짱]",
+      "part_of_speech": "명사 / 형용사",
+      "chosung": "ㅋㅇㅉ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (초고속 인터넷 세대)",
+      "short_def": "영어 'King' + 한자 '王(왕)' + 은어 '짱(최고)'을 3중으로 중첩하여 '최고 중의 최고'를 나타낸 말.",
+      "origin": "온라인 게임 커뮤니티와 초딩 네티즌 사이에서 최상급 표현을 극대화하기 위해 탄생한 언어유희.",
+      "examples": [
+        "A: 이번에 나온 신상 그래픽카드 성능 어때?\nB: 완전 킹왕짱이야, 모든 게임 다 돌아가!"
+      ],
+      "tags": [
+        "극찬",
+        "게임",
+        "초딩",
+        "최고"
+      ],
+      "likes": 4500,
+      "dislikes": 55,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "최고 중의 최고, 더할 나위 없이 우수함",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "GOAT of GOATs / King of the Kings",
+        "desc": "Triple superlative blending King + King(王) + Best(Jjang) to mean ultimate perfection.",
+        "ex": "This new console is the King of Kings, runs everything smoothly!"
+      },
+      "ja": {
+        "slang": "キング・オブ・神 / 最強",
+        "desc": "英語King＋漢字王＋韓国語チャン(最高)の3段重ねによる至高の賛辞。",
+        "ex": "この新型PC、マジでキング王チャン！超快適！"
+      },
+      "vi": {
+        "slang": "Đỉnh của chóp / Đỉnh chóp vũ trụ",
+        "desc": "Từ ghép tam trùng mang ý nghĩa đỉnh cao nhất trong mọi sự đỉnh cao.",
+        "ex": "Chiếc máy tính này đỉnh của chóp luôn, chiến mượt mọi game!"
+      },
+      "es": {
+        "slang": "El rey de reyes / Lo más top del mundo",
+        "desc": "Superlativo triple mítico de los 2000 coreanos que significa 'lo más grande'.",
+        "ex": "Esta tarjeta gráfica es el rey de reyes, ¡vuela con todo!"
+      },
+      "id_lang": {
+        "slang": "Rajanya segala raja / Terhebat sejagat",
+        "desc": "Penggabungan tiga kata superlatif untuk menggambarkan hal paling hebat.",
+        "ex": "Laptop baru ini beneran rajanya segala raja, kenceng banget!"
+      }
+    },
+    {
+      "id": 109,
+      "word": "안습",
+      "pronunciation": "[안습]",
+      "part_of_speech": "명사 / 형용사",
+      "chosung": "ㅇㅅ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (공중파 예능 세대)",
+      "short_def": "'안구에 습기 차다'의 준말로, 눈물이 앞을 가릴 정도로 안타깝거나 측은한 상황을 뜻함.",
+      "origin": "개그맨 지상렬이 방송에서 처음 구사한 '안구에 쓰나미', '안구에 습기'가 인터넷에서 '안습'으로 압축되어 전 국민적 유행어가 됨.",
+      "examples": [
+        "A: 어제 소개팅 나갔는데 계산할 때 지갑 두고 온 거 알았음...\nB: 아... 진짜 눈물 나는 안습 상황이네..."
+      ],
+      "tags": [
+        "안타까움",
+        "지상렬",
+        "눈물",
+        "공중파예능"
+      ],
+      "likes": 5100,
+      "dislikes": 40,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "눈물겹다, 측은하다, 안타깝다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Tearjerker cringe / Moist eyes of pity",
+        "desc": "Short for 'moisture misting up my eyeballs', meaning a situation so pitiful you almost cry.",
+        "ex": "Forgot his wallet on a blind date? Man, that's pure tearjerker cringe."
+      },
+      "ja": {
+        "slang": "涙目 / 目から汗が",
+        "desc": "「眼球に湿気が満ちる」の略で、あまりに不憫で涙が出そうな状況を表す流行語。",
+        "ex": "初デートで財布忘れたって？うわ、ガチで涙目案件だな…"
+      },
+      "vi": {
+        "slang": "Rớt nước mắt / Cay khóe mắt",
+        "desc": "Viết tắt của 'mắt ngập hơi sương', chỉ tình huống đáng thương đến rơi nước mắt.",
+        "ex": "Đi hẹn hò mà quên ví tiền? Đúng là rớt nước mắt tội nghiệp!"
+      },
+      "es": {
+        "slang": "Lágrimas en los ojos / Penita ajena",
+        "desc": "Abreviatura de 'ojos empañados', usada para situaciones tan tristes que dan risa y pena.",
+        "ex": "¿Olvidaste la billetera en tu cita? ¡Qué penita ajena!"
+      },
+      "id_lang": {
+        "slang": "Nyesek banget / Mewek kasihan",
+        "desc": "Singkatan dari 'mata berembun', menggambarkan situasi pilu yang bikin terenyuh.",
+        "ex": "Kencan pertama lupa dompet? Nyesek banget dengernya bro."
+      }
+    },
+    {
+      "id": 110,
+      "word": "얼짱",
+      "pronunciation": "[얼짱]",
+      "part_of_speech": "명사",
+      "chosung": "ㅇㅉ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (싸이월드·하두리 세대)",
+      "short_def": "'얼굴 짱(얼굴이 최고로 예쁘거나 잘생김)'의 줄임말로, 2000년대 초반 인터넷 스타를 지칭하던 단어.",
+      "origin": "웹캠 프로그램 '하두리(Haduri)'와 다음 카페 '얼짱 동호회'를 통해 수많은 연예인 지망생들이 얼짱 출신으로 데뷔함.",
+      "examples": [
+        "A: 이번에 전학 온 남학생 하두리 얼짱 출신이래!\nB: 대박, 진짜 꽃미남이겠다!"
+      ],
+      "tags": [
+        "외모",
+        "하두리",
+        "싸이월드",
+        "인터넷스타"
+      ],
+      "likes": 5800,
+      "dislikes": 70,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "미남, 미녀, 미인, 훈남훈녀",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Ulzzang / Best Face / Visual Star",
+        "desc": "Famous Korean pop-culture term meaning 'Best Face', referring to internet viral visual icons.",
+        "ex": "Did you know that new student was a famous Ulzzang webcam star?"
+      },
+      "ja": {
+        "slang": "オルチャン / 超美形",
+        "desc": "「顔(オルグル)が最高(チャン)」の略で、K-Beautyの起源とも言えるネット美男美女の称号。",
+        "ex": "あの転校生、昔ネットで有名なオルチャンだったらしいよ！"
+      },
+      "vi": {
+        "slang": "Ulzzang / Hot boy, Hot girl thời đầu",
+        "desc": "Thuật ngữ huyền thoại chỉ những gương mặt visual đỉnh cao trên mạng xã hội Hàn.",
+        "ex": "Học sinh mới chuyển tới từng là Ulzzang nổi tiếng đấy!"
+      },
+      "es": {
+        "slang": "Ulzzang / Carita de ángel viral",
+        "desc": "Término global coreano para designar a chicos y chicas con rostros perfectos en la red.",
+        "ex": "Ese chico era un famoso 'Ulzzang' de las webcams en los 2000."
+      },
+      "id_lang": {
+        "slang": "Ulzzang / Bibit unggul visual",
+        "desc": "Istilah legendaris Korea untuk orang-orang berwajah paling tampan atau cantik di internet.",
+        "ex": "Anak baru itu dulunya Ulzzang terkenal di internet loh!"
+      }
+    },
+    {
+      "id": 111,
+      "word": "몸짱",
+      "pronunciation": "[몸짱]",
+      "part_of_speech": "명사",
+      "chosung": "ㅁㅉ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 & X세대",
+      "short_def": "'몸매 짱'의 줄임말로, 근육질이거나 탄탄하고 균형 잡힌 명품 몸매를 가진 사람.",
+      "origin": "얼짱의 파생어로 시작하여, 2000년대 초반 '몸짱 아줌마' 열풍과 함께 전 국민 헬스 붐을 일으킨 사회적 유행어.",
+      "examples": [
+        "A: 너 요즘 헬스장 매일 가더니 완전 몸짱 다 됐네?\nB: 복근 좀 선명해진 거 보이지?"
+      ],
+      "tags": [
+        "피트니스",
+        "헬스",
+        "몸매",
+        "다이어트"
+      ],
+      "likes": 4200,
+      "dislikes": 25,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "근육질 미남, 탄탄한 몸매, 건강미인",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Momzzang / Ripped / Buff physique",
+        "desc": "Meaning 'Best Body', popular slang for someone with an athletic, sculpted physique.",
+        "ex": "Hitting the gym every day? You're totally ripped now!"
+      },
+      "ja": {
+        "slang": "モムチャン / ナイスバディ",
+        "desc": "「体(モム)が最高(チャン)」の略で、鍛え上げられた美ボディを讃える言葉。",
+        "ex": "毎日ジム通ってモムチャンになったね！腹筋すごい！"
+      },
+      "vi": {
+        "slang": "Body chuẩn / Dáng nuột",
+        "desc": "Thuật ngữ chỉ người có thân hình săn chắc, cơ bắp 6 múi hoàn hảo.",
+        "ex": "Dạo này đi gym chăm quá, dáng nuột như người mẫu rồi!"
+      },
+      "es": {
+        "slang": "Cuerpazo / Musculitos de revista",
+        "desc": "Palabra para elogiar a alguien con un cuerpo atlético y perfectamente esculpido.",
+        "ex": "¡Vaya cuerpazo se te ha quedado con el gimnasio!"
+      },
+      "id_lang": {
+        "slang": "Body goals / Berotot kekar",
+        "desc": "Sebutan untuk orang yang bertubuh atletis dan berotot bagus berkat gym.",
+        "ex": "Rajin ngegym ya? Bodinya udah jadi kekar berotot banget!"
+      }
+    },
+    {
+      "id": 112,
+      "word": "훈남",
+      "pronunciation": "[훈남]",
+      "part_of_speech": "명사",
+      "chosung": "ㅎㄴ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (싸이월드 세대)",
+      "short_def": "'훈훈한 남자'의 줄임말. 조각 미남은 아니더라도 보고 있으면 마음이 따뜻해지는 매력적인 남성.",
+      "origin": "얼짱의 부담스러운 미소년 이미지에서 벗어나 친근하고 다정한 현실 이상형을 표현하기 위해 2000년대 중반 탄생함.",
+      "examples": [
+        "A: 그 선배 성격도 다정하고 미소가 완전 훈남 스타일이야.\nB: 맞아, 과에서 인기 제일 많잖아."
+      ],
+      "tags": [
+        "매력",
+        "이상형",
+        "다정함",
+        "캠퍼스"
+      ],
+      "likes": 5300,
+      "dislikes": 45,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "매력적인 남성, 다정한 호감형 미남",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Heartwarming guy / Charming boy next door",
+        "desc": "A guy who may not be a flawless model, but has a warm, charming, and attractive smile.",
+        "ex": "He's not a runway model, but totally the sweet boy-next-door type."
+      },
+      "ja": {
+        "slang": "癒し系イケメン / フンナム",
+        "desc": "「心が温まる(フンフン)男」の略で、親しみやすくて爽やかな好青年を表す。",
+        "ex": "あの先輩、優しくて笑顔が素敵な癒し系イケメンだよね。"
+      },
+      "vi": {
+        "slang": "Chàng trai ấm áp / Mỹ nam dịu dàng",
+        "desc": "Chỉ những chàng trai tuy không đẹp như tượng nhưng nụ cười ấm áp khiến tim rung động.",
+        "ex": "Anh tiền bối đó chuẩn gu chàng trai ấm áp, dịu dàng cực!"
+      },
+      "es": {
+        "slang": "Chico dulce y carismático / El majo atractivo",
+        "desc": "El típico chico que sin ser modelo seduce con su sonrisa cálida y amabilidad.",
+        "ex": "No es modelo de revista, pero tiene una vibra majísima y atractiva."
+      },
+      "id_lang": {
+        "slang": "Cowok manis berkarisma / Pria idaman hangat",
+        "desc": "Pria berwajah manis dengan senyum ramah yang bikin hati meleleh.",
+        "ex": "Senior itu auranya hangat banget, beneran tipe cowok manis idaman."
+      }
+    },
+    {
+      "id": 113,
+      "word": "엄친아",
+      "pronunciation": "[엄치나]",
+      "part_of_speech": "명사",
+      "chosung": "ㅇㅊㅇ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (웹툰 1세대)",
+      "short_def": "'엄마 친구 아들'의 줄임말. 공부, 외모, 성품, 집안까지 모든 것이 완벽하여 부모님의 비교 대상이 되는 사기 캐릭터.",
+      "origin": "네이버 웹툰 '골방환상곡'(워니 작가)에서 어머니들이 '엄마 친구 아들은 서울대 가고 성격도 좋다더라'며 비교하는 에피소드에서 탄생.",
+      "examples": [
+        "A: 옆집 민우 이번에 대기업 수석 입사했대.\nB: 아... 또 시작이네. 완벽한 엄친아랑 비교하지 마세요 엄마!"
+      ],
+      "tags": [
+        "비교",
+        "골방환상곡",
+        "완벽남",
+        "웹툰유래"
+      ],
+      "likes": 6400,
+      "dislikes": 80,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "다재다능한 완벽한 청년, 흠잡을 데 없는 사람",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Mom's friend's son / Mr. Perfect who ruins your life",
+        "desc": "The mythical 'son of mom's friend' who excels at sports, academics, and looks, making you look bad.",
+        "ex": "Stop comparing me to your friend's son! He's literally Mr. Perfect!"
+      },
+      "ja": {
+        "slang": "オムチナ (完璧な隣の息子)",
+        "desc": "「母の友人の息子」の略。勉強も外見も完璧で、親から常に比較対象にされる男。",
+        "ex": "うちの母、いっつも完璧なオムチナと私を比べてくるのよ。"
+      },
+      "vi": {
+        "slang": "Con nhà người ta",
+        "desc": "Hình tượng 'con trai bạn mẹ' học giỏi, đẹp trai, ngoan ngoãn hoàn hảo chuyên bị đem ra so sánh.",
+        "ex": "Đừng so sánh con với 'con nhà người ta' nữa mà mẹ ơi!"
+      },
+      "es": {
+        "slang": "El hijo de la vecina / El chico perfecto",
+        "desc": "El mítico 'hijo de la amiga de mamá' que saca dieces y te hace quedar mal siempre.",
+        "ex": "¡Mamá, para de compararme con el hijo de tu amiga, es imposible competir!"
+      },
+      "id_lang": {
+        "slang": "Anak tetangga sebelah / Si serba sempurna",
+        "desc": "Istilah kocak untuk 'anak teman ibu' yang selalu serba pintar dan dibanding-bandingkan.",
+        "ex": "Ibu hobi banget ngebandingin sama anak tetangga yang serba sempurna itu."
+      }
+    },
+    {
+      "id": 114,
+      "word": "된장녀",
+      "pronunciation": "[된장녀]",
+      "part_of_speech": "명사",
+      "chosung": "ㄷㅈㄴ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 & X세대",
+      "short_def": "자신의 경제적 능력은 없으면서 명품 백과 스타벅스 커피 등 과시적 소비를 일삼는 여성을 비꼰 2000년대 풍자어.",
+      "origin": "‘밥값보다 비싼 테이크아웃 커피를 마신다’는 비판 여론과 디시인사이드 풍자 만화에서 시작되어 사회적 논쟁을 일으킨 단어.",
+      "examples": [
+        "A: 점심은 3천 원짜리 학식 먹고 커피는 6천 원짜리 스타벅스 마신다고 욕먹던 시절 기억나?\nB: 아, 그 시절 된장녀 논란 완전 뜨거웠지."
+      ],
+      "tags": [
+        "풍자",
+        "스타벅스",
+        "소비문화",
+        "사회적논쟁"
+      ],
+      "likes": 3900,
+      "dislikes": 420,
+      "toxicity_level": 3,
+      "standard_korean_mapping": "과시 소비형 여성, 허영심 많은 사람",
+      "trend_status": "RETRO",
+      "en": {
+        "slang": "Bougie poser / Bean-paste girl",
+        "desc": "Controversial 2000s Korean slang mocking women perceived to indulge in luxury brands beyond their means.",
+        "ex": "Back in 2005, drinking Starbucks with a luxury bag sparked the whole 'bougie poser' debate."
+      },
+      "ja": {
+        "slang": "テンジャン女 / 見栄っ張り女子",
+        "desc": "身の丈に合わない高級ブランドやスタバ消費を批判・風刺した2000年代の論争語。",
+        "ex": "2000年代半ば、韓国でテンジャン女論争がものすごく社会問題になったよね。"
+      },
+      "vi": {
+        "slang": "Tiểu thư phông bạt / Đua đòi hàng hiệu",
+        "desc": "Từ lóng chỉ người sống ảo, tiền ít nhưng thích uống cà phê đắt tiền và khoe túi hiệu.",
+        "ex": "Hồi đó ai cầm ly Starbucks với túi hiệu là bị gọi là tiểu thư đua đòi ngay."
+      },
+      "es": {
+        "slang": "Posturera pija / Aparentadora de lujo",
+        "desc": "Término polémico de los 2000 que criticaba a quienes gastaban en marcas caras sin tener dinero.",
+        "ex": "En los 2000 hubo un debate enorme sobre las postureras que se endeudaban por un bolso."
+      },
+      "id_lang": {
+        "slang": "Cewek gengsian / Kaum FOMO pamer",
+        "desc": "Slang kontroversial 2000-an untuk menyindir orang yang hobi pamer barang mewah melebihi kemampuan.",
+        "ex": "Dulu sempat viral sebutan buat orang yang maksa pamer kopi mahal padahal bokek."
+      }
+    },
+    {
+      "id": 115,
+      "word": "담다디",
+      "pronunciation": "[담다디]",
+      "part_of_speech": "명사 / 감탄사",
+      "chosung": "ㄷㄷㄷ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "X세대 (강변가요제 세대)",
+      "short_def": "가수 이상은의 메가 히트곡이자, 1990년대 청춘들의 거침없고 통통 튀는 반항적 자유를 상징하던 노래 제목.",
+      "origin": "1988년 강변가요제 대상 수상곡 '담다디'로 꺽다리 소녀 이상은이 탬버린을 흔들며 X세대 신인류 문화의 상징으로 자리 잡음.",
+      "examples": [
+        "A: 그 시절 축제 장기자랑 오프닝은 무조건 담다디 댄스였지!\nB: 탬버린 흔들면서 신나게 방방 뛰던 기억나네."
+      ],
+      "tags": [
+        "이상은",
+        "강변가요제",
+        "X세대",
+        "추억의명곡"
+      ],
+      "likes": 3600,
+      "dislikes": 20,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "경쾌하고 신나는 가요, 자유분방한 젊음의 춤",
+      "trend_status": "RETRO",
+      "en": {
+        "slang": "Dam-da-di / Wild 90s youth anthem",
+        "desc": "Legendary upbeat 90s anthem symbolizing the free-spirited energy of Korea's Generation X.",
+        "ex": "Every school festival in the 90s opened with the wild Damdadi tambourine dance!"
+      },
+      "ja": {
+        "slang": "ダムダディ / 90年代青春アンセム",
+        "desc": "80年代末〜90年代の韓国X世代が熱狂した、自由奔放な若者の伝説的ヒット曲。",
+        "ex": "当時の学園祭といえば、みんなでタンバリン叩いてダムダディ踊ったもんだよ。"
+      },
+      "vi": {
+        "slang": "Vũ điệu Damdadi / Ca khúc thanh xuân 90s",
+        "desc": "Ca khúc bất hủ biểu tượng cho sự phóng khoáng, nổi loạn đáng yêu của thế hệ Gen X Hàn Quốc.",
+        "ex": "Hồi thập niên 90 lễ hội trường nào cũng quẩy điệu Damdadi rộn ràng!"
+      },
+      "es": {
+        "slang": "Damdadi / Himno noventero rebelde",
+        "desc": "Canción mítica con pandereta que simbolizó la alegría rebelde de la Generación X coreana.",
+        "ex": "¡En los 90 no había fiesta sin el baile loco del Damdadi!"
+      },
+      "id_lang": {
+        "slang": "Lagu Damdadi / Lagu kebangsaan Gen X",
+        "desc": "Lagu legendaris ceria simbol kebebasan dan jiwa muda Generasi X Korea.",
+        "ex": "Dulu setiap festival sekolah pasti heboh nyanyi tarian Damdadi!"
+      }
+    },
+    {
+      "id": 116,
+      "word": "8282",
+      "pronunciation": "[팔이팔이]",
+      "part_of_speech": "수사 / 숫자 은어",
+      "chosung": "ㅍㅇㅍㅇ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "X세대 (삐삐 세대)",
+      "short_def": "숫자 발음의 유사성을 이용해 ‘빨리빨리’ 연락하라는 뜻을 전하던 삐삐(무선호출기) 시절의 국민 숫자 암호.",
+      "origin": "1990년대 글자를 보낼 수 없던 숫자 삐삐 단말기에서 '8282'는 '지금 당장 공중전화로 전화해라'는 긴급 호출의 대명사였음.",
+      "examples": [
+        "A: 삐삐에 '010-XXXX-XXXX 8282' 찍혔다! 빨리 공중전화 찾아!\nB: 주머니에 동전 몇 개 있냐?"
+      ],
+      "tags": [
+        "삐삐",
+        "공중전화",
+        "숫자암호",
+        "X세대"
+      ],
+      "likes": 5900,
+      "dislikes": 30,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "빨리빨리, 급히 연락 바람",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "8282 (ASAP on Pager)",
+        "desc": "Iconic 1990s pager numerical code pronounced 'Pal-I-Pal-I', phonetically sounding like 'Hurry up! (Ppalli-Ppalli)'.",
+        "ex": "Beeped 8282 on my pager! Run to the nearest phone booth!"
+      },
+      "ja": {
+        "slang": "8282 (早く早く / ポケベル暗号)",
+        "desc": "90年代ポケベル時代、数字の「パリパリ」が「早く早く(パリパリ)」と読める緊急暗号。",
+        "ex": "ポケベルに8282入った！公衆電話探さなきゃ！"
+      },
+      "vi": {
+        "slang": "8282 (Nhanh lên / Mã máy nhắn tin)",
+        "desc": "Mã số máy nhắn tin kinh điển thập niên 90 đọc lái thành 'Ppalli Ppalli' tức giục 'Mau lên'.",
+        "ex": "Máy nhắn tin hiện số 8282 kìa, chạy tìm bốt điện thoại công cộng nhanh!"
+      },
+      "es": {
+        "slang": "8282 (¡Rápido ya! / Código de buscapersonas)",
+        "desc": "Código numérico de beeper que en coreano suena idéntico a '¡Rápido, rápido!'.",
+        "ex": "¡Me llegó un 8282 al busca! ¡Busca una cabina telefónica ya!"
+      },
+      "id_lang": {
+        "slang": "8282 (Buruan telpon / Kode Pager)",
+        "desc": "Kode angka pager legendaris 90-an yang bermakna 'cepat-cepat' (ppalli-ppalli).",
+        "ex": "Pager gue bunyi angka 8282! Cepet cari telepon umum!"
+      }
+    },
+    {
+      "id": 117,
+      "word": "0124",
+      "pronunciation": "[영일이사]",
+      "part_of_speech": "수사 / 숫자 은어",
+      "chosung": "ㅇㅇㅇㅅ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "X세대 (삐삐 세대)",
+      "short_def": "'012(영원히) + 4(사랑해)'를 조합한 1990년대 연인들의 달콤한 삐삐 러브레터 숫자 암호.",
+      "origin": "‘0(영) 1(원) 2(이) 4(사랑해)’로 읽히며 공중전화 부스에서 동전을 넣고 연인의 삐삐로 날리던 아날로그 낭만.",
+      "examples": [
+        "A: 그 시절 여친 삐삐에 0124 찍어놓고 공중전화 옆에서 콜백 기다리던 심장 터질 것 같던 순간.\nB: 낭만 그 자체였지..."
+      ],
+      "tags": [
+        "삐삐",
+        "사랑",
+        "숫자암호",
+        "아날로그낭만"
+      ],
+      "likes": 5400,
+      "dislikes": 20,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "영원히 사랑해",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "0124 (Forever Love / 143 Pager Code)",
+        "desc": "Sweet 1990s pager code: 0-1-2 sounds like 'Forever (Yeong-Won-Hi)' and 4 sounds like 'Love (Sa-Rang)'.",
+        "ex": "Paging 0124 meant 'I love you forever' back in the 90s."
+      },
+      "ja": {
+        "slang": "0124 (永遠に愛してる / ポケベル愛の暗号)",
+        "desc": "語呂合わせで「永遠に(012) 愛してる(4)」を意味した90年代純愛ポケベル暗号。",
+        "ex": "公衆電話から彼女のポケベルに0124送ってドキドキ待ったよな。"
+      },
+      "vi": {
+        "slang": "0124 (Mãi mãi yêu em)",
+        "desc": "Mật mã máy nhắn tin tình yêu lãng mạn: 012 (Mãi mãi) + 4 (Yêu em).",
+        "ex": "Thời đó gửi số 0124 vào máy nhắn tin của người yêu là lãng mạn nhất trần đời."
+      },
+      "es": {
+        "slang": "0124 (Te amaré por siempre)",
+        "desc": "Código romántico de beeper que fonéticamente significa 'Te amaré por siempre'.",
+        "ex": "En los 90 mandabas 0124 al beeper de tu novia para decirle que la amabas."
+      },
+      "id_lang": {
+        "slang": "0124 (Cinta selamanya)",
+        "desc": "Kode angka pager romantis era 90-an yang berarti 'mencintaimu selamanya'.",
+        "ex": "Nge-page angka 0124 ke gebetan itu romantis banget zaman dulu."
+      }
+    },
+    {
+      "id": 118,
+      "word": "도토리",
+      "pronunciation": "[도토리]",
+      "part_of_speech": "명사",
+      "chosung": "ㄷㅌㄹ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (싸이월드 세대)",
+      "short_def": "싸이월드 미니홈피에서 배경음악(BGM), 스킨, 미니미 옷을 사기 위해 충전하던 전설의 디지털 화폐 (1개=100원).",
+      "origin": "전 국민 3,200만 명이 가입했던 SNS 싸이월드의 공식 사이버 머니로, 오늘날 게임 캐시와 암호화폐의 선조 격.",
+      "examples": [
+        "A: 프리스타일의 Y 노래 미니홈피 BGM으로 사야 하는데 도토리 5개만 선물해 줘!\nB: 휴대폰 결제해서 쏴줄게 ㅋㅋㅋ"
+      ],
+      "tags": [
+        "싸이월드",
+        "BGM",
+        "미니홈피",
+        "프리스타일Y"
+      ],
+      "likes": 6800,
+      "dislikes": 35,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "사이버 캐시, 전자화폐, 결제 코인",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Dotori (Acorn Cash)",
+        "desc": "Cyworld's iconic digital currency (100 KRW each) used to purchase BGM, skins, and mini-me avatars.",
+        "ex": "Gift me 5 acorns so I can buy Freestyle's 'Y' as my Cyworld BGM!"
+      },
+      "ja": {
+        "slang": "どんぐり (ドトリ / サイワールド通貨)",
+        "desc": "国民的SNSサイワールドでBGMやスキンを買うために使われた伝説の電子通貨。",
+        "ex": "フリースタイルの『Y』をBGMに設定したいから、どんぐり5個送って！"
+      },
+      "vi": {
+        "slang": "Hạt sồi Cyworld (Đồng tiền ảo đầu tiên)",
+        "desc": "Đồng tiền ảo trên mạng xã hội Cyworld dùng mua nhạc nền BGM và trang trí trang cá nhân.",
+        "ex": "Tặng tôi 5 hạt sồi để mua bài hát 'Y' cài nhạc nền trang cá nhân đi!"
+      },
+      "es": {
+        "slang": "Dotori (Bellotas virtuales de Cyworld)",
+        "desc": "La legendaria moneda virtual con la que millones compraban música de fondo y avatares.",
+        "ex": "¡Regálame 5 bellotas para comprar la canción de fondo de mi perfil!"
+      },
+      "id_lang": {
+        "slang": "Dotori (Koin virtual Cyworld)",
+        "desc": "Mata uang virtual legendaris Cyworld untuk beli musik latar dan kostum avatar.",
+        "ex": "Kirim 5 biji dotori dong biar bisa beli lagu BGM profil gue!"
+      }
+    },
+    {
+      "id": 119,
+      "word": "일촌평",
+      "pronunciation": "[일촌평]",
+      "part_of_speech": "명사",
+      "chosung": "ㅇㅊㅍ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (싸이월드 세대)",
+      "short_def": "싸이월드에서 ‘일촌(베스트 프렌드)’을 맺은 사람만이 미니홈피 메인에 남길 수 있었던 한 줄 방명록.",
+      "origin": "친한 친구나 연인 사이에 센스 있는 한 줄 애칭이나 암호를 남겨 친분을 과시하던 2000년대 소통의 꽃.",
+      "examples": [
+        "A: 야, 내 미니홈피 일촌평에 하트 남겨준 거 누구냐?\nB: 일촌평으로 썸타던 시절 그립네 진짜..."
+      ],
+      "tags": [
+        "싸이월드",
+        "일촌",
+        "미니홈피",
+        "썸"
+      ],
+      "likes": 5200,
+      "dislikes": 20,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "친구 한 줄 평, 방명록 코멘트",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Ilchon One-liner / Top Friend status message",
+        "desc": "A special one-line shoutout only 'Ilchon' (verified best friends) could leave on a Cyworld homepage.",
+        "ex": "Flirting through Cyworld Ilchon one-liners was the peak of 2000s romance."
+      },
+      "ja": {
+        "slang": "イルチョンピョン (親友のひとこと伝言板)",
+        "desc": "親友(イルチョン)限定でミニホのトップに刻むことができた伝説の1行メッセージ。",
+        "ex": "気になるあの子のイルチョンピョンに足跡残してドキドキしたなぁ。"
+      },
+      "vi": {
+        "slang": "Dòng tin nhắn bạn thân Cyworld",
+        "desc": "Dòng lời nhắn độc quyền chỉ bạn thân cấp 1 mới được viết lên đầu trang cá nhân.",
+        "ex": "Thả thính bằng một dòng tin nhắn bạn thân trên Cyworld hồi đó vui dã man."
+      },
+      "es": {
+        "slang": "Dedicatoria de mejor amigo",
+        "desc": "Línea corta de estado que solo tus amigos más íntimos podían escribir en tu muro principal.",
+        "ex": "Ligar a través de las dedicatorias de una sola línea era lo máximo en los 2000."
+      },
+      "id_lang": {
+        "slang": "Catatan satu baris sahabat",
+        "desc": "Komentar satu baris eksklusif di beranda utama yang hanya bisa ditulis oleh sahabat dekat.",
+        "ex": "Dulu modus naksir gebetan lewat catatan satu baris sahabat seru banget."
+      }
+    },
+    {
+      "id": 120,
+      "word": "십라",
+      "pronunciation": "[십라]",
+      "part_of_speech": "감탄사 / 욕설 필터링 우회",
+      "chosung": "ㅅㄹ",
+      "era": "latte",
+      "era_name": "1. 📟 라떼 추억 (삐삐/PC통신/싸이월드)",
+      "era_period": "1990s~2000s",
+      "generation": "초기 밀레니얼 (PC게임·포털 세대)",
+      "short_def": "온라인 게임과 게시판의 욕설 필터링(금칙어)을 우회하기 위해 '씨발'을 뒤집어 변형한 단어.",
+      "origin": "‘씨발’이 채팅창에서 ‘***’로 차단되자 ‘시발 -> 십알 -> 십라’ 등으로 우회 표기하며 인터넷 은어로 정착됨.",
+      "examples": [
+        "A: 보스 몹 체력 1% 남기고 서버 튕겼어!\nB: 아 십라 진짜 게임 운영 이따위로 할래?"
+      ],
+      "tags": [
+        "게임",
+        "필터링우회",
+        "욕설필터",
+        "스타크래프트"
+      ],
+      "likes": 3700,
+      "dislikes": 310,
+      "toxicity_level": 3,
+      "standard_korean_mapping": "제기랄, 빌어먹을, 젠장",
+      "trend_status": "RETRO",
+      "en": {
+        "slang": "Frak / Censorship-bypass profanity",
+        "desc": "Clever phonetic bypass for the Korean F-word in 2000s gaming chatrooms to beat word filters.",
+        "ex": "Disconnected with boss at 1% HP? Oh frak this game!"
+      },
+      "ja": {
+        "slang": "クソッ / 伏字回避スラング",
+        "desc": "2000年代のネットゲームでチャットのNGワード規制をすり抜けるために生まれた罵倒語。",
+        "ex": "ボスあとHP1%で鯖落ちした！クソッふざけんな！"
+      },
+      "vi": {
+        "slang": "Đệch / Tiếng chửi lách kiểm duyệt",
+        "desc": "Từ chửi thề nói lái để lách bộ lọc kiểm duyệt tin nhắn trong game online những năm 2000.",
+        "ex": "Boss còn 1% máu thì sập mạng? Đệch bực mình ghê!"
+      },
+      "es": {
+        "slang": "Miercoles / Insulto antispam",
+        "desc": "Típico insulto alterado para burlar los filtros de groserías en los juegos en línea.",
+        "ex": "¡Se cayó el servidor con el jefe a 1% de vida! ¡Miercoles de juego!"
+      },
+      "id_lang": {
+        "slang": "Anjrit / Sensor bypass",
+        "desc": "Plesetan kata makian untuk mengakali sensor sensor chat game online era 2000-an.",
+        "ex": "Boss sisa darah 1% malah disconnect? Anjrit kesel banget!"
+      }
+    },
+    {
+      "id": 201,
+      "word": "멘붕",
+      "pronunciation": "[멘붕]",
+      "part_of_speech": "명사 / 형용사",
+      "chosung": "ㅁㅂ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "'멘탈 붕괴'의 줄임말로, 너무나 충격적이거나 어처구니없는 일을 겪어 정신이 마비된 상태.",
+      "origin": "스타크래프트 중계진이 역전패 위기에 몰린 게이머의 심리를 '멘탈이 붕괴됐다'고 해설하며 시작되어 2010년대 국민 유행어가 됨.",
+      "examples": [
+        "A: 나 방금 저장 안 누르고 문서 껐어...\nB: 헐 진짜 멘붕이겠다... 어떡하냐 복구 안 돼?"
+      ],
+      "tags": [
+        "충격",
+        "멘탈붕괴",
+        "국민유행어",
+        "스타크래프트"
+      ],
+      "likes": 7400,
+      "dislikes": 60,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "정신적 충격, 넋이 나가다, 공황 상태",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Mental breakdown / Mind blown / Lost my mind",
+        "desc": "National slang meaning complete psychological shock or having your mind blown by chaos.",
+        "ex": "Closed the report without saving? Total mental breakdown!"
+      },
+      "ja": {
+        "slang": "メン崩 (メンタル崩壊) / パニック",
+        "desc": "「メンタル崩壊」の略で、あまりの衝撃に精神が崩壊しパニックになった状態。",
+        "ex": "保存せずにパワポ閉じちゃった…マジでメン崩。"
+      },
+      "vi": {
+        "slang": "Sụp đổ tinh thần / Hoảng loạn",
+        "desc": "Viết tắt của 'sụp đổ tinh thần' khi gặp phải sự cố quá đỗi kinh hoàng và bất ngờ.",
+        "ex": "Vừa lỡ tắt file mà chưa lưu bài... Tinh thần sụp đổ hoàn toàn!"
+      },
+      "es": {
+        "slang": "Colapso mental / En shock absoluto",
+        "desc": "Abreviatura de 'colapso mental' ante un desastre inesperado que te deja paralizado.",
+        "ex": "¿Cerraste el documento sin guardar? ¡Qué colapso mental más brutal!"
+      },
+      "id_lang": {
+        "slang": "Mental breakdown / Syok berat",
+        "desc": "Singkatan dari runtuhnya mental akibat kejadian tak terduga yang bikin panik.",
+        "ex": "File kerjaan kehapus belum kesave? Langsung mental breakdown!"
+      }
+    },
+    {
+      "id": 202,
+      "word": "꿀잼",
+      "pronunciation": "[꿀잼]",
+      "part_of_speech": "명사 / 형용사",
+      "chosung": "ㄲㅈ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "'꿀처럼 달콤하게 재미있다'는 뜻으로, 영화나 게임, 대화가 엄청나게 재미있을 때 쓰는 말.",
+      "origin": "재미를 뜻하는 '잼' 앞에 최상급 접두사 '꿀'을 결합하여, 반대말 '노잼'과 함께 2010년대 소통을 장악함.",
+      "examples": [
+        "A: 어제 개봉한 마블 영화 봤어? 어땠어?\nB: 초반부터 액션 터지고 완전 꿀잼이었어!"
+      ],
+      "tags": [
+        "재미",
+        "극찬",
+        "영화",
+        "대유행"
+      ],
+      "likes": 6900,
+      "dislikes": 40,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "매우 재미있다, 대단히 흥미진진하다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Super fun / Absolute blast / Pure gold",
+        "desc": "Combining 'Honey (Kkul)' with 'Fun (Jaem)', meaning something is delightfully fun.",
+        "ex": "Watched that new movie yesterday? It was an absolute blast!"
+      },
+      "ja": {
+        "slang": "神オモ / めっちゃ面白い",
+        "desc": "「蜂蜜(クル)」のように甘くて「面白い(チェム)」という意味の国民的賛辞。",
+        "ex": "昨日の新作映画見た？最初から最後まで神オモだったよ！"
+      },
+      "vi": {
+        "slang": "Vui đỉnh chóp / Siêu bánh cuốn",
+        "desc": "Kết hợp chữ 'mật ong' với 'thú vị', mang ý nghĩa vui vẻ ngọt ngào tuyệt đối.",
+        "ex": "Xem bộ phim mới ra mắt hôm qua chưa? Siêu bánh cuốn luôn nhé!"
+      },
+      "es": {
+        "slang": "Divertidísimo / Una pasada total",
+        "desc": "Slang que combina miel y diversión para decir que algo es superentretenido.",
+        "ex": "¿Viste la película de ayer? ¡Fue una pasada total, no paré de reír!"
+      },
+      "id_lang": {
+        "slang": "Seru parah / Menghibur banget",
+        "desc": "Perpaduan kata 'madu' dan 'seru' untuk menggambarkan hal yang luar biasa seru.",
+        "ex": "Udah nonton film yang baru rilis? Seru parah bro!"
+      }
+    },
+    {
+      "id": 203,
+      "word": "노잼",
+      "pronunciation": "[노잼]",
+      "part_of_speech": "명사 / 형용사",
+      "chosung": "ㄴㅈ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "영어 'No' + 재미의 '잼'이 결합되어 전혀 재미없고 지루함을 뜻하는 2010년대 대표어.",
+      "origin": "‘꿀잼’의 반대말로 생겨나 대화 분위기를 썰렁하게 만드는 사람을 '노잼 인간' 등으로 부름.",
+      "examples": [
+        "A: 부장님이 아재 개그 또 하셨어...\nB: 아 진짜 영혼 없는 억지웃음 짓느라 노잼이었겠다."
+      ],
+      "tags": [
+        "지루함",
+        "재미없음",
+        "아재개그",
+        "단호박"
+      ],
+      "likes": 5800,
+      "dislikes": 90,
+      "toxicity_level": 1,
+      "standard_korean_mapping": "재미없다, 지루하다, 흥미가 없다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Total snooze / No fun / Boring",
+        "desc": "Combining English 'No' with Korean 'Jaem (Fun)', meaning completely boring and unamusing.",
+        "ex": "Boss cracked another dad joke? Total snooze fest..."
+      },
+      "ja": {
+        "slang": "くそつまらん / スベってる",
+        "desc": "英語のNoと面白い(チェム)が合体した「全く面白くない」というスラング。",
+        "ex": "部長がまたオヤジギャグ言ったの？くそつまらんな…"
+      },
+      "vi": {
+        "slang": "Nhạt nhẽo / Buồn ngủ vãi",
+        "desc": "Kết hợp 'No' với 'vui vẻ', nghĩa là cực kỳ nhạt nhẽo và vô vị.",
+        "ex": "Sếp lại kể chuyện cười nhảm à? Nghe nhạt nhẽo buồn ngủ ghê."
+      },
+      "es": {
+        "slang": "Aburrimiento total / Un tostón",
+        "desc": "Fusión del inglés 'No' con 'diversión' en coreano para decir que algo es un muermo.",
+        "ex": "¿El jefe volvió a contar sus chistes malos? ¡Vaya tostón!"
+      },
+      "id_lang": {
+        "slang": "Garing banget / Ngebosenin",
+        "desc": "Kombinasi kata 'No' dan 'seru' untuk sesuatu yang super garing dan tidak lucu.",
+        "ex": "Bos ngelawak garing lagi? Beneran ngebosenin banget..."
+      }
+    },
+    {
+      "id": 204,
+      "word": "심쿵",
+      "pronunciation": "[심쿵]",
+      "part_of_speech": "명사 / 감탄사",
+      "chosung": "ㅅㅋ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "'심장이 쿵쾅거리다'의 줄임말로, 가슴이 떨릴 만큼 설레거나 귀여운 대상을 보았을 때의 리액션.",
+      "origin": "로맨스 드라마의 설레는 장면이나 귀여운 반려동물을 보며 네티즌들이 가슴 통증(?)을 호소하던 감탄사.",
+      "examples": [
+        "A: 길 가다가 아기 고양이가 내 신발 위에서 잠들었어!\nB: 으아악 너무 귀여워서 심쿵사할 것 같아..."
+      ],
+      "tags": [
+        "설렘",
+        "귀여움",
+        "고양이",
+        "로맨스"
+      ],
+      "likes": 8200,
+      "dislikes": 30,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "가슴이 설레다, 심장이 두근거리다, 몹시 귀엽다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Heart-stoppingly cute / Heart flutter / Simp overload",
+        "desc": "Onomatopoeia for 'heart thumping', used when encountering something insanely cute or romantic.",
+        "ex": "That kitten fell asleep on my shoe! Heart flutter overload!"
+      },
+      "ja": {
+        "slang": "胸キュン / 心臓止まるかと思った",
+        "desc": "「心臓がドクン」と跳ねるほどときめいたり可愛いものに出会った時の悶絶リアクション。",
+        "ex": "子猫が靴の上で寝ちゃった！可愛すぎて胸キュン死する…"
+      },
+      "vi": {
+        "slang": "Rụng tim / Đốn tim",
+        "desc": "Chỉ cảm giác tim đập thình thịch vì quá đỗi ngọt ngào hoặc dễ thương xỉu.",
+        "ex": "Con mèo con nằm ngủ trên giày kìa, đốn tim rụng rụng luôn á!"
+      },
+      "es": {
+        "slang": "Flechazo al corazón / Para morirse de amor",
+        "desc": "Sonido del corazón dando un vuelco ante algo increíblemente tierno o atractivo.",
+        "ex": "¡Ese gatito durmiendo en mi zapato me va a dar un flechazo al corazón!"
+      },
+      "id_lang": {
+        "slang": "Bikin jantungan gemas / Meleleh hatiku",
+        "desc": "Reaksi ketika melihat hal yang kelewat lucu atau manis sampai bikin deg-degan.",
+        "ex": "Anak kucingnya tidur di atas sepatu, ya ampun bikin jantungan gemas!"
+      }
+    },
+    {
+      "id": 205,
+      "word": "금수저",
+      "pronunciation": "[금수저]",
+      "part_of_speech": "명사",
+      "chosung": "ㄱㅅㅈ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (청년 세대)",
+      "short_def": "영미권 격언 '은수저를 물고 태어나다'에서 유래하여, 부모의 부와 배경 덕에 시작부터 부유한 청년층.",
+      "origin": "2015년 전후 한국 사회의 경제적 양극화와 청년 불평등 문제를 비유한 '수저계급론'의 최상위 계급.",
+      "examples": [
+        "A: 걔 졸업하자마자 강남에 아파트 분양받았대.\nB: 진짜 타고난 금수저는 평생 노력해도 못 따라가겠다."
+      ],
+      "tags": [
+        "수저계급론",
+        "사회풍자",
+        "양극화",
+        "재벌"
+      ],
+      "likes": 6100,
+      "dislikes": 280,
+      "toxicity_level": 2,
+      "standard_korean_mapping": "부유층 자제, 재력가 집안 출신",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Golden spoon / Born with a silver spoon on steroids",
+        "desc": "Born into top-tier wealth and privilege without needing to work hard, derived from the Spoon Class Theory.",
+        "ex": "He got an apartment in Gangnam right after graduation? Pure golden spoon."
+      },
+      "ja": {
+        "slang": "金のスプーン (クムスジョ) / 勝ち組御曹司",
+        "desc": "韓国の「スプーン階級論」で親の莫大な資産により何の苦労もせず富を得る最上位階層。",
+        "ex": "卒業してすぐ江南のマンションもらったの？さすが金のスプーン組だな。"
+      },
+      "vi": {
+        "slang": "Ngậm thìa vàng / Thiếu gia tài phiệt",
+        "desc": "Thuật ngữ 'thìa vàng' chỉ những đứa trẻ sinh ra ở vạch đích, gia đình siêu giàu có.",
+        "ex": "Vừa ra trường đã được bố mẹ tặng căn hộ cao cấp, đúng là ngậm thìa vàng!"
+      },
+      "es": {
+        "slang": "Cuchara de oro / Nacido en cuna de oro",
+        "desc": "Versión coreana de 'nacer en cuna de oro', máxima categoría de la teoría de clases socioeconómicas.",
+        "ex": "¿Le regalaron un piso de lujo al graduarse? Vaya cuchara de oro."
+      },
+      "id_lang": {
+        "slang": "Sendok emas / Sultan dari lahir",
+        "desc": "Istilah kasta sosial Korea untuk anak orang super kaya yang hidupnya tanpa beban finansial.",
+        "ex": "Lulus kuliah langsung dibeliin apartemen mewah, sultan sendok emas sejati!"
+      }
+    },
+    {
+      "id": 206,
+      "word": "흙수저",
+      "pronunciation": "[흑쑤저]",
+      "part_of_speech": "명사",
+      "chosung": "ㅎㅅㅈ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (청년 세대)",
+      "short_def": "부모의 경제적 지원을 전혀 받지 못해 학자금 대출과 생활고를 스스로 짊어져야 하는 취약 계층 청년의 자조적 표현.",
+      "origin": "‘금수저’의 반대편에 선 흙탕물 같은 가난을 뜻하는 신조어로 2010년대 청년들의 깊은 좌절과 공감을 낳음.",
+      "examples": [
+        "A: 학자금 대출 갚으려면 알바 3개는 뛰어야 해.\nB: 우리 같은 흙수저들은 진짜 숨만 쉬어도 돈이 나가네..."
+      ],
+      "tags": [
+        "수저계급론",
+        "청년고통",
+        "학자금대출",
+        "자조"
+      ],
+      "likes": 6500,
+      "dislikes": 110,
+      "toxicity_level": 2,
+      "standard_korean_mapping": "극빈층 출신, 자수성가해야 하는 청년",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Dirt spoon / Born broke / Living paycheck to paycheck",
+        "desc": "The lowest tier in Korea's Spoon Class Theory, describing young people with zero financial backing struggling alone.",
+        "ex": "Working 3 part-time jobs for student loans? Dirt spoon reality is rough."
+      },
+      "ja": {
+        "slang": "土のスプーン (フクスジョ) / 親ガチャ大失敗",
+        "desc": "親の経済的支援がゼロで、自力で借金返済や生活苦に立ち向かわねばならない最下層の自虐語。",
+        "ex": "学費返すのにバイト掛け持ちだよ。土のスプーン生まれは辛いな…"
+      },
+      "vi": {
+        "slang": "Ngậm thìa đất / Xuất phát điểm nghèo khó",
+        "desc": "Chỉ những người sinh ra trong gia đình nghèo khó, phải tự bươn chải trả nợ sinh viên.",
+        "ex": "Phải cày 3 việc làm thêm trả nợ học phí, kiếp ngậm thìa đất vất vả thật."
+      },
+      "es": {
+        "slang": "Cuchara de barro / Sin un duro de familia",
+        "desc": "Término desgarrador para jóvenes que parten de cero sin herencia ni ayuda económica familiar.",
+        "ex": "Tener 3 curros para pagar la carrera es la dura realidad de la cuchara de barro."
+      },
+      "id_lang": {
+        "slang": "Sendok tanah / Pejuang garis keras",
+        "desc": "Istilah menyedihkan untuk pemuda dari keluarga miskin yang harus menanggung beban hidup sendiri.",
+        "ex": "Kerja sampingan mati-matian buat bayar utang kuliah, nasib sendok tanah."
+      }
+    },
+    {
+      "id": 207,
+      "word": "팩폭",
+      "pronunciation": "[팩폭]",
+      "part_of_speech": "명사",
+      "chosung": "ㅍㅍ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "'팩트 폭력'의 줄임말로, 반박할 수 없는 냉혹한 사실을 정곡으로 찔러 상대방의 자존심을 무너뜨리는 행위.",
+      "origin": "인터넷 토론이나 댓글 창에서 감정적 궤변을 늘어놓는 사람을 객관적 데이터와 진실로 잠재우는 행위에서 시작됨.",
+      "examples": [
+        "A: 넌 공부를 안 해서 점수가 안 나온 게 아니라 공부 머리가 없는 거야.\nB: 야... 아무리 그래도 그렇게 순살로 팩폭하면 뼈 아프잖아..."
+      ],
+      "tags": [
+        "팩트",
+        "돌직구",
+        "사이다",
+        "순살"
+      ],
+      "likes": 7100,
+      "dislikes": 95,
+      "toxicity_level": 2,
+      "standard_korean_mapping": "정곡을 찌르다, 뼈아픈 진실을 가차 없이 말하다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Fact violence / Savage truth / Hard truth bomb",
+        "desc": "Short for 'Fact Violence', delivering undeniable facts so brutally honest that it mentally damages the other person.",
+        "ex": "Stop dropping savage truth bombs on me, that hurts so much!"
+      },
+      "ja": {
+        "slang": "ファクト暴力 / ぐうの音も出ない正論",
+        "desc": "「ファクト(事実)暴力」の略。反論不能のド正論で相手の心を情け容赦なく粉砕する行為。",
+        "ex": "そんなストレートにファクト暴力されたら立ち直れないわ…"
+      },
+      "vi": {
+        "slang": "Sự thật tát vào mặt / Tát bằng sự thật",
+        "desc": "Viết tắt của 'Bạo lực bằng sự thật', dùng sự thật trần trụi đập tan mọi ngụy biện của đối phương.",
+        "ex": "Nói đúng sự thật tát thẳng vào mặt thế thì ai mà đỡ nổi!"
+      },
+      "es": {
+        "slang": "Bomba de verdad pura / Zasca con datos",
+        "desc": "Abreviatura de 'violencia de hechos', lanzar una verdad tan irrefutable que destruye al rival.",
+        "ex": "¡Menudo zasca de hechos me acaba de meter, me ha dejado en el suelo!"
+      },
+      "id_lang": {
+        "slang": "Ditampar fakta / Tamparan kenyataan",
+        "desc": "Singkatan dari 'Kekerasan fakta', membungkam lawan bicara dengan kebenaran telak.",
+        "ex": "Jangan ditampar fakta mulu dong, nyesek banget dengernya!"
+      }
+    },
+    {
+      "id": 208,
+      "word": "빼박캔트",
+      "pronunciation": "[빼박캔트]",
+      "part_of_speech": "명사 / 형용사",
+      "chosung": "ㅃㅂㅋㅌ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "‘빼도 박도 못한다’와 영어 ‘Can’t’를 합성하여, 핑계를 대거나 빠져나갈 구멍이 100% 없는 상황.",
+      "origin": "한국어 관용구 '빼도 박도 못한다'에 영단어 Can't를 리드미컬하게 붙여 인터넷 게시판에서 말장난으로 굳어짐.",
+      "examples": [
+        "A: CCTV에 네가 케이크 몰래 먹는 장면 다 찍혔어.\nB: 헐... 발뺌할 수도 없고 완전 빼박캔트네."
+      ],
+      "tags": [
+        "확정",
+        "발뺌불가",
+        "증거",
+        "말장난"
+      ],
+      "likes": 5600,
+      "dislikes": 35,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "도저히 발뺌할 수 없다, 빼도 박도 못하다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Dead to rights / Caught red-handed / No escape",
+        "desc": "Combining Korean idiom 'Can't pull out or drive in' with English 'Can't', meaning undeniable evidence.",
+        "ex": "You're caught on camera eating the cake? You're dead to rights!"
+      },
+      "ja": {
+        "slang": "言い逃れ不可能 / 逃げ場なし",
+        "desc": "「抜き差しならぬ」と英語の「Can't」を組み合わせた、言い訳が一切通用しない状態。",
+        "ex": "防犯カメラに全部映ってるよ。もう言い逃れ不可能だね。"
+      },
+      "vi": {
+        "slang": "Hết đường chối cãi / Bắt quả tang tại trận",
+        "desc": "Kết hợp thành ngữ Hàn với từ Can't của tiếng Anh, mang nghĩa bằng chứng rành rành không thể trốn.",
+        "ex": "Camera quay rõ mồn một thế kia thì hết đường chối cãi rồi nhé!"
+      },
+      "es": {
+        "slang": "Pillado in fraganti / Sin escapatoria posible",
+        "desc": "Fusión lingüística que indica que las pruebas son tan claras que no hay excusa que valga.",
+        "ex": "¡Te grabó la cámara de seguridad, estás pillado in fraganti sin escapatoria!"
+      },
+      "id_lang": {
+        "slang": "Tertangkap basah / Gak bisa ngeles lagi",
+        "desc": "Perpaduan istilah Korea dan bahasa Inggris yang berarti bukti sudah jelas dan tidak bisa mengelak.",
+        "ex": "Ketahuan kamera CCTV, udah gak bisa ngeles lagi lu bro!"
+      }
+    },
+    {
+      "id": 209,
+      "word": "갓생",
+      "pronunciation": "[갇쌩]",
+      "part_of_speech": "명사",
+      "chosung": "ㄱㅅ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 & Z세대",
+      "short_def": "신(God) + 인생(生)의 합성어로, 부지런하고 생산적으로 하루를 알차게 살아가는 긍정적 자기계발 라이프스타일.",
+      "origin": "아이돌 팬덤에서 '본업과 일상도 성실히 챙기는 건강한 삶'을 가리키던 은어에서 2010년대 후반 청년층 전반의 자기계발 트렌드로 확산됨.",
+      "examples": [
+        "A: 나 오늘 아침 6시에 일어나서 운동하고 영어 회화 1시간 들었어!\nB: 와 대단하다, 완전 갓생 살고 있네!"
+      ],
+      "tags": [
+        "자기계발",
+        "모닝루틴",
+        "생산성",
+        "갓생"
+      ],
+      "likes": 9100,
+      "dislikes": 20,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "모범적인 삶, 성실하고 생산적인 일상",
+      "trend_status": "HOT",
+      "en": {
+        "slang": "God-life / Living your best productive life",
+        "desc": "Blending 'God' and 'Life', referring to waking up early, working out, and leading an inspiring, productive lifestyle.",
+        "ex": "Up at 6 AM working out and studying languages? Total god-life routine!"
+      },
+      "ja": {
+        "slang": "ゴッドライフ / 充実しまくりの人生",
+        "desc": "God(神)＋人生(セン)の造語。早起きや筋トレ、勉強に励む生産的で模範的な生活様式。",
+        "ex": "朝6時に起きて筋トレして英語勉強？マジでゴッドライフ送ってるね！"
+      },
+      "vi": {
+        "slang": "Sống cuộc đời đỉnh chóp / Kỷ luật thép",
+        "desc": "Ghép từ God (Thần) và Saeng (Cuộc sống), chỉ lối sống cực kỳ kỷ luật, chăm chỉ và tích cực.",
+        "ex": "Dậy từ 6h sáng tập thể dục rồi học tiếng Anh, đúng là cuộc sống kỷ luật thép đáng ngưỡng mộ!"
+      },
+      "es": {
+        "slang": "Vida modo Dios / Rutina productiva de diez",
+        "desc": "Fusión de 'Dios' y 'Vida' para describir una rutina impecable, sana y superproductiva.",
+        "ex": "¿Madrugas a las 6 para entrenar y estudiar? ¡Llevas una vida modo Dios total!"
+      },
+      "id_lang": {
+        "slang": "Hidup produktif ala dewa / Panutan hidup",
+        "desc": "Perpaduan kata God (Dewa) dan Kehidupan, gaya hidup disiplin bangun pagi dan produktif.",
+        "ex": "Bangun jam 6 olahraga dan belajar? Bener-bener panutan hidup produktif!"
+      }
+    },
+    {
+      "id": 210,
+      "word": "극혐",
+      "pronunciation": "[그켬]",
+      "part_of_speech": "명사 / 형용사",
+      "chosung": "ㄱㅎ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "'극도로 혐오함'의 줄임말로, 꼴불견이거나 징그럽고 정떨어지는 행동을 보았을 때 단호하게 뱉는 말.",
+      "origin": "인터넷 게시판에서 비매너 행위나 혐오스러운 콘텐츠에 댓글로 '극혐' 두 글자를 남기며 대중화됨.",
+      "examples": [
+        "A: 지하철에서 다리 쩍 벌리고 옆 사람 밀쳐내는 사람 봤어.\nB: 아 진짜 매너 없다... 그런 사람 완전 극혐이야."
+      ],
+      "tags": [
+        "비매너",
+        "혐오",
+        "단호",
+        "비호감"
+      ],
+      "likes": 6300,
+      "dislikes": 180,
+      "toxicity_level": 2,
+      "standard_korean_mapping": "극도로 혐오스럽다, 질색이다, 꼴불견이다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Major ick / Repulsive / Super cringe",
+        "desc": "Short for 'extreme disgust', intensely expressing revulsion towards obnoxious or gross behavior.",
+        "ex": "Manspreading and pushing people on the subway? That's a major ick."
+      },
+      "ja": {
+        "slang": "激キモ / ガチで無理",
+        "desc": "「極度に嫌悪」の略。マナーの悪さや不快な言動に対して強烈な嫌悪感を示す言葉。",
+        "ex": "電車で足広げて隣の人押しのける人、ガチで無理だわ。"
+      },
+      "vi": {
+        "slang": "Cực kỳ ghét bỏ / Dị ứng tận cùng",
+        "desc": "Viết tắt của 'cực kỳ ghê tởm', thể hiện thái độ bài trừ những hành vi thô lỗ, mất lịch sự.",
+        "ex": "Đi tàu điện mà ngồi banh càng chèn ép người khác? Dị ứng tận cùng luôn!"
+      },
+      "es": {
+        "slang": "Repulsión total / Da un asco tremendo",
+        "desc": "Abreviatura de 'odio extremo', para expresar repudio absoluto ante actitudes groseras.",
+        "ex": "¿Ocupando dos asientos en el metro sin educación? ¡Qué asco tremendo de gente!"
+      },
+      "id_lang": {
+        "slang": "Bikin jijik parah / Ilfeel maksimal",
+        "desc": "Singkatan dari 'sangat benci dan jijik' terhadap perilaku norak dan tidak tahu aturan.",
+        "ex": "Duduk ngangkang desek orang di kereta? Ilfeel maksimal lihatnya."
+      }
+    },
+    {
+      "id": 211,
+      "word": "츤데레",
+      "pronunciation": "[츤데레]",
+      "part_of_speech": "명사",
+      "chosung": "ㅊㄷㄹ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (서브컬처·드라마 세대)",
+      "short_def": "겉으로는 차갑고 쌀쌀맞게 굴지만 속으로는 남몰래 챙겨주고 따뜻하게 배려하는 성격의 사람.",
+      "origin": "일본 서브컬처 용어 '츤츤(새침함) + 데레데레(부끄러워 다정함)'에서 유래하여 한국 공중파 드라마와 예능의 단골 캐릭터로 정착됨.",
+      "examples": [
+        "A: 형이 '오다 주웠다' 하면서 내가 갖고 싶었던 신발 툭 던져주고 가더라?\nB: ㅋㅋㅋ 겉으론 무심한 척 챙겨주는 완전 츤데레네."
+      ],
+      "tags": [
+        "반전매력",
+        "오다주웠다",
+        "드라마",
+        "다정함"
+      ],
+      "likes": 7600,
+      "dislikes": 35,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "겉차속따 (겉은 차갑고 속은 따뜻함)",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Tsundere / Secret softie / Cold outside warm inside",
+        "desc": "Someone who acts cold and prickly on the outside, but is secretly deeply caring and affectionate.",
+        "ex": "He said 'I just found this on the road' and tossed my dream sneakers? What a classic tsundere!"
+      },
+      "ja": {
+        "slang": "ツンデレ / 素直になれない優しさ",
+        "desc": "普段はツンツンしているが、本心は優しくデレる魅力的な二面性を表す言葉。",
+        "ex": "「道で拾った」って欲しかったスニーカーくれたの？完璧なツンデレじゃん笑"
+      },
+      "vi": {
+        "slang": "Ngoài lạnh trong nóng / Tsundere",
+        "desc": "Chỉ người ngoài mặt tỏ ra phũ phàng lạnh lùng nhưng thực tâm lại vô cùng chu đáo.",
+        "ex": "Bảo 'nhặt được ngoài đường' rồi ném cho đôi giày tôi thích? Đúng là ngoài lạnh trong nóng!"
+      },
+      "es": {
+        "slang": "Duro por fuera blando por dentro / Tsundere",
+        "desc": "Persona que finge frialdad e indiferencia pero en el fondo se preocupa y es superatenta.",
+        "ex": "Dijo 'me lo encontré por ahí' y me dio las zapatillas de mis sueños. ¡Qué tierno en el fondo!"
+      },
+      "id_lang": {
+        "slang": "Tsundere / Gengsi tapi perhatian",
+        "desc": "Orang yang pura-pura cuek dan galak di luar padahal diam-diam sangat perhatian.",
+        "ex": "Bilangnya nemu di jalan padahal sengaja beliin sepatu idaman gue, tsundere banget!"
+      }
+    },
+    {
+      "id": 212,
+      "word": "케미",
+      "pronunciation": "[케미]",
+      "part_of_speech": "명사",
+      "chosung": "ㅋㅁ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (드라마·예능 세대)",
+      "short_def": "화학반응을 뜻하는 영어 'Chemistry'의 약칭으로, 사람 사이의 호흡이나 어울림이 찰떡처럼 잘 맞음.",
+      "origin": "드라마 남녀 주인공의 로맨틱한 연기 호흡을 가리키던 방송가 은어에서 친구, 동료 간의 환상적 호흡으로 의미가 확장됨.",
+      "examples": [
+        "A: 유재석이랑 박명수 같이 나올 때가 티키타카 호흡 최고였지?\nB: 맞아, 둘이 투닥거리는 케미는 아무도 못 따라가지."
+      ],
+      "tags": [
+        "호흡",
+        "케미스트리",
+        "드라마",
+        "찰떡궁합"
+      ],
+      "likes": 6800,
+      "dislikes": 20,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "찰떡궁합, 호흡이 잘 맞음, 조화로움",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Chemistry / Great vibe together",
+        "desc": "Short for chemistry, describing great rapport, spark, or seamless teamwork between two people.",
+        "ex": "Those two hosts argue constantly, but their on-screen chemistry is undefeated."
+      },
+      "ja": {
+        "slang": "相性抜群 / ケミストリー",
+        "desc": "英語のChemistry(化学反応)の略で、二人の息がぴったり合っている最高の相性。",
+        "ex": "あの二人の掛け合い、ケミが良すぎて永遠に見てられる！"
+      },
+      "vi": {
+        "slang": "Phản ứng hóa học (Chemistry) đỉnh cao",
+        "desc": "Chỉ sự hòa hợp, ăn ý tuyệt vời và tương tác tự nhiên giữa hai người.",
+        "ex": "Hai MC này đối đáp với nhau ăn ý thật, phản ứng hóa học đỉnh cao luôn!"
+      },
+      "es": {
+        "slang": "Química brutal / Buena sintonía",
+        "desc": "Abreviatura de química para describir dos personas que encajan y se complementan a la perfección.",
+        "ex": "Esos dos presentadores tienen una química brutal en pantalla, se complementan genial."
+      },
+      "id_lang": {
+        "slang": "Chemistry cocok / Nyambung banget",
+        "desc": "Singkatan dari kimiawi, menggambarkan kekompakan dan kecocokan luar biasa antar dua orang.",
+        "ex": "Dua pembawa acara itu chemistry-nya dapet banget, klop parah!"
+      }
+    },
+    {
+      "id": 213,
+      "word": "답정너",
+      "pronunciation": "[답정너]",
+      "part_of_speech": "명사",
+      "chosung": "ㄷㅈㄴ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (카톡 일상화 세대)",
+      "short_def": "‘답은 이미 정해져 있고 너는 대답만 해라’의 줄임말. 이미 자기가 원하는 답을 정해두고 유도신문하듯 묻는 사람.",
+      "origin": "SNS나 카카오톡에서 '나 오늘 살찐 것 같지 않아?'라며 '아니야 전혀 안 쪘어, 예뻐'라는 칭찬을 유도하는 사람들을 꼬집으며 유행.",
+      "examples": [
+        "A: 나 이 원피스 안 어울리지? 솔직히 말해봐.\nB: 너 어차피 살 거면서 왜 물어봐? 완전 답정너네 ㅋㅋㅋ"
+      ],
+      "tags": [
+        "칭찬유도",
+        "카카오톡",
+        "심리",
+        "질문"
+      ],
+      "likes": 7300,
+      "dislikes": 90,
+      "toxicity_level": 1,
+      "standard_korean_mapping": "유도신문자, 칭찬을 바라는 유도형 질문",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Fishing for compliments / Rhetorical trap",
+        "desc": "Acronym for 'The answer is already decided, you just agree', describing someone fishing for validation.",
+        "ex": "You're gonna buy that dress anyway, why ask me? Stop fishing for validation lol."
+      },
+      "ja": {
+        "slang": "答えありきの質問 / 褒め言葉待ち",
+        "desc": "「答えは決まってるから、あんたは言われた通りに答えなさい」という誘導尋問をする人。",
+        "ex": "どうせ買う気満々のくせに何で聞くの？完全に答えありきじゃん笑"
+      },
+      "vi": {
+        "slang": "Hỏi chỉ để nghe khen / Thảo mai gài bẫy",
+        "desc": "Viết tắt của 'Đáp án đã có sẵn, bạn chỉ việc gật đầu', chỉ người hỏi để câu lời khen ngợi.",
+        "ex": "Kiểu gì cậu cũng mua mà còn hỏi làm gì? Rõ là hỏi để người khác khen mà!"
+      },
+      "es": {
+        "slang": "Pescar cumplidos / Pregunta con trampa",
+        "desc": "Alguien que ya sabe la respuesta que quiere oír y te pregunta solo para que le des la razón.",
+        "ex": "¿Para qué me preguntas si te queda bien si te lo vas a comprar igual? ¡Buscas que te eche flores!"
+      },
+      "id_lang": {
+        "slang": "Pancing pujian / Pertanyaan jebakan",
+        "desc": "Singkatan dari 'jawabannya udah ada lu tinggal iyain aja', orang yang nanya cuma buat minta dipuji.",
+        "ex": "Ujung-ujungnya lu beli juga ngapain nanya? Cuma pancing pujian lu mah wkwk."
+      }
+    },
+    {
+      "id": 214,
+      "word": "낄끼빠빠",
+      "pronunciation": "[낄끼빠빠]",
+      "part_of_speech": "명사 / 관용구",
+      "chosung": "ㄲㄲㅃㅃ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "‘낄 때 끼고 빠질 때 빠져라’의 줄임말로, 분위기를 파악하여 나설 때와 물러설 때를 분별하라는 사회생활의 금과옥조.",
+      "origin": "눈치 없는 직장 상사나 모임에서 찬물을 끼얹는 불청객을 보며 네티즌들이 만들어낸 최고의 4음절 축약어.",
+      "examples": [
+        "A: 회식 2차 가는데 신입사원들끼리 가겠다는 자리에 부장님이 굳이 따라가시네...\nB: 에휴, 진짜 낄끼빠빠 좀 하시지 눈치가 전혀 없으셔."
+      ],
+      "tags": [
+        "눈치",
+        "사회생활",
+        "센스",
+        "회식"
+      ],
+      "likes": 8500,
+      "dislikes": 40,
+      "toxicity_level": 1,
+      "standard_korean_mapping": "상황 파악을 잘하다, 나설 자리와 물러설 자리를 알다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Know when to join and when to leave / Read the room",
+        "desc": "Clever Korean mantra meaning 'Know when to chime in and when to back off; read the room!'",
+        "ex": "Manager crashing the interns-only afterparty? He seriously needs to read the room!"
+      },
+      "ja": {
+        "slang": "空気を読め / 引き際をわきまえろ",
+        "desc": "「混ざる時は混ざり、抜ける時は抜けろ」の略。場の空気を読んで出処進退を弁えろという教訓。",
+        "ex": "新人同士の飲み会に部長がついて行くの？マジで空気読んでほしいわ…"
+      },
+      "vi": {
+        "slang": "Biết thân biết phận / Đọc vị bầu không khí",
+        "desc": "Lời khuyên vàng trong xã hội: 'Lúc nào nên chen vào và lúc nào nên rút lui thì phải tự biết'.",
+        "ex": "Bọn trẻ đi ăn riêng mà sếp cứ đòi đi theo, đúng là không biết đọc vị không khí gì cả!"
+      },
+      "es": {
+        "slang": "Saber cuándo meterse y cuándo retirarse / Captar la indirecta",
+        "desc": "Mantra social coreano que significa saber cuándo participar y cuándo apartarse discretamente.",
+        "ex": "El jefe acoplándose a la cena de los becarios... ¡que capte la indirecta y se retire!"
+      },
+      "id_lang": {
+        "slang": "Tahu diri / Sadar situasi",
+        "desc": "Singkatan bermakna 'tahu kapan harus ikut campur dan kapan harus mundur teratur'.",
+        "ex": "Anak magang mau nongkrong sendiri bosnya malah ikut, gak peka situasi banget dah."
+      }
+    },
+    {
+      "id": 215,
+      "word": "안물안궁",
+      "pronunciation": "[안물안궁]",
+      "part_of_speech": "감탄사 / 관용구",
+      "chosung": "ㅇㅁㅇㄱ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (카톡 단톡방 세대)",
+      "short_def": "‘안 물어봤고 안 궁금해’의 줄임말. 상대방이 TMI(불필요한 정보)를 늘어놓거나 자랑질할 때 딱 잘라 무안을 주는 말.",
+      "origin": "카카오톡 단체 채팅방에서 과하게 자기 이야기만 늘어놓는 사람의 말을 1초 만에 차단하기 위해 유행함.",
+      "examples": [
+        "A: 나 어제 100만 원짜리 명품 운동화 샀는데 가죽 냄새가 너무 좋더라~\nB: 어~ 안물안궁이니까 조용히 해."
+      ],
+      "tags": [
+        "TMI",
+        "차단",
+        "자랑방어",
+        "카카오톡"
+      ],
+      "likes": 6400,
+      "dislikes": 160,
+      "toxicity_level": 2,
+      "standard_korean_mapping": "묻지 않았고 궁금하지도 않다, 관심 없다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Didn't ask, don't care / Did I ask?",
+        "desc": "Punchy retort short for 'Didn't ask and don't care', instantly shutting down bragging or TMI.",
+        "ex": "Bought $1,000 sneakers yesterday? Didn't ask, don't care!"
+      },
+      "ja": {
+        "slang": "聞いてないし興味ない / 知らんがな",
+        "desc": "「聞いてないし、気にもならない」の略。自慢話やTMIを一刀両断するシャットダウン語。",
+        "ex": "昨日10万円の靴買った自慢？へぇ〜聞いてないし興味ないわ。"
+      },
+      "vi": {
+        "slang": "Không hỏi không quan tâm / Ai mượn kể",
+        "desc": "Cách chặn họng cực gắt khi người khác thích khoe khoang hoặc nói chuyện thừa thãi.",
+        "ex": "Khoe đôi giày tiền triệu làm gì? Ai mượn kể, không ai hỏi luôn á!"
+      },
+      "es": {
+        "slang": "¿Te he preguntado? / No me importa",
+        "desc": "Corte tajante que significa 'Ni te he preguntado ni me interesa tu vida'.",
+        "ex": "¿Que te compraste zapatillas de marca? ¿Y a quién le importa? ¡No te pregunté!"
+      },
+      "id_lang": {
+        "slang": "Gak nanya gak peduli / Siapa nanya",
+        "desc": "Jawaban menohok untuk memotong pamer atau cerita gak penting dari teman.",
+        "ex": "Pamer beli sepatu mahal? Gak ada yang nanya dan gak ada yang peduli tuh!"
+      }
+    },
+    {
+      "id": 216,
+      "word": "솔까말",
+      "pronunciation": "[솔까말]",
+      "part_of_speech": "부사",
+      "chosung": "ㅅㄲㅁ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "‘솔직히 까놓고 말해서’의 줄임말. 가식이나 에두름 없이 자신의 진짜 속마음을 털어놓을 때 서두에 붙이는 관용구.",
+      "origin": "온라인 커뮤니티에서 진솔한 익명 고백을 하거나 솔직한 직언을 날릴 때 머리말로 쓰이며 전 국민의 입에 붙음.",
+      "examples": [
+        "A: 솔까말 이번 프로젝트 기획안 전면 재수정해야 할 것 같아.\nB: 나도 그렇게 생각해, 현실성이 너무 떨어져."
+      ],
+      "tags": [
+        "솔직함",
+        "직언",
+        "진심",
+        "회의"
+      ],
+      "likes": 7800,
+      "dislikes": 20,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "솔직히 터놓고 말하면, 사실대로 말하자면",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "TBH / Real talk / Frankly speaking",
+        "desc": "Short for 'Speaking honestly and openly', used to drop unfiltered genuine thoughts.",
+        "ex": "Real talk, this project proposal needs a complete overhaul from scratch."
+      },
+      "ja": {
+        "slang": "ぶっちゃけ / 正直言って",
+        "desc": "「正直、包み隠さず言って」の略。飾らない本音を切り出す時の定番フレーズ。",
+        "ex": "ぶっちゃけ、今回の企画書は根本から直した方がいいと思う。"
+      },
+      "vi": {
+        "slang": "Nói thật lòng / Nói thẳng thắn ra thì",
+        "desc": "Viết tắt của 'Nói thẳng thắn không giấu giếm', dùng để mở đầu lời nhận xét chân thực.",
+        "ex": "Nói thẳng thắn ra thì bản kế hoạch dự án này cần đập đi làm lại từ đầu."
+      },
+      "es": {
+        "slang": "Para ser sinceros / Hablando en plata",
+        "desc": "Abreviatura de 'hablando con toda franqueza', para soltar una opinión sin rodeos.",
+        "ex": "Hablando en plata, esta propuesta de proyecto necesita rehacerse entera."
+      },
+      "id_lang": {
+        "slang": "Jujurly / Buka-bukaan aja",
+        "desc": "Singkatan dari 'jujur buka-bukaan ngomong', digunakan untuk menyampaikan kritik jujur.",
+        "ex": "Jujurly aja ya, proposal proyek kali ini kayaknya harus dirombak total deh."
+      }
+    },
+    {
+      "id": 217,
+      "word": "어그로",
+      "pronunciation": "[어그로]",
+      "part_of_speech": "명사",
+      "chosung": "ㅇㄱㄹ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (온라인 게임 세대)",
+      "short_def": "온라인 게임에서 몬스터의 적개심(Aggro)을 끄는 행위에서 유래하여, 사람들의 분노나 관심을 끌기 위해 도발하는 행위.",
+      "origin": "MMORPG 게임 '월드 오브 워크래프트(WoW)'의 시스템 용어 'Aggro'가 인터넷 커뮤니티로 퍼져 '어그로 끌다', '어그로꾼'으로 확장됨.",
+      "examples": [
+        "A: 저 유튜버 또 자극적인 가짜 뉴스로 썸네일 만들었네.\nB: 조회수 빨아먹으려고 어그로 끄는 거니까 클릭해 주지 마."
+      ],
+      "tags": [
+        "도발",
+        "관종",
+        "게임유래",
+        "유튜브"
+      ],
+      "likes": 6700,
+      "dislikes": 210,
+      "toxicity_level": 2,
+      "standard_korean_mapping": "주의를 끌다, 도발하다, 관심을 유도하다",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Rage-baiting / Trolling for attention / Aggro",
+        "desc": "Originating from gaming 'aggro', provoking rage or drama deliberately to grab attention and views.",
+        "ex": "That YouTuber is just rage-baiting for clicks, don't give them attention!"
+      },
+      "ja": {
+        "slang": "ヘイト集め / 炎上商法 / アグロ",
+        "desc": "ゲーム用語Aggro由来。注目や再生数を稼ぐためにわざと人を怒らせ挑発する行為。",
+        "ex": "再生数稼ぎの炎上商法なんだから、相手にするな。"
+      },
+      "vi": {
+        "slang": "Câu view bẩn / Kéo sự chú ý độc hại",
+        "desc": "Bắt nguồn từ game online, chỉ hành động cố tình phát ngôn gây sốc để hút sự chú ý.",
+        "ex": "YouTuber đó chỉ đang làm trò câu view bẩn thôi, đừng nhấn vào xem!"
+      },
+      "es": {
+        "slang": "Clickbait polémico / Provocar para llamar la atención",
+        "desc": "Término gamer que pasó a internet para referirse a crear polémica a propósito por visitas.",
+        "ex": "Ese streamer solo busca polémica para llamar la atención, ni caso."
+      },
+      "id_lang": {
+        "slang": "Cari gara-gara / Pancing amarah demi views",
+        "desc": "Berasal dari istilah game, aksi memancing kemarahan netizen sengaja demi konten viral.",
+        "ex": "YouTuber itu cuma mancing amarah netizen biar views naik, jangan diklik!"
+      }
+    },
+    {
+      "id": 218,
+      "word": "현타",
+      "pronunciation": "[현타]",
+      "part_of_speech": "명사",
+      "chosung": "ㅎㅌ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 세대)",
+      "short_def": "'현실 자각 타임'의 줄임말로, 헛된 환상이나 과몰입에서 깨어나 냉혹한 현실을 자각하고 허탈해지는 순간.",
+      "origin": "원래 서브컬처 은어 '현자 타임'에서 방송 심의 및 대중화를 거쳐 '현실 자각 타임'으로 순화되어 전 국민적 단어가 됨.",
+      "examples": [
+        "A: 밤새 덕질하고 새벽 5시에 방바닥 청소하다가 갑자기 현타 왔어...\nB: ㅋㅋㅋ 자고 일어나면 다시 정상으로 돌아올 거야."
+      ],
+      "tags": [
+        "허탈",
+        "현실자각",
+        "멘붕",
+        "일상"
+      ],
+      "likes": 8100,
+      "dislikes": 40,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "허탈감, 현실을 직시하는 순간, 공허함",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Reality check / Post-binge clarity / Instant regret",
+        "desc": "Short for 'Reality Realization Time', the sudden cold emptiness when illusion fades and reality hits.",
+        "ex": "Spent all night binging videos until 5 AM, then sudden reality check hit me."
+      },
+      "ja": {
+        "slang": "賢者タイム / 現実逃避終了の虚無感",
+        "desc": "「現実自覚タイム」の略。我に返った瞬間に押し寄せる強烈な虚無感や我に返る瞬間。",
+        "ex": "朝まで推し活して散らかった部屋見て急に賢者タイムきた…"
+      },
+      "vi": {
+        "slang": "Giật mình tỉnh mộng / Tỉnh ngộ đắng cay",
+        "desc": "Viết tắt của 'Thời điểm thức tỉnh thực tế', khoảnh khắc hụt hẫng khi nhận ra thực tại phũ phàng.",
+        "ex": "Cày phim thâu đêm đến 5h sáng xong tự nhiên giật mình tỉnh mộng thấy trống rỗng."
+      },
+      "es": {
+        "slang": "Golpe de realidad / Momento de lucidez amarga",
+        "desc": "Abreviatura de 'momento de volver a la realidad', ese bajón cuando se disipa la euforia.",
+        "ex": "Estuve toda la noche viendo series hasta las 5 y de pronto me dio un golpe de realidad tremendo."
+      },
+      "id_lang": {
+        "slang": "Ketampar realita / Sadar kenyataan",
+        "desc": "Singkatan dari momen sadar kenyataan, rasa hampa tiba-tiba saat tersadar dari khayalan.",
+        "ex": "Ngegame semalaman pas liat jam 5 subuh langsung ketampar realita dan nyesel."
+      }
+    },
+    {
+      "id": 219,
+      "word": "이생망",
+      "pronunciation": "[이생망]",
+      "part_of_speech": "명사 / 감탄사",
+      "chosung": "ㅇㅅㅁ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (청년 세대)",
+      "short_def": "‘이번 생은 망했다’의 머리글자 축약어. 뜻대로 되지 않는 현실 앞에서 체념과 유머를 섞어 내뱉는 청년들의 자조적 한탄.",
+      "origin": "취업난, 부동산 폭등 속에서 2010년대 중후반 N포 세대 청년들이 절망을 유쾌한 블랙코미디로 승화하며 대유행.",
+      "examples": [
+        "A: 나 이번 학점도 학사경고 각인데 어쩌냐?\nB: 괜찮아, 어차피 이생망이야 다음 생을 노려보자!"
+      ],
+      "tags": [
+        "블랙유머",
+        "자조",
+        "청년현실",
+        "체념"
+      ],
+      "likes": 6900,
+      "dislikes": 80,
+      "toxicity_level": 1,
+      "standard_korean_mapping": "이번 생은 글렀다, 망연자실한 자조",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "FML / This life is ruined / Better luck next life",
+        "desc": "Acronym for 'This lifetime is completely ruined', a dark comedic surrender in the face of tough reality.",
+        "ex": "Failed another semester? Oh well, FML, let's aim for the next reincarnation."
+      },
+      "ja": {
+        "slang": "今世は終了 / 人生オワタ",
+        "desc": "「今回の人生は詰んだ」の略。厳しい現実に直面した若者たちが使うブラックユーモア自虐語。",
+        "ex": "また留年決定だわ。いいよ、今世は終了、来世に期待しよ！"
+      },
+      "vi": {
+        "slang": "Kiếp này coi như bỏ / Đầu thai làm lại",
+        "desc": "Viết tắt của 'Kiếp này coi như toang', câu nói đùa cay đắng khi mọi chuyện vượt tầm kiểm soát.",
+        "ex": "Lại trượt kỳ thi nữa rồi, thôi kiếp này coi như bỏ, kiếp sau tính tiếp!"
+      },
+      "es": {
+        "slang": "Esta vida ya no tiene arreglo / Reiniciar en la otra vida",
+        "desc": "Acrónimo humorístico que significa 'Esta vida ya está perdida, mejor renacer en la próxima'.",
+        "ex": "¿Volviste a reprobar el año? Bueno, esta vida ya está perdida, ¡a probar en la siguiente!"
+      },
+      "id_lang": {
+        "slang": "Hidup kali ini gagal / Reinkarnasi aja",
+        "desc": "Singkatan dari 'hidup kali ini udah ambyar', ungkapan pasrah penuh tawa sarkastik.",
+        "ex": "Gagal tes lagi? Ya udah hidup kali ini gagal, nunggu reinkarnasi aja wkwk."
+      }
+    },
+    {
+      "id": 220,
+      "word": "소확행",
+      "pronunciation": "[소화캥]",
+      "part_of_speech": "명사",
+      "chosung": "ㅅㅎㅎ",
+      "era": "smartphone",
+      "era_name": "2. 📱 국민 유행어 (스마트폰/카톡)",
+      "era_period": "2010s",
+      "generation": "후기 밀레니얼 (MZ 힐링 세대)",
+      "short_def": "‘소소하지만 확실한 행복’의 줄임말. 거대한 성공 대신 퇴근길 갓 구운 빵 한 조각처럼 일상 속 작은 만족을 추구하는 가치관.",
+      "origin": "소설가 무라카미 하루키의 수필집에 등장한 단어로, 2018년 전후 한국 사회의 힐링과 라이프스타일을 대표하는 키워드로 폭발함.",
+      "examples": [
+        "A: 금요일 퇴근하고 샤워한 뒤 시원한 맥주 한 캔 마시는 게 내 인생의 소확행이야.\nB: 크~ 그게 진짜 살아가는 행복이지!"
+      ],
+      "tags": [
+        "행복",
+        "힐링",
+        "무라카미하루키",
+        "퇴근길"
+      ],
+      "likes": 8800,
+      "dislikes": 15,
+      "toxicity_level": 0,
+      "standard_korean_mapping": "작지만 소중한 행복, 일상의 안식",
+      "trend_status": "LEGEND",
+      "en": {
+        "slang": "Small but certain happiness / Simple joys of life",
+        "desc": "Originated from Haruki Murakami, referring to finding deep joy in tiny daily pleasures like cold beer after work.",
+        "ex": "An ice-cold beer after Friday work is my small but certain happiness."
+      },
+      "ja": {
+        "slang": "小確幸 (しょうかっこう) / ささやかで確かな幸せ",
+        "desc": "村上春樹のエッセイ由来。大金や成功ではなく、日常の些細で確実な幸福を愛でる言葉。",
+        "ex": "金曜の仕事終わりの冷たいビール一杯、これが私の小確幸だよ。"
+      },
+      "vi": {
+        "slang": "Hạnh phúc nhỏ bé nhưng chắc chắn",
+        "desc": "Bắt nguồn từ Haruki Murakami, chỉ niềm vui giản dị đời thường như nhâm nhi cốc bia sau giờ làm.",
+        "ex": "Tan làm về tắm rửa rồi uống một lon bia lạnh là niềm hạnh phúc nhỏ nhoi nhưng viên mãn nhất!"
+      },
+      "es": {
+        "slang": "Pequeñas grandes felicidades / Placeres cotidianos",
+        "desc": "Inspirado en Haruki Murakami, disfrutar de alegrías sencillas y seguras del día a día.",
+        "ex": "Una cerveza helada al salir del curro un viernes es mi pequeña gran felicidad."
+      },
+      "id_lang": {
+        "slang": "Bahagia sederhana / Momen healing kecil",
+        "desc": "Terinspirasi dari Haruki Murakami, kebahagiaan kecil namun pasti dalam kehidupan sehari-hari.",
+        "ex": "Pulang kerja minum kopi hangat sambil denger musik adalah bahagia sederhana gue."
+      }
+    },
     {
       "id": 1,
       "word": "긁히다",
@@ -50,7 +2154,11 @@
         "slang": "Kena mental / Tersinggung berat",
         "desc": "Kondisi tersinggung atau emosi ketika seseorang menyentuh titik sensitif atau fakta yang menyakitkan.",
         "ex": "A: Kok mukanya langsung jutek? B: Cieee langsung kena mental ya haha."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 2,
@@ -98,7 +2206,11 @@
         "slang": "Mental baja / Pantang menyerah",
         "desc": "Yang paling penting adalah hati yang tak terpatahkan dalam situasi tersulit sekalipun.",
         "ex": "Ujian hidup boleh berat, tapi yang penting mental baja tetap jalan terus!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 3,
@@ -146,7 +2258,11 @@
         "slang": "Hater maksa / Apes beruntun",
         "desc": "Mencela tanpa alasan jelas, atau rentetan kesialan aneh yang terus menimpa bertubi-tubi.",
         "ex": "Baru keluar rumah langsung hujan badai, dunia kayak sengaja benci banget sama gue."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 4,
@@ -194,7 +2310,11 @@
         "slang": "Peka & Sat-set / Cerdas beres",
         "desc": "Mengerjakan sesuatu dengan rapi, cepat, dan penuh inisiatif tanpa harus disuruh berkali-kali.",
         "ex": "Keren banget kerjaannya, sat-set langsung beres tanpa banyak tanya!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 5,
@@ -242,7 +2362,11 @@
         "slang": "Lagi gacor / Menyala abangkuh",
         "desc": "Pujian luar biasa saat performa, penampilan, atau kemampuan seseorang sedang di puncak terbaiknya.",
         "ex": "Wah gila, codingan lu hari ini lagi gacor banget! Menyala abangkuh!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 6,
@@ -290,7 +2414,11 @@
         "slang": "Si pemalas search / Maunya disuapin",
         "desc": "Orang yang malas mencari info sendiri di Google dan cuma mengandalkan orang lain menyuapi info dasar.",
         "ex": "Google gratis woi, jangan malas banget nanya hal yang ada di halaman depan!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 7,
@@ -338,7 +2466,11 @@
         "slang": "Kafe estetik / Tempat nongkrong cozy",
         "desc": "Kafe dengan suasana cantik, pencahayaan bagus, dan desain interior yang sangat Instagramable.",
         "ex": "Kemarin nongkrong di kafe estetik baru, fotonya dapet angle cakep banget!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 8,
@@ -386,7 +2518,11 @@
         "slang": "Hidup produktif pol / Gaya hidup panutan",
         "desc": "Pola hidup yang sangat tertata, produktif, disiplin bangun pagi dan mengembangkan diri.",
         "ex": "Mulai besok bangun subuh, jogging, belajar skill baru, pokoknya hidup produktif pol!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 9,
@@ -434,7 +2570,11 @@
         "slang": "Mindset Lucky Vicky / Selalu ada hikmah",
         "desc": "Mengubah kejadian apes menjadi keberuntungan luar biasa dengan pola pikir super positif.",
         "ex": "Antrean habis pas giliran gue, tapi jadinya dapet roti baru yang anget! Beneran Lucky Vicky!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 10,
@@ -482,7 +2622,11 @@
         "slang": "Vibe idaman / Kiblat gaya",
         "desc": "Gaya visual, estetika, atau aura yang ingin dicapai dan dijadikan inspirasi.",
         "ex": "Vibe idaman gue tahun ini adalah street fashion minimalis ala Seoul."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 11,
@@ -530,7 +2674,11 @@
         "slang": "Malah makin mantap / Hikmah tersembunyi",
         "desc": "Menganggap kegagalan rencana awal justru membawa hal yang jauh lebih menguntungkan.",
         "ex": "Hujan bikin batal jalan? Ya udah streaming seharian di rumah, malah makin mantap!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 12,
@@ -578,7 +2726,11 @@
         "slang": "Ada yang nodongin pisau ke leher lu? / Risiko sendiri",
         "desc": "Sentilan pedas buat orang yang suka mengeluh padahal itu pilihannya sendiri secara sukarela.",
         "ex": "Lu sendiri yang milih gajinya gede walau lembur, emang ada yang nodongin pisau ke lu?"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 13,
@@ -626,7 +2778,11 @@
         "slang": "Garing berulang / Kebangetan lebay",
         "desc": "Mengulang lelucon atau tingkah laku secara berlebihan sampai bikin suasana jadi canggung dan membosankan.",
         "ex": "Sekali dua kali lucu bro, kalau diulang terus mah udah garing kebangetan."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 14,
@@ -674,7 +2830,11 @@
         "slang": "Senjata makan tuan / Ulah sendiri",
         "desc": "Menanggung penderitaan atau kerepotan akibat kecerobohan atau keputusan diri sendiri.",
         "ex": "Nunda-nunda tugas sampai mepet deadline terus begadang, murni ulah sendiri ini mah."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 15,
@@ -722,7 +2882,11 @@
         "slang": "Bikin kesel tapi kocak / Muka ngeselin",
         "desc": "Rasa jengkel bercampur geli melihat tingkah seseorang yang sok polos tapi sangat memancing emosi.",
         "ex": "Mukanya songong banget pas bilang 'hoki doang dapet nilai 100', bener-bener bikin kesel!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 16,
@@ -770,7 +2934,11 @@
         "slang": "Terus kenapa? Nonton TV aja sana",
         "desc": "Kalimat balasan tengil khas anak-anak untuk membungkam omelan orang lain secara cuek.",
         "ex": "'Beresin kamar lu!' - 'Terus kenapa? Sana nonton TV aja gih!'"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 17,
@@ -818,7 +2986,11 @@
         "slang": "Rekomendasi makan siang / Makan apa nih?",
         "desc": "Singkatan untuk meminta rekomendasi menu makan siang kepada teman saat bingung memilih.",
         "ex": "Lagi buntu nih, ada rekomendasi makan siang yang seger-seger gak?"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 18,
@@ -866,7 +3038,11 @@
         "slang": "Auto ngiler / Bikin mupeng",
         "desc": "Ekspresi ketika melihat makanan lezat atau hal seru yang langsung membuat air liur menetes.",
         "ex": "Lihat keju lumer di atas tteokbokki langsung auto ngiler, pesan sekarang juga!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 19,
@@ -914,7 +3090,11 @@
         "slang": "Kunci di kalender / Masuk jadwal",
         "desc": "Memasukkan jadwal penting ke aplikasi kalender HP agar pasti terlaksana dan tidak bentrok.",
         "ex": "Jangan lupa kumpul Jumat depan ya! Udah gue kunci di kalender nih."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 20,
@@ -962,7 +3142,11 @@
         "slang": "Ikut selera / Co-sign beli samaan",
         "desc": "Tren membeli atau mengikuti gaya seseorang secara persis karena percaya pada seleranya.",
         "ex": "Tas yang dipakai temen gue keren banget, langsung ikut beli samaan tanpa mikir."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 21,
@@ -1010,7 +3194,11 @@
         "slang": "Besok ngantor lagi / Derita buruh korporat",
         "desc": "Keluhan khas pekerja di Minggu malam saat menyadari libur berakhir dan besok harus kembali bekerja.",
         "ex": "Cepet banget weekend lewat, besok udah harus ngantor lagi hadap laptop."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 22,
@@ -1058,7 +3246,11 @@
         "slang": "Gue banget / Tipe idaman",
         "desc": "Pujian saat menemukan barang, gaya pakaian, atau orang yang benar-benar pas dengan selera pribadi.",
         "ex": "Jaket vintage ini potongannya beneran gue banget, langsung bungkus!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 23,
@@ -1106,7 +3298,11 @@
         "slang": "Sesi Q&A / Tanya apa aja",
         "desc": "Fitur stiker tanya jawab di Instagram story untuk berinteraksi bebas dengan pengikut.",
         "ex": "Lagi gabut buka sesi tanya apa aja di IG, ternyata rame banget yang kepo!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 24,
@@ -1154,7 +3350,11 @@
         "slang": "Canda deng / Cuma becanda",
         "desc": "Kalimat penutup setelah melempar gombalan atau candaan berlebihan biar gak canggung.",
         "ex": "Cakep amat lu hari ini udah kayak artis Korea... canda deng haha!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 25,
@@ -1202,7 +3402,11 @@
         "slang": "Kode Rahasia 'Saranghae' Terbalik",
         "desc": "Kode cinta rahasia di mana kata 'Saranghae' (Aku cinta kamu) jika dibalik terbaca seperti H워얼V.",
         "ex": "Balik layar HP lu dan baca ini: H워얼V (Artinya cinta kamu lho!)"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 26,
@@ -1250,7 +3454,11 @@
         "slang": "Jodoh alami / Anti kencan buta",
         "desc": "Lebih menyukai cinta yang tumbuh secara organik dari lingkungan hobi atau kerja daripada kencan buta.",
         "ex": "Gue lebih suka jodoh yang ketemu alami di komunitas daripada dikenalin orang lain."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 27,
@@ -1298,7 +3506,11 @@
         "slang": "Tergantung orangnya / Beda-beda tiap orang",
         "desc": "Menyatakan bahwa pengalaman atau pendapat sangat bervariasi tergantung masing-masing individu.",
         "ex": "Kerja di sana enak gak? Wah itu tergantung orangnya dan timnya masing-masing."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 28,
@@ -1346,7 +3558,11 @@
         "slang": "Info gak penting tapi seru / Kebanyakan info",
         "desc": "Membagikan detail acak yang sepele tentang diri sendiri untuk sekadar mencairkan suasana.",
         "ex": "TMI hari ini: Gue baru sadar kaos kaki gue belang sebelah haha."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 29,
@@ -1394,7 +3610,11 @@
         "slang": "Mode santai / Ngomong lu-gue",
         "desc": "Kesepakatan untuk berhenti memakai bahasa formal dan mulai berbicara santai akrab di media sosial.",
         "ex": "Udah sering komenan bareng, yuk ngobrol santai lu-gue aja biar makin akrab!"
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     },
     {
       "id": 30,
@@ -1442,7 +3662,11 @@
         "slang": "Bahagia sederhana / Sukacita kecil",
         "desc": "Kebahagiaan kecil tapi pasti yang dirasakan dari momen-momen sederhana sehari-hari.",
         "ex": "Makan jajanan anget sambil jalan pulang kantor, bahagia sederhana banget rasanya."
-      }
+      },
+      "era": "shorts",
+      "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+      "era_period": "2020s~2026",
+      "generation": "Z세대 & 알파세대"
     }
   ]
 }
