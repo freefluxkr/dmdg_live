@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <script>
+    // malssam.com 도메인으로 유입 시 말쌈 서비스로 즉시 전환 (주소창 도메인 유지)
+    if (window.location.hostname === 'malssam.com' || window.location.hostname === 'www.malssam.com') {
+      window.location.replace('./malssam/' + window.location.search + window.location.hash);
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta name="apple-mobile-web-app-capable" content="yes">
