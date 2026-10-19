@@ -7427,11 +7427,29 @@
     function switchEra(era) {
       currentEra = era;
       document.querySelectorAll('.era-tab-btn').forEach(b => b.classList.remove('active'));
-      if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-      }
 
       const infoBox = document.getElementById('eraInfoContent');
+
+      if (era === 'kakao') {
+        const kakaoTab = document.getElementById('tabKakaoBtn');
+        if (kakaoTab) kakaoTab.classList.add('active');
+        if (infoBox) {
+          infoBox.innerHTML = `<span>💬 <strong>4. 실시간 카톡 맥락 판독소 (BEST 10선 & 유저 의뢰)</strong>: '영ㅋㅋ', 'H워얼V', '네.' 마침표 등 헷갈리는 메신저 답장의 속뜻과 뉘앙스를 집단지성으로 실시간 판독합니다.</span><button onclick="openKakaoModal()" class="btn-kakao-request" style="font-size:0.75rem; padding:4px 12px; height:auto; background:linear-gradient(135deg, #eab308, #ca8a04); color:#000; font-weight:800; border-radius:8px; border:none; cursor:pointer; margin-left:8px; white-space:nowrap;">+ 내 카톡 판독 의뢰</button>`;
+        }
+        renderKakaoFeed();
+        return;
+      }
+
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+      } else {
+        const buttons = document.querySelectorAll('.era-tab-btn');
+        if (era === 'all' && buttons[0]) buttons[0].classList.add('active');
+        if (era === 'latte' && buttons[1]) buttons[1].classList.add('active');
+        if (era === 'smartphone' && buttons[2]) buttons[2].classList.add('active');
+        if (era === 'shorts' && buttons[3]) buttons[3].classList.add('active');
+      }
+
       if (era === 'latte') {
         infoBox.innerHTML = `<span>📟 <strong>1. 라떼 추억 (1990~2000s)</strong>: 삐삐 번호 암호, 하이텔·천리안 채팅, 버디버디, 싸이월드 미니홈피 시절의 낭만과 원조 레트로 감성</span><span style="color:#38bdf8; font-weight:800; font-size:0.75rem;">X세대 & 초기 밀레니얼</span>`;
       } else if (era === 'smartphone') {
@@ -7439,7 +7457,7 @@
       } else if (era === 'shorts') {
         infoBox.innerHTML = `<span>⚡ <strong>3. 요즘 1020 밈 (2020s~2026)</strong>: 유튜브 쇼츠, 인스타 릴스, 틱톡 알고리즘을 타고 빛의 속도로 번지는 현대 1020 Z·알파세대의 숏폼 밈</span><span style="color:#fb7185; font-weight:800; font-size:0.75rem;">Z세대 & 알파세대</span>`;
       } else {
-        infoBox.innerHTML = `<span>✨ <strong>전체 70선 아카이브</strong>: 1990년대 PC통신부터 2026년 최신 숏폼 밈까지 전 시대를 한눈에 탐색합니다.</span><span style="color:#facc15; font-weight:800; font-size:0.75rem;">총 ${words.length}개 표제어 수록</span>`;
+        infoBox.innerHTML = `<span>✨ <strong>전체 100선 아카이브</strong>: 1990년대 PC통신부터 2026년 최신 숏폼 밈까지 전 시대를 한눈에 탐색합니다.</span><span style="color:#facc15; font-weight:800; font-size:0.75rem;">총 ${words.length}개 표제어 수록</span>`;
       }
 
       applyFilterAndRender();
@@ -7545,11 +7563,15 @@
       const qChosung = getChosung(q);
 
       if (!q) {
-        applyFilterAndRender();
+        if (currentEra === 'kakao') {
+          renderKakaoFeed();
+        } else {
+          applyFilterAndRender();
+        }
         return;
       }
 
-      let pool = (currentEra === 'all') ? words : words.filter(w => w.era === currentEra);
+      let pool = (currentEra === 'all' || currentEra === 'kakao') ? words : words.filter(w => w.era === currentEra);
 
       const filtered = pool.filter(w => {
         const wordMatch = w.word.toLowerCase().includes(q);
@@ -7579,7 +7601,11 @@
       currentFilter = type;
       document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
       if (event && event.target) event.target.classList.add('active');
-      applyFilterAndRender();
+      if (currentEra === 'kakao') {
+        renderKakaoFeed();
+      } else {
+        applyFilterAndRender();
+      }
     }
 
     
@@ -7752,12 +7778,26 @@
       const elBarA = document.getElementById('barA_' + cardId);
       const elBarB = document.getElementById('barB_' + cardId);
       
-      if (choice === 'A') {
-        elPctA.innerText = parseInt(elPctA.innerText) + 1 + '% (내 선택)';
-        elBarA.style.width = (parseInt(elBarA.style.width) + 1) + '%';
-      } else {
-        elPctB.innerText = parseInt(elPctB.innerText) + 1 + '% (내 선택)';
-        elBarB.style.width = (parseInt(elBarB.style.width) + 1) + '%';
+      if (choice === 'A' && elPctA && elBarA) {
+        let curVal = parseInt(elPctA.innerText) || 50;
+        let newVal = Math.min(99, curVal + 1);
+        elPctA.innerText = newVal + '% (내 선택)';
+        elBarA.style.width = newVal + '%';
+        if (elPctB && elBarB) {
+          let bVal = Math.max(1, 100 - newVal);
+          elPctB.innerText = bVal + '%';
+          elBarB.style.width = bVal + '%';
+        }
+      } else if (choice === 'B' && elPctB && elBarB) {
+        let curVal = parseInt(elPctB.innerText) || 50;
+        let newVal = Math.min(99, curVal + 1);
+        elPctB.innerText = newVal + '% (내 선택)';
+        elBarB.style.width = newVal + '%';
+        if (elPctA && elBarA) {
+          let aVal = Math.max(1, 100 - newVal);
+          elPctA.innerText = aVal + '%';
+          elBarA.style.width = aVal + '%';
+        }
       }
     }
 
@@ -7806,13 +7846,24 @@
     function renderKakaoFeed() {
       const container = document.getElementById('wordsContainer');
       const userCards = JSON.parse(localStorage.getItem('malssam_kakao_user_cards') || '[]');
-      const allKakao = [...userCards, ...KAKAO_SEED_CARDS];
+      let allKakao = [...userCards, ...KAKAO_SEED_CARDS];
 
-      document.getElementById('feedTitleText').innerText = '실시간 카톡 맥락 판독소';
+      if (currentFilter === 'hot') {
+        allKakao.sort((a, b) => (b.votes || 0) - (a.votes || 0));
+      }
+
+      document.getElementById('feedTitleText').innerText = '💬 실시간 카톡 맥락 판독소 BEST 10선';
       document.getElementById('feedCountBadge').innerText = allKakao.length + '개 안건';
 
       let html = '';
       allKakao.forEach(item => {
+        const key = 'voted_' + item.id;
+        const myVote = localStorage.getItem(key);
+        let pctTextA = item.pctA + '%';
+        let pctTextB = item.pctB + '%';
+        if (myVote === 'A') pctTextA += ' (내 선택)';
+        if (myVote === 'B') pctTextB += ' (내 선택)';
+
         html += `
           <div class="kakao-card" id="card_${item.id}">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
@@ -7841,7 +7892,7 @@
               <button class="live-vote-btn" onclick="voteKakao('${item.id}', 'A')">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                   <span style="font-size:0.88rem; font-weight:700; color:#fff;">🅰️ ${item.optA}</span>
-                  <span id="pctA_${item.id}" style="color:#f43f5e; font-weight:800;">${item.pctA}%</span>
+                  <span id="pctA_${item.id}" style="color:#f43f5e; font-weight:800;">${pctTextA}</span>
                 </div>
                 <div class="live-vote-gauge-wrap">
                   <div class="live-vote-gauge gauge-a" id="barA_${item.id}" style="width:${item.pctA}%;"></div>
@@ -7851,7 +7902,7 @@
               <button class="live-vote-btn" onclick="voteKakao('${item.id}', 'B')">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                   <span style="font-size:0.88rem; font-weight:700; color:#fff;">🅱️ ${item.optB}</span>
-                  <span id="pctB_${item.id}" style="color:#38bdf8; font-weight:800;">${item.pctB}%</span>
+                  <span id="pctB_${item.id}" style="color:#38bdf8; font-weight:800;">${pctTextB}</span>
                 </div>
                 <div class="live-vote-gauge-wrap">
                   <div class="live-vote-gauge gauge-b" id="barB_${item.id}" style="width:${item.pctB}%;"></div>
@@ -7874,7 +7925,7 @@
         pool.sort((a, b) => b.id - a.id);
       }
 
-      let eraLabel = "전체 신조어 70선";
+      let eraLabel = `전체 신조어 ${words.length}선`;
       if (currentEra === 'latte') eraLabel = "1. 📟 라떼 추억 (1990~2000s)";
       if (currentEra === 'smartphone') eraLabel = "2. 📱 국민 유행어 (2010s)";
       if (currentEra === 'shorts') eraLabel = "3. ⚡ 요즘 1020 밈 (2020s~2026)";
