@@ -164,8 +164,9 @@
 4. **마지막 확인 단계 (사장님 작업)**:
    * [포트원 관리자 콘솔(https://admin.portone.io)](https://admin.portone.io/) -> [결제 연동] -> [채널 관리]에서 카카오페이 / 토스페이먼츠 심사 승인 상태 확인 및 기본 채널 활성화.
    * 심사 승인 즉시 고객 결제 금액이 사장님 사업자 통장으로 자동 입금(D+3~7일)됩니다!
-5. **PayPal 연동**:
-   * [PayPal 비즈니스(https://www.paypal.com/kr/business)](https://www.paypal.com/kr/business) 개발자 콘솔에서 `Client ID` 발급 시 코드 교체로 즉시 글로벌 달러 결제 가동.
+5. **PayPal 글로벌 달러 결제 연동 완료 (기존 발급 상용 Client ID 탑재)**:
+   * 대표님께서 기 발급받으신 페이팔 비즈니스 계정(`dmdg.official@gmail.com`)의 정식 Client ID (`AaYtg54hxqwI7fn87ym2M28kTDOl7NQ1RZJUjdX0tIutj048JX2TovDkCWytSy8K-B9lIpcf7_IHDA-c`)를 `index.html`에 교체 탑재 완료.
+   * 전 세계 5개국(미국/일본/베트남/인도네시아/스페인) 유저가 $0.99 USD PayPal 결제 시 실시간 결제 승인 처리 연동 완료.
 
 ---
 
