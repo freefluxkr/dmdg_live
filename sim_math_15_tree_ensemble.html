@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 15: 의사결정 트리 & 앙상블(배깅·부스팅) 시뮬레이터</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --primary: #38bdf8;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    .header { max-width: 1200px; margin: 0 auto 24px; text-align: center; }
+    .header h1 { font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .header p { color: var(--text-muted); font-size: 15px; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+    }
+    canvas {
+      width: 100%;
+      height: 480px;
+      background: #090d16;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .tab-group { display: flex; gap: 8px; margin-bottom: 16px; }
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid var(--border);
+      background: #1e293b;
+      color: var(--text-muted);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #0f172a;
+      border-color: var(--primary);
+    }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    button.action-btn {
+      background: #334155;
+      color: var(--text);
+      border: none;
+      padding: 9px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button.action-btn:hover { background: #475569; }
+    button.action-btn.primary { background: var(--primary); color: #0f172a; }
+    .slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    input[type=range] { flex: 1; margin: 0 12px; accent-color: var(--primary); }
+    .metric-badge {
+      display: flex;
+      justify-content: space-between;
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🌲 Day 15: 의사결정 트리 & 앙상블(배깅·부스팅) 시뮬레이터</h1>
+    <p>Depth-wise(깊이 우선: XGBoost) vs Leaf-wise(잎 우선: LightGBM) 분할 전략과 랜덤 포레스트(배깅) 및 그레디언트 부스팅의 앙상블 원리를 체감하세요.</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="tab-group">
+        <div class="tab-btn active" id="tabTree" onclick="setMode('tree')">🌳 트리 분할 방식 (Depth vs Leaf)</div>
+        <div class="tab-btn" id="tabEnsemble" onclick="setMode('ensemble')">🤝 앙상블 구조 (Bagging vs Boosting)</div>
+      </div>
+      <canvas id="treeCanvas"></canvas>
+      <div class="btn-group">
+        <button class="action-btn primary" onclick="stepBuild()">🌱 1단계 분할 추가 (Split)</button>
+        <button class="action-btn" onclick="resetSim()">🔄 초기화</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="card">
+        <div class="card-title">⚙️ 알고리즘 아키텍처 선택</div>
+        <div id="treeOptions">
+          <label style="display:block; margin-bottom:10px; font-size:14px; cursor:pointer;">
+            <input type="radio" name="splitType" value="depth" checked onchange="onTypeChange()">
+            <strong style="color:var(--primary);">Depth-wise (대칭 분할)</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-left:20px;">레벨별로 균형 있게 성장 (XGBoost 기본형 / 과적합 억제)</p>
+          </label>
+          <label style="display:block; margin-bottom:14px; font-size:14px; cursor:pointer;">
+            <input type="radio" name="splitType" value="leaf" onchange="onTypeChange()">
+            <strong style="color:var(--accent);">Leaf-wise (비대칭 최우선 분할)</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-left:20px;">손실 감소가 가장 큰 잎을 집중 분할 (LightGBM / 초고속)</p>
+          </label>
+        </div>
+
+        <div id="ensembleOptions" style="display:none;">
+          <label style="display:block; margin-bottom:10px; font-size:14px; cursor:pointer;">
+            <input type="radio" name="ensType" value="bagging" checked onchange="onTypeChange()">
+            <strong style="color:var(--primary);">배깅 (Bagging: Random Forest)</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-left:20px;">독립된 여러 트리가 병렬로 다수결 투표 (분산 감소)</p>
+          </label>
+          <label style="display:block; margin-bottom:14px; font-size:14px; cursor:pointer;">
+            <input type="radio" name="ensType" value="boosting" onchange="onTypeChange()">
+            <strong style="color:var(--warning);">부스팅 (Boosting: Gradient Boosting)</strong>
+            <p style="font-size:12px; color:var(--text-muted); margin-left:20px;">이전 트리의 잔차(Residual) 오차를 다음 트리가 순차 보정</p>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📊 실시간 성능 및 손실 지표</div>
+        <div class="metric-badge">
+          <span>생성된 트리 노드 수:</span>
+          <span id="nodeCountVal" style="font-weight:bold; color:var(--primary);">1개</span>
+        </div>
+        <div class="metric-badge">
+          <span>최대 깊이 (Max Depth):</span>
+          <span id="depthVal" style="font-weight:bold; color:var(--text);">0</span>
+        </div>
+        <div class="metric-badge">
+          <span>잔차 오차 (Residual Loss):</span>
+          <span id="lossVal" style="font-weight:bold; color:var(--danger);">100.0%</span>
+        </div>
+        <div style="font-size:12.5px; color:var(--text-muted); margin-top:12px;">
+          * Leaf-wise는 동일 노드 수 대비 손실을 가장 빠르게 떨어뜨리지만, 데이터가 적으면 특정 가지로 과적합될 수 있습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('treeCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resize() {
+      width = canvas.parentElement.clientWidth - 40;
+      height = 480;
+      canvas.width = width;
+      canvas.height = height;
+      draw();
+    }
+    window.addEventListener('resize', resize);
+
+    let mode = 'tree'; // 'tree' or 'ensemble'
+    let splitType = 'depth'; // 'depth' or 'leaf'
+    let ensType = 'bagging'; // 'bagging' or 'boosting'
+    let step = 0;
+
+    function setMode(m) {
+      mode = m;
+      document.getElementById('tabTree').className = 'tab-btn ' + (m === 'tree' ? 'active' : '');
+      document.getElementById('tabEnsemble').className = 'tab-btn ' + (m === 'ensemble' ? 'active' : '');
+      document.getElementById('treeOptions').style.display = m === 'tree' ? 'block' : 'none';
+      document.getElementById('ensembleOptions').style.display = m === 'ensemble' ? 'block' : 'none';
+      resetSim();
+    }
+
+    function onTypeChange() {
+      if (mode === 'tree') {
+        const radios = document.getElementsByName('splitType');
+        for (let r of radios) { if (r.checked) splitType = r.value; }
+      } else {
+        const radios = document.getElementsByName('ensType');
+        for (let r of radios) { if (r.checked) ensType = r.value; }
+      }
+      resetSim();
+    }
+
+    function resetSim() {
+      step = 0;
+      updateMetrics();
+      draw();
+    }
+
+    function stepBuild() {
+      if (step < 5) {
+        step++;
+        updateMetrics();
+        draw();
+      }
+    }
+
+    function updateMetrics() {
+      const nodeEl = document.getElementById('nodeCountVal');
+      const depthEl = document.getElementById('depthVal');
+      const lossEl = document.getElementById('lossVal');
+
+      if (mode === 'tree') {
+        if (splitType === 'depth') {
+          const nodes = [1, 3, 7, 15, 31, 63][step];
+          nodeEl.innerText = nodes + '개';
+          depthEl.innerText = step;
+          lossEl.innerText = (100 * Math.pow(0.65, step)).toFixed(1) + '%';
+        } else {
+          // Leaf-wise: 2 nodes added per step on the best leaf
+          const nodes = 1 + step * 2;
+          nodeEl.innerText = nodes + '개';
+          depthEl.innerText = Math.min(step + 1, 4);
+          lossEl.innerText = (100 * Math.pow(0.52, step)).toFixed(1) + '%'; // drops faster
+        }
+      } else {
+        nodeEl.innerText = (step + 1) + '개 트리 모형';
+        depthEl.innerText = '고정 깊이 3';
+        if (ensType === 'bagging') {
+          lossEl.innerText = (100 * Math.pow(0.72, step)).toFixed(1) + '% (분산 감소)';
+        } else {
+          lossEl.innerText = (100 * Math.pow(0.55, step)).toFixed(1) + '% (편향 감소)';
+        }
+      }
+    }
+
+    function drawNode(x, y, label, color, isLeaf = false) {
+      ctx.beginPath();
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, x, y);
+    }
+
+    function drawLine(x1, y1, x2, y2) {
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      if (mode === 'tree') {
+        // Draw Decision Tree
+        const rootX = width / 2;
+        const rootY = 70;
+
+        drawNode(rootX, rootY, 'Root', '#3b82f6');
+
+        if (splitType === 'depth') {
+          // Depth-wise symmetrical split
+          if (step >= 1) {
+            drawLine(rootX, rootY, rootX - 140, rootY + 90);
+            drawLine(rootX, rootY, rootX + 140, rootY + 90);
+            drawNode(rootX - 140, rootY + 90, 'L1', '#10b981');
+            drawNode(rootX + 140, rootY + 90, 'R1', '#10b981');
+          }
+          if (step >= 2) {
+            drawLine(rootX - 140, rootY + 90, rootX - 210, rootY + 180);
+            drawLine(rootX - 140, rootY + 90, rootX - 70, rootY + 180);
+            drawLine(rootX + 140, rootY + 90, rootX + 70, rootY + 180);
+            drawLine(rootX + 140, rootY + 90, rootX + 210, rootY + 180);
+            drawNode(rootX - 210, rootY + 180, 'L2', '#f59e0b');
+            drawNode(rootX - 70, rootY + 180, 'L2', '#f59e0b');
+            drawNode(rootX + 70, rootY + 180, 'R2', '#f59e0b');
+            drawNode(rootX + 210, rootY + 180, 'R2', '#f59e0b');
+          }
+          if (step >= 3) {
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '13px sans-serif';
+            ctx.fillText('... 하위 레벨 전체가 대칭적으로 균형 있게 확장됩니다 ...', rootX, rootY + 280);
+          }
+        } else {
+          // Leaf-wise asymmetric split (LightGBM)
+          if (step >= 1) {
+            drawLine(rootX, rootY, rootX - 120, rootY + 90);
+            drawLine(rootX, rootY, rootX + 120, rootY + 90);
+            drawNode(rootX - 120, rootY + 90, 'L1', '#10b981');
+            drawNode(rootX + 120, rootY + 90, 'Best', '#ef4444'); // Target for next split!
+          }
+          if (step >= 2) {
+            // Only split best leaf
+            const bestX = rootX + 120;
+            const bestY = rootY + 90;
+            drawLine(bestX, bestY, bestX - 60, bestY + 90);
+            drawLine(bestX, bestY, bestX + 80, bestY + 90);
+            drawNode(bestX - 60, bestY + 90, 'L2', '#f59e0b');
+            drawNode(bestX + 80, bestY + 90, 'Best', '#ef4444');
+          }
+          if (step >= 3) {
+            const nextX = rootX + 200;
+            const nextY = rootY + 180;
+            drawLine(nextX, nextY, nextX - 40, nextY + 90);
+            drawLine(nextX, nextY, nextX + 60, nextY + 90);
+            drawNode(nextX - 40, nextY + 90, 'L3', '#f59e0b');
+            drawNode(nextX + 60, nextY + 90, 'Leaf', '#10b981');
+          }
+          ctx.fillStyle = '#ef4444';
+          ctx.font = 'bold 12.5px sans-serif';
+          ctx.fillText('⚡ 손실을 가장 많이 낮추는 빨간색 잎(Best Leaf)만 집중 분할!', rootX, 420);
+        }
+      } else {
+        // Ensemble View
+        const numTrees = Math.min(step + 1, 5);
+        const spacing = width / (numTrees + 1);
+
+        if (ensType === 'bagging') {
+          // Bagging: Parallel trees + Majority voting
+          for (let i = 0; i < numTrees; i++) {
+            const tx = spacing * (i + 1);
+            ctx.fillStyle = '#1e293b';
+            ctx.fillRect(tx - 35, 100, 70, 100);
+            ctx.strokeStyle = '#38bdf8';
+            ctx.strokeRect(tx - 35, 100, 70, 100);
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 12px sans-serif';
+            ctx.fillText(`트리 #${i+1}`, tx, 150);
+
+            // Arrow down to vote box
+            drawLine(tx, 200, width / 2, 320);
+          }
+          // Voting box
+          ctx.fillStyle = '#065f46';
+          ctx.fillRect(width / 2 - 90, 320, 180, 55);
+          ctx.strokeStyle = '#34d399';
+          ctx.strokeRect(width / 2 - 90, 320, 180, 55);
+          ctx.fillStyle = '#fff';
+          ctx.font = 'bold 13px sans-serif';
+          ctx.fillText('🗳️ 다수결 평균 투표 (Voting)', width / 2, 350);
+        } else {
+          // Boosting: Sequential residuals
+          for (let i = 0; i < numTrees; i++) {
+            const tx = spacing * (i + 1);
+            ctx.fillStyle = '#1e293b';
+            ctx.fillRect(tx - 35, 180, 70, 90);
+            ctx.strokeStyle = '#f59e0b';
+            ctx.strokeRect(tx - 35, 180, 70, 90);
+            ctx.fillStyle = '#f59e0b';
+            ctx.font = 'bold 12px sans-serif';
+            ctx.fillText(`F_${i}(x)`, tx, 220);
+            ctx.font = '10px sans-serif';
+            ctx.fillText(i === 0 ? '기저 예측' : `잔차 #${i} 학습`, tx, 240);
+
+            if (i < numTrees - 1) {
+              // Arrow to next tree
+              drawLine(tx + 35, 225, tx + spacing - 35, 225);
+              ctx.fillStyle = '#ef4444';
+              ctx.font = 'bold 11px sans-serif';
+              ctx.fillText(`+ 잔차`, tx + spacing / 2, 215);
+            }
+          }
+          ctx.fillStyle = '#f59e0b';
+          ctx.font = 'bold 13px sans-serif';
+          ctx.fillText('🎯 앞선 트리의 오차를 다음 트리가 순차적으로 보정하여 누적 합산!', width / 2, 380);
+        }
+      }
+    }
+
+    resize();
+    resetSim();
+  </script>
+</body>
+</html>

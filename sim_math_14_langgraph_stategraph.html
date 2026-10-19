@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 14: LangGraph 상태 그래프(StateGraph) & 순환 루프 시뮬레이터</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --primary: #38bdf8;
+      --accent: #a855f7;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    .header {
+      max-width: 1200px;
+      margin: 0 auto 24px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .header p { color: var(--text-muted); font-size: 15px; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+    }
+    canvas {
+      width: 100%;
+      height: 480px;
+      background: #090d16;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    button {
+      background: var(--primary);
+      color: #0f172a;
+      border: none;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover { filter: brightness(1.1); }
+    button.btn-accent { background: var(--accent); color: #fff; }
+    button.btn-secondary { background: #334155; color: var(--text); }
+    button.btn-danger { background: rgba(248, 113, 113, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+    .state-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #38bdf8;
+      max-height: 250px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    .slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    input[type=range] { flex: 1; margin: 0 12px; accent-color: var(--primary); }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🔄 Day 14: LangGraph 상태 그래프(StateGraph) & 순환 루프 시뮬레이터</h1>
+    <p>LangGraph의 핵심 철학인 불변 State 전이, 조건부 엣지(Conditional Edge), 그리고 오류 자가 수정 순환 루프(Cycle)를 실시간으로 추적하세요.</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-title">
+        <span>🌐 StateGraph 워크플로우 뷰어</span>
+        <span id="currentStepBadge" class="badge" style="background:#334155; color:#f8fafc;">대기 중 (IDLE)</span>
+      </div>
+      <canvas id="graphCanvas"></canvas>
+      <div class="btn-group">
+        <button onclick="stepForward()">⏭️ 1단계 전진 (Step)</button>
+        <button class="btn-accent" onclick="toggleAutoRun()" id="autoBtn">▶️ 자동 실행</button>
+        <button class="btn-secondary" onclick="resetGraph()">🔄 초기화 (Reset)</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="card">
+        <div class="card-title">🎛️ 조건부 엣지 제어 매개변수</div>
+        <div class="slider-row">
+          <span style="font-size:13px;">평가 합격 기준선:</span>
+          <input type="range" id="thresholdSlider" min="50" max="95" value="75" oninput="updateThreshold()">
+          <span id="thresholdVal" style="font-weight:bold; color:var(--primary);">75점</span>
+        </div>
+        <div class="slider-row">
+          <span style="font-size:13px;">최대 재귀 한도(Recursion Limit):</span>
+          <span style="font-weight:bold; color:var(--warning);">3회</span>
+        </div>
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer; margin-top:8px;">
+          <input type="checkbox" id="failToggle" style="accent-color:var(--danger);">
+          <span>도구 실행 오류 강제 발생 (자가 반성 루프 테스트)</span>
+        </label>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📦 불변 에이전트 상태 (State Snapshot)</div>
+        <div class="state-box" id="stateJson">{}</div>
+        <div style="margin-top:10px; font-size:12px; color:var(--text-muted);">
+          * 각 노드는 직전 State를 수정하지 않고 새로운 채널 값을 추가/병합합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resize() {
+      width = canvas.parentElement.clientWidth - 40;
+      height = 480;
+      canvas.width = width;
+      canvas.height = height;
+      draw();
+    }
+    window.addEventListener('resize', resize);
+
+    const NODES = {
+      START: { x: 80, y: 240, label: '__start__', type: 'system' },
+      PLANNER: { x: 220, y: 240, label: 'Planner', type: 'agent' },
+      TOOL: { x: 380, y: 160, label: 'ToolExecutor', type: 'tool' },
+      EVAL: { x: 540, y: 240, label: 'Evaluator', type: 'eval' },
+      REFLEXION: { x: 380, y: 360, label: 'Reflexion', type: 'cycle' },
+      END: { x: 680, y: 240, label: '__end__', type: 'system' }
+    };
+
+    let currentState = {
+      query: "2026 AI 트렌드 및 멀티에이전트 아키텍처 분석",
+      step: 0,
+      activeNode: 'START',
+      confidence: 0,
+      retries: 0,
+      tool_success: true,
+      eval_score: 0,
+      history: ["__start__"]
+    };
+
+    let isAutoRunning = false;
+    let autoInterval = null;
+    let threshold = 75;
+
+    function updateThreshold() {
+      threshold = parseInt(document.getElementById('thresholdSlider').value);
+      document.getElementById('thresholdVal').innerText = threshold + '점';
+    }
+
+    function updateStateView() {
+      document.getElementById('stateJson').innerText = JSON.stringify(currentState, null, 2);
+      const badge = document.getElementById('currentStepBadge');
+      badge.innerText = `현재 노드: ${currentState.activeNode}`;
+      if (currentState.activeNode === 'END') {
+        badge.style.background = '#065f46';
+        badge.style.color = '#34d399';
+      } else if (currentState.activeNode === 'REFLEXION') {
+        badge.style.background = '#78350f';
+        badge.style.color = '#fbbf24';
+      } else {
+        badge.style.background = '#1e293b';
+        badge.style.color = '#38bdf8';
+      }
+    }
+
+    function stepForward() {
+      const forceFail = document.getElementById('failToggle').checked;
+
+      switch(currentState.activeNode) {
+        case 'START':
+          currentState.activeNode = 'PLANNER';
+          currentState.history.push('PLANNER');
+          break;
+
+        case 'PLANNER':
+          currentState.activeNode = 'TOOL';
+          currentState.history.push('TOOL');
+          break;
+
+        case 'TOOL':
+          currentState.tool_success = !forceFail;
+          currentState.activeNode = 'EVAL';
+          currentState.history.push('EVAL');
+          break;
+
+        case 'EVAL':
+          if (!currentState.tool_success) {
+            currentState.eval_score = 40;
+          } else {
+            // First run might be lower, improving on retries
+            currentState.eval_score = Math.min(95, 60 + currentState.retries * 20);
+          }
+          currentState.confidence = currentState.eval_score / 100;
+
+          // Conditional Edge Logic!
+          if (currentState.eval_score >= threshold || currentState.retries >= 3) {
+            currentState.activeNode = 'END';
+            currentState.history.push('END');
+            if (isAutoRunning) toggleAutoRun();
+          } else {
+            // Route to Reflexion cycle
+            currentState.activeNode = 'REFLEXION';
+            currentState.retries++;
+            currentState.history.push('REFLEXION');
+          }
+          break;
+
+        case 'REFLEXION':
+          // Reflexion cycles back to Planner
+          currentState.activeNode = 'PLANNER';
+          currentState.history.push('PLANNER (재시도 #' + currentState.retries + ')');
+          break;
+
+        case 'END':
+          // Finished
+          if (isAutoRunning) toggleAutoRun();
+          break;
+      }
+
+      currentState.step++;
+      updateStateView();
+      draw();
+    }
+
+    function toggleAutoRun() {
+      isAutoRunning = !isAutoRunning;
+      const btn = document.getElementById('autoBtn');
+      if (isAutoRunning) {
+        btn.innerText = '⏸️ 정지 (Pause)';
+        btn.style.background = 'var(--danger)';
+        autoInterval = setInterval(() => {
+          if (currentState.activeNode === 'END') {
+            toggleAutoRun();
+          } else {
+            stepForward();
+          }
+        }, 1200);
+      } else {
+        btn.innerText = '▶️ 자동 실행';
+        btn.style.background = 'var(--accent)';
+        clearInterval(autoInterval);
+      }
+    }
+
+    function resetGraph() {
+      if (isAutoRunning) toggleAutoRun();
+      currentState = {
+        query: "2026 AI 트렌드 및 멀티에이전트 아키텍처 분석",
+        step: 0,
+        activeNode: 'START',
+        confidence: 0,
+        retries: 0,
+        tool_success: true,
+        eval_score: 0,
+        history: ["__start__"]
+      };
+      updateStateView();
+      draw();
+    }
+
+    function drawEdge(from, to, color, isDashed = false, label = '') {
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const angle = Math.atan2(dy, dx);
+      const r = 28;
+
+      const sx = from.x + r * Math.cos(angle);
+      const sy = from.y + r * Math.sin(angle);
+      const ex = to.x - (r + 4) * Math.cos(angle);
+      const ey = to.y - (r + 4) * Math.sin(angle);
+
+      ctx.save();
+      ctx.beginPath();
+      if (isDashed) ctx.setLineDash([5, 5]);
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(ex, ey);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Arrow
+      ctx.beginPath();
+      ctx.moveTo(ex, ey);
+      ctx.lineTo(ex - 10 * Math.cos(angle - Math.PI / 6), ey - 10 * Math.sin(angle - Math.PI / 6));
+      ctx.lineTo(ex - 10 * Math.cos(angle + Math.PI / 6), ey - 10 * Math.sin(angle + Math.PI / 6));
+      ctx.fillStyle = color;
+      ctx.fill();
+
+      if (label) {
+        ctx.fillStyle = color;
+        ctx.font = '11px sans-serif';
+        ctx.fillText(label, (sx + ex) / 2, (sy + ey) / 2 - 8);
+      }
+      ctx.restore();
+    }
+
+    function drawCurvedEdge(from, to, color, label) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.5;
+      const cpX = (from.x + to.x) / 2 - 50;
+      const cpY = (from.y + to.y) / 2 + 60;
+      ctx.moveTo(from.x, from.y + 25);
+      ctx.quadraticCurveTo(cpX, cpY, to.x, to.y + 25);
+      ctx.stroke();
+
+      // Arrowhead
+      ctx.beginPath();
+      ctx.arc(to.x, to.y + 25, 4, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+
+      ctx.fillStyle = color;
+      ctx.font = 'bold 11px sans-serif';
+      ctx.fillText(label, cpX, cpY + 14);
+      ctx.restore();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Edges
+      drawEdge(NODES.START, NODES.PLANNER, '#64748b');
+      drawEdge(NODES.PLANNER, NODES.TOOL, '#38bdf8');
+      drawEdge(NODES.TOOL, NODES.EVAL, '#38bdf8');
+      
+      // Conditional Edges from EVAL
+      drawEdge(NODES.EVAL, NODES.END, '#34d399', false, `Pass (≥${threshold})`);
+      drawEdge(NODES.EVAL, NODES.REFLEXION, '#fbbf24', true, `Fail (<${threshold})`);
+      
+      // Cycle from Reflexion to Planner
+      drawCurvedEdge(NODES.REFLEXION, NODES.PLANNER, '#fbbf24', 'Cycle Feedback Loop');
+
+      // Nodes
+      for (let key in NODES) {
+        const n = NODES[key];
+        const isActive = currentState.activeNode === key;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 28, 0, Math.PI * 2);
+
+        if (isActive) {
+          ctx.fillStyle = '#38bdf8';
+          ctx.shadowColor = '#38bdf8';
+          ctx.shadowBlur = 15;
+        } else if (n.type === 'system') {
+          ctx.fillStyle = '#334155';
+          ctx.shadowBlur = 0;
+        } else if (n.type === 'cycle') {
+          ctx.fillStyle = '#78350f';
+          ctx.shadowBlur = 0;
+        } else {
+          ctx.fillStyle = '#1e293b';
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+
+        ctx.strokeStyle = isActive ? '#fff' : '#64748b';
+        ctx.lineWidth = isActive ? 3 : 1.5;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Label
+        ctx.fillStyle = isActive ? '#0f172a' : '#f8fafc';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(n.label, n.x, n.y);
+      }
+    }
+
+    resize();
+    updateStateView();
+  </script>
+</body>
+</html>
