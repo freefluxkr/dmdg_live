@@ -32,7 +32,7 @@
     html, body {
       width: 100%;
       max-width: 100vw;
-      overflow-x: hidden;
+      overflow-x: hidden !important;
       position: relative;
       margin: 0;
       padding: 0;
@@ -43,6 +43,7 @@
       display: flex;
       flex-direction: column;
       -webkit-text-size-adjust: 100%;
+      box-sizing: border-box;
     }
 
     img, svg, video, canvas {
@@ -55,18 +56,20 @@
       background: linear-gradient(90deg, #1e1b4b 0%, #312e81 35%, #0f172a 100%);
       border-bottom: 1px solid rgba(250, 204, 21, 0.25);
       color: #e0e7ff;
-      padding: 6px 14px;
-      font-size: 0.74rem;
-      line-height: 1.45;
+      padding: 6px 12px;
+      font-size: 0.72rem;
+      line-height: 1.4;
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
       width: 100%;
       box-sizing: border-box;
-      word-break: keep-all;
+      overflow: hidden;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .unesco-badge {
@@ -249,30 +252,51 @@
 
     @media (max-width: 768px) {
       header {
-        padding: 8px 12px;
+        padding: 8px 10px;
+        overflow: hidden;
       }
       .header-inner {
         flex-wrap: wrap;
         justify-content: space-between;
-        gap: 8px;
+        gap: 6px;
       }
       .brand {
         order: 1;
+        gap: 5px;
+        max-width: 55%;
+        overflow: hidden;
+      }
+      .brand-logo {
+        font-size: 1.25rem;
+      }
+      .brand-title {
+        font-size: 1.05rem;
+      }
+      .brand-sub {
+        display: none;
+      }
+      .fb-live-badge {
+        font-size: 0.62rem;
+        padding: 1px 5px;
       }
       .header-actions {
         order: 2;
-        gap: 6px;
+        gap: 5px;
+        margin-left: auto;
       }
       .global-lang-group {
         order: 3;
         width: 100%;
         justify-content: center;
         margin-top: 2px;
+        padding: 2px;
+        box-sizing: border-box;
       }
       .btn-kakao-request, .btn-add {
-        height: 30px;
-        padding: 0 8px;
-        font-size: 0.74rem;
+        height: 28px;
+        padding: 0 7px;
+        font-size: 0.72rem;
+        border-radius: 6px;
       }
     }
 
@@ -704,33 +728,26 @@
       margin: 0 auto 12px;
       padding: 0 16px;
       box-sizing: border-box;
+      overflow: hidden;
     }
 
     .era-tabs-container {
       background: rgba(17, 24, 39, 0.7);
       border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 4px;
-      display: flex;
+      padding: 6px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       gap: 4px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
       width: 100%;
       box-sizing: border-box;
     }
 
-    .era-tabs-container::-webkit-scrollbar {
-      display: none;
-    }
-
     .era-tab-btn {
-      flex: 1 1 0;
-      min-width: 0;
       background: transparent;
       border: none;
       border-radius: 10px;
-      padding: 8px 10px;
+      padding: 8px 6px;
       color: #94a3b8;
       font-size: 0.82rem;
       font-weight: 700;
@@ -738,17 +755,30 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 2px;
       transition: all 0.2s ease;
       white-space: nowrap;
       box-sizing: border-box;
+      width: 100%;
     }
 
     @media (max-width: 768px) {
+      .era-tabs-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+      }
+      .era-tab-btn:first-child {
+        grid-column: span 2;
+      }
       .era-tab-btn {
-        flex: 0 0 auto;
-        min-width: 98px;
-        padding: 8px 6px;
+        padding: 8px 4px;
+      }
+      .era-tab-btn .era-main {
+        font-size: 0.78rem;
+      }
+      .era-tab-btn .era-sub {
+        font-size: 0.65rem;
       }
     }
 
@@ -783,6 +813,7 @@
       margin: 8px auto 16px;
       padding: 0 16px;
       box-sizing: border-box;
+      overflow: hidden;
     }
 
     .era-info-content {
@@ -798,7 +829,8 @@
       flex-wrap: wrap;
       gap: 8px;
       box-sizing: border-box;
-      word-break: keep-all;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .container {
@@ -2154,6 +2186,58 @@
         <strong id="paypalAmountText" style="font-size:1.3rem; color:#facc15;">Amount: $0.99 USD</strong>
       </p>
       <div id="paypal-button-container" style="min-height: 150px;"></div>
+    </div>
+  </div>
+
+  <!-- 💬 내 카톡 맥락 판독 의뢰 모달 -->
+  <div class="modal-overlay" id="kakaoModal">
+    <div class="modal-card" style="max-width: 520px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h2 class="modal-title" style="color:#f43f5e; font-size:1.3rem; margin:0;">💬 내 카톡 맥락 판독 의뢰</h2>
+        <button type="button" onclick="closeKakaoModal()" style="background:transparent; border:none; color:#94a3b8; font-size:1.6rem; cursor:pointer; line-height:1; padding:0 4px;">&times;</button>
+      </div>
+      <p class="modal-desc" style="margin-bottom:16px;">"이 답장, 호감인가요 오타인가요?" 애매한 답장의 속뜻을 집단지성 투표로 10초 만에 판독해 드립니다.</p>
+
+      <form id="kakaoRequestForm" onsubmit="submitKakaoRequest(event)">
+        <div class="form-group">
+          <label class="form-label">상황 카테고리 <span style="color:#f43f5e;">*</span></label>
+          <select id="kakaoCat" class="form-control" style="cursor:pointer;">
+            <option value="썸 / 연애">💖 썸 / 연애 (답장의 속뜻과 그린라이트 검증)</option>
+            <option value="직장 / 비즈니스">👔 직장 / 비즈니스 (팀장·선배의 완곡어법 해독)</option>
+            <option value="친구 / 일상">☕ 친구 / 일상 (단순 오타 vs 돌려까기 판독)</option>
+            <option value="중고거래 / 당근">🥕 중고거래 / 당근 (네고 요구 대처 및 거절 화법)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">상황 요약 (제목) <span style="color:#f43f5e;">*</span></label>
+          <input type="text" id="kakaoTitle" class="form-control" placeholder="예: 약속 시간 물어봤는데 '영ㅋㅋ'라고 답장 왔어요..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">상대방의 실제 카톡 문장 <span style="color:#f43f5e;">*</span></label>
+          <textarea id="kakaoText" class="form-control" rows="3" placeholder="상대방이 보낸 실제 문구를 적어주세요. (예: 영ㅋㅋ)" required></textarea>
+          <div style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">
+            🛡️ <strong>개인정보 안심 보호</strong>: 실명, 전화번호, 상호 등은 자동으로 마스킹 처리됩니다.
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" class="form-group">
+          <div>
+            <label class="form-label">투표 선택지 🅰️</label>
+            <input type="text" id="kakaoOptA" class="form-control" placeholder="예: 단순 오타다" required>
+          </div>
+          <div>
+            <label class="form-label">투표 선택지 🅱️</label>
+            <input type="text" id="kakaoOptB" class="form-control" placeholder="예: 돌려까기 거절이다" required>
+          </div>
+        </div>
+
+        <div class="modal-actions" style="margin-top:20px;">
+          <button type="button" class="btn-cancel" onclick="closeKakaoModal()">취소</button>
+          <button type="submit" class="btn-submit" style="background:linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); color:#fff; font-weight:800;">🚀 판독 의뢰 등록하기</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -7803,10 +7887,12 @@
 
     // Kakao Modal
     function openKakaoModal() {
-      document.getElementById('kakaoModal').classList.add('active');
+      const m = document.getElementById('kakaoModal');
+      if (m) m.classList.add('active');
     }
     function closeKakaoModal() {
-      document.getElementById('kakaoModal').classList.remove('active');
+      const m = document.getElementById('kakaoModal');
+      if (m) m.classList.remove('active');
     }
 
     function submitKakaoRequest(e) {
@@ -7837,9 +7923,15 @@
       customList.unshift(customCard);
       localStorage.setItem('malssam_kakao_user_cards', JSON.stringify(customList));
 
+      const form = document.getElementById('kakaoRequestForm');
+      if (form) form.reset();
+
       closeKakaoModal();
       showToast('🎉 카톡 판독 의뢰가 등록되었습니다! 판독소 탭에서 확인하세요.');
       switchEra('kakao');
+
+      const el = document.getElementById('feedTitleText');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // Render Kakao Decoder Cards
@@ -8573,58 +8665,6 @@
       발행처: <strong>당목담글(DMDG) 스튜디오 연구 본부</strong> | 공식 도메인: https://malssam.com/
     </div>
   </div>
-  <!-- 💬 내 카톡 맥락 판독 의뢰 모달 -->
-  <div class="modal-overlay" id="kakaoModal">
-    <div class="modal-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-        <h2 class="modal-title" style="color:#f43f5e;">💬 내 카톡 맥락 판독 요청</h2>
-        <button onclick="closeKakaoModal()" style="background:transparent; border:none; color:#94a3b8; font-size:1.5rem; cursor:pointer;">&times;</button>
-      </div>
-      <p class="modal-desc">"이 답장, 호감인가요 오타인가요?" 집단지성에게 10초 만에 판독을 맡기세요.</p>
-
-      <form id="kakaoRequestForm" onsubmit="submitKakaoRequest(event)">
-        <div class="form-group">
-          <label class="form-label">상황 카테고리 <span style="color:#f43f5e;">*</span></label>
-          <select id="kakaoCat" class="form-control" style="cursor:pointer;">
-            <option value="썸 / 연애">💖 썸 / 연애 (답장의 속뜻과 그린라이트 검증)</option>
-            <option value="직장 / 비즈니스">👔 직장 / 비즈니스 (팀장·선배의 완곡어법 해독)</option>
-            <option value="친구 / 일상">☕ 친구 / 일상 (단순 오타 vs 돌려까기 판독)</option>
-            <option value="중고거래 / 당근">🥕 중고거래 / 당근 (네고 요구 대처 및 거절 화법)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">상황 제목 및 의문점 <span style="color:#f43f5e;">*</span></label>
-          <input type="text" id="kakaoTitle" class="form-control" placeholder="예: 약속 시간 물어봤는데 '영ㅋㅋ'라고 답장 왔어요..." required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">상대방의 실제 카톡 문장 <span style="color:#f43f5e;">*</span></label>
-          <textarea id="kakaoText" class="form-control" placeholder="상대방이 보낸 정확한 문구를 적어주세요. (예: 영ㅋㅋ)" required></textarea>
-          <div style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">
-            🛡️ <strong>개인정보 안심 보호</strong>: 실명, 전화번호, 상호 등은 자동으로 마스킹 처리됩니다.
-          </div>
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" class="form-group">
-          <div>
-            <label class="form-label">투표 선택지 🅰️</label>
-            <input type="text" id="kakaoOptA" class="form-control" placeholder="예: 단순 오타다" required>
-          </div>
-          <div>
-            <label class="form-label">투표 선택지 🅱️</label>
-            <input type="text" id="kakaoOptB" class="form-control" placeholder="예: 돌려까기 거절이다" required>
-          </div>
-        </div>
-
-        <div class="modal-actions">
-          <button type="button" class="btn-cancel" onclick="closeKakaoModal()">취소</button>
-          <button type="submit" class="btn-submit" style="background:#f43f5e;">🚀 판독 의뢰 등록하기</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
 </body>
 </html>`;
 
