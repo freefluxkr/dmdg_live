@@ -1,3 +1,28 @@
+# 📚 당목담글(DMDG) 공식 위키독스(WikiDocs) 연재 도서관
+
+<div align="center">
+
+[![WikiDocs Brand Home](https://img.shields.io/badge/WikiDocs-공식_브랜드_홈-6366f1?style=for-the-badge&logo=gitbook&logoColor=white)](https://dmdg.wikidocs.net/)
+[![Official Books](https://img.shields.io/badge/공식_연재-9대_마스터_도서-10b981?style=for-the-badge&logo=bookstack&logoColor=white)](https://dmdg.wikidocs.net/)
+[![Live Simulator](https://img.shields.io/badge/인터랙티브-20종_웹_시뮬레이터-f59e0b?style=for-the-badge&logo=html5&logoColor=white)](https://malssam.com/)
+[![License](https://img.shields.io/badge/라이선스-100%25_무료_공개-blue?style=for-the-badge)](https://dmdg.wikidocs.net/)
+
+### 🌟 "실무 파이썬 소스코드 & 주피터 노트북에 대한 상세한 이론 해설, 20종 인터랙티브 시뮬레이터, 비전공자를 위한 친절한 설명은 위키독스 공식 도서관에서 100% 무료로 열람하실 수 있습니다!"
+
+</div>
+
+| 도서명 | 공식 위키독스 링크 | 핵심 수록 내용 및 실습 소스코드 매핑 |
+| :--- | :---: | :--- |
+| 📘 **《AI 와 데이터 분석 & 최신 LLM 에이전트 완벽 정복을 위한 사전 학습 (수학·기초 엔지니어링)》** | [👉 **Book 21701 바로가기**](https://wikidocs.net/book/21701) | 선형대수학, 역전파, AdamW, Attention 행렬 연산 등 AI 필수 수학 20일 완성 & 파이썬 구현체 |
+| 🤖 **《실전 LLM 서비스 & 멀티 에이전트 완벽 마스터북》** | [👉 **Book 21695 바로가기**](https://wikidocs.net/book/21695) | Google Gemini 2.5, GPT-4o, LangChain, LangGraph, ChatDev 멀티 에이전트 협업 & 18종 단독 시뮬레이터 |
+| 📊 **《AI 와 데이터 분석 - 22대 핵심 실무 마스터》** | [👉 **Book 21658 바로가기**](https://wikidocs.net/book/21658) | CNN, LSTM, XGBoost, LightGBM, Transformer 실무 머신러닝/딥러닝 22개 챕터 주피터 노트북 |
+| 🎨 **《AI 데이터 분석_마스터 인포그래픽》** | [👉 **Book 21683 바로가기**](https://wikidocs.net/book/21683) | 복잡한 딥러닝/머신러닝 수학과 알고리즘을 한눈에 조망하는 고화질 시각 다이어그램 컬렉션 |
+| 💬 **《말쌈 (MALSSAM) : 한글 Urban Dictionary》** | [👉 **Book 21733 바로가기**](https://wikidocs.net/book/21733) | 100대 실전 신조어 뉘앙스 해독, 세대공감 카톡 판독 및 K-컬처 신조어 백과사전 |
+| 🌿 **《DMDG 스튜디오 컬렉션: 당목담글 · 소담 · 방법》** | [👉 **Book 21665 바로가기**](https://wikidocs.net/book/21665) | 마음의 온기와 치유를 잇는 팩션 및 감성 에세이 3부작 |
+| 🌐 **당목담글(DMDG) 공식 브랜드 홈** | [👉 **dmdg.wikidocs.net 바로가기**](https://dmdg.wikidocs.net/) | 전 도서 통합 포털, 20종 실시간 시뮬레이터 허브, 라이브 서비스 관제 센터 |
+
+---
+
 # [제30장 최종 프로젝트 구성 목차]
 
 ```

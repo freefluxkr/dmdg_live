@@ -1,3 +1,24 @@
+# 📚 당목담글(DMDG) 공식 위키독스(WikiDocs) 연재 도서관
+
+<div align="center">
+
+[![WikiDocs Brand Home](https://img.shields.io/badge/WikiDocs-공식_브랜드_홈-6366f1?style=for-the-badge&logo=gitbook&logoColor=white)](https://dmdg.wikidocs.net/)
+[![Official Books](https://img.shields.io/badge/공식_연재-9대_마스터_도서-10b981?style=for-the-badge&logo=bookstack&logoColor=white)](https://dmdg.wikidocs.net/)
+[![Live Simulator](https://img.shields.io/badge/인터랙티브-20종_웹_시뮬레이터-f59e0b?style=for-the-badge&logo=html5&logoColor=white)](https://malssam.com/)
+
+### 🌟 "실무 파이썬 소스코드에 대한 상세한 이론 해설 및 실전 MLOps 아키텍처 명세서는 위키독스 공식 도서관에서 100% 무료로 열람하실 수 있습니다!"
+
+</div>
+
+| 도서명 | 공식 위키독스 링크 | 핵심 수록 내용 및 실습 소스코드 매핑 |
+| :--- | :---: | :--- |
+| 📘 **《AI 와 데이터 분석 & 최신 LLM 에이전트 완벽 정복을 위한 사전 학습 (수학·기초 엔지니어링)》** | [👉 **Book 21701 바로가기**](https://wikidocs.net/book/21701) | 선형대수학, 역전파, AdamW, Attention 행렬 연산 등 AI 필수 수학 20일 완성 & 파이썬 구현체 |
+| 🤖 **《실전 LLM 서비스 & 멀티 에이전트 완벽 마스터북》** | [👉 **Book 21695 바로가기**](https://wikidocs.net/book/21695) | Google Gemini 2.5, GPT-4o, LangChain, LangGraph, ChatDev 멀티 에이전트 협업 & 18종 단독 시뮬레이터 |
+| 📊 **《AI 와 데이터 분석 - 22대 핵심 실무 마스터》** | [👉 **Book 21658 바로가기**](https://wikidocs.net/book/21658) | CNN, LSTM, XGBoost, LightGBM, Transformer 실무 머신러닝/딥러닝 22개 챕터 주피터 노트북 |
+| 🌐 **당목담글(DMDG) 공식 브랜드 홈** | [👉 **dmdg.wikidocs.net 바로가기**](https://dmdg.wikidocs.net/) | 전 도서 통합 포털, 20종 실시간 시뮬레이터 허브, 라이브 서비스 관제 센터 |
+
+---
+
 # [제30장 최종 프로젝트 구성 목차]
 
 ```
