@@ -167,6 +167,204 @@
       flex-direction: column;
       gap: 28px;
     }
+    
+    /* Battle Arena Banner */
+    .battle-arena-section {
+      max-width: 860px;
+      margin: 16px auto 24px;
+      padding: 0 20px;
+    }
+    .battle-inner-box {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.75) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 26px 22px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .battle-header-area {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .battle-top-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--emerald);
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      margin-bottom: 10px;
+    }
+    .battle-main-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .battle-main-heading span {
+      color: var(--emerald);
+    }
+    .battle-sub-intro {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+    .battle-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+    }
+    .battle-choice-card {
+      background: rgba(17, 24, 39, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .battle-choice-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+    }
+    .battle-choice-card.card-office:hover {
+      border-color: #00f2fe;
+      box-shadow: 0 14px 30px rgba(56, 189, 248, 0.25);
+    }
+    .battle-choice-card.card-culture:hover {
+      border-color: #fe2c55;
+      box-shadow: 0 14px 30px rgba(244, 114, 182, 0.25);
+    }
+    .battle-card-top-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .battle-card-icon {
+      font-size: 1.8rem;
+    }
+    .battle-card-chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .battle-choice-card.card-office .battle-card-chip {
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .battle-choice-card.card-culture .battle-card-chip {
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.3);
+    }
+    .battle-choice-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .battle-choice-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .battle-btn-action {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .battle-choice-card.card-office:hover .battle-btn-action {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+    .battle-choice-card.card-culture:hover .battle-btn-action {
+      background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+      border-color: #f472b6;
+      color: #fff;
+    }
+
+    /* Era Switcher Tabs */
+    .era-switcher-section {
+      max-width: 860px;
+      margin: 8px auto 26px;
+      padding: 0 20px;
+    }
+    .era-tabs-wrapper {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+    .era-tabs-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+    .era-tab-item {
+      flex: 1 0 auto;
+      min-width: 140px;
+      background: rgba(17, 24, 39, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      color: var(--muted);
+      text-align: center;
+    }
+    .era-tab-item:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+    .era-tab-item.active {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--emerald);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+    .era-item-main {
+      font-size: 0.88rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .era-item-sub {
+      font-size: 0.72rem;
+      color: var(--dim, #64748b);
+    }
+    .era-tab-item.active .era-item-sub {
+      color: var(--emerald);
+      font-weight: 700;
+    }
+
     .tiktok-card {
       background: var(--card-bg);
       border: 2px solid var(--card-border);
@@ -365,9 +563,73 @@
     </div>
   </section>
 
+  
+  <!-- ⚔️ Dual Battle Arena: Sinh Tồn Công Sở K-Drama & Cỗ Máy Thời Gian -->
+  <section class="battle-arena-section">
+    <div class="battle-inner-box">
+      <div class="battle-header-area">
+        <span class="battle-top-badge">⚔️ ĐẤU TRƯỜNG K-DRAMA & K-POP</span>
+        <h2 class="battle-main-heading">Sinh Tồn Công Sở K-Drama & <span>Cỗ Máy Thời Gian K-Culture</span></h2>
+        <p class="battle-sub-intro">Giải mã sếp khó tính và thần tượng K-Pop! Đo lường trình độ tiếng Hàn thực chiến chỉ với 5 câu hỏi.</p>
+      </div>
+      <div class="battle-cards-grid">
+        <div class="battle-choice-card card-office" onclick="openBattleQuiz('office')">
+          <div>
+            <div class="battle-card-top-row">
+              <span class="battle-card-icon">👔</span>
+              <span class="battle-card-chip">Sinh Tồn Công Sở K-Drama</span>
+            </div>
+            <h3 class="battle-choice-title">"Bạn Có Thể Sống Sót Nơi Công Sở Hàn Quốc?"</h3>
+            <p class="battle-choice-desc">Giải mã Kkondae, Bệnh Nep (reply bot), Giác ngộ tuổi 40 (Young Forty) và Bỏ việc thầm lặng!</p>
+          </div>
+          <button class="battle-btn-action">
+            <span>🔥 Thử Thách Sinh Tồn Công Sở</span>
+            <span>→</span>
+          </button>
+        </div>
+        <div class="battle-choice-card card-culture" onclick="openBattleQuiz('timemachine')">
+          <div>
+            <div class="battle-card-top-row">
+              <span class="battle-card-icon">🎧</span>
+              <span class="battle-card-chip">Cỗ Máy Thời Gian K-Pop</span>
+            </div>
+            <h3 class="battle-choice-title">"Từ Hallyu Thế Hệ 1 Đến Trend TikTok 2026"</h3>
+            <p class="battle-choice-desc">Thử sức với từ lóng thập niên 90 cổ điển đến siêu trend Lucky Vicky và Text Hip!</p>
+          </div>
+          <button class="battle-btn-action">
+            <span>⚡ Khởi Động Cỗ Máy Thời Gian</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⏳ 4-Era Switcher Tabs -->
+  <section class="era-switcher-section">
+    <div class="era-tabs-wrapper">
+      <button class="era-tab-item active" data-era="all" onclick="switchEra('all')">
+        <span class="era-item-main">✨ Tất cả</span>
+        <span class="era-item-sub">100 từ</span>
+      </button>
+      <button class="era-tab-item" data-era="latte" onclick="switchEra('latte')">
+        <span class="era-item-main">📼 1. K-Wave Cổ Điển</span>
+        <span class="era-item-sub">1990~2000s (27)</span>
+      </button>
+      <button class="era-tab-item" data-era="smartphone" onclick="switchEra('smartphone')">
+        <span class="era-item-main">📱 2. Hoàng Kim Phim Hàn</span>
+        <span class="era-item-sub">2010s (31)</span>
+      </button>
+      <button class="era-tab-item" data-era="shorts" onclick="switchEra('shorts')">
+        <span class="era-item-main">⚡ 3. Gen-Z & TikTok</span>
+        <span class="era-item-sub">2020~2026 (42)</span>
+      </button>
+    </div>
+  </section>
+
   <main class="tiktok-feed" id="slangFeed">
     
-        <article class="tiktok-card" data-id="1" data-search="방가방가 geul-khi-da hế lô / chào xìn lời chào kinh điển thời kỳ đầu mạng chat thập niên 90 tại hàn quốc. 인사 pc통신 레트로 천리안">
+        <article class="tiktok-card" data-id="1" data-era="latte" data-search="방가방가 geul-khi-da hế lô / chào xìn lời chào kinh điển thời kỳ đầu mạng chat thập niên 90 tại hàn quốc. 인사 pc통신 레트로 천리안">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -424,7 +686,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="2" data-search="하이루 jung-kkeok-ma hí anh em / hê nhô lời chào kết hợp từ 'hi' với đuôi thân mật thời đầu internet. 인사 pc통신 버디버디">
+        <article class="tiktok-card" data-id="2" data-era="latte" data-search="하이루 jung-kkeok-ma hí anh em / hê nhô lời chào kết hợp từ 'hi' với đuôi thân mật thời đầu internet. 인사 pc통신 버디버디">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -481,7 +743,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="3" data-search="즐 eok-kka next hộ cái / miễn đi từ mang ý mỉa mai, từ chối thẳng thừng cực thịnh hành những năm 2000. 거절 싸이월드 스타크래프트 차단">
+        <article class="tiktok-card" data-id="3" data-era="latte" data-search="즐 eok-kka next hộ cái / miễn đi từ mang ý mỉa mai, từ chối thẳng thừng cực thịnh hành những năm 2000. 거절 싸이월드 스타크래프트 차단">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -538,7 +800,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="4" data-search="otl al-jal-ttak-kkal-sen quỳ gối tuyệt vọng / sụp đổ biểu tượng chữ hình người quỳ gối gục đầu tuyệt vọng nổi tiếng. 좌절 상형문자 디시인사이드 이모티콘">
+        <article class="tiktok-card" data-id="4" data-era="latte" data-search="otl al-jal-ttak-kkal-sen quỳ gối tuyệt vọng / sụp đổ biểu tượng chữ hình người quỳ gối gục đầu tuyệt vọng nổi tiếng. 좌절 상형문자 디시인사이드 이모티콘">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -595,7 +857,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="5" data-search="뷁 pom mi-chyeot-da á đù / cạn lời từ tượng thanh độc nhất vô nhị diễn tả sự phẫn nộ và cạn lời tột độ. 분노 황당 디시인사이드 아햏햏">
+        <article class="tiktok-card" data-id="5" data-era="latte" data-search="뷁 pom mi-chyeot-da á đù / cạn lời từ tượng thanh độc nhất vô nhị diễn tả sự phẫn nộ và cạn lời tột độ. 분노 황당 디시인사이드 아햏햏">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -652,7 +914,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="6" data-search="간지 ping-peu chất lừ / ngầu đét tiếng lóng thời trang chỉ phong cách cực kỳ ngầu và sang chảnh. 패션 스타일 동대문 소지섭">
+        <article class="tiktok-card" data-id="6" data-era="latte" data-search="간지 ping-peu chất lừ / ngầu đét tiếng lóng thời trang chỉ phong cách cực kỳ ngầu và sang chảnh. 패션 스타일 동대문 소지섭">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -709,7 +971,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="7" data-search="지못미 bun-joh-ka xin lỗi vì không thể cứu vớt bạn viết tắt của 'xin lỗi vì không bảo vệ được bạn' khi bạn bè lộ ảnh dìm. 엽기 싸이월드 흑역사 축약어">
+        <article class="tiktok-card" data-id="7" data-era="latte" data-search="지못미 bun-joh-ka xin lỗi vì không thể cứu vớt bạn viết tắt của 'xin lỗi vì không bảo vệ được bạn' khi bạn bè lộ ảnh dìm. 엽기 싸이월드 흑역사 축약어">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -766,7 +1028,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="8" data-search="킹왕짱 gat-saeng đỉnh của chóp / đỉnh chóp vũ trụ từ ghép tam trùng mang ý nghĩa đỉnh cao nhất trong mọi sự đỉnh cao. 극찬 게임 초딩 최고">
+        <article class="tiktok-card" data-id="8" data-era="latte" data-search="킹왕짱 gat-saeng đỉnh của chóp / đỉnh chóp vũ trụ từ ghép tam trùng mang ý nghĩa đỉnh cao nhất trong mọi sự đỉnh cao. 극찬 게임 초딩 최고">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -823,7 +1085,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="9" data-search="안습 reok-ki-bi-ki rớt nước mắt / cay khóe mắt viết tắt của 'mắt ngập hơi sương', chỉ tình huống đáng thương đến rơi nước mắt. 안타까움 지상렬 눈물 공중파예능">
+        <article class="tiktok-card" data-id="9" data-era="latte" data-search="안습 reok-ki-bi-ki rớt nước mắt / cay khóe mắt viết tắt của 'mắt ngập hơi sương', chỉ tình huống đáng thương đến rơi nước mắt. 안타까움 지상렬 눈물 공중파예능">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -880,7 +1142,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="10" data-search="얼짱 chu-gu-mi ulzzang / hot boy, hot girl thời đầu thuật ngữ huyền thoại chỉ những gương mặt visual đỉnh cao trên mạng xã hội hàn. 외모 하두리 싸이월드 인터넷스타">
+        <article class="tiktok-card" data-id="10" data-era="latte" data-search="얼짱 chu-gu-mi ulzzang / hot boy, hot girl thời đầu thuật ngữ huyền thoại chỉ những gương mặt visual đỉnh cao trên mạng xã hội hàn. 외모 하두리 싸이월드 인터넷스타">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -937,7 +1199,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="11" data-search="몸짱 o-hi-ryeo joh-a body chuẩn / dáng nuột thuật ngữ chỉ người có thân hình săn chắc, cơ bắp 6 múi hoàn hảo. 피트니스 헬스 몸매 다이어트">
+        <article class="tiktok-card" data-id="11" data-era="latte" data-search="몸짱 o-hi-ryeo joh-a body chuẩn / dáng nuột thuật ngữ chỉ người có thân hình săn chắc, cơ bắp 6 múi hoàn hảo. 피트니스 헬스 몸매 다이어트">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -994,7 +1256,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="12" data-search="훈남 nu-kal-hyeop chàng trai ấm áp / mỹ nam dịu dàng chỉ những chàng trai tuy không đẹp như tượng nhưng nụ cười ấm áp khiến tim rung động. 매력 이상형 다정함 캠퍼스">
+        <article class="tiktok-card" data-id="12" data-era="latte" data-search="훈남 nu-kal-hyeop chàng trai ấm áp / mỹ nam dịu dàng chỉ những chàng trai tuy không đẹp như tượng nhưng nụ cười ấm áp khiến tim rung động. 매력 이상형 다정함 캠퍼스">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1051,7 +1313,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="13" data-search="엄친아 noe-jeol con nhà người ta hình tượng 'con trai bạn mẹ' học giỏi, đẹp trai, ngoan ngoãn hoàn hảo chuyên bị đem ra so sánh. 비교 골방환상곡 완벽남 웹툰유래">
+        <article class="tiktok-card" data-id="13" data-era="latte" data-search="엄친아 noe-jeol con nhà người ta hình tượng 'con trai bạn mẹ' học giỏi, đẹp trai, ngoan ngoãn hoàn hảo chuyên bị đem ra so sánh. 비교 골방환상곡 완벽남 웹툰유래">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1108,7 +1370,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="14" data-search="된장녀 seu-bul-jae tiểu thư phông bạt / đua đòi hàng hiệu từ lóng chỉ người sống ảo, tiền ít nhưng thích uống cà phê đắt tiền và khoe túi hiệu. 풍자 스타벅스 소비문화 사회적논쟁">
+        <article class="tiktok-card" data-id="14" data-era="latte" data-search="된장녀 seu-bul-jae tiểu thư phông bạt / đua đòi hàng hiệu từ lóng chỉ người sống ảo, tiền ít nhưng thích uống cà phê đắt tiền và khoe túi hiệu. 풍자 스타벅스 소비문화 사회적논쟁">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1165,7 +1427,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="15" data-search="담다디 king-bat-ne vũ điệu damdadi / ca khúc thanh xuân 90s ca khúc bất hủ biểu tượng cho sự phóng khoáng, nổi loạn đáng yêu của thế hệ gen x hàn quốc. 이상은 강변가요제 x세대 추억의명곡">
+        <article class="tiktok-card" data-id="15" data-era="latte" data-search="담다디 king-bat-ne vũ điệu damdadi / ca khúc thanh xuân 90s ca khúc bất hủ biểu tượng cho sự phóng khoáng, nổi loạn đáng yêu của thế hệ gen x hàn quốc. 이상은 강변가요제 x세대 추억의명곡">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1222,7 +1484,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="16" data-search="8282 eo-jjeol-ti-bi 8282 (nhanh lên / mã máy nhắn tin) mã số máy nhắn tin kinh điển thập niên 90 đọc lái thành 'ppalli ppalli' tức giục 'mau lên'. 삐삐 공중전화 숫자암호 x세대">
+        <article class="tiktok-card" data-id="16" data-era="latte" data-search="8282 eo-jjeol-ti-bi 8282 (nhanh lên / mã máy nhắn tin) mã số máy nhắn tin kinh điển thập niên 90 đọc lái thành 'ppalli ppalli' tức giục 'mau lên'. 삐삐 공중전화 숫자암호 x세대">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1279,7 +1541,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="17" data-search="0124 jeom-me-chu 0124 (mãi mãi yêu em) mật mã máy nhắn tin tình yêu lãng mạn: 012 (mãi mãi) + 4 (yêu em). 삐삐 사랑 숫자암호 아날로그낭만">
+        <article class="tiktok-card" data-id="17" data-era="latte" data-search="0124 jeom-me-chu 0124 (mãi mãi yêu em) mật mã máy nhắn tin tình yêu lãng mạn: 012 (mãi mãi) + 4 (yêu em). 삐삐 사랑 숫자암호 아날로그낭만">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1336,7 +1598,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="18" data-search="도토리 gun-ssak hạt sồi cyworld (đồng tiền ảo đầu tiên) đồng tiền ảo trên mạng xã hội cyworld dùng mua nhạc nền bgm và trang trí trang cá nhân. 싸이월드 bgm 미니홈피 프리스타일y">
+        <article class="tiktok-card" data-id="18" data-era="latte" data-search="도토리 gun-ssak hạt sồi cyworld (đồng tiền ảo đầu tiên) đồng tiền ảo trên mạng xã hội cyworld dùng mua nhạc nền bgm và trang trí trang cá nhân. 싸이월드 bgm 미니홈피 프리스타일y">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1393,7 +1655,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="19" data-search="일촌평 kael-bak dòng tin nhắn bạn thân cyworld dòng lời nhắn độc quyền chỉ bạn thân cấp 1 mới được viết lên đầu trang cá nhân. 싸이월드 일촌 미니홈피 썸">
+        <article class="tiktok-card" data-id="19" data-era="latte" data-search="일촌평 kael-bak dòng tin nhắn bạn thân cyworld dòng lời nhắn độc quyền chỉ bạn thân cấp 1 mới được viết lên đầu trang cá nhân. 싸이월드 일촌 미니홈피 썸">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1450,7 +1712,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="20" data-search="십라 di-to đệch / tiếng chửi lách kiểm duyệt từ chửi thề nói lái để lách bộ lọc kiểm duyệt tin nhắn trong game online những năm 2000. 게임 필터링우회 욕설필터 스타크래프트">
+        <article class="tiktok-card" data-id="20" data-era="latte" data-search="십라 di-to đệch / tiếng chửi lách kiểm duyệt từ chửi thề nói lái để lách bộ lọc kiểm duyệt tin nhắn trong game online những năm 2000. 게임 필터링우회 욕설필터 스타크래프트">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1507,7 +1769,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="21" data-search="멘붕 nae-tto-chul sụp đổ tinh thần / hoảng loạn viết tắt của 'sụp đổ tinh thần' khi gặp phải sự cố quá đỗi kinh hoàng và bất ngờ. 충격 멘탈붕괴 국민유행어 스타크래프트">
+        <article class="tiktok-card" data-id="21" data-era="smartphone" data-search="멘붕 nae-tto-chul sụp đổ tinh thần / hoảng loạn viết tắt của 'sụp đổ tinh thần' khi gặp phải sự cố quá đỗi kinh hoàng và bất ngờ. 충격 멘탈붕괴 국민유행어 스타크래프트">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1564,7 +1826,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="22" data-search="꿀잼 wan-nae-seu vui đỉnh chóp / siêu bánh cuốn kết hợp chữ 'mật ong' với 'thú vị', mang ý nghĩa vui vẻ ngọt ngào tuyệt đối. 재미 극찬 영화 대유행">
+        <article class="tiktok-card" data-id="22" data-era="smartphone" data-search="꿀잼 wan-nae-seu vui đỉnh chóp / siêu bánh cuốn kết hợp chữ 'mật ong' với 'thú vị', mang ý nghĩa vui vẻ ngọt ngào tuyệt đối. 재미 극찬 영화 대유행">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1621,7 +1883,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="23" data-search="노잼 mu-mul nhạt nhẽo / buồn ngủ vãi kết hợp 'no' với 'vui vẻ', nghĩa là cực kỳ nhạt nhẽo và vô vị. 지루함 재미없음 아재개그 단호박">
+        <article class="tiktok-card" data-id="23" data-era="smartphone" data-search="노잼 mu-mul nhạt nhẽo / buồn ngủ vãi kết hợp 'no' với 'vui vẻ', nghĩa là cực kỳ nhạt nhẽo và vô vị. 지루함 재미없음 아재개그 단호박">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1678,7 +1940,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="24" data-search="심쿵 mak-i-rae rụng tim / đốn tim chỉ cảm giác tim đập thình thịch vì quá đỗi ngọt ngào hoặc dễ thương xỉu. 설렘 귀여움 고양이 로맨스">
+        <article class="tiktok-card" data-id="24" data-era="smartphone" data-search="심쿵 mak-i-rae rụng tim / đốn tim chỉ cảm giác tim đập thình thịch vì quá đỗi ngọt ngào hoặc dễ thương xỉu. 설렘 귀여움 고양이 로맨스">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1735,7 +1997,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="25" data-search="금수저 sa-rang-hae ngậm thìa vàng / thiếu gia tài phiệt thuật ngữ 'thìa vàng' chỉ những đứa trẻ sinh ra ở vạch đích, gia đình siêu giàu có. 수저계급론 사회풍자 양극화 재벌">
+        <article class="tiktok-card" data-id="25" data-era="smartphone" data-search="금수저 sa-rang-hae ngậm thìa vàng / thiếu gia tài phiệt thuật ngữ 'thìa vàng' chỉ những đứa trẻ sinh ra ở vạch đích, gia đình siêu giàu có. 수저계급론 사회풍자 양극화 재벌">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1792,7 +2054,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="26" data-search="흙수저 ja-man-chu ngậm thìa đất / xuất phát điểm nghèo khó chỉ những người sinh ra trong gia đình nghèo khó, phải tự bươn chải trả nợ sinh viên. 수저계급론 청년고통 학자금대출 자조">
+        <article class="tiktok-card" data-id="26" data-era="smartphone" data-search="흙수저 ja-man-chu ngậm thìa đất / xuất phát điểm nghèo khó chỉ những người sinh ra trong gia đình nghèo khó, phải tự bươn chải trả nợ sinh viên. 수저계급론 청년고통 학자금대출 자조">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1849,7 +2111,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="27" data-search="팩폭 sa-ba-sa sự thật tát vào mặt / tát bằng sự thật viết tắt của 'bạo lực bằng sự thật', dùng sự thật trần trụi đập tan mọi ngụy biện của đối phương. 팩트 돌직구 사이다 순살">
+        <article class="tiktok-card" data-id="27" data-era="smartphone" data-search="팩폭 sa-ba-sa sự thật tát vào mặt / tát bằng sự thật viết tắt của 'bạo lực bằng sự thật', dùng sự thật trần trụi đập tan mọi ngụy biện của đối phương. 팩트 돌직구 사이다 순살">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1906,7 +2168,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="28" data-search="빼박캔트 ti-em-ai hết đường chối cãi / bắt quả tang tại trận kết hợp thành ngữ hàn với từ can't của tiếng anh, mang nghĩa bằng chứng rành rành không thể trốn. 확정 발뺌불가 증거 말장난">
+        <article class="tiktok-card" data-id="28" data-era="smartphone" data-search="빼박캔트 ti-em-ai hết đường chối cãi / bắt quả tang tại trận kết hợp thành ngữ hàn với từ can't của tiếng anh, mang nghĩa bằng chứng rành rành không thể trốn. 확정 발뺌불가 증거 말장난">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -1963,7 +2225,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="29" data-search="갓생 ban-mo sống kỷ luật chuẩn mực / đời nở hoa lối sống kỷ luật, năng suất cao, dậy sớm tập thể dục và học tập không lãng phí một giây phút nào. 자기계발 모범생 성실 동기부여">
+        <article class="tiktok-card" data-id="29" data-era="shorts" data-search="갓생 ban-mo sống kỷ luật chuẩn mực / đời nở hoa lối sống kỷ luật, năng suất cao, dậy sớm tập thể dục và học tập không lãng phí một giây phút nào. 자기계발 모범생 성실 동기부여">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2020,7 +2282,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="30" data-search="극혐 so-hwak-haeng cực kỳ ghét bỏ / dị ứng tận cùng viết tắt của 'cực kỳ ghê tởm', thể hiện thái độ bài trừ những hành vi thô lỗ, mất lịch sự. 비매너 혐오 단호 비호감">
+        <article class="tiktok-card" data-id="30" data-era="smartphone" data-search="극혐 so-hwak-haeng cực kỳ ghét bỏ / dị ứng tận cùng viết tắt của 'cực kỳ ghê tởm', thể hiện thái độ bài trừ những hành vi thô lỗ, mất lịch sự. 비매너 혐오 단호 비호감">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2077,7 +2339,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="31" data-search="츤데레 츤데레 ngoài lạnh trong nóng / tsundere chỉ người ngoài mặt tỏ ra phũ phàng lạnh lùng nhưng thực tâm lại vô cùng chu đáo. 반전매력 오다주웠다 드라마 다정함">
+        <article class="tiktok-card" data-id="31" data-era="smartphone" data-search="츤데레 츤데레 ngoài lạnh trong nóng / tsundere chỉ người ngoài mặt tỏ ra phũ phàng lạnh lùng nhưng thực tâm lại vô cùng chu đáo. 반전매력 오다주웠다 드라마 다정함">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2134,7 +2396,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="32" data-search="케미 케미 phản ứng hóa học (chemistry) đỉnh cao chỉ sự hòa hợp, ăn ý tuyệt vời và tương tác tự nhiên giữa hai người. 호흡 케미스트리 드라마 찰떡궁합">
+        <article class="tiktok-card" data-id="32" data-era="smartphone" data-search="케미 케미 phản ứng hóa học (chemistry) đỉnh cao chỉ sự hòa hợp, ăn ý tuyệt vời và tương tác tự nhiên giữa hai người. 호흡 케미스트리 드라마 찰떡궁합">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2191,7 +2453,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="33" data-search="답정너 답정너 hỏi chỉ để nghe khen / thảo mai gài bẫy viết tắt của 'đáp án đã có sẵn, bạn chỉ việc gật đầu', chỉ người hỏi để câu lời khen ngợi. 칭찬유도 카카오톡 심리 질문">
+        <article class="tiktok-card" data-id="33" data-era="smartphone" data-search="답정너 답정너 hỏi chỉ để nghe khen / thảo mai gài bẫy viết tắt của 'đáp án đã có sẵn, bạn chỉ việc gật đầu', chỉ người hỏi để câu lời khen ngợi. 칭찬유도 카카오톡 심리 질문">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2248,7 +2510,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="34" data-search="낄끼빠빠 낄끼빠빠 biết thân biết phận / đọc vị bầu không khí lời khuyên vàng trong xã hội: 'lúc nào nên chen vào và lúc nào nên rút lui thì phải tự biết'. 눈치 사회생활 센스 회식">
+        <article class="tiktok-card" data-id="34" data-era="smartphone" data-search="낄끼빠빠 낄끼빠빠 biết thân biết phận / đọc vị bầu không khí lời khuyên vàng trong xã hội: 'lúc nào nên chen vào và lúc nào nên rút lui thì phải tự biết'. 눈치 사회생활 센스 회식">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2305,7 +2567,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="35" data-search="안물안궁 안물안궁 không hỏi không quan tâm / ai mượn kể cách chặn họng cực gắt khi người khác thích khoe khoang hoặc nói chuyện thừa thãi. tmi 차단 자랑방어 카카오톡">
+        <article class="tiktok-card" data-id="35" data-era="smartphone" data-search="안물안궁 안물안궁 không hỏi không quan tâm / ai mượn kể cách chặn họng cực gắt khi người khác thích khoe khoang hoặc nói chuyện thừa thãi. tmi 차단 자랑방어 카카오톡">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2362,7 +2624,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="36" data-search="솔까말 솔까말 nói thật lòng / nói thẳng thắn ra thì viết tắt của 'nói thẳng thắn không giấu giếm', dùng để mở đầu lời nhận xét chân thực. 솔직함 직언 진심 회의">
+        <article class="tiktok-card" data-id="36" data-era="smartphone" data-search="솔까말 솔까말 nói thật lòng / nói thẳng thắn ra thì viết tắt của 'nói thẳng thắn không giấu giếm', dùng để mở đầu lời nhận xét chân thực. 솔직함 직언 진심 회의">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2419,7 +2681,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="37" data-search="어그로 어그로 câu view bẩn / kéo sự chú ý độc hại bắt nguồn từ game online, chỉ hành động cố tình phát ngôn gây sốc để hút sự chú ý. 도발 관종 게임유래 유튜브">
+        <article class="tiktok-card" data-id="37" data-era="smartphone" data-search="어그로 어그로 câu view bẩn / kéo sự chú ý độc hại bắt nguồn từ game online, chỉ hành động cố tình phát ngôn gây sốc để hút sự chú ý. 도발 관종 게임유래 유튜브">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2476,7 +2738,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="38" data-search="현타 현타 giật mình tỉnh mộng / tỉnh ngộ đắng cay viết tắt của 'thời điểm thức tỉnh thực tế', khoảnh khắc hụt hẫng khi nhận ra thực tại phũ phàng. 허탈 현실자각 멘붕 일상">
+        <article class="tiktok-card" data-id="38" data-era="smartphone" data-search="현타 현타 giật mình tỉnh mộng / tỉnh ngộ đắng cay viết tắt của 'thời điểm thức tỉnh thực tế', khoảnh khắc hụt hẫng khi nhận ra thực tại phũ phàng. 허탈 현실자각 멘붕 일상">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2533,7 +2795,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="39" data-search="이생망 이생망 kiếp này coi như bỏ / đầu thai làm lại viết tắt của 'kiếp này coi như toang', câu nói đùa cay đắng khi mọi chuyện vượt tầm kiểm soát. 블랙유머 자조 청년현실 체념">
+        <article class="tiktok-card" data-id="39" data-era="smartphone" data-search="이생망 이생망 kiếp này coi như bỏ / đầu thai làm lại viết tắt của 'kiếp này coi như toang', câu nói đùa cay đắng khi mọi chuyện vượt tầm kiểm soát. 블랙유머 자조 청년현실 체념">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2590,7 +2852,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="40" data-search="소확행 소화캥 hạnh phúc giản đơn / niềm vui nhỏ bé niềm hạnh phúc nhỏ bé nhưng chắc chắn có thể cảm nhận được từ những khoảnh khắc đời thường. 행복 힐링 일상 웰빙">
+        <article class="tiktok-card" data-id="40" data-era="shorts" data-search="소확행 소화캥 hạnh phúc giản đơn / niềm vui nhỏ bé niềm hạnh phúc nhỏ bé nhưng chắc chắn có thể cảm nhận được từ những khoảnh khắc đời thường. 행복 힐링 일상 웰빙">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2647,7 +2909,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="41" data-search="긁히다 글키다 bị chọc trúng tim đen / cay cú trạng thái tự ái, nổi đóa khi bị người khác nói đúng điểm yếu hoặc khiêu khích. 감정 도발 심리전 mz유행어">
+        <article class="tiktok-card" data-id="41" data-era="shorts" data-search="긁히다 글키다 bị chọc trúng tim đen / cay cú trạng thái tự ái, nổi đóa khi bị người khác nói đúng điểm yếu hoặc khiêu khích. 감정 도발 심리전 mz유행어">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2704,7 +2966,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="42" data-search="중꺾마 중껑마 trái tim không khuất phục tinh thần bất khuất không bao giờ đầu hàng dù đối mặt với nghịch cảnh khắc nghiệt nhất. 동기부여 명언 스포츠 긍정">
+        <article class="tiktok-card" data-id="42" data-era="shorts" data-search="중꺾마 중껑마 trái tim không khuất phục tinh thần bất khuất không bao giờ đầu hàng dù đối mặt với nghịch cảnh khắc nghiệt nhất. 동기부여 명언 스포츠 긍정">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2761,7 +3023,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="43" data-search="억까 억까 bới lông tìm vết / xui tận mạng bị chỉ trích vô cớ hoặc liên tiếp gặp vận đen phi lý ngoài tầm kiểm soát. 불운 비난 게임 일상">
+        <article class="tiktok-card" data-id="43" data-era="shorts" data-search="억까 억까 bới lông tìm vết / xui tận mạng bị chỉ trích vô cớ hoặc liên tiếp gặp vận đen phi lý ngoài tầm kiểm soát. 불운 비난 게임 일상">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2818,7 +3080,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="44" data-search="알잘딱깔센 알잘딱깔센 khéo léo chu toàn / đỉnh chóp tự giác tự giác xử lý mọi việc một cách thông minh, gọn gàng và tinh tế mà không cần nhắc nhở. 직장생활 센스 일잘러 찬사">
+        <article class="tiktok-card" data-id="44" data-era="shorts" data-search="알잘딱깔센 알잘딱깔센 khéo léo chu toàn / đỉnh chóp tự giác tự giác xử lý mọi việc một cách thông minh, gọn gàng và tinh tế mà không cần nhắc nhở. 직장생활 센스 일잘러 찬사">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2875,7 +3137,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="45" data-search="폼 미쳤다 폼 미첟따 phong độ đỉnh chóp / quá out trình khen ngợi phong độ, nhan sắc hoặc kỹ năng xuất sắc đến mức không thể tin nổi. 극찬 감탄 트렌드 일상">
+        <article class="tiktok-card" data-id="45" data-era="shorts" data-search="폼 미쳤다 폼 미첟따 phong độ đỉnh chóp / quá out trình khen ngợi phong độ, nhan sắc hoặc kỹ năng xuất sắc đến mức không thể tin nổi. 극찬 감탄 트렌드 일상">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2932,7 +3194,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="46" data-search="핑프 핑프 thánh lười search / đợi đút tận mồm người lười đến mức không thèm gõ google tìm kiếm mà chỉ chăm chăm hỏi người khác để được dọn sẵn. 대학생활 풍자 검색 게으름">
+        <article class="tiktok-card" data-id="46" data-era="shorts" data-search="핑프 핑프 thánh lười search / đợi đút tận mồm người lười đến mức không thèm gõ google tìm kiếm mà chỉ chăm chăm hỏi người khác để được dọn sẵn. 대학생활 풍자 검색 게으름">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -2989,7 +3251,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="47" data-search="분좋카 분조카 quán cafe vibe đỉnh / góc sống ảo quán cà phê có không gian đẹp lung linh, âm nhạc êm dịu cực kỳ thích hợp để check-in sống ảo. 라이프스타일 카페 데이트 감성">
+        <article class="tiktok-card" data-id="47" data-era="shorts" data-search="분좋카 분조카 quán cafe vibe đỉnh / góc sống ảo quán cà phê có không gian đẹp lung linh, âm nhạc êm dịu cực kỳ thích hợp để check-in sống ảo. 라이프스타일 카페 데이트 감성">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3046,7 +3308,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="48" data-search="럭키비키 너키비키 tư duy may mắn vicky / lạc quan vô đối biến mọi tình huống xui xẻo thành may mắn bất ngờ với góc nhìn siêu lạc quan. 긍정 원영적사고 아이돌 행운">
+        <article class="tiktok-card" data-id="48" data-era="shorts" data-search="럭키비키 너키비키 tư duy may mắn vicky / lạc quan vô đối biến mọi tình huống xui xẻo thành may mắn bất ngờ với góc nhìn siêu lạc quan. 긍정 원영적사고 아이돌 행운">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3103,7 +3365,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="49" data-search="추구미 추구미 vibe lý tưởng / phong cách hướng tới gu thẩm mỹ hoặc hình tượng phong cách mà một người đang theo đuổi và hướng tới. 패션 스타일 트렌드 감성">
+        <article class="tiktok-card" data-id="49" data-era="shorts" data-search="추구미 추구미 vibe lý tưởng / phong cách hướng tới gu thẩm mỹ hoặc hình tượng phong cách mà một người đang theo đuổi và hướng tới. 패션 스타일 트렌드 감성">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3160,7 +3422,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="50" data-search="오히려 좋아 오히려 조아 thế lại càng hay / càng tốt chứ sao xem những thay đổi bất ngờ hoặc trục trặc kế hoạch như một cơ hội tuyệt vời hơn. 긍정 멘탈케어 일상 유행어">
+        <article class="tiktok-card" data-id="50" data-era="shorts" data-search="오히려 좋아 오히려 조아 thế lại càng hay / càng tốt chứ sao xem những thay đổi bất ngờ hoặc trục trặc kế hoạch như một cơ hội tuyệt vời hơn. 긍정 멘탈케어 일상 유행어">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3217,7 +3479,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="51" data-search="누칼협 누칼협 ai kề dao vào cổ bắt đâu? / tự làm tự chịu câu nói châm chọc nhắc nhở người khác rằng họ tự nguyện lựa chọn nên đừng than vãn. 팩트폭격 사이다 직장 현실">
+        <article class="tiktok-card" data-id="51" data-era="shorts" data-search="누칼협 누칼협 ai kề dao vào cổ bắt đâu? / tự làm tự chịu câu nói châm chọc nhắc nhở người khác rằng họ tự nguyện lựa chọn nên đừng than vãn. 팩트폭격 사이다 직장 현실">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3274,7 +3536,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="52" data-search="뇌절 뇌절 quá đà / nhai lại phát ngấy lặp đi lặp lại một trò đùa quá nhiều lần đến mức phản cảm và làm mất vui. 눈치 선넘음 커뮤니티 경고">
+        <article class="tiktok-card" data-id="52" data-era="shorts" data-search="뇌절 뇌절 quá đà / nhai lại phát ngấy lặp đi lặp lại một trò đùa quá nhiều lần đến mức phản cảm và làm mất vui. 눈치 선넘음 커뮤니티 경고">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3331,7 +3593,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="53" data-search="스불재 스불재 tự làm tự khổ / gậy ông đập lưng ông tự chuốc lấy rắc rối hoặc vất vả do tính lười biếng hoặc quyết định bốc đồng của chính mình. 자업자득 일상 대학생 자조">
+        <article class="tiktok-card" data-id="53" data-era="shorts" data-search="스불재 스불재 tự làm tự khổ / gậy ông đập lưng ông tự chuốc lấy rắc rối hoặc vất vả do tính lười biếng hoặc quyết định bốc đồng của chính mình. 자업자득 일상 대학생 자조">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3388,7 +3650,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="54" data-search="킹받네 킹받네 cay vãi chưởng / nhìn ngứa mắt thật sự cảm giác vừa tức tối vừa buồn cười trước sự vênh váo, khiêu khích một cách đáng ghét của đối phương. 분노 얄미움 침착맨 인터넷밈">
+        <article class="tiktok-card" data-id="54" data-era="shorts" data-search="킹받네 킹받네 cay vãi chưởng / nhìn ngứa mắt thật sự cảm giác vừa tức tối vừa buồn cười trước sự vênh váo, khiêu khích một cách đáng ghét của đối phương. 분노 얄미움 침착맨 인터넷밈">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3445,7 +3707,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="55" data-search="어쩔티비 어쩔티비 kệ tôi / đi mà xem tv câu cãi cùn kiểu trẻ con dùng để gạt phăng mọi lời cằn nhằn hay dạy đời một cách khiêu khích. 알파세대 초딩 반격 유치">
+        <article class="tiktok-card" data-id="55" data-era="shorts" data-search="어쩔티비 어쩔티비 kệ tôi / đi mà xem tv câu cãi cùn kiểu trẻ con dùng để gạt phăng mọi lời cằn nhằn hay dạy đời một cách khiêu khích. 알파세대 초딩 반격 유치">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3502,7 +3764,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="56" data-search="점메추 점메추 gợi ý món trưa / trưa nay ăn gì? viết tắt của câu xin gợi ý thực đơn bữa trưa khi bị bế tắc không biết ăn gì. 음식 직장인 일상 점심">
+        <article class="tiktok-card" data-id="56" data-era="shorts" data-search="점메추 점메추 gợi ý món trưa / trưa nay ăn gì? viết tắt của câu xin gợi ý thực đơn bữa trưa khi bị bế tắc không biết ăn gì. 음식 직장인 일상 점심">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3559,7 +3821,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="57" data-search="군싹 군싹 nuốt nước miếng ừng ực / thèm xỉu cảm thán khi nhìn thấy món ăn quá ngon mắt hoặc một món hời khiến mình thèm muốn ngay tức khắc. 음식 루피 식욕 기대">
+        <article class="tiktok-card" data-id="57" data-era="shorts" data-search="군싹 군싹 nuốt nước miếng ừng ực / thèm xỉu cảm thán khi nhìn thấy món ăn quá ngon mắt hoặc một món hời khiến mình thèm muốn ngay tức khắc. 음식 루피 식욕 기대">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3616,7 +3878,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="58" data-search="캘박 캘박 ghim lịch ngay / note vào calendar lưu chắc chắn cuộc hẹn vào ứng dụng lịch trên điện thoại để không bị quên hoặc trùng lịch. 약속 일정 직장인 스마트폰">
+        <article class="tiktok-card" data-id="58" data-era="shorts" data-search="캘박 캘박 ghim lịch ngay / note vào calendar lưu chắc chắn cuộc hẹn vào ứng dụng lịch trên điện thoại để không bị quên hoặc trùng lịch. 약속 일정 직장인 스마트폰">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3673,7 +3935,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="59" data-search="디토 디토 bắt chước gu / mua theo thần tượng xu hướng mua sắm hoặc học theo phong cách của người mình tin tưởng một cách tuyệt đối. 소비 트렌드 뉴진스 동의">
+        <article class="tiktok-card" data-id="59" data-era="shorts" data-search="디토 디토 bắt chước gu / mua theo thần tượng xu hướng mua sắm hoặc học theo phong cách của người mình tin tưởng một cách tuyệt đối. 소비 트렌드 뉴진스 동의">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3730,7 +3992,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="60" data-search="내또출 내또출 mai lại đi cày / hội chứng tối chủ nhật nỗi ám ảnh kinh hoàng vào tối chủ nhật khi kỳ nghỉ cuối tuần trôi qua và mai lại phải đi làm. 직장인 월요병 출근 비명">
+        <article class="tiktok-card" data-id="60" data-era="shorts" data-search="내또출 내또출 mai lại đi cày / hội chứng tối chủ nhật nỗi ám ảnh kinh hoàng vào tối chủ nhật khi kỳ nghỉ cuối tuần trôi qua và mai lại phải đi làm. 직장인 월요병 출근 비명">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3787,7 +4049,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="61" data-search="완내스 완내스 đúng gu tao luôn / trúng tim đen khen ngợi một món đồ, bài hát hoặc phong cách cực kỳ hợp gu của mình một cách hoàn hảo. 취향저격 패션 쇼핑 호감">
+        <article class="tiktok-card" data-id="61" data-era="shorts" data-search="완내스 완내스 đúng gu tao luôn / trúng tim đen khen ngợi một món đồ, bài hát hoặc phong cách cực kỳ hợp gu của mình một cách hoàn hảo. 취향저격 패션 쇼핑 호감">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3844,7 +4106,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="62" data-search="무물 무물 hỏi tôi đi / hộp câu hỏi q&a tính năng đặt câu hỏi trên instagram story để giao lưu hỏi đáp cùng bạn bè và người theo dõi. 인스타그램 sns 소통 q&a">
+        <article class="tiktok-card" data-id="62" data-era="shorts" data-search="무물 무물 hỏi tôi đi / hộp câu hỏi q&a tính năng đặt câu hỏi trên instagram story để giao lưu hỏi đáp cùng bạn bè và người theo dõi. 인스타그램 sns 소통 q&a">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3901,7 +4163,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="63" data-search="막이래 마기래 đùa đấy / nói giỡn thôi nha câu đệm sau khi khen quá lời hoặc trêu đùa để chữa ngượng một cách duyên dáng. 농담 너스레 유머 추임새">
+        <article class="tiktok-card" data-id="63" data-era="shorts" data-search="막이래 마기래 đùa đấy / nói giỡn thôi nha câu đệm sau khi khen quá lời hoặc trêu đùa để chữa ngượng một cách duyên dáng. 농담 너스레 유머 추임새">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -3958,7 +4220,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="64" data-search="h워얼v 사랑해 mật mã 'anh yêu em' đảo ngược mật mã tình yêu độc đáo khi lật ngược chữ tiếng hàn 'saranghae' trông giống các ký tự h워얼v. 연애 고백 암호 로맨스">
+        <article class="tiktok-card" data-id="64" data-era="shorts" data-search="h워얼v 사랑해 mật mã 'anh yêu em' đảo ngược mật mã tình yêu độc đáo khi lật ngược chữ tiếng hàn 'saranghae' trông giống các ký tự h워얼v. 연애 고백 암호 로맨스">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4015,7 +4277,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="65" data-search="자만추 자만추 tìm duyên tự nhiên / ghét mai mối thích để tình yêu nảy nở tự nhiên qua công việc, sở thích chung hơn là hẹn hò sắp đặt. 연애 소개팅 가치관 일상">
+        <article class="tiktok-card" data-id="65" data-era="shorts" data-search="자만추 자만추 tìm duyên tự nhiên / ghét mai mối thích để tình yêu nảy nở tự nhiên qua công việc, sở thích chung hơn là hẹn hò sắp đặt. 연애 소개팅 가치관 일상">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4072,7 +4334,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="66" data-search="사바사 사바사 tùy từng người / mỗi người mỗi khác mỗi người có tính cách, trải nghiệm và quan điểm khác nhau không thể đánh đồng chung. 인간관계 다양성 케바케 직장">
+        <article class="tiktok-card" data-id="66" data-era="shorts" data-search="사바사 사바사 tùy từng người / mỗi người mỗi khác mỗi người có tính cách, trải nghiệm và quan điểm khác nhau không thể đánh đồng chung. 인간관계 다양성 케바케 직장">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4129,7 +4391,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="67" data-search="tmi 티엠아이 thông tin thừa thãi / chuyện bên lề chia sẻ những chi tiết nhỏ nhặt, riêng tư mà không ai hỏi tới một cách vui vẻ. 토크 스몰토크 일상 글로벌">
+        <article class="tiktok-card" data-id="67" data-era="shorts" data-search="tmi 티엠아이 thông tin thừa thãi / chuyện bên lề chia sẻ những chi tiết nhỏ nhặt, riêng tư mà không ai hỏi tới một cách vui vẻ. 토크 스몰토크 일상 글로벌">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4186,7 +4448,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="68" data-search="반모 반모 nói chuyện ngang hàng / bỏ kính ngữ thỏa thuận nói chuyện thoải mái xưng bạn - tôi không cần dùng kính ngữ khách sáo nữa. 친밀함 sns 10대 친구">
+        <article class="tiktok-card" data-id="68" data-era="shorts" data-search="반모 반모 nói chuyện ngang hàng / bỏ kính ngữ thỏa thuận nói chuyện thoải mái xưng bạn - tôi không cần dùng kính ngữ khách sáo nữa. 친밀함 sns 10대 친구">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4243,7 +4505,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="69" data-search="영포티 영포티 u40 cưa sừng làm nghé / bác 40 đú trend từ châm biếm người trung niên 40 tuổi cố bắt chước phong cách và tiếng lóng của gen z một cách gượng gạo. 세대갈등 직장생활 패션 풍자">
+        <article class="tiktok-card" data-id="69" data-era="shorts" data-search="영포티 영포티 u40 cưa sừng làm nghé / bác 40 đú trend từ châm biếm người trung niên 40 tuổi cố bắt chước phong cách và tiếng lóng của gen z một cách gượng gạo. 세대갈등 직장생활 패션 풍자">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4300,7 +4562,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="70" data-search="영ㅋㅋ 영크크 trẻ trâu ghê haha / trẻ trung quá cơ haha (mỉa mai) câu cảm thán mỉa mai khi sếp già cố tỏ ra sành điệu nói tiếng lóng của giới trẻ. 반어법 조롱 직장인 세대차이">
+        <article class="tiktok-card" data-id="70" data-era="shorts" data-search="영ㅋㅋ 영크크 trẻ trâu ghê haha / trẻ trung quá cơ haha (mỉa mai) câu cảm thán mỉa mai khi sếp già cố tỏ ra sành điệu nói tiếng lóng của giới trẻ. 반어법 조롱 직장인 세대차이">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4357,7 +4619,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="71" data-search="잼민이 잼미니 trẻ trâu tiểu học / nhóc tì phá game chỉ các học sinh tiểu học vô ý thức, hay văng tục và phá game trên mạng xã hội. 초등학생 게임 온라인 풍자">
+        <article class="tiktok-card" data-id="71" data-era="shorts" data-search="잼민이 잼미니 trẻ trâu tiểu học / nhóc tì phá game chỉ các học sinh tiểu học vô ý thức, hay văng tục và phá game trên mạng xã hội. 초등학생 게임 온라인 풍자">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4414,7 +4676,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="72" data-search="넵병 넵뼝 hội chứng dạ vâng 'nep' nơi công sở thói quen phản xạ luôn nhắn 'vâng ạ!' trong các nhóm chat công việc để vừa lịch sự vừa không bị soi. 직장인 슬랙 생존전략 회사생활">
+        <article class="tiktok-card" data-id="72" data-era="shorts" data-search="넵병 넵뼝 hội chứng dạ vâng 'nep' nơi công sở thói quen phản xạ luôn nhắn 'vâng ạ!' trong các nhóm chat công việc để vừa lịch sự vừa không bị soi. 직장인 슬랙 생존전략 회사생활">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4471,7 +4733,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="73" data-search="조용한 사직 조용한 사직 nghỉ việc trong âm thầm (quiet quitting) chỉ làm tròn bổn phận trong giờ làm, từ chối tăng ca và không cống hiến thêm ngoài hợp đồng. 직장인 워라밸 번아웃 mz세대">
+        <article class="tiktok-card" data-id="73" data-era="shorts" data-search="조용한 사직 조용한 사직 nghỉ việc trong âm thầm (quiet quitting) chỉ làm tròn bổn phận trong giờ làm, từ chối tăng ca và không cống hiến thêm ngoài hợp đồng. 직장인 워라밸 번아웃 mz세대">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4528,7 +4790,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="74" data-search="알빠노 알빠노 kệ mẹ / mặc xác không phải việc của tao câu cửa miệng thể hiện sự thờ ơ tuyệt đối trước lời phán xét hay soi mói của người khác. 마이웨이 쿨함 무관심 숏폼밈">
+        <article class="tiktok-card" data-id="74" data-era="shorts" data-search="알빠노 알빠노 kệ mẹ / mặc xác không phải việc của tao câu cửa miệng thể hiện sự thờ ơ tuyệt đối trước lời phán xét hay soi mói của người khác. 마이웨이 쿨함 무관심 숏폼밈">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4585,7 +4847,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="75" data-search="할매니얼 할매니얼 gu hoài niệm kiểu bà ngoại của giới trẻ sự kết hợp giữa 'bà' và 'millennial', chỉ những bạn trẻ mê bánh truyền thống yakgwa và phong cách vintage xưa cũ. 디저트 약과 레트로 트렌드">
+        <article class="tiktok-card" data-id="75" data-era="shorts" data-search="할매니얼 할매니얼 gu hoài niệm kiểu bà ngoại của giới trẻ sự kết hợp giữa 'bà' và 'millennial', chỉ những bạn trẻ mê bánh truyền thống yakgwa và phong cách vintage xưa cũ. 디저트 약과 레트로 트렌드">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4642,7 +4904,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="76" data-search="퐁퐁남 퐁퐁남 anh chồng 'rửa chén' nộp hết lương cho vợ tiếng lóng chỉ người chồng ngoan ngoãn nộp hết lương, chỉ được phát tiền tiêu vặt và gánh hết việc nhà. 결혼 가사 자조 사회풍자">
+        <article class="tiktok-card" data-id="76" data-era="shorts" data-search="퐁퐁남 퐁퐁남 anh chồng 'rửa chén' nộp hết lương cho vợ tiếng lóng chỉ người chồng ngoan ngoãn nộp hết lương, chỉ được phát tiền tiêu vặt và gánh hết việc nhà. 결혼 가사 자조 사회풍자">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4699,7 +4961,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="77" data-search="오팔세대 오팔세대 thế hệ người cao tuổi năng động (opal) chỉ thế hệ u60 tràn đầy sức sống, có điều kiện kinh tế và tận hưởng cuộc sống sau khi nghỉ hưu. 액티브시니어 베이비부머 인생2막 소비">
+        <article class="tiktok-card" data-id="77" data-era="shorts" data-search="오팔세대 오팔세대 thế hệ người cao tuổi năng động (opal) chỉ thế hệ u60 tràn đầy sức sống, có điều kiện kinh tế và tận hưởng cuộc sống sau khi nghỉ hưu. 액티브시니어 베이비부머 인생2막 소비">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4756,7 +5018,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="78" data-search="쿠쿠루삥뽕 쿠쿠루삥뽕 kukuru-bbing-bbong / điệu cười trêu tức đối thủ âm thanh trêu ngươi cực kỳ gây ức chế được game thủ dùng để chọc tức khi đối phương thất bại. 약올리기 도발 트위치 게임밈">
+        <article class="tiktok-card" data-id="78" data-era="shorts" data-search="쿠쿠루삥뽕 쿠쿠루삥뽕 kukuru-bbing-bbong / điệu cười trêu tức đối thủ âm thanh trêu ngươi cực kỳ gây ức chế được game thủ dùng để chọc tức khi đối phương thất bại. 약올리기 도발 트위치 게임밈">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4813,7 +5075,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="79" data-search="꼰대 꼰대 kkondae / kẻ bảo thủ hay lên mặt dạy đời thuật ngữ nổi tiếng chỉ những người lớn tuổi độc đoán, thích áp đặt kinh nghiệm cũ lên giới trẻ. 세대갈등 직장상사 훈계 bbc선정">
+        <article class="tiktok-card" data-id="79" data-era="smartphone" data-search="꼰대 꼰대 kkondae / kẻ bảo thủ hay lên mặt dạy đời thuật ngữ nổi tiếng chỉ những người lớn tuổi độc đoán, thích áp đặt kinh nghiệm cũ lên giới trẻ. 세대갈등 직장상사 훈계 bbc선정">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4870,7 +5132,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="80" data-search="월급루팡 월긍누팡 kẻ trộm tiền lương / ăn lương ngồi không so sánh nhân viên lười biếng với siêu trộm lupin, chỉ ngồi lướt điện thoại mà vẫn ẵm trọn lương tháng. 직장인 풍자 딴짓 회사생활">
+        <article class="tiktok-card" data-id="80" data-era="smartphone" data-search="월급루팡 월긍누팡 kẻ trộm tiền lương / ăn lương ngồi không so sánh nhân viên lười biếng với siêu trộm lupin, chỉ ngồi lướt điện thoại mà vẫn ẵm trọn lương tháng. 직장인 풍자 딴짓 회사생활">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4927,7 +5189,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="81" data-search="아재체 아재체 văn mẫu nhắn tin kiểu ông chú phong cách nhắn tin đặc trưng của các chú trung niên, chuyên chèn dấu sóng (~~) và biểu tượng toát mồ hôi (^^;). 카톡말투 중년 이모지 직장메신저">
+        <article class="tiktok-card" data-id="81" data-era="smartphone" data-search="아재체 아재체 văn mẫu nhắn tin kiểu ông chú phong cách nhắn tin đặc trưng của các chú trung niên, chuyên chèn dấu sóng (~~) và biểu tượng toát mồ hôi (^^;). 카톡말투 중년 이모지 직장메신저">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -4984,7 +5246,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="82" data-search="개저씨 개저씨 gã trung niên thô lỗ, hách dịch từ ghép chỉ những người đàn ông trung niên cư xử vô duyên, lộng quyền và quấy rối nơi công cộng. 민폐 갑질 사회비판 공공예절">
+        <article class="tiktok-card" data-id="82" data-era="smartphone" data-search="개저씨 개저씨 gã trung niên thô lỗ, hách dịch từ ghép chỉ những người đàn ông trung niên cư xử vô duyên, lộng quyền và quấy rối nơi công cộng. 민폐 갑질 사회비판 공공예절">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5041,7 +5303,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="83" data-search="스라밸 스라밸 cân bằng giữa học tập và nghỉ ngơi khái niệm dành cho học sinh, kêu gọi giảm tải áp lực học thêm để có thời gian ngủ và giải trí. 학업 학생 워라밸 청소년">
+        <article class="tiktok-card" data-id="83" data-era="smartphone" data-search="스라밸 스라밸 cân bằng giữa học tập và nghỉ ngơi khái niệm dành cho học sinh, kêu gọi giảm tải áp lực học thêm để có thời gian ngủ và giải trí. 학업 학생 워라밸 청소년">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5098,7 +5360,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="84" data-search="일태기 일태기 giai đoạn chán chường công việc ví sự mệt mỏi trong sự nghiệp như giai đoạn chán nhau của các cặp đôi, sáng dậy không muốn đi làm. 직장인 권태기 번아웃 무기력">
+        <article class="tiktok-card" data-id="84" data-era="smartphone" data-search="일태기 일태기 giai đoạn chán chường công việc ví sự mệt mỏi trong sự nghiệp như giai đoạn chán nhau của các cặp đôi, sáng dậy không muốn đi làm. 직장인 권태기 번아웃 무기력">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5155,7 +5417,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="85" data-search="퇴준생 퇴준생 người vừa đi làm đã rục rịch nhảy việc nhại theo từ 'người tìm việc', chỉ những nhân viên vừa vào công ty đã bí mật chuẩn bị hồ sơ để nhảy việc. 이직 퇴사 직장인 스펙업">
+        <article class="tiktok-card" data-id="85" data-era="smartphone" data-search="퇴준생 퇴준생 người vừa đi làm đã rục rịch nhảy việc nhại theo từ 'người tìm việc', chỉ những nhân viên vừa vào công ty đã bí mật chuẩn bị hồ sơ để nhảy việc. 이직 퇴사 직장인 스펙업">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5212,7 +5474,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="86" data-search="내로남불 내로남불 tiêu chuẩn kép (tôi làm là lãng mạn, người khác làm là ngoại tình) thành ngữ mỉa mai sự đạo đức giả: bản thân làm thì đúng, người khác làm thì kết tội. 이중잣대 위선 정치 국민유행어">
+        <article class="tiktok-card" data-id="86" data-era="smartphone" data-search="내로남불 내로남불 tiêu chuẩn kép (tôi làm là lãng mạn, người khác làm là ngoại tình) thành ngữ mỉa mai sự đạo đức giả: bản thân làm thì đúng, người khác làm thì kết tội. 이중잣대 위선 정치 국민유행어">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5269,7 +5531,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="87" data-search="가심비 가심비 tỷ lệ thỏa mãn tâm lý trên giá tiền xu hướng mua sắm ưu tiên cảm xúc hạnh phúc và tự thưởng cho bản thân hơn là tính toán đắt rẻ cơ học. 소비 힐링 만족감 오마카세">
+        <article class="tiktok-card" data-id="87" data-era="smartphone" data-search="가심비 가심비 tỷ lệ thỏa mãn tâm lý trên giá tiền xu hướng mua sắm ưu tiên cảm xúc hạnh phúc và tự thưởng cho bản thân hơn là tính toán đắt rẻ cơ học. 소비 힐링 만족감 오마카세">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5326,7 +5588,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="88" data-search="주린이 주리니 nhà đầu tư f0 mới vào sàn chứng khoán ghép từ 'chứng khoán' và 'trẻ con', chỉ những nhà đầu tư cá nhân mới tập tành bước vào thị trường. 주식 재테크 초보 동학개미">
+        <article class="tiktok-card" data-id="88" data-era="smartphone" data-search="주린이 주리니 nhà đầu tư f0 mới vào sàn chứng khoán ghép từ 'chứng khoán' và 'trẻ con', chỉ những nhà đầu tư cá nhân mới tập tành bước vào thị trường. 주식 재테크 초보 동학개미">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5383,7 +5645,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="89" data-search="취존 취존 tôn trọng sở thích cá nhân viết tắt của 'tôn trọng gu của nhau', nhắc nhở mọi người không nên phán xét đam mê riêng của người khác. 존중 개성 오타쿠 서브컬처">
+        <article class="tiktok-card" data-id="89" data-era="latte" data-search="취존 취존 tôn trọng sở thích cá nhân viết tắt của 'tôn trọng gu của nhau', nhắc nhở mọi người không nên phán xét đam mê riêng của người khác. 존중 개성 오타쿠 서브컬처">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5440,7 +5702,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="90" data-search="모태솔로 모태쏠로 ế từ trong trứng nước / chưa một mảnh tình vắt vai từ tự trào chỉ người từ lúc sinh ra đến giờ chưa từng có người yêu hay nắm tay ai. 연애 솔로 자조 국민유행어">
+        <article class="tiktok-card" data-id="90" data-era="latte" data-search="모태솔로 모태쏠로 ế từ trong trứng nước / chưa một mảnh tình vắt vai từ tự trào chỉ người từ lúc sinh ra đến giờ chưa từng có người yêu hay nắm tay ai. 연애 솔로 자조 국민유행어">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5497,7 +5759,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="91" data-search="금사빠 금사빠 người dễ rung động / vừa gặp đã yêu chỉ những người cực kỳ nhanh phải lòng người khác, chỉ cần một nụ cười hay cử chỉ nhẹ là đã tưởng tượng đến đám cưới. 연애 짝사랑 감정 일상">
+        <article class="tiktok-card" data-id="91" data-era="latte" data-search="금사빠 금사빠 người dễ rung động / vừa gặp đã yêu chỉ những người cực kỳ nhanh phải lòng người khác, chỉ cần một nụ cười hay cử chỉ nhẹ là đã tưởng tượng đến đám cưới. 연애 짝사랑 감정 일상">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5554,7 +5816,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="92" data-search="아햏햏 아햏햏 a-haeh-haeh / tiếng cười giác ngộ hư vô thán từ mạng huyền thoại đầu những năm 2000, biểu thị trạng thái dở khóc dở cười đã đạt đến cảnh giới giác ngộ buông bỏ. 햏자 득도 디시인사이드 원조인터넷밈">
+        <article class="tiktok-card" data-id="92" data-era="latte" data-search="아햏햏 아햏햏 a-haeh-haeh / tiếng cười giác ngộ hư vô thán từ mạng huyền thoại đầu những năm 2000, biểu thị trạng thái dở khóc dở cười đã đạt đến cảnh giới giác ngộ buông bỏ. 햏자 득도 디시인사이드 원조인터넷밈">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5611,7 +5873,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="93" data-search="싱하형 싱하형 đại ca sing-ha / trùm giang hồ mạng huyền thoại nhân vật meme huyền thoại gắn mặt lý tiểu long với câu thoại kinh điển: '10 giây nữa có mặt ở gầm cầu cho tao!' 이소룡 굴다리 짤방 레전드">
+        <article class="tiktok-card" data-id="93" data-era="latte" data-search="싱하형 싱하형 đại ca sing-ha / trùm giang hồ mạng huyền thoại nhân vật meme huyền thoại gắn mặt lý tiểu long với câu thoại kinh điển: '10 giây nữa có mặt ở gầm cầu cho tao!' 이소룡 굴다리 짤방 레전드">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5668,7 +5930,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="94" data-search="폐인 폐인 game thủ cày net xuyên màn đêm / kẻ nghiện mạng chỉ những người dành trọn ngày đêm ở quán net ăn mì tôm cày game starcraft và lướt diễn đàn thời đầu 2000. pc방 스타크래프트 밤샘 몰입">
+        <article class="tiktok-card" data-id="94" data-era="latte" data-search="폐인 폐인 game thủ cày net xuyên màn đêm / kẻ nghiện mạng chỉ những người dành trọn ngày đêm ở quán net ăn mì tôm cày game starcraft và lướt diễn đàn thời đầu 2000. pc방 스타크래프트 밤샘 몰입">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5725,7 +5987,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="95" data-search="따봉 따봉 dda-bong! / số một, tuyệt cú mèo! bắt nguồn từ tiếng bồ đào nha qua một quảng cáo nước cam năm 1989, trở thành biểu tượng giơ ngón cái khen tuyệt đỉnh. 레트로원조 cf유행어 엄지척 x세대">
+        <article class="tiktok-card" data-id="95" data-era="latte" data-search="따봉 따봉 dda-bong! / số một, tuyệt cú mèo! bắt nguồn từ tiếng bồ đào nha qua một quảng cáo nước cam năm 1989, trở thành biểu tượng giơ ngón cái khen tuyệt đỉnh. 레트로원조 cf유행어 엄지척 x세대">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5782,7 +6044,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="96" data-search="플렉스 플렉스 flex / khoe đồ hiệu xa xỉ từ lóng hip-hop chỉ hành động chi tiền khủng mua đồ hiệu hoặc khoe thành tích sang chảnh lên mạng xã hội. 소비 명품 힙합 과시">
+        <article class="tiktok-card" data-id="96" data-era="smartphone" data-search="플렉스 플렉스 flex / khoe đồ hiệu xa xỉ từ lóng hip-hop chỉ hành động chi tiền khủng mua đồ hiệu hoặc khoe thành tích sang chảnh lên mạng xã hội. 소비 명품 힙합 과시">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5839,7 +6101,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="97" data-search="돈쭐 돈쭐 ủng hộ sập tiệm các quán ăn nghĩa tình cách chơi chữ 'cho một bài học bằng tiền', kêu gọi cộng đồng đến mua vét sạch hàng để ủng hộ quán ăn làm từ thiện. 선한영향력 착한가게 미담 소비">
+        <article class="tiktok-card" data-id="97" data-era="shorts" data-search="돈쭐 돈쭐 ủng hộ sập tiệm các quán ăn nghĩa tình cách chơi chữ 'cho một bài học bằng tiền', kêu gọi cộng đồng đến mua vét sạch hàng để ủng hộ quán ăn làm từ thiện. 선한영향력 착한가게 미담 소비">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5896,7 +6158,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="98" data-search="텍스트 힙 텍스트 힙 trào lưu đọc sách sang chảnh (text hip) xu hướng năm 2026 của gen z cai nghiện video ngắn, tìm về đọc sách giấy như một phong cách sống thời thượng. 독서 종이책 2026트렌드 도파민디톡스">
+        <article class="tiktok-card" data-id="98" data-era="shorts" data-search="텍스트 힙 텍스트 힙 trào lưu đọc sách sang chảnh (text hip) xu hướng năm 2026 của gen z cai nghiện video ngắn, tìm về đọc sách giấy như một phong cách sống thời thượng. 독서 종이책 2026트렌드 도파민디톡스">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -5953,7 +6215,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="99" data-search="워라밸 워라밸 cân bằng giữa công việc và cuộc sống (work-life balance) triết lý coi trọng cuộc sống cá nhân, từ chối tăng ca kiệt sức để tận hưởng buổi tối. 직장인 퇴근 저녁이있는삶 균형">
+        <article class="tiktok-card" data-id="99" data-era="smartphone" data-search="워라밸 워라밸 cân bằng giữa công việc và cuộc sống (work-life balance) triết lý coi trọng cuộc sống cá nhân, từ chối tăng ca kiệt sức để tận hưởng buổi tối. 직장인 퇴근 저녁이있는삶 균형">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>
@@ -6010,7 +6272,7 @@
           </div>
         </article>
         
-        <article class="tiktok-card" data-id="100" data-search="삼포세대 삼포세대 thế hệ 'từ bỏ 3 thứ' (không hẹn hò, không kết hôn, không sinh con) chỉ giới trẻ hàn quốc do áp lực kinh tế mà phải từ bỏ chuyện yêu đương, cưới hỏi và sinh con. 청년실업 결혼 연애 사회풍자">
+        <article class="tiktok-card" data-id="100" data-era="smartphone" data-search="삼포세대 삼포세대 thế hệ 'từ bỏ 3 thứ' (không hẹn hò, không kết hôn, không sinh con) chỉ giới trẻ hàn quốc do áp lực kinh tế mà phải từ bỏ chuyện yêu đương, cưới hỏi và sinh con. 청년실업 결혼 연애 사회풍자">
           <div class="tiktok-top-bar">
             <div class="tiktok-user-info">
               <span class="user-avatar">🇻🇳</span>

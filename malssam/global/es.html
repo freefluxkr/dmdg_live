@@ -120,6 +120,204 @@
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 24px;
     }
+    
+    /* Battle Arena Banner */
+    .battle-arena-section {
+      max-width: 860px;
+      margin: 16px auto 24px;
+      padding: 0 20px;
+    }
+    .battle-inner-box {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.75) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 26px 22px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .battle-header-area {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .battle-top-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--gold);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      margin-bottom: 10px;
+    }
+    .battle-main-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .battle-main-heading span {
+      color: var(--gold);
+    }
+    .battle-sub-intro {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+    .battle-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+    }
+    .battle-choice-card {
+      background: rgba(17, 24, 39, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .battle-choice-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+    }
+    .battle-choice-card.card-office:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 14px 30px rgba(56, 189, 248, 0.25);
+    }
+    .battle-choice-card.card-culture:hover {
+      border-color: #f43f5e;
+      box-shadow: 0 14px 30px rgba(244, 114, 182, 0.25);
+    }
+    .battle-card-top-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .battle-card-icon {
+      font-size: 1.8rem;
+    }
+    .battle-card-chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .battle-choice-card.card-office .battle-card-chip {
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .battle-choice-card.card-culture .battle-card-chip {
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.3);
+    }
+    .battle-choice-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .battle-choice-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .battle-btn-action {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .battle-choice-card.card-office:hover .battle-btn-action {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+    .battle-choice-card.card-culture:hover .battle-btn-action {
+      background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+      border-color: #f472b6;
+      color: #fff;
+    }
+
+    /* Era Switcher Tabs */
+    .era-switcher-section {
+      max-width: 860px;
+      margin: 8px auto 26px;
+      padding: 0 20px;
+    }
+    .era-tabs-wrapper {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+    .era-tabs-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+    .era-tab-item {
+      flex: 1 0 auto;
+      min-width: 140px;
+      background: rgba(17, 24, 39, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      color: var(--muted);
+      text-align: center;
+    }
+    .era-tab-item:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+    .era-tab-item.active {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--gold);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+    .era-item-main {
+      font-size: 0.88rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .era-item-sub {
+      font-size: 0.72rem;
+      color: var(--dim, #64748b);
+    }
+    .era-tab-item.active .era-item-sub {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
     .flip-card-wrapper {
       background-color: transparent;
       height: 480px;
@@ -303,9 +501,73 @@
     </div>
   </section>
 
+  
+  <!-- ⚔️ Dual Battle Arena: Supervivencia en K-Drama & Máquina del Tiempo -->
+  <section class="battle-arena-section">
+    <div class="battle-inner-box">
+      <div class="battle-header-area">
+        <span class="battle-top-badge">⚔️ ARENA DE BATALLA K-DRAMA & K-POP</span>
+        <h2 class="battle-main-heading">Supervivencia en K-Drama & <span>Máquina del Tiempo K-Culture</span></h2>
+        <p class="battle-sub-intro">¿Entiendes a tu jefe coreano y a tus idols de K-Pop? ¡Mide tu nivel callejero en 5 preguntas!</p>
+      </div>
+      <div class="battle-cards-grid">
+        <div class="battle-choice-card card-office" onclick="openBattleQuiz('office')">
+          <div>
+            <div class="battle-card-top-row">
+              <span class="battle-card-icon">👔</span>
+              <span class="battle-card-chip">Supervivencia de Oficina</span>
+            </div>
+            <h3 class="battle-choice-title">"¿Sobrevivirías en una Oficina Coreana?"</h3>
+            <p class="battle-choice-desc">Descifra a los jefes Kkondae, el síndrome Nep (decir sí a todo), Young Forty y la renuncia silenciosa!</p>
+          </div>
+          <button class="battle-btn-action">
+            <span>🔥 Retar Supervivencia de Oficina</span>
+            <span>→</span>
+          </button>
+        </div>
+        <div class="battle-choice-card card-culture" onclick="openBattleQuiz('timemachine')">
+          <div>
+            <div class="battle-card-top-row">
+              <span class="battle-card-icon">🎧</span>
+              <span class="battle-card-chip">Máquina del Tiempo K-Culture</span>
+            </div>
+            <h3 class="battle-choice-title">"Del K-Pop Retro de los 90 a TikTok 2026"</h3>
+            <p class="battle-choice-desc">¡Acierta jerga retro de los 90 y memes virales como Lucky Vicky y Form Micheotta!</p>
+          </div>
+          <button class="battle-btn-action">
+            <span>🚀 Subir a la Máquina del Tiempo</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⏳ 4-Era Switcher Tabs -->
+  <section class="era-switcher-section">
+    <div class="era-tabs-wrapper">
+      <button class="era-tab-item active" data-era="all" onclick="switchEra('all')">
+        <span class="era-item-main">✨ Todas</span>
+        <span class="era-item-sub">100 palabras</span>
+      </button>
+      <button class="era-tab-item" data-era="latte" onclick="switchEra('latte')">
+        <span class="era-item-main">📼 1. K-Wave Retro</span>
+        <span class="era-item-sub">1990~2000s (27)</span>
+      </button>
+      <button class="era-tab-item" data-era="smartphone" onclick="switchEra('smartphone')">
+        <span class="era-item-main">📱 2. Era Dorada K-Drama</span>
+        <span class="era-item-sub">2010s (31)</span>
+      </button>
+      <button class="era-tab-item" data-era="shorts" onclick="switchEra('shorts')">
+        <span class="era-item-main">⚡ 3. Gen-Z y TikTok</span>
+        <span class="era-item-sub">2020~2026 (42)</span>
+      </button>
+    </div>
+  </section>
+
   <main class="fiesta-grid" id="slangFeed">
     
-        <div class="flip-card-wrapper" data-id="1" data-search="방가방가 방가방가 ¿qué onda? / ¡buenas! el mítico saludo de los chats de pc en los años 90 en corea. 인사 pc통신 레트로 천리안">
+        <div class="flip-card-wrapper" data-id="1" data-era="latte" data-search="방가방가 방가방가 ¿qué onda? / ¡buenas! el mítico saludo de los chats de pc en los años 90 en corea. 인사 pc통신 레트로 천리안">
           <div class="flip-card-inner" id="flip-inner-1">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -360,7 +622,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="2" data-search="하이루 하이루 ¡holis! / ¡hey! saludo amistoso de internet de principios de los 2000. 인사 pc통신 버디버디">
+        <div class="flip-card-wrapper" data-id="2" data-era="latte" data-search="하이루 하이루 ¡holis! / ¡hey! saludo amistoso de internet de principios de los 2000. 인사 pc통신 버디버디">
           <div class="flip-card-inner" id="flip-inner-2">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -415,7 +677,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="3" data-search="즐 즐 pasa de largo / ¡a otro perro con ese hueso! sarcástica palabra para cortar a alguien y mandarlo a paseo. 거절 싸이월드 스타크래프트 차단">
+        <div class="flip-card-wrapper" data-id="3" data-era="latte" data-search="즐 즐 pasa de largo / ¡a otro perro con ese hueso! sarcástica palabra para cortar a alguien y mandarlo a paseo. 거절 싸이월드 스타크래프트 차단">
           <div class="flip-card-inner" id="flip-inner-3">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -470,7 +732,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="4" data-search="otl 오티엘 / 엎드려좌절 derrotado de rodillas / hundido emoticono icónico donde o es la cabeza, t el torso y l las piernas arrodilladas de frustración. 좌절 상형문자 디시인사이드 이모티콘">
+        <div class="flip-card-wrapper" data-id="4" data-era="latte" data-search="otl 오티엘 / 엎드려좌절 derrotado de rodillas / hundido emoticono icónico donde o es la cabeza, t el torso y l las piernas arrodilladas de frustración. 좌절 상형문자 디시인사이드 이모티콘">
           <div class="flip-card-inner" id="flip-inner-4">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -525,7 +787,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="5" data-search="뷁 뷐 ¡qué rayada! / ¡maldita sea! grito absurdo coreano de los 2000 para expresar frustración total. 분노 황당 디시인사이드 아햏햏">
+        <div class="flip-card-wrapper" data-id="5" data-era="latte" data-search="뷁 뷐 ¡qué rayada! / ¡maldita sea! grito absurdo coreano de los 2000 para expresar frustración total. 분노 황당 디시인사이드 아햏햏">
           <div class="flip-card-inner" id="flip-inner-5">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -580,7 +842,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="6" data-search="간지 간지 estilazo / porte brutal término clásico de los 2000 para alguien que viste con estilazo imponente. 패션 스타일 동대문 소지섭">
+        <div class="flip-card-wrapper" data-id="6" data-era="latte" data-search="간지 간지 estilazo / porte brutal término clásico de los 2000 para alguien que viste con estilazo imponente. 패션 스타일 동대문 소지섭">
           <div class="flip-card-inner" id="flip-inner-6">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -635,7 +897,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="7" data-search="지못미 지몬미 perdón por no salvarte / f en el chat acrónimo cómico usado ante fotos vergonzosas o meteduras de pata épicas. 엽기 싸이월드 흑역사 축약어">
+        <div class="flip-card-wrapper" data-id="7" data-era="latte" data-search="지못미 지몬미 perdón por no salvarte / f en el chat acrónimo cómico usado ante fotos vergonzosas o meteduras de pata épicas. 엽기 싸이월드 흑역사 축약어">
           <div class="flip-card-inner" id="flip-inner-7">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -690,7 +952,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="8" data-search="킹왕짱 킹왕짱 el rey de reyes / lo más top del mundo superlativo triple mítico de los 2000 coreanos que significa 'lo más grande'. 극찬 게임 초딩 최고">
+        <div class="flip-card-wrapper" data-id="8" data-era="latte" data-search="킹왕짱 킹왕짱 el rey de reyes / lo más top del mundo superlativo triple mítico de los 2000 coreanos que significa 'lo más grande'. 극찬 게임 초딩 최고">
           <div class="flip-card-inner" id="flip-inner-8">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -745,7 +1007,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="9" data-search="안습 안습 lágrimas en los ojos / penita ajena abreviatura de 'ojos empañados', usada para situaciones tan tristes que dan risa y pena. 안타까움 지상렬 눈물 공중파예능">
+        <div class="flip-card-wrapper" data-id="9" data-era="latte" data-search="안습 안습 lágrimas en los ojos / penita ajena abreviatura de 'ojos empañados', usada para situaciones tan tristes que dan risa y pena. 안타까움 지상렬 눈물 공중파예능">
           <div class="flip-card-inner" id="flip-inner-9">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -800,7 +1062,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="10" data-search="얼짱 얼짱 ulzzang / carita de ángel viral término global coreano para designar a chicos y chicas con rostros perfectos en la red. 외모 하두리 싸이월드 인터넷스타">
+        <div class="flip-card-wrapper" data-id="10" data-era="latte" data-search="얼짱 얼짱 ulzzang / carita de ángel viral término global coreano para designar a chicos y chicas con rostros perfectos en la red. 외모 하두리 싸이월드 인터넷스타">
           <div class="flip-card-inner" id="flip-inner-10">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -855,7 +1117,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="11" data-search="몸짱 몸짱 cuerpazo / musculitos de revista palabra para elogiar a alguien con un cuerpo atlético y perfectamente esculpido. 피트니스 헬스 몸매 다이어트">
+        <div class="flip-card-wrapper" data-id="11" data-era="latte" data-search="몸짱 몸짱 cuerpazo / musculitos de revista palabra para elogiar a alguien con un cuerpo atlético y perfectamente esculpido. 피트니스 헬스 몸매 다이어트">
           <div class="flip-card-inner" id="flip-inner-11">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -910,7 +1172,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="12" data-search="훈남 훈남 chico dulce y carismático / el majo atractivo el típico chico que sin ser modelo seduce con su sonrisa cálida y amabilidad. 매력 이상형 다정함 캠퍼스">
+        <div class="flip-card-wrapper" data-id="12" data-era="latte" data-search="훈남 훈남 chico dulce y carismático / el majo atractivo el típico chico que sin ser modelo seduce con su sonrisa cálida y amabilidad. 매력 이상형 다정함 캠퍼스">
           <div class="flip-card-inner" id="flip-inner-12">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -965,7 +1227,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="13" data-search="엄친아 엄치나 el hijo de la vecina / el chico perfecto el mítico 'hijo de la amiga de mamá' que saca dieces y te hace quedar mal siempre. 비교 골방환상곡 완벽남 웹툰유래">
+        <div class="flip-card-wrapper" data-id="13" data-era="latte" data-search="엄친아 엄치나 el hijo de la vecina / el chico perfecto el mítico 'hijo de la amiga de mamá' que saca dieces y te hace quedar mal siempre. 비교 골방환상곡 완벽남 웹툰유래">
           <div class="flip-card-inner" id="flip-inner-13">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1020,7 +1282,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="14" data-search="된장녀 된장녀 posturera pija / aparentadora de lujo término polémico de los 2000 que criticaba a quienes gastaban en marcas caras sin tener dinero. 풍자 스타벅스 소비문화 사회적논쟁">
+        <div class="flip-card-wrapper" data-id="14" data-era="latte" data-search="된장녀 된장녀 posturera pija / aparentadora de lujo término polémico de los 2000 que criticaba a quienes gastaban en marcas caras sin tener dinero. 풍자 스타벅스 소비문화 사회적논쟁">
           <div class="flip-card-inner" id="flip-inner-14">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1075,7 +1337,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="15" data-search="담다디 담다디 damdadi / himno noventero rebelde canción mítica con pandereta que simbolizó la alegría rebelde de la generación x coreana. 이상은 강변가요제 x세대 추억의명곡">
+        <div class="flip-card-wrapper" data-id="15" data-era="latte" data-search="담다디 담다디 damdadi / himno noventero rebelde canción mítica con pandereta que simbolizó la alegría rebelde de la generación x coreana. 이상은 강변가요제 x세대 추억의명곡">
           <div class="flip-card-inner" id="flip-inner-15">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1130,7 +1392,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="16" data-search="8282 팔이팔이 8282 (¡rápido ya! / código de buscapersonas) código numérico de beeper que en coreano suena idéntico a '¡rápido, rápido!'. 삐삐 공중전화 숫자암호 x세대">
+        <div class="flip-card-wrapper" data-id="16" data-era="latte" data-search="8282 팔이팔이 8282 (¡rápido ya! / código de buscapersonas) código numérico de beeper que en coreano suena idéntico a '¡rápido, rápido!'. 삐삐 공중전화 숫자암호 x세대">
           <div class="flip-card-inner" id="flip-inner-16">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1185,7 +1447,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="17" data-search="0124 영일이사 0124 (te amaré por siempre) código romántico de beeper que fonéticamente significa 'te amaré por siempre'. 삐삐 사랑 숫자암호 아날로그낭만">
+        <div class="flip-card-wrapper" data-id="17" data-era="latte" data-search="0124 영일이사 0124 (te amaré por siempre) código romántico de beeper que fonéticamente significa 'te amaré por siempre'. 삐삐 사랑 숫자암호 아날로그낭만">
           <div class="flip-card-inner" id="flip-inner-17">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1240,7 +1502,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="18" data-search="도토리 도토리 dotori (bellotas virtuales de cyworld) la legendaria moneda virtual con la que millones compraban música de fondo y avatares. 싸이월드 bgm 미니홈피 프리스타일y">
+        <div class="flip-card-wrapper" data-id="18" data-era="latte" data-search="도토리 도토리 dotori (bellotas virtuales de cyworld) la legendaria moneda virtual con la que millones compraban música de fondo y avatares. 싸이월드 bgm 미니홈피 프리스타일y">
           <div class="flip-card-inner" id="flip-inner-18">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1295,7 +1557,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="19" data-search="일촌평 일촌평 dedicatoria de mejor amigo línea corta de estado que solo tus amigos más íntimos podían escribir en tu muro principal. 싸이월드 일촌 미니홈피 썸">
+        <div class="flip-card-wrapper" data-id="19" data-era="latte" data-search="일촌평 일촌평 dedicatoria de mejor amigo línea corta de estado que solo tus amigos más íntimos podían escribir en tu muro principal. 싸이월드 일촌 미니홈피 썸">
           <div class="flip-card-inner" id="flip-inner-19">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1350,7 +1612,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="20" data-search="십라 십라 miercoles / insulto antispam típico insulto alterado para burlar los filtros de groserías en los juegos en línea. 게임 필터링우회 욕설필터 스타크래프트">
+        <div class="flip-card-wrapper" data-id="20" data-era="latte" data-search="십라 십라 miercoles / insulto antispam típico insulto alterado para burlar los filtros de groserías en los juegos en línea. 게임 필터링우회 욕설필터 스타크래프트">
           <div class="flip-card-inner" id="flip-inner-20">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1405,7 +1667,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="21" data-search="멘붕 멘붕 colapso mental / en shock absoluto abreviatura de 'colapso mental' ante un desastre inesperado que te deja paralizado. 충격 멘탈붕괴 국민유행어 스타크래프트">
+        <div class="flip-card-wrapper" data-id="21" data-era="smartphone" data-search="멘붕 멘붕 colapso mental / en shock absoluto abreviatura de 'colapso mental' ante un desastre inesperado que te deja paralizado. 충격 멘탈붕괴 국민유행어 스타크래프트">
           <div class="flip-card-inner" id="flip-inner-21">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1460,7 +1722,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="22" data-search="꿀잼 꿀잼 divertidísimo / una pasada total slang que combina miel y diversión para decir que algo es superentretenido. 재미 극찬 영화 대유행">
+        <div class="flip-card-wrapper" data-id="22" data-era="smartphone" data-search="꿀잼 꿀잼 divertidísimo / una pasada total slang que combina miel y diversión para decir que algo es superentretenido. 재미 극찬 영화 대유행">
           <div class="flip-card-inner" id="flip-inner-22">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1515,7 +1777,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="23" data-search="노잼 노잼 aburrimiento total / un tostón fusión del inglés 'no' con 'diversión' en coreano para decir que algo es un muermo. 지루함 재미없음 아재개그 단호박">
+        <div class="flip-card-wrapper" data-id="23" data-era="smartphone" data-search="노잼 노잼 aburrimiento total / un tostón fusión del inglés 'no' con 'diversión' en coreano para decir que algo es un muermo. 지루함 재미없음 아재개그 단호박">
           <div class="flip-card-inner" id="flip-inner-23">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1570,7 +1832,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="24" data-search="심쿵 심쿵 flechazo al corazón / para morirse de amor sonido del corazón dando un vuelco ante algo increíblemente tierno o atractivo. 설렘 귀여움 고양이 로맨스">
+        <div class="flip-card-wrapper" data-id="24" data-era="smartphone" data-search="심쿵 심쿵 flechazo al corazón / para morirse de amor sonido del corazón dando un vuelco ante algo increíblemente tierno o atractivo. 설렘 귀여움 고양이 로맨스">
           <div class="flip-card-inner" id="flip-inner-24">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1625,7 +1887,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="25" data-search="금수저 금수저 cuchara de oro / nacido en cuna de oro versión coreana de 'nacer en cuna de oro', máxima categoría de la teoría de clases socioeconómicas. 수저계급론 사회풍자 양극화 재벌">
+        <div class="flip-card-wrapper" data-id="25" data-era="smartphone" data-search="금수저 금수저 cuchara de oro / nacido en cuna de oro versión coreana de 'nacer en cuna de oro', máxima categoría de la teoría de clases socioeconómicas. 수저계급론 사회풍자 양극화 재벌">
           <div class="flip-card-inner" id="flip-inner-25">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1680,7 +1942,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="26" data-search="흙수저 흑쑤저 cuchara de barro / sin un duro de familia término desgarrador para jóvenes que parten de cero sin herencia ni ayuda económica familiar. 수저계급론 청년고통 학자금대출 자조">
+        <div class="flip-card-wrapper" data-id="26" data-era="smartphone" data-search="흙수저 흑쑤저 cuchara de barro / sin un duro de familia término desgarrador para jóvenes que parten de cero sin herencia ni ayuda económica familiar. 수저계급론 청년고통 학자금대출 자조">
           <div class="flip-card-inner" id="flip-inner-26">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1735,7 +1997,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="27" data-search="팩폭 팩폭 bomba de verdad pura / zasca con datos abreviatura de 'violencia de hechos', lanzar una verdad tan irrefutable que destruye al rival. 팩트 돌직구 사이다 순살">
+        <div class="flip-card-wrapper" data-id="27" data-era="smartphone" data-search="팩폭 팩폭 bomba de verdad pura / zasca con datos abreviatura de 'violencia de hechos', lanzar una verdad tan irrefutable que destruye al rival. 팩트 돌직구 사이다 순살">
           <div class="flip-card-inner" id="flip-inner-27">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1790,7 +2052,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="28" data-search="빼박캔트 빼박캔트 pillado in fraganti / sin escapatoria posible fusión lingüística que indica que las pruebas son tan claras que no hay excusa que valga. 확정 발뺌불가 증거 말장난">
+        <div class="flip-card-wrapper" data-id="28" data-era="smartphone" data-search="빼박캔트 빼박캔트 pillado in fraganti / sin escapatoria posible fusión lingüística que indica que las pruebas son tan claras que no hay excusa que valga. 확정 발뺌불가 증거 말장난">
           <div class="flip-card-inner" id="flip-inner-28">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1845,7 +2107,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="29" data-search="갓생 갇생 vivir como un crack / rutina productiva llevar un estilo de vida súper disciplinado, productivo y saludable día tras día. 자기계발 모범생 성실 동기부여">
+        <div class="flip-card-wrapper" data-id="29" data-era="shorts" data-search="갓생 갇생 vivir como un crack / rutina productiva llevar un estilo de vida súper disciplinado, productivo y saludable día tras día. 자기계발 모범생 성실 동기부여">
           <div class="flip-card-inner" id="flip-inner-29">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1900,7 +2162,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="30" data-search="극혐 그켬 repulsión total / da un asco tremendo abreviatura de 'odio extremo', para expresar repudio absoluto ante actitudes groseras. 비매너 혐오 단호 비호감">
+        <div class="flip-card-wrapper" data-id="30" data-era="smartphone" data-search="극혐 그켬 repulsión total / da un asco tremendo abreviatura de 'odio extremo', para expresar repudio absoluto ante actitudes groseras. 비매너 혐오 단호 비호감">
           <div class="flip-card-inner" id="flip-inner-30">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -1955,7 +2217,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="31" data-search="츤데레 츤데레 duro por fuera blando por dentro / tsundere persona que finge frialdad e indiferencia pero en el fondo se preocupa y es superatenta. 반전매력 오다주웠다 드라마 다정함">
+        <div class="flip-card-wrapper" data-id="31" data-era="smartphone" data-search="츤데레 츤데레 duro por fuera blando por dentro / tsundere persona que finge frialdad e indiferencia pero en el fondo se preocupa y es superatenta. 반전매력 오다주웠다 드라마 다정함">
           <div class="flip-card-inner" id="flip-inner-31">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2010,7 +2272,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="32" data-search="케미 케미 química brutal / buena sintonía abreviatura de química para describir dos personas que encajan y se complementan a la perfección. 호흡 케미스트리 드라마 찰떡궁합">
+        <div class="flip-card-wrapper" data-id="32" data-era="smartphone" data-search="케미 케미 química brutal / buena sintonía abreviatura de química para describir dos personas que encajan y se complementan a la perfección. 호흡 케미스트리 드라마 찰떡궁합">
           <div class="flip-card-inner" id="flip-inner-32">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2065,7 +2327,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="33" data-search="답정너 답정너 pescar cumplidos / pregunta con trampa alguien que ya sabe la respuesta que quiere oír y te pregunta solo para que le des la razón. 칭찬유도 카카오톡 심리 질문">
+        <div class="flip-card-wrapper" data-id="33" data-era="smartphone" data-search="답정너 답정너 pescar cumplidos / pregunta con trampa alguien que ya sabe la respuesta que quiere oír y te pregunta solo para que le des la razón. 칭찬유도 카카오톡 심리 질문">
           <div class="flip-card-inner" id="flip-inner-33">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2120,7 +2382,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="34" data-search="낄끼빠빠 낄끼빠빠 saber cuándo meterse y cuándo retirarse / captar la indirecta mantra social coreano que significa saber cuándo participar y cuándo apartarse discretamente. 눈치 사회생활 센스 회식">
+        <div class="flip-card-wrapper" data-id="34" data-era="smartphone" data-search="낄끼빠빠 낄끼빠빠 saber cuándo meterse y cuándo retirarse / captar la indirecta mantra social coreano que significa saber cuándo participar y cuándo apartarse discretamente. 눈치 사회생활 센스 회식">
           <div class="flip-card-inner" id="flip-inner-34">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2175,7 +2437,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="35" data-search="안물안궁 안물안궁 ¿te he preguntado? / no me importa corte tajante que significa 'ni te he preguntado ni me interesa tu vida'. tmi 차단 자랑방어 카카오톡">
+        <div class="flip-card-wrapper" data-id="35" data-era="smartphone" data-search="안물안궁 안물안궁 ¿te he preguntado? / no me importa corte tajante que significa 'ni te he preguntado ni me interesa tu vida'. tmi 차단 자랑방어 카카오톡">
           <div class="flip-card-inner" id="flip-inner-35">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2230,7 +2492,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="36" data-search="솔까말 솔까말 para ser sinceros / hablando en plata abreviatura de 'hablando con toda franqueza', para soltar una opinión sin rodeos. 솔직함 직언 진심 회의">
+        <div class="flip-card-wrapper" data-id="36" data-era="smartphone" data-search="솔까말 솔까말 para ser sinceros / hablando en plata abreviatura de 'hablando con toda franqueza', para soltar una opinión sin rodeos. 솔직함 직언 진심 회의">
           <div class="flip-card-inner" id="flip-inner-36">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2285,7 +2547,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="37" data-search="어그로 어그로 clickbait polémico / provocar para llamar la atención término gamer que pasó a internet para referirse a crear polémica a propósito por visitas. 도발 관종 게임유래 유튜브">
+        <div class="flip-card-wrapper" data-id="37" data-era="smartphone" data-search="어그로 어그로 clickbait polémico / provocar para llamar la atención término gamer que pasó a internet para referirse a crear polémica a propósito por visitas. 도발 관종 게임유래 유튜브">
           <div class="flip-card-inner" id="flip-inner-37">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2340,7 +2602,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="38" data-search="현타 현타 golpe de realidad / momento de lucidez amarga abreviatura de 'momento de volver a la realidad', ese bajón cuando se disipa la euforia. 허탈 현실자각 멘붕 일상">
+        <div class="flip-card-wrapper" data-id="38" data-era="smartphone" data-search="현타 현타 golpe de realidad / momento de lucidez amarga abreviatura de 'momento de volver a la realidad', ese bajón cuando se disipa la euforia. 허탈 현실자각 멘붕 일상">
           <div class="flip-card-inner" id="flip-inner-38">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2395,7 +2657,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="39" data-search="이생망 이생망 esta vida ya no tiene arreglo / reiniciar en la otra vida acrónimo humorístico que significa 'esta vida ya está perdida, mejor renacer en la próxima'. 블랙유머 자조 청년현실 체념">
+        <div class="flip-card-wrapper" data-id="39" data-era="smartphone" data-search="이생망 이생망 esta vida ya no tiene arreglo / reiniciar en la otra vida acrónimo humorístico que significa 'esta vida ya está perdida, mejor renacer en la próxima'. 블랙유머 자조 청년현실 체념">
           <div class="flip-card-inner" id="flip-inner-39">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2450,7 +2712,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="40" data-search="소확행 소화캥 pequeños placeres / felicidad cotidiana la felicidad modesta pero certera que se encuentra en los pequeños momentos del día a día. 행복 힐링 일상 웰빙">
+        <div class="flip-card-wrapper" data-id="40" data-era="shorts" data-search="소확행 소화캥 pequeños placeres / felicidad cotidiana la felicidad modesta pero certera que se encuentra en los pequeños momentos del día a día. 행복 힐링 일상 웰빙">
           <div class="flip-card-inner" id="flip-inner-40">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2505,7 +2767,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="41" data-search="긁히다 글키다 picar / tocado en el orgullo ponerse a la defensiva o enfadarse cuando alguien te da en el punto débil con una verdad dolorosa. 감정 도발 심리전 mz유행어">
+        <div class="flip-card-wrapper" data-id="41" data-era="shorts" data-search="긁히다 글키다 picar / tocado en el orgullo ponerse a la defensiva o enfadarse cuando alguien te da en el punto débil con una verdad dolorosa. 감정 도발 심리전 mz유행어">
           <div class="flip-card-inner" id="flip-inner-41">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2560,7 +2822,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="42" data-search="중꺾마 중껑마 espíritu inquebrantable lo importante es nunca quebrantar el espíritu, mantener la fe hasta el último segundo. 동기부여 명언 스포츠 긍정">
+        <div class="flip-card-wrapper" data-id="42" data-era="shorts" data-search="중꺾마 중껑마 espíritu inquebrantable lo importante es nunca quebrantar el espíritu, mantener la fe hasta el último segundo. 동기부여 명언 스포츠 긍정">
           <div class="flip-card-inner" id="flip-inner-42">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2615,7 +2877,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="43" data-search="억까 억까 hate sin sentido / mala pata total criticar sin ningún fundamento, o sufrir una racha absurda de mala suerte. 불운 비난 게임 일상">
+        <div class="flip-card-wrapper" data-id="43" data-era="shorts" data-search="억까 억까 hate sin sentido / mala pata total criticar sin ningún fundamento, o sufrir una racha absurda de mala suerte. 불운 비난 게임 일상">
           <div class="flip-card-inner" id="flip-inner-43">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2670,7 +2932,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="44" data-search="알잘딱깔센 알잘딱깔센 fino y al detalle / impecable hacer las cosas con iniciativa propia, de manera limpia, elegante y sin necesidad de instrucciones. 직장생활 센스 일잘러 찬사">
+        <div class="flip-card-wrapper" data-id="44" data-era="shorts" data-search="알잘딱깔센 알잘딱깔센 fino y al detalle / impecable hacer las cosas con iniciativa propia, de manera limpia, elegante y sin necesidad de instrucciones. 직장생활 센스 일잘러 찬사">
           <div class="flip-card-inner" id="flip-inner-44">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2725,7 +2987,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="45" data-search="폼 미쳤다 폼 미첟따 está en su prime / modo bestia elogio rotundo cuando alguien muestra un nivel, físico o rendimiento fuera de serie. 극찬 감탄 트렌드 일상">
+        <div class="flip-card-wrapper" data-id="45" data-era="shorts" data-search="폼 미쳤다 폼 미첟따 está en su prime / modo bestia elogio rotundo cuando alguien muestra un nivel, físico o rendimiento fuera de serie. 극찬 감탄 트렌드 일상">
           <div class="flip-card-inner" id="flip-inner-45">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2780,7 +3042,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="46" data-search="핑프 핑프 preguntón vago / quiere todo masticado persona que ni se molesta en buscar en google y espera que otros le resuelvan la duda más simple. 대학생활 풍자 검색 게으름">
+        <div class="flip-card-wrapper" data-id="46" data-era="shorts" data-search="핑프 핑프 preguntón vago / quiere todo masticado persona que ni se molesta en buscar en google y espera que otros le resuelvan la duda más simple. 대학생활 풍자 검색 게으름">
           <div class="flip-card-inner" id="flip-inner-46">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2835,7 +3097,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="47" data-search="분좋카 분조카 cafetería con buen rollo / lugar instagrameable cafetería bonita, con buena iluminación y ambientación perfecta para fotos y relax. 라이프스타일 카페 데이트 감성">
+        <div class="flip-card-wrapper" data-id="47" data-era="shorts" data-search="분좋카 분조카 cafetería con buen rollo / lugar instagrameable cafetería bonita, con buena iluminación y ambientación perfecta para fotos y relax. 라이프스타일 카페 데이트 감성">
           <div class="flip-card-inner" id="flip-inner-47">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2890,7 +3152,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="48" data-search="럭키비키 너키비키 efecto lucky vicky / optimismo radical transformar cualquier contratiempo en una bendición de pura suerte con actitud positiva. 긍정 원영적사고 아이돌 행운">
+        <div class="flip-card-wrapper" data-id="48" data-era="shorts" data-search="럭키비키 너키비키 efecto lucky vicky / optimismo radical transformar cualquier contratiempo en una bendición de pura suerte con actitud positiva. 긍정 원영적사고 아이돌 행운">
           <div class="flip-card-inner" id="flip-inner-48">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -2945,7 +3207,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="49" data-search="추구미 추구미 estética soñada / look ideal la vibra, estilo visual o estética que uno aspira proyectar y alcanzar. 패션 스타일 트렌드 감성">
+        <div class="flip-card-wrapper" data-id="49" data-era="shorts" data-search="추구미 추구미 estética soñada / look ideal la vibra, estilo visual o estética que uno aspira proyectar y alcanzar. 패션 스타일 트렌드 감성">
           <div class="flip-card-inner" id="flip-inner-49">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3000,7 +3262,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="50" data-search="오히려 좋아 오히려 조아 ¡casi que mejor! / mucho mejor así aceptar un cambio imprevisto de planes viéndolo como una opción aún más ventajosa. 긍정 멘탈케어 일상 유행어">
+        <div class="flip-card-wrapper" data-id="50" data-era="shorts" data-search="오히려 좋아 오히려 조아 ¡casi que mejor! / mucho mejor así aceptar un cambio imprevisto de planes viéndolo como una opción aún más ventajosa. 긍정 멘탈케어 일상 유행어">
           <div class="flip-card-inner" id="flip-inner-50">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3055,7 +3317,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="51" data-search="누칼협 누칼협 ¿alguien te puso una pistola en la cabeza? / apechuga duro recordatorio a quien se queja de las consecuencias de una decisión que tomó libremente. 팩트폭격 사이다 직장 현실">
+        <div class="flip-card-wrapper" data-id="51" data-era="shorts" data-search="누칼협 누칼협 ¿alguien te puso una pistola en la cabeza? / apechuga duro recordatorio a quien se queja de las consecuencias de una decisión que tomó libremente. 팩트폭격 사이다 직장 현실">
           <div class="flip-card-inner" id="flip-inner-51">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3110,7 +3372,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="52" data-search="뇌절 뇌절 rayar el disco / pasarse de la raya repetir una broma o actitud hasta el cansancio, arruinando el ambiente. 눈치 선넘음 커뮤니티 경고">
+        <div class="flip-card-wrapper" data-id="52" data-era="shorts" data-search="뇌절 뇌절 rayar el disco / pasarse de la raya repetir una broma o actitud hasta el cansancio, arruinando el ambiente. 눈치 선넘음 커뮤니티 경고">
           <div class="flip-card-inner" id="flip-inner-52">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3165,7 +3427,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="53" data-search="스불재 스불재 cavar mi propia tumba / buscarse la ruina sufrir las consecuencias desagradables que uno mismo se buscó por pereza o imprudencia. 자업자득 일상 대학생 자조">
+        <div class="flip-card-wrapper" data-id="53" data-era="shorts" data-search="스불재 스불재 cavar mi propia tumba / buscarse la ruina sufrir las consecuencias desagradables que uno mismo se buscó por pereza o imprudencia. 자업자득 일상 대학생 자조">
           <div class="flip-card-inner" id="flip-inner-53">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3220,7 +3482,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="54" data-search="킹받네 킹받네 da una rabia que flipas / qué coraje da estar molesto de forma cómica ante la actitud presumida y chulesca de alguien. 분노 얄미움 침착맨 인터넷밈">
+        <div class="flip-card-wrapper" data-id="54" data-era="shorts" data-search="킹받네 킹받네 da una rabia que flipas / qué coraje da estar molesto de forma cómica ante la actitud presumida y chulesca de alguien. 분노 얄미움 침착맨 인터넷밈">
           <div class="flip-card-inner" id="flip-inner-54">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3275,7 +3537,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="55" data-search="어쩔티비 어쩔티비 ¿y a mí qué? vete a ver la tele respuesta infantil y burlona para cortar en seco los reproches o regaños de los demás. 알파세대 초딩 반격 유치">
+        <div class="flip-card-wrapper" data-id="55" data-era="shorts" data-search="어쩔티비 어쩔티비 ¿y a mí qué? vete a ver la tele respuesta infantil y burlona para cortar en seco los reproches o regaños de los demás. 알파세대 초딩 반격 유치">
           <div class="flip-card-inner" id="flip-inner-55">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3330,7 +3592,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="56" data-search="점메추 점메추 ¿recomendación para comer? / ¿qué comemos? abreviatura para pedir sugerencias de qué almorzar cuando no se sabe qué elegir. 음식 직장인 일상 점심">
+        <div class="flip-card-wrapper" data-id="56" data-era="shorts" data-search="점메추 점메추 ¿recomendación para comer? / ¿qué comemos? abreviatura para pedir sugerencias de qué almorzar cuando no se sabe qué elegir. 음식 직장인 일상 점심">
           <div class="flip-card-inner" id="flip-inner-56">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3385,7 +3647,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="57" data-search="군싹 군싹 se me hace la boca agua / qué antojo expresión al ver comida deliciosa o algo tan tentador que despierta las ganas al instante. 음식 루피 식욕 기대">
+        <div class="flip-card-wrapper" data-id="57" data-era="shorts" data-search="군싹 군싹 se me hace la boca agua / qué antojo expresión al ver comida deliciosa o algo tan tentador que despierta las ganas al instante. 음식 루피 식욕 기대">
           <div class="flip-card-inner" id="flip-inner-57">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3440,7 +3702,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="58" data-search="캘박 캘박 fichado en el calendario / agendado a fuego guardar un compromiso en el calendario del móvil para no olvidarlo bajo ninguna circunstancia. 약속 일정 직장인 스마트폰">
+        <div class="flip-card-wrapper" data-id="58" data-era="shorts" data-search="캘박 캘박 fichado en el calendario / agendado a fuego guardar un compromiso en el calendario del móvil para no olvidarlo bajo ninguna circunstancia. 약속 일정 직장인 스마트폰">
           <div class="flip-card-inner" id="flip-inner-58">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3495,7 +3757,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="59" data-search="디토 디토 copiar el estilo / comprar a ciegas por recomendación seguir fielmente el gusto o compra de otra persona por pura afinidad y confianza. 소비 트렌드 뉴진스 동의">
+        <div class="flip-card-wrapper" data-id="59" data-era="shorts" data-search="디토 디토 copiar el estilo / comprar a ciegas por recomendación seguir fielmente el gusto o compra de otra persona por pura afinidad y confianza. 소비 트렌드 뉴진스 동의">
           <div class="flip-card-inner" id="flip-inner-59">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3550,7 +3812,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="60" data-search="내또출 내또출 mañana a currar otra vez / depresión del domingo el lamento del domingo por la noche al recordar que toca volver a madrugar y trabajar al día siguiente. 직장인 월요병 출근 비명">
+        <div class="flip-card-wrapper" data-id="60" data-era="shorts" data-search="내또출 내또출 mañana a currar otra vez / depresión del domingo el lamento del domingo por la noche al recordar que toca volver a madrugar y trabajar al día siguiente. 직장인 월요병 출근 비명">
           <div class="flip-card-inner" id="flip-inner-60">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3605,7 +3867,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="61" data-search="완내스 완내스 totalmente mi rollo / justo mi estilo expresión para indicar que algo o alguien encaja al cien por cien con tus gustos. 취향저격 패션 쇼핑 호감">
+        <div class="flip-card-wrapper" data-id="61" data-era="shorts" data-search="완내스 완내스 totalmente mi rollo / justo mi estilo expresión para indicar que algo o alguien encaja al cien por cien con tus gustos. 취향저격 패션 쇼핑 호감">
           <div class="flip-card-inner" id="flip-inner-61">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3660,7 +3922,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="62" data-search="무물 무물 pregúntame lo que sea / cajita de preguntas sesión de preguntas y respuestas en instagram stories donde te pueden preguntar cualquier tema. 인스타그램 sns 소통 q&a">
+        <div class="flip-card-wrapper" data-id="62" data-era="shorts" data-search="무물 무물 pregúntame lo que sea / cajita de preguntas sesión de preguntas y respuestas en instagram stories donde te pueden preguntar cualquier tema. 인스타그램 sns 소통 q&a">
           <div class="flip-card-inner" id="flip-inner-62">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3715,7 +3977,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="63" data-search="막이래 마기래 es broma / ¡qué va, es coña! frase que se añade tras un cumplido exagerado o una broma para quitarle seriedad entre risas. 농담 너스레 유머 추임새">
+        <div class="flip-card-wrapper" data-id="63" data-era="shorts" data-search="막이래 마기래 es broma / ¡qué va, es coña! frase que se añade tras un cumplido exagerado o una broma para quitarle seriedad entre risas. 농담 너스레 유머 추임새">
           <div class="flip-card-inner" id="flip-inner-63">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3770,7 +4032,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="64" data-search="h워얼v 사랑해 código secreto 'te quiero' invertido un código romántico donde al girar la palabra coreana 'saranghae' parece el texto h워얼v. 연애 고백 암호 로맨스">
+        <div class="flip-card-wrapper" data-id="64" data-era="shorts" data-search="h워얼v 사랑해 código secreto 'te quiero' invertido un código romántico donde al girar la palabra coreana 'saranghae' parece el texto h워얼v. 연애 고백 암호 로맨스">
           <div class="flip-card-inner" id="flip-inner-64">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3825,7 +4087,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="65" data-search="자만추 자만추 amor orgánico / conocerse sin citas a ciegas preferencia por enamorarse de manera espontánea en la vida cotidiana antes que en citas concertadas. 연애 소개팅 가치관 일상">
+        <div class="flip-card-wrapper" data-id="65" data-era="shorts" data-search="자만추 자만추 amor orgánico / conocerse sin citas a ciegas preferencia por enamorarse de manera espontánea en la vida cotidiana antes que en citas concertadas. 연애 소개팅 가치관 일상">
           <div class="flip-card-inner" id="flip-inner-65">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3880,7 +4142,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="66" data-search="사바사 사바사 depende de la persona / cada quien es un mundo indica que las circunstancias o experiencias cambian radicalmente según el individuo. 인간관계 다양성 케바케 직장">
+        <div class="flip-card-wrapper" data-id="66" data-era="shorts" data-search="사바사 사바사 depende de la persona / cada quien es un mundo indica que las circunstancias o experiencias cambian radicalmente según el individuo. 인간관계 다양성 케바케 직장">
           <div class="flip-card-inner" id="flip-inner-66">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3935,7 +4197,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="67" data-search="tmi 티엠아이 información innecesaria / dato random contar un detalle muy íntimo o trivial que nadie había pedido saber, en tono bromista. 토크 스몰토크 일상 글로벌">
+        <div class="flip-card-wrapper" data-id="67" data-era="shorts" data-search="tmi 티엠아이 información innecesaria / dato random contar un detalle muy íntimo o trivial que nadie había pedido saber, en tono bromista. 토크 스몰토크 일상 글로벌">
           <div class="flip-card-inner" id="flip-inner-67">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -3990,7 +4252,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="68" data-search="반모 반모 tutearse / hablar de tú a tú acordar dejar el trato formal de usted para hablar con confianza y cercanía. 친밀함 sns 10대 친구">
+        <div class="flip-card-wrapper" data-id="68" data-era="shorts" data-search="반모 반모 tutearse / hablar de tú a tú acordar dejar el trato formal de usted para hablar con confianza y cercanía. 친밀함 sns 10대 친구">
           <div class="flip-card-inner" id="flip-inner-68">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4045,7 +4307,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="69" data-search="영포티 영포티 cuarentón que se cree chaval / cuarentón intentando ser gen z término satírico para adultos de 40 años que intentan desesperadamente vestir y hablar como adolescentes. 세대갈등 직장생활 패션 풍자">
+        <div class="flip-card-wrapper" data-id="69" data-era="shorts" data-search="영포티 영포티 cuarentón que se cree chaval / cuarentón intentando ser gen z término satírico para adultos de 40 años que intentan desesperadamente vestir y hablar como adolescentes. 세대갈등 직장생활 패션 풍자">
           <div class="flip-card-inner" id="flip-inner-69">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4100,7 +4362,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="70" data-search="영ㅋㅋ 영크크 súper 'joven' jaja / qué cringe tu intento de molar comentario sarcástico cuando un superior usa jerga juvenil de manera patética. 반어법 조롱 직장인 세대차이">
+        <div class="flip-card-wrapper" data-id="70" data-era="shorts" data-search="영ㅋㅋ 영크크 súper 'joven' jaja / qué cringe tu intento de molar comentario sarcástico cuando un superior usa jerga juvenil de manera patética. 반어법 조롱 직장인 세대차이">
           <div class="flip-card-inner" id="flip-inner-70">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4155,7 +4417,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="71" data-search="잼민이 잼미니 niño rata / crío insoportable de internet término para niños maleducados que insultan y sabotean partidas online. 초등학생 게임 온라인 풍자">
+        <div class="flip-card-wrapper" data-id="71" data-era="shorts" data-search="잼민이 잼미니 niño rata / crío insoportable de internet término para niños maleducados que insultan y sabotean partidas online. 초등학생 게임 온라인 풍자">
           <div class="flip-card-inner" id="flip-inner-71">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4210,7 +4472,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="72" data-search="넵병 넵뼝 síndrome de 'oído cocina' en slack / síndrome del '¡oído!' compulsión de responder siempre '¡entendido!' o '¡oído!' en el chat de trabajo para parecer servicial y educado. 직장인 슬랙 생존전략 회사생활">
+        <div class="flip-card-wrapper" data-id="72" data-era="shorts" data-search="넵병 넵뼝 síndrome de 'oído cocina' en slack / síndrome del '¡oído!' compulsión de responder siempre '¡entendido!' o '¡oído!' en el chat de trabajo para parecer servicial y educado. 직장인 슬랙 생존전략 회사생활">
           <div class="flip-card-inner" id="flip-inner-72">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4265,7 +4527,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="73" data-search="조용한 사직 조용한 사직 renuncia silenciosa / cumplir lo justo e irte hacer estrictamente el trabajo por el que te pagan sin regalar ni un minuto extra a la empresa. 직장인 워라밸 번아웃 mz세대">
+        <div class="flip-card-wrapper" data-id="73" data-era="shorts" data-search="조용한 사직 조용한 사직 renuncia silenciosa / cumplir lo justo e irte hacer estrictamente el trabajo por el que te pagan sin regalar ni un minuto extra a la empresa. 직장인 워라밸 번아웃 mz세대">
           <div class="flip-card-inner" id="flip-inner-73">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4320,7 +4582,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="74" data-search="알빠노 알빠노 ¿y a mí qué me importa? / me da exactamente igual frase para cortar de raíz críticas o comentarios ajenos mostrando total indiferencia. 마이웨이 쿨함 무관심 숏폼밈">
+        <div class="flip-card-wrapper" data-id="74" data-era="shorts" data-search="알빠노 알빠노 ¿y a mí qué me importa? / me da exactamente igual frase para cortar de raíz críticas o comentarios ajenos mostrando total indiferencia. 마이웨이 쿨함 무관심 숏폼밈">
           <div class="flip-card-inner" id="flip-inner-74">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4375,7 +4637,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="75" data-search="할매니얼 할매니얼 estética 'grandma' milenial / moda de abuelita jóvenes amantes de la repostería tradicional coreana y la ropa retro acogedora. 디저트 약과 레트로 트렌드">
+        <div class="flip-card-wrapper" data-id="75" data-era="shorts" data-search="할매니얼 할매니얼 estética 'grandma' milenial / moda de abuelita jóvenes amantes de la repostería tradicional coreana y la ropa retro acogedora. 디저트 약과 레트로 트렌드">
           <div class="flip-card-inner" id="flip-inner-75">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4430,7 +4692,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="76" data-search="퐁퐁남 퐁퐁남 marido pagafantas sometido a la paga semanal término que describe al marido que entrega su sueldo íntegro y hace todas las tareas domésticas por una propina. 결혼 가사 자조 사회풍자">
+        <div class="flip-card-wrapper" data-id="76" data-era="shorts" data-search="퐁퐁남 퐁퐁남 marido pagafantas sometido a la paga semanal término que describe al marido que entrega su sueldo íntegro y hace todas las tareas domésticas por una propina. 결혼 가사 자조 사회풍자">
           <div class="flip-card-inner" id="flip-inner-76">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4485,7 +4747,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="77" data-search="오팔세대 오팔세대 generación sénior activa / jubilados vip personas de 50-60 años con poder adquisitivo que disfrutan activamente del deporte y el ocio. 액티브시니어 베이비부머 인생2막 소비">
+        <div class="flip-card-wrapper" data-id="77" data-era="shorts" data-search="오팔세대 오팔세대 generación sénior activa / jubilados vip personas de 50-60 años con poder adquisitivo que disfrutan activamente del deporte y el ocio. 액티브시니어 베이비부머 인생2막 소비">
           <div class="flip-card-inner" id="flip-inner-77">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4540,7 +4802,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="78" data-search="쿠쿠루삥뽕 쿠쿠루삥뽕 risa burlona de troll irritante onomatopeya coreana irritante usada para reírse en la cara de un rival que acaba de pifiarla. 약올리기 도발 트위치 게임밈">
+        <div class="flip-card-wrapper" data-id="78" data-era="shorts" data-search="쿠쿠루삥뽕 쿠쿠루삥뽕 risa burlona de troll irritante onomatopeya coreana irritante usada para reírse en la cara de un rival que acaba de pifiarla. 약올리기 도발 트위치 게임밈">
           <div class="flip-card-inner" id="flip-inner-78">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4595,7 +4857,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="79" data-search="꼰대 꼰대 kkondae / viejo carca y mandón palabra coreana reconocida por la bbc: jefe autoritario que sermonea con batallitas del pasado. 세대갈등 직장상사 훈계 bbc선정">
+        <div class="flip-card-wrapper" data-id="79" data-era="smartphone" data-search="꼰대 꼰대 kkondae / viejo carca y mandón palabra coreana reconocida por la bbc: jefe autoritario que sermonea con batallitas del pasado. 세대갈등 직장상사 훈계 bbc선정">
           <div class="flip-card-inner" id="flip-inner-79">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4650,7 +4912,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="80" data-search="월급루팡 월긍누팡 ladrón de sueldos / calientasillas profesional metáfora que compara con arsenio lupin a los empleados que no pegan un palo al agua y cobran su nómina. 직장인 풍자 딴짓 회사생활">
+        <div class="flip-card-wrapper" data-id="80" data-era="smartphone" data-search="월급루팡 월긍누팡 ladrón de sueldos / calientasillas profesional metáfora que compara con arsenio lupin a los empleados que no pegan un palo al agua y cobran su nómina. 직장인 풍자 딴짓 회사생활">
           <div class="flip-card-inner" id="flip-inner-80">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4705,7 +4967,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="81" data-search="아재체 아재체 mensajes estilo señor mayor con mil emoticonos forma típica de escribir de los hombres de mediana edad, saturada de tildes (~~), sudor (^^;) y puntos. 카톡말투 중년 이모지 직장메신저">
+        <div class="flip-card-wrapper" data-id="81" data-era="smartphone" data-search="아재체 아재체 mensajes estilo señor mayor con mil emoticonos forma típica de escribir de los hombres de mediana edad, saturada de tildes (~~), sudor (^^;) y puntos. 카톡말투 중년 이모지 직장메신저">
           <div class="flip-card-inner" id="flip-inner-81">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4760,7 +5022,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="82" data-search="개저씨 개저씨 señoro machista e impresentable término despectivo para hombres maduros maleducados que abusan de su poder o faltan al respeto. 민폐 갑질 사회비판 공공예절">
+        <div class="flip-card-wrapper" data-id="82" data-era="smartphone" data-search="개저씨 개저씨 señoro machista e impresentable término despectivo para hombres maduros maleducados que abusan de su poder o faltan al respeto. 민폐 갑질 사회비판 공공예절">
           <div class="flip-card-inner" id="flip-inner-82">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4815,7 +5077,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="83" data-search="스라밸 스라밸 equilibrio estudio-vida para estudiantes versión estudiantil de la conciliación laboral, defendiendo el descanso de los jóvenes ante la presión académica. 학업 학생 워라밸 청소년">
+        <div class="flip-card-wrapper" data-id="83" data-era="smartphone" data-search="스라밸 스라밸 equilibrio estudio-vida para estudiantes versión estudiantil de la conciliación laboral, defendiendo el descanso de los jóvenes ante la presión académica. 학업 학생 워라밸 청소년">
           <div class="flip-card-inner" id="flip-inner-83">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4870,7 +5132,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="84" data-search="일태기 일태기 crisis de hastío laboral / bache profesional sentimiento similar al desamor en una pareja, pero aplicado al trabajo cuando pierdes toda la motivación. 직장인 권태기 번아웃 무기력">
+        <div class="flip-card-wrapper" data-id="84" data-era="smartphone" data-search="일태기 일태기 crisis de hastío laboral / bache profesional sentimiento similar al desamor en una pareja, pero aplicado al trabajo cuando pierdes toda la motivación. 직장인 권태기 번아웃 무기력">
           <div class="flip-card-inner" id="flip-inner-84">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4925,7 +5187,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="85" data-search="퇴준생 퇴준생 trabajador preparando su dimisión / buscador de trabajo encubierto empleado que desde el primer día está preparando su cv y formándose para saltar a otra empresa. 이직 퇴사 직장인 스펙업">
+        <div class="flip-card-wrapper" data-id="85" data-era="smartphone" data-search="퇴준생 퇴준생 trabajador preparando su dimisión / buscador de trabajo encubierto empleado que desde el primer día está preparando su cv y formándose para saltar a otra empresa. 이직 퇴사 직장인 스펙업">
           <div class="flip-card-inner" id="flip-inner-85">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -4980,7 +5242,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="86" data-search="내로남불 내로남불 doble rasero hipócrita / la ley del embudo expresión clásica coreana para criticar a quien se perdona todo a sí mismo pero juzga con crueldad a los demás. 이중잣대 위선 정치 국민유행어">
+        <div class="flip-card-wrapper" data-id="86" data-era="smartphone" data-search="내로남불 내로남불 doble rasero hipócrita / la ley del embudo expresión clásica coreana para criticar a quien se perdona todo a sí mismo pero juzga con crueldad a los demás. 이중잣대 위선 정치 국민유행어">
           <div class="flip-card-inner" id="flip-inner-86">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5035,7 +5297,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="87" data-search="가심비 가심비 relación satisfacción emocional-precio gastar dinero en algo caro solo por la tremenda alegría y paz mental que te produce. 소비 힐링 만족감 오마카세">
+        <div class="flip-card-wrapper" data-id="87" data-era="smartphone" data-search="가심비 가심비 relación satisfacción emocional-precio gastar dinero en algo caro solo por la tremenda alegría y paz mental que te produce. 소비 힐링 만족감 오마카세">
           <div class="flip-card-inner" id="flip-inner-87">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5090,7 +5352,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="88" data-search="주린이 주리니 bebé de la bolsa / inversor novato término cariñoso para principiantes que acaban de empezar a invertir en acciones sin saber mucho. 주식 재테크 초보 동학개미">
+        <div class="flip-card-wrapper" data-id="88" data-era="smartphone" data-search="주린이 주리니 bebé de la bolsa / inversor novato término cariñoso para principiantes que acaban de empezar a invertir en acciones sin saber mucho. 주식 재테크 초보 동학개미">
           <div class="flip-card-inner" id="flip-inner-88">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5145,7 +5407,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="89" data-search="취존 취존 para gustos los colores / respeta mis gustos regla de oro de internet que pide no juzgar ni criticar las aficiones o preferencias raras de los demás. 존중 개성 오타쿠 서브컬처">
+        <div class="flip-card-wrapper" data-id="89" data-era="latte" data-search="취존 취존 para gustos los colores / respeta mis gustos regla de oro de internet que pide no juzgar ni criticar las aficiones o preferencias raras de los demás. 존중 개성 오타쿠 서브컬처">
           <div class="flip-card-inner" id="flip-inner-89">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5200,7 +5462,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="90" data-search="모태솔로 모태쏠로 soltero de nacimiento / nunca ha tenido pareja expresión cómica para alguien que jamás ha tenido novia o novio desde el día en que nació. 연애 솔로 자조 국민유행어">
+        <div class="flip-card-wrapper" data-id="90" data-era="latte" data-search="모태솔로 모태쏠로 soltero de nacimiento / nunca ha tenido pareja expresión cómica para alguien que jamás ha tenido novia o novio desde el día en que nació. 연애 솔로 자조 국민유행어">
           <div class="flip-card-inner" id="flip-inner-90">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5255,7 +5517,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="91" data-search="금사빠 금사빠 enamoradizo compulsivo / se pilla a la primera persona que se enamora locamente en cuestión de segundos por una simple sonrisa de cortesía. 연애 짝사랑 감정 일상">
+        <div class="flip-card-wrapper" data-id="91" data-era="latte" data-search="금사빠 금사빠 enamoradizo compulsivo / se pilla a la primera persona que se enamora locamente en cuestión de segundos por una simple sonrisa de cortesía. 연애 짝사랑 감정 일상">
           <div class="flip-card-inner" id="flip-inner-91">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5310,7 +5572,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="92" data-search="아햏햏 아햏햏 a-haeh-haeh / suspiro zen del internet primitivo legendaria exclamación dadaísta de principios de los 2000 que expresa una extraña iluminación budista ante la desgracia. 햏자 득도 디시인사이드 원조인터넷밈">
+        <div class="flip-card-wrapper" data-id="92" data-era="latte" data-search="아햏햏 아햏햏 a-haeh-haeh / suspiro zen del internet primitivo legendaria exclamación dadaísta de principios de los 2000 que expresa una extraña iluminación budista ante la desgracia. 햏자 득도 디시인사이드 원조인터넷밈">
           <div class="flip-card-inner" id="flip-inner-92">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5365,7 +5627,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="93" data-search="싱하형 싱하형 el hermano sing-ha / el justiciero del puente en 10 segundos meme legendario de los 2000 con la cara de bruce lee que amenazaba a los trolls con esperarlos bajo el puente en 10 segundos. 이소룡 굴다리 짤방 레전드">
+        <div class="flip-card-wrapper" data-id="93" data-era="latte" data-search="싱하형 싱하형 el hermano sing-ha / el justiciero del puente en 10 segundos meme legendario de los 2000 con la cara de bruce lee que amenazaba a los trolls con esperarlos bajo el puente en 10 segundos. 이소룡 굴다리 짤방 레전드">
           <div class="flip-card-inner" id="flip-inner-93">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5420,7 +5682,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="94" data-search="폐인 폐인 ermitaño de cibercafé / viciado sin vida término de los 2000 para los internautas que pasaban noches enteras jugando a starcraft a base de fideos instantáneos. pc방 스타크래프트 밤샘 몰입">
+        <div class="flip-card-wrapper" data-id="94" data-era="latte" data-search="폐인 폐인 ermitaño de cibercafé / viciado sin vida término de los 2000 para los internautas que pasaban noches enteras jugando a starcraft a base de fideos instantáneos. pc방 스타크래프트 밤샘 몰입">
           <div class="flip-card-inner" id="flip-inner-94">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5475,7 +5737,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="95" data-search="따봉 따봉 ¡dda-bong! (¡pulgar arriba, de categoría!) del portugués 'está bom', popularizado por un mítico anuncio de zumos en 1989 como la máxima alabanza con el pulgar arriba. 레트로원조 cf유행어 엄지척 x세대">
+        <div class="flip-card-wrapper" data-id="95" data-era="latte" data-search="따봉 따봉 ¡dda-bong! (¡pulgar arriba, de categoría!) del portugués 'está bom', popularizado por un mítico anuncio de zumos en 1989 como la máxima alabanza con el pulgar arriba. 레트로원조 cf유행어 엄지척 x세대">
           <div class="flip-card-inner" id="flip-inner-95">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5530,7 +5792,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="96" data-search="플렉스 플렉스 flexear / fardar de pasta y lujos presumir de dinero o compras caras dándose un capricho ostentoso. 소비 명품 힙합 과시">
+        <div class="flip-card-wrapper" data-id="96" data-era="smartphone" data-search="플렉스 플렉스 flexear / fardar de pasta y lujos presumir de dinero o compras caras dándose un capricho ostentoso. 소비 명품 힙합 과시">
           <div class="flip-card-inner" id="flip-inner-96">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5585,7 +5847,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="97" data-search="돈쭐 돈쭐 boicot positivo / forrar a un negocio benéfico llenar de pedidos e ingresos a un negocio humilde que ayuda a los necesitados para premiar su generosidad. 선한영향력 착한가게 미담 소비">
+        <div class="flip-card-wrapper" data-id="97" data-era="shorts" data-search="돈쭐 돈쭐 boicot positivo / forrar a un negocio benéfico llenar de pedidos e ingresos a un negocio humilde que ayuda a los necesitados para premiar su generosidad. 선한영향력 착한가게 미담 소비">
           <div class="flip-card-inner" id="flip-inner-97">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5640,7 +5902,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="98" data-search="텍스트 힙 텍스트 힙 text hip / estética lectora intelectual tendencia de 2026 entre la gen z que cambia los vídeos cortos por novelas en papel como símbolo de elegancia intelectual. 독서 종이책 2026트렌드 도파민디톡스">
+        <div class="flip-card-wrapper" data-id="98" data-era="shorts" data-search="텍스트 힙 텍스트 힙 text hip / estética lectora intelectual tendencia de 2026 entre la gen z que cambia los vídeos cortos por novelas en papel como símbolo de elegancia intelectual. 독서 종이책 2026트렌드 도파민디톡스">
           <div class="flip-card-inner" id="flip-inner-98">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5695,7 +5957,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="99" data-search="워라밸 워라밸 conciliación laboral y personal / work-life balance priorizar el descanso y el tiempo libre frente a la cultura tóxica de hacer horas extras. 직장인 퇴근 저녁이있는삶 균형">
+        <div class="flip-card-wrapper" data-id="99" data-era="smartphone" data-search="워라밸 워라밸 conciliación laboral y personal / work-life balance priorizar el descanso y el tiempo libre frente a la cultura tóxica de hacer horas extras. 직장인 퇴근 저녁이있는삶 균형">
           <div class="flip-card-inner" id="flip-inner-99">
             <!-- Front Face -->
             <div class="flip-card-front">
@@ -5750,7 +6012,7 @@
           </div>
         </div>
         
-        <div class="flip-card-wrapper" data-id="100" data-search="삼포세대 삼포세대 generación sampo / la generación que renuncia a todo término para los jóvenes que, asfixiados por la precariedad, renuncian al amor, al matrimonio y a tener hijos. 청년실업 결혼 연애 사회풍자">
+        <div class="flip-card-wrapper" data-id="100" data-era="smartphone" data-search="삼포세대 삼포세대 generación sampo / la generación que renuncia a todo término para los jóvenes que, asfixiados por la precariedad, renuncian al amor, al matrimonio y a tener hijos. 청년실업 결혼 연애 사회풍자">
           <div class="flip-card-inner" id="flip-inner-100">
             <!-- Front Face -->
             <div class="flip-card-front">

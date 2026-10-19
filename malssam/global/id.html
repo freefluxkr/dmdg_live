@@ -145,6 +145,204 @@
       opacity: 0.35;
       z-index: 1;
     }
+    
+    /* Battle Arena Banner */
+    .battle-arena-section {
+      max-width: 860px;
+      margin: 16px auto 24px;
+      padding: 0 20px;
+    }
+    .battle-inner-box {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.75) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 26px 22px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .battle-header-area {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .battle-top-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--sky);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      margin-bottom: 10px;
+    }
+    .battle-main-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .battle-main-heading span {
+      color: var(--sky);
+    }
+    .battle-sub-intro {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+    .battle-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+    }
+    .battle-choice-card {
+      background: rgba(17, 24, 39, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .battle-choice-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+    }
+    .battle-choice-card.card-office:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 14px 30px rgba(56, 189, 248, 0.25);
+    }
+    .battle-choice-card.card-culture:hover {
+      border-color: #f472b6;
+      box-shadow: 0 14px 30px rgba(244, 114, 182, 0.25);
+    }
+    .battle-card-top-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .battle-card-icon {
+      font-size: 1.8rem;
+    }
+    .battle-card-chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .battle-choice-card.card-office .battle-card-chip {
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .battle-choice-card.card-culture .battle-card-chip {
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.3);
+    }
+    .battle-choice-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .battle-choice-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .battle-btn-action {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .battle-choice-card.card-office:hover .battle-btn-action {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+    .battle-choice-card.card-culture:hover .battle-btn-action {
+      background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+      border-color: #f472b6;
+      color: #fff;
+    }
+
+    /* Era Switcher Tabs */
+    .era-switcher-section {
+      max-width: 860px;
+      margin: 8px auto 26px;
+      padding: 0 20px;
+    }
+    .era-tabs-wrapper {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+    .era-tabs-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+    .era-tab-item {
+      flex: 1 0 auto;
+      min-width: 140px;
+      background: rgba(17, 24, 39, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      color: var(--muted);
+      text-align: center;
+    }
+    .era-tab-item:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+    .era-tab-item.active {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--sky);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+    .era-item-main {
+      font-size: 0.88rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .era-item-sub {
+      font-size: 0.72rem;
+      color: var(--dim, #64748b);
+    }
+    .era-tab-item.active .era-item-sub {
+      color: var(--sky);
+      font-weight: 700;
+    }
+
     .tweet-card {
       background: var(--card-bg);
       border: 2px solid var(--card-border);
@@ -315,10 +513,74 @@
     </div>
   </section>
 
+  
+  <!-- ⚔️ Dual Battle Arena: Survival Kantor & Mesin Waktu -->
+  <section class="battle-arena-section">
+    <div class="battle-inner-box">
+      <div class="battle-header-area">
+        <span class="battle-top-badge">⚔️ ARENA TEMPUR K-DRAMA & K-POP</span>
+        <h2 class="battle-main-heading">Survival Kantor K-Drama & <span>Mesin Waktu K-Culture</span></h2>
+        <p class="battle-sub-intro">Pecahkan bahasa bos Korea dan idol K-Pop favoritmu! Tes pemahaman budaya Korea dalam 5 kuis kilat.</p>
+      </div>
+      <div class="battle-cards-grid">
+        <div class="battle-choice-card card-office" onclick="openBattleQuiz('office')">
+          <div>
+            <div class="battle-card-top-row">
+              <span class="battle-card-icon">👔</span>
+              <span class="battle-card-chip">K-Drama Office Survival</span>
+            </div>
+            <h3 class="battle-choice-title">"Mampukah Kamu Bertahan di Kantor Korea?"</h3>
+            <p class="battle-choice-desc">Pecahkan kode bos Kkondae, sindrom 'Nep' (selalu bilang siap), Young Forty, dan Quiet Quitting!</p>
+          </div>
+          <button class="battle-btn-action">
+            <span>🔥 Mulai Kuis Survival Kantor</span>
+            <span>→</span>
+          </button>
+        </div>
+        <div class="battle-choice-card card-culture" onclick="openBattleQuiz('timemachine')">
+          <div>
+            <div class="battle-card-top-row">
+              <span class="battle-card-icon">🎧</span>
+              <span class="battle-card-chip">Mesin Waktu K-Culture</span>
+            </div>
+            <h3 class="battle-choice-title">"Dari Hallyu Generasi 1 Sampai Meme TikTok 2026"</h3>
+            <p class="battle-choice-desc">Uji pengetahuanmu dari bahasa gaul jadul PC telecom hingga tren viral Lucky Vicky!</p>
+          </div>
+          <button class="battle-btn-action">
+            <span>🚀 Mulai Mesin Waktu K-Pop</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⏳ 4-Era Switcher Tabs -->
+  <section class="era-switcher-section">
+    <div class="era-tabs-wrapper">
+      <button class="era-tab-item active" data-era="all" onclick="switchEra('all')">
+        <span class="era-item-main">✨ Semua</span>
+        <span class="era-item-sub">100 kata</span>
+      </button>
+      <button class="era-tab-item" data-era="latte" onclick="switchEra('latte')">
+        <span class="era-item-main">📼 1. Retro K-Wave</span>
+        <span class="era-item-sub">1990~2000s (27)</span>
+      </button>
+      <button class="era-tab-item" data-era="smartphone" onclick="switchEra('smartphone')">
+        <span class="era-item-main">📱 2. Era Emas K-Drama</span>
+        <span class="era-item-sub">2010s (31)</span>
+      </button>
+      <button class="era-tab-item" data-era="shorts" onclick="switchEra('shorts')">
+        <span class="era-item-main">⚡ 3. Gen-Z & TikTok</span>
+        <span class="era-item-sub">2020~2026 (42)</span>
+      </button>
+    </div>
+  </section>
+
   <main class="timeline-container" id="slangFeed">
     <div class="timeline-line"></div>
     
-        <article class="tweet-card" data-id="1" data-search="방가방가 방가방가 halo semuanya / met kenal salam sapa legendaris era chat pc 90-an di korea selatan. 인사 pc통신 레트로 천리안">
+        <article class="tweet-card" data-id="1" data-era="latte" data-search="방가방가 방가방가 halo semuanya / met kenal salam sapa legendaris era chat pc 90-an di korea selatan. 인사 pc통신 레트로 천리안">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -375,7 +637,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="2" data-search="하이루 하이루 hai hai / halo gengs salam gaul perpaduan kata 'hi' dengan akhiran imut era 2000-an. 인사 pc통신 버디버디">
+        <article class="tweet-card" data-id="2" data-era="latte" data-search="하이루 하이루 hai hai / halo gengs salam gaul perpaduan kata 'hi' dengan akhiran imut era 2000-an. 인사 pc통신 버디버디">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -432,7 +694,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="3" data-search="즐 즐 ogah ah / sana pergi kata penolakan sinis paling populer era 2000-an di korea. 거절 싸이월드 스타크래프트 차단">
+        <article class="tweet-card" data-id="3" data-era="latte" data-search="즐 즐 ogah ah / sana pergi kata penolakan sinis paling populer era 2000-an di korea. 거절 싸이월드 스타크래프트 차단">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -489,7 +751,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="4" data-search="otl 오티엘 / 엎드려좌절 tersungkur pasrah / nangis di pojokan emotikon huruf legendaris menggambarkan orang bersujud frustrasi. 좌절 상형문자 디시인사이드 이모티콘">
+        <article class="tweet-card" data-id="4" data-era="latte" data-search="otl 오티엘 / 엎드려좌절 tersungkur pasrah / nangis di pojokan emotikon huruf legendaris menggambarkan orang bersujud frustrasi. 좌절 상형문자 디시인사이드 이모티콘">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -546,7 +808,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="5" data-search="뷁 뷐 hadeeeh / absurd banget jeritan satu suku kata khas korea untuk melampiaskan kekesalan luar biasa. 분노 황당 디시인사이드 아햏햏">
+        <article class="tweet-card" data-id="5" data-era="latte" data-search="뷁 뷐 hadeeeh / absurd banget jeritan satu suku kata khas korea untuk melampiaskan kekesalan luar biasa. 분노 황당 디시인사이드 아햏햏">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -603,7 +865,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="6" data-search="간지 간지 kece badai / keren abis slang fashion 2000-an untuk penampilan yang luar biasa keren dan modis. 패션 스타일 동대문 소지섭">
+        <article class="tweet-card" data-id="6" data-era="latte" data-search="간지 간지 kece badai / keren abis slang fashion 2000-an untuk penampilan yang luar biasa keren dan modis. 패션 스타일 동대문 소지섭">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -660,7 +922,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="7" data-search="지못미 지몬미 maaf gak bisa nyelametin lu singkatan kocak untuk menertawakan foto aib teman. 엽기 싸이월드 흑역사 축약어">
+        <article class="tweet-card" data-id="7" data-era="latte" data-search="지못미 지몬미 maaf gak bisa nyelametin lu singkatan kocak untuk menertawakan foto aib teman. 엽기 싸이월드 흑역사 축약어">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -717,7 +979,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="8" data-search="킹왕짱 킹왕짱 rajanya segala raja / terhebat sejagat penggabungan tiga kata superlatif untuk menggambarkan hal paling hebat. 극찬 게임 초딩 최고">
+        <article class="tweet-card" data-id="8" data-era="latte" data-search="킹왕짱 킹왕짱 rajanya segala raja / terhebat sejagat penggabungan tiga kata superlatif untuk menggambarkan hal paling hebat. 극찬 게임 초딩 최고">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -774,7 +1036,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="9" data-search="안습 안습 nyesek banget / mewek kasihan singkatan dari 'mata berembun', menggambarkan situasi pilu yang bikin terenyuh. 안타까움 지상렬 눈물 공중파예능">
+        <article class="tweet-card" data-id="9" data-era="latte" data-search="안습 안습 nyesek banget / mewek kasihan singkatan dari 'mata berembun', menggambarkan situasi pilu yang bikin terenyuh. 안타까움 지상렬 눈물 공중파예능">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -831,7 +1093,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="10" data-search="얼짱 얼짱 ulzzang / bibit unggul visual istilah legendaris korea untuk orang-orang berwajah paling tampan atau cantik di internet. 외모 하두리 싸이월드 인터넷스타">
+        <article class="tweet-card" data-id="10" data-era="latte" data-search="얼짱 얼짱 ulzzang / bibit unggul visual istilah legendaris korea untuk orang-orang berwajah paling tampan atau cantik di internet. 외모 하두리 싸이월드 인터넷스타">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -888,7 +1150,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="11" data-search="몸짱 몸짱 body goals / berotot kekar sebutan untuk orang yang bertubuh atletis dan berotot bagus berkat gym. 피트니스 헬스 몸매 다이어트">
+        <article class="tweet-card" data-id="11" data-era="latte" data-search="몸짱 몸짱 body goals / berotot kekar sebutan untuk orang yang bertubuh atletis dan berotot bagus berkat gym. 피트니스 헬스 몸매 다이어트">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -945,7 +1207,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="12" data-search="훈남 훈남 cowok manis berkarisma / pria idaman hangat pria berwajah manis dengan senyum ramah yang bikin hati meleleh. 매력 이상형 다정함 캠퍼스">
+        <article class="tweet-card" data-id="12" data-era="latte" data-search="훈남 훈남 cowok manis berkarisma / pria idaman hangat pria berwajah manis dengan senyum ramah yang bikin hati meleleh. 매력 이상형 다정함 캠퍼스">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1002,7 +1264,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="13" data-search="엄친아 엄치나 anak tetangga sebelah / si serba sempurna istilah kocak untuk 'anak teman ibu' yang selalu serba pintar dan dibanding-bandingkan. 비교 골방환상곡 완벽남 웹툰유래">
+        <article class="tweet-card" data-id="13" data-era="latte" data-search="엄친아 엄치나 anak tetangga sebelah / si serba sempurna istilah kocak untuk 'anak teman ibu' yang selalu serba pintar dan dibanding-bandingkan. 비교 골방환상곡 완벽남 웹툰유래">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1059,7 +1321,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="14" data-search="된장녀 된장녀 cewek gengsian / kaum fomo pamer slang kontroversial 2000-an untuk menyindir orang yang hobi pamer barang mewah melebihi kemampuan. 풍자 스타벅스 소비문화 사회적논쟁">
+        <article class="tweet-card" data-id="14" data-era="latte" data-search="된장녀 된장녀 cewek gengsian / kaum fomo pamer slang kontroversial 2000-an untuk menyindir orang yang hobi pamer barang mewah melebihi kemampuan. 풍자 스타벅스 소비문화 사회적논쟁">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1116,7 +1378,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="15" data-search="담다디 담다디 lagu damdadi / lagu kebangsaan gen x lagu legendaris ceria simbol kebebasan dan jiwa muda generasi x korea. 이상은 강변가요제 x세대 추억의명곡">
+        <article class="tweet-card" data-id="15" data-era="latte" data-search="담다디 담다디 lagu damdadi / lagu kebangsaan gen x lagu legendaris ceria simbol kebebasan dan jiwa muda generasi x korea. 이상은 강변가요제 x세대 추억의명곡">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1173,7 +1435,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="16" data-search="8282 팔이팔이 8282 (buruan telpon / kode pager) kode angka pager legendaris 90-an yang bermakna 'cepat-cepat' (ppalli-ppalli). 삐삐 공중전화 숫자암호 x세대">
+        <article class="tweet-card" data-id="16" data-era="latte" data-search="8282 팔이팔이 8282 (buruan telpon / kode pager) kode angka pager legendaris 90-an yang bermakna 'cepat-cepat' (ppalli-ppalli). 삐삐 공중전화 숫자암호 x세대">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1230,7 +1492,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="17" data-search="0124 영일이사 0124 (cinta selamanya) kode angka pager romantis era 90-an yang berarti 'mencintaimu selamanya'. 삐삐 사랑 숫자암호 아날로그낭만">
+        <article class="tweet-card" data-id="17" data-era="latte" data-search="0124 영일이사 0124 (cinta selamanya) kode angka pager romantis era 90-an yang berarti 'mencintaimu selamanya'. 삐삐 사랑 숫자암호 아날로그낭만">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1287,7 +1549,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="18" data-search="도토리 도토리 dotori (koin virtual cyworld) mata uang virtual legendaris cyworld untuk beli musik latar dan kostum avatar. 싸이월드 bgm 미니홈피 프리스타일y">
+        <article class="tweet-card" data-id="18" data-era="latte" data-search="도토리 도토리 dotori (koin virtual cyworld) mata uang virtual legendaris cyworld untuk beli musik latar dan kostum avatar. 싸이월드 bgm 미니홈피 프리스타일y">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1344,7 +1606,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="19" data-search="일촌평 일촌평 catatan satu baris sahabat komentar satu baris eksklusif di beranda utama yang hanya bisa ditulis oleh sahabat dekat. 싸이월드 일촌 미니홈피 썸">
+        <article class="tweet-card" data-id="19" data-era="latte" data-search="일촌평 일촌평 catatan satu baris sahabat komentar satu baris eksklusif di beranda utama yang hanya bisa ditulis oleh sahabat dekat. 싸이월드 일촌 미니홈피 썸">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1401,7 +1663,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="20" data-search="십라 십라 anjrit / sensor bypass plesetan kata makian untuk mengakali sensor sensor chat game online era 2000-an. 게임 필터링우회 욕설필터 스타크래프트">
+        <article class="tweet-card" data-id="20" data-era="latte" data-search="십라 십라 anjrit / sensor bypass plesetan kata makian untuk mengakali sensor sensor chat game online era 2000-an. 게임 필터링우회 욕설필터 스타크래프트">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1458,7 +1720,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="21" data-search="멘붕 멘붕 mental breakdown / syok berat singkatan dari runtuhnya mental akibat kejadian tak terduga yang bikin panik. 충격 멘탈붕괴 국민유행어 스타크래프트">
+        <article class="tweet-card" data-id="21" data-era="smartphone" data-search="멘붕 멘붕 mental breakdown / syok berat singkatan dari runtuhnya mental akibat kejadian tak terduga yang bikin panik. 충격 멘탈붕괴 국민유행어 스타크래프트">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1515,7 +1777,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="22" data-search="꿀잼 꿀잼 seru parah / menghibur banget perpaduan kata 'madu' dan 'seru' untuk menggambarkan hal yang luar biasa seru. 재미 극찬 영화 대유행">
+        <article class="tweet-card" data-id="22" data-era="smartphone" data-search="꿀잼 꿀잼 seru parah / menghibur banget perpaduan kata 'madu' dan 'seru' untuk menggambarkan hal yang luar biasa seru. 재미 극찬 영화 대유행">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1572,7 +1834,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="23" data-search="노잼 노잼 garing banget / ngebosenin kombinasi kata 'no' dan 'seru' untuk sesuatu yang super garing dan tidak lucu. 지루함 재미없음 아재개그 단호박">
+        <article class="tweet-card" data-id="23" data-era="smartphone" data-search="노잼 노잼 garing banget / ngebosenin kombinasi kata 'no' dan 'seru' untuk sesuatu yang super garing dan tidak lucu. 지루함 재미없음 아재개그 단호박">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1629,7 +1891,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="24" data-search="심쿵 심쿵 bikin jantungan gemas / meleleh hatiku reaksi ketika melihat hal yang kelewat lucu atau manis sampai bikin deg-degan. 설렘 귀여움 고양이 로맨스">
+        <article class="tweet-card" data-id="24" data-era="smartphone" data-search="심쿵 심쿵 bikin jantungan gemas / meleleh hatiku reaksi ketika melihat hal yang kelewat lucu atau manis sampai bikin deg-degan. 설렘 귀여움 고양이 로맨스">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1686,7 +1948,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="25" data-search="금수저 금수저 sendok emas / sultan dari lahir istilah kasta sosial korea untuk anak orang super kaya yang hidupnya tanpa beban finansial. 수저계급론 사회풍자 양극화 재벌">
+        <article class="tweet-card" data-id="25" data-era="smartphone" data-search="금수저 금수저 sendok emas / sultan dari lahir istilah kasta sosial korea untuk anak orang super kaya yang hidupnya tanpa beban finansial. 수저계급론 사회풍자 양극화 재벌">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1743,7 +2005,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="26" data-search="흙수저 흑쑤저 sendok tanah / pejuang garis keras istilah menyedihkan untuk pemuda dari keluarga miskin yang harus menanggung beban hidup sendiri. 수저계급론 청년고통 학자금대출 자조">
+        <article class="tweet-card" data-id="26" data-era="smartphone" data-search="흙수저 흑쑤저 sendok tanah / pejuang garis keras istilah menyedihkan untuk pemuda dari keluarga miskin yang harus menanggung beban hidup sendiri. 수저계급론 청년고통 학자금대출 자조">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1800,7 +2062,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="27" data-search="팩폭 팩폭 ditampar fakta / tamparan kenyataan singkatan dari 'kekerasan fakta', membungkam lawan bicara dengan kebenaran telak. 팩트 돌직구 사이다 순살">
+        <article class="tweet-card" data-id="27" data-era="smartphone" data-search="팩폭 팩폭 ditampar fakta / tamparan kenyataan singkatan dari 'kekerasan fakta', membungkam lawan bicara dengan kebenaran telak. 팩트 돌직구 사이다 순살">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1857,7 +2119,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="28" data-search="빼박캔트 빼박캔트 tertangkap basah / gak bisa ngeles lagi perpaduan istilah korea dan bahasa inggris yang berarti bukti sudah jelas dan tidak bisa mengelak. 확정 발뺌불가 증거 말장난">
+        <article class="tweet-card" data-id="28" data-era="smartphone" data-search="빼박캔트 빼박캔트 tertangkap basah / gak bisa ngeles lagi perpaduan istilah korea dan bahasa inggris yang berarti bukti sudah jelas dan tidak bisa mengelak. 확정 발뺌불가 증거 말장난">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1914,7 +2176,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="29" data-search="갓생 갇생 hidup produktif pol / gaya hidup panutan pola hidup yang sangat tertata, produktif, disiplin bangun pagi dan mengembangkan diri. 자기계발 모범생 성실 동기부여">
+        <article class="tweet-card" data-id="29" data-era="shorts" data-search="갓생 갇생 hidup produktif pol / gaya hidup panutan pola hidup yang sangat tertata, produktif, disiplin bangun pagi dan mengembangkan diri. 자기계발 모범생 성실 동기부여">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -1971,7 +2233,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="30" data-search="극혐 그켬 bikin jijik parah / ilfeel maksimal singkatan dari 'sangat benci dan jijik' terhadap perilaku norak dan tidak tahu aturan. 비매너 혐오 단호 비호감">
+        <article class="tweet-card" data-id="30" data-era="smartphone" data-search="극혐 그켬 bikin jijik parah / ilfeel maksimal singkatan dari 'sangat benci dan jijik' terhadap perilaku norak dan tidak tahu aturan. 비매너 혐오 단호 비호감">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2028,7 +2290,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="31" data-search="츤데레 츤데레 tsundere / gengsi tapi perhatian orang yang pura-pura cuek dan galak di luar padahal diam-diam sangat perhatian. 반전매력 오다주웠다 드라마 다정함">
+        <article class="tweet-card" data-id="31" data-era="smartphone" data-search="츤데레 츤데레 tsundere / gengsi tapi perhatian orang yang pura-pura cuek dan galak di luar padahal diam-diam sangat perhatian. 반전매력 오다주웠다 드라마 다정함">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2085,7 +2347,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="32" data-search="케미 케미 chemistry cocok / nyambung banget singkatan dari kimiawi, menggambarkan kekompakan dan kecocokan luar biasa antar dua orang. 호흡 케미스트리 드라마 찰떡궁합">
+        <article class="tweet-card" data-id="32" data-era="smartphone" data-search="케미 케미 chemistry cocok / nyambung banget singkatan dari kimiawi, menggambarkan kekompakan dan kecocokan luar biasa antar dua orang. 호흡 케미스트리 드라마 찰떡궁합">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2142,7 +2404,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="33" data-search="답정너 답정너 pancing pujian / pertanyaan jebakan singkatan dari 'jawabannya udah ada lu tinggal iyain aja', orang yang nanya cuma buat minta dipuji. 칭찬유도 카카오톡 심리 질문">
+        <article class="tweet-card" data-id="33" data-era="smartphone" data-search="답정너 답정너 pancing pujian / pertanyaan jebakan singkatan dari 'jawabannya udah ada lu tinggal iyain aja', orang yang nanya cuma buat minta dipuji. 칭찬유도 카카오톡 심리 질문">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2199,7 +2461,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="34" data-search="낄끼빠빠 낄끼빠빠 tahu diri / sadar situasi singkatan bermakna 'tahu kapan harus ikut campur dan kapan harus mundur teratur'. 눈치 사회생활 센스 회식">
+        <article class="tweet-card" data-id="34" data-era="smartphone" data-search="낄끼빠빠 낄끼빠빠 tahu diri / sadar situasi singkatan bermakna 'tahu kapan harus ikut campur dan kapan harus mundur teratur'. 눈치 사회생활 센스 회식">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2256,7 +2518,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="35" data-search="안물안궁 안물안궁 gak nanya gak peduli / siapa nanya jawaban menohok untuk memotong pamer atau cerita gak penting dari teman. tmi 차단 자랑방어 카카오톡">
+        <article class="tweet-card" data-id="35" data-era="smartphone" data-search="안물안궁 안물안궁 gak nanya gak peduli / siapa nanya jawaban menohok untuk memotong pamer atau cerita gak penting dari teman. tmi 차단 자랑방어 카카오톡">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2313,7 +2575,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="36" data-search="솔까말 솔까말 jujurly / buka-bukaan aja singkatan dari 'jujur buka-bukaan ngomong', digunakan untuk menyampaikan kritik jujur. 솔직함 직언 진심 회의">
+        <article class="tweet-card" data-id="36" data-era="smartphone" data-search="솔까말 솔까말 jujurly / buka-bukaan aja singkatan dari 'jujur buka-bukaan ngomong', digunakan untuk menyampaikan kritik jujur. 솔직함 직언 진심 회의">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2370,7 +2632,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="37" data-search="어그로 어그로 cari gara-gara / pancing amarah demi views berasal dari istilah game, aksi memancing kemarahan netizen sengaja demi konten viral. 도발 관종 게임유래 유튜브">
+        <article class="tweet-card" data-id="37" data-era="smartphone" data-search="어그로 어그로 cari gara-gara / pancing amarah demi views berasal dari istilah game, aksi memancing kemarahan netizen sengaja demi konten viral. 도발 관종 게임유래 유튜브">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2427,7 +2689,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="38" data-search="현타 현타 ketampar realita / sadar kenyataan singkatan dari momen sadar kenyataan, rasa hampa tiba-tiba saat tersadar dari khayalan. 허탈 현실자각 멘붕 일상">
+        <article class="tweet-card" data-id="38" data-era="smartphone" data-search="현타 현타 ketampar realita / sadar kenyataan singkatan dari momen sadar kenyataan, rasa hampa tiba-tiba saat tersadar dari khayalan. 허탈 현실자각 멘붕 일상">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2484,7 +2746,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="39" data-search="이생망 이생망 hidup kali ini gagal / reinkarnasi aja singkatan dari 'hidup kali ini udah ambyar', ungkapan pasrah penuh tawa sarkastik. 블랙유머 자조 청년현실 체념">
+        <article class="tweet-card" data-id="39" data-era="smartphone" data-search="이생망 이생망 hidup kali ini gagal / reinkarnasi aja singkatan dari 'hidup kali ini udah ambyar', ungkapan pasrah penuh tawa sarkastik. 블랙유머 자조 청년현실 체념">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2541,7 +2803,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="40" data-search="소확행 소화캥 bahagia sederhana / sukacita kecil kebahagiaan kecil tapi pasti yang dirasakan dari momen-momen sederhana sehari-hari. 행복 힐링 일상 웰빙">
+        <article class="tweet-card" data-id="40" data-era="shorts" data-search="소확행 소화캥 bahagia sederhana / sukacita kecil kebahagiaan kecil tapi pasti yang dirasakan dari momen-momen sederhana sehari-hari. 행복 힐링 일상 웰빙">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2598,7 +2860,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="41" data-search="긁히다 글키다 kena mental / tersinggung berat kondisi tersinggung atau emosi ketika seseorang menyentuh titik sensitif atau fakta yang menyakitkan. 감정 도발 심리전 mz유행어">
+        <article class="tweet-card" data-id="41" data-era="shorts" data-search="긁히다 글키다 kena mental / tersinggung berat kondisi tersinggung atau emosi ketika seseorang menyentuh titik sensitif atau fakta yang menyakitkan. 감정 도발 심리전 mz유행어">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2655,7 +2917,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="42" data-search="중꺾마 중껑마 mental baja / pantang menyerah yang paling penting adalah hati yang tak terpatahkan dalam situasi tersulit sekalipun. 동기부여 명언 스포츠 긍정">
+        <article class="tweet-card" data-id="42" data-era="shorts" data-search="중꺾마 중껑마 mental baja / pantang menyerah yang paling penting adalah hati yang tak terpatahkan dalam situasi tersulit sekalipun. 동기부여 명언 스포츠 긍정">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2712,7 +2974,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="43" data-search="억까 억까 hater maksa / apes beruntun mencela tanpa alasan jelas, atau rentetan kesialan aneh yang terus menimpa bertubi-tubi. 불운 비난 게임 일상">
+        <article class="tweet-card" data-id="43" data-era="shorts" data-search="억까 억까 hater maksa / apes beruntun mencela tanpa alasan jelas, atau rentetan kesialan aneh yang terus menimpa bertubi-tubi. 불운 비난 게임 일상">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2769,7 +3031,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="44" data-search="알잘딱깔센 알잘딱깔센 peka & sat-set / cerdas beres mengerjakan sesuatu dengan rapi, cepat, dan penuh inisiatif tanpa harus disuruh berkali-kali. 직장생활 센스 일잘러 찬사">
+        <article class="tweet-card" data-id="44" data-era="shorts" data-search="알잘딱깔센 알잘딱깔센 peka & sat-set / cerdas beres mengerjakan sesuatu dengan rapi, cepat, dan penuh inisiatif tanpa harus disuruh berkali-kali. 직장생활 센스 일잘러 찬사">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2826,7 +3088,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="45" data-search="폼 미쳤다 폼 미첟따 lagi gacor / menyala abangkuh pujian luar biasa saat performa, penampilan, atau kemampuan seseorang sedang di puncak terbaiknya. 극찬 감탄 트렌드 일상">
+        <article class="tweet-card" data-id="45" data-era="shorts" data-search="폼 미쳤다 폼 미첟따 lagi gacor / menyala abangkuh pujian luar biasa saat performa, penampilan, atau kemampuan seseorang sedang di puncak terbaiknya. 극찬 감탄 트렌드 일상">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2883,7 +3145,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="46" data-search="핑프 핑프 si pemalas search / maunya disuapin orang yang malas mencari info sendiri di google dan cuma mengandalkan orang lain menyuapi info dasar. 대학생활 풍자 검색 게으름">
+        <article class="tweet-card" data-id="46" data-era="shorts" data-search="핑프 핑프 si pemalas search / maunya disuapin orang yang malas mencari info sendiri di google dan cuma mengandalkan orang lain menyuapi info dasar. 대학생활 풍자 검색 게으름">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2940,7 +3202,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="47" data-search="분좋카 분조카 kafe estetik / tempat nongkrong cozy kafe dengan suasana cantik, pencahayaan bagus, dan desain interior yang sangat instagramable. 라이프스타일 카페 데이트 감성">
+        <article class="tweet-card" data-id="47" data-era="shorts" data-search="분좋카 분조카 kafe estetik / tempat nongkrong cozy kafe dengan suasana cantik, pencahayaan bagus, dan desain interior yang sangat instagramable. 라이프스타일 카페 데이트 감성">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -2997,7 +3259,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="48" data-search="럭키비키 너키비키 mindset lucky vicky / selalu ada hikmah mengubah kejadian apes menjadi keberuntungan luar biasa dengan pola pikir super positif. 긍정 원영적사고 아이돌 행운">
+        <article class="tweet-card" data-id="48" data-era="shorts" data-search="럭키비키 너키비키 mindset lucky vicky / selalu ada hikmah mengubah kejadian apes menjadi keberuntungan luar biasa dengan pola pikir super positif. 긍정 원영적사고 아이돌 행운">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3054,7 +3316,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="49" data-search="추구미 추구미 vibe idaman / kiblat gaya gaya visual, estetika, atau aura yang ingin dicapai dan dijadikan inspirasi. 패션 스타일 트렌드 감성">
+        <article class="tweet-card" data-id="49" data-era="shorts" data-search="추구미 추구미 vibe idaman / kiblat gaya gaya visual, estetika, atau aura yang ingin dicapai dan dijadikan inspirasi. 패션 스타일 트렌드 감성">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3111,7 +3373,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="50" data-search="오히려 좋아 오히려 조아 malah makin mantap / hikmah tersembunyi menganggap kegagalan rencana awal justru membawa hal yang jauh lebih menguntungkan. 긍정 멘탈케어 일상 유행어">
+        <article class="tweet-card" data-id="50" data-era="shorts" data-search="오히려 좋아 오히려 조아 malah makin mantap / hikmah tersembunyi menganggap kegagalan rencana awal justru membawa hal yang jauh lebih menguntungkan. 긍정 멘탈케어 일상 유행어">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3168,7 +3430,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="51" data-search="누칼협 누칼협 ada yang nodongin pisau ke leher lu? / risiko sendiri sentilan pedas buat orang yang suka mengeluh padahal itu pilihannya sendiri secara sukarela. 팩트폭격 사이다 직장 현실">
+        <article class="tweet-card" data-id="51" data-era="shorts" data-search="누칼협 누칼협 ada yang nodongin pisau ke leher lu? / risiko sendiri sentilan pedas buat orang yang suka mengeluh padahal itu pilihannya sendiri secara sukarela. 팩트폭격 사이다 직장 현실">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3225,7 +3487,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="52" data-search="뇌절 뇌절 garing berulang / kebangetan lebay mengulang lelucon atau tingkah laku secara berlebihan sampai bikin suasana jadi canggung dan membosankan. 눈치 선넘음 커뮤니티 경고">
+        <article class="tweet-card" data-id="52" data-era="shorts" data-search="뇌절 뇌절 garing berulang / kebangetan lebay mengulang lelucon atau tingkah laku secara berlebihan sampai bikin suasana jadi canggung dan membosankan. 눈치 선넘음 커뮤니티 경고">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3282,7 +3544,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="53" data-search="스불재 스불재 senjata makan tuan / ulah sendiri menanggung penderitaan atau kerepotan akibat kecerobohan atau keputusan diri sendiri. 자업자득 일상 대학생 자조">
+        <article class="tweet-card" data-id="53" data-era="shorts" data-search="스불재 스불재 senjata makan tuan / ulah sendiri menanggung penderitaan atau kerepotan akibat kecerobohan atau keputusan diri sendiri. 자업자득 일상 대학생 자조">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3339,7 +3601,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="54" data-search="킹받네 킹받네 bikin kesel tapi kocak / muka ngeselin rasa jengkel bercampur geli melihat tingkah seseorang yang sok polos tapi sangat memancing emosi. 분노 얄미움 침착맨 인터넷밈">
+        <article class="tweet-card" data-id="54" data-era="shorts" data-search="킹받네 킹받네 bikin kesel tapi kocak / muka ngeselin rasa jengkel bercampur geli melihat tingkah seseorang yang sok polos tapi sangat memancing emosi. 분노 얄미움 침착맨 인터넷밈">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3396,7 +3658,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="55" data-search="어쩔티비 어쩔티비 terus kenapa? nonton tv aja sana kalimat balasan tengil khas anak-anak untuk membungkam omelan orang lain secara cuek. 알파세대 초딩 반격 유치">
+        <article class="tweet-card" data-id="55" data-era="shorts" data-search="어쩔티비 어쩔티비 terus kenapa? nonton tv aja sana kalimat balasan tengil khas anak-anak untuk membungkam omelan orang lain secara cuek. 알파세대 초딩 반격 유치">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3453,7 +3715,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="56" data-search="점메추 점메추 rekomendasi makan siang / makan apa nih? singkatan untuk meminta rekomendasi menu makan siang kepada teman saat bingung memilih. 음식 직장인 일상 점심">
+        <article class="tweet-card" data-id="56" data-era="shorts" data-search="점메추 점메추 rekomendasi makan siang / makan apa nih? singkatan untuk meminta rekomendasi menu makan siang kepada teman saat bingung memilih. 음식 직장인 일상 점심">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3510,7 +3772,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="57" data-search="군싹 군싹 auto ngiler / bikin mupeng ekspresi ketika melihat makanan lezat atau hal seru yang langsung membuat air liur menetes. 음식 루피 식욕 기대">
+        <article class="tweet-card" data-id="57" data-era="shorts" data-search="군싹 군싹 auto ngiler / bikin mupeng ekspresi ketika melihat makanan lezat atau hal seru yang langsung membuat air liur menetes. 음식 루피 식욕 기대">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3567,7 +3829,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="58" data-search="캘박 캘박 kunci di kalender / masuk jadwal memasukkan jadwal penting ke aplikasi kalender hp agar pasti terlaksana dan tidak bentrok. 약속 일정 직장인 스마트폰">
+        <article class="tweet-card" data-id="58" data-era="shorts" data-search="캘박 캘박 kunci di kalender / masuk jadwal memasukkan jadwal penting ke aplikasi kalender hp agar pasti terlaksana dan tidak bentrok. 약속 일정 직장인 스마트폰">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3624,7 +3886,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="59" data-search="디토 디토 ikut selera / co-sign beli samaan tren membeli atau mengikuti gaya seseorang secara persis karena percaya pada seleranya. 소비 트렌드 뉴진스 동의">
+        <article class="tweet-card" data-id="59" data-era="shorts" data-search="디토 디토 ikut selera / co-sign beli samaan tren membeli atau mengikuti gaya seseorang secara persis karena percaya pada seleranya. 소비 트렌드 뉴진스 동의">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3681,7 +3943,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="60" data-search="내또출 내또출 besok ngantor lagi / derita buruh korporat keluhan khas pekerja di minggu malam saat menyadari libur berakhir dan besok harus kembali bekerja. 직장인 월요병 출근 비명">
+        <article class="tweet-card" data-id="60" data-era="shorts" data-search="내또출 내또출 besok ngantor lagi / derita buruh korporat keluhan khas pekerja di minggu malam saat menyadari libur berakhir dan besok harus kembali bekerja. 직장인 월요병 출근 비명">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3738,7 +4000,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="61" data-search="완내스 완내스 gue banget / tipe idaman pujian saat menemukan barang, gaya pakaian, atau orang yang benar-benar pas dengan selera pribadi. 취향저격 패션 쇼핑 호감">
+        <article class="tweet-card" data-id="61" data-era="shorts" data-search="완내스 완내스 gue banget / tipe idaman pujian saat menemukan barang, gaya pakaian, atau orang yang benar-benar pas dengan selera pribadi. 취향저격 패션 쇼핑 호감">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3795,7 +4057,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="62" data-search="무물 무물 sesi q&a / tanya apa aja fitur stiker tanya jawab di instagram story untuk berinteraksi bebas dengan pengikut. 인스타그램 sns 소통 q&a">
+        <article class="tweet-card" data-id="62" data-era="shorts" data-search="무물 무물 sesi q&a / tanya apa aja fitur stiker tanya jawab di instagram story untuk berinteraksi bebas dengan pengikut. 인스타그램 sns 소통 q&a">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3852,7 +4114,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="63" data-search="막이래 마기래 canda deng / cuma becanda kalimat penutup setelah melempar gombalan atau candaan berlebihan biar gak canggung. 농담 너스레 유머 추임새">
+        <article class="tweet-card" data-id="63" data-era="shorts" data-search="막이래 마기래 canda deng / cuma becanda kalimat penutup setelah melempar gombalan atau candaan berlebihan biar gak canggung. 농담 너스레 유머 추임새">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3909,7 +4171,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="64" data-search="h워얼v 사랑해 kode rahasia 'saranghae' terbalik kode cinta rahasia di mana kata 'saranghae' (aku cinta kamu) jika dibalik terbaca seperti h워얼v. 연애 고백 암호 로맨스">
+        <article class="tweet-card" data-id="64" data-era="shorts" data-search="h워얼v 사랑해 kode rahasia 'saranghae' terbalik kode cinta rahasia di mana kata 'saranghae' (aku cinta kamu) jika dibalik terbaca seperti h워얼v. 연애 고백 암호 로맨스">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -3966,7 +4228,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="65" data-search="자만추 자만추 jodoh alami / anti kencan buta lebih menyukai cinta yang tumbuh secara organik dari lingkungan hobi atau kerja daripada kencan buta. 연애 소개팅 가치관 일상">
+        <article class="tweet-card" data-id="65" data-era="shorts" data-search="자만추 자만추 jodoh alami / anti kencan buta lebih menyukai cinta yang tumbuh secara organik dari lingkungan hobi atau kerja daripada kencan buta. 연애 소개팅 가치관 일상">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4023,7 +4285,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="66" data-search="사바사 사바사 tergantung orangnya / beda-beda tiap orang menyatakan bahwa pengalaman atau pendapat sangat bervariasi tergantung masing-masing individu. 인간관계 다양성 케바케 직장">
+        <article class="tweet-card" data-id="66" data-era="shorts" data-search="사바사 사바사 tergantung orangnya / beda-beda tiap orang menyatakan bahwa pengalaman atau pendapat sangat bervariasi tergantung masing-masing individu. 인간관계 다양성 케바케 직장">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4080,7 +4342,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="67" data-search="tmi 티엠아이 info gak penting tapi seru / kebanyakan info membagikan detail acak yang sepele tentang diri sendiri untuk sekadar mencairkan suasana. 토크 스몰토크 일상 글로벌">
+        <article class="tweet-card" data-id="67" data-era="shorts" data-search="tmi 티엠아이 info gak penting tapi seru / kebanyakan info membagikan detail acak yang sepele tentang diri sendiri untuk sekadar mencairkan suasana. 토크 스몰토크 일상 글로벌">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4137,7 +4399,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="68" data-search="반모 반모 mode santai / ngomong lu-gue kesepakatan untuk berhenti memakai bahasa formal dan mulai berbicara santai akrab di media sosial. 친밀함 sns 10대 친구">
+        <article class="tweet-card" data-id="68" data-era="shorts" data-search="반모 반모 mode santai / ngomong lu-gue kesepakatan untuk berhenti memakai bahasa formal dan mulai berbicara santai akrab di media sosial. 친밀함 sns 10대 친구">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4194,7 +4456,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="69" data-search="영포티 영포티 bapack-bapack sok asik / generasi 40-an caper istilah sarkastik untuk orang usia 40-an yang berdandan dan sok asik memakai bahasa anak muda zaman now. 세대갈등 직장생활 패션 풍자">
+        <article class="tweet-card" data-id="69" data-era="shorts" data-search="영포티 영포티 bapack-bapack sok asik / generasi 40-an caper istilah sarkastik untuk orang usia 40-an yang berdandan dan sok asik memakai bahasa anak muda zaman now. 세대갈등 직장생활 패션 풍자">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4251,7 +4513,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="70" data-search="영ㅋㅋ 영크크 sok muda amat wkwk / cringe abis gayanya reaksi sarkastik saat bos tua memaksakan diri memakai bahasa gaul gen z. 반어법 조롱 직장인 세대차이">
+        <article class="tweet-card" data-id="70" data-era="shorts" data-search="영ㅋㅋ 영크크 sok muda amat wkwk / cringe abis gayanya reaksi sarkastik saat bos tua memaksakan diri memakai bahasa gaul gen z. 반어법 조롱 직장인 세대차이">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4308,7 +4570,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="71" data-search="잼민이 잼미니 bocil kematian / anak kecil rusuh di game sebutan untuk anak sd yang toxic dan suka bikin onar di game online. 초등학생 게임 온라인 풍자">
+        <article class="tweet-card" data-id="71" data-era="shorts" data-search="잼민이 잼미니 bocil kematian / anak kecil rusuh di game sebutan untuk anak sd yang toxic dan suka bikin onar di game online. 초등학생 게임 온라인 풍자">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4365,7 +4627,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="72" data-search="넵병 넵뼝 sindrom 'siap pak/bu' di chat kantor kebiasaan karyawan yang selalu membalas chat bos dengan 'siap!' agar terdengar sopan dan sigap. 직장인 슬랙 생존전략 회사생활">
+        <article class="tweet-card" data-id="72" data-era="shorts" data-search="넵병 넵뼝 sindrom 'siap pak/bu' di chat kantor kebiasaan karyawan yang selalu membalas chat bos dengan 'siap!' agar terdengar sopan dan sigap. 직장인 슬랙 생존전략 회사생활">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4422,7 +4684,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="73" data-search="조용한 사직 조용한 사직 quiet quitting / kerja sesuai gaji bekerja hanya sesuai jobdesk tanpa mau lembur berlebihan demi menjaga kesehatan mental. 직장인 워라밸 번아웃 mz세대">
+        <article class="tweet-card" data-id="73" data-era="shorts" data-search="조용한 사직 조용한 사직 quiet quitting / kerja sesuai gaji bekerja hanya sesuai jobdesk tanpa mau lembur berlebihan demi menjaga kesehatan mental. 직장인 워라밸 번아웃 mz세대">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4479,7 +4741,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="74" data-search="알빠노 알빠노 bodo amat / emang gue pikirin ungkapan masa bodoh terhadap omongan atau kritik orang lain. 마이웨이 쿨함 무관심 숏폼밈">
+        <article class="tweet-card" data-id="74" data-era="shorts" data-search="알빠노 알빠노 bodo amat / emang gue pikirin ungkapan masa bodoh terhadap omongan atau kritik orang lain. 마이웨이 쿨함 무관심 숏폼밈">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4536,7 +4798,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="75" data-search="할매니얼 할매니얼 tren selera nenek-nenek di kalangan milenial gabungan kata 'nenek' dan 'milenial', merujuk pada anak muda yang suka jajanan tradisional dan gaya jadul. 디저트 약과 레트로 트렌드">
+        <article class="tweet-card" data-id="75" data-era="shorts" data-search="할매니얼 할매니얼 tren selera nenek-nenek di kalangan milenial gabungan kata 'nenek' dan 'milenial', merujuk pada anak muda yang suka jajanan tradisional dan gaya jadul. 디저트 약과 레트로 트렌드">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4593,7 +4855,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="76" data-search="퐁퐁남 퐁퐁남 suami cuci piring penjatah uang saku sindiran untuk suami yang gajinya diserahkan semua ke istri dan harus cuci piring demi uang jajan. 결혼 가사 자조 사회풍자">
+        <article class="tweet-card" data-id="76" data-era="shorts" data-search="퐁퐁남 퐁퐁남 suami cuci piring penjatah uang saku sindiran untuk suami yang gajinya diserahkan semua ke istri dan harus cuci piring demi uang jajan. 결혼 가사 자조 사회풍자">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4650,7 +4912,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="77" data-search="오팔세대 오팔세대 generasi lansia aktif dan tajir generasi pensiunan usia 50-60an yang masih sangat aktif berolahraga, traveling, dan menikmati hidup. 액티브시니어 베이비부머 인생2막 소비">
+        <article class="tweet-card" data-id="77" data-era="shorts" data-search="오팔세대 오팔세대 generasi lansia aktif dan tajir generasi pensiunan usia 50-60an yang masih sangat aktif berolahraga, traveling, dan menikmati hidup. 액티브시니어 베이비부머 인생2막 소비">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4707,7 +4969,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="78" data-search="쿠쿠루삥뽕 쿠쿠루삥뽕 tawa ngejek paling nyebelin di game suara ejekan khas gamer korea yang sangat bikin emosi saat lawan kalah konyol. 약올리기 도발 트위치 게임밈">
+        <article class="tweet-card" data-id="78" data-era="shorts" data-search="쿠쿠루삥뽕 쿠쿠루삥뽕 tawa ngejek paling nyebelin di game suara ejekan khas gamer korea yang sangat bikin emosi saat lawan kalah konyol. 약올리기 도발 트위치 게임밈">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4764,7 +5026,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="79" data-search="꼰대 꼰대 kkondae / bos kolot yang suka menggurui istilah korea yang mendunia untuk menyebut atasan tua yang gemar menceramahi dengan standar masa lalu. 세대갈등 직장상사 훈계 bbc선정">
+        <article class="tweet-card" data-id="79" data-era="smartphone" data-search="꼰대 꼰대 kkondae / bos kolot yang suka menggurui istilah korea yang mendunia untuk menyebut atasan tua yang gemar menceramahi dengan standar masa lalu. 세대갈등 직장상사 훈계 bbc선정">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4821,7 +5083,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="80" data-search="월급루팡 월긍누팡 koruptor jam kerja / pemakan gaji buta sebutan kocak untuk karyawan yang tidak bekerja dan sibuk santai tapi gajinya jalan terus. 직장인 풍자 딴짓 회사생활">
+        <article class="tweet-card" data-id="80" data-era="smartphone" data-search="월급루팡 월긍누팡 koruptor jam kerja / pemakan gaji buta sebutan kocak untuk karyawan yang tidak bekerja dan sibuk santai tapi gajinya jalan terus. 직장인 풍자 딴짓 회사생활">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4878,7 +5140,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="81" data-search="아재체 아재체 gaya chat bapack-bapack penuh emotikon gaya mengetik khas bapak-bapack yang penuh dengan tanda gelombang (~~) dan emotikon keringat (^^;). 카톡말투 중년 이모지 직장메신저">
+        <article class="tweet-card" data-id="81" data-era="smartphone" data-search="아재체 아재체 gaya chat bapack-bapack penuh emotikon gaya mengetik khas bapak-bapack yang penuh dengan tanda gelombang (~~) dan emotikon keringat (^^;). 카톡말투 중년 이모지 직장메신저">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4935,7 +5197,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="82" data-search="개저씨 개저씨 om-om toxic dan tak tahu sopan santun sebutan untuk pria paruh baya yang berkelakuan buruk, arogan, dan suka bikin onar di tempat umum. 민폐 갑질 사회비판 공공예절">
+        <article class="tweet-card" data-id="82" data-era="smartphone" data-search="개저씨 개저씨 om-om toxic dan tak tahu sopan santun sebutan untuk pria paruh baya yang berkelakuan buruk, arogan, dan suka bikin onar di tempat umum. 민폐 갑질 사회비판 공공예절">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -4992,7 +5254,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="83" data-search="스라밸 스라밸 keseimbangan belajar dan istirahat konsep work-life balance versi pelajar untuk mengurangi stres akibat les berlebihan. 학업 학생 워라밸 청소년">
+        <article class="tweet-card" data-id="83" data-era="smartphone" data-search="스라밸 스라밸 keseimbangan belajar dan istirahat konsep work-life balance versi pelajar untuk mengurangi stres akibat les berlebihan. 학업 학생 워라밸 청소년">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5049,7 +5311,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="84" data-search="일태기 일태기 fase jenuh kerja / bosan sama rutinitas kantor kondisi mirip fase jenuh pacaran tapi menimpa pekerjaan, hilang semangat sama sekali untuk ngantor. 직장인 권태기 번아웃 무기력">
+        <article class="tweet-card" data-id="84" data-era="smartphone" data-search="일태기 일태기 fase jenuh kerja / bosan sama rutinitas kantor kondisi mirip fase jenuh pacaran tapi menimpa pekerjaan, hilang semangat sama sekali untuk ngantor. 직장인 권태기 번아웃 무기력">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5106,7 +5368,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="85" data-search="퇴준생 퇴준생 karyawan siap-siap resign / pencari kerja terselubung karyawan yang meski baru masuk kerja tapi sudah sibuk upgrade skill diam-diam untuk pindah kantor. 이직 퇴사 직장인 스펙업">
+        <article class="tweet-card" data-id="85" data-era="smartphone" data-search="퇴준생 퇴준생 karyawan siap-siap resign / pencari kerja terselubung karyawan yang meski baru masuk kerja tapi sudah sibuk upgrade skill diam-diam untuk pindah kantor. 이직 퇴사 직장인 스펙업">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5163,7 +5425,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="86" data-search="내로남불 내로남불 standar ganda / giliran gue boleh, giliran lu salah sindiran pedas untuk orang munafik yang membenarkan kesalahannya sendiri tapi menghakimi orang lain. 이중잣대 위선 정치 국민유행어">
+        <article class="tweet-card" data-id="86" data-era="smartphone" data-search="내로남불 내로남불 standar ganda / giliran gue boleh, giliran lu salah sindiran pedas untuk orang munafik yang membenarkan kesalahannya sendiri tapi menghakimi orang lain. 이중잣대 위선 정치 국민유행어">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5220,7 +5482,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="87" data-search="가심비 가심비 kepuasan batin sebanding dengan harga tren belanja yang lebih mementingkan kepuasan emosional dan self-reward ketimbang murahnya barang. 소비 힐링 만족감 오마카세">
+        <article class="tweet-card" data-id="87" data-era="smartphone" data-search="가심비 가심비 kepuasan batin sebanding dengan harga tren belanja yang lebih mementingkan kepuasan emosional dan self-reward ketimbang murahnya barang. 소비 힐링 만족감 오마카세">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5277,7 +5539,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="88" data-search="주린이 주리니 investor pemula di pasar saham gabungan kata 'saham' dan 'anak-anak', julukan imut untuk pemula yang baru belajar trading saham. 주식 재테크 초보 동학개미">
+        <article class="tweet-card" data-id="88" data-era="smartphone" data-search="주린이 주리니 investor pemula di pasar saham gabungan kata 'saham' dan 'anak-anak', julukan imut untuk pemula yang baru belajar trading saham. 주식 재테크 초보 동학개미">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5334,7 +5596,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="89" data-search="취존 취존 hargai selera orang / jangan mencela hobi singkatan dari 'hormati selera orang', prinsip netizen agar tidak menghakimi hobi unik orang lain. 존중 개성 오타쿠 서브컬처">
+        <article class="tweet-card" data-id="89" data-era="latte" data-search="취존 취존 hargai selera orang / jangan mencela hobi singkatan dari 'hormati selera orang', prinsip netizen agar tidak menghakimi hobi unik orang lain. 존중 개성 오타쿠 서브컬처">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5391,7 +5653,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="90" data-search="모태솔로 모태쏠로 jomblo dari lahir / belum pernah pacaran seumur hidup istilah kocak untuk orang yang sejak lahir sampai dewasa belum pernah merasakan pacaran. 연애 솔로 자조 국민유행어">
+        <article class="tweet-card" data-id="90" data-era="latte" data-search="모태솔로 모태쏠로 jomblo dari lahir / belum pernah pacaran seumur hidup istilah kocak untuk orang yang sejak lahir sampai dewasa belum pernah merasakan pacaran. 연애 솔로 자조 국민유행어">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5448,7 +5710,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="91" data-search="금사빠 금사빠 gampang baper / baru kenal langsung jatuh cinta sebutan untuk orang yang hatinya lemah dan sangat cepat jatuh cinta cuma karena hal sepele. 연애 짝사랑 감정 일상">
+        <article class="tweet-card" data-id="91" data-era="latte" data-search="금사빠 금사빠 gampang baper / baru kenal langsung jatuh cinta sebutan untuk orang yang hatinya lemah dan sangat cepat jatuh cinta cuma karena hal sepele. 연애 짝사랑 감정 일상">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5505,7 +5767,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="92" data-search="아햏햏 아햏햏 a-haeh-haeh / helaan nafas pasrah era awal internet ungkapan legendaris awal 2000-an yang menggambarkan perasaan pasrah dan ikhlas tingkat dewa saat tertimpa sial. 햏자 득도 디시인사이드 원조인터넷밈">
+        <article class="tweet-card" data-id="92" data-era="latte" data-search="아햏햏 아햏햏 a-haeh-haeh / helaan nafas pasrah era awal internet ungkapan legendaris awal 2000-an yang menggambarkan perasaan pasrah dan ikhlas tingkat dewa saat tertimpa sial. 햏자 득도 디시인사이드 원조인터넷밈">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5562,7 +5824,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="93" data-search="싱하형 싱하형 bang sing-ha / bos preman meme era 2000-an karakter meme legendaris berwajah bruce lee dengan ancaman khas: 'gue kasih 10 detik kumpul di bawah jembatan!' 이소룡 굴다리 짤방 레전드">
+        <article class="tweet-card" data-id="93" data-era="latte" data-search="싱하형 싱하형 bang sing-ha / bos preman meme era 2000-an karakter meme legendaris berwajah bruce lee dengan ancaman khas: 'gue kasih 10 detik kumpul di bawah jembatan!' 이소룡 굴다리 짤방 레전드">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5619,7 +5881,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="94" data-search="폐인 폐인 nolep anak warnet / pecandu game pc 2000-an julukan untuk anak warnet era 2000-an yang begadang main game starcraft berhari-hari sambil makan mie instan. pc방 스타크래프트 밤샘 몰입">
+        <article class="tweet-card" data-id="94" data-era="latte" data-search="폐인 폐인 nolep anak warnet / pecandu game pc 2000-an julukan untuk anak warnet era 2000-an yang begadang main game starcraft berhari-hari sambil makan mie instan. pc방 스타크래프트 밤샘 몰입">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5676,7 +5938,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="95" data-search="따봉 따봉 dda-bong! / mantap jempolan! berasal dari bahasa portugis 'está bom' lewat iklan jadul 1989, menjadi simbol acungan jempol paling legendaris di korea. 레트로원조 cf유행어 엄지척 x세대">
+        <article class="tweet-card" data-id="95" data-era="latte" data-search="따봉 따봉 dda-bong! / mantap jempolan! berasal dari bahasa portugis 'está bom' lewat iklan jadul 1989, menjadi simbol acungan jempol paling legendaris di korea. 레트로원조 cf유행어 엄지척 x세대">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5733,7 +5995,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="96" data-search="플렉스 플렉스 flexing / pamer barang mewah istilah hip-hop yang merujuk pada aksi belanja barang bermerek mahal lalu dipamerkan ke medsos. 소비 명품 힙합 과시">
+        <article class="tweet-card" data-id="96" data-era="smartphone" data-search="플렉스 플렉스 flexing / pamer barang mewah istilah hip-hop yang merujuk pada aksi belanja barang bermerek mahal lalu dipamerkan ke medsos. 소비 명품 힙합 과시">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5790,7 +6052,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="97" data-search="돈쭐 돈쭐 beli borong untuk balas kebaikan toko aksi memborong dagangan toko yang suka beramal agar pemiliknya untung besar sebagai bentuk apresiasi warga. 선한영향력 착한가게 미담 소비">
+        <article class="tweet-card" data-id="97" data-era="shorts" data-search="돈쭐 돈쭐 beli borong untuk balas kebaikan toko aksi memborong dagangan toko yang suka beramal agar pemiliknya untung besar sebagai bentuk apresiasi warga. 선한영향력 착한가게 미담 소비">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5847,7 +6109,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="98" data-search="텍스트 힙 텍스트 힙 tren baca buku fisik aesthetic (text hip) tren gen z tahun 2026 yang detox dari video pendek dan kembali membaca buku cetak sebagai gaya hidup keren. 독서 종이책 2026트렌드 도파민디톡스">
+        <article class="tweet-card" data-id="98" data-era="shorts" data-search="텍스트 힙 텍스트 힙 tren baca buku fisik aesthetic (text hip) tren gen z tahun 2026 yang detox dari video pendek dan kembali membaca buku cetak sebagai gaya hidup keren. 독서 종이책 2026트렌드 도파민디톡스">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5904,7 +6166,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="99" data-search="워라밸 워라밸 work-life balance / keseimbangan hidup dan kerja prioritas utama pekerja zaman now yang menolak lembur gila-gilaan demi kesehatan mental. 직장인 퇴근 저녁이있는삶 균형">
+        <article class="tweet-card" data-id="99" data-era="smartphone" data-search="워라밸 워라밸 work-life balance / keseimbangan hidup dan kerja prioritas utama pekerja zaman now yang menolak lembur gila-gilaan demi kesehatan mental. 직장인 퇴근 저녁이있는삶 균형">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
@@ -5961,7 +6223,7 @@
           </div>
         </article>
         
-        <article class="tweet-card" data-id="100" data-search="삼포세대 삼포세대 generasi sampo / menyerah pada cinta, nikah, dan anak istilah sosiologis untuk anak muda yang terpaksa merelakan pacaran, menikah, dan punya anak karena beban ekonomi. 청년실업 결혼 연애 사회풍자">
+        <article class="tweet-card" data-id="100" data-era="smartphone" data-search="삼포세대 삼포세대 generasi sampo / menyerah pada cinta, nikah, dan anak istilah sosiologis untuk anak muda yang terpaksa merelakan pacaran, menikah, dan punya anak karena beban ekonomi. 청년실업 결혼 연애 사회풍자">
           <div class="timeline-dot"></div>
           <div class="tweet-top">
             <div class="tweet-author-row">
