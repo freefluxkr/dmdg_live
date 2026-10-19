@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 12 시뮬레이터: 모델 평가지표 & 편향-분산 트레이드오프</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(20, 27, 45, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --accent-cyan: #00f0ff;
+      --accent-pink: #ff007f;
+      --accent-yellow: #facc15;
+      --accent-green: #10b981;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      padding: 24px;
+      min-height: 100vh;
+      background-image: radial-gradient(rgba(250, 204, 21, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .sim-container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000;
+      background: var(--accent-yellow);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    h1 span { color: var(--accent-yellow); }
+    p.sub { color: var(--muted); font-size: 0.95rem; }
+
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.2), rgba(0, 240, 255, 0.2));
+      color: var(--accent-yellow);
+      border-color: var(--accent-yellow);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    canvas {
+      width: 100%;
+      height: 380px;
+      background: #060911;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+
+    .ctrl-group { margin-bottom: 14px; }
+    .ctrl-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .ctrl-label b { color: var(--text); font-family: 'JetBrains Mono', monospace; }
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent-yellow);
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      cursor: pointer;
+    }
+
+    .stat-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-name { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    .stat-val { font-size: 1.25rem; font-weight: 800; color: var(--accent-yellow); font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+
+    .cm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .cm-cell {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .cm-cell.tp { border-color: var(--accent-green); background: rgba(16, 185, 129, 0.1); }
+    .cm-cell.fp { border-color: var(--accent-pink); background: rgba(255, 0, 127, 0.1); }
+
+    .formula-callout {
+      background: rgba(250, 204, 21, 0.08);
+      border-left: 3px solid var(--accent-yellow);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .formula-callout code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+<div class="sim-container">
+  <header>
+    <div class="badge">Part 3. 확률통계 & 정보이론 · Day 12 시뮬레이터</div>
+    <h1>모델 평가 지표 (ROC-AUC) & <span>편향-분산 트레이드오프</span></h1>
+    <p class="sub">분류 임계값(Threshold)에 따른 ROC 곡선 이동과 모델 복잡도에 따른 편향(Bias)-분산(Variance) U자형 오차 곡선을 관찰하세요.</p>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-roc')">🎯 1. 혼동행렬 & ROC-AUC 곡선</button>
+    <button class="tab-btn" onclick="switchTab('tab-bias')">⚖️ 2. 편향-분산 트레이드오프</button>
+  </div>
+
+  <!-- TAB 1: ROC-AUC -->
+  <div id="tab-roc" class="tab-content active">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">📈</span> ROC 곡선 (가짜 양성률 vs 진짜 양성률)</div>
+        <canvas id="rocCanvas"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">⚙️</span> 분류 임계값 (Threshold) 조작</div>
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span>판정 임계값 (Threshold θ)</span><b id="threshVal">θ = 0.50</b></div>
+          <input type="range" id="threshRange" min="0.05" max="0.95" step="0.05" value="0.50" oninput="updateROC()">
+        </div>
+
+        <div class="cm-grid">
+          <div class="cm-cell tp">
+            <span style="font-size:0.75rem; color:var(--muted);">TP (진짜 양성)</span>
+            <div style="font-size:1.15rem; font-weight:800; color:var(--accent-green);" id="tpVal">85</div>
+          </div>
+          <div class="cm-cell fp">
+            <span style="font-size:0.75rem; color:var(--muted);">FP (가짜 양성)</span>
+            <div style="font-size:1.15rem; font-weight:800; color:var(--accent-pink);" id="fpVal">15</div>
+          </div>
+          <div class="cm-cell">
+            <span style="font-size:0.75rem; color:var(--muted);">FN (가짜 음성)</span>
+            <div style="font-size:1.15rem; font-weight:800; color:#cbd5e1;" id="fnVal">15</div>
+          </div>
+          <div class="cm-cell">
+            <span style="font-size:0.75rem; color:var(--muted);">TN (진짜 음성)</span>
+            <div style="font-size:1.15rem; font-weight:800; color:#cbd5e1;" id="tnVal">85</div>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name">정밀도 (Precision)</div>
+            <div class="stat-val" style="color:var(--accent-cyan);" id="precVal">0.850</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">재현율 (Recall / TPR)</div>
+            <div class="stat-val" style="color:var(--accent-green);" id="recVal">0.850</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">F1-Score</div>
+            <div class="stat-val" style="color:var(--accent-yellow);" id="f1Val">0.850</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">ROC-AUC 면적</div>
+            <div class="stat-val" style="color:var(--text);">0.910</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: BIAS-VARIANCE -->
+  <div id="tab-bias" class="tab-content">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">📉</span> 모델 복잡도에 따른 U자형 총 오차 곡선</div>
+        <canvas id="bvCanvas"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">⚖️</span> 모델 복잡도 조작</div>
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span>모델 복잡도 (파라미터 수 / 다항식 차수)</span><b id="compVal">차수 = 4 (적정)</b></div>
+          <input type="range" id="compRange" min="1" max="10" step="1" value="4" oninput="updateBV()">
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name">편향 오차 (Bias²)</div>
+            <div class="stat-val" style="color:var(--accent-cyan);" id="biasVal">0.12</div>
+            <span style="font-size:0.7rem; color:var(--muted);">과소적합 위험</span>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">분산 오차 (Variance)</div>
+            <div class="stat-val" style="color:var(--accent-pink);" id="varVal">0.15</div>
+            <span style="font-size:0.7rem; color:var(--muted);">과적합 위험</span>
+          </div>
+          <div class="stat-card" style="grid-column: span 2;">
+            <div class="stat-name">총 일반화 오차 (Total Test Error)</div>
+            <div class="stat-val" style="color:var(--accent-yellow);" id="totalErrVal">0.37 (스위트 스팟!)</div>
+          </div>
+        </div>
+
+        <div class="formula-callout">
+          <code>Total Error = Bias² + Variance + Irreducible Noise</code><br><br>
+          • <b>너무 단순할 때</b>: 편향이 높아 훈련도 실전도 0점 (Underfitting).<br>
+          • <b>너무 복잡할 때</b>: 훈련은 100점이지만 분산이 폭발해 실전 0점 (Overfitting).
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+    if (tabId === 'tab-roc') drawROC();
+    if (tabId === 'tab-bias') drawBV();
+  }
+
+  // ROC Logic
+  const rCanvas = document.getElementById('rocCanvas');
+  const rCtx = rCanvas.getContext('2d');
+
+  function resizeRCanvas() {
+    rCanvas.width = rCanvas.parentElement.clientWidth;
+    rCanvas.height = 380;
+  }
+  window.addEventListener('resize', () => { resizeRCanvas(); drawROC(); });
+  resizeRCanvas();
+
+  let thresh = 0.50;
+
+  function updateROC() {
+    thresh = parseFloat(document.getElementById('threshRange').value);
+    document.getElementById('threshVal').textContent = `θ = ${thresh.toFixed(2)}`;
+
+    // Mock calculations based on threshold
+    const tp = Math.round(100 * (1 - Math.pow(thresh, 1.8)));
+    const fp = Math.round(100 * Math.pow(1 - thresh, 2.5));
+    const fn = 100 - tp;
+    const tn = 100 - fp;
+
+    const prec = (tp + fp > 0) ? (tp / (tp + fp)) : 1.0;
+    const rec = (tp + fn > 0) ? (tp / (tp + fn)) : 0.0;
+    const f1 = (prec + rec > 0) ? (2 * prec * rec / (prec + rec)) : 0.0;
+
+    document.getElementById('tpVal').textContent = tp;
+    document.getElementById('fpVal').textContent = fp;
+    document.getElementById('fnVal').textContent = fn;
+    document.getElementById('tnVal').textContent = tn;
+
+    document.getElementById('precVal').textContent = prec.toFixed(3);
+    document.getElementById('recVal').textContent = rec.toFixed(3);
+    document.getElementById('f1Val').textContent = f1.toFixed(3);
+
+    drawROC(fp / 100, tp / 100);
+  }
+
+  function drawROC(fpr, tpr) {
+    const w = rCanvas.width;
+    const h = rCanvas.height;
+    const cx = 50;
+    const cy = h - 50;
+    const pw = w - 100;
+    const ph = h - 100;
+
+    rCtx.clearRect(0, 0, w, h);
+
+    // Axes
+    rCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    rCtx.lineWidth = 1;
+    rCtx.beginPath();
+    rCtx.moveTo(cx, cy); rCtx.lineTo(cx + pw, cy);
+    rCtx.moveTo(cx, cy); rCtx.lineTo(cx, cy - ph);
+    rCtx.stroke();
+
+    // Random diagonal line (50% chance)
+    rCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    rCtx.setLineDash([4, 4]);
+    rCtx.beginPath();
+    rCtx.moveTo(cx, cy); rCtx.lineTo(cx + pw, cy - ph);
+    rCtx.stroke();
+    rCtx.setLineDash([]);
+
+    // Draw Smooth ROC Curve (e.g. y = x^0.25)
+    rCtx.strokeStyle = '#00f0ff';
+    rCtx.lineWidth = 2.5;
+    rCtx.beginPath();
+    for (let px = 0; px <= pw; px++) {
+      const xRatio = px / pw;
+      const yRatio = Math.pow(xRatio, 0.28);
+      const py = cy - yRatio * ph;
+      if (px === 0) rCtx.moveTo(cx + px, py); else rCtx.lineTo(cx + px, py);
+    }
+    rCtx.stroke();
+
+    // Current operating point (FPR, TPR)
+    const optX = cx + (fpr || 0.15) * pw;
+    const optY = cy - (tpr || 0.85) * ph;
+
+    rCtx.fillStyle = '#facc15';
+    rCtx.shadowColor = '#facc15';
+    rCtx.shadowBlur = 10;
+    rCtx.beginPath(); rCtx.arc(optX, optY, 6, 0, Math.PI * 2); rCtx.fill();
+    rCtx.shadowBlur = 0;
+
+    // Labels
+    rCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    rCtx.font = '10px "JetBrains Mono"';
+    rCtx.fillText("가짜 양성률 (FPR ➔)", cx + pw - 90, cy + 25);
+    rCtx.fillText("진짜 양성률 (TPR ⬆)", cx - 40, cy - ph - 10);
+  }
+
+  // Bias-Variance Logic
+  const bCanvas = document.getElementById('bvCanvas');
+  const bCtx = bCanvas.getContext('2d');
+
+  function resizeBCanvas() {
+    bCanvas.width = bCanvas.parentElement.clientWidth;
+    bCanvas.height = 380;
+  }
+  window.addEventListener('resize', () => { resizeBCanvas(); drawBV(); });
+  resizeBCanvas();
+
+  let comp = 4;
+
+  function updateBV() {
+    comp = parseInt(document.getElementById('compRange').value);
+    let desc = "적정 (Sweet Spot)";
+    if (comp <= 2) desc = "과소적합 (Underfitting)";
+    if (comp >= 7) desc = "과적합 (Overfitting)";
+    document.getElementById('compVal').textContent = `차수 = ${comp} (${desc})`;
+
+    const b = Math.exp(-0.4 * comp);
+    const v = 0.05 * Math.exp(0.4 * comp);
+    const noise = 0.10;
+    const tot = b + v + noise;
+
+    document.getElementById('biasVal').textContent = b.toFixed(2);
+    document.getElementById('varVal').textContent = v.toFixed(2);
+    document.getElementById('totalErrVal').textContent = `${tot.toFixed(2)} (${desc})`;
+
+    drawBV();
+  }
+
+  function drawBV() {
+    const w = bCanvas.width;
+    const h = bCanvas.height;
+    const cx = 50;
+    const cy = h - 50;
+    const pw = w - 100;
+    const ph = h - 100;
+
+    bCtx.clearRect(0, 0, w, h);
+
+    // Axes
+    bCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    bCtx.lineWidth = 1;
+    bCtx.beginPath();
+    bCtx.moveTo(cx, cy); bCtx.lineTo(cx + pw, cy);
+    bCtx.moveTo(cx, cy); bCtx.lineTo(cx, cy - ph);
+    bCtx.stroke();
+
+    // 1. Bias Curve (Cyan, decreasing)
+    bCtx.strokeStyle = '#00f0ff';
+    bCtx.lineWidth = 2;
+    bCtx.beginPath();
+    for (let px = 0; px <= pw; px++) {
+      const cVal = 1 + (px / pw) * 9;
+      const b = Math.exp(-0.4 * cVal);
+      const py = cy - (b / 1.5) * ph;
+      if (px === 0) bCtx.moveTo(cx + px, py); else bCtx.lineTo(cx + px, py);
+    }
+    bCtx.stroke();
+
+    // 2. Variance Curve (Pink, increasing)
+    bCtx.strokeStyle = '#ff007f';
+    bCtx.lineWidth = 2;
+    bCtx.beginPath();
+    for (let px = 0; px <= pw; px++) {
+      const cVal = 1 + (px / pw) * 9;
+      const v = 0.05 * Math.exp(0.4 * cVal);
+      const py = cy - (v / 1.5) * ph;
+      if (px === 0) bCtx.moveTo(cx + px, py); else bCtx.lineTo(cx + px, py);
+    }
+    bCtx.stroke();
+
+    // 3. Total Error U-Curve (Yellow)
+    bCtx.strokeStyle = '#facc15';
+    bCtx.lineWidth = 3;
+    bCtx.beginPath();
+    for (let px = 0; px <= pw; px++) {
+      const cVal = 1 + (px / pw) * 9;
+      const b = Math.exp(-0.4 * cVal);
+      const v = 0.05 * Math.exp(0.4 * cVal);
+      const tot = b + v + 0.10;
+      const py = cy - (tot / 1.5) * ph;
+      if (px === 0) bCtx.moveTo(cx + px, py); else bCtx.lineTo(cx + px, py);
+    }
+    bCtx.stroke();
+
+    // Marker for current complexity
+    const curPx = cx + ((comp - 1) / 9) * pw;
+    bCtx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    bCtx.setLineDash([3, 3]);
+    bCtx.beginPath(); bCtx.moveTo(curPx, cy); bCtx.lineTo(curPx, cy - ph); bCtx.stroke();
+    bCtx.setLineDash([]);
+
+    // Legend
+    bCtx.fillStyle = '#00f0ff'; bCtx.fillText("편향 Bias²", cx + 20, 40);
+    bCtx.fillStyle = '#ff007f'; bCtx.fillText("분산 Variance", cx + 110, 40);
+    bCtx.fillStyle = '#facc15'; bCtx.fillText("총 오차 U-Curve", cx + 220, 40);
+  }
+
+  updateROC();
+  updateBV();
+</script>
+
+</body>
+</html>

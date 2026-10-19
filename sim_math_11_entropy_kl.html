@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 11 시뮬레이터: 정보이론 (엔트로피, 지니계수 & KL 발산)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(20, 27, 45, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --accent-cyan: #00f0ff;
+      --accent-pink: #ff007f;
+      --accent-yellow: #facc15;
+      --accent-green: #10b981;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      padding: 24px;
+      min-height: 100vh;
+      background-image: radial-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .sim-container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000;
+      background: var(--accent-cyan);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    h1 span { color: var(--accent-cyan); }
+    p.sub { color: var(--muted); font-size: 0.95rem; }
+
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(250, 204, 21, 0.2));
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    canvas {
+      width: 100%;
+      height: 380px;
+      background: #060911;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+
+    .ctrl-group { margin-bottom: 14px; }
+    .ctrl-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .ctrl-label b { color: var(--text); font-family: 'JetBrains Mono', monospace; }
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent-cyan);
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      cursor: pointer;
+    }
+
+    .stat-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-name { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    .stat-val { font-size: 1.25rem; font-weight: 800; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+
+    .formula-callout {
+      background: rgba(0, 240, 255, 0.08);
+      border-left: 3px solid var(--accent-cyan);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .formula-callout code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+<div class="sim-container">
+  <header>
+    <div class="badge">Part 3. 확률통계 & 정보이론 · Day 11 시뮬레이터</div>
+    <h1>정보이론 3대 지표: <span>엔트로피 & KL 발산</span></h1>
+    <p class="sub">불확실성을 비트 단위로 정량화하는 샤논 엔트로피 곡선과 두 확률 분포의 차이를 측정하는 쿨백-라이블러(KL) 발산을 관찰하세요.</p>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-entropy')">🪙 1. 샤논 엔트로피 & 지니 불순도</button>
+    <button class="tab-btn" onclick="switchTab('tab-kl')">📏 2. 쿨백-라이블러(KL) 발산 (RLHF 정렬)</button>
+  </div>
+
+  <!-- TAB 1: ENTROPY -->
+  <div id="tab-entropy" class="tab-content active">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">📈</span> 동전 앞면 확률 p에 따른 불확실성 곡선</div>
+        <canvas id="entropyCanvas"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">⚙️</span> 앞면 확률 p 슬라이더</div>
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span>앞면 확률 (p)</span><b id="pVal">p = 0.50</b></div>
+          <input type="range" id="pRange" min="0.01" max="0.99" step="0.01" value="0.50" oninput="updateEntropy()">
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name">샤논 엔트로피 H(p)</div>
+            <div class="stat-val" style="color:var(--accent-yellow);" id="hVal">1.000 bit</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">지니 불순도 (Gini)</div>
+            <div class="stat-val" style="color:var(--accent-pink);" id="giniVal">0.500</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">뒷면 확률 (1-p)</div>
+            <div class="stat-val" id="qVal">0.50</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">정보량 해석</div>
+            <div class="stat-val" style="color:var(--accent-green);" id="infoDesc">최대 불확실성!</div>
+          </div>
+        </div>
+
+        <div class="formula-callout">
+          <code>H(X) = - ∑ P(x) log₂ P(x)</code><br>
+          <code>Gini = 1 - ∑ P(x)² = 2p(1-p)</code><br>
+          💡 $p=0.5$일 때 어떤 면이 나올지 가장 예측하기 어려우므로 불확실성(엔트로피)이 최대치 $1\text{ bit}$가 됩니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: KL DIVERGENCE -->
+  <div id="tab-kl" class="tab-content">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title"><span class="icon">🎯</span> 두 가우시안 분포 P(x)와 Q(x) 비교</div>
+        <canvas id="klCanvas"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">⚙️</span> 모델 분포 Q(x) 평균 & 분산 조작</div>
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span>Q의 평균 (μ_Q)</span><b id="muQVal">μ = 1.0</b></div>
+          <input type="range" id="muQRange" min="-2.0" max="2.0" step="0.1" value="1.0" oninput="updateKL()">
+        </div>
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span>Q의 표준편차 (σ_Q)</span><b id="sigmaQVal">σ = 1.2</b></div>
+          <input type="range" id="sigmaQRange" min="0.5" max="2.0" step="0.1" value="1.2" oninput="updateKL()">
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-card">
+            <div class="stat-name">KL 발산 D_KL(P || Q)</div>
+            <div class="stat-val" style="color:var(--accent-pink);" id="klVal">0.452</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-name">기준 모델 P(x)</div>
+            <div class="stat-val" style="color:var(--accent-cyan);">μ=0, σ=1</div>
+          </div>
+        </div>
+
+        <div class="formula-callout" style="margin-top: 18px;">
+          <code>D_KL(P || Q) = ∑ P(x) log [ P(x) / Q(x) ]</code><br><br>
+          💡 <b>RLHF에서의 역할</b>: ChatGPT를 인간 취향에 맞게 파인튜닝할 때, 모델($Q$)이 원래 안전한 기준 모델($P$)로부터 지나치게 멀어지지 않도록 <b>KL 페널티 감시 초소</b> 역할을 합니다!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+    if (tabId === 'tab-entropy') drawEntropy();
+    if (tabId === 'tab-kl') drawKL();
+  }
+
+  // Entropy Canvas Logic
+  const eCanvas = document.getElementById('entropyCanvas');
+  const eCtx = eCanvas.getContext('2d');
+
+  function resizeECanvas() {
+    eCanvas.width = eCanvas.parentElement.clientWidth;
+    eCanvas.height = 380;
+  }
+  window.addEventListener('resize', () => { resizeECanvas(); drawEntropy(); });
+  resizeECanvas();
+
+  let p = 0.50;
+
+  function updateEntropy() {
+    p = parseFloat(document.getElementById('pRange').value);
+    document.getElementById('pVal').textContent = `p = ${p.toFixed(2)}`;
+
+    const h = - (p * Math.log2(p) + (1 - p) * Math.log2(1 - p));
+    const gini = 2 * p * (1 - p);
+
+    document.getElementById('hVal').textContent = `${h.toFixed(3)} bit`;
+    document.getElementById('giniVal').textContent = gini.toFixed(3);
+    document.getElementById('qVal').textContent = (1 - p).toFixed(2);
+
+    let desc = "중간 불확실성";
+    if (Math.abs(p - 0.5) < 0.05) desc = "최대 불확실성! 🔥";
+    else if (p < 0.1 || p > 0.9) desc = "확실한 상태 (엔트로피↓)";
+    document.getElementById('infoDesc').textContent = desc;
+
+    drawEntropy();
+  }
+
+  function drawEntropy() {
+    const w = eCanvas.width;
+    const h = eCanvas.height;
+    const cx = 50;
+    const cy = h - 50;
+    const plotW = w - 100;
+    const plotH = h - 100;
+
+    eCtx.clearRect(0, 0, w, h);
+
+    // Axes
+    eCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    eCtx.lineWidth = 1;
+    eCtx.beginPath();
+    eCtx.moveTo(cx, cy); eCtx.lineTo(cx + plotW, cy);
+    eCtx.moveTo(cx, cy); eCtx.lineTo(cx, cy - plotH);
+    eCtx.stroke();
+
+    // Labels
+    eCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    eCtx.font = '11px "JetBrains Mono"';
+    eCtx.fillText("p=0.0", cx - 15, cy + 20);
+    eCtx.fillText("p=0.5", cx + plotW / 2 - 15, cy + 20);
+    eCtx.fillText("p=1.0", cx + plotW - 15, cy + 20);
+    eCtx.fillText("1.0 bit", cx - 45, cy - plotH + 5);
+
+    // Draw Shannon Entropy Curve (Yellow)
+    eCtx.strokeStyle = '#facc15';
+    eCtx.lineWidth = 2.5;
+    eCtx.beginPath();
+    for (let px = 0; px <= plotW; px++) {
+      const pVal = Math.max(0.001, Math.min(0.999, px / plotW));
+      const ent = - (pVal * Math.log2(pVal) + (1 - pVal) * Math.log2(1 - pVal));
+      const py = cy - ent * plotH;
+      if (px === 0) eCtx.moveTo(cx + px, py); else eCtx.lineTo(cx + px, py);
+    }
+    eCtx.stroke();
+
+    // Draw Current p marker
+    const curEnt = - (p * Math.log2(p) + (1 - p) * Math.log2(1 - p));
+    const curPx = cx + p * plotW;
+    const curPy = cy - curEnt * plotH;
+
+    eCtx.fillStyle = '#ff007f';
+    eCtx.beginPath(); eCtx.arc(curPx, curPy, 6, 0, Math.PI * 2); eCtx.fill();
+
+    eCtx.strokeStyle = 'rgba(255, 0, 127, 0.4)';
+    eCtx.beginPath();
+    eCtx.moveTo(curPx, cy); eCtx.lineTo(curPx, curPy);
+    eCtx.stroke();
+  }
+
+  // KL Canvas Logic
+  const kCanvas = document.getElementById('klCanvas');
+  const kCtx = kCanvas.getContext('2d');
+
+  function resizeKCanvas() {
+    kCanvas.width = kCanvas.parentElement.clientWidth;
+    kCanvas.height = 380;
+  }
+  window.addEventListener('resize', () => { resizeKCanvas(); drawKL(); });
+  resizeKCanvas();
+
+  let muQ = 1.0, sigmaQ = 1.2;
+  const muP = 0.0, sigmaP = 1.0;
+
+  function updateKL() {
+    muQ = parseFloat(document.getElementById('muQRange').value);
+    sigmaQ = parseFloat(document.getElementById('sigmaQRange').value);
+
+    document.getElementById('muQVal').textContent = `μ = ${muQ.toFixed(1)}`;
+    document.getElementById('sigmaQVal').textContent = `σ = ${sigmaQ.toFixed(1)}`;
+
+    // Analytical Gaussian KL Divergence
+    // D_KL(P || Q) = log(sQ/sP) + (sP^2 + (muP - muQ)^2) / (2 * sQ^2) - 0.5
+    const term1 = Math.log(sigmaQ / sigmaP);
+    const term2 = (sigmaP * sigmaP + Math.pow(muP - muQ, 2)) / (2 * sigmaQ * sigmaQ);
+    const kl = term1 + term2 - 0.5;
+
+    document.getElementById('klVal').textContent = Math.max(0, kl).toFixed(3);
+    drawKL();
+  }
+
+  function drawKL() {
+    const w = kCanvas.width;
+    const h = kCanvas.height;
+    const cx = w / 2;
+    const cy = h - 60;
+    const scale = 40;
+
+    kCtx.clearRect(0, 0, w, h);
+
+    // Axes
+    kCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    kCtx.beginPath(); kCtx.moveTo(0, cy); kCtx.lineTo(w, cy); kCtx.stroke();
+
+    const gaus = (x, mu, s) => (1 / (s * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mu) / s, 2));
+
+    // Draw P(x) (Cyan)
+    kCtx.strokeStyle = '#00f0ff';
+    kCtx.lineWidth = 2.5;
+    kCtx.beginPath();
+    for (let px = 0; px < w; px++) {
+      const rx = (px - cx) / scale;
+      const ry = gaus(rx, muP, sigmaP);
+      const py = cy - ry * scale * 4;
+      if (px === 0) kCtx.moveTo(px, py); else kCtx.lineTo(px, py);
+    }
+    kCtx.stroke();
+
+    // Draw Q(x) (Pink)
+    kCtx.strokeStyle = '#ff007f';
+    kCtx.lineWidth = 2.5;
+    kCtx.beginPath();
+    for (let px = 0; px < w; px++) {
+      const rx = (px - cx) / scale;
+      const ry = gaus(rx, muQ, sigmaQ);
+      const py = cy - ry * scale * 4;
+      if (px === 0) kCtx.moveTo(px, py); else kCtx.lineTo(px, py);
+    }
+    kCtx.stroke();
+
+    // Legend
+    kCtx.fillStyle = '#00f0ff';
+    kCtx.font = 'bold 12px "JetBrains Mono"';
+    kCtx.fillText("P(x): 기준 모델 (Reference)", 30, 40);
+    kCtx.fillStyle = '#ff007f';
+    kCtx.fillText("Q(x): 파인튜닝 모델 (RLHF)", 30, 60);
+  }
+
+  updateEntropy();
+  updateKL();
+</script>
+
+</body>
+</html>
