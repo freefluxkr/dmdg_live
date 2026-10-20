@@ -1,544 +1,1449 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <script>
-    // malssam.com 도메인으로 유입 시 말쌈 서비스로 즉시 전환 (주소창 도메인 유지)
-    if (window.location.hostname === 'malssam.com' || window.location.hostname === 'www.malssam.com') {
-      window.location.replace('./malssam/' + window.location.search + window.location.hash);
-    }
-  </script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#fff7ed">
-  <title>당목담글 - 마음을 잇는 따뜻한 소리</title>
-  
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="./manifest.json">
-  <link class="touch-icon" rel="apple-touch-icon" href="https://img.icons8.com/color/192/love-letter.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="DMDG LIVE : 차세대 AI 에이전트, REA 역공학 랩, 그리고 지식 출판 생태계의 모든 것. CEO Hamilton Kang & 당목담글 스튜디오 Great AI 출판본부">
+  <meta name="theme-color" content="#070F26">
+  <title>DMDG LIVE | 당목담글 공식 실시간 포털 & 지식 허브</title>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            orange: {
-              50: 'var(--theme-bg-light)',
-              100: 'var(--theme-bg-soft)',
-              150: 'var(--theme-bg-medium)',
-              200: 'var(--theme-bg-medium)',
-              500: 'var(--theme-primary)',
-              600: 'var(--theme-primary-dark)',
-              700: 'var(--theme-accent)',
-              850: 'var(--theme-text-dark)',
-              900: 'var(--theme-text-dark)',
-              950: 'var(--theme-text-deep)'
-            }
-          }
-        }
-      }
-    }
-  </script>
-  
-  <!-- Dexie.js (IndexedDB library) -->
-  <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/dmdg_logo_emblem.png">
+  <link rel="apple-touch-icon" href="./assets/dmdg_logo_emblem.png">
 
-  <!-- Google Fonts for premium typography -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Gaegu:wght@400;700&family=Gowun+Batang:wght@400;700&family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* ==========================================================================
+       DMDG LIVE - Official Design Tokens & System
+       Based on 당목담글 Brand Identity (Teal, Deep Navy, Warm Amber, White)
+       ========================================================================== */
+    :root {
+      /* Brand Color System */
+      --dmdg-navy-deep: #070F26;
+      --dmdg-navy-surface: #0B1B3D;
+      --dmdg-navy-elevated: #102450;
+      --dmdg-navy-card: rgba(11, 27, 61, 0.75);
+      
+      --dmdg-teal: #00A896;
+      --dmdg-teal-glow: rgba(0, 168, 150, 0.4);
+      --dmdg-emerald: #02C39A;
+      
+      --dmdg-amber: #F77F00;
+      --dmdg-orange-light: #FCBF49;
+      --dmdg-orange-glow: rgba(247, 127, 0, 0.35);
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-functions-compat.js"></script>
-  <link rel="stylesheet" href="css/style.css">
+      --dmdg-text-primary: #F8FAFC;
+      --dmdg-text-secondary: #94A3B8;
+      --dmdg-text-muted: #64748B;
+      
+      --dmdg-border: rgba(255, 255, 255, 0.1);
+      --dmdg-border-highlight: rgba(0, 168, 150, 0.35);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      --transition-normal: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Gowun Batang', serif;
+    }
+
+    /* Light Mode (Optional Toggle) */
+    body.theme-light {
+      --dmdg-navy-deep: #F1F5F9;
+      --dmdg-navy-surface: #FFFFFF;
+      --dmdg-navy-elevated: #E2E8F0;
+      --dmdg-navy-card: rgba(255, 255, 255, 0.9);
+      --dmdg-text-primary: #0F172A;
+      --dmdg-text-secondary: #475569;
+      --dmdg-text-muted: #64748B;
+      --dmdg-border: rgba(15, 23, 42, 0.1);
+      --dmdg-border-highlight: rgba(0, 168, 150, 0.45);
+    }
+
+    /* Reset & Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      background-color: var(--dmdg-navy-deep);
+      color: var(--dmdg-text-primary);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Background Ambient Wave Glow */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background: 
+        radial-gradient(circle at 15% 20%, rgba(0, 168, 150, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(247, 127, 0, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(2, 195, 154, 0.06) 0%, transparent 60%);
+    }
+
+    .app-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ==========================================================================
+       Header Navigation
+       ========================================================================== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 15, 38, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--dmdg-border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .brand-emblem {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      object-fit: cover;
+      box-shadow: 0 0 16px var(--dmdg-teal-glow);
+      border: 2px solid var(--dmdg-teal);
+      transition: var(--transition-normal);
+    }
+
+    .brand-wrap:hover .brand-emblem {
+      transform: rotate(5deg) scale(1.05);
+      box-shadow: 0 0 20px var(--dmdg-orange-glow);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FFFFFF 30%, var(--dmdg-emerald) 80%, var(--dmdg-orange-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .brand-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--dmdg-teal), var(--dmdg-amber));
+      color: #FFFFFF;
+      -webkit-text-fill-color: #FFFFFF;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .brand-slogan {
+      font-size: 0.75rem;
+      color: var(--dmdg-text-secondary);
+      font-weight: 500;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--dmdg-border);
+      color: var(--dmdg-text-primary);
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition-normal);
+    }
+
+    .nav-btn:hover {
+      background: rgba(0, 168, 150, 0.2);
+      border-color: var(--dmdg-teal);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn.primary {
+      background: linear-gradient(135deg, var(--dmdg-teal), #0077B6);
+      border: none;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px var(--dmdg-teal-glow);
+    }
+
+    .nav-btn.primary:hover {
+      background: linear-gradient(135deg, #02C39A, var(--dmdg-amber));
+      box-shadow: 0 4px 16px var(--dmdg-orange-glow);
+    }
+
+    /* ==========================================================================
+       Hero Section with Signature Papercut Wave
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* SVG Layered Wave Backdrop */
+    .hero-wave-deco {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1280px;
+      height: 180px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(0, 168, 150, 0.12);
+      border: 1px solid rgba(0, 168, 150, 0.3);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--dmdg-emerald);
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 8px rgba(0, 168, 150, 0.1);
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #FFFFFF 20%, #E2E8F0 50%, var(--dmdg-orange-light) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--dmdg-text-secondary);
+      max-width: 820px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-desc strong {
+      color: var(--dmdg-text-primary);
+      font-weight: 700;
+    }
+
+    /* Live Stat Metrics */
+    .metrics-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .metric-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--dmdg-border);
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background-color: var(--dmdg-emerald);
+      box-shadow: 0 0 10px var(--dmdg-emerald);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(2, 195, 154, 0.7); }
+      70% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 0 8px rgba(2, 195, 154, 0); }
+      100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(2, 195, 154, 0); }
+    }
+
+    /* ==========================================================================
+       Filter Navigation Tabs
+       ========================================================================== */
+    .filter-section {
+      max-width: 1200px;
+      margin: 0 auto 2.5rem;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .filter-tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 0.6rem;
+      padding-bottom: 0.5rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      justify-content: flex-start;
+    }
+
+    .filter-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--dmdg-border);
+      color: var(--dmdg-text-secondary);
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: var(--transition-normal);
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--dmdg-text-primary);
+      border-color: var(--dmdg-border-highlight);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--dmdg-teal), #0077B6);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 4px 14px var(--dmdg-teal-glow);
+    }
+
+    /* ==========================================================================
+       Services Grid & Card System
+       ========================================================================== */
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+      width: 100%;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--dmdg-border);
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-desc {
+      font-size: 0.85rem;
+      color: var(--dmdg-text-muted);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Service Card */
+    .service-card {
+      position: relative;
+      background: var(--dmdg-navy-card);
+      border: 1px solid var(--dmdg-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-normal);
+      overflow: hidden;
+    }
+
+    /* Card Top Signature Gradient Border */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--dmdg-teal), var(--dmdg-amber));
+      opacity: 0.8;
+      transition: var(--transition-normal);
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--dmdg-border-highlight);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 168, 150, 0.15);
+    }
+
+    .service-card:hover::before {
+      height: 4px;
+      opacity: 1;
+      box-shadow: 0 0 12px var(--dmdg-teal-glow);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--dmdg-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+    }
+
+    .card-status-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      background: rgba(2, 195, 154, 0.12);
+      color: var(--dmdg-emerald);
+      border: 1px solid rgba(2, 195, 154, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .card-status-badge.book {
+      background: rgba(247, 127, 0, 0.12);
+      color: var(--dmdg-orange-light);
+      border-color: rgba(247, 127, 0, 0.25);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
+      color: var(--dmdg-text-primary);
+    }
+
+    .card-subtitle {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--dmdg-teal);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--dmdg-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .card-features {
+      list-style: none;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-features li {
+      font-size: 0.78rem;
+      color: var(--dmdg-text-muted);
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-features li::before {
+      content: '✔';
+      color: var(--dmdg-emerald);
+      font-size: 0.7rem;
+    }
+
+    .card-footer-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-action {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--dmdg-border);
+      color: var(--dmdg-text-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition-normal);
+    }
+
+    .btn-action:hover {
+      background: linear-gradient(135deg, var(--dmdg-teal), #0077B6);
+      border-color: transparent;
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px var(--dmdg-teal-glow);
+    }
+
+    .btn-action.gold:hover {
+      background: linear-gradient(135deg, var(--dmdg-amber), #E85D04);
+      box-shadow: 0 4px 14px var(--dmdg-orange-glow);
+    }
+
+    /* ==========================================================================
+       Brand Identity Showcase (Business Card Interactive)
+       ========================================================================== */
+    .brand-story-banner {
+      background: linear-gradient(135deg, rgba(11, 27, 61, 0.85), rgba(7, 15, 38, 0.95));
+      border: 1px solid var(--dmdg-border-highlight);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .brand-story-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--dmdg-teal), var(--dmdg-amber), var(--dmdg-emerald));
+    }
+
+    .brand-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.2rem, 3vw, 1.65rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .brand-subquote {
+      font-size: 0.95rem;
+      color: var(--dmdg-orange-light);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .brand-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.4rem 1.2rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--dmdg-border);
+      font-size: 0.82rem;
+      color: var(--dmdg-text-secondary);
+    }
+
+    /* ==========================================================================
+       Footer
+       ========================================================================== */
+    .app-footer {
+      background: #040817;
+      border-top: 1px solid var(--dmdg-border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--dmdg-text-muted);
+    }
+
+    .footer-channels {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .channel-link {
+      color: var(--dmdg-text-secondary);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition-normal);
+    }
+
+    .channel-link:hover {
+      color: var(--dmdg-emerald);
+    }
+
+    .footer-copy {
+      line-height: 1.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .brand-title {
+        font-size: 1.15rem;
+      }
+      .hero-section {
+        padding: 2rem 1rem 2rem;
+      }
+      .brand-story-banner {
+        padding: 1.75rem 1rem;
+      }
+    }
+  </style>
 </head>
-<body class="flex flex-col items-center justify-between pb-8">
+<body class="theme-dark">
 
-  <!-- Warm background light circles -->
-  <div id="bg-circle-1" class="fixed top-[-10%] left-[-20%] w-[80vw] h-[80vw] rounded-full blur-[80px] pointer-events-none z-[-1] transition-colors duration-500" style="background-color: var(--theme-bg-circle1);"></div>
-  <div id="bg-circle-2" class="fixed bottom-[10%] right-[-20%] w-[90vw] h-[90vw] rounded-full blur-[100px] pointer-events-none z-[-1] transition-colors duration-500" style="background-color: var(--theme-bg-circle2);"></div>
+  <div class="ambient-glow"></div>
 
-  <!-- Header -->
-  <header class="w-full max-w-md px-6 pt-8 flex items-center justify-between">
-    <div class="flex flex-col">
-      <div class="flex items-center gap-2">
-        <span class="text-2xl">🍊</span>
-        <h1 class="text-2xl font-bold text-orange-950 font-warm tracking-tight" data-i18n="title">당목담글</h1>
-      </div>
-      <p class="text-xs text-orange-700/80 font-medium tracking-wide mt-0.5" data-i18n="subtitle">마음을 이어주는 따스한 목소리 릴레이</p>
-    </div>
-    <div class="flex gap-2">
-      <!-- Language Selector -->
-      <div class="relative inline-block text-left">
-        <button onclick="toggleLangDropdown()" id="lang-btn" title="언어 변경" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center gap-1.5 min-w-[54px] min-h-[44px]">
-          <i data-lucide="languages" class="w-5 h-5"></i>
-          <span id="lang-flag-icon" class="text-sm font-semibold select-none">🇰🇷</span>
-        </button>
-        <div id="lang-dropdown" class="origin-top-right absolute right-0 mt-2 w-36 rounded-2xl shadow-xl bg-white/95 backdrop-blur-md border border-orange-100 focus:outline-none hidden z-50">
-          <div class="py-1.5 px-1.5 space-y-0.5">
-            <button onclick="changeLanguage('ko')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇰🇷 한국어 (KO)</button>
-            <button onclick="changeLanguage('ja')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇯🇵 日本語 (JA)</button>
-            <button onclick="changeLanguage('en')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇺🇸 English (EN)</button>
-            <div class="border-t border-gray-100 my-1"></div>
-            <button onclick="changeLanguage('fr')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇫🇷 Français (FR)</button>
-            <button onclick="changeLanguage('de')" class="w-full text-left px-3 py-2 text-xs font-bold text-orange-950 hover:bg-orange-50 rounded-xl transition-colors flex items-center gap-2">🇩🇪 Deutsch (DE)</button>
+  <div class="app-wrapper">
+    
+    <!-- Top Global Navigation Bar -->
+    <header class="top-nav">
+      <div class="brand-wrap" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <img src="./assets/dmdg_logo_emblem.png" alt="DMDG 당목담글 엠블럼" class="brand-emblem">
+        <div class="brand-text">
+          <div class="brand-title">
+            <span>DMDG LIVE</span>
+            <span class="brand-badge">Official</span>
           </div>
+          <div class="brand-slogan">당신의 목소리로 다음글을 읽어주세요</div>
         </div>
       </div>
-      <!-- Database backup / restore triggers -->
-      <button onclick="exportData()" title="데이터 백업" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
-        <i data-lucide="download" class="w-5 h-5"></i>
-      </button>
-      <button onclick="document.getElementById('importFile').click()" title="데이터 불러오기" class="p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
-        <i data-lucide="upload" class="w-5 h-5"></i>
-      </button>
-      <button onclick="openSettingsModal()" title="Gemini 설정" class="hidden p-2.5 rounded-full glass-card text-orange-850 hover:bg-orange-100/50 touch-target flex items-center justify-center min-w-[44px] min-h-[44px]">
-        <i data-lucide="settings" class="w-5 h-5"></i>
-      </button>
-      <input type="file" id="importFile" accept="application/json" class="hidden" onchange="importData(event)">
-    </div>
-  </header>
 
-  <!-- Main Container -->
-  <main class="w-full max-w-md px-5 py-4 flex-grow flex flex-col justify-start gap-5">
-    
-    <!-- Privacy Trust Banner -->
-    <div class="glass-card rounded-2xl p-3.5 border-l-4 border-amber-400 bg-amber-50/20 flex items-center gap-2.5 shadow-sm">
-      <i data-lucide="shield-check" class="w-5 h-5 text-orange-600 shrink-0"></i>
-      <p class="text-[10px] font-semibold text-orange-950/80 leading-relaxed" data-i18n="privacy_banner">
-        🍊 모든 음성 데이터는 사용자의 기기에만 안전하게 저장됩니다 (Local Storage Only)
-      </p>
-    </div>
-
-    <!-- Benefit Info Banner -->
-    <div onclick="openBenefitModal()" class="glass-card rounded-2xl p-3.5 border-l-4 border-rose-400 bg-rose-50/20 flex items-center justify-between shadow-sm cursor-pointer hover:bg-rose-50/30 transition-all touch-target">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <i data-lucide="gift" class="w-5 h-5 text-rose-600 shrink-0 animate-bounce"></i>
-        <p class="text-[10px] font-bold text-orange-950/80 leading-relaxed truncate" data-i18n="benefit_banner">
-          🎁 목소리 기부 시 AI 분석 무료 5회 충전! [자세히 보기]
-        </p>
-      </div>
-      <i data-lucide="chevron-right" class="w-4 h-4 text-orange-950/40 shrink-0"></i>
-    </div>
-    
-    <!-- Emotion Filter & Mode Tabs -->
-    <div class="glass-card rounded-2xl p-2.5 flex items-center justify-between">
-      <div class="flex gap-1.5 overflow-x-auto scrollbar-none" id="emotion-tabs">
-        <!-- Will be dynamically populated -->
-      </div>
-      
-      <!-- Speech Speed Control -->
-      <div class="flex items-center gap-1.5 pl-2 border-l border-orange-200/60 text-orange-900">
-        <i data-lucide="gauge" class="w-4 h-4 text-orange-650"></i>
-        <select id="play-speed" class="bg-transparent text-xs font-bold text-orange-900 border-none focus:outline-none pr-1 cursor-pointer">
-          <option value="0.8">0.8x</option>
-          <option value="1.0" selected>1.0x</option>
-          <option value="1.2">1.2x</option>
-          <option value="1.5">1.5x</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Dynamic Primer Display Card (시, 수필, 오늘의 말) -->
-    <div class="glass-card rounded-3xl p-5 border-l-4 border-theme-primary bg-orange-50/50 flex flex-col gap-2.5">
-      <div class="flex items-center justify-between">
-        <span class="text-xs font-bold text-orange-800 flex items-center gap-1">
-          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
-          <span id="primer-type" data-i18n="primer_type_word">오늘의 마중물 말</span>
-        </span>
-        <div class="flex items-center gap-1">
-
-          <button onclick="rotatePrimer()" class="p-1 rounded-full hover:bg-orange-100/50 text-orange-700 active:scale-90 transition-transform flex items-center justify-center min-w-[32px] min-h-[32px]">
-            <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
-      </div>
-      <p id="primer-content" class="text-xs font-medium text-orange-950 font-warm leading-relaxed italic select-all max-h-[140px] overflow-y-auto pr-1">
-        "바람이 불어오는 곳으로 마음을 던져두면, 어느샌가 그리운 목소리가 찾아와 귀를 채웁니다."
-      </p>
-      <!-- Translation output placeholder -->
-      <div id="primer-translation-box" class="hidden mt-1.5 pt-2 border-t border-orange-200/50">
-        <p id="primer-translation-text" class="text-xs font-semibold text-rose-800/80 font-warm leading-relaxed italic select-all"></p>
-      </div>
-    </div>
-
-    <!-- Audio Popup Modal -->
-    <div id="audio-popup-modal" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-white/60 backdrop-blur-md">
-      <div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center min-w-[320px] max-w-[90%] relative overflow-hidden shadow-2xl ring-1 ring-orange-900/10">
-        <!-- Background Soft Decorative Ring -->
-        <div class="absolute w-72 h-72 rounded-full border-[1.5px] border-orange-200/40 animate-[ping_8s_infinite_linear]"></div>
-        
-        <!-- Text Info -->
-        <div class="text-center z-20 mb-4 mt-2">
-          <h2 id="audio-popup-title" class="text-2xl font-bold text-orange-900 font-warm mb-1">소리를 듣고 있어요...</h2>
-          <p id="audio-popup-subtitle" class="text-sm font-medium text-orange-800/70 font-warm">당신의 따뜻한 기운이 담겨요.</p>
-        </div>
-
-        <!-- Script to Read -->
-        <div id="audio-popup-script-container" class="z-20 w-[90%] max-w-[280px] bg-white/60 backdrop-blur-sm rounded-2xl p-4 shadow-sm mb-4 hidden border border-orange-200/50">
-          <p id="audio-popup-script" class="text-[13px] font-bold text-orange-950 font-warm leading-relaxed break-keep text-center"></p>
-        </div>
-
-        <!-- Blob Canvas (Moved here) -->
-        <canvas id="popup-blob-canvas" width="300" height="240" class="w-full h-56 z-10 drop-shadow-md"></canvas>
-        
-        <!-- Large Stop Button -->
-        <div class="z-20 mt-6 mb-2">
-          <button onclick="handleAudioPopupStop()" class="w-16 h-16 rounded-full bg-rose-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 touch-target border-4 border-white/50">
-            <i data-lucide="square" class="w-6 h-6 fill-current"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Controls / Action Button -->
-    <div class="glass-card rounded-3xl p-5 flex flex-col gap-4 items-center">
-      <!-- Status Display -->
-      <div class="text-center">
-        <p id="status-message" class="text-sm font-semibold text-orange-900 font-warm" data-i18n="status_initial">아래 버튼을 눌러 목소리 마중물을 담아보세요</p>
-      </div>
-
-      <!-- Record Button -->
-      <div class="relative flex items-center justify-center">
-        <!-- Pulsing background ring when recording -->
-        <div id="pulse-ring" class="absolute w-24 h-24 bg-red-400/20 rounded-full scale-0 transition-transform duration-500"></div>
-        <button id="action-btn" onclick="toggleRecording()" class="w-20 h-20 rounded-full bg-theme-grad text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 glow-theme touch-target z-10 min-w-[44px] min-h-[44px]">
-          <i data-lucide="mic" id="action-icon" class="w-8 h-8"></i>
+      <div class="nav-actions">
+        <button id="btn-theme-toggle" class="nav-btn" title="테마 변경">
+          <span id="theme-icon">🌙</span> <span id="theme-label" style="display:none;">다크</span>
         </button>
-      </div>
-
-      <!-- Helper info -->
-      <div class="w-full flex items-center justify-between px-2 text-xs text-orange-700/60 font-medium">
-        <div class="flex items-center gap-1.5">
-          <i data-lucide="info" class="w-3.5 h-3.5"></i>
-          <span data-i18n="mic_help">당신의 따뜻한 기운이 담겨요.</span>
-        </div>
-        <div id="free-eval-badge" class="flex items-center gap-1 bg-orange-100/50 px-2 py-1 rounded-md border border-orange-200">
-          <span class="font-bold text-orange-800" data-i18n="free_eval_badge_text">남은 무료 평가:</span>
-          <span id="free-eval-count" class="font-black text-rose-600">0/5</span><span class="font-bold text-orange-800" data-i18n="free_eval_badge_unit">회</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Relay List Title -->
-    <div class="flex items-center justify-between px-1">
-      <h3 class="text-sm font-bold text-orange-950 font-warm flex items-center gap-1.5">
-        <i data-lucide="music-4" class="w-4 h-4 text-orange-600"></i>
-        <span data-i18n="relay_title">이어받은 따뜻한 소리들</span>
-      </h3>
-      <div class="flex items-center gap-2">
-        <button onclick=" startAudiobook()" class="text-xs font-bold bg-theme-grad text-white px-3 py-1.5 rounded-full shadow-sm hover:scale-105 transition-transform flex items-center gap-1 touch-target">
-          <i data-lucide="headphones" class="w-3.5 h-3.5"></i>
-          <span data-i18n="play_audiobook">오디오북 듣기</span>
+        <button id="btn-fullscreen" class="nav-btn" title="전체화면">
+          <span>⛶</span>
         </button>
-        <span id="relay-count" class="text-xs font-bold bg-orange-150 text-orange-800 px-2.5 py-0.5 rounded-full glass-card">0</span>
+        <a href="https://t.me/aiffall_bot" target="_blank" rel="noopener noreferrer" class="nav-btn primary">
+          <span>🤖</span> <span>에이전트 봇</span>
+        </a>
       </div>
-    </div>
+    </header>
 
-    </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <!-- Papercut Wave Decorative SVG -->
+      <svg class="hero-wave-deco" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,128C672,107,768,85,864,101.3C960,117,1056,171,1152,181.3C1248,192,1344,160,1392,144L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z" fill="url(#wave-gradient)"/>
+        <defs>
+          <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00A896" stop-opacity="0.8"/>
+            <stop offset="50%" stop-color="#02C39A" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#F77F00" stop-opacity="0.8"/>
+          </linearGradient>
+        </defs>
+      </svg>
 
-    <!-- Relay List -->
-    <div id="relay-list" class="space-y-3.5 max-h-[300px] overflow-y-auto pr-1 pb-4">
-      <!-- Dynamic list items -->
-    </div>
+      <div class="hero-tag">
+        <span class="pulse-dot"></span> 2026-2027 NEXT-GEN AGENTIC &amp; KNOWLEDGE ECOSYSTEM
+      </div>
 
-    <!-- Global Warmth Dashboard -->
-    <div class="glass-card rounded-2xl border border-orange-100/40 overflow-hidden shadow-sm transition-all duration-300">
-      <!-- Dashboard Accordion Header -->
-      <div onclick="toggleDashboard()" class="p-4 bg-orange-50/20 hover:bg-orange-100/30 cursor-pointer flex justify-between items-center transition-all touch-target">
-        <div class="flex items-center gap-2">
-          <i data-lucide="line-chart" class="w-4 h-4 text-orange-600"></i>
-          <span class="text-xs font-bold text-orange-950" data-i18n="dashboard_title">글로벌 온기 분석 대시보드</span>
+      <h1 class="hero-title">DMDG LIVE</h1>
+      <p class="hero-desc">
+        <strong>차세대 AI 에이전트, REA 역공학 시뮬레이터, 그리고 지식 출판 생태계의 모든 것</strong><br>
+        사람과 마음을 연결하는 기술과 문학의 실시간 라이브 허브에 오신 것을 환영합니다.
+      </p>
+
+      <!-- Live Metrics Pills -->
+      <div class="metrics-bar">
+        <div class="metric-pill">
+          <span class="pulse-dot"></span> <span>26종 실시간 시뮬레이터 가동</span>
         </div>
-        <i id="dashboard-chevron" data-lucide="chevron-down" class="w-4 h-4 text-orange-950/40 transition-transform duration-300"></i>
+        <div class="metric-pill">
+          <span>📚</span> <span>위키독스 15종 출판 라인업</span>
+        </div>
+        <div class="metric-pill">
+          <span>🎬</span> <span>120분 영화 시나리오 4부작</span>
+        </div>
+        <div class="metric-pill">
+          <span>🤖</span> <span>12대 마스터 AI 에이전트 오케스트레이션</span>
+        </div>
       </div>
-      
-      <!-- Dashboard Content (Collapsible) -->
-      <div id="dashboard-content" class="max-h-0 overflow-hidden transition-all duration-500 bg-white/30 border-t border-orange-100/30">
-        <div class="p-4 flex flex-col items-center gap-4">
-          <!-- Thermometer / Warmth Logo Visualizer -->
-          <div class="flex flex-col items-center gap-3 py-4 w-full relative">
-            <div class="text-center z-10">
-              <span id="warmth-degree" class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 font-comfort">36.5°C</span>
-              <span class="text-[10px] text-orange-950/50 block font-semibold mt-0.5" data-i18n="dashboard_desc">기부가 쌓일수록 지구촌의 온도가 올라갑니다.</span>
+    </section>
+
+    <!-- Category Filter Tabs -->
+    <nav class="filter-section">
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all">🔘 전체 서비스 (20+)</button>
+        <button class="tab-btn" data-filter="flagship">🚀 플래그십 웹앱</button>
+        <button class="tab-btn" data-filter="rea">🔬 REA 역공학 랩</button>
+        <button class="tab-btn" data-filter="saas">👔 SaaS &amp; AI 랩</button>
+        <button class="tab-btn" data-filter="books">📚 위키독스 전자책</button>
+        <button class="tab-btn" data-filter="cinema">🎬 영화 시나리오</button>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="content-container">
+
+      <!-- =====================================================================
+           SECTION 1: Flagship Web Apps
+           ===================================================================== -->
+      <section class="service-group" data-category="flagship">
+        <div class="section-header">
+          <h2 class="section-title"><span>🚀</span> 플래그십 라이브 웹 서비스</h2>
+          <span class="section-desc">브라우저에서 즉시 실행되는 PWA &amp; 대시보드</span>
+        </div>
+
+        <div class="cards-grid">
+          <!-- Card 1: 말쌈 PWA -->
+          <article class="service-card" data-category="flagship">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🗣️</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Live PWA</span>
+              </div>
+              <h3 class="card-title">말쌈 (Malssam)</h3>
+              <div class="card-subtitle">바른 우리말 AI 사전 &amp; 인터랙티브 퀴즈</div>
+              <p class="card-desc">
+                신조어부터 바른 우리말까지, AI 번역과 문해력 동적 퀴즈를 제공하는 온디바이스 PWA 웹 서비스입니다.
+              </p>
+              <ul class="card-features">
+                <li>IndexedDB 로컬 오프라인 완전 구동</li>
+                <li>Firebase 서울 리전 실시간 투표 연동</li>
+                <li>글로벌 5개국 맞춤 디자인 에디션 탑재</li>
+              </ul>
             </div>
-            
-            <!-- Warmth Logo Container -->
-            <div class="relative w-36 h-36 flex items-center justify-center rounded-full bg-slate-950/5 p-1 border border-orange-100/30 overflow-hidden mt-2 shadow-inner">
-              <canvas id="milkyway-canvas" class="absolute inset-0 w-full h-full rounded-full z-0 pointer-events-none"></canvas>
-              <img id="warmth-logo" src="./logo_circle.png" alt="Warmth Logo" class="w-[90%] h-[90%] object-contain rounded-full transition-all duration-1000 z-10 relative" style="filter: grayscale(100%) blur(6px); opacity: 0.15;">
+            <div class="card-footer-action">
+              <a href="./malssam/" class="btn-action">
+                <span>말쌈 사전 접속하기</span> <span>➔</span>
+              </a>
             </div>
-            
-            <p class="text-[10px] text-orange-950/60 font-semibold px-4 text-center leading-relaxed mt-2" id="warmth-status-desc">
-              지구촌의 감성 온도가 조금씩 따뜻해지고 있어요!
+          </article>
+
+          <!-- Card 2: DMDG 서재 -->
+          <article class="service-card" data-category="flagship">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">📖</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Live Reader</span>
+              </div>
+              <h3 class="card-title">DMDG 서재 (Hamilton.Kang)</h3>
+              <div class="card-subtitle">4대 대하 팩션 소설 몰입형 E-Reader</div>
+              <p class="card-desc">
+                2027년 한반도와 글로벌 사이버전을 다룬 Hamilton.Kang의 4대 팩션 스릴러 단편소설 인터랙티브 뷰어입니다.
+              </p>
+              <ul class="card-features">
+                <li>브라우저 AI 음성 낭독(TTS) 및 속도 제어</li>
+                <li>다크·세피아 감성 테마 및 폰트 크기 조절</li>
+                <li>문단 더블클릭 실시간 이어듣기 지원</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./novels.html" class="btn-action">
+                <span>DMDG 서재 열기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 3: SCM MLOps 대시보드 -->
+          <article class="service-card" data-category="flagship">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">⚡</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Live Console</span>
+              </div>
+              <h3 class="card-title">AI 에이전트 &amp; SCM MLOps</h3>
+              <div class="card-subtitle">스마트 공급망 수요 예측 &amp; 실시간 파이프라인</div>
+              <p class="card-desc">
+                LLM Brain과 그래프 지식 저장소를 결합하여 기업 공급망 리스크와 수요를 실시간 추론하는 전문 대시보드입니다.
+              </p>
+              <ul class="card-features">
+                <li>원클릭 공급망 그래프 노드 인터랙션</li>
+                <li>LangGraph 상태 전이 실시간 모니터링</li>
+                <li>LightGBM &amp; XGBoost 앙상블 예측기</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./scm_dashboard.html" class="btn-action">
+                <span>대시보드 콘솔 실행</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 4: 소담 라이브 -->
+          <article class="service-card" data-category="flagship">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🌸</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Firebase Live</span>
+              </div>
+              <h3 class="card-title">소담 라이브 (Sodam Web)</h3>
+              <div class="card-subtitle">마음의 온기와 치유를 전하는 감성 문학</div>
+              <p class="card-desc">
+                따뜻한 글귀와 마음을 보듬는 시·산문을 아름다운 음악과 함께 감상할 수 있는 감성 힐링 웹 서비스입니다.
+              </p>
+              <ul class="card-features">
+                <li>Firebase 독립 인프라 안정 구동</li>
+                <li>감성 비주얼 &amp; 미니멀 반응형 카드</li>
+                <li>위키독스 Book 21665 연계 쇼룸</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer" class="btn-action">
+                <span>소담 라이브 바로가기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 5: 방법 라이브 -->
+          <article class="service-card" data-category="flagship">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🩸</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Live Story</span>
+              </div>
+              <h3 class="card-title">방법 (Curse Bangbeop)</h3>
+              <div class="card-subtitle">한국형 미스터리 오컬트 스릴러 스토리텔링</div>
+              <p class="card-desc">
+                고대 주술과 모던 도시 괴담이 얽힌 미스터리 오컬트 스토리텔링 인터랙티브 웹 쇼케이스입니다.
+              </p>
+              <ul class="card-features">
+                <li>사운드와 비주얼이 결합된 몰입형 씬</li>
+                <li>오컬트 &amp; 캐주얼 듀얼 인터랙션</li>
+                <li>인터랙티브 웹 시나리오 체험</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./curse_bangbeop/" class="btn-action">
+                <span>방법 라이브 체험</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 2: REA Reverse Engineering Simulators
+           ===================================================================== -->
+      <section class="service-group" data-category="rea">
+        <div class="section-header">
+          <h2 class="section-title"><span>🔬</span> REA &amp; 차세대 역공학 라이브 랩</h2>
+          <span class="section-desc">브라우저에서 직접 바이너리를 뜯어보고 해체하는 3대 실습기</span>
+        </div>
+
+        <div class="cards-grid">
+          <!-- REA Lab 1: 공룡 게임 -->
+          <article class="service-card" data-category="rea">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🦖</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Book 21753 연계</span>
+              </div>
+              <h3 class="card-title">크롬 공룡 랩 (Dino Lab)</h3>
+              <div class="card-subtitle">T-Rex 러너 게임 역공학 &amp; 실시간 패치</div>
+              <p class="card-desc">
+                크롬 오프라인 공룡 게임 코드를 분해하여 속도, 점프력, 중력을 슬라이더로 실시간 변조하고 무적 치트를 적용합니다.
+              </p>
+              <ul class="card-features">
+                <li>러너 게임 엔진 실시간 메모리 패치</li>
+                <li>자바스크립트 클론 코드 자동 추출</li>
+                <li>AI 에이전트와 함께하는 10분 해체 쇼</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./sim_dino_lab.html" class="btn-action">
+                <span>공룡 랩 실행하기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- REA Lab 2: 윈도우 계산기 -->
+          <article class="service-card" data-category="rea">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🧮</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Book 21754 연계</span>
+              </div>
+              <h3 class="card-title">윈도우 계산기 랩 (Calc Sim)</h3>
+              <div class="card-subtitle">x86_64 바이너리 분석 &amp; 버그 패치 위젯</div>
+              <p class="card-desc">
+                윈도우 정품 계산기의 C++ / 어셈블리 로직을 역공학하여 악명 높은 퍼센트(%) 연산자 우선순위 버그를 수정한 모던 웹 계산기입니다.
+              </p>
+              <ul class="card-features">
+                <li>디스어셈블리 제어 흐름 분석</li>
+                <li>연산자 파싱 알고리즘 버그 수정</li>
+                <li>모던 반응형 웹 위젯 완전 재현</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./sim_calc_percent.html" class="btn-action">
+                <span>계산기 랩 실행하기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- REA Lab 3: 클린룸 TDD -->
+          <article class="service-card" data-category="rea">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🛡️</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Book 21755 연계</span>
+              </div>
+              <h3 class="card-title">클린룸 TDD 검증기 (Cleanroom Diff)</h3>
+              <div class="card-subtitle">바이트 디프 &amp; 단위 테스트 100% 무결성 검증</div>
+              <p class="card-desc">
+                오리지널 바이너리와 클린룸 기법으로 재구현된 코드를 실시간 헥사(Hex) 바이트 단위로 비교하고 TDD 테스트를 통과시키는 시뮬레이터입니다.
+              </p>
+              <ul class="card-features">
+                <li>실시간 헥사 바이트 비교 엔진</li>
+                <li>불변 비즈니스 룰 자동 추출</li>
+                <li>100% 검증 TDD 자동화 검증</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./sim_cleanroom_diff.html" class="btn-action">
+                <span>클린룸 검증기 실행</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Math Hub Callout Card -->
+        <div style="background: rgba(0, 168, 150, 0.08); border: 1px dashed var(--dmdg-teal); border-radius: var(--radius-lg); padding: 1.5rem 2rem; margin-bottom: 3.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+          <div>
+            <h4 style="font-size: 1.1rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">
+              🎛️ 수학·엔지니어링 20종 시각화 시뮬레이터 마스터 허브
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--dmdg-text-secondary);">
+              Book 21701 연계 텐서 놈, 코사인 유사도, 어텐션 행렬곱, PCA/LoRA, LangGraph 상태 전이 20종 랩 전편 수록
             </p>
           </div>
-
-          <!-- Stats Grid -->
-          <div class="grid grid-cols-2 gap-3.5 w-full mt-1.5">
-            <div class="bg-orange-50/50 border border-orange-100/50 rounded-2xl p-3 text-center">
-              <span class="text-[9px] font-bold text-orange-700 block uppercase tracking-wider" data-i18n="stat_donations">누적 기부 소리</span>
-              <span id="stat-donations-count" class="text-lg font-extrabold text-orange-950 font-comfort mt-0.5 block">0</span>
-            </div>
-            <div class="bg-rose-50/50 border border-rose-100/50 rounded-2xl p-3 text-center">
-              <span class="text-[9px] font-bold text-rose-700 block uppercase tracking-wider" data-i18n="stat_chains">누적 릴레이 체인</span>
-              <span id="stat-chains-count" class="text-lg font-extrabold text-orange-950 font-comfort mt-0.5 block">0</span>
-            </div>
-          </div>
+          <a href="./sim_master_hub.html" class="btn-action primary" style="width: auto; padding: 0.65rem 1.4rem;">
+            <span>20종 마스터 허브 바로가기</span> <span>➔</span>
+          </a>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- Copyright Footer Notice -->
-    <footer class="mt-4 px-2 py-4 border-t border-orange-200/40 text-[10px] text-orange-950/40 leading-relaxed text-center font-medium" data-i18n="footer_notice">
-      위 글의 저작권은 행복한가에 있으며 모든 페이지 내용의 소유권은 행복한가에서 가지고 있습니다. 내용을 공유하실 때에는 글 하단 또는 제목에 '행복한가'를 반드시 표기 바랍니다.
+      <!-- =====================================================================
+           SECTION 3: Enterprise SaaS & AI Agent Labs
+           ===================================================================== -->
+      <section class="service-group" data-category="saas">
+        <div class="section-header">
+          <h2 class="section-title"><span>👔</span> 엔터프라이즈 SaaS &amp; AI 멀티 에이전트 랩</h2>
+          <span class="section-desc">자율 에이전트 관제와 0원 클라우드 비즈니스 아키텍처</span>
+        </div>
+
+        <div class="cards-grid">
+          <!-- SaaS Lab 1: K-오피스 -->
+          <article class="service-card" data-category="saas">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">👔</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Live App</span>
+              </div>
+              <h3 class="card-title">K-오피스 생존 연구소</h3>
+              <div class="card-subtitle">직장인 생존 지수 진단 &amp; AI 롤플레잉</div>
+              <p class="card-desc">
+                대한민국 K-직장인을 위한 생존 지수 진단, 연봉 협상 전략 시뮬레이션 및 상사 대응 롤플레잉 AI 인터랙티브 앱입니다.
+              </p>
+              <ul class="card-features">
+                <li>생존 스트레스 지수 실시간 산출</li>
+                <li>AI 롤플레잉 대화 시나리오</li>
+                <li>직무별 맞춤 협상 카드 제공</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./sim_k_office.html" class="btn-action">
+                <span>연구소 접속하기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- SaaS Lab 2: 멀티 에이전트 콘솔 -->
+          <article class="service-card" data-category="saas">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🤖</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Live Console</span>
+              </div>
+              <h3 class="card-title">멀티 에이전트 오케스트레이터</h3>
+              <div class="card-subtitle">자율 에이전트 실시간 워크플로우 관제</div>
+              <p class="card-desc">
+                기획, 개발, QA, 배포 등 4대 자율 AI 에이전트 간의 실시간 JSON-RPC 통신과 상태 그래프 전이를 시각화합니다.
+              </p>
+              <ul class="card-features">
+                <li>실시간 에이전트 로그 스트리밍</li>
+                <li>LangGraph 상태 전이 시각 맵</li>
+                <li>비동기 이벤트 파이프라인 관제</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./sim_agent_orchestrator.html" class="btn-action">
+                <span>콘솔 관제 실행</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- SaaS Lab 3: 0원 SaaS 빌더 -->
+          <article class="service-card" data-category="saas">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">💰</div>
+                <span class="card-status-badge"><span class="pulse-dot"></span> Live Builder</span>
+              </div>
+              <h3 class="card-title">0원 SaaS 빌더 랩</h3>
+              <div class="card-subtitle">비용 제로 마이크로 SaaS 아키텍처</div>
+              <p class="card-desc">
+                Next.js, Cloudflare, Supabase의 무료 티어를 결합하여 서버 비용 0원으로 월 1,000만 원 규모를 견디는 아키텍처 시뮬레이터입니다.
+              </p>
+              <ul class="card-features">
+                <li>글로벌 엣지 인프라 비용 견적기</li>
+                <li>Stripe / 포트원 결제 파이프라인</li>
+                <li>1인 창업 풀스택 템플릿 제공</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="./sim_saas_builder.html" class="btn-action">
+                <span>빌더 랩 실행하기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 4: Wikidocs Books Lineup
+           ===================================================================== -->
+      <section class="service-group" data-category="books">
+        <div class="section-header">
+          <h2 class="section-title"><span>📚</span> 위키독스(Wikidocs) 공식 출판 전자책</h2>
+          <span class="section-desc">글로벌 엔지니어링 표준과 지식의 정수를 담은 공식 교재</span>
+        </div>
+
+        <div class="cards-grid">
+          <!-- Book 1: REA 1권 -->
+          <article class="service-card" data-category="books">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">📕</div>
+                <span class="card-status-badge book">Book 21753 완간</span>
+              </div>
+              <h3 class="card-title">남의 앱 뜯어보기</h3>
+              <div class="card-subtitle">소스코드는 필요 없다 AI 에이전트와 함께하는 소프트웨어 해체 쇼</div>
+              <p class="card-desc">
+                크롬 공룡 게임부터 윈도우 계산기, 안드로이드 OTP까지 일반 노트북에서 10분 만에 끝내는 실전 역공학 입문서.
+              </p>
+              <ul class="card-features">
+                <li>1~5부 전 11개 챕터 완전 개통</li>
+                <li>인터랙티브 웹 시뮬레이터 100% 연동</li>
+                <li>저자 Hamilton.Kang &amp; DMDG Great AI</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://wikidocs.net/book/21753" target="_blank" rel="noopener noreferrer" class="btn-action gold">
+                <span>위키독스 도서 보기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Book 2: REA 2권 -->
+          <article class="service-card" data-category="books">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">📘</div>
+                <span class="card-status-badge book">Book 21754 완간</span>
+              </div>
+              <h3 class="card-title">리버스 엔지니어링 실전 바이블</h3>
+              <div class="card-subtitle">AI 에이전트로 끝내는 네이티브·웹·모바일 표준 교과서</div>
+              <p class="card-desc">
+                C/C++, Rust, Go 바이너리부터 일렉트론, 안드로이드 APK, 네트워크 프로토콜 분석까지 망라한 엔지니어링 표준서.
+              </p>
+              <ul class="card-features">
+                <li>Part 1~6 전 12개 챕터 완결 출판</li>
+                <li>x64 어셈블리와 프로바이더 구현</li>
+                <li>저자 Hamilton.Kang &amp; DMDG Great AI</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://wikidocs.net/book/21754" target="_blank" rel="noopener noreferrer" class="btn-action gold">
+                <span>위키독스 도서 보기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Book 3: REA 3권 -->
+          <article class="service-card" data-category="books">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">📙</div>
+                <span class="card-status-badge book">Book 21755 완간</span>
+              </div>
+              <h3 class="card-title">모던 리버스 엔지니어링</h3>
+              <div class="card-subtitle">AI 기반 보안 분석과 클린룸 시스템 재구현</div>
+              <p class="card-desc">
+                메모리 취약점 진단, 안티 리버싱 우회부터 바이트 일치 TDD 클린룸 엔지니어링까지 다루는 고급 심화서.
+              </p>
+              <ul class="card-features">
+                <li>Part 1~5 전 12개 챕터 완결 출판</li>
+                <li>합법적 무결점 클린룸 기법 전수</li>
+                <li>저자 Hamilton.Kang &amp; DMDG Great AI</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://wikidocs.net/book/21755" target="_blank" rel="noopener noreferrer" class="btn-action gold">
+                <span>위키독스 도서 보기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Book 4: 수학 교재 -->
+          <article class="service-card" data-category="books">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">📗</div>
+                <span class="card-status-badge book">Book 21701 완간</span>
+              </div>
+              <h3 class="card-title">AI &amp; 데이터 분석 사전 학습</h3>
+              <div class="card-subtitle">최신 LLM 에이전트 완벽 정복을 위한 수학·엔지니어링 20일 완성</div>
+              <p class="card-desc">
+                수포자도 직관적으로 깨우치는 인공지능 수학 교재. 20종 전용 시각화 시뮬레이터와 파이썬 코드가 수록되어 있습니다.
+              </p>
+              <ul class="card-features">
+                <li>Day 01~20 전 20개 강좌 완결</li>
+                <li>20종 단독 시뮬레이터 탑재</li>
+                <li>저자 Hamilton.Kang &amp; DMDG Great AI</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://wikidocs.net/book/21701" target="_blank" rel="noopener noreferrer" class="btn-action gold">
+                <span>위키독스 도서 보기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Brand Home Banner -->
+        <div style="background: rgba(247, 127, 0, 0.08); border: 1px solid rgba(247, 127, 0, 0.3); border-radius: var(--radius-lg); padding: 1.5rem 2rem; margin-bottom: 3.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+          <div>
+            <h4 style="font-size: 1.1rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">
+              🏛️ DMDG 위키독스 공식 브랜드 홈 (dmdg.wikidocs.net)
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--dmdg-text-secondary);">
+              DMDG 스튜디오가 발행한 15종 전 도서와 공식 기술 블로그를 한눈에 둘러보세요.
+            </p>
+          </div>
+          <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="btn-action gold" style="width: auto; padding: 0.65rem 1.4rem;">
+            <span>공식 브랜드 홈 바로가기</span> <span>➔</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 5: 120-Minute Movie Scenarios 4-Parts
+           ===================================================================== -->
+      <section class="service-group" data-category="cinema">
+        <div class="section-header">
+          <h2 class="section-title"><span>🎬</span> 위키독스 120분 영화 시나리오 4부작</h2>
+          <span class="section-desc">총괄 저자 Hamilton.Kang &amp; 당목담글 스튜디오 Great AI 출판본부</span>
+        </div>
+
+        <div class="cards-grid">
+          <!-- Scenario 1 -->
+          <article class="service-card" data-category="cinema">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🔐</div>
+                <span class="card-status-badge">시나리오 I</span>
+              </div>
+              <h3 class="card-title">프로토콜 2027</h3>
+              <div class="card-subtitle">글로벌 사이버 첩보 서스펜스 스릴러</div>
+              <p class="card-desc">
+                국가정보원 사이버실과 고대 지하 묘소에 숨겨진 비밀 매국 협약서 '프로토콜 2027'을 둘러싼 치명적인 72시간의 사투.
+              </p>
+              <ul class="card-features">
+                <li>120분 장편 영화 대본 완결</li>
+                <li>지능형 암호학 &amp; 하이테크 팩션</li>
+                <li>저자 Hamilton.Kang</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://wikidocs.net/452410" target="_blank" rel="noopener noreferrer" class="btn-action">
+                <span>시나리오 1부 읽기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Scenario 2 -->
+          <article class="service-card" data-category="cinema">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🐺</div>
+                <span class="card-status-badge">시나리오 II</span>
+              </div>
+              <h3 class="card-title">2027 제3의 늑대</h3>
+              <div class="card-subtitle">금융망 붕괴 &amp; 국가 안보 팩션 서스펜스</div>
+              <p class="card-desc">
+                대한민국 초국가적 금융 전산망을 0.001초 만에 마비시키려는 거대 세력과 이를 저지하려는 충신들의 숨 막히는 두뇌 싸움.
+              </p>
+              <ul class="card-features">
+                <li>금융 안보 팩션 블록버스터</li>
+                <li>120분 영화 시나리오 완본 수록</li>
+                <li>저자 Hamilton.Kang</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://wikidocs.net/452411" target="_blank" rel="noopener noreferrer" class="btn-action">
+                <span>시나리오 2부 읽기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Scenario 3 -->
+          <article class="service-card" data-category="cinema">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">☀️</div>
+                <span class="card-status-badge">시나리오 III</span>
+              </div>
+              <h3 class="card-title">태양의 제국을 넘어</h3>
+              <div class="card-subtitle">동북아 지정학 대하 팩션 첩보 스릴러</div>
+              <p class="card-desc">
+                칸 제국의 대륙 패권 야욕과 서해안 비밀 에너지 벨트를 수호하기 위해 목숨을 건 특검과 무궁화 결사대의 대하 서사시.
+              </p>
+              <ul class="card-features">
+                <li>동북아 지정학 대하 팩션 스릴러</li>
+                <li>등장인물 심층 프로필 및 비화 수록</li>
+                <li>저자 Hamilton.Kang</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://wikidocs.net/453666" target="_blank" rel="noopener noreferrer" class="btn-action">
+                <span>시나리오 3부 읽기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Scenario 4 -->
+          <article class="service-card" data-category="cinema">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-badge">🛡️</div>
+                <span class="card-status-badge">시나리오 IV</span>
+              </div>
+              <h3 class="card-title">사일런트 킬체인</h3>
+              <div class="card-subtitle">2027 기계 속도 AI 침투체와 자율방어전</div>
+              <p class="card-desc">
+                인간의 반응 속도를 초월한 AI 자율 사이버 무기 침투에 맞서 대한민국 핵심 인프라를 지키는 48시간의 실시간 사이버 혈투.
+              </p>
+              <ul class="card-features">
+                <li>차세대 사이버전 테크노 스릴러</li>
+                <li>국가 안보 사이버 킬체인 완결본</li>
+                <li>저자 Hamilton.Kang</li>
+              </ul>
+            </div>
+            <div class="card-footer-action">
+              <a href="https://wikidocs.net/453667" target="_blank" rel="noopener noreferrer" class="btn-action">
+                <span>시나리오 4부 읽기</span> <span>➔</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           Brand Identity & Philosophy Banner
+           ===================================================================== -->
+      <section class="brand-story-banner">
+        <div style="width: 68px; height: 68px; margin-bottom: 1.25rem;">
+          <img src="./assets/dmdg_logo_emblem.png" alt="당목담글 엠블럼" style="width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 24px var(--dmdg-teal-glow);">
+        </div>
+        <div class="brand-quote">
+          "사람과 마음을 연결하는<br>세상에서 가장 따뜻한 이어읽기 플랫폼"
+        </div>
+        <div class="brand-subquote">
+          당신의 목소리로 다음글을 읽어주세요 — 당목담글(DMDG)
+        </div>
+        <div class="brand-meta-badge">
+          <span>🏛️</span> <span>CEO Hamilton Kang &amp; 당목담글 스튜디오 Great AI 출판본부</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-channels">
+        <a href="https://www.youtube.com/@dmdg-free" target="_blank" rel="noopener noreferrer" class="channel-link">
+          <span>🎬</span> 유튜브: 당목담글 (@dmdg-free)
+        </a>
+        <a href="https://www.youtube.com/@koreans-culture" target="_blank" rel="noopener noreferrer" class="channel-link">
+          <span>🏛️</span> 유튜브: 한국 문화 &amp; 역사 (@koreans-culture)
+        </a>
+        <a href="https://t.me/aiffall_bot" target="_blank" rel="noopener noreferrer" class="channel-link">
+          <span>🤖</span> 텔레그램: Great AI 봇 (@aiffall_bot)
+        </a>
+        <a href="https://github.com/freefluxkr/dmdg_live" target="_blank" rel="noopener noreferrer" class="channel-link">
+          <span>📦</span> GitHub: freefluxkr/dmdg_live
+        </a>
+      </div>
+
+      <div class="footer-copy">
+        <p>© 2026 DMDG (당목담글) 스튜디오 Great AI. All Rights Reserved.</p>
+        <p style="margin-top: 4px; font-size: 0.75rem;">
+          공식 대표 도메인: <strong>dmdg-live.com</strong> &amp; <strong>malssam.com</strong>
+        </p>
+      </div>
     </footer>
 
-  </main>
-
-  <!-- Audiobook Overlay Player Control Panel -->
-  <div id="audiobook-player" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-[90%] max-w-sm glass-card rounded-3xl p-4 shadow-2xl z-40 hidden border-t-2 border-orange-400 transition-all duration-300">
-    <div class="flex flex-col gap-3">
-      <div class="flex items-center justify-between">
-        <span class="text-xs font-bold text-orange-850 flex items-center gap-1">
-          <span class="animate-pulse">🎧</span>
-          <span data-i18n="audiobook_panel_title">마음 오디오북 연속 재생 중</span>
-        </span>
-        <button onclick="stopAudiobook()" class="text-orange-950/50 hover:text-orange-900 transition-colors p-1">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-      
-      <!-- Progress Bar & Active Info -->
-      <div class="bg-orange-50/50 rounded-xl p-2.5 border border-orange-100 flex flex-col gap-1">
-        <div class="flex justify-between text-[10px] font-bold text-orange-800">
-          <span id="audiobook-emotion-badge" class="px-2 py-0.5 rounded-full bg-orange-200/60">위로</span>
-          <span id="audiobook-track-index">1 / 1</span>
-        </div>
-        <p id="audiobook-text" class="text-xs font-medium text-orange-950 font-warm leading-relaxed truncate">
-          로딩 중...
-        </p>
-      </div>
-
-      <!-- Playback Controls -->
-      <div class="flex items-center justify-center gap-5">
-        <button onclick=" prevAudiobookTrack()" class="p-2 rounded-full hover:bg-orange-100 text-orange-800 transition-colors touch-target">
-          <i data-lucide="skip-back" class="w-5 h-5"></i>
-        </button>
-        <button onclick=" toggleAudiobookPlay()" id="audiobook-play-btn" class="w-12 h-12 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-md touch-target">
-          <i data-lucide="pause" class="w-6 h-6"></i>
-        </button>
-        <button onclick=" nextAudiobookTrack()" class="p-2 rounded-full hover:bg-orange-100 text-orange-800 transition-colors touch-target">
-          <i data-lucide="skip-forward" class="w-5 h-5"></i>
-        </button>
-      </div>
-    </div>
   </div>
 
-  <!-- AI Pronunciation Evaluation Scorecard Dialog -->
-  <div id="ai-evaluation-modal" class="fixed inset-0 bg-orange-950/40 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 relative">
-      <div class="flex justify-between items-center">
-        <span class="text-xs font-bold bg-orange-200 text-orange-900 px-3 py-1 rounded-full flex items-center gap-1">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-orange-600 animate-pulse"></i>
-          <span data-i18n="eval_title">Gemini AI 발음 평가 성적표</span>
-        </span>
-        <button onclick="closeEvaluationModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
+  <!-- JavaScript for Tabs, Theme, and Fullscreen -->
+  <script>
+    // Tab Filtering
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const serviceGroups = document.querySelectorAll('.service-group');
+    const serviceCards = document.querySelectorAll('.service-card');
 
-      <!-- Score Display -->
-      <div class="text-center py-3 bg-gradient-to-br from-orange-100/50 to-rose-100/50 rounded-2xl border border-orange-200/40">
-        <span class="text-[10px] font-bold text-orange-800 uppercase tracking-widest block mb-0.5" data-i18n="eval_score_label">PRONUNCIATION SCORE</span>
-        <span id="ai-score" class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 font-comfort">92</span>
-        <span class="text-lg font-bold text-orange-700">/ 100</span>
-      </div>
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-      <!-- Detailed Feedback Section -->
-      <div class="space-y-3 relative overflow-hidden" id="evaluation-feedback-wrapper">
-        <!-- 2안: 초·중·종성 한글 자모 해체 알고리즘(Disassembler) 시각화 뷰 -->
-        <div id="evaluation-visual-feedback" class="flex flex-wrap gap-1.5 p-3.5 bg-white/50 rounded-2xl border border-orange-100/60 justify-center font-warm text-sm leading-relaxed tracking-wider min-h-[60px]">
-          <!-- 글자들이 자모 채점에 맞춰 동적으로 채워짐 -->
-        </div>
+        const filter = btn.dataset.filter;
 
-        <div class="flex flex-col gap-1 bg-white/40 rounded-xl p-3 border border-orange-100">
-          <span class="text-[10px] font-bold text-orange-800 flex items-center gap-1">
-            <i data-lucide="smile" class="w-3 h-3 text-orange-600"></i> <span data-i18n="eval_good_label">잘한 부분</span>
-          </span>
-          <p id="ai-good" class="text-xs font-medium text-orange-950 leading-relaxed font-warm">
-            목소리 톤이 아주 차분하며, 문장의 감정선이 따뜻하게 묻어나와 듣기 좋습니다.
-          </p>
-        </div>
-        <div class="flex flex-col gap-1 bg-rose-50/40 rounded-xl p-3 border border-rose-100">
-          <span class="text-[10px] font-bold text-rose-800 flex items-center gap-1">
-            <i data-lucide="alert-circle" class="w-3 h-3 text-rose-600"></i> <span data-i18n="eval_improve_label">교정이 필요한 부분</span>
-          </span>
-          <p id="ai-improve" class="text-xs font-medium text-orange-950 leading-relaxed font-warm">
-            "바람이" 구절에서 종성 발음이 조금 급해 뭉개졌습니다. 템포를 살짝 늦춰보세요.
-          </p>
-        </div>
+        if (filter === 'all') {
+          serviceGroups.forEach(g => g.style.display = 'block');
+          serviceCards.forEach(c => c.style.display = 'flex');
+        } else {
+          serviceGroups.forEach(g => {
+            if (g.dataset.category === filter) {
+              g.style.display = 'block';
+            } else {
+              g.style.display = 'none';
+            }
+          });
+        }
+      });
+    });
 
-        <!-- 3회 초과 비회원용 블러 잠금 오버레이 -->
-        <div id="premium-lock-overlay" class="absolute inset-0 bg-white/60 backdrop-blur-[6px] flex flex-col items-center justify-center text-center p-4 z-30 hidden rounded-2xl border border-orange-200">
-          <i data-lucide="lock" class="w-8 h-8 text-orange-600 mb-2"></i>
-          <h4 class="text-sm font-bold text-orange-950 mb-1" data-i18n="premium_title">프리미엄 전용 기능</h4>
-          <p class="text-[10px] text-orange-800/80 leading-relaxed mb-3" data-i18n="premium_overlay_desc">
-            일일 무료 체험 3회가 완료되었습니다.<br>PayPal 결제 후 정밀 분석 결과를 확인해 보세요!
-          </p>
-          <button onclick="openPaywallModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 text-white font-bold text-[10px] shadow-md hover:scale-105 transition-transform" data-i18n="premium_unlock_btn">
-            멤버십 잠금해제 🔓
-          </button>
-        </div>
-      </div>
+    // Theme Toggle
+    const themeBtn = document.getElementById('btn-theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
 
-      <button onclick="closeEvaluationModal()" class="w-full py-3 rounded-2xl bg-gradient-to-br from-orange-500 to-rose-500 text-white font-bold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all touch-target" data-i18n="eval_close_btn">
-        확인 완료
-      </button>
-    </div>
-  </div>
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('theme-light');
+      if (document.body.classList.contains('theme-light')) {
+        themeIcon.textContent = '☀️';
+      } else {
+        themeIcon.textContent = '🌙';
+      }
+    });
 
-  <!-- Paywall / Subscription Modal -->
-  <div id="paywall-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
-      <div class="flex justify-end">
-        <button onclick="closePaywallModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-
-      <div class="flex flex-col items-center gap-2">
-        <div class="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-3xl shadow-inner">💎</div>
-        <h3 class="text-base font-bold text-orange-950 font-warm" data-i18n="paywall_title">Gemini AI 정밀 진단 횟수 초과</h3>
-        <p class="text-xs text-orange-700/80 leading-relaxed" data-i18n="paywall_desc">
-          오늘의 무료 AI 발음 평가 3회를 모두 사용하셨습니다.<br>유료 프리미엄 멤버십으로 24시간 언제든 정밀 과외를 즐겨보세요!
-        </p>
-      </div>
-      <!-- Donation Option (Conditional) -->
-      <div id="paywall-donation-option" class="hidden mb-2">
-        <div onclick="processVoiceDonationFromPaywall()" class="p-4 rounded-2xl bg-gradient-to-r from-orange-100 to-rose-100 border border-orange-300 hover:border-orange-400 cursor-pointer flex flex-col justify-center items-center transition-all shadow-sm">
-          <span class="text-xs font-bold text-orange-900 mb-1">🎤 내 목소리 기부하고 5회 받기</span>
-          <span class="text-[10px] text-orange-700/80" id="paywall-donation-limit-text">이번 달 보상 한도: 3회 남음</span>
-        </div>
-        <div class="flex items-center justify-center gap-2 my-3">
-          <div class="h-px bg-orange-200 flex-1"></div>
-          <span class="text-[10px] text-orange-400 font-bold">또는 프리미엄 가입</span>
-          <div class="h-px bg-orange-200 flex-1"></div>
-        </div>
-      </div>
-
-      <!-- Subscription Options -->
-      <div class="space-y-2.5 my-2">
-        <div onclick="selectPricingOption('weekly')" id="option-weekly" class="p-3.5 rounded-2xl border-2 border-orange-400 bg-orange-50/50 hover:bg-orange-100/50 cursor-pointer flex justify-between items-center transition-all">
-          <div class="text-left">
-            <span class="text-xs font-bold text-orange-950 block" data-i18n="paywall_pass">주간 자유 패스</span>
-            <span class="text-[10px] text-orange-700/60" data-i18n="paywall_pass_desc">매주 무제한 발음 피드백</span>
-          </div>
-          <span class="text-xs font-bold text-orange-900" id="price-pass">₩2,900 / 주</span>
-        </div>
-        <div onclick="selectPricingOption('charge')" id="option-charge" class="p-3.5 rounded-2xl border border-orange-200 bg-white/40 hover:bg-orange-50/30 cursor-pointer flex justify-between items-center transition-all">
-          <div class="text-left">
-            <span class="text-xs font-bold text-orange-950 block" data-i18n="paywall_coin">30 코인 충전</span>
-            <span class="text-[10px] text-orange-700/60" data-i18n="paywall_coin_desc">30회 정밀 성적표 발급</span>
-          </div>
-          <span class="text-xs font-bold text-orange-900" id="price-coin">₩4,900 / 1회성</span>
-        </div>
-      </div>
-
-      <!-- PayPal Smart Button container (Will be dynamically rendered inside script) -->
-      <div id="paypal-button-container" class="w-full mt-1 hidden transition-all duration-300"></div>
-
-      <button id="paywall-btn" onclick="startPaypalFlow()" class="w-full py-3.5 rounded-2xl bg-theme-grad text-white font-bold text-xs shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all touch-target" data-i18n="paywall_btn">
-        프리미엄 멤버십 시작하기
-      </button>
-    </div>
-  </div>
-
-  <!-- Gemini API Key Settings Modal -->
-  <div id="settings-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
-      <div class="flex justify-between items-center">
-        <span class="text-xs font-bold bg-orange-100 text-orange-900 px-3 py-1 rounded-full flex items-center gap-1">
-          <i data-lucide="key" class="w-3.5 h-3.5 text-orange-600"></i>
-          <span data-i18n="gemini_key_title">Gemini API 설정</span>
-        </span>
-        <button onclick="closeSettingsModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-      <p class="text-xs text-orange-950/70 leading-relaxed text-left" data-i18n="gemini_key_desc">
-        70개국 실시간 감성 번역을 사용하기 위해 개인 Gemini API Key를 등록해 주세요. 키는 기기 로컬에만 안전하게 보관됩니다.
-      </p>
-      <input type="password" id="gemini-api-key-input" placeholder="AIzaSy..." class="w-full px-4 py-3 rounded-2xl border border-orange-200/60 bg-white/50 focus:outline-none focus:border-orange-400 text-xs font-medium font-comfort">
-      <div class="flex gap-2">
-        <button onclick="closeSettingsModal()" class="w-1/2 py-3 rounded-2xl bg-orange-50 hover:bg-orange-100 text-orange-950 font-bold text-xs shadow-sm transition-all" data-i18n="cancel_btn">취소</button>
-        <button onclick="saveGeminiApiKey()" class="w-1/2 py-3 rounded-2xl bg-theme-grad text-white font-bold text-xs shadow-md transition-all" data-i18n="gemini_key_save">저장하기</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Benefit Info Modal -->
-  <div id="benefit-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
-      <div class="flex justify-end">
-        <button onclick="closeBenefitModal()" class="text-orange-950/40 hover:text-orange-950 transition-colors p-1">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-      <div class="flex flex-col items-center gap-2">
-        <div class="w-16 h-16 rounded-full bg-rose-100 flex items-center justify-center text-3xl shadow-inner animate-pulse">🎁</div>
-        <h3 class="text-base font-bold text-orange-950 font-warm" data-i18n="benefit_modal_title">목소리 기부 혜택 안내</h3>
-        <p class="text-xs text-orange-850/80 leading-relaxed text-left px-1 mt-1 space-y-2">
-          <span class="block">🍊 <b>어떻게 참여하나요?</b><br>낭독 녹음을 마친 후 "세상에 목소리 기부하기"를 선택해 전 세계 릴레이 피드에 업로드합니다.</span>
-          <span class="block">🎁 <b>어떤 혜택을 받나요?</b><br>소중한 온기 기부에 대한 감사의 보답으로, 1회 기부당 <b>Gemini AI 정밀 발음 분석 무료 이용권 5회</b>를 즉시 지급해 드립니다!</span>
-          <span class="block">🔒 <b>개인정보는 안전한가요?</b><br>음성 릴레이 공유에 참여할 때에만 익명 로그인을 경유해 클라우드에 업로드되며, 기부를 선택하지 않으면 오직 기기 로컬에만 안전하게 유지됩니다.</span>
-        </p>
-      </div>
-      <button onclick="closeBenefitModal()" class="w-full py-3.5 rounded-2xl bg-theme-grad text-white font-bold text-xs shadow-md hover:scale-[1.02] transition-all" data-i18n="eval_close_btn">확인 완료</button>
-    </div>
-  </div>
-
-  <!-- Voice Donation Confirm Modal -->
-  <div id="donate-modal" class="fixed inset-0 bg-orange-950/50 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
-    <div class="glass-card rounded-3xl p-6 w-[90%] max-w-sm border border-white/60 shadow-2xl flex flex-col gap-4 text-center">
-      <div class="flex flex-col items-center gap-2">
-        <div class="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-3xl shadow-inner">🌍</div>
-        <h3 class="text-base font-bold text-orange-950 font-warm" data-i18n="donate_modal_title">목소리 온기 나누기</h3>
-        <p class="text-xs text-orange-700/80 leading-relaxed" data-i18n="donate_invite">
-          세상에 목소리를 기부하시면 무료로 발음 정확도를 알려드려요! 🎁<br>
-          <span class="text-[10px] text-orange-600 mt-1 block font-bold">(💡 정밀 교정 및 원어민 발음 듣기는 프리미엄 전용)</span>
-        </p>
-      </div>
-      <div class="flex flex-col gap-2 mt-2">
-        <button onclick="processVoiceDonation()" class="w-full py-3.5 rounded-2xl bg-theme-grad text-white font-bold text-xs shadow-md hover:scale-[1.02] transition-all" data-i18n="donate_btn">
-          목소리 기부하고 5회 얻기
-        </button>
-        <button onclick="processLocalSaveOnly()" class="w-full py-3 rounded-2xl bg-orange-50 hover:bg-orange-100 text-orange-950 font-bold text-xs shadow-sm transition-all" data-i18n="donate_skip">
-          그냥 로컬에만 저장할래요
-        </button>
-      </div>
-    </div>
-  </div>
-  </div>
-
-  <!-- PWA Offline Toast Warning -->
-  <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-rose-600/95 text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl z-50 flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none w-max max-w-[90vw]">
-    <i data-lucide="info" class="w-4 h-4 text-white"></i>
-    <span id="toast-text" class="text-white">네트워크 연결이 끊어졌습니다.</span>
-  </div>
-  <script src="js/db.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="js/firebase-config.js"></script>
-  <script src="js/app.js"></script>
+    // Fullscreen Toggle
+    const fsBtn = document.getElementById('btn-fullscreen');
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    });
+  </script>
 </body>
 </html>
