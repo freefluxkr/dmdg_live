@@ -1,0 +1,801 @@
+/* ==========================================================================
+   DMDG LIVE - Official Master Portal Hub
+   Layout: Design Mockup 1 (Papercut Wave Backdrop) + Mockup 3 (3-Column Dashboard)
+   Footer: "당목담글(DMDG) 스튜디오 자율 에이전트 엔지니어링 본부" Only
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=Nanum+Myeongjo:wght@700;800&display=swap');
+
+:root {
+  /* DMDG Signature Palette from Business Card & Mockup 1 */
+  --dmdg-teal: #00A896;
+  --dmdg-teal-dark: #028090;
+  --dmdg-emerald: #02C39A;
+  --dmdg-amber: #F4A261;
+  --dmdg-orange: #F77F00;
+  --dmdg-orange-light: #FCBF49;
+  --dmdg-navy: #0B1B3D;
+  --dmdg-navy-deep: #070D1E;
+  --dmdg-crimson: #E63946;
+
+  /* Neutrals */
+  --bg-page: #FBF9F5;
+  --bg-card: #FFFFFF;
+  --bg-panel: rgba(243, 245, 248, 0.85);
+  --border-light: rgba(11, 27, 61, 0.08);
+  --border-focus: rgba(0, 168, 150, 0.4);
+
+  --text-main: #0F172A;
+  --text-sub: #334155;
+  --text-muted: #64748B;
+
+  --shadow-sm: 0 2px 6px rgba(11, 27, 61, 0.04);
+  --shadow-md: 0 6px 18px rgba(11, 27, 61, 0.07);
+  --shadow-lg: 0 16px 36px rgba(11, 27, 61, 0.1);
+  --shadow-wave: 0 10px 30px rgba(0, 168, 150, 0.15);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-serif: 'Nanum Myeongjo', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Mockup 1 Signature Papercut Wave Frames (Top, Sides, Bottom)
+   ========================================================================== */
+.wave-backdrop-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 240px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wave-backdrop-top svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: drop-shadow(0 6px 12px rgba(0, 168, 150, 0.15));
+}
+
+.wave-backdrop-side-left {
+  position: absolute;
+  top: 180px;
+  left: 0;
+  width: 120px;
+  height: 600px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.wave-backdrop-side-right {
+  position: absolute;
+  top: 220px;
+  right: 0;
+  width: 130px;
+  height: 650px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   Top Header (Mockup 1 & 3 Fusion)
+   ========================================================================== */
+.top-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-emblem-small {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: contain;
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.header-brand:hover .brand-emblem-small {
+  transform: rotate(6deg) scale(1.08);
+}
+
+.brand-title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-main-text {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  text-shadow: 0 2px 6px rgba(11, 27, 61, 0.4);
+  letter-spacing: -0.02em;
+}
+
+.brand-sub-text {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+/* Search Box in Header (Mockup 3 Style) */
+.header-search {
+  position: relative;
+  width: 320px;
+}
+
+.header-search input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.45rem 1rem 0.45rem 2.2rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  color: var(--text-main);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.header-search input:focus {
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(0, 168, 150, 0.25);
+}
+
+.header-search span {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Quick Nav Links */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-link-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.nav-link-btn.highlight {
+  background: linear-gradient(135deg, var(--dmdg-orange), #E85D04);
+  border: none;
+  box-shadow: 0 4px 12px rgba(247, 127, 0, 0.35);
+}
+
+/* ==========================================================================
+   Hero Centerpiece (Mockup 1 Identity: Large Emblem & Bold Slogan)
+   ========================================================================== */
+.hero-centerpiece {
+  position: relative;
+  z-index: 5;
+  max-width: 1200px;
+  margin: 1rem auto 2.5rem;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  text-align: left;
+}
+
+.hero-emblem-large {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  padding: 10px;
+  box-shadow: 0 16px 40px rgba(0, 168, 150, 0.22), 0 0 24px rgba(247, 127, 0, 0.12);
+  border: 3px solid rgba(0, 168, 150, 0.25);
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-emblem-large:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.hero-emblem-large img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.hero-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-slogan-main {
+  font-size: clamp(1.65rem, 3.2vw, 2.45rem);
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.hero-slogan-en {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dmdg-orange);
+  margin-bottom: 0.5rem;
+}
+
+.hero-slogan-sub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Mockup 3 Content Grid: 3 Main Column Panels
+   [LIVE WEB APPS] | [INTERACTIVE SIMULATORS] | [WIKIBOOKS]
+   ========================================================================== */
+.main-dashboard {
+  position: relative;
+  z-index: 5;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  width: 100%;
+  flex: 1;
+}
+
+.panels-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Common Dashboard Column Panel */
+.dash-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(10px);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(11, 27, 61, 0.06);
+}
+
+.panel-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  text-transform: uppercase;
+}
+
+.panel-count-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  color: var(--dmdg-teal);
+}
+
+/* ==========================================================================
+   Column 1: LIVE WEB APPS Cards
+   ========================================================================== */
+.app-item-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.app-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-focus);
+}
+
+.app-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.app-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  background: rgba(0, 168, 150, 0.1);
+  border: 1px solid rgba(0, 168, 150, 0.2);
+}
+
+.app-title-group h3 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.app-title-group span {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.badge-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.badge-tag.live {
+  background: #E63946;
+  color: #FFFFFF;
+}
+
+.badge-tag.pwa {
+  background: var(--dmdg-teal);
+  color: #FFFFFF;
+}
+
+.badge-tag.beta {
+  background: var(--dmdg-orange);
+  color: #FFFFFF;
+}
+
+.app-card-desc {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  line-height: 1.45;
+}
+
+.app-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(11, 27, 61, 0.08);
+}
+
+.btn-view-app {
+  background: linear-gradient(135deg, var(--dmdg-teal), #0077B6);
+  color: #FFFFFF;
+  padding: 0.38rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 2px 6px rgba(0, 168, 150, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-view-app:hover {
+  background: linear-gradient(135deg, var(--dmdg-emerald), var(--dmdg-amber));
+  box-shadow: 0 4px 10px rgba(247, 127, 0, 0.35);
+}
+
+.btn-view-app.gold {
+  background: linear-gradient(135deg, var(--dmdg-amber), var(--dmdg-orange));
+}
+
+.app-meta-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Column 2: INTERACTIVE SIMULATORS (Mockup 3 Wave Graphic Bars)
+   ========================================================================== */
+.sim-item-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.95rem 1rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sim-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-focus);
+}
+
+.sim-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sim-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.sim-icon {
+  font-size: 1.35rem;
+}
+
+.sim-title-wrap h3 {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.sim-title-wrap span {
+  font-size: 0.7rem;
+  color: var(--dmdg-teal-dark);
+  font-weight: 600;
+}
+
+/* Visual Wave Graphic Bar (From Mockup 3) */
+.sim-wave-graphic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 36px;
+  background: #F8FAFC;
+  border-radius: var(--radius-sm);
+  padding: 0 1rem;
+  border: 1px solid rgba(11, 27, 61, 0.05);
+}
+
+.wave-bar {
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--dmdg-teal), var(--dmdg-orange));
+  animation: wave-bounce 1.4s ease-in-out infinite alternate;
+}
+
+.wave-bar:nth-child(1) { height: 12px; animation-delay: 0.1s; }
+.wave-bar:nth-child(2) { height: 22px; animation-delay: 0.2s; }
+.wave-bar:nth-child(3) { height: 16px; animation-delay: 0.3s; }
+.wave-bar:nth-child(4) { height: 28px; animation-delay: 0.4s; }
+.wave-bar:nth-child(5) { height: 18px; animation-delay: 0.25s; }
+.wave-bar:nth-child(6) { height: 24px; animation-delay: 0.5s; }
+.wave-bar:nth-child(7) { height: 14px; animation-delay: 0.15s; }
+.wave-bar:nth-child(8) { height: 26px; animation-delay: 0.35s; }
+
+@keyframes wave-bounce {
+  0% { transform: scaleY(0.5); opacity: 0.6; }
+  100% { transform: scaleY(1.1); opacity: 1; }
+}
+
+.sim-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sim-desc-text {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.btn-sim-action {
+  background: rgba(0, 168, 150, 0.1);
+  color: var(--dmdg-teal-dark);
+  border: 1px solid rgba(0, 168, 150, 0.3);
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.btn-sim-action:hover {
+  background: var(--dmdg-teal);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   Column 3: WIKIBOOKS (Replacing Movie Scenarios as requested)
+   ========================================================================== */
+.wikibooks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.book-card-item {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-focus);
+}
+
+.book-cover-mini {
+  width: 58px;
+  height: 78px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.4rem;
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.book-cover-mini.rea1 {
+  background: linear-gradient(135deg, #064e3b, #047857);
+}
+
+.book-cover-mini.rea2 {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+.book-cover-mini.rea3 {
+  background: linear-gradient(135deg, #7c2d12, #ea580c);
+}
+
+.book-cover-mini.math {
+  background: linear-gradient(135deg, #0f766e, #0d9488);
+}
+
+.book-cover-mini.ai {
+  background: linear-gradient(135deg, #431407, #c2410c);
+}
+
+.book-cover-mini.malssam {
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
+}
+
+.book-cover-tag {
+  font-size: 0.55rem;
+  font-weight: 800;
+  opacity: 0.85;
+}
+
+.book-cover-title {
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.book-info-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.book-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.book-id-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--dmdg-teal-dark);
+}
+
+.book-info-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 0.2rem;
+}
+
+.book-info-desc {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 0.45rem;
+}
+
+.btn-read-book {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--dmdg-teal);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.btn-read-book:hover {
+  color: var(--dmdg-orange);
+}
+
+/* ==========================================================================
+   Footer: Studio Name & Primary Domains
+   ========================================================================== */
+.clean-footer {
+  position: relative;
+  z-index: 10;
+  background: var(--dmdg-navy);
+  color: #FFFFFF;
+  padding: 1.6rem 1rem;
+  text-align: center;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.footer-single-text {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+
+.footer-domains-text {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.01em;
+}
+
+.footer-domain-link {
+  color: var(--dmdg-orange-light);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.footer-domain-link:hover {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .panels-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-centerpiece {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .top-header {
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1rem;
+  }
+  .header-search {
+    width: 100%;
+  }
+  .hero-emblem-large {
+    width: 140px;
+    height: 140px;
+  }
+}
