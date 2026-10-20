@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>클린룸 바이트코드 교차 검증기 - DMDG REA 쇼룸</title>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(13, 17, 28, 0.9);
+      --border-color: rgba(34, 197, 94, 0.25);
+      --accent-emerald: #10b981;
+      --accent-cyan: #38bdf8;
+      --accent-purple: #c084fc;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: radial-gradient(circle at 50% 10%, #064e3b 0%, #07090e 70%);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent-emerald);
+      color: var(--accent-emerald);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #34d399, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+    p.sub {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      max-width: 1024px;
+      width: 100%;
+      gap: 18px;
+    }
+    @media (min-width: 860px) {
+      .main-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .panel-title {
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-pill {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-family: monospace;
+    }
+    .pill-dirty {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.4);
+    }
+    .pill-clean {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .code-view {
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 11px;
+      line-height: 1.6;
+      height: 280px;
+      overflow-y: auto;
+      color: #cbd5e1;
+    }
+    .code-view .kw { color: #f43f5e; font-weight: bold; }
+    .code-view .fn { color: #38bdf8; }
+    .code-view .asm { color: #34d399; }
+    .code-view .hex { color: #94a3b8; }
+    .code-view .comment { color: #475569; }
+    /* Meter Box */
+    .meter-section {
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .meter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .meter-card {
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .meter-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .meter-value {
+      font-size: 24px;
+      font-weight: 800;
+      font-family: monospace;
+    }
+    .val-emerald { color: var(--accent-emerald); }
+    .val-cyan { color: var(--accent-cyan); }
+    .progress-bar-bg {
+      background: rgba(255, 255, 255, 0.08);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #10b981, #38bdf8);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .btn-action-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    button.btn-run {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #020617;
+      font-weight: bold;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    button.btn-run:hover {
+      filter: brightness(1.2);
+      transform: translateY(-2px);
+    }
+    .footer-links {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .footer-links a {
+      color: var(--accent-emerald);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="badge">DMDG REA LIVE SIMULATOR 03</div>
+    <h1>클린룸 바이트코드 교차 검증기 (Byte Matcher)</h1>
+    <p class="sub">《모던 리버스 엔지니어링 : AI 기반 보안 분석과 클린룸 시스템 재구현》 09장 연계 쇼룸</p>
+  </div>
+
+  <div class="main-grid">
+    <!-- 왼쪽: 원본 x86 디스어셈블리 (The Dirty Room) -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title" style="color: #fb7185;">
+          <span>🔍 원본 x86 바이너리 (Dirty Room)</span>
+        </div>
+        <div class="status-pill pill-dirty">AUDITOR SPEC</div>
+      </div>
+      <div class="code-view" id="dirtyCode">
+        <span class="comment">; 1996 DX-Ball SoundPan (Offset: 0x10002A40)</span><br>
+        <span class="comment">; Total Size: 63 Bytes Machine Code</span><br>
+        <span class="hex">55</span>                   <span class="asm">push    ebp</span><br>
+        <span class="hex">8B EC</span>                <span class="asm">mov     ebp, esp</span><br>
+        <span class="hex">D9 45 08</span>             <span class="asm">fld     dword ptr [ebp+8]  ; posX</span><br>
+        <span class="hex">D8 1D 20 50 40 00</span>    <span class="asm">fcomp   dword ptr [0x405020] ; 0.0f</span><br>
+        <span class="hex">DF E0</span>                <span class="asm">fnstsw  ax</span><br>
+        <span class="hex">9E</span>                   <span class="asm">sahf</span><br>
+        <span class="hex">7A 06</span>                <span class="asm">jp      0x10002A58</span><br>
+        <span class="hex">D9 45 08</span>             <span class="asm">fld     dword ptr [ebp+8]</span><br>
+        <span class="hex">D8 25 24 50 40 00</span>    <span class="asm">fsub    dword ptr [0x405024] ; 320.0f (center)</span><br>
+        <span class="hex">D8 35 28 50 40 00</span>    <span class="asm">fdiv    dword ptr [0x405028] ; 320.0f (span)</span><br>
+        <span class="hex">D9 5D FC</span>             <span class="asm">fstp    dword ptr [ebp-4]  ; clamp pan</span><br>
+        <span class="hex">8B 45 FC</span>             <span class="asm">mov     eax, [ebp-4]</span><br>
+        <span class="hex">5D</span>                   <span class="asm">pop     ebp</span><br>
+        <span class="hex">C3</span>                   <span class="asm">ret</span>
+      </div>
+    </div>
+
+    <!-- 오른쪽: 클린룸 재구현 Rust 코드 (The Clean Room) -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title" style="color: #34d399;">
+          <span>🛡️ 클린룸 재구현 모던 Rust (Clean Room)</span>
+        </div>
+        <div class="status-pill pill-clean">ARCHITECT REBUILD</div>
+      </div>
+      <div class="code-view" id="cleanCode">
+        <span class="comment">// Cleanroom Reconstructed Rust Function</span><br>
+        <span class="comment">// Fully Memory-Safe & Zero Overhead</span><br>
+        <span class="kw">pub const</span> CENTER_X: <span class="fn">f32</span> = <span class="asm">320.0</span>;<br>
+        <span class="kw">pub const</span> MAX_SPAN: <span class="fn">f32</span> = <span class="asm">320.0</span>;<br>
+        <br>
+        <span class="kw">#[inline]</span><br>
+        <span class="kw">pub fn</span> <span class="fn">calculate_dxball_sound_pan</span>(pos_x: <span class="fn">f32</span>) -&gt; <span class="fn">f32</span> {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> pos_x.is_nan() {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="asm">0.0</span>;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">let</span> offset = pos_x - CENTER_X;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">let</span> normalized = offset / MAX_SPAN;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;normalized.<span class="fn">clamp</span>(<span class="asm">-1.0</span>, <span class="asm">1.0</span>)<br>
+        }
+      </div>
+    </div>
+
+    <!-- 검증 컨트롤 & 프로그레스 섹션 -->
+    <div class="meter-section">
+      <div class="meter-grid">
+        <div class="meter-card">
+          <div class="meter-label">TDD 교차 단위 테스트 통과율</div>
+          <div class="meter-value val-emerald" id="meterTest">0 / 3,205</div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="fillTest"></div>
+          </div>
+        </div>
+        <div class="meter-card">
+          <div class="meter-label">바이너리 기계어 일치율 (Byte Parity)</div>
+          <div class="meter-value val-cyan" id="meterByte">0.0 %</div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="fillByte"></div>
+          </div>
+        </div>
+        <div class="meter-card">
+          <div class="meter-label">클린룸 방화벽 (Cleanroom Status)</div>
+          <div class="meter-value" id="meterFirewall" style="color: #a855f7; font-size: 18px; line-height: 32px;">
+            방화벽 격리 활성
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-action-row">
+        <button class="btn-run" id="btnRunTest" onclick="startVerification()">
+          🚀 3,205개 TDD 테스트 및 바이트코드 일치 검증 시작
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    📖 전자책 본문: <a href="https://wikidocs.net/book/21755" target="_blank">위키독스 [모던 리버스 엔지니어링 : AI 기반 보안 분석과 클린룸 시스템 재구현] 바로가기</a> | DMDG Great AI
+  </div>
+
+  <script>
+    let isVerifying = false;
+
+    function startVerification() {
+      if (isVerifying) return;
+      isVerifying = true;
+
+      const meterTest = document.getElementById('meterTest');
+      const fillTest = document.getElementById('fillTest');
+      const meterByte = document.getElementById('meterByte');
+      const fillByte = document.getElementById('fillByte');
+      const btn = document.getElementById('btnRunTest');
+
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+      btn.textContent = '⏳ 단위 테스트 및 바이트 교차 검증 중...';
+
+      let currentTest = 0;
+      const totalTests = 3205;
+      const targetBytes = 63;
+
+      const timer = setInterval(() => {
+        currentTest += 85;
+        if (currentTest >= totalTests) {
+          currentTest = totalTests;
+          clearInterval(timer);
+          finishVerification();
+        }
+
+        const pct = (currentTest / totalTests) * 100;
+        meterTest.textContent = `${currentTest.toLocaleString()} / 3,205`;
+        fillTest.style.width = `${pct}%`;
+
+        const bytePct = Math.min(100, pct);
+        meterByte.textContent = `${bytePct.toFixed(1)} % (${Math.floor(targetBytes * (bytePct/100))}/${targetBytes} Bytes)`;
+        fillByte.style.width = `${bytePct}%`;
+      }, 35);
+    }
+
+    function finishVerification() {
+      const btn = document.getElementById('btnRunTest');
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.background = 'linear-gradient(135deg, #38bdf8, #818cf8)';
+      btn.textContent = '✅ 100% 무결점 일치 완료 (3,205/3,205 PASSED)';
+      document.getElementById('meterFirewall').textContent = '100% 무결점 인증';
+      document.getElementById('meterFirewall').style.color = '#34d399';
+      isVerifying = false;
+    }
+  </script>
+</body>
+</html>

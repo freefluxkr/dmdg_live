@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>윈도우 계산기 % 어셈블리 분기 분석기 - DMDG REA 쇼룸</title>
+  <style>
+    :root {
+      --bg-dark: #080b12;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --border-color: rgba(99, 102, 241, 0.25);
+      --accent-indigo: #6366f1;
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: radial-gradient(circle at 50% 15%, #1e1b4b 0%, #080b12 75%);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid var(--accent-indigo);
+      color: var(--accent-indigo);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #818cf8, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+    p.sub {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      max-width: 960px;
+      width: 100%;
+      gap: 20px;
+    }
+    @media (min-width: 840px) {
+      .main-grid {
+        grid-template-columns: 320px 1fr;
+      }
+    }
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    /* Calculator UI */
+    .calc-screen {
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: right;
+      margin-bottom: 16px;
+    }
+    .calc-history {
+      font-size: 12px;
+      color: var(--text-muted);
+      min-height: 16px;
+      font-family: monospace;
+    }
+    .calc-display {
+      font-size: 26px;
+      font-weight: bold;
+      color: var(--accent-cyan);
+      font-family: monospace;
+      margin-top: 4px;
+    }
+    .calc-keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .btn-calc {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      padding: 14px 0;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-calc:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+    .btn-calc.op {
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .btn-calc.special {
+      background: rgba(244, 63, 94, 0.2);
+      color: #fb7185;
+      border-color: rgba(244, 63, 94, 0.4);
+    }
+    .btn-calc.eq {
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      color: #020617;
+      font-weight: bold;
+    }
+    /* Assembly Debugger UI */
+    .reg-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .reg-card {
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 6px 8px;
+      font-family: monospace;
+      font-size: 11px;
+    }
+    .reg-card .reg-name {
+      color: var(--accent-indigo);
+      font-weight: bold;
+    }
+    .reg-card .reg-val {
+      color: var(--accent-emerald);
+      margin-top: 2px;
+    }
+    .asm-trace {
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 12px;
+      height: 250px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+    .asm-line {
+      display: flex;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .asm-line.active {
+      background: rgba(99, 102, 241, 0.3);
+      border-left: 3px solid var(--accent-cyan);
+    }
+    .asm-addr {
+      color: #64748b;
+      width: 100px;
+    }
+    .asm-inst {
+      color: #e2e8f0;
+      flex: 1;
+    }
+    .asm-inst .kw {
+      color: #818cf8;
+      font-weight: bold;
+    }
+    .asm-inst .op {
+      color: #38bdf8;
+    }
+    .asm-inst .comment {
+      color: #475569;
+    }
+    .footer-links {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .footer-links a {
+      color: var(--accent-indigo);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="badge">DMDG REA LIVE SIMULATOR 02</div>
+    <h1>윈도우 계산기 % 어셈블리 분기 분석기</h1>
+    <p class="sub">《AI 에이전트로 끝내는 리버스 엔지니어링 실전 바이블》 06장 연계 공식 쇼룸</p>
+  </div>
+
+  <div class="main-grid">
+    <!-- 왼쪽: 미니 윈도우 계산기 -->
+    <div class="panel">
+      <h3 style="font-size: 15px; margin-bottom: 12px; color: var(--accent-indigo);">🧮 윈도우 계산기 인터페이스</h3>
+      <div class="calc-screen">
+        <div class="calc-history" id="calcHistory">&nbsp;</div>
+        <div class="calc-display" id="calcDisplay">0</div>
+      </div>
+      <div class="calc-keypad">
+        <button class="btn-calc special" onclick="clearCalc()">C</button>
+        <button class="btn-calc op" onclick="pressOp('/')">/</button>
+        <button class="btn-calc op" onclick="pressOp('*')">×</button>
+        <button class="btn-calc special" onclick="pressPercent()">%</button>
+
+        <button class="btn-calc" onclick="pressNum('7')">7</button>
+        <button class="btn-calc" onclick="pressNum('8')">8</button>
+        <button class="btn-calc" onclick="pressNum('9')">9</button>
+        <button class="btn-calc op" onclick="pressOp('-')">-</button>
+
+        <button class="btn-calc" onclick="pressNum('4')">4</button>
+        <button class="btn-calc" onclick="pressNum('5')">5</button>
+        <button class="btn-calc" onclick="pressNum('6')">6</button>
+        <button class="btn-calc op" onclick="pressOp('+')">+</button>
+
+        <button class="btn-calc" onclick="pressNum('1')">1</button>
+        <button class="btn-calc" onclick="pressNum('2')">2</button>
+        <button class="btn-calc" onclick="pressNum('3')">3</button>
+        <button class="btn-calc eq" onclick="pressEqual()">=</button>
+
+        <button class="btn-calc" style="grid-column: span 2;" onclick="pressNum('0')">0</button>
+        <button class="btn-calc" onclick="pressNum('.')">.</button>
+      </div>
+    </div>
+
+    <!-- 오른쪽: x64 어셈블리 분기 및 레지스터 트레이서 -->
+    <div class="panel">
+      <h3 style="font-size: 15px; margin-bottom: 12px; color: var(--accent-cyan);">⚡ x64 어셈블리 분기 트레이서 (REA Evidence)</h3>
+      
+      <!-- 레지스터 뷰 -->
+      <div class="reg-grid">
+        <div class="reg-card">
+          <div class="reg-name">RAX</div>
+          <div class="reg-val" id="regRAX">0x00000000</div>
+        </div>
+        <div class="reg-card">
+          <div class="reg-name">RBX</div>
+          <div class="reg-val" id="regRBX">0x00000000</div>
+        </div>
+        <div class="reg-card">
+          <div class="reg-name">XMM0</div>
+          <div class="reg-val" id="regXMM0">0.00</div>
+        </div>
+        <div class="reg-card">
+          <div class="reg-name">EFLAGS (ZF)</div>
+          <div class="reg-val" id="regZF">0 (CLEAR)</div>
+        </div>
+      </div>
+
+      <!-- 어셈블리 인스트럭션 로그 -->
+      <div class="asm-trace" id="asmTrace">
+        <div class="asm-line"><span class="asm-addr">0x140021A00</span><span class="asm-inst"><span class="comment">; calc.exe CCalcEngine::ProcessPercent()</span></span></div>
+        <div class="asm-line"><span class="asm-addr">0x140021A04</span><span class="asm-inst"><span class="kw">mov</span> <span class="op">eax, [rbp-0x08]</span> <span class="comment">; 현재 대기 중인 연산자 ID 로드</span></span></div>
+        <div class="asm-line"><span class="asm-addr">0x140021A08</span><span class="asm-inst"><span class="kw">cmp</span> <span class="op">eax, 0x5b</span> <span class="comment">; 0x5b = 덧셈(+) 연산자인가?</span></span></div>
+        <div class="asm-line"><span class="asm-addr">0x140021A0C</span><span class="asm-inst"><span class="kw">je</span> <span class="op">0x140021A30</span> <span class="comment">; 덧셈 퍼센트 핸들러로 분기</span></span></div>
+        <div class="asm-line"><span class="asm-addr">0x140021A10</span><span class="asm-inst"><span class="kw">cmp</span> <span class="op">eax, 0x5c</span> <span class="comment">; 0x5c = 곱셈(*) 연산자인가?</span></span></div>
+        <div class="asm-line"><span class="asm-addr">0x140021A14</span><span class="asm-inst"><span class="kw">je</span> <span class="op">0x140021A45</span> <span class="comment">; 곱셈 퍼센트 핸들러로 분기</span></span></div>
+        <div class="asm-line"><span class="asm-addr">0x140021A30</span><span class="asm-inst"><span class="comment">; [ADD PERCENT] arg2 = (arg1 * arg2) / 100</span></span></div>
+        <div class="asm-line"><span class="asm-addr">0x140021A34</span><span class="asm-inst"><span class="kw">divss</span> <span class="op">xmm1, dword ptr [0x140030100]</span> <span class="comment">; 100.0f로 나눔</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    📖 전자책 본문: <a href="https://wikidocs.net/book/21754" target="_blank">위키독스 [AI 에이전트로 끝내는 리버스 엔지니어링 실전 바이블] 바로가기</a> | DMDG Great AI
+  </div>
+
+  <script>
+    let firstVal = null;
+    let currentOp = null;
+    let displayVal = '0';
+    let isNewInput = true;
+
+    const display = document.getElementById('calcDisplay');
+    const history = document.getElementById('calcHistory');
+    const regRAX = document.getElementById('regRAX');
+    const regRBX = document.getElementById('regRBX');
+    const regXMM0 = document.getElementById('regXMM0');
+    const regZF = document.getElementById('regZF');
+    const asmTrace = document.getElementById('asmTrace');
+
+    function updateDisplay() {
+      display.textContent = displayVal;
+    }
+
+    function pressNum(n) {
+      if (isNewInput) {
+        displayVal = (n === '.') ? '0.' : n;
+        isNewInput = false;
+      } else {
+        if (n === '.' && displayVal.includes('.')) return;
+        displayVal += n;
+      }
+      updateDisplay();
+    }
+
+    function pressOp(op) {
+      firstVal = parseFloat(displayVal);
+      currentOp = op;
+      isNewInput = true;
+      history.textContent = `${firstVal} ${op}`;
+
+      // Update Registers for Operator
+      let opCode = op === '+' ? '0x0000005B' : (op === '*' ? '0x0000005C' : (op === '-' ? '0x0000005D' : '0x0000005E'));
+      regRAX.textContent = opCode;
+      regXMM0.textContent = firstVal.toFixed(2);
+      addAsmLog(`[OP SELECTED] Operator '${op}' Loaded into RAX: ${opCode}`);
+    }
+
+    function pressPercent() {
+      let secondVal = parseFloat(displayVal);
+      if (firstVal === null || currentOp === null) {
+        displayVal = '0';
+        updateDisplay();
+        return;
+      }
+
+      addAsmLog(`>>> EXECUTING % OPERATOR (calc.exe handler)`);
+      regRBX.textContent = '0x' + secondVal.toString(16).toUpperCase().padStart(8, '0');
+
+      let percentResult = 0;
+      if (currentOp === '+' || currentOp === '-') {
+        // Windows Calc behavior: 200 + 10% -> 10% of 200 = 20
+        percentResult = (firstVal * secondVal) / 100;
+        regZF.textContent = "1 (MATCH: 0x5b)";
+        addAsmLog(`[CMP] RAX == 0x5b (+/- Branch Taken)`);
+        addAsmLog(`[MATH] (${firstVal} * ${secondVal}) / 100 = ${percentResult}`);
+      } else if (currentOp === '*' || currentOp === '/') {
+        // Windows Calc behavior: 200 * 10% -> 10 / 100 = 0.1
+        percentResult = secondVal / 100;
+        regZF.textContent = "1 (MATCH: 0x5c)";
+        addAsmLog(`[CMP] RAX == 0x5c (*// Branch Taken)`);
+        addAsmLog(`[MATH] ${secondVal} / 100 = ${percentResult}`);
+      }
+
+      displayVal = percentResult.toString();
+      regXMM0.textContent = percentResult.toFixed(2);
+      history.textContent = `${firstVal} ${currentOp} ${percentResult}`;
+      updateDisplay();
+      isNewInput = true;
+    }
+
+    function pressEqual() {
+      if (firstVal === null || currentOp === null) return;
+      let secondVal = parseFloat(displayVal);
+      let result = 0;
+
+      if (currentOp === '+') result = firstVal + secondVal;
+      else if (currentOp === '-') result = firstVal - secondVal;
+      else if (currentOp === '*') result = firstVal * secondVal;
+      else if (currentOp === '/') result = firstVal / secondVal;
+
+      addAsmLog(`[FINAL RESULT] ${firstVal} ${currentOp} ${secondVal} = ${result}`);
+      history.textContent = `${firstVal} ${currentOp} ${secondVal} =`;
+      displayVal = result.toString();
+      updateDisplay();
+
+      firstVal = null;
+      currentOp = null;
+      isNewInput = true;
+    }
+
+    function clearCalc() {
+      firstVal = null;
+      currentOp = null;
+      displayVal = '0';
+      isNewInput = true;
+      history.textContent = '\u00A0';
+      updateDisplay();
+      regRAX.textContent = '0x00000000';
+      regRBX.textContent = '0x00000000';
+      regXMM0.textContent = '0.00';
+      regZF.textContent = '0 (CLEAR)';
+      addAsmLog(`[RESET] State Cleared`);
+    }
+
+    function addAsmLog(msg) {
+      const line = document.createElement('div');
+      line.className = 'asm-line active';
+      line.innerHTML = `<span class="asm-addr">LOG</span><span class="asm-inst">${msg}</span>`;
+      asmTrace.appendChild(line);
+      asmTrace.scrollTop = asmTrace.scrollHeight;
+    }
+  </script>
+</body>
+</html>
