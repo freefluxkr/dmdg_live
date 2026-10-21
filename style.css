@@ -208,29 +208,54 @@ a {
 }
 
 .nav-link-btn {
-  padding: 0.45rem 0.9rem;
-  border-radius: var(--radius-full);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
+  padding: 0.45rem 1rem !important;
+  border-radius: var(--radius-full) !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  color: #0B1B3D !important; /* 선명한 딥 네이비 글씨 (모바일 흰색 배경/주황 배경 모두 또렷하게 보임) */
+  background: #FFFFFF !important; /* 솔리드 화이트 알약 배경 */
+  border: 1.5px solid rgba(11, 27, 61, 0.25) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  text-decoration: none !important;
+}
+
+.nav-link-btn span {
+  color: #0B1B3D !important;
+  font-weight: 800 !important;
 }
 
 .nav-link-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #0B1B3D !important;
+  color: #FFFFFF !important;
+  border-color: #0B1B3D !important;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(11, 27, 61, 0.25) !important;
+}
+
+.nav-link-btn:hover span {
+  color: #FFFFFF !important;
 }
 
 .nav-link-btn.highlight {
-  background: linear-gradient(135deg, var(--dmdg-orange), #E85D04);
-  border: none;
-  box-shadow: 0 4px 12px rgba(247, 127, 0, 0.35);
+  background: linear-gradient(135deg, #F77F00, #E85D04) !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid #F77F00 !important;
+  box-shadow: 0 4px 12px rgba(247, 127, 0, 0.35) !important;
+}
+
+.nav-link-btn.highlight span {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+
+.nav-link-btn.highlight:hover {
+  background: #0B1B3D !important;
+  border-color: #0B1B3D !important;
+  color: #FFFFFF !important;
 }
 
 /* ==========================================================================
@@ -793,6 +818,27 @@ a {
   }
   .header-search {
     width: 100%;
+  }
+  .header-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .nav-link-btn {
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 0.5rem 1rem;
+    color: #0B1B3D;
+    background: #FFFFFF;
+    border: 1.5px solid rgba(11, 27, 61, 0.25);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+  .nav-link-btn.highlight {
+    background: #0B1B3D;
+    color: #FFFFFF;
+    border-color: #0B1B3D;
   }
   .hero-emblem-large {
     width: 140px;
