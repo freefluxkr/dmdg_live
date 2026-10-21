@@ -1018,17 +1018,18 @@
         </div>
 
         <div>
-          <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #cbd5e1; margin-bottom: 0.35rem;">거주 지역 (강의장 최종 선정 반영) *</label>
-          <select id="currApp_region" required style="width: 100%; box-sizing: border-box; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem 1rem; color: #FFFFFF; font-size: 0.9rem; outline: none;">
-            <option value="">지역을 선택해 주세요</option>
-            <option value="성남시/분당">성남시 / 분당구 (태평역 인근)</option>
-            <option value="서울특별시 강남/송파">서울특별시 강남구 / 송파구</option>
-            <option value="서울특별시 기타">서울특별시 기타 자치구</option>
-            <option value="경기도 수원/용인">경기도 수원시 / 용인시</option>
-            <option value="인천/부천">인천광역시 / 부천시</option>
-            <option value="기타 수도권">기타 수도권</option>
-            <option value="지방/온라인희망">지방 / 온라인 수강 희망</option>
-          </select>
+          <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #cbd5e1; margin-bottom: 0.35rem;">거주 지역 (수도권 한정 / 강의장 최종 배정 반영) *</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <select id="currApp_metro" required onchange="updateDistrictOptions('currApp_metro', 'currApp_district')" style="width: 100%; box-sizing: border-box; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem 0.5rem; color: #FFFFFF; font-size: 0.9rem; outline: none;">
+              <option value="">시/도 선택</option>
+              <option value="서울특별시">서울특별시</option>
+              <option value="경기도">경기도</option>
+              <option value="인천광역시">인천광역시</option>
+            </select>
+            <select id="currApp_district" required style="width: 100%; box-sizing: border-box; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem 0.5rem; color: #FFFFFF; font-size: 0.9rem; outline: none;">
+              <option value="">구/군 선택</option>
+            </select>
+          </div>
         </div>
 
         <div>
@@ -1146,19 +1147,57 @@
       }
     }
 
+    // Metropolitan Districts Mapping (수도권 한정: 서울특별시, 경기도, 인천광역시)
+    const METRO_DISTRICTS = {
+      "서울특별시": [
+        "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", 
+        "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", 
+        "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"
+      ],
+      "경기도": [
+        "성남시 분당구", "성남시 수정구", "성남시 중원구", "수원시", "고양시", "용인시", "부천시", 
+        "안산시", "안양시", "남양주시", "화성시", "평택시", "의정부시", "시흥시", "파주시", 
+        "광명시", "김포시", "군포시", "광주시", "이천시", "양주시", "오산시", "구리시", 
+        "안성시", "포천시", "의왕시", "하남시", "여주시", "양평군", "동두천시", "과천시", "가평군", "연천군"
+      ],
+      "인천광역시": [
+        "중구", "동구", "미추홀구", "연수구", "남동구", "부평구", "계양구", "서구", "강화군", "옹진군"
+      ]
+    };
+
+    function updateDistrictOptions(metroSelectId, districtSelectId) {
+      const metroEl = document.getElementById(metroSelectId);
+      const districtEl = document.getElementById(districtSelectId);
+      if (!metroEl || !districtEl) return;
+
+      const selectedMetro = metroEl.value;
+      districtEl.innerHTML = '<option value="">구/군 선택</option>';
+
+      if (selectedMetro && METRO_DISTRICTS[selectedMetro]) {
+        METRO_DISTRICTS[selectedMetro].forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d;
+          opt.textContent = d;
+          districtEl.appendChild(opt);
+        });
+      }
+    }
+
     // Modal Form Submission
     async function handleCurriculumApplySubmit(e) {
       e.preventDefault();
       const name = document.getElementById('currApp_name').value.trim();
       const phone = document.getElementById('currApp_phone').value.trim();
-      const region = document.getElementById('currApp_region').value;
+      const metro = document.getElementById('currApp_metro').value;
+      const district = document.getElementById('currApp_district').value;
       const cardOption = document.querySelector('input[name="currApp_card"]:checked');
       const hasCard = cardOption ? cardOption.value : '소지';
 
-      if (!name || !phone || !region) {
-        alert('이름, 연락처, 지역을 모두 입력해 주세요.');
+      if (!name || !phone || !metro || !district) {
+        alert('이름, 연락처, 수도권 거주 지역(시/도 및 구/군)을 모두 선택해 주세요.');
         return;
       }
+      const region = `${metro} ${district}`;
 
       const phoneRegex = /^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/;
       if (!phoneRegex.test(phone)) {
