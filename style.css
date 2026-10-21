@@ -667,6 +667,26 @@ a {
   overflow: hidden;
 }
 
+.book-cover-mini.rea-master {
+  background: linear-gradient(135deg, #091e3a, #00f2fe);
+}
+
+.book-cover-mini.ide {
+  background: linear-gradient(135deg, #2e1065, #8b5cf6);
+}
+
+.book-cover-mini.saas {
+  background: linear-gradient(135deg, #78350f, #d97706);
+}
+
+.book-cover-mini.agent {
+  background: linear-gradient(135deg, #064e3b, #059669);
+}
+
+.book-cover-mini.office {
+  background: linear-gradient(135deg, #1e293b, #475569);
+}
+
 .book-cover-mini.rea1 {
   background: linear-gradient(135deg, #064e3b, #047857);
 }
