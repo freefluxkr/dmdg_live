@@ -32,7 +32,7 @@
   <!-- =========================================================================
        1. Admin Login Overlay (아이디: DMDG / 비번: ekdahrekarmf)
        ========================================================================= -->
-  <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 hidden items-center justify-center backdrop-blur-md px-4">
+  <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center backdrop-blur-md px-4">
     <div class="glass-card-elevated p-8 max-w-md w-full glow-gold shadow-2xl">
       <div class="w-16 h-16 bg-amber-500/10 text-amber-500 border border-amber-500/30 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
         <i data-lucide="shield-check" class="w-8 h-8"></i>
@@ -84,7 +84,7 @@
   <!-- =========================================================================
        2. Admin Dashboard Container
        ========================================================================= -->
-  <div id="dashboard-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 transition-opacity duration-500">
+  <div id="dashboard-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden opacity-0 transition-opacity duration-500">
     
     <!-- Top Nav Header -->
     <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-slate-800">
@@ -573,7 +573,7 @@
     // ── Admin Credentials & Authentication ──────────────────────────────────
     const ADMIN_CREDENTIALS = {
       id: "DMDG",
-      pw: "1234"
+      pw: "ekdahrekarmf"
     };
 
     function checkExistingAuth() {
@@ -589,8 +589,8 @@
       const inputPw = document.getElementById('loginAdminPw').value.trim();
       const errorMsg = document.getElementById('loginErrorMsg');
 
-      // ID is case-insensitive, Password accepts 1234 or legacy ekdahrekarmf with whitespace trim
-      if (inputId.toUpperCase() === ADMIN_CREDENTIALS.id && (inputPw === "1234" || inputPw === "ekdahrekarmf")) {
+      // ID is case-insensitive, Password matched with whitespace trim protection
+      if (inputId.toUpperCase() === ADMIN_CREDENTIALS.id && inputPw === ADMIN_CREDENTIALS.pw) {
         sessionStorage.setItem('dmdg_admin_authenticated', 'true');
         errorMsg.classList.add('hidden');
         revealDashboard();
@@ -1185,7 +1185,7 @@
 
     // Initial check on load
     document.addEventListener('DOMContentLoaded', () => {
-      revealDashboard();
+      checkExistingAuth();
     });
   </script>
 </body>
