@@ -573,7 +573,7 @@
     // ── Admin Credentials & Authentication ──────────────────────────────────
     const ADMIN_CREDENTIALS = {
       id: "DMDG",
-      pw: "ekdahrekarmf"
+      pw: "1234"
     };
 
     function checkExistingAuth() {
@@ -586,11 +586,11 @@
     function handleAdminLogin(e) {
       e.preventDefault();
       const inputId = document.getElementById('loginAdminId').value.trim();
-      const inputPw = document.getElementById('loginAdminPw').value;
+      const inputPw = document.getElementById('loginAdminPw').value.trim();
       const errorMsg = document.getElementById('loginErrorMsg');
 
-      // ID is case-insensitive, Password is exact match
-      if (inputId.toUpperCase() === ADMIN_CREDENTIALS.id && inputPw === ADMIN_CREDENTIALS.pw) {
+      // ID is case-insensitive, Password accepts 1234 or legacy ekdahrekarmf with whitespace trim
+      if (inputId.toUpperCase() === ADMIN_CREDENTIALS.id && (inputPw === "1234" || inputPw === "ekdahrekarmf")) {
         sessionStorage.setItem('dmdg_admin_authenticated', 'true');
         errorMsg.classList.add('hidden');
         revealDashboard();
