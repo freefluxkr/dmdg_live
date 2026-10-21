@@ -112,13 +112,145 @@
     </header>
 
     <!-- =======================================================================
-         SECTION A: Antigravity IDE × REA 과정 수강 신청자 실시간 KPI & 현황
+         SECTION A: 실시간 트래픽 & 방문자 분석 (Traffic & Visitors Analytics)
+         ======================================================================= -->
+    <section class="mb-10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
+        <div>
+          <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1">
+            <span>📊</span> Section A · Real-time Traffic &amp; Visitors Analytics
+          </span>
+          <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
+            실시간 트래픽 &amp; 방문자 분석
+          </h2>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Firestore 실시간 연동 활성화
+          </span>
+          <button onclick="refreshAnalyticsData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 접속 통계 새로고침
+          </button>
+          <button onclick="simulateVisitorView()" class="px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all" title="방문자 조회수 1회 시뮬레이션 카운트">
+            <i data-lucide="mouse-pointer" class="w-3.5 h-3.5"></i> 조회수 +1 시뮬레이션
+          </button>
+        </div>
+      </div>
+
+      <!-- Traffic KPI Cards (4 cols) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        
+        <!-- KPI 1: 🟢 오늘 방문자 (Today UV) -->
+        <div class="glass-card p-5 border-l-4 border-emerald-500">
+          <div class="flex justify-between items-start mb-2">
+            <span class="text-xs font-bold text-slate-300 flex items-center gap-1">
+              <span>🟢</span> 오늘 방문자 (Today UV)
+            </span>
+            <div class="p-1.5 bg-emerald-500/10 text-emerald-400 rounded-md">
+              <i data-lucide="user-check" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <h3 id="stat-analytics-today-uv" class="text-3xl font-black text-emerald-400">0</h3>
+            <span class="text-xs text-slate-400 font-semibold">명</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3 truncate">오늘 순수 고유 방문자 (중복 제외)</p>
+        </div>
+
+        <!-- KPI 2: 🔵 오늘 페이지뷰 (Today PV) -->
+        <div class="glass-card p-5 border-l-4 border-cyan-500">
+          <div class="flex justify-between items-start mb-2">
+            <span class="text-xs font-bold text-slate-300 flex items-center gap-1">
+              <span>🔵</span> 오늘 페이지뷰 (Today PV)
+            </span>
+            <div class="p-1.5 bg-cyan-500/10 text-cyan-400 rounded-md">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <h3 id="stat-analytics-today-views" class="text-3xl font-black text-cyan-400">0</h3>
+            <span class="text-xs text-slate-400 font-semibold">회</span>
+          </div>
+          <p id="stat-analytics-today-sub" class="text-[11px] text-slate-400 mt-3 truncate">오늘 발생한 전체 조회/새로고침</p>
+        </div>
+
+        <!-- KPI 3: 🟣 누적 방문자 (Total UV) -->
+        <div class="glass-card p-5 border-l-4 border-purple-500">
+          <div class="flex justify-between items-start mb-2">
+            <span class="text-xs font-bold text-slate-300 flex items-center gap-1">
+              <span>🟣</span> 누적 방문자 (Total UV)
+            </span>
+            <div class="p-1.5 bg-purple-500/10 text-purple-400 rounded-md">
+              <i data-lucide="globe" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <h3 id="stat-analytics-total-uv" class="text-3xl font-black text-purple-400">0</h3>
+            <span class="text-xs text-slate-400 font-semibold">명</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3 truncate">포털 오픈 이래 전체 고유 방문자수 누적</p>
+        </div>
+
+        <!-- KPI 4: 🟠 누적 페이지뷰 (Total PV) -->
+        <div class="glass-card p-5 border-l-4 border-amber-500">
+          <div class="flex justify-between items-start mb-2">
+            <span class="text-xs font-bold text-slate-300 flex items-center gap-1">
+              <span>🟠</span> 누적 페이지뷰 (Total PV)
+            </span>
+            <div class="p-1.5 bg-amber-500/10 text-amber-400 rounded-md">
+              <i data-lucide="trending-up" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <h3 id="stat-analytics-total-views" class="text-3xl font-black text-amber-400">0</h3>
+            <span class="text-xs text-slate-400 font-semibold">회</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3 truncate">포털 오픈 이래 전체 페이지 조회 누적</p>
+        </div>
+
+      </div>
+
+      <!-- Recent 7 Days Traffic Table -->
+      <div class="glass-card overflow-hidden border border-slate-800 shadow-xl mb-10">
+        <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/60">
+          <h3 class="font-bold text-white text-sm flex items-center gap-2">
+            <i data-lucide="calendar" class="w-4 h-4 text-cyan-400"></i>
+            📅 최근 7일간 일자별 접속 추이 테이블
+          </h3>
+          <span class="text-xs text-slate-400">날짜별 UV, PV, 트래픽 비중 자동 갱신 (KST 기준)</span>
+        </div>
+        <div class="overflow-x-auto custom-scroll">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950/80 text-slate-400 uppercase tracking-wider border-b border-slate-800">
+              <tr>
+                <th class="px-4 py-3">일자</th>
+                <th class="px-4 py-3">일일 방문자 (UV)</th>
+                <th class="px-4 py-3">일일 페이지뷰 (PV)</th>
+                <th class="px-4 py-3">트래픽 점유율</th>
+                <th class="px-4 py-3 text-right">관제 상태</th>
+              </tr>
+            </thead>
+            <tbody id="daily-traffic-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+              <tr>
+                <td colspan="5" class="px-4 py-6 text-center text-slate-500">접속 통계를 집계하고 있습니다...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         SECTION B: Antigravity IDE × REA 과정 수강 신청자 실시간 KPI & 현황
          ======================================================================= -->
     <section class="mb-10">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
         <div>
           <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1">
-            <span>🎓</span> Featured Education Program
+            <span>🎓</span> Section B · Featured Education Program
           </span>
           <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
             《Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정》 신청 현황
@@ -243,128 +375,7 @@
       </div>
     </section>
 
-    <!-- =======================================================================
-         SECTION B: 포털 실시간 트래픽 & 접속자 관제 (오늘 / 누적 조회수 및 순방문자)
-         ======================================================================= -->
-    <section class="mb-10">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
-        <div>
-          <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1">
-            <span>📊</span> Real-time Traffic &amp; Visitors Analytics
-          </span>
-          <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
-            실시간 포털 접속 &amp; 조회수 관제
-          </h2>
-        </div>
-
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Firestore 실시간 연동 활성화
-          </span>
-          <button onclick="refreshAnalyticsData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 접속 통계 새로고침
-          </button>
-          <button onclick="simulateVisitorView()" class="px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all" title="방문자 조회수 1회 시뮬레이션 카운트">
-            <i data-lucide="mouse-pointer" class="w-3.5 h-3.5"></i> 조회수 +1 시뮬레이션
-          </button>
-        </div>
-      </div>
-
-      <!-- Traffic KPI Cards (4 cols) -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        
-        <!-- KPI 1: 오늘 페이지 조회수 -->
-        <div class="glass-card p-5 border-l-4 border-cyan-500">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs font-bold text-slate-400">오늘 페이지 조회수 (PV)</span>
-            <div class="p-1.5 bg-cyan-500/10 text-cyan-400 rounded-md">
-              <i data-lucide="eye" class="w-4 h-4"></i>
-            </div>
-          </div>
-          <div class="flex items-baseline gap-2">
-            <h3 id="stat-analytics-today-views" class="text-3xl font-black text-cyan-400">0</h3>
-            <span class="text-xs text-slate-400 font-semibold">회</span>
-          </div>
-          <p id="stat-analytics-today-sub" class="text-[11px] text-slate-400 mt-3 truncate">금일 실시간 페이지 로드</p>
-        </div>
-
-        <!-- KPI 2: 오늘 순 방문자수 (UV) -->
-        <div class="glass-card p-5 border-l-4 border-emerald-500">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs font-bold text-slate-400">오늘 순 방문자 (UV)</span>
-            <div class="p-1.5 bg-emerald-500/10 text-emerald-400 rounded-md">
-              <i data-lucide="user-check" class="w-4 h-4"></i>
-            </div>
-          </div>
-          <div class="flex items-baseline gap-2">
-            <h3 id="stat-analytics-today-uv" class="text-3xl font-black text-emerald-400">0</h3>
-            <span class="text-xs text-slate-400 font-semibold">명</span>
-          </div>
-          <p class="text-[11px] text-slate-400 mt-3 truncate">중복 접속 제외 순수 방문</p>
-        </div>
-
-        <!-- KPI 3: 누적 전체 조회수 (Total PV) -->
-        <div class="glass-card p-5 border-l-4 border-blue-500">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs font-bold text-slate-400">누적 전체 조회수 (Total PV)</span>
-            <div class="p-1.5 bg-blue-500/10 text-blue-400 rounded-md">
-              <i data-lucide="trending-up" class="w-4 h-4"></i>
-            </div>
-          </div>
-          <div class="flex items-baseline gap-2">
-            <h3 id="stat-analytics-total-views" class="text-3xl font-black text-white">0</h3>
-            <span class="text-xs text-slate-400 font-semibold">회</span>
-          </div>
-          <p class="text-[11px] text-slate-400 mt-3 truncate">포털 런칭 후 총 누적 트래픽</p>
-        </div>
-
-        <!-- KPI 4: 누적 순 방문자수 (Total UV) -->
-        <div class="glass-card p-5 border-l-4 border-purple-500">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs font-bold text-slate-400">누적 순 방문자 (Total UV)</span>
-            <div class="p-1.5 bg-purple-500/10 text-purple-400 rounded-md">
-              <i data-lucide="globe" class="w-4 h-4"></i>
-            </div>
-          </div>
-          <div class="flex items-baseline gap-2">
-            <h3 id="stat-analytics-total-uv" class="text-3xl font-black text-purple-400">0</h3>
-            <span class="text-xs text-slate-400 font-semibold">명</span>
-          </div>
-          <p class="text-[11px] text-slate-400 mt-3 truncate">누적 총 고유 방문자수</p>
-        </div>
-
-      </div>
-
-      <!-- Recent 7 Days Traffic Table -->
-      <div class="glass-card overflow-hidden border border-slate-800 shadow-xl mb-10">
-        <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/60">
-          <h3 class="font-bold text-white text-sm flex items-center gap-2">
-            <i data-lucide="calendar" class="w-4 h-4 text-cyan-400"></i>
-            최근 7일간 일일 접속 추이
-          </h3>
-          <span class="text-xs text-slate-400">KST 기준 매일 00:00 자동 분기 집계</span>
-        </div>
-        <div class="overflow-x-auto custom-scroll">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-950/80 text-slate-400 uppercase tracking-wider border-b border-slate-800">
-              <tr>
-                <th class="px-4 py-3">일자</th>
-                <th class="px-4 py-3">일일 조회수 (PV)</th>
-                <th class="px-4 py-3">순 방문자수 (UV)</th>
-                <th class="px-4 py-3">트래픽 비중</th>
-                <th class="px-4 py-3 text-right">상태</th>
-              </tr>
-            </thead>
-            <tbody id="daily-traffic-table-body" class="divide-y divide-slate-800/60 text-slate-300">
-              <tr>
-                <td colspan="5" class="px-4 py-6 text-center text-slate-500">접속 통계를 집계하고 있습니다...</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    
 
     <!-- =======================================================================
          SECTION C: 결제 인프라 & 비즈니스 인증 진단기 (Payment & Business Health Monitor)
@@ -929,24 +940,24 @@
         const isToday = idx === 0;
 
         html += `
-          <tr class="${isToday ? 'bg-cyan-500/5 font-semibold text-cyan-200' : 'hover:bg-slate-900/40'}">
+          <tr class="${isToday ? 'bg-emerald-500/5 font-semibold text-emerald-200' : 'hover:bg-slate-900/40'}">
             <td class="px-4 py-2.5 flex items-center gap-1.5">
               <span>${day}</span>
-              ${isToday ? '<span class="px-1.5 py-0.5 text-[10px] bg-cyan-500/20 text-cyan-300 rounded font-bold">오늘</span>' : ''}
+              ${isToday ? '<span class="px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-300 rounded font-bold">오늘</span>' : ''}
             </td>
-            <td class="px-4 py-2.5 font-bold text-white">${pv.toLocaleString()} 회</td>
             <td class="px-4 py-2.5 text-emerald-400 font-bold">${uv.toLocaleString()} 명</td>
+            <td class="px-4 py-2.5 font-bold text-cyan-300">${pv.toLocaleString()} 회</td>
             <td class="px-4 py-2.5">
               <div class="flex items-center gap-2">
                 <div class="w-20 bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                  <div class="bg-cyan-400 h-full rounded-full" style="width: ${pct}%"></div>
+                  <div class="bg-gradient-to-r from-emerald-400 to-cyan-400 h-full rounded-full" style="width: ${pct}%"></div>
                 </div>
-                <span class="text-[11px] text-slate-400">${pct}%</span>
+                <span class="text-[11px] text-slate-300 font-semibold">${pct}%</span>
               </div>
             </td>
             <td class="px-4 py-2.5 text-right">
-              <span class="px-2 py-0.5 rounded text-[11px] ${pv > 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-800 text-slate-500'}">
-                ${pv > 0 ? '정상 집계' : '대기'}
+              <span class="px-2 py-0.5 rounded text-[11px] ${pv > 0 ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30' : 'bg-slate-800 text-slate-500'}">
+                ${pv > 0 ? '🟢 정상 수집' : '대기'}
               </span>
             </td>
           </tr>
