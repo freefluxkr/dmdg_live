@@ -930,9 +930,9 @@
   <script>
     function openApplyFromCurriculum(e) {
       e.preventDefault();
-      // Redirect to main portal with auto popup trigger
+      // Redirect to main portal with auto popup trigger (소개 화면이 먼저 열리도록 유도)
       localStorage.removeItem('dmdg_course_modal_dismissed_until');
-      window.location.href = './index.html?openApply=true';
+      window.location.href = './index.html';
     }
   </script>
 </body>
