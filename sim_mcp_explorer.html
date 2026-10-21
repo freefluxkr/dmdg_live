@@ -11,32 +11,30 @@
   <style>
     :root {
       --bg-base: #060913;
-      --bg-card: rgba(13, 22, 41, 0.75);
-      --bg-surface: #0f1b33;
-      --border-color: rgba(56, 189, 248, 0.15);
-      --border-highlight: rgba(56, 189, 248, 0.4);
+      --bg-card: rgba(13, 22, 41, 0.85);
+      --bg-card-hover: rgba(20, 32, 60, 0.95);
+      --bg-surface: #0a1122;
+      --border-color: rgba(56, 189, 248, 0.18);
+      --border-highlight: rgba(0, 242, 254, 0.5);
       --cyan-neon: #00f2fe;
-      --cyan-glow: rgba(0, 242, 254, 0.35);
+      --cyan-glow: rgba(0, 242, 254, 0.4);
       --emerald-neon: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.3);
+      --emerald-glow: rgba(16, 185, 129, 0.35);
       --purple-neon: #a855f7;
-      --purple-glow: rgba(168, 85, 247, 0.3);
+      --purple-glow: rgba(168, 85, 247, 0.35);
       --amber-neon: #f59e0b;
-      --text-main: #f1f5f9;
+      --rose-neon: #f43f5e;
+      --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
       --font-ui: 'Outfit', 'Pretendard', -apple-system, sans-serif;
       --font-code: 'Fira Code', monospace;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: radial-gradient(circle at 50% 0%, #112244 0%, var(--bg-base) 70%);
+      background: radial-gradient(circle at 50% 0%, #102144 0%, var(--bg-base) 65%);
       color: var(--text-main);
       font-family: var(--font-ui);
       min-height: 100vh;
@@ -45,509 +43,346 @@
       flex-direction: column;
     }
 
-    /* Ambient background grid */
     .bg-grid {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image: 
         linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
+      background-size: 36px 36px;
+      pointer-events: none; z-index: 0;
     }
 
     /* Header */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: sticky; top: 0; z-index: 50;
       backdrop-filter: blur(16px);
-      background: rgba(6, 9, 19, 0.85);
+      background: rgba(6, 9, 19, 0.9);
       border-bottom: 1px solid var(--border-color);
-      padding: 14px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      padding: 12px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .brand { display: flex; align-items: center; gap: 12px; }
     .logo-badge {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #00f2fe, #4facfe);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 18px;
-      color: #060913;
-      box-shadow: 0 0 20px var(--cyan-glow);
+      width: 42px; height: 42px; border-radius: 10px;
+      background: linear-gradient(135deg, #00f2fe, #3b82f6);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 19px; color: #060913;
+      box-shadow: 0 0 24px var(--cyan-glow);
     }
-
     .brand-text h1 {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 18px; font-weight: 800; letter-spacing: -0.3px;
+      display: flex; align-items: center; gap: 8px;
     }
+    .brand-text p { font-size: 12px; color: var(--text-muted); }
 
-    .brand-text p {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .header-actions { display: flex; align-items: center; gap: 12px; }
     .badge-live {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 9999px;
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 9999px;
       background: rgba(16, 185, 129, 0.12);
       border: 1px solid var(--emerald-neon);
-      color: var(--emerald-neon);
-      font-size: 12px;
-      font-weight: 600;
-      font-family: var(--font-code);
+      color: var(--emerald-neon); font-size: 12px; font-weight: 600; font-family: var(--font-code);
     }
-
     .pulse-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
       background: var(--emerald-neon);
       box-shadow: 0 0 10px var(--emerald-neon);
       animation: pulse 1.8s infinite;
     }
-
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 0.3; transform: scale(0.8); }
     }
 
     .btn-book {
-      padding: 8px 16px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(79, 172, 254, 0.15));
+      padding: 8px 16px; border-radius: 8px;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(59, 130, 246, 0.15));
       border: 1px solid var(--border-highlight);
-      color: var(--cyan-neon);
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.25s ease;
+      color: var(--cyan-neon); font-size: 13px; font-weight: 600;
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: all 0.2s ease;
     }
-
     .btn-book:hover {
-      background: linear-gradient(135deg, var(--cyan-neon), #4facfe);
-      color: #060913;
-      box-shadow: 0 0 20px var(--cyan-glow);
+      background: linear-gradient(135deg, var(--cyan-neon), #3b82f6);
+      color: #060913; box-shadow: 0 0 20px var(--cyan-glow);
     }
 
-    /* Main Container */
+    /* Main */
     main {
-      position: relative;
-      z-index: 10;
-      flex: 1;
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 24px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      position: relative; z-index: 10;
+      flex: 1; max-width: 1680px; margin: 0 auto;
+      padding: 20px 24px; width: 100%;
+      display: flex; flex-direction: column; gap: 18px;
     }
 
-    /* Control Bar */
+    /* Top Control Deck */
     .control-deck {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 18px 24px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      backdrop-filter: blur(12px);
+      border-radius: 14px; padding: 18px 24px;
+      display: grid; grid-template-columns: 1.1fr 1.3fr 0.8fr;
+      gap: 20px; backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    @media (max-width: 1100px) {
+      .control-deck { grid-template-columns: 1fr; }
     }
 
-    .deck-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
+    .deck-group { display: flex; flex-direction: column; gap: 8px; }
     .deck-label {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--cyan-neon);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--cyan-neon);
+      display: flex; align-items: center; justify-content: space-between;
     }
-
     .segment-bar {
-      display: flex;
-      background: rgba(0, 0, 0, 0.35);
-      padding: 4px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.06);
-      gap: 4px;
+      display: flex; background: rgba(0, 0, 0, 0.4);
+      padding: 4px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08); gap: 4px;
     }
-
     .segment-btn {
-      flex: 1;
-      padding: 8px 12px;
-      border-radius: 6px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      flex: 1; padding: 9px 10px; border-radius: 6px;
+      border: none; background: transparent; color: var(--text-muted);
+      font-size: 12.5px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 6px;
+      white-space: nowrap;
     }
-
+    .segment-btn:hover:not(.active) { color: #ffffff; background: rgba(255,255,255,0.05); }
     .segment-btn.active {
-      background: var(--bg-surface);
-      color: #ffffff;
-      border: 1px solid var(--border-highlight);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(59, 130, 246, 0.25));
+      color: #ffffff; border: 1px solid var(--border-highlight);
+      box-shadow: 0 0 14px rgba(0, 242, 254, 0.3);
     }
 
-    .segment-btn:hover:not(.active) {
-      color: var(--text-main);
-      background: rgba(255,255,255,0.04);
+    /* Agent CoT Banner */
+    .agent-cot-box {
+      background: rgba(10, 17, 34, 0.9);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 10px; padding: 12px 18px;
+      font-size: 13px; font-family: var(--font-code);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .cot-text { color: #e2e8f0; display: flex; align-items: center; gap: 8px; flex: 1; }
+    .cot-badge {
+      padding: 3px 8px; border-radius: 4px; font-size: 11px;
+      background: rgba(168, 85, 247, 0.2); color: var(--purple-neon);
+      font-weight: 700; white-space: nowrap;
     }
 
     /* Tool Toolbar */
     .tool-deck {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 16px 20px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      border-radius: 14px; padding: 14px 20px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
       backdrop-filter: blur(12px);
     }
-
-    .tool-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
+    .tool-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .tool-chip {
-      padding: 8px 14px;
-      border-radius: 8px;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--text-muted);
-      font-family: var(--font-code);
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      padding: 9px 16px; border-radius: 8px;
+      background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-muted); font-family: var(--font-code); font-size: 12.5px;
+      cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 6px;
     }
-
+    .tool-chip:hover:not(.active) { color: #ffffff; border-color: rgba(255,255,255,0.25); }
     .tool-chip.active {
-      background: rgba(0, 242, 254, 0.12);
-      border-color: var(--cyan-neon);
-      color: var(--cyan-neon);
-      box-shadow: 0 0 12px var(--cyan-glow);
+      background: rgba(0, 242, 254, 0.15); border-color: var(--cyan-neon);
+      color: var(--cyan-neon); box-shadow: 0 0 16px var(--cyan-glow); font-weight: 600;
     }
 
+    .tool-actions { display: flex; align-items: center; gap: 10px; }
     .btn-run {
-      padding: 10px 24px;
-      border-radius: 8px;
-      border: none;
+      padding: 10px 24px; border-radius: 8px; border: none;
       background: linear-gradient(135deg, var(--cyan-neon), #3b82f6);
-      color: #060913;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 0 20px var(--cyan-glow);
-      transition: all 0.25s ease;
+      color: #060913; font-size: 13.5px; font-weight: 800; cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 0 20px var(--cyan-glow); transition: all 0.2s ease;
     }
+    .btn-run:hover { transform: translateY(-1px); box-shadow: 0 0 28px rgba(0, 242, 254, 0.6); }
+    .btn-run:active { transform: translateY(1px); }
 
-    .btn-run:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 28px rgba(0, 242, 254, 0.6);
+    .btn-secondary {
+      padding: 9px 16px; border-radius: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text-main); font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s ease;
     }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); }
 
-    .btn-run:active {
-      transform: translateY(0);
-    }
-
-    /* 3-Column Inspection Grid */
+    /* 3-Column Inspection Layout */
     .grid-inspector {
       display: grid;
-      grid-template-columns: 320px 1fr 380px;
-      gap: 20px;
-      flex: 1;
+      grid-template-columns: 340px 1.4fr 1fr;
+      gap: 18px; flex: 1; min-height: 580px;
     }
-
-    @media (max-width: 1200px) {
-      .grid-inspector {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 1300px) {
+      .grid-inspector { grid-template-columns: 1fr; }
     }
 
     .panel {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      backdrop-filter: blur(12px);
+      border-radius: 14px; display: flex; flex-direction: column;
+      overflow: hidden; backdrop-filter: blur(12px);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.35);
     }
 
     .panel-header {
-      padding: 14px 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      background: rgba(0, 0, 0, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0, 0, 0, 0.3); display: flex; align-items: center; justify-content: space-between;
     }
-
     .panel-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 13px; font-weight: 700; color: var(--text-main);
+      display: flex; align-items: center; gap: 8px;
     }
 
     .panel-body {
-      padding: 18px;
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      padding: 16px; flex: 1; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 14px;
     }
 
-    /* Parameters */
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    /* Sub-tabs in Panels */
+    .tab-bar {
+      display: flex; gap: 6px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 8px; margin-bottom: 8px;
     }
-
-    .form-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 500;
-      display: flex;
-      justify-content: space-between;
+    .tab-btn {
+      padding: 4px 10px; border-radius: 6px; font-size: 11.5px;
+      background: transparent; border: 1px solid transparent; color: var(--text-dim);
+      font-weight: 600; cursor: pointer; transition: all 0.15s ease;
     }
-
-    .form-input, .form-textarea {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 10px 12px;
-      color: var(--text-main);
-      font-family: var(--font-code);
-      font-size: 12px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .form-input:focus, .form-textarea:focus {
-      border-color: var(--cyan-neon);
-    }
-
-    .slider-range {
-      width: 100%;
-      accent-color: var(--cyan-neon);
-    }
-
-    /* Live Stream Log */
-    .stream-console {
-      background: #04060c;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 16px;
-      flex: 1;
-      font-family: var(--font-code);
-      font-size: 12.5px;
-      line-height: 1.6;
-      overflow-y: auto;
-      max-height: 520px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .log-line {
-      display: flex;
-      gap: 8px;
-      padding: 4px 6px;
-      border-radius: 4px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .log-req {
-      background: rgba(56, 189, 248, 0.08);
-      border-left: 3px solid var(--cyan-neon);
-    }
-
-    .log-res {
-      background: rgba(16, 185, 129, 0.08);
-      border-left: 3px solid var(--emerald-neon);
-    }
-
-    .log-tag {
-      font-weight: 700;
-      font-size: 11px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      align-self: flex-start;
-    }
-
-    .tag-req {
-      background: rgba(0, 242, 254, 0.2);
+    .tab-btn.active {
+      background: rgba(0, 242, 254, 0.1); border-color: var(--border-highlight);
       color: var(--cyan-neon);
     }
 
-    .tag-res {
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--emerald-neon);
+    /* Form Fields */
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-size: 11.5px; color: var(--text-muted); font-weight: 600;
+      display: flex; justify-content: space-between; align-items: center;
     }
-
-    .log-json {
-      white-space: pre-wrap;
-      word-break: break-all;
-      color: #cbd5e1;
+    .form-input {
+      background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 9px 12px; color: var(--text-main);
+      font-family: var(--font-code); font-size: 12px; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-
-    .json-key { color: #38bdf8; }
-    .json-str { color: #34d399; }
-    .json-num { color: #f59e0b; }
-    .json-bool { color: #a78bfa; }
-
-    /* Evidence Cards */
-    .stat-card {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .form-input:focus {
+      border-color: var(--cyan-neon); box-shadow: 0 0 10px rgba(0,242,254,0.25);
     }
+    .slider-range { width: 100%; accent-color: var(--cyan-neon); cursor: pointer; }
 
-    .stat-title {
-      font-size: 11px;
-      color: var(--text-dim);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    /* Target Virtual File Tree */
+    .file-tree {
+      background: #040711; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 10px; font-family: var(--font-code); font-size: 11.5px;
+      display: flex; flex-direction: column; gap: 4px; max-height: 140px; overflow-y: auto;
     }
-
-    .stat-value {
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
-      font-family: var(--font-code);
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
+    .tree-item {
+      padding: 4px 8px; border-radius: 4px; cursor: pointer;
+      display: flex; align-items: center; gap: 6px; color: var(--text-muted);
+      transition: background 0.15s, color 0.15s;
     }
+    .tree-item:hover { background: rgba(255,255,255,0.05); color: #ffffff; }
+    .tree-item.active { background: rgba(0, 242, 254, 0.15); color: var(--cyan-neon); font-weight: 600; }
 
-    .stat-badge {
-      font-size: 11px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--emerald-neon);
+    /* Packet Tracer Stream */
+    .stream-console {
+      background: #03060f; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08);
+      padding: 12px; flex: 1; font-family: var(--font-code); font-size: 12px;
+      overflow-y: auto; display: flex; flex-direction: column; gap: 8px; min-height: 340px;
     }
-
-    .hex-dump {
-      font-family: var(--font-code);
+    .packet-card {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px; padding: 10px 14px; cursor: pointer;
+      transition: all 0.2s ease; display: flex; flex-direction: column; gap: 6px;
+    }
+    .packet-card:hover {
+      background: rgba(20, 32, 60, 0.9); border-color: rgba(56, 189, 248, 0.4);
+      transform: translateX(2px);
+    }
+    .packet-card.active {
+      border-color: var(--cyan-neon); background: rgba(0, 242, 254, 0.08);
+      box-shadow: 0 0 14px rgba(0,242,254,0.15);
+    }
+    .packet-head {
+      display: flex; align-items: center; justify-content: space-between;
       font-size: 11.5px;
-      line-height: 1.5;
-      background: #03050a;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 12px;
-      border-radius: 8px;
-      color: #94a3b8;
-      overflow-x: auto;
+    }
+    .pkt-tag {
+      padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 10.5px;
+    }
+    .tag-req { background: rgba(0, 242, 254, 0.2); color: var(--cyan-neon); }
+    .tag-res { background: rgba(16, 185, 129, 0.2); color: var(--emerald-neon); }
+    .tag-err { background: rgba(244, 63, 94, 0.2); color: var(--rose-neon); }
+
+    .packet-summary {
+      color: #e2e8f0; font-size: 12px; font-weight: 500;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .packet-timing { font-size: 10.5px; color: var(--text-dim); }
+
+    /* Decompiler Split-View */
+    .split-decompiler {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1;
+    }
+    @media (max-width: 900px) { .split-decompiler { grid-template-columns: 1fr; } }
+
+    .code-box {
+      background: #02050c; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 12px; font-family: var(--font-code);
+      font-size: 11.5px; line-height: 1.6; overflow-x: auto; max-height: 260px;
+    }
+    .code-box-title {
+      font-size: 11px; font-weight: 700; color: var(--text-dim);
+      margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
     }
 
+    /* Metrics & Badges */
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-card {
+      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .stat-title { font-size: 11px; color: var(--text-dim); font-weight: 600; }
+    .stat-val {
+      font-size: 18px; font-weight: 800; font-family: var(--font-code); color: #ffffff;
+      display: flex; align-items: baseline; gap: 6px;
+    }
+    .stat-sub { font-size: 11px; color: var(--emerald-neon); }
+
+    .token-bar-wrap {
+      width: 100%; height: 8px; background: rgba(255,255,255,0.08);
+      border-radius: 9999px; overflow: hidden; margin-top: 4px;
+    }
+    .token-bar-fill {
+      height: 100%; width: 84.6%; background: linear-gradient(90deg, #10b981, #00f2fe);
+      border-radius: 9999px; transition: width 0.3s ease;
+    }
+
+    /* Hex Dump Viewer */
+    .hex-dump {
+      font-family: var(--font-code); font-size: 11px; line-height: 1.5;
+      background: #02050a; border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px; border-radius: 8px; color: #94a3b8; overflow-x: auto;
+      max-height: 130px;
+    }
     .hex-addr { color: #64748b; }
-    .hex-bytes { color: var(--cyan-neon); }
+    .hex-bytes { color: var(--cyan-neon); font-weight: 500; }
     .hex-ascii { color: #f8fafc; }
 
     /* Footer */
     footer {
-      border-top: 1px solid var(--border-color);
-      background: rgba(6, 9, 19, 0.9);
-      padding: 20px 28px;
-      font-size: 13px;
-      color: var(--text-dim);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      border-top: 1px solid var(--border-color); background: rgba(6, 9, 19, 0.95);
+      padding: 16px 28px; font-size: 13px; color: var(--text-dim);
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
       margin-top: auto;
     }
-
-    .footer-links {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--cyan-neon);
-    }
+    .footer-links { display: flex; align-items: center; gap: 16px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cyan-neon); }
   </style>
 </head>
 <body>
@@ -558,17 +393,17 @@
     <div class="brand">
       <div class="logo-badge">REA</div>
       <div class="brand-text">
-        <h1>REA × MCP Protocol Inspector <span style="font-size:12px; padding:2px 8px; border-radius:4px; background:rgba(0,242,254,0.15); color:var(--cyan-neon);">v2.4.0</span></h1>
+        <h1>REA × MCP Protocol Inspector <span style="font-size:11.5px; padding:2px 8px; border-radius:4px; background:rgba(0,242,254,0.15); color:var(--cyan-neon); font-weight:700;">PROD v2.4</span></h1>
         <p>Model Context Protocol (JSON-RPC 2.0) 실시간 증거 기반 역공학 시뮬레이터</p>
       </div>
     </div>
     <div class="header-actions">
       <div class="badge-live">
         <div class="pulse-dot"></div>
-        <span>JSON-RPC 2.0 ACTIVE</span>
+        <span id="headerStatus">JSON-RPC 2.0 ACTIVE</span>
       </div>
       <a href="https://wikidocs.net/book/21781" target="_blank" class="btn-book">
-        <span>📚 Book 21781 공식 교재</span>
+        <span>📗 Book 21781 공식 교재</span>
         <span>↗</span>
       </a>
     </div>
@@ -578,17 +413,25 @@
   <main>
     <!-- Top Control Deck -->
     <div class="control-deck">
+      <!-- Group 1: AI Client -->
       <div class="deck-group">
-        <label class="deck-label">🤖 AI 코딩 클라이언트 (Client)</label>
+        <label class="deck-label">
+          <span>🤖 1. AI 코딩 클라이언트 (Client)</span>
+          <span style="font-size:11px; color:var(--text-dim); font-weight:normal;" id="clientEngineLabel">DeepMind Agentic v2.0</span>
+        </label>
         <div class="segment-bar" id="clientSelector">
           <button class="segment-btn active" data-client="antigravity">Antigravity 2.0</button>
-          <button class="segment-btn" data-client="claude">Claude Code</button>
+          <button class="segment-btn" data-client="claude">Claude Code (CLI)</button>
           <button class="segment-btn" data-client="cursor">Cursor IDE</button>
         </div>
       </div>
 
+      <!-- Group 2: Target Binary -->
       <div class="deck-group">
-        <label class="deck-label">🎯 분석 타깃 소프트웨어 (Target)</label>
+        <label class="deck-label">
+          <span>🎯 2. 분석 타깃 소프트웨어 (Target)</span>
+          <span style="font-size:11px; color:var(--text-dim); font-weight:normal;" id="targetFormatLabel">Win32 x86_64 PE</span>
+        </label>
         <div class="segment-bar" id="targetSelector">
           <button class="segment-btn active" data-target="calc">calc.exe (PE)</button>
           <button class="segment-btn" data-target="notion">notion.asar</button>
@@ -597,39 +440,61 @@
         </div>
       </div>
 
+      <!-- Group 3: Active Provider -->
       <div class="deck-group">
-        <label class="deck-label">⚡ 분석 프로바이더 (Provider)</label>
+        <label class="deck-label">
+          <span>⚡ 3. 자동 라우팅 프로바이더</span>
+          <span style="font-size:11px; color:var(--emerald-neon);">READY</span>
+        </label>
         <div class="segment-bar">
-          <button class="segment-btn active" id="providerLabel">Ghidra 12.1 Headless</button>
+          <button class="segment-btn active" id="providerLabel" style="pointer-events:none; font-family:var(--font-code);">Ghidra 12.1 Headless</button>
         </div>
       </div>
+    </div>
+
+    <!-- Agent Live CoT (Thought Process) Stream -->
+    <div class="agent-cot-box">
+      <div class="cot-text">
+        <span class="cot-badge" id="cotAgentBadge">Antigravity Agent</span>
+        <span id="cotThought">"calc.exe의 % 연산자 바이너리 오프셋을 분석하기 위해 REA MCP 도구를 호출할 준비를 마쳤습니다."</span>
+      </div>
+      <div style="font-size:11px; color:var(--text-dim); font-family:var(--font-code);">Latency: <span id="pingVal" style="color:var(--emerald-neon);">12ms</span></div>
     </div>
 
     <!-- Tool Selection Toolbar -->
     <div class="tool-deck">
       <div class="tool-chips" id="toolChips">
-        <button class="tool-chip active" data-tool="inspect_target">🔍 rea:inspect_target</button>
-        <button class="tool-chip" data-tool="decompile_symbol">⚙️ rea:decompile_symbol</button>
-        <button class="tool-chip" data-tool="intercept_packet">📡 rea:intercept_packet</button>
-        <button class="tool-chip" data-tool="verify_cleanroom">🛡️ rea:verify_cleanroom</button>
+        <button class="tool-chip active" data-tool="inspect_target">🔍 rea:inspect_target (타깃 스캔)</button>
+        <button class="tool-chip" data-tool="decompile_symbol">⚙️ rea:decompile_symbol (심볼 디컴파일)</button>
+        <button class="tool-chip" data-tool="intercept_packet">📡 rea:intercept_packet (실시간 패킷 가로채기)</button>
+        <button class="tool-chip" data-tool="verify_cleanroom">🛡️ rea:verify_cleanroom (TDD 바이트 검증)</button>
       </div>
 
-      <button class="btn-run" id="btnRunTool">
-        <span>▶ Execute Tool Call</span>
-      </button>
+      <div class="tool-actions">
+        <label style="font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:6px; cursor:pointer;">
+          <input type="checkbox" id="chkSimulateError" style="accent-color:var(--rose-neon);">
+          <span>에러 주입 (Self-Healing 테스트)</span>
+        </label>
+        <button class="btn-run" id="btnRunTool">
+          <span>▶ Execute Tool Call</span>
+        </button>
+      </div>
     </div>
 
-    <!-- 3-Column Inspector Grid -->
+    <!-- 3-Column Inspection Grid -->
     <div class="grid-inspector">
-      <!-- Left Panel: Parameters -->
+      <!-- Left Column: Tool Config & Virtual File Explorer -->
       <div class="panel">
         <div class="panel-header">
-          <span class="panel-title">🛠️ Tool Call Parameters</span>
-          <span style="font-size:11px; color:var(--text-dim); font-family:var(--font-code);">JSON-RPC Params</span>
+          <span class="panel-title">🛠️ Tool Parameters & Context</span>
+          <span style="font-size:11px; color:var(--text-dim); font-family:var(--font-code);">Params</span>
         </div>
         <div class="panel-body">
           <div class="form-group">
-            <label class="form-label">Target Symbol / Method</label>
+            <label class="form-label">
+              <span>Target Symbol / Method</span>
+              <span id="paramTypeBadge" style="font-size:10px; padding:1px 5px; border-radius:3px; background:rgba(0,242,254,0.15); color:var(--cyan-neon);">Function</span>
+            </label>
             <input type="text" class="form-input" id="paramSymbol" value="CalculatePercentage">
           </div>
 
@@ -640,94 +505,154 @@
 
           <div class="form-group">
             <label class="form-label">
-              <span>Token Chunking Limit</span>
-              <span id="chunkLimitVal" style="color:var(--cyan-neon);">1,024 tokens</span>
+              <span>Smart Paging Chunk Size</span>
+              <span id="chunkLimitVal" style="color:var(--cyan-neon); font-family:var(--font-code);">1,024 tokens</span>
             </label>
             <input type="range" class="slider-range" id="chunkSlider" min="256" max="4096" step="256" value="1024">
           </div>
 
-          <div class="form-group">
-            <label class="form-label">Evidence Verification</label>
-            <select class="form-input" id="paramStrict">
-              <option value="strict">Strict (Require Raw Byte Match)</option>
-              <option value="loose">Heuristic (Tolerate Stripped Symbols)</option>
-            </select>
+          <!-- Virtual Filesystem Structure -->
+          <div class="form-group" style="margin-top:4px;">
+            <label class="form-label">
+              <span>📦 Target Virtual File Structure</span>
+              <span style="font-size:10px; color:var(--text-dim);">Click to inspect</span>
+            </label>
+            <div class="file-tree" id="virtualFileTree">
+              <div class="tree-item active" data-file="headers">📄 PE_HEADERS [.text: 0x00401000]</div>
+              <div class="tree-item" data-file="fn_percent">⚙️ fn_CalculatePercentage()</div>
+              <div class="tree-item" data-file="fn_eval">⚙️ fn_EvaluateExpression()</div>
+              <div class="tree-item" data-file="rdata">📦 .rdata [String Constants]</div>
+            </div>
           </div>
 
           <div class="form-group" style="margin-top:auto;">
-            <label class="form-label">Session ID</label>
-            <input type="text" class="form-input" readonly value="sess_mcp_7f2b904c1a" style="opacity:0.6;">
+            <label class="form-label">Active Session ID</label>
+            <input type="text" class="form-input" readonly id="sessIdField" value="sess_rea_mcp_7f2b904c" style="opacity:0.6;">
           </div>
         </div>
       </div>
 
-      <!-- Center Panel: Live JSON-RPC 2.0 Stream -->
+      <!-- Center Column: Interactive JSON-RPC 2.0 Packet Stream & Split Decompiler -->
       <div class="panel">
         <div class="panel-header">
-          <span class="panel-title">📡 Real-Time JSON-RPC 2.0 Packet Tracer</span>
+          <div class="tab-bar" style="margin-bottom:0; padding-bottom:0; border:none;">
+            <button class="tab-btn active" id="tabBtnStream">📡 Live JSON-RPC Stream</button>
+            <button class="tab-btn" id="tabBtnDecompile">⚙️ Decompiler Split-View</button>
+            <button class="tab-btn" id="tabBtnPayload">📦 Packet Payload Inspector</button>
+          </div>
           <div style="display:flex; gap:8px;">
-            <button id="btnClearLog" style="background:transparent; border:1px solid rgba(255,255,255,0.1); color:var(--text-dim); padding:4px 8px; border-radius:4px; font-size:11px; cursor:pointer;">Clear</button>
-            <span style="font-size:11px; color:var(--emerald-neon); font-family:var(--font-code); display:flex; align-items:center; gap:4px;">
-              <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--emerald-neon);"></span> Connected
-            </span>
+            <button class="btn-secondary" id="btnClearLog" style="padding:4px 10px; font-size:11px;">Clear Log</button>
+            <button class="btn-secondary" id="btnCopyJson" style="padding:4px 10px; font-size:11px;">Copy JSON</button>
           </div>
         </div>
-        <div class="panel-body" style="padding:12px;">
-          <div class="stream-console" id="streamConsole">
-            <!-- Initial Handshake Log -->
-            <div class="log-line log-req">
-              <span class="log-tag tag-req">CLIENT_REQ</span>
-              <div class="log-json">{
-  <span class="json-key">"jsonrpc"</span>: <span class="json-str">"2.0"</span>,
-  <span class="json-key">"id"</span>: <span class="json-num">1</span>,
-  <span class="json-key">"method"</span>: <span class="json-str">"initialize"</span>,
-  <span class="json-key">"params"</span>: {
-    <span class="json-key">"protocolVersion"</span>: <span class="json-str">"2024-11-05"</span>,
-    <span class="json-key">"clientInfo"</span>: { <span class="json-key">"name"</span>: <span class="json-str">"Antigravity-IDE"</span>, <span class="json-key">"version"</span>: <span class="json-str">"2.0.4"</span> }
-  }
-}</div>
-            </div>
 
-            <div class="log-line log-res">
-              <span class="log-tag tag-res">SERVER_ACK</span>
-              <div class="log-json">{
-  <span class="json-key">"jsonrpc"</span>: <span class="json-str">"2.0"</span>,
-  <span class="json-key">"id"</span>: <span class="json-num">1</span>,
-  <span class="json-key">"result"</span>: {
-    <span class="json-key">"serverInfo"</span>: { <span class="json-key">"name"</span>: <span class="json-str">"rea-agents-mcp"</span>, <span class="json-key">"version"</span>: <span class="json-str">"1.0.8"</span> },
-    <span class="json-key">"capabilities"</span>: { <span class="json-key">"tools"</span>: { <span class="json-key">"listChanged"</span>: <span class="json-bool">true</span> } }
-  }
-}</div>
+        <div class="panel-body" style="padding:12px;">
+          <!-- View 1: Live Stream Cards -->
+          <div class="stream-console" id="streamConsole">
+            <!-- Handshake Log -->
+            <div class="packet-card active" data-id="1">
+              <div class="packet-head">
+                <span class="pkt-tag tag-req">#1 CLIENT_REQ</span>
+                <span class="packet-timing">0.00ms</span>
+              </div>
+              <div class="packet-summary">method: "initialize" (protocolVersion: 2024-11-05)</div>
             </div>
+            <div class="packet-card" data-id="2">
+              <div class="packet-head">
+                <span class="pkt-tag tag-res">#2 SERVER_ACK</span>
+                <span class="packet-timing">+14.2ms</span>
+              </div>
+              <div class="packet-summary">result: { serverInfo: "rea-agents-mcp v1.0.8", tools: 4 }</div>
+            </div>
+          </div>
+
+          <!-- View 2: Split Decompiler (Hidden by default) -->
+          <div id="decompileView" style="display:none; flex-direction:column; gap:10px; flex:1;">
+            <div class="split-decompiler">
+              <div>
+                <div class="code-box-title">🔴 Raw Bytecode / Disassembly (Target)</div>
+                <div class="code-box" id="rawAsmBox">
+<span style="color:#64748b;">; Function: CalculatePercentage (0x004012A0)</span>
+004012A0: <span style="color:var(--cyan-neon);">push    rbp</span>
+004012A1: <span style="color:var(--cyan-neon);">mov     rbp, rsp</span>
+004012A4: <span style="color:var(--cyan-neon);">sub     rsp, 32</span>
+004012A8: <span style="color:var(--cyan-neon);">movsd   qword ptr [rbp-8], xmm0</span>
+004012AD: <span style="color:var(--cyan-neon);">movsd   qword ptr [rbp-16], xmm1</span>
+004012B2: <span style="color:var(--cyan-neon);">ucomisd xmm1, qword ptr [__real@00000000]</span>
+004012BA: <span style="color:var(--cyan-neon);">je      loc_zero_ret</span>
+004012C0: <span style="color:var(--cyan-neon);">mulsd   xmm0, xmm1</span>
+004012C4: <span style="color:var(--cyan-neon);">divsd   xmm0, qword ptr [__real@4059000000000000] ; 100.0</span>
+004012CC: <span style="color:var(--cyan-neon);">leave</span>
+004012CD: <span style="color:var(--cyan-neon);">ret</span>
+                </div>
+              </div>
+              <div>
+                <div class="code-box-title">🟢 Clean-Room Recovered Source (C / TypeScript)</div>
+                <div class="code-box" id="cleanSrcBox">
+<span style="color:#10b981;">// 100% Byte-Aligned Clean-Room Recovery</span>
+<span style="color:#38bdf8;">export function</span> <span style="color:#fbbf24;">calculatePercentage</span>(
+  val: <span style="color:#38bdf8;">number</span>, 
+  base: <span style="color:#38bdf8;">number</span>
+): <span style="color:#38bdf8;">number</span> {
+  <span style="color:#f43f5e;">if</span> (base === <span style="color:#fbbf24;">0.0</span>) {
+    <span style="color:#f43f5e;">return</span> <span style="color:#fbbf24;">0.0</span>; <span style="color:#64748b;">// Zero division guard</span>
+  }
+  <span style="color:#f43f5e;">return</span> (val * base) / <span style="color:#fbbf24;">100.0</span>;
+}
+                </div>
+              </div>
+            </div>
+            <div style="font-size:11.5px; color:var(--text-muted); background:rgba(0,0,0,0.4); padding:8px 12px; border-radius:6px; font-family:var(--font-code);">
+              ✔ Equivalence Test: <span style="color:var(--emerald-neon);">4/4 Unit Tests Passed (0.000% Delta)</span>
+            </div>
+          </div>
+
+          <!-- View 3: Selected Packet Payload Inspector -->
+          <div id="payloadView" style="display:none; flex-direction:column; gap:8px; flex:1;">
+            <div class="code-box-title">Selected Packet JSON-RPC Payload</div>
+            <pre class="code-box" id="payloadJsonPre" style="max-height:360px; color:#38bdf8;"></pre>
           </div>
         </div>
       </div>
 
-      <!-- Right Panel: Evidence & Clean-room Metrics -->
+      <!-- Right Column: Evidence & Token Metrics -->
       <div class="panel">
         <div class="panel-header">
-          <span class="panel-title">🛡️ Evidence & Clean-Room Inspector</span>
-          <span class="stat-badge">VERIFIED</span>
+          <span class="panel-title">🛡️ Evidence & Token Economy</span>
+          <span class="stat-badge" id="cleanroomBadge">100% VERIFIED</span>
         </div>
         <div class="panel-body">
+          <!-- Token Economy Card -->
           <div class="stat-card">
             <span class="stat-title">Token Reduction Efficiency</span>
-            <div class="stat-value">
+            <div class="stat-val">
               <span id="statReduction">84.6%</span>
-              <span class="stat-badge">SAVED</span>
+              <span class="stat-sub">SAVED</span>
             </div>
-            <span style="font-size:11px; color:var(--text-dim);">스마트 페이징으로 LLM 컨텍스트 낭비 원천 차단</span>
+            <div class="token-bar-wrap">
+              <div class="token-bar-fill" id="tokenBarFill"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-dim); margin-top:4px;">
+              <span>전체 덤프: 64,000 tok</span>
+              <span id="smartTokensLabel" style="color:var(--cyan-neon);">REA 페이징: 1,024 tok</span>
+            </div>
           </div>
 
+          <!-- Evidence Hash Card -->
           <div class="stat-card">
-            <span class="stat-title">Evidence Hash (SHA-256)</span>
-            <div style="font-family:var(--font-code); font-size:11px; color:var(--cyan-neon); word-break:break-all;" id="statHash">
+            <span class="stat-title">Cryptographic Evidence Hash</span>
+            <div style="font-family:var(--font-code); font-size:11px; color:var(--cyan-neon); word-break:break-all; line-height:1.4;" id="statHash">
               e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
             </div>
+            <div style="font-size:10.5px; color:var(--emerald-neon); margin-top:2px;">✔ SHA-256 Validated · Zero Hallucination Guaranteed</div>
           </div>
 
+          <!-- Hex Dump Inspector -->
           <div class="form-group">
-            <label class="form-label">Raw Byte Inspection (Hex Dump)</label>
+            <label class="form-label">
+              <span>Raw Byte Inspection (Hex Dump)</span>
+              <span style="font-size:10.5px; color:var(--cyan-neon);" id="hexAddrLabel">0x004012A0</span>
+            </label>
             <div class="hex-dump" id="hexDumpViewer">
 <span class="hex-addr">004012A0:</span> <span class="hex-bytes">48 83 EC 28</span> 48 89 4C 24 30  <span class="hex-ascii">H..(H.L$0</span>
 <span class="hex-addr">004012A9:</span> <span class="hex-bytes">F2 0F 10 05</span> 2E 1F 00 00 F2 0F  <span class="hex-ascii">..........</span>
@@ -736,12 +661,14 @@
             </div>
           </div>
 
-          <div class="stat-card" style="border-left:3px solid var(--purple-neon);">
-            <span class="stat-title">Clean-Room TDD Match</span>
-            <div style="font-size:12px; color:#e2e8f0; font-family:var(--font-code);">
-              ✔ Byte Alignment: 100%<br>
-              ✔ Logic Equivalence: Verified<br>
-              ✔ Stripped Symbol Recovered: Yes
+          <!-- Cleanroom Certificate Card -->
+          <div class="stat-card" style="border-left:3px solid var(--purple-neon); background:rgba(168,85,247,0.06);">
+            <span class="stat-title" style="color:var(--purple-neon);">Cleanroom TDD Certificate</span>
+            <div style="font-size:11.5px; color:#e2e8f0; font-family:var(--font-code); line-height:1.6;" id="certSummary">
+              ✔ Provider: Ghidra 12.1 Headless<br>
+              ✔ Logic Equivalence: 100%<br>
+              ✔ Compiler Optimizations Inverted: Yes<br>
+              ✔ Status: READY FOR ENTERPRISE DEPLOY
             </div>
           </div>
         </div>
@@ -752,30 +679,114 @@
   <!-- Footer -->
   <footer>
     <div>
-      <strong>당목담글(DMDG) 스튜디오 자율 에이전트 엔지니어링 본부</strong> · REA & MCP Official Live Simulator
+      <strong>당목담글(DMDG) 스튜디오 자율 에이전트 엔지니어링 본부</strong> · REA × MCP Official Live Simulator
     </div>
     <div class="footer-links">
       <a href="https://dmdg-live.com/" target="_blank">🏛️ 공식 메인 포털</a>
       <a href="https://wikidocs.net/book/21781" target="_blank">📗 REA 완벽 마스터 가이드 (Book 21781)</a>
       <a href="https://wikidocs.net/book/21777" target="_blank">🚀 Antigravity IDE 완벽 가이드 (Book 21777)</a>
+      <a href="https://github.com/cleanroom-lab/rea-agents" target="_blank">🐙 GitHub (rea-agents)</a>
     </div>
   </footer>
 
   <script>
-    // State
+    // State Database
     const state = {
       client: 'antigravity',
       target: 'calc',
       tool: 'inspect_target',
       chunkSize: 1024,
-      reqId: 2
+      simulateError: false,
+      activePacketId: 1,
+      packets: [
+        {
+          id: 1, type: 'req', time: '0.00ms', method: 'initialize',
+          payload: {
+            jsonrpc: "2.0", id: 1, method: "initialize",
+            params: { protocolVersion: "2024-11-05", clientInfo: { name: "Antigravity-IDE", version: "2.0.4" } }
+          }
+        },
+        {
+          id: 2, type: 'res', time: '+14.2ms', method: 'ack',
+          payload: {
+            jsonrpc: "2.0", id: 1,
+            result: {
+              serverInfo: { name: "rea-agents-mcp", version: "1.0.8" },
+              capabilities: { tools: { listChanged: true } }
+            }
+          }
+        }
+      ]
     };
 
-    const targetMeta = {
-      calc: { name: 'calc.exe', provider: 'Ghidra 12.1 Headless', offset: '0x004012A0', symbol: 'CalculatePercentage' },
-      notion: { name: 'notion.asar', provider: 'Electron ASAR Parser', offset: '0x00018FA0', symbol: 'validateSessionToken' },
-      dino: { name: 'dino.wasm', provider: 'Chromium DevTools CDP', offset: '0x000045B2', symbol: 'updateSpeed' },
-      aegis: { name: 'aegis.apk', provider: 'Headless JADX Engine', offset: '0x0012A340', symbol: 'generateTotpCode' }
+    const targetSpecs = {
+      calc: {
+        name: 'calc.exe', format: 'Win32 x86_64 PE', provider: 'Ghidra 12.1 Headless',
+        offset: '0x004012A0', symbol: 'CalculatePercentage',
+        files: [
+          '📄 PE_HEADERS [.text: 0x00401000]',
+          '⚙️ fn_CalculatePercentage()',
+          '⚙️ fn_EvaluateExpression()',
+          '📦 .rdata [String Constants]'
+        ],
+        hex: `004012A0: 48 83 EC 28 48 89 4C 24 30  H..(H.L$0\n004012A9: F2 0F 10 05 2E 1F 00 00 F2 0F  ..........\n004012B3: 59 C1 F2 0F 11 05 22 1F 00 00  Y....."...`,
+        asm: `; Function: CalculatePercentage (0x004012A0)\n004012A0: push    rbp\n004012A1: mov     rbp, rsp\n004012A4: sub     rsp, 32\n004012A8: movsd   qword ptr [rbp-8], xmm0\n004012AD: movsd   qword ptr [rbp-16], xmm1\n004012B2: ucomisd xmm1, qword ptr [__real@00000000]\n004012BA: je      loc_zero_ret\n004012C0: mulsd   xmm0, xmm1\n004012C4: divsd   xmm0, qword ptr [__real@4059000000000000] ; 100.0\n004012CC: leave\n004012CD: ret`,
+        src: `// 100% Byte-Aligned Clean-Room Recovery\nexport function calculatePercentage(\n  val: number, \n  base: number\n): number {\n  if (base === 0.0) {\n    return 0.0; // Zero division guard\n  }\n  return (val * base) / 100.0;\n}`
+      },
+      notion: {
+        name: 'notion.asar', format: 'Electron ASAR v4 Package', provider: 'Electron ASAR Parser',
+        offset: '0x00018FA0', symbol: 'validateSessionToken',
+        files: [
+          '📄 package.json',
+          '⚙️ main.js [Electron Main IPC]',
+          '⚙️ validateSessionToken.js',
+          '📦 preload.js'
+        ],
+        hex: `00018FA0: 7B 22 76 65 72 73 69 6F 6E 22  {"version"\n00018FAA: 3A 20 22 32 2E 34 2E 30 22 2C  : "2.4.0",\n00018FB4: 22 61 70 70 22 3A 20 7B 22 69  "app": {"i`,
+        asm: `// V8 Bytecode snippet: validateSessionToken\nLdaNamedProperty a0, [0]\nStar r0\nTestNull r0\nJumpIfFalse [12]\nLdaFalse\nReturn`,
+        src: `// Clean-Room Reimplementation\nexport function validateSessionToken(token: string): boolean {\n  if (!token || token.length < 32) return false;\n  const [header, payload, sig] = token.split('.');\n  return Boolean(header && payload && sig);\n}`
+      },
+      dino: {
+        name: 'dino.wasm', format: 'WebAssembly Binary (WASM v1)', provider: 'Chromium DevTools CDP',
+        offset: '0x000045B2', symbol: 'updateSpeed',
+        files: [
+          '📄 WASM_HEADER [magic: \\0asm]',
+          '⚙️ $updateSpeed(delta: f32)',
+          '⚙️ $checkCollision(dist: f32)',
+          '📦 DataSection [HighScore: 99999]'
+        ],
+        hex: `000045B0: 00 61 73 6D 01 00 00 00 01 08  .asm......\n000045BA: 02 60 00 00 60 01 7F 00 03 02  .`..`.....`,
+        asm: `(func $updateSpeed (param $delta f32) (result f32)\n  local.get $delta\n  f32.const 0.001\n  f32.mul\n  global.get $currentSpeed\n  f32.add\n  global.set $currentSpeed\n  global.get $currentSpeed\n)`,
+        src: `// WebAssembly Clean-Room Inversion\nexport function updateSpeed(delta: number, currentSpeed: number): number {\n  const ACCELERATION = 0.001;\n  return currentSpeed + (delta * ACCELERATION);\n}`
+      },
+      aegis: {
+        name: 'aegis.apk', format: 'Android Dalvik DEX / APK', provider: 'Headless JADX Engine',
+        offset: '0x0012A340', symbol: 'generateTotpCode',
+        files: [
+          '📄 AndroidManifest.xml',
+          '⚙️ classes.dex [OTP Core]',
+          '⚙️ generateTotpCode(secret, time)',
+          '📦 res/values/strings.xml'
+        ],
+        hex: `0012A340: 64 65 78 0A 30 33 39 00 E4 F1  dex.039...\n0012A34A: 11 22 33 44 55 66 77 88 99 AA  ."3DUfw...\n0012A354: BB CC DD EE FF 00 11 22 33 44  ..........`,
+        asm: `.method public static generateTotp(Ljava/lang/String;J)I\n    .registers 5\n    invoke-static {p0, p1, p2}, Lcom/aegis/Crypto;->hmacSha1([BJ)[B\n    move-result-object v0\n    return v0\n.end method`,
+        src: `// Modern Kotlin/TS OTP Reimplementation\nexport function generateTotpCode(secret: Uint8Array, timeStep: number): number {\n  const hmac = crypto.createHmac('sha1', secret);\n  const buffer = Buffer.alloc(8);\n  buffer.writeBigInt64BE(BigInt(timeStep));\n  const digest = hmac.update(buffer).digest();\n  const offset = digest[digest.length - 1] & 0xf;\n  return (digest.readUInt32BE(offset) & 0x7fffffff) % 1000000;\n}`
+      }
+    };
+
+    const clientThoughts = {
+      antigravity: {
+        engine: 'DeepMind Agentic v2.0 (Orchestrator)',
+        thought: 'Antigravity IDE: "타깃 바이너리의 증거 메타데이터를 수집하고 비동기 서브에이전트에게 정밀 디컴파일을 위임합니다."'
+      },
+      claude: {
+        engine: 'Anthropic Claude Code CLI',
+        thought: 'Claude Code: "REA MCP JSON-RPC 파이프라인과 stdio IPC 터미널 스트림을 초기화했습니다."'
+      },
+      cursor: {
+        engine: 'Cursor AI Shadow Workspace',
+        thought: 'Cursor: "코드베이스 인덱싱 완료. 추출된 C 심볼을 실시간 인라인 Diff 패치로 변환할 준비를 마쳤습니다."'
+      }
     };
 
     // DOM Elements
@@ -783,48 +794,130 @@
     const targetBtns = document.querySelectorAll('#targetSelector .segment-btn');
     const toolChips = document.querySelectorAll('#toolChips .tool-chip');
     const providerLabel = document.getElementById('providerLabel');
+    const clientEngineLabel = document.getElementById('clientEngineLabel');
+    const targetFormatLabel = document.getElementById('targetFormatLabel');
+    const cotAgentBadge = document.getElementById('cotAgentBadge');
+    const cotThought = document.getElementById('cotThought');
     const paramSymbol = document.getElementById('paramSymbol');
     const paramOffset = document.getElementById('paramOffset');
     const chunkSlider = document.getElementById('chunkSlider');
     const chunkLimitVal = document.getElementById('chunkLimitVal');
+    const virtualFileTree = document.getElementById('virtualFileTree');
     const streamConsole = document.getElementById('streamConsole');
     const btnRunTool = document.getElementById('btnRunTool');
     const btnClearLog = document.getElementById('btnClearLog');
+    const btnCopyJson = document.getElementById('btnCopyJson');
+    const chkSimulateError = document.getElementById('chkSimulateError');
     const statReduction = document.getElementById('statReduction');
+    const tokenBarFill = document.getElementById('tokenBarFill');
     const statHash = document.getElementById('statHash');
     const hexDumpViewer = document.getElementById('hexDumpViewer');
+    const hexAddrLabel = document.getElementById('hexAddrLabel');
+    const rawAsmBox = document.getElementById('rawAsmBox');
+    const cleanSrcBox = document.getElementById('cleanSrcBox');
+    const smartTokensLabel = document.getElementById('smartTokensLabel');
+    const certSummary = document.getElementById('certSummary');
 
-    // Client Selector
+    // Sub-Tabs
+    const tabBtnStream = document.getElementById('tabBtnStream');
+    const tabBtnDecompile = document.getElementById('tabBtnDecompile');
+    const tabBtnPayload = document.getElementById('tabBtnPayload');
+    const decompileView = document.getElementById('decompileView');
+    const payloadView = document.getElementById('payloadView');
+    const payloadJsonPre = document.getElementById('payloadJsonPre');
+
+    function switchCenterTab(tab) {
+      tabBtnStream.classList.remove('active');
+      tabBtnDecompile.classList.remove('active');
+      tabBtnPayload.classList.remove('active');
+
+      streamConsole.style.display = 'none';
+      decompileView.style.display = 'none';
+      payloadView.style.display = 'none';
+
+      if (tab === 'stream') {
+        tabBtnStream.classList.add('active');
+        streamConsole.style.display = 'flex';
+      } else if (tab === 'decompile') {
+        tabBtnDecompile.classList.add('active');
+        decompileView.style.display = 'flex';
+      } else {
+        tabBtnPayload.classList.add('active');
+        payloadView.style.display = 'flex';
+        renderSelectedPayload();
+      }
+    }
+
+    tabBtnStream.addEventListener('click', () => switchCenterTab('stream'));
+    tabBtnDecompile.addEventListener('click', () => switchCenterTab('decompile'));
+    tabBtnPayload.addEventListener('click', () => switchCenterTab('payload'));
+
+    // Client Switching
     clientBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         clientBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         state.client = btn.dataset.client;
-        appendSystemLog(`Client switched to: ${btn.innerText}`);
+        const info = clientThoughts[state.client];
+        clientEngineLabel.innerText = info.engine;
+        cotAgentBadge.innerText = btn.innerText;
+        cotThought.innerText = info.thought;
+        addPacketLog('req', `client/handshake`, { client: state.client, engine: info.engine });
       });
     });
 
-    // Target Selector
+    // Target Switching
     targetBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         targetBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         state.target = btn.dataset.target;
-        const meta = targetMeta[state.target];
-        providerLabel.innerText = meta.provider;
-        paramSymbol.value = meta.symbol;
-        paramOffset.value = meta.offset;
-        updateHexDump(meta);
-        appendSystemLog(`Target binary set to: ${meta.name} (${meta.provider})`);
+        const spec = targetSpecs[state.target];
+
+        targetFormatLabel.innerText = spec.format;
+        providerLabel.innerText = spec.provider;
+        paramSymbol.value = spec.symbol;
+        paramOffset.value = spec.offset;
+        hexAddrLabel.innerText = spec.offset;
+
+        // Render virtual file tree
+        virtualFileTree.innerHTML = spec.files.map((f, i) => 
+          `<div class="tree-item ${i===0?'active':''}" data-file="${f}">${f}</div>`
+        ).join('');
+
+        // Bind tree clicks
+        document.querySelectorAll('.tree-item').forEach(ti => {
+          ti.addEventListener('click', () => {
+            document.querySelectorAll('.tree-item').forEach(x => x.classList.remove('active'));
+            ti.classList.add('active');
+            cotThought.innerText = `Selected virtual node: ${ti.innerText}`;
+          });
+        });
+
+        // Update hex dump & decompiler code
+        hexDumpViewer.innerText = spec.hex;
+        rawAsmBox.innerText = spec.asm;
+        cleanSrcBox.innerText = spec.src;
+        statHash.innerText = generateMockHash();
+
+        certSummary.innerHTML = `
+          ✔ Provider: ${spec.provider}<br>
+          ✔ Target: ${spec.name} (${spec.format})<br>
+          ✔ Logic Equivalence: 100% Verified<br>
+          ✔ Status: READY FOR ENTERPRISE DEPLOY
+        `;
+
+        addPacketLog('req', `target/load`, { target: spec.name, format: spec.format, provider: spec.provider });
       });
     });
 
-    // Tool Selector
+    // Tool Chip Switching
     toolChips.forEach(chip => {
       chip.addEventListener('click', () => {
         toolChips.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
         state.tool = chip.dataset.tool;
+        cotThought.innerText = `Agent selected tool: rea:${state.tool}`;
       });
     });
 
@@ -832,189 +925,162 @@
     chunkSlider.addEventListener('input', (e) => {
       state.chunkSize = e.target.value;
       chunkLimitVal.innerText = `${parseInt(e.target.value).toLocaleString()} tokens`;
-      const reduction = (80 + (e.target.value / 4096) * 15).toFixed(1);
+      const reduction = (80 + (e.target.value / 4096) * 16).toFixed(1);
       statReduction.innerText = `${reduction}%`;
+      tokenBarFill.style.width = `${reduction}%`;
+      smartTokensLabel.innerText = `REA 페이징: ${parseInt(e.target.value).toLocaleString()} tok`;
+    });
+
+    // Error simulation toggle
+    chkSimulateError.addEventListener('change', (e) => {
+      state.simulateError = e.target.checked;
+      cotThought.innerText = state.simulateError 
+        ? "⚠️ Warning: Self-Healing 시뮬레이션을 위해 강제 에러(-32602) 주입 모드가 켜졌습니다."
+        : "정상 도구 호출 모드로 복귀했습니다.";
     });
 
     // Clear Log
     btnClearLog.addEventListener('click', () => {
+      state.packets = [];
       streamConsole.innerHTML = '';
-      appendSystemLog('Log console cleared.');
+      cotThought.innerText = "로그가 초기화되었습니다.";
     });
 
-    function appendSystemLog(msg) {
-      const line = document.createElement('div');
-      line.className = 'log-line';
-      line.style.opacity = '0.6';
-      line.style.fontSize = '11px';
-      line.innerHTML = `<span style="color:#64748b;">[SYSTEM]</span> ${msg}`;
-      streamConsole.appendChild(line);
-      streamConsole.scrollTop = streamConsole.scrollHeight;
-    }
+    // Copy JSON
+    btnCopyJson.addEventListener('click', () => {
+      const activePkt = state.packets.find(p => p.id === state.activePacketId) || state.packets[state.packets.length - 1];
+      if (activePkt) {
+        navigator.clipboard.writeText(JSON.stringify(activePkt.payload, null, 2));
+        btnCopyJson.innerText = "Copied!";
+        setTimeout(() => btnCopyJson.innerText = "Copy JSON", 1500);
+      }
+    });
 
-    // Execute Tool Call
-    btnRunTool.addEventListener('click', () => {
-      state.reqId++;
-      const currentReqId = state.reqId;
-      const meta = targetMeta[state.target];
-      const toolName = `rea:${state.tool}`;
-
-      // 1. Build JSON-RPC Request
-      const requestPayload = {
-        jsonrpc: "2.0",
-        id: currentReqId,
-        method: "tools/call",
-        params: {
-          name: toolName,
-          arguments: {
-            target: meta.name,
-            symbol: paramSymbol.value,
-            offset: paramOffset.value,
-            chunkSizeTokens: parseInt(state.chunkSize),
-            strictEvidence: document.getElementById('paramStrict').value === 'strict'
-          }
+    // Add Packet Log
+    function addPacketLog(type, summary, payload) {
+      const newId = state.packets.length + 1;
+      const timing = `+${(Math.random() * 15 + 4).toFixed(1)}ms`;
+      const pkt = {
+        id: newId, type: type, time: timing, method: summary,
+        payload: {
+          jsonrpc: "2.0",
+          id: newId,
+          ...(type === 'req' ? { method: summary, params: payload } : { result: payload })
         }
       };
 
-      appendRequestLog(requestPayload);
+      state.packets.push(pkt);
+      state.activePacketId = newId;
 
-      // Button feedback
+      const card = document.createElement('div');
+      card.className = `packet-card active`;
+      card.dataset.id = newId;
+      card.innerHTML = `
+        <div class="packet-head">
+          <span class="pkt-tag ${type==='req'?'tag-req':type==='res'?'tag-res':'tag-err'}">#${newId} ${type.toUpperCase()}</span>
+          <span class="packet-timing">${timing}</span>
+        </div>
+        <div class="packet-summary">${summary}: ${JSON.stringify(payload).slice(0, 50)}...</div>
+      `;
+
+      // Remove active from others
+      document.querySelectorAll('.packet-card').forEach(c => c.classList.remove('active'));
+      streamConsole.appendChild(card);
+      streamConsole.scrollTop = streamConsole.scrollHeight;
+
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.packet-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        state.activePacketId = newId;
+        renderSelectedPayload();
+      });
+    }
+
+    function renderSelectedPayload() {
+      const pkt = state.packets.find(p => p.id === state.activePacketId) || state.packets[state.packets.length - 1];
+      if (pkt) {
+        payloadJsonPre.innerText = JSON.stringify(pkt.payload, null, 2);
+      }
+    }
+
+    // Run Tool Call
+    btnRunTool.addEventListener('click', () => {
+      const spec = targetSpecs[state.target];
+      const toolName = `rea:${state.tool}`;
+
       btnRunTool.style.transform = 'scale(0.97)';
       btnRunTool.innerHTML = '<span>⏳ Executing Tool Call...</span>';
+
+      // 1. Build and push REQ
+      const reqParams = {
+        tool: toolName,
+        target: spec.name,
+        symbol: paramSymbol.value,
+        offset: paramOffset.value,
+        chunkSizeTokens: parseInt(state.chunkSize)
+      };
+
+      addPacketLog('req', `tools/call (${toolName})`, reqParams);
+      cotThought.innerText = `Calling REA Provider for ${spec.name} [${paramSymbol.value}]...`;
 
       setTimeout(() => {
         btnRunTool.style.transform = '';
         btnRunTool.innerHTML = '<span>▶ Execute Tool Call</span>';
 
-        // 2. Build Mock Response
-        const responsePayload = buildToolResponse(toolName, meta, currentReqId);
-        appendResponseLog(responsePayload);
+        if (state.simulateError) {
+          // Error injected
+          addPacketLog('err', `tools/call:error (-32602)`, {
+            code: -32602,
+            message: "Invalid params: Memory offset 0x004012A0 misaligned for target architecture.",
+            data: { selfHealingSuggestedOffset: "0x004012A4" }
+          });
+          cotThought.innerText = "⚠️ [Self-Healing] 에이전트가 오프셋 오정렬 에러를 감지하고 0x004012A4로 자동 보정하여 재시도합니다.";
+          return;
+        }
 
-        // Update evidence hash
-        statHash.innerText = generateMockHash();
-      }, 450);
-    });
-
-    function appendRequestLog(json) {
-      const line = document.createElement('div');
-      line.className = 'log-line log-req';
-      line.innerHTML = `
-        <span class="log-tag tag-req">REQ #${json.id}</span>
-        <div class="log-json">${syntaxHighlight(json)}</div>
-      `;
-      streamConsole.appendChild(line);
-      streamConsole.scrollTop = streamConsole.scrollHeight;
-    }
-
-    function appendResponseLog(json) {
-      const line = document.createElement('div');
-      line.className = 'log-line log-res';
-      line.innerHTML = `
-        <span class="log-tag tag-res">RES #${json.id}</span>
-        <div class="log-json">${syntaxHighlight(json)}</div>
-      `;
-      streamConsole.appendChild(line);
-      streamConsole.scrollTop = streamConsole.scrollHeight;
-    }
-
-    function buildToolResponse(tool, meta, id) {
-      if (tool === 'rea:inspect_target') {
-        return {
-          jsonrpc: "2.0",
-          id: id,
-          result: {
-            content: [{
-              type: "text",
-              text: `Inspection of ${meta.name} completed successfully.`
-            }],
-            metadata: {
-              format: meta.name.endsWith('.exe') ? "PE32+ (x86_64)" : meta.name.endsWith('.asar') ? "Electron ASAR v4" : "WASM v1",
-              symbolsFound: 342,
-              evidence: {
-                target: meta.name,
-                sha256: generateMockHash(),
-                limitations: "Debug symbols stripped; heuristically recovered by REA Provider."
-              }
-            },
-            isError: false
-          }
-        };
-      } else if (tool === 'rea:decompile_symbol') {
-        return {
-          jsonrpc: "2.0",
-          id: id,
-          result: {
+        // Normal response
+        let resPayload;
+        if (state.tool === 'inspect_target') {
+          resPayload = {
+            format: spec.format,
+            provider: spec.provider,
+            evidence: { sha256: generateMockHash(), byteAlignment: "100%", status: "SCAN_COMPLETE" }
+          };
+          cotThought.innerText = `✔ ${spec.name} 타깃 정적/동적 메타데이터 스캔이 완료되었습니다.`;
+        } else if (state.tool === 'decompile_symbol') {
+          resPayload = {
             symbol: paramSymbol.value,
             offset: paramOffset.value,
-            decompiledCode: `// REA Clean-Room Decompiled from ${meta.name}\nfunction ${paramSymbol.value}(val, base) {\n  if (base === 0) return 0.0;\n  return (val * base) / 100.0;\n}`,
-            evidence: {
-              rawBytes: "48 83 EC 28 F2 0F 10 05",
-              offset: paramOffset.value,
-              confidence: 0.998
-            },
-            isError: false
-          }
-        };
-      } else if (tool === 'rea:intercept_packet') {
-        return {
-          jsonrpc: "2.0",
-          id: id,
-          result: {
+            evidence: { confidence: 0.999, rawBytes: "48 83 EC 28 F2 0F 10 05" },
+            cleanroomCodeLength: spec.src.length
+          };
+          switchCenterTab('decompile');
+          cotThought.innerText = `✔ 심볼 '${paramSymbol.value}'의 클린룸 소스코드가 분할 뷰어에 렌더링되었습니다.`;
+        } else if (state.tool === 'intercept_packet') {
+          resPayload = {
             channel: "WebSocket/CDP",
-            interceptedPackets: 18,
-            sample: { method: "Network.webSocketFrameReceived", payload: "{\"event\":\"sync\",\"tick\":491}" },
-            isError: false
-          }
-        };
-      } else {
-        return {
-          jsonrpc: "2.0",
-          id: id,
-          result: {
-            status: "CLEANROOM_TDD_MATCH_PASSED",
-            testsPassed: 4,
-            coverage: "100%",
-            byteDiff: 0,
-            isError: false
-          }
-        };
-      }
-    }
-
-    function syntaxHighlight(json) {
-      let str = JSON.stringify(json, null, 2);
-      str = str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      return str.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-        let cls = 'json-num';
-        if (/^"/.test(match)) {
-          if (/:$/.test(match)) {
-            cls = 'json-key';
-          } else {
-            cls = 'json-str';
-          }
-        } else if (/true|false/.test(match)) {
-          cls = 'json-bool';
+            interceptedPacketsCount: 14,
+            trafficSample: "{\"event\":\"state_sync\",\"tick\":1042,\"offset\":\"0x004012A0\"}"
+          };
+          cotThought.innerText = "✔ 실시간 WebSocket/IPC 패킷 14건을 인터셉트하여 버퍼에 적재했습니다.";
+        } else {
+          resPayload = {
+            status: "TDD_EQUIVALENCE_MATCH",
+            unitTests: ["test_zero_division: PASS", "test_overflow: PASS", "test_byte_diff: 0.000%"],
+            evidenceHash: generateMockHash()
+          };
+          cotThought.innerText = "✔ 클린룸 TDD 검증 통과! 바이트 불일치율 0.000% 인증서가 갱신되었습니다.";
         }
-        return `<span class="${cls}">${match}</span>`;
-      });
-    }
 
-    function updateHexDump(meta) {
-      if (meta.name.includes('notion')) {
-        hexDumpViewer.innerHTML = `<span class="hex-addr">00018FA0:</span> <span class="hex-bytes">7B 22 76 65</span> 72 73 69 6F 6E 22  <span class="hex-ascii">{"version"</span>\n<span class="hex-addr">00018FAA:</span> <span class="hex-bytes">3A 20 22 32</span> 2E 34 2E 30 22 2C  <span class="hex-ascii">: "2.4.0",</span>\n<span class="hex-addr">00018FB4:</span> <span class="hex-bytes">22 61 70 70</span> 22 3A 20 7B 22 69  <span class="hex-ascii">"app": {"i</span>`;
-      } else if (meta.name.includes('dino')) {
-        hexDumpViewer.innerHTML = `<span class="hex-addr">000045B0:</span> <span class="hex-bytes">00 61 73 6D</span> 01 00 00 00 01 08  <span class="hex-ascii">.asm......</span>\n<span class="hex-addr">000045BA:</span> <span class="hex-bytes">02 60 00 00</span> 60 01 7F 00 03 02  <span class="hex-ascii">.`..`.....</span>`;
-      } else {
-        hexDumpViewer.innerHTML = `<span class="hex-addr">004012A0:</span> <span class="hex-bytes">48 83 EC 28</span> 48 89 4C 24 30  <span class="hex-ascii">H..(H.L$0</span>\n<span class="hex-addr">004012A9:</span> <span class="hex-bytes">F2 0F 10 05</span> 2E 1F 00 00 F2 0F  <span class="hex-ascii">..........</span>\n<span class="hex-addr">004012B3:</span> <span class="hex-bytes">59 C1 F2 0F</span> 11 05 22 1F 00 00  <span class="hex-ascii">Y....."...</span>`;
-      }
-    }
+        addPacketLog('res', `tools/call:result`, resPayload);
+        statHash.innerText = generateMockHash();
+      }, 400);
+    });
 
     function generateMockHash() {
       const chars = '0123456789abcdef';
       let res = '';
-      for (let i = 0; i < 64; i++) {
-        res += chars[Math.floor(Math.random() * chars.length)];
-      }
+      for (let i = 0; i < 64; i++) res += chars[Math.floor(Math.random() * chars.length)];
       return res;
     }
   </script>
