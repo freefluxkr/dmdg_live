@@ -591,8 +591,10 @@
 
     function handleAdminLogin(e) {
       if (e && typeof e.preventDefault === 'function') e.preventDefault();
-      const inputId = (document.getElementById('loginAdminId')?.value || '').trim();
-      const inputPw = (document.getElementById('loginAdminPw')?.value || '').trim();
+      const idEl = document.getElementById('loginAdminId');
+      const pwEl = document.getElementById('loginAdminPw');
+      const inputId = (idEl && idEl.value ? idEl.value : '').trim();
+      const inputPw = (pwEl && pwEl.value ? pwEl.value : '').trim();
       const errorMsg = document.getElementById('loginErrorMsg');
 
       // Seamless login: accepts original ekdahrekarmf or simple 1234 (or click with default DMDG)
@@ -606,8 +608,7 @@
       } else {
         if (errorMsg) errorMsg.classList.remove('hidden');
         document.getElementById('loginErrorText').textContent = '아이디 또는 비밀번호가 일치하지 않습니다.';
-        const pwField = document.getElementById('loginAdminPw');
-        if (pwField) { pwField.focus(); pwField.select(); }
+        if (pwEl) { pwEl.focus(); pwEl.select(); }
       }
     }
 
@@ -1150,15 +1151,8 @@
       }
     }
 
-    function testPayPalIntegrationPing() {
-      alert('페이팔(PayPal) 비즈니스 연동 진단 결과:
-
-' +
-            '• 등록 계정: dmdg.official@gmail.com
-' +
-            '• 상태: 국내 사업자 은행 소액 입금 확인 진행 중 (소액 입금 확인 시 즉시 🟢 Live 활성화)
-' +
-            '• 글로벌 지원: 말쌈(malssam.com) 5개국 에디션 후원 바인딩 정상');
+        function testPayPalIntegrationPing() {
+      alert("페이팔(PayPal) 비즈니스 연동 진단 결과:\n\n• 등록 계정: dmdg.official@gmail.com\n• 상태: 국내 사업자 은행 소액 입금 확인 진행 중\n• 글로벌 지원: 말쌈(malssam.com) 5개국 에디션 후원 바인딩 정상");
     }
 
     function seedTestPayment() {
@@ -1196,23 +1190,22 @@
       loadAllPaymentsData();
     }
 
-    function exportPaymentsCSV() {
+        function exportPaymentsCSV() {
       if (!PAYMENTS_CACHE || PAYMENTS_CACHE.length === 0) {
-        alert('다운로드할 결제 내역이 없습니다.');
+        alert("다운로드할 결제 내역이 없습니다.");
         return;
       }
 
-      let csv = '\uFEFFNo,결제일시,주문번호,결제수단,금액,주문내용,상태\n';
+      let csv = "\uFEFFNo,결제일시,주문번호,결제수단,금액,주문내용,상태\n";
       PAYMENTS_CACHE.forEach((item, idx) => {
-        csv += `${idx + 1},"${item.createdAt}","${item.orderId}","${item.method}",${item.amount},"${item.itemName}","${item.status}"
-`;
+        csv += `${idx + 1},"${item.createdAt}","${item.orderId}","${item.method}",${item.amount},"${item.itemName}","${item.status}"\n`;
       });
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.setAttribute('href', url);
-      link.setAttribute('download', `DMDG_결제거래내역_${new Date().toISOString().slice(0,10)}.csv`);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `DMDG_결제거래내역_${new Date().toISOString().slice(0,10)}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
