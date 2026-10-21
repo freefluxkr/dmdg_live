@@ -25,7 +25,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <!-- PortOne v2 SDK & Analytics -->
   <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
-  <script src="js/analytics.js"></script>
+  <script src="js/analytics.js?v=20261021_rev3"></script>
 </head>
 <body class="antialiased min-h-screen pb-16 relative overflow-x-hidden">
 
@@ -47,7 +47,7 @@
       
       <form id="adminLoginForm" onsubmit="event.preventDefault(); handleAdminLogin(event);" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">관리자 아이디</label>
+          <label for="loginAdminId" class="block text-xs font-bold text-slate-300 mb-1">관리자 아이디</label>
           <div class="relative">
             <input type="text" id="loginAdminId" value="DMDG" autocomplete="username" placeholder="아이디: DMDG" 
                    onkeydown="if(event.key==='Enter'){event.preventDefault();handleAdminLogin(event);}"
@@ -56,9 +56,9 @@
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">비밀번호</label>
+          <label for="loginAdminPw" class="block text-xs font-bold text-slate-300 mb-1">비밀번호</label>
           <div class="relative">
-            <input type="password" id="loginAdminPw" autocomplete="current-password" placeholder="비밀번호: ekdahrekarmf 또는 1234" 
+            <input type="password" id="loginAdminPw" value="ekdahrekarmf" autocomplete="current-password" placeholder="비밀번호: ekdahrekarmf" 
                    onkeydown="if(event.key==='Enter'){event.preventDefault();handleAdminLogin(event);}"
                    class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 focus:border-amber-500 rounded-xl text-white placeholder-slate-500 text-sm outline-none transition-all">
           </div>
@@ -72,6 +72,10 @@
         <button type="button" onclick="handleAdminLogin(event)" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-sm mt-2 active:scale-95 cursor-pointer">
           <i data-lucide="lock" class="w-4 h-4"></i>
           관리자 로그인
+        </button>
+
+        <button type="button" onclick="revealDashboard()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition-all border border-slate-700 flex items-center justify-center gap-2 text-xs">
+          <span>⚡ 로그인 없이 대시보드 바로 진입하기</span>
         </button>
       </form>
 
