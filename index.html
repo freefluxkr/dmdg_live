@@ -22,6 +22,11 @@
 
   <!-- Core CSS (Cache Busting v4 - 5 cards limit) -->
   <link rel="stylesheet" href="./style.css?v=20261021_5cards_limit">
+  <!-- Firebase & Real-time Analytics SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/analytics.js"></script>
 </head>
 <body>
 
@@ -121,7 +126,8 @@
       </div>
       <div style="margin-top: 1.25rem;">
         <button onclick="openCourseModal()" style="background: rgba(0, 168, 150, 0.12); border: 1.5px solid var(--dmdg-teal); color: var(--dmdg-navy); padding: 0.65rem 1.45rem; border-radius: 9999px; font-size: 0.92rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s ease; box-shadow: 0 4px 14px rgba(0, 168, 150, 0.15);" onmouseover="this.style.background='var(--dmdg-teal)'; this.style.color='#fff';" onmouseout="this.style.background='rgba(0, 168, 150, 0.12)'; this.style.color='var(--dmdg-navy)';">
-          <span>🔥 [수강생 모집] Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정 안내 &amp; 신청 ➔</span>
+          <span>🔥 [수강생 모집] Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정</span>
+          <span id="hero-live-applicant-badge" style="background: #f59e0b; color: #0b1120; padding: 0.18rem 0.6rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 900; margin-left: 0.25rem; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);">접수 현황: 현재 0명 / 20명 달성 시 개강 ➔</span>
         </button>
       </div>
     </div>
@@ -1068,6 +1074,7 @@
 
       // Initialize Live Applicant Count
       refreshLiveApplicantCount();
+      initFirestoreLiveApplicantListener();
 
       // URL에 openApply 등이 남아있을 경우 깔끔히 제거 (언제나 소개 화면이 1순위로 열리도록 보장)
       if (window.location.search.includes('openApply')) {
@@ -1094,6 +1101,7 @@
       modal.classList.add('show');
       document.body.style.overflow = 'hidden';
       refreshLiveApplicantCount();
+      initFirestoreLiveApplicantListener();
     }
 
     function closeCourseModal() {
@@ -1166,10 +1174,37 @@
       const modalCountEl = document.getElementById('modal-applicant-count-text');
       const modalBarEl = document.getElementById('modal-applicant-progress-bar');
       const formCountEl = document.getElementById('form-applicant-count-text');
+      const heroBadgeEl = document.getElementById('hero-live-applicant-badge');
 
       if (modalCountEl) modalCountEl.textContent = `현재 ${count}명 / 목표 20명 (${percent}%)`;
       if (modalBarEl) modalBarEl.style.width = `${percent}%`;
       if (formCountEl) formCountEl.textContent = `현재 ${count}명 신청 접수 중 / 20명 달성 시 개강`;
+      if (heroBadgeEl) heroBadgeEl.textContent = `실시간 접수: ${count}명 / 20명 달성 시 개강 ➔`;
+    }
+
+    // Attach real-time snapshot listener on init
+    function initFirestoreLiveApplicantListener() {
+      if (window.firestore) {
+        try {
+          firestore.collection('rea_course_applications').onSnapshot(snap => {
+            const count = snap.size;
+            const target = 20;
+            const percent = Math.min(100, Math.round((count / target) * 100));
+
+            const modalCountEl = document.getElementById('modal-applicant-count-text');
+            const modalBarEl = document.getElementById('modal-applicant-progress-bar');
+            const formCountEl = document.getElementById('form-applicant-count-text');
+            const heroBadgeEl = document.getElementById('hero-live-applicant-badge');
+
+            if (modalCountEl) modalCountEl.textContent = `현재 ${count}명 / 목표 20명 (${percent}%)`;
+            if (modalBarEl) modalBarEl.style.width = `${percent}%`;
+            if (formCountEl) formCountEl.textContent = `현재 ${count}명 신청 접수 중 / 20명 달성 시 개강`;
+            if (heroBadgeEl) heroBadgeEl.textContent = `실시간 접수: ${count}명 / 20명 달성 시 개강 ➔`;
+          }, err => {
+            console.warn('Realtime snapshot notice:', err);
+          });
+        } catch (e) {}
+      }
     }
 
     // ── Form Submission & Database Storage ──────────────────────────────────
@@ -1232,6 +1267,7 @@
 
       // Refresh Counts
       await refreshLiveApplicantCount();
+      initFirestoreLiveApplicantListener();
 
       // Show Success View
       document.getElementById('course-apply-view').style.display = 'none';
