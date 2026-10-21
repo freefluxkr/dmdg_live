@@ -1262,3 +1262,9 @@ a {
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.55);
 }
 
+/* Card 5-Item Display Limit Rule */
+.dmdg-hidden-card {
+  display: none;
+}
+
+
