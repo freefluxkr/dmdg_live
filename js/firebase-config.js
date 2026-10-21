@@ -8,16 +8,23 @@
       appId: "1:357433220336:web:1a8914811da09123a0f635",
       measurementId: "G-RRYE7JKKWX"
     };
+if (typeof firebase !== 'undefined') {
+  if (!firebase.apps || !firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-    const firestore = firebase.firestore();
+  }
+  window.firestore = firebase.firestore();
+}
 
-    const audioEngine = new AudioPlayerEngine();
-    let currentFilter = '전체';
-    const emotions = ['전체', '위로', '설렘', '평온'];
-    let isRecording = false;
-    let mediaRecorder = null;
-    let audioChunks = [];
-    let canvasAnimationId = null;
+let audioEngine = null;
+if (typeof AudioPlayerEngine !== 'undefined') {
+  audioEngine = new AudioPlayerEngine();
+}
+let currentFilter = '전체';
+const emotions = ['전체', '위로', '설렘', '평온'];
+let isRecording = false;
+let mediaRecorder = null;
+let audioChunks = [];
+let canvasAnimationId = null;
 
-    let loadedPrimers = [];
-    let currentPrimerIndex = 0;
+let loadedPrimers = [];
+let currentPrimerIndex = 0;

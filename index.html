@@ -86,11 +86,17 @@
       <a href="https://malssam.com/" target="_blank" rel="noopener noreferrer" class="nav-link-btn highlight" style="background: linear-gradient(135deg, #F77F00, #E85D04) !important; color: #FFFFFF !important; border: 1.5px solid #F77F00 !important;">
         <span style="color: #FFFFFF !important; font-weight: 800 !important;">🗣️ 말쌈 전용관</span>
       </a>
-      <a href="https://dmdg-live.com/voice.html" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
-        <span style="color: #0B1B3D !important; font-weight: 800 !important;">🎙️ 발음 교정</span>
+      <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
+        <span style="color: #0B1B3D !important; font-weight: 800 !important;">📖 DMDG 서재 (E-Reader)</span>
       </a>
+      <button id="btnOpenCourseModal" onclick="openCourseModal()" class="nav-link-btn" style="background: linear-gradient(135deg, #00A896, #028090) !important; color: #FFFFFF !important; border: 1.5px solid #00A896 !important; cursor: pointer; box-shadow: 0 2px 8px rgba(0, 168, 150, 0.3) !important;">
+        <span style="color: #FFFFFF !important; font-weight: 800 !important;">🎓 Antigravity × REA 과정 안내</span>
+      </button>
       <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
         <span style="color: #0B1B3D !important; font-weight: 800 !important;">📚 위키북스</span>
+      </a>
+      <a href="./admin.html" class="nav-link-btn" style="background: #0B1B3D !important; color: #FFFFFF !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;" title="DMDG 관리자 콘솔">
+        <span style="color: #FFFFFF !important; font-weight: 700 !important;">🔐 관리자</span>
       </a>
     </nav>
   </header>
@@ -112,6 +118,11 @@
       </div>
       <div class="hero-slogan-sub">
         당신의 목소리로 다음글을 읽어주세요 — 당목담글(DMDG)
+      </div>
+      <div style="margin-top: 1.25rem;">
+        <button onclick="openCourseModal()" style="background: rgba(0, 168, 150, 0.12); border: 1.5px solid var(--dmdg-teal); color: var(--dmdg-navy); padding: 0.65rem 1.45rem; border-radius: 9999px; font-size: 0.92rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s ease; box-shadow: 0 4px 14px rgba(0, 168, 150, 0.15);" onmouseover="this.style.background='var(--dmdg-teal)'; this.style.color='#fff';" onmouseout="this.style.background='rgba(0, 168, 150, 0.12)'; this.style.color='var(--dmdg-navy)';">
+          <span>🔥 [수강생 모집] Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정 안내 &amp; 신청 ➔</span>
+        </button>
       </div>
     </div>
   </section>
@@ -790,9 +801,230 @@
   </footer>
 
   <!-- =======================================================================
+       Course Popup Modal (Antigravity IDE × REA 모던 역공학 & 클린룸 재구현 과정)
+       ======================================================================= -->
+  <div id="rea-course-modal-backdrop" class="course-modal-backdrop">
+    <div class="course-modal-container">
+      <button class="course-modal-close-btn" onclick="closeCourseModal()" title="창 닫기">✕</button>
+
+      <!-- VIEW 1: 과정 소개 화면 (Intro View) -->
+      <div id="course-intro-view">
+        <div class="course-badges-row">
+          <span class="course-badge-tag gold">🔥 위키북스 Book 21781 &amp; 21777 공식 연계</span>
+          <span class="course-badge-tag cyan">🏆 20명 모집 시 정식 개강</span>
+        </div>
+
+        <h2 class="course-modal-title">
+          《Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정》
+        </h2>
+        <p class="course-modal-subtitle">
+          GitHub 33만 스타 REA와 구글 차세대 Antigravity IDE 2.0으로 완성하는 제로 할루시네이션 에이전틱 리버스 엔지니어링 &amp; TDD 클린룸 실전 마스터 클래스
+        </p>
+
+        <!-- 4 Core Pillars Grid -->
+        <div class="course-pillars-grid">
+          <div class="course-pillar-card">
+            <div class="course-pillar-head">
+              <span class="course-pillar-icon">🔬</span>
+              <span class="course-pillar-name">JSON-RPC 2.0 &amp; 모던 역공학</span>
+            </div>
+            <p class="course-pillar-desc">
+              Electron, Node.js, CDP 바이너리 동적 트레이싱 및 증거 기반(Evidence) 데이터 모델링 실전 마스터
+            </p>
+          </div>
+
+          <div class="course-pillar-card">
+            <div class="course-pillar-head">
+              <span class="course-pillar-icon">🛡️</span>
+              <span class="course-pillar-name">100% 클린룸 TDD 재구현</span>
+            </div>
+            <p class="course-pillar-desc">
+              오리지널 코드에 의존하지 않는 격리 환경에서 테스트 주도 개발(TDD)로 바이너리 로직 무결점 재현
+            </p>
+          </div>
+
+          <div class="course-pillar-card">
+            <div class="course-pillar-head">
+              <span class="course-pillar-icon">🤖</span>
+              <span class="course-pillar-name">Antigravity IDE 2.0 파이프라인</span>
+            </div>
+            <p class="course-pillar-desc">
+              12대 거장 페르소나 에이전트(Demis, Craig, Sherlock 등)와 MCP 서버 도구체인 자동 연동
+            </p>
+          </div>
+
+          <div class="course-pillar-card">
+            <div class="course-pillar-head">
+              <span class="course-pillar-icon">💼</span>
+              <span class="course-pillar-name">실무 포트폴리오 &amp; 글로벌 기여</span>
+            </div>
+            <p class="course-pillar-desc">
+              취업/이직을 위한 고난도 리버스 엔지니어링 프로덕션 포트폴리오 완성 및 오픈소스 기여 증빙
+            </p>
+          </div>
+        </div>
+
+        <!-- Notice Banner -->
+        <div class="course-notice-banner">
+          <span class="course-notice-icon">📢</span>
+          <div>
+            <div class="course-notice-title">본 과정은 20명 이상 신청 시 정식 개강됩니다!</div>
+            <div class="course-notice-sub">
+              국민내일배움카드 소지자 국비 지원 연계 가능 · 개강 인원 달성 시 입력해주신 연락처로 개별 안내 문자가 발송됩니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Goal Bar -->
+        <div class="course-goal-box">
+          <div class="course-goal-header">
+            <span>실시간 신청 접수 현황</span>
+            <span id="modal-applicant-count-text">현재 0명 / 목표 20명</span>
+          </div>
+          <div class="course-goal-bar-bg">
+            <div id="modal-applicant-progress-bar" class="course-goal-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="course-modal-actions">
+          <button onclick="dismissCourseModalToday()" class="btn-modal-dismiss">오늘 하루 보지 않기</button>
+          <button onclick="switchToCourseApply()" class="btn-course-apply-cta">
+            <span>📝 과정 신청하기</span> <span>➔</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- VIEW 2: 과정 신청 화면 (Application Form View) -->
+      <div id="course-apply-view" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <button onclick="switchToCourseIntro()" class="btn-modal-dismiss" style="padding: 0.4rem 0.85rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.35rem;">
+            <span>←</span> <span>과정 소개 다시보기</span>
+          </button>
+          <span style="font-size: 0.8rem; color: #f59e0b; font-weight: 700;">STEP 2 / 2 : 수강 신청</span>
+        </div>
+
+        <h2 class="course-modal-title" style="font-size: 1.45rem;">
+          《Antigravity IDE × REA 과정》 수강 신청서
+        </h2>
+        
+        <div class="course-notice-banner" style="margin-bottom: 1.25rem; padding: 0.85rem 1rem;">
+          <span class="course-notice-icon" style="font-size: 1.4rem;">💡</span>
+          <div>
+            <div class="course-notice-title" style="font-size: 0.9rem;">개강은 20명 이상 신청 시 확정됩니다.</div>
+            <div class="course-notice-sub" style="font-size: 0.78rem;">
+              인원 충족 시 개별 안내 연락을 드리며, 별도의 사전 결제 없이 우선 신청 접수됩니다.
+            </div>
+          </div>
+        </div>
+
+        <form id="courseApplicationForm" onsubmit="handleCourseApplySubmit(event)">
+          <!-- 이름 -->
+          <div class="form-field-group">
+            <label class="form-field-label" for="reaApplicantName">
+              이름 (성명) <span class="required-dot">*</span>
+            </label>
+            <input type="text" id="reaApplicantName" required placeholder="예: 홍길동" class="form-field-input">
+          </div>
+
+          <!-- 연락처 -->
+          <div class="form-field-group">
+            <label class="form-field-label" for="reaApplicantPhone">
+              연락처 (휴대전화) <span class="required-dot">*</span>
+            </label>
+            <input type="tel" id="reaApplicantPhone" required placeholder="010-1234-5678" maxlength="13" class="form-field-input" oninput="formatPhoneNumber(this)">
+          </div>
+
+          <!-- 거주 지역 -->
+          <div class="form-field-group">
+            <label class="form-field-label" for="reaApplicantRegion">
+              지역 (거주지) <span class="required-dot">*</span>
+            </label>
+            <select id="reaApplicantRegion" required class="form-field-select">
+              <option value="">거주 지역을 선택해주세요</option>
+              <option value="서울특별시">서울특별시</option>
+              <option value="경기도">경기도</option>
+              <option value="인천광역시">인천광역시</option>
+              <option value="대전광역시/세종/충청">대전광역시 / 세종 / 충청</option>
+              <option value="대구광역시/경북">대구광역시 / 경북</option>
+              <option value="부산광역시/울산/경남">부산광역시 / 울산 / 경남</option>
+              <option value="광주광역시/전라">광주광역시 / 전라</option>
+              <option value="강원특별자치도">강원특별자치도</option>
+              <option value="제주특별자치도">제주특별자치도</option>
+              <option value="기타/해외">기타 / 해외</option>
+            </select>
+          </div>
+
+          <!-- 내일배움카드 소지 여부 -->
+          <div class="form-field-group">
+            <label class="form-field-label">
+              내일배움카드 소지 여부 <span class="required-dot">*</span>
+            </label>
+            <div class="card-radio-pills">
+              <div>
+                <input type="radio" name="reaHasCard" id="cardOptionYes" value="소지" checked class="card-radio-input">
+                <label for="cardOptionYes" class="card-radio-label">
+                  <span>🟢 소지하고 있음</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="reaHasCard" id="cardOptionPlanned" value="발급예정" class="card-radio-input">
+                <label for="cardOptionPlanned" class="card-radio-label">
+                  <span>🟡 발급 예정/신청 중</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="reaHasCard" id="cardOptionNo" value="미소지" class="card-radio-input">
+                <label for="cardOptionNo" class="card-radio-label">
+                  <span>⚪ 미소지</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 실시간 접수 현황 -->
+          <div class="course-goal-box" style="margin-bottom: 1rem; padding: 0.65rem 0.95rem;">
+            <div class="course-goal-header" style="font-size: 0.78rem;">
+              <span>현재 수강 신청 인원</span>
+              <span id="form-applicant-count-text">현재 0명 / 20명 기준</span>
+            </div>
+          </div>
+
+          <!-- 저장 버튼 -->
+          <button type="submit" id="btnSubmitApplication" class="btn-submit-application">
+            <span>💾 과정 신청 저장하기</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- VIEW 3: 접수 완료 화면 (Success View) -->
+      <div id="course-success-view" style="display: none; text-align: center; padding: 2rem 1rem;">
+        <div style="font-size: 3.5rem; margin-bottom: 1rem;">🎉</div>
+        <h3 style="font-size: 1.5rem; font-weight: 900; color: #10b981; margin-bottom: 0.75rem;">
+          수강 신청이 정상적으로 저장되었습니다!
+        </h3>
+        <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.6; max-width: 480px; margin: 0 auto 1.5rem;">
+          <strong id="successApplicantName" style="color: #fbbf24;">신청자</strong> 님의 접수가 안전하게 등록되었습니다.<br>
+          <strong>20명 이상 신청 시 정식 개강이 확정</strong>되며, 개강 확정 즉시 남겨주신 연락처로 세부 일정 및 안내 문자를 발송해 드립니다.
+        </p>
+        <button onclick="closeCourseModal()" class="btn-course-apply-cta" style="margin: 0 auto;">
+          <span>확인 (포털 이용하기)</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Firebase SDK for Real-time Applications DB -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+
+  <!-- =======================================================================
        Client Logic
        ======================================================================= -->
   <script>
+    // ── Search & Filter Logic ────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('liveSearchInput');
       const allCards = document.querySelectorAll('.app-item-card, .sim-item-card, .book-card-item');
@@ -824,7 +1056,174 @@
           }
         });
       }
+
+      // Initialize Live Applicant Count
+      refreshLiveApplicantCount();
+
+      // Auto Popup: Check if dismissed for today
+      const dismissedUntil = localStorage.getItem('dmdg_course_modal_dismissed_until');
+      if (!dismissedUntil || Date.now() > Number(dismissedUntil)) {
+        setTimeout(openCourseModal, 700);
+      }
     });
+
+    // ── Course Modal Control Functions ────────────────────────────────────────
+    function openCourseModal() {
+      const modal = document.getElementById('rea-course-modal-backdrop');
+      if (!modal) return;
+      switchToCourseIntro();
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      refreshLiveApplicantCount();
+    }
+
+    function closeCourseModal() {
+      const modal = document.getElementById('rea-course-modal-backdrop');
+      if (!modal) return;
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function dismissCourseModalToday() {
+      // Dismiss for 24 hours
+      const nextDay = Date.now() + 24 * 60 * 60 * 1000;
+      localStorage.setItem('dmdg_course_modal_dismissed_until', String(nextDay));
+      closeCourseModal();
+    }
+
+    function switchToCourseIntro() {
+      document.getElementById('course-intro-view').style.display = 'block';
+      document.getElementById('course-apply-view').style.display = 'none';
+      document.getElementById('course-success-view').style.display = 'none';
+    }
+
+    function switchToCourseApply() {
+      document.getElementById('course-intro-view').style.display = 'none';
+      document.getElementById('course-apply-view').style.display = 'block';
+      document.getElementById('course-success-view').style.display = 'none';
+      setTimeout(() => {
+        const nameInput = document.getElementById('reaApplicantName');
+        if (nameInput) nameInput.focus();
+      }, 100);
+    }
+
+    // ── Phone Input Auto-Formatter (010-XXXX-XXXX) ───────────────────────────
+    function formatPhoneNumber(input) {
+      let val = input.value.replace(/[^0-9]/g, '');
+      if (val.length > 3 && val.length <= 7) {
+        val = val.substring(0, 3) + '-' + val.substring(3);
+      } else if (val.length > 7) {
+        val = val.substring(0, 3) + '-' + val.substring(3, 7) + '-' + val.substring(7, 11);
+      }
+      input.value = val;
+    }
+
+    // ── Real-time Applicant Counting ──────────────────────────────────────────
+    async function refreshLiveApplicantCount() {
+      let count = 0;
+      
+      // 1. Try Firebase Firestore
+      try {
+        if (window.firestore) {
+          const snap = await firestore.collection('rea_course_applications').get();
+          count = snap.size;
+        }
+      } catch (e) {
+        console.warn('Firestore count notice:', e.message);
+      }
+
+      // 2. Check LocalStorage fallback
+      try {
+        const localRaw = localStorage.getItem('dmdg_rea_applications');
+        if (localRaw) {
+          const list = JSON.parse(localRaw);
+          count = Math.max(count, list.length);
+        }
+      } catch (e) {}
+
+      const target = 20;
+      const percent = Math.min(100, Math.round((count / target) * 100));
+
+      const modalCountEl = document.getElementById('modal-applicant-count-text');
+      const modalBarEl = document.getElementById('modal-applicant-progress-bar');
+      const formCountEl = document.getElementById('form-applicant-count-text');
+
+      if (modalCountEl) modalCountEl.textContent = `현재 ${count}명 / 목표 20명 (${percent}%)`;
+      if (modalBarEl) modalBarEl.style.width = `${percent}%`;
+      if (formCountEl) formCountEl.textContent = `현재 ${count}명 신청 접수 중 / 20명 달성 시 개강`;
+    }
+
+    // ── Form Submission & Database Storage ──────────────────────────────────
+    async function handleCourseApplySubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('reaApplicantName').value.trim();
+      const phone = document.getElementById('reaApplicantPhone').value.trim();
+      const region = document.getElementById('reaApplicantRegion').value;
+      const cardOption = document.querySelector('input[name="reaHasCard"]:checked');
+      const hasCard = cardOption ? cardOption.value : '미소지';
+
+      if (!name || !phone || !region) {
+        alert('이름, 연락처, 지역을 모두 정확히 입력해 주세요.');
+        return;
+      }
+
+      const phoneRegex = /^01[0-9]-[0-9]{3,4}-[0-9]{4}$/;
+      if (!phoneRegex.test(phone)) {
+        alert('올바른 휴대전화 번호(010-XXXX-XXXX)를 입력해 주세요.');
+        document.getElementById('reaApplicantPhone').focus();
+        return;
+      }
+
+      const submitBtn = document.getElementById('btnSubmitApplication');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>⏳ 신청 데이터 저장 중...</span>`;
+
+      const applicationRecord = {
+        name: name,
+        phone: phone,
+        region: region,
+        hasCard: hasCard,
+        createdAt: new Date().toISOString()
+      };
+
+      // 1. Save to Firebase Firestore
+      let savedToFirestore = false;
+      if (window.firestore) {
+        try {
+          await firestore.collection('rea_course_applications').add({
+            ...applicationRecord,
+            timestamp: firebase.firestore.FieldValue ? firebase.firestore.FieldValue.serverTimestamp() : new Date()
+          });
+          savedToFirestore = true;
+        } catch (err) {
+          console.warn('Firestore direct save notice, falling back to local:', err.message);
+        }
+      }
+
+      // 2. Always Save to LocalStorage (Resilient Persistence)
+      try {
+        const localRaw = localStorage.getItem('dmdg_rea_applications') || '[]';
+        const list = JSON.parse(localRaw);
+        list.push(applicationRecord);
+        localStorage.setItem('dmdg_rea_applications', JSON.stringify(list));
+      } catch (err) {
+        console.warn('LocalStorage save error:', err);
+      }
+
+      // Refresh Counts
+      await refreshLiveApplicantCount();
+
+      // Show Success View
+      document.getElementById('course-apply-view').style.display = 'none';
+      document.getElementById('course-success-view').style.display = 'block';
+      document.getElementById('successApplicantName').textContent = name;
+
+      // Reset form & button
+      e.target.reset();
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span>💾 과정 신청 저장하기</span>`;
+    }
   </script>
 </body>
 </html>
