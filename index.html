@@ -89,9 +89,9 @@
       <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
         <span style="color: #0B1B3D !important; font-weight: 800 !important;">📖 DMDG 서재 (E-Reader)</span>
       </a>
-      <button id="btnOpenCourseModal" onclick="openCourseModal()" class="nav-link-btn" style="background: linear-gradient(135deg, #00A896, #028090) !important; color: #FFFFFF !important; border: 1.5px solid #00A896 !important; cursor: pointer; box-shadow: 0 2px 8px rgba(0, 168, 150, 0.3) !important;">
-        <span style="color: #FFFFFF !important; font-weight: 800 !important;">🎓 Antigravity × REA 과정 안내</span>
-      </button>
+      <a href="./curriculum.html" class="nav-link-btn" style="background: linear-gradient(135deg, #00A896, #028090) !important; color: #FFFFFF !important; border: 1.5px solid #00A896 !important; text-decoration: none !important; box-shadow: 0 2px 8px rgba(0, 168, 150, 0.3) !important;" title="Antigravity IDE × REA 8주 마스터 코스 상세 커리큘럼 전문 보기">
+        <span style="color: #FFFFFF !important; font-weight: 800 !important;">🎓 Antigravity × REA 과정 상세 안내</span>
+      </a>
       <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
         <span style="color: #0B1B3D !important; font-weight: 800 !important;">📚 위키북스</span>
       </a>
@@ -870,7 +870,8 @@
           <div>
             <div class="course-notice-title">본 과정은 20명 이상 신청 시 정식 개강됩니다!</div>
             <div class="course-notice-sub">
-              국민내일배움카드 소지자 국비 지원 연계 가능 · 개강 인원 달성 시 입력해주신 연락처로 개별 안내 문자가 발송됩니다.
+              국민내일배움카드 소지자 국비 지원 연계 가능 · 개강 인원 달성 시 입력해주신 연락처로 개별 안내 문자가 발송됩니다.<br>
+              <strong style="color: #fbbf24;">📍 강의장 위치 : 신청자들의 공통 위치로 선정하여 추후 공지 (현재는 성남시 태평역 부근 예정)</strong>
             </div>
           </div>
         </div>
@@ -887,8 +888,11 @@
         </div>
 
         <!-- Bottom Actions -->
-        <div class="course-modal-actions">
+        <div class="course-modal-actions" style="flex-wrap: wrap; gap: 0.75rem;">
           <button onclick="dismissCourseModalToday()" class="btn-modal-dismiss">오늘 하루 보지 않기</button>
+          <a href="./curriculum.html" class="btn-modal-dismiss" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; color: #00f2fe; border-color: rgba(0, 242, 254, 0.4);" title="8주차 상세 강의계획서 및 공식 교재 전문 보기">
+            <span>📖 상세 커리큘럼 전문 보기 ➔</span>
+          </a>
           <button onclick="switchToCourseApply()" class="btn-course-apply-cta">
             <span>📝 과정 신청하기</span> <span>➔</span>
           </button>
@@ -913,7 +917,8 @@
           <div>
             <div class="course-notice-title" style="font-size: 0.9rem;">개강은 20명 이상 신청 시 확정됩니다.</div>
             <div class="course-notice-sub" style="font-size: 0.78rem;">
-              인원 충족 시 개별 안내 연락을 드리며, 별도의 사전 결제 없이 우선 신청 접수됩니다.
+              인원 충족 시 개별 안내 연락을 드리며, 별도의 사전 결제 없이 우선 신청 접수됩니다.<br>
+              <strong style="color: #fbbf24;">📍 강의장 위치 : 신청자들의 공통 위치로 선정하여 추후 공지 (현재는 성남시 태평역 부근 예정)</strong>
             </div>
           </div>
         </div>
@@ -1064,10 +1069,19 @@
       // Initialize Live Applicant Count
       refreshLiveApplicantCount();
 
-      // Auto Popup: Check if dismissed for today
-      const dismissedUntil = localStorage.getItem('dmdg_course_modal_dismissed_until');
-      if (!dismissedUntil || Date.now() > Number(dismissedUntil)) {
-        setTimeout(openCourseModal, 700);
+      // Check query param for direct apply request (from curriculum.html)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('openApply') === 'true') {
+        setTimeout(() => {
+          openCourseModal();
+          switchToCourseApply();
+        }, 300);
+      } else {
+        // Auto Popup: Check if dismissed for today
+        const dismissedUntil = localStorage.getItem('dmdg_course_modal_dismissed_until');
+        if (!dismissedUntil || Date.now() > Number(dismissedUntil)) {
+          setTimeout(openCourseModal, 700);
+        }
       }
     });
 

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Antigravity IDE × REA 8주 마스터 코스 상세 커리큘럼 | DMDG LIVE</title>
+  <meta name="description" content="Google Antigravity IDE와 REA 자율 에이전트, MCP 프로토콜 기반 모던 리버스 엔지니어링 & 클린룸 재구현 8주 취업 프리패스 부트캠프 상세 커리큘럼">
+  <meta name="keywords" content="Antigravity IDE, REA, 리버스 엔지니어링, 역공학, 클린룸, MCP, 위키북스, 국비지원, 내일배움카드, DMDG">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dmdg-live.com/curriculum.html">
+  <meta property="og:title" content="Antigravity IDE × REA 8주 마스터 코스 상세 커리큘럼 | DMDG">
+  <meta property="og:description" content="자율 에이전트와 MCP로 끝내는 모던 역공학 & 3대 취업 킬러 포트폴리오 부트캠프">
+  <meta property="og:image" content="./assets/dmdg_card_front.png">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/dmdg_logo_emblem.png">
+  <link rel="apple-touch-icon" href="./assets/dmdg_logo_emblem.png">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="./style.css?v=20261021_curriculum_v1">
+  <link rel="stylesheet" href="https://static.wikidocs.net/fonts/pretendard/v1.3.9/pretendardvariable-dynamic-subset.min.css">
+
+  <style>
+    /* Curriculum Page Specific Styles */
+    body {
+      background-color: var(--bg-body, #F8FAFC);
+      color: var(--text-main, #0F172A);
+      font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .curriculum-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Hero Header Block */
+    .curr-hero-card {
+      background: linear-gradient(135deg, #0B1B3D 0%, #0F2B5C 100%);
+      color: #FFFFFF;
+      border-radius: var(--radius-lg, 16px);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(11, 27, 61, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .curr-hero-card::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(0, 168, 150, 0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .curr-badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(247, 127, 0, 0.2);
+      border: 1px solid #F77F00;
+      color: #FCBF49;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .curr-hero-title {
+      font-size: 1.95rem;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 0.85rem;
+      letter-spacing: -0.03em;
+    }
+
+    .curr-hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+      max-width: 860px;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Key Meta Grid */
+    .curr-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+
+    .curr-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .curr-meta-item .meta-label {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .curr-meta-item .meta-val {
+      font-size: 0.95rem;
+      color: #FFFFFF;
+      font-weight: 800;
+    }
+
+    /* Section Cards */
+    .curr-section-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light, #E2E8F0);
+      border-radius: var(--radius-lg, 16px);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 16px rgba(11, 27, 61, 0.05);
+    }
+
+    .curr-sec-title {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #0B1B3D;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid rgba(11, 27, 61, 0.08);
+      letter-spacing: -0.02em;
+    }
+
+    /* Timetable Box */
+    .timetable-box {
+      background: #0B1B3D;
+      color: #F8FAFC;
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+      overflow-x: auto;
+      border: 1px solid rgba(0, 168, 150, 0.3);
+    }
+
+    .timetable-box pre {
+      margin: 0;
+      white-space: pre;
+    }
+
+    /* Weapons Cards */
+    .weapon-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .weapon-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 4px solid var(--dmdg-teal, #00A896);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .weapon-card h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #0B1B3D;
+      margin-bottom: 0.45rem;
+    }
+
+    .weapon-card p {
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Books & Tools Grid */
+    .tools-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .tools-table th, .tools-table td {
+      border: 1px solid #E2E8F0;
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    .tools-table th {
+      background: #F1F5F9;
+      color: #0B1B3D;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .tools-table tr:nth-child(even) {
+      background: #FAFAFA;
+    }
+
+    /* Week Card */
+    .week-timeline-card {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .week-timeline-card:hover {
+      border-color: #00A896;
+      box-shadow: 0 4px 14px rgba(0, 168, 150, 0.12);
+    }
+
+    .week-card-head {
+      background: #F8FAFC;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .week-card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0B1B3D;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .week-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      background: rgba(0, 168, 150, 0.15);
+      color: #028090;
+    }
+
+    .week-card-body {
+      padding: 1.25rem;
+    }
+
+    .week-session-row {
+      margin-bottom: 0.85rem;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .week-session-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .week-session-row strong {
+      color: #0B1B3D;
+    }
+
+    .week-session-row ul {
+      margin: 0.35rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .week-session-row li {
+      margin-bottom: 0.25rem;
+      color: #334155;
+    }
+
+    .qa-box {
+      background: #EFF6FF;
+      border-left: 3px solid #3B82F6;
+      border-radius: 6px;
+      padding: 0.65rem 1rem;
+      font-size: 0.88rem;
+      color: #1E40AF;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* 📍 Prominent Location Banner (User Explicit Requirement) */
+    .location-callout-card {
+      background: linear-gradient(135deg, #0B1B3D 0%, #172554 100%);
+      color: #FFFFFF;
+      border: 2px solid #F59E0B;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
+      text-align: center;
+    }
+
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid #F59E0B;
+      color: #FBBF24;
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .location-main-text {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 0.65rem;
+      line-height: 1.45;
+    }
+
+    .location-sub-text {
+      font-size: 0.95rem;
+      color: #CBD5E1;
+      max-width: 680px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* CTA Bottom Row */
+    .curr-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-apply-direct {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #FFFFFF;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 900;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-apply-direct:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+    }
+
+    .btn-back-home {
+      background: #FFFFFF;
+      color: #0B1B3D;
+      border: 1.5px solid #CBD5E1;
+      padding: 0.9rem 1.75rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-home:hover {
+      background: #F1F5F9;
+      border-color: #0B1B3D;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =======================================================================
+       Top Navigation Bar
+       ======================================================================= -->
+  <header class="top-header" style="background: rgba(11, 27, 61, 0.95); box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <a href="./" class="header-brand" title="DMDG LIVE 포털 홈">
+      <img src="./assets/dmdg_logo_emblem.png" alt="DMDG 당목담글 엠블럼" class="brand-emblem-small">
+      <div class="brand-title-wrap">
+        <span class="brand-main-text">당목담글</span>
+        <span class="brand-sub-text">DMDG LIVE 통합 서비스 허브</span>
+      </div>
+    </a>
+
+    <!-- Quick Navigation Links -->
+    <nav class="header-nav">
+      <a href="./" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; font-weight: 800;">
+        <span>🏠 포털 홈</span>
+      </a>
+      <a href="./curriculum.html" class="nav-link-btn highlight" style="background: linear-gradient(135deg, #00A896, #028090) !important; color: #FFFFFF !important; border: 1.5px solid #00A896 !important; font-weight: 800;">
+        <span>🎓 상세 커리큘럼</span>
+      </a>
+      <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important;">
+        <span>📖 DMDG 서재</span>
+      </a>
+      <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important;">
+        <span>📚 위키북스</span>
+      </a>
+      <a href="./admin.html" class="nav-link-btn" style="background: #0B1B3D !important; color: #FFFFFF !important; border: 1.5px solid #0B1B3D !important;" title="DMDG 관리자 콘솔">
+        <span>🔐 관리자</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- =======================================================================
+       Curriculum Content Container
+       ======================================================================= -->
+  <main class="curriculum-container">
+
+    <!-- Hero Card -->
+    <section class="curr-hero-card">
+      <div class="curr-badge-top">
+        <span>🚀</span> DMDG Great AI 취업 프리패스 부트캠프
+      </div>
+      <h1 class="curr-hero-title">
+        Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현<br>
+        8주 마스터 코스 상세 커리큘럼
+      </h1>
+      <p class="curr-hero-sub">
+        단순 클론 코딩은 끝났습니다. Google Antigravity 자율 에이전트와 MCP(Model Context Protocol) 표준으로 글로벌 상용 소프트웨어를 역공학하고, 합법적 클린룸 명세서와 100% 바이트 일치 TDD를 구현하는 상위 1% 취업 킬러 포트폴리오를 완성합니다.
+      </p>
+
+      <div class="curr-meta-grid">
+        <div class="curr-meta-item">
+          <span class="meta-label">개강 일자</span>
+          <span class="meta-val">2026년 12월 7일 (월)</span>
+        </div>
+        <div class="curr-meta-item">
+          <span class="meta-label">교육 기간</span>
+          <span class="meta-val">2개월 (총 8주, 순수 64시간)</span>
+        </div>
+        <div class="curr-meta-item">
+          <span class="meta-label">수업 시간표</span>
+          <span class="meta-val">매주 월요일 09:00 ~ 17:40</span>
+        </div>
+        <div class="curr-meta-item">
+          <span class="meta-label">개강 요건</span>
+          <span class="meta-val" style="color: #FBBF24;">20명 이상 신청 시 확정</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. 기획 배경 & 3대 취업 킬러 무기 -->
+    <section class="curr-section-card">
+      <h2 class="curr-sec-title">
+        <span>🏛️</span> 1. 취준생 맞춤형 기획 배경: "흔한 투두리스트로는 서류 통과조차 불가능하다"
+      </h2>
+
+      <div style="background: #FEF2F2; border-left: 4px solid #EF4444; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem;">
+        <h4 style="color: #991B1B; font-size: 1.05rem; font-weight: 800; margin-bottom: 0.5rem;">🛑 2026-2027년 취업 시장의 냉혹한 현실</h4>
+        <ul style="margin: 0; padding-left: 1.25rem; color: #7F1D1D; font-size: 0.92rem; line-height: 1.6;">
+          <li>수천 명의 취준생이 똑같은 인스타그램 클론, 쇼핑몰 게시판, 투두리스트 포트폴리오를 제출합니다.</li>
+          <li>채용 담당자와 시니어 면접관은 깃허브 링크를 3초 만에 훑어보고 "또 클론 코딩이네"라며 서류를 탈락시킵니다.</li>
+          <li>취준생에게 지금 가장 절실한 것은 <strong>"면접관의 눈을 번쩍 뜨이게 만들 독보적 차별화 무기"</strong>입니다.</li>
+        </ul>
+      </div>
+
+      <h3 style="font-size: 1.15rem; font-weight: 800; color: #0B1B3D; margin-bottom: 0.85rem;">
+        💡 본 과정이 제공하는 3대 취업 킬러 무기 (Why REA + Antigravity for 취준생?)
+      </h3>
+
+      <div class="weapon-cards-grid">
+        <div class="weapon-card">
+          <h4>1. 남의 코드를 뜯어보고(REA) 내부 원리를 꿰뚫어 보는 주니어</h4>
+          <p>"저는 코드를 복사해 쓰지 않고, 런타임 메모리와 바이너리를 역공학하여 글로벌 상용 소프트웨어가 동작하는 본질을 파악합니다."</p>
+        </div>
+        <div class="weapon-card">
+          <h4>2. 2027년형 AI 네이티브 에이전틱 엔지니어</h4>
+          <p>단순 코파일럿 완성을 넘어 Google Antigravity IDE의 MCP(Model Context Protocol) 표준을 실무 도구로 연동하고 오케스트레이션할 수 있는 차세대 역량 입증.</p>
+        </div>
+        <div class="weapon-card">
+          <h4>3. 합법적 클린룸(Cleanroom) 설계와 100% 바이트 일치 TDD</h4>
+          <p>낡은 레거시 시스템을 저작권 침해 0%의 클린룸 명세서로 변환하고, 모던 Rust/TypeScript로 100% 테스트 커버리지를 달성하는 엔터프라이즈급 실무 경험 확보.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 주중 1일 풀데이 타임테이블 -->
+    <section class="curr-section-card">
+      <h2 class="curr-sec-title">
+        <span>⏰</span> 2. 주중 1일 8시간 풀데이(Full-Day) 타임테이블
+      </h2>
+      <p style="font-size: 0.95rem; color: #475569; line-height: 1.6; margin-bottom: 1rem;">
+        매주 월요일 하루, 이론부터 실습, 코드 리뷰, 면접 대비까지 하루에 끝장내는 <strong>완전 몰입형 파이프라인</strong>입니다.
+      </p>
+
+      <div class="timetable-box">
+<pre>┌─────────────────────────────────────────────────────────────────────────────┐
+│ 🌅 [오전 세션: 09:00 ~ 12:50] 핵심 이론 &amp; 라이브 해체 쇼 (4시간)            │
+│  매주 금요일은 : 16:40분에 종료                                             │
+│  • 09:00 ~ 09:50                                                            │
+│  • 10:00 ~ 10:50                                                            │
+│  • 11:00 ~ 11:50                                                            │
+│  • 12:00 ~ 12:50                                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 🍱 [점심 및 네트워킹: 12:50 ~ 13:50] (1시간)                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 🌇 [오후 세션: 13:50 ~ 17:40] Hands-on 실습 &amp; 포트폴리오화 (4시간)          │
+│  • 13:50 ~ 14:40                                                            │
+│  • 14:50 ~ 15:40                                                            │
+│  • 15:50 ~ 16:40                                                            │
+│  • 16:50 ~ 17:40 (매주 금요일은 7교시)                                      │
+└─────────────────────────────────────────────────────────────────────────────┘</pre>
+      </div>
+
+      <div style="background: #F0FDF4; border-left: 4px solid #16A34A; border-radius: 8px; padding: 1rem 1.25rem; margin-top: 1.25rem; color: #166534; font-size: 0.92rem; line-height: 1.6;">
+        <strong>🔥 주간 1회 수업 종료 시 수강생이 손에 쥐는 3대 산출물:</strong><br>
+        1. 내 GitHub에 잔디가 심어지는 동작하는 완성형 코드 (PR merge)<br>
+        2. 우리가 수립한 <code>BLOG_SEO_HOOKING_RULES.md</code> 표준 기술 블로그 1편 발행<br>
+        3. 실제 이력서에 바로 붙여넣는 <strong>'기술 면접 예상 질문 &amp; 정답 스크립트'</strong> 1세트
+      </div>
+    </section>
+
+    <!-- 3. 공식 교재 & 실습 교구 라인업 -->
+    <section class="curr-section-card">
+      <h2 class="curr-sec-title">
+        <span>📚</span> 3. 공식 교재 &amp; 실습 교구 라인업 매핑
+      </h2>
+
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>교재 / 교구명</th>
+            <th>위키독스 URL / 배포처</th>
+            <th>주 활용 주차</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center; font-weight: 800;">주교재 1</td>
+            <td><strong>《Google Antigravity IDE 완벽 마스터 가이드》</strong></td>
+            <td>사내 배포본 / 위키독스 정식판 (<a href="https://wikidocs.net/book/21777" target="_blank" rel="noopener noreferrer">Book 21777</a>)</td>
+            <td style="text-align: center;">1주차, 2주차, 8주차</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800;">주교재 2</td>
+            <td>📕 <strong>[1권 입문] <a href="https://wikidocs.net/book/21753" target="_blank" rel="noopener noreferrer">남의 앱 뜯어보기 : 소스코드는 필요 없다</a></strong></td>
+            <td><a href="https://wikidocs.net/book/21753" target="_blank" rel="noopener noreferrer">https://wikidocs.net/book/21753</a></td>
+            <td style="text-align: center;">3주차, 4주차</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800;">주교재 3</td>
+            <td>📘 <strong>[2권 실전] <a href="https://wikidocs.net/book/21754" target="_blank" rel="noopener noreferrer">AI 에이전트로 끝내는 리버스 엔지니어링 실전 바이블</a></strong></td>
+            <td><a href="https://wikidocs.net/book/21754" target="_blank" rel="noopener noreferrer">https://wikidocs.net/book/21754</a></td>
+            <td style="text-align: center;">5주차, 6주차</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800;">주교재 4</td>
+            <td>📙 <strong>[3권 심화] <a href="https://wikidocs.net/book/21755" target="_blank" rel="noopener noreferrer">모던 리버스 엔지니어링 : 보안 분석과 클린룸 재구현</a></strong></td>
+            <td><a href="https://wikidocs.net/book/21755" target="_blank" rel="noopener noreferrer">https://wikidocs.net/book/21755</a></td>
+            <td style="text-align: center;">7주차, 8주차</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800;">부교재</td>
+            <td>📗 <strong>[4권 도구] REA 완벽 마스터 가이드</strong> &amp; 🚀 <strong>[5권 환경] IDE 연동 가이드</strong></td>
+            <td>위키독스 공식 출간본 (<a href="https://wikidocs.net/book/21781" target="_blank" rel="noopener noreferrer">Book 21781</a>)</td>
+            <td style="text-align: center;">전 주차 실습 레퍼런스</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800;">실습 교구 1</td>
+            <td>🦖 <strong>크롬 공룡 게임 런타임 가속도 해체 랩</strong></td>
+            <td><a href="https://dmdg-live.com/sim_dino_lab.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_dino_lab.html</a></td>
+            <td style="text-align: center;">3주차 실습</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800;">실습 교구 2</td>
+            <td>🧮 <strong>윈도우 계산기 퍼센트 상태머신 랩</strong></td>
+            <td><a href="https://dmdg-live.com/sim_calc_percent.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_calc_percent.html</a></td>
+            <td style="text-align: center;">4주차 실습</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800;">실습 교구 3</td>
+            <td>🛡️ <strong>클린룸 TDD 재구현 &amp; 100% 바이트 일치 랩</strong></td>
+            <td><a href="https://dmdg-live.com/sim_cleanroom_diff.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_cleanroom_diff.html</a></td>
+            <td style="text-align: center;">7주차, 8주차 실습</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4. 8주차 커리큘럼 상세 로드맵 -->
+    <section class="curr-section-card">
+      <h2 class="curr-sec-title">
+        <span>🗓️</span> 4. 8주차(2개월, 총 64시간) 취준생 맞춤형 상세 강의계획서
+      </h2>
+
+      <!-- Month 1 Header -->
+      <div style="background: linear-gradient(135deg, #065F46, #047857); color: #FFF; padding: 0.85rem 1.25rem; border-radius: 10px; font-weight: 800; font-size: 1.05rem; margin-bottom: 1.25rem;">
+        🟢 [Month 1] 기초 도구 마스터 &amp; 런타임 역공학 입문 (1~4주차, 32시간)
+      </div>
+
+      <!-- 1주차 -->
+      <article class="week-timeline-card">
+        <div class="week-card-head">
+          <span class="week-card-title">📍 1주차 (12/07, 월, 8시간): Antigravity IDE 패러다임 혁명 &amp; 에이전틱 작업 환경 세팅</span>
+          <span class="week-badge">8시간 실습</span>
+        </div>
+        <div class="week-card-body">
+          <div class="week-session-row">
+            <strong>🌅 오전 (3h) - 핵심 이론 &amp; 라이브 분석:</strong>
+            <ul>
+              <li>Copilot형 단순 완성을 넘어선 자율 에이전트 오케스트레이션 멘탈 모델</li>
+              <li>3-Pane 레이아웃, <code>GEMINI.md</code>와 <code>AGENTS.md</code> 프로젝트 헌법 제정법</li>
+              <li>컨텍스트 토큰 경제학과 4대 슬래시 커맨드(<code>/goal</code>, <code>/plan</code>, <code>/schedule</code>, <code>/learn</code>)</li>
+            </ul>
+          </div>
+          <div class="week-session-row">
+            <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
+            <ul>
+              <li><strong>[실습 랩]</strong>: Antigravity IDE 환경 세팅 및 나만의 코딩 규칙(<code>AGENTS.md</code>) 주입 실습</li>
+              <li><strong>[포트폴리오 빌드]</strong>: 오픈소스 버그를 <code>/plan</code>과 <code>/goal</code>로 스스로 진단하는 자율 워크플로우 깃허브 기록</li>
+            </ul>
+            <div class="qa-box">
+              💬 [면접 대비 Q&amp;A 1] "단순 생성형 AI 툴과 Antigravity 자율 에이전트의 구조적 차이는 무엇인가?"
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2주차 -->
+      <article class="week-timeline-card">
+        <div class="week-card-head">
+          <span class="week-card-title">📍 2주차 (12/14, 월, 8시간): MCP(Model Context Protocol) 표준과 REA 도구 무결점 결합</span>
+          <span class="week-badge">8시간 실습</span>
+        </div>
+        <div class="week-card-body">
+          <div class="week-session-row">
+            <strong>🌅 오전 (3h) - 핵심 이론 &amp; 라이브 분석:</strong>
+            <ul>
+              <li>2026년 AI 표준 프로토콜 MCP의 정체와 JSON-RPC 2.0 통신 아키텍처</li>
+              <li><code>mcp_config.json</code> 구조 분석: 도구(Tools), 리소스(Resources), 프롬프트(Prompts)</li>
+              <li>Skills vs MCP의 차이 및 REA MCP 프로바이더 아키텍처</li>
+            </ul>
+          </div>
+          <div class="week-session-row">
+            <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
+            <ul>
+              <li><strong>[실습 랩]</strong>: <code>npx rea-agents@latest setup --client antigravity</code> 원클릭 연동 및 <code>doctor</code> 진단</li>
+              <li><strong>[포트폴리오 빌드]</strong>: AI 에이전트가 로컬 디렉터리를 스캔하여 보안 취약점을 탐지하는 MCP 파이프라인 구축</li>
+            </ul>
+            <div class="qa-box">
+              💬 [면접 대비 Q&amp;A 2] "LLM에게 외부 도구 권한을 부여하는 MCP 프로토콜의 보안 모델은 어떻게 설계되었는가?"
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3주차 -->
+      <article class="week-timeline-card">
+        <div class="week-card-head">
+          <span class="week-card-title">📍 3주차 (12/21, 월, 8시간): [REA 1권] 웹 브라우저 런타임 &amp; 일렉트론 데스크톱 앱(ASAR) 해체</span>
+          <span class="week-badge">8시간 실습</span>
+        </div>
+        <div class="week-card-body">
+          <div class="week-session-row">
+            <strong>🌅 오전 (3h) - 핵심 이론 &amp; 라이브 분석:</strong>
+            <ul>
+              <li>크롬 공룡 게임(<code>chrome://dino</code>) CDP 런타임 가로채기 및 물리 공식(<code>ACCELERATION: 0.001</code>, <code>MAX_SPEED: 13</code>) 추출</li>
+              <li>런타임 몽키 패칭을 통한 1초 무적 치트 코드의 원리</li>
+              <li>일렉트론(Electron) 아키텍처와 <code>app.asar</code> 언패킹 메커니즘</li>
+              <li>노션의 마법: 서식을 유지하는 복사-붙여넣기 다중 MIME(<code>text/plain</code>, <code>application/x-notion-blocks</code>) 비밀</li>
+            </ul>
+          </div>
+          <div class="week-session-row">
+            <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
+            <ul>
+              <li><strong>[실습 랩]</strong>: 크롬 공룡 가속도 슬라이더 웹 개조 (<a href="https://dmdg-live.com/sim_dino_lab.html" target="_blank" rel="noopener noreferrer">시뮬레이터 랩</a>)</li>
+              <li><strong>[포트폴리오 빌드]</strong>: 노션 스타일의 다중 포맷 클립보드 복사-붙여넣기 모듈을 순수 웹으로 클론 구현</li>
+            </ul>
+            <div class="qa-box">
+              💬 [면접 대비 Q&amp;A 3] "일렉트론 데스크톱 앱의 보안 취약점(ASAR)과 클립보드 다중 MIME 핸들링 원리는?"
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4주차 -->
+      <article class="week-timeline-card">
+        <div class="week-card-head">
+          <span class="week-card-title">📍 4주차 (12/28, 월, 8시간): [REA 1권] 네이티브 바이너리(EXE) 투시와 윈도우 계산기 상태머신 웹 재구현</span>
+          <span class="week-badge">8시간 실습</span>
+        </div>
+        <div class="week-card-body">
+          <div class="week-session-row">
+            <strong>🌅 오전 (3h) - 핵심 이론 &amp; 라이브 분석:</strong>
+            <ul>
+              <li>C++ 바이너리(<code>calc.exe</code>) 디컴파일과 기계어 분석의 공포 극복</li>
+              <li>전 세계 주니어 개발자를 울린 '%' 퍼센트 연산의 진실 (<code>100 + 10% = 110</code> vs <code>100 * 10% = 10</code>)</li>
+              <li>사칙연산 종속 상태 머신(State Machine) 수학 모델 추출</li>
+            </ul>
+          </div>
+          <div class="week-session-row">
+            <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
+            <ul>
+              <li><strong>[실습 랩]</strong>: REA 에이전트로 추출한 의사코드를 모던 TypeScript 반응형 웹 계산기로 재구현</li>
+              <li><strong>[포트폴리오 빌드]</strong>: 윈도우 계산기 연산 엔진과 100% 일치하는 클론 계산기 깃허브 오픈소스화</li>
+            </ul>
+            <div class="qa-box">
+              💬 [면접 대비 Q&amp;A 4] "복잡한 비즈니스 로직을 상태 머신(State Machine)으로 모델링하여 리팩토링한 경험을 말해보라."
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Month 2 Header -->
+      <div style="background: linear-gradient(135deg, #1E40AF, #1D4ED8); color: #FFF; padding: 0.85rem 1.25rem; border-radius: 10px; font-weight: 800; font-size: 1.05rem; margin: 2rem 0 1.25rem;">
+        🔵 [Month 2] 실전 &amp; 심화 프로덕션 역공학 &amp; 클린룸 캡스톤 (5~8주차, 32시간)
+      </div>
+
+      <!-- 5주차 -->
+      <article class="week-timeline-card">
+        <div class="week-card-head">
+          <span class="week-card-title">📍 5주차 (01/04, 월, 8시간): [REA 2권] AI × Ghidra Headless 무인 분석 &amp; 모던 언어(Go/Rust/WASM) 바이너리 투시</span>
+          <span class="week-badge">8시간 실습</span>
+        </div>
+        <div class="week-card-body">
+          <div class="week-session-row">
+            <strong>🌅 오전 (3h) - 핵심 이론 &amp; 라이브 분석:</strong>
+            <ul>
+              <li>NSA 오픈소스 디컴파일러 기드라(Ghidra)의 헤드리스 무인 자동화 파이프라인</li>
+              <li>난독화 함수 심볼 시맨틱 복원 및 제어 흐름 그래프(CFG) 분석</li>
+              <li>Go 바이너리의 아킬레스건 <code>pclntab</code> 메타데이터 파싱, Rust 심볼 디맹글링, WASM 바이트코드 AST 변환</li>
+            </ul>
+          </div>
+          <div class="week-session-row">
+            <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
+            <ul>
+              <li><strong>[실습 랩]</strong>: 스트립된 Go CLI 바이너리의 소스 구조를 1초 만에 복원하고 라이선스 검증 로직 해체</li>
+              <li><strong>[포트폴리오 빌드]</strong>: 모던 바이너리 정적 분석 자동화 셸 스크립트 및 기드라 헤드리스 플러그인 작성</li>
+            </ul>
+            <div class="qa-box">
+              💬 [면접 대비 Q&amp;A 5] "컴파일된 바이너리에서 심볼이 제거(Strip)되었을 때 어떻게 함수와 구조체를 복원하는가?"
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6주차 -->
+      <article class="week-timeline-card">
+        <div class="week-card-head">
+          <span class="week-card-title">📍 6주차 (01/11, 월, 8시간): [REA 2권] 모바일 APK 디컴파일 &amp; SSL 핀닝 우회를 통한 비공개 API 명세 역생성</span>
+          <span class="week-badge">8시간 실습</span>
+        </div>
+        <div class="week-card-body">
+          <div class="week-session-row">
+            <strong>🌅 오전 (3h) - 핵심 이론 &amp; 라이브 분석:</strong>
+            <ul>
+              <li>안드로이드 APK 아키텍처와 JADX 정적 디컴파일</li>
+              <li>네트워크 보안 설정 및 인증서 고정(SSL Pinning)의 암호학적 원리</li>
+              <li>Frida 런타임 후킹으로 SSL Pinning 1초 무력화 및 Mitmproxy 트래픽 캡처</li>
+            </ul>
+          </div>
+          <div class="week-session-row">
+            <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
+            <ul>
+              <li><strong>[실습 랩]</strong>: 모바일 앱 트래픽에서 백엔드 REST 엔드포인트를 추출하여 OpenAPI 3.0(Swagger) JSON 자동 역생성</li>
+              <li><strong>[포트폴리오 빌드]</strong>: 비공개 모바일 API 명세서 및 Postman 테스트 컬렉션 완성</li>
+            </ul>
+            <div class="qa-box">
+              💬 [면접 대비 Q&amp;A 6] "모바일 앱과 백엔드 간 HTTPS 통신 보안(SSL Pinning)의 원리와 보안 취약점 진단 절차는?"
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7주차 -->
+      <article class="week-timeline-card">
+        <div class="week-card-head">
+          <span class="week-card-title">📍 7주차 (01/18, 월, 8시간): [REA 3권] 합법적 클린룸(Cleanroom) 설계 &amp; 골든 데이터셋 기반 100% 바이트 일치 TDD</span>
+          <span class="week-badge">8시간 실습</span>
+        </div>
+        <div class="week-card-body">
+          <div class="week-session-row">
+            <strong>🌅 오전 (3h) - 핵심 이론 &amp; 라이브 분석:</strong>
+            <ul>
+              <li>1982년 컴팩 IBM BIOS 합법 복제 사건과 저작권 침해 0% 클린룸 설계(Cleanroom Design)</li>
+              <li>Dirty Team(명세서만 작성)과 Clean Team(명세서만 보고 신규 구현)의 방화벽 격리</li>
+              <li>AI 듀얼 세션(Auditor 에이전트 vs Architect 에이전트) 설계</li>
+              <li>30년 된 메모리 누수 레거시 C 라이브러리의 모던 Rust 100% 바이트 일치 재구현</li>
+            </ul>
+          </div>
+          <div class="week-session-row">
+            <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
+            <ul>
+              <li><strong>[실습 랩]</strong>: 원본 바이너리를 블랙박스로 호출해 수만 개의 입출력 골든 데이터셋을 뽑고 Rust로 재구현</li>
+              <li><strong>[포트폴리오 빌드]</strong>: PyTest / Cargo Test 회귀 단위 테스트 전체 Green 통과 검증 패키지 완성</li>
+            </ul>
+            <div class="qa-box">
+              💬 [면접 대비 Q&amp;A 7] "타사 소프트웨어를 리버스 엔지니어링할 때 지적재산권 침해를 피하기 위한 클린룸 방법론이란?"
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8주차 -->
+      <article class="week-timeline-card">
+        <div class="week-card-head">
+          <span class="week-card-title">📍 8주차 (01/25, 월, 8시간): [캡스톤 프로젝트 &amp; 운영 자동화] 엔터프라이즈 DevSecOps CI/CD 탑재 &amp; 최종 Demo Day</span>
+          <span class="week-badge">8시간 실습</span>
+        </div>
+        <div class="week-card-body">
+          <div class="week-session-row">
+            <strong>🌅 오전 (3h) - 핵심 이론 &amp; 라이브 분석:</strong>
+            <ul>
+              <li>GitHub Actions CI/CD 파이프라인 내 바이너리 자동 보안 감사 도구 연동</li>
+              <li>사내 기밀 유출 0% 차단: 온디바이스 로컬 LLM(Ollama) 하이브리드 보안 라우팅</li>
+              <li>사내 배포용 커스텀 Skill(<code>SKILL.md</code>) 제작 및 팀 배포</li>
+            </ul>
+          </div>
+          <div class="week-session-row">
+            <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
+            <ul>
+              <li><strong>[최종 캡스톤 프로젝트 라이브 시연 (Demo Day)]</strong>: 수강생 각자가 선정한 타깃 소프트웨어(웹/앱/바이너리)의 해체 쇼 ➔ 클린룸 명세서 ➔ 모던 재구현 ➔ CI/CD 자동화 발표</li>
+              <li><strong>[취업 프리패스 모의 기술면접]</strong>: 시니어 면접관 시점 1:1 기술 면접 피드백 &amp; 이력서/포트폴리오 최종 검수</li>
+              <li><strong>[수료식 &amp; DMDG 공식 디지털 자격 인증서 수여]</strong></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- 5. 수료 산출물 -->
+    <section class="curr-section-card">
+      <h2 class="curr-sec-title">
+        <span>🏆</span> 5. 수강생이 수료 시 손에 쥐게 되는 3대 취업 무기 (All-in-One Deliverables)
+      </h2>
+
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>수료 산출물</th>
+            <th>취업 시장에서의 가치 (면접관 시각)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center; font-weight: 800; color: #028090;">무기 1</td>
+            <td><strong>4대 깃허브 실무 킬러 레포지토리</strong></td>
+            <td>단순 클론 코딩이 아닌, 바이너리 해체/API 역설계/클린룸 Rust 재구현이 담긴 상위 1% 포트폴리오</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800; color: #7C3AED;">무기 2</td>
+            <td><strong>SEO·후킹·어그로 적용 기술 블로그 8편</strong></td>
+            <td><code>BLOG_SEO_HOOKING_RULES.md</code> 표준에 따라 작성되어 구글 검색 상위에 노출되는 기술 전문성 입증</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: 800; color: #D97706;">무기 3</td>
+            <td><strong>시니어 면접관 대비 기술 Q&amp;A 24선 스크립트</strong></td>
+            <td>8주간 매주 축적된 면접 질문 3선 × 8주 = 24개 고난도 아키텍처 질문에 대한 완벽한 구술 답변집</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- =======================================================================
+         📍 6. 강의장 위치 안내 (USER EXPLICIT REQUIREMENT)
+         ======================================================================= -->
+    <section class="location-callout-card" id="location-notice">
+      <div class="location-badge">
+        <span>📍</span> 오프라인 실습 강의장 위치 안내
+      </div>
+      <h3 class="location-main-text">
+        강의장 위치 : 신청자들의 공통 위치로 선정하여 추후 공지<br>
+        <span style="color: #FBBF24; font-size: 1.15rem;">(현재는 성남시 태평역 부근 예정)</span>
+      </h3>
+      <p class="location-sub-text">
+        본 과정은 수강생 20명 모집 시 정식 개강됩니다. 수강생분들의 통학 편의와 쾌적한 1인 1실습 환경을 위해, 
+        <strong>신청 접수 완료 후 수강생 거주 지역 분포를 종합 분석하여 가장 접근성이 우수한 최적의 교육장을 최종 배정하여 개별 안내</strong>해 드립니다.
+      </p>
+
+      <div class="curr-cta-row">
+        <a href="./index.html#apply" onclick="openApplyFromCurriculum(event)" class="btn-apply-direct">
+          <span>📝 과정 신청하기 (20명 달성 시 개강)</span> <span>➔</span>
+        </a>
+        <a href="./" class="btn-back-home">
+          <span>🏠 DMDG 포털 홈으로</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =======================================================================
+       Footer
+       ======================================================================= -->
+  <footer style="background: #0B1B3D; color: #94A3B8; text-align: center; padding: 2.5rem 1rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; line-height: 1.6;">
+    <p style="margin: 0 0 0.5rem 0; color: #FFFFFF; font-weight: 800;">
+      당목담글(DMDG) 스튜디오 자율 에이전트 엔지니어링 본부
+    </p>
+    <p style="margin: 0; color: #64748B;">
+      대표도메인 : dmdg-live.com &amp; malssam.com | 문의: contact@dmdg-live.com
+    </p>
+  </footer>
+
+  <script>
+    function openApplyFromCurriculum(e) {
+      e.preventDefault();
+      // Redirect to main portal with auto popup trigger
+      localStorage.removeItem('dmdg_course_modal_dismissed_until');
+      window.location.href = './index.html?openApply=true';
+    }
+  </script>
+</body>
+</html>
