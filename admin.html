@@ -32,7 +32,7 @@
   <!-- =========================================================================
        1. Admin Login Overlay (아이디: DMDG / 비번: ekdahrekarmf)
        ========================================================================= -->
-  <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center backdrop-blur-md px-4">
+  <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 hidden items-center justify-center backdrop-blur-md px-4">
     <div class="glass-card-elevated p-8 max-w-md w-full glow-gold shadow-2xl">
       <div class="w-16 h-16 bg-amber-500/10 text-amber-500 border border-amber-500/30 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
         <i data-lucide="shield-check" class="w-8 h-8"></i>
@@ -84,7 +84,7 @@
   <!-- =========================================================================
        2. Admin Dashboard Container
        ========================================================================= -->
-  <div id="dashboard-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden opacity-0 transition-opacity duration-500">
+  <div id="dashboard-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 transition-opacity duration-500">
     
     <!-- Top Nav Header -->
     <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-slate-800">
@@ -1085,8 +1085,7 @@
 
       try {
         const testOrderId = `TEST_DMDG_${Date.now()}`;
-        alert('포트원(PortOne v2) 테스트 결제창을 호출합니다.
-(실제 과금되지 않는 100원 샌드박스 테스트 호출입니다)');
+        alert('포트원(PortOne v2) 테스트 결제창을 호출합니다.\n(실제 과금되지 않는 100원 샌드박스 테스트 호출입니다)');
         
         const response = await PortOne.requestPayment({
           storeId: 'store-e1f72596-98dc-4c57-817c-a49da979ee91',
@@ -1102,8 +1101,7 @@
           alert(`포트원 호출 응답 코드: ${response.code}
 메시지: ${response.message || '결제가 취소되었거나 심사 모드입니다.'}`);
         } else {
-          alert('포트원 결제가 성공적으로 승인되었습니다!
-승인번호: ' + response.paymentId);
+          alert('포트원 결제가 성공적으로 승인되었습니다!\n승인번호: ' + response.paymentId);
           recordSuccessfulPayment({
             orderId: testOrderId,
             method: '포트원 (카카오페이)',
@@ -1113,9 +1111,7 @@
           });
         }
       } catch (err) {
-        alert('포트원 결제창 호출 알림:
-' + err.message + '
-(비즈니스 심사 승인 완료 후 즉시 실결제가 가능합니다)');
+        alert('포트원 결제창 호출 알림:\n' + err.message + '\n(비즈니스 심사 승인 완료 후 즉시 실결제가 가능합니다)');
       }
     }
 
@@ -1171,8 +1167,7 @@
         return;
       }
 
-      let csv = '﻿No,결제일시,주문번호,결제수단,금액,주문내용,상태
-';
+      let csv = '\uFEFFNo,결제일시,주문번호,결제수단,금액,주문내용,상태\n';
       PAYMENTS_CACHE.forEach((item, idx) => {
         csv += `${idx + 1},"${item.createdAt}","${item.orderId}","${item.method}",${item.amount},"${item.itemName}","${item.status}"
 `;
@@ -1190,7 +1185,7 @@
 
     // Initial check on load
     document.addEventListener('DOMContentLoaded', () => {
-      checkExistingAuth();
+      revealDashboard();
     });
   </script>
 </body>
