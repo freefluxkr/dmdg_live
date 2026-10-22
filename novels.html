@@ -1633,6 +1633,7 @@ const NOVELS_DATA = [
         const allNodes = Array.from(el.readerContent.querySelectorAll('p, blockquote, h1, h2, h3')).filter(n => n.innerText && n.innerText.trim().length > 0);
         const targetIdx = allNodes.indexOf(node);
         if (targetIdx !== -1) {
+          if (isIOS) unlockIosAudio();
           startAudio(targetIdx);
         }
       });
@@ -1704,22 +1705,89 @@ const NOVELS_DATA = [
     el.progressBar.style.width = `${Math.min(100, Math.max(0, scrolled))}%`;
   }
 
-  // ── Web Speech API TTS Audio Reader (Enhanced Paragraph Engine) ──────────
+  // ── Universal Cross-Platform Speech Engine (iOS Safari/Chrome + Desktop/Android) ──
+  const isIOS = (() => {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  })();
+
   let ttsParagraphs = [];
   let ttsCurrentIdx = 0;
   let ttsKeepAliveTimer = null;
   let koreanVoice = null;
+  let ttsIsStarting = false;
+  // Safari GC에 의한 조기 소멸 방지용 영구 Set
+  window.__dmdgActiveUtterances = window.__dmdgActiveUtterances || new Set();
+
+  function showTtsToast(msg, duration = 3500) {
+    let toast = document.getElementById('tts-toast-banner');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'tts-toast-banner';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 74px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(245, 158, 11, 0.5);
+        color: #f8fafc;
+        padding: 10px 18px;
+        border-radius: 9999px;
+        font-size: 0.82rem;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        backdrop-filter: blur(8px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+        max-width: 90vw;
+        text-align: center;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = msg;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    clearTimeout(toast.__timer);
+    toast.__timer = setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(10px)';
+    }, duration);
+  }
+
+  // iOS Safari / Chrome 동기적 오디오 세션 언락
+  function unlockIosAudio() {
+    if (!STATE.tts.synth) return;
+    try {
+      const unlockUtter = new SpeechSynthesisUtterance(' ');
+      unlockUtter.volume = 0.01;
+      unlockUtter.rate = 2.0;
+      STATE.tts.synth.speak(unlockUtter);
+      if (STATE.tts.synth.paused) {
+        STATE.tts.synth.resume();
+      }
+    } catch (e) {
+      console.warn('Audio unlock warning:', e);
+    }
+  }
 
   function loadVoices() {
     if (!STATE.tts.synth) return;
-    const voices = STATE.tts.synth.getVoices();
-    koreanVoice = voices.find(v => v.lang === 'ko-KR' || v.lang.startsWith('ko')) || null;
+    try {
+      const voices = STATE.tts.synth.getVoices();
+      koreanVoice = voices.find(v => v.lang === 'ko-KR' || v.lang.startsWith('ko')) || null;
+    } catch (e) {
+      console.warn('Voice loading warning:', e);
+    }
   }
 
   function initTts() {
     if (!STATE.tts.synth) {
-      el.btnTtsPlay.style.display = 'none';
-      el.btnTtsSpeed.style.display = 'none';
+      if (el.btnTtsPlay) el.btnTtsPlay.style.display = 'none';
+      if (el.btnTtsSpeed) el.btnTtsSpeed.style.display = 'none';
       return;
     }
     loadVoices();
@@ -1730,6 +1798,12 @@ const NOVELS_DATA = [
 
   function toggleAudio() {
     if (!STATE.tts.synth) return;
+
+    // iOS WebKit 환경에서는 터치 즉시 동기적으로 오디오 세션 잠금 해제
+    if (isIOS) {
+      unlockIosAudio();
+    }
+
     if (STATE.tts.isPlaying) {
       stopAudio();
     } else {
@@ -1738,30 +1812,60 @@ const NOVELS_DATA = [
   }
 
   function startAudio(startFromIdx = 0) {
-    stopAudio();
+    if (ttsIsStarting) return;
+    ttsIsStarting = true;
 
     // 낭독 대상 문단/단락 추출
     const nodes = el.readerContent.querySelectorAll('p, blockquote, h1, h2, h3');
     ttsParagraphs = Array.from(nodes).filter(n => n.innerText && n.innerText.trim().length > 0);
 
-    if (ttsParagraphs.length === 0) return;
+    if (ttsParagraphs.length === 0) {
+      ttsIsStarting = false;
+      return;
+    }
 
     ttsCurrentIdx = Math.max(0, Math.min(startFromIdx, ttsParagraphs.length - 1));
+
+    // 기존 발화 큐 정리
+    if (STATE.tts.synth) {
+      try {
+        STATE.tts.synth.cancel();
+      } catch (e) {
+        console.warn('Cancel error:', e);
+      }
+    }
+    clearInterval(ttsKeepAliveTimer);
+    ttsKeepAliveTimer = null;
+
     STATE.tts.isPlaying = true;
     el.ttsIcon.textContent = '⏸️';
     el.ttsText.textContent = '정지';
     el.btnTtsPlay.classList.add('active');
 
-    // Chrome 15초 슬립 방지용 Keep-Alive 타이머
-    clearInterval(ttsKeepAliveTimer);
-    ttsKeepAliveTimer = setInterval(() => {
-      if (STATE.tts.isPlaying && STATE.tts.synth && STATE.tts.synth.speaking) {
-        STATE.tts.synth.pause();
-        STATE.tts.synth.resume();
-      }
-    }, 10000);
+    // 아이폰 환경 안내 토스트
+    if (isIOS) {
+      showTtsToast('🎧 AI 낭독 시작 (💡 아이폰 진동 스위치가 켜져 있으면 소리가 나지 않습니다)');
+    }
 
-    speakNextParagraph();
+    // iOS WebKit은 cancel() 직후 speak() 호출 시 큐가 증발하므로 60ms 딜레이 부여
+    const startDelay = isIOS ? 60 : 0;
+    setTimeout(() => {
+      ttsIsStarting = false;
+      if (!STATE.tts.isPlaying) return;
+
+      // Chrome 데스크톱 전용 15초 슬립 방지 타이머 (iOS WebKit에서는 pause 호출 시 프리징되므로 제외)
+      if (!isIOS) {
+        clearInterval(ttsKeepAliveTimer);
+        ttsKeepAliveTimer = setInterval(() => {
+          if (STATE.tts.isPlaying && STATE.tts.synth && STATE.tts.synth.speaking) {
+            STATE.tts.synth.pause();
+            STATE.tts.synth.resume();
+          }
+        }, 10000);
+      }
+
+      speakNextParagraph();
+    }, startDelay);
   }
 
   function speakNextParagraph() {
@@ -1786,10 +1890,20 @@ const NOVELS_DATA = [
 
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     utterance.lang = 'ko-KR';
-    if (koreanVoice) utterance.voice = koreanVoice;
+
+    // iOS WebKit에서는 voice 수동 바인딩 시 오류가 발생하므로 제외(시스템 네이티브 자동 위임)
+    // Non-iOS (Windows/Android Chrome 등)에서는 검색된 한국어 voice 명시적 바인딩
+    if (!isIOS && koreanVoice) {
+      utterance.voice = koreanVoice;
+    }
+
     utterance.rate = STATE.tts.speedRate;
 
+    // Safari GC에 의한 조기 소멸 방지용 Set 등록
+    window.__dmdgActiveUtterances.add(utterance);
+
     utterance.onend = () => {
+      window.__dmdgActiveUtterances.delete(utterance);
       if (!STATE.tts.isPlaying) return;
       currentEl.classList.remove('audio-speaking');
       ttsCurrentIdx++;
@@ -1797,6 +1911,7 @@ const NOVELS_DATA = [
     };
 
     utterance.onerror = (e) => {
+      window.__dmdgActiveUtterances.delete(utterance);
       console.warn('TTS 재생 에러 또는 사용자 중지:', e);
       if (STATE.tts.isPlaying) {
         currentEl.classList.remove('audio-speaking');
@@ -1806,15 +1921,28 @@ const NOVELS_DATA = [
     };
 
     STATE.tts.utterance = utterance;
+
+    // iOS Safari에서 일시정지 상태로 걸려있을 경우 resume 시도
+    if (STATE.tts.synth.paused) {
+      STATE.tts.synth.resume();
+    }
     STATE.tts.synth.speak(utterance);
   }
 
   function stopAudio() {
+    ttsIsStarting = false;
     clearInterval(ttsKeepAliveTimer);
     ttsKeepAliveTimer = null;
 
     if (STATE.tts.synth) {
-      STATE.tts.synth.cancel();
+      try {
+        STATE.tts.synth.cancel();
+      } catch (e) {
+        console.warn('Synth cancel error:', e);
+      }
+    }
+    if (window.__dmdgActiveUtterances) {
+      window.__dmdgActiveUtterances.clear();
     }
     if (ttsParagraphs && ttsParagraphs.length > 0) {
       ttsParagraphs.forEach(p => p.classList.remove('audio-speaking'));
@@ -1827,13 +1955,16 @@ const NOVELS_DATA = [
   }
 
   function cycleSpeed() {
+    if (isIOS) {
+      unlockIosAudio();
+    }
     const curIdx = STATE.tts.speeds.indexOf(STATE.tts.speedRate);
     const nextIdx = (curIdx + 1) % STATE.tts.speeds.length;
     STATE.tts.speedRate = STATE.tts.speeds[nextIdx];
     el.btnTtsSpeed.textContent = `${STATE.tts.speedRate}x`;
 
     if (STATE.tts.isPlaying) {
-      startAudio(); // Restart with new speed
+      startAudio(ttsCurrentIdx); // Restart with new speed from current paragraph
     }
   }
 
