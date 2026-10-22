@@ -2060,5 +2060,17 @@ const NOVELS_DATA = [
 
   </script>
 
+  <!-- Firebase & Real-time Analytics Tracker -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/analytics.js"></script>
+  <script>
+    try {
+      if (window.DMDG_Analytics) {
+        window.DMDG_Analytics.recordAppClick('novels');
+      }
+    } catch(e) {}
+  </script>
 </body>
 </html>

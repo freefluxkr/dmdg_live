@@ -537,5 +537,13 @@
   <script src="js/audio.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/analytics.js"></script>
+  <script>
+    try {
+      if (window.DMDG_Analytics) {
+        window.DMDG_Analytics.recordAppClick('voice');
+      }
+    } catch(e) {}
+  </script>
 </body>
 </html>
