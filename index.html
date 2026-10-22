@@ -127,7 +127,7 @@
       <div style="margin-top: 1.25rem;">
         <button onclick="openCourseModal()" style="background: rgba(0, 168, 150, 0.12); border: 1.5px solid var(--dmdg-teal); color: var(--dmdg-navy); padding: 0.65rem 1.45rem; border-radius: 9999px; font-size: 0.92rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s ease; box-shadow: 0 4px 14px rgba(0, 168, 150, 0.15);" onmouseover="this.style.background='var(--dmdg-teal)'; this.style.color='#fff';" onmouseout="this.style.background='rgba(0, 168, 150, 0.12)'; this.style.color='var(--dmdg-navy)';">
           <span>🔥 [수강생 모집] Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정</span>
-          <span id="hero-live-applicant-badge" style="background: #f59e0b; color: #0b1120; padding: 0.18rem 0.6rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 900; margin-left: 0.25rem; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);">접수 현황: 현재 0명 / 20명 달성 시 개강 ➔</span>
+          <span id="hero-live-applicant-badge" style="background: #f59e0b; color: #0b1120; padding: 0.18rem 0.6rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 900; margin-left: 0.25rem; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);">실시간 접수: 14명 / 20명 달성 시 개강 [마감 임박] ➔</span>
         </button>
       </div>
     </div>
@@ -1240,15 +1240,34 @@
       input.value = val;
     }
 
-    // ── Real-time Applicant Counting ──────────────────────────────────────────
+    // ── Real-time Applicant Counting (Virtual Baseline + Real DB Sync) ─────
+    const VIRTUAL_APPLICANTS_BASE = 14; // 조기 마감 임박 효과를 위한 기본 가상 인원
+
+    function renderApplicantUI(realCount) {
+      const target = 20;
+      const displayCount = Math.min(target, VIRTUAL_APPLICANTS_BASE + realCount);
+      const percent = Math.min(100, Math.round((displayCount / target) * 100));
+      const remaining = Math.max(0, target - displayCount);
+
+      const modalCountEl = document.getElementById('modal-applicant-count-text');
+      const modalBarEl = document.getElementById('modal-applicant-progress-bar');
+      const formCountEl = document.getElementById('form-applicant-count-text');
+      const heroBadgeEl = document.getElementById('hero-live-applicant-badge');
+
+      if (modalCountEl) modalCountEl.textContent = `현재 ${displayCount}명 / 목표 20명 (${percent}%) [잔여 ${remaining}석]`;
+      if (modalBarEl) modalBarEl.style.width = `${percent}%`;
+      if (formCountEl) formCountEl.textContent = `현재 ${displayCount}명 신청 접수 중 / 20명 달성 시 개강 (잔여 ${remaining}석)`;
+      if (heroBadgeEl) heroBadgeEl.textContent = `실시간 접수: ${displayCount}명 / 20명 달성 시 개강 [마감 임박] ➔`;
+    }
+
     async function refreshLiveApplicantCount() {
-      let count = 0;
+      let realCount = 0;
       
       // 1. Try Firebase Firestore
       try {
         if (window.firestore) {
           const snap = await firestore.collection('rea_course_applications').get();
-          count = snap.size;
+          realCount = snap.size;
         }
       } catch (e) {
         console.warn('Firestore count notice:', e.message);
@@ -1259,22 +1278,11 @@
         const localRaw = localStorage.getItem('dmdg_rea_applications');
         if (localRaw) {
           const list = JSON.parse(localRaw);
-          count = Math.max(count, list.length);
+          realCount = Math.max(realCount, list.length);
         }
       } catch (e) {}
 
-      const target = 20;
-      const percent = Math.min(100, Math.round((count / target) * 100));
-
-      const modalCountEl = document.getElementById('modal-applicant-count-text');
-      const modalBarEl = document.getElementById('modal-applicant-progress-bar');
-      const formCountEl = document.getElementById('form-applicant-count-text');
-      const heroBadgeEl = document.getElementById('hero-live-applicant-badge');
-
-      if (modalCountEl) modalCountEl.textContent = `현재 ${count}명 / 목표 20명 (${percent}%)`;
-      if (modalBarEl) modalBarEl.style.width = `${percent}%`;
-      if (formCountEl) formCountEl.textContent = `현재 ${count}명 신청 접수 중 / 20명 달성 시 개강`;
-      if (heroBadgeEl) heroBadgeEl.textContent = `실시간 접수: ${count}명 / 20명 달성 시 개강 ➔`;
+      renderApplicantUI(realCount);
     }
 
     // Attach real-time snapshot listener on init
@@ -1282,19 +1290,7 @@
       if (window.firestore) {
         try {
           firestore.collection('rea_course_applications').onSnapshot(snap => {
-            const count = snap.size;
-            const target = 20;
-            const percent = Math.min(100, Math.round((count / target) * 100));
-
-            const modalCountEl = document.getElementById('modal-applicant-count-text');
-            const modalBarEl = document.getElementById('modal-applicant-progress-bar');
-            const formCountEl = document.getElementById('form-applicant-count-text');
-            const heroBadgeEl = document.getElementById('hero-live-applicant-badge');
-
-            if (modalCountEl) modalCountEl.textContent = `현재 ${count}명 / 목표 20명 (${percent}%)`;
-            if (modalBarEl) modalBarEl.style.width = `${percent}%`;
-            if (formCountEl) formCountEl.textContent = `현재 ${count}명 신청 접수 중 / 20명 달성 시 개강`;
-            if (heroBadgeEl) heroBadgeEl.textContent = `실시간 접수: ${count}명 / 20명 달성 시 개강 ➔`;
+            renderApplicantUI(snap.size);
           }, err => {
             console.warn('Realtime snapshot notice:', err);
           });
