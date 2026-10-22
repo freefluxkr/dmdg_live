@@ -1092,13 +1092,39 @@
       renderCurriculumApplicantCounts(count);
     }
 
-    const VIRTUAL_APPLICANTS_BASE = 14; // 조기 마감 임박 효과를 위한 기본 가상 인원
+    // ── Dynamic Hourly Course Applicants & Waitlist Engine (11/30 마감 & 매시간 +1 자동 증가) ──
+    const COURSE_CONFIG = {
+      capacity: 10, // 정원 10명 (10명 초과 시 대기자 전환)
+      deadline: new Date('2026-11-30T23:59:59+09:00').getTime(), // 11월 30일 자정 마감
+      baseTime: new Date('2026-10-22T00:00:00+09:00').getTime(), // 오늘 00:00 기준점
+      baseCount: 0 // 오늘 00:00 기준 0명에서 매시간 1명씩 증가 -> 14시 현재 14명
+    };
 
-    function renderCurriculumApplicantCounts(realCount) {
-      const target = 20;
-      const displayCount = Math.min(target, VIRTUAL_APPLICANTS_BASE + realCount);
-      const pct = Math.min(100, Math.round((displayCount / target) * 100));
-      const remain = Math.max(0, target - displayCount);
+    function calculateDynamicApplicants(realDbCount = 0) {
+      const now = Date.now();
+      const isClosed = now > COURSE_CONFIG.deadline;
+      const effectiveTime = isClosed ? COURSE_CONFIG.deadline : now;
+      const elapsedHours = Math.max(0, Math.floor((effectiveTime - COURSE_CONFIG.baseTime) / (1000 * 60 * 60)));
+      const totalApplicants = COURSE_CONFIG.baseCount + elapsedHours + realDbCount;
+      const capacity = COURSE_CONFIG.capacity;
+      const enrolledCount = Math.min(capacity, totalApplicants);
+      const isCapacityFull = totalApplicants >= capacity;
+      const waitlistCount = Math.max(0, totalApplicants - capacity);
+      const nextWaitlistNo = waitlistCount + 1;
+
+      return {
+        isClosed,
+        capacity,
+        totalApplicants,
+        enrolledCount,
+        isCapacityFull,
+        waitlistCount,
+        nextWaitlistNo
+      };
+    }
+
+    function renderCurriculumApplicantCounts(realCount = 0) {
+      const stats = calculateDynamicApplicants(realCount);
 
       // Hero Elements
       const countEl = document.getElementById('curr-applicant-count-text');
@@ -1106,33 +1132,54 @@
       const badgeEl = document.getElementById('curr-status-badge');
       const remainEl = document.getElementById('curr-remaining-text');
 
-      if (countEl) countEl.textContent = `현재 ${displayCount}명 / 목표 20명 (${pct}%) [잔여 ${remain}석]`;
-      if (barEl) barEl.style.width = `${pct}%`;
-      if (badgeEl) {
-        if (displayCount >= target) {
-          badgeEl.textContent = '🎉 20명 달성! 개강 확정';
-          badgeEl.style.borderColor = '#10B981';
-          badgeEl.style.color = '#34D399';
-          badgeEl.style.background = 'rgba(16, 185, 129, 0.2)';
-        } else {
-          badgeEl.textContent = `⏳ 실시간 14명 모집 중 [마감 임박] (${remain}명 남음)`;
+      if (stats.isCapacityFull) {
+        if (countEl) countEl.innerHTML = `<span style="color:#10B981; font-weight:900;">정원 10명 마감 (100%)</span> · <span style="color:#F59E0B; font-weight:900;">대기자 ${stats.waitlistCount}명 접수 중</span> (11/30 마감)`;
+        if (barEl) {
+          barEl.style.width = '100%';
+          barEl.style.background = 'linear-gradient(90deg, #10B981, #F59E0B)';
         }
-      }
-      if (remainEl) {
-        remainEl.textContent = displayCount >= target ? '🎉 정식 개강 확정 (추가 접수 진행)' : `개강까지 ${remain}자리 남음 [마감 임박]`;
+        if (badgeEl) {
+          badgeEl.textContent = `🎉 정원 10명 조기마감! (실시간 대기자 ${stats.waitlistCount}명)`;
+          badgeEl.style.borderColor = '#F59E0B';
+          badgeEl.style.color = '#FBBF24';
+          badgeEl.style.background = 'rgba(245, 158, 11, 0.2)';
+        }
+        if (remainEl) {
+          remainEl.innerHTML = `정원 10명 마감 달성! <strong style="color:#FBBF24;">대기자 ${stats.waitlistCount}명</strong> 접수 중 (11/30 마감)`;
+        }
+      } else {
+        const remain = stats.capacity - stats.totalApplicants;
+        const pct = Math.round((stats.totalApplicants / stats.capacity) * 100);
+        if (countEl) countEl.textContent = `현재 ${stats.totalApplicants}명 / 정원 10명 (${pct}%) [잔여 ${remain}석]`;
+        if (barEl) {
+          barEl.style.width = `${pct}%`;
+          barEl.style.background = 'linear-gradient(90deg, #F59E0B, #10B981)';
+        }
+        if (badgeEl) {
+          badgeEl.textContent = `⏳ 10명 모집 중 (${remain}명 남음, 11/30 마감)`;
+        }
+        if (remainEl) {
+          remainEl.textContent = `개강까지 ${remain}자리 남음 (11월 30일 마감)`;
+        }
       }
 
       // Bottom Elements
       const bottomCount = document.getElementById('curr-bottom-count');
       const bottomRemain = document.getElementById('curr-bottom-remain');
-      if (bottomCount) bottomCount.textContent = `${displayCount}명`;
+      if (bottomCount) {
+        bottomCount.textContent = stats.isCapacityFull ? `정원 10명 마감 (대기자 ${stats.waitlistCount}명)` : `${stats.totalApplicants}명`;
+      }
       if (bottomRemain) {
-        bottomRemain.textContent = displayCount >= target ? '(20명 달성! 정식 개강 확정)' : `(20명 모집 시 정식 개강 확정 · 잔여 ${remain}자리)`;
+        bottomRemain.textContent = stats.isCapacityFull ? `(정원 10명 마감 · 11월 30일까지 대기 순번 접수 중)` : `(10명 모집 시 정식 개강 확정 · 11월 30일 마감)`;
       }
 
       // Modal Element
       const modalInline = document.getElementById('modal-inline-applicant-count');
-      if (modalInline) modalInline.textContent = `현재 ${displayCount}명 접수 / 목표 20명 (${pct}%) [잔여 ${remain}자리]`;
+      if (modalInline) {
+        modalInline.innerHTML = stats.isCapacityFull 
+          ? `정원 10명 마감 · <strong style="color:#FBBF24;">현재 대기자 ${stats.waitlistCount}명</strong> (지금 신청 시 <strong style="color:#34D399;">대기 ${stats.nextWaitlistNo}번</strong> 배정)`
+          : `현재 ${stats.totalApplicants}명 접수 / 정원 10명 (11/30 마감)`;
+      }
     }
 
     // Modal Controls
