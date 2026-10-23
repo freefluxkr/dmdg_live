@@ -1,64 +1,49 @@
-# 🛡️ DMDG LIVE (dmdg-live.com) Cloudflare 4계층 WAF & 봇 방어 연동 런북
+# 🛡️ DMDG 2대 대표 사이트 Cloudflare 4계층 WAF & 안티-스크래핑 방어 런북
 
-> **목적**: 100% 무료 Cloudflare WAF를 연동하여 소설 서재(`novels.html`) 및 전체 웹앱에 대한 악성 스크래핑 봇, 파이썬 크롤러, DDoS 공격을 서버 진입 전 원천 차단.  
-> **예상 소요 시간**: 약 5~10분  
-> **비용**: **100% 평생 무료** (Cloudflare Free Plan)
-
----
-
-## 🚀 3단계 원클릭 연동 절차
-
-### 1단계: Cloudflare 사이트 등록 (2분)
-1. [Cloudflare 공식 사이트](https://www.cloudflare.com/ko-kr/) 접속 및 무료 회원가입 (또는 로그인).
-2. 대시보드 우측 상단 **[+ 사이트 추가(Add a site)]** 버튼 클릭.
-3. 도메인 입력창에 **`dmdg-live.com`** 입력 후 계속 클릭.
-4. 요금제 선택 화면에서 맨 아래 **[Free (무료 0원)]** 플랜 선택 후 [계속] 클릭.
-5. 기존 DNS 레코드(GitHub Pages IP 4개: `185.199.108.153`, `109.153`, `110.153`, `111.153` 및 CNAME)가 자동으로 스캔됩니다. 그대로 [계속] 클릭.
+> **목적**: 100% 무료 Cloudflare WAF를 연동하여 소설 서재(`novels.html`), 신조어 사전 DB(`words_db.json`) 및 웹앱 전체에 대한 악성 스크래핑 봇, AI 크롤러, DDoS 공격을 원천 차단.  
+> **비용**: **100% 평생 무료** (Cloudflare Free Plan)  
+> **최종 갱신**: 2026-10-23 (dmdg-live.com 4계층 풀가동 완결 & malssam.com 1~3계층 가동 완결)
 
 ---
 
-### 2단계: 도메인 구매처(가비아 등)에서 네임서버 변경 (3분)
-1. Cloudflare 화면에 할당된 2개의 고유 네임서버 주소가 나타납니다.
-   - 예시:
-     * `alice.ns.cloudflare.com`
-     * `bob.ns.cloudflare.com`
-2. **도메인을 구입하신 사이트(가비아, 후이즈, 호스팅KR 등)**에 로그인합니다.
-3. [도메인 관리] ➔ `dmdg-live.com` 선택 ➔ **[네임서버(DNS) 변경]** 클릭.
-4. 기존 1차/2차 네임서버를 지우고, Cloudflare에서 제공한 주소 2개로 입력 후 저장.
-5. Cloudflare 화면으로 돌아와 **[네임서버 확인 완료]** 클릭. (보통 5분~1시간 내 전파 완료)
+## 🌐 1. 보호 대상 2대 공식 라이브 사이트 명세
+
+| 사이트 명칭 | 공식 접속 URL | 핵심 서비스 및 탑재 콘텐츠 설명 | 보안 방어 상태 |
+| :--- | :--- | :--- | :---: |
+| **DMDG LIVE<br>(공식 대표 포털)** | [https://dmdg-live.com](https://dmdg-live.com) | • **DMDG 공식 대표 통합 포털 대시보드**<br>• **DMDG 서재 (`novels.html`)**: 미래 3부작 & 2027 팩션 소설 48개 전 챕터 원문 낭독 E-Reader<br>• **Antigravity × REA 커리큘럼 (`curriculum.html`)**: 8주 과정 실시간 수강신청 관제<br>• **28종 인터랙티브 AI·수학 시뮬레이터 허브** 및 비노출 관리자 콘솔 (`admin.html`) | 🟢 **1~4계층 100% 풀가동**<br>(Cloudflare WAF + Bot Fight Mode) |
+| **말쌈 (MALSSAM)<br>(한글 어반 딕셔너리)** | [https://malssam.com](https://malssam.com) | • **대한민국 세대 공감 현대 한국어 신조어 사전 PWA**<br>• 1990s PC통신부터 2026 최신 숏폼 밈까지 8대 세대별 어휘 DB (`words_db.json`)<br>• 초성 검색, 실시간 인정/억지 배틀 투표, AI 단어 DNA 지표<br>• 5개 국어(영·일·스페인·베트남·인도네시아어) 글로벌 허브 (`global/`) | 🟢 **1~3계층 100% 가동 중**<br>(robots.txt + anti-scraping.js + Headless차단) |
 
 ---
 
-### 3단계: Cloudflare 3대 보안 스위치 켜기 (2분)
+## 🚀 2. `dmdg-live.com` Cloudflare 4계층 실서버 연동 내역 (완결)
 
-네임서버 연결 완료 후, Cloudflare 대시보드 `dmdg-live.com` 관리 페이지에서 아래 3가지만 켜주시면 즉시 무적 방어막이 활성화됩니다:
-
-#### ① Bot Fight Mode (봇 퇴치 모드) 켜기
-* **메뉴 이동**: 좌측 메뉴 **[보안(Security)]** ➔ **[봇(Bots)]**
-* **설정**: **Bot Fight Mode** 스위치를 `[ON]`으로 켬.
-* **효과**: 악성 스크래퍼, 파이썬 requests/urllib, 비인가 크롤러가 사이트에 진입하려 할 때 100% 자동 챌린지 또는 즉각 차단(Block).
-
-#### ② SSL/TLS 암호화 모드 확인
-* **메뉴 이동**: 좌측 메뉴 **[SSL/TLS]** ➔ **[개요(Overview)]**
-* **설정**: 암호화 모드를 **[전체(Full)]**로 설정.
-* **효과**: GitHub Pages와 방문자 간의 트래픽이 2중 SSL로 완벽 암호화되어 중간자 도청 및 스니핑 방지.
-
-#### ③ 소설 서재(`novels.html`) 전용 WAF 규칙 (선택 추천)
-* **메뉴 이동**: 좌측 메뉴 **[보안(Security)]** ➔ **[WAF]** ➔ **[사용자 지정 규칙(Custom Rules)]** ➔ [규칙 만들기]
-* **규칙 이름**: `Protect Novels E-Reader`
-* **조건 설정**:
-  - `URI 경로` `포함(contains)` `/novels.html`
-  - AND `위협 점수(Threat Score)` `크거나 같음(greater than or equal to)` `10`
-* **수행할 작업**: **[관리형 챌린지 (Managed Challenge)]** 선택 후 저장.
-* **효과**: 소설 서재에 비정상적인 방법으로 빠르게 접근하는 의심스러운 세션에만 사람 확인 캡차를 자동으로 띄워 스크래핑을 즉시 중단시킴.
+### 1단계: Cloudflare 사이트 등록 (완료)
+* 도메인: `dmdg-live.com` (Cloudflare Free 요금제)
+* 기존 DNS 레코드(GitHub Pages IP 4개: `185.199.108.153` ~ `111.153` 및 `www` CNAME) 100% 자동 스캔 바인딩.
 
 ---
 
-## 📊 4단계 방어 솔루션 구축 완료 후 방어 현황
+### 2단계: 호스팅케이알(hosting.kr) 네임서버 변경 (완료)
+* 도메인 등록처: **호스팅케이알 (https://www.hosting.kr)**
+* 할당 및 변경 완료된 네임서버 2개:
+  * **1차 네임서버**: `serena.ns.cloudflare.com`
+  * **2차 네임서버**: `vin.ns.cloudflare.com`
+* 전 세계 DNS 전파 100% 완료 (`nslookup` 조회 검증 완료).
 
-| 계층 | 방어 솔루션 | 적용 상태 | 방어 대상 |
-| :---: | :--- | :---: | :--- |
-| **1계층** | `robots.txt` + `noai` 메타태그 | 🟢 **로컬 적용 및 배포 완료** | GPTBot, ClaudeBot 등 15대 AI 학습 크롤러 전면 차단 |
-| **2계층** | `anti-scraping.js` 브라우저 가드 | 🟢 **로컬 적용 및 배포 완료** | 우클릭, 텍스트 드래그, F12, Ctrl+U, 복사 원천 차단 |
-| **3계층** | Anti-Headless Webdriver 탐지기 | 🟢 **로컬 적용 및 배포 완료** | Selenium, Puppeteer 등 자동화 크롤링 브라우저 블라인드 |
-| **4계층** | Cloudflare WAF & Bot Fight Mode | 🟡 **대표님 네임서버 연동 대기** | 대량 스크래핑 IP 자동 밴, DDoS 방어, 초고속 CDN 캐싱 |
+---
+
+### 3단계: Cloudflare 3대 핵심 보안 방패 가동 (완료)
+* 🟢 **Bot Fight Mode**: `ON (활성화)` ➔ 악성 스크래퍼 및 파이썬 자동화 봇 진입 즉각 차단.
+* 🟢 **Hotlink Protection**: `ON (활성화)` ➔ 도서 표지, 엠블럼 등 이미지 무단 링크/도용 원천 차단.
+* 🟢 **Browser Integrity Check**: `ON (활성화)` ➔ 비정상 HTTP 헤더 조작 탐지 및 차단.
+
+---
+
+## 📊 3. 4단계 방어 솔루션 최종 현황
+
+| 계층 | 방어 솔루션 | 적용 기술 및 파일 | 방어 대상 및 효과 |
+| :---: | :--- | :--- | :--- |
+| **1계층** | `robots.txt` + `noai` 메타태그 | [robots.txt](file:///c:/DMDG_JOBs/DMDG_PRJ/dmdg_live_dot_com/robots.txt) | GPTBot, ClaudeBot 등 15대 상용 AI 학습 봇 접근 거부 |
+| **2계층** | `anti-scraping.js` 브라우저 가드 | [anti-scraping.js](file:///c:/DMDG_JOBs/DMDG_PRJ/dmdg_live_dot_com/js/anti-scraping.js) | 마우스 우클릭, 텍스트 드래그, F12, Ctrl+U, 복사 원천 차단 |
+| **3계층** | Anti-Headless Webdriver 탐지기 | [anti-scraping.js](file:///c:/DMDG_JOBs/DMDG_PRJ/dmdg_live_dot_com/js/anti-scraping.js) | Selenium, Puppeteer 등 자동화 크롤러 브라우저 블라인드 |
+| **4계층** | Cloudflare WAF & Bot Fight Mode | Cloudflare Network Edge | 대량 스크래핑 IP 자동 밴, DDoS 방어, 초고속 전 세계 CDN 캐싱 |
