@@ -64,7 +64,7 @@
   - 수집 필드: 이름, 연락처(010-XXXX-XXXX 자동 하이픈 포맷), 지역(17개 시도), 내일배움카드 소지 여부.
   - Firebase Firestore (`rea_course_applications` 컬렉션) 및 LocalStorage dual-write 회복 탄력성 저장 구조.
 * **관리자 전용 대시보드 (`admin.html`)**:
-  - 인증: ID `DMDG` / PW `ekdahrekarmf`.
+  - 인증: ID `DMDG-LIVE` / SHA-256 보안 해시 인증.
   - 실시간 신청자 집계, 20명 달성 여부 게이지, 전체 명단 테이블, UTF-8 BOM 엑셀 CSV 원클릭 내보내기 지원.
 
 ### 5. DMDG 서재(E-Reader) 미래 3부작 연동 및 위키독스 정비
@@ -99,7 +99,7 @@
 | :--- | :--- | :--- |
 | `/index.html` (`/`) | DMDG LIVE 메인 대시보드 | 3열 5개 카드 제한, 실시간 검색, 과정 신청 모달 탑재 |
 | `/curriculum.html` | Antigravity × REA 상세 커리큘럼 | 8주차 강의계획서 전문, 시간표, 강의장 위치 안내, 신청 링크 |
-| `/admin.html` | 수강 신청자 관리자 콘솔 | 로그인 인증(DMDG/ekdahrekarmf), 실시간 DB 통계, CSV 다운로드 |
+| `/admin.html` | 수강 신청자 관리자 콘솔 | 비노출 전용 콘솔, SHA-256 보안 해시 인증(DMDG-LIVE), 실시간 DB 통계, CSV 다운로드 |
 | `/novels.html` | DMDG 서재 (E-Reader) | 팩션 소설 및 미래 3부작 48개 챕터 낭독기 + TTS |
 | `/sim_mcp_explorer.html`| REA × MCP Protocol Inspector | JSON-RPC 2.0 패킷 트레이서, 3대 AI 스위처, 시뮬레이터 |
 | `/sim_master_hub.html` | 28종 수학·AI 시뮬레이터 허브 | 20종 수학 알고리즘 및 8대 프로덕션 시뮬레이터 통합 관제 |
@@ -109,9 +109,9 @@
 
 ## 🔐 보안 및 인증 정보 요약
 * **관리자 로그인**:
-  - URL: `https://dmdg-live.com/admin.html`
-  - ID: `DMDG`
-  - PW: `ekdahrekarmf`
+  - URL: `https://dmdg-live.com/admin.html` (공개 상단 네비게이션 버튼 비노출 격리)
+  - ID: `DMDG-LIVE`
+  - 인증 방식: SHA-256 보안 해시 매칭 및 5회 실패 시 5분 계정 잠금 방어
 * **데이터베이스**:
   - Firebase Firestore: `rea_course_applications` 컬렉션
   - LocalStorage 백업: `dmdg_rea_applications` 키로 이중 안전 보관

@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
   <title>DMDG 관리자 콘솔 | Antigravity × REA 과정 & 포털 통합 관리</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -30,7 +32,7 @@
 <body class="antialiased min-h-screen pb-16 relative overflow-x-hidden">
 
   <!-- =========================================================================
-       1. Admin Login Overlay (아이디: DMDG / 비번: ekdahrekarmf)
+       1. Admin Login Overlay
        ========================================================================= -->
   <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center backdrop-blur-md px-4">
     <div class="glass-card-elevated p-8 max-w-md w-full glow-gold shadow-2xl">
@@ -49,7 +51,7 @@
         <div>
           <label for="loginAdminId" class="block text-xs font-bold text-slate-300 mb-1">관리자 아이디</label>
           <div class="relative">
-            <input type="text" id="loginAdminId" value="DMDG" autocomplete="username" placeholder="아이디: DMDG" 
+            <input type="text" id="loginAdminId" value="" autocomplete="username" placeholder="관리자 아이디" 
                    onkeydown="if(event.key==='Enter'){event.preventDefault();handleAdminLogin(event);}"
                    class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 focus:border-amber-500 rounded-xl text-white placeholder-slate-500 text-sm outline-none transition-all">
           </div>
@@ -58,7 +60,7 @@
         <div>
           <label for="loginAdminPw" class="block text-xs font-bold text-slate-300 mb-1">비밀번호</label>
           <div class="relative">
-            <input type="password" id="loginAdminPw" value="ekdahrekarmf" autocomplete="current-password" placeholder="비밀번호: ekdahrekarmf" 
+            <input type="password" id="loginAdminPw" value="" autocomplete="current-password" placeholder="비밀번호" 
                    onkeydown="if(event.key==='Enter'){event.preventDefault();handleAdminLogin(event);}"
                    class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 focus:border-amber-500 rounded-xl text-white placeholder-slate-500 text-sm outline-none transition-all">
           </div>
@@ -72,10 +74,6 @@
         <button type="button" onclick="handleAdminLogin(event)" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-sm mt-2 active:scale-95 cursor-pointer">
           <i data-lucide="lock" class="w-4 h-4"></i>
           관리자 로그인
-        </button>
-
-        <button type="button" onclick="revealDashboard()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition-all border border-slate-700 flex items-center justify-center gap-2 text-xs">
-          <span>⚡ 로그인 없이 대시보드 바로 진입하기</span>
         </button>
       </form>
 
@@ -843,10 +841,17 @@
     if (window.lucide) lucide.createIcons();
 
     // ── Admin Credentials & Authentication ──────────────────────────────────
-    const ADMIN_CREDENTIALS = {
-      id: "DMDG",
-      pw: "ekdahrekarmf"
-    };
+    // SHA-256("ID:PW") — 평문 비밀번호를 소스에 두지 않음.
+    // 변경 시: python -c "import hashlib;print(hashlib.sha256('DMDG-LIVE:새비번'.encode()).hexdigest())"
+    const ADMIN_CRED_HASH = "583251fdc2c82bdc735697c5d2081e7a651f06bcc55d55b3be9f11f989f0c612";
+    const LOGIN_MAX_FAILS = 5;
+    const LOGIN_LOCK_MS = 5 * 60 * 1000;
+
+    async function sha256Hex(text) {
+      const data = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
 
     function checkExistingAuth() {
       const isAuth = sessionStorage.getItem('dmdg_admin_authenticated');
@@ -855,26 +860,51 @@
       }
     }
 
-    function handleAdminLogin(e) {
+    async function handleAdminLogin(e) {
       if (e && typeof e.preventDefault === 'function') e.preventDefault();
       const idEl = document.getElementById('loginAdminId');
       const pwEl = document.getElementById('loginAdminPw');
-      const inputId = (idEl && idEl.value ? idEl.value : '').trim();
+      const inputId = (idEl && idEl.value ? idEl.value : '').trim().toUpperCase();
       const inputPw = (pwEl && pwEl.value ? pwEl.value : '').trim();
       const errorMsg = document.getElementById('loginErrorMsg');
+      const errorText = document.getElementById('loginErrorText');
 
-      // Seamless login: accepts original ekdahrekarmf or simple 1234 (or click with default DMDG)
-      const isMatch = (inputId.toUpperCase() === "DMDG" || !inputId) && 
-                      (inputPw === "ekdahrekarmf" || inputPw === "1234" || inputPw === "");
+      // 무차별 대입(브루트포스) 완화: 5회 실패 시 5분 잠금
+      const lockUntil = parseInt(localStorage.getItem('dmdg_admin_lock_until') || '0', 10);
+      if (Date.now() < lockUntil) {
+        const remain = Math.ceil((lockUntil - Date.now()) / 60000);
+        if (errorMsg) errorMsg.classList.remove('hidden');
+        if (errorText) errorText.textContent = `로그인 시도가 너무 많습니다. ${remain}분 후 다시 시도하세요.`;
+        return;
+      }
+
+      let isMatch = false;
+      if (inputId && inputPw) {
+        try {
+          isMatch = (await sha256Hex(`${inputId}:${inputPw}`)) === ADMIN_CRED_HASH;
+        } catch (err) {
+          console.warn('Hash error:', err);
+        }
+      }
 
       if (isMatch) {
+        localStorage.removeItem('dmdg_admin_fail_count');
+        localStorage.removeItem('dmdg_admin_lock_until');
         sessionStorage.setItem('dmdg_admin_authenticated', 'true');
         if (errorMsg) errorMsg.classList.add('hidden');
         revealDashboard();
       } else {
+        const fails = parseInt(localStorage.getItem('dmdg_admin_fail_count') || '0', 10) + 1;
+        localStorage.setItem('dmdg_admin_fail_count', String(fails));
+        if (fails >= LOGIN_MAX_FAILS) {
+          localStorage.setItem('dmdg_admin_lock_until', String(Date.now() + LOGIN_LOCK_MS));
+          localStorage.setItem('dmdg_admin_fail_count', '0');
+        }
         if (errorMsg) errorMsg.classList.remove('hidden');
-        document.getElementById('loginErrorText').textContent = '아이디 또는 비밀번호가 일치하지 않습니다.';
-        if (pwEl) { pwEl.focus(); pwEl.select(); }
+        if (errorText) errorText.textContent = fails >= LOGIN_MAX_FAILS
+          ? '5회 실패로 5분간 로그인이 잠깁니다.'
+          : `아이디 또는 비밀번호가 일치하지 않습니다. (${fails}/${LOGIN_MAX_FAILS})`;
+        if (pwEl) { pwEl.value = ''; pwEl.focus(); }
       }
     }
 

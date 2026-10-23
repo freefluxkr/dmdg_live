@@ -42,8 +42,8 @@ DMDG LIVE(`dmdg-live.com`)는 사람과 마음을 연결하는 이어읽기 플�
    - 목표 20명 달성 프로그레스 바 실시간 연동 (20명 이상 신청 시 정식 개강).
    - 신청 데이터 이중 보관: **Firebase Firestore (`rea_course_applications`) + LocalStorage fallback**.
 3. **관리자 콘솔 (`admin.html`)**:
-   - URL: `https://dmdg-live.com/admin.html`
-   - 인증: ID `DMDG` / PW `ekdahrekarmf`
+   - URL: `https://dmdg-live.com/admin.html` (공개 네비게이션 버튼 비노출, 직접 URL 접속)
+   - 인증: ID `DMDG-LIVE` / SHA-256 보안 해시 인증 (브루트포스 5회 실패 시 5분 잠금)
    - 실시간 신청자 명단 조회, 20명 개강 여부 배지, **UTF-8 BOM 지원 엑셀 CSV 원클릭 다운로드**.
 
 ---
