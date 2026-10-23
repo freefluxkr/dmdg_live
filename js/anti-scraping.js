@@ -15,17 +15,27 @@
 
   // ── 1. Anti-Headless & Automated Scraping Bot Detection ─────────────────────
   function detectHeadlessBrowser() {
+    // 관리자 페이지(admin.html)에서는 관리자 접속 편의를 위해 차단 검사 면제
+    if (window.location && window.location.pathname && window.location.pathname.includes('admin.html')) {
+      return;
+    }
+
+    // 모바일 기기(Android, iOS, Samsung Internet 등)는 플러그인이 없는 모바일 표준 브라우저이므로 차단 면제
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|SamsungBrowser/i.test(navigator.userAgent || '');
+    if (isMobileDevice) {
+      return;
+    }
+
+    // 명시적인 Selenium / Puppeteer / PhantomJS 자동화 환경만 안전하게 식별
     const isHeadless = !!(
-      navigator.webdriver ||
+      navigator.webdriver === true ||
       window.__webdriver_evaluate ||
       window.__selenium_evaluate ||
       window.__webdriver_script_fn ||
       document.__selenium_unwrapped ||
       document.__webdriver_evaluate ||
       window.callPhantom ||
-      window._phantom ||
-      (window.Buffer && typeof window.Buffer.from === 'function') ||
-      (window.chrome && !window.chrome.runtime && navigator.plugins && navigator.plugins.length === 0)
+      window._phantom
     );
 
     if (isHeadless) {
