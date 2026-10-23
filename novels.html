@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DMDG 서재 | 미래 베스트셀러 3부작 & 2027 팩션 컬렉션</title>
   <meta name="description" content="위키독스 화제의 미래 3부작(K-오피스·멀티에이전트·글로벌 SaaS)과 거장들의 지정학 팩션 소설을 한자리에서 만나는 프리미엄 몰입형 E-Reader">
+  <meta name="robots" content="noai, noimageai, nofollow">
+  <script src="js/anti-scraping.js?v=20261023_shield"></script>
   <style>
 /* ==============================================================================
    DMDG 서재 (Novel Lounge) - Design System & Styling
@@ -1758,20 +1760,57 @@ const NOVELS_DATA = [
     }, duration);
   }
 
-  // iOS Safari / Chrome 동기적 오디오 세션 언락
+  // ── iOS 오디오 세션 승격 (무음 모드에서도 낭독이 들리도록) ─────────────────
+  // iOS WebKit(사파리/크롬 공통)은 Web Speech 출력을 '벨소리/무음 스위치'에 종속된
+  // ambient 세션으로 재생합니다. 무음 모드면 소리가 0이 됩니다.
+  // 사용자 탭 안에서 무음 <audio>를 루프 재생하면 세션이 'playback'으로 승격되어
+  // 무음 모드에서도 낭독이 스피커/이어폰으로 출력됩니다.
+  let iosSilentKeeper = null;
+
+  function buildSilentWavUrl() {
+    // 0.5초 8kHz 8bit mono 무음 WAV를 런타임 생성 (외부 파일 불필요)
+    const sampleRate = 8000, samples = 4000;
+    const buf = new Uint8Array(44 + samples);
+    const dv = new DataView(buf.buffer);
+    const w = (o, s) => { for (let i = 0; i < s.length; i++) buf[o + i] = s.charCodeAt(i); };
+    w(0, 'RIFF'); dv.setUint32(4, 36 + samples, true); w(8, 'WAVE');
+    w(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+    dv.setUint32(24, sampleRate, true); dv.setUint32(28, sampleRate, true);
+    dv.setUint16(32, 1, true); dv.setUint16(34, 8, true);
+    w(36, 'data'); dv.setUint32(40, samples, true);
+    buf.fill(128, 44); // 8bit PCM 무음 기준값
+    let bin = '';
+    buf.forEach(b => { bin += String.fromCharCode(b); });
+    return 'data:audio/wav;base64,' + btoa(bin);
+  }
+
+  // 반드시 사용자 터치 이벤트 핸들러 안에서 '동기적으로' 호출되어야 함
   function unlockIosAudio() {
-    if (!STATE.tts.synth) return;
     try {
-      const unlockUtter = new SpeechSynthesisUtterance(' ');
-      unlockUtter.volume = 0.01;
-      unlockUtter.rate = 2.0;
-      STATE.tts.synth.speak(unlockUtter);
-      if (STATE.tts.synth.paused) {
-        STATE.tts.synth.resume();
+      // Safari 17+ Audio Session API: 무음 스위치 무시하는 재생 카테고리
+      if (navigator.audioSession) {
+        navigator.audioSession.type = 'playback';
       }
+    } catch (e) {}
+    try {
+      if (!iosSilentKeeper) {
+        iosSilentKeeper = new Audio(buildSilentWavUrl());
+        iosSilentKeeper.loop = true;
+        iosSilentKeeper.setAttribute('playsinline', '');
+        iosSilentKeeper.preload = 'auto';
+      }
+      const p = iosSilentKeeper.play();
+      if (p && p.catch) p.catch(err => console.warn('Silent keeper blocked:', err));
     } catch (e) {
       console.warn('Audio unlock warning:', e);
     }
+    try {
+      if (STATE.tts.synth && STATE.tts.synth.paused) STATE.tts.synth.resume();
+    } catch (e) {}
+  }
+
+  function releaseIosAudio() {
+    try { if (iosSilentKeeper) iosSilentKeeper.pause(); } catch (e) {}
   }
 
   function loadVoices() {
@@ -1826,10 +1865,13 @@ const NOVELS_DATA = [
 
     ttsCurrentIdx = Math.max(0, Math.min(startFromIdx, ttsParagraphs.length - 1));
 
-    // 기존 발화 큐 정리
+    // 기존 발화 큐 정리 (iOS는 큐가 비어있을 때 cancel()을 호출하면 직후 speak()가 유실될 수 있어,
+    // 실제로 재생/대기 중인 발화가 있을 때만 cancel)
+    let hadActiveSpeech = false;
     if (STATE.tts.synth) {
       try {
-        STATE.tts.synth.cancel();
+        hadActiveSpeech = STATE.tts.synth.speaking || STATE.tts.synth.pending;
+        if (!isIOS || hadActiveSpeech) STATE.tts.synth.cancel();
       } catch (e) {
         console.warn('Cancel error:', e);
       }
@@ -1844,28 +1886,30 @@ const NOVELS_DATA = [
 
     // 아이폰 환경 안내 토스트
     if (isIOS) {
-      showTtsToast('🎧 AI 낭독 시작 (💡 아이폰 진동 스위치가 켜져 있으면 소리가 나지 않습니다)');
+      showTtsToast('🎧 AI 낭독 시작 (💡 소리가 작으면 측면 볼륨 버튼을 올려주세요)');
     }
 
-    // iOS WebKit은 cancel() 직후 speak() 호출 시 큐가 증발하므로 60ms 딜레이 부여
-    const startDelay = isIOS ? 60 : 0;
-    setTimeout(() => {
+    // Chrome 데스크톱 전용 슬립 방지 타이머 (iOS WebKit에서는 pause 호출 시 프리징되므로 제외)
+    if (!isIOS) {
+      ttsKeepAliveTimer = setInterval(() => {
+        if (STATE.tts.isPlaying && STATE.tts.synth && STATE.tts.synth.speaking) {
+          STATE.tts.synth.pause();
+          STATE.tts.synth.resume();
+        }
+      }, 10000);
+    }
+
+    // iOS: 첫 발화는 반드시 사용자 탭과 같은 호출 스택(동기)에서 speak() 해야 오디오 권한이 유지됨.
+    // 이전에 재생 중이던 발화를 cancel 한 경우에만 큐 증발 방지용 짧은 딜레이 사용.
+    if (isIOS && hadActiveSpeech) {
+      setTimeout(() => {
+        ttsIsStarting = false;
+        if (STATE.tts.isPlaying) speakNextParagraph();
+      }, 80);
+    } else {
       ttsIsStarting = false;
-      if (!STATE.tts.isPlaying) return;
-
-      // Chrome 데스크톱 전용 15초 슬립 방지 타이머 (iOS WebKit에서는 pause 호출 시 프리징되므로 제외)
-      if (!isIOS) {
-        clearInterval(ttsKeepAliveTimer);
-        ttsKeepAliveTimer = setInterval(() => {
-          if (STATE.tts.isPlaying && STATE.tts.synth && STATE.tts.synth.speaking) {
-            STATE.tts.synth.pause();
-            STATE.tts.synth.resume();
-          }
-        }, 10000);
-      }
-
       speakNextParagraph();
-    }, startDelay);
+    }
   }
 
   function speakNextParagraph() {
@@ -1944,6 +1988,7 @@ const NOVELS_DATA = [
     if (window.__dmdgActiveUtterances) {
       window.__dmdgActiveUtterances.clear();
     }
+    if (isIOS) releaseIosAudio();
     if (ttsParagraphs && ttsParagraphs.length > 0) {
       ttsParagraphs.forEach(p => p.classList.remove('audio-speaking'));
     }

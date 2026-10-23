@@ -1,0 +1,81 @@
+# ==============================================================================
+# DMDG LIVE (https://dmdg-live.com) Anti-Scraping & Anti-AI Crawler Robots Policy
+# Protected by DMDG Studio Intellectual Property Policy
+# ==============================================================================
+
+User-agent: *
+Disallow: /admin.html
+Disallow: /novels.html
+Disallow: /curriculum.html
+Disallow: /scm_dashboard.html
+Disallow: /assets/
+Disallow: /js/
+
+# ------------------------------------------------------------------------------
+# 1. Commercial AI Training & LLM Scraper Bots (Strict Disallow)
+# ------------------------------------------------------------------------------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Cohere-ai
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+# ------------------------------------------------------------------------------
+# 2. Automated Scraping Frameworks & HTTP Libraries
+# ------------------------------------------------------------------------------
+User-agent: Scrapy
+Disallow: /
+
+User-agent: python-requests
+Disallow: /
+
+User-agent: aiohttp
+Disallow: /
+
+User-agent: httpx
+Disallow: /
+
+User-agent: Wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
