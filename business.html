@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사업자 정보 고지 | DMDG LIVE</title>
+  <meta name="description" content="당목담글(DMDG) 공식 사업자 등록 정보 및 국세청 사업자등록증명">
+  <link rel="icon" type="image/png" href="./assets/dmdg_logo_emblem.png">
+  <link rel="stylesheet" href="./style.css?v=20261025_legal">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #070D1E; color: #F1F5F9; font-family: 'Pretendard', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+    .page-box { max-width: 920px; margin: 40px auto 80px auto; padding: 40px; background: #0F172A; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); width: 90%; }
+    h1 { font-size: 26px; font-weight: 800; color: #FFFFFF; border-bottom: 2px solid #00A896; padding-bottom: 14px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .badge-check { font-size: 13px; font-weight: 700; background: rgba(16,185,129,0.15); color: #34D399; border: 1px solid #10B981; padding: 4px 12px; border-radius: 9999px; }
+    .info-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .info-table th, .info-table td { padding: 14px 18px; border: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
+    .info-table th { background: rgba(30,41,59,0.8); color: #94A3B8; width: 28%; font-weight: 700; }
+    .info-table td { background: rgba(15,23,42,0.5); color: #F8FAFC; }
+    
+    .cert-preview-card { margin-top: 30px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(0, 168, 150, 0.3); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .cert-preview-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .btn-view-cert { background: #00A896; color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; border: none; }
+    .btn-view-cert:hover { background: #02C39A; }
+    
+    .legal-footer { background: #050811; border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 28px 24px; margin-top: auto; text-align: center; font-size: 13px; color: #64748B; }
+    .legal-footer a { color: #94A3B8; margin: 0 8px; text-decoration: none; }
+    .legal-footer a:hover { color: #00A896; text-decoration: underline; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(5px); }
+    .modal-content { max-width: 720px; width: 92%; max-height: 90vh; overflow-y: auto; background: #0F172A; border: 1px solid #00A896; border-radius: 16px; padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+    .modal-content img { width: 100%; border-radius: 8px; display: block; }
+  </style>
+</head>
+<body>
+  <!-- Header Bar -->
+  <div style="background:#0B1B3D; padding:14px 24px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center;">
+    <a href="./" style="display:flex; align-items:center; gap:8px; text-decoration:none; color:#fff; font-weight:800;">
+      <img src="./assets/dmdg_logo_emblem.png" style="width:28px; height:28px; border-radius:50%;"> DMDG LIVE
+    </a>
+    <div style="display:flex; gap:14px; align-items:center;">
+      <a href="./compliance.html" style="color:#00A896; text-decoration:none; font-weight:700; font-size:13.5px;"><i class="fa-solid fa-shield-halved"></i> 5대 심사 현황판</a>
+      <a href="./store.html" style="color:#F59E0B; text-decoration:none; font-weight:700; font-size:13.5px;"><i class="fa-solid fa-store"></i> 스토어</a>
+      <a href="./" style="color:#94a3b8; text-decoration:none; font-size:13.5px;"><i class="fa-solid fa-house"></i> 포털 홈</a>
+    </div>
+  </div>
+
+  <main class="page-box">
+    <h1>
+      <span>🏢 사업자 정보 고지 (Business Information)</span>
+      <span class="badge-check"><i class="fa-solid fa-check"></i> 국세청 공식 등록 확인 완료 (PASS)</span>
+    </h1>
+    <p style="color:#94A3B8; font-size:14.5px; line-height:1.6; margin-bottom:20px;">
+      전자상거래 등에서의 소비자보호에 관한 법률 제13조(신원 및 거래조건에 대한 정보의 제공)에 따라 당목담글(DMDG)의 국세청 사업자등록증명 공식 신원정보를 투명하게 고지합니다.
+    </p>
+
+    <table class="info-table">
+      <tr>
+        <th>상호명 (법인/사업자명)</th>
+        <td><strong>당목담글 (DMDG)</strong></td>
+      </tr>
+      <tr>
+        <th>대표자 성명</th>
+        <td><strong>강기훈</strong></td>
+      </tr>
+      <tr>
+        <th>사업자등록번호</th>
+        <td>
+          <strong style="color:#38BDF8; font-size:16px;">345-06-03765</strong>
+          <span style="color:#10b981; font-size:12px; margin-left:8px; font-weight:700;">[국세청 홈택스 등록 완료]</span>
+        </td>
+      </tr>
+      <tr>
+        <th>과세 유형</th>
+        <td><strong>간이과세자</strong></td>
+      </tr>
+      <tr>
+        <th>업태 / 종목</th>
+        <td><strong>정보통신업</strong> / <strong>포털 및 기타 인터넷 정보 매개 서비스업</strong></td>
+      </tr>
+      <tr>
+        <th>사업장 소재지</th>
+        <td><strong>경기도 고양시 일산동구 중산로 60, 201동 1002호 (중산동, 일산2차아이파크)</strong></td>
+      </tr>
+      <tr>
+        <th>개업연월일</th>
+        <td><strong>2026년 04월 01일</strong> (사업자등록일: 2026년 04월 21일)</td>
+      </tr>
+      <tr>
+        <th>관할 세무서</th>
+        <td><strong>고양세무서</strong> (민원봉사실: 031-900-9235 | 발급번호: 6320-069-2171-303)</td>
+      </tr>
+      <tr>
+        <th>대표 전화번호</th>
+        <td><strong>010-2470-2926</strong> (평일 09:30 ~ 18:00)</td>
+      </tr>
+      <tr>
+        <th>공식 대표 이메일</th>
+        <td><a href="mailto:dmdg.official@gmail.com" style="color:#38bdf8; text-decoration:none;"><strong>dmdg.official@gmail.com</strong></a></td>
+      </tr>
+      <tr>
+        <th>공식 도메인</th>
+        <td>
+          <a href="https://dmdg-live.com" target="_blank" style="color:#02C39A; text-decoration:none;">https://dmdg-live.com</a> &amp; 
+          <a href="https://malssam.com" target="_blank" style="color:#F77F00; text-decoration:none;">https://malssam.com</a>
+        </td>
+      </tr>
+      <tr>
+        <th>호스팅 서비스 제공자</th>
+        <td>GitHub Inc., Cloudflare Inc. &amp; Google Cloud Platform</td>
+      </tr>
+    </table>
+
+    <!-- Certificate Card -->
+    <div class="cert-preview-card">
+      <div class="cert-preview-header">
+        <div>
+          <h3 style="color:#02C39A; margin:0 0 4px 0; font-size:16px;"><i class="fa-solid fa-file-invoice"></i> 국세청 사업자등록증명 원본 확인</h3>
+          <p style="color:#94A3B8; margin:0; font-size:13px;">국세청 홈택스(Hometax) 민원사무처리규정 제6호 서식에 의거 정식 발급된 사업자등록증명</p>
+        </div>
+        <button class="btn-view-cert" onclick="openCertModal()">
+          <i class="fa-solid fa-magnifying-glass-plus"></i> 원본 증명서 열람
+        </button>
+      </div>
+      <div style="background:#070D1E; border-radius:8px; padding:12px; display:flex; align-items:center; gap:16px;">
+        <img src="./assets/business_certificate.jpg" alt="국세청 사업자등록증명 썸네일" style="width:70px; height:90px; object-fit:cover; border-radius:4px; border:1px solid rgba(255,255,255,0.2); cursor:pointer;" onclick="openCertModal()">
+        <div style="font-size:13px; color:#CBD5E1; line-height:1.6;">
+          • 발급기관: 국세청 고양세무서장<br>
+          • 접수번호: 505191128847<br>
+          • 상태: 정상 사업 영위 및 전자상거래 결제 연동 완료
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Certificate Modal -->
+  <div id="certModal" class="modal-overlay" onclick="closeCertModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="color:#fff; margin:0; font-size:16px;"><i class="fa-solid fa-certificate" style="color:#00A896;"></i> 국세청 사업자등록증명 원본</h4>
+        <button onclick="closeCertModal()" style="background:none; border:none; color:#94a3b8; font-size:24px; cursor:pointer;">&times;</button>
+      </div>
+      <img src="./assets/business_certificate.jpg" alt="사업자등록증명 원본">
+    </div>
+  </div>
+
+  <script>
+    function openCertModal() { document.getElementById('certModal').style.display = 'flex'; }
+    function closeCertModal() { document.getElementById('certModal').style.display = 'none'; }
+  </script>
+
+  <!-- Legal Footer -->
+  <footer class="legal-footer">
+    <div style="margin-bottom: 12px;">
+      <a href="./business.html" style="color:#00A896; font-weight:700;">사업자정보확인</a> |
+      <a href="./terms.html">서비스이용약관</a> |
+      <a href="./privacy.html">개인정보처리방침</a> |
+      <a href="./refund.html">취소및환불정책</a> |
+      <a href="./store.html">디지털스토어</a> |
+      <a href="./compliance.html">심사현황판</a>
+    </div>
+    <div>
+<div>
+      상호명(상호): 당목담글 | 대표자명(대표자): 강기훈 | 사업자등록번호(사업자번호): 345-06-03765 | 과세유형: 간이과세자<br>
+      사업장 주소: 경기도 고양시 일산동구 중산로 60, 201동 1002호 | 유선번호(대표전화): 010-2470-2926 / 031-900-9235<br>
+      대표이메일: dmdg.official@gmail.com | Copyright © 2026 DMDG (당목담글). All Rights Reserved.
+    </div>
+    </div>
+  </footer>
+</body>
+</html>

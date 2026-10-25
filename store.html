@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공식 디지털 스토어 | DMDG LIVE</title>
+  <meta name="description" content="당목담글(DMDG) 공식 디지털 스토어 - 18종 AI 시뮬레이터 소스코드, 기술 e-Book 및 엔터프라이즈 강의">
+  <link rel="icon" type="image/png" href="./assets/dmdg_logo_emblem.png">
+  <link rel="stylesheet" href="./style.css?v=20261025_legal">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #070D1E; color: #F1F5F9; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+    .store-container { max-width: 1140px; margin: 30px auto 80px auto; padding: 0 20px; width: 100%; box-sizing: border-box; }
+    
+    .store-header { background: linear-gradient(135deg, rgba(11, 27, 61, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%); border: 1px solid rgba(0, 168, 150, 0.3); border-radius: 16px; padding: 32px 36px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .store-title h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 800; color: #FFFFFF; display: flex; align-items: center; gap: 12px; }
+    .store-title p { margin: 0; color: #94A3B8; font-size: 14.5px; }
+    .badge-status { background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #34D399; font-size: 13.5px; font-weight: 700; padding: 8px 16px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 8px; }
+    
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; margin-bottom: 40px; }
+    .product-card { background: #0F172A; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; position: relative; }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(0, 168, 150, 0.6); box-shadow: 0 12px 30px rgba(0, 168, 150, 0.15); }
+    
+    .product-thumb { height: 160px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+    .product-thumb i { font-size: 56px; color: #02C39A; }
+    .tag-category { position: absolute; top: 12px; left: 12px; background: rgba(7, 13, 30, 0.8); backdrop-filter: blur(4px); font-size: 11px; font-weight: 700; color: #38BDF8; padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .tag-instant { position: absolute; top: 12px; right: 12px; background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid #10B981; }
+
+    .product-info { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .product-name { font-size: 17px; font-weight: 700; color: #FFFFFF; margin: 0 0 8px 0; line-height: 1.4; }
+    .product-desc { font-size: 13px; color: #94A3B8; line-height: 1.5; margin: 0 0 16px 0; flex: 1; }
+    
+    .product-meta { background: rgba(30, 41, 59, 0.5); border-radius: 8px; padding: 10px 12px; margin-bottom: 16px; font-size: 12px; color: #CBD5E1; }
+    .product-meta div { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    .product-meta div:last-child { margin-bottom: 0; }
+    
+    .price-wrap { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 12px; }
+    .price-krw { font-size: 20px; font-weight: 800; color: #34D399; }
+    .price-usd { font-size: 13px; color: #94A3B8; font-weight: 500; }
+    
+    .btn-buy { background: #00A896; color: #FFFFFF; border: none; padding: 12px 16px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s ease; width: 100%; text-decoration: none; }
+    .btn-buy:hover { background: #02C39A; }
+    .btn-paypal { background: #FFC439; color: #003087; }
+    .btn-paypal:hover { background: #F4B400; color: #002060; }
+    
+    .compliance-notice { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 22px; font-size: 13.5px; color: #94A3B8; line-height: 1.7; }
+    
+    .legal-footer { background: #050811; border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 28px 24px; margin-top: auto; text-align: center; font-size: 13px; color: #64748B; }
+    .legal-footer a { color: #94A3B8; margin: 0 8px; text-decoration: none; }
+    .legal-footer a:hover { color: #00A896; text-decoration: underline; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(4px); }
+    .modal-box { background: #0F172A; border: 1px solid #00A896; border-radius: 16px; max-width: 480px; width: 90%; padding: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+  </style>
+</head>
+<body>
+  <!-- Header Bar -->
+  <div style="background:#0B1B3D; padding:14px 24px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center;">
+    <a href="./" style="display:flex; align-items:center; gap:8px; text-decoration:none; color:#fff; font-weight:800;">
+      <img src="./assets/dmdg_logo_emblem.png" style="width:28px; height:28px; border-radius:50%;"> DMDG LIVE
+    </a>
+    <div style="display:flex; gap:14px; align-items:center;">
+      <a href="./compliance.html" style="color:#00A896; text-decoration:none; font-weight:700; font-size:13.5px;"><i class="fa-solid fa-shield-halved"></i> 5대 심사 현황판</a>
+      <a href="./" style="color:#94a3b8; text-decoration:none; font-size:13.5px;"><i class="fa-solid fa-house"></i> 포털 홈</a>
+    </div>
+  </div>
+
+  <div class="store-container">
+    <!-- Store Header -->
+    <div class="store-header">
+      <div class="store-title">
+        <h1><span>🛍️ DMDG 디지털 스토어</span></h1>
+        <p>인공지능 실무 시뮬레이터 소스코드, 기술 e-Book 및 엔터프라이즈 아키텍처 코스 공식 마켓플레이스</p>
+      </div>
+      <div>
+        <span class="badge-status">
+          <i class="fa-solid fa-circle-check"></i> 상품 등록 유무: 정상 등록 (PASS)
+        </span>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid">
+      <!-- Item 1 -->
+      <div class="product-card">
+        <div class="product-thumb">
+          <span class="tag-category">풀패키지 소스코드</span>
+          <span class="tag-instant">즉시 다운로드</span>
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">18종 AI 시뮬레이터 & 실무 코드 풀 패키지</h3>
+          <p class="product-desc">CNN, RNN, LSTM, Transformer, GAN 등 18개 인터랙티브 시뮬레이터 및 22개 실무 수학 알고리즘 스탠드얼론 HTML/JS 풀 소스코드</p>
+          <div class="product-meta">
+            <div><span>제공 형태:</span> <strong>ZIP 압축파일 + 상용 라이선스</strong></div>
+            <div><span>버전:</span> <strong>v2026.10 Official</strong></div>
+            <div><span>환불 규정:</span> <strong>다운로드 전 7일 100%</strong></div>
+          </div>
+          <div class="price-wrap">
+            <span class="price-krw">₩9,900</span>
+            <span class="price-usd">(약 $7.90 USD)</span>
+          </div>
+          <button class="btn-buy btn-paypal" onclick="openOrderModal('18종 AI 시뮬레이터 풀 패키지', '9,900', '$7.90')">
+            <i class="fa-brands fa-paypal"></i> PayPal 즉시 결제
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="product-card">
+        <div class="product-thumb">
+          <span class="tag-category">기술 도서 e-Book</span>
+          <span class="tag-instant">PDF & EPUB</span>
+          <i class="fa-solid fa-book-open-reader" style="color:#38BDF8;"></i>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">2026 대한민국 AI 트렌드 & 팩션 소설 e-Book</h3>
+          <p class="product-desc">당목담글 연재작 및 2026 AI 에이전트 엔지니어링 실무 분석 리포트 통합 전자책 소장본 패키지</p>
+          <div class="product-meta">
+            <div><span>제공 형태:</span> <strong>고화질 PDF + EPUB 전자책</strong></div>
+            <div><span>분량:</span> <strong>총 420페이지 분량</strong></div>
+            <div><span>환불 규정:</span> <strong>열람 전 7일 100%</strong></div>
+          </div>
+          <div class="price-wrap">
+            <span class="price-krw">₩19,000</span>
+            <span class="price-usd">(약 $14.90 USD)</span>
+          </div>
+          <button class="btn-buy btn-paypal" onclick="openOrderModal('2026 대한민국 AI 트렌드 e-Book', '19,000', '$14.90')">
+            <i class="fa-brands fa-paypal"></i> PayPal 즉시 결제
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="product-card">
+        <div class="product-thumb">
+          <span class="tag-category">엔터프라이즈 코스</span>
+          <span class="tag-instant">VOD 무제한</span>
+          <i class="fa-solid fa-graduation-cap" style="color:#A78BFA;"></i>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Google Antigravity × REA 마스터 클래스</h3>
+          <p class="product-desc">자율 AI 에이전트 오케스트레이션, MCP 아키텍처 및 프롬프트 파이프라인 실전 구축 온라인 코스</p>
+          <div class="product-meta">
+            <div><span>제공 형태:</span> <strong>온라인 VOD + 실습 샌드박스</strong></div>
+            <div><span>수강 기간:</span> <strong>결제일로부터 1년 무제한</strong></div>
+            <div><span>환불 규정:</span> <strong>수강 개시 전 100% 환불</strong></div>
+          </div>
+          <div class="price-wrap">
+            <span class="price-krw">₩89,000</span>
+            <span class="price-usd">(약 $69.00 USD)</span>
+          </div>
+          <button class="btn-buy btn-paypal" onclick="openOrderModal('Antigravity × REA 마스터 클래스', '89,000', '$69.00')">
+            <i class="fa-brands fa-paypal"></i> PayPal 즉시 결제
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="product-card">
+        <div class="product-thumb">
+          <span class="tag-category">멤버십 & 후원</span>
+          <span class="tag-instant">전체 부록 해금</span>
+          <i class="fa-solid fa-mug-hot" style="color:#F59E0B;"></i>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">당목담글 개발팀 커피 후원 & VIP 멤버십</h3>
+          <p class="product-desc">위키독스 전체 도서의 [원클릭 다운로드] 리워드 즉시 잠금 해제 및 개발팀 프라이빗 채널 초대권</p>
+          <div class="product-meta">
+            <div><span>제공 형태:</span> <strong>VIP 패스코드 즉시 발급</strong></div>
+            <div><span>유효 기간:</span> <strong>월간 구독 또는 1회 후원</strong></div>
+            <div><span>환불 규정:</span> <strong>코드 미사용 시 7일 내 전액</strong></div>
+          </div>
+          <div class="price-wrap">
+            <span class="price-krw">₩4,900</span>
+            <span class="price-usd">(약 $3.90 USD)</span>
+          </div>
+          <button class="btn-buy btn-paypal" onclick="openOrderModal('개발팀 커피 후원 & VIP 멤버십', '4,900', '$3.90')">
+            <i class="fa-brands fa-paypal"></i> PayPal 커피 후원
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compliance Notification Box -->
+    <div class="compliance-notice">
+      <h4 style="color:#FFFFFF; margin-top:0; font-size:15px; margin-bottom:8px;"><i class="fa-solid fa-circle-info" style="color:#00A896;"></i> 전자상거래 구매 안전 및 소비자 보호 안내</h4>
+      <p style="margin-bottom:6px;">• 본 스토어에서 판매되는 모든 디지털 상품은 전자상거래법 및 관계 법령을 철저히 준수합니다.</p>
+      <p style="margin-bottom:6px;">• 결제는 글로벌 보안 표준(PCI-DSS Level 1)을 준수하는 PayPal 안전 결제망을 통해 처리되며, 신용카드 번호 등 민감 정보는 판매자 서버에 저장되지 않습니다.</p>
+      <p style="margin-bottom:0;">• 주문 취소 및 환불은 <a href="./refund.html" style="color:#38BDF8; font-weight:700;">취소 및 환불정책</a>에 의거하여 다운로드 전 7일 이내 100% 보장되며, 문의는 <a href="mailto:dmdg.official@gmail.com" style="color:#02C39A;">dmdg.official@gmail.com</a> 또는 010-2470-2926으로 연락주시기 바랍니다.</p>
+    </div>
+  </div>
+
+  <!-- Order Modal -->
+  <div id="orderModal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 id="modalProdTitle" style="color:#fff; margin:0; font-size:18px;">주문 확인 및 결제</h3>
+        <button onclick="closeOrderModal()" style="background:none; border:none; color:#94a3b8; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+      <div style="background:rgba(30,41,59,0.5); padding:16px; border-radius:10px; margin-bottom:20px;">
+        <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">선택 상품: <strong id="modalProdName" style="color:#fff;">-</strong></div>
+        <div style="font-size:16px; color:#34d399; font-weight:800;">결제 금액: <span id="modalProdPrice">-</span> <span id="modalProdUsd" style="font-size:13px; color:#94a3b8; font-weight:400;"></span></div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:13px; color:#94a3b8; display:block; margin-bottom:6px;">수령 이메일 주소 (다운로드 링크 및 라이선스키 발송용)</label>
+        <input type="email" id="buyerEmail" placeholder="your_email@example.com" style="width:100%; box-sizing:border-box; background:#070D1E; border:1px solid rgba(255,255,255,0.2); padding:10px 14px; border-radius:8px; color:#fff; font-size:14px;">
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <label style="font-size:12.5px; color:#cbd5e1; display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
+          <input type="checkbox" id="termsCheck" checked style="margin-top:3px;">
+          <span><a href="./terms.html" target="_blank" style="color:#38bdf8;">이용약관</a> 및 <a href="./refund.html" target="_blank" style="color:#38bdf8;">환불정책</a>에 동의하며 디지털 상품 즉시 제공에 동의합니다.</span>
+        </label>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button class="btn-buy btn-paypal" onclick="processPayPalPayment()">
+          <i class="fa-brands fa-paypal"></i> PayPal 안전 결제 진행
+        </button>
+        <button class="btn-buy" style="background:#1E293B;" onclick="closeOrderModal()">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openOrderModal(name, krw, usd) {
+      document.getElementById('modalProdName').innerText = name;
+      document.getElementById('modalProdPrice').innerText = '₩' + krw;
+      document.getElementById('modalProdUsd').innerText = '(' + usd + ')';
+      document.getElementById('orderModal').style.display = 'flex';
+    }
+    function closeOrderModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+    function processPayPalPayment() {
+      var email = document.getElementById('buyerEmail').value.trim();
+      if (!email || email.indexOf('@') === -1) {
+        alert('다운로드 링크 및 라이선스 키를 수령하실 유효한 이메일 주소를 입력해 주세요.');
+        document.getElementById('buyerEmail').focus();
+        return;
+      }
+      if (!document.getElementById('termsCheck').checked) {
+        alert('이용약관 및 환불정책에 동의해 주세요.');
+        return;
+      }
+      alert('【PayPal 결제 안내】\n공식 비즈니스 계정(dmdg.official@gmail.com) 결제 세션으로 안전하게 연결됩니다.\n\n수령 이메일: ' + email + '\n\n※ 결제 완료 후 즉시 다운로드 링크와 정품 인증 코드가 이메일로 전송됩니다.');
+      // PayPal 공식 비즈니스 결제 링크 또는 샌드박스 연동
+      window.open('https://www.paypal.com/paypalme/dmdgofficial', '_blank');
+      closeOrderModal();
+    }
+  </script>
+
+  <!-- Legal Footer -->
+  <footer class="legal-footer">
+    <div style="margin-bottom: 12px;">
+      <a href="./business.html">사업자정보확인</a> |
+      <a href="./terms.html">서비스이용약관</a> |
+      <a href="./privacy.html">개인정보처리방침</a> |
+      <a href="./refund.html">취소및환불정책</a> |
+      <a href="./store.html" style="color:#00A896; font-weight:700;">디지털스토어</a> |
+      <a href="./compliance.html">심사현황판</a>
+    </div>
+    <div>
+<div>
+      상호명(상호): 당목담글 | 대표자명(대표자): 강기훈 | 사업자등록번호(사업자번호): 345-06-03765 | 과세유형: 간이과세자<br>
+      사업장 주소: 경기도 고양시 일산동구 중산로 60, 201동 1002호 | 유선번호(대표전화): 010-2470-2926 / 031-900-9235<br>
+      대표이메일: dmdg.official@gmail.com | Copyright © 2026 DMDG (당목담글). All Rights Reserved.
+    </div>
+    </div>
+  </footer>
+</body>
+</html>
