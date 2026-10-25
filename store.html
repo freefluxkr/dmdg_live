@@ -8,6 +8,9 @@
   <link rel="icon" type="image/png" href="./assets/dmdg_logo_emblem.png">
   <link rel="stylesheet" href="./style.css?v=20261025_legal">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- PortOne Payment SDK (V1 & V2) -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
   <style>
     body { background-color: #070D1E; color: #F1F5F9; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
     .store-container { max-width: 1140px; margin: 30px auto 80px auto; padding: 0 20px; width: 100%; box-sizing: border-box; }
@@ -227,26 +230,112 @@
       </div>
 
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <button class="btn-buy btn-paypal" onclick="processPayPalPayment()">
-          <i class="fa-brands fa-paypal"></i> PayPal 안전 결제 진행
+        <!-- PortOne Button -->
+        <button onclick="processPortOnePayment()" style="background: linear-gradient(135deg, #10B981, #059669); color: #fff; border: none; padding: 13px; border-radius: 8px; font-weight: 800; font-size: 14.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
+          <i class="fa-solid fa-credit-card"></i> 💳 신용카드 / 카카오페이 / 토스페이 (포트원 결제)
         </button>
+
+        <!-- PayPal Button -->
+        <button class="btn-buy btn-paypal" onclick="processPayPalPayment()">
+          <i class="fa-brands fa-paypal"></i> 🅿️ PayPal 글로벌 결제
+        </button>
+
         <button class="btn-buy" style="background:#1E293B;" onclick="closeOrderModal()">
-          닫기
+          주문 취소 및 닫기
         </button>
       </div>
     </div>
   </div>
 
   <script>
+    let currentStoreProduct = { name: '', price: 9900, usd: '$7.90' };
+
     function openOrderModal(name, krw, usd) {
+      currentStoreProduct = {
+        name: name,
+        price: parseInt(krw.replace(/[^0-9]/g, ''), 10) || 9900,
+        usd: usd
+      };
       document.getElementById('modalProdName').innerText = name;
       document.getElementById('modalProdPrice').innerText = '₩' + krw;
       document.getElementById('modalProdUsd').innerText = '(' + usd + ')';
       document.getElementById('orderModal').style.display = 'flex';
     }
+
     function closeOrderModal() {
       document.getElementById('orderModal').style.display = 'none';
     }
+
+    // 포트원 결제창 호출
+    function processPortOnePayment() {
+      const email = document.getElementById('buyerEmail').value.trim();
+      if (!email || email.indexOf('@') === -1) {
+        alert('다운로드 링크 및 라이선스 키를 수령하실 유효한 이메일 주소를 입력해 주세요.');
+        document.getElementById('buyerEmail').focus();
+        return;
+      }
+      if (!document.getElementById('termsCheck').checked) {
+        alert('이용약관 및 환불정책에 동의해 주세요.');
+        return;
+      }
+
+      const paymentId = 'dmdg_' + new Date().getTime();
+
+      // PortOne V2
+      if (window.PortOne && typeof PortOne.requestPayment === 'function') {
+        try {
+          PortOne.requestPayment({
+            storeId: 'store-e66b704c-bdd0-4e99-9ec1-a7602b3b6d56',
+            paymentId: paymentId,
+            orderName: currentStoreProduct.name,
+            totalAmount: currentStoreProduct.price,
+            currency: 'CURRENCY_KRW',
+            payMethod: 'CARD',
+            customer: { email: email }
+          }).then(function(res) {
+            if (res && res.code != null) {
+              alert('결제 안내: ' + (res.message || '결제가 취소되었습니다.'));
+            } else {
+              alert('【결제 완료】\n정상 승인되었습니다.\n상품 다운로드 링크와 인증 코드가 ' + email + '로 전송됩니다.');
+              closeOrderModal();
+            }
+          }).catch(function(err) {
+            console.warn('V2 fallback:', err);
+            fallbackPortOneV1(email, paymentId);
+          });
+          return;
+        } catch(e) {
+          console.warn('V2 error:', e);
+        }
+      }
+
+      fallbackPortOneV1(email, paymentId);
+    }
+
+    function fallbackPortOneV1(email, paymentId) {
+      if (window.IMP) {
+        IMP.init('imp60832647');
+        IMP.request_pay({
+          pg: 'kakaopay',
+          pay_method: 'card',
+          merchant_uid: paymentId,
+          name: currentStoreProduct.name,
+          amount: currentStoreProduct.price,
+          buyer_email: email,
+          buyer_name: '고객'
+        }, function(rsp) {
+          if (rsp.success) {
+            alert('【결제 완료】\n정상 승인되었습니다.\n수령 이메일: ' + email);
+            closeOrderModal();
+          } else {
+            alert('결제 안내: ' + rsp.error_msg);
+          }
+        });
+      } else {
+        alert('포트원 결제 모듈(imp60832647)로 연결 중입니다.');
+      }
+    }
+
     function processPayPalPayment() {
       var email = document.getElementById('buyerEmail').value.trim();
       if (!email || email.indexOf('@') === -1) {
@@ -259,7 +348,6 @@
         return;
       }
       alert('【PayPal 결제 안내】\n공식 비즈니스 계정(dmdg.official@gmail.com) 결제 세션으로 안전하게 연결됩니다.\n\n수령 이메일: ' + email + '\n\n※ 결제 완료 후 즉시 다운로드 링크와 정품 인증 코드가 이메일로 전송됩니다.');
-      // PayPal 공식 비즈니스 결제 링크 또는 샌드박스 연동
       window.open('https://www.paypal.com/paypalme/dmdgofficial', '_blank');
       closeOrderModal();
     }

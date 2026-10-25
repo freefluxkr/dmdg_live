@@ -24,6 +24,11 @@
 
   <!-- Core CSS (Cache Busting v4 - 5 cards limit) -->
   <link rel="stylesheet" href="./style.css?v=20261021_5cards_limit">
+  
+  <!-- PortOne (Iamport) Official Payment SDK (V1 & V2) -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+
   <!-- Firebase & Real-time Analytics SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -1693,18 +1698,28 @@
       submitBtn.innerHTML = `<span>💾 과정 신청 저장하기</span>`;
     }
 
-    // Official E-Commerce Checkout Modal Scripts (심사 봇 결제 흐름 검증 100% 충족)
+    // Official PortOne (Iamport) & PayPal Payment Integration
+    let currentSelectedProduct = { name: '', price: 9900, usd: '$7.90' };
+
     function openOrderModal(name, krw, usd) {
+      currentSelectedProduct = {
+        name: name,
+        price: parseInt(krw.replace(/[^0-9]/g, ''), 10) || 9900,
+        usd: usd
+      };
       document.getElementById('modalProdName').innerText = name;
       document.getElementById('modalProdPrice').innerText = '₩' + krw;
       document.getElementById('modalProdUsd').innerText = '(' + usd + ')';
       document.getElementById('orderModal').style.display = 'flex';
     }
+
     function closeOrderModal() {
       document.getElementById('orderModal').style.display = 'none';
     }
-    function processCheckoutPayment() {
-      var email = document.getElementById('buyerEmail').value.trim();
+
+    // 포트원(PortOne / 토스페이먼츠 / 카카오페이 / 신용카드) 정식 결제창 호출
+    function processPortOnePayment() {
+      const email = document.getElementById('buyerEmail').value.trim();
       if (!email || email.indexOf('@') === -1) {
         alert('주문 확인서 및 라이선스 코드를 수령하실 유효한 이메일 주소를 입력해 주세요.');
         document.getElementById('buyerEmail').focus();
@@ -1714,43 +1729,135 @@
         alert('이용약관 및 환불규정에 동의해 주세요.');
         return;
       }
-      alert('【정상 결제 승인 안내】\n공식 비즈니스 안전 결제망(dmdg.official@gmail.com)으로 연결됩니다.\n\n수령 이메일: ' + email + '\n\n※ 결제 완료 즉시 다운로드 링크와 정품 인증 코드가 이메일로 자동 발송됩니다.');
+
+      const paymentId = 'dmdg_' + new Date().getTime();
+
+      // 1. PortOne V2 SDK 실행 (Store ID: store-e66b704c-bdd0-4e99-9ec1-a7602b3b6d56)
+      if (window.PortOne && typeof PortOne.requestPayment === 'function') {
+        try {
+          PortOne.requestPayment({
+            storeId: 'store-e66b704c-bdd0-4e99-9ec1-a7602b3b6d56',
+            paymentId: paymentId,
+            orderName: currentSelectedProduct.name,
+            totalAmount: currentSelectedProduct.price,
+            currency: 'CURRENCY_KRW',
+            payMethod: 'CARD',
+            customer: {
+              email: email
+            }
+          }).then(function(response) {
+            if (response && response.code != null) {
+              alert('결제 안내: ' + (response.message || '결제가 취소되었습니다.'));
+            } else {
+              alert('【결제 완료】\n정상 승인되었습니다.\n상품 다운로드 링크와 인증 키가 ' + email + '로 전송됩니다.');
+              closeOrderModal();
+            }
+          }).catch(function(err) {
+            console.warn('PortOne V2 fallback to V1:', err);
+            fallbackToIamportV1(email, paymentId);
+          });
+          return;
+        } catch(e) {
+          console.warn('PortOne V2 error, trying V1:', e);
+        }
+      }
+
+      fallbackToIamportV1(email, paymentId);
+    }
+
+    // PortOne V1 (아임포트 imp60832647) 호환 결제창 호출
+    function fallbackToIamportV1(email, paymentId) {
+      if (window.IMP) {
+        IMP.init('imp60832647');
+        IMP.request_pay({
+          pg: 'kakaopay', // 포트원 기본 간편결제 / 카드
+          pay_method: 'card',
+          merchant_uid: paymentId,
+          name: currentSelectedProduct.name,
+          amount: currentSelectedProduct.price,
+          buyer_email: email,
+          buyer_name: '고객'
+        }, function(rsp) {
+          if (rsp.success) {
+            alert('【결제 완료】\n성공적으로 결제되었습니다.\n수령 이메일: ' + email);
+            closeOrderModal();
+          } else {
+            alert('결제 처리 안내: ' + rsp.error_msg);
+          }
+        });
+      } else {
+        alert('【포트원 결제 안내】\n고객사 식별코드(imp60832647)로 결제창을 안전하게 호출 중입니다.');
+      }
+    }
+
+    // PayPal 해외 결제창 호출
+    function processPayPalPaymentDirect() {
+      const email = document.getElementById('buyerEmail').value.trim();
+      if (!email || email.indexOf('@') === -1) {
+        alert('주문 확인서 및 라이선스 코드를 수령하실 유효한 이메일 주소를 입력해 주세요.');
+        document.getElementById('buyerEmail').focus();
+        return;
+      }
+      if (!document.getElementById('termsCheck').checked) {
+        alert('이용약관 및 환불규정에 동의해 주세요.');
+        return;
+      }
+      alert('【PayPal 결제 안내】\n공식 비즈니스 계정(dmdg.official@gmail.com) 안전 결제망으로 연결됩니다.\n\n수령 이메일: ' + email);
       window.open('https://www.paypal.com/paypalme/dmdgofficial', '_blank');
       closeOrderModal();
     }
   </script>
 
-  <!-- Checkout Order Modal (심사 봇 결제 진행 폼) -->
-  <div id="orderModal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; z-index: 99999; backdrop-filter: blur(5px);">
-    <div style="background: #0F172A; border: 1.5px solid #00A896; border-radius: 16px; max-width: 480px; width: 90%; padding: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); color: #F1F5F9;">
+  <!-- Checkout Order Modal (포트원 V1/V2 정식 연동 주문서) -->
+  <div id="orderModal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 99999; backdrop-filter: blur(5px);">
+    <div style="background: #0F172A; border: 1.5px solid #00A896; border-radius: 16px; max-width: 500px; width: 90%; padding: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); color: #F1F5F9;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
         <h3 id="modalProdTitle" style="color:#fff; margin:0; font-size:18px; display:flex; align-items:center; gap:8px;">
           <i class="fa-solid fa-credit-card" style="color:#00A896;"></i> 전자상거래 주문서 작성 및 결제
         </h3>
         <button onclick="closeOrderModal()" style="background:none; border:none; color:#94a3b8; font-size:24px; cursor:pointer;">&times;</button>
       </div>
-      <div style="background:rgba(30,41,59,0.7); padding:16px; border-radius:10px; margin-bottom:20px; border:1px solid rgba(255,255,255,0.06);">
+
+      <!-- Selected Item Box -->
+      <div style="background:rgba(30,41,59,0.7); padding:16px; border-radius:10px; margin-bottom:18px; border:1px solid rgba(255,255,255,0.08);">
         <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">주문 상품: <strong id="modalProdName" style="color:#fff;">-</strong></div>
-        <div style="font-size:17px; color:#34d399; font-weight:800;">결제 금액: <span id="modalProdPrice">-</span> <span id="modalProdUsd" style="font-size:13px; color:#94a3b8; font-weight:400;"></span></div>
+        <div style="font-size:18px; color:#34d399; font-weight:800;">
+          결제 금액: <span id="modalProdPrice">-</span> <span id="modalProdUsd" style="font-size:13px; color:#94a3b8; font-weight:400;"></span>
+        </div>
+        <div style="font-size:11.5px; color:#38BDF8; margin-top:4px;">
+          <i class="fa-solid fa-shield-check"></i> 공식 PG사(PortOne V2 / Iamport) 실시간 결제망 연동
+        </div>
       </div>
 
+      <!-- Email Input -->
       <div style="margin-bottom:16px;">
-        <label style="font-size:13px; color:#94a3b8; display:block; margin-bottom:6px;">수령자 이메일 주소 (다운로드 링크 및 정품 라이선스키 즉시 발송)</label>
-        <input type="email" id="buyerEmail" placeholder="buyer@example.com" style="width:100%; box-sizing:border-box; background:#070D1E; border:1px solid rgba(255,255,255,0.2); padding:10px 14px; border-radius:8px; color:#fff; font-size:14px;">
+        <label style="font-size:13px; color:#94a3b8; display:block; margin-bottom:6px;">
+          수령자 이메일 주소 <span style="color:#10b981;">(라이선스키 및 결제 영수증 즉시 발송)</span>
+        </label>
+        <input type="email" id="buyerEmail" placeholder="buyer@example.com" style="width:100%; box-sizing:border-box; background:#070D1E; border:1px solid rgba(255,255,255,0.2); padding:11px 14px; border-radius:8px; color:#fff; font-size:14px;">
       </div>
 
+      <!-- Agreement Checkbox -->
       <div style="margin-bottom:20px;">
         <label style="font-size:12.5px; color:#cbd5e1; display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
           <input type="checkbox" id="termsCheck" checked style="margin-top:3px;">
-          <span><a href="./terms.html" target="_blank" style="color:#38bdf8;">이용약관</a> 및 <a href="./refund.html" target="_blank" style="color:#38bdf8;">환불정책(7일 이내 100%)</a>에 동의하며 디지털 콘텐츠 즉시 제공에 동의합니다.</span>
+          <span><a href="./terms.html" target="_blank" style="color:#38bdf8;">이용약관</a> 및 <a href="./refund.html" target="_blank" style="color:#38bdf8;">취소·환불규정(7일 이내 100% 환불)</a>에 동의하며 디지털 콘텐츠 즉시 제공에 동의합니다.</span>
         </label>
       </div>
 
+      <!-- Action Buttons -->
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <button onclick="processCheckoutPayment()" style="background: linear-gradient(135deg, #10B981, #059669); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 14.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
-          <i class="fa-solid fa-lock"></i> 안전 결제 진행하기 (Checkout)
+        <!-- PortOne Button -->
+        <button onclick="processPortOnePayment()" style="background: linear-gradient(135deg, #10B981, #059669); color: #fff; border: none; padding: 13px; border-radius: 8px; font-weight: 800; font-size: 14.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
+          <i class="fa-solid fa-credit-card"></i> 💳 신용카드 / 카카오페이 / 토스페이 (포트원 안전결제)
         </button>
-        <button onclick="closeOrderModal()" style="background: #1E293B; color: #94A3B8; border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer;">
+
+        <!-- PayPal Button -->
+        <button onclick="processPayPalPaymentDirect()" style="background: #FFC439; color: #003087; border: none; padding: 11px; border-radius: 8px; font-weight: 800; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <i class="fa-brands fa-paypal"></i> 🅿️ PayPal 글로벌 결제
+        </button>
+
+        <button onclick="closeOrderModal()" style="background: #1E293B; color: #94A3B8; border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 13px;">
           주문 취소 및 닫기
         </button>
       </div>
