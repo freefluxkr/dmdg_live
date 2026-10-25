@@ -462,6 +462,16 @@
         <a href="#tab-store" onclick="switchTab('store')" class="card-btn">스토어 보기 ➔</a>
       </div>
 
+      <!-- 6. 위험업종 및 불가업종 비해당 -->
+      <div class="checklist-card">
+        <div>
+          <span class="card-status-badge badge-pass"><i class="fa-solid fa-circle-check"></i> 6. 업종 적격성 (PASS)</span>
+          <div class="card-title">위험/불가업종 비해당</div>
+          <div class="card-detail">성인, 도박, 유사수신, 코인환전 등 결제 금지/유의 업종 일체 비해당 (순수 IT 소프트웨어·교육)</div>
+        </div>
+        <a href="#tab-safe" onclick="switchTab('safe')" class="card-btn">업종 검증 ➔</a>
+      </div>
+
     </section>
 
     <!-- Tab Navigation -->
@@ -480,6 +490,9 @@
       </button>
       <button class="tab-btn" onclick="switchTab('store')" id="btn-tab-store">
         <i class="fa-solid fa-cart-shopping"></i> 5. 등록 상품 &amp; 결제 카탈로그
+      </button>
+      <button class="tab-btn" onclick="switchTab('safe')" id="btn-tab-safe">
+        <i class="fa-solid fa-shield-virus"></i> 6. 위험/불가업종 검증 (PASS)
       </button>
     </div>
 
@@ -722,6 +735,80 @@
           </a>
         </div>
 
+      </div>
+    </section>
+
+    <!-- TAB 6: 위험업종 및 불가업종 비해당 검증 (PASS) -->
+    <section class="tab-panel" id="tab-safe">
+      <h2>
+        <span>🛡️ 결제 금지(불가) 및 위험(유의) 업종 비해당 공식 검증 (PASS)</span>
+        <span style="font-size: 13px; font-weight: 700; background: rgba(16,185,129,0.15); color: #34D399; border: 1px solid #10B981; padding: 4px 12px; border-radius: 9999px;">
+          적격 일반 업종 (PASS)
+        </span>
+      </h2>
+      <p>
+        당목담글(DMDG)은 대한민국 여신전문금융업법, 전자상거래법 및 주요 결제 대행사(토스페이먼츠, NHN KCP, KG이니시스, PayPal 등)의 가맹점 심사 기준에 의거하여, 아래와 같이 <strong>불가업종 및 위험업종에 일체 해당하지 않는 합법적인 소프트웨어 개발 및 IT 교육 콘텐츠 사업자</strong>임을 공식 확약합니다.
+      </p>
+
+      <table class="info-table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <th style="width: 28%;">심사 구분 항목</th>
+            <th style="width: 52%;">세부 검토 기준 및 대상</th>
+            <th style="width: 20%; text-align: center;">적격 판정 결과</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>불가업종 (금지업종)</strong></td>
+            <td>
+              • 마약, 향정신성의약품 및 미승인 의약품 판매<br>
+              • 성인물, 음란물 및 청소년 유해매체물<br>
+              • 도박, 사행성 게임, 복권 및 경마/카지노<br>
+              • 총포, 도검, 화약류 등 무기류 판매<br>
+              • 담배, 주류 등 통신판매 금지 품목<br>
+              • 가상자산(암호화폐/코인) 거래 및 불법 외환 송금<br>
+              • 유사수신행위, 다단계 및 폰지사기성 금융
+            </td>
+            <td style="text-align: center; vertical-align: middle;">
+              <span style="color: #34D399; font-weight: 800; font-size: 14px;"><i class="fa-solid fa-circle-check"></i> 일체 비해당<br>(PASS)</span>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>위험업종 (유의업종)</strong></td>
+            <td>
+              • 선불전자지급수단, 문화상품권 등 현금성 유가증권<br>
+              • 무대가성 불법 기부금 및 비인가 후원금 모집<br>
+              • 고액 장기 미인도 여행/항공권 상품 (취소 리스크)<br>
+              • 중고차, 렌터카 및 리스 금융 중개<br>
+              • 고수익 보장 투자 자문 및 주식/코인 리딩방
+            </td>
+            <td style="text-align: center; vertical-align: middle;">
+              <span style="color: #34D399; font-weight: 800; font-size: 14px;"><i class="fa-solid fa-circle-check"></i> 일체 비해당<br>(PASS)</span>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>실제 영위 사업 성격</strong></td>
+            <td>
+              • <strong>한국표준산업분류:</strong> 정보통신업 / 소프트웨어 개발 및 공급업 (58221)<br>
+              • <strong>주요 취급 재화/용역:</strong><br>
+                - AI/머신러닝 인터랙티브 시뮬레이터 소스코드 영구 라이선스 (ZIP 다운로드)<br>
+                - 공학 기술 도서 및 IT 트렌드 분석 리포트 전자책 (PDF/EPUB e-Book)<br>
+                - 자율 AI 에이전트 엔지니어링 온라인 VOD 교육 코스<br>
+                - 실무 소스코드 리워드 즉시 열람권이 포함된 개발팀 서포터즈 디지털 멤버십
+            </td>
+            <td style="text-align: center; vertical-align: middle;">
+              <span style="color: #38BDF8; font-weight: 800; font-size: 14px;"><i class="fa-solid fa-square-check"></i> 정상 적격<br>(100% 승인 대상)</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background: rgba(0, 168, 150, 0.08); border: 1px solid rgba(0, 168, 150, 0.3); border-radius: 12px; padding: 20px; margin-top: 20px;">
+        <h4 style="color: #00A896; margin: 0 0 8px 0; font-size: 15px;"><i class="fa-solid fa-file-shield"></i> 가맹점 대표자 확약서</h4>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.7; color: #CBD5E1;">
+          "당목담글(대표자: 강기훈)은 등록된 사업자등록증명(345-06-03765)에 기재된 정보통신업 및 포털·소프트웨어 개발 업태의 범위 내에서 순수 소프트웨어 소스코드와 교육용 전자출판물만을 취급하며, 관계 법령에 위배되는 불법 유해 상품이나 환금성 재화를 일체 취급하지 않음을 서약합니다."
+        </p>
       </div>
     </section>
 
