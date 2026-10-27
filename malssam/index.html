@@ -434,6 +434,37 @@
       box-sizing: border-box;
     }
 
+        .live-battle-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-rotate-battle {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #f8fafc;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-rotate-battle:hover {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: #f43f5e;
+      color: #f43f5e;
+      transform: translateY(-1px);
+    }
+
     .live-battle-tag {
       display: inline-flex;
       align-items: center;
@@ -1867,42 +1898,47 @@
   </section>
 
   <!-- ⚔️ 바이럴 킬러 콘텐츠: 세대 공감 배틀 퀴즈 (Family & Office Battle) -->
-    <!-- 🔥 오늘의 말쌈 배틀 (LIVE BATTLE #01) -->
+      <!-- 🔥 오늘의 말쌈 배틀 (LIVE BATTLE 15종 풀 & 동적 순환) -->
   <section class="live-battle-section">
     <div class="live-battle-card">
-      <div class="live-battle-tag">🔥 LIVE BATTLE #01 · 실시간 말투 밸런스 게임</div>
-      <h2 class="live-battle-q">팀장님 공지에 신입이 <span style="color:#facc15;">"네."</span>라고 답장했다면?</h2>
-      <p class="live-battle-desc">물결(`~`)이나 느낌표(`!`) 없이 마침표만 찍힌 단답, 과연 사회생활 마이너스일까요?</p>
+      <div class="live-battle-header">
+        <div class="live-battle-tag" id="liveBattleTag">🔥 LIVE BATTLE · 실시간 말투 밸런스 게임</div>
+        <button class="btn-rotate-battle" onclick="nextLiveBattle()" title="다른 밸런스 게임 보기">
+          🔄 다른 밸런스 게임 보기 (<span id="liveBattleCount">1/15</span>)
+        </button>
+      </div>
+      <h2 class="live-battle-q" id="liveBattleQ">팀장님 공지에 신입이 <span style="color:#facc15;">"네."</span>라고 답장했다면?</h2>
+      <p class="live-battle-desc" id="liveBattleDesc">물결(`~`)이나 느낌표(`!`) 없이 마침표만 찍힌 단답, 과연 사회생활 마이너스일까요?</p>
 
       <div class="live-battle-grid">
         <div class="live-vote-btn" id="liveBtnA" onclick="voteLiveBattle('A')">
-          <div class="live-vote-title">🅰️ 마침표는 차갑고 화난 것 같다… '넵!' 또는 '네~'가 기본이다</div>
+          <div class="live-vote-title" id="liveVoteTitleA">🅰️ 마침표는 차갑고 화난 것 같다… '넵!' 또는 '네~'가 기본이다</div>
           <div>
             <div class="live-vote-pct">
               <span id="livePctA">76% 투표</span>
-              <span style="color:#f43f5e; font-weight:800;">예의중시파</span>
+              <span id="liveLabelA" style="color:#f43f5e; font-weight:800;">예의중시파</span>
             </div>
             <div class="live-vote-gauge-wrap">
-              <div class="live-vote-gauge gauge-a" id="liveGaugeA"></div>
+              <div class="live-vote-gauge gauge-a" id="liveGaugeA" style="width: 76%;"></div>
             </div>
           </div>
         </div>
 
         <div class="live-vote-btn" id="liveBtnB" onclick="voteLiveBattle('B')">
-          <div class="live-vote-title">🅱️ 맞춤법 맞게 대답한 건데 뭐가 문제? 마침표 과몰입 금지</div>
+          <div class="live-vote-title" id="liveVoteTitleB">🅱️ 맞춤법 맞게 대답한 건데 뭐가 문제? 마침표 과몰입 금지</div>
           <div>
             <div class="live-vote-pct">
               <span id="livePctB">24% 투표</span>
-              <span style="color:#38bdf8; font-weight:800;">효율실용파</span>
+              <span id="liveLabelB" style="color:#38bdf8; font-weight:800;">효율실용파</span>
             </div>
             <div class="live-vote-gauge-wrap">
-              <div class="live-vote-gauge gauge-b" id="liveGaugeB"></div>
+              <div class="live-vote-gauge gauge-b" id="liveGaugeB" style="width: 24%;"></div>
             </div>
           </div>
         </div>
       </div>
       <div id="liveVoteResultMsg" style="margin-top:12px; font-size:0.8rem; color:#facc15; font-weight:700; display:none; text-align:center;">
-        ✨ 집단지성 투표 반영 완료! (현재 참여자: 1,429명) — 카톡 단톡방에 공유하고 동료 의견도 확인해보세요!
+        ✨ 집단지성 투표 반영 완료! — 카톡 단톡방에 공유하고 동료 의견도 확인해보세요!
       </div>
     </div>
   </section>
@@ -7819,33 +7855,343 @@
       }
     ];
 
-    // Live Battle Vote Logic
-    function voteLiveBattle(choice) {
+        // ⚔️ 15종 오피스·세대갈등·카톡 말투 밸런스 게임 마스터 풀
+    const LIVE_BATTLES_POOL = [
+      {
+        id: "battle_1",
+        num: "#01",
+        tag: "🔥 LIVE BATTLE #01 · 마침표 vs 느낌표",
+        question: '팀장님 공지에 신입이 <span style="color:#facc15;">"네."</span>라고 답장했다면?',
+        desc: "물결(`~`)이나 느낌표(`!`) 없이 마침표만 찍힌 단답, 과연 사회생활 마이너스일까요?",
+        optA: "🅰️ 마침표는 차갑고 화난 것 같다… '넵!' 또는 '네~'가 기본이다",
+        optB: "🅱️ 맞춤법 맞게 대답한 건데 뭐가 문제? 마침표 과몰입 금지",
+        labelA: "예의중시파", labelB: "효율실용파",
+        pctA: 76, pctB: 24, votes: 3420,
+        toastA: '🅰️ "마침표는 차갑다" 선택 완료! 당신은 상위 12% 예의중시파입니다.',
+        toastB: '🅱️ "맞춤법 맞다" 선택 완료! 당신은 상위 18% 효율실용파입니다.'
+      },
+      {
+        id: "battle_2",
+        num: "#02",
+        tag: "🔥 LIVE BATTLE #02 · 퇴근 직전 카톡 공포",
+        question: '퇴근 10분 전 팀장님의 <span style="color:#facc15;">"오늘 별일 없지?"</span> 카톡, 속뜻은?',
+        desc: "불길한 예감 vs 단순한 안부 인사! 당신이 느끼는 진실은?",
+        optA: "🅰️ 야근이나 급한 이슈 터졌으니 퇴근하지 말고 대기하라는 신호다",
+        optB: "🅱️ 진짜 별일 없으면 정시퇴근 잘 챙기라는 순수한 안부 인사다",
+        labelA: "PTSD경계파", labelB: "순수긍정파",
+        pctA: 84, pctB: 16, votes: 2890,
+        toastA: '🅰️ "야근 빌드업이다" 선택! 당신은 잔뼈 굵은 위기감지 마스터입니다.',
+        toastB: '🅱️ "순수한 안부다" 선택! 당신은 보기 드문 평화주의 직장인입니다.'
+      },
+      {
+        id: "battle_3",
+        num: "#03",
+        tag: "🔥 LIVE BATTLE #03 · 넵병의 진화",
+        question: '사내 메신저 최강의 답변: <span style="color:#facc15;">"넵!" vs "네~" vs "네!"</span>',
+        desc: "직장인 90%가 앓고 있다는 '넵병', 당신의 주력 시그니처 대답은?",
+        optA: "🅰️ 군더더기 없고 빠릿하며 신뢰감을 주는 대한민국 표준 '넵!'",
+        optB: "🅱️ 친절하고 부드러우며 감정선이 살아있는 '네~' 또는 '네!'",
+        labelA: "넵병정석파", labelB: "친절감성파",
+        pctA: 68, pctB: 32, votes: 4110,
+        toastA: '🅰️ "넵!" 선택 완료! 당신은 대한민국 표준 직장인의 정석입니다.',
+        toastB: '🅱️ "네~" 선택 완료! 당신은 메신저 분위기를 살리는 온화한 소통러입니다.'
+      },
+      {
+        id: "battle_4",
+        num: "#04",
+        tag: "🔥 LIVE BATTLE #04 · 업무 카톡 이모티콘",
+        question: '업무 메신저에서 상사/선배에게 <span style="color:#facc15;">"이모티콘"</span> 사용 허용 범위는?',
+        desc: "딱딱한 메신저의 윤활유 vs 공적인 업무 자리에서의 예의 결여?",
+        optA: "🅰️ 직장 메신저에서 캐릭터 이모티콘은 가벼워 보이고 예의에 어긋난다",
+        optB: "🅱️ 무미건조한 단답보다 부드러운 분위기 만드는 훌륭한 소통 윤활유다",
+        labelA: "엄격공적파", labelB: "분위기메이커파",
+        pctA: 31, pctB: 69, votes: 3650,
+        toastA: '🅰️ "엄격공적" 선택! 당신은 완벽한 비즈니스 매너리스트입니다.',
+        toastB: '🅱️ "윤활유" 선택! 당신은 친화력 만렙의 메신저 인싸입니다.'
+      },
+      {
+        id: "battle_5",
+        num: "#05",
+        tag: "🔥 LIVE BATTLE #05 · 주말 업무 카톡 대처법",
+        question: '주말이나 퇴근 후 온 업무 카톡, <span style="color:#facc15;">1 확인하고 안읽씹 vs 1 안 없애고 묵히기?</span>',
+        desc: "궁금해서 먼저 확인하기 vs 월요일 아침까지 완벽한 침묵 유지?",
+        optA: "🅰️ 미리 확인하고(1 없앰) 월요일 출근해서 정중하고 완벽하게 답장한다",
+        optB: "🅱️ 주말엔 아예 안 읽은 척(1 유지) 월요일 8시 50분에 확인한다",
+        labelA: "미리확인파", labelB: "완벽단절파",
+        pctA: 38, pctB: 62, votes: 5200,
+        toastA: '🅰️ "미리확인" 선택! 준비성은 철저하지만 워라밸 주의가 필요합니다.',
+        toastB: '🅱️ "완벽단절" 선택! 확실한 주말 사수로 워라밸을 지켜내는 고수입니다.'
+      },
+      {
+        id: "battle_6",
+        num: "#06",
+        tag: "🔥 LIVE BATTLE #06 · 연차 사유 논쟁",
+        question: '신입사원이 연차 신청서에 <span style="color:#facc15;">"개인 사정"</span> 4글자만 썼다면?',
+        desc: "연차는 묻지도 따지지도 않는 권리 vs 인수인계를 위한 배려?",
+        optA: "🅰️ 연차는 법적 권리! 개인 사유를 캐묻거나 구체적으로 적을 필요 없다",
+        optB: "🅱️ 팀 업무 일정과 조율을 위해 최소한의 양해나 사유 공유는 예의다",
+        labelA: "권리보장파", labelB: "조직배려파",
+        pctA: 79, pctB: 21, votes: 6100,
+        toastA: '🅰️ "권리보장" 선택! 현대 직장인의 정당한 권리를 수호하는 분입니다.',
+        toastB: '🅱️ "조직배려" 선택! 팀워크와 상호 배려를 중시하는 따뜻한 동료입니다.'
+      },
+      {
+        id: "battle_7",
+        num: "#07",
+        tag: "🔥 LIVE BATTLE #07 · 문해력 vs 실무안전",
+        question: '업무 일정 공지: <span style="color:#facc15;">"사흘 뒤까지 부탁드립니다"</span>',
+        desc: "'사흘(3일)'을 '4일'로 오해하는 사태, 누구의 책임일까요?",
+        optA: "🅰️ 사흘(3일)은 기본 상식! 모르면 교양 부족이며 당사자 책임이다",
+        optB: "🅱️ 실무 분쟁을 막으려면 애초에 '3일 뒤(수요일)' 숫자로 써야 한다",
+        labelA: "문해력원칙파", labelB: "실무안전파",
+        pctA: 44, pctB: 56, votes: 4820,
+        toastA: '🅰️ "문해력 원칙" 선택! 올바른 우리말 교양을 중시하는 원칙주의자입니다.',
+        toastB: '🅱️ "실무 안전" 선택! 분쟁 제로를 추구하는 현명한 실무 프로입니다.'
+      },
+      {
+        id: "battle_8",
+        num: "#08",
+        tag: "🔥 LIVE BATTLE #08 · 단톡방 종료 예절",
+        question: '단톡방 대화 마무리할 때: <span style="color:#facc15;">하트 리액션 vs 텍스트 인사</span>',
+        desc: "알림 안 울리는 스마트한 퇴장 vs 마지막까지 확실한 문장형 인사?",
+        optA: "🅰️ 불필요한 알림 없이 조용히 하트/따봉 리액션 찍고 마무리",
+        optB: "🅱️ '감사합니다! 좋은 하루 보내세요~' 텍스트로 확실하게 끝맺음",
+        labelA: "스마트리액션파", labelB: "텍스트정성파",
+        pctA: 63, pctB: 37, votes: 3740,
+        toastA: '🅰️ "리액션" 선택! 알림 공해를 줄여주는 센스 있는 현대인입니다.',
+        toastB: '🅱️ "텍스트 인사" 선택! 온기 넘치는 매너로 감동을 주는 분입니다.'
+      },
+      {
+        id: "battle_9",
+        num: "#09",
+        tag: "🔥 LIVE BATTLE #09 · 점심 메뉴 암호 해독",
+        question: '점심 메뉴 정할 때 팀원의 <span style="color:#facc15;">"아무거나 다 좋아요"</span>의 진실은?',
+        desc: "진짜 다 잘 먹는 걸까, 아니면 은근한 눈치 싸움의 시작일까?",
+        optA: "🅰️ 진짜 호불호 없으니 리더가 편한 메뉴로 골라달라는 전적인 위임",
+        optB: "🅱️ '내가 싫어하는 것 빼고 분위기 깔끔한 곳으로 알아서 눈치껏'의 암호",
+        labelA: "무념무상파", labelB: "암호해독파",
+        pctA: 22, pctB: 78, votes: 5980,
+        toastA: '🅰️ "전적 위임" 선택! 메뉴 선택에 스트레스 없는 털털한 성격이시네요.',
+        toastB: '🅱️ "암호 해독" 선택! 직장 밥상머리 눈치 100단의 베테랑이십니다.'
+      },
+      {
+        id: "battle_10",
+        num: "#10",
+        tag: "🔥 LIVE BATTLE #10 · 메신저 전송 스타일",
+        question: '사내 메신저로 질문할 때: <span style="color:#facc15;">장문 1개 vs 짧게 끊어치기?</span>',
+        desc: "알림 1번만 울리는 정돈된 장문 vs 카톡처럼 대화하듯 연타 치기?",
+        optA: "🅰️ 알림 1번만 울리게 배경-질문-요청을 깔끔히 정리한 장문 1개",
+        optB: "🅱️ 상대방이 읽기 편하게 카톡처럼 핵심을 짧게 여러 번 끊어치기",
+        labelA: "장문정리파", labelB: "단문소통파",
+        pctA: 71, pctB: 29, votes: 3450,
+        toastA: '🅰️ "장문 1개" 선택! 상대의 집중 시간을 존중하는 배려 깊은 분입니다.',
+        toastB: '🅱️ "짧게 끊어치기" 선택! 모바일 친화적이고 신속한 소통을 선호하시네요.'
+      },
+      {
+        id: "battle_11",
+        num: "#11",
+        tag: "🔥 LIVE BATTLE #11 · 회식 2차 칼퇴 논쟁",
+        question: '팀 회식 2차 이동할 때: <span style="color:#facc15;">"저 먼저 가보겠습니다" 칼퇴 허용?</span>',
+        desc: "1차 참여했으면 충분 vs 팀 단합을 위해 2차 분위기는 맞춰야?",
+        optA: "🅰️ 1차 참석했으면 도리 다함! 2차는 100% 자유 선택이어야 한다",
+        optB: "🅱️ 팀 단합을 위한 자리인 만큼 최소한 눈치나 양해는 구해야 한다",
+        labelA: "칼퇴자유파", labelB: "회식의리파",
+        pctA: 82, pctB: 18, votes: 4300,
+        toastA: '🅰️ "칼퇴 자유" 선택! 깔끔한 사생활 분리와 워라밸의 승리입니다.',
+        toastB: '🅱️ "회식 의리" 선택! 조직의 끈끈한 결속력을 지켜주는 버팀목입니다.'
+      },
+      {
+        id: "battle_12",
+        num: "#12",
+        tag: "🔥 LIVE BATTLE #12 · '수고하셨습니다' 호칭 예절",
+        question: '후배가 선배/상사에게 <span style="color:#facc15;">"오늘도 수고하셨습니다!"</span> 인사했다면?',
+        desc: "'수고'는 아랫사람에게 쓰는 말 vs 감사 마음이면 충분?",
+        optA: "🅰️ '수고'는 윗사람이 쓰는 말! '고생 많으셨습니다'가 올바른 표현이다",
+        optB: "🅱️ 감사의 마음이 담겼으면 그만! 사소한 어원 따지기는 꼰대스럽다",
+        labelA: "예절엄수파", labelB: "실용소통파",
+        pctA: 47, pctB: 53, votes: 4120,
+        toastA: '🅰️ "예절 엄수" 선택! 바른 국어 생활과 예절을 중시하는 정통파입니다.',
+        toastB: '🅱️ "실용 소통" 선택! 형식보다 진심 어린 마음을 더 높이 사는 쿨한 분입니다.'
+      },
+      {
+        id: "battle_13",
+        num: "#13",
+        tag: "🔥 LIVE BATTLE #13 · 노캔 이어폰 근무",
+        question: '업무 시간에 <span style="color:#facc15;">양쪽 노이즈캔슬링 이어폰</span> 끼고 일하는 동료는?',
+        desc: "초집중을 위한 도구 vs 팀원 간 소통을 차단하는 벽?",
+        optA: "🅰️ 업무 몰입과 생산성을 높이는 훌륭한 방법이므로 적극 권장된다",
+        optB: "🅱️ 긴급 호출이나 일상 소통을 차단하므로 한쪽만 끼거나 자제해야 한다",
+        labelA: "초집중몰입파", labelB: "소통연결파",
+        pctA: 59, pctB: 41, votes: 3880,
+        toastA: '🅰️ "초집중 몰입" 선택! 오직 결과물과 높은 몰입도로 승부하는 프로입니다.',
+        toastB: '🅱️ "소통 연결" 선택! 즉각적인 협업과 팀 시너지를 아끼는 소통가입니다.'
+      },
+      {
+        id: "battle_14",
+        num: "#14",
+        tag: "🔥 LIVE BATTLE #14 · SNS 회사 불만 밈",
+        question: '개인 SNS에 <span style="color:#facc15;">"퇴사 마렵다"·회사 저격 밈</span> 올리는 행위는?',
+        desc: "내 사생활 자유 vs 회사 사람들도 보는데 리스크 관리 부족?",
+        optA: "🅰️ 개인 사생활 공간에서의 스트레스 해소일 뿐, 회사 눈치 볼 이유 없다",
+        optB: "🅱️ 동료나 업계 지인도 볼 수 있는데 프로답지 못하고 리스크가 크다",
+        labelA: "사생활자유파", labelB: "리스크관리파",
+        pctA: 51, pctB: 49, votes: 6400,
+        toastA: '🅰️ "사생활 자유" 선택! 솔직담백하고 가식 없는 자유로운 영혼입니다.',
+        toastB: '🅱️ "리스크 관리" 선택! 철저한 자기관리와 프로페셔널한 평판 관리자입니다.'
+      },
+      {
+        id: "battle_15",
+        num: "#15",
+        tag: "🔥 LIVE BATTLE #15 · 약속 시간 '지금 출발'",
+        question: '약속 시간 5분 전 친구의 <span style="color:#facc15;">"나 지금 출발~"</span> 카톡, 그 진실은?',
+        desc: "이미 버스/지하철 탔다는 뜻 vs 이제 막 현관문 신발 신는 중?",
+        optA: "🅰️ 이제 막 침대에서 일어났거나 현관문 나서는 중! 최소 15분 이상 지각",
+        optB: "🅱️ 이미 대중교통 탑승해서 거의 다 왔으니 안심하라는 실시간 현황",
+        labelA: "지각감지파", labelB: "신뢰안심파",
+        pctA: 88, pctB: 12, votes: 7120,
+        toastA: '🅰️ "15분 지각 확정" 선택! 친구들의 카톡 거짓말을 꿰뚫어 보는 도사입니다.',
+        toastB: '🅱️ "진짜 출발" 선택! 사람을 끝까지 믿어주는 세상 따뜻한 친구입니다.'
+      }
+    ];
+
+    let currentBattleIdx = 0;
+
+    // 실시간 밸런스 게임 렌더링 함수
+    function renderLiveBattle(idx) {
+      if (!LIVE_BATTLES_POOL || LIVE_BATTLES_POOL.length === 0) return;
+      currentBattleIdx = (idx + LIVE_BATTLES_POOL.length) % LIVE_BATTLES_POOL.length;
+      const b = LIVE_BATTLES_POOL[currentBattleIdx];
+
+      const elTag = document.getElementById('liveBattleTag');
+      const elCount = document.getElementById('liveBattleCount');
+      const elQ = document.getElementById('liveBattleQ');
+      const elDesc = document.getElementById('liveBattleDesc');
+      const elTitleA = document.getElementById('liveVoteTitleA');
+      const elTitleB = document.getElementById('liveVoteTitleB');
+      const elPctA = document.getElementById('livePctA');
+      const elPctB = document.getElementById('livePctB');
+      const elLabelA = document.getElementById('liveLabelA');
+      const elLabelB = document.getElementById('liveLabelB');
+      const elGaugeA = document.getElementById('liveGaugeA');
+      const elGaugeB = document.getElementById('liveGaugeB');
       const elMsg = document.getElementById('liveVoteResultMsg');
       const btnA = document.getElementById('liveBtnA');
       const btnB = document.getElementById('liveBtnB');
-      
-      btnA.classList.remove('voted');
-      btnB.classList.remove('voted');
+
+      if (elTag) elTag.innerText = b.tag;
+      if (elCount) elCount.innerText = `${currentBattleIdx + 1}/${LIVE_BATTLES_POOL.length}`;
+      if (elQ) elQ.innerHTML = b.question;
+      if (elDesc) elDesc.innerText = b.desc;
+      if (elTitleA) elTitleA.innerText = b.optA;
+      if (elTitleB) elTitleB.innerText = b.optB;
+      if (elLabelA) elLabelA.innerText = b.labelA;
+      if (elLabelB) elLabelB.innerText = b.labelB;
+
+      // 사용자 투표 상태 복원
+      const userVote = localStorage.getItem('malssam_battle_' + b.id);
+      if (btnA) btnA.classList.remove('voted');
+      if (btnB) btnB.classList.remove('voted');
+
+      let displayPctA = b.pctA;
+      let displayPctB = b.pctB;
+
+      if (userVote === 'A') {
+        if (btnA) btnA.classList.add('voted');
+        if (elPctA) elPctA.innerText = `${displayPctA}% (내 선택)`;
+        if (elPctB) elPctB.innerText = `${displayPctB}%`;
+        if (elMsg) {
+          elMsg.style.display = 'block';
+          elMsg.innerHTML = `✨ 집단지성 투표 완료! (참여자: ${b.votes.toLocaleString()}명) — ${b.toastA}`;
+        }
+      } else if (userVote === 'B') {
+        if (btnB) btnB.classList.add('voted');
+        if (elPctA) elPctA.innerText = `${displayPctA}%`;
+        if (elPctB) elPctB.innerText = `${displayPctB}% (내 선택)`;
+        if (elMsg) {
+          elMsg.style.display = 'block';
+          elMsg.innerHTML = `✨ 집단지성 투표 완료! (참여자: ${b.votes.toLocaleString()}명) — ${b.toastB}`;
+        }
+      } else {
+        if (elPctA) elPctA.innerText = `${displayPctA}% 투표`;
+        if (elPctB) elPctB.innerText = `${displayPctB}% 투표`;
+        if (elMsg) elMsg.style.display = 'none';
+      }
+
+      if (elGaugeA) elGaugeA.style.width = `${displayPctA}%`;
+      if (elGaugeB) elGaugeB.style.width = `${displayPctB}%`;
+    }
+
+    // 다음 밸런스 게임 보기
+    function nextLiveBattle() {
+      currentBattleIdx = (currentBattleIdx + 1) % LIVE_BATTLES_POOL.length;
+      renderLiveBattle(currentBattleIdx);
+      if (typeof showToast === 'function') {
+        showToast(`🔄 [${currentBattleIdx + 1}/${LIVE_BATTLES_POOL.length}] 새로운 밸런스 게임으로 전환되었습니다!`);
+      }
+    }
+
+    // 밸런스 게임 투표 처리
+    function voteLiveBattle(choice) {
+      const b = LIVE_BATTLES_POOL[currentBattleIdx];
+      const storageKey = 'malssam_battle_' + b.id;
+      const alreadyVoted = localStorage.getItem(storageKey);
+
+      localStorage.setItem(storageKey, choice);
+
+      const btnA = document.getElementById('liveBtnA');
+      const btnB = document.getElementById('liveBtnB');
+      const elMsg = document.getElementById('liveVoteResultMsg');
+
+      if (btnA) btnA.classList.remove('voted');
+      if (btnB) btnB.classList.remove('voted');
+
+      let displayPctA = b.pctA;
+      let displayPctB = b.pctB;
+
+      if (!alreadyVoted) {
+        b.votes += 1;
+        if (choice === 'A') {
+          displayPctA = Math.min(99, b.pctA + 1);
+          displayPctB = 100 - displayPctA;
+        } else {
+          displayPctB = Math.min(99, b.pctB + 1);
+          displayPctA = 100 - displayPctB;
+        }
+      }
 
       if (choice === 'A') {
-        btnA.classList.add('voted');
-        document.getElementById('livePctA').innerText = '77% (내 선택)';
-        document.getElementById('livePctB').innerText = '23%';
-        document.getElementById('liveGaugeA').style.width = '77%';
-        document.getElementById('liveGaugeB').style.width = '23%';
-        showToast('🅰️ "마침표는 차갑다" 선택 완료! 당신은 상위 12% 예의중시파입니다.');
+        if (btnA) btnA.classList.add('voted');
+        document.getElementById('livePctA').innerText = `${displayPctA}% (내 선택)`;
+        document.getElementById('livePctB').innerText = `${displayPctB}%`;
+        document.getElementById('liveGaugeA').style.width = `${displayPctA}%`;
+        document.getElementById('liveGaugeB').style.width = `${displayPctB}%`;
+        if (typeof showToast === 'function') showToast(b.toastA);
+        if (elMsg) {
+          elMsg.style.display = 'block';
+          elMsg.innerHTML = `✨ 집단지성 투표 반영 완료! (현재 참여자: ${b.votes.toLocaleString()}명) — ${b.toastA}`;
+        }
       } else {
-        btnB.classList.add('voted');
-        document.getElementById('livePctA').innerText = '75%';
-        document.getElementById('livePctB').innerText = '25% (내 선택)';
-        document.getElementById('liveGaugeA').style.width = '75%';
-        document.getElementById('liveGaugeB').style.width = '25%';
-        showToast('🅱️ "맞춤법 맞다" 선택 완료! 당신은 상위 18% 효율실용파입니다.');
+        if (btnB) btnB.classList.add('voted');
+        document.getElementById('livePctA').innerText = `${displayPctA}%`;
+        document.getElementById('livePctB').innerText = `${displayPctB}% (내 선택)`;
+        document.getElementById('liveGaugeA').style.width = `${displayPctA}%`;
+        document.getElementById('liveGaugeB').style.width = `${displayPctB}%`;
+        if (typeof showToast === 'function') showToast(b.toastB);
+        if (elMsg) {
+          elMsg.style.display = 'block';
+          elMsg.innerHTML = `✨ 집단지성 투표 반영 완료! (현재 참여자: ${b.votes.toLocaleString()}명) — ${b.toastB}`;
+        }
       }
-      elMsg.style.display = 'block';
-      localStorage.setItem('malssam_live_battle_01', choice);
     }
+
+    // 접속할 때마다 날짜 및 랜덤 기반 자동 순환 초기화
+    function initLiveBattle() {
+      const todaySeed = new Date().getDate();
+      const randomOffset = Math.floor(Math.random() * LIVE_BATTLES_POOL.length);
+      const initialIdx = (todaySeed + randomOffset) % LIVE_BATTLES_POOL.length;
+      renderLiveBattle(initialIdx);
+    }
+
 
     // Kakao Card Vote Logic
     function voteKakao(cardId, choice) {
@@ -8743,6 +9089,7 @@
     // 초기 실행
     updateEraCounts();
     applyFilterAndRender();
+    initLiveBattle();
 
     // Firebase Firestore 추가 데이터 비동기 로드
     window.addEventListener('DOMContentLoaded', async () => {

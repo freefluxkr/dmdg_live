@@ -1376,5 +1376,210 @@ a {
   font-weight: 800;
 }
 
+/* ==========================================================================
+   DMDG Master Ecosystem Footer - Jennifer & Craig Design System
+   ========================================================================== */
+.dmdg-master-footer {
+  position: relative;
+  background: linear-gradient(180deg, #090e1a 0%, #050811 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  padding: 4.5rem 1.5rem 2.5rem 1.5rem;
+  margin-top: 5rem;
+  overflow: hidden;
+}
+
+.dmdg-master-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f59e0b, #00a896, transparent);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+}
+
+.footer-inner-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.footer-top-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 3rem;
+}
+
+.footer-brand-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.footer-brand-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  object-fit: contain;
+}
+
+.footer-brand-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.footer-brand-subtitle {
+  font-size: 0.88rem;
+  color: #64748b;
+  max-width: 580px;
+  line-height: 1.5;
+}
+
+.footer-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.footer-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+
+@media (max-width: 1024px) {
+  .footer-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-nav-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .footer-top-brand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.footer-nav-col h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-nav-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-nav-col a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.86rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.footer-nav-col a:hover {
+  color: #f59e0b;
+  transform: translateX(3px);
+}
+
+.footer-nav-col a .tag-pill {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.footer-nav-col a .tag-pill.cyan {
+  background: rgba(6, 182, 212, 0.15);
+  color: #22d3ee;
+}
+
+.footer-bottom-bar {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.footer-bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-domain-badge {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.footer-domain-badge a {
+  color: #00a896;
+  text-decoration: none;
+}
+
+.footer-domain-badge a:hover {
+  text-decoration: underline;
+}
+
+.footer-team-signature {
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.footer-team-signature strong {
+  color: #f59e0b;
+}
+
+
 
 
