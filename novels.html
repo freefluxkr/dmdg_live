@@ -1144,17 +1144,24 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
     filteredNovels.forEach(novel => {
       const card = document.createElement('article');
       card.className = 'book-card';
-      card.style.setProperty('--cover-from', novel.color.from);
-      card.style.setProperty('--cover-to', novel.color.to);
-      card.style.setProperty('--card-accent', novel.color.accent);
-      card.style.setProperty('--card-glow', novel.color.glow);
+      const c = novel.color || { from: '#1e293b', to: '#0f172a', accent: '#f59e0b', glow: 'rgba(245,158,11,0.2)' };
+      card.style.setProperty('--cover-from', c.from || '#1e293b');
+      card.style.setProperty('--cover-to', c.to || '#0f172a');
+      card.style.setProperty('--card-accent', c.accent || '#f59e0b');
+      card.style.setProperty('--card-glow', c.glow || 'rgba(245,158,11,0.2)');
 
-      const coverIcon = novel.id.includes('21748') ? '💰' : 
-                       (novel.id.includes('21747') ? '🤖' : 
-                       (novel.id.includes('21746') ? '💼' : 
-                       (novel.id.includes('wolf') ? '🐺' : 
-                       (novel.id.includes('sun') ? '☀️' : 
-                       (novel.id.includes('silent') ? '🛡️' : '🔐')))));
+      const novelId = String(novel.id || '');
+      const coverIcon = novelId.includes('21748') ? '💰' : 
+                       (novelId.includes('21747') ? '🤖' : 
+                       (novelId.includes('21746') ? '💼' : 
+                       (novelId.includes('21858') ? '🛡️' :
+                       (novelId.includes('21842') ? '🏭' :
+                       (novelId.includes('21870') ? '🚨' :
+                       (novelId.includes('21868') ? '🌐' :
+                       (novelId.includes('21869') ? '🚚' :
+                       (novelId.includes('wolf') ? '🐺' : 
+                       (novelId.includes('sun') ? '☀️' : 
+                       (novelId.includes('silent') ? '🛡️' : '🔐'))))))))));
 
       card.innerHTML = `
         <div class="book-cover">
@@ -1681,8 +1688,6 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
   } else {
     init();
   }
-
-})();
 
   </script>
 </body>
