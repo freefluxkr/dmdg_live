@@ -72,16 +72,65 @@
       border: 1px solid var(--yellow);
       border-radius: 4px;
     }
-    .header-nav { display: flex; align-items: center; gap: 12px; }
-    .lang-switcher {
-      display: flex; gap: 6px; background: #11141f; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--card-border);
+    .global-lang-group {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2px 4px;
+      gap: 2px;
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
     }
-    .lang-btn { color: var(--muted); text-decoration: none; font-size: 1.1rem; padding: 4px 6px; border-radius: 4px; transition: all 0.2s; }
-    .lang-btn:hover, .lang-btn.active { background: var(--yellow); color: #000; transform: scale(1.1); }
-    .home-link {
-      color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 700; background: #1e293b; padding: 8px 16px; border-radius: 6px; border: 1px solid #334155; transition: all 0.2s;
+    .global-lang-group::-webkit-scrollbar {
+      display: none;
     }
-    .home-link:hover { border-color: var(--yellow); color: var(--yellow); }
+    .lang-tag {
+      font-size: 0.68rem;
+      color: #64748b;
+      font-weight: 800;
+      margin: 0 4px;
+      letter-spacing: 0.5px;
+    }
+    .lang-pill {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .lang-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .lang-pill.active {
+      background: #facc15;
+      color: #0f172a;
+      font-weight: 800;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px 16px;
+      }
+      .global-lang-group {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 4px;
+      }
+    }
     .hero { max-width: 920px; margin: 40px auto 20px; padding: 0 24px; text-align: center; }
     .hero-badge {
       display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; color: #000; background: var(--yellow); padding: 5px 14px; border-radius: 4px; text-transform: uppercase; margin-bottom: 16px;
@@ -388,16 +437,15 @@
     <a href="../index.html" class="brand">
       <div class="brand-logo">MALSSAM <span class="brand-edition">US EDITION</span></div>
     </a>
-    <div class="header-nav">
-      <div class="lang-switcher">
-        <a href="en.html" class="lang-btn active" title="English (US)">🇺🇸</a>
-        <a href="ja.html" class="lang-btn" title="日本語 (Japan)">🇯🇵</a>
-        <a href="vi.html" class="lang-btn" title="Tiếng Việt (Vietnam)">🇻🇳</a>
-        <a href="id.html" class="lang-btn" title="Bahasa Indonesia">🇮🇩</a>
-        <a href="es.html" class="lang-btn" title="Español (Spain/LatAm)">🇪🇸</a>
-      </div>
-      <a href="../index.html" class="home-link">🇰🇷 KOREAN ORIGINAL</a>
-    </div>
+    <nav class="global-lang-group" title="Global Edition Selector">
+      <span class="lang-tag">GLOBAL:</span>
+      <a href="../index.html" class="lang-pill" title="Korean Original">🇰🇷 KR</a>
+      <a href="en.html" class="lang-pill active" title="English Edition">🇺🇸 EN</a>
+      <a href="ja.html" class="lang-pill" title="Japanese Edition">🇯🇵 JA</a>
+      <a href="vi.html" class="lang-pill" title="Vietnamese Edition">🇻🇳 VI</a>
+      <a href="id.html" class="lang-pill" title="Indonesian Edition">🇮🇩 ID</a>
+      <a href="es.html" class="lang-pill" title="Spanish Edition">🇪🇸 ES</a>
+    </nav>
   </header>
   <section class="hero">
     <div class="hero-badge">⚡ 2026 K-CULTURE STREET ARCHIVE</div>
@@ -508,7 +556,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">방가방가</h2>
-              <span class="roman-pron">[방가방가]</span>
+              <span class="roman-pron">[banggabangga]</span>
               <span class="pos-tag">감탄사 / 인사말</span>
             </div>
             <div class="slang-punchline">
@@ -544,7 +592,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">하이루</h2>
-              <span class="roman-pron">[하이루]</span>
+              <span class="roman-pron">[hairu]</span>
               <span class="pos-tag">감탄사 / 인사말</span>
             </div>
             <div class="slang-punchline">
@@ -580,7 +628,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">즐</h2>
-              <span class="roman-pron">[즐]</span>
+              <span class="roman-pron">[jeul]</span>
               <span class="pos-tag">감탄사 / 은어</span>
             </div>
             <div class="slang-punchline">
@@ -616,7 +664,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">OTL</h2>
-              <span class="roman-pron">[오티엘 / 엎드려좌절]</span>
+              <span class="roman-pron">[OTL]</span>
               <span class="pos-tag">이모티콘 / 명사</span>
             </div>
             <div class="slang-punchline">
@@ -652,7 +700,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">뷁</h2>
-              <span class="roman-pron">[뷐]</span>
+              <span class="roman-pron">[bwek]</span>
               <span class="pos-tag">감탄사 / 명사</span>
             </div>
             <div class="slang-punchline">
@@ -688,7 +736,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">간지</h2>
-              <span class="roman-pron">[간지]</span>
+              <span class="roman-pron">[ganji]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -724,7 +772,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">지못미</h2>
-              <span class="roman-pron">[지몬미]</span>
+              <span class="roman-pron">[jimotmi]</span>
               <span class="pos-tag">감탄사 / 명사</span>
             </div>
             <div class="slang-punchline">
@@ -760,7 +808,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">킹왕짱</h2>
-              <span class="roman-pron">[킹왕짱]</span>
+              <span class="roman-pron">[kingwangjjang]</span>
               <span class="pos-tag">명사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -796,7 +844,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">안습</h2>
-              <span class="roman-pron">[안습]</span>
+              <span class="roman-pron">[anseup]</span>
               <span class="pos-tag">명사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -832,7 +880,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">얼짱</h2>
-              <span class="roman-pron">[얼짱]</span>
+              <span class="roman-pron">[eoljjang]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -868,7 +916,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">몸짱</h2>
-              <span class="roman-pron">[몸짱]</span>
+              <span class="roman-pron">[momjjang]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -904,7 +952,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">훈남</h2>
-              <span class="roman-pron">[훈남]</span>
+              <span class="roman-pron">[hunnam]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -940,7 +988,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">엄친아</h2>
-              <span class="roman-pron">[엄치나]</span>
+              <span class="roman-pron">[eomchina]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -976,7 +1024,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">된장녀</h2>
-              <span class="roman-pron">[된장녀]</span>
+              <span class="roman-pron">[doenjangnyeo]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1012,7 +1060,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">담다디</h2>
-              <span class="roman-pron">[담다디]</span>
+              <span class="roman-pron">[damdadi]</span>
               <span class="pos-tag">명사 / 감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -1048,7 +1096,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">8282</h2>
-              <span class="roman-pron">[팔이팔이]</span>
+              <span class="roman-pron">[8282]</span>
               <span class="pos-tag">수사 / 숫자 은어</span>
             </div>
             <div class="slang-punchline">
@@ -1084,7 +1132,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">0124</h2>
-              <span class="roman-pron">[영일이사]</span>
+              <span class="roman-pron">[0124]</span>
               <span class="pos-tag">수사 / 숫자 은어</span>
             </div>
             <div class="slang-punchline">
@@ -1120,7 +1168,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">도토리</h2>
-              <span class="roman-pron">[도토리]</span>
+              <span class="roman-pron">[dotori]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1156,7 +1204,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">일촌평</h2>
-              <span class="roman-pron">[일촌평]</span>
+              <span class="roman-pron">[ilchonpyeong]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1192,7 +1240,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">십라</h2>
-              <span class="roman-pron">[십라]</span>
+              <span class="roman-pron">[sipra]</span>
               <span class="pos-tag">감탄사 / 욕설 필터링 우회</span>
             </div>
             <div class="slang-punchline">
@@ -1228,7 +1276,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">멘붕</h2>
-              <span class="roman-pron">[멘붕]</span>
+              <span class="roman-pron">[menbung]</span>
               <span class="pos-tag">명사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -1264,7 +1312,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">꿀잼</h2>
-              <span class="roman-pron">[꿀잼]</span>
+              <span class="roman-pron">[kkuljaem]</span>
               <span class="pos-tag">명사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -1300,7 +1348,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">노잼</h2>
-              <span class="roman-pron">[노잼]</span>
+              <span class="roman-pron">[nojaem]</span>
               <span class="pos-tag">명사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -1336,7 +1384,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">심쿵</h2>
-              <span class="roman-pron">[심쿵]</span>
+              <span class="roman-pron">[simkung]</span>
               <span class="pos-tag">명사 / 감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -1372,7 +1420,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">금수저</h2>
-              <span class="roman-pron">[금수저]</span>
+              <span class="roman-pron">[geumsujeo]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1408,7 +1456,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">흙수저</h2>
-              <span class="roman-pron">[흑쑤저]</span>
+              <span class="roman-pron">[heuksujeo]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1444,7 +1492,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">팩폭</h2>
-              <span class="roman-pron">[팩폭]</span>
+              <span class="roman-pron">[paekpok]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1480,7 +1528,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">빼박캔트</h2>
-              <span class="roman-pron">[빼박캔트]</span>
+              <span class="roman-pron">[ppaebakkaenteu]</span>
               <span class="pos-tag">명사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -1516,7 +1564,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">갓생</h2>
-              <span class="roman-pron">[갇생]</span>
+              <span class="roman-pron">[gatsaeng]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -1552,7 +1600,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">극혐</h2>
-              <span class="roman-pron">[그켬]</span>
+              <span class="roman-pron">[geukhyeom]</span>
               <span class="pos-tag">명사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -1588,7 +1636,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">츤데레</h2>
-              <span class="roman-pron">[츤데레]</span>
+              <span class="roman-pron">[cheundere]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1624,7 +1672,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">케미</h2>
-              <span class="roman-pron">[케미]</span>
+              <span class="roman-pron">[kemi]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1660,7 +1708,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">답정너</h2>
-              <span class="roman-pron">[답정너]</span>
+              <span class="roman-pron">[dapjeongneo]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1696,7 +1744,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">낄끼빠빠</h2>
-              <span class="roman-pron">[낄끼빠빠]</span>
+              <span class="roman-pron">[kkilkkippappa]</span>
               <span class="pos-tag">명사 / 관용구</span>
             </div>
             <div class="slang-punchline">
@@ -1732,7 +1780,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">안물안궁</h2>
-              <span class="roman-pron">[안물안궁]</span>
+              <span class="roman-pron">[anmulangung]</span>
               <span class="pos-tag">감탄사 / 관용구</span>
             </div>
             <div class="slang-punchline">
@@ -1768,7 +1816,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">솔까말</h2>
-              <span class="roman-pron">[솔까말]</span>
+              <span class="roman-pron">[solkkamal]</span>
               <span class="pos-tag">부사</span>
             </div>
             <div class="slang-punchline">
@@ -1804,7 +1852,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">어그로</h2>
-              <span class="roman-pron">[어그로]</span>
+              <span class="roman-pron">[eogeuro]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1840,7 +1888,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">현타</h2>
-              <span class="roman-pron">[현타]</span>
+              <span class="roman-pron">[hyeonta]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1876,7 +1924,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">이생망</h2>
-              <span class="roman-pron">[이생망]</span>
+              <span class="roman-pron">[isaengmang]</span>
               <span class="pos-tag">명사 / 감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -1912,7 +1960,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">소확행</h2>
-              <span class="roman-pron">[소화캥]</span>
+              <span class="roman-pron">[sohwakhaeng]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -1948,7 +1996,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">긁히다</h2>
-              <span class="roman-pron">[글키다]</span>
+              <span class="roman-pron">[geukhida]</span>
               <span class="pos-tag">동사</span>
             </div>
             <div class="slang-punchline">
@@ -1984,7 +2032,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">중꺾마</h2>
-              <span class="roman-pron">[중껑마]</span>
+              <span class="roman-pron">[jung-kkeok-ma]</span>
               <span class="pos-tag">명사 / 관용구</span>
             </div>
             <div class="slang-punchline">
@@ -2020,7 +2068,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">억까</h2>
-              <span class="roman-pron">[억까]</span>
+              <span class="roman-pron">[eokkka]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -2056,7 +2104,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">알잘딱깔센</h2>
-              <span class="roman-pron">[알잘딱깔센]</span>
+              <span class="roman-pron">[aljaltakkalsen]</span>
               <span class="pos-tag">부사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -2092,7 +2140,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">폼 미쳤다</h2>
-              <span class="roman-pron">[폼 미첟따]</span>
+              <span class="roman-pron">[pom michyeotda]</span>
               <span class="pos-tag">감탄사 / 관용구</span>
             </div>
             <div class="slang-punchline">
@@ -2128,7 +2176,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">핑프</h2>
-              <span class="roman-pron">[핑프]</span>
+              <span class="roman-pron">[pingpeu]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -2164,7 +2212,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">분좋카</h2>
-              <span class="roman-pron">[분조카]</span>
+              <span class="roman-pron">[bunjotka]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -2200,7 +2248,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">럭키비키</h2>
-              <span class="roman-pron">[너키비키]</span>
+              <span class="roman-pron">[leokki-biki]</span>
               <span class="pos-tag">명사 / 감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -2236,7 +2284,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">추구미</h2>
-              <span class="roman-pron">[추구미]</span>
+              <span class="roman-pron">[chugumi]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -2272,7 +2320,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">오히려 좋아</h2>
-              <span class="roman-pron">[오히려 조아]</span>
+              <span class="roman-pron">[ohiryeo jota]</span>
               <span class="pos-tag">관용구</span>
             </div>
             <div class="slang-punchline">
@@ -2308,7 +2356,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">누칼협</h2>
-              <span class="roman-pron">[누칼협]</span>
+              <span class="roman-pron">[nukalhyeop]</span>
               <span class="pos-tag">명사 / 관용구</span>
             </div>
             <div class="slang-punchline">
@@ -2344,7 +2392,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">뇌절</h2>
-              <span class="roman-pron">[뇌절]</span>
+              <span class="roman-pron">[noejeol]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -2380,7 +2428,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">스불재</h2>
-              <span class="roman-pron">[스불재]</span>
+              <span class="roman-pron">[seubuljae]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -2416,7 +2464,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">킹받네</h2>
-              <span class="roman-pron">[킹받네]</span>
+              <span class="roman-pron">[kingbatne]</span>
               <span class="pos-tag">감탄사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -2452,7 +2500,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">어쩔티비</h2>
-              <span class="roman-pron">[어쩔티비]</span>
+              <span class="roman-pron">[eojjeoltibi]</span>
               <span class="pos-tag">감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -2488,7 +2536,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">점메추</h2>
-              <span class="roman-pron">[점메추]</span>
+              <span class="roman-pron">[jeommechu]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -2524,7 +2572,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">군싹</h2>
-              <span class="roman-pron">[군싹]</span>
+              <span class="roman-pron">[gunssak]</span>
               <span class="pos-tag">감탄사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -2560,7 +2608,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">캘박</h2>
-              <span class="roman-pron">[캘박]</span>
+              <span class="roman-pron">[kaelbak]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -2596,7 +2644,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">디토</h2>
-              <span class="roman-pron">[디토]</span>
+              <span class="roman-pron">[dito]</span>
               <span class="pos-tag">명사 / 감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -2632,7 +2680,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">내또출</h2>
-              <span class="roman-pron">[내또출]</span>
+              <span class="roman-pron">[naettochul]</span>
               <span class="pos-tag">명사 / 감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -2668,7 +2716,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">완내스</h2>
-              <span class="roman-pron">[완내스]</span>
+              <span class="roman-pron">[wannaeseu]</span>
               <span class="pos-tag">명사 / 형용사</span>
             </div>
             <div class="slang-punchline">
@@ -2704,7 +2752,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">무물</h2>
-              <span class="roman-pron">[무물]</span>
+              <span class="roman-pron">[mumul]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -2740,7 +2788,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">막이래</h2>
-              <span class="roman-pron">[마기래]</span>
+              <span class="roman-pron">[makirae]</span>
               <span class="pos-tag">감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -2776,7 +2824,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">H워얼V</h2>
-              <span class="roman-pron">[사랑해]</span>
+              <span class="roman-pron">[h-wo-eol-v]</span>
               <span class="pos-tag">감탄사 / 명사</span>
             </div>
             <div class="slang-punchline">
@@ -2812,7 +2860,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">자만추</h2>
-              <span class="roman-pron">[자만추]</span>
+              <span class="roman-pron">[jamanchu]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -2848,7 +2896,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">사바사</h2>
-              <span class="roman-pron">[사바사]</span>
+              <span class="roman-pron">[sabasa]</span>
               <span class="pos-tag">명사 / 관용구</span>
             </div>
             <div class="slang-punchline">
@@ -2884,7 +2932,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">TMI</h2>
-              <span class="roman-pron">[티엠아이]</span>
+              <span class="roman-pron">[TMI]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -2920,7 +2968,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">반모</h2>
-              <span class="roman-pron">[반모]</span>
+              <span class="roman-pron">[banmo]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -2956,7 +3004,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">영포티</h2>
-              <span class="roman-pron">[영포티]</span>
+              <span class="roman-pron">[young-forty]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -2992,7 +3040,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">영ㅋㅋ</h2>
-              <span class="roman-pron">[영크크]</span>
+              <span class="roman-pron">[young-kk]</span>
               <span class="pos-tag">감탄사 / 밈</span>
             </div>
             <div class="slang-punchline">
@@ -3028,7 +3076,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">잼민이</h2>
-              <span class="roman-pron">[잼미니]</span>
+              <span class="roman-pron">[jaemmini]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3064,7 +3112,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">넵병</h2>
-              <span class="roman-pron">[넵뼝]</span>
+              <span class="roman-pron">[nepbyeong]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3100,7 +3148,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">조용한 사직</h2>
-              <span class="roman-pron">[조용한 사직]</span>
+              <span class="roman-pron">[joyonghan sajik]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3136,7 +3184,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">알빠노</h2>
-              <span class="roman-pron">[알빠노]</span>
+              <span class="roman-pron">[alppano]</span>
               <span class="pos-tag">감탄사 / 밈</span>
             </div>
             <div class="slang-punchline">
@@ -3172,7 +3220,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">할매니얼</h2>
-              <span class="roman-pron">[할매니얼]</span>
+              <span class="roman-pron">[halmaenieol]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3208,7 +3256,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">퐁퐁남</h2>
-              <span class="roman-pron">[퐁퐁남]</span>
+              <span class="roman-pron">[pongpongnam]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3244,7 +3292,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">오팔세대</h2>
-              <span class="roman-pron">[오팔세대]</span>
+              <span class="roman-pron">[opalsedae]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3280,7 +3328,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">쿠쿠루삥뽕</h2>
-              <span class="roman-pron">[쿠쿠루삥뽕]</span>
+              <span class="roman-pron">[kukuruppingppong]</span>
               <span class="pos-tag">감탄사 / 밈</span>
             </div>
             <div class="slang-punchline">
@@ -3316,7 +3364,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">꼰대</h2>
-              <span class="roman-pron">[꼰대]</span>
+              <span class="roman-pron">[kkondae]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3352,7 +3400,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">월급루팡</h2>
-              <span class="roman-pron">[월긍누팡]</span>
+              <span class="roman-pron">[wolgeuprupang]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3388,7 +3436,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">아재체</h2>
-              <span class="roman-pron">[아재체]</span>
+              <span class="roman-pron">[ajaeche]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3424,7 +3472,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">개저씨</h2>
-              <span class="roman-pron">[개저씨]</span>
+              <span class="roman-pron">[gaejeossi]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3460,7 +3508,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">스라밸</h2>
-              <span class="roman-pron">[스라밸]</span>
+              <span class="roman-pron">[seurabael]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3496,7 +3544,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">일태기</h2>
-              <span class="roman-pron">[일태기]</span>
+              <span class="roman-pron">[iltaegi]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3532,7 +3580,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">퇴준생</h2>
-              <span class="roman-pron">[퇴준생]</span>
+              <span class="roman-pron">[toejunsaeng]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3568,7 +3616,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">내로남불</h2>
-              <span class="roman-pron">[내로남불]</span>
+              <span class="roman-pron">[naeronambul]</span>
               <span class="pos-tag">명사 / 사자성어풍</span>
             </div>
             <div class="slang-punchline">
@@ -3604,7 +3652,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">가심비</h2>
-              <span class="roman-pron">[가심비]</span>
+              <span class="roman-pron">[gasimbi]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3640,7 +3688,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">주린이</h2>
-              <span class="roman-pron">[주리니]</span>
+              <span class="roman-pron">[jurini]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3676,7 +3724,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">취존</h2>
-              <span class="roman-pron">[취존]</span>
+              <span class="roman-pron">[chwijon]</span>
               <span class="pos-tag">명사 / 감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -3712,7 +3760,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">모태솔로</h2>
-              <span class="roman-pron">[모태쏠로]</span>
+              <span class="roman-pron">[motaesolro]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3748,7 +3796,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">금사빠</h2>
-              <span class="roman-pron">[금사빠]</span>
+              <span class="roman-pron">[geumsappa]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3784,7 +3832,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">아햏햏</h2>
-              <span class="roman-pron">[아햏햏]</span>
+              <span class="roman-pron">[ahaethaet]</span>
               <span class="pos-tag">감탄사</span>
             </div>
             <div class="slang-punchline">
@@ -3820,7 +3868,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">싱하형</h2>
-              <span class="roman-pron">[싱하형]</span>
+              <span class="roman-pron">[singhahyeong]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3856,7 +3904,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">폐인</h2>
-              <span class="roman-pron">[폐인]</span>
+              <span class="roman-pron">[pyein]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -3892,7 +3940,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">따봉</h2>
-              <span class="roman-pron">[따봉]</span>
+              <span class="roman-pron">[ttabong]</span>
               <span class="pos-tag">감탄사 / 명사</span>
             </div>
             <div class="slang-punchline">
@@ -3928,7 +3976,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">플렉스</h2>
-              <span class="roman-pron">[플렉스]</span>
+              <span class="roman-pron">[peulrekseu]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -3964,7 +4012,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">돈쭐</h2>
-              <span class="roman-pron">[돈쭐]</span>
+              <span class="roman-pron">[donjjul]</span>
               <span class="pos-tag">명사 / 동사</span>
             </div>
             <div class="slang-punchline">
@@ -4000,7 +4048,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">텍스트 힙</h2>
-              <span class="roman-pron">[텍스트 힙]</span>
+              <span class="roman-pron">[tekseuteu hip]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -4036,7 +4084,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">워라밸</h2>
-              <span class="roman-pron">[워라밸]</span>
+              <span class="roman-pron">[worabael]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">
@@ -4072,7 +4120,7 @@
             </div>
             <div class="word-header">
               <h2 class="hangul-title">삼포세대</h2>
-              <span class="roman-pron">[삼포세대]</span>
+              <span class="roman-pron">[samposedae]</span>
               <span class="pos-tag">명사</span>
             </div>
             <div class="slang-punchline">

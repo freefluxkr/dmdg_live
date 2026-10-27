@@ -70,16 +70,65 @@
       padding: 3px 8px;
       border-radius: 9999px;
     }
-    .header-nav { display: flex; align-items: center; gap: 10px; }
-    .lang-switcher {
-      display: flex; gap: 5px; background: #161c33; padding: 4px 8px; border-radius: 20px; border: 1px solid var(--card-border);
+    .global-lang-group {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2px 4px;
+      gap: 2px;
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
     }
-    .lang-btn { text-decoration: none; font-size: 1.1rem; padding: 2px 6px; border-radius: 12px; transition: all 0.2s; }
-    .lang-btn:hover, .lang-btn.active { background: var(--pink); color: #000; transform: scale(1.15); }
-    .home-link {
-      color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 700; background: #202742; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--card-border); transition: all 0.2s;
+    .global-lang-group::-webkit-scrollbar {
+      display: none;
     }
-    .home-link:hover { border-color: var(--pink); color: var(--pink); }
+    .lang-tag {
+      font-size: 0.68rem;
+      color: #64748b;
+      font-weight: 800;
+      margin: 0 4px;
+      letter-spacing: 0.5px;
+    }
+    .lang-pill {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .lang-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .lang-pill.active {
+      background: #facc15;
+      color: #0f172a;
+      font-weight: 800;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px 16px;
+      }
+      .global-lang-group {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 4px;
+      }
+    }
     .hero { max-width: 900px; margin: 36px auto 16px; padding: 0 20px; text-align: center; }
     .hero-badge {
       display: inline-block; font-size: 0.8rem; font-weight: 800; color: #fff; background: linear-gradient(135deg, #ec4899, #8b5cf6); padding: 5px 16px; border-radius: 20px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
@@ -439,16 +488,15 @@
     <a href="../index.html" class="brand">
       <div class="brand-logo">マルサム (MALSSAM) 🌸 <span class="brand-edition">日本版</span></div>
     </a>
-    <div class="header-nav">
-      <div class="lang-switcher">
-        <a href="en.html" class="lang-btn" title="English (US)">🇺🇸</a>
-        <a href="ja.html" class="lang-btn active" title="日本語 (Japan)">🇯🇵</a>
-        <a href="vi.html" class="lang-btn" title="Tiếng Việt (Vietnam)">🇻🇳</a>
-        <a href="id.html" class="lang-btn" title="Bahasa Indonesia">🇮🇩</a>
-        <a href="es.html" class="lang-btn" title="Español (Spain/LatAm)">🇪🇸</a>
-      </div>
-      <a href="../index.html" class="home-link">🇰🇷 韓国語メイン</a>
-    </div>
+    <nav class="global-lang-group" title="Global Edition Selector">
+      <span class="lang-tag">GLOBAL:</span>
+      <a href="../index.html" class="lang-pill" title="Korean Original">🇰🇷 KR</a>
+      <a href="en.html" class="lang-pill" title="English Edition">🇺🇸 EN</a>
+      <a href="ja.html" class="lang-pill active" title="Japanese Edition">🇯🇵 JA</a>
+      <a href="vi.html" class="lang-pill" title="Vietnamese Edition">🇻🇳 VI</a>
+      <a href="id.html" class="lang-pill" title="Indonesian Edition">🇮🇩 ID</a>
+      <a href="es.html" class="lang-pill" title="Spanish Edition">🇪🇸 ES</a>
+    </nav>
   </header>
   <section class="hero">
     <div class="hero-badge">🌸 2026 最新 Z世代・推し活・流行語辞典</div>
@@ -553,8 +601,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">방가방가</span>
-              <rt class="katakana-rt">クルキダ</rt>
+              <rt class="katakana-rt">バンガバンガ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[banggabangga]</span>
+              <button class="btn-sound-speak" onclick="speakWord('방가방가', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -588,8 +640,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">하이루</span>
-              <rt class="katakana-rt">ジュンコンマ</rt>
+              <rt class="katakana-rt">ハイル</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[hairu]</span>
+              <button class="btn-sound-speak" onclick="speakWord('하이루', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -623,8 +679,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">즐</span>
-              <rt class="katakana-rt">オッカ</rt>
+              <rt class="katakana-rt">チュル</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[jeul]</span>
+              <button class="btn-sound-speak" onclick="speakWord('즐', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -658,8 +718,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">OTL</span>
-              <rt class="katakana-rt">アルジャルタッカルセン</rt>
+              <rt class="katakana-rt">OTL</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[OTL]</span>
+              <button class="btn-sound-speak" onclick="speakWord('OTL', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -693,8 +757,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">뷁</span>
-              <rt class="katakana-rt">ポムミチョッタ</rt>
+              <rt class="katakana-rt">뷁</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[bwek]</span>
+              <button class="btn-sound-speak" onclick="speakWord('뷁', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -728,8 +796,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">간지</span>
-              <rt class="katakana-rt">ピンプ</rt>
+              <rt class="katakana-rt">カンチ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[ganji]</span>
+              <button class="btn-sound-speak" onclick="speakWord('간지', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -763,8 +835,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">지못미</span>
-              <rt class="katakana-rt">プンジョカ</rt>
+              <rt class="katakana-rt">チ못미</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[jimotmi]</span>
+              <button class="btn-sound-speak" onclick="speakWord('지못미', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -798,8 +874,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">킹왕짱</span>
-              <rt class="katakana-rt">カッセン</rt>
+              <rt class="katakana-rt">キン왕짱</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[kingwangjjang]</span>
+              <button class="btn-sound-speak" onclick="speakWord('킹왕짱', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -833,8 +913,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">안습</span>
-              <rt class="katakana-rt">ラッキービッキー</rt>
+              <rt class="katakana-rt">アンスプ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[anseup]</span>
+              <button class="btn-sound-speak" onclick="speakWord('안습', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -868,8 +952,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">얼짱</span>
-              <rt class="katakana-rt">チュグミ</rt>
+              <rt class="katakana-rt">얼짱</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[eoljjang]</span>
+              <button class="btn-sound-speak" onclick="speakWord('얼짱', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -903,8 +991,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">몸짱</span>
-              <rt class="katakana-rt">オヒリョチョア</rt>
+              <rt class="katakana-rt">몸짱</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[momjjang]</span>
+              <button class="btn-sound-speak" onclick="speakWord('몸짱', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -938,8 +1030,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">훈남</span>
-              <rt class="katakana-rt">ヌカルヒョプ</rt>
+              <rt class="katakana-rt">フンナム</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[hunnam]</span>
+              <button class="btn-sound-speak" onclick="speakWord('훈남', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -973,8 +1069,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">엄친아</span>
-              <rt class="katakana-rt">ネジョル</rt>
+              <rt class="katakana-rt">オムチンア</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[eomchina]</span>
+              <button class="btn-sound-speak" onclick="speakWord('엄친아', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1008,8 +1108,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">된장녀</span>
-              <rt class="katakana-rt">スブルジェ</rt>
+              <rt class="katakana-rt">テンジャンニョ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[doenjangnyeo]</span>
+              <button class="btn-sound-speak" onclick="speakWord('된장녀', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1043,8 +1147,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">담다디</span>
-              <rt class="katakana-rt">キンバンネ</rt>
+              <rt class="katakana-rt">담ダディ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[damdadi]</span>
+              <button class="btn-sound-speak" onclick="speakWord('담다디', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1078,8 +1186,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">8282</span>
-              <rt class="katakana-rt">オッチョルTV</rt>
+              <rt class="katakana-rt">8282</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[8282]</span>
+              <button class="btn-sound-speak" onclick="speakWord('8282', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1113,8 +1225,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">0124</span>
-              <rt class="katakana-rt">チョンメチュ</rt>
+              <rt class="katakana-rt">0124</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[0124]</span>
+              <button class="btn-sound-speak" onclick="speakWord('0124', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1148,8 +1264,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">도토리</span>
-              <rt class="katakana-rt">クンサク</rt>
+              <rt class="katakana-rt">ド토リ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[dotori]</span>
+              <button class="btn-sound-speak" onclick="speakWord('도토리', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1183,8 +1303,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">일촌평</span>
-              <rt class="katakana-rt">ケルパク</rt>
+              <rt class="katakana-rt">일촌평</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[ilchonpyeong]</span>
+              <button class="btn-sound-speak" onclick="speakWord('일촌평', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1218,8 +1342,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">십라</span>
-              <rt class="katakana-rt">ディット</rt>
+              <rt class="katakana-rt">십ラ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[sipra]</span>
+              <button class="btn-sound-speak" onclick="speakWord('십라', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1253,8 +1381,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">멘붕</span>
-              <rt class="katakana-rt">ネットチュル</rt>
+              <rt class="katakana-rt">メンブン</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[menbung]</span>
+              <button class="btn-sound-speak" onclick="speakWord('멘붕', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1288,8 +1420,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">꿀잼</span>
-              <rt class="katakana-rt">ワンネス</rt>
+              <rt class="katakana-rt">クルチェム</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[kkuljaem]</span>
+              <button class="btn-sound-speak" onclick="speakWord('꿀잼', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1323,8 +1459,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">노잼</span>
-              <rt class="katakana-rt">ムムル</rt>
+              <rt class="katakana-rt">ノチェム</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[nojaem]</span>
+              <button class="btn-sound-speak" onclick="speakWord('노잼', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1358,8 +1498,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">심쿵</span>
-              <rt class="katakana-rt">マギレ</rt>
+              <rt class="katakana-rt">シムクン</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[simkung]</span>
+              <button class="btn-sound-speak" onclick="speakWord('심쿵', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1393,8 +1537,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">금수저</span>
-              <rt class="katakana-rt">サランヘ</rt>
+              <rt class="katakana-rt">クムスジョ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[geumsujeo]</span>
+              <button class="btn-sound-speak" onclick="speakWord('금수저', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1428,8 +1576,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">흙수저</span>
-              <rt class="katakana-rt">チャマンチュ</rt>
+              <rt class="katakana-rt">フクスジョ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[heuksujeo]</span>
+              <button class="btn-sound-speak" onclick="speakWord('흙수저', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1463,8 +1615,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">팩폭</span>
-              <rt class="katakana-rt">サバサ</rt>
+              <rt class="katakana-rt">パクポク</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[paekpok]</span>
+              <button class="btn-sound-speak" onclick="speakWord('팩폭', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1498,8 +1654,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">빼박캔트</span>
-              <rt class="katakana-rt">ティーエムアイ</rt>
+              <rt class="katakana-rt">빼박캔ト</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[ppaebakkaenteu]</span>
+              <button class="btn-sound-speak" onclick="speakWord('빼박캔트', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1533,8 +1693,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">갓생</span>
-              <rt class="katakana-rt">パンモ</rt>
+              <rt class="katakana-rt">カッセン</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[gatsaeng]</span>
+              <button class="btn-sound-speak" onclick="speakWord('갓생', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1568,8 +1732,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">극혐</span>
-              <rt class="katakana-rt">ソファケン</rt>
+              <rt class="katakana-rt">극혐</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[geukhyeom]</span>
+              <button class="btn-sound-speak" onclick="speakWord('극혐', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1603,8 +1771,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">츤데레</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">츤데레</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[cheundere]</span>
+              <button class="btn-sound-speak" onclick="speakWord('츤데레', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1638,8 +1810,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">케미</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">케미</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[kemi]</span>
+              <button class="btn-sound-speak" onclick="speakWord('케미', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1673,8 +1849,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">답정너</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">タプチョン너</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[dapjeongneo]</span>
+              <button class="btn-sound-speak" onclick="speakWord('답정너', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1708,8 +1888,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">낄끼빠빠</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">キルキパパ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[kkilkkippappa]</span>
+              <button class="btn-sound-speak" onclick="speakWord('낄끼빠빠', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1743,8 +1927,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">안물안궁</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">アン물アン궁</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[anmulangung]</span>
+              <button class="btn-sound-speak" onclick="speakWord('안물안궁', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1778,8 +1966,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">솔까말</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ソルカマル</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[solkkamal]</span>
+              <button class="btn-sound-speak" onclick="speakWord('솔까말', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1813,8 +2005,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">어그로</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">オ그ロ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[eogeuro]</span>
+              <button class="btn-sound-speak" onclick="speakWord('어그로', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1848,8 +2044,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">현타</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">현타</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[hyeonta]</span>
+              <button class="btn-sound-speak" onclick="speakWord('현타', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1883,8 +2083,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">이생망</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">イセン망</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[isaengmang]</span>
+              <button class="btn-sound-speak" onclick="speakWord('이생망', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1918,8 +2122,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">소확행</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ソファクヘン</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[sohwakhaeng]</span>
+              <button class="btn-sound-speak" onclick="speakWord('소확행', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1953,8 +2161,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">긁히다</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">クルヒダ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[geukhida]</span>
+              <button class="btn-sound-speak" onclick="speakWord('긁히다', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -1988,8 +2200,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">중꺾마</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">チュンコンマ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[jung-kkeok-ma]</span>
+              <button class="btn-sound-speak" onclick="speakWord('중꺾마', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2023,8 +2239,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">억까</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">オクカ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[eokkka]</span>
+              <button class="btn-sound-speak" onclick="speakWord('억까', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2058,8 +2278,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">알잘딱깔센</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">アルチャルタクカルセン</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[aljaltakkalsen]</span>
+              <button class="btn-sound-speak" onclick="speakWord('알잘딱깔센', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2093,8 +2317,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">폼 미쳤다</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">폼 미쳤ダ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[pom michyeotda]</span>
+              <button class="btn-sound-speak" onclick="speakWord('폼 미쳤다', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2128,8 +2356,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">핑프</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ピンプ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[pingpeu]</span>
+              <button class="btn-sound-speak" onclick="speakWord('핑프', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2163,8 +2395,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">분좋카</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">プンチョカ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[bunjotka]</span>
+              <button class="btn-sound-speak" onclick="speakWord('분좋카', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2198,8 +2434,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">럭키비키</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ラクキビキ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[leokki-biki]</span>
+              <button class="btn-sound-speak" onclick="speakWord('럭키비키', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2233,8 +2473,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">추구미</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">チュ구미</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[chugumi]</span>
+              <button class="btn-sound-speak" onclick="speakWord('추구미', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2268,8 +2512,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">오히려 좋아</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">オヒ려 チョア</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[ohiryeo jota]</span>
+              <button class="btn-sound-speak" onclick="speakWord('오히려 좋아', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2303,8 +2551,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">누칼협</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">누칼협</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[nukalhyeop]</span>
+              <button class="btn-sound-speak" onclick="speakWord('누칼협', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2338,8 +2590,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">뇌절</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">뇌절</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[noejeol]</span>
+              <button class="btn-sound-speak" onclick="speakWord('뇌절', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2373,8 +2629,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">스불재</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">スプルチェ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[seubuljae]</span>
+              <button class="btn-sound-speak" onclick="speakWord('스불재', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2408,8 +2668,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">킹받네</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">キンパンネ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[kingbatne]</span>
+              <button class="btn-sound-speak" onclick="speakWord('킹받네', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2443,8 +2707,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">어쩔티비</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">オ쩔ティビ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[eojjeoltibi]</span>
+              <button class="btn-sound-speak" onclick="speakWord('어쩔티비', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2478,8 +2746,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">점메추</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">チョム메チュ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[jeommechu]</span>
+              <button class="btn-sound-speak" onclick="speakWord('점메추', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2513,8 +2785,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">군싹</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">クンサク</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[gunssak]</span>
+              <button class="btn-sound-speak" onclick="speakWord('군싹', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2548,8 +2824,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">캘박</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">캘박</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[kaelbak]</span>
+              <button class="btn-sound-speak" onclick="speakWord('캘박', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2583,8 +2863,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">디토</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ディ토</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[dito]</span>
+              <button class="btn-sound-speak" onclick="speakWord('디토', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2618,8 +2902,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">내또출</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">내또출</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[naettochul]</span>
+              <button class="btn-sound-speak" onclick="speakWord('내또출', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2653,8 +2941,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">완내스</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ワン내ス</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[wannaeseu]</span>
+              <button class="btn-sound-speak" onclick="speakWord('완내스', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2688,8 +2980,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">무물</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">무물</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[mumul]</span>
+              <button class="btn-sound-speak" onclick="speakWord('무물', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2723,8 +3019,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">막이래</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">マクイ래</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[makirae]</span>
+              <button class="btn-sound-speak" onclick="speakWord('막이래', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2758,8 +3058,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">H워얼V</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">Hウォ얼V</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[h-wo-eol-v]</span>
+              <button class="btn-sound-speak" onclick="speakWord('H워얼V', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2793,8 +3097,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">자만추</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">자만チュ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[jamanchu]</span>
+              <button class="btn-sound-speak" onclick="speakWord('자만추', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2828,8 +3136,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">사바사</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">사바사</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[sabasa]</span>
+              <button class="btn-sound-speak" onclick="speakWord('사바사', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2863,8 +3175,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">TMI</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">TMI</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[TMI]</span>
+              <button class="btn-sound-speak" onclick="speakWord('TMI', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2898,8 +3214,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">반모</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">반モ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[banmo]</span>
+              <button class="btn-sound-speak" onclick="speakWord('반모', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2933,8 +3253,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">영포티</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ヨンポティ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[young-forty]</span>
+              <button class="btn-sound-speak" onclick="speakWord('영포티', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -2968,8 +3292,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">영ㅋㅋ</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ヨンㅋㅋ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[young-kk]</span>
+              <button class="btn-sound-speak" onclick="speakWord('영ㅋㅋ', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3003,8 +3331,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">잼민이</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">チェム민イ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[jaemmini]</span>
+              <button class="btn-sound-speak" onclick="speakWord('잼민이', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3038,8 +3370,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">넵병</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">넵병</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[nepbyeong]</span>
+              <button class="btn-sound-speak" onclick="speakWord('넵병', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3073,8 +3409,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">조용한 사직</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">조용ハン 사직</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[joyonghan sajik]</span>
+              <button class="btn-sound-speak" onclick="speakWord('조용한 사직', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3108,8 +3448,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">알빠노</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">アルパノ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[alppano]</span>
+              <button class="btn-sound-speak" onclick="speakWord('알빠노', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3143,8 +3487,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">할매니얼</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">할メ니얼</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[halmaenieol]</span>
+              <button class="btn-sound-speak" onclick="speakWord('할매니얼', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3178,8 +3526,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">퐁퐁남</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">퐁퐁ナム</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[pongpongnam]</span>
+              <button class="btn-sound-speak" onclick="speakWord('퐁퐁남', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3213,8 +3565,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">오팔세대</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">オ팔세デ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[opalsedae]</span>
+              <button class="btn-sound-speak" onclick="speakWord('오팔세대', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3248,8 +3604,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">쿠쿠루삥뽕</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">쿠쿠ル삥뽕</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[kukuruppingppong]</span>
+              <button class="btn-sound-speak" onclick="speakWord('쿠쿠루삥뽕', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3283,8 +3643,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">꼰대</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">コンデ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[kkondae]</span>
+              <button class="btn-sound-speak" onclick="speakWord('꼰대', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3318,8 +3682,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">월급루팡</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">월급ル팡</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[wolgeuprupang]</span>
+              <button class="btn-sound-speak" onclick="speakWord('월급루팡', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3353,8 +3721,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">아재체</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">アチェ체</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[ajaeche]</span>
+              <button class="btn-sound-speak" onclick="speakWord('아재체', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3388,8 +3760,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">개저씨</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">개ジョ씨</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[gaejeossi]</span>
+              <button class="btn-sound-speak" onclick="speakWord('개저씨', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3423,8 +3799,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">스라밸</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">スラベル</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[seurabael]</span>
+              <button class="btn-sound-speak" onclick="speakWord('스라밸', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3458,8 +3838,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">일태기</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">일テ기</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[iltaegi]</span>
+              <button class="btn-sound-speak" onclick="speakWord('일태기', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3493,8 +3877,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">퇴준생</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">퇴준セン</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[toejunsaeng]</span>
+              <button class="btn-sound-speak" onclick="speakWord('퇴준생', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3528,8 +3916,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">내로남불</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">내ロナムプル</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[naeronambul]</span>
+              <button class="btn-sound-speak" onclick="speakWord('내로남불', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3563,8 +3955,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">가심비</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ガシムビ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[gasimbi]</span>
+              <button class="btn-sound-speak" onclick="speakWord('가심비', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3598,8 +3994,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">주린이</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">주린イ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[jurini]</span>
+              <button class="btn-sound-speak" onclick="speakWord('주린이', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3633,8 +4033,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">취존</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">취존</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[chwijon]</span>
+              <button class="btn-sound-speak" onclick="speakWord('취존', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3668,8 +4072,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">모태솔로</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">モテソルロ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[motaesolro]</span>
+              <button class="btn-sound-speak" onclick="speakWord('모태솔로', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3703,8 +4111,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">금사빠</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">クム사パ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[geumsappa]</span>
+              <button class="btn-sound-speak" onclick="speakWord('금사빠', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3738,8 +4150,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">아햏햏</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ア햏햏</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[ahaethaet]</span>
+              <button class="btn-sound-speak" onclick="speakWord('아햏햏', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3773,8 +4189,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">싱하형</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">싱ハ형</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[singhahyeong]</span>
+              <button class="btn-sound-speak" onclick="speakWord('싱하형', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3808,8 +4228,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">폐인</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">폐イン</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[pyein]</span>
+              <button class="btn-sound-speak" onclick="speakWord('폐인', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3843,8 +4267,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">따봉</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">따봉</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[ttabong]</span>
+              <button class="btn-sound-speak" onclick="speakWord('따봉', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3878,8 +4306,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">플렉스</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">플렉ス</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[peulrekseu]</span>
+              <button class="btn-sound-speak" onclick="speakWord('플렉스', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3913,8 +4345,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">돈쭐</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">돈쭐</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[donjjul]</span>
+              <button class="btn-sound-speak" onclick="speakWord('돈쭐', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3948,8 +4384,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">텍스트 힙</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">텍スト 힙</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[tekseuteu hip]</span>
+              <button class="btn-sound-speak" onclick="speakWord('텍스트 힙', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -3983,8 +4423,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">워라밸</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">ウォラベル</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[worabael]</span>
+              <button class="btn-sound-speak" onclick="speakWord('워라밸', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -4018,8 +4462,12 @@
           <div class="bento-title-area">
             <ruby class="jp-ruby-title">
               <span class="hangul-char">삼포세대</span>
-              <rt class="katakana-rt">ハングル</rt>
+              <rt class="katakana-rt">삼ポ세デ</rt>
             </ruby>
+            <div class="jp-pron-row" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <span class="jp-roman-pron" style="color:#38bdf8; font-size:0.88rem; font-weight:700; font-family:'Montserrat', monospace;">[samposedae]</span>
+              <button class="btn-sound-speak" onclick="speakWord('삼포세대', event)" style="background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.75rem;" title="発音を聞く">🔊</button>
+            </div>
           </div>
           <div class="jp-slang-highlight">
             <span class="star-icon">✨</span>
@@ -4191,6 +4639,17 @@
         dEl.innerText = "30枚のカードを復習して、リアルな韓国語を身につけましょう！";
       }
     }
+  
+    function speakWord(text, ev) {
+      if (ev) ev.stopPropagation();
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ko-KR';
+      u.rate = 0.92;
+      window.speechSynthesis.speak(u);
+    }
+    
   </script>
 </body>
 </html>

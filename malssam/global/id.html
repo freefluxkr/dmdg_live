@@ -70,16 +70,65 @@
       padding: 3px 8px;
       border-radius: 9999px;
     }
-    .header-nav { display: flex; align-items: center; gap: 10px; }
-    .lang-switcher {
-      display: flex; gap: 5px; background: #121824; padding: 4px 8px; border-radius: 20px; border: 1px solid var(--card-border);
+    .global-lang-group {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2px 4px;
+      gap: 2px;
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
     }
-    .lang-btn { text-decoration: none; font-size: 1.1rem; padding: 2px 6px; border-radius: 12px; transition: all 0.2s; }
-    .lang-btn:hover, .lang-btn.active { background: var(--orange); color: #000; transform: scale(1.15); }
-    .home-link {
-      color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 700; background: #1a2233; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--card-border); transition: all 0.2s;
+    .global-lang-group::-webkit-scrollbar {
+      display: none;
     }
-    .home-link:hover { border-color: var(--orange); color: var(--orange); }
+    .lang-tag {
+      font-size: 0.68rem;
+      color: #64748b;
+      font-weight: 800;
+      margin: 0 4px;
+      letter-spacing: 0.5px;
+    }
+    .lang-pill {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .lang-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .lang-pill.active {
+      background: #facc15;
+      color: #0f172a;
+      font-weight: 800;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px 16px;
+      }
+      .global-lang-group {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 4px;
+      }
+    }
 
     /* Fandom Trending Ticker */
     .fandom-ticker {
@@ -461,16 +510,15 @@
     <a href="../index.html" class="brand">
       <div class="brand-logo">MALSSAM ID 🇮🇩 <span class="brand-edition">INDONESIA</span></div>
     </a>
-    <div class="header-nav">
-      <div class="lang-switcher">
-        <a href="en.html" class="lang-btn" title="English (US)">🇺🇸</a>
-        <a href="ja.html" class="lang-btn" title="日本語 (Japan)">🇯🇵</a>
-        <a href="vi.html" class="lang-btn" title="Tiếng Việt (Vietnam)">🇻🇳</a>
-        <a href="id.html" class="lang-btn active" title="Bahasa Indonesia">🇮🇩</a>
-        <a href="es.html" class="lang-btn" title="Español (Spain/LatAm)">🇪🇸</a>
-      </div>
-      <a href="../index.html" class="home-link">🇰🇷 Versi Utama</a>
-    </div>
+    <nav class="global-lang-group" title="Global Edition Selector">
+      <span class="lang-tag">GLOBAL:</span>
+      <a href="../index.html" class="lang-pill" title="Korean Original">🇰🇷 KR</a>
+      <a href="en.html" class="lang-pill" title="English Edition">🇺🇸 EN</a>
+      <a href="ja.html" class="lang-pill" title="Japanese Edition">🇯🇵 JA</a>
+      <a href="vi.html" class="lang-pill" title="Vietnamese Edition">🇻🇳 VI</a>
+      <a href="id.html" class="lang-pill active" title="Indonesian Edition">🇮🇩 ID</a>
+      <a href="es.html" class="lang-pill" title="Spanish Edition">🇪🇸 ES</a>
+    </nav>
   </header>
 
   <div class="fandom-ticker">
@@ -599,7 +647,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">방가방가</h2>
-              <span class="id-pron">[방가방가]</span>
+              <span class="id-pron">[banggabangga]</span>
               <span class="id-pos">감탄사 / 인사말</span>
             </div>
 
@@ -656,7 +704,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">하이루</h2>
-              <span class="id-pron">[하이루]</span>
+              <span class="id-pron">[hairu]</span>
               <span class="id-pos">감탄사 / 인사말</span>
             </div>
 
@@ -713,7 +761,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">즐</h2>
-              <span class="id-pron">[즐]</span>
+              <span class="id-pron">[jeul]</span>
               <span class="id-pos">감탄사 / 은어</span>
             </div>
 
@@ -770,7 +818,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">OTL</h2>
-              <span class="id-pron">[오티엘 / 엎드려좌절]</span>
+              <span class="id-pron">[OTL]</span>
               <span class="id-pos">이모티콘 / 명사</span>
             </div>
 
@@ -827,7 +875,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">뷁</h2>
-              <span class="id-pron">[뷐]</span>
+              <span class="id-pron">[bwek]</span>
               <span class="id-pos">감탄사 / 명사</span>
             </div>
 
@@ -884,7 +932,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">간지</h2>
-              <span class="id-pron">[간지]</span>
+              <span class="id-pron">[ganji]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -941,7 +989,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">지못미</h2>
-              <span class="id-pron">[지몬미]</span>
+              <span class="id-pron">[jimotmi]</span>
               <span class="id-pos">감탄사 / 명사</span>
             </div>
 
@@ -998,7 +1046,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">킹왕짱</h2>
-              <span class="id-pron">[킹왕짱]</span>
+              <span class="id-pron">[kingwangjjang]</span>
               <span class="id-pos">명사 / 형용사</span>
             </div>
 
@@ -1055,7 +1103,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">안습</h2>
-              <span class="id-pron">[안습]</span>
+              <span class="id-pron">[anseup]</span>
               <span class="id-pos">명사 / 형용사</span>
             </div>
 
@@ -1112,7 +1160,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">얼짱</h2>
-              <span class="id-pron">[얼짱]</span>
+              <span class="id-pron">[eoljjang]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -1169,7 +1217,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">몸짱</h2>
-              <span class="id-pron">[몸짱]</span>
+              <span class="id-pron">[momjjang]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -1226,7 +1274,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">훈남</h2>
-              <span class="id-pron">[훈남]</span>
+              <span class="id-pron">[hunnam]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -1283,7 +1331,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">엄친아</h2>
-              <span class="id-pron">[엄치나]</span>
+              <span class="id-pron">[eomchina]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -1340,7 +1388,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">된장녀</h2>
-              <span class="id-pron">[된장녀]</span>
+              <span class="id-pron">[doenjangnyeo]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -1397,7 +1445,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">담다디</h2>
-              <span class="id-pron">[담다디]</span>
+              <span class="id-pron">[damdadi]</span>
               <span class="id-pos">명사 / 감탄사</span>
             </div>
 
@@ -1454,7 +1502,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">8282</h2>
-              <span class="id-pron">[팔이팔이]</span>
+              <span class="id-pron">[8282]</span>
               <span class="id-pos">수사 / 숫자 은어</span>
             </div>
 
@@ -1511,7 +1559,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">0124</h2>
-              <span class="id-pron">[영일이사]</span>
+              <span class="id-pron">[0124]</span>
               <span class="id-pos">수사 / 숫자 은어</span>
             </div>
 
@@ -1568,7 +1616,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">도토리</h2>
-              <span class="id-pron">[도토리]</span>
+              <span class="id-pron">[dotori]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -1625,7 +1673,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">일촌평</h2>
-              <span class="id-pron">[일촌평]</span>
+              <span class="id-pron">[ilchonpyeong]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -1682,7 +1730,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">십라</h2>
-              <span class="id-pron">[십라]</span>
+              <span class="id-pron">[sipra]</span>
               <span class="id-pos">감탄사 / 욕설 필터링 우회</span>
             </div>
 
@@ -1739,7 +1787,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">멘붕</h2>
-              <span class="id-pron">[멘붕]</span>
+              <span class="id-pron">[menbung]</span>
               <span class="id-pos">명사 / 형용사</span>
             </div>
 
@@ -1796,7 +1844,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">꿀잼</h2>
-              <span class="id-pron">[꿀잼]</span>
+              <span class="id-pron">[kkuljaem]</span>
               <span class="id-pos">명사 / 형용사</span>
             </div>
 
@@ -1853,7 +1901,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">노잼</h2>
-              <span class="id-pron">[노잼]</span>
+              <span class="id-pron">[nojaem]</span>
               <span class="id-pos">명사 / 형용사</span>
             </div>
 
@@ -1910,7 +1958,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">심쿵</h2>
-              <span class="id-pron">[심쿵]</span>
+              <span class="id-pron">[simkung]</span>
               <span class="id-pos">명사 / 감탄사</span>
             </div>
 
@@ -1967,7 +2015,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">금수저</h2>
-              <span class="id-pron">[금수저]</span>
+              <span class="id-pron">[geumsujeo]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2024,7 +2072,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">흙수저</h2>
-              <span class="id-pron">[흑쑤저]</span>
+              <span class="id-pron">[heuksujeo]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2081,7 +2129,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">팩폭</h2>
-              <span class="id-pron">[팩폭]</span>
+              <span class="id-pron">[paekpok]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2138,7 +2186,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">빼박캔트</h2>
-              <span class="id-pron">[빼박캔트]</span>
+              <span class="id-pron">[ppaebakkaenteu]</span>
               <span class="id-pos">명사 / 형용사</span>
             </div>
 
@@ -2195,7 +2243,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">갓생</h2>
-              <span class="id-pron">[갇생]</span>
+              <span class="id-pron">[gatsaeng]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -2252,7 +2300,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">극혐</h2>
-              <span class="id-pron">[그켬]</span>
+              <span class="id-pron">[geukhyeom]</span>
               <span class="id-pos">명사 / 형용사</span>
             </div>
 
@@ -2309,7 +2357,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">츤데레</h2>
-              <span class="id-pron">[츤데레]</span>
+              <span class="id-pron">[cheundere]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2366,7 +2414,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">케미</h2>
-              <span class="id-pron">[케미]</span>
+              <span class="id-pron">[kemi]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2423,7 +2471,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">답정너</h2>
-              <span class="id-pron">[답정너]</span>
+              <span class="id-pron">[dapjeongneo]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2480,7 +2528,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">낄끼빠빠</h2>
-              <span class="id-pron">[낄끼빠빠]</span>
+              <span class="id-pron">[kkilkkippappa]</span>
               <span class="id-pos">명사 / 관용구</span>
             </div>
 
@@ -2537,7 +2585,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">안물안궁</h2>
-              <span class="id-pron">[안물안궁]</span>
+              <span class="id-pron">[anmulangung]</span>
               <span class="id-pos">감탄사 / 관용구</span>
             </div>
 
@@ -2594,7 +2642,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">솔까말</h2>
-              <span class="id-pron">[솔까말]</span>
+              <span class="id-pron">[solkkamal]</span>
               <span class="id-pos">부사</span>
             </div>
 
@@ -2651,7 +2699,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">어그로</h2>
-              <span class="id-pron">[어그로]</span>
+              <span class="id-pron">[eogeuro]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2708,7 +2756,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">현타</h2>
-              <span class="id-pron">[현타]</span>
+              <span class="id-pron">[hyeonta]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2765,7 +2813,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">이생망</h2>
-              <span class="id-pron">[이생망]</span>
+              <span class="id-pron">[isaengmang]</span>
               <span class="id-pos">명사 / 감탄사</span>
             </div>
 
@@ -2822,7 +2870,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">소확행</h2>
-              <span class="id-pron">[소화캥]</span>
+              <span class="id-pron">[sohwakhaeng]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -2879,7 +2927,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">긁히다</h2>
-              <span class="id-pron">[글키다]</span>
+              <span class="id-pron">[geukhida]</span>
               <span class="id-pos">동사</span>
             </div>
 
@@ -2936,7 +2984,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">중꺾마</h2>
-              <span class="id-pron">[중껑마]</span>
+              <span class="id-pron">[jung-kkeok-ma]</span>
               <span class="id-pos">명사 / 관용구</span>
             </div>
 
@@ -2993,7 +3041,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">억까</h2>
-              <span class="id-pron">[억까]</span>
+              <span class="id-pron">[eokkka]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -3050,7 +3098,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">알잘딱깔센</h2>
-              <span class="id-pron">[알잘딱깔센]</span>
+              <span class="id-pron">[aljaltakkalsen]</span>
               <span class="id-pos">부사 / 형용사</span>
             </div>
 
@@ -3107,7 +3155,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">폼 미쳤다</h2>
-              <span class="id-pron">[폼 미첟따]</span>
+              <span class="id-pron">[pom michyeotda]</span>
               <span class="id-pos">감탄사 / 관용구</span>
             </div>
 
@@ -3164,7 +3212,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">핑프</h2>
-              <span class="id-pron">[핑프]</span>
+              <span class="id-pron">[pingpeu]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -3221,7 +3269,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">분좋카</h2>
-              <span class="id-pron">[분조카]</span>
+              <span class="id-pron">[bunjotka]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -3278,7 +3326,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">럭키비키</h2>
-              <span class="id-pron">[너키비키]</span>
+              <span class="id-pron">[leokki-biki]</span>
               <span class="id-pos">명사 / 감탄사</span>
             </div>
 
@@ -3335,7 +3383,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">추구미</h2>
-              <span class="id-pron">[추구미]</span>
+              <span class="id-pron">[chugumi]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -3392,7 +3440,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">오히려 좋아</h2>
-              <span class="id-pron">[오히려 조아]</span>
+              <span class="id-pron">[ohiryeo jota]</span>
               <span class="id-pos">관용구</span>
             </div>
 
@@ -3449,7 +3497,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">누칼협</h2>
-              <span class="id-pron">[누칼협]</span>
+              <span class="id-pron">[nukalhyeop]</span>
               <span class="id-pos">명사 / 관용구</span>
             </div>
 
@@ -3506,7 +3554,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">뇌절</h2>
-              <span class="id-pron">[뇌절]</span>
+              <span class="id-pron">[noejeol]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -3563,7 +3611,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">스불재</h2>
-              <span class="id-pron">[스불재]</span>
+              <span class="id-pron">[seubuljae]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -3620,7 +3668,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">킹받네</h2>
-              <span class="id-pron">[킹받네]</span>
+              <span class="id-pron">[kingbatne]</span>
               <span class="id-pos">감탄사 / 동사</span>
             </div>
 
@@ -3677,7 +3725,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">어쩔티비</h2>
-              <span class="id-pron">[어쩔티비]</span>
+              <span class="id-pron">[eojjeoltibi]</span>
               <span class="id-pos">감탄사</span>
             </div>
 
@@ -3734,7 +3782,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">점메추</h2>
-              <span class="id-pron">[점메추]</span>
+              <span class="id-pron">[jeommechu]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -3791,7 +3839,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">군싹</h2>
-              <span class="id-pron">[군싹]</span>
+              <span class="id-pron">[gunssak]</span>
               <span class="id-pos">감탄사 / 형용사</span>
             </div>
 
@@ -3848,7 +3896,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">캘박</h2>
-              <span class="id-pron">[캘박]</span>
+              <span class="id-pron">[kaelbak]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -3905,7 +3953,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">디토</h2>
-              <span class="id-pron">[디토]</span>
+              <span class="id-pron">[dito]</span>
               <span class="id-pos">명사 / 감탄사</span>
             </div>
 
@@ -3962,7 +4010,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">내또출</h2>
-              <span class="id-pron">[내또출]</span>
+              <span class="id-pron">[naettochul]</span>
               <span class="id-pos">명사 / 감탄사</span>
             </div>
 
@@ -4019,7 +4067,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">완내스</h2>
-              <span class="id-pron">[완내스]</span>
+              <span class="id-pron">[wannaeseu]</span>
               <span class="id-pos">명사 / 형용사</span>
             </div>
 
@@ -4076,7 +4124,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">무물</h2>
-              <span class="id-pron">[무물]</span>
+              <span class="id-pron">[mumul]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -4133,7 +4181,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">막이래</h2>
-              <span class="id-pron">[마기래]</span>
+              <span class="id-pron">[makirae]</span>
               <span class="id-pos">감탄사</span>
             </div>
 
@@ -4190,7 +4238,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">H워얼V</h2>
-              <span class="id-pron">[사랑해]</span>
+              <span class="id-pron">[h-wo-eol-v]</span>
               <span class="id-pos">감탄사 / 명사</span>
             </div>
 
@@ -4247,7 +4295,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">자만추</h2>
-              <span class="id-pron">[자만추]</span>
+              <span class="id-pron">[jamanchu]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4304,7 +4352,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">사바사</h2>
-              <span class="id-pron">[사바사]</span>
+              <span class="id-pron">[sabasa]</span>
               <span class="id-pos">명사 / 관용구</span>
             </div>
 
@@ -4361,7 +4409,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">TMI</h2>
-              <span class="id-pron">[티엠아이]</span>
+              <span class="id-pron">[TMI]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4418,7 +4466,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">반모</h2>
-              <span class="id-pron">[반모]</span>
+              <span class="id-pron">[banmo]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -4475,7 +4523,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">영포티</h2>
-              <span class="id-pron">[영포티]</span>
+              <span class="id-pron">[young-forty]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4532,7 +4580,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">영ㅋㅋ</h2>
-              <span class="id-pron">[영크크]</span>
+              <span class="id-pron">[young-kk]</span>
               <span class="id-pos">감탄사 / 밈</span>
             </div>
 
@@ -4589,7 +4637,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">잼민이</h2>
-              <span class="id-pron">[잼미니]</span>
+              <span class="id-pron">[jaemmini]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4646,7 +4694,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">넵병</h2>
-              <span class="id-pron">[넵뼝]</span>
+              <span class="id-pron">[nepbyeong]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4703,7 +4751,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">조용한 사직</h2>
-              <span class="id-pron">[조용한 사직]</span>
+              <span class="id-pron">[joyonghan sajik]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4760,7 +4808,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">알빠노</h2>
-              <span class="id-pron">[알빠노]</span>
+              <span class="id-pron">[alppano]</span>
               <span class="id-pos">감탄사 / 밈</span>
             </div>
 
@@ -4817,7 +4865,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">할매니얼</h2>
-              <span class="id-pron">[할매니얼]</span>
+              <span class="id-pron">[halmaenieol]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4874,7 +4922,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">퐁퐁남</h2>
-              <span class="id-pron">[퐁퐁남]</span>
+              <span class="id-pron">[pongpongnam]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4931,7 +4979,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">오팔세대</h2>
-              <span class="id-pron">[오팔세대]</span>
+              <span class="id-pron">[opalsedae]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -4988,7 +5036,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">쿠쿠루삥뽕</h2>
-              <span class="id-pron">[쿠쿠루삥뽕]</span>
+              <span class="id-pron">[kukuruppingppong]</span>
               <span class="id-pos">감탄사 / 밈</span>
             </div>
 
@@ -5045,7 +5093,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">꼰대</h2>
-              <span class="id-pron">[꼰대]</span>
+              <span class="id-pron">[kkondae]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5102,7 +5150,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">월급루팡</h2>
-              <span class="id-pron">[월긍누팡]</span>
+              <span class="id-pron">[wolgeuprupang]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5159,7 +5207,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">아재체</h2>
-              <span class="id-pron">[아재체]</span>
+              <span class="id-pron">[ajaeche]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5216,7 +5264,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">개저씨</h2>
-              <span class="id-pron">[개저씨]</span>
+              <span class="id-pron">[gaejeossi]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5273,7 +5321,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">스라밸</h2>
-              <span class="id-pron">[스라밸]</span>
+              <span class="id-pron">[seurabael]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5330,7 +5378,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">일태기</h2>
-              <span class="id-pron">[일태기]</span>
+              <span class="id-pron">[iltaegi]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5387,7 +5435,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">퇴준생</h2>
-              <span class="id-pron">[퇴준생]</span>
+              <span class="id-pron">[toejunsaeng]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5444,7 +5492,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">내로남불</h2>
-              <span class="id-pron">[내로남불]</span>
+              <span class="id-pron">[naeronambul]</span>
               <span class="id-pos">명사 / 사자성어풍</span>
             </div>
 
@@ -5501,7 +5549,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">가심비</h2>
-              <span class="id-pron">[가심비]</span>
+              <span class="id-pron">[gasimbi]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5558,7 +5606,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">주린이</h2>
-              <span class="id-pron">[주리니]</span>
+              <span class="id-pron">[jurini]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5615,7 +5663,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">취존</h2>
-              <span class="id-pron">[취존]</span>
+              <span class="id-pron">[chwijon]</span>
               <span class="id-pos">명사 / 감탄사</span>
             </div>
 
@@ -5672,7 +5720,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">모태솔로</h2>
-              <span class="id-pron">[모태쏠로]</span>
+              <span class="id-pron">[motaesolro]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5729,7 +5777,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">금사빠</h2>
-              <span class="id-pron">[금사빠]</span>
+              <span class="id-pron">[geumsappa]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5786,7 +5834,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">아햏햏</h2>
-              <span class="id-pron">[아햏햏]</span>
+              <span class="id-pron">[ahaethaet]</span>
               <span class="id-pos">감탄사</span>
             </div>
 
@@ -5843,7 +5891,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">싱하형</h2>
-              <span class="id-pron">[싱하형]</span>
+              <span class="id-pron">[singhahyeong]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5900,7 +5948,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">폐인</h2>
-              <span class="id-pron">[폐인]</span>
+              <span class="id-pron">[pyein]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -5957,7 +6005,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">따봉</h2>
-              <span class="id-pron">[따봉]</span>
+              <span class="id-pron">[ttabong]</span>
               <span class="id-pos">감탄사 / 명사</span>
             </div>
 
@@ -6014,7 +6062,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">플렉스</h2>
-              <span class="id-pron">[플렉스]</span>
+              <span class="id-pron">[peulrekseu]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -6071,7 +6119,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">돈쭐</h2>
-              <span class="id-pron">[돈쭐]</span>
+              <span class="id-pron">[donjjul]</span>
               <span class="id-pos">명사 / 동사</span>
             </div>
 
@@ -6128,7 +6176,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">텍스트 힙</h2>
-              <span class="id-pron">[텍스트 힙]</span>
+              <span class="id-pron">[tekseuteu hip]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -6185,7 +6233,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">워라밸</h2>
-              <span class="id-pron">[워라밸]</span>
+              <span class="id-pron">[worabael]</span>
               <span class="id-pos">명사</span>
             </div>
 
@@ -6242,7 +6290,7 @@
           <div class="tweet-body">
             <div class="hangul-headline">
               <h2 class="id-hangul">삼포세대</h2>
-              <span class="id-pron">[삼포세대]</span>
+              <span class="id-pron">[samposedae]</span>
               <span class="id-pos">명사</span>
             </div>
 

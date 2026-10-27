@@ -1,0 +1,736 @@
+/* ============================================================
+   🎬 [말쌈 3D 플립 숏폼 상황극 디자인 시스템: css/roleplay.css]
+   - 스페인어 스타일 3D Flip Card & 15초 숏폼 비디오 시뮬레이터
+   - 6개국어 인터랙티브 더빙 엔진 & 글래스모피즘 네온 UI
+   ============================================================ */
+
+:root {
+  --rp-magenta: #ff007f;
+  --rp-gold: #ffd166;
+  --rp-cyan: #00f5d4;
+  --rp-purple: #a855f7;
+  --rp-dark: #0b0f17;
+  --rp-card-bg: #150522;
+}
+
+/* 🎴 3D FLIP CARD 모달 오버레이 */
+.roleplay-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 9, 19, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.roleplay-modal-overlay.active {
+  display: flex;
+}
+
+.roleplay-modal-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  animation: modalPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.roleplay-modal-close-btn {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 100;
+}
+
+.roleplay-modal-close-btn:hover {
+  background: var(--rp-magenta);
+  transform: rotate(90deg);
+}
+
+/* 🌐 6개국 언어 셀렉터 바 */
+.rp-global-lang-bar {
+  display: inline-flex;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rp-lang-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+
+.rp-lang-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.rp-lang-btn.active {
+  background: linear-gradient(135deg, var(--rp-magenta), #ff5500);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(255, 0, 127, 0.4);
+}
+
+/* ============================================================
+   🎴 [3D FLIP CARD 스테이지]
+   ============================================================ */
+.rp-flip-stage-container {
+  perspective: 1400px;
+  width: 100%;
+  max-width: 430px;
+  height: 720px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.rp-flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  transform-origin: center center;
+}
+
+.rp-flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.rp-flip-face {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 0, 127, 0.25);
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   [앞면: 스페인어 스타일 3D 네온 단어 카드]
+   ------------------------------------------------------------ */
+.rp-card-front {
+  background: linear-gradient(160deg, #1b072c 0%, #0d0218 60%, #150522 100%);
+  border: 2px solid var(--rp-magenta);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 20px;
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.rp-card-front::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(255, 0, 127, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.rp-front-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  z-index: 2;
+}
+
+.rp-k-soul-badge {
+  background: rgba(255, 209, 102, 0.15);
+  border: 1px solid var(--rp-gold);
+  color: var(--rp-gold);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rp-flip-hint-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.rp-front-word-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  text-shadow: 0 4px 20px rgba(255, 0, 127, 0.4);
+}
+
+.rp-front-pron-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.rp-pron-pill {
+  background: rgba(0, 245, 212, 0.12);
+  border: 1px solid var(--rp-cyan);
+  color: var(--rp-cyan);
+  font-size: 0.90rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-family: monospace;
+}
+
+.rp-pron-alt {
+  color: #f472b6;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.rp-btn-quick-audio {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+
+.rp-btn-quick-audio:hover {
+  background: var(--rp-cyan);
+  color: #0b0f17;
+  transform: scale(1.1);
+}
+
+.rp-front-desc-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-size: 0.84rem;
+  color: #e2e8f0;
+  line-height: 1.5;
+  backdrop-filter: blur(6px);
+}
+
+.rp-punchline-card {
+  background: linear-gradient(135deg, rgba(255, 0, 127, 0.12), rgba(168, 85, 247, 0.12));
+  border-left: 3px solid var(--rp-magenta);
+  padding: 10px 12px;
+  border-radius: 0 10px 10px 0;
+  font-size: 0.80rem;
+  color: #ffd166;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.rp-cast-preview-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+
+.rp-cast-header {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #a855f7;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rp-cast-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rp-cast-avatar-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3px 8px;
+  border-radius: 16px;
+}
+
+.rp-cast-avatar-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rp-gold);
+  object-fit: cover;
+}
+
+.rp-cast-avatar-name {
+  font-size: 0.70rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.rp-btn-fiesta-flip {
+  width: 100%;
+  background: linear-gradient(135deg, #ff007f 0%, #ff5500 50%, #ffd166 100%);
+  color: #0f172a;
+  font-weight: 900;
+  font-size: 0.95rem;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 25px rgba(255, 0, 127, 0.45);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rp-btn-fiesta-flip:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(255, 0, 127, 0.6);
+  color: #000;
+}
+
+/* ------------------------------------------------------------
+   [뒷면: 3D 숏폼 비디오 시뮬레이터]
+   ------------------------------------------------------------ */
+.rp-card-back {
+  background: #000;
+  border: 2px solid var(--rp-purple);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+/* 인스타 스토리 5단 진행 바 */
+.rp-story-progress-container {
+  display: flex;
+  gap: 5px;
+  padding: 12px 14px 4px;
+  z-index: 20;
+}
+
+.rp-story-progress-segment {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.rp-story-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  border-radius: 4px;
+  transition: width 0.1s linear;
+}
+
+.rp-back-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 14px;
+  z-index: 20;
+}
+
+.rp-btn-flip-back {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.rp-btn-flip-back:hover {
+  background: var(--rp-magenta);
+  color: #fff;
+}
+
+.rp-current-lang-pill {
+  font-size: 0.70rem;
+  background: rgba(168, 85, 247, 0.25);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #d8b4fe;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+.rp-btn-sound-toggle {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+/* 메인 비디오 스테이지 */
+.rp-video-stage {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.rp-stage-ambient-light {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, transparent 70%);
+  filter: blur(35px);
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.rp-character-stage {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rp-character-avatar-wrapper {
+  position: relative;
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--rp-magenta), #f43f5e);
+  box-shadow: 0 0 35px rgba(255, 0, 127, 0.6);
+  transition: all 0.3s ease;
+}
+
+.rp-character-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #0f172a;
+  display: block;
+}
+
+.rp-reaction-sticker {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.rp-actor-badge {
+  margin-top: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  color: #fff;
+}
+
+.rp-actor-title {
+  font-size: 0.70rem;
+  color: #38bdf8;
+  font-weight: 800;
+}
+
+.rp-speed-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent 40px, rgba(255,255,255,0.06) 40px, rgba(255,255,255,0.06) 42px);
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 5;
+}
+
+.rp-speed-lines.active {
+  opacity: 1;
+  animation: speedLineMove 0.15s infinite linear;
+}
+
+@keyframes speedLineMove {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+.rp-acting-direction-box {
+  z-index: 15;
+  margin-top: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  color: #ffd166;
+  font-style: italic;
+  max-width: 90%;
+  text-align: center;
+}
+
+/* 자막 영역 */
+.rp-subtitles-container {
+  padding: 6px 14px 10px;
+  z-index: 20;
+  text-align: center;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rp-main-subtitle {
+  font-size: 1.0rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.35;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 0, 127, 0.6);
+  margin-bottom: 4px;
+  word-break: keep-all;
+  transition: all 0.2s ease;
+}
+
+.rp-subtitles-trans {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  font-weight: 600;
+  word-break: keep-all;
+}
+
+/* 하단 플레이어 컨트롤 바 */
+.rp-bottom-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px 14px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.95) 100%);
+  z-index: 20;
+}
+
+.rp-ctrl-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rp-ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.rp-btn-play-pause {
+  background: linear-gradient(135deg, var(--rp-magenta), #8b5cf6);
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+}
+
+/* 화면 흔들림 효과 */
+.rp-screen-shake {
+  animation: rpScreenShake 0.4s ease-in-out;
+}
+
+@keyframes rpScreenShake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-3px, 4px) rotate(-1deg); }
+  40% { transform: translate(3px, -3px) rotate(1deg); }
+  60% { transform: translate(-2px, 2px) rotate(0deg); }
+  80% { transform: translate(2px, -1px) rotate(1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* 단어 카드 내 3D 상황극 열기 버튼 */
+.btn-card-roleplay {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, rgba(255, 0, 127, 0.18), rgba(168, 85, 247, 0.18));
+  border: 1px solid rgba(255, 0, 127, 0.5);
+  color: #ff77a9;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.2);
+}
+
+.btn-card-roleplay:hover {
+  background: linear-gradient(135deg, #ff007f, #a855f7);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+  transform: translateY(-1px) scale(1.04);
+}
+
+/* 🎬 메인 홈 숏폼 상황극 극장 헌정 배너 */
+.roleplay-theater-banner {
+  margin: 20px 0 30px;
+  background: linear-gradient(135deg, rgba(255, 0, 127, 0.12) 0%, rgba(168, 85, 247, 0.16) 50%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(255, 0, 127, 0.35);
+  border-radius: 20px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 0, 127, 0.15);
+  flex-wrap: wrap;
+}
+
+.roleplay-banner-text h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roleplay-banner-text p {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.btn-open-theater {
+  background: linear-gradient(135deg, #ff007f 0%, #ff5500 50%, #ffd166 100%);
+  color: #0b0f17;
+  font-weight: 900;
+  font-size: 0.90rem;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(255, 0, 127, 0.45);
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+
+.btn-open-theater:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(255, 0, 127, 0.65);
+}

@@ -70,16 +70,65 @@
       padding: 3px 8px;
       border-radius: 9999px;
     }
-    .header-nav { display: flex; align-items: center; gap: 10px; }
-    .lang-switcher {
-      display: flex; gap: 5px; background: #0c241c; padding: 4px 8px; border-radius: 20px; border: 1px solid var(--card-border);
+    .global-lang-group {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2px 4px;
+      gap: 2px;
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
     }
-    .lang-btn { text-decoration: none; font-size: 1.1rem; padding: 2px 6px; border-radius: 12px; transition: all 0.2s; }
-    .lang-btn:hover, .lang-btn.active { background: var(--emerald); color: #000; transform: scale(1.15); }
-    .home-link {
-      color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 700; background: #0f3025; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--card-border); transition: all 0.2s;
+    .global-lang-group::-webkit-scrollbar {
+      display: none;
     }
-    .home-link:hover { border-color: var(--emerald); color: var(--emerald); }
+    .lang-tag {
+      font-size: 0.68rem;
+      color: #64748b;
+      font-weight: 800;
+      margin: 0 4px;
+      letter-spacing: 0.5px;
+    }
+    .lang-pill {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .lang-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .lang-pill.active {
+      background: #facc15;
+      color: #0f172a;
+      font-weight: 800;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px 16px;
+      }
+      .global-lang-group {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 4px;
+      }
+    }
 
     /* TikTok Story Highlights Bar */
     .story-bar {
@@ -494,16 +543,15 @@
     <a href="../index.html" class="brand">
       <div class="brand-logo">MALSSAM 🇻🇳 <span class="brand-edition">VIỆT NAM</span></div>
     </a>
-    <div class="header-nav">
-      <div class="lang-switcher">
-        <a href="en.html" class="lang-btn" title="English (US)">🇺🇸</a>
-        <a href="ja.html" class="lang-btn" title="日本語 (Japan)">🇯🇵</a>
-        <a href="vi.html" class="lang-btn active" title="Tiếng Việt (Vietnam)">🇻🇳</a>
-        <a href="id.html" class="lang-btn" title="Bahasa Indonesia">🇮🇩</a>
-        <a href="es.html" class="lang-btn" title="Español (Spain/LatAm)">🇪🇸</a>
-      </div>
-      <a href="../index.html" class="home-link">🇰🇷 Trang Gốc</a>
-    </div>
+    <nav class="global-lang-group" title="Global Edition Selector">
+      <span class="lang-tag">GLOBAL:</span>
+      <a href="../index.html" class="lang-pill" title="Korean Original">🇰🇷 KR</a>
+      <a href="en.html" class="lang-pill" title="English Edition">🇺🇸 EN</a>
+      <a href="ja.html" class="lang-pill" title="Japanese Edition">🇯🇵 JA</a>
+      <a href="vi.html" class="lang-pill active" title="Vietnamese Edition">🇻🇳 VI</a>
+      <a href="id.html" class="lang-pill" title="Indonesian Edition">🇮🇩 ID</a>
+      <a href="es.html" class="lang-pill" title="Spanish Edition">🇪🇸 ES</a>
+    </nav>
   </header>
 
   <!-- Story Highlights Bar -->
@@ -644,7 +692,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">방가방가</h2>
-              <span class="vn-pron-chip">🔊 [geul-khi-da]</span>
+              <span class="vn-pron-chip">🔊 [banggabangga]</span>
               <span class="vn-pos-chip">감탄사 / 인사말</span>
             </div>
 
@@ -701,7 +749,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">하이루</h2>
-              <span class="vn-pron-chip">🔊 [jung-kkeok-ma]</span>
+              <span class="vn-pron-chip">🔊 [hairu]</span>
               <span class="vn-pos-chip">감탄사 / 인사말</span>
             </div>
 
@@ -758,7 +806,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">즐</h2>
-              <span class="vn-pron-chip">🔊 [eok-kka]</span>
+              <span class="vn-pron-chip">🔊 [jeul]</span>
               <span class="vn-pos-chip">감탄사 / 은어</span>
             </div>
 
@@ -815,7 +863,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">OTL</h2>
-              <span class="vn-pron-chip">🔊 [al-jal-ttak-kkal-sen]</span>
+              <span class="vn-pron-chip">🔊 [OTL]</span>
               <span class="vn-pos-chip">이모티콘 / 명사</span>
             </div>
 
@@ -872,7 +920,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">뷁</h2>
-              <span class="vn-pron-chip">🔊 [pom mi-chyeot-da]</span>
+              <span class="vn-pron-chip">🔊 [bwek]</span>
               <span class="vn-pos-chip">감탄사 / 명사</span>
             </div>
 
@@ -929,7 +977,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">간지</h2>
-              <span class="vn-pron-chip">🔊 [ping-peu]</span>
+              <span class="vn-pron-chip">🔊 [ganji]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -986,7 +1034,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">지못미</h2>
-              <span class="vn-pron-chip">🔊 [bun-joh-ka]</span>
+              <span class="vn-pron-chip">🔊 [jimotmi]</span>
               <span class="vn-pos-chip">감탄사 / 명사</span>
             </div>
 
@@ -1043,7 +1091,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">킹왕짱</h2>
-              <span class="vn-pron-chip">🔊 [gat-saeng]</span>
+              <span class="vn-pron-chip">🔊 [kingwangjjang]</span>
               <span class="vn-pos-chip">명사 / 형용사</span>
             </div>
 
@@ -1100,7 +1148,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">안습</h2>
-              <span class="vn-pron-chip">🔊 [reok-ki-bi-ki]</span>
+              <span class="vn-pron-chip">🔊 [anseup]</span>
               <span class="vn-pos-chip">명사 / 형용사</span>
             </div>
 
@@ -1157,7 +1205,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">얼짱</h2>
-              <span class="vn-pron-chip">🔊 [chu-gu-mi]</span>
+              <span class="vn-pron-chip">🔊 [eoljjang]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -1214,7 +1262,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">몸짱</h2>
-              <span class="vn-pron-chip">🔊 [o-hi-ryeo joh-a]</span>
+              <span class="vn-pron-chip">🔊 [momjjang]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -1271,7 +1319,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">훈남</h2>
-              <span class="vn-pron-chip">🔊 [nu-kal-hyeop]</span>
+              <span class="vn-pron-chip">🔊 [hunnam]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -1328,7 +1376,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">엄친아</h2>
-              <span class="vn-pron-chip">🔊 [noe-jeol]</span>
+              <span class="vn-pron-chip">🔊 [eomchina]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -1385,7 +1433,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">된장녀</h2>
-              <span class="vn-pron-chip">🔊 [seu-bul-jae]</span>
+              <span class="vn-pron-chip">🔊 [doenjangnyeo]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -1442,7 +1490,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">담다디</h2>
-              <span class="vn-pron-chip">🔊 [king-bat-ne]</span>
+              <span class="vn-pron-chip">🔊 [damdadi]</span>
               <span class="vn-pos-chip">명사 / 감탄사</span>
             </div>
 
@@ -1499,7 +1547,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">8282</h2>
-              <span class="vn-pron-chip">🔊 [eo-jjeol-ti-bi]</span>
+              <span class="vn-pron-chip">🔊 [8282]</span>
               <span class="vn-pos-chip">수사 / 숫자 은어</span>
             </div>
 
@@ -1556,7 +1604,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">0124</h2>
-              <span class="vn-pron-chip">🔊 [jeom-me-chu]</span>
+              <span class="vn-pron-chip">🔊 [0124]</span>
               <span class="vn-pos-chip">수사 / 숫자 은어</span>
             </div>
 
@@ -1613,7 +1661,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">도토리</h2>
-              <span class="vn-pron-chip">🔊 [gun-ssak]</span>
+              <span class="vn-pron-chip">🔊 [dotori]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -1670,7 +1718,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">일촌평</h2>
-              <span class="vn-pron-chip">🔊 [kael-bak]</span>
+              <span class="vn-pron-chip">🔊 [ilchonpyeong]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -1727,7 +1775,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">십라</h2>
-              <span class="vn-pron-chip">🔊 [di-to]</span>
+              <span class="vn-pron-chip">🔊 [sipra]</span>
               <span class="vn-pos-chip">감탄사 / 욕설 필터링 우회</span>
             </div>
 
@@ -1784,7 +1832,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">멘붕</h2>
-              <span class="vn-pron-chip">🔊 [nae-tto-chul]</span>
+              <span class="vn-pron-chip">🔊 [menbung]</span>
               <span class="vn-pos-chip">명사 / 형용사</span>
             </div>
 
@@ -1841,7 +1889,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">꿀잼</h2>
-              <span class="vn-pron-chip">🔊 [wan-nae-seu]</span>
+              <span class="vn-pron-chip">🔊 [kkuljaem]</span>
               <span class="vn-pos-chip">명사 / 형용사</span>
             </div>
 
@@ -1898,7 +1946,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">노잼</h2>
-              <span class="vn-pron-chip">🔊 [mu-mul]</span>
+              <span class="vn-pron-chip">🔊 [nojaem]</span>
               <span class="vn-pos-chip">명사 / 형용사</span>
             </div>
 
@@ -1955,7 +2003,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">심쿵</h2>
-              <span class="vn-pron-chip">🔊 [mak-i-rae]</span>
+              <span class="vn-pron-chip">🔊 [simkung]</span>
               <span class="vn-pos-chip">명사 / 감탄사</span>
             </div>
 
@@ -2012,7 +2060,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">금수저</h2>
-              <span class="vn-pron-chip">🔊 [sa-rang-hae]</span>
+              <span class="vn-pron-chip">🔊 [geumsujeo]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2069,7 +2117,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">흙수저</h2>
-              <span class="vn-pron-chip">🔊 [ja-man-chu]</span>
+              <span class="vn-pron-chip">🔊 [heuksujeo]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2126,7 +2174,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">팩폭</h2>
-              <span class="vn-pron-chip">🔊 [sa-ba-sa]</span>
+              <span class="vn-pron-chip">🔊 [paekpok]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2183,7 +2231,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">빼박캔트</h2>
-              <span class="vn-pron-chip">🔊 [ti-em-ai]</span>
+              <span class="vn-pron-chip">🔊 [ppaebakkaenteu]</span>
               <span class="vn-pos-chip">명사 / 형용사</span>
             </div>
 
@@ -2240,7 +2288,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">갓생</h2>
-              <span class="vn-pron-chip">🔊 [ban-mo]</span>
+              <span class="vn-pron-chip">🔊 [gatsaeng]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -2297,7 +2345,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">극혐</h2>
-              <span class="vn-pron-chip">🔊 [so-hwak-haeng]</span>
+              <span class="vn-pron-chip">🔊 [geukhyeom]</span>
               <span class="vn-pos-chip">명사 / 형용사</span>
             </div>
 
@@ -2354,7 +2402,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">츤데레</h2>
-              <span class="vn-pron-chip">🔊 [츤데레]</span>
+              <span class="vn-pron-chip">🔊 [cheundere]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2411,7 +2459,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">케미</h2>
-              <span class="vn-pron-chip">🔊 [케미]</span>
+              <span class="vn-pron-chip">🔊 [kemi]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2468,7 +2516,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">답정너</h2>
-              <span class="vn-pron-chip">🔊 [답정너]</span>
+              <span class="vn-pron-chip">🔊 [dapjeongneo]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2525,7 +2573,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">낄끼빠빠</h2>
-              <span class="vn-pron-chip">🔊 [낄끼빠빠]</span>
+              <span class="vn-pron-chip">🔊 [kkilkkippappa]</span>
               <span class="vn-pos-chip">명사 / 관용구</span>
             </div>
 
@@ -2582,7 +2630,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">안물안궁</h2>
-              <span class="vn-pron-chip">🔊 [안물안궁]</span>
+              <span class="vn-pron-chip">🔊 [anmulangung]</span>
               <span class="vn-pos-chip">감탄사 / 관용구</span>
             </div>
 
@@ -2639,7 +2687,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">솔까말</h2>
-              <span class="vn-pron-chip">🔊 [솔까말]</span>
+              <span class="vn-pron-chip">🔊 [solkkamal]</span>
               <span class="vn-pos-chip">부사</span>
             </div>
 
@@ -2696,7 +2744,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">어그로</h2>
-              <span class="vn-pron-chip">🔊 [어그로]</span>
+              <span class="vn-pron-chip">🔊 [eogeuro]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2753,7 +2801,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">현타</h2>
-              <span class="vn-pron-chip">🔊 [현타]</span>
+              <span class="vn-pron-chip">🔊 [hyeonta]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2810,7 +2858,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">이생망</h2>
-              <span class="vn-pron-chip">🔊 [이생망]</span>
+              <span class="vn-pron-chip">🔊 [isaengmang]</span>
               <span class="vn-pos-chip">명사 / 감탄사</span>
             </div>
 
@@ -2867,7 +2915,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">소확행</h2>
-              <span class="vn-pron-chip">🔊 [소화캥]</span>
+              <span class="vn-pron-chip">🔊 [sohwakhaeng]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -2924,7 +2972,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">긁히다</h2>
-              <span class="vn-pron-chip">🔊 [글키다]</span>
+              <span class="vn-pron-chip">🔊 [geukhida]</span>
               <span class="vn-pos-chip">동사</span>
             </div>
 
@@ -2981,7 +3029,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">중꺾마</h2>
-              <span class="vn-pron-chip">🔊 [중껑마]</span>
+              <span class="vn-pron-chip">🔊 [jung-kkeok-ma]</span>
               <span class="vn-pos-chip">명사 / 관용구</span>
             </div>
 
@@ -3038,7 +3086,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">억까</h2>
-              <span class="vn-pron-chip">🔊 [억까]</span>
+              <span class="vn-pron-chip">🔊 [eokkka]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -3095,7 +3143,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">알잘딱깔센</h2>
-              <span class="vn-pron-chip">🔊 [알잘딱깔센]</span>
+              <span class="vn-pron-chip">🔊 [aljaltakkalsen]</span>
               <span class="vn-pos-chip">부사 / 형용사</span>
             </div>
 
@@ -3152,7 +3200,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">폼 미쳤다</h2>
-              <span class="vn-pron-chip">🔊 [폼 미첟따]</span>
+              <span class="vn-pron-chip">🔊 [pom michyeotda]</span>
               <span class="vn-pos-chip">감탄사 / 관용구</span>
             </div>
 
@@ -3209,7 +3257,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">핑프</h2>
-              <span class="vn-pron-chip">🔊 [핑프]</span>
+              <span class="vn-pron-chip">🔊 [pingpeu]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -3266,7 +3314,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">분좋카</h2>
-              <span class="vn-pron-chip">🔊 [분조카]</span>
+              <span class="vn-pron-chip">🔊 [bunjotka]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -3323,7 +3371,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">럭키비키</h2>
-              <span class="vn-pron-chip">🔊 [너키비키]</span>
+              <span class="vn-pron-chip">🔊 [leokki-biki]</span>
               <span class="vn-pos-chip">명사 / 감탄사</span>
             </div>
 
@@ -3380,7 +3428,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">추구미</h2>
-              <span class="vn-pron-chip">🔊 [추구미]</span>
+              <span class="vn-pron-chip">🔊 [chugumi]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -3437,7 +3485,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">오히려 좋아</h2>
-              <span class="vn-pron-chip">🔊 [오히려 조아]</span>
+              <span class="vn-pron-chip">🔊 [ohiryeo jota]</span>
               <span class="vn-pos-chip">관용구</span>
             </div>
 
@@ -3494,7 +3542,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">누칼협</h2>
-              <span class="vn-pron-chip">🔊 [누칼협]</span>
+              <span class="vn-pron-chip">🔊 [nukalhyeop]</span>
               <span class="vn-pos-chip">명사 / 관용구</span>
             </div>
 
@@ -3551,7 +3599,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">뇌절</h2>
-              <span class="vn-pron-chip">🔊 [뇌절]</span>
+              <span class="vn-pron-chip">🔊 [noejeol]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -3608,7 +3656,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">스불재</h2>
-              <span class="vn-pron-chip">🔊 [스불재]</span>
+              <span class="vn-pron-chip">🔊 [seubuljae]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -3665,7 +3713,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">킹받네</h2>
-              <span class="vn-pron-chip">🔊 [킹받네]</span>
+              <span class="vn-pron-chip">🔊 [kingbatne]</span>
               <span class="vn-pos-chip">감탄사 / 동사</span>
             </div>
 
@@ -3722,7 +3770,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">어쩔티비</h2>
-              <span class="vn-pron-chip">🔊 [어쩔티비]</span>
+              <span class="vn-pron-chip">🔊 [eojjeoltibi]</span>
               <span class="vn-pos-chip">감탄사</span>
             </div>
 
@@ -3779,7 +3827,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">점메추</h2>
-              <span class="vn-pron-chip">🔊 [점메추]</span>
+              <span class="vn-pron-chip">🔊 [jeommechu]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -3836,7 +3884,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">군싹</h2>
-              <span class="vn-pron-chip">🔊 [군싹]</span>
+              <span class="vn-pron-chip">🔊 [gunssak]</span>
               <span class="vn-pos-chip">감탄사 / 형용사</span>
             </div>
 
@@ -3893,7 +3941,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">캘박</h2>
-              <span class="vn-pron-chip">🔊 [캘박]</span>
+              <span class="vn-pron-chip">🔊 [kaelbak]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -3950,7 +3998,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">디토</h2>
-              <span class="vn-pron-chip">🔊 [디토]</span>
+              <span class="vn-pron-chip">🔊 [dito]</span>
               <span class="vn-pos-chip">명사 / 감탄사</span>
             </div>
 
@@ -4007,7 +4055,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">내또출</h2>
-              <span class="vn-pron-chip">🔊 [내또출]</span>
+              <span class="vn-pron-chip">🔊 [naettochul]</span>
               <span class="vn-pos-chip">명사 / 감탄사</span>
             </div>
 
@@ -4064,7 +4112,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">완내스</h2>
-              <span class="vn-pron-chip">🔊 [완내스]</span>
+              <span class="vn-pron-chip">🔊 [wannaeseu]</span>
               <span class="vn-pos-chip">명사 / 형용사</span>
             </div>
 
@@ -4121,7 +4169,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">무물</h2>
-              <span class="vn-pron-chip">🔊 [무물]</span>
+              <span class="vn-pron-chip">🔊 [mumul]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -4178,7 +4226,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">막이래</h2>
-              <span class="vn-pron-chip">🔊 [마기래]</span>
+              <span class="vn-pron-chip">🔊 [makirae]</span>
               <span class="vn-pos-chip">감탄사</span>
             </div>
 
@@ -4235,7 +4283,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">H워얼V</h2>
-              <span class="vn-pron-chip">🔊 [사랑해]</span>
+              <span class="vn-pron-chip">🔊 [h-wo-eol-v]</span>
               <span class="vn-pos-chip">감탄사 / 명사</span>
             </div>
 
@@ -4292,7 +4340,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">자만추</h2>
-              <span class="vn-pron-chip">🔊 [자만추]</span>
+              <span class="vn-pron-chip">🔊 [jamanchu]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -4349,7 +4397,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">사바사</h2>
-              <span class="vn-pron-chip">🔊 [사바사]</span>
+              <span class="vn-pron-chip">🔊 [sabasa]</span>
               <span class="vn-pos-chip">명사 / 관용구</span>
             </div>
 
@@ -4406,7 +4454,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">TMI</h2>
-              <span class="vn-pron-chip">🔊 [티엠아이]</span>
+              <span class="vn-pron-chip">🔊 [TMI]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -4463,7 +4511,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">반모</h2>
-              <span class="vn-pron-chip">🔊 [반모]</span>
+              <span class="vn-pron-chip">🔊 [banmo]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -4520,7 +4568,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">영포티</h2>
-              <span class="vn-pron-chip">🔊 [영포티]</span>
+              <span class="vn-pron-chip">🔊 [young-forty]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -4577,7 +4625,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">영ㅋㅋ</h2>
-              <span class="vn-pron-chip">🔊 [영크크]</span>
+              <span class="vn-pron-chip">🔊 [young-kk]</span>
               <span class="vn-pos-chip">감탄사 / 밈</span>
             </div>
 
@@ -4634,7 +4682,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">잼민이</h2>
-              <span class="vn-pron-chip">🔊 [잼미니]</span>
+              <span class="vn-pron-chip">🔊 [jaemmini]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -4691,7 +4739,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">넵병</h2>
-              <span class="vn-pron-chip">🔊 [넵뼝]</span>
+              <span class="vn-pron-chip">🔊 [nepbyeong]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -4748,7 +4796,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">조용한 사직</h2>
-              <span class="vn-pron-chip">🔊 [조용한 사직]</span>
+              <span class="vn-pron-chip">🔊 [joyonghan sajik]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -4805,7 +4853,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">알빠노</h2>
-              <span class="vn-pron-chip">🔊 [알빠노]</span>
+              <span class="vn-pron-chip">🔊 [alppano]</span>
               <span class="vn-pos-chip">감탄사 / 밈</span>
             </div>
 
@@ -4862,7 +4910,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">할매니얼</h2>
-              <span class="vn-pron-chip">🔊 [할매니얼]</span>
+              <span class="vn-pron-chip">🔊 [halmaenieol]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -4919,7 +4967,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">퐁퐁남</h2>
-              <span class="vn-pron-chip">🔊 [퐁퐁남]</span>
+              <span class="vn-pron-chip">🔊 [pongpongnam]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -4976,7 +5024,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">오팔세대</h2>
-              <span class="vn-pron-chip">🔊 [오팔세대]</span>
+              <span class="vn-pron-chip">🔊 [opalsedae]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5033,7 +5081,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">쿠쿠루삥뽕</h2>
-              <span class="vn-pron-chip">🔊 [쿠쿠루삥뽕]</span>
+              <span class="vn-pron-chip">🔊 [kukuruppingppong]</span>
               <span class="vn-pos-chip">감탄사 / 밈</span>
             </div>
 
@@ -5090,7 +5138,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">꼰대</h2>
-              <span class="vn-pron-chip">🔊 [꼰대]</span>
+              <span class="vn-pron-chip">🔊 [kkondae]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5147,7 +5195,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">월급루팡</h2>
-              <span class="vn-pron-chip">🔊 [월긍누팡]</span>
+              <span class="vn-pron-chip">🔊 [wolgeuprupang]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5204,7 +5252,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">아재체</h2>
-              <span class="vn-pron-chip">🔊 [아재체]</span>
+              <span class="vn-pron-chip">🔊 [ajaeche]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5261,7 +5309,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">개저씨</h2>
-              <span class="vn-pron-chip">🔊 [개저씨]</span>
+              <span class="vn-pron-chip">🔊 [gaejeossi]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5318,7 +5366,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">스라밸</h2>
-              <span class="vn-pron-chip">🔊 [스라밸]</span>
+              <span class="vn-pron-chip">🔊 [seurabael]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5375,7 +5423,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">일태기</h2>
-              <span class="vn-pron-chip">🔊 [일태기]</span>
+              <span class="vn-pron-chip">🔊 [iltaegi]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5432,7 +5480,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">퇴준생</h2>
-              <span class="vn-pron-chip">🔊 [퇴준생]</span>
+              <span class="vn-pron-chip">🔊 [toejunsaeng]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5489,7 +5537,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">내로남불</h2>
-              <span class="vn-pron-chip">🔊 [내로남불]</span>
+              <span class="vn-pron-chip">🔊 [naeronambul]</span>
               <span class="vn-pos-chip">명사 / 사자성어풍</span>
             </div>
 
@@ -5546,7 +5594,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">가심비</h2>
-              <span class="vn-pron-chip">🔊 [가심비]</span>
+              <span class="vn-pron-chip">🔊 [gasimbi]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5603,7 +5651,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">주린이</h2>
-              <span class="vn-pron-chip">🔊 [주리니]</span>
+              <span class="vn-pron-chip">🔊 [jurini]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5660,7 +5708,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">취존</h2>
-              <span class="vn-pron-chip">🔊 [취존]</span>
+              <span class="vn-pron-chip">🔊 [chwijon]</span>
               <span class="vn-pos-chip">명사 / 감탄사</span>
             </div>
 
@@ -5717,7 +5765,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">모태솔로</h2>
-              <span class="vn-pron-chip">🔊 [모태쏠로]</span>
+              <span class="vn-pron-chip">🔊 [motaesolro]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5774,7 +5822,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">금사빠</h2>
-              <span class="vn-pron-chip">🔊 [금사빠]</span>
+              <span class="vn-pron-chip">🔊 [geumsappa]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5831,7 +5879,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">아햏햏</h2>
-              <span class="vn-pron-chip">🔊 [아햏햏]</span>
+              <span class="vn-pron-chip">🔊 [ahaethaet]</span>
               <span class="vn-pos-chip">감탄사</span>
             </div>
 
@@ -5888,7 +5936,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">싱하형</h2>
-              <span class="vn-pron-chip">🔊 [싱하형]</span>
+              <span class="vn-pron-chip">🔊 [singhahyeong]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -5945,7 +5993,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">폐인</h2>
-              <span class="vn-pron-chip">🔊 [폐인]</span>
+              <span class="vn-pron-chip">🔊 [pyein]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -6002,7 +6050,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">따봉</h2>
-              <span class="vn-pron-chip">🔊 [따봉]</span>
+              <span class="vn-pron-chip">🔊 [ttabong]</span>
               <span class="vn-pos-chip">감탄사 / 명사</span>
             </div>
 
@@ -6059,7 +6107,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">플렉스</h2>
-              <span class="vn-pron-chip">🔊 [플렉스]</span>
+              <span class="vn-pron-chip">🔊 [peulrekseu]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -6116,7 +6164,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">돈쭐</h2>
-              <span class="vn-pron-chip">🔊 [돈쭐]</span>
+              <span class="vn-pron-chip">🔊 [donjjul]</span>
               <span class="vn-pos-chip">명사 / 동사</span>
             </div>
 
@@ -6173,7 +6221,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">텍스트 힙</h2>
-              <span class="vn-pron-chip">🔊 [텍스트 힙]</span>
+              <span class="vn-pron-chip">🔊 [tekseuteu hip]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -6230,7 +6278,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">워라밸</h2>
-              <span class="vn-pron-chip">🔊 [워라밸]</span>
+              <span class="vn-pron-chip">🔊 [worabael]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 
@@ -6287,7 +6335,7 @@
           <div class="tiktok-main-content">
             <div class="hangul-hero">
               <h2 class="vn-hangul-word">삼포세대</h2>
-              <span class="vn-pron-chip">🔊 [삼포세대]</span>
+              <span class="vn-pron-chip">🔊 [samposedae]</span>
               <span class="vn-pos-chip">명사</span>
             </div>
 

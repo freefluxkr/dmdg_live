@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>말쌈 (MALSSAM) - 글로벌 3D 플립 숏폼 상황극</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Noto+Sans+KR:wght@400;700;900&family=Outfit:wght@600;800;900&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070913;
+      --player-bg: #0f172a;
+      --magenta: #ff007f;
+      --gold: #ffd166;
+      --cyan: #00f5d4;
+      --purple: #a855f7;
+      --card-bg: #130424;
+      --card-border: #3b1154;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard Variable", Pretendard, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 10%, #1e0933 0%, var(--bg-dark) 70%);
+      color: var(--text-main);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .header-box {
+      text-align: center;
+      margin-bottom: 16px;
+      max-width: 650px;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(255, 0, 127, 0.25), rgba(168, 85, 247, 0.25));
+      border: 1px solid rgba(255, 0, 127, 0.5);
+      color: #ff77a9;
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.2);
+    }
+
+    .header-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff 0%, var(--gold) 40%, var(--magenta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .header-sub {
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    /* 🌐 6개국 언어 셀렉터 바 */
+    .global-lang-bar {
+      display: inline-flex;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 6px 14px;
+      border-radius: 16px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--magenta), #ff5500);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(255, 0, 127, 0.4);
+    }
+
+    /* ============================================================
+       🎴 [스페인어 사이트 시그니처: 3D FLIP CARD 스테이지]
+       ============================================================ */
+    .flip-stage-container {
+      perspective: 1400px;
+      width: 100%;
+      max-width: 440px;
+      height: 740px;
+      margin: 0 auto 30px;
+      position: relative;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      transform-origin: center center;
+    }
+
+    .flip-card-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 0, 127, 0.25);
+      box-sizing: border-box;
+    }
+
+    /* ------------------------------------------------------------
+       [앞면: 스페인어 피에스타 3D 단어 카드]
+       ------------------------------------------------------------ */
+    .card-front {
+      background: linear-gradient(160deg, #1b072c 0%, #0d0218 60%, #150522 100%);
+      border: 2px solid var(--magenta);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 26px 22px;
+      transform: rotateY(0deg);
+      z-index: 2;
+    }
+
+    .card-front::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(255, 0, 127, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .front-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      z-index: 2;
+    }
+
+    .k-soul-badge {
+      background: rgba(255, 209, 102, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .flip-hint-badge {
+      background: rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 8px;
+    }
+
+    .front-word-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      text-shadow: 0 4px 20px rgba(255, 0, 127, 0.4);
+    }
+
+    .front-pron-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .pron-pill {
+      background: rgba(0, 245, 212, 0.12);
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      font-size: 0.92rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-family: 'Montserrat', monospace;
+    }
+
+    .pron-alt {
+      color: #f472b6;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .btn-quick-audio {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-quick-audio:hover {
+      background: var(--cyan);
+      color: #000;
+      transform: scale(1.1);
+    }
+
+    .front-punchline-box {
+      background: rgba(255, 0, 127, 0.12);
+      border-left: 4px solid var(--magenta);
+      border-radius: 0 14px 14px 0;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+
+    .punchline-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .punchline-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    .front-def-text {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    /* DMDG 어벤져스 출연진 프리뷰 */
+    .cast-preview-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+    }
+
+    .cast-header {
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: #a855f7;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cast-avatar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cast-avatar-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 8px;
+      border-radius: 20px;
+    }
+
+    .cast-avatar-img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      object-fit: cover;
+    }
+
+    .cast-avatar-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* 스페인어 스타일 3D 플립 트리거 버튼 */
+    .btn-fiesta-flip {
+      width: 100%;
+      background: linear-gradient(135deg, #ff007f 0%, #ff5500 50%, #ffd166 100%);
+      color: #0f172a;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.95rem;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 25px rgba(255, 0, 127, 0.45);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-fiesta-flip:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(255, 0, 127, 0.6);
+      color: #000;
+    }
+
+    /* ------------------------------------------------------------
+       [뒷면: 3D 숏폼 비디오 시뮬레이터]
+       ------------------------------------------------------------ */
+    .card-back {
+      background: #000;
+      border: 2px solid var(--purple);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1;
+    }
+
+    /* 상단 인스타 스토리 5단 진행 바 */
+    .story-progress-bar-container {
+      display: flex;
+      gap: 5px;
+      padding: 12px 14px 4px;
+      z-index: 20;
+    }
+
+    .story-progress-segment {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .story-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 4px;
+      transition: width 0.1s linear;
+    }
+
+    /* 백 페이스 헤더 오버레이 */
+    .back-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 14px;
+      z-index: 20;
+    }
+
+    .btn-flip-back {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn-flip-back:hover {
+      background: var(--magenta);
+      color: #fff;
+    }
+
+    .current-lang-pill {
+      font-size: 0.72rem;
+      background: rgba(168, 85, 247, 0.25);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #d8b4fe;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-weight: 800;
+    }
+
+    .btn-sound-toggle {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.82rem;
+    }
+
+    /* 🎬 메인 비디오 스테이지 영역 */
+    .video-stage {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .stage-ambient-light {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, transparent 70%);
+      filter: blur(35px);
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+
+    .character-stage {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .character-avatar-wrapper {
+      position: relative;
+      width: 135px;
+      height: 135px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--magenta), #f43f5e);
+      box-shadow: 0 0 35px rgba(255, 0, 127, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .character-avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #0f172a;
+      display: block;
+    }
+
+    .reaction-sticker {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      animation: bounceSticker 1.2s infinite alternate ease-in-out;
+    }
+
+    @keyframes bounceSticker {
+      0% { transform: scale(0.9) rotate(-6deg); }
+      100% { transform: scale(1.1) rotate(6deg); }
+    }
+
+    .actor-name-badge {
+      margin-top: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 스피드 라인 효과 */
+    .speed-lines-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-radial-gradient(circle, transparent 0, transparent 40px, rgba(255, 255, 255, 0.04) 45px);
+      pointer-events: none;
+      z-index: 5;
+      display: none;
+    }
+    .speed-lines-overlay.active {
+      display: block;
+      animation: pulseLines 0.3s infinite linear;
+    }
+    @keyframes pulseLines {
+      0% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.05); }
+      100% { opacity: 0.4; transform: scale(1); }
+    }
+
+    /* 💬 하단 자막 및 컨트롤 */
+    .shorts-bottom-overlay {
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 30%, #000 100%);
+      padding: 14px 16px 14px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .subtitles-acting-hint {
+      color: #facc15;
+      font-size: 0.74rem;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .subtitles-main-text {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.45;
+      min-height: 48px;
+      transition: all 0.2s ease;
+    }
+
+    .subtitles-trans-text {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 8px;
+      border-radius: 6px;
+      line-height: 1.4;
+    }
+
+    .player-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .btn-ctrl {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 10px;
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-ctrl:hover {
+      background: var(--magenta);
+      color: #fff;
+    }
+
+    .scene-counter {
+      font-size: 0.76rem;
+      color: #94a3b8;
+      font-weight: 800;
+      font-family: monospace;
+    }
+
+    .screen-shake {
+      animation: screenShake 0.4s ease-in-out;
+    }
+    @keyframes screenShake {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-5px, 4px); }
+      40% { transform: translate(5px, -4px); }
+      60% { transform: translate(-3px, 3px); }
+      80% { transform: translate(3px, -2px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-box">
+    <div class="header-badge">🇪🇸 FIESTA 3D FLIP × 15초 다국어 숏폼 시뮬레이터</div>
+    <h1 class="header-title">스페인어 스타일 3D 상황극 카드</h1>
+    <p class="header-sub">카드를 3D로 뒤집어 글로벌 6개 언어 원어민 음성으로 살아 숨 쉬는 오피스 상황극을 감상하세요!</p>
+
+    <!-- 🌐 6개국 언어 선택 탭 -->
+    <div class="global-lang-bar">
+      <button class="lang-btn active" onclick="setLanguage('ko', this)">🇰🇷 한국어</button>
+      <button class="lang-btn" onclick="setLanguage('en', this)">🇺🇸 English</button>
+      <button class="lang-btn" onclick="setLanguage('ja', this)">🇯🇵 日本語</button>
+      <button class="lang-btn" onclick="setLanguage('es', this)">🇪🇸 Español</button>
+      <button class="lang-btn" onclick="setLanguage('fr', this)">🇫🇷 Français</button>
+      <button class="lang-btn" onclick="setLanguage('id', this)">🇮🇩 Indonesia</button>
+    </div>
+  </div>
+
+  <!-- 🎴 3D FLIP CARD 스테이지 본체 -->
+  <div class="flip-stage-container">
+    <div class="flip-card-inner" id="flipCardInner">
+
+      <!-- ==========================================
+           [앞면 (FRONT)] 스페인어 피에스타 3D 단어 카드
+           ========================================== -->
+      <div class="flip-face card-front">
+        <div>
+          <div class="front-top-row">
+            <span class="k-soul-badge" id="frontCategoryBadge">💎 K-SOUL #01 · 번역불가 한국어</span>
+            <span class="flip-hint-badge">3D FLIP CARD</span>
+          </div>
+
+          <h2 class="front-word-title" id="frontWordTitle">눈치</h2>
+
+          <div class="front-pron-bar">
+            <span class="pron-pill" id="frontPronPill">🗣️ [nun-chi · NOON-chee]</span>
+            <span class="pron-alt" id="frontPronAlt">カタカナ: ヌンチ</span>
+            <button class="btn-quick-audio" onclick="speakQuickWord()" title="원어민 발음 듣기">
+              🔊
+            </button>
+          </div>
+
+          <div class="front-punchline-box">
+            <div class="punchline-tag" id="frontPunchTag">🔥 6TH SENSE SURVIVAL</div>
+            <div class="punchline-text" id="frontPunchText">"The Art of Reading the Room Before Overtime Strikes!"</div>
+          </div>
+
+          <p class="front-def-text" id="frontDefText">
+            상대방의 기분, 분위기, 눈빛을 0.1초 만에 파악해 알아서 처신하는 한국 고유의 생존 본능. 
+            눈치가 빠르면 주말 등산 번개를 칼같이 피하고, 눈치가 없으면 혼자 독박 야근을 쓰게 됩니다.
+          </p>
+
+          <!-- DMDG 어벤져스 출연진 프리뷰 -->
+          <div class="cast-preview-box">
+            <div class="cast-header">
+              <span id="castHeaderTitle">🎭 실전 상황극 출연진 (DMDG Team)</span>
+              <span id="castEpisodeTitle">에피소드: 주말 등산의 비극</span>
+            </div>
+            <div class="cast-avatar-row">
+              <div class="cast-avatar-item">
+                <img src="file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png" class="cast-avatar-img" alt="데미스">
+                <span class="cast-avatar-name" id="castNameDemis">데미스 (팀장)</span>
+              </div>
+              <div class="cast-avatar-item">
+                <img src="file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png" class="cast-avatar-img" alt="크레이그">
+                <span class="cast-avatar-name" id="castNameCraig">크레이그 (시니어)</span>
+              </div>
+              <div class="cast-avatar-item">
+                <img src="file:///c:/DMDG_Jobs/.agents/assets/jennifer_profile.png" class="cast-avatar-img" alt="제니퍼">
+                <span class="cast-avatar-name" id="castNameJennifer">제니퍼 (수석)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D 뒤집기 버튼 -->
+        <button class="btn-fiesta-flip" onclick="flipToBackAndPlay()">
+          <span id="btnFlipText">💃 [3D 회전] 실전 숏폼 상황극 보기 ↺</span>
+        </button>
+      </div>
+
+
+      <!-- ==========================================
+           [뒷면 (BACK)] 15초 숏폼 비디오 시뮬레이터
+           ========================================== -->
+      <div class="flip-face card-back" id="shortsPlayer">
+
+        <!-- 상단 5단 스토리 진행 바 -->
+        <div class="story-progress-bar-container">
+          <div class="story-progress-segment"><div class="story-progress-fill" id="fill-0"></div></div>
+          <div class="story-progress-segment"><div class="story-progress-fill" id="fill-1"></div></div>
+          <div class="story-progress-segment"><div class="story-progress-fill" id="fill-2"></div></div>
+          <div class="story-progress-segment"><div class="story-progress-fill" id="fill-3"></div></div>
+          <div class="story-progress-segment"><div class="story-progress-fill" id="fill-4"></div></div>
+        </div>
+
+        <!-- 백 페이스 탑 바 (돌아가기 버튼 & 언어 뱃지 & 음성 토글) -->
+        <div class="back-top-bar">
+          <button class="btn-flip-back" onclick="flipToFront()">
+            <span id="btnBackToFrontText">↺ 단어 카드로 돌아가기</span>
+          </button>
+          <span class="current-lang-pill" id="currentLangPill">🇰🇷 KO AUDIO</span>
+          <button class="btn-sound-toggle" id="btnSoundToggle" onclick="toggleMute()" title="음성 켜기/끄기">
+            🔊
+          </button>
+        </div>
+
+        <!-- 메인 비디오 스테이지 -->
+        <div class="video-stage">
+          <div class="stage-ambient-light" id="ambientLight"></div>
+          <div class="speed-lines-overlay" id="speedLines"></div>
+
+          <div class="character-stage" id="characterStage">
+            <div class="character-avatar-wrapper" id="avatarWrapper">
+              <img src="file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png" id="actorAvatar" class="character-avatar-img" alt="캐릭터">
+              <div class="reaction-sticker" id="reactionSticker">☕</div>
+            </div>
+            <div class="actor-name-badge" id="actorBadge">
+              <span id="actorRoleIcon">👔</span>
+              <span id="actorName">데미스</span>
+              <span id="actorTitle" style="color: #38bdf8; font-size: 0.72rem; font-weight: normal;">총괄 팀장</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 하단 자막 및 컨트롤 오버레이 -->
+        <div class="shorts-bottom-overlay">
+          <div class="subtitles-acting-hint" id="actingHint">(인자한 미소로 커피를 홀짝이며 팀원들을 소집한다)</div>
+          <div class="subtitles-main-text" id="mainSubtitle">
+            "어~ 이번 주 토요일 아침 6시에 다 같이 북한산 백운대 찍고 삼계탕에 낮술 어때? 사비로 쏜다! 으하하!"
+          </div>
+
+          <div class="subtitles-trans-text" id="subtitlesTransText">
+            Demis (Team Lead): How about climbing Bukhansan at 6 AM Saturday?
+          </div>
+
+          <div class="player-controls">
+            <div style="display: flex; gap: 6px;">
+              <button class="btn-ctrl" onclick="prevScene()" title="이전 대사">⏮️</button>
+              <button class="btn-ctrl" id="btnPlayPause" onclick="togglePlayPause()" style="min-width: 95px;">⏸️ 일시정지</button>
+              <button class="btn-ctrl" onclick="nextSceneManual()" title="다음 대사">⏭️</button>
+            </div>
+            <span class="scene-counter" id="sceneCounter">SCENE 1 / 5</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // 🌐 6개국 언어별 상황극 대본 및 오디오 데이터 (구어체 발음 정밀 튜닝)
+    // ============================================================
+    let currentLang = 'ko';
+
+    const LANG_METADATA = {
+      ko: {
+        pill: '🇰🇷 KO AUDIO',
+        badge: '💎 K-SOUL #01 · 번역불가 한국어',
+        altPron: 'カタカナ: ヌンチ',
+        punchTag: '🔥 6TH SENSE SURVIVAL',
+        punchText: '“말하지 않아도 공기를 읽는 K-직장인 생존술”',
+        def: '상대방의 기분, 분위기, 눈빛을 0.1초 만에 파악해 알아서 처신하는 한국 고유의 생존 본능. 눈치가 빠르면 주말 등산 번개를 칼같이 피하고, 눈치가 없으면 혼자 독박 야근을 쓰게 됩니다.',
+        btnFlip: '💃 [3D 회전] 실전 숏폼 상황극 보기 ↺',
+        btnBack: '↺ 단어 카드로 돌아가기',
+        castHeader: '🎭 실전 상황극 출연진 (DMDG Team)',
+        castEp: '에피소드: 주말 등산의 비극',
+        castDemis: '데미스 (팀장)',
+        castCraig: '크레이그 (시니어)',
+        castJennifer: '제니퍼 (수석)',
+        ttsLang: 'ko-KR'
+      },
+      en: {
+        pill: '🇺🇸 EN AUDIO',
+        badge: '💎 K-SOUL #01 · UNTRANSLATABLE KOREAN',
+        altPron: 'Phonetic: NOON-chee',
+        punchTag: '🔥 6TH SENSE SURVIVAL',
+        punchText: '“The Art of Reading the Room Before Overtime Strikes!”',
+        def: 'Nunchi is the subtle Korean superpower of gauging thoughts and feelings of others in a split second. Sharp nunchi saves you from voluntary weekend hiking, while slow nunchi leaves you stuck working overtime alone!',
+        btnFlip: '💃 [3D Flip] Watch 15s Shorts Simulation ↺',
+        btnBack: '↺ Back to Word Card',
+        castHeader: '🎭 Situation Drama Cast (DMDG Team)',
+        castEp: 'Ep. 01: Tragedy of Weekend Hiking',
+        castDemis: 'Demis (Lead)',
+        castCraig: 'Craig (Senior)',
+        castJennifer: 'Jennifer (Principal)',
+        ttsLang: 'en-US'
+      },
+      ja: {
+        pill: '🇯🇵 JA AUDIO',
+        badge: '💎 K-SOUL #01 · 翻訳不能な韓国の心',
+        altPron: 'カタカナ: ヌンチ [nunchi]',
+        punchTag: '🔥 空気を読む超感覚',
+        punchText: '「残業命令が落ちる前に空気を読む、韓国サラリーマンの生存術！」',
+        def: '相手の表情、空気、気配を0.1秒で察知し機転を利かせる韓国特有の第六感。ヌンチが速ければ週末の急な登山を回避でき、ヌンチが鈍ければ一人で休日残業を背負うハメになります！',
+        btnFlip: '💃 [3D回転] 15秒オフィス状況劇を見る ↺',
+        btnBack: '↺ 単語カードに戻る',
+        castHeader: '🎭 出演キャスト (DMDGチーム)',
+        castEp: 'エピソード01：休日登山の悲劇',
+        castDemis: 'デミス (部長)',
+        castCraig: 'クレイグ (シニア)',
+        castJennifer: 'ジェニファー (チーフ)',
+        ttsLang: 'ja-JP'
+      },
+      es: {
+        pill: '🇪🇸 ES AUDIO',
+        badge: '💎 K-SOUL #01 · PALABRA INTRADUCIBLE',
+        altPron: 'Pronunciación: NUN-chi',
+        punchTag: '🔥 EL SEXTO SENTIDO SOCIAL',
+        punchText: '“¡El arte de captar el ambiente antes de que caiga horas extras!”',
+        def: 'Nunchi es la habilidad coreana de leer la mente, miradas y la tensión de una sala en 0.1 segundos. ¡Tener buen nunchi te salva del senderismo obligatorio del fin de semana con el jefe!',
+        btnFlip: '💃 [Giro 3D] Ver Simulación Corta de 15s ↺',
+        btnBack: '↺ Volver a la Tarjeta',
+        castHeader: '🎭 Elenco de la Simulación (Equipo DMDG)',
+        castEp: 'Ep. 01: La Tragedia del Senderismo',
+        castDemis: 'Demis (Líder)',
+        castCraig: 'Craig (Senior)',
+        castJennifer: 'Jennifer (Principal)',
+        ttsLang: 'es-ES'
+      },
+      fr: {
+        pill: '🇫🇷 FR AUDIO',
+        badge: '💎 K-SOUL #01 · INTRADUISIBLE EN FRANÇAIS',
+        altPron: 'Prononciation: [NOUN-tchi]',
+        punchTag: '🔥 6ÈME SENS DU MONDE DU TRAVAIL',
+        punchText: '« L’art de lire l’atmosphère avant que les heures sup ne tombent ! »',
+        def: 'Le nunchi est la subtile capacité coréenne à capter l’humeur, les regards et la tension d’une pièce en 0,1 seconde. Un bon nunchi vous sauve d’une rando forcée le week-end avec votre boss, tandis qu’un mauvais nunchi vous laisse seul coincé au bureau !',
+        btnFlip: '💃 [Rotation 3D] Voir la saynète de 15s ↺',
+        btnBack: '↺ Retour à la carte',
+        castHeader: '🎭 Distribution de la Saynète (Équipe DMDG)',
+        castEp: 'Épisode 01 : La Tragédie de la Rando du Samedi',
+        castDemis: 'Demis (Chef d’équipe)',
+        castCraig: 'Craig (Ingénieur Senior)',
+        castJennifer: 'Jennifer (Cheffe UI/UX)',
+        ttsLang: 'fr-FR'
+      },
+      id: {
+        pill: '🇮🇩 ID AUDIO',
+        badge: '💎 K-SOUL #01 · KATA TAK TERTERJEMAHKAN',
+        altPron: 'Pengucapan: Nun-chi',
+        punchTag: '🔥 INDERA KEENAM SURVIVAL KANTOR',
+        punchText: '“Seni membaca situasi sebelum terjebak lembur sukarela!”',
+        def: 'Nunchi adalah insting sosial khas Korea untuk membaca suasana hati dan situasi ruangan dalam hitungan detik. Nunchi cepat menyelamatkan dari ajakan naik gunung bareng bos di hari libur!',
+        btnFlip: '💃 [Putar 3D] Tonton Drama Pendek 15 Detik ↺',
+        btnBack: '↺ Kembali ke Kartu Kata',
+        castHeader: '🎭 Pemeran Drama Pendek (DMDG Team)',
+        castEp: 'Ep. 01: Tragedi Naik Gunung Akhir Pekan',
+        castDemis: 'Demis (Pimpinan)',
+        castCraig: 'Craig (Senior)',
+        castJennifer: 'Jennifer (Principal)',
+        ttsLang: 'id-ID'
+      }
+    };
+
+    // 🎭 5개 씬의 다국어 대본 & 오디오 음성 텍스트
+    const DRAMA_SCRIPTS = {
+      ko: [
+        {
+          actor: "데미스",
+          title: "총괄 팀장",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "☕",
+          color: "#38bdf8",
+          acting: "(인자한 미소로 커피를 홀짝이며 팀원들을 소집한다)",
+          dialogue: "어~ 이번 주 토요일 아침 6시에 다 같이 북한산 백운대 찍고 삼계탕에 낮술 어때? 사비로 쏜다! 으하하!",
+          // 🔥 자연스러운 구어체 발음: 물결표, 특수기호 제거, 숫자와 약어를 자연스럽게 읽음
+          speechText: "어, 이번 주 토요일 아침 여섯 시에 다 같이 북한산 백운대 찍고 삼계탕에 낮술 어때요? 제 사비로 쏩니다! 으하하하!",
+          trans: "Demis: How about hiking Bukhansan at 6 AM Saturday and grabbing chicken soup? On me!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.05,
+          voiceRate: 0.95,
+          pitch: 0.95
+        },
+        {
+          actor: "크레이그",
+          title: "풀스택 시니어",
+          roleIcon: "💻",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "😱💦",
+          color: "#c084fc",
+          acting: "(손가락이 키보드 위에서 굳으며 식은땀을 폭포수처럼 흘린다)",
+          dialogue: "팀장님! 저 그날 하필 AWS 도쿄 데이터센터 화재 예방 특별 철야 당직이라... 뼈를 묻고 싶지만 눈물이 앞을 가립니다!!",
+          speechText: "팀장님! 저 그날 하필 에이더블유에스 도쿄 데이터센터 화재 예방 특별 철야 당직입니다. 뼈를 묻고 싶지만 눈물이 앞을 가립니다!",
+          trans: "Craig: Boss! I have emergency overnight AWS server duty in Tokyo that day!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.25,
+          voiceRate: 1.05,
+          pitch: 1.05
+        },
+        {
+          actor: "제니퍼",
+          title: "UI/UX 수석",
+          roleIcon: "🎨",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/jennifer_profile.png",
+          sticker: "⚡✈️",
+          color: "#fb7185",
+          acting: "(0.1초 만에 스마트폰 비행기 티켓 화면을 띄우며 안광 번쩍)",
+          dialogue: "어머 팀장님! 저도 그날 파리 루브르 글로벌 UI/UX 서밋 출장 비행기를 타야 해서요! 정말 아쉽습니다~ 호호!",
+          speechText: "어머 팀장님! 저도 그날 파리 루브르 글로벌 유아이 유엑스 서밋 출장 비행기를 타야 해서요! 정말 아쉽습니다. 호호호!",
+          trans: "Jennifer: Oh Boss, I must catch a flight to Paris for a UX summit that exact day! So sad!",
+          shake: false,
+          speedLines: true,
+          zoom: 1.2,
+          voiceRate: 1.0,
+          pitch: 1.2
+        },
+        {
+          actor: "데미스",
+          title: "총괄 팀장",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "🕶️❄️",
+          color: "#38bdf8",
+          acting: "(서늘한 미소를 지으며 안경을 고쳐 쓴다)",
+          dialogue: "음... 둘 다 '눈치'는 5G급으로 빠르네. 아주 훌륭해! 그럼 깔끔하게 다음 주 일요일로 미루지 뭐.",
+          // 🔥 '5G' -> '파이브지'로 완벽 발음!
+          speechText: "음, 둘 다 눈치는 파이브지급으로 빠르네. 아주 훌륭해! 그럼 깔끔하게 다음 주 일요일로 미루지 뭐!",
+          trans: "Demis: Hmm... both of your nunchi are 5G speed. Fine, let's postpone to next Sunday!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.15,
+          voiceRate: 0.9,
+          pitch: 0.9
+        },
+        {
+          actor: "크레이그 & 제니퍼",
+          title: "멘붕 상태",
+          roleIcon: "💀",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "💥💀",
+          color: "#ef4444",
+          acting: "(영혼이 빠져나간 채 바닥에 털썩 주저앉는다)",
+          dialogue: "으아아악!! 다음 주 일요일이라니!! 눈치가 너무 빨라도 죽는구나!! (털썩)",
+          speechText: "으아악! 다음 주 일요일이라니! 눈치가 너무 빨라도 죽는구나!",
+          trans: "Craig & Jennifer: Aaaargh! Next Sunday?! Even lightning nunchi couldn't save us!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.35,
+          voiceRate: 1.1,
+          pitch: 1.15
+        }
+      ],
+      en: [
+        {
+          actor: "Demis",
+          title: "Team Lead",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "☕",
+          color: "#38bdf8",
+          acting: "(Sipping coffee with a warm smile, assembling the team)",
+          dialogue: "Well team, how about we all hike up Bukhansan at 6 AM this Saturday, then grab chicken soup and day-drinks? On my dime! Hahaha!",
+          speechText: "Well team! How about we all hike up Bukhansan at 6 AM this Saturday, then grab chicken soup and day drinks? On my dime! Hahaha!",
+          trans: "데미스: 이번 주 토요일 아침 6시 북한산 등산 어때? 삼계탕 쏜다!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.05,
+          voiceRate: 0.95,
+          pitch: 0.95
+        },
+        {
+          actor: "Craig",
+          title: "Senior Fullstack",
+          roleIcon: "💻",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "😱💦",
+          color: "#c084fc",
+          acting: "(Fingers freeze on the keyboard, cold sweat pouring down)",
+          dialogue: "Boss! I happen to have emergency overnight duty for AWS Tokyo data center fire drills that day! I'd love to go, but my heart weeps!",
+          speechText: "Boss! I happen to have emergency overnight duty for AWS Tokyo data center that day! I would love to go, but my heart weeps!",
+          trans: "크레이그: 팀장님! 저 그날 하필 AWS 도쿄 데이터센터 철야 당직이라 눈물이 앞을 가립니다!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.25,
+          voiceRate: 1.05,
+          pitch: 1.05
+        },
+        {
+          actor: "Jennifer",
+          title: "Principal UX",
+          roleIcon: "🎨",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/jennifer_profile.png",
+          sticker: "⚡✈️",
+          color: "#fb7185",
+          acting: "(Flashes plane ticket on her phone in 0.1 seconds)",
+          dialogue: "Oh my, Boss! I have to catch a flight to Paris for the Global UI UX Summit that exact day! Such a pity, hoho!",
+          speechText: "Oh my, Boss! I have to catch a flight to Paris for the Global UI UX Summit that exact day! Such a pity, hohoho!",
+          trans: "제니퍼: 어머 팀장님! 저도 그날 파리 루브르 UX 서밋 출장 비행기를 타야 해서요!",
+          shake: false,
+          speedLines: true,
+          zoom: 1.2,
+          voiceRate: 1.0,
+          pitch: 1.2
+        },
+        {
+          actor: "Demis",
+          title: "Team Lead",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "🕶️❄️",
+          color: "#38bdf8",
+          acting: "(Adjusts glasses with a chilly smirk)",
+          dialogue: "Hmm... both of your 'nunchi' are 5G fast. Excellent! Then let's simply reschedule for next Sunday!",
+          speechText: "Hmm, both of your nunchi are five G fast. Excellent! Then let us simply reschedule for next Sunday!",
+          trans: "데미스: 둘 다 눈치는 5G급이네. 그럼 다음 주 일요일로 미루지 뭐!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.15,
+          voiceRate: 0.95,
+          pitch: 0.9
+        },
+        {
+          actor: "Craig & Jennifer",
+          title: "Mentally Broken",
+          roleIcon: "💀",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "💥💀",
+          color: "#ef4444",
+          acting: "(Collapsing to the floor as their souls escape)",
+          dialogue: "Nooooo!! Next Sunday?! Even lightning-fast nunchi couldn't save us!! (thud)",
+          speechText: "Nooooo! Next Sunday? Even lightning-fast nunchi couldn't save us!",
+          trans: "크레이그 & 제니퍼: 으아아악! 다음 주 일요일이라니! 눈치가 빨라도 죽는구나!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.35,
+          voiceRate: 1.1,
+          pitch: 1.15
+        }
+      ],
+      ja: [
+        {
+          actor: "デミス",
+          title: "統括部長",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "☕",
+          color: "#38bdf8",
+          acting: "(穏やかな笑みでコーヒーをすすり、部下を呼ぶ)",
+          dialogue: "お〜今週の土曜の朝6時に、みんなで北漢山に登って昼酒と参鶏湯どうだ？俺の奢りだ！ハハハ！",
+          speechText: "お、今週の土曜の朝六時に、みんなで北漢山に登って昼酒と参鶏湯どうだ？俺の奢りだ！ハハハ！",
+          trans: "Demis: 토요일 아침 6시 북한산 등산 어때? 내가 쏜다!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.05,
+          voiceRate: 0.95,
+          pitch: 0.95
+        },
+        {
+          actor: "クレイグ",
+          title: "シニア開発者",
+          roleIcon: "💻",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "😱💦",
+          color: "#c084fc",
+          acting: "(キーボードの上で手が硬直し冷や汗を流す)",
+          dialogue: "部長！その日あいにくAWS東京データセンターの特別徹夜当直が入ってまして…骨を埋めたいですが涙が出ます！",
+          speechText: "部長！その日あいにくエックス東京データセンターの特別徹夜当直が入ってまして、骨を埋めたいですが涙が出ます！",
+          trans: "Craig: 부장님! 그날 AWS 도쿄 당직이라 눈물이 앞을 가립니다!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.25,
+          voiceRate: 1.05,
+          pitch: 1.05
+        },
+        {
+          actor: "ジェニファー",
+          title: "UXチーフ",
+          roleIcon: "🎨",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/jennifer_profile.png",
+          sticker: "⚡✈️",
+          color: "#fb7185",
+          acting: "(0.1秒でスマホの航空券画面を掲げる)",
+          dialogue: "あら部長！私もその日パリのルーヴルUXサミット出張便に乗らなきゃでして！本当に残念です〜ホホ！",
+          speechText: "あら部長！私もその日パリのルーヴルユーエックスサミット出張便に乗らなきゃでして！本当に残念です、ホホホ！",
+          trans: "Jennifer: 어머 부장님! 저도 파리 루브르 UX 서밋 출장이라 너무 아쉽네요!",
+          shake: false,
+          speedLines: true,
+          zoom: 1.2,
+          voiceRate: 1.0,
+          pitch: 1.2
+        },
+        {
+          actor: "デミス",
+          title: "統括部長",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "🕶️❄️",
+          color: "#38bdf8",
+          acting: "(冷たい笑みを浮かべ眼鏡を直す)",
+          dialogue: "ふむ…二人とも『ヌンチ（気配り）』は5G並みに速いな。素晴らしい！じゃあスッキリ来週の日曜に延期しよう！",
+          speechText: "ふむ、二人ともヌンチはファイブジー並みに速いな。素晴らしい！じゃあスッキリ来週の日曜に延期しよう！",
+          trans: "Demis: 둘 다 눈치가 5G급이네. 그럼 깔끔하게 다음 주 일요일로!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.15,
+          voiceRate: 0.95,
+          pitch: 0.9
+        },
+        {
+          actor: "二人",
+          title: "メンタル崩壊",
+          roleIcon: "💀",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "💥💀",
+          color: "#ef4444",
+          acting: "(魂が抜けて床にへたり込む)",
+          dialogue: "うわあああ！！来週の日曜だなんて！！ヌンチが早すぎても死ぬのか〜！！（バタッ）",
+          speechText: "うわあああ！来週の日曜だなんて！ヌンチが早すぎても死ぬのか！",
+          trans: "Craig & Jennifer: 으아악! 다음 주 일요일이라니! 눈치가 빨라도 죽다니!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.35,
+          voiceRate: 1.1,
+          pitch: 1.15
+        }
+      ],
+      es: [
+        {
+          actor: "Demis",
+          title: "Líder de Equipo",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "☕",
+          color: "#38bdf8",
+          acting: "(Bebiendo café con una sonrisa paternal)",
+          dialogue: "¡Oigan! ¿Qué tal si este sábado a las 6 AM subimos al monte Bukhansan y luego sopa de pollo y cerveza? ¡Yo invito! ¡Jajaja!",
+          speechText: "Oigan, ¿qué tal si este sábado a las seis de la mañana subimos a la montaña y luego sopa con cerveza? ¡Yo invito! ¡Jajaja!",
+          trans: "데미스: 이번 주 토요일 아침 6시 북한산 등산 어때? 삼계탕 쏜다!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.05,
+          voiceRate: 0.95,
+          pitch: 0.95
+        },
+        {
+          actor: "Craig",
+          title: "Senior Fullstack",
+          roleIcon: "💻",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "😱💦",
+          color: "#c084fc",
+          acting: "(Dedos congelados en el teclado con sudor frío)",
+          dialogue: "¡Jefe! Ese día justo tengo guardia nocturna de emergencia para AWS Tokio. ¡Me encantaría ir, pero lloro de tristeza!",
+          speechText: "Jefe! Ese día justo tengo guardia nocturna de emergencia para A W S Tokio. ¡Me encantaría ir, pero lloro de tristeza!",
+          trans: "크레이그: 팀장님! 그날 AWS 도쿄 당직이라 눈물이 앞을 가립니다!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.25,
+          voiceRate: 1.05,
+          pitch: 1.05
+        },
+        {
+          actor: "Jennifer",
+          title: "Principal UX",
+          roleIcon: "🎨",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/jennifer_profile.png",
+          sticker: "⚡✈️",
+          color: "#fb7185",
+          acting: "(Muestra el boleto de avión en su teléfono al instante)",
+          dialogue: "¡Ay jefe! Justo ese día tengo que tomar un vuelo a París para la cumbre de UX en el Louvre. ¡Qué lástima! ¡Jojo!",
+          speechText: "Ay jefe! Justo ese día tengo que tomar un vuelo a París para la cumbre de U X en el Louvre. ¡Qué lástima! Jojo!",
+          trans: "제니퍼: 어머 팀장님! 저도 파리 루브르 UX 서밋 출장이라 너무 아쉽네요!",
+          shake: false,
+          speedLines: true,
+          zoom: 1.2,
+          voiceRate: 1.0,
+          pitch: 1.2
+        },
+        {
+          actor: "Demis",
+          title: "Líder de Equipo",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "🕶️❄️",
+          color: "#38bdf8",
+          acting: "(Ajusta sus gafas con una sonrisa fría)",
+          dialogue: "Mmm... el 'nunchi' de ambos es nivel 5G de rápido. ¡Excelente! Entonces lo dejamos para el próximo domingo.",
+          speechText: "Mmm, el nunchi de ambos es nivel cinco G de rápido. Excelente! Entonces lo dejamos para el próximo domingo.",
+          trans: "데미스: 둘 다 눈치가 5G급이네. 그럼 깔끔하게 다음 주 일요일로!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.15,
+          voiceRate: 0.95,
+          pitch: 0.9
+        },
+        {
+          actor: "Craig y Jennifer",
+          title: "Destruidos",
+          roleIcon: "💀",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "💥💀",
+          color: "#ef4444",
+          acting: "(Colapsan en el suelo sin alma)",
+          dialogue: "¡Noooo! ¿El próximo domingo? ¡Tener tanto nunchi tampoco nos salvó!",
+          speechText: "Nooooo! El próximo domingo? Tener tanto nunchi tampoco nos salvó!",
+          trans: "크레이그 & 제니퍼: 으아악! 다음 주 일요일이라니! 눈치가 빨라도 죽다니!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.35,
+          voiceRate: 1.1,
+          pitch: 1.15
+        }
+      ],
+      fr: [
+        {
+          actor: "Demis",
+          title: "Chef d'équipe",
+          roleIcon: "👔",
+          avatar: "assets/agents/demis_profile.png",
+          sticker: "☕",
+          color: "#38bdf8",
+          acting: "(Sirotant son café avec un sourire bienveillant tout en rassemblant l'équipe)",
+          dialogue: "Dites l'équipe ! Samedi matin à 6h, on grimpe le mont Bukhansan puis soupe au poulet et saké ensemble ? C'est ma tournée ! Ahaha !",
+          speechText: "Dites l'équipe ! Samedi matin à six heures, on grimpe le mont Bukhansan puis soupe au poulet et saké ensemble ? C'est ma tournée ! Ahaha !",
+          trans: "데미스: 토요일 아침 6시 북한산 등산 어때? 삼계탕 쏜다!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.05,
+          voiceRate: 0.95,
+          pitch: 0.95
+        },
+        {
+          actor: "Craig",
+          title: "Ingénieur Senior",
+          roleIcon: "💻",
+          avatar: "assets/agents/craig_profile.png",
+          sticker: "😱💦",
+          color: "#c084fc",
+          acting: "(Doigts paralysés sur le clavier, gouttes de sueur froide)",
+          dialogue: "Chef ! Ce jour-là, j'ai une astreinte de nuit d'urgence anti-incendie pour les serveurs AWS à Tokyo ! Je donnerais ma vie pour venir, mais j'en pleure de regret !",
+          speechText: "Chef ! Ce jour-là, j'ai une astreinte de nuit d'urgence anti-incendie pour les serveurs A W S à Tokyo ! Je donnerais ma vie pour venir, mais j'en pleure de regret !",
+          trans: "크레이그: 팀장님! 그날 AWS 도쿄 당직이라 눈물이 앞을 가립니다!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.25,
+          voiceRate: 1.05,
+          pitch: 1.05
+        },
+        {
+          actor: "Jennifer",
+          title: "Cheffe UI/UX",
+          roleIcon: "🎨",
+          avatar: "assets/agents/jennifer_profile.png",
+          sticker: "⚡✈️",
+          color: "#fb7185",
+          acting: "(Sort l'écran de ses billets d'avion en 0,1 seconde avec des yeux brillants)",
+          dialogue: "Oh là là Chef ! Moi aussi, je dois m'envoler pour Paris ce jour-là pour le grand sommet UI UX au Louvre ! Quel immense regret, hihi !",
+          speechText: "Oh là là Chef ! Moi aussi, je dois m'envoler pour Paris ce jour-là pour le grand sommet U I U X au Louvre ! Quel immense regret, hihihi !",
+          trans: "제니퍼: 어머 팀장님! 저도 파리 루브르 UX 서밋 출장이라 너무 아쉽네요!",
+          shake: false,
+          speedLines: true,
+          zoom: 1.2,
+          voiceRate: 1.0,
+          pitch: 1.2
+        },
+        {
+          actor: "Demis",
+          title: "Chef d'équipe",
+          roleIcon: "👔",
+          avatar: "assets/agents/demis_profile.png",
+          sticker: "🕶️❄️",
+          color: "#38bdf8",
+          acting: "(Sourit froidement en ajustant ses lunettes)",
+          dialogue: "Hum... Vous avez tous les deux un 'nunchi' rapide comme la 5G. Bravo ! Alors, on décale simplement au dimanche prochain !",
+          speechText: "Hum, vous avez tous les deux un nunchi rapide comme la cinq G. Bravo ! Alors, on décale simplement au dimanche prochain !",
+          trans: "데미스: 둘 다 눈치가 5G급이네. 그럼 깔끔하게 다음 주 일요일로!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.15,
+          voiceRate: 0.95,
+          pitch: 0.9
+        },
+        {
+          actor: "Craig & Jennifer",
+          title: "En état de choc",
+          roleIcon: "💀",
+          avatar: "assets/agents/craig_profile.png",
+          sticker: "💥💀",
+          color: "#ef4444",
+          acting: "(L'âme qui s'envole, s'effondrent sur le sol)",
+          dialogue: "Aaaah !! Dimanche prochain ?! Même avec un nunchi supersonic, on ne peut pas y échapper !!",
+          speechText: "Aaaah ! Dimanche prochain ?! Même avec un nunchi supersonic, on ne peut pas y échapper !",
+          trans: "크레이그 & 제니퍼: 으아악! 다음 주 일요일이라니! 눈치가 빨라도 죽다니!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.35,
+          voiceRate: 1.1,
+          pitch: 1.15
+        }
+      ],
+      id: [
+        {
+          actor: "Demis",
+          title: "Pimpinan",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "☕",
+          color: "#38bdf8",
+          acting: "(Menyeruput kopi sambil tersenyum ramah memanggil tim)",
+          dialogue: "Hei tim! Sabtu pagi jam 6 kita mendaki gunung Bukhansan lalu makan sup ayam bareng, gimana? Traktiran saya! Hahaha!",
+          speechText: "Hei tim! Sabtu pagi jam enam kita mendaki gunung Bukhansan lalu makan sup ayam bareng, gimana? Traktiran saya! Hahaha!",
+          trans: "데미스: 토요일 아침 6시 북한산 등산 어때? 삼계탕 쏜다!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.05,
+          voiceRate: 0.95,
+          pitch: 0.95
+        },
+        {
+          actor: "Craig",
+          title: "Senior Fullstack",
+          roleIcon: "💻",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "😱💦",
+          color: "#c084fc",
+          acting: "(Jari kaku di atas keyboard, keringat dingin bercucuran)",
+          dialogue: "Pak Bos! Hari itu saya ada piket malam darurat untuk AWS Tokyo. Mau banget ikut, tapi air mata berlinang!",
+          speechText: "Pak Bos! Hari itu saya ada piket malam darurat untuk A W S Tokyo. Mau banget ikut, tapi air mata berlinang!",
+          trans: "크레이그: 팀장님! 그날 AWS 도쿄 당직이라 눈물이 앞을 가립니다!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.25,
+          voiceRate: 1.05,
+          pitch: 1.05
+        },
+        {
+          actor: "Jennifer",
+          title: "Principal UX",
+          roleIcon: "🎨",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/jennifer_profile.png",
+          sticker: "⚡✈️",
+          color: "#fb7185",
+          acting: "(Memperlihatkan tiket pesawat di HP dalam 0.1 detik)",
+          dialogue: "Aduh Pak Bos! Saya juga harus naik pesawat ke Paris untuk summit UX Louvre hari itu! Sayang sekali, hoho!",
+          speechText: "Aduh Pak Bos! Saya juga harus naik pesawat ke Paris untuk summit U X Louvre hari itu! Sayang sekali, hohoho!",
+          trans: "제니퍼: 어머 팀장님! 저도 파리 루브르 UX 서밋 출장이라 너무 아쉽네요!",
+          shake: false,
+          speedLines: true,
+          zoom: 1.2,
+          voiceRate: 1.0,
+          pitch: 1.2
+        },
+        {
+          actor: "Demis",
+          title: "Pimpinan",
+          roleIcon: "👔",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/demis_profile.png",
+          sticker: "🕶️❄️",
+          color: "#38bdf8",
+          acting: "(Tersenyum dingin sambil membetulkan kacamata)",
+          dialogue: "Hmm... 'nunchi' kalian berdua secepat 5G ya. Bagus sekali! Kalau gitu kita undur ke hari Minggu depan!",
+          speechText: "Hmm, nunchi kalian berdua secepat lima G ya. Bagus sekali! Kalau gitu kita undur ke hari Minggu depan!",
+          trans: "데미스: 둘 다 눈치가 5G급이네. 그럼 깔끔하게 다음 주 일요일로!",
+          shake: false,
+          speedLines: false,
+          zoom: 1.15,
+          voiceRate: 0.95,
+          pitch: 0.9
+        },
+        {
+          actor: "Craig & Jennifer",
+          title: "Patah Semangat",
+          roleIcon: "💀",
+          avatar: "file:///c:/DMDG_Jobs/.agents/assets/craig_profile.png",
+          sticker: "💥💀",
+          color: "#ef4444",
+          acting: "(Jiwa melayang, jatuh tersungkur ke lantai)",
+          dialogue: "Waaaa!! Minggu depan?! Punya nunchi secepat kilat pun tetap gak selamat!!",
+          speechText: "Waaaa! Minggu depan? Punya nunchi secepat kilat pun tetap tidak selamat!",
+          trans: "크레이그 & 제니퍼: 으아악! 다음 주 일요일이라니! 눈치가 빨라도 죽다니!",
+          shake: true,
+          speedLines: true,
+          zoom: 1.35,
+          voiceRate: 1.1,
+          pitch: 1.15
+        }
+      ]
+    };
+
+    let currentScene = 0;
+    let isPlaying = false;
+    let isMuted = false;
+    let fallbackTimer = null;
+    let keepAliveInterval = null;
+    window._activeUtterance = null; // GC 수거 방지 전역 참조
+
+    function setLanguage(lang, btn) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const meta = LANG_METADATA[lang];
+      document.getElementById('currentLangPill').innerText = meta.pill;
+      document.getElementById('frontCategoryBadge').innerText = meta.badge;
+      document.getElementById('frontPronAlt').innerText = meta.altPron;
+      document.getElementById('frontPunchTag').innerText = meta.punchTag;
+      document.getElementById('frontPunchText').innerText = meta.punchText;
+      document.getElementById('frontDefText').innerText = meta.def;
+      document.getElementById('btnFlipText').innerText = meta.btnFlip;
+      document.getElementById('btnBackToFrontText').innerText = meta.btnBack;
+      document.getElementById('castHeaderTitle').innerText = meta.castHeader;
+      document.getElementById('castEpisodeTitle').innerText = meta.castEp;
+      document.getElementById('castNameDemis').innerText = meta.castDemis;
+      document.getElementById('castNameCraig').innerText = meta.castCraig;
+      document.getElementById('castNameJennifer').innerText = meta.castJennifer;
+
+      stopAudio();
+      renderScene(currentScene);
+      if (isPlaying) {
+        playCurrentSceneAudio();
+      }
+    }
+
+    // 🎴 3D FLIP 제어 함수
+    function flipToBackAndPlay() {
+      const card = document.getElementById('flipCardInner');
+      card.classList.add('flipped');
+      playShow();
+    }
+
+    function flipToFront() {
+      const card = document.getElementById('flipCardInner');
+      card.classList.remove('flipped');
+      pauseShow();
+    }
+
+    // 앞면 퀵 오디오 재생
+    function speakQuickWord(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance('눈치');
+        u.lang = 'ko-KR';
+        u.rate = 0.9;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    // 씬 프로그레스 클릭 바로가기 등록
+    for (let i = 0; i < 5; i++) {
+      const seg = document.getElementById(`fill-${i}`).parentElement;
+      if (seg) {
+        seg.title = `SCENE ${i + 1} 바로가기`;
+        seg.onclick = () => {
+          stopAudio();
+          currentScene = i;
+          renderScene(currentScene);
+          if (isPlaying) {
+            playCurrentSceneAudio();
+          }
+        };
+      }
+    }
+
+    function renderScene(idx) {
+      const scriptList = DRAMA_SCRIPTS[currentLang] || DRAMA_SCRIPTS['ko'];
+      const s = scriptList[idx];
+      document.getElementById('sceneCounter').innerText = `SCENE ${idx + 1} / ${scriptList.length}`;
+
+      // 텍스트 & 아바타 업데이트
+      document.getElementById('actorAvatar').src = s.avatar;
+      document.getElementById('actorName').innerText = s.actor;
+      document.getElementById('actorTitle').innerText = s.title;
+      document.getElementById('actorTitle').style.color = s.color;
+      document.getElementById('actorRoleIcon').innerText = s.roleIcon;
+      document.getElementById('reactionSticker').innerText = s.sticker;
+
+      document.getElementById('actingHint').innerText = s.acting;
+      document.getElementById('mainSubtitle').innerText = s.dialogue;
+      document.getElementById('subtitlesTransText').innerText = s.trans;
+
+      // 시각 연출 (줌인, 쉐이크, 스피드 라인, 앰비언트 라이트)
+      const stage = document.getElementById('characterStage');
+      stage.style.transform = `scale(${s.zoom})`;
+
+      const speedLines = document.getElementById('speedLines');
+      if (s.speedLines) speedLines.classList.add('active');
+      else speedLines.classList.remove('active');
+
+      const wrapper = document.getElementById('avatarWrapper');
+      wrapper.style.boxShadow = `0 0 35px ${s.color}88`;
+      wrapper.style.background = `linear-gradient(135deg, ${s.color}, #ff007f)`;
+
+      const ambient = document.getElementById('ambientLight');
+      ambient.style.background = `radial-gradient(circle, ${s.color}77 0%, transparent 70%)`;
+
+      const player = document.getElementById('shortsPlayer');
+      if (s.shake) player.classList.add('screen-shake');
+      else player.classList.remove('screen-shake');
+
+      // 상단 프로그레스 바 채우기
+      for (let i = 0; i < scriptList.length; i++) {
+        const fill = document.getElementById(`fill-${i}`);
+        if (i < idx) fill.style.width = '100%';
+        else if (i === idx) fill.style.width = '100%';
+        else fill.style.width = '0%';
+      }
+    }
+
+    function stopAudio() {
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
+      if (keepAliveInterval) {
+        clearInterval(keepAliveInterval);
+        keepAliveInterval = null;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      window._activeUtterance = null;
+      const sub = document.getElementById('mainSubtitle');
+      if (sub) {
+        sub.style.border = 'none';
+        sub.style.boxShadow = 'none';
+      }
+    }
+
+    // 🎭 캐릭터 & 언어별 최적 Voice 탐색
+    function getPreviewBestVoice(lang, actorName) {
+      if (!('speechSynthesis' in window)) return null;
+      const voices = window.speechSynthesis.getVoices() || [];
+      const targetPrefix = lang.toLowerCase();
+      const langVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith(targetPrefix));
+      if (langVoices.length === 0) return null;
+
+      const isFemale = (actorName && (actorName.includes('제니퍼') || actorName.includes('Jennifer')));
+      if (targetPrefix === 'ko') {
+        const googleKo = langVoices.find(v => v.name.includes('Google') || v.name.includes('한국의'));
+        return googleKo || langVoices[0];
+      }
+      if (targetPrefix === 'en') {
+        if (isFemale) {
+          const femaleVoice = langVoices.find(v => v.name.includes('Zira') || v.name.includes('Female'));
+          if (femaleVoice) return femaleVoice;
+        } else {
+          const maleVoice = langVoices.find(v => v.name.includes('David') || v.name.includes('Mark'));
+          if (maleVoice) return maleVoice;
+        }
+        return langVoices[0];
+      }
+      const googleVoice = langVoices.find(v => v.name.includes('Google'));
+      return googleVoice || langVoices[0];
+    }
+
+    function sanitizePreviewText(text, lang) {
+      if (!text) return '';
+      let c = String(text);
+      if (lang === 'ko') {
+        c = c.replace(/~/g, ', ')
+             .replace(/5G/gi, '파이브지')
+             .replace(/AWS/gi, '에이더블유에스')
+             .replace(/UI\/UX/gi, '유아이 유엑스')
+             .replace(/[!]{2,}/g, '!')
+             .replace(/\.\.\./g, '... ');
+      } else if (lang === 'en') {
+        c = c.replace(/~/g, ', ')
+             .replace(/5G/gi, 'five G')
+             .replace(/AWS/gi, 'A W S')
+             .replace(/UI\/UX/gi, 'U I and U X');
+      } else {
+        c = c.replace(/~/g, ', ');
+      }
+      return c.trim();
+    }
+
+    function calculatePreviewDuration(text, rate, lang) {
+      const safeRate = rate || 1.0;
+      const len = (text || '').length;
+      let charMs = (lang === 'ko') ? 175 : ((lang === 'en' || lang === 'es') ? 85 : 120);
+      return Math.max(4600, Math.round((len * charMs) / safeRate));
+    }
+
+    let previewSpeechStartTime = 0;
+
+    function playCurrentSceneAudio() {
+      stopAudio();
+      const scriptList = DRAMA_SCRIPTS[currentLang] || DRAMA_SCRIPTS['ko'];
+      const s = scriptList[currentScene];
+      const meta = LANG_METADATA[currentLang];
+
+      const sub = document.getElementById('mainSubtitle');
+      if (sub) {
+        sub.style.border = `1.5px solid ${s.color}`;
+        sub.style.borderRadius = '10px';
+        sub.style.padding = '8px 12px';
+        sub.style.background = 'rgba(0,0,0,0.65)';
+        sub.style.boxShadow = `0 0 20px ${s.color}55`;
+      }
+
+      const rawText = s.speechText || s.dialogue;
+      const textToSpeak = sanitizePreviewText(rawText, currentLang);
+      const voiceRate = s.voiceRate || 0.95;
+      const expectedDuration = calculatePreviewDuration(textToSpeak, voiceRate, currentLang);
+      const naturalTurnPause = 1200; // 사람 간 대화 여운 호흡
+      const totalSceneDuration = expectedDuration + naturalTurnPause;
+
+      // 상단 프로그레스 바 실시간 싱크
+      const curFill = document.getElementById(`fill-${currentScene}`);
+      if (curFill) {
+        curFill.style.transition = 'none';
+        curFill.style.width = '0%';
+        requestAnimationFrame(() => {
+          curFill.style.transition = `width ${totalSceneDuration}ms linear`;
+          curFill.style.width = '100%';
+        });
+      }
+
+      if (!isMuted && ('speechSynthesis' in window)) {
+        const u = new SpeechSynthesisUtterance(textToSpeak);
+        u.lang = meta.ttsLang;
+        u.rate = voiceRate;
+        u.pitch = s.pitch || 1.0;
+
+        const bestVoice = getPreviewBestVoice(currentLang, s.actor);
+        if (bestVoice) u.voice = bestVoice;
+
+        previewSpeechStartTime = Date.now();
+        window._activeUtterance = u;
+
+        keepAliveInterval = setInterval(() => {
+          if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.pause();
+            window.speechSynthesis.resume();
+          } else {
+            clearInterval(keepAliveInterval);
+          }
+        }, 7000);
+
+        // 🔥 대화 짤림 방지: 조기 종료 방어 및 자연스러운 호흡 여운
+        u.onend = () => {
+          clearInterval(keepAliveInterval);
+          if (!isPlaying) return;
+          const elapsed = Date.now() - previewSpeechStartTime;
+          const remaining = Math.max(0, expectedDuration - elapsed);
+          fallbackTimer = setTimeout(() => {
+            advanceNext();
+          }, remaining + naturalTurnPause);
+        };
+
+        u.onerror = (e) => {
+          clearInterval(keepAliveInterval);
+          console.warn("SpeechSynthesis error:", e);
+          if (isPlaying) {
+            fallbackTimer = setTimeout(advanceNext, totalSceneDuration);
+          }
+        };
+
+        const safetyTimeout = totalSceneDuration + 3000;
+        fallbackTimer = setTimeout(() => {
+          if (isPlaying) advanceNext();
+        }, safetyTimeout);
+
+        window.speechSynthesis.speak(u);
+
+      } else {
+        fallbackTimer = setTimeout(() => {
+          if (isPlaying) advanceNext();
+        }, totalSceneDuration);
+      }
+    }
+
+    function advanceNext() {
+      if (!isPlaying) return;
+      const scriptList = DRAMA_SCRIPTS[currentLang] || DRAMA_SCRIPTS['ko'];
+      currentScene++;
+      if (currentScene < scriptList.length) {
+        renderScene(currentScene);
+        playCurrentSceneAudio();
+      } else {
+        // 5씬 모두 완료 시
+        stopAudio();
+        isPlaying = false;
+        document.getElementById('btnPlayPause').innerHTML = `<span>↺ 다시보기</span>`;
+        currentScene = 0;
+      }
+    }
+
+    function prevScene() {
+      stopAudio();
+      currentScene = Math.max(0, currentScene - 1);
+      renderScene(currentScene);
+      if (isPlaying) playCurrentSceneAudio();
+    }
+
+    function nextSceneManual() {
+      stopAudio();
+      const scriptList = DRAMA_SCRIPTS[currentLang] || DRAMA_SCRIPTS['ko'];
+      currentScene = (currentScene + 1) % scriptList.length;
+      renderScene(currentScene);
+      if (isPlaying) playCurrentSceneAudio();
+    }
+
+    function togglePlayPause() {
+      if (isPlaying) {
+        pauseShow();
+      } else {
+        playShow();
+      }
+    }
+
+    function playShow() {
+      isPlaying = true;
+      document.getElementById('btnPlayPause').innerHTML = `<span>⏸️ 일시정지</span>`;
+      renderScene(currentScene);
+      playCurrentSceneAudio();
+    }
+
+    function pauseShow() {
+      isPlaying = false;
+      document.getElementById('btnPlayPause').innerHTML = `<span>▶️ 재생하기</span>`;
+      stopAudio();
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      document.getElementById('btnSoundToggle').innerText = isMuted ? '🔇' : '🔊';
+      if (isMuted) {
+        stopAudio();
+      } else if (isPlaying) {
+        playCurrentSceneAudio();
+      }
+    }
+
+    // 초기 렌더링
+    setLanguage('ko');
+  </script>
+</body>
+</html>
