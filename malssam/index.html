@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>말쌈 (MALSSAM) - 3대 세대별 한국어 신조어 사전 & 세대 공감 배틀</title>
   <meta name="description" content="1990년대 PC통신·싸이월드 라떼 추억부터 2010년대 스마트폰 국민 유행어, 2026 최신 쇼츠 밈까지! 세대 간 소통을 잇는 대한민국 집단지성 현대어 사전.">
+  <meta name="robots" content="noai, noimageai">
+  <script src="js/anti-scraping.js?v=20261023_shield_fix"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
   
   <style>
@@ -432,37 +434,6 @@
       position: relative;
       overflow: hidden;
       box-sizing: border-box;
-    }
-
-        .live-battle-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .btn-rotate-battle {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #f8fafc;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-rotate-battle:hover {
-      background: rgba(244, 63, 94, 0.2);
-      border-color: #f43f5e;
-      color: #f43f5e;
-      transform: translateY(-1px);
     }
 
     .live-battle-tag {
@@ -1898,41 +1869,45 @@
   </section>
 
   <!-- ⚔️ 바이럴 킬러 콘텐츠: 세대 공감 배틀 퀴즈 (Family & Office Battle) -->
-      <!-- 🔥 오늘의 말쌈 배틀 (LIVE BATTLE 15종 풀 & 동적 순환) -->
+    <!-- 🔥 오늘의 말쌈 배틀 (LIVE BATTLE #01) -->
+  <!-- =======================================================================
+       🔥 LIVE BATTLE: 매일/접속 시마다 새로운 질문으로 교체되는 실시간 말투 밸런스 게임
+       ======================================================================= -->
   <section class="live-battle-section">
-    <div class="live-battle-card">
-      <div class="live-battle-header">
-        <div class="live-battle-tag" id="liveBattleTag">🔥 LIVE BATTLE · 실시간 말투 밸런스 게임</div>
-        <button class="btn-rotate-battle" onclick="nextLiveBattle()" title="다른 밸런스 게임 보기">
-          🔄 다른 밸런스 게임 보기 (<span id="liveBattleCount">1/15</span>)
+    <div class="live-battle-card" id="liveBattleCard">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+        <div class="live-battle-tag" id="liveBattleTag">🔥 LIVE BATTLE #01 · 실시간 말투 밸런스 게임</div>
+        <button onclick="nextRandomBattle()" style="background:rgba(244,63,94,0.12); border:1px solid rgba(244,63,94,0.35); color:#fda4af; font-size:0.75rem; font-weight:800; padding:3px 10px; border-radius:12px; cursor:pointer; display:inline-flex; align-items:center; gap:4px; transition:all 0.2s ease;" onmouseover="this.style.background='rgba(244,63,94,0.25)'" onmouseout="this.style.background='rgba(244,63,94,0.12)'">
+          <span>🔄 다른 질문 보기</span>
         </button>
       </div>
+      
       <h2 class="live-battle-q" id="liveBattleQ">팀장님 공지에 신입이 <span style="color:#facc15;">"네."</span>라고 답장했다면?</h2>
       <p class="live-battle-desc" id="liveBattleDesc">물결(`~`)이나 느낌표(`!`) 없이 마침표만 찍힌 단답, 과연 사회생활 마이너스일까요?</p>
 
       <div class="live-battle-grid">
         <div class="live-vote-btn" id="liveBtnA" onclick="voteLiveBattle('A')">
-          <div class="live-vote-title" id="liveVoteTitleA">🅰️ 마침표는 차갑고 화난 것 같다… '넵!' 또는 '네~'가 기본이다</div>
+          <div class="live-vote-title" id="liveTitleA">🅰️ 마침표는 차갑고 화난 것 같다… '넵!' 또는 '네~'가 기본이다</div>
           <div>
             <div class="live-vote-pct">
               <span id="livePctA">76% 투표</span>
               <span id="liveLabelA" style="color:#f43f5e; font-weight:800;">예의중시파</span>
             </div>
             <div class="live-vote-gauge-wrap">
-              <div class="live-vote-gauge gauge-a" id="liveGaugeA" style="width: 76%;"></div>
+              <div class="live-vote-gauge gauge-a" id="liveGaugeA" style="width:76%;"></div>
             </div>
           </div>
         </div>
 
         <div class="live-vote-btn" id="liveBtnB" onclick="voteLiveBattle('B')">
-          <div class="live-vote-title" id="liveVoteTitleB">🅱️ 맞춤법 맞게 대답한 건데 뭐가 문제? 마침표 과몰입 금지</div>
+          <div class="live-vote-title" id="liveTitleB">🅱️ 맞춤법 맞게 대답한 건데 뭐가 문제? 마침표 과몰입 금지</div>
           <div>
             <div class="live-vote-pct">
               <span id="livePctB">24% 투표</span>
               <span id="liveLabelB" style="color:#38bdf8; font-weight:800;">효율실용파</span>
             </div>
             <div class="live-vote-gauge-wrap">
-              <div class="live-vote-gauge gauge-b" id="liveGaugeB" style="width: 24%;"></div>
+              <div class="live-vote-gauge gauge-b" id="liveGaugeB" style="width:24%;"></div>
             </div>
           </div>
         </div>
@@ -2017,7 +1992,7 @@
   <div class="era-info-box" id="eraInfoBox">
     <div class="era-info-content" id="eraInfoContent">
       <span>✨ <strong>전체 100선 아카이브</strong>: 1990년대 PC통신부터 2026년 최신 영포티·영ㅋㅋ 밈까지 전 시대를 한눈에 탐색합니다.</span>
-      <span style="color:#facc15; font-weight:800; font-size:0.75rem;">총 100개 표제어 수록</span>
+      <span style="color:#facc15; font-weight:800; font-size:0.75rem;">총 200개 표제어 수록</span>
     </div>
   </div>
 
@@ -7489,6 +7464,3125 @@
       "desc": "Istilah sosiologis untuk anak muda yang terpaksa merelakan pacaran, menikah, dan punya anak karena beban ekonomi.",
       "ex": "Beban hidup yang berat bikin generasi sekarang pasrah dan menyerah untuk menikah."
     }
+  },
+  {
+    "id": 101,
+    "word": "삐끼삐끼",
+    "pronunciation": "[삐끼삐끼]",
+    "part_of_speech": "명사 / 챌린지 밈",
+    "chosung": "ㅃㄲㅃㄲ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대",
+    "short_def": "프로야구 기아 타이거즈 치어리더 이주은의 아웃송 댄스에서 유래하여 전 세계 숏폼을 뒤흔든 무표정 댄스 밈.",
+    "origin": "투수가 상대 타자를 삼진 아웃시켰을 때 흘러나오는 전자음 비트('삐끼삐끼')에 맞춰 무심하고 시크하게 화장을 고치며 춤을 추는 동작이 틱톡과 릴스 알고리즘을 타고 글로벌 메가히트를 기록함.",
+    "examples": [
+      "A: 야 너 릴스에서 그 삐끼삐끼 춤 봤어? 해외 유명 인플루언서들도 다 따라 하더라!\nB: 응! 무표정으로 툭툭 추는 게 완전 중독성 대박이야."
+    ],
+    "tags": [
+      "숏폼",
+      "틱톡",
+      "릴스",
+      "치어리더",
+      "글로벌밈"
+    ],
+    "likes": 4820,
+    "dislikes": 32,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "삼진 아웃 축하 댄스, 무표정 숏폼 율동",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Pikipiki Dance / Outsong Meme",
+      "desc": "A viral K-baseball cheerleader dance craze performed with a chic, poker-faced vibe to electronic beats.",
+      "example": "A: Have you seen the Pikipiki dance trend on TikTok?\nB: Yes, the nonchalant vibe is super addictive!"
+    }
+  },
+  {
+    "id": 102,
+    "word": "원영적 사고",
+    "pronunciation": "[원영적 사고]",
+    "part_of_speech": "명사 / 마인드셋",
+    "chosung": "ㅇㅇㅈㅅㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대",
+    "short_def": "아이브 장원영의 무한 긍정 화법에서 유래한 사고방식으로, 어떤 불운한 상황도 결국 나에게 더 좋은 행운으로 귀결된다는 초긍정 마인드.",
+    "origin": "빵집에서 앞사람이 빵을 다 사 가자 '내가 새로 갓 구운 빵을 먹을 수 있게 됐네? 완전 럭키비키잖아!'라고 한 스페인 브이로그 발언에서 촉발됨.",
+    "examples": [
+      "A: 오늘 비 와서 약속 취소됐어 짜증 나.\nB: 원영적 사고를 해봐! 집에서 밀린 넷플릭스 보면서 푹 쉴 수 있는 최고의 기회잖아!"
+    ],
+    "tags": [
+      "럭키비키",
+      "장원영",
+      "초긍정",
+      "행운",
+      "마인드셋"
+    ],
+    "likes": 4950,
+    "dislikes": 25,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "초긍정적 낙관주의, 전화위복의 사고방식",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Wonyoung Thinking / Ultra-optimism",
+      "desc": "A hyper-positive mindset popularized by idol Jang Wonyoung, reframing every misfortune into a lucky blessing.",
+      "example": "A: My train got delayed!\nB: Use Wonyoung thinking: now you get 20 extra minutes to read your favorite book!"
+    }
+  },
+  {
+    "id": 103,
+    "word": "아파트 (APT)",
+    "pronunciation": "[아파트]",
+    "part_of_speech": "명사 / 글로벌 신드롬",
+    "chosung": "ㅇㅍㅌ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 글로벌 K-POP 팬",
+    "short_def": "한국의 전통적인 술자리 손포개기 게임 '아파트'를 블랙핑크 로제와 브루노 마스가 글로벌 히트곡으로 재해석하여 전 세계인이 따라 부르는 밈.",
+    "origin": "한국 대학가 술자리 게임의 인트로 구호인 '아~파트 아파트, 아~파트 아파트'를 팝스타 브루노 마스와 협업하여 중독성 넘치는 팝 펑크 곡으로 발표하며 빌보드를 강타함.",
+    "examples": [
+      "A: 채영이가 좋아하는 랜덤 게임~ 게임 스타트!\nB: 아~파트 아파트! 전 세계 클럽에서 한국어 구호 떼창 나오는 거 실화냐?"
+    ],
+    "tags": [
+      "로제",
+      "브루노마스",
+      "술자리게임",
+      "K-POP",
+      "빌보드"
+    ],
+    "likes": 5120,
+    "dislikes": 18,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "한국형 손포개기 친목 게임, 글로벌 히트 가요",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "APT Meme / Korean Drinking Game Song",
+      "desc": "A global viral hit by ROSÉ and Bruno Mars based on a classic Korean social drinking game.",
+      "example": "A: Apateu, apateu! Everyone in the party is chanting Korean now!\nB: That song is undeniably infectious."
+    }
+  },
+  {
+    "id": 104,
+    "word": "흑백요리사",
+    "pronunciation": "[흑백요리사]",
+    "part_of_speech": "명사 / 비유적 표현",
+    "chosung": "ㅎㅂㅇㄹㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "전 세대 (밀레니얼 & Z세대)",
+    "short_def": "넷플릭스 서바이벌에서 유래하여 계급장 떼고 오직 순수한 실력만으로 승부하는 블라인드 진검승부 또는 파격적인 실력자를 뜻하는 유행어.",
+    "origin": "스타 셰프(백수저)와 재야의 고수(흑수저)가 안대를 낀 심사위원 앞에서 오직 맛으로만 겨루는 넷플릭스 요리 서바이벌이 초대박 흥행하며 사회 전반의 비유어로 안착.",
+    "examples": [
+      "A: 이번 개발자 해커톤에 10년 차 시니어와 고등학생이 결승에서 맞붙었대.\nB: 완전 흑백요리사 대결이네! 오직 코딩 실력 하나로 승부 보는 거잖아."
+    ],
+    "tags": [
+      "넷플릭스",
+      "백수저",
+      "흑수저",
+      "블라인드",
+      "진검승부"
+    ],
+    "likes": 4650,
+    "dislikes": 29,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "블라인드 실력 경연, 계급을 초월한 진검승부",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Culinary Class Wars / Blind Showdown",
+      "desc": "A metaphor for a pure merit-based clash between renowned elites and hidden underdogs.",
+      "example": "A: This hackathon is like Culinary Class Wars: juniors beating senior tech leads purely on code quality!"
+    }
+  },
+  {
+    "id": 105,
+    "word": "마라탕후루",
+    "pronunciation": "[마라탕후루]",
+    "part_of_speech": "명사 / 숏폼 챌린지",
+    "chosung": "ㅁㄹㅌㅎㄹ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "알파세대 & 10대",
+    "short_def": "'선배 마라탕 사주세요, 그럼 제가 후배님 좋아하는 탕후루도 사줄게요'라는 귀여운 음원 챌린지이자 10대 필수 코스를 상징하는 단어.",
+    "origin": "크리에이터 서이브의 '마라탕후루' 음원이 틱톡과 쇼츠에서 폭발적인 댄스 챌린지를 일으키며 2024년 10대들의 디저트 식문화를 대표하는 대명사가 됨.",
+    "examples": [
+      "A: 오늘 하교하고 뭐 먹을래?\nB: 당근 마라탕후루 코스지! 마라탕 매운맛 먹고 바로 탕후루로 입가심하자."
+    ],
+    "tags": [
+      "마라탕",
+      "탕후루",
+      "서이브",
+      "10대문화",
+      "챌린지"
+    ],
+    "likes": 4310,
+    "dislikes": 55,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "얼얼한 매운 마라탕과 달콤한 과일 사탕 코스",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Malatanghulu Trend",
+      "desc": "A hyper-popular teen combo of spicy hot pot followed by sugar-coated fruit skewers, driven by a viral TikTok dance song.",
+      "example": "A: Let's do the Malatanghulu combo after class today!\nB: Sweet, savory, and pure dopamine!"
+    }
+  },
+  {
+    "id": 106,
+    "word": "꽁꽁 얼어붙은 한강 위로",
+    "pronunciation": "[꽁꽁 얼어붙은 한강 위로]",
+    "part_of_speech": "문장형 밈 / 댄스 챌린지",
+    "chosung": "ㄲㄲㅇㅇㅂㅇㅎㄱㅇㄹ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 아이돌 팬덤",
+    "short_def": "뉴스 기자의 차분한 보도 멘트에 고양이 걸음 율동을 결합하여 K-POP 아이돌들이 필수 코스로 따라 한 숏폼 밈.",
+    "origin": "2021년 MBN 기자의 한파 보도 멘트 '꽁꽁 얼어붙은 한강 위로 고양이가 걸어다닙니다'를 2024년 리믹스 음원과 고양이 발동작 안무로 엮어 숏폼 챌린지로 대유행함.",
+    "examples": [
+      "A: 너 최애 아이돌 꽁꽁 얼어붙은 한강 챌린지 춘 거 봤어?\nB: 고양이 귀 머리띠 하고 총총 걸어가는 거 너무 귀여워서 기절했잖아."
+    ],
+    "tags": [
+      "고양이챌린지",
+      "뉴스리포트",
+      "아이돌필수코스",
+      "숏폼"
+    ],
+    "likes": 4540,
+    "dislikes": 20,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "혹한기 얼음 위 고양이 흉내 율동",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Frozen Han River Cat Walk",
+      "desc": "A viral dance challenge originating from a deadpan Korean news clip reporting on a cat walking over the frozen Han River.",
+      "example": "A: Even top K-pop idols did the frozen Han River cat walk challenge on Reels!"
+    }
+  },
+  {
+    "id": 107,
+    "word": "쇠맛",
+    "pronunciation": "[쇠맏]",
+    "part_of_speech": "명사 / 스타일 수식어",
+    "chosung": "ㅅㅁ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & K-POP 팬",
+    "short_def": "에스파(aespa)의 'Supernova', 'Armageddon' 등 메탈릭하고 묵직한 베이스 사운드 및 미래지향적 Y3K 컨셉을 일컫는 표현.",
+    "origin": "이지리스닝 팝이 주류를 이루던 K-POP 씬에서 강렬하고 차가운 금속성 사운드와 사이버네틱 콘셉트를 완벽히 소화하자 팬들이 '진짜 쇠맛 난다'며 극찬한 데서 시작.",
+    "examples": [
+      "A: 에스파 신곡 들었어? 비트가 진짜 심장을 때리더라.\nB: 이게 바로 오리지널 쇠맛이지! 차갑고 메탈릭한 맛에 완전 취한다."
+    ],
+    "tags": [
+      "에스파",
+      "Y3K",
+      "메탈릭",
+      "사이버펑크",
+      "슈퍼노바"
+    ],
+    "likes": 4680,
+    "dislikes": 22,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "금속성 묵직한 사운드, 미래지향적 사이버네틱 스타일",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Metallic Flavor / Iron Taste",
+      "desc": "A distinctive K-pop aesthetic characterized by heavy, aggressive metallic synths and futuristic cyberpunk visuals.",
+      "example": "A: That new release gives off pure metallic flavor vibes, love the heavy bass!"
+    }
+  },
+  {
+    "id": 108,
+    "word": "맑눈광",
+    "pronunciation": "[망눈광]",
+    "part_of_speech": "명사",
+    "chosung": "ㅁㄴㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 직장인",
+    "short_def": "'맑은 눈의 광인'의 줄임말로, 티 없이 맑고 순진한 눈빛을 띠고 있지만 속에는 예측 불가능한 돌발성과 무서운 광기를 품고 있는 인물.",
+    "origin": "SNL 코리아 'MZ오피스'의 김아영 캐릭터가 동그랗고 맑은 눈을 번뜩이며 선배들의 불합리한 지시에 엉뚱하게 맞서는 연기를 펼쳐 전국적인 유행어가 됨.",
+    "examples": [
+      "A: 우리 팀 신입사원 조용조용한데 눈빛이 심상치 않아.\nB: 앗 전형적인 맑눈광 스타일이네! 건드리면 어떻게 폭발할지 모름."
+    ],
+    "tags": [
+      "맑은눈의광인",
+      "MZ오피스",
+      "직장인",
+      "반전매력"
+    ],
+    "likes": 4790,
+    "dislikes": 18,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "순진한 얼굴 뒤에 결단력이나 광기를 품은 사람",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Clear-Eyed Maniac",
+      "desc": "A person who looks utterly innocent with wide, clear eyes, but harbors unexpected craziness or relentless stubbornness.",
+      "example": "A: Watch out for the new intern, she's a total clear-eyed maniac who never backs down politely."
+    }
+  },
+  {
+    "id": 109,
+    "word": "저메추",
+    "pronunciation": "[저메추]",
+    "part_of_speech": "명사 / 축약어",
+    "chosung": "ㅈㅁㅊ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "10대~30대",
+    "short_def": "'저녁 메뉴 추천'의 줄임말. 퇴근길이나 친구들과의 메신저 대화에서 저녁 식사 결정을 의뢰할 때 쓰는 필수 일상어.",
+    "origin": "선택 장애가 있는 현대인들이 SNS 스토리나 단톡방에 질문을 올리던 문화에서 '점메추(점심 메뉴 추천)'와 쌍벽을 이루는 파생어로 굳어짐.",
+    "examples": [
+      "A: 오늘 야근 확정인데 스트레스 풀리는 저메추 좀 해줘.\nB: 그럼 무조건 매콤한 닭발이나 불족발 가야지!"
+    ],
+    "tags": [
+      "저녁",
+      "음식",
+      "추천",
+      "줄임말",
+      "일상"
+    ],
+    "likes": 4200,
+    "dislikes": 15,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "저녁 식사 식단 추천",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Dinner Reco",
+      "desc": "Abbreviation for 'Dinner Menu Recommendation' used daily in group chats and social media.",
+      "example": "A: Guys, need a quick dinner reco after this crazy overtime work!"
+    }
+  },
+  {
+    "id": 110,
+    "word": "혼코노",
+    "pronunciation": "[혼코노]",
+    "part_of_speech": "명사",
+    "chosung": "ㅎㅋㄴ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "1020 학생 및 청년층",
+    "short_def": "'혼자 코인 노래방 가기'의 줄임말. 눈치 보지 않고 부르고 싶은 곡을 마음껏 열창하며 힐링하는 1인 문화의 정석.",
+    "origin": "동전이나 카드 몇 장으로 1~2곡씩 부를 수 있는 부스형 코인노래연습장이 대중화되면서 혼밥에 이어 1인 여가 트렌드로 자리 잡음.",
+    "examples": [
+      "A: 시험 끝나고 스트레스 어떻게 풀 거야?\nB: 난 바로 혼코노 가서 10곡 연속으로 질러버릴 거야!"
+    ],
+    "tags": [
+      "코인노래방",
+      "혼자놀기",
+      "힐링",
+      "1인문화"
+    ],
+    "likes": 4350,
+    "dislikes": 12,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "1인 동전 노래연습장 이용",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Solo Coin Karaoke",
+      "desc": "Going alone to a pay-per-song coin karaoke booth to sing your heart out stress-free.",
+      "example": "A: Doing solo coin karaoke after work is my ultimate therapy session."
+    }
+  },
+  {
+    "id": 111,
+    "word": "무지출 챌린지",
+    "pronunciation": "[무지출 챌린지]",
+    "part_of_speech": "명사",
+    "chosung": "ㅁㅈㅊㅊㄹㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "하루 지출 0원을 목표로 소비를 극도로 통제하는 청년 세대의 고물가 극복 챌린지.",
+    "origin": "고물가 시대 생활비 절약을 위해 도시락을 싸고 커피를 끊는 SNS 인증 챌린지.",
+    "examples": [
+      "A: 요즘 다들 '무지출 챌린지'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "무지출",
+      "절약",
+      "짠테크"
+    ],
+    "likes": 4387,
+    "dislikes": 28,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "무지출 소비 절제 운동",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Zero Spend Challenge",
+      "desc": "Korean urban trend term for '무지출 소비 절제 운동'.",
+      "example": "A: Did you hear about '무지출 챌린지' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 112,
+    "word": "거지방",
+    "pronunciation": "[거지방]",
+    "part_of_speech": "명사",
+    "chosung": "ㄱㅈㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "오픈채팅방에서 서로의 낭비성 소비를 단호하게 질책하고 절약을 유도하는 익명 커뮤니티.",
+    "origin": "카카오톡 오픈채팅에서 '스타벅스 커피 삼'이라고 올리면 '물이나 마셔라'며 유머러스하게 서로를 다잡는 방.",
+    "examples": [
+      "A: 요즘 다들 '거지방'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "오픈채팅",
+      "절약",
+      "풍자"
+    ],
+    "likes": 4404,
+    "dislikes": 31,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "절약 장려 익명 대화방",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Broke Chatroom",
+      "desc": "Korean urban trend term for '절약 장려 익명 대화방'.",
+      "example": "A: Did you hear about '거지방' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 113,
+    "word": "시성비",
+    "pronunciation": "[시성비]",
+    "part_of_speech": "명사",
+    "chosung": "ㅅㅅㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "가격 대비 성능(가성비)을 넘어, 투입한 시간 대비 효율과 만족도를 최우선으로 따지는 소비 기준.",
+    "origin": "시간이 부족한 현대인들이 2배속 영상 보기, 요약본 소비, 가사 대행 서비스 등을 선호하는 트렌드.",
+    "examples": [
+      "A: 요즘 다들 '시성비'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "시간효율",
+      "트렌드",
+      "2배속"
+    ],
+    "likes": 4421,
+    "dislikes": 34,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "시간 효율성, 시간 대비 효용",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Time-Cost Ratio",
+      "desc": "Korean urban trend term for '시간 효율성, 시간 대비 효용'.",
+      "example": "A: Did you hear about '시성비' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 114,
+    "word": "디토 소비",
+    "pronunciation": "[디토 소비]",
+    "part_of_speech": "명사",
+    "chosung": "ㄷㅌㅅㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "복잡한 상품 검색 대신 자신이 신뢰하는 인플루언서나 전문가의 취향을 그대로 '나도(Ditto)' 따라 사는 소비.",
+    "origin": "정보 과잉 시대에 검증된 취향을 가진 인물의 선택을 그대로 복제하는 효율적 쇼핑 방식.",
+    "examples": [
+      "A: 요즘 다들 '디토 소비'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "디토",
+      "추종소비",
+      "취향"
+    ],
+    "likes": 4438,
+    "dislikes": 37,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "취향 추종 구매, 동조 소비",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Ditto Consumption",
+      "desc": "Korean urban trend term for '취향 추종 구매, 동조 소비'.",
+      "example": "A: Did you hear about '디토 소비' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 115,
+    "word": "도파민 중독",
+    "pronunciation": "[도파민 중독]",
+    "part_of_speech": "명사",
+    "chosung": "ㄷㅍㅁㅈㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "숏폼 영상, 소셜미디어 알림, 자극적인 이슈에서 나오는 즉각적인 쾌감(도파민)만을 끊임없이 좇는 심리 상태.",
+    "origin": "스마트폰을 손에서 놓지 못하고 1분 이내의 도파민 폭탄 콘텐츠를 스크롤하는 현대인의 뇌 피로 현상.",
+    "examples": [
+      "A: 요즘 다들 '도파민 중독'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "도파민",
+      "숏폼",
+      "뇌건강"
+    ],
+    "likes": 4455,
+    "dislikes": 40,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "즉각적 쾌락 추구 편향",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Dopamine Addiction",
+      "desc": "Korean urban trend term for '즉각적 쾌락 추구 편향'.",
+      "example": "A: Did you hear about '도파민 중독' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 116,
+    "word": "육각형 인간",
+    "pronunciation": "[육각형 인간]",
+    "part_of_speech": "명사",
+    "chosung": "ㅇㄱㅎㅇㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "외모, 학벌, 자산, 직업, 집안, 성격의 6대 능력치 그래프가 빈틈없이 꽉 찬 완벽한 이상형을 뜻하는 신조어.",
+    "origin": "게임 캐릭터 스테이터스 육각형 레이더 차트에서 유래하여 모든 방면에서 흠잡을 데 없는 인물을 지칭.",
+    "examples": [
+      "A: 요즘 다들 '육각형 인간'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "육각형",
+      "완벽주의",
+      "능력자"
+    ],
+    "likes": 4472,
+    "dislikes": 43,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "모든 역량을 고루 갖춘 완벽한 인물",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Hexagonal Person",
+      "desc": "Korean urban trend term for '모든 역량을 고루 갖춘 완벽한 인물'.",
+      "example": "A: Did you hear about '육각형 인간' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 117,
+    "word": "요노족",
+    "pronunciation": "[요노족]",
+    "part_of_speech": "명사",
+    "chosung": "ㅇㄴㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "인생은 한 번뿐이라며 과소비하던 욜로(YOLO)와 반대로, 꼭 필요한 것만 최소한으로 사는 요노(YONO, You Only Need One) 세대.",
+    "origin": "불필요한 과시형 명품이나 플렉스 대신 실용적이고 알뜰한 단일 필수품에 집중하는 합리적 청년층.",
+    "examples": [
+      "A: 요즘 다들 '요노족'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "YONO",
+      "미니멀리즘",
+      "알뜰"
+    ],
+    "likes": 4489,
+    "dislikes": 46,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "단순 필수 소비 지향 세대",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "YONO Tribe",
+      "desc": "Korean urban trend term for '단순 필수 소비 지향 세대'.",
+      "example": "A: Did you hear about '요노족' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 118,
+    "word": "플러팅",
+    "pronunciation": "[플러팅]",
+    "part_of_speech": "명사",
+    "chosung": "ㅍㄹㅌ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "상대방에게 매력이나 호감을 유쾌하고 은근하게 어필하는 유혹 행위.",
+    "origin": "영어 Flirting에서 유래하여 예능 프로그램이나 연애 리얼리티에서 플러팅 장인이라는 수식어로 대중화됨.",
+    "examples": [
+      "A: 요즘 다들 '플러팅'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "호감표현",
+      "연애",
+      "유혹"
+    ],
+    "likes": 2506,
+    "dislikes": 49,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "호감 표현, 추파 던지기",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Flirting",
+      "desc": "Korean urban trend term for '호감 표현, 추파 던지기'.",
+      "example": "A: Did you hear about '플러팅' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 119,
+    "word": "가스라이팅",
+    "pronunciation": "[가스라이팅]",
+    "part_of_speech": "명사",
+    "chosung": "ㄱㅅㄹㅇㅌ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "상대방의 기억이나 심리를 교묘하게 조작하여 스스로의 판단력을 의심하게 만드는 심리적 지배 행위.",
+    "origin": "연극 '가스등(Gas Light)'에서 유래하여 대인관계나 직장에서의 비정상적 갑을 관계를 경고하는 전문어로 정착.",
+    "examples": [
+      "A: 요즘 다들 '가스라이팅'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "심리조작",
+      "지배",
+      "경계"
+    ],
+    "likes": 2523,
+    "dislikes": 52,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "심리적 조작 지배",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Gaslighting",
+      "desc": "Korean urban trend term for '심리적 조작 지배'.",
+      "example": "A: Did you hear about '가스라이팅' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 120,
+    "word": "뇌빼기",
+    "pronunciation": "[뇌빼기]",
+    "part_of_speech": "명사",
+    "chosung": "ㄴㅃㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "복잡하고 골치 아픈 생각을 완전히 비우고 멍하니 즐기는 무념무상의 감상 상태.",
+    "origin": "고민 많은 현대인들이 스트레스를 잊기 위해 아무 생각 없이 웃을 수 있는 가벼운 콘텐츠를 볼 때 쓰는 말.",
+    "examples": [
+      "A: 요즘 다들 '뇌빼기'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "뇌비우기",
+      "킬링타임",
+      "무념무상"
+    ],
+    "likes": 2540,
+    "dislikes": 15,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "생각 비우기, 무념무상 휴식",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Brain-off Relaxing",
+      "desc": "Korean urban trend term for '생각 비우기, 무념무상 휴식'.",
+      "example": "A: Did you hear about '뇌빼기' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 121,
+    "word": "버추얼 아이돌",
+    "pronunciation": "[버추얼 아이돌]",
+    "part_of_speech": "명사",
+    "chosung": "ㅂㅊㅇㅇㅇㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "모션 캡처와 3D 그래픽 기술을 활용한 버추얼 아바타로 음반 활동과 라이브 방송을 진행하는 차세대 아이돌.",
+    "origin": "플레이브(PLAVE) 등이 지상파 1위를 차지하며 서브컬처를 넘어 주류 K-POP 문화로 우뚝 선 신개념 그룹.",
+    "examples": [
+      "A: 요즘 다들 '버추얼 아이돌'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "플레이브",
+      "가상아이돌",
+      "3D"
+    ],
+    "likes": 2557,
+    "dislikes": 18,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "가상 입체 아이돌 그룹",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Virtual Idol",
+      "desc": "Korean urban trend term for '가상 입체 아이돌 그룹'.",
+      "example": "A: Did you hear about '버추얼 아이돌' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 122,
+    "word": "딸깍충",
+    "pronunciation": "[딸깍충]",
+    "part_of_speech": "명사 (은어)",
+    "chosung": "ㄸㄲㅊ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "생성형 AI 기술을 활용해 마우스 클릭(딸깍) 한 번으로 손쉽게 그림이나 코드를 만들어내고 거들먹거리는 사람을 비꼬는 말.",
+    "origin": "창작의 고뇌 없이 버튼 클릭 한 번으로 결과물을 양산하는 행태를 풍자하는 인터넷 신조어.",
+    "examples": [
+      "A: 요즘 다들 '딸깍충'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "AI생성",
+      "풍자",
+      "클릭"
+    ],
+    "likes": 2574,
+    "dislikes": 21,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "원클릭 생성 편승자",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Clicker Freeloader",
+      "desc": "Korean urban trend term for '원클릭 생성 편승자'.",
+      "example": "A: Did you hear about '딸깍충' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 123,
+    "word": "바이브 코딩",
+    "pronunciation": "[바이브 코딩]",
+    "part_of_speech": "명사 / 개발 신조어",
+    "chosung": "ㅂㅇㅂㅋㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "안드레이 카파시가 제창한 개념으로, 구체적 문법 코딩 대신 AI 에이전트에게 자연어로 분위기(Vibe)와 의도를 설명하며 개발하는 방식.",
+    "origin": "LLM의 코딩 능력이 급성장함에 따라 개발자가 기획과 프롬프트 의도 조율에 집중하는 차세대 개발 패러다임.",
+    "examples": [
+      "A: 요즘 다들 '바이브 코딩'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "AI개발",
+      "에이전트",
+      "카파시"
+    ],
+    "likes": 2591,
+    "dislikes": 24,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "직관형 AI 협업 개발",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Vibe Coding",
+      "desc": "Korean urban trend term for '직관형 AI 협업 개발'.",
+      "example": "A: Did you hear about '바이브 코딩' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 124,
+    "word": "탈룰라",
+    "pronunciation": "[탈룰라]",
+    "part_of_speech": "명사 / 밈",
+    "chosung": "ㅌㄹㄹ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "어떤 대상이나 물건을 심하게 욕했다가 알고 보니 상대방 부모님이 해준 것임을 알고 급히 칭찬으로 태세를 전환하는 민망한 상황.",
+    "origin": "영화 '쿨 러닝'에서 썰매 이름을 짓다가 '어머니 이름'이라는 말에 급수습하는 장면에서 탄생한 전설적인 밈.",
+    "examples": [
+      "A: 요즘 다들 '탈룰라'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "급수습",
+      "태세전환",
+      "웃픈상황"
+    ],
+    "likes": 2608,
+    "dislikes": 27,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "부모 언급에 따른 즉각적 화제 수습",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Tallulah Moment",
+      "desc": "Korean urban trend term for '부모 언급에 따른 즉각적 화제 수습'.",
+      "example": "A: Did you hear about '탈룰라' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 125,
+    "word": "삼귀다",
+    "pronunciation": "[삼귀다]",
+    "part_of_speech": "동사",
+    "chosung": "ㅅㄱㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "사귀기(4) 전 단계로, 서로 호감을 가지고 달콤하게 썸을 타는(3) 설레는 시기를 귀엽게 표현한 말.",
+    "origin": "숫자 4(사)보다 하나 작은 3(삼)을 연애 직전의 설레는 단계에 빗대어 표현한 재치 있는 언어유희.",
+    "examples": [
+      "A: 요즘 다들 '삼귀다'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "썸",
+      "연애전야",
+      "설렘"
+    ],
+    "likes": 2625,
+    "dislikes": 30,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "사귀기 전 썸 타는 단계",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Pre-dating / Almost Dating",
+      "desc": "Korean urban trend term for '사귀기 전 썸 타는 단계'.",
+      "example": "A: Did you hear about '삼귀다' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 126,
+    "word": "별다줄",
+    "pronunciation": "[별다줄]",
+    "part_of_speech": "축약어",
+    "chosung": "ㅂㄷㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'별걸 다 줄인다'의 줄임말로, 일상적인 단어까지 지나치게 두세 글자로 압축해 부르는 신조어 풍조를 꼬집는 말.",
+    "origin": "신조어가 너무 빠르게 쏟아져 기성세대가 따라가기 벅찰 때 반어적으로 감탄하며 내뱉는 표현.",
+    "examples": [
+      "A: 요즘 다들 '별다줄'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "줄임말",
+      "신조어풍자",
+      "한탄"
+    ],
+    "likes": 2642,
+    "dislikes": 33,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "지나친 약어 사용에 대한 한탄",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Shortening Everything",
+      "desc": "Korean urban trend term for '지나친 약어 사용에 대한 한탄'.",
+      "example": "A: Did you hear about '별다줄' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 127,
+    "word": "만반잘부",
+    "pronunciation": "[만반잘부]",
+    "part_of_speech": "축약어 / 인사말",
+    "chosung": "ㅁㅂㅈㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'만나서 반가워 잘 부탁해'의 머리글자만 딴 초성형 인사말로, 신학기나 오픈채팅방에서 첫인사를 나눌 때 쓰임.",
+    "origin": "모바일 채팅에서 타수를 최소화하고 빠른 친목 형성을 도모하기 위해 10대들이 만든 인사말.",
+    "examples": [
+      "A: 요즘 다들 '만반잘부'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "신학기",
+      "첫인사",
+      "친목"
+    ],
+    "likes": 2659,
+    "dislikes": 36,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "만나서 반갑습니다 잘 부탁드립니다",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Nice to meet you (Abbr.)",
+      "desc": "Korean urban trend term for '만나서 반갑습니다 잘 부탁드립니다'.",
+      "example": "A: Did you hear about '만반잘부' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 128,
+    "word": "오뱅알",
+    "pronunciation": "[오뱅알]",
+    "part_of_speech": "축약어",
+    "chosung": "ㅇㅂㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'오늘 방송 알찼다'의 줄임말. 인터넷 스트리머가 생방송을 종료할 때 시청자들이 채팅창에 남기는 감사의 인사말.",
+    "origin": "트위치, 치지직, 아프리카TV 라이브 플랫폼에서 방종 때 도배되는 대표적인 팬덤 은어.",
+    "examples": [
+      "A: 요즘 다들 '오뱅알'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "인방",
+      "치지직",
+      "방종인사"
+    ],
+    "likes": 2676,
+    "dislikes": 39,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "오늘 방송 대단히 유익했습니다",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Great Stream Today",
+      "desc": "Korean urban trend term for '오늘 방송 대단히 유익했습니다'.",
+      "example": "A: Did you hear about '오뱅알' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 129,
+    "word": "오운완",
+    "pronunciation": "[오운완]",
+    "part_of_speech": "축약어",
+    "chosung": "ㅇㅇㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'오늘 운동 완료'의 줄임말로, 헬스장이나 러닝 후 거울 셀카와 함께 SNS에 인증샷을 올릴 때 쓰는 필수 해시태그.",
+    "origin": "자기관리와 건강을 중시하는 MZ세대의 루틴 인증 문화이자 건강한 성취감을 고취하는 대표 유행어.",
+    "examples": [
+      "A: 요즘 다들 '오운완'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "헬스",
+      "오운완",
+      "자기관리"
+    ],
+    "likes": 2693,
+    "dislikes": 42,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "오늘의 운동 완수",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Workout Done Today",
+      "desc": "Korean urban trend term for '오늘의 운동 완수'.",
+      "example": "A: Did you hear about '오운완' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 130,
+    "word": "오하운",
+    "pronunciation": "[오하운]",
+    "part_of_speech": "축약어",
+    "chosung": "ㅇㅎㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'오늘 하루 운동'의 줄임말로, 거창한 운동이 아니더라도 계단 오르기나 산책 등 일상 속에서 운동을 실천하자는 라이프스타일 키워드.",
+    "origin": "트렌드 코리아가 선정한 키워드로, 운동을 일상의 자연스러운 루틴으로 흡수시킨 세대의 신조어.",
+    "examples": [
+      "A: 요즘 다들 '오하운'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "일상운동",
+      "건강루틴",
+      "웰빙"
+    ],
+    "likes": 2710,
+    "dislikes": 45,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "오늘 하루의 건강 운동",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Daily Exercise Routine",
+      "desc": "Korean urban trend term for '오늘 하루의 건강 운동'.",
+      "example": "A: Did you hear about '오하운' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 131,
+    "word": "미라클 모닝",
+    "pronunciation": "[미라클 모닝]",
+    "part_of_speech": "명사",
+    "chosung": "ㅁㄹㅋㅁㄴ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "일반적인 기상 시간보다 1~2시간 일찍 일어나 독서, 명상, 운동 등 온전한 자기계발 시간을 갖는 아침 기상 챌린지.",
+    "origin": "미국의 할 엘로드 저서에서 유래하여 한국의 갓생 살기 열풍과 맞물려 강력한 모닝 루틴으로 유행.",
+    "examples": [
+      "A: 요즘 다들 '미라클 모닝'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "아침기상",
+      "자기계발",
+      "갓생"
+    ],
+    "likes": 2727,
+    "dislikes": 48,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "기적의 아침 자기계발",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Miracle Morning",
+      "desc": "Korean urban trend term for '기적의 아침 자기계발'.",
+      "example": "A: Did you hear about '미라클 모닝' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 132,
+    "word": "갓생러",
+    "pronunciation": "[갓생러]",
+    "part_of_speech": "명사",
+    "chosung": "ㄱㅅㄹ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "신(God)처럼 모범적이고 훌륭하며, 매일의 목표를 체계적으로 성취해 나가는 사람을 칭찬하는 표현.",
+    "origin": "갓생(God+生)에 사람을 뜻하는 접미사 '-er'을 붙여 계획표대로 치열하고 알차게 사는 현대인을 뜻함.",
+    "examples": [
+      "A: 요즘 다들 '갓생러'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "갓생",
+      "성실",
+      "자기관리"
+    ],
+    "likes": 2744,
+    "dislikes": 51,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "모범적이고 성실한 삶을 사는 사람",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "God-life Achiever",
+      "desc": "Korean urban trend term for '모범적이고 성실한 삶을 사는 사람'.",
+      "example": "A: Did you hear about '갓생러' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 133,
+    "word": "무물보",
+    "pronunciation": "[무물보]",
+    "part_of_speech": "명사 / 축약어",
+    "chosung": "ㅁㅁㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "인스타그램 스토리에 질문 스티커를 띄워 무엇이든 질문을 받고 답변해 주는 소통 코너.",
+    "origin": "'무엇이든 물어보살' 예능 프로그램명과 결합되어 인플루언서들이 팬들과 Q&A를 나눌 때 필수적으로 사용.",
+    "examples": [
+      "A: 요즘 다들 '무물보'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "인스타스토리",
+      "QNA",
+      "소통"
+    ],
+    "likes": 2761,
+    "dislikes": 54,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "무엇이든 물어보세요",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Ask Me Anything",
+      "desc": "Korean urban trend term for '무엇이든 물어보세요'.",
+      "example": "A: Did you hear about '무물보' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 134,
+    "word": "좋댓구알",
+    "pronunciation": "[좋댓구알]",
+    "part_of_speech": "축약어",
+    "chosung": "ㅈㄷㄱㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'좋아요, 댓글, 구독, 알림 설정'의 앞 글자를 딴 유튜브 크리에이터들의 마감 멘트.",
+    "origin": "유튜브 채널 성장에 가장 핵심적인 4대 알고리즘 반응을 시청자에게 원클릭으로 요청하는 신조어.",
+    "examples": [
+      "A: 요즘 다들 '좋댓구알'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "유튜브",
+      "구독",
+      "알고리즘"
+    ],
+    "likes": 2778,
+    "dislikes": 17,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "좋아요·댓글·구독·알림설정 요청",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Like, Comment, Subscribe",
+      "desc": "Korean urban trend term for '좋아요·댓글·구독·알림설정 요청'.",
+      "example": "A: Did you hear about '좋댓구알' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 135,
+    "word": "졌잘싸",
+    "pronunciation": "[졌잘싸]",
+    "part_of_speech": "축약어",
+    "chosung": "ㅈㅈㅆ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'졌지만 잘 싸웠다'의 줄임말로, 스포츠 경기나 경쟁에서 비록 패배했으나 끝까지 투혼을 발휘했을 때 보내는 아낌없는 찬사.",
+    "origin": "월드컵, 올림픽 등에서 강팀을 상대로 포기하지 않고 명승부를 펼친 선수단에게 국민들이 보내는 격려의 말.",
+    "examples": [
+      "A: 요즘 다들 '졌잘싸'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "스포츠",
+      "투혼",
+      "격려"
+    ],
+    "likes": 2795,
+    "dislikes": 20,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "패배했으나 훌륭한 승부였습니다",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Lost But Fought Well",
+      "desc": "Korean urban trend term for '패배했으나 훌륭한 승부였습니다'.",
+      "example": "A: Did you hear about '졌잘싸' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 136,
+    "word": "킹리적 갓심",
+    "pronunciation": "[킹리적 갓심]",
+    "part_of_speech": "명사",
+    "chosung": "ㅋㄹㅈㄱㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'합리적 의심'이라는 단어 앞뒤에 극존칭 킹(King)과 갓(God)을 덧붙여, 객관적 정황상 의심하지 않을 수 없는 확실한 상황을 뜻함.",
+    "origin": "단순한 억측이 아니라 논리적이고 타당한 근거가 충분할 때 네티즌들이 유머러스하게 사용하는 관용구.",
+    "examples": [
+      "A: 요즘 다들 '킹리적 갓심'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "합리적의심",
+      "유머",
+      "추리"
+    ],
+    "likes": 2812,
+    "dislikes": 23,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "지극히 타당하고 논리적인 의심",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Totally Reasonable Suspicion",
+      "desc": "Korean urban trend term for '지극히 타당하고 논리적인 의심'.",
+      "example": "A: Did you hear about '킹리적 갓심' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 137,
+    "word": "댕댕이",
+    "pronunciation": "[댕댕이]",
+    "part_of_speech": "명사 / 야민정음",
+    "chosung": "ㄷㄷㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "글자 '멍멍이'의 시각적 형태가 '댕댕이'와 닮았다고 하여 귀여운 강아지를 애정 담아 부르는 대표적 야민정음.",
+    "origin": "디시인사이드 국내야구 갤러리에서 글자를 비슷하게 바꿔 쓰던 놀이가 대중화되어 표준어급 애칭으로 안착.",
+    "examples": [
+      "A: 요즘 다들 '댕댕이'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "강아지",
+      "야민정음",
+      "반려견"
+    ],
+    "likes": 2829,
+    "dislikes": 26,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "귀여운 강아지",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Puppy / Doggo",
+      "desc": "Korean urban trend term for '귀여운 강아지'.",
+      "example": "A: Did you hear about '댕댕이' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 138,
+    "word": "떼껄룩",
+    "pronunciation": "[떼껄룩]",
+    "part_of_speech": "명사",
+    "chosung": "ㄸㄲㄹ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "RPG 게임 '엘더스크롤 스카이림'의 고양이형 수인 카짓 종족이 물건을 팔며 하는 대사 'Take a look'을 소리 나는 대로 부른 고양이 애칭.",
+    "origin": "인터넷 커뮤니티에서 길고양이나 집고양이 사진을 올릴 때 '떼껄룩 발견'이라며 애정을 담아 부르는 별명.",
+    "examples": [
+      "A: 요즘 다들 '떼껄룩'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "고양이",
+      "스카이림",
+      "애칭"
+    ],
+    "likes": 2846,
+    "dislikes": 29,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "사랑스러운 고양이",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Cat / Kitty",
+      "desc": "Korean urban trend term for '사랑스러운 고양이'.",
+      "example": "A: Did you hear about '떼껄룩' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 139,
+    "word": "커엽다",
+    "pronunciation": "[커엽다]",
+    "part_of_speech": "형용사 / 야민정음",
+    "chosung": "ㅋㅇㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'귀엽다'의 '귀' 자를 모양이 비슷한 '커'로 바꾸어 표기한 인터넷 은어로, 사물이나 사람이 너무 귀여울 때 사용.",
+    "origin": "야민정음 특유의 위트와 함께 발음상 느껴지는 독특한 어감 때문에 젊은 층에서 메신저로 널리 쓰임.",
+    "examples": [
+      "A: 요즘 다들 '커엽다'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "귀엽다",
+      "야민정음",
+      "심쿵"
+    ],
+    "likes": 2863,
+    "dislikes": 32,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "대단히 귀엽고 사랑스럽다",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Super Cute",
+      "desc": "Korean urban trend term for '대단히 귀엽고 사랑스럽다'.",
+      "example": "A: Did you hear about '커엽다' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 140,
+    "word": "머박",
+    "pronunciation": "[머박]",
+    "part_of_speech": "명사 / 감탄사",
+    "chosung": "ㅁㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'대박'의 '대' 자를 모양이 닮은 '머'로 바꾸어 놀라움이나 축하를 표현하는 야민정음 유행어.",
+    "origin": "경사스러운 소식이나 믿기지 않는 엄청난 성과가 터졌을 때 '머박사건' 등의 형태로 활용됨.",
+    "examples": [
+      "A: 요즘 다들 '머박'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "대박",
+      "야민정음",
+      "감탄"
+    ],
+    "likes": 2880,
+    "dislikes": 35,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "대단히 놀라운 성공이나 경사",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Jackpot / Awesome",
+      "desc": "Korean urban trend term for '대단히 놀라운 성공이나 경사'.",
+      "example": "A: Did you hear about '머박' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 141,
+    "word": "롬곡",
+    "pronunciation": "[롬곡]",
+    "part_of_speech": "명사 / 언어유희",
+    "chosung": "ㄹㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'눈물'이라는 단어를 상하로 180도 뒤집어 읽었을 때 '롬곡'으로 보이는 데서 착안한 슬픔과 감동의 표현.",
+    "origin": "너무 슬프거나 가슴 벅찬 감동을 느낄 때 '롬곡옾눞(폭풍눈물)' 등의 파생어와 함께 인터넷에서 널리 쓰임.",
+    "examples": [
+      "A: 요즘 다들 '롬곡'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "눈물",
+      "감동",
+      "언어유희"
+    ],
+    "likes": 2897,
+    "dislikes": 38,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "슬픔이나 감격의 눈물",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Tears of Emotion",
+      "desc": "Korean urban trend term for '슬픔이나 감격의 눈물'.",
+      "example": "A: Did you hear about '롬곡' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 142,
+    "word": "띵작",
+    "pronunciation": "[띵작]",
+    "part_of_speech": "명사 / 야민정음",
+    "chosung": "ㄸㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'명작(名作)'의 '명' 자가 한글 '띵'과 흡사하게 생겼다는 이유로 훌륭한 영화, 웹툰, 소설을 격찬할 때 쓰는 말.",
+    "origin": "시간이 흘러도 변치 않는 감동을 주는 걸작 콘텐츠를 젊은 세대가 친근하게 추천할 때 빠지지 않는 단어.",
+    "examples": [
+      "A: 요즘 다들 '띵작'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "명작",
+      "걸작",
+      "야민정음"
+    ],
+    "likes": 2914,
+    "dislikes": 41,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "불후의 명작, 위대한 걸작",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Masterpiece",
+      "desc": "Korean urban trend term for '불후의 명작, 위대한 걸작'.",
+      "example": "A: Did you hear about '띵작' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 143,
+    "word": "띵곡",
+    "pronunciation": "[띵곡]",
+    "part_of_speech": "명사 / 야민정음",
+    "chosung": "ㄸㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'명곡(名曲)'을 야민정음 표기로 바꾼 단어로, 들을 때마다 감탄이 절로 나오는 최고의 음악을 지칭.",
+    "origin": "음원 차트 역주행 곡이나 숨은 명곡을 발견했을 때 '이 노래 진짜 띵곡이다'라며 추천하는 데 쓰임.",
+    "examples": [
+      "A: 요즘 다들 '띵곡'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "명곡",
+      "노래추천",
+      "야민정음"
+    ],
+    "likes": 2931,
+    "dislikes": 44,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "아름답고 훌륭한 명곡",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Masterpiece Song",
+      "desc": "Korean urban trend term for '아름답고 훌륭한 명곡'.",
+      "example": "A: Did you hear about '띵곡' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 144,
+    "word": "맵찔이",
+    "pronunciation": "[맵찔이]",
+    "part_of_speech": "명사",
+    "chosung": "ㅁㅉㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "매운 음식을 조금만 먹어도 땀을 뻘뻘 흘리고 힘들어하는 매운맛 초보자를 친근하게 놀리는 표현.",
+    "origin": "신라면이나 떡볶이 기본 맛조차 매워하는 사람을 뜻하며, 매운맛 열풍에 대응하여 탄생한 반대말.",
+    "examples": [
+      "A: 요즘 다들 '맵찔이'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "매운맛",
+      "신라면",
+      "음식"
+    ],
+    "likes": 2948,
+    "dislikes": 47,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "매운 음식을 잘 먹지 못하는 사람",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Spicy Weakling",
+      "desc": "Korean urban trend term for '매운 음식을 잘 먹지 못하는 사람'.",
+      "example": "A: Did you hear about '맵찔이' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 145,
+    "word": "맵부심",
+    "pronunciation": "[맵부심]",
+    "part_of_speech": "명사",
+    "chosung": "ㅁㅂㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "불닭볶음면, 마라탕 등 극도로 매운 음식을 남들보다 훨씬 잘 먹는다는 사실에 대해 드러내는 뿌듯한 자부심.",
+    "origin": "매운맛 챌린지가 성행하면서 자신이 얼마나 매운 단계를 버틸 수 있는지 경쟁하듯 과시하는 심리.",
+    "examples": [
+      "A: 요즘 다들 '맵부심'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "매운맛",
+      "자부심",
+      "챌린지"
+    ],
+    "likes": 2965,
+    "dislikes": 50,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "매운 음식 섭취에 대한 자부심",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Spicy Pride",
+      "desc": "Korean urban trend term for '매운 음식 섭취에 대한 자부심'.",
+      "example": "A: Did you hear about '맵부심' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 146,
+    "word": "순삭",
+    "pronunciation": "[순삭]",
+    "part_of_speech": "명사 / 부사",
+    "chosung": "ㅅㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'순간 삭제'의 줄임말로, 음식이나 휴가, 시간, 돈 따위가 눈 깜짝할 사이에 감쪽같이 사라져 버림을 뜻함.",
+    "origin": "주말이 시작되자마자 끝나버리거나, 맛있는 간식이 식탁에 오르자마자 다 먹어 치워졌을 때 주로 씀.",
+    "examples": [
+      "A: 요즘 다들 '순삭'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "순간삭제",
+      "순삭",
+      "주말"
+    ],
+    "likes": 2982,
+    "dislikes": 53,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "눈 깜짝할 사이에 사라짐",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Instant Disappearance",
+      "desc": "Korean urban trend term for '눈 깜짝할 사이에 사라짐'.",
+      "example": "A: Did you hear about '순삭' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 147,
+    "word": "혼밥",
+    "pronunciation": "[혼밥]",
+    "part_of_speech": "명사",
+    "chosung": "ㅎㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "다른 사람의 동행 없이 혼자서 식당이나 집에서 식사를 해결하는 현대 1인 가구의 보편적 식사 행태.",
+    "origin": "혼자 밥 먹기를 어색해하던 과거와 달리, 당당하고 편안한 개인의 권리이자 라이프스타일로 정착함.",
+    "examples": [
+      "A: 요즘 다들 '혼밥'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "혼밥",
+      "1인식당",
+      "개인주의"
+    ],
+    "likes": 2999,
+    "dislikes": 16,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "혼자 하는 식사",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Eating Alone",
+      "desc": "Korean urban trend term for '혼자 하는 식사'.",
+      "example": "A: Did you hear about '혼밥' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 148,
+    "word": "혼술",
+    "pronunciation": "[혼술]",
+    "part_of_speech": "명사",
+    "chosung": "ㅎㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "하루 일과를 마치고 집이나 조용한 바에서 홀로 맥주나 와인을 마시며 차분하게 사색과 휴식을 즐기는 음주 문화.",
+    "origin": "회식 중심의 강요된 술자리에서 벗어나 오롯이 자신의 주량과 속도에 맞춰 술을 즐기는 현대인의 취향.",
+    "examples": [
+      "A: 요즘 다들 '혼술'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "혼술",
+      "홈술",
+      "휴식"
+    ],
+    "likes": 3016,
+    "dislikes": 19,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "홀로 마시는 술",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Drinking Alone",
+      "desc": "Korean urban trend term for '홀로 마시는 술'.",
+      "example": "A: Did you hear about '혼술' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 149,
+    "word": "탕진잼",
+    "pronunciation": "[탕진잼]",
+    "part_of_speech": "명사",
+    "chosung": "ㅌㅈㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "소소한 액수의 돈을 가성비 아이템이나 뽑기, 문구류 등에 아낌없이 쓰며 스트레스를 푸는 재미.",
+    "origin": "거창한 저축이 어려운 고물가 시대에 적은 돈으로 즉각적인 소비의 기쁨을 맛보는 젊은 세대의 해소법.",
+    "examples": [
+      "A: 요즘 다들 '탕진잼'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "탕진",
+      "소비재미",
+      "스트레스해소"
+    ],
+    "likes": 3033,
+    "dislikes": 22,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "소소한 소비를 통한 쾌감",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Small Splurge Fun",
+      "desc": "Korean urban trend term for '소소한 소비를 통한 쾌감'.",
+      "example": "A: Did you hear about '탕진잼' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 150,
+    "word": "빌드업",
+    "pronunciation": "[빌드업]",
+    "part_of_speech": "명사",
+    "chosung": "ㅂㄷㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "축구 전술 용어에서 유래하여, 결정적인 웃음이나 반전, 결과를 완성하기 위해 차근차근 복선과 밑밥을 까는 행위.",
+    "origin": "개그맨이나 이야기꾼이 결말의 빵 터지는 한 방을 위해 사전에 치밀하게 상황을 조성하는 과정.",
+    "examples": [
+      "A: 요즘 다들 '빌드업'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "축구용어",
+      "복선",
+      "치밀함"
+    ],
+    "likes": 3050,
+    "dislikes": 25,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "결과를 위한 사전 포석 및 차분한 전개",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Build-up / Setup",
+      "desc": "Korean urban trend term for '결과를 위한 사전 포석 및 차분한 전개'.",
+      "example": "A: Did you hear about '빌드업' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 151,
+    "word": "떡상",
+    "pronunciation": "[떡상]",
+    "part_of_speech": "명사 / 동사",
+    "chosung": "ㄸㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "주식, 코인, 유튜브 조회수, 인지도 등이 로켓처럼 수직으로 폭발적인 급상승을 기록하는 현상.",
+    "origin": "바닥에 머물던 자산이나 크리에이터가 하룻밤 사이에 폭발적인 주목을 받으며 대박을 터뜨렸을 때 씀.",
+    "examples": [
+      "A: 요즘 다들 '떡상'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "급상승",
+      "대박",
+      "수익"
+    ],
+    "likes": 3067,
+    "dislikes": 28,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "가파른 폭등, 폭발적 인기 급상승",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Skyrocketing",
+      "desc": "Korean urban trend term for '가파른 폭등, 폭발적 인기 급상승'.",
+      "example": "A: Did you hear about '떡상' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 152,
+    "word": "떡락",
+    "pronunciation": "[떡락]",
+    "part_of_speech": "명사 / 동사",
+    "chosung": "ㄸㄹ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "가치나 인기, 주가가 낭떠러지 아래로 수직 추락하여 처참하게 폭락하는 절망적인 상황.",
+    "origin": "떡상의 반대말로, 투자 자산이 반토막 나거나 논란으로 인해 인플루언서의 구독자가 급감했을 때 씀.",
+    "examples": [
+      "A: 요즘 다들 '떡락'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "폭락",
+      "추락",
+      "손실"
+    ],
+    "likes": 3084,
+    "dislikes": 31,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "가파른 폭락, 수직 추락",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Plummeting / Crashing",
+      "desc": "Korean urban trend term for '가파른 폭락, 수직 추락'.",
+      "example": "A: Did you hear about '떡락' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 153,
+    "word": "존버",
+    "pronunciation": "[존버]",
+    "part_of_speech": "명사 / 동사 (비속어 유래)",
+    "chosung": "ㅈㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "극심한 고통과 하락장 속에서도 언젠가 반등할 것을 굳게 믿으며 끈질기게 버티고 또 버티는 인내 행위.",
+    "origin": "원래 거친 비속어에서 출발했으나, 어려운 취업 시장이나 주식 하락장에서 버티는 현대인의 생존 구호로 승화됨.",
+    "examples": [
+      "A: 요즘 다들 '존버'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "버티기",
+      "인내",
+      "생존"
+    ],
+    "likes": 3101,
+    "dislikes": 34,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "끝까지 끈기 있게 견딤",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Hodling / Enduring",
+      "desc": "Korean urban trend term for '끝까지 끈기 있게 견딤'.",
+      "example": "A: Did you hear about '존버' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 154,
+    "word": "영끌",
+    "pronunciation": "[영끌]",
+    "part_of_speech": "명사 / 동사",
+    "chosung": "ㅇㄲ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'영혼까지 끌어모으다'의 축약어로, 주택 구입이나 투자를 위해 동원 가능한 모든 대출과 자금을 한계까지 쥐어짬.",
+    "origin": "부동산 급등기에 내 집 마련을 위해 신용대출부터 부모 찬스까지 모든 자금을 그러모았던 사회적 현상.",
+    "examples": [
+      "A: 요즘 다들 '영끌'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "부동산",
+      "대출",
+      "총동원"
+    ],
+    "likes": 3118,
+    "dislikes": 37,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "가능한 모든 자원의 총동원",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Scraping Everything",
+      "desc": "Korean urban trend term for '가능한 모든 자원의 총동원'.",
+      "example": "A: Did you hear about '영끌' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 155,
+    "word": "패닉바잉",
+    "pronunciation": "[패닉바잉]",
+    "part_of_speech": "명사",
+    "chosung": "ㅍㄴㅂㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "가격이 더 오를 것이라는 극심한 공포와 박탈감 때문에 이성적 판단을 잃고 무리하게 추격 매수하는 공황 구매.",
+    "origin": "부동산, 명품, 원자재 시장 등에서 물량이 동나거나 가격이 치솟을 때 군중 심리에 휩쓸리는 현상.",
+    "examples": [
+      "A: 요즘 다들 '패닉바잉'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "공황구매",
+      "추격매수",
+      "불안"
+    ],
+    "likes": 3135,
+    "dislikes": 40,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "공황 심리에 기인한 추격 구매",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Panic Buying",
+      "desc": "Korean urban trend term for '공황 심리에 기인한 추격 구매'.",
+      "example": "A: Did you hear about '패닉바잉' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 156,
+    "word": "빚투",
+    "pronunciation": "[빚투]",
+    "part_of_speech": "명사",
+    "chosung": "ㅂㅌ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'빚내서 투자하기'의 줄임말로, 저금리나 상승장에 편승해 금융권 대출이나 마이너스 통장으로 주식/코인에 베팅함.",
+    "origin": "레버리지를 극대화하여 고수익을 노리지만 하락장에서는 막대한 이자 부담과 깡통 계좌 위험을 초래함.",
+    "examples": [
+      "A: 요즘 다들 '빚투'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "신용대출",
+      "레버리지",
+      "투자"
+    ],
+    "likes": 3152,
+    "dislikes": 43,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "부채를 통한 레버리지 투자",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Debt-fueled Investing",
+      "desc": "Korean urban trend term for '부채를 통한 레버리지 투자'.",
+      "example": "A: Did you hear about '빚투' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 157,
+    "word": "벼락거지",
+    "pronunciation": "[벼락거지]",
+    "part_of_speech": "명사",
+    "chosung": "ㅂㄹㄱㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "자신은 아무런 잘못 없이 성실히 살았으나, 주변 부동산과 주식이 폭등하는 바람에 하루아침에 상대적 빈곤층으로 전락한 사람.",
+    "origin": "자산 시장의 양극화로 인해 노동 소득만 모으던 근로자들이 느끼는 깊은 상대적 박탈감을 꼬집은 신조어.",
+    "examples": [
+      "A: 요즘 다들 '벼락거지'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "상대적박탈감",
+      "자산격차",
+      "양극화"
+    ],
+    "likes": 3169,
+    "dislikes": 46,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "자산 격차로 인한 상대적 빈곤층",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Sudden Pauper",
+      "desc": "Korean urban trend term for '자산 격차로 인한 상대적 빈곤층'.",
+      "example": "A: Did you hear about '벼락거지' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 158,
+    "word": "숏폼 피로증",
+    "pronunciation": "[숏폼 피로증]",
+    "part_of_speech": "명사",
+    "chosung": "ㅅㅍㅍㄹㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "1분 미만의 도파민 폭탄 릴스, 쇼츠를 수시간 동안 넋 놓고 보다가 찾아오는 극심한 뇌 피로와 집중력 저하.",
+    "origin": "짧은 자극에 뇌가 익숙해져 텍스트 독서나 긴 영화를 진득하게 감상하지 못하는 디지털 후유증.",
+    "examples": [
+      "A: 요즘 다들 '숏폼 피로증'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "디지털피로",
+      "숏폼",
+      "팝콘브레인"
+    ],
+    "likes": 3186,
+    "dislikes": 49,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "초단편 영상 과다 소비 피로",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Shorts Fatigue",
+      "desc": "Korean urban trend term for '초단편 영상 과다 소비 피로'.",
+      "example": "A: Did you hear about '숏폼 피로증' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 159,
+    "word": "네카라쿠배",
+    "pronunciation": "[네카라쿠배]",
+    "part_of_speech": "명사 / 축약어",
+    "chosung": "ㄴㅋㄹㅋㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "대한민국 IT 개발자들이 가장 입사하고 싶어 하는 선망의 5대 빅테크 기업(네이버, 카카오, 라인, 쿠팡, 배달의민족).",
+    "origin": "개발자 연봉 인상과 처우 개선 붐을 이끌며 IT 취업 및 이직 시장의 표준 지표가 된 기업 연합 약칭.",
+    "examples": [
+      "A: 요즘 다들 '네카라쿠배'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "개발자",
+      "빅테크",
+      "취업선망"
+    ],
+    "likes": 3203,
+    "dislikes": 52,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "국내 5대 대표 IT 혁신기업군",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Top Korean Tech 5",
+      "desc": "Korean urban trend term for '국내 5대 대표 IT 혁신기업군'.",
+      "example": "A: Did you hear about '네카라쿠배' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 160,
+    "word": "당토야",
+    "pronunciation": "[당토야]",
+    "part_of_speech": "명사 / 축약어",
+    "chosung": "ㄷㅌㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "네카라쿠배의 뒤를 잇는 차세대 유니콘 스타트업 3대장인 당근, 토스, 야놀자의 앞 글자를 딴 약칭.",
+    "origin": "급성장하는 서비스 플랫폼과 파격적인 조직 문화로 개발자와 기획자들의 이직 1순위로 떠오른 기업군.",
+    "examples": [
+      "A: 요즘 다들 '당토야'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "스타트업",
+      "유니콘",
+      "플랫폼"
+    ],
+    "likes": 3220,
+    "dislikes": 15,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "차세대 3대 유니콘 플랫폼",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Next Tech Trio",
+      "desc": "Korean urban trend term for '차세대 3대 유니콘 플랫폼'.",
+      "example": "A: Did you hear about '당토야' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 161,
+    "word": "덕통사고",
+    "pronunciation": "[덕통사고]",
+    "part_of_speech": "명사",
+    "chosung": "ㄷㅌㅅㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "교통사고처럼 예기치 못한 순간에 갑작스럽고 강렬하게 어떤 아이돌, 캐릭터, 작품의 열혈 팬(덕후)이 되어버림.",
+    "origin": "우연히 본 무대 영상이나 애니메이션 한 장면에 심장을 저격당해 돌이킬 수 없는 팬 활동을 시작하게 된 계기.",
+    "examples": [
+      "A: 요즘 다들 '덕통사고'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "입덕",
+      "팬덤",
+      "심쿵"
+    ],
+    "likes": 3237,
+    "dislikes": 18,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "예기치 못한 운명적 팬덤 입문",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Fandom Accident",
+      "desc": "Korean urban trend term for '예기치 못한 운명적 팬덤 입문'.",
+      "example": "A: Did you hear about '덕통사고' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 162,
+    "word": "성덕",
+    "pronunciation": "[성덕]",
+    "part_of_speech": "명사",
+    "chosung": "ㅅㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'성공한 덕후'의 줄임말로, 자신이 동경하고 사랑하던 우상이나 취미 분야에서 성공하여 직접 함께 작업하게 된 사람.",
+    "origin": "좋아하던 만화가의 어시스턴트가 되거나, 최애 아이돌에게 곡을 써주어 꿈을 이룬 열정적인 팬.",
+    "examples": [
+      "A: 요즘 다들 '성덕'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "성공한덕후",
+      "꿈실현",
+      "열정"
+    ],
+    "likes": 3254,
+    "dislikes": 21,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "꿈을 이룬 열정적 마니아",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Successful Fan / Stan",
+      "desc": "Korean urban trend term for '꿈을 이룬 열정적 마니아'.",
+      "example": "A: Did you hear about '성덕' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 163,
+    "word": "어덕행덕",
+    "pronunciation": "[어덕행덕]",
+    "part_of_speech": "사자성어형 밈",
+    "chosung": "ㅇㄷㅎㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'어차피 덕질할 거 행복하게 덕질하자'의 줄임말로, 팬 활동 중 스트레스 받지 말고 즐겁게 사랑하자는 모토.",
+    "origin": "팬덤 내의 분쟁이나 순위 경쟁에 집착하지 않고, 자신이 좋아하는 대상을 통해 삶의 활력을 얻자는 힐링 구호.",
+    "examples": [
+      "A: 요즘 다들 '어덕행덕'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "행복덕질",
+      "팬덤철학",
+      "힐링"
+    ],
+    "likes": 3271,
+    "dislikes": 24,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "행복과 긍정을 지향하는 팬 활동",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Happy Stan Life",
+      "desc": "Korean urban trend term for '행복과 긍정을 지향하는 팬 활동'.",
+      "example": "A: Did you hear about '어덕행덕' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 164,
+    "word": "입덕",
+    "pronunciation": "[입덕]",
+    "part_of_speech": "명사 / 동사",
+    "chosung": "ㅇㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "어떤 대상(아이돌, 배우, 장르, 게임 등)에 깊은 호감을 느끼고 본격적으로 팬 활동의 문(門)으로 들어감.",
+    "origin": "불교의 '입도(入道)'에서 유래하여 마니아의 세계에 첫 발을 내딛는 흥분되는 순간을 뜻함.",
+    "examples": [
+      "A: 요즘 다들 '입덕'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "팬덤입문",
+      "덕질시작",
+      "매료"
+    ],
+    "likes": 3288,
+    "dislikes": 27,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "팬덤 활동의 시작",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Becoming a Stan / Fan",
+      "desc": "Korean urban trend term for '팬덤 활동의 시작'.",
+      "example": "A: Did you hear about '입덕' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 165,
+    "word": "탈덕",
+    "pronunciation": "[탈덕]",
+    "part_of_speech": "명사 / 동사",
+    "chosung": "ㅌㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "오랫동안 열정적으로 이어오던 팬(덕후) 활동을 청산하고 일반인의 평범한 일상으로 되돌아감.",
+    "origin": "아이돌의 구설수, 환멸, 혹은 자연스러운 관심의 이동으로 인해 정들었던 팬덤을 떠나는 행위.",
+    "examples": [
+      "A: 요즘 다들 '탈덕'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "팬덤이탈",
+      "정리",
+      "일상복귀"
+    ],
+    "likes": 3305,
+    "dislikes": 30,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "팬덤 활동의 중단 및 종료",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Leaving the Fandom",
+      "desc": "Korean urban trend term for '팬덤 활동의 중단 및 종료'.",
+      "example": "A: Did you hear about '탈덕' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 166,
+    "word": "휴덕",
+    "pronunciation": "[휴덕]",
+    "part_of_speech": "명사 / 동사",
+    "chosung": "ㅎㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "학업, 취업, 바쁜 생업 등으로 인해 팬 활동을 잠시 쉬어가지만, 결코 영원히 탈덕한 것은 아닌 일시 휴지기.",
+    "origin": "'휴덕은 있어도 탈덕은 없다'는 격언처럼, 여건이 좋아지면 언제든 우상에게로 복귀할 준비가 되어 있는 상태.",
+    "examples": [
+      "A: 요즘 다들 '휴덕'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "임시휴식",
+      "컴백예고",
+      "팬심보존"
+    ],
+    "likes": 3322,
+    "dislikes": 33,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "팬덤 활동의 일시적 휴식",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Taking a Fan Break",
+      "desc": "Korean urban trend term for '팬덤 활동의 일시적 휴식'.",
+      "example": "A: Did you hear about '휴덕' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 167,
+    "word": "홈마",
+    "pronunciation": "[홈마]",
+    "part_of_speech": "명사",
+    "chosung": "ㅎㅁ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'홈페이지 마스터'의 줄임말로, 대포 카메라를 들고 아이돌의 스케줄을 따라다니며 고화질 사진과 직캠을 공유하는 팬.",
+    "origin": "기획사 공식 사진보다 뛰어난 보정과 애정 담긴 시선으로 K-POP 비주얼 문화를 이끄는 핵심 크리에이터.",
+    "examples": [
+      "A: 요즘 다들 '홈마'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "대포카메라",
+      "직캠",
+      "아이돌사진"
+    ],
+    "likes": 3339,
+    "dislikes": 36,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "팬페이지 전문 운영자",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Fansite Master",
+      "desc": "Korean urban trend term for '팬페이지 전문 운영자'.",
+      "example": "A: Did you hear about '홈마' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 168,
+    "word": "포카",
+    "pronunciation": "[포카]",
+    "part_of_speech": "명사",
+    "chosung": "ㅍㅋ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "K-POP 앨범이나 굿즈에 무작위(랜덤)로 한두 장씩 포함되어 있는 명함 크기의 아이돌 셀카 사진 카드.",
+    "origin": "최애 멤버의 희귀한 포토카드를 얻기 위해 앨범을 수십 장씩 구매하거나 교환 및 거래하는 팬덤의 핵심 굿즈.",
+    "examples": [
+      "A: 요즘 다들 '포카'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "포토카드",
+      "굿즈",
+      "수집"
+    ],
+    "likes": 3356,
+    "dislikes": 39,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "소장용 미니 사진 카드",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Photocard / PC",
+      "desc": "Korean urban trend term for '소장용 미니 사진 카드'.",
+      "example": "A: Did you hear about '포카' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 169,
+    "word": "예절샷",
+    "pronunciation": "[예절샷]",
+    "part_of_speech": "명사",
+    "chosung": "ㅇㅈㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "맛있는 음식을 먹기 전, 최애 아이돌의 포토카드나 인형을 음식 옆에 두고 인증 사진을 찍는 팬덤의 식사 예절.",
+    "origin": "SNS에 음식 사진만 올리는 대신, '최애와 함께 식사한다'는 의미를 담아 정성스레 촬영하는 귀여운 문화.",
+    "examples": [
+      "A: 요즘 다들 '예절샷'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "포카인증",
+      "팬덤예절",
+      "SNS인증"
+    ],
+    "likes": 3373,
+    "dislikes": 42,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "포토카드 동반 식사 인증 사진",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Fandom Etiquette Shot",
+      "desc": "Korean urban trend term for '포토카드 동반 식사 인증 사진'.",
+      "example": "A: Did you hear about '예절샷' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 170,
+    "word": "볼콕",
+    "pronunciation": "[볼콕]",
+    "part_of_speech": "명사 / 포즈",
+    "chosung": "ㅂㅋ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "검지 손가락 끝으로 자신의 부드러운 볼을 살짝 찌르며 귀여움을 한껏 발산하는 대표적인 애교 사진 포즈.",
+    "origin": "아이돌 팬사인회나 포토이즘 셀프 사진관에서 최애들이 가장 많이 선보이는 러블리 시그니처 제스처.",
+    "examples": [
+      "A: 요즘 다들 '볼콕'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "포즈",
+      "애교",
+      "사진관"
+    ],
+    "likes": 3390,
+    "dislikes": 45,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "볼 찌르기 귀여운 포즈",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Cheek-poke Pose",
+      "desc": "Korean urban trend term for '볼 찌르기 귀여운 포즈'.",
+      "example": "A: Did you hear about '볼콕' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 171,
+    "word": "갸루피스",
+    "pronunciation": "[갸루피스]",
+    "part_of_speech": "명사 / 포즈 밈",
+    "chosung": "ㄱㄹㅍㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "손바닥이 위를 향하도록 손목을 180도 뒤집어 V(브이) 사인을 만드는 1990년대 일본 갸루 스타일 포즈.",
+    "origin": "아이브의 일본인 멤버 레이가 셀카에서 유행시키며 한국 K-POP 아이돌과 학생들 사이에 선풍적 유행을 일으킴.",
+    "examples": [
+      "A: 요즘 다들 '갸루피스'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "아이브레이",
+      "브이포즈",
+      "Y2K"
+    ],
+    "likes": 3407,
+    "dislikes": 48,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "뒤집은 V자 손가락 포즈",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Gyaru Peace",
+      "desc": "Korean urban trend term for '뒤집은 V자 손가락 포즈'.",
+      "example": "A: Did you hear about '갸루피스' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 172,
+    "word": "체념형 소비",
+    "pronunciation": "[체념형 소비]",
+    "part_of_speech": "명사",
+    "chosung": "ㅊㄴㅎㅅㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "치솟는 부동산 가격으로 평생 저축해도 내 집 마련이 불가능해지자, 차라리 당장의 고급 미식이나 여행에 돈을 쓰는 행태.",
+    "origin": "미래에 대한 거창한 희망을 포기하는 대신 현재의 확실한 감각적 만족과 행복을 구매하려는 씁쓸한 세태 반영.",
+    "examples": [
+      "A: 요즘 다들 '체념형 소비'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "오마카세",
+      "현실체념",
+      "현재만족"
+    ],
+    "likes": 3424,
+    "dislikes": 51,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "미래 포기형 현재 소비",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Resigned Consumption",
+      "desc": "Korean urban trend term for '미래 포기형 현재 소비'.",
+      "example": "A: Did you hear about '체념형 소비' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 173,
+    "word": "모에모에뀽",
+    "pronunciation": "[모에모에뀽]",
+    "part_of_speech": "감탄사 / 애교 밈",
+    "chosung": "ㅁㅇㅁㅇㄲ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "음식이나 사물이 더 맛있고 사랑스러워지도록 주문을 거는 일본 메이드 카페 유래의 극강 애교 구호.",
+    "origin": "다나카(김경욱) 캐릭터가 유튜브 콘텐츠에서 구수하게 시전하며 대중적인 웃음과 패러디를 유발함.",
+    "examples": [
+      "A: 요즘 다들 '모에모에뀽'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "다나카",
+      "애교주문",
+      "오이시쿠나레"
+    ],
+    "likes": 3441,
+    "dislikes": 54,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "맛있어지는 사랑의 주문",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Moe Moe Kyun",
+      "desc": "Korean urban trend term for '맛있어지는 사랑의 주문'.",
+      "example": "A: Did you hear about '모에모에뀽' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 174,
+    "word": "잘파세대",
+    "pronunciation": "[잘파세대]",
+    "part_of_speech": "명사 / 인구학",
+    "chosung": "ㅈㅍㅅㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "1990년대 중반~2000년대 초반 출생한 Z세대와 2010년 이후 태어난 알파(Alpha)세대를 한데 묶은 디지털 완전 원주민.",
+    "origin": "스마트폰과 AI를 태어날 때부터 자연스럽게 접하여 텍스트보다 숏폼 영상과 메타버스에 가장 익숙한 미래 주역.",
+    "examples": [
+      "A: 요즘 다들 '잘파세대'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "Z세대",
+      "알파세대",
+      "디지털원주민"
+    ],
+    "likes": 3458,
+    "dislikes": 17,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "Z세대 및 알파세대 융합층",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Zalpha Generation",
+      "desc": "Korean urban trend term for 'Z세대 및 알파세대 융합층'.",
+      "example": "A: Did you hear about '잘파세대' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 175,
+    "word": "갓기",
+    "pronunciation": "[갓기]",
+    "part_of_speech": "명사",
+    "chosung": "ㄱㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "신(God)+아기의 합성어로, 나이는 10대나 막내로 어리지만 실력, 비주얼, 무대 장악력은 신의 경지에 오른 아이돌.",
+    "origin": "어린 나이에도 불구하고 프로페셔널한 아우라를 뿜어내는 완성형 천재 유망주를 찬양할 때 쓰는 말.",
+    "examples": [
+      "A: 요즘 다들 '갓기'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "장원영",
+      "완성형아이돌",
+      "천재유망주"
+    ],
+    "likes": 3475,
+    "dislikes": 20,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "어리지만 완성된 실력을 갖춘 인재",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "God-baby / Wonder Prodigy",
+      "desc": "Korean urban trend term for '어리지만 완성된 실력을 갖춘 인재'.",
+      "example": "A: Did you hear about '갓기' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 176,
+    "word": "웅니",
+    "pronunciation": "[웅니]",
+    "part_of_speech": "명사 / 애교 호칭",
+    "chosung": "ㅇㄴ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "언니를 혀 짧은 소리처럼 앙증맞고 콧소리 섞어 부르는 표현으로, 좋아하는 여성 선배나 연예인을 향한 무한 애정 표현.",
+    "origin": "트위터와 인스타그램에서 걸크러시를 유발하는 멋진 여성 연예인을 '우리 웅니 최고'라며 칭송할 때 애용됨.",
+    "examples": [
+      "A: 요즘 다들 '웅니'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "언니",
+      "걸크러시",
+      "애교호칭"
+    ],
+    "likes": 3492,
+    "dislikes": 23,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "친근하고 사랑스러운 언니 호칭",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "My Sweet Unnie",
+      "desc": "Korean urban trend term for '친근하고 사랑스러운 언니 호칭'.",
+      "example": "A: Did you hear about '웅니' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 177,
+    "word": "짱친",
+    "pronunciation": "[짱친]",
+    "part_of_speech": "명사",
+    "chosung": "ㅉㅊ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'짱 친한 친구'의 줄임말로, 비밀 없이 속마음을 털어놓을 수 있는 인생 최고의 베스트 프렌드를 뜻함.",
+    "origin": "베프, 절친과 맥락을 같이하며 학창 시절부터 두터운 우정을 쌓은 둘도 없는 단짝을 가리킴.",
+    "examples": [
+      "A: 요즘 다들 '짱친'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "베스트프렌드",
+      "절친",
+      "우정"
+    ],
+    "likes": 3509,
+    "dislikes": 26,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "가장 친한 단짝 친구",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Best Friend Forever",
+      "desc": "Korean urban trend term for '가장 친한 단짝 친구'.",
+      "example": "A: Did you hear about '짱친' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 178,
+    "word": "유잼",
+    "pronunciation": "[유잼]",
+    "part_of_speech": "명사 / 형용사",
+    "chosung": "ㅇㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'재미가 넘친다(有잼)'는 뜻으로, 지루하고 썰렁한 '노잼'의 정반대 자리에 서서 빵 터지는 빅재미를 보장함.",
+    "origin": "예능 프로그램이나 토크쇼에서 쉬지 않고 폭소를 자아내는 멤버에게 '역시 유잼봇'이라며 칭찬할 때 사용.",
+    "examples": [
+      "A: 요즘 다들 '유잼'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "빅재미",
+      "유머",
+      "폭소"
+    ],
+    "likes": 3526,
+    "dislikes": 29,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "재미가 매우 풍부함",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Super Fun / Hilarious",
+      "desc": "Korean urban trend term for '재미가 매우 풍부함'.",
+      "example": "A: Did you hear about '유잼' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 179,
+    "word": "당모치",
+    "pronunciation": "[당모치]",
+    "part_of_speech": "명언형 신조어",
+    "chosung": "ㄷㅁㅊ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'당연히 모든 치킨은 옳다'의 머리글자 약어로, 치킨에 대한 국민적 사랑과 불패의 신뢰를 유머러스하게 표현함.",
+    "origin": "프라이드, 양념, 간장 가릴 것 없이 치킨이라면 어떤 브랜드나 메뉴든 무조건 환영한다는 치킨 찬가.",
+    "examples": [
+      "A: 요즘 다들 '당모치'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "치킨",
+      "야식",
+      "국민음식"
+    ],
+    "likes": 3543,
+    "dislikes": 32,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "치킨에 대한 무조건적 신뢰",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "All Chicken is Right",
+      "desc": "Korean urban trend term for '치킨에 대한 무조건적 신뢰'.",
+      "example": "A: Did you hear about '당모치' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 180,
+    "word": "팩트체크",
+    "pronunciation": "[팩트체크]",
+    "part_of_speech": "명사 / 동사",
+    "chosung": "ㅍㅌㅊㅋ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "각종 소문, 뉴스, 논란거리에 대해 객관적 데이터와 공인된 증거를 토대로 사실관계를 낱낱이 검증함.",
+    "origin": "가짜 뉴스와 정보 오염이 범람하는 시대에 뜬소문에 휘둘리지 않고 진실을 규명하려는 필수적 지적 작업.",
+    "examples": [
+      "A: 요즘 다들 '팩트체크'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "사실검증",
+      "진실규명",
+      "증거"
+    ],
+    "likes": 3560,
+    "dislikes": 35,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "객관적 사실관계 검증",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Fact Checking",
+      "desc": "Korean urban trend term for '객관적 사실관계 검증'.",
+      "example": "A: Did you hear about '팩트체크' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 181,
+    "word": "귀차니즘",
+    "pronunciation": "[귀차니즘]",
+    "part_of_speech": "명사",
+    "chosung": "ㄱㅊㄴㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "만사가 귀찮아서 침대에 누워 꼼짝달싹도 하기 싫어하는 만성적 무기력과 귀찮음을 사상처럼 빗댄 말.",
+    "origin": "2000년대 초반 스노우캣 만화 등에서 유래하여 일상에서 에너지를 아끼려는 현대인의 영원한 생활 태도.",
+    "examples": [
+      "A: 요즘 다들 '귀차니즘'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "귀찮음",
+      "침대생활",
+      "게으름"
+    ],
+    "likes": 3577,
+    "dislikes": 38,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "매사에 의욕이 없고 귀찮아함",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Lazyism / Couch-potatoing",
+      "desc": "Korean urban trend term for '매사에 의욕이 없고 귀찮아함'.",
+      "example": "A: Did you hear about '귀차니즘' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 182,
+    "word": "멍때리기",
+    "pronunciation": "[멍때리기]",
+    "part_of_speech": "명사 / 힐링",
+    "chosung": "ㅁㄸㄹㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "아무런 생각이나 스마트폰 자극 없이 뇌를 완전히 멈추고 허공이나 모닥불(불멍), 강물(물멍)을 응시하는 휴식.",
+    "origin": "정보 과부하에 시달리는 현대인들을 위해 실제 '멍때리기 대회'까지 열릴 정도로 공인된 멘탈 디톡스 요법.",
+    "examples": [
+      "A: 요즘 다들 '멍때리기'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "불멍",
+      "물멍",
+      "뇌휴식"
+    ],
+    "likes": 3594,
+    "dislikes": 41,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "아무 생각 없이 쉬는 행위",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Spacing Out / Zone-out",
+      "desc": "Korean urban trend term for '아무 생각 없이 쉬는 행위'.",
+      "example": "A: Did you hear about '멍때리기' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 183,
+    "word": "불금",
+    "pronunciation": "[불금]",
+    "part_of_speech": "명사",
+    "chosung": "ㅂㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "주말을 바로 앞둔 금요일 저녁, 스트레스를 활활 태우며 신나게 음주가무나 여가를 즐기는 열정의 밤.",
+    "origin": "주 5일 근무제가 정착되면서 토요일 출근 부담이 사라진 직장인과 대학생들의 가장 설레는 요일 대명사.",
+    "examples": [
+      "A: 요즘 다들 '불금'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "금요일밤",
+      "주말시작",
+      "스트레스해소"
+    ],
+    "likes": 3611,
+    "dislikes": 44,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "신나게 즐기는 금요일 밤",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "TGIF / Fire Friday",
+      "desc": "Korean urban trend term for '신나게 즐기는 금요일 밤'.",
+      "example": "A: Did you hear about '불금' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 184,
+    "word": "치맥",
+    "pronunciation": "[치맥]",
+    "part_of_speech": "명사",
+    "chosung": "ㅊㅁ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "바삭한 치킨과 시원한 생맥주의 환상적인 궁합을 일컫는 대한민국 대표 식음료 문화이자 K-푸드 수출 단어.",
+    "origin": "드라마 '별에서 온 그대'를 통해 중국과 전 세계로 퍼져나가 한국을 방문하는 외국인들의 필수 체험 코스가 됨.",
+    "examples": [
+      "A: 요즘 다들 '치맥'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "치킨맥주",
+      "야식",
+      "K푸드"
+    ],
+    "likes": 3628,
+    "dislikes": 47,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "치킨과 맥주의 조합",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Chimaek (Chicken & Beer)",
+      "desc": "Korean urban trend term for '치킨과 맥주의 조합'.",
+      "example": "A: Did you hear about '치맥' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 185,
+    "word": "패스트 힐링",
+    "pronunciation": "[패스트 힐링]",
+    "part_of_speech": "명사",
+    "chosung": "ㅍㅅㅌㅎㄹ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "바쁜 일과 중 자투리 시간(점심시간 30분 등)을 쪼개어 수면 카페나 안마의자에서 초고속으로 피로를 푸는 휴식.",
+    "origin": "긴 휴가를 내기 어려운 도시 직장인들이 도심 속에서 신속하게 에너지를 충전하는 현대형 재충전 트렌드.",
+    "examples": [
+      "A: 요즘 다들 '패스트 힐링'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "수면카페",
+      "안마의자",
+      "자투리휴식"
+    ],
+    "likes": 3645,
+    "dislikes": 50,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "단시간 집중 재충전 휴식",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Fast Healing",
+      "desc": "Korean urban trend term for '단시간 집중 재충전 휴식'.",
+      "example": "A: Did you hear about '패스트 힐링' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 186,
+    "word": "반퇴족",
+    "pronunciation": "[반퇴족]",
+    "part_of_speech": "명사 / 고용",
+    "chosung": "ㅂㅌㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "주된 직장에서 정년이나 명예퇴직을 한 후에도, 완전히 은퇴하지 못하고 생계나 활력을 위해 재취업 전선에 뛰어드는 세대.",
+    "origin": "100세 장수 시대와 노후 불안이 겹치면서 5060 퇴직자들이 인생 2막의 일자리를 찾아 나서는 사회 현상.",
+    "examples": [
+      "A: 요즘 다들 '반퇴족'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "퇴직후재취업",
+      "인생2막",
+      "시니어고용"
+    ],
+    "likes": 3662,
+    "dislikes": 53,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "퇴직 후 재취업 근로자",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Semi-retired Worker",
+      "desc": "Korean urban trend term for '퇴직 후 재취업 근로자'.",
+      "example": "A: Did you hear about '반퇴족' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 187,
+    "word": "회전문 관객",
+    "pronunciation": "[회전문 관객]",
+    "part_of_speech": "명사 / 문화",
+    "chosung": "ㅎㅈㅁㄱㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "마음에 드는 뮤지컬, 연극, 콘서트, 영화를 보기 위해 티켓을 끊고 또 끊으며 극장을 회전문 돌듯 반복 방문하는 관객.",
+    "origin": "배우별 캐스팅 차이나 디테일한 무대 연출을 온전히 만끽하기 위해 N차 관람을 아끼지 않는 충성도 높은 마니아.",
+    "examples": [
+      "A: 요즘 다들 '회전문 관객'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "N차관람",
+      "뮤지컬",
+      "충성관객"
+    ],
+    "likes": 3679,
+    "dislikes": 16,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "동일 공연 반복 관람 관객",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Revolving Door Audience",
+      "desc": "Korean urban trend term for '동일 공연 반복 관람 관객'.",
+      "example": "A: Did you hear about '회전문 관객' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 188,
+    "word": "이모티콘 과소비",
+    "pronunciation": "[이모티콘 과소비]",
+    "part_of_speech": "명사",
+    "chosung": "ㅇㅁㅌㅋㄱㅅㅂ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "개당 2~3천 원 하는 카카오톡 신상 이모티콘이 귀엽다는 이유로 수십 개씩 망설임 없이 결제해 모으는 행위.",
+    "origin": "작은 금액이지만 누적되면 상당한 지출이 되는 모바일 메신저 세대의 귀여운 소확행형 과소비.",
+    "examples": [
+      "A: 요즘 다들 '이모티콘 과소비'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "카톡임티",
+      "소액결제",
+      "취향저격"
+    ],
+    "likes": 3696,
+    "dislikes": 19,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "모바일 감정 스티커 과다 구매",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Emoticon Overspending",
+      "desc": "Korean urban trend term for '모바일 감정 스티커 과다 구매'.",
+      "example": "A: Did you hear about '이모티콘 과소비' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 189,
+    "word": "랜선 집사",
+    "pronunciation": "[랜선 집사]",
+    "part_of_speech": "명사",
+    "chosung": "ㄹㅅㅈㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "주거 환경이나 알레르기 등으로 반려동물을 직접 키우지 못해, 유튜브나 인스타로 남의 고양이를 흐뭇하게 지켜보는 팬.",
+    "origin": "퇴근길 스마트폰 화면 속 귀여운 고양이 영상을 보며 마치 자신이 집사인 양 대리만족과 힐링을 얻는 사람.",
+    "examples": [
+      "A: 요즘 다들 '랜선 집사'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "고양이유튜브",
+      "대리만족",
+      "힐링"
+    ],
+    "likes": 3713,
+    "dislikes": 22,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "온라인 반려동물 대리 애호가",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Cyber Cat Butler",
+      "desc": "Korean urban trend term for '온라인 반려동물 대리 애호가'.",
+      "example": "A: Did you hear about '랜선 집사' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 190,
+    "word": "랜선 이모",
+    "pronunciation": "[랜선 이모]",
+    "part_of_speech": "명사",
+    "chosung": "ㄹㅅㅇㅁ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "SNS나 방송에 출연하는 사랑스러운 아기나 어린이들의 일상을 지켜보며 이모처럼 애틋하게 응원과 애정을 보내는 팬.",
+    "origin": "'슈퍼맨이 돌아왔다'나 인스타 키즈 스타들의 성장 과정을 흐뭇하게 랜선으로 지켜보는 랜선 삼촌/이모 팬덤.",
+    "examples": [
+      "A: 요즘 다들 '랜선 이모'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "랜선육아",
+      "힐링키즈",
+      "흐뭇"
+    ],
+    "likes": 3730,
+    "dislikes": 25,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "온라인 조카 팬덤",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Cyber Aunt",
+      "desc": "Korean urban trend term for '온라인 조카 팬덤'.",
+      "example": "A: Did you hear about '랜선 이모' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 191,
+    "word": "세젤귀",
+    "pronunciation": "[세젤귀]",
+    "part_of_speech": "축약어",
+    "chosung": "ㅅㅈㄱ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'세상에서 제일 귀엽다'의 줄임말로, 아기나 반려동물, 최애 아이돌의 극강의 사랑스러움을 극찬할 때 쓰는 말.",
+    "origin": "어떤 미사여구로도 다 담아낼 수 없을 만큼 심장을 녹아내리게 만드는 치명적인 귀여움에 바치는 찬사.",
+    "examples": [
+      "A: 요즘 다들 '세젤귀'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "최고귀여움",
+      "심쿵",
+      "애정"
+    ],
+    "likes": 3747,
+    "dislikes": 28,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "세상에서 가장 귀여움",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Cutest in the World",
+      "desc": "Korean urban trend term for '세상에서 가장 귀여움'.",
+      "example": "A: Did you hear about '세젤귀' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 192,
+    "word": "세젤예",
+    "pronunciation": "[세젤예]",
+    "part_of_speech": "축약어",
+    "chosung": "ㅅㅈㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'세상에서 제일 예쁘다'의 줄임말로, 눈부신 미모나 아름다운 자태를 뽐내는 사람을 향해 아낌없이 던지는 찬탄.",
+    "origin": "여신급 미모를 자랑하는 연예인이나 특별한 날 화사하게 단장한 친구의 사진에 댓글로 달아주는 찬사.",
+    "examples": [
+      "A: 요즘 다들 '세젤예'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "여신미모",
+      "눈부심",
+      "칭찬"
+    ],
+    "likes": 3764,
+    "dislikes": 31,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "세상에서 가장 아름다움",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Prettiest in the World",
+      "desc": "Korean urban trend term for '세상에서 가장 아름다움'.",
+      "example": "A: Did you hear about '세젤예' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 193,
+    "word": "할많하않",
+    "pronunciation": "[할많하않]",
+    "part_of_speech": "축약어 / 관용구",
+    "chosung": "ㅎㅁㅎㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "'할 말은 많지만 하지 않겠다'의 줄임말로, 너무 어이가 없거나 상대할 가치가 없어 침묵을 지키겠다는 의사표시.",
+    "origin": "속에 천불이 나고 따질 말이 수백 가지이지만, 더 말해봤자 입만 아프고 감정만 소모될 때 한숨 쉬며 내뱉는 말.",
+    "examples": [
+      "A: 요즘 다들 '할많하않'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "침묵",
+      "한숨",
+      "체념"
+    ],
+    "likes": 3781,
+    "dislikes": 34,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "더 이상 언급하지 않겠다는 침묵 선언",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Much to Say, Won't Say",
+      "desc": "Korean urban trend term for '더 이상 언급하지 않겠다는 침묵 선언'.",
+      "example": "A: Did you hear about '할많하않' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 194,
+    "word": "어그로꾼",
+    "pronunciation": "[어그로꾼]",
+    "part_of_speech": "명사 (은어)",
+    "chosung": "ㅇㄱㄹㄲ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "온라인 게시판이나 게임에서 남들의 분노와 관심을 유발하기 위해 고의로 자극적이고 악의적인 글을 올리는 분란 유발자.",
+    "origin": "게임 속 적의 주의를 끄는 'Aggro'와 사람을 뜻하는 '꾼'이 결합되어 온라인 생태계를 흐리는 트롤을 지칭.",
+    "examples": [
+      "A: 요즘 다들 '어그로꾼'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "분란유발",
+      "악플러",
+      "관종"
+    ],
+    "likes": 3798,
+    "dislikes": 37,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "고의적 분란 및 관심 유발자",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Aggro Troll",
+      "desc": "Korean urban trend term for '고의적 분란 및 관심 유발자'.",
+      "example": "A: Did you hear about '어그로꾼' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 195,
+    "word": "빛의 속도",
+    "pronunciation": "[빛의 속도]",
+    "part_of_speech": "비유적 수식어",
+    "chosung": "ㅂㅇㅅㄷ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "어떤 작업이나 반응, 품절, 결제 속도가 상상을 초월할 만큼 번개처럼 신속하게 끝났음을 비유하는 말.",
+    "origin": "인기 콘서트 티켓팅이 1초 만에 마감되거나, 칼퇴근하는 직장인의 발걸음이 눈 깜짝할 새 사라질 때 씀.",
+    "examples": [
+      "A: 요즘 다들 '빛의 속도'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "초고속",
+      "티켓팅",
+      "칼퇴"
+    ],
+    "likes": 3815,
+    "dislikes": 40,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "극도로 신속한 처리 속도",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Speed of Light",
+      "desc": "Korean urban trend term for '극도로 신속한 처리 속도'.",
+      "example": "A: Did you hear about '빛의 속도' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 196,
+    "word": "자웅동체",
+    "pronunciation": "[자웅동체]",
+    "part_of_speech": "비유적 은어",
+    "chosung": "ㅈㅇㄷㅊ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "생물학적 용어를 차용하여, 하루 종일 한시도 떨어지지 않고 붙어 다니며 환상의 호흡을 자랑하는 단짝 둘을 익살스럽게 칭함.",
+    "origin": "취향도 똑같고 밥도 항상 같이 먹어 마치 한 몸처럼 움직이는 단짝 친구나 사내 콤비를 놀리는 말.",
+    "examples": [
+      "A: 요즘 다들 '자웅동체'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "단짝콤비",
+      "찰떡궁합",
+      "한몸"
+    ],
+    "likes": 3832,
+    "dislikes": 43,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "항상 함께 다니는 찰떡 콤비",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Inseparable Duo",
+      "desc": "Korean urban trend term for '항상 함께 다니는 찰떡 콤비'.",
+      "example": "A: Did you hear about '자웅동체' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 197,
+    "word": "현타존",
+    "pronunciation": "[현타존]",
+    "part_of_speech": "명사",
+    "chosung": "ㅎㅌㅈ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "화려한 축제나 파티, 밤샘 야근, 과소비가 끝난 직후 차가운 현실을 자각하며 깊은 허탈감이 밀려오는 물리적·심리적 공간.",
+    "origin": "새벽 첫차 지하철 승강장이나 결제 영수증 앞처럼 '내가 지금 뭐 하고 있나' 회의감이 엄습하는 구역.",
+    "examples": [
+      "A: 요즘 다들 '현타존'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "현자타임",
+      "허탈감",
+      "현실자각"
+    ],
+    "likes": 3849,
+    "dislikes": 46,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "현실 자각의 허탈한 순간과 장소",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Reality Check Zone",
+      "desc": "Korean urban trend term for '현실 자각의 허탈한 순간과 장소'.",
+      "example": "A: Did you hear about '현타존' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 198,
+    "word": "디지털 디톡스",
+    "pronunciation": "[디지털 디톡스]",
+    "part_of_speech": "명사 / 웰빙",
+    "chosung": "ㄷㅈㅌㄷㅌㅅ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "스마트폰, SNS, 전자기기의 화면을 일정 기간 완전히 끄고 현실의 자연과 독서, 인간관계에 몰입하는 뇌 휴식 요법.",
+    "origin": "도파민 중독과 숏폼 피로증에 지친 현대인들이 산속 리트릿이나 폴더폰 사용을 통해 뇌의 평온을 되찾는 웰빙 트렌드.",
+    "examples": [
+      "A: 요즘 다들 '디지털 디톡스'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "뇌청소",
+      "탈스마트폰",
+      "힐링"
+    ],
+    "likes": 3866,
+    "dislikes": 49,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "디지털 기기 단절을 통한 심신 정화",
+    "trend_status": "COMMON",
+    "en": {
+      "slang": "Digital Detox",
+      "desc": "Korean urban trend term for '디지털 기기 단절을 통한 심신 정화'.",
+      "example": "A: Did you hear about '디지털 디톡스' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 199,
+    "word": "AI 프롬프트 장인",
+    "pronunciation": "[AI 프롬프트 장인]",
+    "part_of_speech": "명사 / AI 시대",
+    "chosung": "ㅇㅇㅍㄹㅍㅌㅈㅇ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대 및 현대인",
+    "short_def": "ChatGPT, 클로드, 미드저니 등 생성형 AI 모델에게 초정밀 명령어를 설계하여 기적 같은 퀄리티의 결과물을 뽑아내는 숙련자.",
+    "origin": "단순한 질문을 넘어 컨텍스트, 제약 조건, 역할 부여를 마스터하여 AI의 잠재력을 100% 해금하는 신인류.",
+    "examples": [
+      "A: 요즘 다들 'AI 프롬프트 장인'에 대해서 이야기 많이 하더라!\nB: 맞아, 지금 완전 대세 유행어잖아. 알아두면 유용해!"
+    ],
+    "tags": [
+      "프롬프트",
+      "AI엔지니어",
+      "능력자"
+    ],
+    "likes": 3883,
+    "dislikes": 52,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "생성형 AI 지시어 최고 숙련자",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Prompt Artisan / Master",
+      "desc": "Korean urban trend term for '생성형 AI 지시어 최고 숙련자'.",
+      "example": "A: Did you hear about 'AI 프롬프트 장인' recently?\nB: Yes, it's one of the hottest buzzwords in Korea right now!"
+    }
+  },
+  {
+    "id": 200,
+    "word": "긱시크",
+    "pronunciation": "[긱시크]",
+    "part_of_speech": "명사 / 트렌드 스타일",
+    "chosung": "ㄱㅅㅋ",
+    "era": "shorts",
+    "era_name": "3. ⚡ 요즘 1020 밈 (쇼츠/릴스/틱톡)",
+    "era_period": "2020s~2026",
+    "generation": "Z세대 & 알파세대",
+    "short_def": "괴짜나 너드를 뜻하는 긱(Geek)과 세련됨을 뜻하는 시크(Chic)의 합성어로, 두꺼운 뿔테안경과 레트로 오피스룩을 세련되게 소화하는 패션 밈.",
+    "origin": "너드미 넘치는 무테 또는 뿔테 안경과 단정한 셔츠, 넥타이를 결합한 룩이 2024년 K-POP 아이돌과 패션 위크에서 폭발적인 인기를 끌며 안착함.",
+    "examples": [
+      "A: 너 오늘 안경이랑 셔츠 입은 거 완전 긱시크 무드 제대로다!\nB: 고마워! 요즘 유행하는 단정하면서도 힙한 느낌 내봤어."
+    ],
+    "tags": [
+      "긱시크",
+      "Y2K",
+      "패션",
+      "뿔테안경",
+      "너드미"
+    ],
+    "likes": 4150,
+    "dislikes": 19,
+    "toxicity_level": 0,
+    "standard_korean_mapping": "지적이고 세련된 레트로 안경 패션 스타일",
+    "trend_status": "TRENDING",
+    "en": {
+      "slang": "Geek Chic",
+      "desc": "A fashion aesthetic combining nerdy elements like thick-framed glasses with sophisticated chic fashion.",
+      "example": "A: Your outfit with the retro glasses is pure geek chic today!\nB: Thanks, totally into the intellectual nerd vibe!"
+    }
   }
 ];
 
@@ -7511,16 +10605,16 @@
     // 로컬 스토리지 V4 마이그레이션 (70단어 전수 보장)
     let words = DEFAULT_WORDS;
     try {
-      const cached = localStorage.getItem('malssam_words_v4');
+      const cached = localStorage.getItem('malssam_words_v6');
       if (cached) {
         const parsed = JSON.parse(cached);
         if (Array.isArray(parsed) && parsed.length >= DEFAULT_WORDS.length) {
           words = parsed;
         } else {
-          localStorage.setItem('malssam_words_v4', JSON.stringify(DEFAULT_WORDS));
+          localStorage.setItem('malssam_words_v6', JSON.stringify(DEFAULT_WORDS));
         }
       } else {
-        localStorage.setItem('malssam_words_v4', JSON.stringify(DEFAULT_WORDS));
+        localStorage.setItem('malssam_words_v6', JSON.stringify(DEFAULT_WORDS));
       }
     } catch(e) {
       words = DEFAULT_WORDS;
@@ -7855,289 +10949,327 @@
       }
     ];
 
-        // ⚔️ 15종 오피스·세대갈등·카톡 말투 밸런스 게임 마스터 풀
-    const LIVE_BATTLES_POOL = [
+    
+    // =========================================================================
+    // 🔥 LIVE BATTLE 20종 마스터 질문 데이터셋 & 매일/접속 시 자동 교체 엔진
+    // =========================================================================
+    const MALSSAM_BATTLE_QUESTIONS = [
       {
-        id: "battle_1",
-        num: "#01",
-        tag: "🔥 LIVE BATTLE #01 · 마침표 vs 느낌표",
-        question: '팀장님 공지에 신입이 <span style="color:#facc15;">"네."</span>라고 답장했다면?',
+        id: "battle_01",
+        num: "01",
+        question: "팀장님 공지에 신입이 <span style=\"color:#facc15;\">\"네.\"</span>라고 답장했다면?",
         desc: "물결(`~`)이나 느낌표(`!`) 없이 마침표만 찍힌 단답, 과연 사회생활 마이너스일까요?",
         optA: "🅰️ 마침표는 차갑고 화난 것 같다… '넵!' 또는 '네~'가 기본이다",
         optB: "🅱️ 맞춤법 맞게 대답한 건데 뭐가 문제? 마침표 과몰입 금지",
-        labelA: "예의중시파", labelB: "효율실용파",
-        pctA: 76, pctB: 24, votes: 3420,
-        toastA: '🅰️ "마침표는 차갑다" 선택 완료! 당신은 상위 12% 예의중시파입니다.',
-        toastB: '🅱️ "맞춤법 맞다" 선택 완료! 당신은 상위 18% 효율실용파입니다.'
+        labelA: "예의중시파",
+        labelB: "효율실용파",
+        pctA: 76,
+        pctB: 24,
+        participants: "1,429명",
+        toastA: "🅰️ '마침표는 차갑다' 선택! 당신은 상위 12% 예의중시파입니다.",
+        toastB: "🅱️ '맞춤법 맞다' 선택! 당신은 상위 18% 효율실용파입니다."
       },
       {
-        id: "battle_2",
-        num: "#02",
-        tag: "🔥 LIVE BATTLE #02 · 퇴근 직전 카톡 공포",
-        question: '퇴근 10분 전 팀장님의 <span style="color:#facc15;">"오늘 별일 없지?"</span> 카톡, 속뜻은?',
-        desc: "불길한 예감 vs 단순한 안부 인사! 당신이 느끼는 진실은?",
-        optA: "🅰️ 야근이나 급한 이슈 터졌으니 퇴근하지 말고 대기하라는 신호다",
-        optB: "🅱️ 진짜 별일 없으면 정시퇴근 잘 챙기라는 순수한 안부 인사다",
-        labelA: "PTSD경계파", labelB: "순수긍정파",
-        pctA: 84, pctB: 16, votes: 2890,
-        toastA: '🅰️ "야근 빌드업이다" 선택! 당신은 잔뼈 굵은 위기감지 마스터입니다.',
-        toastB: '🅱️ "순수한 안부다" 선택! 당신은 보기 드문 평화주의 직장인입니다.'
+        id: "battle_02",
+        num: "02",
+        question: "퇴근 10분 전, 메신저로 <span style=\"color:#facc15;\">\"긴급 업무 요청\"</span>이 왔다면?",
+        desc: "컴퓨터 끄고 가방 챙기려는 순간 울린 팀장님의 카톡! 당신의 선택은?",
+        optA: "🅰️ 일단 확인하고 '내일 아침 출근 후 처리하겠습니다' 답장한다",
+        optB: "🅱️ 퇴근 후엔 개인 시간! 숫자 '1' 안 지우고 모른 척 퇴근한다",
+        labelA: "칼퇴응답파",
+        labelB: "접속오프파",
+        pctA: 64,
+        pctB: 36,
+        participants: "2,180명",
+        toastA: "🅰️ '답장 후 퇴근' 선택! 쿨하면서도 책임감 넘치는 프로 직장인!",
+        toastB: "🅱️ '읽지 않고 퇴근' 선택! 철통같은 워라밸 수호자!"
       },
       {
-        id: "battle_3",
-        num: "#03",
-        tag: "🔥 LIVE BATTLE #03 · 넵병의 진화",
-        question: '사내 메신저 최강의 답변: <span style="color:#facc15;">"넵!" vs "네~" vs "네!"</span>',
-        desc: "직장인 90%가 앓고 있다는 '넵병', 당신의 주력 시그니처 대답은?",
-        optA: "🅰️ 군더더기 없고 빠릿하며 신뢰감을 주는 대한민국 표준 '넵!'",
-        optB: "🅱️ 친절하고 부드러우며 감정선이 살아있는 '네~' 또는 '네!'",
-        labelA: "넵병정석파", labelB: "친절감성파",
-        pctA: 68, pctB: 32, votes: 4110,
-        toastA: '🅰️ "넵!" 선택 완료! 당신은 대한민국 표준 직장인의 정석입니다.',
-        toastB: '🅱️ "네~" 선택 완료! 당신은 메신저 분위기를 살리는 온화한 소통러입니다.'
+        id: "battle_03",
+        num: "03",
+        question: "업무 카톡에서 상사에게 <span style=\"color:#facc15;\">\"ㅋㅋㅋ 2개\"</span> vs <span style=\"color:#facc15;\">\"ㅎㅎ 2개\"</span>?",
+        desc: "사내 메신저나 카톡에서 부드러운 분위기를 낼 때 더 적절한 웃음 표현은?",
+        optA: "🅰️ 'ㅎㅎ'가 훨씬 부드럽고 격식 차린 예의 바른 느낌이다",
+        optB: "🅱️ 'ㅋㅋㅋ'가 가식 없이 진심으로 재미있어하는 솔직한 느낌이다",
+        labelA: "온건부드럼파",
+        labelB: "진정성솔직파",
+        pctA: 58,
+        pctB: 42,
+        participants: "1,890명",
+        toastA: "🅰️ 'ㅎㅎ' 선택! 배려심 넘치고 상사에게 예쁨받는 스타일!",
+        toastB: "🅱️ 'ㅋㅋㅋ' 선택! 털털하고 유쾌한 분위기 메이커!"
       },
       {
-        id: "battle_4",
-        num: "#04",
-        tag: "🔥 LIVE BATTLE #04 · 업무 카톡 이모티콘",
-        question: '업무 메신저에서 상사/선배에게 <span style="color:#facc15;">"이모티콘"</span> 사용 허용 범위는?',
-        desc: "딱딱한 메신저의 윤활유 vs 공적인 업무 자리에서의 예의 결여?",
-        optA: "🅰️ 직장 메신저에서 캐릭터 이모티콘은 가벼워 보이고 예의에 어긋난다",
-        optB: "🅱️ 무미건조한 단답보다 부드러운 분위기 만드는 훌륭한 소통 윤활유다",
-        labelA: "엄격공적파", labelB: "분위기메이커파",
-        pctA: 31, pctB: 69, votes: 3650,
-        toastA: '🅰️ "엄격공적" 선택! 당신은 완벽한 비즈니스 매너리스트입니다.',
-        toastB: '🅱️ "윤활유" 선택! 당신은 친화력 만렙의 메신저 인싸입니다.'
+        id: "battle_04",
+        num: "04",
+        question: "점심 메뉴 고를 때 <span style=\"color:#facc15;\">\"아무거나요\"</span> vs <span style=\"color:#facc15;\">\"저 마라탕이요!\"</span>?",
+        desc: "메뉴 결정 장애에 걸린 팀장님 앞에서 더 센스 있는 신입의 답변은?",
+        optA: "🅰️ 의견이라도 똑 부러지게 확실히 제시하는 '마라탕'이 백배 낫다",
+        optB: "🅱️ 팀 분위기 맞춰주고 무난하게 묻어가는 '아무거나요'가 속 편하다",
+        labelA: "확답제시파",
+        labelB: "무난순응파",
+        pctA: 71,
+        pctB: 29,
+        participants: "2,450명",
+        toastA: "🅰️ '마라탕' 선택! 리더의 고민을 덜어주는 결단력 있는 인재!",
+        toastB: "🅱️ '아무거나' 선택! 평화를 사랑하는 조화로운 협조자!"
       },
       {
-        id: "battle_5",
-        num: "#05",
-        tag: "🔥 LIVE BATTLE #05 · 주말 업무 카톡 대처법",
-        question: '주말이나 퇴근 후 온 업무 카톡, <span style="color:#facc15;">1 확인하고 안읽씹 vs 1 안 없애고 묵히기?</span>',
-        desc: "궁금해서 먼저 확인하기 vs 월요일 아침까지 완벽한 침묵 유지?",
-        optA: "🅰️ 미리 확인하고(1 없앰) 월요일 출근해서 정중하고 완벽하게 답장한다",
-        optB: "🅱️ 주말엔 아예 안 읽은 척(1 유지) 월요일 8시 50분에 확인한다",
-        labelA: "미리확인파", labelB: "완벽단절파",
-        pctA: 38, pctB: 62, votes: 5200,
-        toastA: '🅰️ "미리확인" 선택! 준비성은 철저하지만 워라밸 주의가 필요합니다.',
-        toastB: '🅱️ "완벽단절" 선택! 확실한 주말 사수로 워라밸을 지켜내는 고수입니다.'
+        id: "battle_05",
+        num: "05",
+        question: "카톡 대화 중 상대방이 말끝마다 <span style=\"color:#facc15;\">\"말줄임표(...) 붙이기\"</span>?",
+        desc: "'네... 알겠습니다... 수고하세요...' 말줄임표 남발, 과연 신경 쓰일까요?",
+        optA: "🅰️ 무슨 불만이 있거나 나한테 서운한 게 있나 싶어 신경 쓰인다",
+        optB: "🅱️ 그냥 키보드 습관일 뿐이다. 아무 의미 없으니 쿨하게 넘긴다",
+        labelA: "감정예민파",
+        labelB: "쿨무관심파",
+        pctA: 69,
+        pctB: 31,
+        participants: "3,120명",
+        toastA: "🅰️ '신경 쓰인다' 선택! 섬세한 눈치와 감수성의 소유자!",
+        toastB: "🅱️ '쿨하게 넘긴다' 선택! 스트레스 프리 멘탈 갑!"
       },
       {
-        id: "battle_6",
-        num: "#06",
-        tag: "🔥 LIVE BATTLE #06 · 연차 사유 논쟁",
-        question: '신입사원이 연차 신청서에 <span style="color:#facc15;">"개인 사정"</span> 4글자만 썼다면?',
-        desc: "연차는 묻지도 따지지도 않는 권리 vs 인수인계를 위한 배려?",
-        optA: "🅰️ 연차는 법적 권리! 개인 사유를 캐묻거나 구체적으로 적을 필요 없다",
-        optB: "🅱️ 팀 업무 일정과 조율을 위해 최소한의 양해나 사유 공유는 예의다",
-        labelA: "권리보장파", labelB: "조직배려파",
-        pctA: 79, pctB: 21, votes: 6100,
-        toastA: '🅰️ "권리보장" 선택! 현대 직장인의 정당한 권리를 수호하는 분입니다.',
-        toastB: '🅱️ "조직배려" 선택! 팀워크와 상호 배려를 중시하는 따뜻한 동료입니다.'
+        id: "battle_06",
+        num: "06",
+        question: "직장 상사의 SNS 발견 시, <span style=\"color:#facc15;\">\"팔로우\"</span> vs <span style=\"color:#facc15;\">\"선제 차단\"</span>?",
+        desc: "우연히 알고리즘에 뜬 팀장님의 인스타그램 계정! 당신의 행동은?",
+        optA: "🅰️ 사생활 보호가 최우선! 들키기 전에 조용히 선제 차단한다",
+        optB: "🅱️ 맞팔하고 가끔 좋아요 눌러주며 사회생활 점수를 챙긴다",
+        labelA: "철벽보안파",
+        labelB: "사회생활파",
+        pctA: 82,
+        pctB: 18,
+        participants: "1,940명",
+        toastA: "🅰️ '선제 차단' 선택! 공사 구분이 확실한 사생활 철벽 수호자!",
+        toastB: "🅱️ '맞팔 소통' 선택! 사교성 만렙의 비즈니스 마인드!"
       },
       {
-        id: "battle_7",
-        num: "#07",
-        tag: "🔥 LIVE BATTLE #07 · 문해력 vs 실무안전",
-        question: '업무 일정 공지: <span style="color:#facc15;">"사흘 뒤까지 부탁드립니다"</span>',
-        desc: "'사흘(3일)'을 '4일'로 오해하는 사태, 누구의 책임일까요?",
-        optA: "🅰️ 사흘(3일)은 기본 상식! 모르면 교양 부족이며 당사자 책임이다",
-        optB: "🅱️ 실무 분쟁을 막으려면 애초에 '3일 뒤(수요일)' 숫자로 써야 한다",
-        labelA: "문해력원칙파", labelB: "실무안전파",
-        pctA: 44, pctB: 56, votes: 4820,
-        toastA: '🅰️ "문해력 원칙" 선택! 올바른 우리말 교양을 중시하는 원칙주의자입니다.',
-        toastB: '🅱️ "실무 안전" 선택! 분쟁 제로를 추구하는 현명한 실무 프로입니다.'
+        id: "battle_07",
+        num: "07",
+        question: "신입사원의 <span style=\"color:#facc15;\">\"노이즈 캔슬링 이어폰\"</span> 착용 근무, 허용 vs 금지?",
+        desc: "사무실에서 양쪽 에어팟 끼고 일하는 동료, 과연 적절할까요?",
+        optA: "🅰️ 소통 단절되고 불러도 못 들어서 사내 협업에 방해된다 (금지)",
+        optB: "🅱️ 집중력 올라가서 일만 잘 끝내면 전혀 상관없다 (자유 허용)",
+        labelA: "협업소통파",
+        labelB: "효율자율파",
+        pctA: 49,
+        pctB: 51,
+        participants: "3,560명",
+        toastA: "🅰️ '금지' 선택! 원활한 팀워크와 분위기를 중시하는 리더형!",
+        toastB: "🅱️ '허용' 선택! 결과와 생산성을 우선하는 모던 워커!"
       },
       {
-        id: "battle_8",
-        num: "#08",
-        tag: "🔥 LIVE BATTLE #08 · 단톡방 종료 예절",
-        question: '단톡방 대화 마무리할 때: <span style="color:#facc15;">하트 리액션 vs 텍스트 인사</span>',
-        desc: "알림 안 울리는 스마트한 퇴장 vs 마지막까지 확실한 문장형 인사?",
-        optA: "🅰️ 불필요한 알림 없이 조용히 하트/따봉 리액션 찍고 마무리",
-        optB: "🅱️ '감사합니다! 좋은 하루 보내세요~' 텍스트로 확실하게 끝맺음",
-        labelA: "스마트리액션파", labelB: "텍스트정성파",
-        pctA: 63, pctB: 37, votes: 3740,
-        toastA: '🅰️ "리액션" 선택! 알림 공해를 줄여주는 센스 있는 현대인입니다.',
-        toastB: '🅱️ "텍스트 인사" 선택! 온기 넘치는 매너로 감동을 주는 분입니다.'
+        id: "battle_08",
+        num: "08",
+        question: "더 열받는 카톡 매너: <span style=\"color:#facc15;\">\"읽씹\"</span> vs <span style=\"color:#facc15;\">\"안읽씹\"</span>?",
+        desc: "인간관계에서 나를 더 미치게 만드는 상대방의 메시지 방치 행태는?",
+        optA: "🅰️ 대놓고 확인하고 답장 안 하는 '읽씹'이 더 무시당하는 기분이다",
+        optB: "🅱️ 며칠째 숫자 '1' 안 지우고 방치하는 '안읽씹'이 더 괘씸하다",
+        labelA: "읽씹분노파",
+        labelB: "안읽씹분노파",
+        pctA: 59,
+        pctB: 41,
+        participants: "4,210명",
+        toastA: "🅰️ '읽씹이 더 분노' 선택! 즉각적인 피드백을 중시하는 직진파!",
+        toastB: "🅱️ '안읽씹이 더 분노' 선택! 회피형 태도를 용납 못 하는 솔직파!"
       },
       {
-        id: "battle_9",
-        num: "#09",
-        tag: "🔥 LIVE BATTLE #09 · 점심 메뉴 암호 해독",
-        question: '점심 메뉴 정할 때 팀원의 <span style="color:#facc15;">"아무거나 다 좋아요"</span>의 진실은?',
-        desc: "진짜 다 잘 먹는 걸까, 아니면 은근한 눈치 싸움의 시작일까?",
-        optA: "🅰️ 진짜 호불호 없으니 리더가 편한 메뉴로 골라달라는 전적인 위임",
-        optB: "🅱️ '내가 싫어하는 것 빼고 분위기 깔끔한 곳으로 알아서 눈치껏'의 암호",
-        labelA: "무념무상파", labelB: "암호해독파",
-        pctA: 22, pctB: 78, votes: 5980,
-        toastA: '🅰️ "전적 위임" 선택! 메뉴 선택에 스트레스 없는 털털한 성격이시네요.',
-        toastB: '🅱️ "암호 해독" 선택! 직장 밥상머리 눈치 100단의 베테랑이십니다.'
+        id: "battle_09",
+        num: "09",
+        question: "주말 오후 날아온 상사의 카톡 공지, <span style=\"color:#facc15;\">\"확인 답장\"</span> vs <span style=\"color:#facc15;\">\"월요일 확인\"</span>?",
+        desc: "'월요일 회의 준비' 주말 단톡방 알림! 어떻게 행동하시겠습니까?",
+        optA: "🅰️ 주말은 신성한 휴식 시간! 월요일 출근해서 확인하고 답한다",
+        optB: "🅱️ 마음 졸이고 찝찝하느니 바로 확인하고 5초 만에 답장해 치운다",
+        labelA: "주말철벽파",
+        labelB: "즉시해결파",
+        pctA: 67,
+        pctB: 33,
+        participants: "2,730명",
+        toastA: "🅰️ '월요일 확인' 선택! 번아웃 방지 워라밸의 절대 고수!",
+        toastB: "🅱️ '즉시 해결' 선택! 속전속결로 찜찜함을 날리는 스타일!"
       },
       {
         id: "battle_10",
-        num: "#10",
-        tag: "🔥 LIVE BATTLE #10 · 메신저 전송 스타일",
-        question: '사내 메신저로 질문할 때: <span style="color:#facc15;">장문 1개 vs 짧게 끊어치기?</span>',
-        desc: "알림 1번만 울리는 정돈된 장문 vs 카톡처럼 대화하듯 연타 치기?",
-        optA: "🅰️ 알림 1번만 울리게 배경-질문-요청을 깔끔히 정리한 장문 1개",
-        optB: "🅱️ 상대방이 읽기 편하게 카톡처럼 핵심을 짧게 여러 번 끊어치기",
-        labelA: "장문정리파", labelB: "단문소통파",
-        pctA: 71, pctB: 29, votes: 3450,
-        toastA: '🅰️ "장문 1개" 선택! 상대의 집중 시간을 존중하는 배려 깊은 분입니다.',
-        toastB: '🅱️ "짧게 끊어치기" 선택! 모바일 친화적이고 신속한 소통을 선호하시네요.'
+        num: "10",
+        question: "친구 모임 후 계산: <span style=\"color:#facc15;\">\"1/N 1원 단위 정산\"</span> vs <span style=\"color:#facc15;\">\"번갈아 쏘기\"</span>?",
+        desc: "친한 친구들과의 식사 후 가장 깔끔하고 뒤끝 없는 결제 방식은?",
+        optA: "🅰️ 카카오페이 1/N 정산 링크로 1원 단위까지 칼같이 나누는 게 최고다",
+        optB: "🅱️ 친구 사이에 너무 계산적이면 정 떨어진다. 돌아가며 쏘는 게 인간미다",
+        labelA: "칼더치페이파",
+        labelB: "인간미번갈파",
+        pctA: 78,
+        pctB: 22,
+        participants: "2,980명",
+        toastA: "🅰️ '1/N 정산' 선택! 공정하고 투명한 금융 매너의 정석!",
+        toastB: "🅱️ '번갈아 쏘기' 선택! 낭만과 끈끈한 정을 아는 의리파!"
       },
       {
         id: "battle_11",
-        num: "#11",
-        tag: "🔥 LIVE BATTLE #11 · 회식 2차 칼퇴 논쟁",
-        question: '팀 회식 2차 이동할 때: <span style="color:#facc15;">"저 먼저 가보겠습니다" 칼퇴 허용?</span>',
-        desc: "1차 참여했으면 충분 vs 팀 단합을 위해 2차 분위기는 맞춰야?",
-        optA: "🅰️ 1차 참석했으면 도리 다함! 2차는 100% 자유 선택이어야 한다",
-        optB: "🅱️ 팀 단합을 위한 자리인 만큼 최소한 눈치나 양해는 구해야 한다",
-        labelA: "칼퇴자유파", labelB: "회식의리파",
-        pctA: 82, pctB: 18, votes: 4300,
-        toastA: '🅰️ "칼퇴 자유" 선택! 깔끔한 사생활 분리와 워라밸의 승리입니다.',
-        toastB: '🅱️ "회식 의리" 선택! 조직의 끈끈한 결속력을 지켜주는 버팀목입니다.'
+        num: "11",
+        question: "비즈니스 마무리 인사: <span style=\"color:#facc15;\">\"감사합니다\"</span> vs <span style=\"color:#facc15;\">\"고맙습니다\"</span>?",
+        desc: "공식 이메일이나 보고서 끝에 더 격식 있고 신뢰감 넘치는 표현은?",
+        optA: "🅰️ 한자어 어원의 '감사합니다'가 공적 비즈니스에 가장 격식 있어 보인다",
+        optB: "🅱️ 순우리말 '고맙습니다'가 훨씬 부드럽고 진심 어린 품격을 준다",
+        labelA: "포멀격식파",
+        labelB: "순우리말파",
+        pctA: 81,
+        pctB: 19,
+        participants: "1,670명",
+        toastA: "🅰️ '감사합니다' 선택! 비즈니스 매너에 정통한 프로페셔널!",
+        toastB: "🅱️ '고맙습니다' 선택! 우리말의 결을 살리는 따뜻한 소통가!"
       },
       {
         id: "battle_12",
-        num: "#12",
-        tag: "🔥 LIVE BATTLE #12 · '수고하셨습니다' 호칭 예절",
-        question: '후배가 선배/상사에게 <span style="color:#facc15;">"오늘도 수고하셨습니다!"</span> 인사했다면?',
-        desc: "'수고'는 아랫사람에게 쓰는 말 vs 감사 마음이면 충분?",
-        optA: "🅰️ '수고'는 윗사람이 쓰는 말! '고생 많으셨습니다'가 올바른 표현이다",
-        optB: "🅱️ 감사의 마음이 담겼으면 그만! 사소한 어원 따지기는 꼰대스럽다",
-        labelA: "예절엄수파", labelB: "실용소통파",
-        pctA: 47, pctB: 53, votes: 4120,
-        toastA: '🅰️ "예절 엄수" 선택! 바른 국어 생활과 예절을 중시하는 정통파입니다.',
-        toastB: '🅱️ "실용 소통" 선택! 형식보다 진심 어린 마음을 더 높이 사는 쿨한 분입니다.'
+        num: "12",
+        question: "약속 시간 5분 전 친구의 <span style=\"color:#facc15;\">\"나 거의 다 왔어!\"</span>, 진짜 위치는?",
+        desc: "약속 시간 직전 날아온 친구의 카톡! 과연 진실일까요?",
+        optA: "🅰️ 신뢰의 아이콘! 이미 약속 장소 반경 300m 앞이나 횡단보도 대기 중",
+        optB: "🅱️ 희망고문 100%! 이제 막 집에서 신발 신고 있거나 엘리베이터 탑승",
+        labelA: "신뢰정직파",
+        labelB: "희망고문파",
+        pctA: 33,
+        pctB: 67,
+        participants: "3,890명",
+        toastA: "🅰️ '진짜 다 옴' 선택! 사람을 믿는 따뜻한 순수 영혼!",
+        toastB: "🅱️ '이제 신발 신음' 선택! 산전수전 다 겪은 현실주의자!"
       },
       {
         id: "battle_13",
-        num: "#13",
-        tag: "🔥 LIVE BATTLE #13 · 노캔 이어폰 근무",
-        question: '업무 시간에 <span style="color:#facc15;">양쪽 노이즈캔슬링 이어폰</span> 끼고 일하는 동료는?',
-        desc: "초집중을 위한 도구 vs 팀원 간 소통을 차단하는 벽?",
-        optA: "🅰️ 업무 몰입과 생산성을 높이는 훌륭한 방법이므로 적극 권장된다",
-        optB: "🅱️ 긴급 호출이나 일상 소통을 차단하므로 한쪽만 끼거나 자제해야 한다",
-        labelA: "초집중몰입파", labelB: "소통연결파",
-        pctA: 59, pctB: 41, votes: 3880,
-        toastA: '🅰️ "초집중 몰입" 선택! 오직 결과물과 높은 몰입도로 승부하는 프로입니다.',
-        toastB: '🅱️ "소통 연결" 선택! 즉각적인 협업과 팀 시너지를 아끼는 소통가입니다.'
+        num: "13",
+        question: "식당 주문할 때: <span style=\"color:#facc15;\">\"테이블 벨 띵동\"</span> vs <span style=\"color:#facc15;\">\"저기요 사장님!\"</span>?",
+        desc: "바쁜 식당에서 추가 주문이나 물을 요청할 때 더 편안한 방식은?",
+        optA: "🅰️ 서로 얼굴 붉힐 일 없이 벨 누르고 기다리는 게 가장 깔끔하다",
+        optB: "🅱️ 눈 마주치며 상냥하게 '사장님~' 부르는 게 더 빠르고 친근하다",
+        labelA: "비대면벨선호",
+        labelB: "친근목소리파",
+        pctA: 68,
+        pctB: 32,
+        participants: "2,340명",
+        toastA: "🅰️ '벨 띵동' 선택! 조용하고 스마트한 에티켓 선호!",
+        toastB: "🅱️ '사장님 호칭' 선택! 친화력 넘치는 에너지의 주인공!"
       },
       {
         id: "battle_14",
-        num: "#14",
-        tag: "🔥 LIVE BATTLE #14 · SNS 회사 불만 밈",
-        question: '개인 SNS에 <span style="color:#facc15;">"퇴사 마렵다"·회사 저격 밈</span> 올리는 행위는?',
-        desc: "내 사생활 자유 vs 회사 사람들도 보는데 리스크 관리 부족?",
-        optA: "🅰️ 개인 사생활 공간에서의 스트레스 해소일 뿐, 회사 눈치 볼 이유 없다",
-        optB: "🅱️ 동료나 업계 지인도 볼 수 있는데 프로답지 못하고 리스크가 크다",
-        labelA: "사생활자유파", labelB: "리스크관리파",
-        pctA: 51, pctB: 49, votes: 6400,
-        toastA: '🅰️ "사생활 자유" 선택! 솔직담백하고 가식 없는 자유로운 영혼입니다.',
-        toastB: '🅱️ "리스크 관리" 선택! 철저한 자기관리와 프로페셔널한 평판 관리자입니다.'
+        num: "14",
+        question: "퇴근길 엘리베이터에 상사와 단둘이 탔을 때: <span style=\"color:#facc15;\">\"스몰토크\"</span> vs <span style=\"color:#facc15;\">\"침묵\"</span>?",
+        desc: "15층에서 1층까지 내려가는 어색한 25초! 당신의 대처법은?",
+        optA: "🅰️ '팀장님 오늘 수고 많으셨습니다! 저녁 뭐 드세요?' 밝게 대화 시도",
+        optB: "🅱️ 묵묵히 층수 표시 LCD만 바라보며 조용히 정적을 지킨다",
+        labelA: "사회성만렙파",
+        labelB: "정적수호파",
+        pctA: 61,
+        pctB: 39,
+        participants: "3,110명",
+        toastA: "🅰️ '스몰토크 시도' 선택! 어색함을 날려버리는 사교성 에이스!",
+        toastB: "🅱️ '정적 지키기' 선택! 불필요한 에너지를 아끼는 쿨러너!"
       },
       {
         id: "battle_15",
-        num: "#15",
-        tag: "🔥 LIVE BATTLE #15 · 약속 시간 '지금 출발'",
-        question: '약속 시간 5분 전 친구의 <span style="color:#facc15;">"나 지금 출발~"</span> 카톡, 그 진실은?',
-        desc: "이미 버스/지하철 탔다는 뜻 vs 이제 막 현관문 신발 신는 중?",
-        optA: "🅰️ 이제 막 침대에서 일어났거나 현관문 나서는 중! 최소 15분 이상 지각",
-        optB: "🅱️ 이미 대중교통 탑승해서 거의 다 왔으니 안심하라는 실시간 현황",
-        labelA: "지각감지파", labelB: "신뢰안심파",
-        pctA: 88, pctB: 12, votes: 7120,
-        toastA: '🅰️ "15분 지각 확정" 선택! 친구들의 카톡 거짓말을 꿰뚫어 보는 도사입니다.',
-        toastB: '🅱️ "진짜 출발" 선택! 사람을 끝까지 믿어주는 세상 따뜻한 친구입니다.'
+        num: "15",
+        question: "동료의 치명적 오타 발견 시: <span style=\"color:#facc15;\">\"귓속말 DM\"</span> vs <span style=\"color:#facc15;\">\"침묵\"</span>?",
+        desc: "전사 공지에 '사외이사'를 '사외의사'로 오타 낸 동료를 봤다면?",
+        optA: "🅰️ 더 큰 망신당하기 전에 1:1 비밀 메시지로 조용히 알려준다",
+        optB: "🅱️ 지적질처럼 느껴져 기분 나빠할 수 있으니 모른 척 넘어간다",
+        labelA: "배려구원파",
+        labelB: "불간섭주의파",
+        pctA: 89,
+        pctB: 11,
+        participants: "2,560명",
+        toastA: "🅰️ '귓속말 전달' 선택! 동료의 품격을 지켜주는 든든한 수호천사!",
+        toastB: "🅱️ '모른 척' 선택! 타인의 영역을 존중하는 신중파!"
       }
     ];
 
-    let currentBattleIdx = 0;
+    let CURRENT_BATTLE_INDEX = 0;
 
-    // 실시간 밸런스 게임 렌더링 함수
-    function renderLiveBattle(idx) {
-      if (!LIVE_BATTLES_POOL || LIVE_BATTLES_POOL.length === 0) return;
-      currentBattleIdx = (idx + LIVE_BATTLES_POOL.length) % LIVE_BATTLES_POOL.length;
-      const b = LIVE_BATTLES_POOL[currentBattleIdx];
+    // 날짜 기반 고유 시드 계산 (매일 자정마다 자동 변경)
+    function getDailyBattleIndex() {
+      const todayStr = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+      let hash = 0;
+      for (let i = 0; i < todayStr.length; i++) {
+        hash = (hash * 31 + todayStr.charCodeAt(i)) & 0xFFFFFFFF;
+      }
+      return Math.abs(hash) % MALSSAM_BATTLE_QUESTIONS.length;
+    }
 
-      const elTag = document.getElementById('liveBattleTag');
-      const elCount = document.getElementById('liveBattleCount');
-      const elQ = document.getElementById('liveBattleQ');
-      const elDesc = document.getElementById('liveBattleDesc');
-      const elTitleA = document.getElementById('liveVoteTitleA');
-      const elTitleB = document.getElementById('liveVoteTitleB');
-      const elPctA = document.getElementById('livePctA');
-      const elPctB = document.getElementById('livePctB');
-      const elLabelA = document.getElementById('liveLabelA');
-      const elLabelB = document.getElementById('liveLabelB');
-      const elGaugeA = document.getElementById('liveGaugeA');
-      const elGaugeB = document.getElementById('liveGaugeB');
-      const elMsg = document.getElementById('liveVoteResultMsg');
+    // 특정 인덱스의 배틀 질문 화면에 렌더링
+    function renderBattleQuestion(idx) {
+      if (idx < 0 || idx >= MALSSAM_BATTLE_QUESTIONS.length) idx = 0;
+      CURRENT_BATTLE_INDEX = idx;
+      const q = MALSSAM_BATTLE_QUESTIONS[idx];
+
+      const tagEl = document.getElementById('liveBattleTag');
+      const qEl = document.getElementById('liveBattleQ');
+      const descEl = document.getElementById('liveBattleDesc');
+      const titleA = document.getElementById('liveTitleA');
+      const titleB = document.getElementById('liveTitleB');
+      const labelA = document.getElementById('liveLabelA');
+      const labelB = document.getElementById('liveLabelB');
+      const pctA = document.getElementById('livePctA');
+      const pctB = document.getElementById('livePctB');
+      const gaugeA = document.getElementById('liveGaugeA');
+      const gaugeB = document.getElementById('liveGaugeB');
       const btnA = document.getElementById('liveBtnA');
       const btnB = document.getElementById('liveBtnB');
+      const msgEl = document.getElementById('liveVoteResultMsg');
 
-      if (elTag) elTag.innerText = b.tag;
-      if (elCount) elCount.innerText = `${currentBattleIdx + 1}/${LIVE_BATTLES_POOL.length}`;
-      if (elQ) elQ.innerHTML = b.question;
-      if (elDesc) elDesc.innerText = b.desc;
-      if (elTitleA) elTitleA.innerText = b.optA;
-      if (elTitleB) elTitleB.innerText = b.optB;
-      if (elLabelA) elLabelA.innerText = b.labelA;
-      if (elLabelB) elLabelB.innerText = b.labelB;
+      if (tagEl) tagEl.textContent = `🔥 LIVE BATTLE #${q.num} · 실시간 말투 밸런스 게임`;
+      if (qEl) qEl.innerHTML = q.question;
+      if (descEl) descEl.textContent = q.desc;
+      if (titleA) titleA.textContent = q.optA;
+      if (titleB) titleB.textContent = q.optB;
+      if (labelA) labelA.textContent = q.labelA;
+      if (labelB) labelB.textContent = q.labelB;
 
-      // 사용자 투표 상태 복원
-      const userVote = localStorage.getItem('malssam_battle_' + b.id);
+      // 이전 투표 내역 확인
+      const votedChoice = localStorage.getItem('malssam_battle_' + q.id);
       if (btnA) btnA.classList.remove('voted');
       if (btnB) btnB.classList.remove('voted');
 
-      let displayPctA = b.pctA;
-      let displayPctB = b.pctB;
+      let curPctA = q.pctA;
+      let curPctB = q.pctB;
 
-      if (userVote === 'A') {
+      if (votedChoice === 'A') {
         if (btnA) btnA.classList.add('voted');
-        if (elPctA) elPctA.innerText = `${displayPctA}% (내 선택)`;
-        if (elPctB) elPctB.innerText = `${displayPctB}%`;
-        if (elMsg) {
-          elMsg.style.display = 'block';
-          elMsg.innerHTML = `✨ 집단지성 투표 완료! (참여자: ${b.votes.toLocaleString()}명) — ${b.toastA}`;
-        }
-      } else if (userVote === 'B') {
+        curPctA = Math.min(99, q.pctA + 1);
+        curPctB = Math.max(1, 100 - curPctA);
+        if (pctA) pctA.innerText = `${curPctA}% (내 선택)`;
+        if (pctB) pctB.innerText = `${curPctB}%`;
+        if (msgEl) msgEl.style.display = 'block';
+      } else if (votedChoice === 'B') {
         if (btnB) btnB.classList.add('voted');
-        if (elPctA) elPctA.innerText = `${displayPctA}%`;
-        if (elPctB) elPctB.innerText = `${displayPctB}% (내 선택)`;
-        if (elMsg) {
-          elMsg.style.display = 'block';
-          elMsg.innerHTML = `✨ 집단지성 투표 완료! (참여자: ${b.votes.toLocaleString()}명) — ${b.toastB}`;
-        }
+        curPctB = Math.min(99, q.pctB + 1);
+        curPctA = Math.max(1, 100 - curPctB);
+        if (pctA) pctA.innerText = `${curPctA}%`;
+        if (pctB) pctB.innerText = `${curPctB}% (내 선택)`;
+        if (msgEl) msgEl.style.display = 'block';
       } else {
-        if (elPctA) elPctA.innerText = `${displayPctA}% 투표`;
-        if (elPctB) elPctB.innerText = `${displayPctB}% 투표`;
-        if (elMsg) elMsg.style.display = 'none';
+        if (pctA) pctA.innerText = `${curPctA}% 투표`;
+        if (pctB) pctB.innerText = `${curPctB}% 투표`;
+        if (msgEl) msgEl.style.display = 'none';
       }
 
-      if (elGaugeA) elGaugeA.style.width = `${displayPctA}%`;
-      if (elGaugeB) elGaugeB.style.width = `${displayPctB}%`;
+      if (gaugeA) gaugeA.style.width = `${curPctA}%`;
+      if (gaugeB) gaugeB.style.width = `${curPctB}%`;
+
+      if (msgEl) {
+        msgEl.innerHTML = `✨ 집단지성 투표 반영 완료! (현재 참여자: ${q.participants}) — 동료들과 링크를 공유해 의견을 나눠보세요!`;
+      }
     }
 
-    // 다음 밸런스 게임 보기
-    function nextLiveBattle() {
-      currentBattleIdx = (currentBattleIdx + 1) % LIVE_BATTLES_POOL.length;
-      renderLiveBattle(currentBattleIdx);
+    // 다음 랜덤 질문 보기
+    function nextRandomBattle() {
+      let nextIdx = (CURRENT_BATTLE_INDEX + 1) % MALSSAM_BATTLE_QUESTIONS.length;
+      renderBattleQuestion(nextIdx);
       if (typeof showToast === 'function') {
-        showToast(`🔄 [${currentBattleIdx + 1}/${LIVE_BATTLES_POOL.length}] 새로운 밸런스 게임으로 전환되었습니다!`);
+        showToast(`새로운 밸런스 배틀 #${MALSSAM_BATTLE_QUESTIONS[nextIdx].num} 로드 완료!`);
       }
     }
 
-    // 밸런스 게임 투표 처리
+    // 투표 처리 함수
     function voteLiveBattle(choice) {
-      const b = LIVE_BATTLES_POOL[currentBattleIdx];
-      const storageKey = 'malssam_battle_' + b.id;
-      const alreadyVoted = localStorage.getItem(storageKey);
-
-      localStorage.setItem(storageKey, choice);
-
+      const q = MALSSAM_BATTLE_QUESTIONS[CURRENT_BATTLE_INDEX];
       const btnA = document.getElementById('liveBtnA');
       const btnB = document.getElementById('liveBtnB');
       const elMsg = document.getElementById('liveVoteResultMsg');
@@ -8145,52 +11277,41 @@
       if (btnA) btnA.classList.remove('voted');
       if (btnB) btnB.classList.remove('voted');
 
-      let displayPctA = b.pctA;
-      let displayPctB = b.pctB;
-
-      if (!alreadyVoted) {
-        b.votes += 1;
-        if (choice === 'A') {
-          displayPctA = Math.min(99, b.pctA + 1);
-          displayPctB = 100 - displayPctA;
-        } else {
-          displayPctB = Math.min(99, b.pctB + 1);
-          displayPctA = 100 - displayPctB;
-        }
-      }
+      let newPctA = q.pctA;
+      let newPctB = q.pctB;
 
       if (choice === 'A') {
         if (btnA) btnA.classList.add('voted');
-        document.getElementById('livePctA').innerText = `${displayPctA}% (내 선택)`;
-        document.getElementById('livePctB').innerText = `${displayPctB}%`;
-        document.getElementById('liveGaugeA').style.width = `${displayPctA}%`;
-        document.getElementById('liveGaugeB').style.width = `${displayPctB}%`;
-        if (typeof showToast === 'function') showToast(b.toastA);
-        if (elMsg) {
-          elMsg.style.display = 'block';
-          elMsg.innerHTML = `✨ 집단지성 투표 반영 완료! (현재 참여자: ${b.votes.toLocaleString()}명) — ${b.toastA}`;
+        newPctA = Math.min(99, q.pctA + 1);
+        newPctB = Math.max(1, 100 - newPctA);
+        document.getElementById('livePctA').innerText = `${newPctA}% (내 선택)`;
+        document.getElementById('livePctB').innerText = `${newPctB}%`;
+        if (typeof showToast === 'function') {
+          showToast(q.toastA);
         }
       } else {
         if (btnB) btnB.classList.add('voted');
-        document.getElementById('livePctA').innerText = `${displayPctA}%`;
-        document.getElementById('livePctB').innerText = `${displayPctB}% (내 선택)`;
-        document.getElementById('liveGaugeA').style.width = `${displayPctA}%`;
-        document.getElementById('liveGaugeB').style.width = `${displayPctB}%`;
-        if (typeof showToast === 'function') showToast(b.toastB);
-        if (elMsg) {
-          elMsg.style.display = 'block';
-          elMsg.innerHTML = `✨ 집단지성 투표 반영 완료! (현재 참여자: ${b.votes.toLocaleString()}명) — ${b.toastB}`;
+        newPctB = Math.min(99, q.pctB + 1);
+        newPctA = Math.max(1, 100 - newPctB);
+        document.getElementById('livePctA').innerText = `${newPctA}%`;
+        document.getElementById('livePctB').innerText = `${newPctB}% (내 선택)`;
+        if (typeof showToast === 'function') {
+          showToast(q.toastB);
         }
       }
+
+      document.getElementById('liveGaugeA').style.width = `${newPctA}%`;
+      document.getElementById('liveGaugeB').style.width = `${newPctB}%`;
+      if (elMsg) elMsg.style.display = 'block';
+
+      localStorage.setItem('malssam_battle_' + q.id, choice);
     }
 
-    // 접속할 때마다 날짜 및 랜덤 기반 자동 순환 초기화
-    function initLiveBattle() {
-      const todaySeed = new Date().getDate();
-      const randomOffset = Math.floor(Math.random() * LIVE_BATTLES_POOL.length);
-      const initialIdx = (todaySeed + randomOffset) % LIVE_BATTLES_POOL.length;
-      renderLiveBattle(initialIdx);
-    }
+    // 페이지 진입 시 오늘 날짜 기준 배틀 질문 자동 초기화
+    document.addEventListener('DOMContentLoaded', function() {
+      const initialIdx = getDailyBattleIndex();
+      renderBattleQuestion(initialIdx);
+    });
 
 
     // Kakao Card Vote Logic
@@ -8391,7 +11512,7 @@
 
       userVotes[id] = type;
       localStorage.setItem('malssam_votes_v4', JSON.stringify(userVotes));
-      localStorage.setItem('malssam_words_v4', JSON.stringify(words));
+      localStorage.setItem('malssam_words_v6', JSON.stringify(words));
 
       const likeEl = document.getElementById(`like-count-${id}`);
       const dislikeEl = document.getElementById(`dislike-count-${id}`);
@@ -9079,7 +12200,7 @@
       };
 
       words.unshift(newObj);
-      localStorage.setItem('malssam_words_v4', JSON.stringify(words));
+      localStorage.setItem('malssam_words_v6', JSON.stringify(words));
       closeAddModal();
       showToast(`🎉 '${wordVal}' 신조어가 성공적으로 제보되었습니다!`);
       updateEraCounts();
@@ -9089,7 +12210,6 @@
     // 초기 실행
     updateEraCounts();
     applyFilterAndRender();
-    initLiveBattle();
 
     // Firebase Firestore 추가 데이터 비동기 로드
     window.addEventListener('DOMContentLoaded', async () => {
