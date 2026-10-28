@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>WSL2 & Docker 보안 샌드박스 & 대용량 데이터 스트리밍 시뮬레이터 | DMDG SafeTech Labs</title>
+  <meta name="description" content="비용 0원으로 구축하는 WSL2와 Docker 5중 보안 커널 격리 샌드박스 및 10만 행 Pandas 청크 스트리밍 OOM 방어 인터랙티브 시뮬레이터">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/dmdg_logo_emblem.png">
+  <link rel="apple-touch-icon" href="./assets/dmdg_logo_emblem.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #070913;
+      --bg-surface: #0e1222;
+      --bg-card: rgba(18, 22, 40, 0.78);
+      --border-subtle: rgba(99, 102, 241, 0.2);
+      --border-accent: rgba(99, 102, 241, 0.5);
+      --primary: #818cf8;
+      --primary-glow: rgba(129, 140, 248, 0.35);
+      --accent-cyan: #00f2fe;
+      --accent-cyan-glow: rgba(0, 242, 254, 0.35);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.4);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.35);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-display: 'Orbitron', -apple-system, sans-serif;
+      --font-code: 'Fira Code', monospace;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #151538 0%, var(--bg-base) 80%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Top Navbar */
+    .top-navbar {
+      height: 64px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(7, 9, 19, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-wrap img { width: 34px; height: 34px; border-radius: 50%; }
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-nav:hover {
+      background: var(--primary);
+      color: #060913;
+      border-color: var(--primary);
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    /* Main Container */
+    .simulator-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Preset Toolbar */
+    .preset-toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+    }
+    .preset-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .preset-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-preset {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-preset:hover, .btn-preset.active {
+      color: #fff;
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.2);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    /* 3-Column Cyber Grid */
+    .cyber-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1.25fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 1200px) {
+      .cyber-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Panel Card */
+    .cyber-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+    .panel-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      letter-spacing: 0.5px;
+    }
+    .panel-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--primary);
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-code);
+    }
+
+    /* Terminal Console */
+    .terminal-box {
+      background: #03050c;
+      border: 1px solid #1e2438;
+      border-radius: 8px;
+      font-family: var(--font-code);
+      font-size: 12px;
+      height: 310px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .terminal-head {
+      background: #0c1020;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid #1e2438;
+    }
+    .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .term-dot.r { background: #ef4444; }
+    .term-dot.y { background: #f59e0b; }
+    .term-dot.g { background: #10b981; }
+    .terminal-body {
+      padding: 12px;
+      flex: 1;
+      overflow-y: auto;
+      color: #38bdf8;
+      line-height: 1.5;
+    }
+    .term-prompt { color: #818cf8; font-weight: 700; }
+    .term-cmd { color: #fff; }
+    .term-out { color: #94a3b8; }
+    .term-err { color: #f87171; }
+    .term-ok { color: #34d399; }
+
+    /* Security Flags Toggles */
+    .flags-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .flag-toggle-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .flag-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .flag-code {
+      font-family: var(--font-code);
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+    .flag-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #334155;
+      transition: .3s;
+      border-radius: 22px;
+    }
+    .slider:before {
+      position: absolute; content: "";
+      height: 16px; width: 16px;
+      left: 3px; bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: var(--primary); }
+    input:checked + .slider:before { transform: translateX(18px); }
+
+    /* Column 2: OOM & Resource Guard */
+    .resource-hero {
+      text-align: center;
+      padding: 18px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+    .gauge-circle-wrap {
+      display: flex;
+      justify-content: space-around;
+      margin: 14px 0;
+    }
+    .gauge-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .gauge-val {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .gauge-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .oom-status-tag {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      font-family: var(--font-display);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .oom-safe { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid var(--success); }
+    .oom-warn { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid var(--warning); }
+    .oom-killed { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid var(--danger); animation: pulse 1s infinite; }
+
+    /* Stream Chart Canvas */
+    .chart-container {
+      height: 160px;
+      background: #03050c;
+      border: 1px solid #1e2438;
+      border-radius: 8px;
+      position: relative;
+    }
+    #streamCanvas { width: 100%; height: 100%; display: block; }
+
+    /* Column 3: Big Data Chunking */
+    .compression-compare-card {
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .compare-bar-row {
+      margin-bottom: 12px;
+    }
+    .compare-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-family: var(--font-code);
+      margin-bottom: 4px;
+    }
+    .comp-bar-track {
+      height: 14px;
+      background: #1e293b;
+      border-radius: 7px;
+      overflow: hidden;
+    }
+    .comp-bar-fill {
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+    .fill-raw { background: linear-gradient(90deg, #f87171, #ef4444); }
+    .fill-downcast { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+    .fill-chunk { background: linear-gradient(90deg, #38bdf8, #818cf8); box-shadow: 0 0 10px var(--primary-glow); }
+
+    /* Chunks Progress Grid */
+    .chunks-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .chunk-box {
+      height: 30px;
+      background: #1e2438;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-family: var(--font-code);
+      color: #64748b;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .chunk-box.done {
+      background: rgba(129, 140, 248, 0.25);
+      color: #818cf8;
+      border-color: var(--primary);
+    }
+    .chunk-box.active {
+      background: var(--accent-cyan);
+      color: #060913;
+      font-weight: 800;
+      box-shadow: 0 0 10px var(--accent-cyan-glow);
+    }
+
+    /* Action Buttons */
+    .btn-action-primary {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), #4f46e5);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 0 16px var(--primary-glow);
+      transition: all 0.2s ease;
+    }
+    .btn-action-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px var(--primary-glow);
+    }
+
+    /* Bottom Info Banner */
+    .bottom-info-banner {
+      background: linear-gradient(135deg, rgba(21, 21, 56, 0.8), rgba(7, 9, 19, 0.9));
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .book-ref-text h4 {
+      font-size: 15px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .book-ref-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.show { opacity: 1; pointer-events: auto; }
+    .modal-card {
+      background: #0d1124;
+      border: 1.5px solid var(--border-accent);
+      border-radius: 16px;
+      max-width: 680px;
+      width: 90%;
+      padding: 28px;
+      box-shadow: 0 0 40px rgba(99, 102, 241, 0.25);
+    }
+    .modal-card h2 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-card p {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    .modal-points {
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border-left: 3px solid var(--primary);
+    }
+    .modal-points li {
+      margin-left: 20px;
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+    .btn-modal-close {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), #4f46e5);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: var(--font-display);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="top-navbar">
+    <a href="./" class="brand-wrap">
+      <img src="./assets/dmdg_logo_emblem.png" alt="DMDG Emblem">
+      <div>
+        <div class="brand-title">DOCKER SECURE SANDBOX & BIG DATA</div>
+        <div class="brand-subtitle">WSL2 커널 5중 보안 격리 & 10만 행 청크 스트리밍 시뮬레이터</div>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="btn-nav" onclick="openHelpModal()">📖 샌드박스 가이드</button>
+      <a href="https://wikidocs.net/book/21889" target="_blank" class="btn-nav" style="border-color: var(--primary); color: var(--primary);">
+        📚 Book 21889 전자책 ➔
+      </a>
+    </div>
+  </nav>
+
+  <!-- Simulator Main -->
+  <div class="simulator-container">
+
+    <!-- Preset Toolbar -->
+    <div class="preset-toolbar">
+      <div class="preset-title">
+        <span>⚡</span> 실전 엔지니어링 프리셋
+      </div>
+      <div class="preset-btns">
+        <button class="btn-preset active" onclick="loadPreset('safe_crawler')">
+          🛡️ 악성 크롤러 안전 격리
+        </button>
+        <button class="btn-preset" onclick="loadPreset('chunk_streaming')">
+          ⚡ 100만 행 CSV 청크 스트리밍 (OOM 제로)
+        </button>
+        <button class="btn-preset" onclick="loadPreset('ransomware_blocked')">
+          🚫 랜섬웨어 파일 암호화 공격 차단
+        </button>
+        <button class="btn-preset" onclick="loadPreset('oom_crash_test')">
+          💥 OOM Killer 폭사 테스트 (보안 미적용)
+        </button>
+      </div>
+    </div>
+
+    <!-- 3-Column Cyber Grid -->
+    <div class="cyber-grid">
+
+      <!-- Column 1: Linux Container Terminal & 5-Layer Security -->
+      <div class="cyber-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>💻</span> 리눅스 컨테이너 터미널
+          </div>
+          <span class="panel-tag" id="termSessionTag">sandboxuser@docker-sec</span>
+        </div>
+
+        <!-- Terminal Box -->
+        <div class="terminal-box">
+          <div class="terminal-head">
+            <span class="term-dot r"></span>
+            <span class="term-dot y"></span>
+            <span class="term-dot g"></span>
+            <span style="font-size:11px; color:#64748b; margin-left:6px;">bash (isolated sandbox)</span>
+          </div>
+          <div class="terminal-body" id="termOutput">
+            <div class="term-prompt">$ docker run --rm -it \</div>
+            <div class="term-cmd">  --cap-drop ALL \</div>
+            <div class="term-cmd">  --security-opt no-new-privileges \</div>
+            <div class="term-cmd">  --read-only --tmpfs /tmp \</div>
+            <div class="term-cmd">  --network none --memory 512m \</div>
+            <div class="term-cmd">  dmdg/sandbox-engine:v2.4</div>
+            <div class="term-ok">[+] 5중 커널 보안 격리 샌드박스가 가동되었습니다.</div>
+          </div>
+        </div>
+
+        <!-- 5-Layer Flags Control -->
+        <div class="panel-header" style="margin-top:4px;">
+          <div class="panel-title">
+            <span>🛡️</span> 커널 5중 보안벽 토글
+          </div>
+          <span class="panel-tag">Security Options</span>
+        </div>
+
+        <div class="flags-list">
+          <div class="flag-toggle-item">
+            <div class="flag-info">
+              <div>
+                <div class="flag-code">--cap-drop ALL</div>
+                <div class="flag-desc">모든 리눅스 루트 특권 회수 (원천 탈출 차단)</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="flagCapDrop" checked onchange="runSecurityCheck()">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="flag-toggle-item">
+            <div class="flag-info">
+              <div>
+                <div class="flag-code">--read-only</div>
+                <div class="flag-desc">루트 파일시스템 읽기 전용 (랜섬웨어 방어)</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="flagReadOnly" checked onchange="runSecurityCheck()">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="flag-toggle-item">
+            <div class="flag-info">
+              <div>
+                <div class="flag-code">--network none</div>
+                <div class="flag-desc">네트워크 완전 봉쇄 (외부 데이터 유출 차단)</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="flagNetNone" checked onchange="runSecurityCheck()">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="flag-toggle-item">
+            <div class="flag-info">
+              <div>
+                <div class="flag-code">no-new-privileges</div>
+                <div class="flag-desc">setuid를 통한 권한 상승 공격 무력화</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="flagNoPriv" checked onchange="runSecurityCheck()">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: OOM Prevention & Resource Guard -->
+      <div class="cyber-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>⚡</span> 리소스 가드 & OOM 제어
+          </div>
+          <span class="panel-tag">--memory 512m</span>
+        </div>
+
+        <!-- Resource Hero -->
+        <div class="resource-hero">
+          <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Container Memory Guard</div>
+          <div class="gauge-circle-wrap">
+            <div class="gauge-block">
+              <span class="gauge-val" id="memUsageVal">182 MB</span>
+              <span class="gauge-label">실시간 메모리 (512MB 제한)</span>
+            </div>
+            <div class="gauge-block">
+              <span class="gauge-val" id="cpuLoadVal" style="color:var(--accent-cyan);">24.8 %</span>
+              <span class="gauge-label">CPU 쿼터 (0.5 Core)</span>
+            </div>
+          </div>
+          <div class="oom-status-tag oom-safe" id="oomStatusTag">
+            <span>🛡️</span> OOM KILLER: PREVENTED (정상)
+          </div>
+        </div>
+
+        <!-- Realtime Memory Stream Chart -->
+        <div class="panel-header" style="margin-top:4px;">
+          <div class="panel-title">
+            <span>📈</span> 메모리 사용 추세 (청크 스트리밍)
+          </div>
+          <span class="panel-tag">Peak: 195 MB</span>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="streamCanvas"></canvas>
+        </div>
+
+        <!-- Interactive Test Command Buttons -->
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <button class="btn-action-primary" onclick="testAttackRansomware()">
+            <span>⚠️ 악성 스크립트 실행 테스트 (호스트 오염 시도)</span>
+          </button>
+          <button class="btn-action-primary" style="background:rgba(255,255,255,0.08); box-shadow:none;" onclick="testLargePandasLoad()">
+            <span>📦 통째로 1.2GB 한 번에 로드 (전통적 방식 OOM 유발)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Column 3: Big Data Chunking & Downcasting Visualizer -->
+      <div class="cyber-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>📊</span> 대용량 데이터 청크 & 다운사이징
+          </div>
+          <span class="panel-tag">1,000,000 Rows</span>
+        </div>
+
+        <!-- Memory Reduction Comparison -->
+        <div class="compression-compare-card">
+          <div class="compare-bar-row">
+            <div class="compare-header">
+              <span>기존 무분별 판다스 (pd.read_csv)</span>
+              <strong style="color:#f87171;">1,240 MB (1.2 GB)</strong>
+            </div>
+            <div class="comp-bar-track">
+              <div class="comp-bar-fill fill-raw" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <div class="compare-bar-row">
+            <div class="compare-header">
+              <span>dtype 다운캐스팅 (float64 ➔ float32)</span>
+              <strong style="color:#fbbf24;">680 MB (45% 절감)</strong>
+            </div>
+            <div class="comp-bar-track">
+              <div class="comp-bar-fill fill-downcast" style="width: 55%;"></div>
+            </div>
+          </div>
+
+          <div class="compare-bar-row">
+            <div class="compare-header">
+              <span>10만 행 청크 스트리밍 + 범주형 압축</span>
+              <strong style="color:#818cf8;" id="finalCompText">182 MB (85.3% 다이어트 성공!)</strong>
+            </div>
+            <div class="comp-bar-track">
+              <div class="comp-bar-fill fill-chunk" id="finalCompBar" style="width: 15%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 Chunks Processing Grid -->
+        <div class="panel-header" style="margin-top:4px;">
+          <div class="panel-title">
+            <span>⚙️</span> 10개 청크 순차 파이프라인 (100,000 Rows/chunk)
+          </div>
+          <span class="panel-tag" id="chunkProgressText">10 / 10 COMPLETED</span>
+        </div>
+
+        <div class="chunks-grid" id="chunksGrid">
+          <div class="chunk-box done">#1</div>
+          <div class="chunk-box done">#2</div>
+          <div class="chunk-box done">#3</div>
+          <div class="chunk-box done">#4</div>
+          <div class="chunk-box done">#5</div>
+          <div class="chunk-box done">#6</div>
+          <div class="chunk-box done">#7</div>
+          <div class="chunk-box done">#8</div>
+          <div class="chunk-box done">#9</div>
+          <div class="chunk-box done">#10</div>
+        </div>
+
+        <button class="btn-action-primary" style="margin-top:10px; background:linear-gradient(135deg, #10b981, #059669);" onclick="startChunkStreamProcess()">
+          <span>▶️ 10만 행 청크 스트리밍 엔진 가동</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Bottom Book Ref Banner -->
+    <div class="bottom-info-banner">
+      <div class="book-ref-text">
+        <h4>📖 《WSL2와 Docker로 샌드박스 환경 구축하기》</h4>
+        <p>위키독스 공식 Book ID: 21889 · 커널 5중 보안 격리 & Pandas 청크 스트리밍 공식 시뮬레이터</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <a href="https://wikidocs.net/book/21889" target="_blank" class="btn-nav" style="background: linear-gradient(135deg, #6366f1, #4338ca); color:#fff; border:none; padding: 10px 18px;">
+          📖 위키독스 전자책 열람하기
+        </a>
+        <a href="https://toss.me/dmdg" target="_blank" class="btn-nav" style="background: linear-gradient(135deg, #f59e0b, #d97706); color:#fff; border:none; padding: 10px 18px;">
+          ☕ 커피 한 잔 후원하기
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Help Modal -->
+  <div class="modal-backdrop" id="helpModal">
+    <div class="modal-card">
+      <h2><span>🛡️</span> WSL2 & Docker 보안 샌드박스 시뮬레이터 안내</h2>
+      <p>
+        본 시뮬레이터는 인터넷에서 내려받은 정체불명의 AI 생성 코드나 크롤러를 
+        <strong>비용 0원으로 호스트 시스템과 완벽히 격리 실행</strong>하고, 
+        <strong>수 기가바이트의 대용량 데이터를 메모리 폭주(OOM) 없이 처리</strong>하는 
+        핵심 엔지니어링 메커니즘을 인터랙티브하게 체험할 수 있도록 제작되었습니다.
+      </p>
+
+      <div class="modal-points">
+        <ul>
+          <li><strong>리눅스 커널 5중 보안벽</strong>: `--cap-drop ALL`, `--read-only`, `no-new-privileges`를 통해 파일시스템 변조와 컨테이너 탈출을 원천 방어합니다.</li>
+          <li><strong>OOM 방어 리소스 가드</strong>: 512MB 하드 리밋 내에서 메모리 누수 없이 안전하게 연산합니다.</li>
+          <li><strong>10만 행 Pandas 청크 스트리밍</strong>: 1.2GB 대용량 CSV를 쪼개어 읽고 `dtype 다운사이징`과 `category` 변환을 적용하여 메모리를 85% 절감합니다.</li>
+        </ul>
+      </div>
+
+      <button class="btn-modal-close" onclick="closeHelpModal()">실습 시작하기 ➔</button>
+    </div>
+  </div>
+
+  <!-- Audio FX -->
+  <script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(freq = 440, type = 'sine', duration = 0.1) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+  </script>
+
+  <!-- Interactive Logic -->
+  <script>
+    const termOutput = document.getElementById('termOutput');
+    const streamCanvas = document.getElementById('streamCanvas');
+    const streamCtx = streamCanvas.getContext('2d');
+
+    function resizeCanvas() {
+      streamCanvas.width = streamCanvas.parentElement.clientWidth;
+      streamCanvas.height = streamCanvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function logTerm(prompt, cmd, out, isErr = false, isOk = false) {
+      const row = document.createElement('div');
+      row.style.marginBottom = '6px';
+      let html = '';
+      if (prompt) html += `<span class="term-prompt">${prompt} </span>`;
+      if (cmd) html += `<span class="term-cmd">${cmd}</span><br>`;
+      if (out) {
+        const cls = isErr ? 'term-err' : (isOk ? 'term-ok' : 'term-out');
+        html += `<span class="${cls}">${out}</span>`;
+      }
+      row.innerHTML = html;
+      termOutput.appendChild(row);
+      termOutput.scrollTop = termOutput.scrollHeight;
+    }
+
+    // Presets
+    function loadPreset(type) {
+      document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      if (type === 'safe_crawler') {
+        document.getElementById('flagCapDrop').checked = true;
+        document.getElementById('flagReadOnly').checked = true;
+        document.getElementById('flagNetNone').checked = true;
+        document.getElementById('flagNoPriv').checked = true;
+        logTerm('$', 'python crawler_untrusted.py', '[+] 격리 샌드박스 내부에서 안전하게 실행되었습니다. 외부 유출 차단 완료.', false, true);
+        setResourceUI(182, 24.8, 'safe');
+      } else if (type === 'chunk_streaming') {
+        startChunkStreamProcess();
+      } else if (type === 'ransomware_blocked') {
+        testAttackRansomware();
+      } else if (type === 'oom_crash_test') {
+        testLargePandasLoad();
+      }
+      playBeep(520, 'sine', 0.1);
+    }
+
+    function runSecurityCheck() {
+      const cap = document.getElementById('flagCapDrop').checked;
+      const ro = document.getElementById('flagReadOnly').checked;
+      const net = document.getElementById('flagNetNone').checked;
+      const nopriv = document.getElementById('flagNoPriv').checked;
+
+      logTerm('$', 'docker inspect sandbox', `[Config Updated] CapDrop:${cap}, ReadOnly:${ro}, NetNone:${net}, NoPriv:${nopriv}`);
+      playBeep(650, 'triangle', 0.08);
+    }
+
+    function testAttackRansomware() {
+      const ro = document.getElementById('flagReadOnly').checked;
+      playBeep(300, 'sawtooth', 0.2);
+
+      if (ro) {
+        logTerm('$', 'python encrypt_files.py', '❌ [PERMISSION DENIED] Read-only file system. 악성 암호화 시도가 완벽히 차단되었습니다!', true);
+      } else {
+        logTerm('$', 'python encrypt_files.py', '🚨 [DANGER] Read-only 플래그가 꺼져 있어 파일시스템이 오염되었습니다!', true);
+      }
+    }
+
+    function testLargePandasLoad() {
+      playBeep(200, 'sawtooth', 0.4);
+      logTerm('$', 'python -c "import pandas as pd; df = pd.read_csv(\'bigdata.csv\')"', '💥 [FATAL OOM] Container memory exceeded limit (512MB)! Process killed by kernel OOM-Killer.', true);
+      setResourceUI(512, 100, 'killed');
+    }
+
+    function setResourceUI(mem, cpu, status) {
+      document.getElementById('memUsageVal').innerText = `${mem} MB`;
+      document.getElementById('cpuLoadVal').innerText = `${cpu.toFixed(1)} %`;
+      const tag = document.getElementById('oomStatusTag');
+      if (status === 'safe') {
+        tag.className = 'oom-status-tag oom-safe';
+        tag.innerHTML = '<span>🛡️</span> OOM KILLER: PREVENTED (정상)';
+      } else if (status === 'warn') {
+        tag.className = 'oom-status-tag oom-warn';
+        tag.innerHTML = '<span>⚠️</span> MEMORY HIGH: 480MB WARNING';
+      } else {
+        tag.className = 'oom-status-tag oom-killed';
+        tag.innerHTML = '<span>💥</span> CONTAINER KILLED (OOM EXCEEDED)';
+      }
+    }
+
+    // Chunk Streaming Animation
+    let chunkInterval = null;
+    function startChunkStreamProcess() {
+      clearInterval(chunkInterval);
+      playBeep(700, 'sine', 0.15);
+      const boxes = document.querySelectorAll('.chunk-box');
+      boxes.forEach(b => { b.className = 'chunk-box'; });
+
+      let current = 0;
+      logTerm('$', 'python process_chunks.py --chunksize 100000', '[*] 10만 행 단위 청크 스트리밍 연산을 시작합니다...');
+
+      chunkInterval = setInterval(() => {
+        if (current < boxes.length) {
+          boxes.forEach((b, idx) => {
+            if (idx < current) b.className = 'chunk-box done';
+            else if (idx === current) b.className = 'chunk-box active';
+          });
+          current++;
+          document.getElementById('chunkProgressText').innerText = `${current} / 10 PROCESSING...`;
+          setResourceUI(160 + Math.random() * 35, 30 + Math.random() * 20, 'safe');
+          playBeep(500 + current * 40, 'sine', 0.05);
+        } else {
+          boxes.forEach(b => b.className = 'chunk-box done');
+          clearInterval(chunkInterval);
+          document.getElementById('chunkProgressText').innerText = `10 / 10 COMPLETED (1,000,000 rows)`;
+          logTerm(null, null, '✅ [SUCCESS] 100만 행 전수 연산 완료! 피크 메모리: 188MB (OOM 제로 달성)', false, true);
+          setResourceUI(182, 12.0, 'safe');
+          playBeep(900, 'triangle', 0.3);
+        }
+      }, 400);
+    }
+
+    // Canvas Memory Chart Animation
+    let historyData = [];
+    for (let i = 0; i < 40; i++) historyData.push(180 + Math.sin(i * 0.3) * 15);
+
+    function drawChart() {
+      const w = streamCanvas.width;
+      const h = streamCanvas.height;
+      streamCtx.fillStyle = '#03050c';
+      streamCtx.fillRect(0, 0, w, h);
+
+      // 512MB Hard Limit Red Line
+      const limitY = h * 0.15;
+      streamCtx.strokeStyle = 'rgba(239, 68, 68, 0.7)';
+      streamCtx.setLineDash([4, 4]);
+      streamCtx.lineWidth = 1.5;
+      streamCtx.beginPath();
+      streamCtx.moveTo(0, limitY);
+      streamCtx.lineTo(w, limitY);
+      streamCtx.stroke();
+      streamCtx.setLineDash([]);
+
+      streamCtx.fillStyle = '#f87171';
+      streamCtx.font = '10px monospace';
+      streamCtx.fillText('512 MB HARD LIMIT', 10, limitY - 4);
+
+      // Memory Usage Curve
+      historyData.shift();
+      historyData.push(175 + Math.random() * 20);
+
+      streamCtx.strokeStyle = '#818cf8';
+      streamCtx.lineWidth = 2.5;
+      streamCtx.beginPath();
+      const step = w / (historyData.length - 1);
+      historyData.forEach((val, i) => {
+        const y = h - (val / 550) * h;
+        if (i === 0) streamCtx.moveTo(0, y);
+        else streamCtx.lineTo(i * step, y);
+      });
+      streamCtx.stroke();
+
+      requestAnimationFrame(drawChart);
+    }
+    requestAnimationFrame(drawChart);
+
+    function openHelpModal() { document.getElementById('helpModal').classList.add('show'); }
+    function closeHelpModal() { document.getElementById('helpModal').classList.remove('show'); }
+  </script>
+</body>
+</html>
