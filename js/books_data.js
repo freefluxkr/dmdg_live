@@ -4,6 +4,39 @@
  */
 window.NOVELS_DATA = [
   {
+    "id": "book-21891",
+    "title": "비화재보 제로에 도전하는 지능형 화재 감지 및 소방청 119 자동 연계 시스템",
+    "subtitle": "위키독스 공식 Book ID: 21891",
+    "author": "Hamilton.Kang & SafeTech Labs",
+    "persona": "DMDG SafeTech",
+    "genre": "지능형 방재 클라우드 & 소방청 119 연계",
+    "badge": "✨ NEW 2026 완간",
+    "category": "tech, fire-safety, dst, iot",
+    "wikidocsUrl": "https://wikidocs.net/book/21891",
+    "color": {
+      "from": "#450a0a",
+      "to": "#09090b",
+      "accent": "#ef4444",
+      "glow": "#ef444466"
+    },
+    "synopsis": "골든타임 5분 사수! 뎀스터-셰이퍼(DST) 다중 센서 융합과 스마트시티·소방청 119 표준 API 직결 연계 실무 바이블",
+    "charCount": 54200,
+    "readingTime": "약 90분",
+    "chapterCount": 22,
+    "chapters": [
+      {
+        "id": 464624,
+        "title": "FrontPage (도서 소개 & 아키텍처 로드맵)",
+        "content": "## 📖 《비화재보 제로에 도전하는 지능형 화재 감지 및 소방청 119 자동 연계 시스템》\\n\\n[wikidocs.net/book/21891](https://wikidocs.net/book/21891)\\n\\n비화재보 0%와 소방청 119 직결 자동 호출을 완벽하게 구현하는 실전 엔지니어링 바이블!"
+      },
+      {
+        "id": 464625,
+        "title": "00장. 프롤로그: 소방관의 생명과 골든타임을 지키는 무결점 소프트웨어",
+        "content": "## 00장. 프롤로그\\n\\n소방관의 생명과 골든타임을 지키는 무결점 소프트웨어의 시작!"
+      }
+    ]
+  },
+  {
     "id": "book-21887",
     "title": "내 PC에서 시작하는 피지컬 AI & ROS 2",
     "subtitle": "위키독스 공식 Book ID: 21887",
