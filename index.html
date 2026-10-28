@@ -125,9 +125,9 @@
         당신의 목소리로 다음글을 읽어주세요 — 당목담글(DMDG)
       </div>
       <div style="margin-top: 1.25rem;">
-        <button onclick="openCourseModal()" style="background: rgba(0, 168, 150, 0.12); border: 1.5px solid var(--dmdg-teal); color: var(--dmdg-navy); padding: 0.65rem 1.45rem; border-radius: 9999px; font-size: 0.92rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s ease; box-shadow: 0 4px 14px rgba(0, 168, 150, 0.15);" onmouseover="this.style.background='var(--dmdg-teal)'; this.style.color='#fff';" onmouseout="this.style.background='rgba(0, 168, 150, 0.12)'; this.style.color='var(--dmdg-navy)';">
-          <span>🔥 [수강생 모집] Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정</span>
-          <span id="hero-live-applicant-badge" style="background: linear-gradient(135deg, #ef4444, #f59e0b); color: #fff; padding: 0.18rem 0.65rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 900; margin-left: 0.25rem; box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);">정원 10명 조기마감! · 실시간 대기 4명 접수 중 (11/30 마감) ➔</span>
+        <button onclick="openCourseModal()" style="background: rgba(15, 23, 42, 0.08); border: 1.5px solid #64748b; color: #1e293b; padding: 0.65rem 1.45rem; border-radius: 9999px; font-size: 0.92rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06);" onmouseover="this.style.background='#1e293b'; this.style.color='#fff';" onmouseout="this.style.background='rgba(15, 23, 42, 0.08)'; this.style.color='#1e293b';">
+          <span>🏁 [수강 접수 마감] Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정</span>
+          <span style="background: linear-gradient(135deg, #475569, #334155); color: #fff; padding: 0.18rem 0.65rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 900; margin-left: 0.25rem; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">정원 초과 조기 마감 완료 (성원에 감사드립니다) ➔</span>
         </button>
       </div>
     </div>
@@ -1048,9 +1048,9 @@
       <!-- VIEW 1: 과정 소개 화면 (Intro View) -->
       <div id="course-intro-view">
         <div class="course-badges-row">
-          <span class="course-badge-tag gold">📅 11월 30일(월) 최종 마감</span>
-          <span class="course-badge-tag emerald">🎉 정원 10명 조기 마감 (개강 확정)</span>
-          <span class="course-badge-tag cyan">대기자 접수 중</span>
+          <span class="course-badge-tag gold" style="background:#475569; color:#fff;">🏁 접수 전면 마감</span>
+          <span class="course-badge-tag emerald">🎉 정원 초과 조기 마감</span>
+          <span class="course-badge-tag cyan">다음 기수 추후 공지</span>
         </div>
 
         <h2 class="course-modal-title">
@@ -1104,13 +1104,14 @@
         </div>
 
         <!-- Notice Banner -->
-        <div class="course-notice-banner">
+        <div class="course-notice-banner" style="border-left-color: #64748b;">
           <span class="course-notice-icon">📢</span>
           <div>
-            <div id="course-notice-main-title" class="course-notice-title">🎉 정원 10명 조기 마감! 현재 대기자 접수 중 (11월 30일 최종 마감)</div>
+            <div id="course-notice-main-title" class="course-notice-title" style="color: #94a3b8;">🎉 [공지] 모집 인원 초과로 수강생 모집이 전면 조기 마감되었습니다.</div>
             <div class="course-notice-sub">
-              국민내일배움카드 소지자 국비 지원 연계 가능 · 정원 10명 초과 시 결원 발생 대비 [대기 순번]으로 우선 배정됩니다.<br>
-              <strong style="color: #fbbf24;">📍 신청 마감 : 2026년 11월 30일(월) 자정까지 · 강의장 : 성남시 태평역 부근 예정</strong>
+              뜨거운 성원에 감사드립니다. 정원 초과로 인해 본 과정의 모든 접수가 마감되었습니다.<br>
+              수강 확정자 분들께는 개별 안내가 완료되었으며, 결원 발생 시 대기자 분들께 순차 연락드립니다.<br>
+              <strong style="color: #38bdf8;">📍 다음 기수 개강 시 DMDG LIVE 공지사항을 통해 별도 안내해 드리겠습니다.</strong>
             </div>
           </div>
         </div>
@@ -1118,22 +1119,22 @@
         <!-- Live Goal Bar -->
         <div class="course-goal-box">
           <div class="course-goal-header">
-            <span>실시간 접수 현황 (정원 10명 + 대기자)</span>
-            <span id="modal-applicant-count-text">정원 10명 마감 · 대기자 접수 중</span>
+            <span>최종 접수 현황 (정원 초과 마감)</span>
+            <span id="modal-applicant-count-text" style="color: #10b981; font-weight:800;">정원 초과로 접수 마감 완료</span>
           </div>
           <div class="course-goal-bar-bg">
-            <div id="modal-applicant-progress-bar" class="course-goal-bar-fill" style="width: 100%; background: linear-gradient(90deg, #10b981, #f59e0b);"></div>
+            <div id="modal-applicant-progress-bar" class="course-goal-bar-fill" style="width: 100%; background: linear-gradient(90deg, #10b981, #059669);"></div>
           </div>
         </div>
 
         <!-- Bottom Actions -->
         <div class="course-modal-actions" style="flex-wrap: wrap; gap: 0.75rem;">
-          <button onclick="dismissCourseModalToday()" class="btn-modal-dismiss">오늘 하루 보지 않기</button>
+          <button onclick="dismissCourseModalToday()" class="btn-modal-dismiss">창 닫기</button>
           <a href="./curriculum.html" class="btn-modal-dismiss" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; color: #00f2fe; border-color: rgba(0, 242, 254, 0.4);" title="8주차 상세 강의계획서 및 공식 교재 전문 보기">
             <span>📖 상세 커리큘럼 전문 보기 ➔</span>
           </a>
-          <button onclick="switchToCourseApply()" class="btn-course-apply-cta">
-            <span id="btnModalGoApplyText">📝 수강 대기자 신청하기 ➔</span>
+          <button disabled class="btn-course-apply-cta" style="background: #475569; cursor: not-allowed; opacity: 0.85; box-shadow: none;">
+            <span>🚫 모집 마감되었습니다 (성원 감사)</span>
           </button>
         </div>
       </div>
@@ -1318,11 +1319,11 @@
       // 항상 소개 화면(STEP 1)을 기본값으로 초기화
       switchToCourseIntro();
 
-      // Auto Popup: 접속 시 무조건 [과정 소개 화면(STEP 1)]으로 먼저 팝업 오픈
-      const dismissedUntil = localStorage.getItem('dmdg_course_modal_dismissed_until');
-      if (!dismissedUntil || Date.now() > Number(dismissedUntil)) {
-        setTimeout(openCourseModal, 600);
-      }
+      // Auto Popup: 모집 마감으로 인해 자동 팝업 오픈 비활성화 (버튼 클릭 시에만 확인 가능)
+      // const dismissedUntil = localStorage.getItem('dmdg_course_modal_dismissed_until');
+      // if (!dismissedUntil || Date.now() > Number(dismissedUntil)) {
+      //   setTimeout(openCourseModal, 600);
+      // }
     });
 
     // ── Course Modal Control Functions ────────────────────────────────────────
