@@ -466,6 +466,60 @@ a {
   color: #FFFFFF;
 }
 
+.badge-tag.new-star {
+  background: linear-gradient(135deg, #FFB703, #FB8500);
+  color: #0B1B3D !important;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  box-shadow: 0 0 10px rgba(255, 183, 3, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  animation: starPulse 2.2s infinite ease-in-out;
+  letter-spacing: -0.01em;
+}
+
+.badge-tag.new-emerald {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #FFFFFF !important;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  animation: emeraldPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(255, 183, 3, 0.5);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 16px rgba(251, 133, 0, 0.9);
+  }
+}
+
+@keyframes emeraldPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 16px rgba(5, 150, 105, 0.9);
+  }
+}
+
+/* 신규 등록 콘텐츠 하이라이트 카드 스타일 */
+.is-new-card {
+  position: relative !important;
+  border: 1.5px solid rgba(251, 133, 0, 0.55) !important;
+  box-shadow: 0 4px 18px rgba(251, 133, 0, 0.16) !important;
+}
+
 .app-card-desc {
   font-size: 0.78rem;
   color: var(--text-sub);
