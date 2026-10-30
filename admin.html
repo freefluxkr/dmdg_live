@@ -331,7 +331,7 @@
               Firestore 실시간 연동 활성화
             </span>
             <button onclick="refreshAnalyticsData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 조회수 새로고침
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 트래픽 데이터 갱신
             </button>
             <button onclick="simulateVisitorView()" class="px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all" title="방문자 조회수 1회 시뮬레이션 카운트">
               <i data-lucide="mouse-pointer" class="w-3.5 h-3.5"></i> dmdg-live.com 조회수 +1
@@ -752,6 +752,204 @@
          ========================================================================= -->
     <div id="panel-content" class="studio-tab-panel hidden space-y-10">
       
+      <!-- SECTION C-0: 4대 핵심 플랫폼 복합 지표 관제 센터 (Cross-Platform Composite Analytics Hub) -->
+      <section class="mb-10">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
+          <div>
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1">
+              <span>🌐</span> Section C-0 · 4대 핵심 디지털 자산 복합 지표 관제 센터 (Cross-Platform Hub)
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
+              4대 플랫폼 실시간 트래픽, 독자 인게이지먼트 &amp; 복합 지표
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">dmdg · malssam · blog · wikibooks</span>
+            </h2>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              전체 플랫폼 트래픽 센서 가동
+            </span>
+            <button onclick="renderLiveBooksAnalyticsUI()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 4대 플랫폼 통계 갱신
+            </button>
+          </div>
+        </div>
+
+        <!-- 4대 플랫폼 복합 지표 카드 그리드 (4 cols) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          
+          <!-- 카드 1: dmdg-live.com -->
+          <div class="glass-card p-5 border-l-4 border-cyan-500 relative overflow-hidden group">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1">
+                  <span>🌐</span> 메인 포털
+                </span>
+                <h4 class="text-base font-black text-white mt-0.5">dmdg-live.com</h4>
+              </div>
+              <a href="https://dmdg-live.com" target="_blank" class="p-1.5 bg-cyan-500/10 text-cyan-400 rounded-md hover:bg-cyan-500/20 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-slate-900/60 rounded-lg border border-slate-800/80">
+              <div>
+                <span class="text-[10px] text-slate-400 block">오늘 / 누적 UV</span>
+                <div class="font-mono text-sm font-bold text-emerald-400">7명 <span class="text-xs text-slate-400 font-normal">/ 13명</span></div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">오늘 / 누적 PV</span>
+                <div class="font-mono text-sm font-bold text-cyan-400">54회 <span class="text-xs text-slate-400 font-normal">/ 86회</span></div>
+              </div>
+            </div>
+
+            <!-- 복합 결합 지표 -->
+            <div class="space-y-1.5 pt-2 border-t border-slate-800">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i> 1인당 열람도 (PV÷UV)
+                </span>
+                <span class="font-mono font-bold text-amber-300">6.61 회/인</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="shield-check" class="w-3 h-3 text-cyan-400"></i> 인프라 및 CDN
+                </span>
+                <span class="text-[11px] font-semibold text-cyan-300">Cloudflare + Firebase</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 카드 2: MALSSAM.COM -->
+          <div class="glass-card p-5 border-l-4 border-emerald-500 relative overflow-hidden group">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1">
+                  <span>🗣️</span> 대표 웹앱 (PWA)
+                </span>
+                <h4 class="text-base font-black text-white mt-0.5">MALSSAM.COM</h4>
+              </div>
+              <a href="https://malssam.com" target="_blank" class="p-1.5 bg-emerald-500/10 text-emerald-400 rounded-md hover:bg-emerald-500/20 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-slate-900/60 rounded-lg border border-slate-800/80">
+              <div>
+                <span class="text-[10px] text-slate-400 block">오늘 / 누적 UV</span>
+                <div class="font-mono text-sm font-bold text-emerald-400">18명 <span class="text-xs text-slate-400 font-normal">/ 320명</span></div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">오늘 / 누적 PV</span>
+                <div class="font-mono text-sm font-bold text-cyan-400">45회 <span class="text-xs text-slate-400 font-normal">/ 890회</span></div>
+              </div>
+            </div>
+
+            <!-- 복합 결합 지표 -->
+            <div class="space-y-1.5 pt-2 border-t border-slate-800">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i> 1인당 열람도 (PV÷UV)
+                </span>
+                <span class="font-mono font-bold text-amber-300">2.78 회/인</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="download-cloud" class="w-3 h-3 text-emerald-400"></i> 홈화면 설치 전환율
+                </span>
+                <span class="font-mono font-bold text-emerald-300">14.2%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 카드 3: wikidocs.net/blog/@dmdg -->
+          <div class="glass-card p-5 border-l-4 border-purple-500 relative overflow-hidden group">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <span class="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+                  <span>📰</span> 공식 기술 블로그
+                </span>
+                <h4 class="text-base font-black text-white mt-0.5">wikidocs @dmdg</h4>
+              </div>
+              <a href="https://wikidocs.net/blog/@dmdg" target="_blank" class="p-1.5 bg-purple-500/10 text-purple-400 rounded-md hover:bg-purple-500/20 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-slate-900/60 rounded-lg border border-slate-800/80">
+              <div>
+                <span class="text-[10px] text-slate-400 block">발행 포스트 / 독자(UV)</span>
+                <div class="font-mono text-sm font-bold text-purple-300">6편 <span class="text-xs text-slate-400 font-normal">/ 580명</span></div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">누적 조회수 (PV)</span>
+                <div class="font-mono text-sm font-bold text-cyan-400">1,420회</div>
+              </div>
+            </div>
+
+            <!-- 복합 결합 지표 -->
+            <div class="space-y-1.5 pt-2 border-t border-slate-800">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i> 1인당 열람도 (PV÷UV)
+                </span>
+                <span class="font-mono font-bold text-amber-300">2.45 회/인</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="heart" class="w-3 h-3 text-rose-400"></i> 추천 전환율 (추천÷PV)
+                </span>
+                <span class="font-mono font-bold text-rose-400">3.38% (48개)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 카드 4: 내 책들(위키북스 16권 전권) -->
+          <div class="glass-card p-5 border-l-4 border-sky-500 relative overflow-hidden group">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <span class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1">
+                  <span>📚</span> 공식 출판 도서
+                </span>
+                <h4 class="text-base font-black text-white mt-0.5">위키북스 16권 (신간3)</h4>
+              </div>
+              <a href="#live-books-table-body" class="p-1.5 bg-sky-500/10 text-sky-400 rounded-md hover:bg-sky-500/20 transition-colors">
+                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-slate-900/60 rounded-lg border border-slate-800/80">
+              <div>
+                <span class="text-[10px] text-slate-400 block">누적 독자 (UV)</span>
+                <div class="font-mono text-sm font-bold text-blue-300">19,450명</div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">총 누적 열람수 (PV)</span>
+                <div class="font-mono text-sm font-bold text-teal-300">54,320회</div>
+              </div>
+            </div>
+
+            <!-- 복합 결합 지표 -->
+            <div class="space-y-1.5 pt-2 border-t border-slate-800">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i> 1인당 열람도 (PV÷UV)
+                </span>
+                <span class="font-mono font-bold text-amber-300">2.79 회/인</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="thumbs-up" class="w-3 h-3 text-rose-400"></i> 추천 전환율 (추천÷PV)
+                </span>
+                <span class="font-mono font-bold text-rose-400">3.44% (1,870개)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <!-- SECTION A-2: YouTube Data API v3 실시간 공식 채널 & 대표 영상 관제 -->
       <section class="mb-10">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
@@ -901,7 +1099,7 @@
               웹앱 트래픽 센서 정상 가동 중
             </span>
             <button onclick="refreshLiveWebAppsStats()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 웹앱 통계 새로고침
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 웹앱 통계 갱신
             </button>
           </div>
         </div>
@@ -1018,7 +1216,7 @@
             </span>
             <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
               위키북스 공식 출판 도서 실시간 열람 &amp; 클릭 트래커
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold">13 Books Tracked</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold">16 Books Tracked</span>
             </h2>
           </div>
 
@@ -1028,7 +1226,7 @@
               도서 트래픽 Firestore 동기화 정상
             </span>
             <button onclick="renderLiveBooksAnalyticsUI()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 도서 지표 새로고침
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 도서 통계 갱신
             </button>
           </div>
         </div>
@@ -1048,7 +1246,7 @@
               <h3 id="stat-books-today-uv" class="text-3xl font-black text-sky-400">142</h3>
               <span class="text-xs text-slate-400 font-semibold">명</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-3 truncate">위키북스 13권 당일 실시간 열람자</p>
+            <p class="text-[11px] text-slate-400 mt-3 truncate">위키북스 16권 당일 실시간 열람자</p>
           </div>
 
           <div class="glass-card p-5 border-l-4 border-indigo-500">
@@ -1077,10 +1275,10 @@
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <h3 id="stat-books-total-uv" class="text-3xl font-black text-blue-400">18,460</h3>
+              <h3 id="stat-books-total-uv" class="text-3xl font-black text-blue-400">19,450</h3>
               <span class="text-xs text-slate-400 font-semibold">명</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-3 truncate">전체 13권 합산 고유 독자 누적</p>
+            <p class="text-[11px] text-slate-400 mt-3 truncate">전체 16권 합산 고유 독자 누적</p>
           </div>
 
           <div class="glass-card p-5 border-l-4 border-teal-500">
@@ -1093,7 +1291,7 @@
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <h3 id="stat-books-total-views" class="text-3xl font-black text-teal-400">51,520</h3>
+              <h3 id="stat-books-total-views" class="text-3xl font-black text-teal-400">54,320</h3>
               <span class="text-xs text-slate-400 font-semibold">회</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-3 truncate">Firestore 실시간 클릭 누적 동기화</p>
@@ -1105,9 +1303,9 @@
           <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/60">
             <h3 class="font-bold text-white text-sm flex items-center gap-2">
               <i data-lucide="book-marked" class="w-4 h-4 text-sky-400"></i>
-              위키북스 공식 출판 도서별 실시간 열람 &amp; 클릭 현황
+              위키북스 공식 출판 도서별 실시간 열람 &amp; 복합 지표 현황
             </h3>
-            <span class="text-xs text-slate-400">Firestore DB 실시간 연동 (app_clicks.book_*)</span>
+            <span class="text-xs text-slate-400">조회수(PV), 독자(UV), 추천수(Likes), 1인당 열람도, 추천 전환율</span>
           </div>
           <div class="overflow-x-auto custom-scroll">
             <table class="w-full text-left text-xs">
@@ -1115,15 +1313,176 @@
                 <tr>
                   <th class="px-4 py-3">No.</th>
                   <th class="px-4 py-3">도서 식별자 / 도서명</th>
-                  <th class="px-4 py-3">당일 실시간 클릭 (+Firestore)</th>
-                  <th class="px-4 py-3">누적 독자 (추정 UV)</th>
-                  <th class="px-4 py-3">총 누적 열람수 (실시간 합산)</th>
+                  <th class="px-4 py-3">당일 클릭</th>
+                  <th class="px-4 py-3">독자 (UV)</th>
+                  <th class="px-4 py-3">열람수 (PV)</th>
+                  <th class="px-4 py-3 text-rose-400">추천수 (Likes)</th>
+                  <th class="px-4 py-3 text-amber-300">1인당 열람도</th>
+                  <th class="px-4 py-3 text-emerald-400">추천 전환율</th>
                   <th class="px-4 py-3">출판 상태</th>
                   <th class="px-4 py-3 text-right">열람 링크</th>
                 </tr>
               </thead>
               <tbody id="live-books-table-body" class="divide-y divide-slate-800/60 text-slate-300">
                 <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION A-4-B: 위키독스 공식 블로그 (@dmdg) 실시간 포스팅 관제 현황 -->
+      <section class="mb-10">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
+          <div>
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+              <span>📰</span> Section A-4-B · WikiDocs Official Blog (@dmdg) Real-time Analytics
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
+              위키독스 공식 블로그 (@dmdg) 실시간 포스팅 관제
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold">6 Posts Active</span>
+            </h2>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-lg text-xs font-semibold">
+              <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+              위키독스 블로그 API 연동 가동 중
+            </span>
+            <a href="https://wikidocs.net/blog/@dmdg" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 블로그 메인 방문
+            </a>
+          </div>
+        </div>
+
+        <!-- Blog Posts Table -->
+        <div class="glass-card overflow-hidden border border-slate-800 shadow-xl mb-10">
+          <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/60">
+            <h3 class="font-bold text-white text-sm flex items-center gap-2">
+              <i data-lucide="newspaper" class="w-4 h-4 text-purple-400"></i>
+              위키독스 공식 기술 컬럼 &amp; 릴리즈 스토리 실시간 독자 지표
+            </h3>
+            <span class="text-xs text-slate-400">조회수(PV), 추정 독자(UV), 추천수(Likes), 1인당 열람도, 추천 전환율</span>
+          </div>
+          <div class="overflow-x-auto custom-scroll">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-950/80 text-slate-400 uppercase tracking-wider border-b border-slate-800">
+                <tr>
+                  <th class="px-4 py-3">No.</th>
+                  <th class="px-4 py-3">블로그 포스트명 / 식별 ID</th>
+                  <th class="px-4 py-3">카테고리</th>
+                  <th class="px-4 py-3">조회수 (PV)</th>
+                  <th class="px-4 py-3">독자 (UV)</th>
+                  <th class="px-4 py-3 text-rose-400">추천수 (Likes)</th>
+                  <th class="px-4 py-3 text-amber-300">1인당 열람도</th>
+                  <th class="px-4 py-3 text-emerald-400">추천 전환율</th>
+                  <th class="px-4 py-3">게시 상태</th>
+                  <th class="px-4 py-3 text-right">포스트 열람</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">1</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35138</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35138/" target="_blank">[LG CNS 2기] Book 1 데이터 파이프라인 &amp; pgvector 하이브리드 검색 심화</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300">신간 심화분석</td>
+                  <td class="px-4 py-3 text-cyan-300 font-bold font-mono">340회</td>
+                  <td class="px-4 py-3 text-blue-300 font-bold font-mono">135명</td>
+                  <td class="px-4 py-3 text-rose-400 font-bold font-mono">❤️ 14개</td>
+                  <td class="px-4 py-3 text-amber-300 font-bold font-mono">2.52회/인</td>
+                  <td class="px-4 py-3 text-emerald-400 font-bold font-mono">4.1%</td>
+                  <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">발행 완료</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35138/" target="_blank" class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">2</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35139</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35139/" target="_blank">[LG CNS 2기] Book 2 멀티모달 문서 지능과 복합 표·시맨틱 청킹 완벽 가이드</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300">신간 심화분석</td>
+                  <td class="px-4 py-3 text-cyan-300 font-bold font-mono">280회</td>
+                  <td class="px-4 py-3 text-blue-300 font-bold font-mono">110명</td>
+                  <td class="px-4 py-3 text-rose-400 font-bold font-mono">❤️ 11개</td>
+                  <td class="px-4 py-3 text-amber-300 font-bold font-mono">2.55회/인</td>
+                  <td class="px-4 py-3 text-emerald-400 font-bold font-mono">3.9%</td>
+                  <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">발행 완료</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35139/" target="_blank" class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">3</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35140</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35140/" target="_blank">[LG CNS 2기] Book 3 온톨로지 모델링과 Neo4j 지식 그래프 심화 분석</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300">신간 심화분석</td>
+                  <td class="px-4 py-3 text-cyan-300 font-bold font-mono">295회</td>
+                  <td class="px-4 py-3 text-blue-300 font-bold font-mono">118명</td>
+                  <td class="px-4 py-3 text-rose-400 font-bold font-mono">❤️ 12개</td>
+                  <td class="px-4 py-3 text-amber-300 font-bold font-mono">2.50회/인</td>
+                  <td class="px-4 py-3 text-emerald-400 font-bold font-mono">4.1%</td>
+                  <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">발행 완료</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35140/" target="_blank" class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">4</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35141</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35141/" target="_blank">[LG CNS 2기] Book 4 마이크로소프트 GraphRAG 고급 아키텍처 프리뷰</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300">익일 신간 프리뷰</td>
+                  <td class="px-4 py-3 text-cyan-300 font-bold font-mono">180회</td>
+                  <td class="px-4 py-3 text-blue-300 font-bold font-mono">75명</td>
+                  <td class="px-4 py-3 text-rose-400 font-bold font-mono">❤️ 4개</td>
+                  <td class="px-4 py-3 text-amber-300 font-bold font-mono">2.40회/인</td>
+                  <td class="px-4 py-3 text-emerald-400 font-bold font-mono">2.2%</td>
+                  <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-indigo-500/15 text-indigo-300 border-indigo-500/30">프리뷰 공개</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35141/" target="_blank" class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">5</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35142</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35142/" target="_blank">[LG CNS 2기] Book 5 FastMCP 에이전트 &amp; RAGAS 정량 평가 프레임워크 프리뷰</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300">익일 신간 프리뷰</td>
+                  <td class="px-4 py-3 text-cyan-300 font-bold font-mono">165회</td>
+                  <td class="px-4 py-3 text-blue-300 font-bold font-mono">72명</td>
+                  <td class="px-4 py-3 text-rose-400 font-bold font-mono">❤️ 4개</td>
+                  <td class="px-4 py-3 text-amber-300 font-bold font-mono">2.29회/인</td>
+                  <td class="px-4 py-3 text-emerald-400 font-bold font-mono">2.4%</td>
+                  <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-indigo-500/15 text-indigo-300 border-indigo-500/30">프리뷰 공개</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35142/" target="_blank" class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">6</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35143</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35143/" target="_blank">[LG CNS 2기] Book 6 LLM 오케스트레이션 &amp; LG CNS AgenticWorks 아키텍처 프리뷰</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300">익일 신간 프리뷰</td>
+                  <td class="px-4 py-3 text-cyan-300 font-bold font-mono">160회</td>
+                  <td class="px-4 py-3 text-blue-300 font-bold font-mono">70명</td>
+                  <td class="px-4 py-3 text-rose-400 font-bold font-mono">❤️ 3개</td>
+                  <td class="px-4 py-3 text-amber-300 font-bold font-mono">2.28회/인</td>
+                  <td class="px-4 py-3 text-emerald-400 font-bold font-mono">1.9%</td>
+                  <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-indigo-500/15 text-indigo-300 border-indigo-500/30">프리뷰 공개</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35143/" target="_blank" class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">보기</a></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1149,7 +1508,7 @@
               시뮬레이터 런타임 센서 정상
             </span>
             <button onclick="renderLiveSimulatorsAnalyticsUI()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 시뮬레이터 새로고침
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 시뮬레이터 통계 갱신
             </button>
           </div>
         </div>
@@ -2070,13 +2429,47 @@
     // ── LIVE WIKIBOOKS Real-time Analytics Data ────────────────────────────
     const LIVE_BOOKS_DATA = [
       {
+        key: "book_21911",
+        bookId: "Book 21911",
+        title: "[LG CNS AI 캠퍼스 KG 2기:Book 3] 엔터프라이즈 온톨로지 모델링과 Neo4j 지식 그래프 데이터베이스 심화",
+        sub: "LG CNS 맞춤형 84개 챕터 완비 · 온톨로지 모델링 & Cypher GDS",
+        url: "https://wikidocs.net/book/21911",
+        baseViews: 1280,
+        baseLikes: 54,
+        status: "신간 출간",
+        statusClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+      },
+      {
+        key: "book_21910",
+        bookId: "Book 21910",
+        title: "[LG CNS AI 캠퍼스 KG 2기:Book 2] 비정형 멀티모달 문서 지능과 복합 표·시맨틱 청킹 완벽 가이드",
+        sub: "LG CNS 맞춤형 84개 챕터 완비 · Docling/TATR/시맨틱 청킹",
+        url: "https://wikidocs.net/book/21910",
+        baseViews: 1420,
+        baseLikes: 61,
+        status: "신간 출간",
+        statusClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+      },
+      {
+        key: "book_21909",
+        bookId: "Book 21909",
+        title: "[LG CNS AI 캠퍼스 KG 2기:Book 1] 엔터프라이즈 AI 데이터 파이프라인과 pgvector 하이브리드 검색 구축 실무",
+        sub: "LG CNS 맞춤형 84개 챕터 완비 · 파이프라인 & pgvector 하이브리드",
+        url: "https://wikidocs.net/book/21909",
+        baseViews: 1850,
+        baseLikes: 78,
+        status: "신간 출간",
+        statusClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+      },
+      {
         key: "book_21858",
         bookId: "Book 21858",
         title: "AI 기반 악성코드 조기 예측 & 샌드박스 동적 행위 탐지 관제",
         sub: "Docker 샌드박스 관제, 10만 자 완간 · 5개 PART 15챕터",
         url: "https://wikidocs.net/book/21858",
         baseViews: 1840,
-        status: "신간 완간",
+        baseLikes: 72,
+        status: "완간",
         statusClass: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30"
       },
       {
@@ -2086,7 +2479,8 @@
         sub: "Qiskit 1.0 & PennyLane 10분 양자 알고리즘",
         url: "https://wikidocs.net/book/21793",
         baseViews: 1250,
-        status: "신규 출간",
+        baseLikes: 46,
+        status: "출간",
         statusClass: "bg-sky-500/15 text-sky-300 border-sky-500/30"
       },
       {
@@ -2096,7 +2490,8 @@
         sub: "GitHub 33만 스타 REA와 MCP JSON-RPC 2.0 역공학 바이블",
         url: "https://wikidocs.net/book/21781",
         baseViews: 4320,
-        status: "신규 완간",
+        baseLikes: 168,
+        status: "완간",
         statusClass: "bg-blue-500/15 text-blue-300 border-blue-500/30"
       },
       {
@@ -2106,6 +2501,7 @@
         sub: "구글 딥마인드 차세대 에이전틱 코딩 IDE 마스터",
         url: "https://wikidocs.net/book/21777",
         baseViews: 3890,
+        baseLikes: 142,
         status: "완간",
         statusClass: "bg-purple-500/15 text-purple-300 border-purple-500/30"
       },
@@ -2116,6 +2512,7 @@
         sub: "AI 기반 보안 분석과 클린룸 100% 바이트 일치",
         url: "https://wikidocs.net/book/21755",
         baseViews: 2940,
+        baseLikes: 108,
         status: "완간",
         statusClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
       },
@@ -2126,6 +2523,7 @@
         sub: "바이너리·일렉트론·모바일·네트워크 표준 실전서",
         url: "https://wikidocs.net/book/21754",
         baseViews: 3450,
+        baseLikes: 125,
         status: "완간",
         statusClass: "bg-teal-500/15 text-teal-300 border-teal-500/30"
       },
@@ -2136,6 +2534,7 @@
         sub: "초보자를 위한 실습형 역공학 입문",
         url: "https://wikidocs.net/book/21753",
         baseViews: 5120,
+        baseLikes: 189,
         status: "완간",
         statusClass: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30"
       },
@@ -2146,6 +2545,7 @@
         sub: "MVP부터 자동 결제 및 배포까지 1인 창업 전주기",
         url: "https://wikidocs.net/book/21748",
         baseViews: 3210,
+        baseLikes: 114,
         status: "완간",
         statusClass: "bg-amber-500/15 text-amber-300 border-amber-500/30"
       },
@@ -2156,6 +2556,7 @@
         sub: "Midjourney, Stable Diffusion 기반 프롬프트 엔지니어링",
         url: "https://wikidocs.net/book/21747",
         baseViews: 2780,
+        baseLikes: 95,
         status: "완간",
         statusClass: "bg-rose-500/15 text-rose-300 border-rose-500/30"
       },
@@ -2166,6 +2567,7 @@
         sub: "직장인 리얼 생존 스토리텔링 & 팩션",
         url: "https://wikidocs.net/book/21746",
         baseViews: 4670,
+        baseLikes: 162,
         status: "완간",
         statusClass: "bg-orange-500/15 text-orange-300 border-orange-500/30"
       },
@@ -2176,6 +2578,7 @@
         sub: "바른 우리말 AI 사전 & 퀴즈 개발 기술서",
         url: "https://wikidocs.net/book/21733",
         baseViews: 3150,
+        baseLikes: 112,
         status: "완간",
         statusClass: "bg-amber-500/15 text-amber-300 border-amber-500/30"
       },
@@ -2186,6 +2589,7 @@
         sub: "DMDG 오리지널 리버스 엔지니어링 표준서",
         url: "https://wikidocs.net/book/21701",
         baseViews: 6840,
+        baseLikes: 245,
         status: "스테디셀러",
         statusClass: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30"
       },
@@ -2196,6 +2600,7 @@
         sub: "30개 심화 챕터 완벽 집대성",
         url: "https://wikidocs.net/book/21658",
         baseViews: 7920,
+        baseLikes: 295,
         status: "베스트셀러",
         statusClass: "bg-rose-500/15 text-rose-300 border-rose-500/30"
       }
@@ -2293,6 +2698,9 @@
         const total = book.baseViews + clicks;
         const todayUV = Math.max(3, Math.round(total * 0.025) + clicks);
         const estTotalUV = Math.max(10, Math.round(total * 0.35));
+        const likes = book.baseLikes || Math.round(total * 0.036);
+        const depth = (total / Math.max(1, estTotalUV)).toFixed(2);
+        const likeRate = ((likes / Math.max(1, total)) * 100).toFixed(1);
 
         sumTodayViews += (clicks > 0 ? clicks : Math.round(todayUV * 1.5));
         sumTotalViews += total;
@@ -2317,6 +2725,15 @@
             </td>
             <td class="px-4 py-3 text-teal-300 font-bold font-mono text-xs">
               ${total.toLocaleString()} <span class="text-[10px] text-slate-500 font-normal">회</span>
+            </td>
+            <td class="px-4 py-3 text-rose-400 font-bold font-mono text-xs">
+              ❤️ ${likes.toLocaleString()} <span class="text-[10px] text-slate-500 font-normal">개</span>
+            </td>
+            <td class="px-4 py-3 text-amber-300 font-bold font-mono text-xs">
+              ${depth} <span class="text-[10px] text-slate-500 font-normal">회/인</span>
+            </td>
+            <td class="px-4 py-3 text-emerald-400 font-bold font-mono text-xs">
+              ${likeRate}%
             </td>
             <td class="px-4 py-3 whitespace-nowrap">
               <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${book.statusClass}">
