@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LG CNS AI 캠퍼스 KG 2기 · 본과정 대비 사전 학습 자가진단 평가 (Pre-Assessment)</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            },
+            gold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap');
+
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'Pretendard', sans-serif;
+    }
+
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(51, 65, 85, 0.6);
+      border-radius: 1rem;
+    }
+
+    .glass-card-elevated {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(71, 85, 105, 0.6);
+      border-radius: 1.25rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    }
+
+    .option-card {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .option-card:hover {
+      border-color: rgba(16, 185, 129, 0.5);
+      background: rgba(16, 185, 129, 0.05);
+      transform: translateY(-1px);
+    }
+    .option-card.selected {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: #fff; color: #000; }
+      .no-print { display: none !important; }
+      .glass-card, .glass-card-elevated { background: #fff; border: 1px solid #ccc; box-shadow: none; color: #000; }
+      .text-white { color: #000 !important; }
+      .text-slate-300, .text-slate-400 { color: #333 !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-emerald-500 selection:text-white pb-20">
+
+  <!-- Sticky Top Header -->
+  <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <a href="https://dmdg-live.com/sim_lgcns_kg2_hub.html" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors" title="시뮬레이터 허브로 돌아가기">
+          <i data-lucide="chevron-left" class="w-5 h-5"></i>
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-mono">LG CNS AI 캠퍼스 KG 2기</span>
+            <span class="text-[11px] font-semibold text-slate-400 hidden sm:inline">사전 학습(Pre-Course) 4주 완성</span>
+          </div>
+          <h1 class="text-sm sm:text-base font-black text-white">본과정 대비 사전 자가진단 평가 (Pre-Assessment)</h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="text-right hidden sm:block">
+          <span class="text-[10px] text-slate-400 block font-mono">PASS 기준: 80점 / 100점</span>
+          <div class="text-xs font-bold text-amber-400 flex items-center gap-1 justify-end">
+            <i data-lucide="award" class="w-3.5 h-3.5"></i> 얼리버드 인증 배지 수여
+          </div>
+        </div>
+        <button onclick="resetAssessment()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> 초기화
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-4 pt-6 space-y-6">
+
+    <!-- Hero Card -->
+    <div class="glass-card-elevated p-6 border-l-4 border-emerald-500 relative overflow-hidden">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i> Pre-Course Self-Diagnostic Test
+          </span>
+          <h2 class="text-xl sm:text-2xl font-black text-white mt-1">
+            본과정 Book 1~Book 6 완주를 위한 기초 지식 20제
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+            파이썬 비동기, pgvector 벡터 수학, 비정형 텍스트 정제, FastMCP/Docker 아키텍처 4대 영역에 대한 핵심 직관을 점검합니다. 80점 이상 통과 시 본과정 최우선 실습 자격이 부여됩니다.
+          </p>
+        </div>
+
+        <!-- Student Info Input -->
+        <div class="w-full md:w-auto p-4 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2">
+          <span class="text-[11px] font-bold text-slate-300 block">응시자 정보 (결과 리포트 출력용)</span>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" id="student-name" placeholder="성명 (예: 홍길동)" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500">
+            <input type="email" id="student-email" placeholder="이메일 주소" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500">
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Progress Bar -->
+      <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3 w-full sm:w-2/3">
+          <span class="text-xs font-bold text-slate-300 whitespace-nowrap" id="progress-text">진행률: 0 / 20 문항 (0%)</span>
+          <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+            <div id="progress-bar" class="bg-emerald-500 h-full w-0 transition-all duration-300"></div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 self-end sm:self-auto">
+          <span id="unanswered-badge" class="text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">
+            미응답 20문항
+          </span>
+          <button onclick="submitExam()" class="px-5 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-lg text-xs shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-1.5">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i> 채점 및 결과 확인
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exam Content Section -->
+    <div id="exam-container" class="space-y-8">
+      <!-- Questions rendered dynamically -->
+    </div>
+
+    <!-- Exam Bottom Submit Bar -->
+    <div class="glass-card p-5 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-left">
+        <h4 class="text-sm font-bold text-white">모든 문항을 체크하셨나요?</h4>
+        <p class="text-xs text-slate-400 mt-0.5">제출 즉시 채점되며 문항별 정답과 Book 1~6 복습 단원이 안내됩니다.</p>
+      </div>
+      <button onclick="submitExam()" class="w-full sm:w-auto px-8 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-sm shadow-xl shadow-emerald-500/25 transition-all flex items-center justify-center gap-2">
+        <i data-lucide="check-check" class="w-4 h-4"></i>
+        최종 답안 제출 및 실시간 채점하기
+      </button>
+    </div>
+
+    <!-- Result Modal (Hidden by default) -->
+    <div id="result-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+      <div class="glass-card-elevated max-w-2xl w-full p-6 sm:p-8 space-y-6 border border-slate-700 max-h-[90vh] overflow-y-auto custom-scroll">
+        
+        <!-- Modal Header -->
+        <div class="flex justify-between items-start border-b border-slate-800 pb-4">
+          <div>
+            <span id="result-status-badge" class="text-xs font-bold px-3 py-1 rounded-full uppercase font-mono tracking-wider"></span>
+            <h3 class="text-2xl font-black text-white mt-2" id="result-title">사전 학습 평가 결과 성적표</h3>
+            <p class="text-xs text-slate-400 mt-1" id="result-subtitle"></p>
+          </div>
+          <button onclick="closeModal()" class="p-1 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Score Breakdown Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-center">
+            <span class="text-[10px] text-slate-400 block">총 획득 점수</span>
+            <div class="text-2xl font-black text-emerald-400 font-mono mt-1" id="score-total">0 / 100</div>
+          </div>
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-center">
+            <span class="text-[10px] text-slate-400 block">파이썬 코딩</span>
+            <div class="text-lg font-bold text-cyan-400 font-mono mt-1" id="score-area-1">0 / 25</div>
+          </div>
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-center">
+            <span class="text-[10px] text-slate-400 block">DB &amp; 벡터수학</span>
+            <div class="text-lg font-bold text-amber-400 font-mono mt-1" id="score-area-2">0 / 25</div>
+          </div>
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-center">
+            <span class="text-[10px] text-slate-400 block">문서 &amp; 도구</span>
+            <div class="text-lg font-bold text-purple-400 font-mono mt-1" id="score-area-3-4">0 / 50</div>
+          </div>
+        </div>
+
+        <!-- Area Analysis Bars -->
+        <div class="space-y-3 p-4 bg-slate-900/60 rounded-xl border border-slate-800">
+          <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="bar-chart-2" class="w-4 h-4 text-emerald-400"></i> 4대 영역별 성취도 분석
+          </h4>
+          <div class="space-y-2">
+            <div>
+              <div class="flex justify-between text-xs mb-1 font-semibold">
+                <span class="text-slate-400">1. 파이썬 &amp; 비동기 고성능 코딩</span>
+                <span id="bar-text-1" class="font-mono text-cyan-400">0%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div id="bar-fill-1" class="bg-cyan-400 h-full w-0 transition-all"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1 font-semibold">
+                <span class="text-slate-400">2. 데이터베이스 &amp; 벡터 수학 직관</span>
+                <span id="bar-text-2" class="font-mono text-amber-400">0%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div id="bar-fill-2" class="bg-amber-400 h-full w-0 transition-all"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1 font-semibold">
+                <span class="text-slate-400">3. 비정형 문서 처리 &amp; 텍스트 정제</span>
+                <span id="bar-text-3" class="font-mono text-emerald-400">0%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div id="bar-fill-3" class="bg-emerald-400 h-full w-0 transition-all"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1 font-semibold">
+                <span class="text-slate-400">4. 시스템 아키텍처 &amp; 도구 숙련도</span>
+                <span id="bar-text-4" class="font-mono text-purple-400">0%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div id="bar-fill-4" class="bg-purple-400 h-full w-0 transition-all"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommendations Box -->
+        <div id="recommendation-box" class="p-4 rounded-xl border text-xs space-y-2">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap justify-between items-center gap-3 pt-4 border-t border-slate-800">
+          <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i> 성적표 인쇄 / PDF 저장
+          </button>
+
+          <div class="flex items-center gap-2">
+            <button onclick="closeModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold transition-all">
+              문항별 정답/해설 보기
+            </button>
+            <button onclick="shuffleAndRetake()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+              <i data-lucide="shuffle" class="w-3.5 h-3.5"></i> 보기 셔플 재응시
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Assessment Data & Logic -->
+  <script>
+    const QUESTIONS_DATA = [
+      // AREA 1: 파이썬 & 비동기 고성능 코딩 (1~5)
+      {
+        id: 1,
+        areaId: 1,
+        areaTitle: "파이썬 & 비동기/고성능 코딩",
+        title: "파이썬 제너레이터(Generator)와 메모리 효율성",
+        desc: "10GB 크기의 거대 텍스트 파일을 청킹할 때, 전체를 메모리에 한 번에 올리지 않고 한 줄씩 스트리밍 처리하기 위해 사용하는 가장 적합한 파이썬 키워드와 메커니즘은?",
+        code: "def read_large_file(file_path):\n    with open(file_path, 'r', encoding='utf-8') as f:\n        for line in f:\n            ________ line.strip()",
+        options: [
+          { text: "yield (제너레이터를 생성하여 호출 시점마다 지연 평가로 1개씩 반환)", isCorrect: true },
+          { text: "return (함수를 즉시 종료하고 마지막 줄까지의 전체 리스트를 반환)", isCorrect: false },
+          { text: "pass (다음 루프로 넘어가며 메모리 캐시에 자동 보관)", isCorrect: false },
+          { text: "async await (별도 스레드를 생성하여 CPU 풀을 즉시 비움)", isCorrect: false }
+        ],
+        explanation: "yield 키워드는 제너레이터(Generator) 객체를 반환하여 데이터가 필요한 순간마다 한 개씩 지연 평가(Lazy Evaluation) 방식으로 읽어오므로 O(1) 수준의 최소 메모리로 대용량 파일을 안전하게 스트리밍할 수 있습니다.",
+        recommendBook: "Book 1 Chapter 01 (고성능 데이터 파이프라인 기초)"
+      },
+      {
+        id: 2,
+        areaId: 1,
+        areaTitle: "파이썬 & 비동기/고성능 코딩",
+        title: "asyncio 비동기 프로그래밍과 I/O 바운드 작업",
+        desc: "10,000개의 임베딩 API 호출을 동기(Synchronous) 루프로 실행하면 1시간이 걸립니다. 이를 비동기 코루틴으로 동시에 50개씩 병렬 요청하여 수 초 내로 단축시키고자 할 때 사용하는 핵심 조합은?",
+        code: "import asyncio\n\nasync def fetch_embedding(text, semaphore):\n    async with semaphore:\n        return await client.embeddings.create(input=text)\n\n# 50개 동시 요청 제한 및 전체 태스크 병렬 취합",
+        options: [
+          { text: "asyncio.Semaphore(50) + asyncio.gather(*tasks)", isCorrect: true },
+          { text: "threading.Thread() + time.sleep(50)", isCorrect: false },
+          { text: "multiprocessing.Pool(50) + os.fork()", isCorrect: false },
+          { text: "time.sleep() + while True 루프", isCorrect: false }
+        ],
+        explanation: "외부 LLM API 호출은 전형적인 I/O 바운드 작업입니다. asyncio.Semaphore를 통해 동시 연결 수를 제어(Rate Limit 회피)하고 asyncio.gather 또는 TaskGroup으로 코루틴을 이벤트 루프에 동시 예약하여 처리량을 극대화합니다.",
+        recommendBook: "Book 1 Chapter 04 (비동기 임베딩 배치 파이프라인)"
+      },
+      {
+        id: 3,
+        areaId: 1,
+        areaTitle: "파이썬 & 비동기/고성능 코딩",
+        title: "Polars vs Pandas DataFrame 성능 아키텍처",
+        desc: "엔터프라이즈 환경에서 1,000만 건의 정형 로그 데이터를 청크 단위로 집계할 때, Pandas 대신 Rust 기반 Polars를 채택하는 가장 결정적인 기술적 이유는?",
+        code: null,
+        options: [
+          { text: "Rust 기반의 다중 스레드 병렬 실행과 지연 평가(LazyFrame) 쿼리 최적화 지원", isCorrect: true },
+          { text: "Polars는 파이썬 인터프리터 없이도 단독 실행되는 GUI 애플리케이션이기 때문", isCorrect: false },
+          { text: "Pandas는 오직 정수형 데이터만 다룰 수 있기 때문", isCorrect: false },
+          { text: "Polars를 쓰면 SQL 데이터베이스를 완전히 대체하여 DB가 불필요해지기 때문", isCorrect: false }
+        ],
+        explanation: "Polars는 내부가 Rust로 작성되어 Apache Arrow 메모리 포맷을 완벽 활용하며, GIL(Global Interpreter Lock) 제약 없이 CPU 코어를 100% 병렬 활용하고 지연 실행(LazyFrame) 플랜을 자동 최적화합니다.",
+        recommendBook: "Book 1 Chapter 02 (Polars 기반 초고속 ETL 전처리)"
+      },
+      {
+        id: 4,
+        areaId: 1,
+        areaTitle: "파이썬 & 비동기/고성능 코딩",
+        title: "파이썬 타입 힌팅과 Pydantic 데이터 검증",
+        desc: "LLM이 생성한 JSON 출력이 사전에 정의된 데이터 규격(스키마)을 만족하는지 엄격하게 런타임 유효성 검사를 수행하기 위한 현대적 파이썬 표준 라이브러리는?",
+        code: "from pydantic import BaseModel, Field\n\nclass EntityExtraction(BaseModel):\n    name: str = Field(..., description='엔티티 이름')\n    confidence: float = Field(..., ge=0.0, le=1.0)",
+        options: [
+          { text: "Pydantic v2 (타입 힌트 기반 런타임 파싱 및 유효성 강제 검증)", isCorrect: true },
+          { text: "pickle (객체 직렬화 바이트 변환 라이브러리)", isCorrect: false },
+          { text: "random (임의의 타입으로 자동 변환 라이브러리)", isCorrect: false },
+          { text: "unittest (단위 테스트 프레임워크)", isCorrect: false }
+        ],
+        explanation: "Pydantic v2는 LLM의 비정형 출력을 구조화된 파이썬 객체로 엄격히 검증(Validation)하고 파싱하여, 환각(Hallucination)이나 잘못된 필드 누락을 사전에 차단하는 엔터프라이즈 에이전트의 핵심 필수 도구입니다.",
+        recommendBook: "Book 5 Chapter 01 (Pydantic 스키마 기반 구조화 출력)"
+      },
+      {
+        id: 5,
+        areaId: 1,
+        areaTitle: "파이썬 & 비동기/고성능 코딩",
+        title: "파이썬 가상환경(venv)과 의존성 격리",
+        desc: "여러 프로젝트에서 각각 다른 버전의 패키지(예: LangChain 0.1 vs 0.3)를 충돌 없이 독립적으로 운영하기 위한 필수 표준 절차는?",
+        code: null,
+        options: [
+          { text: "python -m venv .venv 로 독립된 가상환경을 생성하고 activate 후 설치", isCorrect: true },
+          { text: "C:\\Windows\\System32 폴더에 패키지 파일을 직접 복사", isCorrect: false },
+          { text: "글로벌 환경(pip install)에 모두 --force 옵션으로 덮어쓰기", isCorrect: false },
+          { text: "가상환경을 쓰지 않고 매번 컴퓨터를 재부팅하며 설치", isCorrect: false }
+        ],
+        explanation: "가상환경(venv 또는 conda/uv)은 프로젝트 디렉토리마다 고유한 파이썬 바이너리와 패키지 디렉토리를 격리하여 엔터프라이즈 프로젝트 간 의존성 충돌(Dependency Hell)을 원천 방지합니다.",
+        recommendBook: "Book 1 부록 C (가상환경 세팅 가이드)"
+      },
+
+      // AREA 2: 데이터베이스 & 벡터 수학 직관 (6~10)
+      {
+        id: 6,
+        areaId: 2,
+        areaTitle: "데이터베이스 & 벡터 수학 직관",
+        title: "벡터 유사도 계산: 코사인 유사도(Cosine Similarity)",
+        desc: "두 임베딩 벡터 A=[1, 0], B=[0, 1]의 사잇각은 90도(직교)입니다. 두 벡터의 코사인 유사도 값과 검색 의미는?",
+        code: "Cosine Similarity = (A · B) / (||A|| * ||B||)",
+        options: [
+          { text: "0.0 (두 벡터 간 의미적 연관성이 전혀 없음 / 직교 상태)", isCorrect: true },
+          { text: "1.0 (두 벡터가 완전히 동일한 의미를 가짐)", isCorrect: false },
+          { text: "-1.0 (두 벡터가 정반대의 의미를 가짐)", isCorrect: false },
+          { text: "0.5 (두 벡터가 절반 정도 일치함)", isCorrect: false }
+        ],
+        explanation: "코사인 유사도는 두 벡터의 방향 일치도를 -1.0(반대)부터 1.0(일치) 사이로 측정합니다. 90도 직교 시 내적(A·B)=0이므로 코사인 유사도는 0.0이며, 두 문서 간의 의미적 공통점이 없음을 뜻합니다.",
+        recommendBook: "Book 1 Chapter 03 (벡터 수학과 코사인 유사도 직관)"
+      },
+      {
+        id: 7,
+        areaId: 2,
+        areaTitle: "데이터베이스 & 벡터 수학 직관",
+        title: "PostgreSQL pgvector 인덱스: HNSW vs IVFFlat",
+        desc: "100만 건 이상의 고차원(1536차원) 벡터 데이터에서 검색 속도와 Recall(재현율)을 극대화하기 위해 다층 그래프 계층을 탐색하는 현대적 벡터 인덱스는?",
+        code: "CREATE INDEX ON document_embeddings USING ________ (embedding vector_cosine_ops);",
+        options: [
+          { text: "hnsw (Hierarchical Navigable Small World, 고성능 그래프 기반 근사 최근접 검색)", isCorrect: true },
+          { text: "btree (전통적인 1차원 정렬 색인)", isCorrect: false },
+          { text: "hash (단순 해시 충돌 색인)", isCorrect: false },
+          { text: "gin (단순 텍스트 역색인)", isCorrect: false }
+        ],
+        explanation: "HNSW(Hierarchical Navigable Small World)는 스킵 리스트 개념을 다차원 벡터 공간의 그래프로 확장하여, 빌드 메모리는 더 사용하지만 검색 속도와 재현율(Recall) 면에서 IVFFlat보다 압도적으로 우수합니다.",
+        recommendBook: "Book 1 Chapter 05 (pgvector HNSW vs IVFFlat 인덱스 튜닝)"
+      },
+      {
+        id: 8,
+        areaId: 2,
+        areaTitle: "데이터베이스 & 벡터 수학 직관",
+        title: "임베딩 벡터의 차원 수(Dimension)의 의미",
+        desc: "OpenAI text-embedding-3-small은 1,536차원, 대형 모델은 3,072차원을 가집니다. 벡터 차원 수가 클 때 발생하는 현상으로 올바른 것은?",
+        code: null,
+        options: [
+          { text: "미세한 문맥 의미를 더 풍부하게 표현하지만, 저장 용량과 인덱스 계산 비용이 증가함", isCorrect: true },
+          { text: "단어의 글자 수가 1,536자 이하로 제한됨", isCorrect: false },
+          { text: "차원이 커지면 데이터베이스 검색 속도가 무조건 10배 빨라짐", isCorrect: false },
+          { text: "차원 수는 오직 텍스트의 줄바꿈 횟수와 일치함", isCorrect: false }
+        ],
+        explanation: "차원(Dimension)은 텍스트의 다각적 의미 속성(문체, 감정, 전문 도메인 등)을 표현하는 좌표 축의 개수입니다. 차원이 높을수록 의미 표현력은 섬세해지나 차원의 저주(Curse of Dimensionality) 및 연산량이 늘어납니다.",
+        recommendBook: "Book 1 Chapter 03 (임베딩 모델 차원과 압축 기법)"
+      },
+      {
+        id: 9,
+        areaId: 2,
+        areaTitle: "데이터베이스 & 벡터 수학 직관",
+        title: "지식 그래프(KG)의 핵심: Labeled Property Graph (LPG)",
+        desc: "관계형 데이터베이스(RDB)의 무거운 다중 JOIN 문제를 해결하고, 엔티티 간의 복잡한 관계망을 직관적으로 저장하는 Neo4j의 기본 데이터 모델은?",
+        code: null,
+        options: [
+          { text: "Labeled Property Graph (노드, 관계(Relationship), 각각에 부여된 속성 Key-Value)", isCorrect: true },
+          { text: "Key-Value Store (Redis와 같은 단순 단일 키-값 쌍)", isCorrect: false },
+          { text: "CSV 플랫 텍스트 파일 저장소", isCorrect: false },
+          { text: "Binary Blob Storage (이미지 이진 파일 저장)", isCorrect: false }
+        ],
+        explanation: "Neo4j의 LPG 모델은 데이터 자체(Node)뿐 아니라 노드와 노드를 잇는 연결선(Relationship)에도 방향성과 자체 속성(Property)을 부여하여, 수십 단계의 연결 관계도 인덱스 없이 포인터 추적으로 1ms 내에 탐색합니다.",
+        recommendBook: "Book 3 Chapter 01 (LPG 온톨로지 모델링 정석)"
+      },
+      {
+        id: 10,
+        areaId: 2,
+        areaTitle: "데이터베이스 & 벡터 수학 직관",
+        title: "Neo4j 선언형 그래프 질의어 Cypher 기초",
+        desc: "'홍길동'이라는 사원이 소속된(WORKS_AT) 부서 노드를 찾아 반환하는 표준 Cypher 쿼리 문법은?",
+        code: null,
+        options: [
+          { text: "MATCH (e:Employee {name: '홍길동'})-[:WORKS_AT]->(d:Department) RETURN d", isCorrect: true },
+          { text: "SELECT Department FROM Employee WHERE name = '홍길동' JOIN WORKS_AT", isCorrect: false },
+          { text: "FIND (d) WHERE (홍길동)->(WORKS_AT)->(d)", isCorrect: false },
+          { text: "GET /employee/hong/department HTTP/1.1", isCorrect: false }
+        ],
+        explanation: "Cypher는 아스키 아트(ASCII-art) 형태로 화살표 ()-[]->() 를 그려 관계를 조회하는 직관적인 그래프 질의 언어입니다. MATCH 구문으로 그래프 패턴을 매칭하고 RETURN으로 결과를 반환합니다.",
+        recommendBook: "Book 3 Chapter 03 (Cypher 쿼리 마스터 가이드)"
+      },
+
+      // AREA 3: 비정형 문서 처리 & 텍스트 정제 (11~15)
+      {
+        id: 11,
+        areaId: 3,
+        areaTitle: "비정형 문서 처리 & 텍스트 정제",
+        title: "정규표현식(Regex)을 이용한 개인정보(PII) 마스킹",
+        desc: "텍스트에서 주민등록번호 또는 전화번호 패턴을 탐지하여 '[MASKED]'로 치환할 때 사용하는 표준 파이썬 모듈과 함수는?",
+        code: "import re\ncleaned = re.______(r'\\d{3}-\\d{4}-\\d{4}', '[MASKED]', raw_text)",
+        options: [
+          { text: "re.sub (정규표현식 패턴을 찾아 대체 문자열로 치환)", isCorrect: true },
+          { text: "re.split (문자열을 패턴 기준으로 리스트로 쪼갬)", isCorrect: false },
+          { text: "re.compile_only (치환하지 않고 컴파일만 수행)", isCorrect: false },
+          { text: "str.replace (정규식을 인식하지 못하고 정확한 고정 문자열만 치환)", isCorrect: false }
+        ],
+        explanation: "파이썬의 re.sub() 함수는 정규표현식 패턴과 일치하는 모든 영역을 안전하게 지정된 마스킹 문자열로 일괄 치환하여, LLM 임베딩 시 개인정보 유출을 방지하는 전처리 필수 함수입니다.",
+        recommendBook: "Book 2 Chapter 02 (비정형 문서 정규표현식 클렌징)"
+      },
+      {
+        id: 12,
+        areaId: 3,
+        areaTitle: "비정형 문서 처리 & 텍스트 정제",
+        title: "LLM 토큰(Token)과 바이트 페어 인코딩(BPE)",
+        desc: "LLM이 텍스트를 인식하는 단위는 '글자'나 '단어'가 아니라 '토큰'입니다. 한국어 텍스트 처리 시 발생할 수 있는 '토큰 파편화' 현상에 대한 올바른 설명은?",
+        code: null,
+        options: [
+          { text: "영어 중심 BPE 사전에서는 한국어 1글자가 2~3개 이상의 토큰으로 잘게 쪼개져 비용과 컨텍스트 소모가 커질 수 있다.", isCorrect: true },
+          { text: "한국어는 1글자가 무조건 정확히 0.1토큰으로 고정된다.", isCorrect: false },
+          { text: "토큰화는 이미지 픽셀을 압축할 때만 사용된다.", isCorrect: false },
+          { text: "토큰 수가 많아질수록 LLM API 호출 요금이 저렴해진다.", isCorrect: false }
+        ],
+        explanation: "대부분의 파운데이션 LLM은 영어 중심 말뭉치로 BPE 사전을 학습했기 때문에, 한국어 음절은 복수의 바이트 토큰으로 쪼개지는 현상이 발생합니다. 따라서 tiktoken 등을 활용한 정확한 토큰 수 측정과 청킹 크기 산정이 필수적입니다.",
+        recommendBook: "Book 2 Chapter 04 (토크나이저와 BPE 청킹 최적화)"
+      },
+      {
+        id: 13,
+        areaId: 3,
+        areaTitle: "비정형 문서 처리 & 텍스트 정제",
+        title: "고정 크기 청킹(Fixed Chunking)의 한계와 시맨틱 청킹",
+        desc: "문서를 무조건 500자 단위로 뚝뚝 자르는 '고정 크기 청킹'의 가장 치명적인 문제점과 이를 보완하는 해결책은?",
+        code: null,
+        options: [
+          { text: "문장이나 단락 중간이 끊겨 문맥이 단절되므로, 의미적 유사도나 제목 계층 기반의 '시맨틱 청킹'을 적용한다.", isCorrect: true },
+          { text: "글자 수가 줄어들어 파일 용량이 0바이트가 된다.", isCorrect: false },
+          { text: "컴퓨터 하드디스크가 손상된다.", isCorrect: false },
+          { text: "고정 크기 청킹이 언제나 시맨틱 청킹보다 정확도가 100% 높다.", isCorrect: false }
+        ],
+        explanation: "단순 길이 기반 분할은 문장 중간이나 복합 표의 행 사이를 무자비하게 단절시켜 검색 품질을 크게 떨어뜨립니다. 문장 간 코사인 유사도 변화 지점을 감지하는 시맨틱 청킹(Semantic Chunking)이 엔터프라이즈의 표준입니다.",
+        recommendBook: "Book 2 Chapter 05 (고정 vs 시맨틱 청킹 비교 실습)"
+      },
+      {
+        id: 14,
+        areaId: 3,
+        areaTitle: "비정형 문서 처리 & 텍스트 정제",
+        title: "복합 표(Table) 데이터의 LLM 직렬화(Serialization)",
+        desc: "PDF 보고서 내의 복잡한 2차원 표(행과 열, 셀 병합)를 RAG 시스템에서 LLM이 가장 잘 이해할 수 있는 텍스트 포맷으로 변환하는 표준 형태는?",
+        code: null,
+        options: [
+          { text: "Markdown 파이프(|) 테이블 또는 행 단위 Key-Value JSON 직렬화", isCorrect: true },
+          { text: "표를 1차원 숫자로만 무작위 나열한 바이너리 코드", isCorrect: false },
+          { text: "모든 표 선을 지우고 스페이스 공백으로만 정렬", isCorrect: false },
+          { text: "표의 헤더(열 이름)를 완전히 제거하고 값만 나열", isCorrect: false }
+        ],
+        explanation: "LLM은 마크다운 테이블 문법(| col1 | col2 |)이나 JSON/HTML Table 태그처럼 행(Row)과 열(Header)의 구조적 관계가 보존된 형태를 가장 높은 정확도로 추론합니다.",
+        recommendBook: "Book 2 Chapter 03 (Docling 및 TATR 기반 복합 표 직렬화)"
+      },
+      {
+        id: 15,
+        areaId: 3,
+        areaTitle: "비정형 문서 처리 & 텍스트 정제",
+        title: "마크다운(Markdown) 계층 구조 파싱의 이점",
+        desc: "# H1, ## H2, ### H3 헤더 태그를 보존하며 문서를 청킹할 때 얻을 수 있는 결정적 이점은?",
+        code: null,
+        options: [
+          { text: "각 청크에 상위 문서 제목과 섹션명을 메타데이터(Metadata)로 자동 주입할 수 있다.", isCorrect: true },
+          { text: "문서의 텍스트 색상을 자동으로 파란색으로 변경해준다.", isCorrect: false },
+          { text: "파일이 자동으로 암호화되어 열리지 않는다.", isCorrect: false },
+          { text: "LLM이 모든 헤더를 무시하고 넘어가도록 강제한다.", isCorrect: false }
+        ],
+        explanation: "헤더 계층 파싱은 본문 청크에 '문서제목 > 대분류 > 소분류'의 계층 경로를 메타데이터로 부여하여, 벡터 검색 시 정확한 필터링(Metadata Filtering)과 문맥 증강(Context Enrichment)을 가능케 합니다.",
+        recommendBook: "Book 2 Chapter 02 (Markdown 계층 구조 파싱)"
+      },
+
+      // AREA 4: 시스템 아키텍처 & 도구 숙련도 (16~20)
+      {
+        id: 16,
+        areaId: 4,
+        areaTitle: "시스템 아키텍처 & 도구 숙련도",
+        title: "VS Code 인터랙티브 디버깅과 중단점(Breakpoint)",
+        desc: "복잡한 비동기 에이전트 코드에서 변수 상태를 런타임에 추적하고 오류 원인을 분석할 때 사용하는 가장 효율적인 개발 습관은?",
+        code: null,
+        options: [
+          { text: "코드 라인에 중단점(F9)을 설정하고 F5로 디버거를 시작하여 Call Stack과 변수를 조사한다.", isCorrect: true },
+          { text: "모든 코드 줄마다 print() 문을 수백 개 출력하고 코드를 지운다.", isCorrect: false },
+          { text: "에러가 발생하면 전체 운영체제를 포맷한다.", isCorrect: false },
+          { text: "코드를 눈으로만 훑어보고 실행하지 않는다.", isCorrect: false }
+        ],
+        explanation: "VS Code의 내장 디버거(F5/F9/F10/F11)를 활용하면 프로그램의 실행을 원하는 라인에서 일시 정지시키고 런타임 변수 스코프, 호출 스택(Call Stack), 비동기 태스크 상태를 정밀 분석할 수 있습니다.",
+        recommendBook: "Book 1 부록 A (VS Code 디버깅 마스터 가이드)"
+      },
+      {
+        id: 17,
+        areaId: 4,
+        areaTitle: "시스템 아키텍처 & 도구 숙련도",
+        title: "Git 협업과 충돌(Merge Conflict) 해결",
+        desc: "동료와 같은 파일의 같은 라인을 동시에 수정하여 'CONFLICT (content): Merge conflict in main.py' 에러가 났을 때 올바른 대처 순서는?",
+        code: "<<<<<<< HEAD\nmy_code()\n=======\ntheir_code()\n>>>>>>> feature-branch",
+        options: [
+          { text: "충돌 마커(<<<<, ====, >>>>)를 확인하여 알맞은 코드를 병합 선택 후 git add 및 commit", isCorrect: true },
+          { text: "깃 저장소(.git) 폴더를 강제로 삭제하고 프로젝트를 포기한다.", isCorrect: false },
+          { text: "컴퓨터 전원을 끄고 동료에게 소리를 지른다.", isCorrect: false },
+          { text: "git push --force 로 동료의 코드를 무조건 삭제해 버린다.", isCorrect: false }
+        ],
+        explanation: "충돌 마커가 표시된 영역에서 자신의 변경사항(HEAD)과 동료의 변경사항을 검토하여 비즈니스 로직에 맞게 하나로 정리한 뒤, 충돌 마커를 지우고 스테이징(git add) 후 병합 커밋을 완료해야 합니다.",
+        recommendBook: "Book 1 부록 B (Git 형상관리 표준)"
+      },
+      {
+        id: 18,
+        areaId: 4,
+        areaTitle: "시스템 아키텍처 & 도구 숙련도",
+        title: "Docker 포트 포워딩(Port Binding) 개념",
+        desc: "호스트 PC(내 노트북)의 브라우저에서 Docker 컨테이너 안의 Neo4j 웹 콘솔(내부 7474 포트)에 접속하기 위한 올바른 Docker 실행 옵션은?",
+        code: "docker run -d --name my-neo4j -p ________:7474 neo4j:latest",
+        options: [
+          { text: "7474:7474 (호스트의 7474 포트를 컨테이너 내부 7474 포트로 포워딩)", isCorrect: true },
+          { text: "-port-all-open (모든 포트를 무조건 자동 개방)", isCorrect: false },
+          { text: "--no-port (포트를 사용하지 않음)", isCorrect: false },
+          { text: "7474=7474 (등호 연산자로 환경변수 할당)", isCorrect: false }
+        ],
+        explanation: "Docker의 -p 호스트포트:컨테이너포트 플래그는 외부(로컬 PC)에서 들어오는 네트워크 트래픽을 컨테이너 내부 격리된 포트로 연결(Port Binding)해주는 핵심 네트워크 옵션입니다.",
+        recommendBook: "Book 3 Chapter 02 (Docker 기반 Neo4j 컨테이너 구축)"
+      },
+      {
+        id: 19,
+        areaId: 4,
+        areaTitle: "시스템 아키텍처 & 도구 숙련도",
+        title: "환경변수(.env)와 LLM API Key 보안 원칙",
+        desc: "OpenAI, Anthropic 등의 유료 API Key를 GitHub 공개 저장소에 실수로 push하지 않기 위한 가장 필수적인 보안 조치는?",
+        code: null,
+        options: [
+          { text: ".env 파일에 키를 작성하고, .gitignore 파일에 '.env'를 반드시 등록하여 버전 관리에서 제외한다.", isCorrect: true },
+          { text: "코드 소스 파일(main.py)의 맨 윗줄에 평문 문자열로 API Key를 하드코딩한다.", isCorrect: false },
+          { text: "API Key를 회사 단톡방이나 GitHub README 메인에 공유한다.", isCorrect: false },
+          { text: "API Key 앞자리 4자리를 삭제하고 푸시한다.", isCorrect: false }
+        ],
+        explanation: "API Key와 비밀번호 같은 민감 정보는 절대 소스코드에 하드코딩하거나 git에 커밋해서는 안 됩니다. .env 파일에 두고 .gitignore에 명시하여 로컬에만 보관하며, python-dotenv 등으로 런타임에 로드해야 합니다.",
+        recommendBook: "Book 1 부록 A (환경변수 보안 표준)"
+      },
+      {
+        id: 20,
+        areaId: 4,
+        areaTitle: "시스템 아키텍처 & 도구 숙련도",
+        title: "FastMCP와 에이전트 도구 호출(Tool Calling) 표준",
+        desc: "Model Context Protocol(MCP) 환경에서 LLM이 호출할 수 있는 함수(도구)를 서버에 등록할 때 사용하는 통신 프로토콜과 파이썬 데코레이터 표준은?",
+        code: "from mcp.server.fastmcp import FastMCP\n\nmcp = FastMCP('kg-search')\n\n@mcp.________()\ndef search_graph_entity(entity_name: str) -> dict:\n    \"\"\"지식 그래프에서 엔티티 정보를 검색합니다.\"\"\"",
+        options: [
+          { text: "tool() (JSON-RPC 2.0 기반 도구 스키마를 LLM 클라이언트에 표준 규격으로 등록)", isCorrect: true },
+          { text: "html_page() (웹 브라우저 렌더링용 HTML 템플릿 반환)", isCorrect: false },
+          { text: "system_restart() (컴퓨터를 재부팅하는 시스템 명령)", isCorrect: false },
+          { text: "print_text() (단순 화면 출력 함수 등록)", isCorrect: false }
+        ],
+        explanation: "Anthropic이 제정한 오픈 표준 MCP(Model Context Protocol)는 JSON-RPC 2.0 통신을 기반으로 하며, FastMCP의 @mcp.tool() 데코레이터를 통해 함수의 Docstring과 Pydantic 타입 힌트를 LLM 도구 호출 스키마로 자동 변환합니다.",
+        recommendBook: "Book 5 Chapter 02 (FastMCP 기반 에이전트 도구 오케스트레이션)"
+      }
+    ];
+
+    let userAnswers = {}; // { questionId: selectedIndex }
+
+    function renderExam() {
+      const container = document.getElementById('exam-container');
+      container.innerHTML = '';
+
+      let currentArea = null;
+
+      QUESTIONS_DATA.forEach((q, idx) => {
+        // Area Section Header
+        if (currentArea !== q.areaId) {
+          currentArea = q.areaId;
+          const areaHeader = document.createElement('div');
+          areaHeader.className = 'pt-6 pb-2 border-b border-slate-800 flex items-center justify-between';
+          areaHeader.innerHTML = `
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 font-bold font-mono flex items-center justify-center text-xs">${currentArea}</span>
+              <h3 class="text-base sm:text-lg font-black text-white">[영역 ${currentArea}] ${q.areaTitle}</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-400 font-bold">5문항 (25점)</span>
+          `;
+          container.appendChild(areaHeader);
+        }
+
+        // Question Card
+        const card = document.createElement('div');
+        card.className = 'glass-card p-5 sm:p-6 transition-all';
+        card.id = `q-card-${q.id}`;
+
+        let codeSnippetHtml = '';
+        if (q.code) {
+          codeSnippetHtml = `
+            <pre class="my-3 p-3.5 bg-slate-950 rounded-lg text-xs font-mono text-emerald-300 border border-slate-800 overflow-x-auto custom-scroll"><code>${escapeHtml(q.code)}</code></pre>
+          `;
+        }
+
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+          const isSelected = userAnswers[q.id] === optIdx;
+          optionsHtml += `
+            <label class="option-card flex items-start gap-3 p-3.5 rounded-xl border border-slate-800 cursor-pointer ${isSelected ? 'selected' : ''}" onclick="selectOption(${q.id}, ${optIdx})">
+              <input type="radio" name="q_${q.id}" value="${optIdx}" ${isSelected ? 'checked' : ''} class="mt-1 text-emerald-500 focus:ring-emerald-500 bg-slate-900 border-slate-700">
+              <div class="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+                <span class="font-mono font-bold text-slate-400 mr-1.5">(${optIdx + 1})</span>
+                ${escapeHtml(opt.text)}
+              </div>
+            </label>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="flex justify-between items-start gap-3 mb-2">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Q${q.id}</span>
+              <h4 class="text-sm sm:text-base font-bold text-white">${q.title}</h4>
+            </div>
+            <span class="text-[11px] font-mono text-emerald-400 font-bold">5점</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mt-2">${q.desc}</p>
+          ${codeSnippetHtml}
+          <div class="space-y-2.5 mt-4">
+            ${optionsHtml}
+          </div>
+          <!-- Answer Feedback Box (Initially Hidden) -->
+          <div id="feedback-${q.id}" class="hidden mt-4 p-4 rounded-xl text-xs space-y-1.5 border"></div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      updateProgress();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function selectOption(qId, optIdx) {
+      userAnswers[qId] = optIdx;
+      
+      // Update UI for the question
+      const card = document.getElementById(`q-card-${qId}`);
+      if (card) {
+        const labels = card.querySelectorAll('.option-card');
+        labels.forEach((lbl, idx) => {
+          if (idx === optIdx) {
+            lbl.classList.add('selected');
+            lbl.querySelector('input').checked = true;
+          } else {
+            lbl.classList.remove('selected');
+          }
+        });
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = QUESTIONS_DATA.length;
+      const percent = Math.round((answeredCount / total) * 100);
+
+      document.getElementById('progress-text').innerText = `진행률: ${answeredCount} / ${total} 문항 (${percent}%)`;
+      document.getElementById('progress-bar').style.width = `${percent}%`;
+
+      const unansweredEl = document.getElementById('unanswered-badge');
+      const diff = total - answeredCount;
+      if (diff === 0) {
+        unansweredEl.className = 'text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
+        unansweredEl.innerText = '전 문항 응답 완료';
+      } else {
+        unansweredEl.className = 'text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30';
+        unansweredEl.innerText = `미응답 ${diff}문항`;
+      }
+    }
+
+    function submitExam() {
+      const answeredCount = Object.keys(userAnswers).length;
+      if (answeredCount < QUESTIONS_DATA.length) {
+        const confirmSubmit = confirm(`아직 응답하지 않은 문항이 ${QUESTIONS_DATA.length - answeredCount}개 있습니다. 그대로 제출하시겠습니까?`);
+        if (!confirmSubmit) return;
+      }
+
+      const studentName = document.getElementById('student-name').value.trim() || '수강생';
+      const studentEmail = document.getElementById('student-email').value.trim();
+
+      let totalScore = 0;
+      let areaScores = { 1: 0, 2: 0, 3: 0, 4: 0 };
+      let wrongQuestions = [];
+
+      QUESTIONS_DATA.forEach(q => {
+        const chosenIdx = userAnswers[q.id];
+        const correctIdx = q.options.findIndex(o => o.isCorrect);
+        const isCorrect = chosenIdx !== undefined && chosenIdx === correctIdx;
+
+        if (isCorrect) {
+          totalScore += 5;
+          areaScores[q.areaId] += 5;
+        } else {
+          wrongQuestions.push({
+            q,
+            chosenIdx,
+            correctIdx
+          });
+        }
+
+        // Inline Feedback
+        const feedbackEl = document.getElementById(`feedback-${q.id}`);
+        if (feedbackEl) {
+          feedbackEl.classList.remove('hidden');
+          if (isCorrect) {
+            feedbackEl.className = 'mt-4 p-4 rounded-xl text-xs space-y-1.5 border border-emerald-500/40 bg-emerald-500/10 text-emerald-200';
+            feedbackEl.innerHTML = `
+              <div class="font-bold flex items-center gap-1.5 text-emerald-400 text-sm">
+                <i data-lucide="check-circle" class="w-4 h-4"></i> 정답입니다! (+5점)
+              </div>
+              <p class="text-slate-300 leading-relaxed"><strong>해설:</strong> ${q.explanation}</p>
+            `;
+          } else {
+            const correctOptText = q.options[correctIdx].text;
+            feedbackEl.className = 'mt-4 p-4 rounded-xl text-xs space-y-1.5 border border-rose-500/40 bg-rose-500/10 text-rose-200';
+            feedbackEl.innerHTML = `
+              <div class="font-bold flex items-center gap-1.5 text-rose-400 text-sm">
+                <i data-lucide="x-circle" class="w-4 h-4"></i> 오답 (0점)
+              </div>
+              <p class="text-slate-300"><strong>정답:</strong> (${correctIdx + 1}) ${escapeHtml(correctOptText)}</p>
+              <p class="text-slate-300 leading-relaxed"><strong>해설:</strong> ${q.explanation}</p>
+              <div class="mt-2 pt-2 border-t border-rose-500/30 text-amber-300 font-semibold flex items-center gap-1">
+                <i data-lucide="book-open" class="w-3.5 h-3.5"></i> 권장 복습: ${q.recommendBook}
+              </div>
+            `;
+          }
+        }
+      });
+
+      // Show Result Modal
+      displayResultModal(studentName, totalScore, areaScores, wrongQuestions);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function displayResultModal(name, score, areaScores, wrongList) {
+      const isPassed = score >= 80;
+      const modal = document.getElementById('result-modal');
+
+      const statusBadge = document.getElementById('result-status-badge');
+      if (isPassed) {
+        statusBadge.className = 'text-xs font-bold px-3 py-1 rounded-full uppercase font-mono tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+        statusBadge.innerHTML = '🎉 PASS (합격 / 얼리버드 인증)';
+      } else {
+        statusBadge.className = 'text-xs font-bold px-3 py-1 rounded-full uppercase font-mono tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30';
+        statusBadge.innerHTML = '⚡ 보충 권장 (PASS 기준: 80점)';
+      }
+
+      document.getElementById('result-title').innerText = `${name} 님의 사전 학습 진단 성적표`;
+      document.getElementById('result-subtitle').innerText = `응시 일시: ${new Date().toLocaleString()} · 총 20문항 중 ${(score/5)}문항 정답`;
+
+      document.getElementById('score-total').innerText = `${score} / 100`;
+      document.getElementById('score-area-1').innerText = `${areaScores[1]} / 25`;
+      document.getElementById('score-area-2').innerText = `${areaScores[2]} / 25`;
+      document.getElementById('score-area-3-4').innerText = `${areaScores[3] + areaScores[4]} / 50`;
+
+      // Area Progress Bars
+      const p1 = Math.round((areaScores[1] / 25) * 100);
+      const p2 = Math.round((areaScores[2] / 25) * 100);
+      const p3 = Math.round((areaScores[3] / 25) * 100);
+      const p4 = Math.round((areaScores[4] / 25) * 100);
+
+      document.getElementById('bar-text-1').innerText = `${p1}% (${areaScores[1]}점)`;
+      document.getElementById('bar-fill-1').style.width = `${p1}%`;
+
+      document.getElementById('bar-text-2').innerText = `${p2}% (${areaScores[2]}점)`;
+      document.getElementById('bar-fill-2').style.width = `${p2}%`;
+
+      document.getElementById('bar-text-3').innerText = `${p3}% (${areaScores[3]}점)`;
+      document.getElementById('bar-fill-3').style.width = `${p3}%`;
+
+      document.getElementById('bar-text-4').innerText = `${p4}% (${areaScores[4]}점)`;
+      document.getElementById('bar-fill-4').style.width = `${p4}%`;
+
+      // Recommendations Box
+      const recBox = document.getElementById('recommendation-box');
+      if (isPassed) {
+        recBox.className = 'p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-xs text-emerald-200 space-y-2';
+        recBox.innerHTML = `
+          <div class="font-bold text-sm text-emerald-300 flex items-center gap-1.5">
+            <i data-lucide="award" class="w-4 h-4"></i> 우수한 기초 역량을 입증하셨습니다!
+          </div>
+          <p class="text-slate-300 leading-relaxed">
+            본과정 Book 1(데이터 파이프라인 &amp; pgvector)부터 Book 6(LG CNS AgenticWorks)까지의 고난도 엔지니어링 실습을 원활하게 소화할 준비가 완료되었습니다. 입과 전까지 안내된 무료 강의 영상을 가볍게 시청해 주시기 바랍니다.
+          </p>
+        `;
+      } else {
+        recBox.className = 'p-4 rounded-xl border border-amber-500/30 bg-amber-500/10 text-xs text-amber-200 space-y-2';
+        let booksSet = new Set(wrongList.map(w => w.q.recommendBook));
+        let booksListHtml = Array.from(booksSet).map(b => `<li class="text-slate-300">• <strong>${b}</strong></li>`).join('');
+        recBox.innerHTML = `
+          <div class="font-bold text-sm text-amber-300 flex items-center gap-1.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i> 본과정 시작 전 아래 취약 단원 보충 학습을 권장합니다.
+          </div>
+          <p class="text-slate-300 leading-relaxed">
+            80점 기준에 다소 미달하였으나, 아래 안내된 단행본 부록과 기초 문서를 1~2회 정독하시면 본과정 프로젝트를 충분히 따라오실 수 있습니다:
+          </p>
+          <ul class="space-y-1 mt-2 pl-2">${booksListHtml}</ul>
+        `;
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('result-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function resetAssessment() {
+      if (confirm('진행 중인 풀이 답안을 모두 초기화하시겠습니까?')) {
+        userAnswers = {};
+        renderExam();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function shuffleAndRetake() {
+      // Shuffle options within each question
+      QUESTIONS_DATA.forEach(q => {
+        // Simple Fisher-Yates shuffle
+        for (let i = q.options.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+        }
+      });
+      userAnswers = {};
+      closeModal();
+      renderExam();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      alert('모든 문항의 보기(1~4번)가 무작위로 재배열되었습니다. 새로운 마음으로 재응시해 보세요!');
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderExam();
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
