@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LG CNS AI 캠퍼스 KG 2기 공식 3대 인터랙티브 라이브 시뮬레이터</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --card-bg: #111827;
+      --border-color: #1f2937;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    .header-hub {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 28px;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 16px;
+    }
+    .header-hub h1 { font-size: 26px; font-weight: 900; margin-bottom: 8px; color: #fff; }
+    .header-hub p { color: var(--text-muted); font-size: 14px; }
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: #1e293b;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+      color: #fff;
+      border-color: #38bdf8;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+    }
+    .sim-container {
+      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .sim-container.active { display: block; }
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .sim-grid { grid-template-columns: 1fr; } }
+    .control-panel {
+      background: #1a2234;
+      border: 1px solid #2d3748;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .control-panel h3 { font-size: 16px; margin-bottom: 16px; color: var(--accent-cyan); display: flex; align-items: center; gap: 8px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px;
+      color: #fff;
+      font-size: 13px;
+    }
+    .range-wrap { display: flex; align-items: center; gap: 12px; }
+    .range-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #38bdf8; min-width: 40px; }
+    .btn-run {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      margin-top: 20px;
+    }
+    .btn-run:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-run:disabled { background: #475569; cursor: not-allowed; transform: none; }
+    .display-panel {
+      background: #1a2234;
+      border: 1px solid #2d3748;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .stage-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #2d3748;
+    }
+    .stage-step { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .stage-step.active { color: var(--accent-cyan); font-weight: 700; }
+    .stage-step.done { color: var(--accent-emerald); font-weight: 700; }
+    .progress-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: #0f172a;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #06b6d4, #10b981);
+      transition: width 0.3s ease;
+    }
+    .console-term {
+      flex: 1;
+      min-height: 220px;
+      background: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #38bdf8;
+      overflow-y: auto;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .console-term .log-err { color: #f43f5e; }
+    .console-term .log-succ { color: #10b981; }
+    .console-term .log-warn { color: #f59e0b; }
+    .canvas-wrap {
+      height: 200px;
+      background: #0b1120;
+      border: 1px solid #223049;
+      border-radius: 8px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    canvas { width: 100%; height: 100%; }
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .metric-card {
+      background: #111a2e;
+      border: 1px solid #202d46;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+    .metric-card .title { font-size: 11px; color: var(--text-muted); }
+    .metric-card .val { font-size: 18px; font-weight: 800; color: #fff; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body>
+
+  <header class="header-hub">
+    <h1>🔬 LG CNS AI 캠퍼스 KG 2기 실전 라이브 시뮬레이터 포털</h1>
+    <p>단순 박제된 결과 화면이 아닌, 독자가 직접 파라미터를 조절하고 실시간으로 가동하는 완전 동적 엔지니어링 샌드박스입니다.</p>
+  </header>
+
+  <nav class="nav-tabs">
+    <button class="tab-btn active" onclick="switchSim('sim1')">⚡ [Book 1] pgvector 하이브리드 파이프라인</button>
+    <button class="tab-btn" onclick="switchSim('sim2')">📄 [Book 2] Docling 멀티모달 & 시맨틱 청킹</button>
+    <button class="tab-btn" onclick="switchSim('sim3')">🕸️ [Book 3] Neo4j 온톨로지 & Multi-hop Cypher</button>
+  </nav>
+
+  <!-- ==================== SIMULATOR 1 ==================== -->
+  <div id="sim1" class="sim-container active">
+    <div class="sim-grid">
+      <div class="control-panel">
+        <h3>⚡ 파이프라인 제어 콘솔</h3>
+        <div class="form-group">
+          <label>적재 배치 크기 (Batch Size): <span class="range-val" id="b1_batch_val">1,000</span> 건</label>
+          <input type="range" id="b1_batch" min="100" max="5000" step="100" value="1000" oninput="document.getElementById('b1_batch_val').innerText = Number(this.value).toLocaleString()">
+        </div>
+        <div class="form-group">
+          <label>HNSW 최대 엣지 수 (m): <span class="range-val" id="b1_m_val">16</span></label>
+          <input type="range" id="b1_m" min="8" max="64" step="8" value="16" oninput="document.getElementById('b1_m_val').innerText = this.value">
+        </div>
+        <div class="form-group">
+          <label>HNSW 탐색 큐 (ef_construction): <span class="range-val" id="b1_ef_val">64</span></label>
+          <input type="range" id="b1_ef" min="16" max="256" step="16" value="64" oninput="document.getElementById('b1_ef_val').innerText = this.value">
+        </div>
+        <div class="form-group">
+          <label>임베딩 모델 및 차원 규격</label>
+          <select id="b1_model">
+            <option value="gemini">Google Gemini text-embedding-004 (768 차원)</option>
+            <option value="openai">OpenAI text-embedding-3-small (1536 차원)</option>
+            <option value="bgem3">BGE-m3 한국어 파인튜닝 (1024 차원)</option>
+          </select>
+        </div>
+        <button class="btn-run" id="btn_run_1" onclick="runPipeline1()">
+          <span>▶ 파이프라인 실시간 가동 시작</span>
+        </button>
+      </div>
+
+      <div class="display-panel">
+        <div class="stage-indicator">
+          <span class="stage-step" id="b1_s1">1. Polars 수집</span>
+          <span class="stage-step" id="b1_s2">2. Gemini 임베딩</span>
+          <span class="stage-step" id="b1_s3">3. pgvector HNSW</span>
+          <span class="stage-step" id="b1_s4">4. Streamlit 서빙</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="b1_progress"></div>
+        </div>
+        <div class="console-term" id="b1_console">
+[대기 중] 파라미터를 조절하고 [▶ 파이프라인 실시간 가동 시작] 버튼을 누르십시오.
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="canvas1"></canvas>
+        </div>
+        <div class="metrics-row">
+          <div class="metric-card"><div class="title">처리량 (Throughput)</div><div class="val" id="m1_qps">0 RPS</div></div>
+          <div class="metric-card"><div class="title">검색 재현율 (Recall@10)</div><div class="val" id="m1_recall">0.0%</div></div>
+          <div class="metric-card"><div class="title">P99 응답 지연 (Latency)</div><div class="val" id="m1_lat">0.0 ms</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SIMULATOR 2 ==================== -->
+  <div id="sim2" class="sim-container">
+    <div class="sim-grid">
+      <div class="control-panel">
+        <h3>📄 멀티모달 파서 제어 콘솔</h3>
+        <div class="form-group">
+          <label>대상 엔터프라이즈 문서 선택</label>
+          <select id="b2_doc_type">
+            <option value="dart">DART 전자공시 분기보고서 (복합 표 14개 포함)</option>
+            <option value="policy">사내 IT 정보보안 규정집 (H1~H3 계층 조항)</option>
+            <option value="scanned">스캔 계약서 PDF (OCR 노이즈 및 서명란)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>코사인 유사도 분할 임계값: <span class="range-val" id="b2_thresh_val">0.45</span></label>
+          <input type="range" id="b2_thresh" min="0.2" max="0.8" step="0.05" value="0.45" oninput="document.getElementById('b2_thresh_val').innerText = this.value">
+        </div>
+        <div class="form-group">
+          <label>표 구조 복원 엔진 (TSR Mode)</label>
+          <select id="b2_tsr">
+            <option value="tatr">Microsoft Table Transformer (TATR Accurate)</option>
+            <option value="docling">IBM Docling TableFormer</option>
+            <option value="camelot">Camelot Lattice Parsing</option>
+          </select>
+        </div>
+        <button class="btn-run" id="btn_run_2" onclick="runPipeline2()">
+          <span>▶ Docling 멀티모달 파싱 가동</span>
+        </button>
+      </div>
+
+      <div class="display-panel">
+        <div class="stage-indicator">
+          <span class="stage-step" id="b2_s1">1. PDF 프리미티브</span>
+          <span class="stage-step" id="b2_s2">2. TATR 표 복원</span>
+          <span class="stage-step" id="b2_s3">3. 코사인 시맨틱 청킹</span>
+          <span class="stage-step" id="b2_s4">4. 마크다운 생성</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="b2_progress"></div>
+        </div>
+        <div class="console-term" id="b2_console">
+[대기 중] 문서를 선택하고 [▶ Docling 멀티모달 파싱 가동] 버튼을 누르십시오.
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="canvas2"></canvas>
+        </div>
+        <div class="metrics-row">
+          <div class="metric-card"><div class="title">표 셀 인식 정확도</div><div class="val" id="m2_acc">0.0%</div></div>
+          <div class="metric-card"><div class="title">생성된 시맨틱 청크</div><div class="val" id="m2_chunks">0 Chunks</div></div>
+          <div class="metric-card"><div class="title">문맥 유실률 (Context Loss)</div><div class="val" id="m2_loss">0.0%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SIMULATOR 3 ==================== -->
+  <div id="sim3" class="sim-container">
+    <div class="sim-grid">
+      <div class="control-panel">
+        <h3>🕸️ 온톨로지 & Multi-hop 제어</h3>
+        <div class="form-group">
+          <label>비정형 원시 도메인 텍스트 입력</label>
+          <textarea id="b3_text" rows="3">LG CNS 부산 데이터센터 3번 서버랙의 UPS 전원 공급 장치가 과열 경보를 발생시켰으며, 이 장치는 Core-Switch-01과 광케이블로 직결되어 있습니다.</textarea>
+        </div>
+        <div class="form-group">
+          <label>Multi-hop 경로 탐색 깊이: <span class="range-val" id="b3_hop_val">3</span> Hops</label>
+          <input type="range" id="b3_hop" min="1" max="5" step="1" value="3" oninput="document.getElementById('b3_hop_val').innerText = this.value + ' Hops'">
+        </div>
+        <div class="form-group">
+          <label>그래프 알고리즘 선택</label>
+          <select id="b3_algo">
+            <option value="shortest">Shortest Path (다익스트라 최단 위험 전파 경로)</option>
+            <option value="pagerank">PageRank (핵심 장애 인프라 노드 중심성)</option>
+            <option value="louvain">Louvain (연관 설비 서브 커뮤니티 클러스터)</option>
+          </select>
+        </div>
+        <button class="btn-run" id="btn_run_3" onclick="runPipeline3()">
+          <span>▶ 지식 그래프 트리플 추출 & 탐색</span>
+        </button>
+      </div>
+
+      <div class="display-panel">
+        <div class="stage-indicator">
+          <span class="stage-step" id="b3_s1">1. LLM 트리플 추출</span>
+          <span class="stage-step" id="b3_s2">2. Neo4j MERGE</span>
+          <span class="stage-step" id="b3_s3">3. Cypher Multi-hop</span>
+          <span class="stage-step" id="b3_s4">4. GDS 위험도 판정</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="b3_progress"></div>
+        </div>
+        <div class="console-term" id="b3_console">
+[대기 중] 텍스트를 입력하고 [▶ 지식 그래프 트리플 추출 & 탐색] 버튼을 누르십시오.
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="canvas3"></canvas>
+        </div>
+        <div class="metrics-row">
+          <div class="metric-card"><div class="title">추출된 RDF 트리플</div><div class="val" id="m3_triples">0 SPOs</div></div>
+          <div class="metric-card"><div class="title">탐색된 서브그래프 노드</div><div class="val" id="m3_nodes">0 Nodes</div></div>
+          <div class="metric-card"><div class="title">경로 탐색 속도</div><div class="val" id="m3_speed">0.0 ms</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchSim(id) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.sim-container').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Canvas drawing helpers
+    const c1 = document.getElementById('canvas1');
+    const ctx1 = c1.getContext('2d');
+    const c2 = document.getElementById('canvas2');
+    const ctx2 = c2.getContext('2d');
+    const c3 = document.getElementById('canvas3');
+    const ctx3 = c3.getContext('2d');
+
+    function resizeCanvases() {
+      [c1, c2, c3].forEach(c => {
+        c.width = c.parentElement.clientWidth;
+        c.height = c.parentElement.clientHeight;
+      });
+    }
+    window.addEventListener('resize', resizeCanvases);
+    resizeCanvases();
+
+    // ================= SIMULATOR 1 EXECUTION =================
+    function runPipeline1() {
+      const btn = document.getElementById('btn_run_1');
+      btn.disabled = true;
+      const term = document.getElementById('b1_console');
+      const prog = document.getElementById('b1_progress');
+      term.innerHTML = '';
+
+      function log(msg, cls='') {
+        const time = new Date().toISOString().substring(11, 19);
+        term.innerHTML += `<div class="${cls}">[${time}] ${msg}</div>`;
+        term.scrollTop = term.scrollHeight;
+      }
+
+      log("🚀 [Airflow DAG] 'enterprise_pgvector_etl' 스케줄러 트리거 가동...");
+      document.getElementById('b1_s1').className = 'stage-step active';
+      prog.style.width = '25%';
+
+      setTimeout(() => {
+        const batch = document.getElementById('b1_batch').value;
+        log(`📦 [Polars Stream] DART 금융 분기보고서 ${batch}건 제너레이터 스트리밍 파싱 완료.`, 'log-succ');
+        document.getElementById('b1_s1').className = 'stage-step done';
+        document.getElementById('b1_s2').className = 'stage-step active';
+        prog.style.width = '50%';
+      }, 700);
+
+      setTimeout(() => {
+        const model = document.getElementById('b1_model').value;
+        log(`⚡ [LLM Client] MultiProviderLLMClient (${model}) 배치 벡터화 수행...`, 'log-warn');
+        log(`✓ 768차원 임베딩 텐서 생성 완료 (소요시간: 142ms)`);
+        document.getElementById('b1_s2').className = 'stage-step done';
+        document.getElementById('b1_s3').className = 'stage-step active';
+        prog.style.width = '75%';
+      }, 1500);
+
+      setTimeout(() => {
+        const m = document.getElementById('b1_m').value;
+        const ef = document.getElementById('b1_ef').value;
+        log(`💾 [pgvector] HNSW 인덱스 빌드 (m=${m}, ef_construction=${ef})...`);
+        log(`✅ PostgreSQL 16 물리 테이블 적재 및 HNSW 그래프 연결 완성!`, 'log-succ');
+        document.getElementById('b1_s3').className = 'stage-step done';
+        document.getElementById('b1_s4').className = 'stage-step active';
+        prog.style.width = '100%';
+
+        // Metrics
+        document.getElementById('m1_qps').innerText = (1200 + Math.floor(Math.random()*300)) + " RPS";
+        document.getElementById('m1_recall').innerText = (98.2 + (ef/200)*1.5).toFixed(1) + "%";
+        document.getElementById('m1_lat').innerText = (4.2 + (m/64)*2.1).toFixed(1) + " ms";
+
+        // Draw HNSW graph
+        drawHNSW(ctx1, c1.width, c1.height, m);
+      }, 2300);
+
+      setTimeout(() => {
+        log("🎉 [Streamlit] 실시간 하이브리드 검색 대시보드 서빙 준비 완료!", 'log-succ');
+        document.getElementById('b1_s4').className = 'stage-step done';
+        btn.disabled = false;
+      }, 2800);
+    }
+
+    function drawHNSW(ctx, w, h, m) {
+      ctx.clearRect(0, 0, w, h);
+      const nodes = [];
+      const count = 30;
+      for (let i = 0; i < count; i++) {
+        nodes.push({ x: 40 + Math.random() * (w - 80), y: 30 + Math.random() * (h - 60) });
+      }
+      ctx.strokeStyle = "rgba(6, 182, 212, 0.35)";
+      ctx.lineWidth = 1;
+      nodes.forEach((n, idx) => {
+        for (let j = 1; j <= 3; j++) {
+          const target = nodes[(idx + j) % count];
+          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
+          ctx.lineTo(target.x, target.y);
+          ctx.stroke();
+        }
+      });
+      nodes.forEach((n, idx) => {
+        ctx.fillStyle = idx === 0 ? "#f43f5e" : "#06b6d4";
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, idx === 0 ? 6 : 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    // ================= SIMULATOR 2 EXECUTION =================
+    function runPipeline2() {
+      const btn = document.getElementById('btn_run_2');
+      btn.disabled = true;
+      const term = document.getElementById('b2_console');
+      const prog = document.getElementById('b2_progress');
+      term.innerHTML = '';
+
+      function log(msg, cls='') {
+        const time = new Date().toISOString().substring(11, 19);
+        term.innerHTML += `<div class="${cls}">[${time}] ${msg}</div>`;
+        term.scrollTop = term.scrollHeight;
+      }
+
+      log("🚀 [Docling Converter] PDF 문서 로딩 및 바이너리 스트림 디코딩...");
+      document.getElementById('b2_s1').className = 'stage-step active';
+      prog.style.width = '25%';
+
+      setTimeout(() => {
+        log("🔍 [LayoutParser] H1/H2 제목, 텍스트 본문 단락, 캡션 바운딩 박스 분할.", 'log-succ');
+        document.getElementById('b2_s1').className = 'stage-step done';
+        document.getElementById('b2_s2').className = 'stage-step active';
+        prog.style.width = '50%';
+      }, 700);
+
+      setTimeout(() => {
+        const tsr = document.getElementById('b2_tsr').value;
+        log(`📊 [TSR Engine: ${tsr}] 표 내부 행/열 그리드 및 Rowspan/Colspan 병합 셀 좌표 복원 완료.`, 'log-warn');
+        document.getElementById('b2_s2').className = 'stage-step done';
+        document.getElementById('b2_s3').className = 'stage-step active';
+        prog.style.width = '75%';
+      }, 1500);
+
+      setTimeout(() => {
+        const th = document.getElementById('b2_thresh').value;
+        log(`✂️ [Semantic Chunking] 코사인 거리 변곡점 (Threshold=${th}) 기반 문맥 청크 분할 완료.`, 'log-succ');
+        document.getElementById('b2_s3').className = 'stage-step done';
+        document.getElementById('b2_s4').className = 'stage-step active';
+        prog.style.width = '100%';
+
+        document.getElementById('m2_acc').innerText = "97.8%";
+        document.getElementById('m2_chunks').innerText = "18 Chunks";
+        document.getElementById('m2_loss').innerText = "1.2%";
+
+        drawCosineCurve(ctx2, c2.width, c2.height, th);
+      }, 2300);
+
+      setTimeout(() => {
+        log("✅ [E2E Complete] 마크다운 포맷 및 정형 JSON 내보내기 100% 완료!", 'log-succ');
+        document.getElementById('b2_s4').className = 'stage-step done';
+        btn.disabled = false;
+      }, 2800);
+    }
+
+    function drawCosineCurve(ctx, w, h, th) {
+      ctx.clearRect(0, 0, w, h);
+      ctx.strokeStyle = "#475569";
+      ctx.beginPath();
+      const midY = h * (1 - th);
+      ctx.setLineDash([4, 4]);
+      ctx.moveTo(20, midY);
+      ctx.lineTo(w - 20, midY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.strokeStyle = "#10b981";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      const points = [0.85, 0.82, 0.78, 0.35, 0.88, 0.91, 0.38, 0.84, 0.89];
+      const step = (w - 60) / (points.length - 1);
+      points.forEach((p, i) => {
+        const x = 30 + i * step;
+        const y = h * (1 - p);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      points.forEach((p, i) => {
+        const x = 30 + i * step;
+        const y = h * (1 - p);
+        ctx.fillStyle = p < th ? "#f43f5e" : "#10b981";
+        ctx.beginPath();
+        ctx.arc(x, y, p < th ? 6 : 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    // ================= SIMULATOR 3 EXECUTION =================
+    function runPipeline3() {
+      const btn = document.getElementById('btn_run_3');
+      btn.disabled = true;
+      const term = document.getElementById('b3_console');
+      const prog = document.getElementById('b3_progress');
+      term.innerHTML = '';
+
+      function log(msg, cls='') {
+        const time = new Date().toISOString().substring(11, 19);
+        term.innerHTML += `<div class="${cls}">[${time}] ${msg}</div>`;
+        term.scrollTop = term.scrollHeight;
+      }
+
+      log("🚀 [LLM Triple Extractor] Gemini 2.5 Flash를 통한 도메인 엔티티 & 관계 추출...");
+      document.getElementById('b3_s1').className = 'stage-step active';
+      prog.style.width = '25%';
+
+      setTimeout(() => {
+        log("📋 [추출된 S-P-O]: (:DataCenter)-[:CONTAINS]->(:ServerRack)", 'log-succ');
+        log("📋 [추출된 S-P-O]: (:UPS)-[:OVERHEATED_ALERT]->(:FaultEvent)");
+        log("📋 [추출된 S-P-O]: (:UPS)-[:CONNECTED_VIA]->(:CoreSwitch)");
+        document.getElementById('b3_s1').className = 'stage-step done';
+        document.getElementById('b3_s2').className = 'stage-step active';
+        prog.style.width = '50%';
+      }, 750);
+
+      setTimeout(() => {
+        log("💾 [Neo4j 5.x Engine] APOC 트랜잭션 배치 MERGE 실행...", 'log-warn');
+        log("✓ 노드 6개 생성, 관계 7개 인덱스-프리 포인터 연결 완료.");
+        document.getElementById('b3_s2').className = 'stage-step done';
+        document.getElementById('b3_s3').className = 'stage-step active';
+        prog.style.width = '75%';
+      }, 1500);
+
+      setTimeout(() => {
+        const hops = document.getElementById('b3_hop').value;
+        const algo = document.getElementById('b3_algo').value;
+        log(`🔍 [Cypher Query] MATCH p=(u:UPS)-[*1..${hops}]-(target) RETURN p...`);
+        log(`⚡ [GDS Algorithm: ${algo}] 위험 설비 영향도 스코어 산출 완료.`, 'log-succ');
+        document.getElementById('b3_s3').className = 'stage-step done';
+        document.getElementById('b3_s4').className = 'stage-step active';
+        prog.style.width = '100%';
+
+        document.getElementById('m3_triples').innerText = "3 SPOs";
+        document.getElementById('m3_nodes').innerText = "14 Nodes";
+        document.getElementById('m3_speed').innerText = "1.8 ms";
+
+        drawGraphNet(ctx3, c3.width, c3.height);
+      }, 2300);
+
+      setTimeout(() => {
+        log("🎉 [Complete] 지식 그래프 다단계 경로 탐색 및 이상 징후 분석 완료!", 'log-succ');
+        document.getElementById('b3_s4').className = 'stage-step done';
+        btn.disabled = false;
+      }, 2800);
+    }
+
+    function drawGraphNet(ctx, w, h) {
+      ctx.clearRect(0, 0, w, h);
+      const center = { x: w / 2, y: h / 2, label: "UPS-03", color: "#f43f5e" };
+      const neighbors = [
+        { x: w / 2 - 120, y: h / 2 - 40, label: "Rack-03", color: "#8b5cf6" },
+        { x: w / 2 + 130, y: h / 2 - 50, label: "CoreSwitch", color: "#8b5cf6" },
+        { x: w / 2 - 60, y: h / 2 + 60, label: "Busan-DC", color: "#06b6d4" },
+        { x: w / 2 + 100, y: h / 2 + 60, label: "PowerGrid", color: "#f59e0b" },
+      ];
+      ctx.strokeStyle = "rgba(139, 92, 246, 0.6)";
+      ctx.lineWidth = 2;
+      neighbors.forEach(n => {
+        ctx.beginPath();
+        ctx.moveTo(center.x, center.y);
+        ctx.lineTo(n.x, n.y);
+        ctx.stroke();
+      });
+      [center, ...neighbors].forEach(n => {
+        ctx.fillStyle = n.color;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.label === "UPS-03" ? 14 : 10, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#fff";
+        ctx.font = "10px sans-serif";
+        ctx.fillText(n.label, n.x - 18, n.y - 14);
+      });
+    }
+  </script>
+</body>
+</html>
