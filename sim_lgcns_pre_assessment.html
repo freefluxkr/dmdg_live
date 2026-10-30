@@ -815,6 +815,28 @@
       const isPassed = score >= 80;
       const modal = document.getElementById('result-modal');
 
+      // 실시간 관리자 대시보드(admin.html) 연동을 위한 로컬스토리지 저장
+      try {
+        const email = document.getElementById('student_email')?.value || '';
+        const affiliation = document.getElementById('student_affiliation')?.value || 'LG CNS KG 2기';
+        const submission = {
+          id: 'sub_' + Date.now(),
+          name: name || '수강생',
+          email: email,
+          affiliation: affiliation,
+          score: score,
+          isPassed: isPassed,
+          areaScores: areaScores,
+          timestamp: new Date().toISOString(),
+          dateStr: new Date().toLocaleString('ko-KR')
+        };
+        const list = JSON.parse(localStorage.getItem('dmdg_assessment_submissions') || '[]');
+        list.unshift(submission);
+        localStorage.setItem('dmdg_assessment_submissions', JSON.stringify(list.slice(0, 200)));
+      } catch (e) {
+        console.warn('Failed to save assessment submission', e);
+      }
+
       const statusBadge = document.getElementById('result-status-badge');
       if (isPassed) {
         statusBadge.className = 'text-xs font-bold px-3 py-1 rounded-full uppercase font-mono tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
