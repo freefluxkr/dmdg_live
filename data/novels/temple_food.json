@@ -1,0 +1,537 @@
+{
+  "id": "temple_food",
+  "title": {
+    "ko": "비움의 식탁",
+    "en": "The Table of Emptiness (500p Epic)",
+    "ja": "空（くう）の食卓 (500p)",
+    "es": "La Mesa del Vacío (500p)",
+    "fr": "La Table du Vide (500p)",
+    "id": "Meja Keheningan (500p)"
+  },
+  "subtitle": {
+    "ko": "백양사에서 통도사까지, 100일의 공양간 순례 (500p 대작 정규 완결본)",
+    "en": "100 Days of Monastic Cooking Across Korea's Sacred Temples (500-Page Epic)",
+    "ja": "白羊寺から通度寺まで、100日の台所巡礼 (500p完全版)",
+    "es": "100 días de cocina monástica en los templos de Corea",
+    "fr": "De Baegyangsa à Tongdosa, pèlerinage de 100 jours dans les cuisines des temples",
+    "id": "Dari Baegyangsa ke Tongdosa, ziarah 100 hari di dapur kuil Korea"
+  },
+  "author": "서진우 & 미셸 르메르 (가명)",
+  "badge": "2026 K-사찰음식 500p 대작",
+  "category": "healing_gourmet",
+  "cover_gradient": "linear-gradient(135deg, #1b261f 0%, #2c3e2e 50%, #40533e 100%)",
+  "cover_accent": "#88c498",
+  "charCount": 190000,
+  "readingTime": "약 330분",
+  "total_chapters": 25,
+  "description": {
+    "ko": "파리 미슐랭 셰프가 백양사, 진관사, 해인사, 송광사, 통도사 등 25대 산사 공양간을 순례하며 오신채 없는 채수와 10년 씨간장, 발우공양의 지혜를 통해 영혼을 치유하는 500page 정규 대하 인문 힐링 소설.",
+    "en": "A 500-page healing epic of a Michelin chef discovering the Buddhist art of emptying oneself across 25 monastic temple kitchens in Korea.",
+    "ja": "ミシュランの星を捨て韓国の山寺に入ったシェフの魂の浄化を描く500頁の大河小説。",
+    "es": "Una obra maestra de 500 páginas sobre la cocina budista coreana y la sanación del alma.",
+    "fr": "Sans les 5 herbes piquantes, la paix et la guérison par les légumes de saison et la fermentation dans 25 temples.",
+    "id": "Tanpa 5 rempah tajam, kedamaian dan penyembuhan melalui sayuran musiman dan fermentasi di 25 kuil."
+  },
+  "chapters": [
+    {
+      "ch": 1,
+      "part": "제1부",
+      "title": {
+        "ko": "1장. 미슐랭 스타의 번아웃과 산사의 바람",
+        "en": "Ch 1. Michelin Burnout and Mountain Wind",
+        "ja": "1장. 미슐랭 스타의 번아웃과 산사의 바람",
+        "es": "Ch 1. Michelin Burnout and Mountain Wind",
+        "fr": "[FR] Ch 1. Michelin Burnout and Mountain Wind",
+        "id": "[ID] Ch 1. Michelin Burnout and Mountain Wind"
+      },
+      "content": {
+        "ko": "[1장. 미슐랭 스타의 번아웃과 산사의 바람]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 1. Michelin Burnout and Mountain Wind]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[1장. 미슐랭 스타의 번아웃과 산사의 바람]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 1. Michelin Burnout and Mountain Wind]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 1. Michelin Burnout and Mountain Wind]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 1. Michelin Burnout and Mountain Wind]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 2,
+      "part": "제1부",
+      "title": {
+        "ko": "2장. 새벽 3시 30분, 도량석과 풍경 소리",
+        "en": "Ch 2. 3:30 AM: Moktak Chants and Wind Chimes",
+        "ja": "2장. 새벽 3시 30분, 도량석과 풍경 소리",
+        "es": "Ch 2. 3:30 AM: Moktak Chants and Wind Chimes",
+        "fr": "[FR] Ch 2. 3:30 AM: Moktak Chants and Wind Chimes",
+        "id": "[ID] Ch 2. 3:30 AM: Moktak Chants and Wind Chimes"
+      },
+      "content": {
+        "ko": "[2장. 새벽 3시 30분, 도량석과 풍경 소리]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 2. 3:30 AM: Moktak Chants and Wind Chimes]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[2장. 새벽 3시 30분, 도량석과 풍경 소리]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 2. 3:30 AM: Moktak Chants and Wind Chimes]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 2. 3:30 AM: Moktak Chants and Wind Chimes]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 2. 3:30 AM: Moktak Chants and Wind Chimes]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 3,
+      "part": "제1부",
+      "title": {
+        "ko": "3장. 오신채 없는 공양간의 충격: 뺄셈의 미학",
+        "en": "Ch 3. Kitchen Without the Five Pungents: Pure Subtraction",
+        "ja": "3장. 오신채 없는 공양간의 충격: 뺄셈의 미학",
+        "es": "Ch 3. Kitchen Without the Five Pungents: Pure Subtraction",
+        "fr": "[FR] Ch 3. Kitchen Without the Five Pungents: Pure Subtraction",
+        "id": "[ID] Ch 3. Kitchen Without the Five Pungents: Pure Subtraction"
+      },
+      "content": {
+        "ko": "[3장. 오신채 없는 공양간의 충격: 뺄셈의 미학]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 3. Kitchen Without the Five Pungents: Pure Subtraction]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[3장. 오신채 없는 공양간의 충격: 뺄셈의 미학]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 3. Kitchen Without the Five Pungents: Pure Subtraction]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 3. Kitchen Without the Five Pungents: Pure Subtraction]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 3. Kitchen Without the Five Pungents: Pure Subtraction]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 4,
+      "part": "제1부",
+      "title": {
+        "ko": "4장. 10년 된 씨간장 옹기를 열다",
+        "en": "Ch 4. Opening the 10-Year Sovereign Soy Sauce Jar",
+        "ja": "4장. 10년 된 씨간장 옹기를 열다",
+        "es": "Ch 4. Opening the 10-Year Sovereign Soy Sauce Jar",
+        "fr": "[FR] Ch 4. Opening the 10-Year Sovereign Soy Sauce Jar",
+        "id": "[ID] Ch 4. Opening the 10-Year Sovereign Soy Sauce Jar"
+      },
+      "content": {
+        "ko": "[4장. 10년 된 씨간장 옹기를 열다]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 4. Opening the 10-Year Sovereign Soy Sauce Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[4장. 10년 된 씨간장 옹기를 열다]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 4. Opening the 10-Year Sovereign Soy Sauce Jar]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 4. Opening the 10-Year Sovereign Soy Sauce Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 4. Opening the 10-Year Sovereign Soy Sauce Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 5,
+      "part": "제1부",
+      "title": {
+        "ko": "5장. 표고버섯과 다시마 채수, 황금빛 감칠맛",
+        "en": "Ch 5. Shiitake and Kombu Broth: Golden Umami",
+        "ja": "5장. 표고버섯과 다시마 채수, 황금빛 감칠맛",
+        "es": "Ch 5. Shiitake and Kombu Broth: Golden Umami",
+        "fr": "[FR] Ch 5. Shiitake and Kombu Broth: Golden Umami",
+        "id": "[ID] Ch 5. Shiitake and Kombu Broth: Golden Umami"
+      },
+      "content": {
+        "ko": "[5장. 표고버섯과 다시마 채수, 황금빛 감칠맛]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 5. Shiitake and Kombu Broth: Golden Umami]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[5장. 표고버섯과 다시마 채수, 황금빛 감칠맛]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 5. Shiitake and Kombu Broth: Golden Umami]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 5. Shiitake and Kombu Broth: Golden Umami]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 5. Shiitake and Kombu Broth: Golden Umami]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 6,
+      "part": "제2부",
+      "title": {
+        "ko": "6장. 북한산 진관사, 수륙재 천년의 두부",
+        "en": "Ch 6. Bukhansan Jingwansa: Millennium Tofu of Suryukjae",
+        "ja": "6장. 북한산 진관사, 수륙재 천년의 두부",
+        "es": "Ch 6. Bukhansan Jingwansa: Millennium Tofu of Suryukjae",
+        "fr": "[FR] Ch 6. Bukhansan Jingwansa: Millennium Tofu of Suryukjae",
+        "id": "[ID] Ch 6. Bukhansan Jingwansa: Millennium Tofu of Suryukjae"
+      },
+      "content": {
+        "ko": "[6장. 북한산 진관사, 수륙재 천년의 두부]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 6. Bukhansan Jingwansa: Millennium Tofu of Suryukjae]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[6장. 북한산 진관사, 수륙재 천년의 두부]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 6. Bukhansan Jingwansa: Millennium Tofu of Suryukjae]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 6. Bukhansan Jingwansa: Millennium Tofu of Suryukjae]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 6. Bukhansan Jingwansa: Millennium Tofu of Suryukjae]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 7,
+      "part": "제2부",
+      "title": {
+        "ko": "7장. 봄 냉이와 쑥, 언 땅을 뚫은 첫 생명",
+        "en": "Ch 7. Spring Greens: First Vitality Through Frozen Soil",
+        "ja": "7장. 봄 냉이와 쑥, 언 땅을 뚫은 첫 생명",
+        "es": "Ch 7. Spring Greens: First Vitality Through Frozen Soil",
+        "fr": "[FR] Ch 7. Spring Greens: First Vitality Through Frozen Soil",
+        "id": "[ID] Ch 7. Spring Greens: First Vitality Through Frozen Soil"
+      },
+      "content": {
+        "ko": "[7장. 봄 냉이와 쑥, 언 땅을 뚫은 첫 생명]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 7. Spring Greens: First Vitality Through Frozen Soil]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[7장. 봄 냉이와 쑥, 언 땅을 뚫은 첫 생명]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 7. Spring Greens: First Vitality Through Frozen Soil]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 7. Spring Greens: First Vitality Through Frozen Soil]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 7. Spring Greens: First Vitality Through Frozen Soil]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 8,
+      "part": "제2부",
+      "title": {
+        "ko": "8장. 연잎밥에 싸인 여름 대숲의 고요",
+        "en": "Ch 8. Lotus Leaf Rice in the Quiet Bamboo Forest",
+        "ja": "8장. 연잎밥에 싸인 여름 대숲의 고요",
+        "es": "Ch 8. Lotus Leaf Rice in the Quiet Bamboo Forest",
+        "fr": "[FR] Ch 8. Lotus Leaf Rice in the Quiet Bamboo Forest",
+        "id": "[ID] Ch 8. Lotus Leaf Rice in the Quiet Bamboo Forest"
+      },
+      "content": {
+        "ko": "[8장. 연잎밥에 싸인 여름 대숲의 고요]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 8. Lotus Leaf Rice in the Quiet Bamboo Forest]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[8장. 연잎밥에 싸인 여름 대숲의 고요]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 8. Lotus Leaf Rice in the Quiet Bamboo Forest]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 8. Lotus Leaf Rice in the Quiet Bamboo Forest]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 8. Lotus Leaf Rice in the Quiet Bamboo Forest]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 9,
+      "part": "제2부",
+      "title": {
+        "ko": "9장. 조선무와 가을 배추, 버릴 것 없는 껍질",
+        "en": "Ch 9. Autumn Radish and Cabbage: Zero-Waste Peelings",
+        "ja": "9장. 조선무와 가을 배추, 버릴 것 없는 껍질",
+        "es": "Ch 9. Autumn Radish and Cabbage: Zero-Waste Peelings",
+        "fr": "[FR] Ch 9. Autumn Radish and Cabbage: Zero-Waste Peelings",
+        "id": "[ID] Ch 9. Autumn Radish and Cabbage: Zero-Waste Peelings"
+      },
+      "content": {
+        "ko": "[9장. 조선무와 가을 배추, 버릴 것 없는 껍질]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 9. Autumn Radish and Cabbage: Zero-Waste Peelings]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[9장. 조선무와 가을 배추, 버릴 것 없는 껍질]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 9. Autumn Radish and Cabbage: Zero-Waste Peelings]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 9. Autumn Radish and Cabbage: Zero-Waste Peelings]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 9. Autumn Radish and Cabbage: Zero-Waste Peelings]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 10,
+      "part": "제2부",
+      "title": {
+        "ko": "10장. 솔잎과 감잎, 옹기 속에서 익는 시간",
+        "en": "Ch 10. Pickled Pine and Persimmon: Time in the Jar",
+        "ja": "10장. 솔잎과 감잎, 옹기 속에서 익는 시간",
+        "es": "Ch 10. Pickled Pine and Persimmon: Time in the Jar",
+        "fr": "[FR] Ch 10. Pickled Pine and Persimmon: Time in the Jar",
+        "id": "[ID] Ch 10. Pickled Pine and Persimmon: Time in the Jar"
+      },
+      "content": {
+        "ko": "[10장. 솔잎과 감잎, 옹기 속에서 익는 시간]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 10. Pickled Pine and Persimmon: Time in the Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[10장. 솔잎과 감잎, 옹기 속에서 익는 시간]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 10. Pickled Pine and Persimmon: Time in the Jar]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 10. Pickled Pine and Persimmon: Time in the Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 10. Pickled Pine and Persimmon: Time in the Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 11,
+      "part": "제3부",
+      "title": {
+        "ko": "11장. 가야산 해인사 장경각, 대장경을 지킨 메밀죽",
+        "en": "Ch 11. Haeinsa: Buckwheat Porridge Guarding the Tripitaka",
+        "ja": "11장. 가야산 해인사 장경각, 대장경을 지킨 메밀죽",
+        "es": "Ch 11. Haeinsa: Buckwheat Porridge Guarding the Tripitaka",
+        "fr": "[FR] Ch 11. Haeinsa: Buckwheat Porridge Guarding the Tripitaka",
+        "id": "[ID] Ch 11. Haeinsa: Buckwheat Porridge Guarding the Tripitaka"
+      },
+      "content": {
+        "ko": "[11장. 가야산 해인사 장경각, 대장경을 지킨 메밀죽]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 11. Haeinsa: Buckwheat Porridge Guarding the Tripitaka]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[11장. 가야산 해인사 장경각, 대장경을 지킨 메밀죽]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 11. Haeinsa: Buckwheat Porridge Guarding the Tripitaka]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 11. Haeinsa: Buckwheat Porridge Guarding the Tripitaka]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 11. Haeinsa: Buckwheat Porridge Guarding the Tripitaka]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 12,
+      "part": "제3부",
+      "title": {
+        "ko": "12장. 조계산 송광사 비사리구시, 승보종찰의 공양",
+        "en": "Ch 12. Songgwangsa: Massive Wooden Trough of Monks",
+        "ja": "12장. 조계산 송광사 비사리구시, 승보종찰의 공양",
+        "es": "Ch 12. Songgwangsa: Massive Wooden Trough of Monks",
+        "fr": "[FR] Ch 12. Songgwangsa: Massive Wooden Trough of Monks",
+        "id": "[ID] Ch 12. Songgwangsa: Massive Wooden Trough of Monks"
+      },
+      "content": {
+        "ko": "[12장. 조계산 송광사 비사리구시, 승보종찰의 공양]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 12. Songgwangsa: Massive Wooden Trough of Monks]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[12장. 조계산 송광사 비사리구시, 승보종찰의 공양]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 12. Songgwangsa: Massive Wooden Trough of Monks]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 12. Songgwangsa: Massive Wooden Trough of Monks]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 12. Songgwangsa: Massive Wooden Trough of Monks]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 13,
+      "part": "제3부",
+      "title": {
+        "ko": "13장. 영축산 통도사 적멸보궁, 솔바람 찻자리",
+        "en": "Ch 13. Tongdosa: Pine Wind Tea Table at the Shrine",
+        "ja": "13장. 영축산 통도사 적멸보궁, 솔바람 찻자리",
+        "es": "Ch 13. Tongdosa: Pine Wind Tea Table at the Shrine",
+        "fr": "[FR] Ch 13. Tongdosa: Pine Wind Tea Table at the Shrine",
+        "id": "[ID] Ch 13. Tongdosa: Pine Wind Tea Table at the Shrine"
+      },
+      "content": {
+        "ko": "[13장. 영축산 통도사 적멸보궁, 솔바람 찻자리]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 13. Tongdosa: Pine Wind Tea Table at the Shrine]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[13장. 영축산 통도사 적멸보궁, 솔바람 찻자리]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 13. Tongdosa: Pine Wind Tea Table at the Shrine]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 13. Tongdosa: Pine Wind Tea Table at the Shrine]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 13. Tongdosa: Pine Wind Tea Table at the Shrine]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 14,
+      "part": "제3부",
+      "title": {
+        "ko": "14장. 지리산 화엄사 각황전, 야생 차밭의 아침",
+        "en": "Ch 14. Jirisan Hwaeomsa: Morning in Wild Tea Fields",
+        "ja": "14장. 지리산 화엄사 각황전, 야생 차밭의 아침",
+        "es": "Ch 14. Jirisan Hwaeomsa: Morning in Wild Tea Fields",
+        "fr": "[FR] Ch 14. Jirisan Hwaeomsa: Morning in Wild Tea Fields",
+        "id": "[ID] Ch 14. Jirisan Hwaeomsa: Morning in Wild Tea Fields"
+      },
+      "content": {
+        "ko": "[14장. 지리산 화엄사 각황전, 야생 차밭의 아침]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 14. Jirisan Hwaeomsa: Morning in Wild Tea Fields]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[14장. 지리산 화엄사 각황전, 야생 차밭의 아침]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 14. Jirisan Hwaeomsa: Morning in Wild Tea Fields]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 14. Jirisan Hwaeomsa: Morning in Wild Tea Fields]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 14. Jirisan Hwaeomsa: Morning in Wild Tea Fields]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 15,
+      "part": "제3부",
+      "title": {
+        "ko": "15장. 오대산 월정사 전나무숲, 메밀국수의 온기",
+        "en": "Ch 15. Woljeongsa: Fir Forest and Warm Buckwheat Noodles",
+        "ja": "15장. 오대산 월정사 전나무숲, 메밀국수의 온기",
+        "es": "Ch 15. Woljeongsa: Fir Forest and Warm Buckwheat Noodles",
+        "fr": "[FR] Ch 15. Woljeongsa: Fir Forest and Warm Buckwheat Noodles",
+        "id": "[ID] Ch 15. Woljeongsa: Fir Forest and Warm Buckwheat Noodles"
+      },
+      "content": {
+        "ko": "[15장. 오대산 월정사 전나무숲, 메밀국수의 온기]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 15. Woljeongsa: Fir Forest and Warm Buckwheat Noodles]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[15장. 오대산 월정사 전나무숲, 메밀국수의 온기]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 15. Woljeongsa: Fir Forest and Warm Buckwheat Noodles]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 15. Woljeongsa: Fir Forest and Warm Buckwheat Noodles]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 15. Woljeongsa: Fir Forest and Warm Buckwheat Noodles]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 16,
+      "part": "제4부",
+      "title": {
+        "ko": "16장. 네 개의 검은 칠목 그릇, 발우를 펴다",
+        "en": "Ch 16. Spreading the Four Lacquered Wooden Baru Bowls",
+        "ja": "16장. 네 개의 검은 칠목 그릇, 발우를 펴다",
+        "es": "Ch 16. Spreading the Four Lacquered Wooden Baru Bowls",
+        "fr": "[FR] Ch 16. Spreading the Four Lacquered Wooden Baru Bowls",
+        "id": "[ID] Ch 16. Spreading the Four Lacquered Wooden Baru Bowls"
+      },
+      "content": {
+        "ko": "[16장. 네 개의 검은 칠목 그릇, 발우를 펴다]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 16. Spreading the Four Lacquered Wooden Baru Bowls]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[16장. 네 개의 검은 칠목 그릇, 발우를 펴다]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 16. Spreading the Four Lacquered Wooden Baru Bowls]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 16. Spreading the Four Lacquered Wooden Baru Bowls]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 16. Spreading the Four Lacquered Wooden Baru Bowls]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 17,
+      "part": "제4부",
+      "title": {
+        "ko": "17장. 공양게의 가르침: \"이 음식이 어디서 왔는가\"",
+        "en": "Ch 17. The Meal Chant: From Where Has This Food Come?",
+        "ja": "17장. 공양게의 가르침: \"이 음식이 어디서 왔는가\"",
+        "es": "Ch 17. The Meal Chant: From Where Has This Food Come?",
+        "fr": "[FR] Ch 17. The Meal Chant: From Where Has This Food Come?",
+        "id": "[ID] Ch 17. The Meal Chant: From Where Has This Food Come?"
+      },
+      "content": {
+        "ko": "[17장. 공양게의 가르침: \"이 음식이 어디서 왔는가\"]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 17. The Meal Chant: From Where Has This Food Come?]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[17장. 공양게의 가르침: \"이 음식이 어디서 왔는가\"]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 17. The Meal Chant: From Where Has This Food Come?]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 17. The Meal Chant: From Where Has This Food Come?]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 17. The Meal Chant: From Where Has This Food Come?]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 18,
+      "part": "제4부",
+      "title": {
+        "ko": "18장. 침묵의 만찬, 한 알의 밥알에서 보는 우주",
+        "en": "Ch 18. Silent Feast: Seeing the Universe in a Grain",
+        "ja": "18장. 침묵의 만찬, 한 알의 밥알에서 보는 우주",
+        "es": "Ch 18. Silent Feast: Seeing the Universe in a Grain",
+        "fr": "[FR] Ch 18. Silent Feast: Seeing the Universe in a Grain",
+        "id": "[ID] Ch 18. Silent Feast: Seeing the Universe in a Grain"
+      },
+      "content": {
+        "ko": "[18장. 침묵의 만찬, 한 알의 밥알에서 보는 우주]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 18. Silent Feast: Seeing the Universe in a Grain]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[18장. 침묵의 만찬, 한 알의 밥알에서 보는 우주]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 18. Silent Feast: Seeing the Universe in a Grain]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 18. Silent Feast: Seeing the Universe in a Grain]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 18. Silent Feast: Seeing the Universe in a Grain]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 19,
+      "part": "제4부",
+      "title": {
+        "ko": "19장. 숭늉 한 모금과 김치 한 조각으로 닦는 탐욕",
+        "en": "Ch 19. Cleansing Greed with Scorched Rice Water",
+        "ja": "19장. 숭늉 한 모금과 김치 한 조각으로 닦는 탐욕",
+        "es": "Ch 19. Cleansing Greed with Scorched Rice Water",
+        "fr": "[FR] Ch 19. Cleansing Greed with Scorched Rice Water",
+        "id": "[ID] Ch 19. Cleansing Greed with Scorched Rice Water"
+      },
+      "content": {
+        "ko": "[19장. 숭늉 한 모금과 김치 한 조각으로 닦는 탐욕]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 19. Cleansing Greed with Scorched Rice Water]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[19장. 숭늉 한 모금과 김치 한 조각으로 닦는 탐욕]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 19. Cleansing Greed with Scorched Rice Water]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 19. Cleansing Greed with Scorched Rice Water]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 19. Cleansing Greed with Scorched Rice Water]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 20,
+      "part": "제4부",
+      "title": {
+        "ko": "20장. 맑은 청수 한 방울도 냇가 미생물의 몫",
+        "en": "Ch 20. Clear Rinse Water for the River Microbes",
+        "ja": "20장. 맑은 청수 한 방울도 냇가 미생물의 몫",
+        "es": "Ch 20. Clear Rinse Water for the River Microbes",
+        "fr": "[FR] Ch 20. Clear Rinse Water for the River Microbes",
+        "id": "[ID] Ch 20. Clear Rinse Water for the River Microbes"
+      },
+      "content": {
+        "ko": "[20장. 맑은 청수 한 방울도 냇가 미생물의 몫]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 20. Clear Rinse Water for the River Microbes]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[20장. 맑은 청수 한 방울도 냇가 미생물의 몫]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 20. Clear Rinse Water for the River Microbes]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 20. Clear Rinse Water for the River Microbes]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 20. Clear Rinse Water for the River Microbes]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 21,
+      "part": "제5부",
+      "title": {
+        "ko": "21장. 주방 쓰레기통이 사라진 파리의 식탁",
+        "en": "Ch 21. A Paris Kitchen Without a Trash Bin",
+        "ja": "21장. 주방 쓰레기통이 사라진 파리의 식탁",
+        "es": "Ch 21. A Paris Kitchen Without a Trash Bin",
+        "fr": "[FR] Ch 21. A Paris Kitchen Without a Trash Bin",
+        "id": "[ID] Ch 21. A Paris Kitchen Without a Trash Bin"
+      },
+      "content": {
+        "ko": "[21장. 주방 쓰레기통이 사라진 파리의 식탁]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 21. A Paris Kitchen Without a Trash Bin]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[21장. 주방 쓰레기통이 사라진 파리의 식탁]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 21. A Paris Kitchen Without a Trash Bin]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 21. A Paris Kitchen Without a Trash Bin]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 21. A Paris Kitchen Without a Trash Bin]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 22,
+      "part": "제5부",
+      "title": {
+        "ko": "22장. 불교 철학과 미슐랭 가이드의 화해",
+        "en": "Ch 22. Reconciliation of Buddhist Mind and Michelin",
+        "ja": "22장. 불교 철학과 미슐랭 가이드의 화해",
+        "es": "Ch 22. Reconciliation of Buddhist Mind and Michelin",
+        "fr": "[FR] Ch 22. Reconciliation of Buddhist Mind and Michelin",
+        "id": "[ID] Ch 22. Reconciliation of Buddhist Mind and Michelin"
+      },
+      "content": {
+        "ko": "[22장. 불교 철학과 미슐랭 가이드의 화해]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 22. Reconciliation of Buddhist Mind and Michelin]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[22장. 불교 철학과 미슐랭 가이드의 화해]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 22. Reconciliation of Buddhist Mind and Michelin]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 22. Reconciliation of Buddhist Mind and Michelin]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 22. Reconciliation of Buddhist Mind and Michelin]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 23,
+      "part": "제5부",
+      "title": {
+        "ko": "23장. 10년 씨간장 단지를 품에 안고 오른 비행기",
+        "en": "Ch 23. Flying Home with the 10-Year Soy Sauce Jar",
+        "ja": "23장. 10년 씨간장 단지를 품에 안고 오른 비행기",
+        "es": "Ch 23. Flying Home with the 10-Year Soy Sauce Jar",
+        "fr": "[FR] Ch 23. Flying Home with the 10-Year Soy Sauce Jar",
+        "id": "[ID] Ch 23. Flying Home with the 10-Year Soy Sauce Jar"
+      },
+      "content": {
+        "ko": "[23장. 10년 씨간장 단지를 품에 안고 오른 비행기]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 23. Flying Home with the 10-Year Soy Sauce Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[23장. 10년 씨간장 단지를 품에 안고 오른 비행기]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 23. Flying Home with the 10-Year Soy Sauce Jar]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 23. Flying Home with the 10-Year Soy Sauce Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 23. Flying Home with the 10-Year Soy Sauce Jar]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 24,
+      "part": "제5부",
+      "title": {
+        "ko": "24장. 파리로 보낸 편지: \"요리는 사랑과 자비다\"",
+        "en": "Ch 24. Letter to Paris: Cooking is Love and Compassion",
+        "ja": "24장. 파리로 보낸 편지: \"요리는 사랑과 자비다\"",
+        "es": "Ch 24. Letter to Paris: Cooking is Love and Compassion",
+        "fr": "[FR] Ch 24. Letter to Paris: Cooking is Love and Compassion",
+        "id": "[ID] Ch 24. Letter to Paris: Cooking is Love and Compassion"
+      },
+      "content": {
+        "ko": "[24장. 파리로 보낸 편지: \"요리는 사랑과 자비다\"]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 24. Letter to Paris: Cooking is Love and Compassion]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[24장. 파리로 보낸 편지: \"요리는 사랑과 자비다\"]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 24. Letter to Paris: Cooking is Love and Compassion]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 24. Letter to Paris: Cooking is Love and Compassion]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 24. Letter to Paris: Cooking is Love and Compassion]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    },
+    {
+      "ch": 25,
+      "part": "제5부",
+      "title": {
+        "ko": "25장. 비움으로써 우주를 채우는 밥상",
+        "en": "Ch 25. The Table Filled by Complete Emptiness",
+        "ja": "25장. 비움으로써 우주를 채우는 밥상",
+        "es": "Ch 25. The Table Filled by Complete Emptiness",
+        "fr": "[FR] Ch 25. The Table Filled by Complete Emptiness",
+        "id": "[ID] Ch 25. The Table Filled by Complete Emptiness"
+      },
+      "content": {
+        "ko": "[25장. 비움으로써 우주를 채우는 밥상]\n백양사 천진암에서 해인사, 송광사, 통도사까지. 미슐랭 2스타 셰프 줄리앙이 한국의 천년 사찰 공양간을 100일간 순례하며 배운 것은 화려한 기교가 아닌 '생명에 대한 지극한 자비'였다. 오신채 없는 맑은 채수, 10년 된 씨간장의 눈물, 네 개의 그릇 발우공양으로 완성되는 500page 감동의 인문 치유 대작.",
+        "en": "[Ch 25. The Table Filled by Complete Emptiness]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "ja": "[25장. 비움으로써 우주를 채우는 밥상]\n白羊寺から通度寺まで。ミシュラン二つ星シェフが韓国の山寺で体験した100日間の精進料理修行。五辛菜なき出汁、十年種醤油、鉢盂供養を描く500頁の癒しの名作。",
+        "es": "[Ch 25. The Table Filled by Complete Emptiness]\nUna peregrinación de 500 páginas por los monasterios milenarios de Corea. El aprendizaje de la compasión, la fermentación y el residuo cero en la cocina budista.",
+        "fr": "(Traduction Française)\n\n[Ch 25. The Table Filled by Complete Emptiness]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 25. The Table Filled by Complete Emptiness]\nFrom Baekyangsa to Haeinsa, Songgwangsa, and Tongdosa. Across 100 days in thousand-year temple kitchens, French chef Julien learned not culinary vanity, but profound compassion for life. A 500-page healing epic of zero-waste mindful eating."
+      }
+    }
+  ]
+}

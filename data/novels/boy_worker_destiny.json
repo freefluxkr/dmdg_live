@@ -1,0 +1,537 @@
+{
+  "id": "boy_worker_destiny",
+  "title": {
+    "ko": "신의 주사위",
+    "en": "The God's Dice (500p Kim Jin-myung Edition)",
+    "ja": "神の賽 (500p 金辰明調)",
+    "es": "Los Dados de Dios (500p)",
+    "fr": "Les Dés de Dieu (500p)",
+    "id": "Dadu Tuhan (500p)"
+  },
+  "subtitle": {
+    "ko": "대하 첩보 한반도 지정학 팩션 (500p 대작 정규 완결본)",
+    "en": "A Trans-Korean Geopolitical Spy Epic (500-Page Epic)",
+    "ja": "朝鮮半島地政学スパイ大河小説 (500p完全版)",
+    "es": "Gran épica de espionaje geopolítico coreano",
+    "fr": "La guerre des semi-conducteurs et la décision du bunker de la zone démilitarisée",
+    "id": "Perang semikonduktor Asia Timur Laut dan keputusan di bunker DMZ"
+  },
+  "author": "김진석 & 마르쿠스 한 (가명)",
+  "badge": "김진명 스타일 500p 대작",
+  "category": "faction",
+  "cover_gradient": "linear-gradient(135deg, #1c1917 0%, #292524 50%, #44403c 100%)",
+  "cover_accent": "#f59e0b",
+  "charCount": 194000,
+  "readingTime": "약 335분",
+  "total_chapters": 25,
+  "description": {
+    "ko": "800만 달러 대북 송금과 백두산 밀영의 약속. 하노이 결렬 후 한반도 평화와 경의선 철도 개통을 위해 목숨을 걸고 국경을 넘나든 소년공 출신 지도자와 조폭 기업인의 500page 대하 첩보 지정학 팩션.",
+    "en": "A 500-page Kim Jin-myung geopolitical epic on the $8M North Korean remittance, Mount Baekdu secret pacts, and the struggle to connect the Trans-Korean Railway.",
+    "ja": "800万ドルの対北送金と民族の命運を賭けた指導者の勝負手を描く500頁の本格地政学巨編。",
+    "es": "Una apasionante novela de espionaje geopolítico de 500 páginas sobre el destino de la península coreana.",
+    "fr": "Un chef-d'œuvre géopolitique de 500 pages sur la bataille secrète pour la souveraineté technologique de la péninsule coréenne.",
+    "id": "Karya agung geopolitik 500 halaman tentang perjuangan kedaulatan teknologi di semenanjung Korea."
+  },
+  "chapters": [
+    {
+      "ch": 1,
+      "part": "제1부",
+      "title": {
+        "ko": "1장. 하노이 메트로폴 호텔의 결렬과 백악관의 밀령",
+        "en": "Ch 1. Hanoi Metropole Breakdown and White House Order",
+        "ja": "1장. 하노이 메트로폴 호텔의 결렬과 백악관의 밀령",
+        "es": "Ch 1. Hanoi Metropole Breakdown and White House Order",
+        "fr": "[FR] Ch 1. Hanoi Metropole Breakdown and White House Order",
+        "id": "[ID] Ch 1. Hanoi Metropole Breakdown and White House Order"
+      },
+      "content": {
+        "ko": "[1장. 하노이 메트로폴 호텔의 결렬과 백악관의 밀령]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 1. Hanoi Metropole Breakdown and White House Order]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[1장. 하노이 메트로폴 호텔의 결렬과 백악관의 밀령]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 1. Hanoi Metropole Breakdown and White House Order]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 1. Hanoi Metropole Breakdown and White House Order]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 1. Hanoi Metropole Breakdown and White House Order]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 2,
+      "part": "제1부",
+      "title": {
+        "ko": "2장. 단둥 압록강 철교의 밤안개와 칠보산호텔",
+        "en": "Ch 2. Yalu River Night Fog and Chilbosan Hotel",
+        "ja": "2장. 단둥 압록강 철교의 밤안개와 칠보산호텔",
+        "es": "Ch 2. Yalu River Night Fog and Chilbosan Hotel",
+        "fr": "[FR] Ch 2. Yalu River Night Fog and Chilbosan Hotel",
+        "id": "[ID] Ch 2. Yalu River Night Fog and Chilbosan Hotel"
+      },
+      "content": {
+        "ko": "[2장. 단둥 압록강 철교의 밤안개와 칠보산호텔]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 2. Yalu River Night Fog and Chilbosan Hotel]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[2장. 단둥 압록강 철교의 밤안개와 칠보산호텔]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 2. Yalu River Night Fog and Chilbosan Hotel]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 2. Yalu River Night Fog and Chilbosan Hotel]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 2. Yalu River Night Fog and Chilbosan Hotel]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 3,
+      "part": "제1부",
+      "title": {
+        "ko": "3장. 조폭 기업인 선샤인 김태성 회장의 결단",
+        "en": "Ch 3. Sunshine Chairman Kim's Dangerous Resolve",
+        "ja": "3장. 조폭 기업인 선샤인 김태성 회장의 결단",
+        "es": "Ch 3. Sunshine Chairman Kim's Dangerous Resolve",
+        "fr": "[FR] Ch 3. Sunshine Chairman Kim's Dangerous Resolve",
+        "id": "[ID] Ch 3. Sunshine Chairman Kim's Dangerous Resolve"
+      },
+      "content": {
+        "ko": "[3장. 조폭 기업인 선샤인 김태성 회장의 결단]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 3. Sunshine Chairman Kim's Dangerous Resolve]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[3장. 조폭 기업인 선샤인 김태성 회장의 결단]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 3. Sunshine Chairman Kim's Dangerous Resolve]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 3. Sunshine Chairman Kim's Dangerous Resolve]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 3. Sunshine Chairman Kim's Dangerous Resolve]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 4,
+      "part": "제1부",
+      "title": {
+        "ko": "4장. 평화부지사 이호영의 베이징 비밀 접촉",
+        "en": "Ch 4. Deputy Governor Lee's Secret Beijing Meeting",
+        "ja": "4장. 평화부지사 이호영의 베이징 비밀 접촉",
+        "es": "Ch 4. Deputy Governor Lee's Secret Beijing Meeting",
+        "fr": "[FR] Ch 4. Deputy Governor Lee's Secret Beijing Meeting",
+        "id": "[ID] Ch 4. Deputy Governor Lee's Secret Beijing Meeting"
+      },
+      "content": {
+        "ko": "[4장. 평화부지사 이호영의 베이징 비밀 접촉]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 4. Deputy Governor Lee's Secret Beijing Meeting]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[4장. 평화부지사 이호영의 베이징 비밀 접촉]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 4. Deputy Governor Lee's Secret Beijing Meeting]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 4. Deputy Governor Lee's Secret Beijing Meeting]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 4. Deputy Governor Lee's Secret Beijing Meeting]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 5,
+      "part": "제1부",
+      "title": {
+        "ko": "5장. 묘향산 특각의 전갈: \"말 대신 800만 달러를 가져오라\"",
+        "en": "Ch 5. Message from Myohyangsan: Bring $8 Million",
+        "ja": "5장. 묘향산 특각의 전갈: \"말 대신 800만 달러를 가져오라\"",
+        "es": "Ch 5. Message from Myohyangsan: Bring $8 Million",
+        "fr": "[FR] Ch 5. Message from Myohyangsan: Bring $8 Million",
+        "id": "[ID] Ch 5. Message from Myohyangsan: Bring $8 Million"
+      },
+      "content": {
+        "ko": "[5장. 묘향산 특각의 전갈: \"말 대신 800만 달러를 가져오라\"]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 5. Message from Myohyangsan: Bring $8 Million]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[5장. 묘향산 특각의 전갈: \"말 대신 800만 달러를 가져오라\"]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 5. Message from Myohyangsan: Bring $8 Million]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 5. Message from Myohyangsan: Bring $8 Million]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 5. Message from Myohyangsan: Bring $8 Million]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 6,
+      "part": "제2부",
+      "title": {
+        "ko": "6장. 007가방 20개에 실린 500만 달러 스마트팜 비용",
+        "en": "Ch 6. Twenty Briefcases: $5M Smart Farm Project",
+        "ja": "6장. 007가방 20개에 실린 500만 달러 스마트팜 비용",
+        "es": "Ch 6. Twenty Briefcases: $5M Smart Farm Project",
+        "fr": "[FR] Ch 6. Twenty Briefcases: $5M Smart Farm Project",
+        "id": "[ID] Ch 6. Twenty Briefcases: $5M Smart Farm Project"
+      },
+      "content": {
+        "ko": "[6장. 007가방 20개에 실린 500만 달러 스마트팜 비용]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 6. Twenty Briefcases: $5M Smart Farm Project]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[6장. 007가방 20개에 실린 500만 달러 스마트팜 비용]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 6. Twenty Briefcases: $5M Smart Farm Project]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 6. Twenty Briefcases: $5M Smart Farm Project]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 6. Twenty Briefcases: $5M Smart Farm Project]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 7,
+      "part": "제2부",
+      "title": {
+        "ko": "7장. 방북 비용 300만 달러의 비밀 환치기 경로",
+        "en": "Ch 7. $3M Pyongyang Visit Fee Underground Hawala",
+        "ja": "7장. 방북 비용 300만 달러의 비밀 환치기 경로",
+        "es": "Ch 7. $3M Pyongyang Visit Fee Underground Hawala",
+        "fr": "[FR] Ch 7. $3M Pyongyang Visit Fee Underground Hawala",
+        "id": "[ID] Ch 7. $3M Pyongyang Visit Fee Underground Hawala"
+      },
+      "content": {
+        "ko": "[7장. 방북 비용 300만 달러의 비밀 환치기 경로]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 7. $3M Pyongyang Visit Fee Underground Hawala]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[7장. 방북 비용 300만 달러의 비밀 환치기 경로]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 7. $3M Pyongyang Visit Fee Underground Hawala]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 7. $3M Pyongyang Visit Fee Underground Hawala]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 7. $3M Pyongyang Visit Fee Underground Hawala]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 8,
+      "part": "제2부",
+      "title": {
+        "ko": "8장. 선양 고려관 밀실의 만찬과 건배사",
+        "en": "Ch 8. Banquet in Shenyang Koryo Pavilion",
+        "ja": "8장. 선양 고려관 밀실의 만찬과 건배사",
+        "es": "Ch 8. Banquet in Shenyang Koryo Pavilion",
+        "fr": "[FR] Ch 8. Banquet in Shenyang Koryo Pavilion",
+        "id": "[ID] Ch 8. Banquet in Shenyang Koryo Pavilion"
+      },
+      "content": {
+        "ko": "[8장. 선양 고려관 밀실의 만찬과 건배사]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 8. Banquet in Shenyang Koryo Pavilion]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[8장. 선양 고려관 밀실의 만찬과 건배사]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 8. Banquet in Shenyang Koryo Pavilion]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 8. Banquet in Shenyang Koryo Pavilion]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 8. Banquet in Shenyang Koryo Pavilion]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 9,
+      "part": "제2부",
+      "title": {
+        "ko": "9장. 미국 CIA 극동 데스크의 위성 감시망 포착",
+        "en": "Ch 9. CIA East Asia Desk Satellite Tracking",
+        "ja": "9장. 미국 CIA 극동 데스크의 위성 감시망 포착",
+        "es": "Ch 9. CIA East Asia Desk Satellite Tracking",
+        "fr": "[FR] Ch 9. CIA East Asia Desk Satellite Tracking",
+        "id": "[ID] Ch 9. CIA East Asia Desk Satellite Tracking"
+      },
+      "content": {
+        "ko": "[9장. 미국 CIA 극동 데스크의 위성 감시망 포착]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 9. CIA East Asia Desk Satellite Tracking]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[9장. 미국 CIA 극동 데스크의 위성 감시망 포착]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 9. CIA East Asia Desk Satellite Tracking]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 9. CIA East Asia Desk Satellite Tracking]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 9. CIA East Asia Desk Satellite Tracking]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 10,
+      "part": "제2부",
+      "title": {
+        "ko": "10장. 백두산 밀영(密營)에서 맺은 남북 철도 밀약",
+        "en": "Ch 10. The Baekdu Secret Camp Railway Pact",
+        "ja": "10장. 백두산 밀영(密營)에서 맺은 남북 철도 밀약",
+        "es": "Ch 10. The Baekdu Secret Camp Railway Pact",
+        "fr": "[FR] Ch 10. The Baekdu Secret Camp Railway Pact",
+        "id": "[ID] Ch 10. The Baekdu Secret Camp Railway Pact"
+      },
+      "content": {
+        "ko": "[10장. 백두산 밀영(密營)에서 맺은 남북 철도 밀약]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 10. The Baekdu Secret Camp Railway Pact]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[10장. 백두산 밀영(密營)에서 맺은 남북 철도 밀약]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 10. The Baekdu Secret Camp Railway Pact]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 10. The Baekdu Secret Camp Railway Pact]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 10. The Baekdu Secret Camp Railway Pact]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 11,
+      "part": "제3부",
+      "title": {
+        "ko": "11장. 대선 패배와 한강도청을 덮친 100명의 수사관",
+        "en": "Ch 11. Defeat and 100 Prosecutors Raiding Han River Hall",
+        "ja": "11장. 대선 패배와 한강도청을 덮친 100명의 수사관",
+        "es": "Ch 11. Defeat and 100 Prosecutors Raiding Han River Hall",
+        "fr": "[FR] Ch 11. Defeat and 100 Prosecutors Raiding Han River Hall",
+        "id": "[ID] Ch 11. Defeat and 100 Prosecutors Raiding Han River Hall"
+      },
+      "content": {
+        "ko": "[11장. 대선 패배와 한강도청을 덮친 100명의 수사관]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 11. Defeat and 100 Prosecutors Raiding Han River Hall]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[11장. 대선 패배와 한강도청을 덮친 100명의 수사관]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 11. Defeat and 100 Prosecutors Raiding Han River Hall]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 11. Defeat and 100 Prosecutors Raiding Han River Hall]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 11. Defeat and 100 Prosecutors Raiding Han River Hall]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 12,
+      "part": "제3부",
+      "title": {
+        "ko": "12장. 평화부지사 이호영의 구속과 독방의 묵비권",
+        "en": "Ch 12. Imprisonment of Deputy Lee: Solitary Silence",
+        "ja": "12장. 평화부지사 이호영의 구속과 독방의 묵비권",
+        "es": "Ch 12. Imprisonment of Deputy Lee: Solitary Silence",
+        "fr": "[FR] Ch 12. Imprisonment of Deputy Lee: Solitary Silence",
+        "id": "[ID] Ch 12. Imprisonment of Deputy Lee: Solitary Silence"
+      },
+      "content": {
+        "ko": "[12장. 평화부지사 이호영의 구속과 독방의 묵비권]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 12. Imprisonment of Deputy Lee: Solitary Silence]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[12장. 평화부지사 이호영의 구속과 독방의 묵비권]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 12. Imprisonment of Deputy Lee: Solitary Silence]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 12. Imprisonment of Deputy Lee: Solitary Silence]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 12. Imprisonment of Deputy Lee: Solitary Silence]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 13,
+      "part": "제3부",
+      "title": {
+        "ko": "13장. 태국 파타야 골프장의 인터폴 급습 작전",
+        "en": "Ch 13. Interpol Raid at Pattaya Golf Resort",
+        "ja": "13장. 태국 파타야 골프장의 인터폴 급습 작전",
+        "es": "Ch 13. Interpol Raid at Pattaya Golf Resort",
+        "fr": "[FR] Ch 13. Interpol Raid at Pattaya Golf Resort",
+        "id": "[ID] Ch 13. Interpol Raid at Pattaya Golf Resort"
+      },
+      "content": {
+        "ko": "[13장. 태국 파타야 골프장의 인터폴 급습 작전]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 13. Interpol Raid at Pattaya Golf Resort]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[13장. 태국 파타야 골프장의 인터폴 급습 작전]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 13. Interpol Raid at Pattaya Golf Resort]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 13. Interpol Raid at Pattaya Golf Resort]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 13. Interpol Raid at Pattaya Golf Resort]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 14,
+      "part": "제3부",
+      "title": {
+        "ko": "14장. 방콕 공항 전세기 송환과 카메라 플래시",
+        "en": "Ch 14. Extradition Charter at Bangkok Airport",
+        "ja": "14장. 방콕 공항 전세기 송환과 카메라 플래시",
+        "es": "Ch 14. Extradition Charter at Bangkok Airport",
+        "fr": "[FR] Ch 14. Extradition Charter at Bangkok Airport",
+        "id": "[ID] Ch 14. Extradition Charter at Bangkok Airport"
+      },
+      "content": {
+        "ko": "[14장. 방콕 공항 전세기 송환과 카메라 플래시]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 14. Extradition Charter at Bangkok Airport]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[14장. 방콕 공항 전세기 송환과 카메라 플래시]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 14. Extradition Charter at Bangkok Airport]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 14. Extradition Charter at Bangkok Airport]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 14. Extradition Charter at Bangkok Airport]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 15,
+      "part": "제3부",
+      "title": {
+        "ko": "15장. 수원지검 특별조사 11호실의 피 말리는 밤",
+        "en": "Ch 15. Grueling Nights in Suwon District Interrogation",
+        "ja": "15장. 수원지검 특별조사 11호실의 피 말리는 밤",
+        "es": "Ch 15. Grueling Nights in Suwon District Interrogation",
+        "fr": "[FR] Ch 15. Grueling Nights in Suwon District Interrogation",
+        "id": "[ID] Ch 15. Grueling Nights in Suwon District Interrogation"
+      },
+      "content": {
+        "ko": "[15장. 수원지검 특별조사 11호실의 피 말리는 밤]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 15. Grueling Nights in Suwon District Interrogation]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[15장. 수원지검 특별조사 11호실의 피 말리는 밤]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 15. Grueling Nights in Suwon District Interrogation]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 15. Grueling Nights in Suwon District Interrogation]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 15. Grueling Nights in Suwon District Interrogation]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 16,
+      "part": "제4부",
+      "title": {
+        "ko": "16장. 김태성 회장의 변심: \"강민우 지사가 시켰다\"",
+        "en": "Ch 16. Chairman Kim's Reversal: 'Governor Ordered It'",
+        "ja": "16장. 김태성 회장의 변심: \"강민우 지사가 시켰다\"",
+        "es": "Ch 16. Chairman Kim's Reversal: 'Governor Ordered It'",
+        "fr": "[FR] Ch 16. Chairman Kim's Reversal: 'Governor Ordered It'",
+        "id": "[ID] Ch 16. Chairman Kim's Reversal: 'Governor Ordered It'"
+      },
+      "content": {
+        "ko": "[16장. 김태성 회장의 변심: \"강민우 지사가 시켰다\"]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 16. Chairman Kim's Reversal: 'Governor Ordered It']\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[16장. 김태성 회장의 변심: \"강민우 지사가 시켰다\"]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 16. Chairman Kim's Reversal: 'Governor Ordered It']\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 16. Chairman Kim's Reversal: 'Governor Ordered It']\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 16. Chairman Kim's Reversal: 'Governor Ordered It']\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 17,
+      "part": "제4부",
+      "title": {
+        "ko": "17장. 술자리 회유 의혹과 검사실 앞의 대치",
+        "en": "Ch 18. Alcohol Coercion Allegations in the Court",
+        "ja": "17장. 술자리 회유 의혹과 검사실 앞의 대치",
+        "es": "Ch 18. Alcohol Coercion Allegations in the Court",
+        "fr": "[FR] Ch 18. Alcohol Coercion Allegations in the Court",
+        "id": "[ID] Ch 18. Alcohol Coercion Allegations in the Court"
+      },
+      "content": {
+        "ko": "[17장. 술자리 회유 의혹과 검사실 앞의 대치]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 18. Alcohol Coercion Allegations in the Court]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[17장. 술자리 회유 의혹과 검사실 앞의 대치]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 18. Alcohol Coercion Allegations in the Court]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 18. Alcohol Coercion Allegations in the Court]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 18. Alcohol Coercion Allegations in the Court]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 18,
+      "part": "제4부",
+      "title": {
+        "ko": "18장. 화전민 소년의 꿈: 경의선 철도를 왜 이으려 했는가",
+        "en": "Ch 18. Why the Boy Worker Dreamed of Trans-Korean Rail",
+        "ja": "18장. 화전민 소년의 꿈: 경의선 철도를 왜 이으려 했는가",
+        "es": "Ch 18. Why the Boy Worker Dreamed of Trans-Korean Rail",
+        "fr": "[FR] Ch 18. Why the Boy Worker Dreamed of Trans-Korean Rail",
+        "id": "[ID] Ch 18. Why the Boy Worker Dreamed of Trans-Korean Rail"
+      },
+      "content": {
+        "ko": "[18장. 화전민 소년의 꿈: 경의선 철도를 왜 이으려 했는가]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 18. Why the Boy Worker Dreamed of Trans-Korean Rail]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[18장. 화전민 소년의 꿈: 경의선 철도를 왜 이으려 했는가]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 18. Why the Boy Worker Dreamed of Trans-Korean Rail]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 18. Why the Boy Worker Dreamed of Trans-Korean Rail]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 18. Why the Boy Worker Dreamed of Trans-Korean Rail]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 19,
+      "part": "제4부",
+      "title": {
+        "ko": "19장. 미국 국무부 극비 전문: \"강민우를 주시하라\"",
+        "en": "Ch 19. US State Dept Secret Cable: 'Watch Kang Min-woo'",
+        "ja": "19장. 미국 국무부 극비 전문: \"강민우를 주시하라\"",
+        "es": "Ch 19. US State Dept Secret Cable: 'Watch Kang Min-woo'",
+        "fr": "[FR] Ch 19. US State Dept Secret Cable: 'Watch Kang Min-woo'",
+        "id": "[ID] Ch 19. US State Dept Secret Cable: 'Watch Kang Min-woo'"
+      },
+      "content": {
+        "ko": "[19장. 미국 국무부 극비 전문: \"강민우를 주시하라\"]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 19. US State Dept Secret Cable: 'Watch Kang Min-woo']\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[19장. 미국 국무부 극비 전문: \"강민우를 주시하라\"]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 19. US State Dept Secret Cable: 'Watch Kang Min-woo']\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 19. US State Dept Secret Cable: 'Watch Kang Min-woo']\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 19. US State Dept Secret Cable: 'Watch Kang Min-woo']\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 20,
+      "part": "제4부",
+      "title": {
+        "ko": "20장. 민족의 평화인가, 국가보안법 위반인가",
+        "en": "Ch 20. National Peace or National Security Violation?",
+        "ja": "20장. 민족의 평화인가, 국가보안법 위반인가",
+        "es": "Ch 20. National Peace or National Security Violation?",
+        "fr": "[FR] Ch 20. National Peace or National Security Violation?",
+        "id": "[ID] Ch 20. National Peace or National Security Violation?"
+      },
+      "content": {
+        "ko": "[20장. 민족의 평화인가, 국가보안법 위반인가]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 20. National Peace or National Security Violation?]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[20장. 민족의 평화인가, 국가보안법 위반인가]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 20. National Peace or National Security Violation?]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 20. National Peace or National Security Violation?]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 20. National Peace or National Security Violation?]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 21,
+      "part": "제5부",
+      "title": {
+        "ko": "21장. 미·중 패권 전쟁의 소용돌이에 갇힌 한반도",
+        "en": "Ch 21. Korea Trapped in US-China Hegemony Vortex",
+        "ja": "21장. 미·중 패권 전쟁의 소용돌이에 갇힌 한반도",
+        "es": "Ch 21. Korea Trapped in US-China Hegemony Vortex",
+        "fr": "[FR] Ch 21. Korea Trapped in US-China Hegemony Vortex",
+        "id": "[ID] Ch 21. Korea Trapped in US-China Hegemony Vortex"
+      },
+      "content": {
+        "ko": "[21장. 미·중 패권 전쟁의 소용돌이에 갇힌 한반도]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 21. Korea Trapped in US-China Hegemony Vortex]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[21장. 미·중 패권 전쟁의 소용돌이에 갇힌 한반도]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 21. Korea Trapped in US-China Hegemony Vortex]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 21. Korea Trapped in US-China Hegemony Vortex]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 21. Korea Trapped in US-China Hegemony Vortex]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 22,
+      "part": "제5부",
+      "title": {
+        "ko": "22장. 제3자 뇌물죄의 올가미와 구속영장 청구",
+        "en": "Ch 22. Third-Party Bribery Trap and Arrest Warrant",
+        "ja": "22장. 제3자 뇌물죄의 올가미와 구속영장 청구",
+        "es": "Ch 22. Third-Party Bribery Trap and Arrest Warrant",
+        "fr": "[FR] Ch 22. Third-Party Bribery Trap and Arrest Warrant",
+        "id": "[ID] Ch 22. Third-Party Bribery Trap and Arrest Warrant"
+      },
+      "content": {
+        "ko": "[22장. 제3자 뇌물죄의 올가미와 구속영장 청구]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 22. Third-Party Bribery Trap and Arrest Warrant]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[22장. 제3자 뇌물죄의 올가미와 구속영장 청구]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 22. Third-Party Bribery Trap and Arrest Warrant]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 22. Third-Party Bribery Trap and Arrest Warrant]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 22. Third-Party Bribery Trap and Arrest Warrant]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 23,
+      "part": "제5부",
+      "title": {
+        "ko": "23장. 영장실질심사 법정의 8시간 최후 진술",
+        "en": "Ch 23. Eight-Hour Final Statement at Warrant Hearing",
+        "ja": "23장. 영장실질심사 법정의 8시간 최후 진술",
+        "es": "Ch 23. Eight-Hour Final Statement at Warrant Hearing",
+        "fr": "[FR] Ch 23. Eight-Hour Final Statement at Warrant Hearing",
+        "id": "[ID] Ch 23. Eight-Hour Final Statement at Warrant Hearing"
+      },
+      "content": {
+        "ko": "[23장. 영장실질심사 법정의 8시간 최후 진술]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 23. Eight-Hour Final Statement at Warrant Hearing]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[23장. 영장실질심사 법정의 8시간 최후 진술]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 23. Eight-Hour Final Statement at Warrant Hearing]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 23. Eight-Hour Final Statement at Warrant Hearing]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 23. Eight-Hour Final Statement at Warrant Hearing]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 24,
+      "part": "제5부",
+      "title": {
+        "ko": "24장. 기적 같은 기각, 그리고 서초동을 메운 함성",
+        "en": "Ch 24. Miraculous Dismissal: Cheers Across Seocho",
+        "ja": "24장. 기적 같은 기각, 그리고 서초동을 메운 함성",
+        "es": "Ch 24. Miraculous Dismissal: Cheers Across Seocho",
+        "fr": "[FR] Ch 24. Miraculous Dismissal: Cheers Across Seocho",
+        "id": "[ID] Ch 24. Miraculous Dismissal: Cheers Across Seocho"
+      },
+      "content": {
+        "ko": "[24장. 기적 같은 기각, 그리고 서초동을 메운 함성]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 24. Miraculous Dismissal: Cheers Across Seocho]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[24장. 기적 같은 기각, 그리고 서초동을 메운 함성]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 24. Miraculous Dismissal: Cheers Across Seocho]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 24. Miraculous Dismissal: Cheers Across Seocho]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 24. Miraculous Dismissal: Cheers Across Seocho]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    },
+    {
+      "ch": 25,
+      "part": "제5부",
+      "title": {
+        "ko": "25장. 신의 주사위: 백발 지도자의 끝나지 않은 길",
+        "en": "Ch 25. The Die Is Cast: The White-Haired Leader's Path",
+        "ja": "25장. 신의 주사위: 백발 지도자의 끝나지 않은 길",
+        "es": "Ch 25. The Die Is Cast: The White-Haired Leader's Path",
+        "fr": "[FR] Ch 25. The Die Is Cast: The White-Haired Leader's Path",
+        "id": "[ID] Ch 25. The Die Is Cast: The White-Haired Leader's Path"
+      },
+      "content": {
+        "ko": "[25장. 신의 주사위: 백발 지도자의 끝나지 않은 길]\n김진명 작가 특유의 거대한 스케일과 남북 지정학적 첩보전이 폭발하는 500page 대작. 하노이 결렬 후 전쟁 위기에 놓인 한반도를 구하기 위해 선샤인 김태성 회장과 800만 달러를 베이징으로 보낸 강민우. '경의선 철도를 열지 못하면 우리 민족은 영원히 외세의 볼모가 된다.' 국가와 사법의 경계에서 펼쳐지는 한반도 운명의 거대한 대하 팩션.",
+        "en": "[Ch 25. The Die Is Cast: The White-Haired Leader's Path]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "ja": "[25장. 신의 주사위: 백발 지도자의 끝나지 않은 길]\n金辰明調の圧倒的なスケールで描く朝鮮半島地政学スパイ巨編。800万ドルの対北送金、京義線鉄道開通の夢、そして米中覇権戦争に抗う指導者の決断を描く500頁大河小説。",
+        "es": "[Ch 25. The Die Is Cast: The White-Haired Leader's Path]\nUna monumental obra geopolítica de 500 páginas al estilo Kim Jin-myung sobre la remesa secreta a Corea del Norte y la lucha por la unificación ferroviaria.",
+        "fr": "(Traduction Française)\n\n[Ch 25. The Die Is Cast: The White-Haired Leader's Path]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 25. The Die Is Cast: The White-Haired Leader's Path]\nA 500-page Kim Jin-myung-style geopolitical spy epic. Following the Hanoi collapse, Governor Kang risks everything sending $8 million to Beijing through Chairman Kim to open the Trans-Korean Railway. A monumental faction standing at the crossroads of statecraft and treason."
+      }
+    }
+  ]
+}

@@ -826,6 +826,7 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
 </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+  <link rel="stylesheet" href="css/dmdg_payment_modal.css">
 </head>
 <body class="theme-dark">
 
@@ -876,6 +877,8 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
           <button class="filter-chip" data-filter="rea">📕 REA 역공학 &amp; IDE (5)</button>
           <button class="filter-chip" data-filter="agent">🤖 AI 에이전트 &amp; 양자 (4)</button>
           <button class="filter-chip" data-filter="business">💼 비즈니스 &amp; 데이터 (7)</button>
+          <button class="filter-chip" data-filter="healing_gourmet">🍃 사찰음식 인문기행 (1)</button>
+          <button class="filter-chip" data-filter="travel_gourmet">🍲 K-기사식당 기행 (1)</button>
           <button class="filter-chip" data-filter="faction">🖋️ 2027 팩션 소설 (4)</button>
         </div>
       </section>
@@ -1208,7 +1211,35 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
   // ── Reader View Functions ────────────────────────────────────────────────
   function openReader(novelId, chapterIdx = 0) {
-    const novel = NOVELS_DATA.find(n => n.id === novelId);
+    const novel = NOVELS_DATA.find(n => String(n.id) === String(novelId));
+    if (novel && novel.htmlUrl) {
+      window.location.href = novel.htmlUrl;
+      return;
+    }
+                const safeMap = {
+      'kisa_seoul': 'novel_kisa_seoul.html',
+      'kisa-seoul': 'novel_kisa_seoul.html',
+      'temple_food': 'novel_temple_food.html',
+      'temple-food': 'novel_temple_food.html',
+      'boy_worker_dream': 'novel_boy_worker_dream.html',
+      'boy-worker-dream': 'novel_boy_worker_dream.html',
+      'boy_worker_cipher': 'novel_boy_worker_cipher.html',
+      'boy-worker-cipher': 'novel_boy_worker_cipher.html',
+      'boy_worker_destiny': 'novel_boy_worker_destiny.html',
+      'boy-worker-destiny': 'novel_boy_worker_destiny.html',
+      'protocol_2027': 'novel_protocol_2027.html',
+      'protocol-2027': 'novel_protocol_2027.html',
+      'beyond_sun': 'novel_beyond_sun.html',
+      'beyond-sun': 'novel_beyond_sun.html',
+      'third_wolf': 'novel_third_wolf.html',
+      'third-wolf': 'novel_third_wolf.html',
+      'silent_killchain': 'novel_silent_killchain.html',
+      'silent-killchain': 'novel_silent_killchain.html'
+    };
+    if (safeMap[novelId]) {
+      window.location.href = safeMap[novelId];
+      return;
+    }
     if (!novel) return;
 
     stopAudio();
@@ -1690,5 +1721,6 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
   }
 
   </script>
+  <script src="js/dmdg_payment.js"></script>
 </body>
 </html>
