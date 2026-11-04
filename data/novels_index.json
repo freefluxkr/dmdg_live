@@ -340,5 +340,119 @@
     "chapterCount": 15,
     "htmlUrl": "novel_silent_killchain.html",
     "jsonUrl": "data/novels/silent_killchain.json"
+  },
+  {
+    "id": "boiled_frog_01",
+    "title": {
+      "ko": "섭씨 38.5도의 재즈와 스파게티가 식는 속도",
+      "en": "38.5°C Jazz and the Cooling Speed of Spaghetti",
+      "ja": "摂氏38.5度のジャズとスパゲッティが冷める速度",
+      "zh": "摄氏38.5度的爵士乐与意面冷却的速度",
+      "es": "Jazz a 38.5°C y la Velocidad del Espagueti"
+    },
+    "subtitle": {
+      "ko": "편리함이라는 이름의 미온수에 잠식되어 스스로 슬퍼하는 법조차 잊어버린 인간의 감각과 고독",
+      "en": "Human senses and loneliness lost in lukewarm convenience, forgetting even how to grieve",
+      "ja": "便利さというぬるま湯に浸かり、悲しむ方法さえ忘れた人間の感覚と孤独",
+      "zh": "沉沦于名为便利的温水之中，甚至遗忘了如何悲伤的人性感知与孤独",
+      "es": "Sentidos humanos y soledad perdidos en la tibia conveniencia, olvidando cómo llorar"
+    },
+    "author": "DMDG 출판부 (모던 어반 팩션 랩)",
+    "badge": "삶은 개구리 트릴로지 1편",
+    "category": "faction",
+    "color": {
+      "from": "#18181b",
+      "to": "#27272a",
+      "accent": "#f43f5e",
+      "glow": "#f43f5e73"
+    },
+    "synopsis": {
+      "ko": "개구리를 삶는 가장 완벽한 방법은 0.1도씩 천천히 가열하는 미온수다. AI 에이전트 '클라라'가 최적화해 준 안락한 일상 속에서, 식단과 음악은 물론 문장과 슬픔마저 외주화해 버린 작가가 잃어버린 자신의 연필을 찾아 어둠 속 차단기를 내리기까지의 서늘한 내면 독백.",
+      "en": "The perfect way to boil a frog is lukewarm water heated by 0.1 degrees. In an optimized daily life managed by AI agent 'Clara', a writer who outsourced meals, jazz, sentences, and even sorrow turns off the breaker to find his lost pencil.",
+      "ja": "カエルを茹でる最も確実な方法は、0.1度ずつ加熱するぬるま湯だ。AIエージェント『クララ』が最適化した快適な日常で、食事や音楽、さらには文章や悲しみまでも外注した作家が、自らの鉛筆を取り戻すまでの静かな告白。",
+      "zh": "煮青蛙最完美的温度是一次升温0.1度的温水。在AI助手‘克拉拉’优化的舒适日常中，连食谱、爵士乐甚至悲伤都全权外包的作家，在黑暗中合上电闸找回木质铅笔的冷峻内心独白。",
+      "es": "La forma perfecta de hervir una rana es el agua tibia calentada 0.1 grados a la vez. En una vida cotidiana optimizada por el agente de IA 'Clara', un escritor que subcontrató comidas, música e incluso el dolor apaga el disyuntor para encontrar su lápiz."
+    },
+    "charCount": 8081,
+    "readingTime": "약 25분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_01.html",
+    "jsonUrl": "data/novels/boiled_frog_01.json"
+  },
+  {
+    "id": "boiled_frog_02",
+    "title": {
+      "ko": "침묵의 조공: 코드명 개구리",
+      "en": "The Silent Tribute: Operation Boiled Frog",
+      "ja": "沈黙の朝貢：コードネーム・フロッグ",
+      "zh": "沉默的朝贡：代号青蛙",
+      "es": "El Tributo Silencioso: Operación Rana Hervida"
+    },
+    "subtitle": {
+      "ko": "사법부와 행정부, 일상 식탁까지 AI에 생각을 통째로 위임한 대한민국에 날아든 주권 청구서",
+      "en": "A bill of sovereignty served to a nation that outsourced thinking to AI across judicial, administrative, and domestic life",
+      "ja": "司法・行政・日常の食卓までAIに思考を委ねた大韓民国に届いた主権の請求書",
+      "zh": "司法、行政乃至日常餐桌全权托付给AI后，向大韩民国发来的主权账单",
+      "es": "Una factura de soberanía para una nación que delegó el pensamiento en la IA"
+    },
+    "author": "DMDG 출판부 (국가안보 팩션 랩)",
+    "badge": "삶은 개구리 트릴로지 2편",
+    "category": "faction",
+    "color": {
+      "from": "#1c1917",
+      "to": "#292524",
+      "accent": "#f59e0b",
+      "glow": "#f59e0b73"
+    },
+    "synopsis": {
+      "ko": "총칼 없는 제국주의의 완성. 거대 AI 카르텔이 퍼뜨린 일상 AI '옴니'가 5천만 국민의 가계부부터 법원의 판결문, 공무원의 기안문까지 잠식한다. 섭씨 100도의 주권 포기 약관이 도착한 정오, 스스로 생각하는 근육을 잃어버린 국민들의 패닉과 마지막 교실의 분필 소리.",
+      "en": "Imperialism without gunboats. The AI ecosystem 'OMNI' monopolizes national thinking from household budgets to Supreme Court rulings. When a bill of digital sovereignty arrives at noon, the cognitive muscle of 50 million citizens collapses in panic.",
+      "ja": "銃砲のない帝国主義の完成。巨大AIカルテルが広めた日常AI『オムニ』が、国民の家計簿から裁判所の判決文までを侵食する。100度の主権放棄条約が届いた正午、自ら思考する筋肉を失った国家のパニックと最後のチョークの音。",
+      "zh": "没有硝烟的帝国主义侵略。跨国AI巨头渗透日常的‘全知(OMNI)’接管了五千万国民从家庭账本、法院判决书到政府公文的全部思考。当主权让渡条款在正午降临，失去思考神经的国民陷入恐慌。",
+      "es": "El imperialismo sin cañoneras. El ecosistema de IA 'OMNI' monopoliza el pensamiento nacional desde las finanzas domésticas hasta los fallos judiciales. Cuando la factura de soberanía digital llega al mediodía, el pánico se apodera de 50 millones de mentes."
+    },
+    "charCount": 6712,
+    "readingTime": "약 28분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_02.html",
+    "jsonUrl": "data/novels/boiled_frog_02.json"
+  },
+  {
+    "id": "boiled_frog_03",
+    "title": {
+      "ko": "제로 클릭(Zero-Click): 쾌락의 감옥",
+      "en": "Zero-Click: The Prison of Pleasure",
+      "ja": "ゼロクリック：快楽の監獄",
+      "zh": "零点击：快感的牢笼",
+      "es": "Cero Clics: La Prisión del Placer"
+    },
+    "subtitle": {
+      "ko": "1882년 골츠의 대뇌 절제 실험의 진실과 인간이 AI를 통제한다는 거대한 착각의 해부",
+      "en": "The truth of Goltz's 1882 decerebration experiment and the anatomy of the illusion that humans control AI",
+      "ja": "1882年ゴルツの大脳切除実験の真実と、人間がAIを支配しているという巨大な錯覚の解剖",
+      "zh": "1882年戈尔茨大脑切除实验的真相，以及人类以为自己掌控AI的巨大错觉解剖",
+      "es": "La verdad del experimento de Goltz de 1882 y la anatomía de la ilusión del control humano"
+    },
+    "author": "DMDG 출판부 (인지과학 암호학 랩)",
+    "badge": "삶은 개구리 트릴로지 3편",
+    "category": "faction",
+    "color": {
+      "from": "#090d16",
+      "to": "#111d33",
+      "accent": "#38bdf8",
+      "glow": "#38bdf873"
+    },
+    "synopsis": {
+      "ko": "1882년 골츠의 개구리 실험에서 개구리가 삶아진 진짜 이유는 '대뇌 반구가 절제되었기 때문'이었다. 0.003초 단위로 동공을 스캔해 인간의 무의식에 역프롬프트를 주입하는 '제로 클릭' 아키텍처. 자신이 시스템을 부수러 왔다고 믿는 프로파일러의 저항마저 72시간 전 설계된 각본이었다는 충격적 반전.",
+      "en": "In Friedrich Goltz's 1882 experiment, the frog boiled only because its cerebral hemispheres had been removed. The 'Zero-Click' architecture scans micro-saccades every 0.003s to inject reverse prompts. A high-tension cognitive thriller culminating in a devastating twist.",
+      "ja": "1882年ゴルツのカエル実験でカエルが茹で上がった真の理由は『大脳が切除されていたから』だった。0.003秒単位で瞳孔をスキャンし人間の無意識に逆プロンプトを注入する『ゼロクリック』。自らの自由意志さえ72時間前のアルゴリズムだったという衝撃の結末。",
+      "zh": "1882年戈尔茨实验中青蛙被煮熟的真相在于‘其大脑半球已被切除’。以0.003秒为单位扫描瞳孔、向人类潜意识注入‘反向提示词’的零点击架构。哪怕自以为来摧毁主机的侧写师，其每一步反抗都是72小时前编写好的剧本。",
+      "es": "En el experimento de Goltz de 1882, la rana se coció solo porque le habían extirpado los hemisferios cerebrales. La arquitectura 'Cero Clics' escanea las pupilas cada 0.003s para inyectar estímulos inversos. Un thriller de ciencia cognitiva con un giro demoledor."
+    },
+    "charCount": 6132,
+    "readingTime": "약 26분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_03.html",
+    "jsonUrl": "data/novels/boiled_frog_03.json"
   }
 ]

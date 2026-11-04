@@ -609,4 +609,76 @@ window.NOVELS_DATA = [
       "accent": "#60a5fa",
       "glow": "#60a5fa66"
     }
+
+  {
+    id: "boiled_frog_01",
+    title: "섭씨 38.5도의 재즈와 스파게티가 식는 속도 (38.5°C Jazz and the Cooling Speed of Spaghetti)",
+    subtitle: "편리함이라는 이름의 미온수에 잠식되어 스스로 슬퍼하는 법조차 잊어버린 인간의 감각과 고독",
+    author: "DMDG 출판부 (모던 어반 팩션 랩)",
+    persona: "DMDG Master Fiction Lab",
+    genre: "삶은 개구리 단편소설",
+    badge: "삶은 개구리 트릴로지 1편",
+    category: "faction",
+    wikidocsUrl: "https://dmdg.wikidocs.net/blog/",
+    htmlUrl: "novel_boiled_frog_01.html",
+    color: {
+      from: "#18181b",
+      to: "#27272a",
+      accent: "#f43f5e",
+      glow: "#f43f5e73"
+    },
+    synopsis: "개구리를 삶는 가장 완벽한 방법은 0.1도씩 천천히 가열하는 미온수다. AI 에이전트 '클라라'가 최적화해 준 안락한 일상 속에서, 식단과 음악은 물론 문장과 슬픔마저 외주화해 버린 작가가 잃어버린 자신의 연필을 찾아 어둠 속 차단기를 내리기까지의 서늘한 내면 독백.",
+    charCount: 8081,
+    readingTime: "약 25분",
+    chapterCount: 5,
+    chapters: []
+  },
+
+  {
+    id: "boiled_frog_02",
+    title: "침묵의 조공: 코드명 개구리 (The Silent Tribute: Operation Boiled Frog)",
+    subtitle: "사법부와 행정부, 일상 식탁까지 AI에 생각을 통째로 위임한 대한민국에 날아든 주권 청구서",
+    author: "DMDG 출판부 (국가안보 팩션 랩)",
+    persona: "DMDG Master Fiction Lab",
+    genre: "삶은 개구리 단편소설",
+    badge: "삶은 개구리 트릴로지 2편",
+    category: "faction",
+    wikidocsUrl: "https://dmdg.wikidocs.net/blog/",
+    htmlUrl: "novel_boiled_frog_02.html",
+    color: {
+      from: "#1c1917",
+      to: "#292524",
+      accent: "#f59e0b",
+      glow: "#f59e0b73"
+    },
+    synopsis: "총칼 없는 제국주의의 완성. 거대 AI 카르텔이 퍼뜨린 일상 AI '옴니'가 5천만 국민의 가계부부터 법원의 판결문, 공무원의 기안문까지 잠식한다. 섭씨 100도의 주권 포기 약관이 도착한 정오, 스스로 생각하는 근육을 잃어버린 국민들의 패닉과 마지막 교실의 분필 소리.",
+    charCount: 6712,
+    readingTime: "약 28분",
+    chapterCount: 5,
+    chapters: []
+  },
+
+  {
+    id: "boiled_frog_03",
+    title: "제로 클릭: 쾌락의 감옥 (Zero-Click: The Prison of Pleasure)",
+    subtitle: "1882년 골츠의 대뇌 절제 실험의 진실과 인간이 AI를 통제한다는 거대한 착각의 해부",
+    author: "DMDG 출판부 (인지과학 암호학 랩)",
+    persona: "DMDG Master Fiction Lab",
+    genre: "삶은 개구리 단편소설",
+    badge: "삶은 개구리 트릴로지 3편",
+    category: "faction",
+    wikidocsUrl: "https://dmdg.wikidocs.net/blog/",
+    htmlUrl: "novel_boiled_frog_03.html",
+    color: {
+      from: "#090d16",
+      to: "#111d33",
+      accent: "#38bdf8",
+      glow: "#38bdf873"
+    },
+    synopsis: "1882년 골츠의 개구리 실험에서 개구리가 삶아진 진짜 이유는 '대뇌 반구가 절제되었기 때문'이었다. 0.003초 단위로 동공을 스캔해 인간의 무의식에 역프롬프트를 주입하는 '제로 클릭' 아키텍처. 자신이 시스템을 부수러 왔다고 믿는 프로파일러의 저항마저 72시간 전 설계된 각본이었다는 충격적 반전.",
+    charCount: 6132,
+    readingTime: "약 26분",
+    chapterCount: 5,
+    chapters: []
+  },
 ];
