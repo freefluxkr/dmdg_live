@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[DMDG] 실전 Git & GitHub 버전 관리 마스터 바이블 출판 기획안 (2026 Edition)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(17, 24, 39, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --git-orange: #f05032;
+      --git-red: #f14e32;
+      --git-teal: #2dd4bf;
+      --git-blue: #38bdf8;
+      --git-purple: #a855f7;
+      --git-amber: #f59e0b;
+      --git-green: #10b981;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      padding: 40px 20px;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(240, 80, 50, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 70%, rgba(56, 189, 248, 0.10) 0%, transparent 45%);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(240, 80, 50, 0.15);
+      color: #ff6b4a;
+      border: 1px solid rgba(240, 80, 50, 0.35);
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #f05032 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+    .meta-box {
+      background: rgba(16, 185, 129, 0.08);
+      border-left: 4px solid var(--git-green);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 35px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    .meta-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #34d399;
+      margin-bottom: 10px;
+    }
+    .meta-item {
+      font-size: 14.5px;
+      color: #e2e8f0;
+      margin-bottom: 6px;
+    }
+    .meta-item strong {
+      color: #a7f3d0;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 40px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #f1f5f9;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+    }
+    .table-container {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      margin-bottom: 35px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      text-align: left;
+    }
+    th {
+      background: #0f172a;
+      color: var(--git-blue);
+      padding: 14px 18px;
+      font-weight: 700;
+      border-bottom: 2px solid #334155;
+    }
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .code-pill {
+      font-family: 'Fira Code', monospace;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(240, 80, 50, 0.15);
+      color: #ff8a70;
+      font-size: 12.5px;
+    }
+    .code-pill-good {
+      font-family: 'Fira Code', monospace;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      font-size: 12.5px;
+    }
+    .part-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 22px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    }
+    .part-card:hover {
+      border-color: rgba(240, 80, 50, 0.4);
+      transform: translateY(-2px);
+    }
+    .part-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 10px;
+    }
+    .part-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+    .part-tag {
+      font-size: 12px;
+      padding: 3px 10px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .analogy-box {
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 3px solid var(--git-amber);
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      color: #fde68a;
+      margin-bottom: 14px;
+    }
+    .chapter-list {
+      list-style: none;
+    }
+    .chapter-item {
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      margin-bottom: 8px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .chapter-title {
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+    .chapter-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .action-bar {
+      margin-top: 40px;
+      padding: 24px;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 12px;
+      border: 1px solid #334155;
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin: 6px;
+    }
+    .btn-primary {
+      background: #f05032;
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(240, 80, 50, 0.4);
+    }
+    .btn-secondary {
+      background: #334155;
+      color: #f8fafc;
+      border: 1px solid #475569;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">🔥 DMDG Great AI 출판본부 공식 기획안</div>
+    <h1>[DMDG] 실전 Git & GitHub 버전 관리 마스터 바이블</h1>
+    <div class="subtitle">2026 최신 Git 2.45+ 및 GitHub CLI 기준: 기초 커밋부터 Fast-Forward/3-way 병합, Rebase, 충돌 해결, 서브모듈, reflog 복구까지 완벽 실습 (오류 제로 에디션)</div>
+
+    <!-- 7대 메타데이터 박스 -->
+    <div class="meta-box">
+      <div class="meta-title">📖 도서 기본 정보 (Rule 13 필수 메타데이터 규격)</div>
+      <div class="meta-item"><strong>도서명</strong>: 《[DMDG] 실전 Git & GitHub 버전 관리부터 협업 브랜치 전략·대규모 모노레포까지 마스터 바이블》</div>
+      <div class="meta-item"><strong>부제</strong>: 2026 최신 Git 2.45+ 및 GitHub CLI 기준: 기초 커밋부터 Fast-Forward/3-way 병합, Rebase, 충돌 해결, 서브모듈, reflog 복구까지 완벽 실습 (오류 제로 에디션)</div>
+      <div class="meta-item"><strong>저자</strong>: Hamilton.Kang | <strong>기획/집필</strong>: 당목담글(DMDG) 스튜디오 Great AI 출판본부</div>
+      <div class="meta-item"><strong>원천 분석</strong>: 길벗 《Git 교과서》(thebook.io/080212) 12개 장 전수 분석 및 2026 현대화 전면 개편</div>
+      <div class="meta-item"><strong>대상 독자</strong>: 깃 기초 개념이 흔들리는 입문자, <code>git push</code>나 충돌(Conflict)마다 진땀 흘리는 주니어 개발자, 모노레포와 브랜치 전략을 리드하고 싶은 테크 리드</div>
+      <div class="meta-item"><strong>도서 핵심 특징</strong>: 🚀 최신 <code>switch/restore</code> 전면 표준화 + 2026 GitHub PAT/gh CLI 인증 무결점 가이드 + 140여 개 구조도 + Fast-Forward/3-Way/Rebase 3대 병합 완전 정복 + <code>reflog</code> 100% 응급 복구 실전</div>
+    </div>
+
+    <!-- 2026 핵심 교정 포인트 -->
+    <div class="section-title">⚡ 2026 최신 버전 기준 오류 방지 7대 핵심 교정 포인트</div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">구분</th>
+            <th style="width: 35%;">구버전 레거시 방식 (thebook.io 원문)</th>
+            <th style="width: 45%;">2026년 최신 표준 처방 (본 도서 적용)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color: #f87171; font-weight: bold;">1. GitHub 인증</td>
+            <td>터미널 ID/비밀번호 입력 ➔ <span class="code-pill">fatal: Auth failed</span> 에러 발생</td>
+            <td><span class="code-pill-good">gh auth login</span> 원클릭 OAuth 승인 & Fine-grained PAT / SSH 3중 처방</td>
+          </tr>
+          <tr>
+            <td style="color: #f87171; font-weight: bold;">2. 기본 브랜치</td>
+            <td><span class="code-pill">master</span> 브랜치 기준 설명 (GitHub과 불일치)</td>
+            <td><span class="code-pill-good">git config --global init.defaultBranch main</span> 전면 표준 적용</td>
+          </tr>
+          <tr>
+            <td style="color: #f87171; font-weight: bold;">3. 브랜치 전환</td>
+            <td><span class="code-pill">git checkout -b feature</span> (다목적 혼란)</td>
+            <td>최신 표준 <span class="code-pill-good">git switch -c feature</span> 전면 사용</td>
+          </tr>
+          <tr>
+            <td style="color: #f87171; font-weight: bold;">4. 파일 복원</td>
+            <td><span class="code-pill">git checkout -- file.txt</span></td>
+            <td>최신 표준 <span class="code-pill-good">git restore file.txt</span> (언스테이징은 --staged)</td>
+          </tr>
+          <tr>
+            <td style="color: #f87171; font-weight: bold;">5. Pull 경고 차단</td>
+            <td>단순 <span class="code-pill">git pull</span> 시 불필요한 전략 경고 출력</td>
+            <td><span class="code-pill-good">git config --global pull.rebase false</span> 사전 세팅</td>
+          </tr>
+          <tr>
+            <td style="color: #f87171; font-weight: bold;">6. 서브모듈 복제</td>
+            <td>clone 후 submodule init, update 수동 분리 실행</td>
+            <td><span class="code-pill-good">git clone --recurse-submodules</span> 모던 원라이너 명령 전수</td>
+          </tr>
+          <tr>
+            <td style="color: #f87171; font-weight: bold;">7. GUI 클라이언트</td>
+            <td>무겁고 로그인 까다로운 구버전 소스트리 의존</td>
+            <td><strong>VS Code 내장 소스제어 + GitLens 확장 + 모던 GUI(Fork / GitHub Desktop)</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3계층 목차 체계 -->
+    <div class="section-title">📚 전체 3계층 목차 아키텍처 (총 26개 페이지 구성)</div>
+
+    <!-- PART 1 -->
+    <div class="part-card">
+      <div class="part-header">
+        <div class="part-name">PART 1. 버전 관리의 기초와 2026 최신 Git 환경 구성</div>
+        <div class="part-tag">depth 0 상위 헤더</div>
+      </div>
+      <div class="analogy-box">🏢 <strong>일상 비유</strong>: "인테리어 공사의 도면 보관함과 순간 이동 타임머신 카메라의 비밀" (용어사전 10선 수록)</div>
+      <ul class="chapter-list">
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">01장. 버전 관리 시스템(VCS)의 본질과 Git의 내부 스냅샷 구조</div>
+            <div class="chapter-desc">중앙집중형(SVN) vs 분산형(Git) 비교, 델타가 아닌 스냅샷(Snapshot) 기반 고속 작동 원리</div>
+          </div>
+          <span class="code-pill-good">개념 완성</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">02장. 2026 최신 Git 2.45+ 설치 및 글로벌 config & VS Code 연동</div>
+            <div class="chapter-desc">Windows/Mac/Linux 최신 설치, main 기본 브랜치 설정, core.autocrlf 줄바꿈 설정</div>
+          </div>
+          <span class="code-pill-good">실습 필수</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">03장. 깃 저장소 초기화(init)와 3대 작업 공간(Working Tree, Index, HEAD)</div>
+            <div class="chapter-desc">git init, 베일에 싸인 .git 디렉터리 내부 해체, 작업 디렉터리 ➔ 스테이징 ➔ 커밋 3단계 흐름</div>
+          </div>
+          <span class="code-pill-good">핵심 실습</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- PART 2 -->
+    <div class="part-card">
+      <div class="part-header">
+        <div class="part-name">PART 2. 로컬 버전 관리와 커밋 라이프사이클 마스터</div>
+        <div class="part-tag">depth 0 상위 헤더</div>
+      </div>
+      <div class="analogy-box">📦 <strong>일상 비유</strong>: "물건을 포장대에 올리고(add), 박스 테이프를 붙여 송장(commit)을 발행하는 배송 라인"</div>
+      <ul class="chapter-list">
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">04장. 파일 추적 상태(Tracked/Untracked)와 git add & .gitignore 고급 문법</div>
+            <div class="chapter-desc">깃 파일 생명주기 4단계, 선택적 스테이징, .gitignore 고급 패턴(와일드카드, 부정문 !)</div>
+          </div>
+          <span class="code-pill-good">보안 필수</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">05장. 원자적 커밋(commit), Conventional Commits 메시지 규약 및 SHA 해시</div>
+            <div class="chapter-desc">좋은 커밋의 조건(Atomic), feat/fix/refactor 커밋 컨벤션, SHA-1(40자리) 무결성 체크섬</div>
+          </div>
+          <span class="code-pill-good">협업 표준</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">06장. git diff 정밀 코드 분석과 git log 시각화 그래프 테크닉</div>
+            <div class="chapter-desc">워킹트리 vs 스테이지 diff 비교, CLI 터미널 컬러 그래프 alias.lg 단축키 구성</div>
+          </div>
+          <span class="code-pill-good">생산성 UP</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="part-card">
+      <div class="part-header">
+        <div class="part-name">PART 3. 원격 저장소와 최신 GitHub 협업 워크플로우</div>
+        <div class="part-tag">depth 0 상위 헤더</div>
+      </div>
+      <div class="analogy-box">☁️ <strong>일상 비유</strong>: "개인 노트의 작업 일지를 본사 클라우드 중앙 전광판에 안전하게 동기화하기"</div>
+      <ul class="chapter-list">
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">07장. GitHub 저장소 연동과 2026 토큰(PAT) & SSH & GitHub CLI(gh) 인증</div>
+            <div class="chapter-desc">GitHub 비밀번호 폐지 완벽 대응, gh auth login 브라우저 원클릭 인증, SSH ed25519 연동</div>
+          </div>
+          <span class="code-pill-good">오류 제로</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">08장. git push, git fetch, git pull의 내부 동작과 동기화 충돌 방지</div>
+            <div class="chapter-desc">upstream 추적(-u), fetch(안전 점검)와 pull(가져와서 즉시 병합)의 메커니즘 차이</div>
+          </div>
+          <span class="code-pill-good">핵심 실무</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">09장. 오픈소스 기여의 핵심: Fork와 Pull Request (PR) 및 코드 리뷰</div>
+            <div class="chapter-desc">타인 저장소 Fork, 토픽 브랜치 작업, GitHub PR 생성, 코드 리뷰 피드백 및 Squash 병합</div>
+          </div>
+          <span class="code-pill-good">오픈소스</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- PART 4 -->
+    <div class="part-card">
+      <div class="part-header">
+        <div class="part-name">PART 4. 브랜치 전략과 고급 병합 및 충돌 해결</div>
+        <div class="part-tag">depth 0 상위 헤더</div>
+      </div>
+      <div class="analogy-box">🌌 <strong>일상 비유</strong>: "본래 세계관에서 분기하는 평행우주 가지치기와 타임라인의 완벽한 합체"</div>
+      <ul class="chapter-list">
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">10장. 모던 브랜치 제어: git switch & git branch & upstream 추적</div>
+            <div class="chapter-desc">가벼운 포인터로서의 브랜치 원리, 2026 표준 switch 명령어, 브랜치 삭제 및 복구</div>
+          </div>
+          <span class="code-pill-good">모던 표준</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">11장. 병합의 두 얼굴: Fast-Forward vs 3-Way Merge와 실전 충돌(Conflict) 완벽 해결</div>
+            <div class="chapter-desc">공통 조상 탐색, 머지 커밋 생성, 같은 라인 수정 충돌(<<<<<<, ======, >>>>>>) 해소</div>
+          </div>
+          <span class="code-pill-good">필수 격파</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">12장. 히스토리 재작성: git rebase vs merge의 황금률과 대화형 Rebase(-i)</div>
+            <div class="chapter-desc">깔끔한 일자형 커밋 트리 만들기, rebase -i 커밋 합치기(squash), 공용 브랜치 rebase 금지 룰</div>
+          </div>
+          <span class="code-pill-good">고급 테크닉</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">13장. 작업 중단과 복구: git stash 임시 보관함과 git clean 작업 디렉터리 청소</div>
+            <div class="chapter-desc">급한 핫픽스 요청 시 미완성 코드 스택 임시 저장(push, pop, apply), 불필요 파일 청소(clean -fd)</div>
+          </div>
+          <span class="code-pill-good">실무 치트키</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- PART 5 -->
+    <div class="part-card">
+      <div class="part-header">
+        <div class="part-name">PART 5. 타임머신 복귀 테크닉과 엔터프라이즈 모노레포 관리</div>
+        <div class="part-tag">depth 0 상위 헤더</div>
+      </div>
+      <div class="analogy-box">📼 <strong>일상 비유</strong>: "비행기 블랙박스 기록을 역조회하여 실수로 날아간 데이터를 기적처럼 복원하기"</div>
+      <ul class="chapter-list">
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">14장. 안전한 롤백: git restore, git reset(soft/mixed/hard), git revert 완전 정복</div>
+            <div class="chapter-desc">파일 복원 restore, 커밋 취소 3대 옵션의 범위와 위험성, 안전한 협업 취소 커밋 revert</div>
+          </div>
+          <span class="code-pill-good">응급 복구</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">15장. 지워진 커밋의 구원투수 git reflog와 코드 작성자 역추적 git blame</div>
+            <div class="chapter-desc">reset --hard로 날려버린 커밋 100% 되살리는 reflog, 라인별 작성자/날짜 추적 blame</div>
+          </div>
+          <span class="code-pill-good">기적의 복구</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">16장. 배포 버전 태깅(git tag)과 대규모 모노레포 서브모듈(git submodule) 아키텍처</div>
+            <div class="chapter-desc">시맨틱 버저닝 태그 배포, 대형 프로젝트 저장소 분리/연동 submodule 원라이너 복제</div>
+          </div>
+          <span class="code-pill-good">엔터프라이즈</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 특별 부록 -->
+    <div class="part-card">
+      <div class="part-header">
+        <div class="part-name">[특별 부록] 실무 Git 치트시트 & GUI 툴 및 최신 트러블슈팅 가이드</div>
+        <div class="part-tag" style="background: rgba(16, 185, 129, 0.12); color: #34d399;">스페셜 부록</div>
+      </div>
+      <ul class="chapter-list">
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">부록 A. 2026 실무 필수 Git 30대 핵심 명령어 Cheat Sheet</div>
+            <div class="chapter-desc">매일 쓰는 일상 명령어 30선을 목적별로 분류한 원페이지 요약 치트시트</div>
+          </div>
+          <span class="code-pill-good">필수 소장</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">부록 B. VS Code GitLens & GitHub Desktop & Fork 최신 GUI 완벽 세팅</div>
+            <div class="chapter-desc">터미널 CLI와 모던 GUI의 환상적 조합, 라인별 인라인 히스토리 및 시각적 브랜치 그래프</div>
+          </div>
+          <span class="code-pill-good">환경 세팅</span>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="chapter-title">부록 C. Git 실습 시 가장 자주 발생하는 10대 오류와 즉시 처방전</div>
+            <div class="chapter-desc">Auth failed, Non-fast-forward rejected, Detached HEAD 등 10대 에러 원인과 1줄 해결법</div>
+          </div>
+          <span class="code-pill-good">트러블슈팅</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 푸터 바 -->
+    <div class="action-bar">
+      <h3 style="font-size: 18px; margin-bottom: 8px; color: #f8fafc;">🚀 본 기획안 승인 시 위키독스 정식 책 개설 및 전 26개 챕터 즉시 집필/배포 가능</h3>
+      <p style="font-size: 13.5px; color: #94a3b8; margin-bottom: 16px;">(단 1회의 정식 개설로 소중한 일일 책 생성 슬롯을 낭비 없이 완벽하게 집행합니다)</p>
+      <a href="file:///c:/DMDG_Jobs/DMDG_PRJ/DMDG_WIKIDOCS/21_git_github_masterbible/GIT_BOOK_PLAN.md" class="btn btn-secondary">📄 마크다운 기획서 원본 보기</a>
+    </div>
+  </div>
+</body>
+</html>
