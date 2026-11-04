@@ -454,5 +454,122 @@
     "chapterCount": 5,
     "htmlUrl": "novel_boiled_frog_03.html",
     "jsonUrl": "data/novels/boiled_frog_03.json"
+  },
+  {
+    "id": "boiled_frog_04",
+    "title": {
+      "ko": "한강 위를 떠다니는 풍선과 시부야에서 걸려온 전화",
+      "en": "Balloons Over the Han River and a Phone Call from Shibuya",
+      "ja": "漢江の上に浮かぶ風船と渋谷からかかってきた電話",
+      "zh": "汉江上空漂浮的气球与来自涩谷的电话",
+      "es": "Globos sobre el Río Han y una Llamada desde Shibuya"
+    },
+    "subtitle": {
+      "ko": "전쟁의 전조 속에서도 '설마'라는 미온수에 몸을 담근 채 아이스 아메리카노를 마시는 도시의 초현실적 평온",
+      "en": "The surreal tranquility of a city sipping iced Americanos in lukewarm 'Surely Not' while war looms on the horizon",
+      "ja": "戦争の前兆の中でも『まさか』というぬるま湯に浸かりアイスアメリカーノを飲む都市の超現実的な平穏",
+      "zh": "在战争前兆中依然浸泡在名为‘怎么可能’的温水里喝着冰美式的都市超现实平静",
+      "es": "La tranquilidad surrealista de una ciudad bebiendo café helado en el agua tibia de 'Seguro que no' ante la guerra"
+    },
+    "author": "DMDG 출판부 (모던 어반 팩션 랩)",
+    "badge": "삶은 개구리 S2 · 1편",
+    "category": "faction",
+    "color": {
+      "from": "#1e1b4b",
+      "to": "#312e81",
+      "accent": "#a78bfa",
+      "glow": "#a78bfa73"
+    },
+    "synopsis": {
+      "ko": "새벽 6시 17분의 위급재난문자를 눈도 뜨지 않고 1.5초 만에 끄는 도시. 전방의 도로가 폭파되고 자주포 덮개가 벗겨졌다는 외신 속보에 도쿄의 친구는 비명을 지르지만, 서울의 시민들은 소금빵 웨이팅 앱을 새로고침하며 여의도 한강 재즈 페스티벌로 향한다. 북서쪽 하늘의 포격 섬광마저 불꽃놀이 리허설이라 믿으며 스마트폰 카메라를 치켜드는 미온수 도시의 초현실적 고독.",
+      "en": "A city that dismisses 6:17 AM emergency war alerts in 1.5 seconds without opening its eyes. While a friend in Tokyo screams over breaking news of frontline artillery preparation, Seoulites refresh bakery waiting apps and gather at the Han River Jazz Festival—mistaking artillery flashes in the northern sky for fireworks.",
+      "ja": "朝6時17分の緊急災害文字を1.5秒で消す都市。前線の道路が爆破され自走砲の覆いが外されたという外信速報に東京の友人は悲鳴を上げるが、ソウルの人々は塩パンの順番待ちアプリを更新し漢江ジャズフェスティバルへ向かう。北西の空の砲撃の閃光さえ花火のリハーサルだと信じてカメラを向ける都市の孤独。",
+      "zh": "一座在凌晨6点17分连眼都不睁就能在1.5秒内关掉紧急灾难短信的城市。面对前线道路爆破、自行火炮卸下伪装网的外媒速报，东京的友人失声惊呼，而首尔市民却在刷新盐面包排队软件并前往汉江爵士音乐节，甚至将北方天际的炮火闪光当成烟花彩排。",
+      "es": "Una ciudad que apaga las alertas de emergencia de las 6:17 AM en 1.5 segundos sin abrir los ojos. Mientras una amiga en Tokio grita por las noticias de artillería en la frontera, los ciudadanos de Seúl van al Festival de Jazz del Río Han, confundiendo los destellos de artillería con fuegos artificiales."
+    },
+    "charCount": 6495,
+    "readingTime": "약 25분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_04.html",
+    "jsonUrl": "data/novels/boiled_frog_04.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35784"
+  },
+  {
+    "id": "boiled_frog_05",
+    "title": {
+      "ko": "설마의 제국: 임진강의 수위가 오를 때",
+      "en": "Empire of 'Surely Not': When the Imjin River Rises",
+      "ja": "『まさか』の帝国：臨津江の水位が上がる時",
+      "zh": "‘侥幸’的帝国：当临津江水位暴涨之时",
+      "es": "El Imperio del 'Seguro que no': Cuando Sube el Río Imjin"
+    },
+    "subtitle": {
+      "ko": "1592년과 1950년의 비극을 부른 두 글자 '설마', 안보 불감증에 잠식된 대한민국을 향한 피의 경고",
+      "en": "The two syllables that brought the tragedies of 1592 and 1950—a fierce warning to a nation consumed by security amnesia",
+      "ja": "1592年と1950年の悲劇を招いた言葉『まさか』、安保不感症に侵された大韓民国への血の警告",
+      "zh": "招致1592年与1950年国难的两个字‘岂会’，向陷入安保麻木症的大韩民国敲响的泣血警钟",
+      "es": "La palabra que trajo las tragedias de 1592 y 1950: una advertencia de sangre contra la amnesia de seguridad"
+    },
+    "author": "DMDG 출판부 (국가안보 팩션 랩)",
+    "badge": "삶은 개구리 S2 · 2편",
+    "category": "faction",
+    "color": {
+      "from": "#450a0a",
+      "to": "#7f1d1d",
+      "accent": "#f87171",
+      "glow": "#f8717173"
+    },
+    "synopsis": {
+      "ko": "1592년 임진년 봄의 '설마 왜적이 바다를 건너오겠는가'와 1950년 6월 24일 밤의 '설마 전면전이야 나겠어'가 2026년 서울에서 다시 반복된다. 폐박스로 가로막힌 지하 대피소 방폭문과 미사일 도발을 저점 매수 기회라며 비웃는 도심의 연회. 실제 공습경보조차 오발령이라 비웃는 밤, 최전방 야전 지휘관 강태산 중령이 전국 재난 방송망 마이크를 잡고 피의 절규를 토해낸다.",
+      "en": "The fatal complacency of 1592 and June 24, 1950 repeats in modern Seoul. Blast doors of underground shelters are blocked by cardboard boxes while elites laugh off artillery preparations as stock-buying dips. When real air-raid sirens are mocked as false alarms, frontline commander Lt. Col. Kang Tae-san hijacks the national broadcast mic.",
+      "ja": "1592年文禄の役と1950年朝鮮戦争前夜の『まさか全面戦争にはならないだろう』という油断が現代のソウルで繰り返される。廃箱で塞がれた地下シェルターの防爆扉と、ミサイル挑発を株の押し目買いだと笑う都心の宴会。実際の空襲警報さえ誤報だと嘲笑う夜、最前線のカン・テサン中佐が全国放送マイクを握る。",
+      "zh": "1592年壬辰倭乱与1950年6月24日夜间的致命侥幸在今日首尔重演。被废纸箱堵死的地下防空洞防爆门，将导弹挑衅视为股市抄底良机的江南酒局。当真正的空袭警报在午夜拉响却被市民嘲笑为误报时，最前线营长姜泰山中校强行接通全国应急广播麦克风发出泣血咆哮。",
+      "es": "La complacencia fatal de 1592 y 1950 se repite en el Seúl moderno. Las puertas blindadas de los refugios están bloqueadas por cajas de cartón mientras las élites se ríen de las amenazas. Cuando las sirenas reales son ignoradas como falsas alarmas, el comandante Kang Tae-san toma el micrófono nacional."
+    },
+    "charCount": 6791,
+    "readingTime": "약 28분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_05.html",
+    "jsonUrl": "data/novels/boiled_frog_05.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35785"
+  },
+  {
+    "id": "boiled_frog_06",
+    "title": {
+      "ko": "데프콘의 역설(The DEFCON Paradox): 정상성 편향 프로토콜",
+      "en": "The DEFCON Paradox: Normalcy Bias Protocol",
+      "ja": "デフコンの逆説(The DEFCON Paradox)：正常性バイアス・プロトコル",
+      "zh": "战备悖论(The DEFCON Paradox)：常态偏见协议",
+      "es": "La Paradoja DEFCON: Protocolo de Sesgo de Normalidad"
+    },
+    "subtitle": {
+      "ko": "5천만 국민의 뇌 편도체를 마비시킨 수학적 도발 수열과 '정상성 편향(Normalcy Bias)'을 이용한 무혈 침공 프로토콜",
+      "en": "A mathematical provocation sequence that paralyzed 50 million amygdalae and the bloodless invasion protocol exploiting Normalcy Bias",
+      "ja": "5千万国民の扁桃体を麻痺させた数学的挑発数列と『正常性バイアス』を利用した無血侵攻プロトコル",
+      "zh": "麻痹五千万国民大脑杏仁核的数学挑衅数列，以及利用‘常态偏见’实施的无血入侵协议",
+      "es": "La secuencia matemática que paralizó 50 millones de amígdalas y el protocolo de invasión sin sangre mediante el Sesgo de Normalidad"
+    },
+    "author": "DMDG 출판부 (인지과학 암호학 랩)",
+    "badge": "삶은 개구리 S2 · 3편",
+    "category": "faction",
+    "color": {
+      "from": "#042f2e",
+      "to": "#115e59",
+      "accent": "#2dd4bf",
+      "glow": "#2dd4bf73"
+    },
+    "synopsis": {
+      "ko": "한미연합사 지하 벙커의 홀로그램 그래프가 기이한 역설을 가리킨다. 군사적 위협 지수는 94.7%로 정점에 달했으나, 시민 공포 반응 지수는 0.04로 사실상 소멸한 것. 인지심리학 박사 서윤아는 지난 3년간 142회의 도발이 인간 뇌의 아드레날린 소진 주기(17.4일)에 맞춘 '로그 나선 수열' 알고리즘이었음을 밝혀낸다. 폼페이와 타이타닉을 집어삼킨 정상성 편향의 덫과 '양치기 소년 프로토콜'의 소름 끼치는 카운트다운.",
+      "en": "Inside the Combined Forces Command bunker, two graphs reveal a chilling paradox: Military Threat Index at 94.7%, Public Fear Index at 0.04. Cognitive psychologist Dr. Seo Yoon-ah discovers that 142 provocations over 36 months follow a logarithmic spiral engineered to sever the human amygdala's escape reflex—culminating in 'Phase Omega'.",
+      "ja": "韓米連合司令部地下バンカーのグラフが奇妙な逆説を示す。軍事的脅威指数は94.7%に達したのに、市民の恐怖反応指数は0.04と消滅していたのだ。認知心理学者のソ・ユナ博士は、過去3年間142回の挑発が脳の扁桃体を麻痺させる『対数螺旋数列』アルゴリズムであったことを突き止める。",
+      "zh": "韩美联合司令部地下掩体的全息图表揭示了诡异的悖论：军事威胁指数高达94.7%，而公众恐惧反应指数却跌至0.04。认知心理学博士徐允儿发现，过去三年间142次挑衅竟是严格按照17.4天肾上腺素耗竭周期排列的‘对数螺旋数列’，旨在彻底切断五千万人的逃生神经。",
+      "es": "En el búnker del Comando Combinado, dos gráficos revelan una paradoja escalofriante: Índice de Amenaza Militar en 94.7%, Índice de Miedo Público en 0.04. La Dra. Seo Yoon-ah descubre que las 142 provocaciones siguen una espiral logarítmica diseñada para anestesiar la amígdala humana antes de la Fase Omega."
+    },
+    "charCount": 6267,
+    "readingTime": "약 26분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_06.html",
+    "jsonUrl": "data/novels/boiled_frog_06.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35786"
   }
 ]

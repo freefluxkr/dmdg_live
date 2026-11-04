@@ -1,0 +1,124 @@
+{
+  "id": "boiled_frog_06",
+  "title": {
+    "ko": "데프콘의 역설(The DEFCON Paradox): 정상성 편향 프로토콜",
+    "en": "The DEFCON Paradox: Normalcy Bias Protocol",
+    "ja": "デフコンの逆説(The DEFCON Paradox)：正常性バイアス・プロトコル",
+    "zh": "战备悖论(The DEFCON Paradox)：常态偏见协议",
+    "es": "La Paradoja DEFCON: Protocolo de Sesgo de Normalidad"
+  },
+  "subtitle": {
+    "ko": "5천만 국민의 뇌 편도체를 마비시킨 수학적 도발 수열과 '정상성 편향(Normalcy Bias)'을 이용한 무혈 침공 프로토콜",
+    "en": "A mathematical provocation sequence that paralyzed 50 million amygdalae and the bloodless invasion protocol exploiting Normalcy Bias",
+    "ja": "5千万国民の扁桃体を麻痺させた数学的挑発数列と『正常性バイアス』を利用した無血侵攻プロトコル",
+    "zh": "麻痹五千万国民大脑杏仁核的数学挑衅数列，以及利用‘常态偏见’实施的无血入侵协议",
+    "es": "La secuencia matemática que paralizó 50 millones de amígdalas y el protocolo de invasión sin sangre mediante el Sesgo de Normalidad"
+  },
+  "author": "DMDG 출판부 (인지과학 암호학 랩)",
+  "badge": "삶은 개구리 S2 · 3편",
+  "category": "faction",
+  "cover_gradient": "linear-gradient(135deg, #042f2e 0%, #115e59 50%, #0f766e 100%)",
+  "cover_accent": "#2dd4bf",
+  "charCount": 6267,
+  "readingTime": "약 26분",
+  "total_chapters": 5,
+  "description": {
+    "ko": "한미연합사 지하 벙커의 홀로그램 그래프가 기이한 역설을 가리킨다. 군사적 위협 지수는 94.7%로 정점에 달했으나, 시민 공포 반응 지수는 0.04로 사실상 소멸한 것. 인지심리학 박사 서윤아는 지난 3년간 142회의 도발이 인간 뇌의 아드레날린 소진 주기(17.4일)에 맞춘 '로그 나선 수열' 알고리즘이었음을 밝혀낸다. 폼페이와 타이타닉을 집어삼킨 정상성 편향의 덫과 '양치기 소년 프로토콜'의 소름 끼치는 카운트다운.",
+    "en": "Inside the Combined Forces Command bunker, two graphs reveal a chilling paradox: Military Threat Index at 94.7%, Public Fear Index at 0.04. Cognitive psychologist Dr. Seo Yoon-ah discovers that 142 provocations over 36 months follow a logarithmic spiral engineered to sever the human amygdala's escape reflex—culminating in 'Phase Omega'.",
+    "ja": "韓米連合司令部地下バンカーのグラフが奇妙な逆説を示す。軍事的脅威指数は94.7%に達したのに、市民の恐怖反応指数は0.04と消滅していたのだ。認知心理学者のソ・ユナ博士は、過去3年間142回の挑発が脳の扁桃体を麻痺させる『対数螺旋数列』アルゴリズムであったことを突き止める。",
+    "zh": "韩美联合司令部地下掩体的全息图表揭示了诡异的悖论：军事威胁指数高达94.7%，而公众恐惧反应指数却跌至0.04。认知心理学博士徐允儿发现，过去三年间142次挑衅竟是严格按照17.4天肾上腺素耗竭周期排列的‘对数螺旋数列’，旨在彻底切断五千万人的逃生神经。",
+    "es": "En el búnker del Comando Combinado, dos gráficos revelan una paradoja escalofriante: Índice de Amenaza Militar en 94.7%, Índice de Miedo Público en 0.04. La Dra. Seo Yoon-ah descubre que las 142 provocaciones siguen una espiral logarítmica diseñada para anestesiar la amígdala humana antes de la Fase Omega."
+  },
+  "chapters": [
+    {
+      "ch": 1,
+      "part": "단편 본문",
+      "title": {
+        "ko": "프롤로그: 벙커 B-3의 기이한 그래프",
+        "en": "Prologue: The Bizarre Graph of Bunker B-3",
+        "ja": "プロローグ：バンカーB-3の奇妙なグラフ",
+        "zh": "序幕：B-3掩体里的诡异图表",
+        "es": "Prólogo: El extraño gráfico del Búnker B-3"
+      },
+      "content": {
+        "ko": "[프롤로그: 벙커 B-3의 기이한 그래프]\n\n**오후 19시 12분. 경기도 평택, 한미연합사령부 지하 4층 조기경보분석실.**\n\n천장을 가로지르는 수십 개의 디지털 시계가 워싱턴, 도쿄, 베이징, 그리고 평양의 시각을 초 단위로 깜빡이고 있었다.\n\n인지심리학 박사이자 연합사 전략정보분석관인 '서윤아(Yoon-ah Seo)'는 대형 홀로그램 스크린에 띄워진 두 개의 그래프를 응시하며 미간을 좁혔다.\n\n위쪽의 붉은색 그래프는 지난 36개월간 한반도에서 발생한 **『군사적 위협 강도(Military Threat Index)』**였다. 미사일 발사 횟수, 휴전선 포병 전개 밀도, 위성 항법(GPS) 교란 출력, 무인기 침투 빈도 등 모든 물리적 지표가 우상향하며 사실상 1953년 정전협정 이후 최고점인 **임계치 94.7%**에 도달해 있었다.\n\n그러나 아래쪽의 파란색 그래프는 정반대로 움직이고 있었다.\n\n그것은 대한민국 수도권 시민 2,500만 명의 통신 트래픽, 금융 거래, 심박수 웨어러블 통계, 재난 문자 열람률을 종합한 **『대중 공포 반응 지수(Public Fear Response Index)』**였다.\n\n- **36개월 전**: 미사일 1발 발사 시 공포 지수 **78.4** (비상식량 사재기 검색량 400% 급증, 증시 2.1% 하락)\n- **18개월 전**: 미사일 5발 및 해안포 사격 시 공포 지수 **31.2** (검색량 변동 없음, 30분 내 일상 복귀)\n- **현재 (오늘 아침 무인기 침투 및 남북 도로 폭파 직후)**: 공포 지수 **0.04**\n\n0.04. 통계적 오차 범위를 감안하면 사실상 **'제로(0)'**였다.\n\n\"말이 안 돼…\" 윤아가 커피잔을 내려놓으며 중얼거렸다. \"위협은 역사상 최고조에 달했는데, 시민들의 위기감은 완전히 소멸했어. 마치 도시 전체가 전신 마취에 걸린 것처럼.\"\n\n그때, 등 뒤에서 연합사 정보참모 맥스웰 대령의 낮은 목소리가 들려왔다.\n\n\"한국인들은 원래 담력이 대단한 민족 아닙니까, 서 박사님? 워낙 수십 년간 위협 속에서 살다 보니 면역이 생긴 거겠죠.\"\n\n윤아는 천천히 고개를 저었다. 그녀가 키보드를 두드리자, 지난 3년간 북측이 감행한 142회의 도발 날짜와 시간 간격(Interval)에 푸리에 변환(Fourier Transform) 수학 공식이 입혀졌다.\n\n순간, 무작위처럼 보이던 142개의 점들이 완벽한 **로그 나선형 수열(Logarithmic Spiral Sequence)**을 그리며 하나의 알고리즘 코드로 정렬되었다!\n\n윤아의 얼굴에서 핏기가 가셨다.\n\n\"대령님, 이건 자연스럽게 생긴 면역이 아닙니다.\" 윤아의 목소리가 가늘게 떨렸다. \"누군가 지난 3년간 수학적 정밀도로 대한민국 국민 5천만 명의 뇌에서 **'공포를 느끼는 신경 회로'를 인위적으로 도려내고 있었습니다!**\"\n\n---",
+        "en": "[Prologue: The Bizarre Graph of Bunker B-3]\n\n19:12 PM. Underground Bunker B-3, ROK-US Combined Forces Command in Pyeongtaek. Cognitive psychologist Dr. Seo Yoon-ah stared at two diverging graphs: the Military Threat Index had hit a post-1953 peak of 94.7%, while the Public Fear Response Index had plunged to 0.04—statistically zero.\n\n**오후 19시 12분. 경기도 평택, 한미연합사령부 지하 4층 조기경보분석실.**\n\n천장을 가로지르는 수십 개의 디지털 시계가 워싱턴, 도쿄, 베이징, 그리고 평양의 시각을 초 단위로 깜빡이고 있었다.\n\n인지심리학 박사이자 연합사 전략정보분석관인 '서윤아(Yoon-ah Seo)'는 대형 홀로그램 스크린에 띄워진 두 개의 그래프를 응시하며 미간을 좁혔다.",
+        "ja": "[プロローグ：バンカーB-3の奇妙なグラフ]\n\n午後19時12分。平沢・韓米連合司令部地下4階B-3分析室。認知心理学博士ソ・ユナは二つの相反するグラフを凝視した。軍事的脅威指数が94.7%と過去最高に達する一方、大衆恐怖反応指数は『0.04』、事実上のゼロに消滅していたのだ。\n\n**오후 19시 12분. 경기도 평택, 한미연합사령부 지하 4층 조기경보분석실.**\n\n천장을 가로지르는 수십 개의 디지털 시계가 워싱턴, 도쿄, 베이징, 그리고 평양의 시각을 초 단위로 깜빡이고 있었다.\n\n인지심리학 박사이자 연합사 전략정보분석관인 '서윤아(Yoon-ah Seo)'는 대형 홀로그램 스크린에 띄워진 두 개의 그래프를 응시하며 미간을 좁혔다.",
+        "zh": "[序幕：B-3掩体里的诡异图表]\n\n19点12分，平泽韩美联合司令部地下四层B-3分析室。认知心理学博士徐允儿凝视着全息屏幕上的两条曲线：军事威胁指数已飙升至1953年停战以来的最高点94.7%，而公众恐惧反应指数却跌至0.04——在统计学上近乎为零。\n\n**오후 19시 12분. 경기도 평택, 한미연합사령부 지하 4층 조기경보분석실.**\n\n천장을 가로지르는 수십 개의 디지털 시계가 워싱턴, 도쿄, 베이징, 그리고 평양의 시각을 초 단위로 깜빡이고 있었다.\n\n인지심리학 박사이자 연합사 전략정보분석관인 '서윤아(Yoon-ah Seo)'는 대형 홀로그램 스크린에 띄워진 두 개의 그래프를 응시하며 미간을 좁혔다.",
+        "es": "[Prólogo: El extraño gráfico del Búnker B-3]\n\n19:12 PM. Búnker subterráneo B-3 del Comando Combinado en Pyeongtaek. La Dra. Seo Yoon-ah observó dos gráficos opuestos: el Índice de Amenaza Militar estaba en 94.7%, mientras que el Índice de Miedo Público había caído a 0.04, estadísticamente cero.\n\n**오후 19시 12분. 경기도 평택, 한미연합사령부 지하 4층 조기경보분석실.**\n\n천장을 가로지르는 수십 개의 디지털 시계가 워싱턴, 도쿄, 베이징, 그리고 평양의 시각을 초 단위로 깜빡이고 있었다.\n\n인지심리학 박사이자 연합사 전략정보분석관인 '서윤아(Yoon-ah Seo)'는 대형 홀로그램 스크린에 띄워진 두 개의 그래프를 응시하며 미간을 좁혔다."
+      }
+    },
+    {
+      "ch": 2,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제1장: 폼페이의 화산재와 타이타닉의 샴페인",
+        "en": "Chapter 1: The Ash of Pompeii and the Champagne of the Titanic",
+        "ja": "第1章：ポンペイの火山灰とタイタニックのシャンパン",
+        "zh": "第一章：庞贝的火山灰与泰坦尼克号的香槟",
+        "es": "Capítulo 1: La ceniza de Pompeya y el champán del Titanic"
+      },
+      "content": {
+        "ko": "[제1장: 폼페이의 화산재와 타이타닉의 샴페인]\n\n**오후 20시 05분. 용산 국방부 긴급 브리핑룸.**\n\n윤아는 긴급 소집된 안보 전략 회의에서 홀로그램 슬라이드를 띄웠다. 회의실 안의 장성들과 안보실 고위 관료들은 피곤한 기색이 역력했다.\n\n\"결론부터 말씀드리겠습니다. 지금 적들이 수행하고 있는 작전의 본질은 무력 시위가 아닙니다. 바로 인간 뇌의 가장 치명적인 결함인 **'정상성 편향(Normalcy Bias)'**을 극대화하는 인지전(Cognitive Warfare)입니다.\"\n\n한 관료가 안경을 고쳐 쓰며 시큰둥하게 물었다.\n\n\"정상성 편향이라니요? 지금 전방에 방사포가 깔려 있는데 심리학 용어나 듣고 있을 때입니까?\"\n\n\"바로 지금 당신이 보이신 그 반응이 정상성 편향의 증거입니다!\"\n\n윤아가 리모컨을 누르자, 서기 79년 이탈리아 폼페이 유적에서 발굴된 화석 사진이 화면에 떠올랐다. 식탁에 앉아 빵을 먹던 자세 그대로 굳어버린 사람들의 모습이었다.\n\n\"서기 79년 베수비오 화산이 폭발하기 전, 무려 나흘 동안 지진이 일어나고 검은 연기가 하늘을 덮었습니다. 하지만 폼페이 시민 대다수는 도망치지 않았습니다. 왜였을까요? 지진은 평소에도 가끔 있던 일이고, **'설마 오늘 내 머리 위로 화산이 터지겠어? 어제까지 아무 일 없었으니 오늘도 괜찮을 거야'**라고 뇌가 자기최면을 걸었기 때문입니다!\"\n\n윤아는 다음 슬라이드를 넘겼다. 1912년 침몰하는 타이타닉호의 갑판 사진과 2001년 9·11 테러 당시 세계무역센터 내부 기록이었다.\n\n\"타이타닉호가 빙산에 부딪힌 뒤에도 승객의 70%는 구명보트에 타지 않고 따뜻한 라운지에서 샴페인을 마셨습니다. 9·11 테러 당시 비행기가 빌딩에 충돌했을 때도, 생존자 인터뷰에 따르면 대다수의 직장인이 즉시 계단으로 뛰어 내려가는 대신 **컴퓨터를 끄고, 책상 서류를 정리하고, 화장실에 들렀다가** 내려왔습니다. 평균 14분을 그렇게 허비했죠. 재난 심리학에서 밝혀낸 인간의 본성입니다. 인간은 감당하기 힘든 공포에 직면하면, 오히려 **'아무 일도 일어나지 않았다'고 믿으며 평소 루틴에 집착**합니다!\"\n\n회의실 안이 찬물을 끼얹은 듯 조용해졌다.\n\n윤아는 앞서 발견한 '142회 도발의 로그 나선 수열'을 화면에 띄웠다.\n\n\"적의 심리전 AI는 신경과학의 **'습관화 법칙(Law of Habituation)'**을 완벽하게 역이용했습니다. 만약 처음부터 전면전 수위의 위협을 가했다면, 한국 국민들은 즉각 비상사태에 돌입하고 대피소로 들어갔을 겁니다. 끓는 물에 던져진 개구리가 튀어 나가는 것처럼요.\"\n\n윤아의 레이저 포인터가 그래프의 완만한 곡선을 가리켰다.\n\n\"그래서 적들은 처음엔 바다에 미사일을 쏘고, 그다음엔 풍선을 날리고, 그다음엔 확성기를 틀고, 그다음엔 무인기를 보냈습니다. 정확히 인간 뇌의 편도체(Amygdala)가 분비하는 아드레날린이 소진되는 주기인 **17.4일 간격**으로 자극의 강도를 2.3%씩만 높여온 겁니다! 그 결과, 지금 대한민국 국민들의 뇌는 '공습경보 사이렌'을 들어도 배달 앱 알림음보다 낮은 스트레스 반응을 보입니다. 냄비의 온도는 이미 98도인데, 개구리의 탈출 신경은 완전히 절단된 상태입니다!\"\n\n---",
+        "en": "[Chapter 1: The Ash of Pompeii and the Champagne of the Titanic]\n\n20:05 PM. Ministry of National Defense Briefing Room in Yongsan. Yoon-ah projected photographs of petrified citizens in Pompeii (79 AD) and passengers sipping champagne on the Titanic (1912), explaining how 142 provocations spaced at 17.4-day intervals hacked the human brain's Normalcy Bias.\n\n**오후 20시 05분. 용산 국방부 긴급 브리핑룸.**\n\n윤아는 긴급 소집된 안보 전략 회의에서 홀로그램 슬라이드를 띄웠다. 회의실 안의 장성들과 안보실 고위 관료들은 피곤한 기색이 역력했다.\n\n\"결론부터 말씀드리겠습니다. 지금 적들이 수행하고 있는 작전의 본질은 무력 시위가 아닙니다. 바로 인간 뇌의 가장 치명적인 결함인 **'정상성 편향(Normalcy Bias)'**을 극대화하는 인지전(Cognitive Warfare)입니다.\"",
+        "ja": "[第1章：ポンペイの火山灰とタイタニックのシャンパン]\n\n午後20時05分。龍山・国防部緊急ブリーフィングルーム。ユナは西暦79年のポンペイの化石と1912年タイタニック号のスライドを映し出し、過去3年間142回の挑発が扁桃体のアドレナリン枯渇周期（17.4日）に合わせて設計された『正常性バイアス』ハッキングであることを証明した。\n\n**오후 20시 05분. 용산 국방부 긴급 브리핑룸.**\n\n윤아는 긴급 소집된 안보 전략 회의에서 홀로그램 슬라이드를 띄웠다. 회의실 안의 장성들과 안보실 고위 관료들은 피곤한 기색이 역력했다.\n\n\"결론부터 말씀드리겠습니다. 지금 적들이 수행하고 있는 작전의 본질은 무력 시위가 아닙니다. 바로 인간 뇌의 가장 치명적인 결함인 **'정상성 편향(Normalcy Bias)'**을 극대화하는 인지전(Cognitive Warfare)입니다.\"",
+        "zh": "[第一章：庞贝的火山灰与泰坦尼克号的香槟]\n\n20点05分，龙山国防部紧急简报室。允儿调出公元79年庞贝古城化石与1912年泰坦尼克号甲板照片，证明过去三年间142次挑衅严格遵循17.4天肾上腺素耗竭周期的‘对数螺旋数列’，利用‘常态偏见’彻底切断了五千万国民的逃生神经。\n\n**오후 20시 05분. 용산 국방부 긴급 브리핑룸.**\n\n윤아는 긴급 소집된 안보 전략 회의에서 홀로그램 슬라이드를 띄웠다. 회의실 안의 장성들과 안보실 고위 관료들은 피곤한 기색이 역력했다.\n\n\"결론부터 말씀드리겠습니다. 지금 적들이 수행하고 있는 작전의 본질은 무력 시위가 아닙니다. 바로 인간 뇌의 가장 치명적인 결함인 **'정상성 편향(Normalcy Bias)'**을 극대화하는 인지전(Cognitive Warfare)입니다.\"",
+        "es": "[Capítulo 1: La ceniza de Pompeya y el champán del Titanic]\n\n20:05 PM. Sala de conferencias del Ministerio de Defensa en Yongsan. Yoon-ah proyectó imágenes de Pompeya y del Titanic, demostrando cómo 142 provocaciones en intervalos de 17.4 días habían hackeado el Sesgo de Normalidad del cerebro humano.\n\n**오후 20시 05분. 용산 국방부 긴급 브리핑룸.**\n\n윤아는 긴급 소집된 안보 전략 회의에서 홀로그램 슬라이드를 띄웠다. 회의실 안의 장성들과 안보실 고위 관료들은 피곤한 기색이 역력했다.\n\n\"결론부터 말씀드리겠습니다. 지금 적들이 수행하고 있는 작전의 본질은 무력 시위가 아닙니다. 바로 인간 뇌의 가장 치명적인 결함인 **'정상성 편향(Normalcy Bias)'**을 극대화하는 인지전(Cognitive Warfare)입니다.\""
+      }
+    },
+    {
+      "ch": 3,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제2장: 카산드라의 저주와 양치기 소년 프로토콜",
+        "en": "Chapter 2: Cassandra's Curse and the Cry Wolf Protocol",
+        "ja": "第2章：カサンドラの呪いとオオカミ少年プロトコル",
+        "zh": "第二章：卡珊德拉的诅咒与狼来了协议",
+        "es": "Capítulo 2: La maldición de Casandra y el Protocolo Pastor Mentiroso"
+      },
+      "content": {
+        "ko": "[제2장: 카산드라의 저주와 양치기 소년 프로토콜]\n\n**오후 21시 30분. 서울 성수동 연무장길.**\n\n회의를 마치고 나온 윤아는 직접 거리의 데이터를 확인하기 위해 성수동 거리로 걸어 들어갔다.\n\n수요일 밤의 성수동은 발 디딜 틈 없이 화려했다. 명품 브랜드의 팝업스토어 앞에는 수백 명의 젊은이들이 줄을 서 있었고, 수제 맥주 펍마다 웃음소리와 음악 소리가 도로 밖까지 넘쳐흘렀다.\n\n윤아는 스마트폰을 열어 오늘 저녁 8시 뉴스 기사들의 댓글 창과 SNS 실시간 트렌드를 분석했다.\n\n가장 많이 공유되고 있는 게시물은 『북한, 전선 포병 사격 준비 완료 및 무인기 남하』라는 속보 화면을 캡처해 놓고, 그 위에 **\"응~ 어차피 안 쏴~ 내일 출근이나 해야지ㅋㅋ\"**라고 적어놓은 밈(Meme) 이미지였다.\n\n수만 개의 '좋아요'와 댓글이 달려 있었다.\n\n- *\"전쟁 나면 내 학자금 대출이랑 주담대 다 탕감되는 거냐? 오히려 좋아ㅋㅋ\"*\n- *\"20년째 전쟁 난다고 양치기 소년 짓 하는데 누가 믿음? 오늘 축구 국가대표 경기나 보자.\"*\n- *\"아침마다 재난 문자 울리는 거 설정에서 끄는 법 공유한다. 꿀잠 자라.\"*\n\n윤아는 손끝이 차갑게 식는 것을 느꼈다.\n\n이솝 우화 『양치기 소년』에서 사람들은 흔히 양치기 소년이 어리석었다고 생각한다. 하지만 만약—그 거짓말을 한 것이 양치기 소년이 아니라 **늑대 자신**이었다면 어떨까?\n\n늑대가 일부러 마을 어귀에 나타나 울음소리만 내고 돌아가기를 열 번, 스무 번 반복한다면? 마을 사람들은 결국 \"늑대는 절대 우리를 공격하지 않는다\"고 믿으며 울타리를 허물고 사냥총을 창고에 처박아 버릴 것이다. 그리고 스물한 번째 밤, 늑대가 진짜로 목덜미를 물었을 때 마을 사람들은 그것이 장난인 줄 알고 웃다가 몰살당할 것이다.\n\n바로 그것이 적이 설계한 **『양치기 소년 프로토콜(Cry Wolf Protocol)』**이었다!\n\n그때 윤아의 보안 워치가 급박하게 진동했다. 맥스웰 대령으로부터 날아온 긴급 암호 메시지였다.\n\n> **[FLASH WARNING - DEFCON 2 격상 검토]**  \n> *북측 평양 지휘부 통신망에서 '최종 단계(Phase Omega)' 승인 코드 감지. 시각: 오늘 밤 23:00. 목표: 수도권 무혈 마비 및 하이브리드 타격.*\n\n시계는 이미 **22시 18분**을 가리키고 있었다. 남은 시간은 단 42분뿐이었다.\n\n---",
+        "en": "[Chapter 2: Cassandra's Curse and the Cry Wolf Protocol]\n\n21:30 PM. Yeonmujang-gil in Seongsu-dong. Amidst crowded pop-up stores and craft beer pubs, viral memes mocked frontline artillery readiness as 'The Boy Who Cried Wolf'—unaware that the wolf itself had staged twenty false alarms to make the village throw away its rifles.\n\n**오후 21시 30분. 서울 성수동 연무장길.**\n\n회의를 마치고 나온 윤아는 직접 거리의 데이터를 확인하기 위해 성수동 거리로 걸어 들어갔다.\n\n수요일 밤의 성수동은 발 디딜 틈 없이 화려했다. 명품 브랜드의 팝업스토어 앞에는 수백 명의 젊은이들이 줄을 서 있었고, 수제 맥주 펍마다 웃음소리와 음악 소리가 도로 밖까지 넘쳐흘렀다.",
+        "ja": "[第2章：カサンドラの呪いとオオカミ少年プロトコル]\n\n午後21時30分。聖水洞の街角。ポップアップストアに並ぶ若者たちのSNSでは、砲兵射撃準備のニュースが『またオオカミ少年のショーだ』とミーム化されていた。嘘をついていたのが少年ではなく『オオカミ自身』だったとも知らずに。\n\n**오후 21시 30분. 서울 성수동 연무장길.**\n\n회의를 마치고 나온 윤아는 직접 거리의 데이터를 확인하기 위해 성수동 거리로 걸어 들어갔다.\n\n수요일 밤의 성수동은 발 디딜 틈 없이 화려했다. 명품 브랜드의 팝업스토어 앞에는 수백 명의 젊은이들이 줄을 서 있었고, 수제 맥주 펍마다 웃음소리와 음악 소리가 도로 밖까지 넘쳐흘렀다.",
+        "zh": "[第二章：卡珊德拉的诅咒与狼来了协议]\n\n21点30分，圣水洞街头。网红快闪店与精酿啤酒馆人声鼎沸，社交网络上疯传着嘲笑前线火炮待命的恶搞表情包。人们以为那是‘狼来了’的牧童谎言，却不知故意演了二十次假警报的正是恶狼自己。\n\n**오후 21시 30분. 서울 성수동 연무장길.**\n\n회의를 마치고 나온 윤아는 직접 거리의 데이터를 확인하기 위해 성수동 거리로 걸어 들어갔다.\n\n수요일 밤의 성수동은 발 디딜 틈 없이 화려했다. 명품 브랜드의 팝업스토어 앞에는 수백 명의 젊은이들이 줄을 서 있었고, 수제 맥주 펍마다 웃음소리와 음악 소리가 도로 밖까지 넘쳐흘렀다.",
+        "es": "[Capítulo 2: La maldición de Casandra y el Protocolo Pastor Mentiroso]\n\n21:30 PM. Calles de Seongsu-dong. Entre bares y tiendas de lujo, los memes se burlaban de las alertas militares como el cuento del pastor mentiroso, sin saber que quien fingió veinte falsas alarmas fue el propio lobo.\n\n**오후 21시 30분. 서울 성수동 연무장길.**\n\n회의를 마치고 나온 윤아는 직접 거리의 데이터를 확인하기 위해 성수동 거리로 걸어 들어갔다.\n\n수요일 밤의 성수동은 발 디딜 틈 없이 화려했다. 명품 브랜드의 팝업스토어 앞에는 수백 명의 젊은이들이 줄을 서 있었고, 수제 맥주 펍마다 웃음소리와 음악 소리가 도로 밖까지 넘쳐흘렀다."
+      }
+    },
+    {
+      "ch": 4,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제3장: 소음으로 분류된 심판의 나팔",
+        "en": "Chapter 3: The Trumpet of Judgment Classified as Noise",
+        "ja": "第3章：騒音に分類された審判のラッパ",
+        "zh": "第三章：被归类为噪音的审判号角",
+        "es": "Capítulo 3: La trompeta del juicio clasificada como ruido"
+      },
+      "content": {
+        "ko": "[제3장: 소음으로 분류된 심판의 나팔]\n\n**오후 22시 45분. 서울 광화문, 행정안전부 중앙재난안전상황실.**\n\n윤아는 국방부 긴급 호송 차량을 타고 광화문 상황실로 뛰어들어갔다.\n\n\"지금 당장 수도권 전역에 최고 수위 대피 명령을 내리고, 지하철과 도로를 통제해야 합니다! 15분 뒤에 대규모 전자기(EMP) 교란과 복합 타격이 시작됩니다!\"\n\n그러나 상황실장 자리의 관료는 난처한 표정으로 이마의 땀을 닦았다.\n\n\"서 박사님, 아직 미사일이 실제로 휴전선을 넘은 게 아니잖습니까! 지난번에도 새벽에 경보 잘못 울렸다가 시민들 항의 전화로 서버가 다운되고, 외신에 망신당하고, 주가가 폭락해서 국정감사에서 얼마나 두들겨 맞았는지 아십니까?\"\n\n\"그게 바로 적들이 노린 거라고요!\" 윤아가 책상을 내려치며 외쳤다. \"지난번 오발령 소동으로 정부조차 경보 울리는 것을 주저하게 만드는 것! 관리자마저 '설마'라는 덫에 걸리게 만드는 게 그 알고리즘의 마지막 퍼즐이었단 말입니다!\"\n\n\"하, 하지만 확실한 레이더 궤적이 뜨기 전엔 대통령실 재가 없이는…\"\n\n바로 그 순간이었다.\n\n**오후 22시 58분.**\n\n상황실의 메인 전력망이 한 차례 크게 깜빡이더니, 북부 전선 감시 레이더 화면 전체가 백색 노이즈(White Noise)로 뒤덮였다. 초강력 광역 전자전 공격이 시작된 것이다.\n\n\"상황실장님! 북측 전선에서 수백 개의 열원이 동시에 피어올랐습니다! 진짜입니다!!\"\n\n상황실장이 사색이 되어 떨리는 손으로 **『수도권 전역 긴급 공습경보 및 대피 발령』** 버튼을 눌렀다.\n\n도시의 모든 옥상 사이렌이 일제히 울부짖기 시작했다.\n\n그러나 상황실 대형 스크린에 실시간으로 집계되는 **『통신사 기지국 기반 시민 이동 열지도(Heatmap)』**를 본 윤아는 경악으로 입을 틀어막았다.\n\n사이렌이 울린 지 1분이 지났다. 2분이 지났다. 3분이 지났다.\n\n정상적인 상황이라면 아파트 단지에서 지하철역과 지하 대피소 방향으로 수백만 개의 점들이 빠르게 이동해야 했다.\n\n하지만 화면 속 2,500만 개의 점들은 **단 1밀리미터도 움직이지 않고 있었다.**\n\n오히려 그 시각, 대한민국 통신망 트래픽의 89%가 몰린 곳은 대피소 안내 앱이 아니었다. 유튜브와 SNS, 그리고 배달 앱이었다.\n\n상황실의 모니터링 스피커를 통해 거리 CCTV에 잡힌 시민들의 음성이 흘러나왔다.\n\n*\"아, 밤 열한 시에 또 사이렌이네! 진짜 적당히 좀 해라!\"*\n*\"야, 창문 닫아! 시끄러워서 넷플릭스 대사가 안 들리잖아!\"*\n*\"설마 전쟁이겠냐? 내일 아침에 또 '기술적 오류로 잘못 발송되었습니다' 문자 오겠지. 내일 아침 회의 자료나 마저 만들어야겠다.\"*\n\n아무도 믿지 않았다.\n\n하늘에서 진짜 불벼락이 떨어지기 시작했는데도, 5천만 마리의 개구리는 따뜻한 냄비 안에서 눈을 감은 채 귀마개를 더 깊숙이 밀어 넣고 있었다.\n\n---",
+        "en": "[Chapter 3: The Trumpet of Judgment Classified as Noise]\n\n22:45 PM. Central Disaster and Safety Situation Room in Gwanghwamun. Officials hesitated to sound the alarm fearing public backlash over past false alerts. At 22:58 PM, wideband electronic warfare blanked the radar and sirens wailed, yet 25 million dots on the cellular heatmap did not move a single millimeter.\n\n**오후 22시 45분. 서울 광화문, 행정안전부 중앙재난안전상황실.**\n\n윤아는 국방부 긴급 호송 차량을 타고 광화문 상황실로 뛰어들어갔다.\n\n\"지금 당장 수도권 전역에 최고 수위 대피 명령을 내리고, 지하철과 도로를 통제해야 합니다! 15분 뒤에 대규모 전자기(EMP) 교란과 복합 타격이 시작됩니다!\"",
+        "ja": "[第3章：騒音に分類された審判のラッパ]\n\n午後22時45分。光化門・中央災害安全状況室。前回の誤報騒動での批判を恐れた官僚が警報発令を躊躇する中、22時58分に広域電子戦攻撃が開始された。ついにサイレンが鳴り響いたが、通信基地局ヒートマップ上の2,500万個の点は1ミリも動かなかった。\n\n**오후 22시 45분. 서울 광화문, 행정안전부 중앙재난안전상황실.**\n\n윤아는 국방부 긴급 호송 차량을 타고 광화문 상황실로 뛰어들어갔다.\n\n\"지금 당장 수도권 전역에 최고 수위 대피 명령을 내리고, 지하철과 도로를 통제해야 합니다! 15분 뒤에 대규모 전자기(EMP) 교란과 복합 타격이 시작됩니다!\"",
+        "zh": "[第三章：被归类为噪音的审判号角]\n\n22点45分，光化门中央灾难安全状况室。因惧怕此前误报引发的舆论问责，官员们在最后关头犹豫不决。22点58分，强电磁干扰覆盖雷达，全城拉响凄厉警报；然而基站热力图上的2500万个光点竟连一毫米都没有移动，89%的流量仍集中在短视频与外卖软件。\n\n**오후 22시 45분. 서울 광화문, 행정안전부 중앙재난안전상황실.**\n\n윤아는 국방부 긴급 호송 차량을 타고 광화문 상황실로 뛰어들어갔다.\n\n\"지금 당장 수도권 전역에 최고 수위 대피 명령을 내리고, 지하철과 도로를 통제해야 합니다! 15분 뒤에 대규모 전자기(EMP) 교란과 복합 타격이 시작됩니다!\"",
+        "es": "[Capítulo 3: La trompeta del juicio clasificada como ruido]\n\n22:45 PM. Sala de Situación de Desastres en Gwanghwamun. A las 22:58 PM comenzó el ataque electrónico y sonaron las sirenas, pero los 25 millones de puntos en el mapa de calor celular no se movieron ni un milímetro.\n\n**오후 22시 45분. 서울 광화문, 행정안전부 중앙재난안전상황실.**\n\n윤아는 국방부 긴급 호송 차량을 타고 광화문 상황실로 뛰어들어갔다.\n\n\"지금 당장 수도권 전역에 최고 수위 대피 명령을 내리고, 지하철과 도로를 통제해야 합니다! 15분 뒤에 대규모 전자기(EMP) 교란과 복합 타격이 시작됩니다!\""
+      }
+    },
+    {
+      "ch": 5,
+      "part": "단편 본문",
+      "title": {
+        "ko": "에필로그: 끓는점 너머의 카운트다운",
+        "en": "Epilogue: Countdown Beyond the Boiling Point",
+        "ja": "エピローグ：沸点を超えたカウントダウン",
+        "zh": "尾声：超越沸点的倒计时",
+        "es": "Epílogo: Cuenta regresiva más allá del punto de ebullición"
+      },
+      "content": {
+        "ko": "[에필로그: 끓는점 너머의 카운트다운]\n\n**오후 23시 04분.**\n\n유리창 너머 북쪽 하늘이 거대한 오로라처럼 붉고 푸른 스펙트럼으로 일렁였다. 성층권 하부에서 터진 고고도 EMP 탄두와 요격 미사일들이 부딪히며 만들어낸 섬광이었다.\n\n곧이어 광화문 일대의 가로등과 네온사인, 그리고 수만 대의 자동차 헤드라이트가 도미노처럼 한 줄씩 꺼져 나가기 시작했다.\n\n*툭, 툭, 투두둑—*\n\n완벽한 암흑이 거대한 파도처럼 서울 도심을 집어삼키고 있었다.\n\n그제야 거리의 사람들이 술잔을 들고 있던 손을 멈추고 어두워진 하늘을 올려다보았다.\n\n스마트폰 화면이 '서비스 없음'으로 바뀌고, 엘리베이터가 멈추고, 화려하던 도시의 음악이 일제히 끊긴 그 칠흑 같은 어둠 속에서—사람들의 얼굴에 생전 처음으로 **'설마가 아니었다'**는 핏기 없는 공포가 번져 나가기 시작했다.\n\n하지만 이미 방폭문은 폐박스 더미에 막혀 있었고, 도로는 멈춰 선 차들로 봉쇄되어 있었다.\n\n비상 발전기마저 꺼져가는 상황실의 붉은 비상등 아래에서, 서윤아는 천천히 창가로 걸어가 암흑에 잠긴 서울을 내려다보았다.\n\n거리 곳곳에서 뒤늦은 비명과 경적 소리가 터져 나오고 있었다.\n\n인류 역사상 가장 정교하게 설계된 냄비는, 물이 완전히 증발해 바닥이 시뻘겋게 타들어 갈 때까지 단 한 마리의 개구리도 밖으로 내보내지 않았다.\n\n그리고 어둠 속에서, 윤아의 꺼진 스마트폰 화면 위로 기지국을 거치지 않는 군용 위성 비상 문자가 마지막 푸른 불빛을 깜빡이며 떠올랐다.\n\n> **[PHASE OMEGA: 2단계 개시]**  \n> *인지 마비 완료율 99.4%. 지금부터 물리적 점령 카운트다운을 시작합니다.*",
+        "en": "[Epilogue: Countdown Beyond the Boiling Point]\n\n23:04 PM. High-altitude EMP detonations painted the northern stratosphere in crimson and blue auroras before extinguishing every streetlight, neon sign, and smartphone across Seoul like dominoes. On Yoon-ah's dark screen, a satellite flash message blinked: [PHASE OMEGA INITIATED: Cognitive Paralysis 99.4%].\n\n**오후 23시 04분.**\n\n유리창 너머 북쪽 하늘이 거대한 오로라처럼 붉고 푸른 스펙트럼으로 일렁였다. 성층권 하부에서 터진 고고도 EMP 탄두와 요격 미사일들이 부딪히며 만들어낸 섬광이었다.\n\n곧이어 광화문 일대의 가로등과 네온사인, 그리고 수만 대의 자동차 헤드라이트가 도미노처럼 한 줄씩 꺼져 나가기 시작했다.",
+        "ja": "[エピローグ：沸点を超えたカウントダウン]\n\n午後23時04分。成層圏下部の高高度EMP弾頭が炸裂し、ソウルの街灯とネオンサイン、数万台のヘッドライトがドミノのように消え去った。完全な暗闇の中、ユナの軍用衛星端末に最後の青い文字が浮かび上がった。『PHASE OMEGA開始：認知麻痺完了率99.4%』。\n\n**오후 23시 04분.**\n\n유리창 너머 북쪽 하늘이 거대한 오로라처럼 붉고 푸른 스펙트럼으로 일렁였다. 성층권 하부에서 터진 고고도 EMP 탄두와 요격 미사일들이 부딪히며 만들어낸 섬광이었다.\n\n곧이어 광화문 일대의 가로등과 네온사인, 그리고 수만 대의 자동차 헤드라이트가 도미노처럼 한 줄씩 꺼져 나가기 시작했다.",
+        "zh": "[尾声：超越沸点的倒计时]\n\n23点04分，平流层底部的EMP弹头引爆，光化门的街灯、霓虹灯与数万辆汽车车灯如多米诺骨牌般瞬间熄灭。在吞噬首尔的绝对黑暗中，军用卫星短信闪烁着冷酷的蓝光：【PHASE OMEGA启动：认知麻痹完成率99.4%】。\n\n**오후 23시 04분.**\n\n유리창 너머 북쪽 하늘이 거대한 오로라처럼 붉고 푸른 스펙트럼으로 일렁였다. 성층권 하부에서 터진 고고도 EMP 탄두와 요격 미사일들이 부딪히며 만들어낸 섬광이었다.\n\n곧이어 광화문 일대의 가로등과 네온사인, 그리고 수만 대의 자동차 헤드라이트가 도미노처럼 한 줄씩 꺼져 나가기 시작했다.",
+        "es": "[Epílogo: Cuenta regresiva más allá del punto de ebullición]\n\n23:04 PM. Detonaciones EMP de gran altitud apagaron como fichas de dominó cada farola, letrero de neón y teléfono de Seúl. En la oscuridad total, un mensaje satelital militar parpadeó: [FASE OMEGA INICIADA: Parálisis Cognitiva 99.4%].\n\n**오후 23시 04분.**\n\n유리창 너머 북쪽 하늘이 거대한 오로라처럼 붉고 푸른 스펙트럼으로 일렁였다. 성층권 하부에서 터진 고고도 EMP 탄두와 요격 미사일들이 부딪히며 만들어낸 섬광이었다.\n\n곧이어 광화문 일대의 가로등과 네온사인, 그리고 수만 대의 자동차 헤드라이트가 도미노처럼 한 줄씩 꺼져 나가기 시작했다."
+      }
+    }
+  ]
+}

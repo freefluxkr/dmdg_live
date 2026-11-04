@@ -681,4 +681,76 @@ window.NOVELS_DATA = [
     chapterCount: 5,
     chapters: []
   },
+
+  {
+    id: "boiled_frog_04",
+    title: "한강 위를 떠다니는 풍선과 시부야에서 걸려온 전화 (Balloons Over the Han River and a Phone Call from Shibuya)",
+    subtitle: "전쟁의 전조 속에서도 '설마'라는 미온수에 몸을 담근 채 아이스 아메리카노를 마시는 도시의 초현실적 평온",
+    author: "DMDG 출판부 (모던 어반 팩션 랩)",
+    persona: "DMDG Master Fiction Lab",
+    genre: "삶은 개구리 S2 단편소설",
+    badge: "삶은 개구리 S2 · 1편",
+    category: "faction",
+    wikidocsUrl: "https://dmdg.wikidocs.net/blog/35784",
+    htmlUrl: "novel_boiled_frog_04.html",
+    color: {
+      from: "#1e1b4b",
+      to: "#312e81",
+      accent: "#a78bfa",
+      glow: "#a78bfa73"
+    },
+    synopsis: "새벽 6시 17분의 위급재난문자를 눈도 뜨지 않고 1.5초 만에 끄는 도시. 전방의 도로가 폭파되고 자주포 덮개가 벗겨졌다는 외신 속보에 도쿄의 친구는 비명을 지르지만, 서울의 시민들은 소금빵 웨이팅 앱을 새로고침하며 여의도 한강 재즈 페스티벌로 향한다. 북서쪽 하늘의 포격 섬광마저 불꽃놀이 리허설이라 믿으며 스마트폰 카메라를 치켜드는 미온수 도시의 초현실적 고독.",
+    charCount: 6495,
+    readingTime: "약 25분",
+    chapterCount: 5,
+    chapters: []
+  },
+
+  {
+    id: "boiled_frog_05",
+    title: "설마의 제국: 임진강의 수위가 오를 때 (Empire of 'Surely Not': When the Imjin River Rises)",
+    subtitle: "1592년과 1950년의 비극을 부른 두 글자 '설마', 안보 불감증에 잠식된 대한민국을 향한 피의 경고",
+    author: "DMDG 출판부 (국가안보 팩션 랩)",
+    persona: "DMDG Master Fiction Lab",
+    genre: "삶은 개구리 S2 단편소설",
+    badge: "삶은 개구리 S2 · 2편",
+    category: "faction",
+    wikidocsUrl: "https://dmdg.wikidocs.net/blog/35785",
+    htmlUrl: "novel_boiled_frog_05.html",
+    color: {
+      from: "#450a0a",
+      to: "#7f1d1d",
+      accent: "#f87171",
+      glow: "#f8717173"
+    },
+    synopsis: "1592년 임진년 봄의 '설마 왜적이 바다를 건너오겠는가'와 1950년 6월 24일 밤의 '설마 전면전이야 나겠어'가 2026년 서울에서 다시 반복된다. 폐박스로 가로막힌 지하 대피소 방폭문과 미사일 도발을 저점 매수 기회라며 비웃는 도심의 연회. 실제 공습경보조차 오발령이라 비웃는 밤, 최전방 야전 지휘관 강태산 중령이 전국 재난 방송망 마이크를 잡고 피의 절규를 토해낸다.",
+    charCount: 6791,
+    readingTime: "약 28분",
+    chapterCount: 5,
+    chapters: []
+  },
+
+  {
+    id: "boiled_frog_06",
+    title: "데프콘의 역설: 정상성 편향 프로토콜 (The DEFCON Paradox: Normalcy Bias Protocol)",
+    subtitle: "5천만 국민의 뇌 편도체를 마비시킨 수학적 도발 수열과 '정상성 편향(Normalcy Bias)'을 이용한 무혈 침공 프로토콜",
+    author: "DMDG 출판부 (인지과학 암호학 랩)",
+    persona: "DMDG Master Fiction Lab",
+    genre: "삶은 개구리 S2 단편소설",
+    badge: "삶은 개구리 S2 · 3편",
+    category: "faction",
+    wikidocsUrl: "https://dmdg.wikidocs.net/blog/35786",
+    htmlUrl: "novel_boiled_frog_06.html",
+    color: {
+      from: "#042f2e",
+      to: "#115e59",
+      accent: "#2dd4bf",
+      glow: "#2dd4bf73"
+    },
+    synopsis: "한미연합사 지하 벙커의 홀로그램 그래프가 기이한 역설을 가리킨다. 군사적 위협 지수는 94.7%로 정점에 달했으나, 시민 공포 반응 지수는 0.04로 사실상 소멸한 것. 인지심리학 박사 서윤아는 지난 3년간 142회의 도발이 인간 뇌의 아드레날린 소진 주기(17.4일)에 맞춘 '로그 나선 수열' 알고리즘이었음을 밝혀낸다. 폼페이와 타이타닉을 집어삼킨 정상성 편향의 덫과 '양치기 소년 프로토콜'의 소름 끼치는 카운트다운.",
+    charCount: 6267,
+    readingTime: "약 26분",
+    chapterCount: 5,
+    chapters: []
+  },
 ];
