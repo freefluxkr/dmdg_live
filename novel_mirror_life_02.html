@@ -395,7 +395,8 @@ body {
     'ko': 'ko-KR',
     'en': 'en-US',
     'ja': 'ja-JP',
-    'zh': 'zh-CN',
+    'fr': 'fr-FR',
+    'id': 'id-ID',
     'es': 'es-ES'
   };
 
@@ -403,7 +404,7 @@ body {
 
   async function loadBookData() {
     try {
-      const res = await fetch('data/novels/mirror_life_02.json');
+      const res = await fetch('data/novels/mirror_life_02.json?v=20261105');
       BOOK_DATA = await res.json();
       renderChapter(0);
       renderToc();

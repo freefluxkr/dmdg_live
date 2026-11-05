@@ -144,7 +144,7 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
       try {
-        const res = await fetch("data/novels/boy_worker_cipher.json");
+        const res = await fetch('data/novels/boy_worker_cipher.json?v=20261105');
         currentData = await res.json();
         render();
       } catch(e) {

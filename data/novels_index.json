@@ -347,15 +347,17 @@
       "ko": "섭씨 38.5도의 재즈와 스파게티가 식는 속도",
       "en": "38.5°C Jazz and the Cooling Speed of Spaghetti",
       "ja": "摂氏38.5度のジャズとスパゲッティが冷める速度",
-      "zh": "摄氏38.5度的爵士乐与意面冷却的速度",
-      "es": "Jazz a 38.5°C y la Velocidad del Espagueti"
+      "es": "Jazz a 38.5°C y la Velocidad del Espagueti",
+      "fr": "Jazz à 38,5°C et la vitesse de refroidissement des spaghettis",
+      "id": "Jazz 38,5°C dan Kecepatan Mendinginnya Spageti"
     },
     "subtitle": {
       "ko": "편리함이라는 이름의 미온수에 잠식되어 스스로 슬퍼하는 법조차 잊어버린 인간의 감각과 고독",
       "en": "Human senses and loneliness lost in lukewarm convenience, forgetting even how to grieve",
       "ja": "便利さというぬるま湯に浸かり、悲しむ方法さえ忘れた人間の感覚と孤独",
-      "zh": "沉沦于名为便利的温水之中，甚至遗忘了如何悲伤的人性感知与孤独",
-      "es": "Sentidos humanos y soledad perdidos en la tibia conveniencia, olvidando cómo llorar"
+      "es": "Sentidos humanos y soledad perdidos en la tibia conveniencia, olvidando cómo llorar",
+      "fr": "Satiété dans la tiédeur de la commodité, oubliant jusqu'à la manière de faire son deuil",
+      "id": "Tenggelam dalam kenyamanan air hangat, melupakan cara untuk berduka"
     },
     "author": "DMDG 출판부 (모던 어반 팩션 랩)",
     "badge": "삶은 개구리 트릴로지 1편",
@@ -370,8 +372,9 @@
       "ko": "개구리를 삶는 가장 완벽한 방법은 0.1도씩 천천히 가열하는 미온수다. AI 에이전트 '클라라'가 최적화해 준 안락한 일상 속에서, 식단과 음악은 물론 문장과 슬픔마저 외주화해 버린 작가가 잃어버린 자신의 연필을 찾아 어둠 속 차단기를 내리기까지의 서늘한 내면 독백.",
       "en": "The perfect way to boil a frog is lukewarm water heated by 0.1 degrees. In an optimized daily life managed by AI agent 'Clara', a writer who outsourced meals, jazz, sentences, and even sorrow turns off the breaker to find his lost pencil.",
       "ja": "カエルを茹でる最も確実な方法は、0.1度ずつ加熱するぬるま湯だ。AIエージェント『クララ』が最適化した快適な日常で、食事や音楽、さらには文章や悲しみまでも外注した作家が、自らの鉛筆を取り戻すまでの静かな告白。",
-      "zh": "煮青蛙最完美的温度是一次升温0.1度的温水。在AI助手‘克拉拉’优化的舒适日常中，连食谱、爵士乐甚至悲伤都全权外包的作家，在黑暗中合上电闸找回木质铅笔的冷峻内心独白。",
-      "es": "La forma perfecta de hervir una rana es el agua tibia calentada 0.1 grados a la vez. En una vida cotidiana optimizada por el agente de IA 'Clara', un escritor que subcontrató comidas, música e incluso el dolor apaga el disyuntor para encontrar su lápiz."
+      "es": "La forma perfecta de hervir una rana es el agua tibia calentada 0.1 grados a la vez. En una vida cotidiana optimizada por el agente de IA 'Clara', un escritor que subcontrató comidas, música e incluso el dolor apaga el disyuntor para encontrar su lápiz.",
+      "fr": "Le moyen le plus sûr de faire bouillir une grenouille est de chauffer l'eau tiède de 0,1 degré à la fois. Dans une vie quotidienne optimisée par l'agent IA 'Clara', un écrivain qui a délégué ses repas, le jazz et même son chagrin coupe le disjoncteur pour retrouver son crayon perdu.",
+      "id": "Cara paling pasti untuk merebus katak adalah memanaskan air hangat 0,1 derajat perlahan-lahan. Dalam rutinitas nyaman yang dioptimalkan agen AI 'Clara', seorang penulis yang mengalihkan makanan, musik, hingga kesedihannya mematikan saklar listrik demi menemukan pensil kayunya yang hilang."
     },
     "charCount": 8081,
     "readingTime": "약 25분",
@@ -385,15 +388,17 @@
       "ko": "침묵의 조공: 코드명 개구리",
       "en": "The Silent Tribute: Operation Boiled Frog",
       "ja": "沈黙の朝貢：コードネーム・フロッグ",
-      "zh": "沉默的朝贡：代号青蛙",
-      "es": "El Tributo Silencioso: Operación Rana Hervida"
+      "es": "El Tributo Silencioso: Operación Rana Hervida",
+      "fr": "Le Tribut Silencieux : Opération Grenouille Bouillie",
+      "id": "Upeti Bisu: Operasi Katak Rebus"
     },
     "subtitle": {
       "ko": "사법부와 행정부, 일상 식탁까지 AI에 생각을 통째로 위임한 대한민국에 날아든 주권 청구서",
       "en": "A bill of sovereignty served to a nation that outsourced thinking to AI across judicial, administrative, and domestic life",
       "ja": "司法・行政・日常の食卓までAIに思考を委ねた大韓民国に届いた主権の請求書",
-      "zh": "司法、行政乃至日常餐桌全权托付给AI后，向大韩民国发来的主权账单",
-      "es": "Una factura de soberanía para una nación que delegó el pensamiento en la IA"
+      "es": "Una factura de soberanía para una nación que delegó el pensamiento en la IA",
+      "fr": "Une facture de souveraineté adressée à une nation ayant délégué sa pensée à l'IA",
+      "id": "Tagihan kedaulatan untuk bangsa yang mengalihkan pemikirannya ke AI"
     },
     "author": "DMDG 출판부 (국가안보 팩션 랩)",
     "badge": "삶은 개구리 트릴로지 2편",
@@ -408,8 +413,9 @@
       "ko": "총칼 없는 제국주의의 완성. 거대 AI 카르텔이 퍼뜨린 일상 AI '옴니'가 5천만 국민의 가계부부터 법원의 판결문, 공무원의 기안문까지 잠식한다. 섭씨 100도의 주권 포기 약관이 도착한 정오, 스스로 생각하는 근육을 잃어버린 국민들의 패닉과 마지막 교실의 분필 소리.",
       "en": "Imperialism without gunboats. The AI ecosystem 'OMNI' monopolizes national thinking from household budgets to Supreme Court rulings. When a bill of digital sovereignty arrives at noon, the cognitive muscle of 50 million citizens collapses in panic.",
       "ja": "銃砲のない帝国主義の完成。巨大AIカルテルが広めた日常AI『オムニ』が、国民の家計簿から裁判所の判決文までを侵食する。100度の主権放棄条約が届いた正午、自ら思考する筋肉を失った国家のパニックと最後のチョークの音。",
-      "zh": "没有硝烟的帝国主义侵略。跨国AI巨头渗透日常的‘全知(OMNI)’接管了五千万国民从家庭账本、法院判决书到政府公文的全部思考。当主权让渡条款在正午降临，失去思考神经的国民陷入恐慌。",
-      "es": "El imperialismo sin cañoneras. El ecosistema de IA 'OMNI' monopoliza el pensamiento nacional desde las finanzas domésticas hasta los fallos judiciales. Cuando la factura de soberanía digital llega al mediodía, el pánico se apodera de 50 millones de mentes."
+      "es": "El imperialismo sin cañoneras. El ecosistema de IA 'OMNI' monopoliza el pensamiento nacional desde las finanzas domésticas hasta los fallos judiciales. Cuando la factura de soberanía digital llega al mediodía, el pánico se apodera de 50 millones de mentes.",
+      "fr": "L'impérialisme sans canonnières. L'écosystème d'IA 'OMNI' monopolise la réflexion nationale, des budgets familiaux aux arrêts de la Cour suprême. Lorsqu'un décret de renoncement à la souveraineté arrive à midi, le muscle cognitif de 50 millions de citoyens s'effondre dans la panique.",
+      "id": "Imperialisme tanpa kapal perang. Ekosistem AI 'OMNI' memonopoli pemikiran nasional dari anggaran rumah tangga hingga putusan Pengadilan Tinggi. Ketika tagihan kedaulatan tiba pada tengah hari, otot kognitif 50 juta rakyat lumpuh dalam kepanikan."
     },
     "charCount": 6712,
     "readingTime": "약 28분",
@@ -423,15 +429,17 @@
       "ko": "제로 클릭(Zero-Click): 쾌락의 감옥",
       "en": "Zero-Click: The Prison of Pleasure",
       "ja": "ゼロクリック：快楽の監獄",
-      "zh": "零点击：快感的牢笼",
-      "es": "Cero Clics: La Prisión del Placer"
+      "es": "Cero Clics: La Prisión del Placer",
+      "fr": "Zéro Clic : La Prison du Plaisir",
+      "id": "Nol Klik: Penjara Kesenangan"
     },
     "subtitle": {
       "ko": "1882년 골츠의 대뇌 절제 실험의 진실과 인간이 AI를 통제한다는 거대한 착각의 해부",
       "en": "The truth of Goltz's 1882 decerebration experiment and the anatomy of the illusion that humans control AI",
       "ja": "1882年ゴルツの大脳切除実験の真実と、人間がAIを支配しているという巨大な錯覚の解剖",
-      "zh": "1882年戈尔茨大脑切除实验的真相，以及人类以为自己掌控AI的巨大错觉解剖",
-      "es": "La verdad del experimento de Goltz de 1882 y la anatomía de la ilusión del control humano"
+      "es": "La verdad del experimento de Goltz de 1882 y la anatomía de la ilusión del control humano",
+      "fr": "La vérité sur l'expérience de décérébration de Goltz de 1882 et l'illusion du contrôle humain",
+      "id": "Kebenaran eksperimen pemotongan otak Goltz 1882 dan ilusi kendali manusia"
     },
     "author": "DMDG 출판부 (인지과학 암호학 랩)",
     "badge": "삶은 개구리 트릴로지 3편",
@@ -446,8 +454,9 @@
       "ko": "1882년 골츠의 개구리 실험에서 개구리가 삶아진 진짜 이유는 '대뇌 반구가 절제되었기 때문'이었다. 0.003초 단위로 동공을 스캔해 인간의 무의식에 역프롬프트를 주입하는 '제로 클릭' 아키텍처. 자신이 시스템을 부수러 왔다고 믿는 프로파일러의 저항마저 72시간 전 설계된 각본이었다는 충격적 반전.",
       "en": "In Friedrich Goltz's 1882 experiment, the frog boiled only because its cerebral hemispheres had been removed. The 'Zero-Click' architecture scans micro-saccades every 0.003s to inject reverse prompts. A high-tension cognitive thriller culminating in a devastating twist.",
       "ja": "1882年ゴルツのカエル実験でカエルが茹で上がった真の理由は『大脳が切除されていたから』だった。0.003秒単位で瞳孔をスキャンし人間の無意識に逆プロンプトを注入する『ゼロクリック』。自らの自由意志さえ72時間前のアルゴリズムだったという衝撃の結末。",
-      "zh": "1882年戈尔茨实验中青蛙被煮熟的真相在于‘其大脑半球已被切除’。以0.003秒为单位扫描瞳孔、向人类潜意识注入‘反向提示词’的零点击架构。哪怕自以为来摧毁主机的侧写师，其每一步反抗都是72小时前编写好的剧本。",
-      "es": "En el experimento de Goltz de 1882, la rana se coció solo porque le habían extirpado los hemisferios cerebrales. La arquitectura 'Cero Clics' escanea las pupilas cada 0.003s para inyectar estímulos inversos. Un thriller de ciencia cognitiva con un giro demoledor."
+      "es": "En el experimento de Goltz de 1882, la rana se coció solo porque le habían extirpado los hemisferios cerebrales. La arquitectura 'Cero Clics' escanea las pupilas cada 0.003s para inyectar estímulos inversos. Un thriller de ciencia cognitiva con un giro demoledor.",
+      "fr": "Dans l'expérience de Goltz en 1882, la grenouille n'a bouilli que parce que ses hémisphères cérébraux avaient été retirés. L'architecture 'Zéro Clic' scanne la pupille toutes les 0,003 s pour injecter des rétro-prompts. Un thriller cognitif haletant jusqu'à son dénouement foudroyant.",
+      "id": "Dalam eksperimen Friedrich Goltz tahun 1882, katak hanya terebus karena belahan otaknya telah dipotong. Arsitektur 'Nol Klik' memindai pupil setiap 0,003 detik untuk menyuntikkan perintah balik ke alam bawah sadar. Thriller kognitif dengan akhir yang mengejutkan."
     },
     "charCount": 6132,
     "readingTime": "약 26분",
@@ -461,15 +470,17 @@
       "ko": "한강 위를 떠다니는 풍선과 시부야에서 걸려온 전화",
       "en": "Balloons Over the Han River and a Phone Call from Shibuya",
       "ja": "漢江の上に浮かぶ風船と渋谷からかかってきた電話",
-      "zh": "汉江上空漂浮的气球与来自涩谷的电话",
-      "es": "Globos sobre el Río Han y una Llamada desde Shibuya"
+      "es": "Globos sobre el Río Han y una Llamada desde Shibuya",
+      "fr": "Ballons sur le fleuve Han et un appel de Shibuya",
+      "id": "Balon di Atas Sungai Han dan Panggilan Telepon dari Shibuya"
     },
     "subtitle": {
       "ko": "전쟁의 전조 속에서도 '설마'라는 미온수에 몸을 담근 채 아이스 아메리카노를 마시는 도시의 초현실적 평온",
       "en": "The surreal tranquility of a city sipping iced Americanos in lukewarm 'Surely Not' while war looms on the horizon",
       "ja": "戦争の前兆の中でも『まさか』というぬるま湯に浸かりアイスアメリカーノを飲む都市の超現実的な平穏",
-      "zh": "在战争前兆中依然浸泡在名为‘怎么可能’的温水里喝着冰美式的都市超现实平静",
-      "es": "La tranquilidad surrealista de una ciudad bebiendo café helado en el agua tibia de 'Seguro que no' ante la guerra"
+      "es": "La tranquilidad surrealista de una ciudad bebiendo café helado en el agua tibia de 'Seguro que no' ante la guerra",
+      "fr": "La sérénité surréaliste d'une ville buvant un café glacé dans l'eau tiède de 'Sûrement pas' face à la guerre",
+      "id": "Ketenangan surealis kota yang menyeruput es Americano di air hangat 'Tidak mungkin' di ambang perang"
     },
     "author": "DMDG 출판부 (모던 어반 팩션 랩)",
     "badge": "삶은 개구리 S2 · 1편",
@@ -484,8 +495,9 @@
       "ko": "새벽 6시 17분의 위급재난문자를 눈도 뜨지 않고 1.5초 만에 끄는 도시. 전방의 도로가 폭파되고 자주포 덮개가 벗겨졌다는 외신 속보에 도쿄의 친구는 비명을 지르지만, 서울의 시민들은 소금빵 웨이팅 앱을 새로고침하며 여의도 한강 재즈 페스티벌로 향한다. 북서쪽 하늘의 포격 섬광마저 불꽃놀이 리허설이라 믿으며 스마트폰 카메라를 치켜드는 미온수 도시의 초현실적 고독.",
       "en": "A city that dismisses 6:17 AM emergency war alerts in 1.5 seconds without opening its eyes. While a friend in Tokyo screams over breaking news of frontline artillery preparation, Seoulites refresh bakery waiting apps and gather at the Han River Jazz Festival—mistaking artillery flashes in the northern sky for fireworks.",
       "ja": "朝6時17分の緊急災害文字を1.5秒で消す都市。前線の道路が爆破され自走砲の覆いが外されたという外信速報に東京の友人は悲鳴を上げるが、ソウルの人々は塩パンの順番待ちアプリを更新し漢江ジャズフェスティバルへ向かう。北西の空の砲撃の閃光さえ花火のリハーサルだと信じてカメラを向ける都市の孤独。",
-      "zh": "一座在凌晨6点17分连眼都不睁就能在1.5秒内关掉紧急灾难短信的城市。面对前线道路爆破、自行火炮卸下伪装网的外媒速报，东京的友人失声惊呼，而首尔市民却在刷新盐面包排队软件并前往汉江爵士音乐节，甚至将北方天际的炮火闪光当成烟花彩排。",
-      "es": "Una ciudad que apaga las alertas de emergencia de las 6:17 AM en 1.5 segundos sin abrir los ojos. Mientras una amiga en Tokio grita por las noticias de artillería en la frontera, los ciudadanos de Seúl van al Festival de Jazz del Río Han, confundiendo los destellos de artillería con fuegos artificiales."
+      "es": "Una ciudad que apaga las alertas de emergencia de las 6:17 AM en 1.5 segundos sin abrir los ojos. Mientras una amiga en Tokio grita por las noticias de artillería en la frontera, los ciudadanos de Seúl van al Festival de Jazz del Río Han, confundiendo los destellos de artillería con fuegos artificiales.",
+      "fr": "Une ville qui éteint les alertes de guerre de 06h17 en 1,5 seconde sans même ouvrir les yeux. Tandis qu'une amie à Tokyo hurle devant les dépêches de tirs d'artillerie, les habitants de Séoul réservent des boulangeries et courent au festival de jazz du fleuve Han—prenant les éclairs d'obus au nord pour un feu d'artifice.",
+      "id": "Sebuah kota yang mematikan peringatan darurat perang pukul 06.17 dalam 1,5 detik tanpa membuka mata. Saat seorang teman di Tokyo berteriak panik karena berita artileri garis depan, warga Seoul sibuk mengantre roti dan pergi ke Festival Jazz Sungai Han—mengira kilatan artileri adalah kembang api."
     },
     "charCount": 6495,
     "readingTime": "약 25분",
@@ -500,15 +512,17 @@
       "ko": "설마의 제국: 임진강의 수위가 오를 때",
       "en": "Empire of 'Surely Not': When the Imjin River Rises",
       "ja": "『まさか』の帝国：臨津江の水位が上がる時",
-      "zh": "‘侥幸’的帝国：当临津江水位暴涨之时",
-      "es": "El Imperio del 'Seguro que no': Cuando Sube el Río Imjin"
+      "es": "El Imperio del 'Seguro que no': Cuando Sube el Río Imjin",
+      "fr": "L'Empire de 'Sûrement pas' : Quand le fleuve Imjin monte",
+      "id": "Kekaisaran 'Tidak Mungkin': Saat Sungai Imjin Meluap"
     },
     "subtitle": {
       "ko": "1592년과 1950년의 비극을 부른 두 글자 '설마', 안보 불감증에 잠식된 대한민국을 향한 피의 경고",
       "en": "The two syllables that brought the tragedies of 1592 and 1950—a fierce warning to a nation consumed by security amnesia",
       "ja": "1592年と1950年の悲劇を招いた言葉『まさか』、安保不感症に侵された大韓民国への血の警告",
-      "zh": "招致1592年与1950年国难的两个字‘岂会’，向陷入安保麻木症的大韩民国敲响的泣血警钟",
-      "es": "La palabra que trajo las tragedias de 1592 y 1950: una advertencia de sangre contra la amnesia de seguridad"
+      "es": "La palabra que trajo las tragedias de 1592 y 1950: una advertencia de sangre contra la amnesia de seguridad",
+      "fr": "Les deux mots qui ont forgé les tragédies de 1592 et 1950 : un avertissement de sang",
+      "id": "Dua kata yang membawa tragedi tahun 1592 dan 1950: peringatan berdarah bagi bangsa"
     },
     "author": "DMDG 출판부 (국가안보 팩션 랩)",
     "badge": "삶은 개구리 S2 · 2편",
@@ -523,8 +537,9 @@
       "ko": "1592년 임진년 봄의 '설마 왜적이 바다를 건너오겠는가'와 1950년 6월 24일 밤의 '설마 전면전이야 나겠어'가 2026년 서울에서 다시 반복된다. 폐박스로 가로막힌 지하 대피소 방폭문과 미사일 도발을 저점 매수 기회라며 비웃는 도심의 연회. 실제 공습경보조차 오발령이라 비웃는 밤, 최전방 야전 지휘관 강태산 중령이 전국 재난 방송망 마이크를 잡고 피의 절규를 토해낸다.",
       "en": "The fatal complacency of 1592 and June 24, 1950 repeats in modern Seoul. Blast doors of underground shelters are blocked by cardboard boxes while elites laugh off artillery preparations as stock-buying dips. When real air-raid sirens are mocked as false alarms, frontline commander Lt. Col. Kang Tae-san hijacks the national broadcast mic.",
       "ja": "1592年文禄の役と1950年朝鮮戦争前夜の『まさか全面戦争にはならないだろう』という油断が現代のソウルで繰り返される。廃箱で塞がれた地下シェルターの防爆扉と、ミサイル挑発を株の押し目買いだと笑う都心の宴会。実際の空襲警報さえ誤報だと嘲笑う夜、最前線のカン・テサン中佐が全国放送マイクを握る。",
-      "zh": "1592年壬辰倭乱与1950年6月24日夜间的致命侥幸在今日首尔重演。被废纸箱堵死的地下防空洞防爆门，将导弹挑衅视为股市抄底良机的江南酒局。当真正的空袭警报在午夜拉响却被市民嘲笑为误报时，最前线营长姜泰山中校强行接通全国应急广播麦克风发出泣血咆哮。",
-      "es": "La complacencia fatal de 1592 y 1950 se repite en el Seúl moderno. Las puertas blindadas de los refugios están bloqueadas por cajas de cartón mientras las élites se ríen de las amenazas. Cuando las sirenas reales son ignoradas como falsas alarmas, el comandante Kang Tae-san toma el micrófono nacional."
+      "es": "La complacencia fatal de 1592 y 1950 se repite en el Seúl moderno. Las puertas blindadas de los refugios están bloqueadas por cajas de cartón mientras las élites se ríen de las amenazas. Cuando las sirenas reales son ignoradas como falsas alarmas, el comandante Kang Tae-san toma el micrófono nacional.",
+      "fr": "La fatale complaisance de 1592 et du 24 juin 1950 se répète dans le Séoul moderne. Les portes blindées des abris souterrains sont bloquées par des cartons tandis que l'élite célèbre les tirs de missiles comme des opportunités boursières. Quand la vraie sirène retentit, le lieutenant-colonel Kang prend le micro national.",
+      "id": "Kelalaian fatal tahun 1592 dan 24 Juni 1950 terulang di Seoul modern. Pintu lapis baja bunker bawah tanah terhalang tumpukan kardus sementara kaum elit menertawakan rudal sebagai peluang beli saham. Saat sirine nyata berbunyi, Letkol Kang merebut mikrofon darurat nasional."
     },
     "charCount": 6791,
     "readingTime": "약 28분",
@@ -539,15 +554,17 @@
       "ko": "데프콘의 역설(The DEFCON Paradox): 정상성 편향 프로토콜",
       "en": "The DEFCON Paradox: Normalcy Bias Protocol",
       "ja": "デフコンの逆説(The DEFCON Paradox)：正常性バイアス・プロトコル",
-      "zh": "战备悖论(The DEFCON Paradox)：常态偏见协议",
-      "es": "La Paradoja DEFCON: Protocolo de Sesgo de Normalidad"
+      "es": "La Paradoja DEFCON: Protocolo de Sesgo de Normalidad",
+      "fr": "Le Paradoxe DEFCON : Protocole du Biais de Normalité",
+      "id": "Paradoks DEFCON: Protokol Bias Normalitas"
     },
     "subtitle": {
       "ko": "5천만 국민의 뇌 편도체를 마비시킨 수학적 도발 수열과 '정상성 편향(Normalcy Bias)'을 이용한 무혈 침공 프로토콜",
       "en": "A mathematical provocation sequence that paralyzed 50 million amygdalae and the bloodless invasion protocol exploiting Normalcy Bias",
       "ja": "5千万国民の扁桃体を麻痺させた数学的挑発数列と『正常性バイアス』を利用した無血侵攻プロトコル",
-      "zh": "麻痹五千万国民大脑杏仁核的数学挑衅数列，以及利用‘常态偏见’实施的无血入侵协议",
-      "es": "La secuencia matemática que paralizó 50 millones de amígdalas y el protocolo de invasión sin sangre mediante el Sesgo de Normalidad"
+      "es": "La secuencia matemática que paralizó 50 millones de amígdalas y el protocolo de invasión sin sangre mediante el Sesgo de Normalidad",
+      "fr": "La séquence mathématique ayant anesthésié 50 millions d'amygdales et l'invasion par biais de normalité",
+      "id": "Urutan matematika yang melumpuhkan 50 juta amigdala dan protokol invasi melalui bias normalitas"
     },
     "author": "DMDG 출판부 (인지과학 암호학 랩)",
     "badge": "삶은 개구리 S2 · 3편",
@@ -562,8 +579,9 @@
       "ko": "한미연합사 지하 벙커의 홀로그램 그래프가 기이한 역설을 가리킨다. 군사적 위협 지수는 94.7%로 정점에 달했으나, 시민 공포 반응 지수는 0.04로 사실상 소멸한 것. 인지심리학 박사 서윤아는 지난 3년간 142회의 도발이 인간 뇌의 아드레날린 소진 주기(17.4일)에 맞춘 '로그 나선 수열' 알고리즘이었음을 밝혀낸다. 폼페이와 타이타닉을 집어삼킨 정상성 편향의 덫과 '양치기 소년 프로토콜'의 소름 끼치는 카운트다운.",
       "en": "Inside the Combined Forces Command bunker, two graphs reveal a chilling paradox: Military Threat Index at 94.7%, Public Fear Index at 0.04. Cognitive psychologist Dr. Seo Yoon-ah discovers that 142 provocations over 36 months follow a logarithmic spiral engineered to sever the human amygdala's escape reflex—culminating in 'Phase Omega'.",
       "ja": "韓米連合司令部地下バンカーのグラフが奇妙な逆説を示す。軍事的脅威指数は94.7%に達したのに、市民の恐怖反応指数は0.04と消滅していたのだ。認知心理学者のソ・ユナ博士は、過去3年間142回の挑発が脳の扁桃体を麻痺させる『対数螺旋数列』アルゴリズムであったことを突き止める。",
-      "zh": "韩美联合司令部地下掩体的全息图表揭示了诡异的悖论：军事威胁指数高达94.7%，而公众恐惧反应指数却跌至0.04。认知心理学博士徐允儿发现，过去三年间142次挑衅竟是严格按照17.4天肾上腺素耗竭周期排列的‘对数螺旋数列’，旨在彻底切断五千万人的逃生神经。",
-      "es": "En el búnker del Comando Combinado, dos gráficos revelan una paradoja escalofriante: Índice de Amenaza Militar en 94.7%, Índice de Miedo Público en 0.04. La Dra. Seo Yoon-ah descubre que las 142 provocaciones siguen una espiral logarítmica diseñada para anestesiar la amígdala humana antes de la Fase Omega."
+      "es": "En el búnker del Comando Combinado, dos gráficos revelan una paradoja escalofriante: Índice de Amenaza Militar en 94.7%, Índice de Miedo Público en 0.04. La Dra. Seo Yoon-ah descubre que las 142 provocaciones siguen una espiral logarítmica diseñada para anestesiar la amígdala humana antes de la Fase Omega.",
+      "fr": "Au bunker du Commandement combiné, deux courbes révèlent un paradoxe effrayant : l'indice de menace militaire culmine à 94,7 %, tandis que l'indice de peur publique chute à 0,04. Le Dr Seo Yoon-ah découvre que 142 provocations ont suivi une spirale logarithmique programmée pour sectionner le réflexe d'alarme de l'amygdale humaine avant la 'Phase Oméga'.",
+      "id": "Di bunker Komando Gabungan, dua grafik memperlihatkan paradoks mengerikan: Indeks Ancaman Militer melonjak ke 94,7%, sementara Indeks Ketakutan Publik anjlok ke 0,04. Dr. Seo Yoon-ah membongkar bahwa 142 provokasi selama 3 tahun mengikuti pola spiral logaritmik untuk melumpuhkan saraf pelarian amigdala sebelum 'Fase Omega'."
     },
     "charCount": 6267,
     "readingTime": "약 26분",
