@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>침묵의 조공: 코드명 개구리 | DMDG 다국어 E-Reader</title>
-  <meta name="description" content="침묵의 조공: 코드명 개구리 5개국어(한·영·일·중·서) 텍스트 및 네이티브 오디오북 지원 E-Reader">
+  <meta name="description" content="침묵의 조공: 코드명 개구리 6개국어(한·영·일·프·인·스) 텍스트 및 네이티브 오디오북 지원 E-Reader">
   
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Pretendard:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap');
@@ -333,7 +333,7 @@ body {
       </div>
 
       <!-- TTS Audio -->
-      <button id="btn-tts-play" class="btn-ctrl" title="AI 음성 낭독 (5개국어 지원)">
+      <button id="btn-tts-play" class="btn-ctrl" title="AI 음성 낭독 (6개국어 지원)">
         <span id="tts-icon">🎧</span> <span id="tts-text">낭독</span>
       </button>
 
@@ -390,6 +390,17 @@ body {
   let isTtsPlaying = false;
   let ttsParagraphs = [];
   let ttsCurrentPIdx = 0;
+  let availableVoices = [];
+  function populateVoices() {
+    if (!synth) return;
+    availableVoices = synth.getVoices();
+  }
+  if (synth) {
+    populateVoices();
+    if (synth.onvoiceschanged !== undefined) {
+      synth.onvoiceschanged = populateVoices;
+    }
+  }
 
   const LANG_VOICE_MAP = {
     'ko': 'ko-KR',
@@ -510,8 +521,20 @@ body {
     curP.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     ttsUtterance = new SpeechSynthesisUtterance(curP.textContent);
-    ttsUtterance.lang = LANG_VOICE_MAP[CURRENT_LANG] || 'ko-KR';
+    const targetLang = LANG_VOICE_MAP[CURRENT_LANG] || 'ko-KR';
+    ttsUtterance.lang = targetLang;
     ttsUtterance.rate = 1.0;
+
+    if (availableVoices.length === 0 && synth) {
+      availableVoices = synth.getVoices();
+    }
+    const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+    const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+    if (exactVoice) {
+      ttsUtterance.voice = exactVoice;
+    } else if (prefixVoice) {
+      ttsUtterance.voice = prefixVoice;
+    }
 
     ttsUtterance.onend = () => {
       if (isTtsPlaying) {
