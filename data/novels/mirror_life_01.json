@@ -1,0 +1,137 @@
+{
+  "id": "mirror_life_01",
+  "title": {
+    "ko": "거울의 제국: 코드명 키랄",
+    "en": "Empire of Mirrors: Operation Chiral",
+    "ja": "鏡の帝国：コードネーム・カイラル",
+    "fr": "L'Empire des Miroirs : Opération Chirale",
+    "id": "Kekaisaran Cermin: Operasi Kiral",
+    "es": "El Imperio de los Espejos: Operación Quiral"
+  },
+  "subtitle": {
+    "ko": "천적도 백신도 없는 D-아미노산의 역습, 한반도 바이오 안보와 5천만의 생존을 건 비밀 결단",
+    "en": "A counterattack of D-amino acids with no predator or vaccine: a secret decision for national biosecurity",
+    "ja": "天敵もワクチンも存在しないD-アミノ酸の逆襲、朝鮮半島のバイオ安保と国民の生存を賭けた秘密の決断",
+    "fr": "La contre-attaque des acides D-aminés sans prédateur ni vaccin : décision secrète pour la biosécurité",
+    "id": "Serangan balik asam D-amino tanpa predator atau vaksin: keputusan rahasia demi ketahanan hayati",
+    "es": "El contraataque de los D-aminoácidos sin depredador ni vacuna: una decisión secreta por la bioseguridad"
+  },
+  "author": "DMDG 출판부 (국가안보 팩션 랩)",
+  "badge": "거울 생명체 컬렉션 1편",
+  "category": "faction",
+  "cover_gradient": "linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #020617 100%)",
+  "cover_accent": "#38bdf8",
+  "charCount": 5491,
+  "readingTime": "약 27분",
+  "total_chapters": 5,
+  "description": {
+    "ko": "1975년 아실로마 선언 뒤편에 봉인된 거울 생명체 금기 규약. 40억 년 생명의 호모키랄성(L-단백질, D-DNA)을 정반대로 뒤집은 'D-아미노산 세균'이 압록강변 지하 비밀 연구소에서 복제된다. 천적도 없고 인체의 백혈구마저 인식하지 못하는 불사의 바이오 무기 앞에 맞서, 카이스트 서민우 박사와 국정원 강태혁 대위가 펼치는 피와 헌신의 안보 첩보전.",
+    "en": "The forbidden Mirror Life protocol sealed behind the 1975 Asilomar Declaration. When artificial bacteria made of D-amino acids and L-DNA are synthesized in a subterranean bunker along the Yalu River, natural predators and human white blood cells become blind to the immortal threat. A high-stakes national biosecurity thriller.",
+    "ja": "1975年アシロマ宣言の陰に封印された鏡像生命体の禁忌条約。40億年の生命のホモキラル性（L型タンパク質、D型DNA）を逆転させた『D-アミノ酸細菌』が鴨緑江の地下研究所で複製される。天敵も免疫も通用しない不死の生物兵器に立ち向かう、国家の存亡を賭けたバイオスリラー。",
+    "fr": "Le protocole interdit sur la vie miroir scellé derrière la déclaration d'Asilomar de 1975. Lorsqu'une bactérie artificielle faite d'acides D-aminés et d'ADN-L est synthétisée, les globules blancs humains restent aveugles face à cette menace immortelle sans prédateur naturel.",
+    "id": "Protokol terlarang Kehidupan Cermin yang disegel di balik Deklarasi Asilomar 1975. Ketika bakteri sintetis dari asam D-amino dan DNA-L bereplikasi, sistem imun manusia menjadi buta terhadap ancaman abadi tanpa predator alami. Thriller ketahanan hayati nasional berisiko tinggi.",
+    "es": "El protocolo prohibido de la Vida Espejo sellado tras la Declaración de Asilomar de 1975. Cuando bacterias sintéticas hechas de D-aminoácidos y L-ADN se replican, los glóbulos blancos humanos quedan ciegos ante una amenaza inmortal sin depredadores naturales."
+  },
+  "chapters": [
+    {
+      "ch": 1,
+      "part": "단편 본문",
+      "title": {
+        "ko": "프롤로그: 1975년 아실로마의 침묵",
+        "en": "Prologue: The Silence of Asilomar, 1975",
+        "ja": "プロローグ：1975年アシロマの沈黙",
+        "fr": "Prologue : Le silence d'Asilomar, 1975",
+        "id": "Prolog: Keheningan Asilomar, 1975",
+        "es": "Prólogo: El silencio de Asilomar, 1975"
+      },
+      "content": {
+        "ko": "[프롤로그: 1975년 아실로마의 침묵]\n\n1975년 2월, 미국 캘리포니아주 몬터레이 반도의 한적한 해변 마을 아실로마(Asilomar).\n\n태평양의 거센 파도가 부서지는 소나무 숲속 회의장에 전 세계 분자생물학계를 이끄는 석학 140여 명이 모여들었다. 노벨상 수상자들로 가득 찬 그 엄숙한 회의장에서, 과학자들은 인류 역사상 유례가 없는 합의안을 도출했다.\n\n이종(異種) 간의 유전자 재조합 연구가 자연계에 끔찍한 바이오 재앙을 초래할 수 있으므로, 엄격한 안전 지침이 마련되기 전까지 스스로 연구를 멈추겠다는 자발적 모라토리엄. 그것이 바로 생명윤리의 성경으로 불리는 **'아실로마 선언(Asilomar Declaration)'**이었다.\n\n그러나 당시 작성된 공식 선언문 뒤편에 극비 부록으로 봉인된 한 장의 타이핑 문건이 존재한다는 사실을 아는 이는 극소수에 불과했다.\n\n> **[TOP SECRET - EYES ONLY]**  \n> *\"생명체의 기본 골격인 L형 아미노산과 D형 당(糖) 구조를 인위적으로 반전시킨 '완전 거울 생명체(Mirror Life)'의 복제 연구는 절대 금기(Absolute Taboo)로 규정한다.  \n> 자연계의 어떤 포식자도, 어떤 분해 효소도, 어떤 면역계도 거울 생명체를 소화하거나 파괴할 수 없다. 그것이 배양기를 벗어나는 순간, 지구의 기존 생태계는 면역 결핍 상태에서 멸종을 맞이하게 될 것이다.\"*\n\n그로부터 반세기가 흐른 2026년 10월의 마지막 밤.\n\n압록강 너머 중국 지린성(吉林省) 옌지(延吉) 외곽의 울창한 자작나무 숲속, 지하 30미터 암반을 뚫고 지어진 무국적 바이오 연구소 '오메가(Omega)'의 배양기 경보등이 핏빛으로 번쩍이기 시작했다.\n\n섭씨 37도로 유지되던 무균 격리 챔버 안에서, 자연계의 법칙을 정반대로 뒤집은 350만 염기쌍의 인공 염색체—**'D형 아미노산과 L형 DNA'**로 합성된 최초의 자기복제 미생물이 세포 분열을 시작하고 있었다.\n\n---",
+        "en": "[Prologue: The Silence of Asilomar, 1975]\n\nFebruary 1975. In the coastal sanctuary of Asilomar, Monterey Peninsula, 140 of the world's most prominent molecular biologists signed a historic voluntary moratorium on genetic recombination. Yet sealed behind the official text lay a single top-secret memorandum forbidding the synthesis of 'Mirror Life' made of D-amino acids and L-DNA.\n\n1975년 2월, 미국 캘리포니아주 몬터레이 반도의 한적한 해변 마을 아실로마(Asilomar).\n\n태평양의 거센 파도가 부서지는 소나무 숲속 회의장에 전 세계 분자생물학계를 이끄는 석학 140여 명이 모여들었다. 노벨상 수상자들로 가득 찬 그 엄숙한 회의장에서, 과학자들은 인류 역사상 유례가 없는 합의안을 도출했다.\n\n이종(異種) 간의 유전자 재조합 연구가 자연계에 끔찍한 바이오 재앙을 초래할 수 있으므로, 엄격한 안전 지침이 마련되기 전까지 스스로 연구를 멈추겠다는 자발적 모라토리엄. 그것이 바로 생명윤리의 성경으로 불리는 **'아실로마 선언(Asilomar Declaration)'**이었다.",
+        "ja": "[プロローグ：1975年アシロマの沈黙]\n\n1975年2月、カリフォルニア州モントレー半島のアシロマ。140名の分子生物学者が集まり、遺伝子組換えの自発的停止を宣言した。しかし公式文書の裏には『完全な鏡像生命体の合成は絶対禁忌とする』という極秘メモが封印されていた。\n\n1975년 2월, 미국 캘리포니아주 몬터레이 반도의 한적한 해변 마을 아실로마(Asilomar).\n\n태평양의 거센 파도가 부서지는 소나무 숲속 회의장에 전 세계 분자생물학계를 이끄는 석학 140여 명이 모여들었다. 노벨상 수상자들로 가득 찬 그 엄숙한 회의장에서, 과학자들은 인류 역사상 유례가 없는 합의안을 도출했다.\n\n이종(異種) 간의 유전자 재조합 연구가 자연계에 끔찍한 바이오 재앙을 초래할 수 있으므로, 엄격한 안전 지침이 마련되기 전까지 스스로 연구를 멈추겠다는 자발적 모라토리엄. 그것이 바로 생명윤리의 성경으로 불리는 **'아실로마 선언(Asilomar Declaration)'**이었다.",
+        "fr": "[Prologue : Le silence d'Asilomar, 1975]\n\nFévrier 1975. Dans le sanctuaire côtier d'Asilomar en Californie, 140 biologistes moléculaires ont signé un moratoire historique sur la recombinaison génétique. Pourtant, scellé derrière le texte officiel, se trouvait un mémorandum secret interdisant la création d'une 'Vie Miroir'.\n\n1975년 2월, 미국 캘리포니아주 몬터레이 반도의 한적한 해변 마을 아실로마(Asilomar).\n\n태평양의 거센 파도가 부서지는 소나무 숲속 회의장에 전 세계 분자생물학계를 이끄는 석학 140여 명이 모여들었다. 노벨상 수상자들로 가득 찬 그 엄숙한 회의장에서, 과학자들은 인류 역사상 유례가 없는 합의안을 도출했다.\n\n이종(異種) 간의 유전자 재조합 연구가 자연계에 끔찍한 바이오 재앙을 초래할 수 있으므로, 엄격한 안전 지침이 마련되기 전까지 스스로 연구를 멈추겠다는 자발적 모라토리엄. 그것이 바로 생명윤리의 성경으로 불리는 **'아실로마 선언(Asilomar Declaration)'**이었다.",
+        "id": "[Prolog: Keheningan Asilomar, 1975]\n\nFebruari 1975. Di Asilomar, Semenanjung Monterey, 140 ahli biologi molekuler menandatangani moratorium bersejarah tentang rekayasa genetika. Namun, di balik dokumen resmi terdapat memo rahasia yang melarang penciptaan 'Kehidupan Cermin'.\n\n1975년 2월, 미국 캘리포니아주 몬터레이 반도의 한적한 해변 마을 아실로마(Asilomar).\n\n태평양의 거센 파도가 부서지는 소나무 숲속 회의장에 전 세계 분자생물학계를 이끄는 석학 140여 명이 모여들었다. 노벨상 수상자들로 가득 찬 그 엄숙한 회의장에서, 과학자들은 인류 역사상 유례가 없는 합의안을 도출했다.\n\n이종(異種) 간의 유전자 재조합 연구가 자연계에 끔찍한 바이오 재앙을 초래할 수 있으므로, 엄격한 안전 지침이 마련되기 전까지 스스로 연구를 멈추겠다는 자발적 모라토리엄. 그것이 바로 생명윤리의 성경으로 불리는 **'아실로마 선언(Asilomar Declaration)'**이었다.",
+        "es": "[Prólogo: El silencio de Asilomar, 1975]\n\nFebrero de 1975. En el santuario costero de Asilomar, 140 biólogos moleculares firmaron una moratoria histórica. No obstante, detrás del texto oficial se ocultaba un memorando ultrasecreto que prohibía sintetizar la 'Vida Espejo' compuesta por D-aminoácidos y L-ADN.\n\n1975년 2월, 미국 캘리포니아주 몬터레이 반도의 한적한 해변 마을 아실로마(Asilomar).\n\n태평양의 거센 파도가 부서지는 소나무 숲속 회의장에 전 세계 분자생물학계를 이끄는 석학 140여 명이 모여들었다. 노벨상 수상자들로 가득 찬 그 엄숙한 회의장에서, 과학자들은 인류 역사상 유례가 없는 합의안을 도출했다.\n\n이종(異種) 간의 유전자 재조합 연구가 자연계에 끔찍한 바이오 재앙을 초래할 수 있으므로, 엄격한 안전 지침이 마련되기 전까지 스스로 연구를 멈추겠다는 자발적 모라토리엄. 그것이 바로 생명윤리의 성경으로 불리는 **'아실로마 선언(Asilomar Declaration)'**이었다."
+      }
+    },
+    {
+      "ch": 2,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제1장: 용산 안보실에 날아든 검은 보고서",
+        "en": "Chapter 1: The Black Dossier Arrives at Yongsan",
+        "ja": "第1章：龍山安保室に届いた黒い報告書",
+        "fr": "Chapitre 1 : Le dossier noir arrive au bureau de sécurité",
+        "id": "Bab 1: Berkas hitam tiba di kantor keamanan nasional",
+        "es": "Capítulo 1: El informe negro llega a la oficina de seguridad"
+      },
+      "content": {
+        "ko": "[제1장: 용산 안보실에 날아든 검은 보고서]\n\n오전 8시 15분, 서울 용산 대통령실 지하 국가위기관리센터.\n\n국가안보실 1차장실의 방음 유리문이 거칠게 열리며, 국정원 해외정보국장 최무현이 굳은 표정으로 걸어 들어왔다. 그의 손에는 붉은색 '1급 기밀' 스탬프가 찍힌 보고서 한 권이 들려 있었다.\n\n\"차장님, 긴급 사안입니다. 국방과학연구소(ADD)와 질병관리청 특수병원체연구센터의 교차 검증을 막 끝마쳤습니다.\"\n\n안보실장과 1차장이 서류를 펼쳤다. 첫 장에는 전자현미경으로 촬영된 기이한 막대 모양의 세균 사진이 첨부되어 있었다. 겉보기에는 흔한 대장균과 다를 바 없어 보였다.\n\n\"이게 뭔가? 또 새로운 변종 탄저균인가?\"\n\n\"아닙니다.\" 최무현 국장의 목소리가 낮게 가라앉았다. \"탄저균이나 에볼라라면 치료제나 백신 개발이라도 시도해 볼 수 있습니다. 하지만 이것은… **자연계의 생명체가 아닙니다.**\"\n\n\"자연계의 생명체가 아니라니?\"\n\n\"지구상의 모든 생물은 예외 없이 왼손잡이 아미노산(L형)으로 단백질을 만들고, 오른손잡이 당(D형)으로 DNA를 만듭니다. 태초의 바다에서 생명이 탄생한 이래 40억 년간 단 한 번도 깨진 적 없는 생명의 법칙입니다. 그런데 이 녀석은… 정확히 그 반대입니다. **오른손잡이 아미노산(D형)과 왼손잡이 DNA(L형)로 이루어진 '거울 생명체(Mirror Bacteria)'**입니다.\"\n\n회의실 공기가 얼어붙었다. 최 국장이 말을 이었다.\n\n\"이 거울 세균의 진짜 공포는 치사율이 아닙니다. **'절대 불사(不死)'**라는 점입니다. 아메바 같은 단세포 포식자부터 인간의 백혈구, T세포에 이르기까지 지구상의 모든 면역 체계는 L형 단백질만 인식하도록 진화했습니다. 인간의 몸에 이 세균이 침투하면, 면역세포는 눈앞에서 장기가 녹아내리는데도 침략자가 있다는 사실조차 인지하지 못합니다. 항체도 결합하지 못하고, 기존의 100여 종 항생제는 분자 구조가 달라 단 0.1%도 작동하지 않습니다.\"\n\n안보실장의 얼굴이 창백해졌다.\n\n\"자연계의 천적도 없고, 인간의 면역계는 장님이 되며, 어떤 약도 듣지 않는다… 그렇다면 이것이 유출되면 어떻게 되는 건가?\"\n\n\"포식자가 없으니 무한 증식합니다. 토양과 수중의 단순 탄소원을 모조리 먹어 치우며 기존 미생물 생태계를 절멸시킬 겁니다. 총칼 한 자루, 핵미사일 한 발 쓰지 않고도 한 나라의 농축산업과 인구를 6개월 안에 소멸시킬 수 있는 궁극의 생물학 비대칭 무기입니다.\"\n\n최 국장은 위성사진 한 장을 테이블 중앙에 던졌다.\n\n\"북한군 총참모부 산하 정찰총국과 러시아 용병 기업 바그너의 잔당, 그리고 다국적 카르텔이 결탁한 압록강변 지하 기지에서 이 거울 세균의 무기화 최종 테스트를 사흘 뒤 감행한다는 첩보가 입수되었습니다.\"\n\n---",
+        "en": "[Chapter 1: The Black Dossier Arrives at Yongsan]\n\nAt 08:15 AM inside the underground crisis management bunker in Yongsan, Seoul, the NIS Foreign Intelligence Director delivered a black dossier: 'This is not an ordinary pathogen like anthrax. It is an immortal mirror bacterium whose D-amino acid cell walls make human T-cells and white blood cells completely blind.'\n\n오전 8시 15분, 서울 용산 대통령실 지하 국가위기관리센터.\n\n국가안보실 1차장실의 방음 유리문이 거칠게 열리며, 국정원 해외정보국장 최무현이 굳은 표정으로 걸어 들어왔다. 그의 손에는 붉은색 '1급 기밀' 스탬프가 찍힌 보고서 한 권이 들려 있었다.\n\n\"차장님, 긴급 사안입니다. 국방과학연구소(ADD)와 질병관리청 특수병원체연구센터의 교차 검증을 막 끝마쳤습니다.\"",
+        "ja": "[第1章：龍山安保室に届いた黒い報告書]\n\n午前8時15分、龍山大統領府地下の国家危機管理センター。国家情報院の局長が黒いファイルを差し出した。『これは通常の病原体ではありません。地球上のすべての免疫系が認識できないD-アミノ酸で構成された鏡像生命体です。』\n\n오전 8시 15분, 서울 용산 대통령실 지하 국가위기관리센터.\n\n국가안보실 1차장실의 방음 유리문이 거칠게 열리며, 국정원 해외정보국장 최무현이 굳은 표정으로 걸어 들어왔다. 그의 손에는 붉은색 '1급 기밀' 스탬프가 찍힌 보고서 한 권이 들려 있었다.\n\n\"차장님, 긴급 사안입니다. 국방과학연구소(ADD)와 질병관리청 특수병원체연구센터의 교차 검증을 막 끝마쳤습니다.\"",
+        "fr": "[Chapitre 1 : Le dossier noir arrive au bureau de sécurité]\n\nÀ 08h15, dans le bunker souterrain de gestion des crises à Yongsan, le directeur des renseignements a présenté un dossier noir : 'Il ne s'agit pas d'un agent pathogène ordinaire. C'est une bactérie miroir immortelle dont les acides D-aminés rendent aveugles nos globules blancs.'\n\n오전 8시 15분, 서울 용산 대통령실 지하 국가위기관리센터.\n\n국가안보실 1차장실의 방음 유리문이 거칠게 열리며, 국정원 해외정보국장 최무현이 굳은 표정으로 걸어 들어왔다. 그의 손에는 붉은색 '1급 기밀' 스탬프가 찍힌 보고서 한 권이 들려 있었다.\n\n\"차장님, 긴급 사안입니다. 국방과학연구소(ADD)와 질병관리청 특수병원체연구센터의 교차 검증을 막 끝마쳤습니다.\"",
+        "id": "[Bab 1: Berkas hitam tiba di kantor keamanan nasional]\n\nPukul 08.15 di bunker krisis Yongsan, Direktur Intelijen menyerahkan berkas rahasia: 'Ini bukan bakteri biasa. Ini adalah bakteri cermin abadi yang dinding sel asam D-amino-nya membuat sel darah putih manusia menjadi buta total.'\n\n오전 8시 15분, 서울 용산 대통령실 지하 국가위기관리센터.\n\n국가안보실 1차장실의 방음 유리문이 거칠게 열리며, 국정원 해외정보국장 최무현이 굳은 표정으로 걸어 들어왔다. 그의 손에는 붉은색 '1급 기밀' 스탬프가 찍힌 보고서 한 권이 들려 있었다.\n\n\"차장님, 긴급 사안입니다. 국방과학연구소(ADD)와 질병관리청 특수병원체연구센터의 교차 검증을 막 끝마쳤습니다.\"",
+        "es": "[Capítulo 1: El informe negro llega a la oficina de seguridad]\n\nA las 08:15 en el búnker de crisis de Yongsan en Seúl, el Director de Inteligencia entregó un informe negro: 'No es un patógeno común. Es una bacteria espejo inmortal cuyos D-aminoácidos ciegan por completo a los glóbulos blancos humanos.'\n\n오전 8시 15분, 서울 용산 대통령실 지하 국가위기관리센터.\n\n국가안보실 1차장실의 방음 유리문이 거칠게 열리며, 국정원 해외정보국장 최무현이 굳은 표정으로 걸어 들어왔다. 그의 손에는 붉은색 '1급 기밀' 스탬프가 찍힌 보고서 한 권이 들려 있었다.\n\n\"차장님, 긴급 사안입니다. 국방과학연구소(ADD)와 질병관리청 특수병원체연구센터의 교차 검증을 막 끝마쳤습니다.\""
+      }
+    },
+    {
+      "ch": 3,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제2장: 임진강의 수석 연구원과 30억 염기서열",
+        "en": "Chapter 2: The Chief Scientist and 3 Billion Base Pairs",
+        "ja": "第2章：臨津江の首席研究員と30億の塩基配列",
+        "fr": "Chapitre 2 : Le chercheur en chef et les 3 milliards de paires de bases",
+        "id": "Bab 2: Kepala peneliti dan 3 miliar pasangan basa",
+        "es": "Capítulo 2: El científico jefe y los 3 mil millones de pares de bases"
+      },
+      "content": {
+        "ko": "[제2장: 임진강의 수석 연구원과 30억 염기서열]\n\n같은 날 오후 1시, 충북 오송의 질병관리청 특수생물테러대응단.\n\n한국 분자생물학계의 독보적인 권위자이자 카이스트 특훈교수인 서민우 박사는 보안 클린룸에서 떨리는 손으로 마이크로 피펫을 내려놓았다.\n\n그의 앞 유리벽 너머에는 국정원이 중국 옌지 연구소의 탈출 연구원으로부터 극비리에 확보한 0.5밀리리터의 시료가 냉동 보관되어 있었다.\n\n\"믿을 수가 없군… 2001년 노벨 화학상을 받은 카이랄(Chiral) 촉매 합성 기술이 이런 괴물을 낳는 데 쓰이다니.\"\n\n서 박사의 곁으로 국정원 특수공작팀장 강태혁 대위가 다가왔다.\n\n\"박사님, 해결책은 없습니까? 적들이 이것을 에어로졸 형태로 휴전선 일대나 서울 상공에 살포한다면 우리 군과 국민은 무방비로 당할 수밖에 없습니다.\"\n\n서민우 박사는 모니터에 떠 있는 3차원 분자 나선 구조를 가리켰다.\n\n\"강 대위, 거울을 본 적이 있지? 거울 속의 나는 나와 완벽히 똑같아 보이지만, 오른손을 들면 거울 속의 나는 왼손을 드네. 자물쇠와 열쇠의 관계와 같아. 우리 몸의 소화 효소와 면역 수용체는 '왼손 열쇠'만 들어맞는 자물쇠일세. 그런데 저 거울 세균은 '오른손 열쇠'를 쥐고 있어. 그러니 우리 몸 안의 어떤 방어 기제도 저 녀석을 잠그거나 부술 수가 없는 걸세.\"\n\n\"그렇다면 적들은 어떻게 저 괴물을 제어한다는 말입니까? 자신들도 감염될 텐데요.\"\n\n강태혁의 날카로운 질문에 서 박사의 눈빛이 번뜩였다.\n\n\"바로 그 점이 유일한 단서야. 적들도 자신들의 생존을 위해 반드시 '거울 생명체만을 특이적으로 파괴하는 인공 역(逆)효소'를 만들어 두었을 걸세. 거울 속의 자물쇠를 부술 수 있는 '오른손 전용 가위', 즉 **합성 D-엔도뉴클레아제(D-Endonuclease)**의 설계도 말이야.\"\n\n서 박사는 모니터의 데이터를 암호화 드라이브에 복사하며 외투를 집어 들었다.\n\n\"그 설계도의 암호 키가 압록강변 지하 기지의 메인 서버에 있네. 저들이 배양조의 밸브를 열기 전에, 우리는 그 설계도를 확보하고 연구소를 통째로 기화시켜야 하네.\"\n\n강태혁 대위가 권총의 슬라이드를 당기며 서늘하게 미소 지었다.\n\n\"시간이 없습니다, 박사님. 헬기가 옥상에서 대기 중입니다.\"\n\n---",
+        "en": "[Chapter 2: The Chief Scientist and 3 Billion Base Pairs]\n\nAt 1:00 PM in Osong, KAIST distinguished professor Dr. Seo Min-woo analyzed the frozen sample: 'Our digestive and immune receptors are locks meant only for left-handed keys. This mirror bacteria holds a right-handed key. The only antidote is the artificial D-endonuclease enzyme designed by the creators.'\n\n같은 날 오후 1시, 충북 오송의 질병관리청 특수생물테러대응단.\n\n한국 분자생물학계의 독보적인 권위자이자 카이스트 특훈교수인 서민우 박사는 보안 클린룸에서 떨리는 손으로 마이크로 피펫을 내려놓았다.\n\n그의 앞 유리벽 너머에는 국정원이 중국 옌지 연구소의 탈출 연구원으로부터 극비리에 확보한 0.5밀리리터의 시료가 냉동 보관되어 있었다.",
+        "ja": "[第2章：臨津江の首席研究員と30億の塩基配列]\n\n午後1時、忠清北道五松。KAISTのソ・ミンウ教授は震える手で検体を検査した。『私たちの免疫は左手用の鍵穴です。この細菌は右手用の鍵を持っているため、人体の防御機構は一切作動しません。唯一の対抗策は人工D-分解酵素だけです。』\n\n같은 날 오후 1시, 충북 오송의 질병관리청 특수생물테러대응단.\n\n한국 분자생물학계의 독보적인 권위자이자 카이스트 특훈교수인 서민우 박사는 보안 클린룸에서 떨리는 손으로 마이크로 피펫을 내려놓았다.\n\n그의 앞 유리벽 너머에는 국정원이 중국 옌지 연구소의 탈출 연구원으로부터 극비리에 확보한 0.5밀리리터의 시료가 냉동 보관되어 있었다.",
+        "fr": "[Chapitre 2 : Le chercheur en chef et les 3 milliards de paires de bases]\n\nÀ 13h00 à Osong, le professeur Seo Min-woo du KAIST a examiné l'échantillon : 'Nos récepteurs immunitaires ne s'adaptent qu'aux clés gauches. Cette bactérie possède une clé droite. Le seul antidote réside dans l'enzyme artificielle D-endonucléase.'\n\n같은 날 오후 1시, 충북 오송의 질병관리청 특수생물테러대응단.\n\n한국 분자생물학계의 독보적인 권위자이자 카이스트 특훈교수인 서민우 박사는 보안 클린룸에서 떨리는 손으로 마이크로 피펫을 내려놓았다.\n\n그의 앞 유리벽 너머에는 국정원이 중국 옌지 연구소의 탈출 연구원으로부터 극비리에 확보한 0.5밀리리터의 시료가 냉동 보관되어 있었다.",
+        "id": "[Bab 2: Kepala peneliti dan 3 miliar pasangan basa]\n\nPukul 13.00 di Osong, Prof. Seo Min-woo memeriksa sampel beku: 'Sistem kekebalan kita hanya mengenali kunci tangan kiri. Bakteri ini memegang kunci tangan kanan. Satu-satunya penangkal adalah enzim buatan D-endonuklease.'\n\n같은 날 오후 1시, 충북 오송의 질병관리청 특수생물테러대응단.\n\n한국 분자생물학계의 독보적인 권위자이자 카이스트 특훈교수인 서민우 박사는 보안 클린룸에서 떨리는 손으로 마이크로 피펫을 내려놓았다.\n\n그의 앞 유리벽 너머에는 국정원이 중국 옌지 연구소의 탈출 연구원으로부터 극비리에 확보한 0.5밀리리터의 시료가 냉동 보관되어 있었다.",
+        "es": "[Capítulo 2: El científico jefe y los 3 mil millones de pares de bases]\n\nA las 13:00 en Osong, el profesor Seo Min-woo examinó la muestra: 'Nuestros receptores inmunitarios son cerraduras para llaves izquierdas. Esta bacteria tiene una llave derecha. El único antídoto es la enzima artificial D-endonucleasa.'\n\n같은 날 오후 1시, 충북 오송의 질병관리청 특수생물테러대응단.\n\n한국 분자생물학계의 독보적인 권위자이자 카이스트 특훈교수인 서민우 박사는 보안 클린룸에서 떨리는 손으로 마이크로 피펫을 내려놓았다.\n\n그의 앞 유리벽 너머에는 국정원이 중국 옌지 연구소의 탈출 연구원으로부터 극비리에 확보한 0.5밀리리터의 시료가 냉동 보관되어 있었다."
+      }
+    },
+    {
+      "ch": 4,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제3장: 압록강의 붉은 눈보라",
+        "en": "Chapter 3: Red Blizzard on the Yalu River",
+        "ja": "第3章：鴨緑江の赤い吹雪",
+        "fr": "Chapitre 3 : Tempête de neige rouge sur le fleuve Yalu",
+        "id": "Bab 3: Badai salju merah di Sungai Yalu",
+        "es": "Capítulo 3: Tormenta de nieve roja en el Río Yalu"
+      },
+      "content": {
+        "ko": "[제3장: 압록강의 붉은 눈보라]\n\n자정 02시 40분. 영하 25도의 혹한 속에서 압록강 상류의 강물이 두껍게 얼어붙어 있었다.\n\n야간투시경을 착용한 대한민국 국정원 블랙요원들과 특수임무대(UDT/SEAL) 8명이 은밀히 강판을 건너 자작나무 숲으로 침투했다. 숲속 깊은 곳, 환기구로 위장된 환풍 굴뚝에서 희미한 열기가 뿜어져 나오고 있었다.\n\n\"타깃 지하 2층, 메인 배양실 진입 10초 전.\"\n\n강태혁 대위의 수신호와 함께 특수 제작된 고주파 절단기가 두께 30센티미터의 방폭 해치를 소리 없이 녹여냈다. 요원들이 연막탄과 함께 섬광탄을 투척하며 통제실 안으로 쏟아져 들어갔다.\n\n*탕! 탕! 탕!*\n\n소음기를 장착한 소총이 불을 뿜으며 무장 경비원들이 쓰러졌다. 서민우 박사는 방호복을 입은 채 중앙 제어 콘솔로 돌진했다.\n\n콘솔 화면에는 카운트다운이 깜빡이고 있었다.\n\n**[PROJECT CHIRAL: 남하 살포용 무인기 적재 완료 - D-00:14:22]**\n\n\"박사님, 서두르십시오! 적 증원 부대가 지하 1층 격벽을 뚫고 내려오고 있습니다!\"\n\n강태혁 대위가 통로를 향해 기관단총을 난사하며 외쳤다.\n\n서민우 박사는 피 묻은 키보드를 미친 듯이 두드렸다. 화면 위로 수억 개의 A, T, G, C 염기서열이 폭포수처럼 쏟아져 내렸다. 하지만 보통의 서열이 아니었다. 모든 리보스가 L형으로 합성된, 인류 생물학 역사가 한 번도 본 적 없는 암흑의 코드였다.\n\n\"찾았다…! 거울 생명체의 세포벽을 분해하는 인공 효소 '미러-라이신(Mirror-Lysin)'의 촉매 합성식이야!\"\n\n데이터 다운로드가 98%에 도달한 순간, 통로 저편에서 육중한 철문이 열리며 러시아 용병 지휘관이 RPG-7 대전차 로켓을 조준했다.\n\n\"엎드려!!\"\n\n강태혁 대위가 서 박사를 밀치며 몸을 날렸다.\n\n*콰아아앙—!*\n\n폭음과 함께 배양실 유리벽이 박살 났다. 챔버가 깨지며 수십 리터의 녹색 거울 세균 배양액이 바닥으로 쏟아져 흘렀다. 공기 중으로 유출된 에어로졸이 환기구를 타고 지상으로 빨려 올라가기 시작했다.\n\n\"환기구를 차단해야 해! 저게 밖으로 나가면 압록강과 서해가 끝장난다!\"\n\n서 박사가 부서진 콘솔 밑에서 피를 흘리며 절규했다.\n\n강태혁 대위는 자신의 어깨에 박힌 파편을 움켜쥐고 일어섰다. 그의 눈앞에 비상 자폭 장치의 붉은 레버가 보였다. 지하 기지 전체를 섭씨 3,000도의 열압력으로 태워버릴 수 있는 최후의 소각 프로토콜이었다.\n\n\"강 대위, 안 돼! 자폭을 누르면 자네도 탈출하지 못해!\"\n\n강태혁은 피 묻은 손으로 데이터 드라이브를 서 박사의 품에 찔러 넣고, 비상 탈출용 수직 해치의 사다리 쪽으로 박사를 거칠게 밀어 올렸다.\n\n\"박사님, 대한민국 오천만 국민의 목숨이 그 드라이브에 걸려 있습니다. 반드시 백신을 만들어 우리 땅을 지키십시오!\"\n\n강태혁 대위는 해치의 빗장을 밖에서 걸어 잠근 뒤, 배양실 한가운데로 걸어 들어갔다. 바닥의 거울 배양액이 그의 군화를 적셨다.\n\n그는 권총을 들어 자폭 제어반의 기폭 스위치를 정조준했다.\n\n\"자연의 거울을 깨뜨린 대가는… 너희와 함께 여기서 치른다.\"\n\n*탕—!*\n\n눈부신 섬광과 함께 지하 30미터의 기지가 거대한 화염 폭풍 속으로 사라졌다.\n\n---",
+        "en": "[Chapter 3: Red Blizzard on the Yalu River]\n\n02:40 AM. Across the frozen Yalu River in sub-zero 25-degree blizzard, ROK special forces breached the subterranean facility. When the culture chamber shattered, Captain Kang Tae-hyuk handed the decryption drive to Dr. Seo and locked the hatch from outside to trigger the thermal self-destruct.\n\n자정 02시 40분. 영하 25도의 혹한 속에서 압록강 상류의 강물이 두껍게 얼어붙어 있었다.\n\n야간투시경을 착용한 대한민국 국정원 블랙요원들과 특수임무대(UDT/SEAL) 8명이 은밀히 강판을 건너 자작나무 숲으로 침투했다. 숲속 깊은 곳, 환기구로 위장된 환풍 굴뚝에서 희미한 열기가 뿜어져 나오고 있었다.\n\n\"타깃 지하 2층, 메인 배양실 진입 10초 전.\"",
+        "ja": "[第3章：鴨緑江の赤い吹雪]\n\n午前2時40分、零下25度の鴨緑江。特殊任務隊が地下基地へ突入した。培養液が漏出し始めた瞬間、カン・テヒョク大尉は解析ドライブをソ教授に託し、自らを犠牲にして自爆スイッチを引いた。\n\n자정 02시 40분. 영하 25도의 혹한 속에서 압록강 상류의 강물이 두껍게 얼어붙어 있었다.\n\n야간투시경을 착용한 대한민국 국정원 블랙요원들과 특수임무대(UDT/SEAL) 8명이 은밀히 강판을 건너 자작나무 숲으로 침투했다. 숲속 깊은 곳, 환기구로 위장된 환풍 굴뚝에서 희미한 열기가 뿜어져 나오고 있었다.\n\n\"타깃 지하 2층, 메인 배양실 진입 10초 전.\"",
+        "fr": "[Chapitre 3 : Tempête de neige rouge sur le fleuve Yalu]\n\n02h40 du matin. Par moins 25 degrés sur le fleuve Yalu gelé, les forces spéciales ont pris d'assaut la base secrète. Lorsque le réservoir s'est brisé, le capitaine Kang a remis la clé de décryptage au Dr Seo et a activé l'autodestruction pour sauver son pays.\n\n자정 02시 40분. 영하 25도의 혹한 속에서 압록강 상류의 강물이 두껍게 얼어붙어 있었다.\n\n야간투시경을 착용한 대한민국 국정원 블랙요원들과 특수임무대(UDT/SEAL) 8명이 은밀히 강판을 건너 자작나무 숲으로 침투했다. 숲속 깊은 곳, 환기구로 위장된 환풍 굴뚝에서 희미한 열기가 뿜어져 나오고 있었다.\n\n\"타깃 지하 2층, 메인 배양실 진입 10초 전.\"",
+        "id": "[Bab 3: Badai salju merah di Sungai Yalu]\n\nPukul 02.40 subuh di Sungai Yalu yang membeku. Pasukan khusus menyerbu fasilitas bawah tanah. Saat tangki pecah, Kapten Kang menyerahkan data penawar kepada Prof. Seo dan mengunci pintu untuk meledakkan diri demi menyelamatkan bangsa.\n\n자정 02시 40분. 영하 25도의 혹한 속에서 압록강 상류의 강물이 두껍게 얼어붙어 있었다.\n\n야간투시경을 착용한 대한민국 국정원 블랙요원들과 특수임무대(UDT/SEAL) 8명이 은밀히 강판을 건너 자작나무 숲으로 침투했다. 숲속 깊은 곳, 환기구로 위장된 환풍 굴뚝에서 희미한 열기가 뿜어져 나오고 있었다.\n\n\"타깃 지하 2층, 메인 배양실 진입 10초 전.\"",
+        "es": "[Capítulo 3: Tormenta de nieve roja en el Río Yalu]\n\n02:40 AM. A 25 grados bajo cero en el Río Yalu congelado, las fuerzas especiales asaltaron el laboratorio. Cuando el tanque se fracturó, el capitán Kang entregó los datos al Dr. Seo y activó la autodestrucción para salvar a su pueblo.\n\n자정 02시 40분. 영하 25도의 혹한 속에서 압록강 상류의 강물이 두껍게 얼어붙어 있었다.\n\n야간투시경을 착용한 대한민국 국정원 블랙요원들과 특수임무대(UDT/SEAL) 8명이 은밀히 강판을 건너 자작나무 숲으로 침투했다. 숲속 깊은 곳, 환기구로 위장된 환풍 굴뚝에서 희미한 열기가 뿜어져 나오고 있었다.\n\n\"타깃 지하 2층, 메인 배양실 진입 10초 전.\""
+      }
+    },
+    {
+      "ch": 5,
+      "part": "단편 본문",
+      "title": {
+        "ko": "에필로그: 대자연의 경고",
+        "en": "Epilogue: The Warning of Mother Nature",
+        "ja": "エピローグ：大自然の警告",
+        "fr": "Épilogue : L'avertissement de la Terre Mère",
+        "id": "Epilog: Peringatan dari Ibu Pertiwi",
+        "es": "Epílogo: La advertencia de la Madre Naturaleza"
+      },
+      "content": {
+        "ko": "[에필로그: 대자연의 경고]\n\n사흘 뒤, 서울 청와대 영빈관.\n\n비공개 국가안보포상 수여식을 마친 서민우 박사는 훈장함을 손에 쥔 채 북악산 자락을 올려다보았다. 그의 코트 주머니 속에는 강태혁 대위가 목숨과 맞바꿔 넘겨준 데이터로 완성한 '항(抗) 거울 생명체 방어 항생물질'의 최종 승인 문서가 들어 있었다.\n\n가을바람이 차갑게 뺨을 스쳤다.\n\n지구상의 모든 풀잎과 나무, 날아다니는 새와 거리를 걷는 인간들은 오늘도 왼손잡이 단백질과 오른손잡이 DNA가 만들어낸 40억 년의 정교한 하모니 속에서 숨을 쉬고 있었다.\n\n그것은 단순한 화학적 우연이 아니었다. 생명이 서로를 먹고, 분해하고, 흙으로 돌아가 다시 피어날 수 있도록 신(神)이 설계해 놓은 가장 위대하고 자비로운 순환의 궤적이었다.\n\n서 박사는 혼잣말로 나지막이 읊조렸다.\n\n\"역사는 무기를 든 자들의 기록이 아니라, 선을 넘지 않은 자들이 지켜낸 생명의 기록이다. 거울 저편의 세계를 탐하지 말라. 그곳에 있는 것은 진보가 아니라, 자연이 인간에게 내리는 가장 냉혹한 사형선고일 뿐이다.\"\n\n푸른 가을 하늘 아래로, 지켜낸 조국의 산하가 눈부시게 빛나고 있었다.",
+        "en": "[Epilogue: The Warning of Mother Nature]\n\nThree days later at the Blue House guesthouse, Dr. Seo held the finalized defense antibiotic approval and looked at the autumn sky: 'Never covet the world beyond the mirror. There lies not progress, but nature's most ruthless death sentence.'\n\n사흘 뒤, 서울 청와대 영빈관.\n\n비공개 국가안보포상 수여식을 마친 서민우 박사는 훈장함을 손에 쥔 채 북악산 자락을 올려다보았다. 그의 코트 주머니 속에는 강태혁 대위가 목숨과 맞바꿔 넘겨준 데이터로 완성한 '항(抗) 거울 생명체 방어 항생물질'의 최종 승인 문서가 들어 있었다.\n\n가을바람이 차갑게 뺨을 스쳤다.",
+        "ja": "[エピローグ：大自然の警告]\n\n三日後、ソウル青瓦台。青空を見上げたソ教授は呟いた。『鏡の向こう側の世界を欲してはならない。そこに待つのは進歩ではなく、大自然が下す冷酷な死刑宣告に過ぎない。』\n\n사흘 뒤, 서울 청와대 영빈관.\n\n비공개 국가안보포상 수여식을 마친 서민우 박사는 훈장함을 손에 쥔 채 북악산 자락을 올려다보았다. 그의 코트 주머니 속에는 강태혁 대위가 목숨과 맞바꿔 넘겨준 데이터로 완성한 '항(抗) 거울 생명체 방어 항생물질'의 최종 승인 문서가 들어 있었다.\n\n가을바람이 차갑게 뺨을 스쳤다.",
+        "fr": "[Épilogue : L'avertissement de la Terre Mère]\n\nTrois jours plus tard, le Dr Seo contemplait le ciel d'automne : 'Ne convoitez jamais le monde au-delà du miroir. Là ne réside pas le progrès, mais la condamnation à mort la plus impitoyable de la nature.'\n\n사흘 뒤, 서울 청와대 영빈관.\n\n비공개 국가안보포상 수여식을 마친 서민우 박사는 훈장함을 손에 쥔 채 북악산 자락을 올려다보았다. 그의 코트 주머니 속에는 강태혁 대위가 목숨과 맞바꿔 넘겨준 데이터로 완성한 '항(抗) 거울 생명체 방어 항생물질'의 최종 승인 문서가 들어 있었다.\n\n가을바람이 차갑게 뺨을 스쳤다.",
+        "id": "[Epilog: Peringatan dari Ibu Pertiwi]\n\nTiga hari kemudian di Seoul, Prof. Seo memandang langit: 'Jangan pernah mendambakan dunia di balik cermin. Di sana bukan kemajuan, melainkan hukuman mati paling kejam dari alam.'\n\n사흘 뒤, 서울 청와대 영빈관.\n\n비공개 국가안보포상 수여식을 마친 서민우 박사는 훈장함을 손에 쥔 채 북악산 자락을 올려다보았다. 그의 코트 주머니 속에는 강태혁 대위가 목숨과 맞바꿔 넘겨준 데이터로 완성한 '항(抗) 거울 생명체 방어 항생물질'의 최종 승인 문서가 들어 있었다.\n\n가을바람이 차갑게 뺨을 스쳤다.",
+        "es": "[Epílogo: La advertencia de la Madre Naturaleza]\n\nTres días después, el Dr. Seo contempló el cielo otoñal: 'Nunca codicies el mundo más allá del espejo. Allí no reside el progreso, sino la sentencia de muerte más implacable de la naturaleza.'\n\n사흘 뒤, 서울 청와대 영빈관.\n\n비공개 국가안보포상 수여식을 마친 서민우 박사는 훈장함을 손에 쥔 채 북악산 자락을 올려다보았다. 그의 코트 주머니 속에는 강태혁 대위가 목숨과 맞바꿔 넘겨준 데이터로 완성한 '항(抗) 거울 생명체 방어 항생물질'의 최종 승인 문서가 들어 있었다.\n\n가을바람이 차갑게 뺨을 스쳤다."
+      }
+    }
+  ]
+}

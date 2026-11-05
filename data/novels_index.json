@@ -571,5 +571,89 @@
     "htmlUrl": "novel_boiled_frog_06.html",
     "jsonUrl": "data/novels/boiled_frog_06.json",
     "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35786"
+  },
+  {
+    "id": "mirror_life_01",
+    "title": {
+      "ko": "거울의 제국: 코드명 키랄",
+      "en": "Empire of Mirrors: Operation Chiral",
+      "ja": "鏡の帝国：コードネーム・カイラル",
+      "fr": "L'Empire des Miroirs : Opération Chirale",
+      "id": "Kekaisaran Cermin: Operasi Kiral",
+      "es": "El Imperio de los Espejos: Operación Quiral"
+    },
+    "subtitle": {
+      "ko": "천적도 백신도 없는 D-아미노산의 역습, 한반도 바이오 안보와 5천만의 생존을 건 비밀 결단",
+      "en": "A counterattack of D-amino acids with no predator or vaccine: a secret decision for national biosecurity",
+      "ja": "天敵もワクチンも存在しないD-アミノ酸の逆襲、朝鮮半島のバイオ安保と国民の生存を賭けた秘密の決断",
+      "fr": "La contre-attaque des acides D-aminés sans prédateur ni vaccin : décision secrète pour la biosécurité",
+      "id": "Serangan balik asam D-amino tanpa predator atau vaksin: keputusan rahasia demi ketahanan hayati",
+      "es": "El contraataque de los D-aminoácidos sin depredador ni vacuna: una decisión secreta por la bioseguridad"
+    },
+    "author": "DMDG 출판부 (국가안보 팩션 랩)",
+    "badge": "거울 생명체 컬렉션 1편",
+    "category": "faction",
+    "color": {
+      "from": "#1e293b",
+      "to": "#0f172a",
+      "accent": "#38bdf8",
+      "glow": "#38bdf873"
+    },
+    "synopsis": {
+      "ko": "1975년 아실로마 선언 뒤편에 봉인된 거울 생명체 금기 규약. 40억 년 생명의 호모키랄성(L-단백질, D-DNA)을 정반대로 뒤집은 'D-아미노산 세균'이 압록강변 지하 비밀 연구소에서 복제된다. 천적도 없고 인체의 백혈구마저 인식하지 못하는 불사의 바이오 무기 앞에 맞서, 카이스트 서민우 박사와 국정원 강태혁 대위가 펼치는 피와 헌신의 안보 첩보전.",
+      "en": "The forbidden Mirror Life protocol sealed behind the 1975 Asilomar Declaration. When artificial bacteria made of D-amino acids and L-DNA are synthesized in a subterranean bunker along the Yalu River, natural predators and human white blood cells become blind to the immortal threat. A high-stakes national biosecurity thriller.",
+      "ja": "1975年アシロマ宣言の陰に封印された鏡像生命体の禁忌条約。40億年の生命のホモキラル性（L型タンパク質、D型DNA）を逆転させた『D-アミノ酸細菌』が鴨緑江の地下研究所で複製される。天敵も免疫も通用しない不死の生物兵器に立ち向かう、国家の存亡を賭けたバイオスリラー。",
+      "fr": "Le protocole interdit sur la vie miroir scellé derrière la déclaration d'Asilomar de 1975. Lorsqu'une bactérie artificielle faite d'acides D-aminés et d'ADN-L est synthétisée, les globules blancs humains restent aveugles face à cette menace immortelle sans prédateur naturel.",
+      "id": "Protokol terlarang Kehidupan Cermin yang disegel di balik Deklarasi Asilomar 1975. Ketika bakteri sintetis dari asam D-amino dan DNA-L bereplikasi, sistem imun manusia menjadi buta terhadap ancaman abadi tanpa predator alami. Thriller ketahanan hayati nasional berisiko tinggi.",
+      "es": "El protocolo prohibido de la Vida Espejo sellado tras la Declaración de Asilomar de 1975. Cuando bacterias sintéticas hechas de D-aminoácidos y L-ADN se replican, los glóbulos blancos humanos quedan ciegos ante una amenaza inmortal sin depredadores naturales."
+    },
+    "charCount": 5491,
+    "readingTime": "약 27분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_mirror_life_01.html",
+    "jsonUrl": "data/novels/mirror_life_01.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35868"
+  },
+  {
+    "id": "mirror_life_02",
+    "title": {
+      "ko": "루킹글래스 프로토콜: 파스퇴르의 거울",
+      "en": "The Looking-Glass Protocol: Pasteur's Mirror",
+      "ja": "ルッキンググラス・プロトコル：パスツールの鏡",
+      "fr": "Le Protocole du Miroir : Le Miroir de Pasteur",
+      "id": "Protokol Kaca Cermin: Cermin Pasteur",
+      "es": "El Protocolo del Espejo: El Espejo de Pasteur"
+    },
+    "subtitle": {
+      "ko": "1848년 파스퇴르의 결정부터 1950년 탈리도마이드의 저주까지, 불사의 D-박테리아를 둘러싼 24시간의 암호 추적 스릴러",
+      "en": "From Pasteur's 1848 chiral crystals to the 1950s thalidomide curse: a 24-hour cipher hunt for immortal D-bacteria",
+      "ja": "1848年パスツールの酒石酸結晶から1950年サリドマイドの惨劇まで、不死のD-細菌をめぐる24時間の暗号解読スリラー",
+      "fr": "Des cristaux chiraux de Pasteur en 1848 à la malédiction de la thalidomide : 24 heures de traque cryptographique",
+      "id": "Dari kristal kiral Pasteur 1848 hingga kutukan talidomida 1950-an: perburuan sandi 24 jam melawan bakteri-D abadi",
+      "es": "De los cristales quirales de Pasteur de 1848 a la maldición de la talidomida: 24 horas de caza de cifrados contra la D-bacteria"
+    },
+    "author": "DMDG 출판부 (생화학 암호학 랩)",
+    "badge": "거울 생명체 컬렉션 2편",
+    "category": "faction",
+    "color": {
+      "from": "#091e3a",
+      "to": "#102a45",
+      "accent": "#00f0ff",
+      "glow": "#00f0ff73"
+    },
+    "synopsis": {
+      "ko": "스위스 제네바 WHO BSL-4 밀실에서 숨진 수석 과학자의 피 묻은 다잉 메시지 'CHIRAL'. 1848년 루이 파스퇴르가 편광 현미경으로 분리한 비대칭 타르타르산 결정과 1950년대 거울상 분자 하나로 1만 명의 기형아를 낳은 탈리도마이드의 비극. 루체른 호수 상수원을 노리는 비밀 결사 '키랄 소사이어티'에 맞서 하버드 기호학자 로버트 강이 24시간 동안 펼치는 지적 스릴러.",
+      "en": "A dying scientist inside a Geneva WHO BSL-4 chamber leaves a bloody mirror-writing cipher: 'CHIRAL'. Uniting Louis Pasteur's 1848 chiral crystals and the 1950s thalidomide tragedy, Harvard symbologist Robert Kang races against time to stop 'The Chiral Society' from poisoning Lake Lucerne with immortal mirror bacteria.",
+      "ja": "ジュネーブWHOのBSL-4密室で発見された科学者の血文字ダイイングメッセージ『CHIRAL』。1848年パスツールが発見した鏡像異性体と1950年代サリドマイドの悲劇が結びつく。ルツェルン湖の水道網を狙う秘密結社に対し、ハーバード大のロバート・カン教授が挑む24時間の暗号追跡スリラー。",
+      "fr": "Un message d'agonie écrit en miroir dans une salle BSL-4 à Genève : 'CHIRAL'. Reliant les cristaux de Pasteur de 1848 à la tragédie de la thalidomide, le professeur Robert Kang affronte la Société Chirale pour empêcher l'empoisonnement du lac des Quatre-Cantons.",
+      "id": "Pesan kematian berdarah bertuliskan cermin di laboratorium WHO Jenewa: 'CHIRAL'. Mengaitkan kristal kiral Pasteur tahun 1848 dengan tragedi talidomida, Robert Kang berpacu dengan waktu untuk menghentikan Komunitas Kiral sebelum meracuni Danau Lucerne.",
+      "es": "Un mensaje de muerte escrito al revés en una cámara BSL-4 en Ginebra: 'CHIRAL'. Uniendo los cristales quirales de Pasteur de 1848 y la tragedia de la talidomida, Robert Kang corre contra el reloj para detener a la Sociedad Quiral antes de envenenar el lago Lucerna."
+    },
+    "charCount": 6304,
+    "readingTime": "약 26분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_mirror_life_02.html",
+    "jsonUrl": "data/novels/mirror_life_02.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35869"
   }
 ]

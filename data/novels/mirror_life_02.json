@@ -1,0 +1,137 @@
+{
+  "id": "mirror_life_02",
+  "title": {
+    "ko": "루킹글래스 프로토콜: 파스퇴르의 거울",
+    "en": "The Looking-Glass Protocol: Pasteur's Mirror",
+    "ja": "ルッキンググラス・プロトコル：パスツールの鏡",
+    "fr": "Le Protocole du Miroir : Le Miroir de Pasteur",
+    "id": "Protokol Kaca Cermin: Cermin Pasteur",
+    "es": "El Protocolo del Espejo: El Espejo de Pasteur"
+  },
+  "subtitle": {
+    "ko": "1848년 파스퇴르의 결정부터 1950년 탈리도마이드의 저주까지, 불사의 D-박테리아를 둘러싼 24시간의 암호 추적 스릴러",
+    "en": "From Pasteur's 1848 chiral crystals to the 1950s thalidomide curse: a 24-hour cipher hunt for immortal D-bacteria",
+    "ja": "1848年パスツールの酒石酸結晶から1950年サリドマイドの惨劇まで、不死のD-細菌をめぐる24時間の暗号解読スリラー",
+    "fr": "Des cristaux chiraux de Pasteur en 1848 à la malédiction de la thalidomide : 24 heures de traque cryptographique",
+    "id": "Dari kristal kiral Pasteur 1848 hingga kutukan talidomida 1950-an: perburuan sandi 24 jam melawan bakteri-D abadi",
+    "es": "De los cristales quirales de Pasteur de 1848 a la maldición de la talidomida: 24 horas de caza de cifrados contra la D-bacteria"
+  },
+  "author": "DMDG 출판부 (생화학 암호학 랩)",
+  "badge": "거울 생명체 컬렉션 2편",
+  "category": "faction",
+  "cover_gradient": "linear-gradient(135deg, #091e3a 0%, #102a45 50%, #173753 100%)",
+  "cover_accent": "#00f0ff",
+  "charCount": 6304,
+  "readingTime": "약 26분",
+  "total_chapters": 5,
+  "description": {
+    "ko": "스위스 제네바 WHO BSL-4 밀실에서 숨진 수석 과학자의 피 묻은 다잉 메시지 'CHIRAL'. 1848년 루이 파스퇴르가 편광 현미경으로 분리한 비대칭 타르타르산 결정과 1950년대 거울상 분자 하나로 1만 명의 기형아를 낳은 탈리도마이드의 비극. 루체른 호수 상수원을 노리는 비밀 결사 '키랄 소사이어티'에 맞서 하버드 기호학자 로버트 강이 24시간 동안 펼치는 지적 스릴러.",
+    "en": "A dying scientist inside a Geneva WHO BSL-4 chamber leaves a bloody mirror-writing cipher: 'CHIRAL'. Uniting Louis Pasteur's 1848 chiral crystals and the 1950s thalidomide tragedy, Harvard symbologist Robert Kang races against time to stop 'The Chiral Society' from poisoning Lake Lucerne with immortal mirror bacteria.",
+    "ja": "ジュネーブWHOのBSL-4密室で発見された科学者の血文字ダイイングメッセージ『CHIRAL』。1848年パスツールが発見した鏡像異性体と1950年代サリドマイドの悲劇が結びつく。ルツェルン湖の水道網を狙う秘密結社に対し、ハーバード大のロバート・カン教授が挑む24時間の暗号追跡スリラー。",
+    "fr": "Un message d'agonie écrit en miroir dans une salle BSL-4 à Genève : 'CHIRAL'. Reliant les cristaux de Pasteur de 1848 à la tragédie de la thalidomide, le professeur Robert Kang affronte la Société Chirale pour empêcher l'empoisonnement du lac des Quatre-Cantons.",
+    "id": "Pesan kematian berdarah bertuliskan cermin di laboratorium WHO Jenewa: 'CHIRAL'. Mengaitkan kristal kiral Pasteur tahun 1848 dengan tragedi talidomida, Robert Kang berpacu dengan waktu untuk menghentikan Komunitas Kiral sebelum meracuni Danau Lucerne.",
+    "es": "Un mensaje de muerte escrito al revés en una cámara BSL-4 en Ginebra: 'CHIRAL'. Uniendo los cristales quirales de Pasteur de 1848 y la tragedia de la talidomida, Robert Kang corre contra el reloj para detener a la Sociedad Quiral antes de envenenar el lago Lucerna."
+  },
+  "chapters": [
+    {
+      "ch": 1,
+      "part": "단편 본문",
+      "title": {
+        "ko": "프롤로그: 03:14 AM, 제네바의 밀실",
+        "en": "Prologue: 03:14 AM, The Locked Room in Geneva",
+        "ja": "プロローグ：午前03時14分、ジュネーブの密室",
+        "fr": "Prologue : 03h14, la chambre close de Genève",
+        "id": "Prolog: 03.14 AM, Ruang Terkunci di Jenewa",
+        "es": "Prólogo: 03:14 AM, la habitación cerrada de Ginebra"
+      },
+      "content": {
+        "ko": "[프롤로그: 03:14 AM, 제네바의 밀실]\n\n**스위스 제네바, 세계보건기구(WHO) 본부 지하 4층 생물안전 4등급(BSL-4) 격리 연구동.**\n\n적막을 찢는 비상벨 소리와 함께 주황색 스트로브 조명이 콘크리트 복도를 번갈아 때리고 있었다.\n\n생체 기호학자이자 하버드대 전염병 암호학 객원교수인 '로버트 강(Robert Kang)'은 스위스 연방경찰 특수수사관 베아트리스 랑그(Béatrice Lange)를 따라 두께 40센티미터의 티타늄 에어록 문을 통과했다. 방호복 속으로 차가운 공기가 밀려들었다.\n\n\"강 교수, 당신을 새벽 세 시에 비행기로 긴급 호출한 이유를 곧 두 눈으로 보게 될 겁니다.\"\n\n랑그 수사관이 손전등 불빛을 중앙 연구대 아래로 비추었다.\n\n바닥에는 WHO 수석 생화학자이자 노벨상 위원회 자문위원인 앙리 뒤퐁(Henri Dupont) 박사가 웅크린 채 숨져 있었다. 그러나 시신의 상태는 기괴하기 짝이 없었다. 외상은 전혀 없었지만, 피부 표면이 마치 산(Acid)에 녹아내린 것처럼 투명한 젤라틴 상태로 붕괴해 있었다.\n\n더욱 소름 끼치는 것은 뒤퐁 박사의 오른손이었다. 그는 숨이 끊어지는 마지막 순간, 자신의 검지손가락 끝을 깨물어 바닥의 에폭시 타일 위에 피로 일곱 자리의 글자를 휘갈겨 놓았다.\n\n$$\\text{ꓤ Ɐ ꓤ I H Ɔ}$$\n\n\"라틴어도 아니고, 고대 룬 문자도 아니군요.\" 랑그가 눈살을 찌푸렸다. \"무슨 뜻입니까?\"\n\n로버트 강은 숨을 들이켰다. 그는 주머니에서 작은 금속 손거울을 꺼내 핏자국 옆에 직각으로 세웠다. 거울 속에 비친 글자는 즉각 정상적인 철자로 정렬되었다.\n\n**『 C H I R A L 』**\n\n\"카이랄(Chiral)…\" 강의 목소리가 떨렸다. \"그리스어로 손(Cheir)을 뜻하는 단어입니다. 오른손과 왼손처럼 겉모습은 완벽한 대칭을 이루지만, 3차원 공간에서 아무리 회전시켜도 겹쳐지지 않는 거울상 이성질체를 의미하죠.\"\n\n\"뒤퐁 박사가 왜 죽어가면서 거울 문자로 '카이랄'을 남긴 겁니까?\"\n\n강은 뒤퐁의 굳어버린 왼손을 가리켰다. 박사의 핏기 없는 손가락 사이에는 깨진 유리 슬라이드 조각이 쥐여 있었다. 그 위에는 네임펜으로 적힌 짧은 라틴어 문구가 적혀 있었다.\n\n> *Speculum fractum est. Lupus intus est.*  \n> **(거울이 깨졌다. 늑대가 안으로 들어왔다.)**\n\n---",
+        "en": "[Prologue: 03:14 AM, The Locked Room in Geneva]\n\n03:14 AM. Subterranean BSL-4 facility at WHO headquarters in Geneva. Symbologist Robert Kang entered through a titanium airlock to find Dr. Henri Dupont dead, his skin collapsing into clear gel. On the floor, written in dying blood was a single mirror-writing cipher: 'CHIRAL'.\n\n**스위스 제네바, 세계보건기구(WHO) 본부 지하 4층 생물안전 4등급(BSL-4) 격리 연구동.**\n\n적막을 찢는 비상벨 소리와 함께 주황색 스트로브 조명이 콘크리트 복도를 번갈아 때리고 있었다.\n\n생체 기호학자이자 하버드대 전염병 암호학 객원교수인 '로버트 강(Robert Kang)'은 스위스 연방경찰 특수수사관 베아트리스 랑그(Béatrice Lange)를 따라 두께 40센티미터의 티타늄 에어록 문을 통과했다. 방호복 속으로 차가운 공기가 밀려들었다.",
+        "ja": "[プロローグ：午前03時14分、ジュネーブの密室]\n\n午前03時14分。ジュネーブWHO本部の地下BSL-4研究棟。記号学者のロバート・カン教授はチタン製エアロックを抜け、皮膚が溶解したデュポン博士の遺体の前に立ち尽くした。床には血文字の鏡文字で『CHIRAL』と記されていた。\n\n**스위스 제네바, 세계보건기구(WHO) 본부 지하 4층 생물안전 4등급(BSL-4) 격리 연구동.**\n\n적막을 찢는 비상벨 소리와 함께 주황색 스트로브 조명이 콘크리트 복도를 번갈아 때리고 있었다.\n\n생체 기호학자이자 하버드대 전염병 암호학 객원교수인 '로버트 강(Robert Kang)'은 스위스 연방경찰 특수수사관 베아트리스 랑그(Béatrice Lange)를 따라 두께 40센티미터의 티타늄 에어록 문을 통과했다. 방호복 속으로 차가운 공기가 밀려들었다.",
+        "fr": "[Prologue : 03h14, la chambre close de Genève]\n\n03h14 du matin. Laboratoire BSL-4 souterrain au siège de l'OMS à Genève. Le symbologiste Robert Kang a découvert le corps du Dr Dupont, dont la peau s'effondrait en gel transparent. Sur le sol, un mot tracé dans son propre sang en écriture spéculaire : 'CHIRAL'.\n\n**스위스 제네바, 세계보건기구(WHO) 본부 지하 4층 생물안전 4등급(BSL-4) 격리 연구동.**\n\n적막을 찢는 비상벨 소리와 함께 주황색 스트로브 조명이 콘크리트 복도를 번갈아 때리고 있었다.\n\n생체 기호학자이자 하버드대 전염병 암호학 객원교수인 '로버트 강(Robert Kang)'은 스위스 연방경찰 특수수사관 베아트리스 랑그(Béatrice Lange)를 따라 두께 40센티미터의 티타늄 에어록 문을 통과했다. 방호복 속으로 차가운 공기가 밀려들었다.",
+        "id": "[Prolog: 03.14 AM, Ruang Terkunci di Jenewa]\n\n03.14 AM. Laboratorium BSL-4 bawah tanah di markas WHO Jenewa. Simbologis Robert Kang melangkah masuk dan menemukan Dr. Dupont tewas dengan kulit meleleh. Di lantai, tergores tulisan cermin berdarah: 'CHIRAL'.\n\n**스위스 제네바, 세계보건기구(WHO) 본부 지하 4층 생물안전 4등급(BSL-4) 격리 연구동.**\n\n적막을 찢는 비상벨 소리와 함께 주황색 스트로브 조명이 콘크리트 복도를 번갈아 때리고 있었다.\n\n생체 기호학자이자 하버드대 전염병 암호학 객원교수인 '로버트 강(Robert Kang)'은 스위스 연방경찰 특수수사관 베아트리스 랑그(Béatrice Lange)를 따라 두께 40센티미터의 티타늄 에어록 문을 통과했다. 방호복 속으로 차가운 공기가 밀려들었다.",
+        "es": "[Prólogo: 03:14 AM, la habitación cerrada de Ginebra]\n\n03:14 AM. Instalación BSL-4 subterránea de la OMS en Ginebra. El simbologista Robert Kang halló al Dr. Dupont sin vida, con la piel licuada como gelatina transparente. En el suelo, escrito con sangre en escritura especular, se leía: 'CHIRAL'.\n\n**스위스 제네바, 세계보건기구(WHO) 본부 지하 4층 생물안전 4등급(BSL-4) 격리 연구동.**\n\n적막을 찢는 비상벨 소리와 함께 주황색 스트로브 조명이 콘크리트 복도를 번갈아 때리고 있었다.\n\n생체 기호학자이자 하버드대 전염병 암호학 객원교수인 '로버트 강(Robert Kang)'은 스위스 연방경찰 특수수사관 베아트리스 랑그(Béatrice Lange)를 따라 두께 40센티미터의 티타늄 에어록 문을 통과했다. 방호복 속으로 차가운 공기가 밀려들었다."
+      }
+    },
+    {
+      "ch": 2,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제1장: 05:20 AM, 1848년의 어두운 유산",
+        "en": "Chapter 1: 05:20 AM, The Dark Legacy of 1848",
+        "ja": "第1章：午前05時20分、1848年の暗い遺産",
+        "fr": "Chapitre 1 : 05h20, le sombre héritage de 1848",
+        "id": "Bab 1: 05.20 AM, Warisan Kelam Tahun 1848",
+        "es": "Capítulo 1: 05:20 AM, el oscuro legado de 1848"
+      },
+      "content": {
+        "ko": "[제1장: 05:20 AM, 1848년의 어두운 유산]\n\n새벽 5시 20분. 제네바 시내가 내려다보이는 WHO 전략회의실.\n\n대형 스크린에는 1848년 프랑스 파리의 과학아카데미 문서 보관소에서 디지털로 복원한 양피지 한 장이 떠올랐다.\n\n\"모든 것은 178년 전, 현대 미생물학의 아버지라 불리는 루이 파스퇴르(Louis Pasteur)로부터 시작되었습니다.\"\n\n로버트 강이 레이저 포인터를 켰다.\n\n\"1848년, 스물다섯 살의 청년 파스퇴르는 와인 통 바닥에 가라앉은 타르타르산 결정을 편광 현미경으로 관찰하던 중 인류 최초의 충격적인 비밀을 발견했습니다. 똑같은 화학식을 가진 결정들이 빛을 오른쪽으로 굴절시키는 '우회전성 결정'과 왼쪽으로 굴절시키는 '좌회전성 결정'으로 완벽히 나뉜다는 사실이었죠. 그는 핀셋으로 두 결정을 일일이 분리해 냈습니다.\"\n\n랑그 수사관이 팔짱을 끼며 물었다.\n\n\"그게 뒤퐁 박사의 죽음과 무슨 상관이 있다는 겁니까?\"\n\n\"자연계의 모든 생명체는 그 둘 중 오직 '한쪽 방향'만을 선택해 진화했습니다. 단백질을 이루는 20종의 아미노산은 100% 왼손잡이(L형)이고, DNA와 RNA를 이루는 당은 100% 오른손잡이(D형)입니다. 이를 생화학에서는 **'동일회전성(호모키랄성, Homochirality)'**이라고 부릅니다.\"\n\n강 교수가 화면을 넘기자, 1950년대의 참혹한 흑백 사진들이 나타났다. 팔다리가 짧거나 없는 기형아들의 사진이었다.\n\n\"하지만 거울의 저편을 건드리면 재앙이 일어납니다. 1950년대 서독에서 임산부의 입덧 치료제로 개발된 수면제 **'탈리도마이드(Thalidomide)'**를 기억하십니까? 판매된 약품 속에는 오른손잡이 분자와 왼손잡이 분자가 반반씩 섞여 있었습니다. 오른손잡이 분자는 안전한 진정제였지만, 거울상인 왼손잡이 분자는 태아의 혈관 형성을 완벽하게 파괴하는 악마의 독극물이었습니다. 단 하나의 거울 대칭 때문에 전 세계에서 1만 명이 넘는 기형아가 태어났습니다.\"\n\n강의 목소리에 서늘한 긴장감이 실렸다.\n\n\"그리고 어젯밤 뒤퐁 박사를 살해한 것은 단순한 화학물질이 아닙니다. 파스퇴르가 봉인했던 자연의 법칙을 완전히 뒤집어, **'D형 아미노산과 L형 DNA'로 몸 전체를 조립한 완전 인공 미생물—『거울 생명체(Mirror Organism)』**입니다.\"\n\n---",
+        "en": "[Chapter 1: 05:20 AM, The Dark Legacy of 1848]\n\n05:20 AM. Briefing room overlooking Lake Geneva. Kang revealed Louis Pasteur's 1848 discovery of asymmetric tartaric acid crystals and the 1950s thalidomide tragedy—where a single mirror-image isomer caused over 10,000 birth defects—exposing the mortal danger of artificial mirror organisms.\n\n새벽 5시 20분. 제네바 시내가 내려다보이는 WHO 전략회의실.\n\n대형 스크린에는 1848년 프랑스 파리의 과학아카데미 문서 보관소에서 디지털로 복원한 양피지 한 장이 떠올랐다.\n\n\"모든 것은 178년 전, 현대 미생물학의 아버지라 불리는 루이 파스퇴르(Louis Pasteur)로부터 시작되었습니다.\"",
+        "ja": "[第1章：午前05時20分、1848年の暗い遺産]\n\n午前05時20分。ジュネーブ湖を望むブリーフィングルーム。カン教授は1848年のパスツールの酒石酸結晶分離と、1950年代に鏡像異性体によって1万名の奇形児を生んだサリドマイドの惨劇を語り、完全な鏡像細菌の脅威を暴いた。\n\n새벽 5시 20분. 제네바 시내가 내려다보이는 WHO 전략회의실.\n\n대형 스크린에는 1848년 프랑스 파리의 과학아카데미 문서 보관소에서 디지털로 복원한 양피지 한 장이 떠올랐다.\n\n\"모든 것은 178년 전, 현대 미생물학의 아버지라 불리는 루이 파스퇴르(Louis Pasteur)로부터 시작되었습니다.\"",
+        "fr": "[Chapitre 1 : 05h20, le sombre héritage de 1848]\n\n05h20. Salle de crise à Genève. Kang a rappelé la découverte des cristaux de Pasteur en 1848 et la tragédie de la thalidomide dans les années 1950, où un seul isomère miroir a mutilé 10 000 nouveau-nés, prouvant la létalité des organismes artificiels inversés.\n\n새벽 5시 20분. 제네바 시내가 내려다보이는 WHO 전략회의실.\n\n대형 스크린에는 1848년 프랑스 파리의 과학아카데미 문서 보관소에서 디지털로 복원한 양피지 한 장이 떠올랐다.\n\n\"모든 것은 178년 전, 현대 미생물학의 아버지라 불리는 루이 파스퇴르(Louis Pasteur)로부터 시작되었습니다.\"",
+        "id": "[Bab 1: 05.20 AM, Warisan Kelam Tahun 1848]\n\n05.20 AM. Ruang strategi menghadap Danau Jenewa. Kang memaparkan kristal kiral Pasteur tahun 1848 dan bencana talidomida 1950-an—di mana satu molekul cermin menyebabkan 10.000 cacat lahir—membongkar ancaman mematikan bakteri cermin.\n\n새벽 5시 20분. 제네바 시내가 내려다보이는 WHO 전략회의실.\n\n대형 스크린에는 1848년 프랑스 파리의 과학아카데미 문서 보관소에서 디지털로 복원한 양피지 한 장이 떠올랐다.\n\n\"모든 것은 178년 전, 현대 미생물학의 아버지라 불리는 루이 파스퇴르(Louis Pasteur)로부터 시작되었습니다.\"",
+        "es": "[Capítulo 1: 05:20 AM, el oscuro legado de 1848]\n\n05:20 AM. Sala de mando con vista al lago de Ginebra. Kang expuso los cristales de Pasteur de 1848 y la tragedia de la talidomida en 1950—donde un solo enantiómero causó 10.000 malformaciones—revelando el peligro mortal de los organismos espejo.\n\n새벽 5시 20분. 제네바 시내가 내려다보이는 WHO 전략회의실.\n\n대형 스크린에는 1848년 프랑스 파리의 과학아카데미 문서 보관소에서 디지털로 복원한 양피지 한 장이 떠올랐다.\n\n\"모든 것은 178년 전, 현대 미생물학의 아버지라 불리는 루이 파스퇴르(Louis Pasteur)로부터 시작되었습니다.\""
+      }
+    },
+    {
+      "ch": 3,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제2장: 08:45 AM, 면역계가 장님이 되는 순간",
+        "en": "Chapter 2: 08:45 AM, The Moment Immunity Goes Blind",
+        "ja": "第2章：午前08時45分、免疫系が盲目となる瞬間",
+        "fr": "Chapitre 2 : 08h45, l'instant où l'immunité devient aveugle",
+        "id": "Bab 2: 08.45 AM, Saat Sistem Kekebalan Menjadi Buta",
+        "es": "Capítulo 2: 08:45 AM, el momento en que la inmunidad se vuelve ciega"
+      },
+      "content": {
+        "ko": "[제2장: 08:45 AM, 면역계가 장님이 되는 순간]\n\n오전 8시 45분. 프랑스 국경 인근 CERN(유럽입자물리연구소) 부속 바이오 극저온 랩.\n\n강 교수와 랑그 수사관은 특수 격리 챔버 안의 전자현미경 접안렌즈를 응시했다. 고해상도 모니터 위에서 실시간 생체 반응 영상이 재생되고 있었다.\n\n배양액 속에 인간의 대식세포(Macrophage) 수천 개와 함께, 뒤퐁 박사의 체내에서 추출한 녹색 형광의 '거울 세균'이 투입되었다.\n\n\"믿을 수가 없어…\" 랑그가 숨을 삼켰다.\n\n보통의 박테리아가 침투하면 인간의 대식세포는 즉시 위족(僞足)을 뻗어 세균을 집어삼키고 리소좀 효소로 분해해야 했다. 그것이 인간이 수백만 년간 진화시켜 온 면역 반응의 기본이었다.\n\n하지만 화면 속 대식세포들은 거울 세균의 표면을 그대로 통과하거나, 눈앞에 세균이 떠다니는데도 허공을 헤매고 있었다.\n\n\"면역세포가 세균을 전혀 보지 못하고 있습니다!\" 랑그가 소리쳤다.\n\n\"보지 못하는 게 아닙니다.\" 강 교수가 낮게 읊조렸다. \"인간의 모든 면역 수용체와 항체는 L형 단백질의 굴곡에만 결합하도록 열쇠구멍이 파여 있습니다. 그런데 저 거울 세균은 모든 표면 단백질이 D형으로 뒤집혀 있습니다. 물리적으로 결합 자체가 불가능한 겁니다. **자연계의 면역 시스템 전체에 저 세균은 '존재하지 않는 유령'입니다.**\"\n\n\"그렇다면 세균은 어떻게 뒤퐁 박사를 죽인 거죠?\"\n\n\"저 녀석은 면역 공격을 받지 않은 채 무한 증식하며, 인체 세포 내부의 포도당과 단순 무기질을 연료로 빨아들입니다. 그리고 분해되지 않는 독성 대사산물을 쏟아내 세포막을 통째로 붕괴시켰습니다. 천적도 없고, 항생제도 듣지 않으며, 면역세포는 인식조차 못 하는… **완벽한 불사(Immortal)의 병기**입니다.\"\n\n그때, CERN의 양자 컴퓨터 분석기가 비프음을 울렸다. 뒤퐁 박사의 개인 서버에서 복호화된 마지막 이메일 수신함이 열렸다.\n\n발신자는 스위스 취리히의 비공개 프라이빗 뱅크에 계좌를 둔 비밀 사설 재단—**『키랄 소사이어티(The Chiral Society)』**였다.\n\n메일 본문에는 단 한 줄의 좌표와 암호문이 적혀 있었다.\n\n> **[LUCERNE 47.0502° N, 8.3093° E - RECEPTOR 0]**  \n> *\"1975년 아실로마의 겁쟁이들은 신의 정원을 봉인하려 했다. 그러나 오늘 정오, 우리는 루체른 호수의 상수도 시스템에 100리터의 루킹글래스 원액을 방류한다. 구인류의 면역계는 종말을 맞이할 것이다.\"*\n\n시계는 이미 **09시 12분**을 가리키고 있었다. 남은 시간은 단 2시간 48분이었다.\n\n---",
+        "en": "[Chapter 2: 08:45 AM, The Moment Immunity Goes Blind]\n\n08:45 AM. At CERN's bio-cryo lab, electron microscopes showed human macrophages drifting completely blind past the green fluorescent mirror bacteria. A decrypted email revealed 'The Chiral Society' scheduled to dump 100 liters of the agent into Lake Lucerne at noon.\n\n오전 8시 45분. 프랑스 국경 인근 CERN(유럽입자물리연구소) 부속 바이오 극저온 랩.\n\n강 교수와 랑그 수사관은 특수 격리 챔버 안의 전자현미경 접안렌즈를 응시했다. 고해상도 모니터 위에서 실시간 생체 반응 영상이 재생되고 있었다.\n\n배양액 속에 인간의 대식세포(Macrophage) 수천 개와 함께, 뒤퐁 박사의 체내에서 추출한 녹색 형광의 '거울 세균'이 투입되었다.",
+        "ja": "[第2章：午前08時45分、免疫系が盲目となる瞬間]\n\n午前08時45分。CERNの極低温バイオラボ。電子顕微鏡下のヒト大食細胞は、蛍光グリーンに輝く鏡像細菌を認識できず素通りしていた。秘密結社『カイラル・ソサエティ』が正午にルツェルン湖へ100リットルを散布するという脅迫文が解読された。\n\n오전 8시 45분. 프랑스 국경 인근 CERN(유럽입자물리연구소) 부속 바이오 극저온 랩.\n\n강 교수와 랑그 수사관은 특수 격리 챔버 안의 전자현미경 접안렌즈를 응시했다. 고해상도 모니터 위에서 실시간 생체 반응 영상이 재생되고 있었다.\n\n배양액 속에 인간의 대식세포(Macrophage) 수천 개와 함께, 뒤퐁 박사의 체내에서 추출한 녹색 형광의 '거울 세균'이 투입되었다.",
+        "fr": "[Chapitre 2 : 08h45, l'instant où l'immunité devient aveugle]\n\n08h45. Au laboratoire cryo-bio du CERN, les macrophages humains passaient totalement aveugles devant la bactérie miroir fluorescente. Un message décrypté révélait que la Société Chirale prévoyait d'empoisonner le lac de Lucerne à midi.\n\n오전 8시 45분. 프랑스 국경 인근 CERN(유럽입자물리연구소) 부속 바이오 극저온 랩.\n\n강 교수와 랑그 수사관은 특수 격리 챔버 안의 전자현미경 접안렌즈를 응시했다. 고해상도 모니터 위에서 실시간 생체 반응 영상이 재생되고 있었다.\n\n배양액 속에 인간의 대식세포(Macrophage) 수천 개와 함께, 뒤퐁 박사의 체내에서 추출한 녹색 형광의 '거울 세균'이 투입되었다.",
+        "id": "[Bab 2: 08.45 AM, Saat Sistem Kekebalan Menjadi Buta]\n\n08.45 AM. Di laboratorium CERN, mikroskop elektron membuktikan sel makrofag manusia tidak mampu mendeteksi bakteri cermin hijau. Email yang didekripsi membongkar rencana Komunitas Kiral membuang 100 liter cairan ke Danau Lucerne pada tengah hari.\n\n오전 8시 45분. 프랑스 국경 인근 CERN(유럽입자물리연구소) 부속 바이오 극저온 랩.\n\n강 교수와 랑그 수사관은 특수 격리 챔버 안의 전자현미경 접안렌즈를 응시했다. 고해상도 모니터 위에서 실시간 생체 반응 영상이 재생되고 있었다.\n\n배양액 속에 인간의 대식세포(Macrophage) 수천 개와 함께, 뒤퐁 박사의 체내에서 추출한 녹색 형광의 '거울 세균'이 투입되었다.",
+        "es": "[Capítulo 2: 08:45 AM, el momento en que la inmunidad se vuelve ciega]\n\n08:45 AM. En el laboratorio del CERN, los macrófagos humanos pasaban ciegos frente a la bacteria espejo fluorescente. Un correo descifrado reveló que la Sociedad Quiral arrojaría 100 litros al lago Lucerna al mediodía.\n\n오전 8시 45분. 프랑스 국경 인근 CERN(유럽입자물리연구소) 부속 바이오 극저온 랩.\n\n강 교수와 랑그 수사관은 특수 격리 챔버 안의 전자현미경 접안렌즈를 응시했다. 고해상도 모니터 위에서 실시간 생체 반응 영상이 재생되고 있었다.\n\n배양액 속에 인간의 대식세포(Macrophage) 수천 개와 함께, 뒤퐁 박사의 체내에서 추출한 녹색 형광의 '거울 세균'이 투입되었다."
+      }
+    },
+    {
+      "ch": 4,
+      "part": "단편 본문",
+      "title": {
+        "ko": "제3장: 11:15 AM, 루체른 호수의 수중 성당",
+        "en": "Chapter 3: 11:15 AM, The Submerged Cathedral of Lake Lucerne",
+        "ja": "第3章：午前11時15分、ルツェルン湖の水中大聖堂",
+        "fr": "Chapitre 3 : 11h15, la cathédrale submergée du lac de Lucerne",
+        "id": "Bab 3: 11.15 AM, Katedral Bawah Air Danau Lucerne",
+        "es": "Capítulo 3: 11:15 AM, la catedral sumergida del lago Lucerna"
+      },
+      "content": {
+        "ko": "[제3장: 11:15 AM, 루체른 호수의 수중 성당]\n\n오전 11시 15분. 스위스 알프스산맥의 만년설로 둘러싸인 루체른 호수(Lake Lucerne).\n\n스위스 대테러 특공대 헬기가 호수 중앙의 고요한 수면 위로 급강하했다. 호수 한가운데 세워진 18세기 석조 급수탑 지하, 호수 바닥과 연결된 취수 밸브 챔버 안으로 로버트 강과 랑그 수사관이 잠수복을 입고 침투했다.\n\n축축한 석조 벽면에는 기이한 양각 부조가 새겨져 있었다. 왼손과 오른손이 서로를 맞잡고 있는 고대 연금술의 카이랄 상징이었다.\n\n챔버 중앙의 거대한 메인 배수 펌프에는 티타늄 실린더가 장착되어 있었고, 그 안에서 에메랄드빛 액체가 카운트다운 타이머와 함께 교반되고 있었다.\n\n**[DISCHARGE COUNTDOWN: 00:11:42]**\n\n\"강 교수! 배출 밸브를 물리적으로 부수면 안 됩니다!\" 랑그가 소리쳤다. \"압력 센서가 장착되어 있습니다! 충격을 가하면 실린더가 즉시 파열되어 호수 전체로 확산됩니다!\"\n\n타이머 밑에는 알파벳 6자리를 입력해야 하는 디지털 키패드가 깜빡이고 있었다.\n\n키패드 상단에는 라틴어로 쓰인 기호학적 수수께끼가 새겨져 있었다.\n\n> *I am the mirror that cures the poison.*  \n> *I am the enzyme that nature forgot.*  \n> *Name the hand that cuts the D-strand.*  \n> **(나는 독을 치료하는 거울이다. 나는 자연이 잊어버린 효소다. D-가닥을 자르는 손의 이름을 대라.)**\n\n\"자연이 잊어버린 효소…?\" 랑그가 당황하며 키보드를 바라보았다. \"파스퇴르인가? 아니면 벤터(Venter)?\"\n\n\"아닙니다.\" 강의 뇌세포가 맹렬하게 회전했다.\n\n*1848년 파스퇴르의 거울 결정…*  \n*1950년 탈리도마이드의 거울상 독성…*  \n*그리고 2001년 노벨 화학상을 수상한 카이랄 촉매 합성 기술!*\n\n\"거울 세균은 D형 단백질과 L형 DNA로 만들어졌기 때문에 자연계의 어떤 분해 효소로도 자를 수 없습니다. 그렇다면 그 세균을 통제하기 위해 그들이 인공적으로 합성해야만 했던 유일한 '가위'는 무엇인가?\"\n\n강의 눈동자가 흔들렸다.\n\n\"일반적인 DNA 분해 효소는 L형 단백질로 만들어진 **엔도뉴클레아제(Endonuclease)**입니다. 하지만 거울 DNA를 자르려면 효소 자체도 완벽한 거울상으로 뒤집힌 **'D형 분해 효소'**여야만 합니다!\"\n\n\"그 효소의 암호화 명칭이 뭡니까?! 1분이 남았습니다!\"\n\n강은 키패드 앞으로 다가갔다. 그는 뒤퐁 박사가 피로 남겼던 거울 문자, 그리고 1975년 아실로마 극비 회의록의 암호 체계를 결합했다.\n\nD-형 엔도뉴클레아제를 뜻하는 분자생물학적 국제 등록 코드.\n\n강은 망설임 없이 여섯 글자를 입력했다.\n\n$$\\text{D} \\quad \\text{N} \\quad \\text{U} \\quad \\text{C} \\quad \\text{L} \\quad \\text{E}$$\n\n*삑—*\n\n빨간색 타이머가 멈추지 않았다!\n\n**[00:00:19… 00:00:18… ERROR: INVALID CIPHER]**\n\n\"틀렸습니다! 강 교수!!\" 랑그가 권총을 꺼내 들었다.\n\n순간, 강의 머릿속에 번개처럼 한 장면이 스쳐 지나갔다. 뒤퐁 박사가 거울을 비춰야만 읽을 수 있는 **'거울 문자(Mirror Writing)'**로 다잉 메시지를 남겼던 이유!\n\n\"바보 같으니… 키패드 화면 자체가 거울이었어!\"\n\n강은 키보드에 손을 올리고, 철자의 순서를 거꾸로 뒤집어 입력했다. 거울에 반사되었을 때 비로소 정방향이 되는 역배열 코드!\n\n$$\\text{E} \\quad \\text{L} \\quad \\text{C} \\quad \\text{U} \\quad \\text{N} \\quad \\text{D}$$\n\n*철컥.*\n\n무거운 유압음과 함께 타이머가 **00:00:03**에서 멈추었다. 녹색 배양액을 호수로 밀어내려던 취수관 밸브가 단단히 잠기며, 실린더 내부로 섭씨 200도의 초고온 중화 증기가 주입되기 시작했다.\n\n거울 세균들이 고열 속에서 형체를 잃고 하얗게 응고되었다.\n\n---",
+        "en": "[Chapter 3: 11:15 AM, The Submerged Cathedral of Lake Lucerne]\n\n11:15 AM. Deep inside a flooded 18th-century water intake tower under Lake Lucerne. With 19 seconds on the detonator, Kang deduced that the keypad screen itself was a mirror—reversing the code 'D-NUCLE' into 'E-L-C-U-N-D' to stop the discharge with 3 seconds to spare.\n\n오전 11시 15분. 스위스 알프스산맥의 만년설로 둘러싸인 루체른 호수(Lake Lucerne).\n\n스위스 대테러 특공대 헬기가 호수 중앙의 고요한 수면 위로 급강하했다. 호수 한가운데 세워진 18세기 석조 급수탑 지하, 호수 바닥과 연결된 취수 밸브 챔버 안으로 로버트 강과 랑그 수사관이 잠수복을 입고 침투했다.\n\n축축한 석조 벽면에는 기이한 양각 부조가 새겨져 있었다. 왼손과 오른손이 서로를 맞잡고 있는 고대 연금술의 카이랄 상징이었다.",
+        "ja": "[第3章：午前11時15分、ルツェルン湖の水中大聖堂]\n\n午前11時15分。ルツェルン湖底の取水塔地下。起爆タイマーの残り19秒で、カン教授はキーパッド自体が鏡であることを看破し、解読コードを反転させた『E-L-C-U-N-D』を入力して残り3秒で排出弁を停止させた。\n\n오전 11시 15분. 스위스 알프스산맥의 만년설로 둘러싸인 루체른 호수(Lake Lucerne).\n\n스위스 대테러 특공대 헬기가 호수 중앙의 고요한 수면 위로 급강하했다. 호수 한가운데 세워진 18세기 석조 급수탑 지하, 호수 바닥과 연결된 취수 밸브 챔버 안으로 로버트 강과 랑그 수사관이 잠수복을 입고 침투했다.\n\n축축한 석조 벽면에는 기이한 양각 부조가 새겨져 있었다. 왼손과 오른손이 서로를 맞잡고 있는 고대 연금술의 카이랄 상징이었다.",
+        "fr": "[Chapitre 3 : 11h15, la cathédrale submergée du lac de Lucerne]\n\n11h15. Au cœur d'une tour de captage sous le lac de Lucerne. À 19 secondes de l'échéance, Kang a compris que l'écran était lui-même un miroir, inversant 'D-NUCLE' en 'E-L-C-U-N-D' pour stopper la décharge à 3 secondes de la fin.\n\n오전 11시 15분. 스위스 알프스산맥의 만년설로 둘러싸인 루체른 호수(Lake Lucerne).\n\n스위스 대테러 특공대 헬기가 호수 중앙의 고요한 수면 위로 급강하했다. 호수 한가운데 세워진 18세기 석조 급수탑 지하, 호수 바닥과 연결된 취수 밸브 챔버 안으로 로버트 강과 랑그 수사관이 잠수복을 입고 침투했다.\n\n축축한 석조 벽면에는 기이한 양각 부조가 새겨져 있었다. 왼손과 오른손이 서로를 맞잡고 있는 고대 연금술의 카이랄 상징이었다.",
+        "id": "[Bab 3: 11.15 AM, Katedral Bawah Air Danau Lucerne]\n\n11.15 AM. Di dalam menara air bawah danau Lucerne. Saat penghitung waktu tersisa 19 detik, Kang menyadari layar keypad adalah cermin, membalik kode 'D-NUCLE' menjadi 'E-L-C-U-N-D' dan menghentikan katup 3 detik sebelum terlambat.\n\n오전 11시 15분. 스위스 알프스산맥의 만년설로 둘러싸인 루체른 호수(Lake Lucerne).\n\n스위스 대테러 특공대 헬기가 호수 중앙의 고요한 수면 위로 급강하했다. 호수 한가운데 세워진 18세기 석조 급수탑 지하, 호수 바닥과 연결된 취수 밸브 챔버 안으로 로버트 강과 랑그 수사관이 잠수복을 입고 침투했다.\n\n축축한 석조 벽면에는 기이한 양각 부조가 새겨져 있었다. 왼손과 오른손이 서로를 맞잡고 있는 고대 연금술의 카이랄 상징이었다.",
+        "es": "[Capítulo 3: 11:15 AM, la catedral sumergida del lago Lucerna]\n\n11:15 AM. En la torre sumergida del lago Lucerna. A 19 segundos de la detonación, Kang dedujo que la pantalla era un espejo e invirtió el código 'D-NUCLE' en 'E-L-C-U-N-D', bloqueando las válvulas a 3 segundos del desastre.\n\n오전 11시 15분. 스위스 알프스산맥의 만년설로 둘러싸인 루체른 호수(Lake Lucerne).\n\n스위스 대테러 특공대 헬기가 호수 중앙의 고요한 수면 위로 급강하했다. 호수 한가운데 세워진 18세기 석조 급수탑 지하, 호수 바닥과 연결된 취수 밸브 챔버 안으로 로버트 강과 랑그 수사관이 잠수복을 입고 침투했다.\n\n축축한 석조 벽면에는 기이한 양각 부조가 새겨져 있었다. 왼손과 오른손이 서로를 맞잡고 있는 고대 연금술의 카이랄 상징이었다."
+      }
+    },
+    {
+      "ch": 5,
+      "part": "단편 본문",
+      "title": {
+        "ko": "에필로그: 부서진 거울의 파편",
+        "en": "Epilogue: Shards of the Shattered Mirror",
+        "ja": "エピローグ：砕かれた鏡の破片",
+        "fr": "Épilogue : Les éclats du miroir brisé",
+        "id": "Epilog: Serpihan Cermin yang Hancur",
+        "es": "Epílogo: Fragmentos del espejo roto"
+      },
+      "content": {
+        "ko": "[에필로그: 부서진 거울의 파편]\n\n정오 12시 05분. 호숫가의 안개가 걷히고 알프스의 영봉들이 푸른 호수 위에 투명하게 반영(Reflect)되고 있었다.\n\n구급차의 들것에 실려 나가는 실린더를 바라보며, 랑그 수사관이 담배에 불을 붙였다.\n\n\"끝난 겁니까?\"\n\n로버트 강은 호수 수면에 비친 자신의 얼굴을 말없이 내려다보았다. 수면 위의 강과 수면 아래의 강이 서로를 응시하고 있었다.\n\n\"아닙니다. 이제 시작일 뿐입니다.\"\n\n\"무슨 뜻입니까? 루체른의 테러는 막아냈잖습니까.\"\n\n강은 품에서 뒤퐁 박사가 쥐고 있던 깨진 유리 슬라이드를 꺼내 들었다. 햇빛을 받은 유리 파편이 프리즘처럼 갈라지며 바닥에 두 개의 무지개를 만들어냈다. 하나는 오른쪽으로 꺾였고, 하나는 왼쪽으로 꺾여 있었다.\n\n\"합성생물학은 이미 돌이킬 수 없는 루비콘강을 건넜습니다. 뒤퐁을 살해하고 배양액을 훔쳐낸 자들은 키랄 소사이어티의 하수인에 불과했습니다. 오늘 우리가 막아낸 것은 100리터였지만, 전 세계의 수많은 사설 연구소에서 지금 이 순간에도 인공 거울 박테리아가 세포 분열을 거듭하고 있습니다.\"\n\n강은 깨진 유리 조각을 깊은 호수 속으로 던져 넣었다. 유리 파편은 은빛 궤적을 그리며 심연 속으로 가라앉았다.\n\n\"거울 속의 세계는 한 번 문이 열리면 결코 닫히지 않습니다. 신이 40억 년간 단 한쪽 손만을 들어 올린 데에는 다 이유가 있었던 겁니다. 거울 저편의 손을 잡는 순간… 인류는 스스로 자신의 천적을 창조하게 될 테니까요.\"\n\n호수 저편에서 정오를 알리는 성당의 종소리가 무겁게 울려 퍼졌다. 마치 다가올 새로운 시대를 향한 거대한 경고음처럼.",
+        "en": "[Epilogue: Shards of the Shattered Mirror]\n\n12:05 PM. As church bells echoed over Lake Lucerne, Kang looked at the reflections in the water: 'The mirror world, once opened, never shuts. The moment we reach for the hand on the other side, humanity creates its own ultimate predator.'\n\n정오 12시 05분. 호숫가의 안개가 걷히고 알프스의 영봉들이 푸른 호수 위에 투명하게 반영(Reflect)되고 있었다.\n\n구급차의 들것에 실려 나가는 실린더를 바라보며, 랑그 수사관이 담배에 불을 붙였다.\n\n\"끝난 겁니까?\"",
+        "ja": "[エピローグ：砕かれた鏡の破片]\n\n午後12時05分。教会の鐘が響く湖畔で、カン教授は水面に映る自分を見つめた。『鏡の向こう側の世界は一度開けば二度と閉じない。向こう側の手を取った瞬間、人類は自らの天敵を創造することになるのだ。』\n\n정오 12시 05분. 호숫가의 안개가 걷히고 알프스의 영봉들이 푸른 호수 위에 투명하게 반영(Reflect)되고 있었다.\n\n구급차의 들것에 실려 나가는 실린더를 바라보며, 랑그 수사관이 담배에 불을 붙였다.\n\n\"끝난 겁니까?\"",
+        "fr": "[Épilogue : Les éclats du miroir brisé]\n\n12h05. Alors que les cloches résonnaient sur le lac, Kang fixait son reflet dans l'eau : 'Une fois ouvert, le monde du miroir ne se referme jamais. Tendre la main vers l'autre côté revient à créer notre propre prédateur ultime.'\n\n정오 12시 05분. 호숫가의 안개가 걷히고 알프스의 영봉들이 푸른 호수 위에 투명하게 반영(Reflect)되고 있었다.\n\n구급차의 들것에 실려 나가는 실린더를 바라보며, 랑그 수사관이 담배에 불을 붙였다.\n\n\"끝난 겁니까?\"",
+        "id": "[Epilog: Serpihan Cermin yang Hancur]\n\n12.05 PM. Lonceng gereja bergema di atas danau. Kang menatap pantulan dirinya di air: 'Dunia di balik cermin tidak akan pernah tertutup. Saat kita menyentuh tangan di seberang sana, manusia menciptakan predatornya sendiri.'\n\n정오 12시 05분. 호숫가의 안개가 걷히고 알프스의 영봉들이 푸른 호수 위에 투명하게 반영(Reflect)되고 있었다.\n\n구급차의 들것에 실려 나가는 실린더를 바라보며, 랑그 수사관이 담배에 불을 붙였다.\n\n\"끝난 겁니까?\"",
+        "es": "[Epílogo: Fragmentos del espejo roto]\n\n12:05 PM. Las campanas resonaron sobre el lago. Kang miró su reflejo en el agua: 'El mundo del espejo nunca se cierra. En el momento en que tomamos la mano del otro lado, la humanidad crea a su propio depredador.'\n\n정오 12시 05분. 호숫가의 안개가 걷히고 알프스의 영봉들이 푸른 호수 위에 투명하게 반영(Reflect)되고 있었다.\n\n구급차의 들것에 실려 나가는 실린더를 바라보며, 랑그 수사관이 담배에 불을 붙였다.\n\n\"끝난 겁니까?\""
+      }
+    }
+  ]
+}

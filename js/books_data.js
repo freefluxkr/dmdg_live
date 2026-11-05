@@ -753,4 +753,52 @@ window.NOVELS_DATA = [
     chapterCount: 5,
     chapters: []
   },
+
+  {
+    id: "mirror_life_01",
+    title: "거울의 제국: 코드명 키랄 (Empire of Mirrors: Operation Chiral)",
+    subtitle: "천적도 백신도 없는 D-아미노산의 역습, 한반도 바이오 안보와 5천만의 생존을 건 비밀 결단",
+    author: "DMDG 출판부 (국가안보 팩션 랩)",
+    persona: "DMDG Master Fiction Lab",
+    genre: "거울 생명체 바이오 팩션",
+    badge: "거울 생명체 컬렉션 1편",
+    category: "faction",
+    wikidocsUrl: "https://dmdg.wikidocs.net/blog/35868",
+    htmlUrl: "novel_mirror_life_01.html",
+    color: {
+      from: "#1e293b",
+      to: "#0f172a",
+      accent: "#38bdf8",
+      glow: "#38bdf873"
+    },
+    synopsis: "1975년 아실로마 선언 뒤편에 봉인된 거울 생명체 금기 규약. 40억 년 생명의 호모키랄성(L-단백질, D-DNA)을 정반대로 뒤집은 'D-아미노산 세균'이 압록강변 지하 비밀 연구소에서 복제된다. 천적도 없고 인체의 백혈구마저 인식하지 못하는 불사의 바이오 무기 앞에 맞서, 카이스트 서민우 박사와 국정원 강태혁 대위가 펼치는 피와 헌신의 안보 첩보전.",
+    charCount: 5491,
+    readingTime: "약 27분",
+    chapterCount: 5,
+    chapters: []
+  },
+
+  {
+    id: "mirror_life_02",
+    title: "루킹글래스 프로토콜: 파스퇴르의 거울 (The Looking-Glass Protocol: Pasteur's Mirror)",
+    subtitle: "1848년 파스퇴르의 결정부터 1950년 탈리도마이드의 저주까지, 불사의 D-박테리아를 둘러싼 24시간의 암호 추적 스릴러",
+    author: "DMDG 출판부 (생화학 암호학 랩)",
+    persona: "DMDG Master Fiction Lab",
+    genre: "거울 생명체 바이오 팩션",
+    badge: "거울 생명체 컬렉션 2편",
+    category: "faction",
+    wikidocsUrl: "https://dmdg.wikidocs.net/blog/35869",
+    htmlUrl: "novel_mirror_life_02.html",
+    color: {
+      from: "#091e3a",
+      to: "#102a45",
+      accent: "#00f0ff",
+      glow: "#00f0ff73"
+    },
+    synopsis: "스위스 제네바 WHO BSL-4 밀실에서 숨진 수석 과학자의 피 묻은 다잉 메시지 'CHIRAL'. 1848년 루이 파스퇴르가 편광 현미경으로 분리한 비대칭 타르타르산 결정과 1950년대 거울상 분자 하나로 1만 명의 기형아를 낳은 탈리도마이드의 비극. 루체른 호수 상수원을 노리는 비밀 결사 '키랄 소사이어티'에 맞서 하버드 기호학자 로버트 강이 24시간 동안 펼치는 지적 스릴러.",
+    charCount: 6304,
+    readingTime: "약 26분",
+    chapterCount: 5,
+    chapters: []
+  },
 ];
