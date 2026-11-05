@@ -872,14 +872,14 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
         <!-- Filter Chips -->
         <div class="filter-bar">
-          <button class="filter-chip active" data-filter="all">전체 도서관 (25)</button>
+          <button class="filter-chip active" data-filter="all">전체 도서관 (40)</button>
+          <button class="filter-chip" data-filter="faction">🖋️ 팩션 소설 컬렉션 (15)</button>
           <button class="filter-chip" data-filter="security">🛡️ 산업 IoT &amp; 안전관제 (5)</button>
-          <button class="filter-chip" data-filter="rea">📕 REA 역공학 &amp; IDE (5)</button>
-          <button class="filter-chip" data-filter="agent">🤖 AI 에이전트 &amp; 양자 (4)</button>
-          <button class="filter-chip" data-filter="business">💼 비즈니스 &amp; 데이터 (7)</button>
+          <button class="filter-chip" data-filter="rea">📕 REA 역공학 &amp; IDE (6)</button>
+          <button class="filter-chip" data-filter="agent">🤖 AI 에이전트 &amp; 양자 (5)</button>
+          <button class="filter-chip" data-filter="business">💼 비즈니스 &amp; 데이터 (9)</button>
           <button class="filter-chip" data-filter="healing_gourmet">🍃 사찰음식 인문기행 (1)</button>
           <button class="filter-chip" data-filter="travel_gourmet">🍲 K-기사식당 기행 (1)</button>
-          <button class="filter-chip" data-filter="faction">🖋️ 2027 팩션 소설 (4)</button>
         </div>
       </section>
 
@@ -1136,11 +1136,11 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
     const filteredNovels = NOVELS_DATA.filter(n => {
       if (filter === 'all') return true;
-      if (filter === 'faction') return n.category && (n.category.includes('faction') || !n.wikidocsUrl);
-      if (filter === 'security') return n.category && (n.category.includes('security') || n.id.includes('21858') || n.id.includes('21842') || n.id.includes('21870') || n.id.includes('21868'));
-      if (filter === 'rea') return n.category && (n.category.includes('rea') || n.id.includes('21781') || n.id.includes('21777') || n.id.includes('21753') || n.id.includes('21754') || n.id.includes('21755'));
-      if (filter === 'agent') return n.category && (n.category.includes('agent') || n.id.includes('21695') || n.id.includes('21747') || n.id.includes('21793') || n.id.includes('21701'));
-      if (filter === 'business') return n.category && (n.category.includes('business') || n.id.includes('21748') || n.id.includes('21746') || n.id.includes('21733') || n.id.includes('21658') || n.id.includes('21683') || n.id.includes('21841') || n.id.includes('21869') || n.id.includes('21665'));
+      if (filter === 'faction') return n.category && (n.category.includes('faction') || !n.wikidocsUrl || String(n.id).includes('boiled_frog') || String(n.id).includes('mirror_life'));
+      if (filter === 'security') return n.category && (n.category.includes('security') || n.category.includes('fire-safety') || String(n.id).includes('21858') || String(n.id).includes('21842') || String(n.id).includes('21870') || String(n.id).includes('21868') || String(n.id).includes('21891'));
+      if (filter === 'rea') return n.category && (n.category.includes('rea') || n.category.includes('robotics') || String(n.id).includes('21781') || String(n.id).includes('21777') || String(n.id).includes('21753') || String(n.id).includes('21754') || String(n.id).includes('21755') || String(n.id).includes('21887'));
+      if (filter === 'agent') return n.category && (n.category.includes('agent') || n.category.includes('ai') || String(n.id).includes('21695') || String(n.id).includes('21747') || String(n.id).includes('21793') || String(n.id).includes('21701'));
+      if (filter === 'business') return n.category && (n.category.includes('business') || n.category.includes('data') || String(n.id).includes('21748') || String(n.id).includes('21746') || String(n.id).includes('21733') || String(n.id).includes('21658') || String(n.id).includes('21683') || String(n.id).includes('21841') || String(n.id).includes('21869') || String(n.id).includes('21665'));
       return (n.author && n.author.includes(filter)) || (n.badge && n.badge.includes(filter)) || (n.category && n.category.includes(filter));
     });
 
@@ -1154,7 +1154,9 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
       card.style.setProperty('--card-glow', c.glow || 'rgba(245,158,11,0.2)');
 
       const novelId = String(novel.id || '');
-      const coverIcon = novelId.includes('21748') ? '💰' : 
+      const coverIcon = novelId.includes('mirror') ? '🪞' :
+                       (novelId.includes('boiled') ? '🐸' :
+                       (novelId.includes('21748') ? '💰' : 
                        (novelId.includes('21747') ? '🤖' : 
                        (novelId.includes('21746') ? '💼' : 
                        (novelId.includes('21858') ? '🛡️' :
@@ -1164,7 +1166,9 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
                        (novelId.includes('21869') ? '🚚' :
                        (novelId.includes('wolf') ? '🐺' : 
                        (novelId.includes('sun') ? '☀️' : 
-                       (novelId.includes('silent') ? '🛡️' : '🔐'))))))))));
+                       (novelId.includes('silent') ? '🛡️' : 
+                       (novelId.includes('kisa') ? '🍲' :
+                       (novelId.includes('temple') ? '🍃' : '🔐'))))))))))))));
 
       card.innerHTML = `
         <div class="book-cover">
