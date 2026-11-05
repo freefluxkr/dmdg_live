@@ -148,6 +148,28 @@
         <span class="panel-count-badge" style="background: #EFF6FF; border-color: #BFDBFE; color: #1D4ED8; font-weight: 800;">4 Live Exams · 총 400문항</span>
       </div>
 
+            <!-- A.C.E.S AI 직무 추천 프리미어 서비스 배너 카드 -->
+      <div style="background: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%); border-radius: 14px; padding: 1.35rem 1.6rem; color: #fff; margin-bottom: 1.25rem; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.35); border: 1.5px solid rgba(6, 182, 212, 0.4); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.2rem;">
+        <div style="flex: 1; min-width: 290px;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.45rem; flex-wrap: wrap;">
+            <span style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; font-size: 0.72rem; font-weight: 900; padding: 0.22rem 0.65rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 2px 6px rgba(6, 182, 212, 0.4);">AI Premier Service</span>
+            <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 9999px;">🎁 2026 무료 체험 프로모션 (2027년 유료 전환)</span>
+          </div>
+          <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 0.5rem;">
+            <span>🎯</span> A.C.E.S 6대 IT/AI 직무 추천 &amp; 역량 진단 대시보드
+          </h3>
+          <p style="margin: 0; font-size: 0.88rem; color: #cbd5e1; line-height: 1.55;">
+            DMDG 4대 평가(SQL·AI수학·데이터분석·파이썬) 결과를 기반으로, 구직자의 6대 핵심 역량을 정량화하고 머신러닝 알고리즘으로 최적의 IT/AI 직무를 추천합니다. (PDF 성적표 즉시 발급)
+          </p>
+        </div>
+        <div>
+          <button onclick="openCareerModal()" style="background: linear-gradient(135deg, #06b6d4 0%, #2563eb 50%, #7c3aed 100%); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); padding: 0.85rem 1.65rem; border-radius: 12px; font-size: 0.96rem; font-weight: 900; cursor: pointer; box-shadow: 0 6px 18px rgba(6, 182, 212, 0.45); transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 0.6rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(6, 182, 212, 0.65)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 6px 18px rgba(6, 182, 212, 0.45)';">
+            <span>🚀 직무 추천 진단 시작하기</span>
+            <span>➔</span>
+          </button>
+        </div>
+      </div>
+
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1rem;">
         <!-- Exam 1: SQL 실무 역량 평가 (90문항) -->
         <article class="app-item-card" data-keyword="sql 시험 평가 mysql 데이터베이스 쿼리 역량 평가 90문항 sql_exam" style="margin-bottom: 0; border-top: 3px solid #0284C7;">
@@ -1447,6 +1469,65 @@
   <!-- =======================================================================
        Course Popup Modal (Antigravity IDE × REA 모던 역공학 & 클린룸 재구현 과정)
        ======================================================================= -->
+    <!-- =======================================================================
+       Career Recommender Onboarding Modal (A.C.E.S 4대 평가 & AI 직무 추천)
+       ======================================================================= -->
+  <div id="career-recommender-modal-backdrop" class="course-modal-backdrop">
+    <div class="course-modal-container" style="max-width: 640px; background: #0f172a; border: 1.5px solid rgba(6, 182, 212, 0.4); color: #f8fafc; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); padding: 2.25rem 2rem;">
+      <button class="course-modal-close-btn" onclick="closeCareerModal()" title="창 닫기" style="color: #94a3b8; font-size: 1.3rem;">✕</button>
+
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.35); padding: 0.3rem 0.8rem; border-radius: 9999px; margin-bottom: 0.75rem;">
+          <span style="color: #06b6d4; font-size: 0.8rem; font-weight: 800;">🎯 DMDG A.C.E.S 프레임워크</span>
+          <span style="background: #10b981; color: #fff; font-size: 0.7rem; font-weight: 900; padding: 0.1rem 0.5rem; border-radius: 9999px;">2026 무료 응시 프로모션</span>
+        </div>
+        <h2 style="font-size: 1.5rem; font-weight: 900; margin: 0 0 0.5rem 0; color: #ffffff;">
+          IT/AI 세부 직무 추천 &amp; 역량 진단
+        </h2>
+        <p style="color: #94a3b8; font-size: 0.88rem; margin: 0; line-height: 1.5;">
+          구직자의 4대 역량 점수를 6대 축 레이더로 정량화하여 최적의 직무를 찾아드립니다.
+        </p>
+      </div>
+
+      <div style="background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem;">
+        <h4 style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: #38bdf8; display: flex; align-items: center; gap: 0.4rem;">
+          <span>📋</span> 응시 요건 및 프로세스 안내
+        </h4>
+        <ul style="margin: 0; padding-left: 1.2rem; color: #cbd5e1; font-size: 0.88rem; line-height: 1.7;">
+          <li><strong>응시 대상:</strong> DMDG 4대 핵심 평가(또는 자가 진단 평가)를 응시할 구직자·이직 준비자</li>
+          <li><strong>예상 소요시간:</strong> <strong>약 5~8분</strong> (총 4개 영역 직무 역량 지표 측정)</li>
+          <li><strong>진단 영역 (4대 핵심 축):</strong>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-top: 0.4rem; font-size: 0.8rem; color: #94a3b8;">
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.35rem 0.6rem; border-radius: 6px;">1. Analytical (데이터·수학·통계)</div>
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.35rem 0.6rem; border-radius: 6px;">2. Coding (Python·알고리즘)</div>
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.35rem 0.6rem; border-radius: 6px;">3. GenAI (LLM·프롬프트·RAG)</div>
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.35rem 0.6rem; border-radius: 6px;">4. Solution (아키텍처·비즈니스)</div>
+            </div>
+          </li>
+          <li style="margin-top: 0.5rem;"><strong>제공 혜택:</strong> 6대 IT/AI 직무 추천 순위 + 6각 네온 레이더 차트 + SHAP XAI 정량 기여도 분석 + <strong>1-Click PDF 성적표 다운로드</strong></li>
+        </ul>
+      </div>
+
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.65rem;">
+        <span style="font-size: 1.2rem;">💡</span>
+        <div style="font-size: 0.82rem; color: #fbbf24; line-height: 1.4;">
+          <strong>2026 특별 혜택:</strong> 현재 전액 <strong>무료</strong>로 이용 가능합니다.<br>
+          <span style="color: #fde68a;">(※ 2027년 1월 1일부터는 정규 유료 서비스(19,800원)로 전환됩니다.)</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button onclick="closeCareerModal()" style="flex: 1; padding: 0.85rem; background: #334155; color: #cbd5e1; border: none; border-radius: 10px; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#475569';" onmouseout="this.style.background='#334155';">
+          닫기
+        </button>
+        <a href="career_aces.html" style="flex: 2; padding: 0.85rem; background: linear-gradient(135deg, #06b6d4, #2563eb); color: #ffffff; text-decoration: none; border-radius: 10px; font-size: 0.95rem; font-weight: 900; text-align: center; display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; box-shadow: 0 4px 14px rgba(6, 182, 212, 0.4); transition: all 0.2s;" onmouseover="this.style.boxShadow='0 6px 20px rgba(6, 182, 212, 0.6)';" onmouseout="this.style.boxShadow='0 4px 14px rgba(6, 182, 212, 0.4)';">
+          <span>🚀 4대 평가 응시 &amp; 직무 추천 받기</span>
+          <span>➔</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div id="rea-course-modal-backdrop" class="course-modal-backdrop">
     <div class="course-modal-container">
       <button class="course-modal-close-btn" onclick="closeCourseModal()" title="창 닫기">✕</button>
@@ -1733,6 +1814,22 @@
     });
 
     // ── Course Modal Control Functions ────────────────────────────────────────
+
+    // ── Career Recommender Modal Functions ─────────────────────────────────────
+    function openCareerModal() {
+      const modal = document.getElementById('career-recommender-modal-backdrop');
+      if (!modal) return;
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCareerModal() {
+      const modal = document.getElementById('career-recommender-modal-backdrop');
+      if (!modal) return;
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
     function openCourseModal() {
       const modal = document.getElementById('rea-course-modal-backdrop');
       if (!modal) return;
