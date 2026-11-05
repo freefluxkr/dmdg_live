@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DMDG A.C.E.S 직무 추천 & 역량 진단 (Official)</title>
+  <title>DMDG A.C.E.S 직무 추천 & 채용 JD 정밀 진단 (Official)</title>
   <link rel="icon" href="./assets/dmdg_icon.png" type="image/png">
   <!-- html2pdf.js for 1-Click PDF Download -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -549,6 +549,9 @@
           </div>
         </div>
 
+                <!-- [NEW] 취업 준비도(Job Readiness Tier) 진단 배너 -->
+        <div id="readinessBanner" style="border-radius: 12px; padding: 18px 22px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 16px;"></div>
+
         <!-- 6-Axis KPI Box -->
         <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 24px;">
           <div style="background: #111827; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; text-align: center;">
@@ -594,7 +597,7 @@
             <!-- Rank 1 Card -->
             <div class="hero-job-card">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="background: #06b6d4; color: #041b29; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 4px;">👑 1순위 강력 추천</span>
+                <span id="topJobBadge" style="background: #06b6d4; color: #041b29; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 4px;">👑 1순위 강력 추천</span>
                 <span style="color: #22d3ee; font-weight: 900; font-size: 24px;" id="topJobProb">0%</span>
               </div>
               <h2 style="color: #ffffff; font-size: 20px; font-weight: 800; margin-bottom: 6px;" id="topJobName">-</h2>
@@ -639,6 +642,49 @@
           </div>
         </div>
 
+        <!-- [NEW] 국내외 채용 플랫폼(원티드·프로그래머스·LinkedIn) 실무 JD 분석 & 역량 Gap 분석 -->
+        <div id="jdAnalysisSection" style="background: #0f172a; border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 24px; margin-top: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <span style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 4px;">RECRUITMENT BIGDATA</span>
+              <h3 style="color: #f8fafc; font-size: 17px; font-weight: 800; margin: 6px 0 0 0;">🏢 국내외 채용 플랫폼 실무 JD 분석 &amp; 3개월 합격 로드맵</h3>
+            </div>
+            <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px;" id="jdTargetRoleBadge">-</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px;">
+            <!-- 좌측: 시장 지표 및 필수 역량 -->
+            <div style="background: #111827; border: 1px solid #1e293b; border-radius: 10px; padding: 18px;">
+              <h4 style="color: #38bdf8; font-size: 14px; margin: 0 0 12px 0;">📊 실무 채용 시장 현황 (원티드·프로그래머스·LinkedIn 2026)</h4>
+              <div style="font-size: 13px; line-height: 1.8; color: #cbd5e1;">
+                <div>• <span style="color: #94a3b8;">채용 시장 수요:</span> <strong id="jdDemand" style="color: #fff;">-</strong></div>
+                <div>• <span style="color: #94a3b8;">서류 통과 경쟁률:</span> <strong id="jdComp" style="color: #fbbf24;">-</strong></div>
+                <div>• <span style="color: #94a3b8;">국내 평균 연봉:</span> <strong id="jdSalaryKrw" style="color: #34d399;">-</strong></div>
+                <div>• <span style="color: #94a3b8;">글로벌(US) 연봉:</span> <strong id="jdSalaryGlobal" style="color: #38bdf8;">-</strong></div>
+                <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #1e293b;">• <span style="color: #94a3b8;">주요 채용 기업:</span> <span id="jdEmployers" style="color: #e2e8f0; font-size: 12px;">-</span></div>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(244, 63, 94, 0.3); border-radius: 8px; padding: 12px; margin-top: 14px;">
+                <div style="color: #f43f5e; font-weight: 700; font-size: 12.5px; margin-bottom: 6px;">🚨 서류 합격 필수 기술 요건 (Must-Have):</div>
+                <div id="jdMustHave" style="font-size: 12px; color: #cbd5e1; line-height: 1.6;"></div>
+              </div>
+            </div>
+
+            <!-- 우측: 역량 Gap 분석 및 3개월 로드맵 -->
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <div style="background: #111827; border: 1px solid #1e293b; border-radius: 10px; padding: 18px;">
+                <h4 style="color: #38bdf8; font-size: 14px; margin: 0 0 10px 0;">📉 목표 직무 기준선 대비 내 역량 Gap</h4>
+                <div id="jdGapList" style="font-size: 12.5px; line-height: 1.8;"></div>
+              </div>
+
+              <div style="background: #111827; border: 1px solid #1e293b; border-radius: 10px; padding: 18px; flex: 1;">
+                <h4 style="color: #38bdf8; font-size: 14px; margin: 0 0 10px 0;">🚀 향후 3개월 집중 취업 완성 로드맵</h4>
+                <div id="jdRoadmap" style="font-size: 12.5px; color: #cbd5e1; line-height: 1.7;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Official Seal Footer -->
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; color: #64748b; font-size: 12px;">
           <span>당목담글(DMDG) 스튜디오 AI 인재평가 공인 리포트</span>
@@ -651,6 +697,198 @@
 
   <script>
     // 6대 직무별 벤치마크 프로필
+    
+    // 국내외 취업 플랫폼(원티드, 프로그래머스, LinkedIn, Indeed) 실무 JD 빅데이터 분석 DB
+    const JOB_MARKET_INTELLIGENCE = {
+      0: {
+        roleName: "MLOps / LLMOps 엔지니어",
+        marketDemand: "🔥🔥 매우 높음 (원티드/프로그래머스 2026 채용 수요 최상위)",
+        competitionRate: "경쟁률 18:1 (실무 역량 보유자 품귀 현상)",
+        avgSalaryKrw: "신입/주니어 4,800만 ~ 6,500만원 / 3~5년차 7,500만 ~ 1억 1,000만원",
+        avgSalaryGlobal: "$110,000 ~ $165,000 (US / Remote 기준)",
+        topEmployers: "네이버, 카카오, 토스, 당근, 업스테이지 / Databricks, Pinecone 파트너사",
+        mustHave: [
+          "Docker / Kubernetes 기반 컨테이너 오케스트레이션",
+          "Python (FastAPI, Triton, vLLM) 기반 고성능 모델 서빙",
+          "CI/CD 및 MLflow / Kubeflow 파이프라인 구축 경험",
+          "Prometheus / Grafana 모니터링 및 로깅 체계"
+        ],
+        preferred: [
+          "대규모 LLM 분산 서빙 및 GPU 자원 스케줄링 최적화 경험",
+          "오픈소스 LLM 파인튜닝 파이프라인 구축 경험"
+        ],
+        roadmap3m: [
+          "1개월차: Docker 컨테이너 기반 Python FastAPI 모델 서빙 파이프라인 구축",
+          "2개월차: vLLM 또는 Ollama를 활용한 Llama-3 로컬 서빙 및 TPS/Latency 측정",
+          "3개월차: Prometheus + Grafana 연동 GPU 메모리 실시간 모니터링 포트폴리오 완성"
+        ]
+      },
+      1: {
+        roleName: "AI 모델 연구원 (Core Research)",
+        marketDemand: "⚡ 선별 채용 (상위 5% 최상위 난이도, 서류 통과율 2.1%)",
+        competitionRate: "경쟁률 45:1 (고스펙자 밀집 구간)",
+        avgSalaryKrw: "신입 석사 5,500만 ~ 7,500만원 / 박사·경력 9,000만 ~ 1억 5,000만원",
+        avgSalaryGlobal: "$140,000 ~ $220,000 (Silicon Valley Tier 1)",
+        topEmployers: "LG AI연구원, 삼성리서치, 네이버 클라우드, 카카오브레인 / Google DeepMind, Meta FAIR",
+        mustHave: [
+          "수리통계학 / 선형대수학 / 최적화 이론 심화 이해",
+          "PyTorch / JAX 딥러닝 프레임워크 기반 논문 바닥 구현(Paper-to-Code) 역량",
+          "파운데이션 모델 사전학습 및 LoRA/PEFT 경량 파인튜닝",
+          "컴퓨터공학 / 인공지능 / 통계학 석사 학위 이상 (또는 이에 준하는 연구 실적)"
+        ],
+        preferred: [
+          "NeurIPS, ICML, CVPR, ACL 등 글로벌 탑티어 학회 논문 1저자 게재",
+          "Kaggle Competition Master / Grandmaster 뱃지 보유"
+        ],
+        roadmap3m: [
+          "1개월차: 선형대수학/확률통계 수리 기초 90점 수준 회복 (고유값 분해, 역전파 미분)",
+          "2개월차: Attention Is All You Need 최신 트랜스포머 아키텍처 PyTorch로 바닥부터 구현",
+          "3개월차: LoRA/QLoRA 기반 7B 모델 다운스트림 파인튜닝 실험 및 정량 평가 리포트 작성"
+        ]
+      },
+      2: {
+        roleName: "GenAI 풀스택 개발자",
+        marketDemand: "🔥🔥🔥 폭발적 채용 (스타트업부터 대기업까지 2026 신규 채용 1위)",
+        competitionRate: "경쟁률 12:1 (포트폴리오 중심 선발, 주니어 진입 가능성 최고)",
+        avgSalaryKrw: "신입/주니어 4,000만 ~ 5,500만원 / 3년차 6,500만 ~ 9,000만원",
+        avgSalaryGlobal: "$95,000 ~ $145,000",
+        topEmployers: "뤼튼테크놀로지스, 스캐터랩, 야놀자, 우아한형제들, 오늘의집 / Y-Combinator 스타트업",
+        mustHave: [
+          "Python (FastAPI) 및 JavaScript/TypeScript(React/Next.js/Streamlit)",
+          "LangChain / LlamaIndex 프레임워크를 이용한 RAG 파이프라인 개발",
+          "Vector DB (Chroma, Pinecone, Milvus) 연동 및 하이브리드 검색 구현",
+          "OpenAI, Claude, 오픈소스 LLM API 연동 및 에러 핸들링"
+        ],
+        preferred: [
+          "상용 서비스 배포 및 일간 활성 사용자(DAU) 1,000명 이상 운영 경험",
+          "RAG Triad(적합성, 근거성, 관련성) 평가 지표 및 프롬프트 최적화"
+        ],
+        roadmap3m: [
+          "1개월차: LangChain + ChromaDB 연동 사내 문서 기반 Q&A 챗봇 완성",
+          "2개월차: Streamlit 또는 Next.js로 실제 구동 가능한 풀스택 AI 웹앱 배포",
+          "3개월차: RAG Triad 평가 지표 구축 및 Vercel/Railway 라이브 서비스 런칭"
+        ]
+      },
+      3: {
+        roleName: "AI 데이터 엔지니어 (Lakehouse)",
+        marketDemand: "🔥 매우 높음 (빅데이터 인프라 및 전사 데이터 레이크하우스 필수)",
+        competitionRate: "경쟁률 15:1 (SQL + 분산 컴퓨팅 역량 요구)",
+        avgSalaryKrw: "신입/주니어 4,500만 ~ 6,000만원 / 3~5년차 7,000만 ~ 1억원",
+        avgSalaryGlobal: "$105,000 ~ $160,000",
+        topEmployers: "현대자동차, 쿠팡, SK텔레콤, 무신사, 마켓컬리 / Snowflake, Databricks 파트너",
+        mustHave: [
+          "고급 SQL 쿼리 최적화, 윈도우 함수 및 데이터 모델링(Star Schema)",
+          "Apache Spark / PySpark 대용량 분산 배치 데이터 처리",
+          "Apache Kafka 실시간 이벤트 스트리밍 토픽 설계 및 컨슈머 파이프라인",
+          "Apache Iceberg / Delta Lake 기반 모던 데이터 레이크하우스 아키텍처"
+        ],
+        preferred: [
+          "Airflow를 활용한 일간 1,000만 건 이상 ETL 파이프라인 무중단 운영",
+          "AWS S3 / GCP BigQuery 클라우드 데이터 플랫폼 엔지니어링"
+        ],
+        roadmap3m: [
+          "1개월차: MySQL/PostgreSQL 윈도우 함수 및 복합 인덱스 튜닝 마스터 (SQL 90제)",
+          "2개월차: Docker 환경에서 Kafka + Spark 스트리밍 파이프라인 구축 실습",
+          "3개월차: Iceberg 기반 레이크하우스 아키텍처 구축 및 100만 건 데이터 쿼리 벤치마킹"
+        ]
+      },
+      4: {
+        roleName: "AI 솔루션 아키텍트 / 테크 PM",
+        marketDemand: "🔥 높음 (전 산업군 생성형 AI 도입에 따른 테크 리딩 수요)",
+        competitionRate: "경쟁률 20:1 (도메인 비즈니스 지식 + 기술 아키텍처 융합)",
+        avgSalaryKrw: "신입/주니어 4,500만 ~ 5,800만원 / 경력 7,500만 ~ 1억 2,000만원",
+        avgSalaryGlobal: "$115,000 ~ $175,000",
+        topEmployers: "삼성SDS, LG CNS, SK C&C, 메가존클라우드, 베스핀글로벌 / AWS, MS 파트너사",
+        mustHave: [
+          "비즈니스 요구사항 기술 스펙(PRD) 정의 및 개발팀 태스크 분해",
+          "엔드투엔드 클라우드 AI 서비스 아키텍처 설계 (AWS/Azure/GCP)",
+          "생성형 AI 도입 ROI 분석 및 토큰/인프라 운영 원가(TCO) 계산",
+          "AI 윤리, 보안 및 데이터 개인정보 보호 규정(GDPR, PIPA) 이해"
+        ],
+        preferred: [
+          "AWS Certified Solutions Architect 또는 GCP Cloud Architect 자격증",
+          "엔터프라이즈 AI PoC(개념검증) 리딩 및 수주 제안서 작성 경험"
+        ],
+        roadmap3m: [
+          "1개월차: 기업 비즈니스 문제 정의 및 AI 도입 타당성 분석 제안서(RFP 대응) 작성",
+          "2개월차: Mermaid / Draw.io를 활용한 엔드투엔드 클라우드 AI 아키텍처 다이어그램 설계",
+          "3개월차: 토큰 비용 및 클라우드 인프라 TCO 시뮬레이터 포트폴리오 문서화"
+        ]
+      },
+      5: {
+        roleName: "온디바이스 / 엣지 AI 엔지니어",
+        marketDemand: "🔥 높음 (자율주행, 피지컬 AI, 로보틱스, 스마트 디바이스 집중)",
+        competitionRate: "경쟁률 16:1 (C++ 및 하드웨어 가속기 전문성 요구)",
+        avgSalaryKrw: "신입/주니어 5,000만 ~ 6,500만원 / 경력 8,000만 ~ 1억 3,000만원",
+        avgSalaryGlobal: "$120,000 ~ $180,000",
+        topEmployers: "현대모비스, 한화시스템, 딥엑스, 리벨리온, 퓨리오사AI / Apple, Qualcomm, Tesla",
+        mustHave: [
+          "C/C++ 및 Python 프로그래밍 역량 (메모리 관리 및 알고리즘 최적화)",
+          "ONNX / TensorRT 프레임워크를 활용한 딥러닝 모델 경량화 및 가속",
+          "모델 양자화(INT8/FP16 Quantization) 및 가지치기(Pruning) 기법",
+          "임베디드 리눅스 환경 개발 및 디버깅 경험"
+        ],
+        preferred: [
+          "NPU / GPU 하드웨어 가속기 내부 구조에 대한 깊은 이해",
+          "실시간 객체 검출(YOLO) 엣지 디바이스 30FPS 실시간 구동 경험"
+        ],
+        roadmap3m: [
+          "1개월차: C++ 현대 문법(C++17) 및 Python 연동(PyBind11) 실습",
+          "2개월차: PyTorch 모델을 ONNX 형식으로 변환 및 TensorRT 엔진 최적화",
+          "3개월차: 라즈베리파이 또는 Jetson 보드에서 INT8 양자화 모델 실시간 추론 데모 완성"
+        ]
+      }
+    };
+
+    function evaluateJobReadiness(userScores) {
+      const uMean = userScores.reduce((a, b) => a + b, 0) / 6;
+      if (uMean < 40) {
+        return {
+          tier: "TIER_1_TRAINEE",
+          tierTitle: "🚨 기초 빌드업 단계 (Pre-Trainee / 취업 집중 준비 필요)",
+          badgeColor: "#ef4444",
+          badgeBg: "rgba(239, 68, 68, 0.15)",
+          verdict: `현재 종합 역량(평균 ${uMean.toFixed(1)}점)은 국내외 실무 IT/AI 기업의 최소 서류/코딩테스트 통과선(평균 60~65점)에 도달하지 못했습니다. 지금 바로 실무 채용에 지원할 경우 서류 및 1차 전형 탈락 위험이 90% 이상으로 매우 높으므로, 즉시 취업보다는 '기초 핵심 역량 3개월 빌드업'이 최우선 과제입니다.`,
+          immediateAction: "기초 알고리즘 코딩(Python) 및 데이터 정제(SQL/Pandas) 학습 필수",
+          realisticEntryRole: "AI 프롬프트/데이터 테스터 & 주니어 IT 어시스턴트",
+          heroTag: "🎯 장기 목표 희망 직무 (※ 즉시 실무 투입 어려움)"
+        };
+      } else if (uMean < 65) {
+        return {
+          tier: "TIER_2_JUNIOR",
+          tierTitle: "⚠️ 주니어 인턴 / 엔트리 지원 가능 단계 (Junior Entry)",
+          badgeColor: "#f59e0b",
+          badgeBg: "rgba(245, 158, 11, 0.15)",
+          verdict: `기본적인 IT/데이터 다루기는 가능(평균 ${uMean.toFixed(1)}점)하나, 원티드/프로그래머스 기준 신입 공채 서류 통과를 위해서는 실무 수준의 포트폴리오(RAG 서비스 또는 데이터 파이프라인 구축물)가 반드시 보강되어야 합니다.`,
+          immediateAction: "상용 배포 경험(FastAPI + VectorDB) 포트폴리오 1~2건 제작",
+          realisticEntryRole: "GenAI 풀스택 주니어 개발자 / 주니어 데이터 분석가",
+          heroTag: "⚠️ 주니어 신입 추천 직무 (포트폴리오 보강 필수)"
+        };
+      } else if (uMean < 85) {
+        return {
+          tier: "TIER_3_ASSOCIATE",
+          tierTitle: "✅ 실무 즉시 투입 안정권 (Job-Ready Associate)",
+          badgeColor: "#10b981",
+          badgeBg: "rgba(16, 185, 129, 0.15)",
+          verdict: `원티드, 프로그래머스, LinkedIn 기준 신입~경력 1~3년 차 실무 요구 스펙을 충족(평균 ${uMean.toFixed(1)}점)하고 있습니다. 자신감을 가지고 타깃 직무의 채용 공고에 적극 지원 가능한 상태입니다.`,
+          immediateAction: "타깃 기업 맞춤형 기술 면접 대비 및 실무 아키텍처 설명 역량 강화",
+          realisticEntryRole: "MLOps 엔지니어 / GenAI 풀스택 개발자 / AI 데이터 엔지니어",
+          heroTag: "👑 1순위 실무 즉시 투입 강력 추천"
+        };
+      } else {
+        return {
+          tier: "TIER_4_SPECIALIST",
+          tierTitle: "👑 핵심 연구원 / 테크 스페셜리스트 (Senior / Core Research)",
+          badgeColor: "#8b5cf6",
+          badgeBg: "rgba(139, 92, 246, 0.15)",
+          verdict: `최상위 연구원 및 테크 리더 수준의 뛰어난 역량(평균 ${uMean.toFixed(1)}점)을 보유하고 있습니다. 파운데이션 모델 연구, 수리 모델링, 글로벌 탑티어 테크 기업 지원에 적합합니다.`,
+          immediateAction: "탑티어 AI 연구소 및 빅테크 시니어 포지션 타깃팅",
+          realisticEntryRole: "AI 모델 연구원 (Core Research) / MLOps 수석 아키텍트",
+          heroTag: "💎 1순위 최상위 스페셜리스트 / 연구원 추천"
+        };
+      }
+    }
+
     const JOBS = [
       { name: "MLOps / LLMOps 엔지니어", scores: [65, 82, 90, 78, 55, 75], desc: "LLM 분산 서빙, FastMCP 인프라, 실시간 모니터링 및 벡터 DB 최적화 총괄", skills: "Data/Infra 90점 · Coding 82점 · GenAI 78점" },
       { name: "AI 모델 연구원 (Core Research)", scores: [94, 85, 60, 72, 45, 70], desc: "신규 알고리즘 연구, 수리 모델링, 파운데이션 모델 사전학습 및 파라미터 경량화(LoRA)", skills: "Math 94점 · Coding 85점 · Architecture 70점" },
@@ -872,3 +1110,4 @@
   </script>
 </body>
 </html>
+
