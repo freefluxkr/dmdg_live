@@ -347,6 +347,149 @@
     @media (max-width: 768px) {
       .result-grid { grid-template-columns: 1fr; }
     }
+  
+    /* Distinct Preview Hub (Samples) */
+    .preview-hub-section {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 2px solid rgba(168, 85, 247, 0.5);
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px -5px rgba(168, 85, 247, 0.25);
+    }
+
+    .preview-sample-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .preview-sample-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .preview-sample-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .preview-sample-card.junior {
+      border-color: rgba(239, 68, 68, 0.45);
+    }
+    .preview-sample-card.junior:hover {
+      border-color: #ef4444;
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.25);
+    }
+
+    .preview-sample-card.genai {
+      border-color: rgba(6, 182, 212, 0.45);
+    }
+    .preview-sample-card.genai:hover {
+      border-color: #06b6d4;
+      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.25);
+    }
+
+    .preview-sample-card.research {
+      border-color: rgba(168, 85, 247, 0.45);
+    }
+    .preview-sample-card.research:hover {
+      border-color: #a855f7;
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25);
+    }
+
+    .btn-sample-trigger {
+      width: 100%;
+      margin-top: 12px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-sample-trigger.red {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.3));
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.5);
+    }
+    .btn-sample-trigger.red:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .btn-sample-trigger.cyan {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(2, 132, 199, 0.3));
+      color: #67e8f9;
+      border: 1px solid rgba(6, 182, 212, 0.5);
+    }
+    .btn-sample-trigger.cyan:hover {
+      background: #06b6d4;
+      color: #041b29;
+    }
+
+    .btn-sample-trigger.purple {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(126, 34, 206, 0.3));
+      color: #d8b4fe;
+      border: 1px solid rgba(168, 85, 247, 0.5);
+    }
+    .btn-sample-trigger.purple:hover {
+      background: #a855f7;
+      color: #ffffff;
+    }
+
+    /* Assessment Mode Section */
+    .assessment-mode-section {
+      background: linear-gradient(135deg, rgba(8, 20, 36, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%);
+      border: 2px solid rgba(6, 182, 212, 0.45);
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px -5px rgba(6, 182, 212, 0.2);
+    }
+
+    .mode-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .mode-select-card {
+      background: #0f172a;
+      border: 2px solid #1e293b;
+      border-radius: 12px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .mode-select-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+
+    .mode-select-card.active {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(37, 99, 235, 0.1) 100%);
+      border-color: #06b6d4;
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+    }
+    
   </style>
 </head>
 <body>
@@ -372,49 +515,135 @@
       <p>구직자 4대 기둥 역량을 6대 축 레이더로 정량화하여, 원티드·프로그래머스·LinkedIn 실무 채용 시장 빅데이터와 1:1 매칭합니다.</p>
     </header>
 
-    <!-- 2대 진단 모드 선택 & 샘플 체험 바 -->
-    <div class="mode-nav-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
-        <span style="font-size: 13.5px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 6px;">
-          <span>🧭</span> 응시 목적에 맞는 진단 방식을 선택하세요:
+    <!-- ===================================================================
+         SECTION 1: [샘플 예시 즉시 체험관] (Instant Sample Preview)
+         평가 문항 풀이 없이 최종 결과 화면과 채용 JD 분석을 1초 만에 확인
+         =================================================================== -->
+    <section class="preview-hub-section">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+        <span style="background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff; font-size: 11px; font-weight: 900; padding: 4px 11px; border-radius: 9999px; letter-spacing: 0.05em; box-shadow: 0 2px 8px rgba(168, 85, 247, 0.4);">
+          👀 SECTION 1 · 결과 화면 1초 즉시 체험관 (SAMPLE PREVIEW)
         </span>
-        <!-- 샘플 예시 즉시 보기 버튼 -->
-        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-          <span style="font-size: 12px; color: #94a3b8; font-weight: 700;">👀 샘플 예시 즉시 보기:</span>
-          <button class="sample-btn" onclick="loadSamplePreset('junior')" style="border-color: rgba(239, 68, 68, 0.5); color: #f87171;">
-            🌱 [샘플 1] 취준생/입문 (20점대 갭분석)
-          </button>
-          <button class="sample-btn" onclick="loadSamplePreset('genai')" style="border-color: rgba(6, 182, 212, 0.5); color: #38bdf8;">
-            🚀 [샘플 2] 2년차 GenAI (70점대 안정권)
-          </button>
-          <button class="sample-btn" onclick="loadSamplePreset('research')" style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;">
-            🔬 [샘플 3] AI 연구원 (90점대 코어)
-          </button>
+        <span style="color: #cbd5e1; font-size: 12px; font-weight: 700;">※ 문항 풀이 없이 클릭 즉시 결과 산출</span>
+      </div>
+      <h2 style="font-size: 18px; font-weight: 900; color: #ffffff; margin: 4px 0 6px 0;">
+        🌟 "시험 보기 전, 최종 추천 결과 리포트가 어떻게 나오는지 궁금하신가요?"
+      </h2>
+      <p style="color: #cbd5e1; font-size: 13px; line-height: 1.5; margin: 0;">
+        아래 3가지 대표 구직자 유형 중 하나를 선택하시면, DMDG 머신러닝 엔진이 도출하는 <strong>6각 레이더 차트, 국내외 채용 JD 빅데이터 분석, 3개월 합격 로드맵</strong>을 1초 만에 미리 체험하실 수 있습니다.
+      </p>
+
+      <div class="preview-sample-grid">
+        <!-- Sample 1: 취준생 / 입문자 -->
+        <div class="preview-sample-card junior" onclick="loadSamplePreset('junior')">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="background: rgba(239, 68, 68, 0.2); color: #f87171; font-size: 11px; font-weight: 900; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(239, 68, 68, 0.4);">🚨 기초 빌드업 단계</span>
+              <span style="color: #ef4444; font-weight: 900; font-size: 13px;">평균 16.2점</span>
+            </div>
+            <h3 style="font-size: 15px; font-weight: 800; color: #ffffff; margin: 0 0 6px 0;">🌱 [샘플 1] 비전공 / 취업 준비생</h3>
+            <div style="color: #94a3b8; font-size: 12px; line-height: 1.55;">
+              • 비현실적 연구원 추천 원천 차단 (1.2% 패널티)<br>
+              • 현실적 입문 경로(AI 테스터/IT 어시스턴트) 제시<br>
+              • 6대 역량 취약점(Gap) 및 3개월 집중 처방전
+            </div>
+          </div>
+          <button class="btn-sample-trigger red">👉 [샘플 1] 결과 리포트 즉시 보기 ➔</button>
+        </div>
+
+        <!-- Sample 2: 2년차 GenAI 개발자 -->
+        <div class="preview-sample-card genai" onclick="loadSamplePreset('genai')">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="background: rgba(6, 182, 212, 0.2); color: #38bdf8; font-size: 11px; font-weight: 900; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(6, 182, 212, 0.4);">✅ 실무 합격 안정권</span>
+              <span style="color: #38bdf8; font-weight: 900; font-size: 13px;">평균 74.2점</span>
+            </div>
+            <h3 style="font-size: 15px; font-weight: 800; color: #ffffff; margin: 0 0 6px 0;">🚀 [샘플 2] 2년차 GenAI 실무 개발자</h3>
+            <div style="color: #94a3b8; font-size: 12px; line-height: 1.55;">
+              • 1순위: GenAI 풀스택 / 백엔드 개발자 강력 추천<br>
+              • 원티드/LinkedIn 2026 연봉(4,500만~6,500만) 매칭<br>
+              • RAG Triad 평가 및 모델 경량 서빙 포트폴리오
+            </div>
+          </div>
+          <button class="btn-sample-trigger cyan">👉 [샘플 2] 결과 리포트 즉시 보기 ➔</button>
+        </div>
+
+        <!-- Sample 3: AI 모델 연구원 -->
+        <div class="preview-sample-card research" onclick="loadSamplePreset('research')">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-size: 11px; font-weight: 900; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(168, 85, 247, 0.4);">👑 상위 5% 코어 연구직</span>
+              <span style="color: #c084fc; font-weight: 900; font-size: 13px;">평균 89.5점</span>
+            </div>
+            <h3 style="font-size: 15px; font-weight: 800; color: #ffffff; margin: 0 0 6px 0;">🔬 [샘플 3] AI 모델 연구원 (Core)</h3>
+            <div style="color: #94a3b8; font-size: 12px; line-height: 1.55;">
+              • 1순위: AI 모델 연구원 (수리통계 95점·코딩 88점)<br>
+              • 글로벌 Silicon Valley 연봉($140k~$220k) 매칭<br>
+              • 논문 바닥 구현 및 LoRA/PEFT 경량 파인튜닝 로드맵
+            </div>
+          </div>
+          <button class="btn-sample-trigger purple">👉 [샘플 3] 결과 리포트 즉시 보기 ➔</button>
         </div>
       </div>
+    </section>
 
-      <!-- 2대 모드 탭 -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-        <div id="tabModeQuick" class="tab-btn active" onclick="switchMode('quick')">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <strong style="color: #38bdf8; font-size: 14px;">⚡ 모드 1: 5분 쾌속 직무 매칭 (자가 진단)</strong>
-            <span style="background: #06b6d4; color: #041b29; font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 4px;">⏱️ 약 5~8분</span>
+    <!-- Visual Separator Bar -->
+    <div style="display: flex; align-items: center; justify-content: center; margin: 26px 0 22px 0; gap: 16px;">
+      <div style="flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.4));"></div>
+      <div style="background: #0f172a; border: 1.5px solid rgba(56, 189, 248, 0.5); padding: 7px 18px; border-radius: 9999px; color: #38bdf8; font-size: 12.5px; font-weight: 800; display: flex; align-items: center; gap: 8px; box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);">
+        <span>⚡</span> 또는 (OR) 아래에서 내 실제 역량으로 직접 평가 응시하기
+      </div>
+      <div style="flex: 1; height: 1.5px; background: linear-gradient(90deg, rgba(56, 189, 248, 0.4), transparent);"></div>
+    </div>
+
+    <!-- ===================================================================
+         SECTION 2: [실전 평가 응시 트랙] (Start My Assessment)
+         내 실력으로 직접 진단받기 (모드 1: 5분 쾌속 vs 모드 2: 정규 4대 시험)
+         =================================================================== -->
+    <section class="assessment-mode-section">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+        <span style="background: linear-gradient(135deg, #06b6d4, #2563eb); color: #fff; font-size: 11px; font-weight: 900; padding: 4px 11px; border-radius: 9999px; letter-spacing: 0.05em; box-shadow: 0 2px 8px rgba(6, 182, 212, 0.4);">
+          🎯 SECTION 2 · 내 역량 기반 실전 직무 추천 응시 (REAL ASSESSMENT)
+        </span>
+        <span style="color: #38bdf8; font-size: 12px; font-weight: 700;">원하는 응시 트랙을 클릭하세요</span>
+      </div>
+      <h2 style="font-size: 18px; font-weight: 900; color: #ffffff; margin: 4px 0 6px 0;">
+        📝 "구직자 본인의 실제 역량으로 진단받으시겠습니까? 응시 방식을 선택하세요."
+      </h2>
+      <p style="color: #94a3b8; font-size: 13px; line-height: 1.5; margin: 0;">
+        시간이 촉박하신 분은 5분 쾌속 자가진단을, 공인 인증 성적표가 필요하신 분은 4대 시험 공식 성적표 연동을 선택해 주세요.
+      </p>
+
+      <div class="mode-cards-grid">
+        <!-- Track 1: 5분 쾌속 직무 매칭 -->
+        <div id="tabModeQuick" class="mode-select-card active" onclick="switchMode('quick')">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <strong style="color: #38bdf8; font-size: 15px;">⚡ [트랙 1] 5분 쾌속 직무 매칭 (자가 진단)</strong>
+            <span style="background: #06b6d4; color: #041b29; font-size: 11px; font-weight: 900; padding: 2px 8px; border-radius: 4px;">⏱️ 약 5~8분 소요</span>
           </div>
-          <div style="font-size: 12px; color: #94a3b8; line-height: 1.4;">
-            4대 기둥 12개 핵심 역량 슬라이더를 5분 만에 입력하고 직무 추천과 채용 JD 분석을 즉시 확인합니다.
+          <div style="font-size: 12.5px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px;">
+            4대 기둥 12개 역량 슬라이더를 5분 만에 입력하고 채용 JD 분석 &amp; 3개월 합격 로드맵을 즉시 확인합니다.
+          </div>
+          <div id="statusTagQuick" style="display: inline-flex; align-items: center; gap: 4px; background: rgba(6, 182, 212, 0.2); color: #38bdf8; font-size: 11.5px; font-weight: 800; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(6, 182, 212, 0.4);">
+            ✅ 현재 선택됨: 5분 쾌속 진단 진행 중
           </div>
         </div>
 
-        <div id="tabModeOfficial" class="tab-btn" onclick="switchMode('official')">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <strong style="color: #cbd5e1; font-size: 14px;">🎓 모드 2: 정규 4대 시험 성적 기반 (공인 인증)</strong>
-            <span style="background: #334155; color: #e2e8f0; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">총 400문항 실기</span>
+        <!-- Track 2: 정규 4대 시험 성적표 기반 -->
+        <div id="tabModeOfficial" class="mode-select-card" onclick="switchMode('official')">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <strong style="color: #cbd5e1; font-size: 15px;">🎓 [트랙 2] 정규 4대 시험 성적표 기반 (공인 인증)</strong>
+            <span style="background: #334155; color: #e2e8f0; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">총 400문항 공인 실기</span>
           </div>
-          <div style="font-size: 12px; color: #64748b; line-height: 1.4;">
-            DMDG 4대 평가 센터(SQL·수학·데이터·파이썬)에서 실제로 획득한 시험 점수로 정밀 추천을 산출합니다.
+          <div style="font-size: 12.5px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">
+            DMDG 4대 평가(SQL 90문항·수학 75문항·데이터 90문항·파이썬 145문항)에서 실제로 획득한 성적으로 공인 추천서를 발행합니다.
+          </div>
+          <div id="statusTagOfficial" style="display: inline-flex; align-items: center; gap: 4px; background: rgba(51, 65, 85, 0.5); color: #94a3b8; font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 4px; border: 1px solid #334155;">
+            🔘 클릭 시 전환: 4대 시험 성적표 입력
           </div>
         </div>
       </div>
+    </section>
     </div>
 
     <!-- VIEW A: 5분 쾌속 진단 모드 (12문항 슬라이더) -->
@@ -630,14 +859,18 @@
     <div id="resultSection">
       
       <!-- Top Action Bar -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; gap: 8px;">
-          <button class="btn-nav" onclick="resetAssessment()">🔄 다시 진단하기</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 12px 18px;">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <button class="btn-nav" onclick="resetAssessment()" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; font-weight: 800;">
+            🔄 내 실력으로 다시 진단하기
+          </button>
+          <span style="color: #64748b; margin: 0 4px;">|</span>
+          <span style="font-size: 12px; color: #94a3b8; font-weight: 700;">다른 샘플 바로보기:</span>
           <button class="sample-btn" onclick="loadSamplePreset('junior')" style="border-color: rgba(239, 68, 68, 0.5); color: #f87171;">🌱 취준생 샘플</button>
           <button class="sample-btn" onclick="loadSamplePreset('genai')" style="border-color: rgba(6, 182, 212, 0.5); color: #38bdf8;">🚀 2년차 GenAI</button>
-          <button class="sample-btn" onclick="loadSamplePreset('research')" style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;">🔬 AI 연구원</button>
+          <button class="sample-btn" onclick="loadSamplePreset('research')" style="border-color: rgba(168, 85, 247, 0.5); color: #c084fc;">🔬 AI 연구원</button>
         </div>
-        <button class="btn-pdf-download" onclick="downloadReportPDF()">📄 진단 결과 및 채용 JD 성적표 PDF 다운로드 (1-Click)</button>
+        <button class="btn-pdf-download"  onclick="downloadReportPDF()">📄 진단 결과 및 채용 JD 성적표 PDF 다운로드 (1-Click)</button>
       </div>
 
       <!-- Printable Report Container -->
@@ -991,15 +1224,41 @@
 
     // ── Mode Switcher Function ──
     function switchMode(mode) {
+      const tagQuick = document.getElementById('statusTagQuick');
+      const tagOfficial = document.getElementById('statusTagOfficial');
       if (mode === 'quick') {
         document.getElementById('tabModeQuick').classList.add('active');
         document.getElementById('tabModeOfficial').classList.remove('active');
+        if (tagQuick) {
+          tagQuick.innerHTML = '✅ 현재 선택됨: 5분 쾌속 진단 진행 중';
+          tagQuick.style.background = 'rgba(6, 182, 212, 0.2)';
+          tagQuick.style.color = '#38bdf8';
+          tagQuick.style.borderColor = 'rgba(6, 182, 212, 0.4)';
+        }
+        if (tagOfficial) {
+          tagOfficial.innerHTML = '🔘 클릭 시 전환: 4대 시험 성적표 입력';
+          tagOfficial.style.background = 'rgba(51, 65, 85, 0.5)';
+          tagOfficial.style.color = '#94a3b8';
+          tagOfficial.style.borderColor = '#334155';
+        }
         document.getElementById('quickAssessmentView').style.display = 'block';
         document.getElementById('officialExamView').style.display = 'none';
         document.getElementById('reportModeBadge').innerText = '5분 쾌속 진단 모드';
       } else {
         document.getElementById('tabModeQuick').classList.remove('active');
         document.getElementById('tabModeOfficial').classList.add('active');
+        if (tagQuick) {
+          tagQuick.innerHTML = '🔘 클릭 시 전환: 5분 쾌속 진단';
+          tagQuick.style.background = 'rgba(51, 65, 85, 0.5)';
+          tagQuick.style.color = '#94a3b8';
+          tagQuick.style.borderColor = '#334155';
+        }
+        if (tagOfficial) {
+          tagOfficial.innerHTML = '✅ 현재 선택됨: 4대 시험 성적표 입력 진행 중';
+          tagOfficial.style.background = 'rgba(16, 185, 129, 0.2)';
+          tagOfficial.style.color = '#34d399';
+          tagOfficial.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+        }
         document.getElementById('quickAssessmentView').style.display = 'none';
         document.getElementById('officialExamView').style.display = 'block';
         document.getElementById('reportModeBadge').innerText = '정규 4대 시험 성적표 기반 공인 인증';
@@ -1073,7 +1332,7 @@
     function loadSamplePreset(type) {
       let scores = [];
       if (type === 'junior') {
-        scores = [16, 21, 14, 10, 15, 21]; // 구직자 실제 저점수 예시
+        scores = [16, 21, 14, 10, 15, 21]; // 구직자 저점수 예시
         document.getElementById('reportModeBadge').innerText = '🌱 [샘플 1] 취준생/입문 (20점대 갭분석)';
       } else if (type === 'genai') {
         scores = [62, 85, 65, 88, 70, 75]; // 2년차 실무자
@@ -1083,6 +1342,10 @@
         document.getElementById('reportModeBadge').innerText = '🔬 [샘플 3] AI 모델 연구원 (90점대 코어)';
       }
       executeFullAnalysis(scores);
+      setTimeout(() => {
+        const target = document.getElementById('resultSection');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
 
     // ── Calculate from Sliders (Mode 1) ──
