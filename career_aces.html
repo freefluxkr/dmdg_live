@@ -14,312 +14,323 @@
     :root {
       --bg-dark: #070b14;
       --card-bg: #0f172a;
-      --card-border: #1e293b;
-      --accent-cyan: #06b6d4;
-      --accent-blue: #38bdf8;
-      --accent-emerald: #10b981;
-      --accent-amber: #f59e0b;
-      --accent-rose: #f43f5e;
+      --panel-border: #1e293b;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
+      --cyan-neon: #06b6d4;
+      --blue-neon: #3b82f6;
+      --purple-neon: #8b5cf6;
+      --green-neon: #10b981;
+      --amber-neon: #f59e0b;
+      --rose-neon: #f43f5e;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       background-color: var(--bg-dark);
       color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
-      padding: 20px;
+      padding: 24px 16px 80px;
     }
 
     .container {
-      max-width: 1140px;
+      max-width: 1040px;
       margin: 0 auto;
     }
 
-    /* Header Banner */
+    /* Promo & Pricing Banner */
     .promo-banner {
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(2, 132, 199, 0.1) 100%);
-      border: 1px solid rgba(6, 182, 212, 0.35);
-      border-radius: 12px;
-      padding: 12px 20px;
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .promo-badge {
-      background: #06b6d4;
-      color: #03131e;
-      font-weight: 800;
-      font-size: 11.5px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.5px;
-    }
-    .promo-text {
-      font-size: 13px;
-      color: #cbd5e1;
-    }
-    .promo-price {
-      font-size: 12.5px;
-      color: #f59e0b;
-      font-weight: 700;
+      gap: 8px;
     }
 
-    .app-header {
-      background: linear-gradient(135deg, #091222 0%, #0d1b33 50%, #15102a 100%);
-      border: 1px solid #1e293b;
-      border-left: 6px solid var(--accent-cyan);
-      border-radius: 14px;
-      padding: 24px 28px;
-      margin-bottom: 24px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    .promo-badge {
+      background: #10b981;
+      color: #042f2e;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 4px;
     }
+
+    .promo-text {
+      font-size: 13px;
+      color: #34d399;
+      font-weight: 600;
+    }
+
+    .promo-price {
+      font-size: 12px;
+      color: #fde68a;
+    }
+
+    /* Header */
+    .app-header {
+      background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+      border: 1.5px solid rgba(6, 182, 212, 0.4);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
     .app-header h1 {
       font-size: 24px;
-      font-weight: 800;
+      font-weight: 900;
       color: #ffffff;
       margin-bottom: 6px;
     }
+
     .app-header p {
       color: var(--text-muted);
       font-size: 13.5px;
-    }
-
-    /* Modal Styles */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 20px;
-      opacity: 1;
-      visibility: visible;
-      transition: all 0.3s ease;
-    }
-    .modal-overlay.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .modal-box {
-      background: #0f172a;
-      border: 1.5px solid #06b6d4;
-      border-radius: 16px;
-      max-width: 620px;
-      width: 100%;
-      padding: 30px;
-      box-shadow: 0 0 35px rgba(6, 182, 212, 0.35);
-      position: relative;
-    }
-    .modal-header {
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 16px;
-      margin-bottom: 18px;
-    }
-    .modal-header h2 {
-      font-size: 20px;
-      color: #38bdf8;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .modal-list {
-      list-style: none;
-      margin: 16px 0;
-    }
-    .modal-list li {
-      padding: 10px 14px;
-      background: #111827;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      font-size: 13.5px;
-      color: #cbd5e1;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .modal-list li strong {
-      color: #38bdf8;
-    }
-    .modal-info-box {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 8px;
-      padding: 12px 16px;
-      font-size: 13px;
-      color: #fcd34d;
-      margin: 16px 0 24px 0;
       line-height: 1.5;
     }
-    .modal-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-    }
-    .btn-modal-start {
-      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
-      color: #fff;
-      border: 1px solid #38bdf8;
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
-      transition: all 0.2s;
-    }
-    .btn-modal-start:hover {
-      background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
-      transform: translateY(-1px);
-    }
 
-    /* Assessment Screen */
-    .screen-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 26px;
+    /* Mode Navigation Tabs */
+    .mode-nav-box {
+      background: #0d1527;
+      border: 1.5px solid #1e293b;
+      border-radius: 14px;
+      padding: 18px 20px;
       margin-bottom: 24px;
     }
 
-    .pillar-step {
-      display: none;
+    .tab-btn {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1.5px solid #1e293b;
+      background: #0f172a;
+      color: #94a3b8;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
     }
-    .pillar-step.active {
-      display: block;
+
+    .tab-btn.active {
+      background: rgba(6, 182, 212, 0.12);
+      border-color: #06b6d4;
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
     }
+
+    .sample-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sample-btn:hover {
+      background: #334155;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Screen Cards */
+    .screen-card {
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .pillar-step { display: none; }
+    .pillar-step.active { display: block; }
 
     .step-badge {
       display: inline-block;
       background: rgba(56, 189, 248, 0.15);
       border: 1px solid rgba(56, 189, 248, 0.3);
       color: #38bdf8;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 9999px;
       margin-bottom: 12px;
     }
 
     .question-block {
-      background: #111827;
-      border: 1px solid #1e293b;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 10px;
-      padding: 18px 20px;
-      margin-bottom: 16px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
     }
+
     .question-title {
-      font-size: 14.5px;
-      font-weight: 700;
-      color: #f1f5f9;
-      margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 10px;
     }
+
     .slider-val {
+      font-size: 14px;
+      font-weight: 900;
       color: #38bdf8;
-      font-weight: 800;
-      font-size: 15px;
     }
 
     input[type=range] {
       width: 100%;
       height: 6px;
+      border-radius: 4px;
       background: #1e293b;
-      border-radius: 3px;
       outline: none;
-      accent-color: #06b6d4;
+      -webkit-appearance: none;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #06b6d4;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
     }
 
     .step-nav {
       display: flex;
       justify-content: space-between;
-      margin-top: 24px;
+      margin-top: 20px;
     }
+
     .btn-nav {
       background: #1e293b;
       border: 1px solid #334155;
       color: #cbd5e1;
-      padding: 10px 22px;
+      padding: 9px 18px;
       border-radius: 8px;
-      font-size: 13.5px;
       font-weight: 700;
+      font-size: 13px;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .btn-nav:hover {
-      background: #334155;
-      color: #fff;
-    }
+
     .btn-nav.primary {
-      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
-      border-color: #38bdf8;
-      color: #fff;
+      background: linear-gradient(135deg, #06b6d4, #2563eb);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.35);
     }
 
-    /* Result Dashboard Styles */
-    #resultSection {
-      display: none;
+    /* Exam Cards in Official Mode */
+    .exam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
     }
+
+    .exam-mini-card {
+      background: #111827;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .exam-mini-card h4 {
+      font-size: 13.5px;
+      color: #f1f5f9;
+      margin-bottom: 4px;
+    }
+
+    .exam-mini-card span {
+      font-size: 11.5px;
+      color: #94a3b8;
+    }
+
+    .exam-link-btn {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #38bdf8;
+      text-decoration: none;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      text-align: center;
+    }
+
+    .exam-link-btn:hover {
+      background: rgba(56, 189, 248, 0.2);
+    }
+
+    /* Results Dashboard */
+    #resultSection { display: none; }
 
     .result-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 20px;
       margin-bottom: 24px;
-    }
-    @media(max-width: 860px) {
-      .result-grid { grid-template-columns: 1fr; }
     }
 
     .hero-job-card {
       background: linear-gradient(135deg, #091e2b 0%, #0d273d 50%, #111827 100%);
       border: 2px solid #06b6d4;
       border-radius: 12px;
-      padding: 22px 24px;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.2);
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.25);
     }
+
     .sub-job-card {
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #111827;
+      border: 1px solid #1e293b;
       border-radius: 10px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       margin-bottom: 10px;
     }
+
     .prog-bar-bg {
       background: #1e293b;
       border-radius: 4px;
       height: 7px;
-      overflow: hidden;
       margin-top: 6px;
+      overflow: hidden;
     }
+
     .prog-bar-fill {
       background: linear-gradient(90deg, #0284c7, #38bdf8);
       height: 7px;
     }
 
-    /* Print & PDF formatting */
     .btn-pdf-download {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #ffffff;
       border: 1px solid #34d399;
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 800;
+      padding: 10px 20px;
+      border-radius: 8px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -327,46 +338,22 @@
       box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
       transition: all 0.2s;
     }
+
     .btn-pdf-download:hover {
       background: linear-gradient(135deg, #059669 0%, #047857 100%);
       transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .result-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ONBOARDING MODAL (4대 평가 안내 & 소요시간 & 2026 무료/2027 유료 공지) -->
-  <div id="acesModal" class="modal-overlay">
-    <div class="modal-box">
-      <div class="modal-header">
-        <h2>🎯 A.C.E.S 4대 종합 역량 평가 &amp; 직무 추천</h2>
-      </div>
-      <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.6;">
-        본 서비스는 단순 설문이 아닌, 지원자의 실제 IT/AI 핵심 실무 역량을 4대 기둥(4-Pillars)으로 정밀 진단하여 <strong>최적의 6대 IT/AI 전문 직무와 SHAP XAI 정량 사유</strong>를 도출합니다.
-      </p>
-
-      <ul class="modal-list">
-        <li><span>📐</span> <div><strong>Pillar 1: 기초 수리·알고리즘 논리</strong> (Analytical Foundations)</div></li>
-        <li><span>💻</span> <div><strong>Pillar 2: SW 코딩 및 모듈 설계</strong> (Coding &amp; System Eng)</div></li>
-        <li><span>🤖</span> <div><strong>Pillar 3: 생성형 AI &amp; LLMOps</strong> (GenAI &amp; Operationalization)</div></li>
-        <li><span>💼</span> <div><strong>Pillar 4: 비즈니스 문제정의 &amp; 완성도</strong> (Solution Impact &amp; Capstone)</div></li>
-      </ul>
-
-      <div class="modal-info-box">
-        ⏱️ <strong>예상 소요 시간</strong>: <strong>약 5분 ~ 8분</strong> (4대 기둥 12개 핵심 역량 지표 슬라이더 진단)<br>
-        <div style="font-size: 11.5px; color: #94a3b8; margin: 4px 0;">※ 하단 4대 정규 시험(총 400문항, 과목당 40~50분) 응시 성적이 있으신 경우 해당 점수를 즉시 반영하여 정밀 매칭됩니다.</div>
-        🎁 <strong>가격 프로모션</strong>: 2026년 한정 <strong>100% 무료 제공</strong> (2027년 1월 1일 건당 19,800원 정식 유료화 예정)<br>
-        📄 <strong>제공 혜택</strong>: 육각형 레이더 + 6대 직무 랭킹 + 채용 JD 분석 + <strong>공식 진단 성적표 PDF 다운로드</strong>
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn-modal-start" onclick="startAssessment()">🚀 4대 평가 응시하고 직무 추천받기 (무료) ➔</button>
-      </div>
-    </div>
-  </div>
-
   <div class="container">
-    <!-- Top Promo Banner -->
+
+    <!-- 2026 Promo Banner -->
     <div class="promo-banner">
       <div style="display: flex; align-items: center; gap: 10px;">
         <span class="promo-badge">2026 PROMO</span>
@@ -381,18 +368,63 @@
         <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-weight: 700; font-size: 11px; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.3);">DMDG Enterprise HR-Tech</span>
         <a href="https://dmdg-live.com/" style="color: #38bdf8; font-size: 12px; text-decoration: none;">🏛️ 메인 포털로 돌아가기</a>
       </div>
-      <h1>🎯 A.C.E.S 4대 평가 기반 IT/AI 직무 추천 콘솔</h1>
-      <p>수리·알고리즘(A), SW 코딩(C), GenAI·LLMOps(E), 비즈니스 임팩트(S) 4대 축을 종합하여 최적의 직무를 추천합니다.</p>
+      <h1>🎯 A.C.E.S IT/AI 직무 추천 &amp; 채용 JD 정밀 진단 콘솔</h1>
+      <p>구직자 4대 기둥 역량을 6대 축 레이더로 정량화하여, 원티드·프로그래머스·LinkedIn 실무 채용 시장 빅데이터와 1:1 매칭합니다.</p>
     </header>
 
-    <!-- ASSESSMENT SCREEN (4 STEPS) -->
-    <div id="assessmentSection" class="screen-card">
+    <!-- 2대 진단 모드 선택 & 샘플 체험 바 -->
+    <div class="mode-nav-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+        <span style="font-size: 13.5px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 6px;">
+          <span>🧭</span> 응시 목적에 맞는 진단 방식을 선택하세요:
+        </span>
+        <!-- 샘플 예시 즉시 보기 버튼 -->
+        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+          <span style="font-size: 12px; color: #94a3b8; font-weight: 700;">👀 샘플 예시 즉시 보기:</span>
+          <button class="sample-btn" onclick="loadSamplePreset('junior')" style="border-color: rgba(239, 68, 68, 0.5); color: #f87171;">
+            🌱 [샘플 1] 취준생/입문 (20점대 갭분석)
+          </button>
+          <button class="sample-btn" onclick="loadSamplePreset('genai')" style="border-color: rgba(6, 182, 212, 0.5); color: #38bdf8;">
+            🚀 [샘플 2] 2년차 GenAI (70점대 안정권)
+          </button>
+          <button class="sample-btn" onclick="loadSamplePreset('research')" style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;">
+            🔬 [샘플 3] AI 연구원 (90점대 코어)
+          </button>
+        </div>
+      </div>
+
+      <!-- 2대 모드 탭 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div id="tabModeQuick" class="tab-btn active" onclick="switchMode('quick')">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <strong style="color: #38bdf8; font-size: 14px;">⚡ 모드 1: 5분 쾌속 직무 매칭 (자가 진단)</strong>
+            <span style="background: #06b6d4; color: #041b29; font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 4px;">⏱️ 약 5~8분</span>
+          </div>
+          <div style="font-size: 12px; color: #94a3b8; line-height: 1.4;">
+            4대 기둥 12개 핵심 역량 슬라이더를 5분 만에 입력하고 직무 추천과 채용 JD 분석을 즉시 확인합니다.
+          </div>
+        </div>
+
+        <div id="tabModeOfficial" class="tab-btn" onclick="switchMode('official')">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <strong style="color: #cbd5e1; font-size: 14px;">🎓 모드 2: 정규 4대 시험 성적 기반 (공인 인증)</strong>
+            <span style="background: #334155; color: #e2e8f0; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">총 400문항 실기</span>
+          </div>
+          <div style="font-size: 12px; color: #64748b; line-height: 1.4;">
+            DMDG 4대 평가 센터(SQL·수학·데이터·파이썬)에서 실제로 획득한 시험 점수로 정밀 추천을 산출합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW A: 5분 쾌속 진단 모드 (12문항 슬라이더) -->
+    <div id="quickAssessmentView" class="screen-card">
       
       <!-- STEP 1: PILLAR A (ANALYTICAL) -->
       <div id="step1" class="pillar-step active">
         <span class="step-badge">STEP 1 OF 4</span>
-        <h2 style="color: #38bdf8; font-size: 19px; margin-bottom: 6px;">📐 Pillar 1: Analytical Foundations (기초 수리·알고리즘)</h2>
-        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">선형대수, 미적분, 확률통계, 알고리즘 시간복잡도 역량을 평가합니다.</p>
+        <h2 style="color: #38bdf8; font-size: 18px; margin-bottom: 4px;">📐 Pillar 1: Analytical Foundations (기초 수리·알고리즘)</h2>
+        <p style="color: #94a3b8; font-size: 12.5px; margin-bottom: 18px;">선형대수, 미적분, 확률통계, 알고리즘 시간복잡도 역량을 평가합니다.</p>
 
         <div class="question-block">
           <div class="question-title">
@@ -425,8 +457,8 @@
       <!-- STEP 2: PILLAR C (CODING) -->
       <div id="step2" class="pillar-step">
         <span class="step-badge">STEP 2 OF 4</span>
-        <h2 style="color: #38bdf8; font-size: 19px; margin-bottom: 6px;">💻 Pillar 2: Coding &amp; System Engineering (SW 코딩 및 모듈 설계)</h2>
-        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">모던 파이썬 OOP, 비동기(asyncio), SQL 데이터베이스 튜닝, TDD 무결성을 평가합니다.</p>
+        <h2 style="color: #38bdf8; font-size: 18px; margin-bottom: 4px;">💻 Pillar 2: Coding &amp; System Engineering (SW 코딩 및 모듈 설계)</h2>
+        <p style="color: #94a3b8; font-size: 12.5px; margin-bottom: 18px;">모던 파이썬 OOP, 비동기(asyncio), SQL 데이터베이스 튜닝, TDD 무결성을 평가합니다.</p>
 
         <div class="question-block">
           <div class="question-title">
@@ -459,8 +491,8 @@
       <!-- STEP 3: PILLAR E (GENAI) -->
       <div id="step3" class="pillar-step">
         <span class="step-badge">STEP 3 OF 4</span>
-        <h2 style="color: #38bdf8; font-size: 19px; margin-bottom: 6px;">🤖 Pillar 3: GenAI &amp; Operationalization (생성형 AI &amp; LLMOps)</h2>
-        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">RAG 하이브리드 검색, FastMCP 도구 연동, 프롬프트 압축(TIR), 벡터 DB 운용을 평가합니다.</p>
+        <h2 style="color: #38bdf8; font-size: 18px; margin-bottom: 4px;">🤖 Pillar 3: GenAI &amp; Operationalization (생성형 AI &amp; LLMOps)</h2>
+        <p style="color: #94a3b8; font-size: 12.5px; margin-bottom: 18px;">RAG 하이브리드 검색, FastMCP 도구 연동, 프롬프트 압축(TIR), 벡터 DB 운용을 평가합니다.</p>
 
         <div class="question-block">
           <div class="question-title">
@@ -493,8 +525,8 @@
       <!-- STEP 4: PILLAR S (SOLUTION IMPACT) -->
       <div id="step4" class="pillar-step">
         <span class="step-badge">STEP 4 OF 4</span>
-        <h2 style="color: #38bdf8; font-size: 19px; margin-bottom: 6px;">💼 Pillar 4: Solution Impact &amp; Capstone (비즈니스 문제정의 및 완성도)</h2>
-        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">비즈니스 ROI 수립, E2E 완결성, C4 아키텍처 다이어그램, 소통 리더십을 평가합니다.</p>
+        <h2 style="color: #38bdf8; font-size: 18px; margin-bottom: 4px;">💼 Pillar 4: Solution Impact &amp; Capstone (비즈니스 문제정의 및 완성도)</h2>
+        <p style="color: #94a3b8; font-size: 12.5px; margin-bottom: 18px;">비즈니스 ROI 수립, E2E 완결성, C4 아키텍처 다이어그램, 소통 리더십을 평가합니다.</p>
 
         <div class="question-block">
           <div class="question-title">
@@ -520,37 +552,113 @@
 
         <div class="step-nav">
           <button class="btn-nav" onclick="goToStep(3)">⬅️ 이전 기둥</button>
-          <button class="btn-nav primary" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="calculateAndShowResults()">🎉 평가 완료 및 직무 추천 결과 보기 ➔</button>
+          <button class="btn-nav primary" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="calculateFromSliders()">🚀 쾌속 진단 결과 분석 산출 ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW B: 정규 4대 시험 성적 기반 공인 인증 모드 -->
+    <div id="officialExamView" class="screen-card" style="display: none;">
+      <span class="step-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">OFFICIAL EXAM VERIFICATION</span>
+      <h2 style="color: #f8fafc; font-size: 19px; margin-bottom: 6px;">🎓 정규 4대 실무 시험 응시 및 성적표 연동</h2>
+      <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">
+        실제 공인 평가 시험(총 400문항)을 아직 치르지 않으셨다면 각 시험 링크를 통해 먼저 응시하시고, 획득한 성적을 아래에 입력해 주세요.
+      </p>
+
+      <!-- 4대 시험 바로가기 링크 그리드 -->
+      <div class="exam-grid">
+        <div class="exam-mini-card">
+          <div>
+            <h4>🗄️ SQL 실무 평가</h4>
+            <span>총 90문항 · MySQL 쿼리 실기</span>
+          </div>
+          <a href="https://freefluxkr.github.io/sql_exam/" target="_blank" class="exam-link-btn">시험 응시하기 ➔</a>
+        </div>
+        <div class="exam-mini-card">
+          <div>
+            <h4>📐 AI·LLM 사전수학</h4>
+            <span>총 75문항 · 선형대수/미적분</span>
+          </div>
+          <a href="https://freefluxkr.github.io/ai_math_exam/" target="_blank" class="exam-link-btn">시험 응시하기 ➔</a>
+        </div>
+        <div class="exam-mini-card">
+          <div>
+            <h4>🧠 AI 데이터 분석</h4>
+            <span>총 90문항 · CNN/RNN/XAI</span>
+          </div>
+          <a href="https://freefluxkr.github.io/ai_data_exam/" target="_blank" class="exam-link-btn">시험 응시하기 ➔</a>
+        </div>
+        <div class="exam-mini-card">
+          <div>
+            <h4>🐍 파이썬 &amp; ML/DL</h4>
+            <span>총 145문항 · Pandas/Numpy</span>
+          </div>
+          <a href="https://freefluxkr.github.io/python_ai_exam/" target="_blank" class="exam-link-btn">시험 응시하기 ➔</a>
         </div>
       </div>
 
+      <!-- 성적표 점수 입력 폼 -->
+      <div style="background: #111827; border: 1.5px solid #1e293b; border-radius: 12px; padding: 20px; margin-top: 20px;">
+        <h3 style="color: #38bdf8; font-size: 15px; margin-bottom: 14px;">📝 4대 시험 성적표 점수 입력 (0 ~ 100점)</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;">
+          <div>
+            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">1. SQL 실무 평가 획득 점수</label>
+            <input type="number" id="exam_sql" min="0" max="100" value="85" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+          </div>
+          <div>
+            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">2. AI &amp; LLM 사전수학 획득 점수</label>
+            <input type="number" id="exam_math" min="0" max="100" value="70" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+          </div>
+          <div>
+            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">3. AI 데이터 분석 획득 점수</label>
+            <input type="number" id="exam_data" min="0" max="100" value="88" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+          </div>
+          <div>
+            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">4. 파이썬 &amp; ML/DL 획득 점수</label>
+            <input type="number" id="exam_python" min="0" max="100" value="82" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+          </div>
+        </div>
+
+        <button onclick="calculateFromOfficialExams()" style="width: 100%; background: linear-gradient(135deg, #10b981, #0284c7); color: #fff; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
+          🎯 실제 시험 성적으로 공인 직무 추천 &amp; 채용 JD 분석 산출 ➔
+        </button>
+      </div>
     </div>
 
     <!-- FINAL RESULT DASHBOARD (PDF PRINTABLE CONTAINER) -->
     <div id="resultSection">
       
-      <!-- Action Bar -->
+      <!-- Top Action Bar -->
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
-        <button class="btn-nav" onclick="resetAssessment()">🔄 다시 응시하기</button>
-        <button class="btn-pdf-download" onclick="downloadReportPDF()">📄 진단 결과 및 성적표 PDF 다운로드 (1-Click)</button>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-nav" onclick="resetAssessment()">🔄 다시 진단하기</button>
+          <button class="sample-btn" onclick="loadSamplePreset('junior')" style="border-color: rgba(239, 68, 68, 0.5); color: #f87171;">🌱 취준생 샘플</button>
+          <button class="sample-btn" onclick="loadSamplePreset('genai')" style="border-color: rgba(6, 182, 212, 0.5); color: #38bdf8;">🚀 2년차 GenAI</button>
+          <button class="sample-btn" onclick="loadSamplePreset('research')" style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;">🔬 AI 연구원</button>
+        </div>
+        <button class="btn-pdf-download" onclick="downloadReportPDF()">📄 진단 결과 및 채용 JD 성적표 PDF 다운로드 (1-Click)</button>
       </div>
 
       <!-- Printable Report Container -->
-      <div id="printableReport" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 14px; padding: 30px; box-shadow: 0 4px 25px rgba(0,0,0,0.5);">
+      <div id="printableReport" class="screen-card" style="padding: 28px;">
         
         <!-- Report Header -->
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1.5px solid #1e293b; padding-bottom: 20px; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 16px;">
           <div>
-            <div style="font-size: 11.5px; font-weight: 800; color: #06b6d4; text-transform: uppercase; letter-spacing: 0.5px;">DMDG Competency &amp; Career Diagnostic Report</div>
-            <h1 style="color: #ffffff; font-size: 22px; font-weight: 800; margin: 4px 0;">🎯 A.C.E.S 직무 적합도 진단 결과 성적표</h1>
-            <p style="color: #94a3b8; font-size: 13px; margin: 0;">발급처: 당목담글(DMDG) 스튜디오 AI 미래전략본부 | 진단 일시: <span id="reportDate"></span></p>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+              <span style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; font-size: 11px; font-weight: 900; padding: 2px 8px; border-radius: 4px;">OFFICIAL REPORT</span>
+              <span style="color: #94a3b8; font-size: 12px;" id="reportModeBadge">5분 쾌속 진단 모드</span>
+            </div>
+            <h2 style="font-size: 22px; font-weight: 900; color: #ffffff;">IT/AI 전문 직무 추천 &amp; 실무 채용 JD 정밀 성적표</h2>
           </div>
           <div style="text-align: right;">
-            <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">공식 검증 완료</span>
+            <div style="font-size: 11px; color: #94a3b8;">발행 일시</div>
+            <div style="font-size: 13px; font-weight: 700; color: #cbd5e1;" id="reportDate">2026-11-05</div>
           </div>
         </div>
 
-                <!-- [NEW] 취업 준비도(Job Readiness Tier) 진단 배너 -->
+        <!-- 취업 준비도(Job Readiness Tier) 진단 배너 -->
         <div id="readinessBanner" style="border-radius: 12px; padding: 18px 22px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 16px;"></div>
 
         <!-- 6-Axis KPI Box -->
@@ -643,7 +751,7 @@
           </div>
         </div>
 
-        <!-- [NEW] 국내외 채용 플랫폼(원티드·프로그래머스·LinkedIn) 실무 JD 분석 & 역량 Gap 분석 -->
+        <!-- 국내외 채용 플랫폼 실무 JD 분석 & 역량 Gap 분석 -->
         <div id="jdAnalysisSection" style="background: #0f172a; border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 24px; margin-top: 20px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
             <div>
@@ -698,8 +806,46 @@
 
   <script>
     // 6대 직무별 벤치마크 프로필
-    
-    // 국내외 취업 플랫폼(원티드, 프로그래머스, LinkedIn, Indeed) 실무 JD 빅데이터 분석 DB
+    const JOBS = [
+      {
+        name: "MLOps / LLMOps 엔지니어",
+        scores: [65, 82, 90, 78, 55, 75],
+        desc: "LLM 분산 서빙, FastMCP 인프라, 실시간 모니터링 및 벡터 DB 최적화 총괄",
+        skills: "Data/Infra 90점 · Coding 82점 · GenAI 78점"
+      },
+      {
+        name: "AI 모델 연구원 (Core Research)",
+        scores: [94, 85, 60, 72, 45, 70],
+        desc: "신규 알고리즘 연구, 수리 모델링, 파운데이션 모델 사전학습 및 파라미터 경량화(LoRA)",
+        skills: "Math 94점 · Coding 85점 · Architecture 70점"
+      },
+      {
+        name: "GenAI 풀스택 개발자",
+        scores: [60, 92, 65, 90, 68, 75],
+        desc: "생성형 AI 결합 웹/앱 서비스 개발, 대화형 에이전트 및 고성능 API 연동",
+        skills: "Coding 92점 · GenAI 90점 · Architecture 75점"
+      },
+      {
+        name: "AI 데이터 엔지니어 (Lakehouse)",
+        scores: [70, 80, 95, 60, 50, 72],
+        desc: "대용량 분산 레이크하우스(Kafka, Spark, Iceberg), RAG용 비정형 데이터 정제 및 파이프라인",
+        skills: "Data/Infra 95점 · Coding 80점 · Math 70점"
+      },
+      {
+        name: "AI 솔루션 아키텍트 / 테크 PM",
+        scores: [55, 68, 70, 75, 92, 88],
+        desc: "비즈니스 요구사항 기술 스펙 전환, ROI 검증, 엔터프라이즈 솔루션 제안 및 총괄 설계",
+        skills: "Biz 92점 · Architecture 88점 · GenAI 75점"
+      },
+      {
+        name: "온디바이스 / 엣지 AI 엔지니어",
+        scores: [85, 90, 72, 60, 48, 68],
+        desc: "NPU/모바일 환경 모델 양자화(Quantization), 임베디드 AI 추론 엔진 최적화",
+        skills: "Coding 90점 · Math 85점 · Data/Infra 72점"
+      }
+    ];
+
+    // 국내외 채용 플랫폼(원티드, 프로그래머스, LinkedIn, Indeed) 실무 JD 빅데이터 분석 DB
     const JOB_MARKET_INTELLIGENCE = {
       0: {
         roleName: "MLOps / LLMOps 엔지니어",
@@ -841,6 +987,39 @@
       }
     };
 
+    let radarChartInstance = null;
+
+    // ── Mode Switcher Function ──
+    function switchMode(mode) {
+      if (mode === 'quick') {
+        document.getElementById('tabModeQuick').classList.add('active');
+        document.getElementById('tabModeOfficial').classList.remove('active');
+        document.getElementById('quickAssessmentView').style.display = 'block';
+        document.getElementById('officialExamView').style.display = 'none';
+        document.getElementById('reportModeBadge').innerText = '5분 쾌속 진단 모드';
+      } else {
+        document.getElementById('tabModeQuick').classList.remove('active');
+        document.getElementById('tabModeOfficial').classList.add('active');
+        document.getElementById('quickAssessmentView').style.display = 'none';
+        document.getElementById('officialExamView').style.display = 'block';
+        document.getElementById('reportModeBadge').innerText = '정규 4대 시험 성적표 기반 공인 인증';
+      }
+    }
+
+    function updateVal(id) {
+      const slider = document.getElementById('q_' + id);
+      document.getElementById('val_' + id).innerText = slider.value + '점';
+    }
+
+    function goToStep(stepNum) {
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById('step' + i).classList.remove('active');
+      }
+      document.getElementById('step' + stepNum).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Readiness Tier Evaluator ──
     function evaluateJobReadiness(userScores) {
       const uMean = userScores.reduce((a, b) => a + b, 0) / 6;
       if (uMean < 40) {
@@ -890,42 +1069,29 @@
       }
     }
 
-    const JOBS = [
-      { name: "MLOps / LLMOps 엔지니어", scores: [65, 82, 90, 78, 55, 75], desc: "LLM 분산 서빙, FastMCP 인프라, 실시간 모니터링 및 벡터 DB 최적화 총괄", skills: "Data/Infra 90점 · Coding 82점 · GenAI 78점" },
-      { name: "AI 모델 연구원 (Core Research)", scores: [94, 85, 60, 72, 45, 70], desc: "신규 알고리즘 연구, 수리 모델링, 파운데이션 모델 사전학습 및 파라미터 경량화(LoRA)", skills: "Math 94점 · Coding 85점 · Architecture 70점" },
-      { name: "GenAI 풀스택 개발자", scores: [60, 92, 65, 90, 68, 75], desc: "생성형 AI 결합 웹/앱 서비스 개발, 대화형 에이전트 및 고성능 API 연동", skills: "Coding 92점 · GenAI 90점 · Architecture 75점" },
-      { name: "AI 데이터 엔지니어 (Lakehouse)", scores: [70, 80, 95, 60, 50, 72], desc: "대용량 분산 레이크하우스(Kafka, Spark, Iceberg), RAG용 비정형 데이터 정제 및 파이프라인", skills: "Data/Infra 95점 · Coding 80점 · Math 70점" },
-      { name: "AI 솔루션 아키텍트 / 테크 PM", scores: [55, 68, 70, 75, 92, 88], desc: "비즈니스 요구사항 기술 스펙 전환, ROI 검증, 엔터프라이즈 솔루션 제안 및 총괄 설계", skills: "Biz 92점 · Architecture 88점 · GenAI 75점" },
-      { name: "온디바이스 / 엣지 AI 엔지니어", scores: [85, 90, 72, 60, 48, 68], desc: "NPU/모바일 환경 모델 양자화(Quantization), 임베디드 AI 추론 엔진 최적화", skills: "Coding 90점 · Math 85점 · Data/Infra 72점" }
-    ];
-
-    let radarChartInstance = null;
-
-    function startAssessment() {
-      document.getElementById('acesModal').classList.add('hidden');
-    }
-
-    function updateVal(id) {
-      const slider = document.getElementById('q_' + id);
-      document.getElementById('val_' + id).innerText = slider.value + '점';
-    }
-
-    function goToStep(stepNum) {
-      for (let i = 1; i <= 4; i++) {
-        document.getElementById('step' + i).classList.remove('active');
+    // ── Sample Presets (1-Click Demo) ──
+    function loadSamplePreset(type) {
+      let scores = [];
+      if (type === 'junior') {
+        scores = [16, 21, 14, 10, 15, 21]; // 구직자 실제 저점수 예시
+        document.getElementById('reportModeBadge').innerText = '🌱 [샘플 1] 취준생/입문 (20점대 갭분석)';
+      } else if (type === 'genai') {
+        scores = [62, 85, 65, 88, 70, 75]; // 2년차 실무자
+        document.getElementById('reportModeBadge').innerText = '🚀 [샘플 2] 2년차 GenAI 개발자 (70점대 안정권)';
+      } else if (type === 'research') {
+        scores = [95, 88, 65, 75, 50, 72]; // AI 연구원
+        document.getElementById('reportModeBadge').innerText = '🔬 [샘플 3] AI 모델 연구원 (90점대 코어)';
       }
-      document.getElementById('step' + stepNum).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      executeFullAnalysis(scores);
     }
 
-    function calculateAndShowResults() {
-      // 1. Calculate 4 Pillars (Average of 3 questions)
+    // ── Calculate from Sliders (Mode 1) ──
+    function calculateFromSliders() {
       const pA = (parseInt(document.getElementById('q_a1').value) + parseInt(document.getElementById('q_a2').value) + parseInt(document.getElementById('q_a3').value)) / 3;
       const pC = (parseInt(document.getElementById('q_c1').value) + parseInt(document.getElementById('q_c2').value) + parseInt(document.getElementById('q_c3').value)) / 3;
       const pE = (parseInt(document.getElementById('q_e1').value) + parseInt(document.getElementById('q_e2').value) + parseInt(document.getElementById('q_e3').value)) / 3;
       const pS = (parseInt(document.getElementById('q_s1').value) + parseInt(document.getElementById('q_s2').value) + parseInt(document.getElementById('q_s3').value)) / 3;
 
-      // 2. Weight Matrix to 6-Axis
       const math = Math.round(0.75 * pA + 0.15 * pC + 0.05 * pE + 0.05 * pS);
       const coding = Math.round(0.10 * pA + 0.65 * pC + 0.15 * pE + 0.10 * pS);
       const data = Math.round(0.05 * pA + 0.30 * pC + 0.45 * pE + 0.20 * pS);
@@ -933,9 +1099,39 @@
       const biz = Math.round(0.05 * pA + 0.05 * pC + 0.15 * pE + 0.75 * pS);
       const arch = Math.round(0.05 * pA + 0.20 * pC + 0.25 * pE + 0.50 * pS);
 
-      const userScores = [math, coding, data, genai, biz, arch];
+      document.getElementById('reportModeBadge').innerText = '5분 쾌속 직무 매칭 진단';
+      executeFullAnalysis([math, coding, data, genai, biz, arch]);
+    }
 
-      // Update KPI Boxes
+    // ── Calculate from Official 4 Exams (Mode 2) ──
+    function calculateFromOfficialExams() {
+      const sql = parseFloat(document.getElementById('exam_sql').value) || 0;
+      const math = parseFloat(document.getElementById('exam_math').value) || 0;
+      const data = parseFloat(document.getElementById('exam_data').value) || 0;
+      const py = parseFloat(document.getElementById('exam_python').value) || 0;
+
+      // 4대 시험 점수를 A.C.E.S 기둥 점수로 정밀 매핑
+      const pA = math;
+      const pC = (0.5 * py) + (0.5 * sql);
+      const pE = data;
+      const pS = (0.4 * py) + (0.3 * sql) + (0.3 * data);
+
+      const m = Math.round(0.75 * pA + 0.15 * pC + 0.05 * pE + 0.05 * pS);
+      const c = Math.round(0.10 * pA + 0.65 * pC + 0.15 * pE + 0.10 * pS);
+      const d = Math.round(0.05 * pA + 0.30 * pC + 0.45 * pE + 0.20 * pS);
+      const g = Math.round(0.05 * pA + 0.10 * pC + 0.70 * pE + 0.15 * pS);
+      const b = Math.round(0.05 * pA + 0.05 * pC + 0.15 * pE + 0.75 * pS);
+      const a = Math.round(0.05 * pA + 0.20 * pC + 0.25 * pE + 0.50 * pS);
+
+      document.getElementById('reportModeBadge').innerText = '정규 4대 시험 성적 기반 공인 인증';
+      executeFullAnalysis([m, c, d, g, b, a]);
+    }
+
+    // ── Full Recommendation & JD Analytics Execution Engine ──
+    function executeFullAnalysis(userScores) {
+      const [math, coding, data, genai, biz, arch] = userScores;
+
+      // 1. Update KPI Boxes
       document.getElementById('res_math').innerText = math + '점';
       document.getElementById('res_coding').innerText = coding + '점';
       document.getElementById('res_data').innerText = data + '점';
@@ -943,10 +1139,11 @@
       document.getElementById('res_biz').innerText = biz + '점';
       document.getElementById('res_arch').innerText = arch + '점';
 
-      // 3. Realistic Recommendation Algorithm (Cosine Shape + Adequacy)
       const uNorm = Math.sqrt(userScores.reduce((acc, v) => acc + v*v, 0));
-      const uSum = userScores.reduce((acc, v) => acc + v, 0);
+      const uMean = userScores.reduce((acc, v) => acc + v, 0) / 6;
+      const readiness = evaluateJobReadiness(userScores);
 
+      // 2. Realistic Matching Algorithm with Barrier Penalty
       let scores = [];
       JOBS.forEach((job, idx) => {
         const b = job.scores;
@@ -955,19 +1152,33 @@
         for (let i = 0; i < 6; i++) dot += userScores[i] * b[i];
         const cosSim = uNorm > 0 ? Math.max(0, dot / (uNorm * bNorm)) : 0;
 
-        // Top 3 competency adequacy
         const top3Idx = [0, 1, 2, 3, 4, 5].sort((x, y) => b[y] - b[x]).slice(0, 3);
         const adequacy = top3Idx.reduce((acc, i) => acc + (userScores[i] / b[i]), 0) / 3;
         const boundedAdequacy = Math.min(1.2, adequacy) / 1.2;
 
-        const combined = (cosSim * cosSim) * 0.6 + boundedAdequacy * 0.4;
+        let barrierPenalty = 1.0;
+        if (idx === 1) { // AI 모델 연구원
+          if (userScores[0] < 65 || userScores[1] < 60) barrierPenalty = 0.05;
+          else if (userScores[0] < 75) barrierPenalty = 0.40;
+        } else if (idx === 0) { // MLOps
+          if (userScores[1] < 50 || userScores[2] < 50) barrierPenalty = 0.35;
+        } else if (idx === 5) { // 온디바이스
+          if (userScores[0] < 55 || userScores[1] < 55) barrierPenalty = 0.35;
+        } else if (idx === 2) { // GenAI 풀스택
+          if (uMean < 45) barrierPenalty = 1.35;
+        } else if (idx === 4) { // AI 솔루션 아키텍트/테크 PM
+          if (userScores[4] >= userScores[0] && uMean < 45) barrierPenalty = 1.25;
+        }
+
+        const combined = ((cosSim * cosSim) * 0.55 + boundedAdequacy * 0.45) * barrierPenalty;
         scores.push({ jobIdx: idx, score: combined });
       });
 
       // Softmax
-      const expSum = scores.reduce((acc, s) => acc + Math.exp(s.score * 5.0), 0);
+      const expSum = scores.reduce((acc, s) => acc + Math.exp(s.score * 4.0), 0);
+      const scaleFactor = Math.min(1.0, Math.max(0.35, uMean / 60.0));
       scores.forEach(s => {
-        s.prob = Math.round((Math.exp(s.score * 5.0) / expSum) * 1000) / 10;
+        s.prob = Math.round(((Math.exp(s.score * 4.0) / expSum) * 100 * scaleFactor) * 10) / 10;
       });
 
       scores.sort((a, b) => b.prob - a.prob);
@@ -975,8 +1186,34 @@
       const top1 = JOBS[scores[0].jobIdx];
       const top2 = JOBS[scores[1].jobIdx];
       const top3 = JOBS[scores[2].jobIdx];
+      const topIntel = JOB_MARKET_INTELLIGENCE[scores[0].jobIdx];
 
-      // Update Cards
+      // 3. Render Readiness Banner
+      const rBanner = document.getElementById('readinessBanner');
+      if (rBanner) {
+        rBanner.style.background = readiness.badgeBg;
+        rBanner.style.border = `1.5px solid ${readiness.badgeColor}`;
+        rBanner.innerHTML = `
+          <div style="font-size: 28px;">${readiness.tier === 'TIER_1_TRAINEE' ? '🚨' : readiness.tier === 'TIER_2_JUNIOR' ? '⚠️' : '✅'}</div>
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
+              <span style="color: ${readiness.badgeColor}; font-weight: 900; font-size: 15px;">${readiness.tierTitle}</span>
+              <span style="background: ${readiness.badgeColor}; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 800;">종합 평균 ${uMean.toFixed(1)}점</span>
+            </div>
+            <p style="color: #e2e8f0; font-size: 13.5px; line-height: 1.55; margin: 0 0 8px 0;">${readiness.verdict}</p>
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 12px; border-radius: 6px; font-size: 12.5px; color: #cbd5e1; display: flex; flex-wrap: wrap; gap: 14px;">
+              <span><strong>💡 즉시 집중 과제:</strong> <span style="color: #38bdf8;">${readiness.immediateAction}</span></span>
+              <span><strong>🌱 당장 도전 가능한 입문 트랙:</strong> <span style="color: #34d399; font-weight: 700;">${readiness.realisticEntryRole}</span></span>
+            </div>
+          </div>
+        `;
+      }
+
+      // 4. Update Recommendation Cards
+      document.getElementById('topJobBadge').innerText = readiness.heroTag;
+      document.getElementById('topJobBadge').style.background = readiness.badgeColor;
+      document.getElementById('topJobBadge').style.color = '#ffffff';
+
       document.getElementById('topJobName').innerText = "🥇 " + top1.name;
       document.getElementById('topJobProb').innerText = scores[0].prob + "%";
       document.getElementById('topJobDesc').innerText = top1.desc;
@@ -984,13 +1221,13 @@
 
       document.getElementById('rank2Name').innerText = top2.name;
       document.getElementById('rank2Prob').innerText = scores[1].prob + "%";
-      document.getElementById('rank2Bar').style.width = scores[1].prob + "%";
+      document.getElementById('rank2Bar').style.width = Math.min(100, scores[1].prob * 2) + "%";
 
       document.getElementById('rank3Name').innerText = top3.name;
       document.getElementById('rank3Prob').innerText = scores[2].prob + "%";
-      document.getElementById('rank3Bar').style.width = scores[2].prob + "%";
+      document.getElementById('rank3Bar').style.width = Math.min(100, scores[2].prob * 2) + "%";
 
-      // 4. SHAP XAI Analysis
+      // 5. Render SHAP XAI Analysis
       const featNames = ["수학/알고리즘", "SW 코딩", "데이터/인프라", "GenAI/프롬프트", "비즈니스 기획", "시스템 아키텍처"];
       let diffs = userScores.map((score, i) => ({
         name: featNames[i],
@@ -1004,30 +1241,61 @@
 
       let posHtml = "";
       pos.slice(0, 3).forEach(p => {
-        posHtml += `• <strong style="color: #fff;">${p.name}</strong> (${p.score}점): 기준 대비 <span style="color: #34d399; font-weight: 700;">+${p.diff}점</span>으로 1순위 추천 확률을 강력 견인했습니다.<br>`;
+        posHtml += `• <strong style="color: #fff;">${p.name}</strong> (${p.score}점): 기준 대비 <span style="color: #34d399; font-weight: 700;">+${p.diff}점</span>으로 추천 확률을 높였습니다.<br>`;
       });
       document.getElementById('xaiStrengths').innerHTML = posHtml || "• 고른 균형 역량을 보유하고 있습니다.";
 
       let negHtml = "";
       if (neg.length > 0) {
         neg.slice(0, 2).forEach(n => {
-          negHtml += `• <strong style="color: #fff;">${n.name}</strong> (${n.score}점): 직무 기준 대비 <span style="color: #f87171; font-weight: 700;">${n.diff}점</span> 보완 시 최상위 리더십 확보가 가능합니다.<br>`;
+          negHtml += `• <strong style="color: #fff;">${n.name}</strong> (${n.score}점): 직무 기준 대비 <span style="color: #f87171; font-weight: 700;">${n.diff}점</span> 보완 시 합격선에 진입합니다.<br>`;
         });
       } else {
         negHtml = "• 모든 역량이 1순위 직무 기준선을 상회하고 있습니다.";
       }
       document.getElementById('xaiImprovements').innerHTML = negHtml;
 
-      // 5. Render Radar Chart
+      // 6. [FIX BUG 4] Render Recruitment JD Intelligence & 3-Month Roadmap
+      if (topIntel) {
+        document.getElementById('jdTargetRoleBadge').innerText = topIntel.roleName;
+        document.getElementById('jdDemand').innerText = topIntel.marketDemand;
+        document.getElementById('jdComp').innerText = topIntel.competitionRate;
+        document.getElementById('jdSalaryKrw').innerText = topIntel.avgSalaryKrw;
+        document.getElementById('jdSalaryGlobal').innerText = topIntel.avgSalaryGlobal;
+        document.getElementById('jdEmployers').innerText = topIntel.topEmployers;
+        
+        document.getElementById('jdMustHave').innerHTML = topIntel.mustHave.map(s => `• ${s}`).join('<br>');
+
+        let gapHtml = "";
+        userScores.forEach((score, i) => {
+          const diff = score - top1.scores[i];
+          const color = diff >= 0 ? '#10b981' : '#f43f5e';
+          gapHtml += `<div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <span style="color: #cbd5e1;">${featNames[i]}:</span>
+            <span><span style="color: #94a3b8;">${score}점</span> / 기준 <span style="color: #fff;">${top1.scores[i]}점</span> (<strong style="color: ${color};">${diff >= 0 ? '+' : ''}${diff}점</strong>)</span>
+          </div>`;
+        });
+        document.getElementById('jdGapList').innerHTML = gapHtml;
+
+        document.getElementById('jdRoadmap').innerHTML = `
+          <div style="margin-bottom: 4px;">• <strong>${topIntel.roadmap3m[0]}</strong></div>
+          <div style="margin-bottom: 4px;">• <strong>${topIntel.roadmap3m[1]}</strong></div>
+          <div>• <strong>${topIntel.roadmap3m[2]}</strong></div>
+        `;
+      }
+
+      // 7. Render Radar Chart
       renderRadar(userScores, top1.scores, top1.name);
 
-      // 6. Set Date & Switch Section
+      // 8. Set Date & Switch Section
       document.getElementById('reportDate').innerText = new Date().toISOString().slice(0, 10);
-      document.getElementById('assessmentSection').style.display = 'none';
+      document.getElementById('quickAssessmentView').style.display = 'none';
+      document.getElementById('officialExamView').style.display = 'none';
       document.getElementById('resultSection').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // ── Render Radar Chart ──
     function renderRadar(userScores, benchScores, benchName) {
       const ctx = document.getElementById('radarChart').getContext('2d');
       if (radarChartInstance) radarChartInstance.destroy();
@@ -1054,7 +1322,7 @@
               pointRadius: 4
             },
             {
-              label: '1순위 직무 기준선',
+              label: '목표 직무 기준선',
               data: benchScores,
               backgroundColor: 'rgba(245, 158, 11, 0.12)',
               borderColor: '#f59e0b',
@@ -1093,15 +1361,15 @@
 
     function resetAssessment() {
       document.getElementById('resultSection').style.display = 'none';
-      document.getElementById('assessmentSection').style.display = 'block';
+      switchMode('quick');
       goToStep(1);
     }
 
     function downloadReportPDF() {
       const element = document.getElementById('printableReport');
       const opt = {
-        margin:       10,
-        filename:     'DMDG_ACES_직무추천_진단성적표.pdf',
+        margin:       8,
+        filename:     'DMDG_ACES_직무추천_채용JD_성적표.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0f172a' },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -1111,4 +1379,3 @@
   </script>
 </body>
 </html>
-
