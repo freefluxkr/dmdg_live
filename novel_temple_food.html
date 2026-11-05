@@ -124,7 +124,7 @@
       <div class="book-subtitle" id="bookSubtitle">백양사에서 통도사까지, 100일의 공양간 순례 (500p 대작 정규 완결본)</div>
       <div class="book-desc" id="bookDesc">파리 미슐랭 셰프가 백양사, 진관사, 해인사, 송광사, 통도사 등 25대 산사 공양간을 순례하며 오신채 없는 채수와 10년 씨간장, 발우공양의 지혜를 통해 영혼을 치유하는 500page 정규 대하 인문 힐링 소설.</div>
       <div style="margin-top: 1.4rem; font-size: 0.88rem; color: var(--text-muted);">
-        저자: 서진우 & 미셸 르메르 (가명) | 전 25개 챕터 (500p 완결) | 5개국어 텍스트 및 음성 완비
+        저자: 서진우 & 미셸 르메르 (가명) | 전 25개 챕터 (500p 완결) | 6개국어 텍스트 및 음성 완비
       </div>
     </div>
 
@@ -141,6 +141,17 @@
     let currentLang = 'ko';
     let isPlayingAll = false;
     let currentUtterance = null;
+    let availableVoices = [];
+    function populateVoices() {
+      if (!window.speechSynthesis) return;
+      availableVoices = window.speechSynthesis.getVoices();
+    }
+    if (window.speechSynthesis) {
+      populateVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+    }
 
     document.addEventListener("DOMContentLoaded", async () => {
       try {
@@ -212,7 +223,20 @@
       const ch = currentData.chapters[idx];
       const text = `${ch.title[currentLang] || ch.title['ko']}.\n\n${ch.content[currentLang] || ch.content['ko']}`;
       currentUtterance = new SpeechSynthesisUtterance(text);
-      currentUtterance.lang = getLangCode(currentLang);
+      const targetLang = getLangCode(currentLang);
+      currentUtterance.lang = targetLang;
+      currentUtterance.rate = 1.0;
+
+      if (availableVoices.length === 0 && window.speechSynthesis) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+      const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+      const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+      if (exactVoice) {
+        currentUtterance.voice = exactVoice;
+      } else if (prefixVoice) {
+        currentUtterance.voice = prefixVoice;
+      }
       window.speechSynthesis.speak(currentUtterance);
     }
 

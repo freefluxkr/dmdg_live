@@ -124,7 +124,7 @@
       <div class="book-subtitle" id="bookSubtitle">48시간 타임 리미트 지능형 금융 서스펜스 스릴러 (500p 대작 정규 완결본)</div>
       <div class="book-desc" id="bookDesc">선고 48시간 전! 대림지구 비밀 장부와 50억 클럽, 1976년 소년공 시절 프레스 기계 시리얼 넘버 '1976-NO.6'에 숨겨진 거대한 사법-금융 카르텔의 암호를 해독하는 500page 지능형 서스펜스 대작.</div>
       <div style="margin-top: 1.4rem; font-size: 0.88rem; color: var(--text-muted);">
-        저자: 댄 B. 사이퍼 & 에드워드 권 (가명) | 전 25개 챕터 (500p 완결) | 5개국어 텍스트 및 음성 완비
+        저자: 댄 B. 사이퍼 & 에드워드 권 (가명) | 전 25개 챕터 (500p 완결) | 6개국어 텍스트 및 음성 완비
       </div>
     </div>
 
@@ -141,6 +141,17 @@
     let currentLang = 'ko';
     let isPlayingAll = false;
     let currentUtterance = null;
+    let availableVoices = [];
+    function populateVoices() {
+      if (!window.speechSynthesis) return;
+      availableVoices = window.speechSynthesis.getVoices();
+    }
+    if (window.speechSynthesis) {
+      populateVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+    }
 
     document.addEventListener("DOMContentLoaded", async () => {
       try {
@@ -212,7 +223,20 @@
       const ch = currentData.chapters[idx];
       const text = `${ch.title[currentLang] || ch.title['ko']}.\n\n${ch.content[currentLang] || ch.content['ko']}`;
       currentUtterance = new SpeechSynthesisUtterance(text);
-      currentUtterance.lang = getLangCode(currentLang);
+      const targetLang = getLangCode(currentLang);
+      currentUtterance.lang = targetLang;
+      currentUtterance.rate = 1.0;
+
+      if (availableVoices.length === 0 && window.speechSynthesis) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+      const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+      const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+      if (exactVoice) {
+        currentUtterance.voice = exactVoice;
+      } else if (prefixVoice) {
+        currentUtterance.voice = prefixVoice;
+      }
       window.speechSynthesis.speak(currentUtterance);
     }
 

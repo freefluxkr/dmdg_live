@@ -124,7 +124,7 @@
       <div class="book-subtitle" id="bookSubtitle">프레스에 짓눌린 팔에서 대권의 문턱까지 (500p 대작 정규 완결본)</div>
       <div class="book-desc" id="bookDesc">12세 소년공에서 거대 야당 대표까지. 무라카미 하루키의 서늘한 내면 독백 문체로 추적한 결핍과 권력, 가족 파탄과 사법의 심연을 다룬 500page 대작 심리 팩션.</div>
       <div style="margin-top: 1.4rem; font-size: 0.88rem; color: var(--text-muted);">
-        저자: 무라카미 H. & 강민우 문학랩 (가명) | 전 25개 챕터 (500p 완결) | 5개국어 텍스트 및 음성 완비
+        저자: 무라카미 H. & 강민우 문학랩 (가명) | 전 25개 챕터 (500p 완결) | 6개국어 텍스트 및 음성 완비
       </div>
     </div>
 
@@ -141,6 +141,17 @@
     let currentLang = 'ko';
     let isPlayingAll = false;
     let currentUtterance = null;
+    let availableVoices = [];
+    function populateVoices() {
+      if (!window.speechSynthesis) return;
+      availableVoices = window.speechSynthesis.getVoices();
+    }
+    if (window.speechSynthesis) {
+      populateVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+    }
 
     document.addEventListener("DOMContentLoaded", async () => {
       try {
@@ -212,7 +223,20 @@
       const ch = currentData.chapters[idx];
       const text = `${ch.title[currentLang] || ch.title['ko']}.\n\n${ch.content[currentLang] || ch.content['ko']}`;
       currentUtterance = new SpeechSynthesisUtterance(text);
-      currentUtterance.lang = getLangCode(currentLang);
+      const targetLang = getLangCode(currentLang);
+      currentUtterance.lang = targetLang;
+      currentUtterance.rate = 1.0;
+
+      if (availableVoices.length === 0 && window.speechSynthesis) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+      const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+      const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+      if (exactVoice) {
+        currentUtterance.voice = exactVoice;
+      } else if (prefixVoice) {
+        currentUtterance.voice = prefixVoice;
+      }
       window.speechSynthesis.speak(currentUtterance);
     }
 

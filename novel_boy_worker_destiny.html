@@ -124,7 +124,7 @@
       <div class="book-subtitle" id="bookSubtitle">대하 첩보 한반도 지정학 팩션 (500p 대작 정규 완결본)</div>
       <div class="book-desc" id="bookDesc">800만 달러 대북 송금과 백두산 밀영의 약속. 하노이 결렬 후 한반도 평화와 경의선 철도 개통을 위해 목숨을 걸고 국경을 넘나든 소년공 출신 지도자와 조폭 기업인의 500page 대하 첩보 지정학 팩션.</div>
       <div style="margin-top: 1.4rem; font-size: 0.88rem; color: var(--text-muted);">
-        저자: 김진석 & 마르쿠스 한 (가명) | 전 25개 챕터 (500p 완결) | 5개국어 텍스트 및 음성 완비
+        저자: 김진석 & 마르쿠스 한 (가명) | 전 25개 챕터 (500p 완결) | 6개국어 텍스트 및 음성 완비
       </div>
     </div>
 
@@ -141,6 +141,17 @@
     let currentLang = 'ko';
     let isPlayingAll = false;
     let currentUtterance = null;
+    let availableVoices = [];
+    function populateVoices() {
+      if (!window.speechSynthesis) return;
+      availableVoices = window.speechSynthesis.getVoices();
+    }
+    if (window.speechSynthesis) {
+      populateVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+    }
 
     document.addEventListener("DOMContentLoaded", async () => {
       try {
@@ -212,7 +223,20 @@
       const ch = currentData.chapters[idx];
       const text = `${ch.title[currentLang] || ch.title['ko']}.\n\n${ch.content[currentLang] || ch.content['ko']}`;
       currentUtterance = new SpeechSynthesisUtterance(text);
-      currentUtterance.lang = getLangCode(currentLang);
+      const targetLang = getLangCode(currentLang);
+      currentUtterance.lang = targetLang;
+      currentUtterance.rate = 1.0;
+
+      if (availableVoices.length === 0 && window.speechSynthesis) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+      const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+      const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+      if (exactVoice) {
+        currentUtterance.voice = exactVoice;
+      } else if (prefixVoice) {
+        currentUtterance.voice = prefixVoice;
+      }
       window.speechSynthesis.speak(currentUtterance);
     }
 

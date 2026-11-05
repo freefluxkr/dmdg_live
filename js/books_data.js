@@ -3508,6 +3508,7 @@ window.NOVELS_DATA = [
   },
   {
     "id": "protocol-2027",
+    "htmlUrl": "novel_protocol_2027.html",
     "title": "프로토콜 2027",
     "subtitle": "지능형 암호학 서스펜스 미스터리 대하 단편소설 완결본",
     "author": "Hamilton.Kang",
@@ -3603,6 +3604,7 @@ window.NOVELS_DATA = [
   },
   {
     "id": "beyond-sun",
+    "htmlUrl": "novel_beyond_sun.html",
     "title": "태양의 제국을 넘어",
     "subtitle": "지정학 대하 팩션 첩보 스릴러 완결본",
     "author": "Hamilton.Kang",
@@ -3714,6 +3716,7 @@ window.NOVELS_DATA = [
   },
   {
     "id": "third-wolf",
+    "htmlUrl": "novel_third_wolf.html",
     "title": "2027 제3의 늑대",
     "subtitle": "지능형 금융망 붕괴 팩션 서스펜스 완결본",
     "author": "Hamilton.Kang",
@@ -3789,6 +3792,7 @@ window.NOVELS_DATA = [
   },
   {
     "id": "silent-killchain",
+    "htmlUrl": "novel_silent_killchain.html",
     "title": "사일런트 킬체인",
     "subtitle": "차세대 자율 방어 사이버전 스릴러 완결본",
     "author": "Hamilton.Kang",

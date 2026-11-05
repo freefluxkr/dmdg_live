@@ -124,7 +124,7 @@
       <div class="book-subtitle" id="bookSubtitle">대한민국 24시 드라이버 로드 100일 순례기 (500p 대작 정규 완결본)</div>
       <div class="book-desc" id="bookDesc">뉴욕 미식 비평가와 30년 베테랑 택시 기사가 서울, 인천, 부산, 전주, 광주 등 전국 25대 기사식당 성지를 순례하며 은쟁반 위에 피어난 삶의 온기와 서민의 자존심을 기록한 500page 대하 미식 기행소설.</div>
       <div style="margin-top: 1.4rem; font-size: 0.88rem; color: var(--text-muted);">
-        저자: 강선우 & 소피아 L. (가명) | 전 25개 챕터 (500p 완결) | 5개국어 텍스트 및 음성 완비
+        저자: 강선우 & 소피아 L. (가명) | 전 25개 챕터 (500p 완결) | 6개국어 텍스트 및 음성 완비
       </div>
     </div>
 
@@ -141,6 +141,17 @@
     let currentLang = 'ko';
     let isPlayingAll = false;
     let currentUtterance = null;
+    let availableVoices = [];
+    function populateVoices() {
+      if (!window.speechSynthesis) return;
+      availableVoices = window.speechSynthesis.getVoices();
+    }
+    if (window.speechSynthesis) {
+      populateVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+    }
 
     document.addEventListener("DOMContentLoaded", async () => {
       try {
@@ -212,7 +223,20 @@
       const ch = currentData.chapters[idx];
       const text = `${ch.title[currentLang] || ch.title['ko']}.\n\n${ch.content[currentLang] || ch.content['ko']}`;
       currentUtterance = new SpeechSynthesisUtterance(text);
-      currentUtterance.lang = getLangCode(currentLang);
+      const targetLang = getLangCode(currentLang);
+      currentUtterance.lang = targetLang;
+      currentUtterance.rate = 1.0;
+
+      if (availableVoices.length === 0 && window.speechSynthesis) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+      const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+      const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+      if (exactVoice) {
+        currentUtterance.voice = exactVoice;
+      } else if (prefixVoice) {
+        currentUtterance.voice = prefixVoice;
+      }
       window.speechSynthesis.speak(currentUtterance);
     }
 
