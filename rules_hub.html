@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DMDG 자율 에이전트 룰 & 운영 컨트롤 타워 (Rules Hub)</title>
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent-cyan: #06b6d4;
+      --accent-blue: #3b82f6;
+      --accent-orange: #f97316;
+      --accent-green: #10b981;
+      --accent-purple: #8b5cf6;
+      --accent-red: #ef4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 24px 30px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .header-title h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-title p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 280px;
+    }
+    .search-box input {
+      width: 100%;
+      background: #0b0f19;
+      border: 1px solid #374151;
+      padding: 10px 16px 10px 36px;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-box input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+    }
+    .search-box span {
+      position: absolute;
+      left: 12px;
+      top: 10px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .btn-nav-ws {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      padding: 9px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-nav-ws:hover {
+      background: rgba(56, 189, 248, 0.3);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Tabs */
+    .tabs-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+    .tab-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn:hover {
+      background: #334155;
+      color: #fff;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      border-color: #38bdf8;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    /* Rule Grid */
+    .rule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 18px;
+    }
+
+    .rule-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .rule-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      border-color: #38bdf8;
+    }
+    .rule-card.highlight {
+      border-left: 4px solid #f97316;
+    }
+    .rule-card.core {
+      border-left: 4px solid #38bdf8;
+    }
+    .rule-card.publish {
+      border-left: 4px solid #10b981;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .card-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-top: 4px;
+    }
+    .card-desc {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .card-checklist {
+      list-style: none;
+      background: #0f172a;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+    }
+    .card-checklist li {
+      padding: 5px 0;
+      color: #94a3b8;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .card-checklist li strong {
+      color: #e2e8f0;
+    }
+
+    /* Checklist Mode */
+    .interactive-checklist {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #1e293b;
+      cursor: pointer;
+    }
+    .check-item:hover {
+      background: #1e293b;
+    }
+    .check-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #10b981;
+      cursor: pointer;
+    }
+    .check-item span.title {
+      font-weight: 700;
+      font-size: 14px;
+      color: #f8fafc;
+      flex: 1;
+    }
+    .check-item span.badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #374151;
+      color: #9ca3af;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="header-title">
+        <h1>🛡️ DMDG 룰 &amp; 출판 운영 컨트롤 타워</h1>
+        <p>복잡한 .md 문서를 헤매지 않고, 3대 계층(헌법·출판·개발)의 규칙과 체크리스트를 한눈에 통제하는 대시보드</p>
+      </div>
+      <div class="header-actions">
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" id="ruleSearch" placeholder="규칙, 목차, MD 파일, 배포 검색...">
+        </div>
+        <a href="workspace_hub.html" class="btn-nav-ws">🏛️ Workspace Hub 열기 ➔</a>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('core', this)">🏛️ 핵심 5대 헌법 (Core)</button>
+      <button class="tab-btn" onclick="switchTab('publish', this)">📚 도서 출간 &amp; 6대 MD 동기화</button>
+      <button class="tab-btn" onclick="switchTab('blog', this)">✍️ 블로그 SEO &amp; 3초 후킹</button>
+      <button class="tab-btn" onclick="switchTab('checklist', this)">✅ 실시간 출간 검증 체크리스트</button>
+    </div>
+
+    <!-- TAB 1: CORE CONSTITUTION -->
+    <div id="tab-core" class="tab-content">
+      <div class="rule-grid">
+        <div class="rule-card core">
+          <div class="card-header">
+            <span class="card-num">CORE RULE 01</span>
+          </div>
+          <div class="card-title">🇰🇷 한국어 진행 &amp; 직관 해설</div>
+          <p class="card-desc">모든 생각 흐름, 계획, 코드 설명 및 결과 보고는 쉬운 한국어로 진행하며, 난해한 기술 용어는 일상적 비유로 1:1 매핑합니다.</p>
+        </div>
+
+        <div class="rule-card core">
+          <div class="card-header">
+            <span class="card-num">CORE RULE 02</span>
+          </div>
+          <div class="card-title">🛑 전문 정독·선답변 & 3대 승인 키워드 착수</div>
+          <p class="card-desc">질문 전체를 끝까지 모두 정독하고 답변·기획을 먼저 제시하며, 사장님의 "시작", "진행", "수락" 명시적 승인 전에는 첫 문장만 보고 폴더 생성이나 코드 작업을 절대 선행하지 않습니다.</p>
+        </div>
+
+        <div class="rule-card core">
+          <div class="card-header">
+            <span class="card-num">CORE RULE 03</span>
+          </div>
+          <div class="card-title">🚫 불필요 팝업 &amp; 질문 차단</div>
+          <p class="card-desc">확인 모달(ask_question)로 Submit을 요구하거나 불필요한 승인 클릭을 강요하지 않고, 전문가 관점에서 최적의 방식으로 자율 완결합니다.</p>
+        </div>
+
+        <div class="rule-card core">
+          <div class="card-header">
+            <span class="card-num">CORE RULE 04</span>
+          </div>
+          <div class="card-title">⚡ 논스톱 자율 실행 &amp; 결과 검증</div>
+          <p class="card-desc">작업 착수 후 멈추지 않고 파일 생성, 코드 수정, 빌드 검증까지 완결하며, 반드시 배포 후 브라우저/실서버 응답을 스스로 확인합니다.</p>
+        </div>
+
+        <div class="rule-card core">
+          <div class="card-header">
+            <span class="card-num">CORE RULE 05</span>
+          </div>
+          <div class="card-title">📱 텔레그램 실시간 원격 보고</div>
+          <p class="card-desc">사용자가 "알려줘", "보고해"를 요청하거나 중요 작업 완료 시, 공식 봇(@aiffall_bot)으로 핵심 요약과 링크를 즉시 전송합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: PUBLISHING & MD PIPELINE -->
+    <div id="tab-publish" class="tab-content" style="display: none;">
+      <div class="rule-grid">
+        
+        <div class="rule-card highlight">
+          <div class="card-header">
+            <span class="card-num">RULE 14 🎮</span>
+          </div>
+          <div class="card-title">🕹️ 도서 전용 실시간 웹 시뮬레이터 필수 번들링 (Simulator Rule)</div>
+          <p class="card-desc"><strong>"우리 도서들만의 독보적 특화점"</strong>: 모든 신규 위키독스 도서 출간 시 독자가 브라우저에서 직접 클릭하고 조작하며 원리를 체감하는 단일 HTML 실시간 웹 시뮬레이터(Kafka, Hive, 딥러닝, 레이더 차트 등)를 필수 제작하여 도서 대문 및 GitHub Pages에 동시 탑재합니다.</p>
+          <ul class="card-checklist">
+            <li>• <strong>온보딩 가이드 모달</strong>: 최초 접속 시 3단계 핵심 가이드 팝업 및 localStorage 다시 보지 않기 제공</li>
+            <li>• <strong>4대 원클릭 프리셋</strong>: 초보 독자도 클릭 한 번으로 극적인 상태 전이를 체험할 수 있는 버튼 완비</li>
+            <li>• <strong>반응형 &amp; 다크 테마</strong>: 모바일/태블릿/데스크톱 해상도 대응 및 무결점 단일 파일 번들링</li>
+          </ul>
+        </div>
+
+        <div class="rule-card core">
+          <div class="card-header">
+            <span class="card-num">RULE 15 🔒</span>
+          </div>
+          <div class="card-title">🏛️ 비공개(Private) 보안 도서 관리 및 &lt;&lt;Hamilton.Kang 전용&gt;&gt; 표준 규격</div>
+          <p class="card-desc">사내 엔터프라이즈 서비스 아키텍처, 시스템 블루프린트, 내부 포털 링크는 위키독스 비공개(open_yn: 'N') 도서로 발행하며, 상단에 'CONFIDENTIAL / INTERNAL USE ONLY' 보안 헤더를 의무 장착합니다.</p>
+          <ul class="card-checklist">
+            <li>• <strong>비공개 속성 강제</strong>: 도서 및 모든 챕터 페이지에 <code>open_yn: 'N'</code> 파라미터 적용</li>
+            <li>• <strong>접근 통제</strong>: 외부 검색 인덱싱 차단 및 관리자/에이전트 단일 진실 공급원(SSOT) 유지</li>
+          </ul>
+        </div>
+
+
+        <div class="rule-card publish">
+          <div class="card-header">
+            <span class="card-num">RULE 09-A 📖</span>
+          </div>
+          <div class="card-title">📖 파트별 전문 용어 사전 &amp; 알기 쉬운 개요는 각 Part 페이지에 게시</div>
+          <p class="card-desc">개별 챕터가 아닌 <strong>상위 대단원인 각 Part 페이지(depth 0)</strong>에 비전공자도 단번에 이해할 수 있는 전문 용어 해설 표와 직관적 개요 설명을 무조건 단독 게시합니다.</p>
+          <ul class="card-checklist">
+            <li>• <strong>각 Part 페이지에 단독 게시</strong>: 단순 폴더가 아닌 전용 학습 관문 역할 수행</li>
+            <li>• <strong>전문 용어 사전 (Terminology)</strong>: 큐비트, 양자 얽힘, 텐서곱 등 핵심 용어 1:1 비유 해설 표</li>
+            <li>• <strong>직관적 개요 (Concept Overview)</strong>: 일상적 실생활 비유 및 파트 전체 작동 흐름도 상세 설명</li>
+          </ul>
+        </div>
+
+        <div class="rule-card publish">
+          <div class="card-header">
+            <span class="card-num">RULE 09-B 🎮</span>
+          </div>
+          <div class="card-title">🎮 인터랙티브 웹 시뮬레이터 4대 팝업 &amp; 온보딩 룰</div>
+          <p class="card-desc">도서와 1:1 연동되는 인터랙티브 웹 시뮬레이터는 학습 효과 극대화를 위해 4대 규칙을 100% 탑재합니다:</p>
+          <ul class="card-checklist">
+            <li>• <strong>자동 온보딩 모달</strong>: 다크 글래스모피즘 3단 가이드 + 오늘 하루 보지 않기</li>
+            <li>• <strong>상단 📖 사용 안내</strong>: 헤더 우측 상시 호출 버튼 탑재</li>
+            <li>• <strong>Zero-Dead-Click</strong>: 반응 없는 빈 클릭 원천 차단 (상태/사운드/토스트)</li>
+            <li>• <strong>원클릭 프리셋 바</strong>: 상단 5대 실습 시나리오 즉시 실행</li>
+          </ul>
+        </div>
+
+        <div class="rule-card publish">
+          <div class="card-header">
+            <span class="card-num">RULE 11 🏛️</span>
+          </div>
+          <div class="card-title">🏛️ 기획서 100% 일치 3계층 목차 (Part > 장 > 절)</div>
+          <p class="card-desc">위키독스 목차에 챕터를 플랫하게 나열하는 것은 엄격히 금지됩니다. 반드시 대단원(Part 1~6)을 상위 폴더(부)로 생성하고 parent_id로 바인딩합니다.</p>
+          <ul class="card-checklist">
+            <li>• <strong>프롤로그 최상단 고정</strong>: 00장. 접두사 또는 FrontPage로 최상단 배치</li>
+            <li>• <strong>Part (대단원)</strong>: depth 0, parent_id None (용어 사전 &amp; 개요 수록)</li>
+            <li>• <strong>장 (중단원)</strong>: depth 1, parent_id Part_ID</li>
+            <li>• <strong>절 (소단원)</strong>: 본문 내 ## 1.1, ## 1.2 표준 2단계 헤딩</li>
+          </ul>
+        </div>
+
+        <div class="rule-card publish">
+          <div class="card-header">
+            <span class="card-num">BUILD RULE 🛡️</span>
+          </div>
+          <div class="card-title">🛡️ 전자책 빌드 무결점 (오류 0건, 경고 0건)</div>
+          <p class="card-desc">PDF/EPUB 변환 시 치명적 빌드 오류 및 폰트 깨짐 경고를 유발하는 요인을 사전에 100% 차단합니다:</p>
+          <ul class="card-checklist">
+            <li>• <strong>## 2단계 헤딩 시작</strong>: 본문 첫 헤딩에 # 사용 절대 금지 (38건 빌드 오류 차단)</li>
+            <li>• <strong>HTML 0칸 들여쓰기</strong>: 태그 앞 4칸 공백 금지 (469건 경고 및 네모(□) 깨짐 차단)</li>
+            <li>• <strong>구분선 격리</strong>: --- 수평선 위아래 1줄 이상 공백 행 확보</li>
+            <li>• <strong>LaTeX 짝 맞춤</strong>: $ / $$ 기호 무결성 검증 및 1:1 파이썬 코드 매핑</li>
+            <li>• <strong>깨진 링크 제로</strong>: 상대경로 404 및 내부 하이퍼링크 단절 원천 방지</li>
+          </ul>
+        </div>
+
+        <div class="rule-card publish">
+          <div class="card-header">
+            <span class="card-num">FOOTER RULE ☕</span>
+          </div>
+          <div class="card-title">☕ 전 페이지 필수 4대 푸터 배너 (좌측 0칸 정렬)</div>
+          <p class="card-desc">책소개글(BOOK_INTRO.md), 프롤로그, 전 챕터 최하단에 예외 없이 표준 4대 푸터를 결합합니다:</p>
+          <ul class="card-checklist">
+            <li>• 🚀 전체 도서 상호 연계 로드맵 &amp; 무료 시뮬레이터 링크</li>
+            <li>• 👍 상단 [추천] 유도 1초 CTA 문구</li>
+            <li>• ☕ 선명한 골드 컬러 [창작자 커피 후원] 직결 버튼</li>
+            <li>• 💬 정식 피드백 모달 직결 링크 (https://wikidocs.net/{id}#myModal)</li>
+          </ul>
+        </div>
+
+        <div class="rule-card publish">
+          <div class="card-header">
+            <span class="card-num">RULE 13 ⭐</span>
+          </div>
+          <div class="card-title">📑 출간 시 필수 업데이트 6대 MD 파일 동기화</div>
+          <p class="card-desc">신규 도서 출간 완료 후, 작업 종료 전 반드시 사내 6대 핵심 문서를 즉시 일괄 갱신해야 합니다:</p>
+          <ul class="card-checklist">
+            <li>1. <strong>DMDG_SERVICES_PORTAL.md</strong>: 도서 라인업 및 프로젝트 디렉터리</li>
+            <li>2. <strong>README.md</strong>: 루트 메인 대문 총괄 매핑표</li>
+            <li>3. <strong>PROJECTS_STRUCTURE.md</strong>: 파일 트리 및 아키텍처</li>
+            <li>4. <strong>DMDG_BOOK_INTRO_CARDS_ARCHIVE.md</strong>: 위키독스 소개 카드 박스</li>
+            <li>5. <strong>SESSION_CHECKPOINT.md</strong>: 당일 출간 결과 영구 기록</li>
+            <li>6. <strong>전 도서 하단 배너</strong>: (출간 예정) ➔ 정식 링크 일괄 치환</li>
+          </ul>
+        </div>
+
+        <div class="rule-card publish">
+          <div class="card-header">
+            <span class="card-num">RULE 15 ⭐</span>
+          </div>
+          <div class="card-title">🗂️ 워크스페이스 MD_ 접두사, Git 소문자 &amp; DMDG_PRJ 강령</div>
+          <p class="card-desc">루트 디렉터리 청결과 정합성을 위해 4대 마크다운(MD_ 접두사), Git 리포지토리(all 소문자) 및 프로젝트 모듈(DMDG_) 표준을 적용합니다:</p>
+          <ul class="card-checklist">
+            <li>1. <strong>MD_ 접두사 필수</strong>: MD_todo_lst, MD_session, MD_dmdg_svc, MD_dmdg_compl</li>
+            <li>2. <strong>Git 리포지토리 소문자 구분</strong>: DMDG_PRJ 내 Git 저장소(dmdg_live_dot_com, dmdg_malssam_dot_com)는 all 소문자로 일반 모듈과 구분</li>
+            <li>3. <strong>디자인 자산 단일화</strong>: 명함 &amp; 브랜드 시안 폴더를 <strong>DMDG_DESIGN</strong>으로 단일화</li>
+            <li>4. <strong>프로젝트 모듈 표준</strong>: DMDG_WIKIDOCS, DMDG_YOUTUBE, DMDG_LIVE, DMDG_CURR, DMDG_DESIGN</li>
+            <li>5. <strong>루트 상시 보존</strong>: README.md, WORKSPACE_STRUCTURE.md, 양대 관제 허브(rules_hub.html, workspace_hub.html), temp_dmdg_live</li>
+          </ul>
+        </div>
+
+        <div class="rule-card" style="border-color: #10b981;">
+          <div class="card-header">
+            <span class="card-num" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">RULE 16 🗣️</span>
+          </div>
+          <div class="card-title">🗣️ malssam.com 신조어 매주(토요일) 1회 업데이트 정기 규정</div>
+          <p class="card-desc">한글 어반 딕셔너리 말쌈(malssam.com)의 신선도와 데이터 품질 유지를 위해 매주 토요일 정기 배치 업데이트를 강제 실행합니다:</p>
+          <ul class="card-checklist">
+            <li>• <strong>정기 주기</strong>: 매주 토요일 오전 10:00 (KST) 정기 배치 실행</li>
+            <li>• <strong>전담 페르소나</strong>: Haruki(신조어 수집 &amp; 팩션 해독) + Craig(DB 빌드 &amp; 배포) + Peggy(텔레그램 보고)</li>
+            <li>• <strong>필수 항목</strong>: 표제어, 영문 로마자, 세대별 태그(Z세대/MZ/영포티), 어원/유래, 실전 예문(영한 병기), 훈민정음 원리</li>
+            <li>• <strong>빌드 &amp; 배포</strong>: js/db.js 병합 ➔ update_malssam_ui.py 빌드 ➔ GitHub Pages 무중단 배포</li>
+            <li>• <strong>자동 알림</strong>: 완료 즉시 @aiffall_bot으로 사장님 텔레그램에 신조어 목록 및 링크 보고</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: BLOG SEO & HOOKING -->
+    <div id="tab-blog" class="tab-content" style="display: none;">
+      <div class="rule-grid">
+        <div class="rule-card highlight">
+          <div class="card-header">
+            <span class="card-num">SEO RULE 01</span>
+          </div>
+          <div class="card-title">🔍 고의도 검색 키워드 전진 배치</div>
+          <p class="card-desc">개발자와 일반인이 실제로 구글/네이버에 검색하는 킬러 키워드를 제목 앞단 30자 이내에 배치합니다.</p>
+          <ul class="card-checklist">
+            <li>• <strong>표준 말머리</strong>: [REA:Reverse Engineer Achitecher], [Antigravity IDE 01]</li>
+            <li>• <strong>타깃 키워드</strong>: 크롬 공룡 치트, 노션 복사 붙여넣기, Ghidra, 윈도우 계산기 버그</li>
+          </ul>
+        </div>
+
+        <div class="rule-card highlight">
+          <div class="card-header">
+            <span class="card-num">SEO RULE 02</span>
+          </div>
+          <div class="card-title">🎯 3초 킬러 후킹 &amp; 4단 파이프라인</div>
+          <p class="card-desc">스크롤 이탈률을 0%로 줄이는 4단계 아티클 구조를 엄격히 준수합니다:</p>
+          <ul class="card-checklist">
+            <li>• <strong>1단 (공감 오프닝)</strong>: "아직도 코드를 직접 치십니까?"</li>
+            <li>• <strong>2단 (비밀 폭로)</strong>: 실제 Ghidra 디컴파일 코드 및 어셈블리 노출</li>
+            <li>• <strong>3단 (와우 모먼트)</strong>: DMDG 라이브 웹 시뮬레이터 직결 링크</li>
+            <li>• <strong>4단 (전환 퍼널)</strong>: 위키독스 정식 전자책 구매 링크</li>
+          </ul>
+        </div>
+
+        <div class="rule-card highlight">
+          <div class="card-header">
+            <span class="card-num">SEO RULE 03</span>
+          </div>
+          <div class="card-title">🌐 12대 전 도서 &amp; 3대 시뮬레이터 배너</div>
+          <p class="card-desc">모든 블로그 아티클 최하단에는 [K-오피스, 멀티 에이전트, 0원 SaaS] 3대 시뮬레이터 카드와 전 도서 링크 뱃지가 강제 탑재됩니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: INTERACTIVE CHECKLIST -->
+    <div id="tab-checklist" class="tab-content" style="display: none;">
+      <div class="interactive-checklist">
+        <h3 style="margin-bottom: 16px; color: #10b981;">🚀 위키독스(위키북스) 10대 무결점 사전/사후 전수 검사 체크리스트</h3>
+        <p style="font-size: 13px; color: #94a3b8; margin-bottom: 20px;">도서 원고 집필 및 출간 작업 시 단 하나의 결함도 없이 아래 10대 항목을 100% 통과해야 합니다.</p>
+
+        <div class="check-item">
+          <input type="checkbox" id="c1">
+          <span class="title">1. 각 Part 페이지(depth 0) 본문에 전문 용어 사전(Terminology) 표 단독 수록 완료</span>
+          <span class="badge">용어 사전</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c2">
+          <span class="title">2. 각 Part 페이지(depth 0) 본문에 일상적 비유와 알기 쉬운 개요(Overview) 상세 설명 수록 완료</span>
+          <span class="badge">개념 개요</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c3">
+          <span class="title">3. 기획서 기준 Part > Chapter 3계층 목차 구조 및 프롤로그(00장.) 최상단 배치 완료</span>
+          <span class="badge">3계층 목차</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c4">
+          <span class="title">4. 연계 인터랙티브 시뮬레이터 4대 팝업 룰 (온보딩 모달, 📖 안내 버튼, Zero-Dead-Click, 프리셋) 준수 완료</span>
+          <span class="badge">시뮬레이터</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c5">
+          <span class="title">5. 모든 페이지 본문 최상위 헤딩이 ## (2단계)로 시작 (# 1단계 본문 사용 0건, 38건 빌드 오류 차단)</span>
+          <span class="badge">헤딩 2단계</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c6">
+          <span class="title">6. 모든 HTML 태그 블록 좌측 0칸 정렬 (4칸 들여쓰기 0건, 469건 경고 및 네모(□) 깨짐 차단)</span>
+          <span class="badge">HTML 0칸</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c7">
+          <span class="title">7. 구분선(---) 상하 1줄 이상 빈 줄 확보 (테이블 헤더 오인 방지)</span>
+          <span class="badge">구분선 격리</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c8">
+          <span class="title">8. LaTeX 수식 짝 맞춤($ / $$) 및 비전공자용 1:1 파이썬 구현 매핑 완료</span>
+          <span class="badge">수식 무결성</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c9">
+          <span class="title">9. 책소개글(BOOK_INTRO.md), 프롤로그, 전 챕터 최하단 필수 4대 푸터 배너(추천/커피/로드맵/피드백) 결합 완료</span>
+          <span class="badge">4대 푸터 배너</span>
+        </div>
+
+        <div class="check-item">
+          <input type="checkbox" id="c10">
+          <span class="title">10. 출간 시 6대 연동 MD 문서(포털, 메인 README, 구조도, 북카드, 체크포인트, 크로스배너) 동기화 완료</span>
+          <span class="badge">6대 MD 동기화</span>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      DMDG 자율 에이전트 엔지니어링 본부 &copy; 2026. All rights reserved. | Hamilton.Kang
+    </footer>
+  </div>
+
+  <script>
+    function switchTab(tabId, el) {
+      document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      const targetContent = document.getElementById('tab-' + tabId);
+      if (targetContent) targetContent.style.display = 'block';
+      const activeBtn = el || (window.event ? window.event.currentTarget : null);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    // Simple Search Filter
+    document.getElementById('ruleSearch').addEventListener('input', function(e) {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.rule-card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(q)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
