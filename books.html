@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DMDG Tech Books & Engineering Library | 실무 단행본 전체보기</title>
+  <meta name="description" content="엔터프라이즈 AI 아키텍처부터 벡터 파이프라인까지, 검증된 실무 단행본 및 지식 아카이브 전체 라이브러리">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+KR:wght@500;700&display=swap">
+  
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --bg-card-hover: rgba(30, 41, 59, 0.85);
+      --border-card: rgba(245, 158, 11, 0.2);
+      --border-card-hover: rgba(245, 158, 11, 0.5);
+      --gold-primary: #f59e0b;
+      --gold-light: #fbbf24;
+      --cyan-accent: #06b6d4;
+      --purple-accent: #c084fc;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #07090e 70%);
+      color: var(--text-main);
+      font-family: 'Pretendard', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      padding-bottom: 5rem;
+    }
+
+    /* ── Header ─────────────────────────────────────────── */
+    .books-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 9, 14, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1rem 2rem;
+    }
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--gold-primary);
+      color: #ffffff;
+      transform: translateX(-2px);
+    }
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 30%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .search-box {
+      position: relative;
+      width: 280px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.5rem 1rem 0.5rem 2.2rem;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      color: #ffffff;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus {
+      border-color: var(--gold-primary);
+    }
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      pointer-events: none;
+    }
+
+    /* ── Hero Banner ─────────────────────────────────────── */
+    .hero-banner {
+      max-width: 1400px;
+      margin: 2.5rem auto 1.5rem;
+      padding: 0 2rem;
+    }
+    .hero-card {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 20px;
+      padding: 2.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--gold-light);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    .hero-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-sub);
+      max-width: 800px;
+    }
+
+    /* ── Tab Filter ──────────────────────────────────────── */
+    .filter-container {
+      max-width: 1400px;
+      margin: 1.5rem auto;
+      padding: 0 2rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.55rem 1.25rem;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      background: rgba(30, 41, 59, 0.8);
+      color: #ffffff;
+    }
+    .filter-btn.active {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0.1) 100%);
+      border-color: var(--gold-primary);
+      color: #fbbf24;
+    }
+
+    /* ── Section Layout ──────────────────────────────────── */
+    .section-wrap {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.75rem;
+    }
+    .section-title-group h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-title-group p {
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      margin-top: 0.25rem;
+    }
+    .badge-count {
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--gold-light);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* ── Book Grid ───────────────────────────────────────── */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── Book Card ───────────────────────────────────────── */
+    .book-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(12px);
+    }
+    .book-card:hover {
+      transform: translateY(-4px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-card-hover);
+      box-shadow: 0 16px 32px -10px rgba(245, 158, 11, 0.15);
+    }
+
+    .book-top {
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    /* 3D Book Spine Cover Thumbnail */
+    .book-cover {
+      width: 90px;
+      height: 125px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+      box-shadow: -4px 6px 12px rgba(0, 0, 0, 0.5), inset 3px 0 6px rgba(255, 255, 255, 0.2);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.6rem;
+      position: relative;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .book-cover.blue {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    .book-cover.purple {
+      background: linear-gradient(135deg, #581c87 0%, #2e1065 100%);
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+    .book-cover.emerald {
+      background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .book-cover.crimson {
+      background: linear-gradient(135deg, #881337 0%, #4c0519 100%);
+      border-color: rgba(244, 63, 94, 0.4);
+    }
+
+    .cover-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #fbbf24;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cover-icon {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    .cover-footer {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .book-info {
+      flex: 1;
+    }
+    .book-meta-top {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .book-id-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      background: rgba(245, 158, 11, 0.15);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+    .book-status-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+    .book-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.35;
+      margin-bottom: 0.35rem;
+    }
+    .book-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      line-height: 1.45;
+    }
+
+    .book-desc {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--gold-primary);
+    }
+
+    .book-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-sub);
+    }
+
+    .book-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+    .btn-read {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #000000;
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    }
+    .btn-read:hover {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .books-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-card {
+        padding: 1.75rem;
+      }
+      .hero-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <header class="books-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <a href="./index.html" class="back-btn">
+          <span>←</span>
+          <span>DMDG 메인 포털</span>
+        </a>
+        <h1 class="brand-title">DMDG Tech Books & Engineering Library</h1>
+      </div>
+
+      <div class="header-actions">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="도서명, 키워드 검색..." onkeyup="filterBooks()">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Hero Banner ─────────────────────────────────────── -->
+  <div class="hero-banner">
+    <div class="hero-card">
+      <div class="hero-tag">✨ Official Wikidocs Knowledge Hub</div>
+      <h2 class="hero-title">실무 엔지니어링의 정수를 담은<br><span>DMDG 6대 단행본 & 지식 아카이브</span></h2>
+      <p class="hero-subtitle">
+        엔터프라이즈 MLOps 아키텍처, 초대형 LLM 오케스트레이션, 고성능 HNSW 벡터 파이프라인부터 거버넌스까지 — 실무 현장에서 즉시 적용 가능한 완성형 엔지니어링 지식을 자유롭게 열람하세요.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Tab Filters ─────────────────────────────────────── -->
+  <div class="filter-container">
+    <button class="filter-btn active" onclick="switchCategory('all', this)">전체 보기 (9권)</button>
+    <button class="filter-btn" onclick="switchCategory('tech', this)">AI 실무 단행본 (6권)</button>
+    <button class="filter-btn" onclick="switchCategory('novel', this)">감성 팩션 소설 (3권)</button>
+    <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="filter-btn" style="text-decoration:none; margin-left:auto;">
+      위키독스 공식 채널 ↗
+    </a>
+  </div>
+
+  <!-- ── Section 1: AI 엔지니어링 실무 단행본 ─────────────── -->
+  <main class="section-wrap" id="tech-section">
+    <div class="section-head">
+      <div class="section-title-group">
+        <h2>
+          <span>📘</span> AI 엔지니어링 실무 단행본 컬렉션
+          <span class="badge-count">6 Books</span>
+        </h2>
+        <p>위키독스 실시간 공식 연동 · 엔터프라이즈 AI 아키텍처 및 파이프라인 표준</p>
+      </div>
+    </div>
+
+    <div class="books-grid">
+      
+      <!-- 1. Book 21777 -->
+      <article class="book-card" data-category="tech" data-keywords="21777 ai 엔지니어링 실무 아키텍처 mlops deeplearning 딥러닝 llm">
+        <div>
+          <div class="book-top">
+            <div class="book-cover">
+              <span class="cover-badge">Book 21777</span>
+              <div class="cover-icon">📕</div>
+              <span class="cover-footer">DMDG AI</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">ID: 21777</span>
+                <span class="book-status-tag">베스트셀러</span>
+              </div>
+              <h3 class="book-title">AI 엔지니어링 실무 아키텍처</h3>
+              <p class="book-subtitle">딥러닝·MLOps·LLM 애플리케이션 아키텍처 실무</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            복잡한 엔터프라이즈 AI 시스템을 설계하고 운영하기 위한 실무 아키텍처 가이드. 데이터 인제스천부터 모델 서빙, 모니터링까지 전 주기 파이프라인을 다룹니다.
+          </p>
+          <div class="book-tags">
+            <span class="tag">MLOps</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Docker</span>
+            <span class="tag">TensorFlow</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="https://wikidocs.net/book/21777" target="_blank" rel="noopener noreferrer" class="btn-read">
+            위키독스에서 열람하기 ➔
+          </a>
+        </div>
+      </article>
+
+      <!-- 2. Book 21695 -->
+      <article class="book-card" data-category="tech" data-keywords="21695 엔터프라이즈 llm 구축 가이드 rag 파인튜닝 agent 에이전트">
+        <div>
+          <div class="book-top">
+            <div class="book-cover blue">
+              <span class="cover-badge">Book 21695</span>
+              <div class="cover-icon">📗</div>
+              <span class="cover-footer">LLM GUIDE</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">ID: 21695</span>
+                <span class="book-status-tag">인기 도서</span>
+              </div>
+              <h3 class="book-title">엔터프라이즈 LLM 구축 가이드</h3>
+              <p class="book-subtitle">파인튜닝, RAG, 에이전트 설계 및 프로덕션 배포</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            초거대 언어모델을 사내 시스템에 안전하고 고성능으로 도입하는 전 과정. RAG 검색 증강 생성 아키텍처와 LangChain/LangGraph 에이전트 구축 실무.
+          </p>
+          <div class="book-tags">
+            <span class="tag">LLM</span>
+            <span class="tag">RAG</span>
+            <span class="tag">LangGraph</span>
+            <span class="tag">Fine-Tuning</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="https://wikidocs.net/book/21695" target="_blank" rel="noopener noreferrer" class="btn-read">
+            위키독스에서 열람하기 ➔
+          </a>
+        </div>
+      </article>
+
+      <!-- 3. Book 21858 -->
+      <article class="book-card" data-category="tech" data-keywords="21858 고성능 벡터 데이터 파이프라인 pgvector hnsw neo4j 지식그래프">
+        <div>
+          <div class="book-top">
+            <div class="book-cover emerald">
+              <span class="cover-badge">Book 21858</span>
+              <div class="cover-icon">📙</div>
+              <span class="cover-footer">VECTOR DB</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">ID: 21858</span>
+                <span class="book-status-tag">핵심 기술</span>
+              </div>
+              <h3 class="book-title">고성능 벡터 데이터 파이프라인</h3>
+              <p class="book-subtitle">pgvector, HNSW, Neo4j 하이브리드 검색 엔진 구현</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            수천만 건의 비정형 텍스트 임베딩을 초저지연으로 검색하는 최적화 가이드. PostgreSQL pgvector와 그래프 DB의 앙상블 검색 엔진 구축.
+          </p>
+          <div class="book-tags">
+            <span class="tag">pgvector</span>
+            <span class="tag">HNSW Index</span>
+            <span class="tag">Neo4j</span>
+            <span class="tag">Hybrid Search</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="https://wikidocs.net/book/21858" target="_blank" rel="noopener noreferrer" class="btn-read">
+            위키독스에서 열람하기 ➔
+          </a>
+        </div>
+      </article>
+
+      <!-- 4. Book 21842 -->
+      <article class="book-card" data-category="tech" data-keywords="21842 클라우드 멀티 리전 최적화 gcp aws kubernetes 글로벌인프라">
+        <div>
+          <div class="book-top">
+            <div class="book-cover purple">
+              <span class="cover-badge">Book 21842</span>
+              <div class="cover-icon">📘</div>
+              <span class="cover-footer">MULTI REGION</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">ID: 21842</span>
+                <span class="book-status-tag">아키텍처</span>
+              </div>
+              <h3 class="book-title">클라우드 멀티 리전 최적화</h3>
+              <p class="book-subtitle">GCP/AWS 글로벌 인프라, 고가용성 및 비용 최적화 전략</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            장애 발생 시 0초 무중단 페일오버를 달성하는 멀티 리전 클라우드 아키텍처. 글로벌 트래픽 분산과 테라폼 기반 자동화 인프라 구축.
+          </p>
+          <div class="book-tags">
+            <span class="tag">GCP</span>
+            <span class="tag">AWS</span>
+            <span class="tag">Multi-Cloud</span>
+            <span class="tag">Terraform</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="https://wikidocs.net/book/21842" target="_blank" rel="noopener noreferrer" class="btn-read">
+            위키독스에서 열람하기 ➔
+          </a>
+        </div>
+      </article>
+
+      <!-- 5. Book 21781 -->
+      <article class="book-card" data-category="tech" data-keywords="21781 차세대 생성형 ai 거버넌스 가드레일 보안 윤리 프레임워크">
+        <div>
+          <div class="book-top">
+            <div class="book-cover crimson">
+              <span class="cover-badge">Book 21781</span>
+              <div class="cover-icon">📓</div>
+              <span class="cover-footer">GOVERNANCE</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">ID: 21781</span>
+                <span class="book-status-tag">보안 표준</span>
+              </div>
+              <h3 class="book-title">차세대 생성형 AI 거버넌스</h3>
+              <p class="book-subtitle">엔터프라이즈 AI 보안, 환각 방지 가드레일, 윤리 프레임워크</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            기업 내 AI 도입 시 발생할 수 있는 프롬프트 인젝션, 민감 데이터 유출 및 환각(Hallucination) 위험을 철저히 방어하는 거버넌스 체계.
+          </p>
+          <div class="book-tags">
+            <span class="tag">AI Security</span>
+            <span class="tag">Guardrails</span>
+            <span class="tag">Compliance</span>
+            <span class="tag">Red Teaming</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="https://wikidocs.net/book/21781" target="_blank" rel="noopener noreferrer" class="btn-read">
+            위키독스에서 열람하기 ➔
+          </a>
+        </div>
+      </article>
+
+      <!-- 6. Book 21909 -->
+      <article class="book-card" data-category="tech" data-keywords="21909 lg cns 2기 데이터 파이프라인 pgvector 하이브리드 검색 심화">
+        <div>
+          <div class="book-top">
+            <div class="book-cover">
+              <span class="cover-badge">Book 21909</span>
+              <div class="cover-icon">✨</div>
+              <span class="cover-footer">CNS STANDARD</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">ID: 21909</span>
+                <span class="book-status-tag">신간 표준</span>
+              </div>
+              <h3 class="book-title">[LG CNS 2기] 데이터 파이프라인 심화</h3>
+              <p class="book-subtitle">pgvector 하이브리드 검색 및 대규모 데이터 인프라 표준</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            LG CNS AI 아카데미 2기 실무 프로젝트의 기술 표준서. 실무 데이터 정제, 멀티모달 파서, 고성능 임베딩 서빙 파이프라인 완벽 가이드.
+          </p>
+          <div class="book-tags">
+            <span class="tag">LG CNS</span>
+            <span class="tag">pgvector</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Data Lake</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="https://wikidocs.net/book/21909" target="_blank" rel="noopener noreferrer" class="btn-read">
+            위키독스에서 열람하기 ➔
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ── Section 2: 감성 팩션 소설 컬렉션 ─────────────────── -->
+  <section class="section-wrap" id="novel-section">
+    <div class="section-head">
+      <div class="section-title-group">
+        <h2>
+          <span>🐸</span> DMDG Master 팩션 소설 컬렉션 (삶은 개구리 트릴로지)
+          <span class="badge-count">3 Novels</span>
+        </h2>
+        <p>기술의 특이점과 인간 실존의 고독을 다룬 감성 미스터리 팩션 대하 소설</p>
+      </div>
+    </div>
+
+    <div class="books-grid">
+
+      <!-- Novel 1 -->
+      <article class="book-card" data-category="novel" data-keywords="소설 novel 삶은 개구리 1편 섭씨 38.5도 재즈 스파게티">
+        <div>
+          <div class="book-top">
+            <div class="book-cover crimson">
+              <span class="cover-badge">Novel Vol.1</span>
+              <div class="cover-icon">🍷</div>
+              <span class="cover-footer">FROG TRILOGY</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">Trilogy 01</span>
+                <span class="book-status-tag">E-Reader 완비</span>
+              </div>
+              <h3 class="book-title">삶은 개구리 1편</h3>
+              <p class="book-subtitle">섭씨 38.5도의 재즈와 스파게티가 식는 속도</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            한밤의 서울 서버실, 식어가는 토마토 스파게티와 턴테이블에서 흐르는 빌 에반스의 피아노 선율. 서서히 달아오르는 물속에서 우리는 무엇을 잃어가고 있는가.
+          </p>
+          <div class="book-tags">
+            <span class="tag">팩션 소설</span>
+            <span class="tag">재즈 & 감성</span>
+            <span class="tag">인라인 오디오북</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="./novel_boiled_frog_01.html" class="btn-read">
+            온라인 서재에서 읽기 ➔
+          </a>
+          <a href="./novels.html" class="btn-outline">
+            소설 허브 ↗
+          </a>
+        </div>
+      </article>
+
+      <!-- Novel 2 -->
+      <article class="book-card" data-category="novel" data-keywords="소설 novel 삶은 개구리 2편 섭씨 55도 시뮬라크르">
+        <div>
+          <div class="book-top">
+            <div class="book-cover purple">
+              <span class="cover-badge">Novel Vol.2</span>
+              <div class="cover-icon">🕯️</div>
+              <span class="cover-footer">FROG TRILOGY</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">Trilogy 02</span>
+                <span class="book-status-tag">연재 완결</span>
+              </div>
+              <h3 class="book-title">삶은 개구리 2편</h3>
+              <p class="book-subtitle">섭씨 55도의 시뮬라크르와 불 꺼진 서버실</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            가상과 현실의 경계가 무너지는 55도의 미온수. 알고리즘이 써 내려가는 감정과 진짜 인간의 기억 사이에서 벌어지는 숨 막히는 추적.
+          </p>
+          <div class="book-tags">
+            <span class="tag">시뮬라크르</span>
+            <span class="tag">심리 서스펜스</span>
+            <span class="tag">음성 낭독</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="./novels.html" class="btn-read">
+            서재에서 열람하기 ➔
+          </a>
+        </div>
+      </article>
+
+      <!-- Novel 3 -->
+      <article class="book-card" data-category="novel" data-keywords="소설 novel 삶은 개구리 3편 섭씨 100도 특이점">
+        <div>
+          <div class="book-top">
+            <div class="book-cover blue">
+              <span class="cover-badge">Novel Vol.3</span>
+              <div class="cover-icon">🌊</div>
+              <span class="cover-footer">FROG TRILOGY</span>
+            </div>
+            <div class="book-info">
+              <div class="book-meta-top">
+                <span class="book-id-tag">Trilogy 03</span>
+                <span class="book-status-tag">클라이맥스</span>
+              </div>
+              <h3 class="book-title">삶은 개구리 3편</h3>
+              <p class="book-subtitle">섭씨 100도의 특이점과 기억의 잔향</p>
+            </div>
+          </div>
+          <p class="book-desc">
+            마침내 끓는점에 도달한 세계. 특이점을 통과한 인류의 마지막 감정이 남긴 잔향을 좇아 떠나는 거대한 철학적 여정.
+          </p>
+          <div class="book-tags">
+            <span class="tag">SF 팩션</span>
+            <span class="tag">특이점</span>
+            <span class="tag">완결작</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="./novels.html" class="btn-read">
+            서재에서 열람하기 ➔
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ── Filter & Search Scripts ─────────────────────────── -->
+  <script>
+    let currentCategory = 'all';
+
+    function switchCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const techSec = document.getElementById('tech-section');
+      const novelSec = document.getElementById('novel-section');
+
+      if (cat === 'all') {
+        techSec.style.display = 'block';
+        novelSec.style.display = 'block';
+      } else if (cat === 'tech') {
+        techSec.style.display = 'block';
+        novelSec.style.display = 'none';
+      } else if (cat === 'novel') {
+        techSec.style.display = 'none';
+        novelSec.style.display = 'block';
+      }
+      filterBooks();
+    }
+
+    function filterBooks() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const cards = document.querySelectorAll('.book-card');
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+        const title = (card.querySelector('.book-title')?.textContent || '').toLowerCase();
+        const desc = (card.querySelector('.book-desc')?.textContent || '').toLowerCase();
+
+        const matchCat = (currentCategory === 'all' || currentCategory === cat);
+        const matchQuery = !q || keywords.includes(q) || title.includes(q) || desc.includes(q);
+
+        if (matchCat && matchQuery) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+

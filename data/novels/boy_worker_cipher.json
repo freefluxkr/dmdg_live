@@ -1,0 +1,537 @@
+{
+  "id": "boy_worker_cipher",
+  "title": {
+    "ko": "카르텔의 암호",
+    "en": "The Cipher of the Cartel (500p Dan Brown Edition)",
+    "ja": "カルテルの暗号 (500p ダン・ブラウン調)",
+    "es": "El Cifrado del Cártel (500p)",
+    "fr": "Le Cryptogramme du Cartel (500p)",
+    "id": "Sandi Kartel (500p)"
+  },
+  "subtitle": {
+    "ko": "48시간 타임 리미트 지능형 금융 서스펜스 스릴러 (500p 대작 정규 완결본)",
+    "en": "A 48-Hour Financial Cryptographic Thriller (500-Page Epic)",
+    "ja": "48時間タイムリミット知能型金融サスペンス (500p完全版)",
+    "es": "Thriller criptográfico y financiero contrarreloj de 48 horas",
+    "fr": "La nuit du Forum de Davos et la sémiotique des bunkers suisses",
+    "id": "Malam Forum Davos dan semiotika bunker bawah tanah Swiss"
+  },
+  "author": "댄 B. 사이퍼 & 에드워드 권 (가명)",
+  "badge": "댄 브라운 스타일 500p 대작",
+  "category": "faction",
+  "cover_gradient": "linear-gradient(135deg, #090d16 0%, #111d33 50%, #1e3a8a 100%)",
+  "cover_accent": "#38bdf8",
+  "charCount": 192000,
+  "readingTime": "약 330분",
+  "total_chapters": 25,
+  "description": {
+    "ko": "선고 48시간 전! 대림지구 비밀 장부와 50억 클럽, 1976년 소년공 시절 프레스 기계 시리얼 넘버 '1976-NO.6'에 숨겨진 거대한 사법-금융 카르텔의 암호를 해독하는 500page 지능형 서스펜스 대작.",
+    "en": "48 hours to verdict: a 500-page Dan Brown-style thriller deciphering the serial '1976-NO.6', the 5-Billion Club, and a massive judicial-financial conspiracy.",
+    "ja": "判決直前48時間の息詰まる攻防。50億クラブと少年工の暗号を追う500頁の本格金融サスペンス大作。",
+    "es": "Una trepidante novela de suspense de 500 páginas que desvela la gran conspiración judicial y financiera en Corea.",
+    "fr": "Un thriller sémiotique de 500 pages de Dan Brown sur le traité secret du cartel mondial de l'énergie.",
+    "id": "Thriller semiotika 500 halaman Dan Brown tentang perjanjian rahasia kartel energi global."
+  },
+  "chapters": [
+    {
+      "ch": 1,
+      "part": "ACT 1",
+      "title": {
+        "ko": "1장. 새벽 03:00, 서초동 한강변의 질주",
+        "en": "Ch 1. 03:00 AM: Pursuit Along the Han River",
+        "ja": "第1章夜明け03:00、瑞草洞漢江辺の疾走",
+        "es": "Ch 1. 03:00 AM: Pursuit Along the Han River",
+        "fr": "[FR] Ch 1. 03:00 AM: Pursuit Along the Han River",
+        "id": "[ID] Ch 1. 03:00 AM: Pursuit Along the Han River"
+      },
+      "content": {
+        "ko": "[1장. 새벽 03:00, 서초동 한강변의 질주]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 1. 03:00 AM: Pursuit Along the Han River]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［１章。夜明け03:00、瑞草洞漢江辺の疾走]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 1. 03:00 AM: Pursuit Along the Han River]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 1. 03:00 AM: Pursuit Along the Han River]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 1. 03:00 AM: Pursuit Along the Han River]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 2,
+      "part": "ACT 1",
+      "title": {
+        "ko": "2장. 류창호의 의문의 추락과 가죽 조각",
+        "en": "Ch 2. Ryu's Mysterious Fall and the Leather Fragment",
+        "ja": "第2章リュ・チャンホの疑問の墜落と革の彫刻",
+        "es": "Ch 2. Ryu's Mysterious Fall and the Leather Fragment",
+        "fr": "[FR] Ch 2. Ryu's Mysterious Fall and the Leather Fragment",
+        "id": "[ID] Ch 2. Ryu's Mysterious Fall and the Leather Fragment"
+      },
+      "content": {
+        "ko": "[2장. 류창호의 의문의 추락과 가죽 조각]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 2. Ryu's Mysterious Fall and the Leather Fragment]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［２章。リュ・チャンホの疑問の墜落と革片】\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 2. Ryu's Mysterious Fall and the Leather Fragment]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 2. Ryu's Mysterious Fall and the Leather Fragment]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 2. Ryu's Mysterious Fall and the Leather Fragment]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 3,
+      "part": "ACT 1",
+      "title": {
+        "ko": "3장. 8자리 암호 '1976-NO.6'의 해독",
+        "en": "Ch 3. Decoding the 8-Digit Cipher '1976-NO.6'",
+        "ja": "第3章8桁の暗号「1976-NO.6」の解読",
+        "es": "Ch 3. Decoding the 8-Digit Cipher '1976-NO.6'",
+        "fr": "[FR] Ch 3. Decoding the 8-Digit Cipher '1976-NO.6'",
+        "id": "[ID] Ch 3. Decoding the 8-Digit Cipher '1976-NO.6'"
+      },
+      "content": {
+        "ko": "[3장. 8자리 암호 '1976-NO.6'의 해독]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 3. Decoding the 8-Digit Cipher '1976-NO.6']\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［３章。 8桁の暗号「1976-NO.6」の復号]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 3. Decoding the 8-Digit Cipher '1976-NO.6']\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 3. Decoding the 8-Digit Cipher '1976-NO.6']\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 3. Decoding the 8-Digit Cipher '1976-NO.6']\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 4,
+      "part": "ACT 1",
+      "title": {
+        "ko": "4장. 암호학자 에드워드 권의 서재 침입자",
+        "en": "Ch 4. The Intruder in Cryptologist Edward's Study",
+        "ja": "第4章暗号学者エドワード圏の書載侵入者",
+        "es": "Ch 4. The Intruder in Cryptologist Edward's Study",
+        "fr": "[FR] Ch 4. The Intruder in Cryptologist Edward's Study",
+        "id": "[ID] Ch 4. The Intruder in Cryptologist Edward's Study"
+      },
+      "content": {
+        "ko": "[4장. 암호학자 에드워드 권의 서재 침입자]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 4. The Intruder in Cryptologist Edward's Study]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［４章。暗号学者エドワード圏の書斎侵入者]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 4. The Intruder in Cryptologist Edward's Study]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 4. The Intruder in Cryptologist Edward's Study]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 4. The Intruder in Cryptologist Edward's Study]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 5,
+      "part": "ACT 1",
+      "title": {
+        "ko": "5장. 대림지구(대장동) 지적도에 숨겨진 피보나치 나선",
+        "en": "Ch 5. Fibonacci Spiral on the Daelim Cadastral Map",
+        "ja": "第5章大林地区（大蔵洞）知的道に隠されたフィボナッチ螺旋",
+        "es": "Ch 5. Fibonacci Spiral on the Daelim Cadastral Map",
+        "fr": "[FR] Ch 5. Fibonacci Spiral on the Daelim Cadastral Map",
+        "id": "[ID] Ch 5. Fibonacci Spiral on the Daelim Cadastral Map"
+      },
+      "content": {
+        "ko": "[5장. 대림지구(대장동) 지적도에 숨겨진 피보나치 나선]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 5. Fibonacci Spiral on the Daelim Cadastral Map]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "[5章。大林地区（大蔵洞）知的道に隠されたフィボナッチ螺旋]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 5. Fibonacci Spiral on the Daelim Cadastral Map]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 5. Fibonacci Spiral on the Daelim Cadastral Map]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 5. Fibonacci Spiral on the Daelim Cadastral Map]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 6,
+      "part": "ACT 2",
+      "title": {
+        "ko": "6장. 서초동 법조타운 지하 비밀 바 '정의(Justitia)'",
+        "en": "Ch 6. Underground Bar 'Justitia' in Seocho",
+        "ja": "第6章瑞草洞法廷タウン地下秘密バー「Justitia」",
+        "es": "Ch 6. Underground Bar 'Justitia' in Seocho",
+        "fr": "[FR] Ch 6. Underground Bar 'Justitia' in Seocho",
+        "id": "[ID] Ch 6. Underground Bar 'Justitia' in Seocho"
+      },
+      "content": {
+        "ko": "[6장. 서초동 법조타운 지하 비밀 바 '정의(Justitia)']\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 6. Underground Bar 'Justitia' in Seocho]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "[6章。瑞草洞法渓タウン地下秘密バー「Justitia」]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 6. Underground Bar 'Justitia' in Seocho]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 6. Underground Bar 'Justitia' in Seocho]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 6. Underground Bar 'Justitia' in Seocho]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 7,
+      "part": "ACT 2",
+      "title": {
+        "ko": "7장. 전직 대법관의 만년필과 녹음된 밀담",
+        "en": "Ch 7. Former Justice's Fountain Pen and Recorded Talk",
+        "ja": "第7章元最高裁判所の万年筆と録音された密談",
+        "es": "Ch 7. Former Justice's Fountain Pen and Recorded Talk",
+        "fr": "[FR] Ch 7. Former Justice's Fountain Pen and Recorded Talk",
+        "id": "[ID] Ch 7. Former Justice's Fountain Pen and Recorded Talk"
+      },
+      "content": {
+        "ko": "[7장. 전직 대법관의 만년필과 녹음된 밀담]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 7. Former Justice's Fountain Pen and Recorded Talk]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "[7章。元大法館の万年筆と録音された密談]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 7. Former Justice's Fountain Pen and Recorded Talk]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 7. Former Justice's Fountain Pen and Recorded Talk]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 7. Former Justice's Fountain Pen and Recorded Talk]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 8,
+      "part": "ACT 2",
+      "title": {
+        "ko": "8장. 50억 클럽 7인의 가면: 법과 언론의 야합",
+        "en": "Ch 8. Seven Masks of 5-Billion Club: Law and Press",
+        "ja": "第8章50億クラブ7人の仮面：法と言論の野合",
+        "es": "Ch 8. Seven Masks of 5-Billion Club: Law and Press",
+        "fr": "[FR] Ch 8. Seven Masks of 5-Billion Club: Law and Press",
+        "id": "[ID] Ch 8. Seven Masks of 5-Billion Club: Law and Press"
+      },
+      "content": {
+        "ko": "[8장. 50억 클럽 7인의 가면: 법과 언론의 야합]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 8. Seven Masks of 5-Billion Club: Law and Press]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "[8章。 50億クラブ7人の仮面：法と言論の野合]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 8. Seven Masks of 5-Billion Club: Law and Press]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 8. Seven Masks of 5-Billion Club: Law and Press]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 8. Seven Masks of 5-Billion Club: Law and Press]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 9,
+      "part": "ACT 2",
+      "title": {
+        "ko": "9장. 금융감독원 전산망 해킹과 페이퍼컴퍼니",
+        "en": "Ch 9. Hacking the Financial Supervisory Grid",
+        "ja": "第9章金融監督院コンピュータネットワークハッキングとペーパーカンパニー",
+        "es": "Ch 9. Hacking the Financial Supervisory Grid",
+        "fr": "[FR] Ch 9. Hacking the Financial Supervisory Grid",
+        "id": "[ID] Ch 9. Hacking the Financial Supervisory Grid"
+      },
+      "content": {
+        "ko": "[9장. 금융감독원 전산망 해킹과 페이퍼컴퍼니]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 9. Hacking the Financial Supervisory Grid]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［９章。金融監督院コンピュータネットワークハッキングとペーパーカンパニー]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 9. Hacking the Financial Supervisory Grid]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 9. Hacking the Financial Supervisory Grid]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 9. Hacking the Financial Supervisory Grid]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 10,
+      "part": "ACT 2",
+      "title": {
+        "ko": "10장. 그림자 참모 정상구의 도청 방지 전화",
+        "en": "Ch 10. Shadow Chief's Anti-Wiretap Device",
+        "ja": "第10章。影参謀頂上の盗聴防止電話",
+        "es": "Ch 10. Shadow Chief's Anti-Wiretap Device",
+        "fr": "[FR] Ch 10. Shadow Chief's Anti-Wiretap Device",
+        "id": "[ID] Ch 10. Shadow Chief's Anti-Wiretap Device"
+      },
+      "content": {
+        "ko": "[10장. 그림자 참모 정상구의 도청 방지 전화]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 10. Shadow Chief's Anti-Wiretap Device]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "[10章。影参謀頂上の盗聴防止電話】\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 10. Shadow Chief's Anti-Wiretap Device]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 10. Shadow Chief's Anti-Wiretap Device]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 10. Shadow Chief's Anti-Wiretap Device]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 11,
+      "part": "ACT 3",
+      "title": {
+        "ko": "11장. 탄성시 폐공장 지하 30톤 프레스 기계",
+        "en": "Ch 11. 30-Ton Press in Abandoned Tanseong Factory",
+        "ja": "11章。弾性市廃工場地下30トンプレス機",
+        "es": "Ch 11. 30-Ton Press in Abandoned Tanseong Factory",
+        "fr": "[FR] Ch 11. 30-Ton Press in Abandoned Tanseong Factory",
+        "id": "[ID] Ch 11. 30-Ton Press in Abandoned Tanseong Factory"
+      },
+      "content": {
+        "ko": "[11장. 탄성시 폐공장 지하 30톤 프레스 기계]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 11. 30-Ton Press in Abandoned Tanseong Factory]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［11章。弾性市廃工場地下30トンプレス機]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 11. 30-Ton Press in Abandoned Tanseong Factory]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 11. 30-Ton Press in Abandoned Tanseong Factory]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 11. 30-Ton Press in Abandoned Tanseong Factory]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 12,
+      "part": "ACT 3",
+      "title": {
+        "ko": "12장. 부러진 뼈 속에 심어진 일련번호의 진실",
+        "en": "Ch 12. Truth of the Serial Number Embedded in Bone",
+        "ja": "第12章。骨折した骨の中に植えられたシリアル番号の真実",
+        "es": "Ch 12. Truth of the Serial Number Embedded in Bone",
+        "fr": "[FR] Ch 12. Truth of the Serial Number Embedded in Bone",
+        "id": "[ID] Ch 12. Truth of the Serial Number Embedded in Bone"
+      },
+      "content": {
+        "ko": "[12장. 부러진 뼈 속에 심어진 일련번호의 진실]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 12. Truth of the Serial Number Embedded in Bone]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［12章。壊れた骨の中に植えられたシリアル番号の真実]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 12. Truth of the Serial Number Embedded in Bone]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 12. Truth of the Serial Number Embedded in Bone]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 12. Truth of the Serial Number Embedded in Bone]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 13,
+      "part": "ACT 3",
+      "title": {
+        "ko": "13장. 스위스 UBS 취리히 지점의 비밀 금고 1976",
+        "en": "Ch 13. Swiss UBS Zurich Vault 1976",
+        "ja": "第13章。スイスUBSチューリッヒ支店の秘密金庫1976",
+        "es": "Ch 13. Swiss UBS Zurich Vault 1976",
+        "fr": "[FR] Ch 13. Swiss UBS Zurich Vault 1976",
+        "id": "[ID] Ch 13. Swiss UBS Zurich Vault 1976"
+      },
+      "content": {
+        "ko": "[13장. 스위스 UBS 취리히 지점의 비밀 금고 1976]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 13. Swiss UBS Zurich Vault 1976]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［13章。スイスUBSチューリッヒ支店の秘密金庫1976]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 13. Swiss UBS Zurich Vault 1976]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 13. Swiss UBS Zurich Vault 1976]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 13. Swiss UBS Zurich Vault 1976]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 14,
+      "part": "ACT 3",
+      "title": {
+        "ko": "14장. 회계사 형 강민석의 감사 일기장 원본",
+        "en": "Ch 14. Original Audit Diary of Brother Min-seok",
+        "ja": "14章。会計士型カン・ミンソクの監査日記帳オリジナル",
+        "es": "Ch 14. Original Audit Diary of Brother Min-seok",
+        "fr": "[FR] Ch 14. Original Audit Diary of Brother Min-seok",
+        "id": "[ID] Ch 14. Original Audit Diary of Brother Min-seok"
+      },
+      "content": {
+        "ko": "[14장. 회계사 형 강민석의 감사 일기장 원본]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 14. Original Audit Diary of Brother Min-seok]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "[14章。会計士型カン・ミンソクの監査日記帳オリジナル]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 14. Original Audit Diary of Brother Min-seok]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 14. Original Audit Diary of Brother Min-seok]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 14. Original Audit Diary of Brother Min-seok]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 15,
+      "part": "ACT 3",
+      "title": {
+        "ko": "15장. 남산 통신탑 레이더가 포착한 국가정보원 요원",
+        "en": "Ch 15. Namsan Tower Radar Tracking NIS Agents",
+        "ja": "15章。南山通信塔レーダーが捉えた国家情報院要員",
+        "es": "Ch 15. Namsan Tower Radar Tracking NIS Agents",
+        "fr": "[FR] Ch 15. Namsan Tower Radar Tracking NIS Agents",
+        "id": "[ID] Ch 15. Namsan Tower Radar Tracking NIS Agents"
+      },
+      "content": {
+        "ko": "[15장. 남산 통신탑 레이더가 포착한 국가정보원 요원]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 15. Namsan Tower Radar Tracking NIS Agents]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［15章。南山通信塔レーダーが捉えた国家情報院要員]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 15. Namsan Tower Radar Tracking NIS Agents]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 15. Namsan Tower Radar Tracking NIS Agents]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 15. Namsan Tower Radar Tracking NIS Agents]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 16,
+      "part": "ACT 4",
+      "title": {
+        "ko": "16장. 국회 로텐더홀 단식 텐트 급습",
+        "en": "Ch 16. Raid on the National Assembly Strike Tent",
+        "ja": "16章。国会ローテンダーホール断食テント急襲",
+        "es": "Ch 16. Raid on the National Assembly Strike Tent",
+        "fr": "[FR] Ch 16. Raid on the National Assembly Strike Tent",
+        "id": "[ID] Ch 16. Raid on the National Assembly Strike Tent"
+      },
+      "content": {
+        "ko": "[16장. 국회 로텐더홀 단식 텐트 급습]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 16. Raid on the National Assembly Strike Tent]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［16章。国会ローテンダーホール断食テント急襲】\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 16. Raid on the National Assembly Strike Tent]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 16. Raid on the National Assembly Strike Tent]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 16. Raid on the National Assembly Strike Tent]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 17,
+      "part": "ACT 4",
+      "title": {
+        "ko": "17장. 강민우의 병상 대면: \"너는 진실을 감당할 수 있는가\"",
+        "en": "Ch 17. Hospital Confrontation: 'Can You Bear the Truth?'",
+        "ja": "17章。カン・ミンウの病床対面：「あなたは真実を余裕ができるのか」",
+        "es": "Ch 17. Hospital Confrontation: 'Can You Bear the Truth?'",
+        "fr": "[FR] Ch 17. Hospital Confrontation: 'Can You Bear the Truth?'",
+        "id": "[ID] Ch 17. Hospital Confrontation: 'Can You Bear the Truth?'"
+      },
+      "content": {
+        "ko": "[17장. 강민우의 병상 대면: \"너는 진실을 감당할 수 있는가\"]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 17. Hospital Confrontation: 'Can You Bear the Truth?']\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［17章。カン・ミンウの病床対面：「あなたは真実を余裕ができるのか」]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 17. Hospital Confrontation: 'Can You Bear the Truth?']\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 17. Hospital Confrontation: 'Can You Bear the Truth?']\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 17. Hospital Confrontation: 'Can You Bear the Truth?']\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 18,
+      "part": "ACT 4",
+      "title": {
+        "ko": "18장. 서초동 중앙지법 지하 2층 보일러실 철문",
+        "en": "Ch 18. Iron Door of Courtroom Boiler Room B2",
+        "ja": "18章。瑞草洞中央地法地下2階ボイラー室鉄門",
+        "es": "Ch 18. Iron Door of Courtroom Boiler Room B2",
+        "fr": "[FR] Ch 18. Iron Door of Courtroom Boiler Room B2",
+        "id": "[ID] Ch 18. Iron Door of Courtroom Boiler Room B2"
+      },
+      "content": {
+        "ko": "[18장. 서초동 중앙지법 지하 2층 보일러실 철문]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 18. Iron Door of Courtroom Boiler Room B2]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［18章。瑞草洞中央地法地下2階ボイラー室鉄門]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 18. Iron Door of Courtroom Boiler Room B2]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 18. Iron Door of Courtroom Boiler Room B2]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 18. Iron Door of Courtroom Boiler Room B2]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 19,
+      "part": "ACT 4",
+      "title": {
+        "ko": "19장. 배상진 기자의 007가방 폭파 위협",
+        "en": "Ch 19. Reporter Bae's Explosive Briefcase Threat",
+        "ja": "19章。ペ・サンジン記者の007バッグ爆破の脅威",
+        "es": "Ch 19. Reporter Bae's Explosive Briefcase Threat",
+        "fr": "[FR] Ch 19. Reporter Bae's Explosive Briefcase Threat",
+        "id": "[ID] Ch 19. Reporter Bae's Explosive Briefcase Threat"
+      },
+      "content": {
+        "ko": "[19장. 배상진 기자의 007가방 폭파 위협]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 19. Reporter Bae's Explosive Briefcase Threat]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［19章。ペ・サンジン記者の007バッグ爆破の脅威]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 19. Reporter Bae's Explosive Briefcase Threat]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 19. Reporter Bae's Explosive Briefcase Threat]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 19. Reporter Bae's Explosive Briefcase Threat]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 20,
+      "part": "ACT 4",
+      "title": {
+        "ko": "20장. 바티칸 은행과 연계된 역외 탈세 계좌",
+        "en": "Ch 20. Offshore Tax Havens Linked to Vatican Banks",
+        "ja": "20章。バチカン銀行と連携した駅外脱税口座",
+        "es": "Ch 20. Offshore Tax Havens Linked to Vatican Banks",
+        "fr": "[FR] Ch 20. Offshore Tax Havens Linked to Vatican Banks",
+        "id": "[ID] Ch 20. Offshore Tax Havens Linked to Vatican Banks"
+      },
+      "content": {
+        "ko": "[20장. 바티칸 은행과 연계된 역외 탈세 계좌]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 20. Offshore Tax Havens Linked to Vatican Banks]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［20章。バチカン銀行と連携した駅外脱税口座]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 20. Offshore Tax Havens Linked to Vatican Banks]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 20. Offshore Tax Havens Linked to Vatican Banks]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 20. Offshore Tax Havens Linked to Vatican Banks]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 21,
+      "part": "ACT 5",
+      "title": {
+        "ko": "21장. 영하 12도, 서초동 법원 정문 앞 10만 군중",
+        "en": "Ch 21. 100,000 Crowds Before the Court at -12°C",
+        "ja": "21章。零下12度、瑞草洞裁判所正門前10万群衆",
+        "es": "Ch 21. 100,000 Crowds Before the Court at -12°C",
+        "fr": "[FR] Ch 21. 100,000 Crowds Before the Court at -12°C",
+        "id": "[ID] Ch 21. 100,000 Crowds Before the Court at -12°C"
+      },
+      "content": {
+        "ko": "[21장. 영하 12도, 서초동 법원 정문 앞 10만 군중]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 21. 100,000 Crowds Before the Court at -12°C]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［２１章。零下12度、瑞草洞裁判所正門前10万群衆]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 21. 100,000 Crowds Before the Court at -12°C]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 21. 100,000 Crowds Before the Court at -12°C]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 21. 100,000 Crowds Before the Court at -12°C]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 22,
+      "part": "ACT 5",
+      "title": {
+        "ko": "22장. 제417호 대법정의 무거운 침묵",
+        "en": "Ch 22. Heavy Silence in Courtroom No. 417",
+        "ja": "第22章。第417号大法廷の重い沈黙",
+        "es": "Ch 22. Heavy Silence in Courtroom No. 417",
+        "fr": "[FR] Ch 22. Heavy Silence in Courtroom No. 417",
+        "id": "[ID] Ch 22. Heavy Silence in Courtroom No. 417"
+      },
+      "content": {
+        "ko": "[22장. 제417호 대법정의 무거운 침묵]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 22. Heavy Silence in Courtroom No. 417]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［22章。第417号大法廷の重い沈黙]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 22. Heavy Silence in Courtroom No. 417]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 22. Heavy Silence in Courtroom No. 417]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 22. Heavy Silence in Courtroom No. 417]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 23,
+      "part": "ACT 5",
+      "title": {
+        "ko": "23장. 판사의 방망이가 내려치기 직전 3초",
+        "en": "Ch 23. Three Seconds Before the Judge's Gavel Falls",
+        "ja": "第23章。裁判官のバットが降りる直前の3秒",
+        "es": "Ch 23. Three Seconds Before the Judge's Gavel Falls",
+        "fr": "[FR] Ch 23. Three Seconds Before the Judge's Gavel Falls",
+        "id": "[ID] Ch 23. Three Seconds Before the Judge's Gavel Falls"
+      },
+      "content": {
+        "ko": "[23장. 판사의 방망이가 내려치기 직전 3초]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 23. Three Seconds Before the Judge's Gavel Falls]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［23章。裁判官のバットが降りる直前3秒]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 23. Three Seconds Before the Judge's Gavel Falls]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 23. Three Seconds Before the Judge's Gavel Falls]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 23. Three Seconds Before the Judge's Gavel Falls]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 24,
+      "part": "ACT 5",
+      "title": {
+        "ko": "24장. 밝혀진 설계자: 소년공의 복수극이었는가",
+        "en": "Ch 24. The Master Architect: A Boy Worker's Revenge?",
+        "ja": "24章。明らかになった設計者：少年ボールの復讐劇だったか",
+        "es": "Ch 24. The Master Architect: A Boy Worker's Revenge?",
+        "fr": "[FR] Ch 24. The Master Architect: A Boy Worker's Revenge?",
+        "id": "[ID] Ch 24. The Master Architect: A Boy Worker's Revenge?"
+      },
+      "content": {
+        "ko": "[24장. 밝혀진 설계자: 소년공의 복수극이었는가]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 24. The Master Architect: A Boy Worker's Revenge?]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［24章。明らかになった設計者：少年功の復讐劇だったか]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 24. The Master Architect: A Boy Worker's Revenge?]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 24. The Master Architect: A Boy Worker's Revenge?]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 24. The Master Architect: A Boy Worker's Revenge?]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    },
+    {
+      "ch": 25,
+      "part": "ACT 5",
+      "title": {
+        "ko": "25장. 카르텔의 암호: 법정 문을 나서며",
+        "en": "Ch 25. The Cipher of the Cartel: Stepping into the Snow",
+        "ja": "25章。カルテルのパスワード：法廷の門を出て",
+        "es": "Ch 25. The Cipher of the Cartel: Stepping into the Snow",
+        "fr": "[FR] Ch 25. The Cipher of the Cartel: Stepping into the Snow",
+        "id": "[ID] Ch 25. The Cipher of the Cartel: Stepping into the Snow"
+      },
+      "content": {
+        "ko": "[25장. 카르텔의 암호: 법정 문을 나서며]\n선고까지 남은 시간 단 48시간! 댄 브라운 특유의 초긴박 타임 리미트 기호학 스릴러. 1976년 프레스 기계의 시리얼 넘버 '1976-NO.6', 대림지구 황금비율 배당금, 그리고 서초동 50억 클럽의 지하 금고를 해체하는 500page 숨 막히는 지능형 암호학 서스펜스.",
+        "en": "[Ch 25. The Cipher of the Cartel: Stepping into the Snow]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "ja": "［25章。カルテルのパスワード：法廷の門を出て]\n判決まで残り48時間！ダン・ブラウン調のノンストップ暗号サスペンス。1976年のプレス機番号、大林開発の黄金比、50億クラブの地下金庫を暴く500頁の超大作。",
+        "es": "[Ch 25. The Cipher of the Cartel: Stepping into the Snow]\n¡48 horas para la sentencia! Un vertiginoso thriller de 500 páginas al estilo Dan Brown que descifra el código '1976-NO.6' y los secretos del Club 5.000 Millones.",
+        "fr": "(Traduction Française)\n\n[Ch 25. The Cipher of the Cartel: Stepping into the Snow]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 25. The Cipher of the Cartel: Stepping into the Snow]\n48 hours before the verdict! A Dan Brown-style relentless cryptographic thriller. Tracing the 1976 press machine serial '1976-NO.6', the Fibonacci ratio of Daelim, and the subterranean vaults of the 5-Billion Club across 500 heart-stopping pages."
+      }
+    }
+  ]
+}

@@ -1,0 +1,537 @@
+{
+  "id": "kisa_seoul",
+  "title": {
+    "ko": "은쟁반 위의 서울",
+    "en": "The Midnight Drivers' Table (500p Epic)",
+    "ja": "銀のトレイに乗ったソウル (500p)",
+    "es": "La Mesa de Medianoche (500p)",
+    "fr": "La Table des Chauffeurs de Séoul (500p)",
+    "id": "Meja Pengemudi Seoul (500p)"
+  },
+  "subtitle": {
+    "ko": "대한민국 24시 드라이버 로드 100일 순례기 (500p 대작 정규 완결본)",
+    "en": "A 100-Day Odyssey Across Korea's 24-Hour Road Diners (500-Page Epic)",
+    "ja": "韓国24時間タクシー食堂100日巡礼記 (500p完全版)",
+    "es": "Odisea de 100 días por los comedores de carretera de Corea",
+    "fr": "Odyssée culinaire de 100 jours sur la route des chauffeurs 24h/24",
+    "id": "Odise Kuliner 100 Hari di Restoran Pengemudi 24 Jam Korea"
+  },
+  "author": "강선우 & 소피아 L. (가명)",
+  "badge": "2026 K-컬처 500p 대작",
+  "category": "travel_gourmet",
+  "cover_gradient": "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)",
+  "cover_accent": "#f59e0b",
+  "charCount": 185000,
+  "readingTime": "약 320분",
+  "total_chapters": 25,
+  "description": {
+    "ko": "뉴욕 미식 비평가와 30년 베테랑 택시 기사가 서울, 인천, 부산, 전주, 광주 등 전국 25대 기사식당 성지를 순례하며 은쟁반 위에 피어난 삶의 온기와 서민의 자존심을 기록한 500page 대하 미식 기행소설.",
+    "en": "A 500-page culinary travel epic spanning 25 legendary road diners across Seoul, Incheon, Busan, and Jeonju, chronicling dignity, grit, and warmth on silver trays.",
+    "ja": "ソウルから釜山まで、全国25の名所を巡る500頁の本格ロード紀行小説。",
+    "es": "Una épica de 500 páginas por 25 legendarios comedores de taxistas en Corea.",
+    "fr": "Une fresque culinaire de 500 pages à travers 25 restaurants de chauffeurs légendaires de Séoul à Busan.",
+    "id": "Epik kuliner 500 halaman melintasi 25 restoran pengemudi legendaris dari Seoul hingga Busan."
+  },
+  "chapters": [
+    {
+      "ch": 1,
+      "part": "제1부",
+      "title": {
+        "ko": "1장. 맨해튼의 밤과 편도 티켓",
+        "en": "Ch 1. Manhattan Night and a One-Way Ticket",
+        "ja": "第1章マンハッタンの夜と片道チケット",
+        "es": "Ch 1. Manhattan Night and a One-Way Ticket",
+        "fr": "[FR] Ch 1. Manhattan Night and a One-Way Ticket",
+        "id": "[ID] Ch 1. Manhattan Night and a One-Way Ticket"
+      },
+      "content": {
+        "ko": "[1장. 맨해튼의 밤과 편도 티켓]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 1. Manhattan Night and a One-Way Ticket]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［１章。マンハッタンの夜と片道チケット]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 1. Manhattan Night and a One-Way Ticket]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 1. Manhattan Night and a One-Way Ticket]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 1. Manhattan Night and a One-Way Ticket]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 2,
+      "part": "제1부",
+      "title": {
+        "ko": "2장. 연남동 감나무집, 첫 번째 은쟁반",
+        "en": "Ch 2. Yeonnam-dong: The First Silver Tray",
+        "ja": "第2章延南洞柿の木の家、最初の銀班",
+        "es": "Ch 2. Yeonnam-dong: The First Silver Tray",
+        "fr": "[FR] Ch 2. Yeonnam-dong: The First Silver Tray",
+        "id": "[ID] Ch 2. Yeonnam-dong: The First Silver Tray"
+      },
+      "content": {
+        "ko": "[2장. 연남동 감나무집, 첫 번째 은쟁반]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 2. Yeonnam-dong: The First Silver Tray]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［２章。延南洞柿の木の家、最初の銀班]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 2. Yeonnam-dong: The First Silver Tray]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 2. Yeonnam-dong: The First Silver Tray]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 2. Yeonnam-dong: The First Silver Tray]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 3,
+      "part": "제1부",
+      "title": {
+        "ko": "3장. 자양동 송림식당의 철판 볶음밥 미학",
+        "en": "Ch 3. Jayang-dong: The Iron-Plate Fried Rice",
+        "ja": "第3章楊陽洞松林食堂の鉄板チャーハン美学",
+        "es": "Ch 3. Jayang-dong: The Iron-Plate Fried Rice",
+        "fr": "[FR] Ch 3. Jayang-dong: The Iron-Plate Fried Rice",
+        "id": "[ID] Ch 3. Jayang-dong: The Iron-Plate Fried Rice"
+      },
+      "content": {
+        "ko": "[3장. 자양동 송림식당의 철판 볶음밥 미학]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 3. Jayang-dong: The Iron-Plate Fried Rice]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［３章。紫陽洞松林食堂の鉄板チャーハン美学】\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 3. Jayang-dong: The Iron-Plate Fried Rice]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 3. Jayang-dong: The Iron-Plate Fried Rice]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 3. Jayang-dong: The Iron-Plate Fried Rice]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 4,
+      "part": "제1부",
+      "title": {
+        "ko": "4장. 성북동 쌍다리, 50년 연탄불의 훈연",
+        "en": "Ch 4. Seongbuk-dong: Fifty Years of Briquette Smoke",
+        "ja": "第4章城北洞双橋、50年練炭火の訓練",
+        "es": "Ch 4. Seongbuk-dong: Fifty Years of Briquette Smoke",
+        "fr": "[FR] Ch 4. Seongbuk-dong: Fifty Years of Briquette Smoke",
+        "id": "[ID] Ch 4. Seongbuk-dong: Fifty Years of Briquette Smoke"
+      },
+      "content": {
+        "ko": "[4장. 성북동 쌍다리, 50년 연탄불의 훈연]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 4. Seongbuk-dong: Fifty Years of Briquette Smoke]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［４章。城北洞双橋、50年練炭火の訓練]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 4. Seongbuk-dong: Fifty Years of Briquette Smoke]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 4. Seongbuk-dong: Fifty Years of Briquette Smoke]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 4. Seongbuk-dong: Fifty Years of Briquette Smoke]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 5,
+      "part": "제1부",
+      "title": {
+        "ko": "5장. 역삼동 현대기사식당, 묵은지 청국장의 위로",
+        "en": "Ch 5. Yeoksam-dong: Aged Kimchi Cheonggukjang",
+        "ja": "第5章駅三洞現代騎士食堂、ムン・ウンジ清国章の慰め",
+        "es": "Ch 5. Yeoksam-dong: Aged Kimchi Cheonggukjang",
+        "fr": "[FR] Ch 5. Yeoksam-dong: Aged Kimchi Cheonggukjang",
+        "id": "[ID] Ch 5. Yeoksam-dong: Aged Kimchi Cheonggukjang"
+      },
+      "content": {
+        "ko": "[5장. 역삼동 현대기사식당, 묵은지 청국장의 위로]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 5. Yeoksam-dong: Aged Kimchi Cheonggukjang]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "[5章。駅三洞現代騎士食堂、泊まった地清国章の慰め]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 5. Yeoksam-dong: Aged Kimchi Cheonggukjang]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 5. Yeoksam-dong: Aged Kimchi Cheonggukjang]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 5. Yeoksam-dong: Aged Kimchi Cheonggukjang]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 6,
+      "part": "제2부",
+      "title": {
+        "ko": "6장. 가락동 동명돈까스, 큼직한 빵가루와 왕돈까스",
+        "en": "Ch 6. Garak-dong: The Giant Pork Cutlet",
+        "ja": "第6章カラクドンドンミョンカツ、大規模なパン粉とワンドンカス",
+        "es": "Ch 6. Garak-dong: The Giant Pork Cutlet",
+        "fr": "[FR] Ch 6. Garak-dong: The Giant Pork Cutlet",
+        "id": "[ID] Ch 6. Garak-dong: The Giant Pork Cutlet"
+      },
+      "content": {
+        "ko": "[6장. 가락동 동명돈까스, 큼직한 빵가루와 왕돈까스]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 6. Garak-dong: The Giant Pork Cutlet]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "[6章。カラクドンドンミョンカツ、大規模なパン粉とワンドンカス]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 6. Garak-dong: The Giant Pork Cutlet]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 6. Garak-dong: The Giant Pork Cutlet]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 6. Garak-dong: The Giant Pork Cutlet]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 7,
+      "part": "제2부",
+      "title": {
+        "ko": "7장. 신월동 양천기사식당, 비빔밥 무한리필의 인정",
+        "en": "Ch 7. Sinwol-dong: Infinite Bibimbap Warmth",
+        "ja": "第7章新月洞ヤンチョン騎士食堂、ビビンバ無限詰め替えの認定",
+        "es": "Ch 7. Sinwol-dong: Infinite Bibimbap Warmth",
+        "fr": "[FR] Ch 7. Sinwol-dong: Infinite Bibimbap Warmth",
+        "id": "[ID] Ch 7. Sinwol-dong: Infinite Bibimbap Warmth"
+      },
+      "content": {
+        "ko": "[7장. 신월동 양천기사식당, 비빔밥 무한리필의 인정]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 7. Sinwol-dong: Infinite Bibimbap Warmth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "[7章。新月洞ヤンチョン騎士食堂、ビビンバ無限詰め替えの認定]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 7. Sinwol-dong: Infinite Bibimbap Warmth]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 7. Sinwol-dong: Infinite Bibimbap Warmth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 7. Sinwol-dong: Infinite Bibimbap Warmth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 8,
+      "part": "제2부",
+      "title": {
+        "ko": "8장. 인천 숭의동 로터리, 해장국 솥의 김",
+        "en": "Ch 8. Incheon Sungui-dong: Steaming Hangover Soup",
+        "ja": "第8章仁川崇義洞ロータリー、ヘジャングク鍋の金",
+        "es": "Ch 8. Incheon Sungui-dong: Steaming Hangover Soup",
+        "fr": "[FR] Ch 8. Incheon Sungui-dong: Steaming Hangover Soup",
+        "id": "[ID] Ch 8. Incheon Sungui-dong: Steaming Hangover Soup"
+      },
+      "content": {
+        "ko": "[8장. 인천 숭의동 로터리, 해장국 솥의 김]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 8. Incheon Sungui-dong: Steaming Hangover Soup]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "[8章。仁川崇義洞ロータリー、ヘジャングク鍋の金]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 8. Incheon Sungui-dong: Steaming Hangover Soup]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 8. Incheon Sungui-dong: Steaming Hangover Soup]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 8. Incheon Sungui-dong: Steaming Hangover Soup]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 9,
+      "part": "제2부",
+      "title": {
+        "ko": "9장. 일산 백석동 뚝배기 불고기, 심야의 안식처",
+        "en": "Ch 9. Ilsan Baekseok: Late Night Bulgogi Haven",
+        "ja": "第9章イルサンペクソクドントゥクベギブルゴギ、深夜の安息地",
+        "es": "Ch 9. Ilsan Baekseok: Late Night Bulgogi Haven",
+        "fr": "[FR] Ch 9. Ilsan Baekseok: Late Night Bulgogi Haven",
+        "id": "[ID] Ch 9. Ilsan Baekseok: Late Night Bulgogi Haven"
+      },
+      "content": {
+        "ko": "[9장. 일산 백석동 뚝배기 불고기, 심야의 안식처]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 9. Ilsan Baekseok: Late Night Bulgogi Haven]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［９章。一山ペクソクドントゥクベギ焼肉、深夜の安息地]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 9. Ilsan Baekseok: Late Night Bulgogi Haven]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 9. Ilsan Baekseok: Late Night Bulgogi Haven]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 9. Ilsan Baekseok: Late Night Bulgogi Haven]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 10,
+      "part": "제2부",
+      "title": {
+        "ko": "10장. 수원 파장동 고등어구이, 바삭한 껍질의 마술",
+        "en": "Ch 10. Suwon Pajang: Crispy Grilled Mackerel",
+        "ja": "第10章。水原波洞鯖焼き、カリカリの殻の魔法",
+        "es": "Ch 10. Suwon Pajang: Crispy Grilled Mackerel",
+        "fr": "[FR] Ch 10. Suwon Pajang: Crispy Grilled Mackerel",
+        "id": "[ID] Ch 10. Suwon Pajang: Crispy Grilled Mackerel"
+      },
+      "content": {
+        "ko": "[10장. 수원 파장동 고등어구이, 바삭한 껍질의 마술]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 10. Suwon Pajang: Crispy Grilled Mackerel]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "[10章。水原波長東サバ焼き、カリカリ皮の魔法】\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 10. Suwon Pajang: Crispy Grilled Mackerel]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 10. Suwon Pajang: Crispy Grilled Mackerel]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 10. Suwon Pajang: Crispy Grilled Mackerel]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 11,
+      "part": "제3부",
+      "title": {
+        "ko": "11장. 천안 성환의 선지국밥, 국도변의 불빛",
+        "en": "Ch 11. Cheonan Seonghwan: Ox-Blood Soup on the Highway",
+        "ja": "11章。天安城丸の仙地クッパ、国道辺の光",
+        "es": "Ch 11. Cheonan Seonghwan: Ox-Blood Soup on the Highway",
+        "fr": "[FR] Ch 11. Cheonan Seonghwan: Ox-Blood Soup on the Highway",
+        "id": "[ID] Ch 11. Cheonan Seonghwan: Ox-Blood Soup on the Highway"
+      },
+      "content": {
+        "ko": "[11장. 천안 성환의 선지국밥, 국도변의 불빛]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 11. Cheonan Seonghwan: Ox-Blood Soup on the Highway]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［11章。天安城丸の船地クッパ、国道辺の光]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 11. Cheonan Seonghwan: Ox-Blood Soup on the Highway]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 11. Cheonan Seonghwan: Ox-Blood Soup on the Highway]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 11. Cheonan Seonghwan: Ox-Blood Soup on the Highway]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 12,
+      "part": "제3부",
+      "title": {
+        "ko": "12장. 대전 신대동 기사식당, 얼큰한 두부두루치기",
+        "en": "Ch 12. Daejeon Sindae: Spicy Braised Tofu",
+        "ja": "第12章。大田新大洞騎士食堂、おいしい豆腐",
+        "es": "Ch 12. Daejeon Sindae: Spicy Braised Tofu",
+        "fr": "[FR] Ch 12. Daejeon Sindae: Spicy Braised Tofu",
+        "id": "[ID] Ch 12. Daejeon Sindae: Spicy Braised Tofu"
+      },
+      "content": {
+        "ko": "[12장. 대전 신대동 기사식당, 얼큰한 두부두루치기]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 12. Daejeon Sindae: Spicy Braised Tofu]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［12章。大田新大洞騎士食堂、おしゃれな豆腐まき】\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 12. Daejeon Sindae: Spicy Braised Tofu]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 12. Daejeon Sindae: Spicy Braised Tofu]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 12. Daejeon Sindae: Spicy Braised Tofu]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 13,
+      "part": "제3부",
+      "title": {
+        "ko": "13장. 대구 비산동 기사식당 골목, 따로국밥의 원형",
+        "en": "Ch 13. Daegu Bisan: Original Ttaro Gukbap Alley",
+        "ja": "第13章。大邱飛山洞騎士食堂路地、別荘の原型",
+        "es": "Ch 13. Daegu Bisan: Original Ttaro Gukbap Alley",
+        "fr": "[FR] Ch 13. Daegu Bisan: Original Ttaro Gukbap Alley",
+        "id": "[ID] Ch 13. Daegu Bisan: Original Ttaro Gukbap Alley"
+      },
+      "content": {
+        "ko": "[13장. 대구 비산동 기사식당 골목, 따로국밥의 원형]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 13. Daegu Bisan: Original Ttaro Gukbap Alley]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［13章。大邱飛山洞騎士食堂の路地、別にクッパの原型]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 13. Daegu Bisan: Original Ttaro Gukbap Alley]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 13. Daegu Bisan: Original Ttaro Gukbap Alley]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 13. Daegu Bisan: Original Ttaro Gukbap Alley]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 14,
+      "part": "제3부",
+      "title": {
+        "ko": "14장. 경주 건천IC 선지국수, 천년고도의 새벽",
+        "en": "Ch 14. Gyeongju Geoncheon: Dawn Ox-Blood Noodles",
+        "ja": "14章。慶州乾川IC先知麺、千年高度の夜明け",
+        "es": "Ch 14. Gyeongju Geoncheon: Dawn Ox-Blood Noodles",
+        "fr": "[FR] Ch 14. Gyeongju Geoncheon: Dawn Ox-Blood Noodles",
+        "id": "[ID] Ch 14. Gyeongju Geoncheon: Dawn Ox-Blood Noodles"
+      },
+      "content": {
+        "ko": "[14장. 경주 건천IC 선지국수, 천년고도의 새벽]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 14. Gyeongju Geoncheon: Dawn Ox-Blood Noodles]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "[14章。慶州乾川IC先知麺、千年高度の夜明け]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 14. Gyeongju Geoncheon: Dawn Ox-Blood Noodles]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 14. Gyeongju Geoncheon: Dawn Ox-Blood Noodles]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 14. Gyeongju Geoncheon: Dawn Ox-Blood Noodles]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 15,
+      "part": "제3부",
+      "title": {
+        "ko": "15장. 부산 초량 불백거리, 자갈치 바람과 깻잎 쌈",
+        "en": "Ch 15. Busan Choryang: Bulgogi by Jagalchi Sea",
+        "ja": "15章。釜山の超量の不白の通り、砂利の風とかき葉の包み",
+        "es": "Ch 15. Busan Choryang: Bulgogi by Jagalchi Sea",
+        "fr": "[FR] Ch 15. Busan Choryang: Bulgogi by Jagalchi Sea",
+        "id": "[ID] Ch 15. Busan Choryang: Bulgogi by Jagalchi Sea"
+      },
+      "content": {
+        "ko": "[15장. 부산 초량 불백거리, 자갈치 바람과 깻잎 쌈]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 15. Busan Choryang: Bulgogi by Jagalchi Sea]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［15章。釜山超量の不白距離、小石風とかき葉の包み]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 15. Busan Choryang: Bulgogi by Jagalchi Sea]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 15. Busan Choryang: Bulgogi by Jagalchi Sea]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 15. Busan Choryang: Bulgogi by Jagalchi Sea]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 16,
+      "part": "제4부",
+      "title": {
+        "ko": "16장. 전주 동산동 콩나물국밥, 오징어 사리의 조화",
+        "en": "Ch 16. Jeonju Dongsan: Bean Sprout Soup with Squid",
+        "ja": "16章。全州東山洞もやしクッパ、イカサリの調和",
+        "es": "Ch 16. Jeonju Dongsan: Bean Sprout Soup with Squid",
+        "fr": "[FR] Ch 16. Jeonju Dongsan: Bean Sprout Soup with Squid",
+        "id": "[ID] Ch 16. Jeonju Dongsan: Bean Sprout Soup with Squid"
+      },
+      "content": {
+        "ko": "[16장. 전주 동산동 콩나물국밥, 오징어 사리의 조화]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 16. Jeonju Dongsan: Bean Sprout Soup with Squid]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［16章。全州東山洞もやしクッパ、イカサリの調和]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 16. Jeonju Dongsan: Bean Sprout Soup with Squid]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 16. Jeonju Dongsan: Bean Sprout Soup with Squid]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 16. Jeonju Dongsan: Bean Sprout Soup with Squid]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 17,
+      "part": "제4부",
+      "title": {
+        "ko": "17장. 광주 송정리 떡갈비 골목, 뼈국물의 무한 리필",
+        "en": "Ch 17. Gwangju Songjeong: Infinite Bone Broth",
+        "ja": "17章。光州ソンジョンリ餅の路地、骨汁の無限詰め替え",
+        "es": "Ch 17. Gwangju Songjeong: Infinite Bone Broth",
+        "fr": "[FR] Ch 17. Gwangju Songjeong: Infinite Bone Broth",
+        "id": "[ID] Ch 17. Gwangju Songjeong: Infinite Bone Broth"
+      },
+      "content": {
+        "ko": "[17장. 광주 송정리 떡갈비 골목, 뼈국물의 무한 리필]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 17. Gwangju Songjeong: Infinite Bone Broth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［17章。光州ソンジョンリ餅の路地、骨汁の無限詰め替え]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 17. Gwangju Songjeong: Infinite Bone Broth]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 17. Gwangju Songjeong: Infinite Bone Broth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 17. Gwangju Songjeong: Infinite Bone Broth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 18,
+      "part": "제4부",
+      "title": {
+        "ko": "18장. 목포 산정동 갈치조림, 부두 노동자들의 식탁",
+        "en": "Ch 18. Mokpo Sanjeong: Braised Cutlassfish by Port",
+        "ja": "18章。木浦山貞洞 刈り取り、桟橋労働者の食卓",
+        "es": "Ch 18. Mokpo Sanjeong: Braised Cutlassfish by Port",
+        "fr": "[FR] Ch 18. Mokpo Sanjeong: Braised Cutlassfish by Port",
+        "id": "[ID] Ch 18. Mokpo Sanjeong: Braised Cutlassfish by Port"
+      },
+      "content": {
+        "ko": "[18장. 목포 산정동 갈치조림, 부두 노동자들의 식탁]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 18. Mokpo Sanjeong: Braised Cutlassfish by Port]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［18章。木浦山亭洞 刈り取り、桟橋労働者の食卓]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 18. Mokpo Sanjeong: Braised Cutlassfish by Port]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 18. Mokpo Sanjeong: Braised Cutlassfish by Port]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 18. Mokpo Sanjeong: Braised Cutlassfish by Port]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 19,
+      "part": "제4부",
+      "title": {
+        "ko": "19장. 순천 조례동 꼬막비빔밥, 갯벌의 생명력",
+        "en": "Ch 19. Suncheon Jorye: Mudflat Cockle Bibimbap",
+        "ja": "19章。順天条例洞コビビビンバ、干潟の生命力",
+        "es": "Ch 19. Suncheon Jorye: Mudflat Cockle Bibimbap",
+        "fr": "[FR] Ch 19. Suncheon Jorye: Mudflat Cockle Bibimbap",
+        "id": "[ID] Ch 19. Suncheon Jorye: Mudflat Cockle Bibimbap"
+      },
+      "content": {
+        "ko": "[19장. 순천 조례동 꼬막비빔밥, 갯벌의 생명력]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 19. Suncheon Jorye: Mudflat Cockle Bibimbap]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［19章。順天条例洞コビビビンパ、干潟の生命力]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 19. Suncheon Jorye: Mudflat Cockle Bibimbap]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 19. Suncheon Jorye: Mudflat Cockle Bibimbap]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 19. Suncheon Jorye: Mudflat Cockle Bibimbap]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 20,
+      "part": "제4부",
+      "title": {
+        "ko": "20장. 여수 봉산동 게장백반, 돌게장의 깊은 짠맛",
+        "en": "Ch 20. Yeosu Bongsan: Fermented Stone Crab Rice",
+        "ja": "20章。麗水鳳山洞カジャン白斑",
+        "es": "Ch 20. Yeosu Bongsan: Fermented Stone Crab Rice",
+        "fr": "[FR] Ch 20. Yeosu Bongsan: Fermented Stone Crab Rice",
+        "id": "[ID] Ch 20. Yeosu Bongsan: Fermented Stone Crab Rice"
+      },
+      "content": {
+        "ko": "[20장. 여수 봉산동 게장백반, 돌게장의 깊은 짠맛]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 20. Yeosu Bongsan: Fermented Stone Crab Rice]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［20章。麗水鳳山洞カジャン白斑、ドルゲジャンの深い塩味]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 20. Yeosu Bongsan: Fermented Stone Crab Rice]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 20. Yeosu Bongsan: Fermented Stone Crab Rice]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 20. Yeosu Bongsan: Fermented Stone Crab Rice]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 21,
+      "part": "제5부",
+      "title": {
+        "ko": "21장. 30년 택시기사 강태식의 낡은 운전대",
+        "en": "Ch 21. Veteran Driver Kang's Worn Steering Wheel",
+        "ja": "21章。 30年のタクシー運転手カン・テシクの古い運転台",
+        "es": "Ch 21. Veteran Driver Kang's Worn Steering Wheel",
+        "fr": "[FR] Ch 21. Veteran Driver Kang's Worn Steering Wheel",
+        "id": "[ID] Ch 21. Veteran Driver Kang's Worn Steering Wheel"
+      },
+      "content": {
+        "ko": "[21장. 30년 택시기사 강태식의 낡은 운전대]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 21. Veteran Driver Kang's Worn Steering Wheel]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［２１章。 30年タクシー騎士カン・テシクの古い運転台]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 21. Veteran Driver Kang's Worn Steering Wheel]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 21. Veteran Driver Kang's Worn Steering Wheel]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 21. Veteran Driver Kang's Worn Steering Wheel]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 22,
+      "part": "제5부",
+      "title": {
+        "ko": "22장. 은쟁반에 담긴 서민의 땀방울과 자존심",
+        "en": "Ch 22. Sweat and Dignity on the Silver Platter",
+        "ja": "第22章。銀班に入った庶民の汗滴とプライド",
+        "es": "Ch 22. Sweat and Dignity on the Silver Platter",
+        "fr": "[FR] Ch 22. Sweat and Dignity on the Silver Platter",
+        "id": "[ID] Ch 22. Sweat and Dignity on the Silver Platter"
+      },
+      "content": {
+        "ko": "[22장. 은쟁반에 담긴 서민의 땀방울과 자존심]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 22. Sweat and Dignity on the Silver Platter]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［22章。銀班に入った庶民の汗滴とプライド]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 22. Sweat and Dignity on the Silver Platter]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 22. Sweat and Dignity on the Silver Platter]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 22. Sweat and Dignity on the Silver Platter]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 23,
+      "part": "제5부",
+      "title": {
+        "ko": "23장. 뉴욕으로 부치는 칼럼: \"가장 빠른 온기\"",
+        "en": "Ch 23. Column to New York: The Fastest Warmth",
+        "ja": "第23章。ニューヨークで吹くコラム：「最も速いぬくもり」",
+        "es": "Ch 23. Column to New York: The Fastest Warmth",
+        "fr": "[FR] Ch 23. Column to New York: The Fastest Warmth",
+        "id": "[ID] Ch 23. Column to New York: The Fastest Warmth"
+      },
+      "content": {
+        "ko": "[23장. 뉴욕으로 부치는 칼럼: \"가장 빠른 온기\"]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 23. Column to New York: The Fastest Warmth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［23章。ニューヨークで吹くコラム: 「最も速いぬくもり」]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 23. Column to New York: The Fastest Warmth]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 23. Column to New York: The Fastest Warmth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 23. Column to New York: The Fastest Warmth]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 24,
+      "part": "제5부",
+      "title": {
+        "ko": "24장. 다시 돌아온 심야의 올림픽대로",
+        "en": "Ch 24. Returning to the Midnight Olympic Highway",
+        "ja": "24章。戻ってきた深夜のオリンピック通り",
+        "es": "Ch 24. Returning to the Midnight Olympic Highway",
+        "fr": "[FR] Ch 24. Returning to the Midnight Olympic Highway",
+        "id": "[ID] Ch 24. Returning to the Midnight Olympic Highway"
+      },
+      "content": {
+        "ko": "[24장. 다시 돌아온 심야의 올림픽대로]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 24. Returning to the Midnight Olympic Highway]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［24章。戻ってきた深夜のオリンピック通り]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 24. Returning to the Midnight Olympic Highway]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 24. Returning to the Midnight Olympic Highway]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 24. Returning to the Midnight Olympic Highway]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    },
+    {
+      "ch": 25,
+      "part": "제5부",
+      "title": {
+        "ko": "25장. 은쟁반 위의 서울: 끝나지 않은 여정",
+        "en": "Ch 25. Seoul on the Silver Platter: Endless Journey",
+        "ja": "25章。銀行の上のソウル：終わらない旅",
+        "es": "Ch 25. Seoul on the Silver Platter: Endless Journey",
+        "fr": "[FR] Ch 25. Seoul on the Silver Platter: Endless Journey",
+        "id": "[ID] Ch 25. Seoul on the Silver Platter: Endless Journey"
+      },
+      "content": {
+        "ko": "[25장. 은쟁반 위의 서울: 끝나지 않은 여정]\n서울과 전국의 24시간을 달리는 기사식당의 은쟁반 위에는 대한민국 근현대사를 지탱해온 서민들의 땀과 눈물이 담겨 있다. 지글거리는 돼지불백과 구수한 된장찌개, 그리고 1분 만에 쌈을 싸서 입에 넣는 기사들의 거친 손. 뉴욕 미식 비평가 소피아와 30년 베테랑 기사 강태식이 500페이지에 걸쳐 기록한 눈부신 인간미와 길 위의 인생 철학.",
+        "en": "[Ch 25. Seoul on the Silver Platter: Endless Journey]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "ja": "［25章。銀行の上のソウル：終わらない旅]\n全国の道路を24時間走るタクシー食堂の銀のトレイには、庶民の汗と涙が宿る。豚プルコギとテンジャンチゲの湯気、そして人生の哲学を描く500頁の大河紀行。",
+        "es": "[Ch 25. Seoul on the Silver Platter: Endless Journey]\nEn las bandejas plateadas de los comedores de taxistas descansa el alma de los trabajadores nocturnos. Una odisea gastronómica de 500 páginas sobre el calor humano en las carreteras de Corea.",
+        "fr": "(Traduction Française)\n\n[Ch 25. Seoul on the Silver Platter: Endless Journey]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy.",
+        "id": "(Terjemahan Bahasa Indonesia)\n\n[Ch 25. Seoul on the Silver Platter: Endless Journey]\nOn the round aluminum trays of Korean taxi driver canteens lies the resilience of working souls running 24 hours. Sizzling pork bulgogi, steaming soybean stew, and quick lettuce wraps eaten in minutes. New York critic Sophia and 30-year driver Kang trace 500 pages of human warmth and road philosophy."
+      }
+    }
+  ]
+}

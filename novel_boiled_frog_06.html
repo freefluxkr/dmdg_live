@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>데프콘의 역설: 정상성 편향 프로토콜 | DMDG 다국어 E-Reader</title>
+  <meta name="description" content="데프콘의 역설: 정상성 편향 프로토콜 6개국어(한·영·일·프·인·스) 텍스트 및 네이티브 오디오북 지원 E-Reader">
+  
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Pretendard:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-app: #0b0f17;
+  --bg-surface: #131b26;
+  --bg-surface-elevated: #1a2434;
+  --bg-glass: rgba(19, 27, 38, 0.92);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(245, 158, 11, 0.4);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --accent-gold: #f59e0b;
+  --accent-gold-glow: rgba(245, 158, 11, 0.25);
+  
+  --reader-max-width: 780px;
+  --reader-font-size: 18px;
+  --reader-line-height: 1.95;
+  
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Noto Serif KR', Georgia, serif;
+  --font-display: 'Outfit', 'Pretendard', sans-serif;
+}
+
+body.theme-sepia {
+  --bg-app: #f4ecd8;
+  --bg-surface: #eae0c8;
+  --bg-surface-elevated: #dfd4b8;
+  --bg-glass: rgba(244, 236, 216, 0.95);
+  --border-color: rgba(120, 80, 40, 0.15);
+  --text-primary: #382818;
+  --text-secondary: #6e553c;
+  --text-muted: #9c836a;
+  --accent-gold: #b45309;
+}
+
+body.theme-light {
+  --bg-app: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f1f5f9;
+  --bg-glass: rgba(255, 255, 255, 0.96);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --accent-gold: #d97706;
+}
+
+body.theme-oled {
+  --bg-app: #000000;
+  --bg-surface: #0a0a0a;
+  --bg-surface-elevated: #141414;
+  --bg-glass: rgba(10, 10, 10, 0.96);
+  --border-color: #222222;
+  --text-primary: #ededed;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+  --accent-gold: #f59e0b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  line-height: var(--reader-line-height);
+  font-size: var(--reader-font-size);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Reading Progress */
+.reader-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--accent-gold);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+/* Header Bar */
+.reader-nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.65rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--font-sans);
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-center {
+  text-align: center;
+  max-width: 380px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-title-head {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.chapter-title-head {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.btn-ctrl {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  height: 34px;
+  padding: 0 0.8rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-ctrl:hover {
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.btn-ctrl.active {
+  background: var(--accent-gold);
+  color: #0b0f17;
+  border-color: var(--accent-gold);
+}
+
+/* Language Selector Bar */
+.lang-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-surface);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-btn.active {
+  background: var(--accent-gold);
+  color: #0b0f17;
+}
+
+/* Main Reader Article */
+.reader-container {
+  max-width: var(--reader-max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.chapter-badge {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--accent-gold);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  font-family: var(--font-sans);
+}
+
+.chapter-heading {
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.chapter-body p {
+  margin-bottom: 1.85rem;
+  text-align: justify;
+  text-indent: 1em;
+  word-break: keep-all;
+}
+
+.chapter-body p.audio-speaking {
+  background: rgba(245, 158, 11, 0.18);
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 10px;
+  border-radius: 4px;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  font-family: var(--font-sans);
+}
+
+/* TOC Drawer */
+.toc-drawer {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 320px;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-color);
+  z-index: 1100;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+}
+
+.toc-drawer.open { transform: translateX(0); }
+.toc-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toc-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  list-style: none;
+}
+
+.toc-item {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+}
+
+.toc-item:hover, .toc-item.active {
+  background: var(--bg-surface-elevated);
+  color: var(--accent-gold);
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1050;
+  display: none;
+}
+
+.drawer-backdrop.open { display: block; }
+  
+/* TTS Dropdown Menu */
+.tts-wrap {
+  position: relative;
+  display: inline-block;
+}
+.tts-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 270px;
+  background: rgba(18, 24, 38, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(16px);
+  padding: 6px;
+  z-index: 9999;
+  flex-direction: column;
+  gap: 4px;
+}
+.tts-dropdown-menu.show {
+  display: flex !important;
+  animation: ttsFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes ttsFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.tts-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #f1f5f9;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s ease;
+  font-family: inherit;
+  width: 100%;
+}
+.tts-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(245, 158, 11, 0.3);
+  transform: translateX(2px);
+}
+.tts-item-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.tts-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tts-item-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+}
+.tts-item-desc {
+  font-size: 0.74rem;
+  color: #94a3b8;
+  line-height: 1.3;
+}
+.chapter-body p {
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.chapter-body p:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+</style>
+  <link rel="stylesheet" href="css/dmdg_payment_modal.css">
+</head>
+<body class="theme-dark">
+  <div id="reader-progress" class="reader-progress-bar"></div>
+
+  <!-- Reader Nav -->
+  <header class="reader-nav">
+    <div class="nav-left">
+      <a href="novels.html" class="btn-ctrl">
+        <span>←</span> <span>서재로</span>
+      </a>
+      <button id="btn-toggle-toc" class="btn-ctrl">
+        <span>📑</span> <span>목차</span>
+      </button>
+    </div>
+
+    <div class="nav-center">
+      <div id="head-book-title" class="book-title-head">데프콘의 역설: 정상성 편향 프로토콜</div>
+      <div id="head-chapter-title" class="chapter-title-head">로딩 중...</div>
+    </div>
+
+    <div class="nav-right">
+      <!-- 5-Language Switcher -->
+            <div class="lang-bar">
+        <button class="lang-btn active" data-lang="ko">🇰🇷 KO</button>
+        <button class="lang-btn" data-lang="en">🇺🇸 EN</button>
+        <button class="lang-btn" data-lang="ja">🇯🇵 JA</button>
+        <button class="lang-btn" data-lang="fr">🇫🇷 FR</button>
+        <button class="lang-btn" data-lang="id">🇮🇩 ID</button>
+        <button class="lang-btn" data-lang="es">🇪🇸 ES</button>
+      </div>
+
+      <!-- TTS Audio -->
+      <div class="tts-wrap">
+        <button id="btn-tts-play" class="btn-ctrl" title="AI 음성 낭독 (6개국어 지원)">
+          <span id="tts-icon">🎧</span> <span id="tts-text">낭독</span>
+        </button>
+        <div id="tts-menu" class="tts-dropdown-menu">
+          <button type="button" class="tts-menu-item" onclick="startTtsWithMode('continuous')">
+            <span class="tts-item-icon">▶️</span>
+            <div class="tts-item-body">
+              <div class="tts-item-title">전체 연속 낭독</div>
+              <div class="tts-item-desc">현재 챕터의 전체 본문을 순서대로 자동 낭독</div>
+            </div>
+          </button>
+          <button type="button" class="tts-menu-item" onclick="startTtsWithMode('paragraph')">
+            <span class="tts-item-icon">📑</span>
+            <div class="tts-item-body">
+              <div class="tts-item-title">문단 단위 낭독</div>
+              <div class="tts-item-desc">선택 문단만 낭독 (본문 문단 클릭 시 개별 낭독)</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      
+
+      <!-- Theme & Font -->
+            <!-- Payment Download Modal Trigger -->
+      <button class="btn-ctrl" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; color: #f59e0b; font-weight: 700;" onclick="DMDG_Payment.openModal('boiled_frog_06', '데프콘의 역설: 정상성 편향 프로토콜')">
+        <span>📥</span> <span class="hide-mobile">소장/다운로드 (PDF 500원 / 오디오 1,000원)</span>
+      </button>
+
+      <button id="btn-theme" class="btn-ctrl" title="테마 변경">🌙</button>
+      <button id="btn-font-dec" class="btn-ctrl" style="padding:0 8px;">A-</button>
+      <button id="btn-font-inc" class="btn-ctrl" style="padding:0 8px;">A+</button>
+    </div>
+  </header>
+
+  <!-- Reader Content -->
+  <main class="reader-container">
+    <article id="reader-article">
+      <div class="chapter-badge" id="chapter-badge">Chapter 1</div>
+      <h1 class="chapter-heading" id="chapter-title">로딩 중...</h1>
+      <div class="chapter-body" id="chapter-body"></div>
+    </article>
+
+    <div class="bottom-nav">
+      <button id="btn-prev" class="btn-ctrl">← 이전 챕터</button>
+      <button id="btn-top" class="btn-ctrl">맨 위로 ↑</button>
+      <button id="btn-next" class="btn-ctrl">다음 챕터 →</button>
+    </div>
+  </main>
+
+  <!-- TOC Drawer -->
+  <aside id="toc-drawer" class="toc-drawer">
+    <div class="toc-header">
+      <h3 id="toc-book-title">작품 목차</h3>
+      <button id="btn-close-toc" class="btn-ctrl" style="height:28px; padding:0 8px;">✕</button>
+    </div>
+    <ul id="toc-list" class="toc-list"></ul>
+  </aside>
+  <div id="drawer-backdrop" class="drawer-backdrop"></div>
+
+  <script>
+  let BOOK_DATA = null;
+  let CURRENT_CH_IDX = 0;
+  let CURRENT_LANG = 'ko';
+  let CURRENT_FONT_SIZE = 18;
+  const THEMES = ['theme-dark', 'theme-sepia', 'theme-light', 'theme-oled'];
+  let THEME_IDX = 0;
+
+  // TTS State
+  let synth = window.speechSynthesis || null;
+  let ttsUtterance = null;
+  let isTtsPlaying = false;
+  let ttsMode = "continuous";
+  let ttsParagraphs = [];
+  let ttsCurrentPIdx = 0;
+  let availableVoices = [];
+  function populateVoices() {
+    if (!synth) return;
+    availableVoices = synth.getVoices();
+  }
+  if (synth) {
+    populateVoices();
+    if (synth.onvoiceschanged !== undefined) {
+      synth.onvoiceschanged = populateVoices;
+    }
+  }
+
+  const LANG_VOICE_MAP = {
+    'ko': 'ko-KR',
+    'en': 'en-US',
+    'ja': 'ja-JP',
+    'fr': 'fr-FR',
+    'id': 'id-ID',
+    'es': 'es-ES'
+  };
+
+  function toggleAmbience() {}
+
+  async function loadBookData() {
+    try {
+      const res = await fetch('data/novels/boiled_frog_06.json?v=20261105');
+      BOOK_DATA = await res.json();
+      renderChapter(0);
+      renderToc();
+    } catch (e) {
+      console.error('Book data load failed:', e);
+      document.getElementById('chapter-body').innerHTML = '<p style="color:red;">소설 데이터를 불러오지 못했습니다. 로컬 서버 상태를 확인해주세요.</p>';
+    }
+  }
+
+  function getLocalizedText(obj) {
+    if (!obj) return '';
+    if (typeof obj === 'string') return obj;
+    return obj[CURRENT_LANG] || obj['ko'] || '';
+  }
+
+  function renderChapter(idx) {
+    if (!BOOK_DATA || !BOOK_DATA.chapters || !BOOK_DATA.chapters[idx]) return;
+    CURRENT_CH_IDX = idx;
+    const ch = BOOK_DATA.chapters[idx];
+
+    const bookTitle = getLocalizedText(BOOK_DATA.title);
+    const chTitle = getLocalizedText(ch.title);
+    const chContent = getLocalizedText(ch.content);
+
+    document.getElementById('head-book-title').textContent = bookTitle;
+    document.getElementById('head-chapter-title').textContent = chTitle;
+    document.getElementById('chapter-badge').textContent = `Chapter ${idx + 1} / ${BOOK_DATA.chapters.length}`;
+    document.getElementById('chapter-title').textContent = chTitle;
+
+    // Convert newlines to paragraphs
+    const paragraphs = chContent.split(/\n\n+/).filter(p => p.trim().length > 0);
+    const bodyHtml = paragraphs.map((p, pIdx) => `<p id="p-${pIdx}" onclick="onParagraphClick(${pIdx})" title="클릭 시 이 문단 낭독">${p.replace(/\n/g, '<br>')}</p>`).join('');
+    document.getElementById('chapter-body').innerHTML = bodyHtml;
+
+    // Update active in TOC
+    document.querySelectorAll('.toc-item').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+    });
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    stopTts();
+  }
+
+  function renderToc() {
+    if (!BOOK_DATA || !BOOK_DATA.chapters) return;
+    const listEl = document.getElementById('toc-list');
+    listEl.innerHTML = '';
+    BOOK_DATA.chapters.forEach((ch, i) => {
+      const li = document.createElement('li');
+      li.className = `toc-item ${i === CURRENT_CH_IDX ? 'active' : ''}`;
+      li.textContent = getLocalizedText(ch.title);
+      li.onclick = () => {
+        renderChapter(i);
+        closeToc();
+      };
+      listEl.appendChild(li);
+    });
+  }
+
+  function switchLanguage(lang) {
+    CURRENT_LANG = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    renderChapter(CURRENT_CH_IDX);
+    renderToc();
+  }
+
+  // TTS Logic
+  function toggleTts() {
+    if (isTtsPlaying) {
+      stopTts();
+      return;
+    }
+    const menu = document.getElementById('tts-menu');
+    if (menu) {
+      menu.classList.toggle('show');
+    } else {
+      startTtsWithMode('continuous');
+    }
+  }
+
+  function startTtsWithMode(mode, startIdx = 0) {
+    const menu = document.getElementById('tts-menu');
+    if (menu) menu.classList.remove('show');
+    ttsMode = mode;
+    startTts(startIdx);
+  }
+
+  function startTts(startIdx = 0) {
+    if (!synth) return;
+    synth.cancel();
+    ttsParagraphs = Array.from(document.querySelectorAll('#chapter-body p'));
+    if (ttsParagraphs.length === 0) return;
+
+    isTtsPlaying = true;
+    ttsCurrentPIdx = Math.max(0, Math.min(startIdx, ttsParagraphs.length - 1));
+    document.getElementById('tts-icon').textContent = '⏹️';
+    document.getElementById('tts-text').textContent = (ttsMode === 'paragraph') ? '정지 (문단)' : '정지';
+    document.getElementById('btn-tts-play').classList.add('active');
+
+    speakNextP();
+  }
+
+  function speakNextP() {
+    if (!isTtsPlaying || ttsCurrentPIdx >= ttsParagraphs.length) {
+      stopTts();
+      return;
+    }
+
+    ttsParagraphs.forEach(p => p.classList.remove('audio-speaking'));
+    const curP = ttsParagraphs[ttsCurrentPIdx];
+    curP.classList.add('audio-speaking');
+    curP.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    ttsUtterance = new SpeechSynthesisUtterance(curP.textContent);
+    const targetLang = LANG_VOICE_MAP[CURRENT_LANG] || 'ko-KR';
+    ttsUtterance.lang = targetLang;
+    ttsUtterance.rate = 1.0;
+
+    if (availableVoices.length === 0 && synth) {
+      availableVoices = synth.getVoices();
+    }
+    const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+    const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+    if (exactVoice) {
+      ttsUtterance.voice = exactVoice;
+    } else if (prefixVoice) {
+      ttsUtterance.voice = prefixVoice;
+    }
+
+    ttsUtterance.onend = () => {
+      if (isTtsPlaying) {
+        if (ttsMode === 'paragraph') {
+          stopTts();
+          return;
+        }
+        ttsCurrentPIdx++;
+        speakNextP();
+      }
+    };
+    ttsUtterance.onerror = () => stopTts();
+
+    synth.speak(ttsUtterance);
+  }
+
+  function stopTts() {
+    if (synth) synth.cancel();
+    isTtsPlaying = false;
+    document.getElementById('tts-icon').textContent = '🎧';
+    document.getElementById('tts-text').textContent = '낭독';
+    document.getElementById('btn-tts-play').classList.remove('active');
+    const menu = document.getElementById('tts-menu');
+    if (menu) menu.classList.remove('show');
+    if (ttsParagraphs) ttsParagraphs.forEach(p => p.classList.remove('audio-speaking'));
+  }
+
+  function onParagraphClick(pIdx) {
+    startTtsWithMode('paragraph', pIdx);
+  }
+
+  document.addEventListener('click', (e) => {
+    const wrap = document.querySelector('.tts-wrap');
+    const menu = document.getElementById('tts-menu');
+    if (wrap && menu && !wrap.contains(e.target)) {
+      menu.classList.remove('show');
+    }
+  });
+
+  function openToc() {
+    document.getElementById('toc-drawer').classList.add('open');
+    document.getElementById('drawer-backdrop').classList.add('open');
+  }
+
+  function closeToc() {
+    document.getElementById('toc-drawer').classList.remove('open');
+    document.getElementById('drawer-backdrop').classList.remove('open');
+  }
+
+  function toggleTheme() {
+    document.body.classList.remove(THEMES[THEME_IDX]);
+    THEME_IDX = (THEME_IDX + 1) % THEMES.length;
+    document.body.classList.add(THEMES[THEME_IDX]);
+  }
+
+  function changeFontSize(delta) {
+    CURRENT_FONT_SIZE = Math.max(14, Math.min(26, CURRENT_FONT_SIZE + delta));
+    document.body.style.setProperty('--reader-font-size', `${CURRENT_FONT_SIZE}px`);
+  }
+
+  // Events
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+  });
+
+  document.getElementById('btn-toggle-toc').addEventListener('click', openToc);
+  document.getElementById('btn-close-toc').addEventListener('click', closeToc);
+  document.getElementById('drawer-backdrop').addEventListener('click', closeToc);
+  document.getElementById('btn-theme').addEventListener('click', toggleTheme);
+  document.getElementById('btn-font-dec').addEventListener('click', () => changeFontSize(-2));
+  document.getElementById('btn-font-inc').addEventListener('click', () => changeFontSize(2));
+  document.getElementById('btn-tts-play').addEventListener('click', toggleTts);
+
+  document.getElementById('btn-prev').addEventListener('click', () => {
+    if (CURRENT_CH_IDX > 0) renderChapter(CURRENT_CH_IDX - 1);
+  });
+  document.getElementById('btn-next').addEventListener('click', () => {
+    if (BOOK_DATA && CURRENT_CH_IDX < BOOK_DATA.chapters.length - 1) {
+      renderChapter(CURRENT_CH_IDX + 1);
+    }
+  });
+  document.getElementById('btn-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = total > 0 ? (window.scrollY / total) * 100 : 0;
+    document.getElementById('reader-progress').style.width = `${progress}%`;
+  });
+
+  
+
+  // Init
+  loadBookData();
+  </script>
+  <script src="js/dmdg_payment.js"></script>
+</body>
+</html>

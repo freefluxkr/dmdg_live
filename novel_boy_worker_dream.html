@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>소년공 꿈의 결말 (500p 대작 완결본) - DMDG e-Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0a0e14;
+      --bg-card: rgba(18, 24, 38, 0.88);
+      --bg-card-border: rgba(255, 255, 255, 0.12);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #f43f5e;
+      --accent-glow: rgba(56, 189, 248, 0.35);
+      --serif: 'Nanum Myeongjo', serif;
+      --sans: 'Noto Sans KR', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--sans);
+      min-height: 100vh;
+      line-height: 1.85;
+    }
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 14, 20, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--bg-card-border);
+      padding: 0.8rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .back-btn {
+      color: var(--accent); text-decoration: none; font-size: 0.9rem;
+      display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.8rem;
+      border-radius: 8px; background: rgba(255,255,255,0.06); transition: all 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.15); transform: translateX(-2px); }
+    .lang-tabs { display: flex; gap: 0.3rem; background: rgba(0,0,0,0.5); padding: 0.25rem; border-radius: 20px; }
+    .lang-btn {
+      background: transparent; border: none; color: var(--text-muted);
+      padding: 0.35rem 0.8rem; font-size: 0.8rem; border-radius: 14px; cursor: pointer; font-weight: 600;
+    }
+    .lang-btn.active { background: var(--accent); color: #040810; }
+    
+    .audio-bar {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0.6rem 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;
+    }
+    .audio-btn {
+      background: rgba(255,255,255,0.08); color: var(--accent); border: 1px solid var(--accent);
+      padding: 0.4rem 0.9rem; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;
+    }
+    .audio-btn:hover { background: var(--accent); color: #000; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
+    .book-banner {
+      background: linear-gradient(135deg, #18181b 0%, #27272a 50%, #3f3f46 100%);
+      border: 1px solid var(--bg-card-border); border-radius: 20px; padding: 3rem 2.2rem;
+      margin-bottom: 2.5rem; text-align: center; box-shadow: 0 14px 40px rgba(0,0,0,0.5);
+    }
+    .page-badge {
+      display: inline-block; background: rgba(255,255,255,0.15); color: var(--accent);
+      border: 1px solid var(--accent); padding: 0.25rem 0.8rem; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 1rem;
+    }
+    .book-title { font-family: var(--serif); font-size: 2.4rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem; line-height: 1.3; }
+    .book-subtitle { color: #cbd5e1; font-size: 1.1rem; margin-bottom: 1.4rem; }
+    .book-desc { font-size: 0.98rem; color: #e2e8f0; line-height: 1.9; max-width: 780px; margin: 0 auto; text-align: left; background: rgba(0,0,0,0.35); padding: 1.4rem; border-radius: 12px; border-left: 4px solid var(--accent); }
+    
+    .toc-bar { background: var(--bg-card); border: 1px solid var(--bg-card-border); border-radius: 16px; padding: 1.2rem; margin-bottom: 2.5rem; }
+    .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.45rem; margin-top: 0.8rem; }
+    .toc-link { color: var(--text-muted); text-decoration: none; padding: 0.45rem 0.7rem; font-size: 0.8rem; border-radius: 8px; background: rgba(0,0,0,0.3); display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border: 1px solid transparent; }
+    .toc-link:hover { color: #fff; background: var(--accent); color: #000; }
+
+    .chapter-card {
+      background: var(--bg-card); border: 1px solid var(--bg-card-border); border-radius: 18px;
+      padding: 2.2rem; margin-bottom: 2.2rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .chapter-part { font-size: 0.82rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; text-transform: uppercase; }
+    .chapter-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.9rem; margin-bottom: 1.4rem; }
+    .chapter-title { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: #fff; }
+    .chapter-audio-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .chapter-audio-btn:hover { background: var(--accent); color: #000; transform: scale(1.08); }
+    .chapter-body { font-family: var(--serif); font-size: 1.08rem; line-height: 2.1; color: #cbd5e1; white-space: pre-line; text-align: justify; }
+  
+/* TTS Dropdown Menu */
+.tts-wrap {
+  position: relative;
+  display: inline-block;
+}
+.tts-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 270px;
+  background: rgba(18, 24, 38, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(16px);
+  padding: 6px;
+  z-index: 9999;
+  flex-direction: column;
+  gap: 4px;
+}
+.tts-dropdown-menu.show {
+  display: flex !important;
+  animation: ttsFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes ttsFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.tts-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #f1f5f9;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s ease;
+  font-family: inherit;
+  width: 100%;
+}
+.tts-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(245, 158, 11, 0.3);
+  transform: translateX(2px);
+}
+.tts-item-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.tts-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tts-item-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+}
+.tts-item-desc {
+  font-size: 0.74rem;
+  color: #94a3b8;
+  line-height: 1.3;
+}
+
+</style>
+  <link rel="stylesheet" href="css/dmdg_payment_modal.css">
+</head>
+<body>
+  <header class="header">
+    <a href="novels.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> 서재로</a>
+    <span style="font-weight: 700; font-family: var(--serif);">소년공 꿈의 결말 (500p 완결본)</span>
+        <div class="lang-tabs">
+      <button class="lang-btn active" onclick="changeLang('ko')">🇰🇷 한국어</button>
+      <button class="lang-btn" onclick="changeLang('en')">🇺🇸 English</button>
+      <button class="lang-btn" onclick="changeLang('ja')">🇯🇵 日本語</button>
+      <button class="lang-btn" onclick="changeLang('fr')">🇫🇷 Français</button>
+      <button class="lang-btn" onclick="changeLang('id')">🇮🇩 Indonesia</button>
+      <button class="lang-btn" onclick="changeLang('es')">🇪🇸 Español</button>
+    </div>
+  </header>
+
+  <div class="audio-bar">
+    <button class="audio-btn" style="background: rgba(245, 158, 11, 0.18); border-color: #f59e0b; color: #f59e0b;" onclick="DMDG_Payment.openModal('boy_worker_dream', '소년공 꿈의 결말')">
+        <i class="fa-solid fa-download"></i> <span>소장/다운로드 (PDF 500원 / 오디오 1,000원)</span>
+      </button>
+    <div class="tts-wrap">
+      <button class="audio-btn" id="ttsPlayAllBtn" onclick="togglePlayAllTTS()">
+        <i class="fa-solid fa-headphones"></i> <span id="ttsBtnText">낭독 듣기 (TTS)</span>
+      </button>
+      <div id="tts-menu" class="tts-dropdown-menu">
+        <button type="button" class="tts-menu-item" onclick="start500pTts('all')">
+          <span class="tts-item-icon">▶️</span>
+          <div class="tts-item-body">
+            <div class="tts-item-title">전체 연속 낭독</div>
+            <div class="tts-item-desc">현재 챕터부터 마지막 챕터까지 자동 연속 낭독</div>
+          </div>
+        </button>
+        <button type="button" class="tts-menu-item" onclick="start500pTts('chapter')">
+          <span class="tts-item-icon">📑</span>
+          <div class="tts-item-body">
+            <div class="tts-item-title">챕터 단위 낭독</div>
+            <div class="tts-item-desc">선택한 1개 챕터만 낭독 후 정지 (각 챕터 스피커 클릭)</div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <span style="color: var(--text-muted); font-size: 0.8rem;">DMDG 네이티브 고품질 다국어 음성 엔진 | 500-PAGE SPECIAL EDITION</span>
+  </div>
+
+  <main class="container">
+    <div class="book-banner">
+      <span class="page-badge"><i class="fa-solid fa-book-bookmark"></i> 500-PAGE GRAND MASTER NOVEL</span>
+      <h1 class="book-title" id="bookTitle">소년공 꿈의 결말</h1>
+      <div class="book-subtitle" id="bookSubtitle">프레스에 짓눌린 팔에서 대권의 문턱까지 (500p 대작 정규 완결본)</div>
+      <div class="book-desc" id="bookDesc">12세 소년공에서 거대 야당 대표까지. 무라카미 하루키의 서늘한 내면 독백 문체로 추적한 결핍과 권력, 가족 파탄과 사법의 심연을 다룬 500page 대작 심리 팩션.</div>
+      <div style="margin-top: 1.4rem; font-size: 0.88rem; color: var(--text-muted);">
+        저자: 무라카미 H. & 강민우 문학랩 (가명) | 전 25개 챕터 (500p 완결) | 6개국어 텍스트 및 음성 완비
+      </div>
+    </div>
+
+    <div class="toc-bar">
+      <div style="font-weight: 700; color: var(--accent); font-size: 0.95rem;"><i class="fa-solid fa-list-ol"></i> 500page 전체 목차 (25개 챕터) 바로가기</div>
+      <div class="toc-grid" id="tocGrid"></div>
+    </div>
+
+    <div id="chaptersList"></div>
+  </main>
+
+  <script>
+    let currentData = null;
+    let currentLang = 'ko';
+    let isPlayingAll = false;
+    let ttsMode = "all";
+    let current500pChIdx = 0;
+    let currentUtterance = null;
+    let availableVoices = [];
+    function populateVoices() {
+      if (!window.speechSynthesis) return;
+      availableVoices = window.speechSynthesis.getVoices();
+    }
+    if (window.speechSynthesis) {
+      populateVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const res = await fetch('data/novels/boy_worker_dream.json?v=20261105');
+        currentData = await res.json();
+        render();
+      } catch(e) {
+        console.error(e);
+      }
+    });
+
+        function changeLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll(".lang-btn").forEach(b => {
+        b.classList.toggle("active", b.getAttribute("onclick").includes(`'${lang}'`));
+      });
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      render();
+    }
+
+    function render() {
+      if (!currentData) return;
+      document.getElementById("bookTitle").textContent = currentData.title[currentLang] || currentData.title['ko'];
+      document.getElementById("bookSubtitle").textContent = currentData.subtitle[currentLang] || currentData.subtitle['ko'];
+      document.getElementById("bookDesc").textContent = currentData.description[currentLang] || currentData.description['ko'];
+
+      const tocGrid = document.getElementById("tocGrid");
+      tocGrid.innerHTML = "";
+      currentData.chapters.forEach(ch => {
+        const a = document.createElement("a");
+        a.className = "toc-link";
+        a.href = `#ch-${ch.ch}`;
+        a.textContent = ch.title[currentLang] || ch.title['ko'];
+        tocGrid.appendChild(a);
+      });
+
+      const list = document.getElementById("chaptersList");
+      list.innerHTML = "";
+      currentData.chapters.forEach((ch, idx) => {
+        const card = document.createElement("article");
+        card.className = "chapter-card";
+        card.id = `ch-${ch.ch}`;
+        card.innerHTML = `
+          <div class="chapter-part">${ch.part}</div>
+          <div class="chapter-header">
+            <h2 class="chapter-title">${ch.title[currentLang] || ch.title['ko']}</h2>
+            <button class="chapter-audio-btn" onclick="playChapterTTS(${idx})"><i class="fa-solid fa-volume-high"></i></button>
+          </div>
+          <div class="chapter-body">${ch.content[currentLang] || ch.content['ko']}</div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+        function getLangCode(l) {
+      switch(l) {
+        case 'en': return 'en-US';
+        case 'ja': return 'ja-JP';
+        case 'fr': return 'fr-FR';
+        case 'id': return 'id-ID';
+        case 'es': return 'es-ES';
+        default: return 'ko-KR';
+      }
+    }
+
+    function playChapterTTS(idx) {
+      if (!window.speechSynthesis || !currentData) return;
+      window.speechSynthesis.cancel();
+      current500pChIdx = idx;
+      const ch = currentData.chapters[idx];
+      const text = `${ch.title[currentLang] || ch.title['ko']}.\n\n${ch.content[currentLang] || ch.content['ko']}`;
+      currentUtterance = new SpeechSynthesisUtterance(text);
+      const targetLang = getLangCode(currentLang);
+      currentUtterance.lang = targetLang;
+      currentUtterance.rate = 1.0;
+
+      if (availableVoices.length === 0 && window.speechSynthesis) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+      const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+      const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+      if (exactVoice) {
+        currentUtterance.voice = exactVoice;
+      } else if (prefixVoice) {
+        currentUtterance.voice = prefixVoice;
+      }
+
+      currentUtterance.onend = () => {
+        if (isPlayingAll) {
+          if (ttsMode === 'chapter') {
+            stop500pTts();
+            return;
+          }
+          current500pChIdx++;
+          if (current500pChIdx < currentData.chapters.length) {
+            playChapterTTS(current500pChIdx);
+          } else {
+            stop500pTts();
+          }
+        }
+      };
+      currentUtterance.onerror = () => stop500pTts();
+
+      window.speechSynthesis.speak(currentUtterance);
+    }
+
+    function togglePlayAllTTS() {
+      if (!window.speechSynthesis || !currentData) return;
+      if (isPlayingAll) {
+        stop500pTts();
+        return;
+      }
+      const menu = document.getElementById("tts-menu");
+      if (menu) {
+        menu.classList.toggle("show");
+      } else {
+        start500pTts('all');
+      }
+    }
+
+    function start500pTts(mode, startIdx = 0) {
+      const menu = document.getElementById("tts-menu");
+      if (menu) menu.classList.remove("show");
+      ttsMode = mode;
+      isPlayingAll = true;
+      document.getElementById("ttsBtnText").textContent = (mode === 'chapter') ? "낭독 정지 (챕터)" : "낭독 정지";
+      current500pChIdx = startIdx;
+      playChapterTTS(current500pChIdx);
+    }
+
+    function stop500pTts() {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      isPlayingAll = false;
+      document.getElementById("ttsBtnText").textContent = "낭독 듣기 (TTS)";
+      const menu = document.getElementById("tts-menu");
+      if (menu) menu.classList.remove("show");
+    }
+
+    document.addEventListener('click', (e) => {
+      const wrap = document.querySelector('.tts-wrap');
+      const menu = document.getElementById('tts-menu');
+      if (wrap && menu && !wrap.contains(e.target)) {
+        menu.classList.remove('show');
+      }
+    });
+  </script>
+  <script src="js/dmdg_payment.js"></script>
+</body>
+</html>

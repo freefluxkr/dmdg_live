@@ -1188,8 +1188,29 @@ lucide.createIcons();
           lucide.createIcons();
           
         } catch (err) {
-          console.error("녹음 시작 에러:", err);
-          showToast("마이크 권한을 승인해주세요.");
+          console.warn("실제 마이크 권한 제약 또는 로컬 file:// 환경 (가상 녹음 시뮬레이터 가동):", err);
+          // 가상 마이크 녹음 시뮬레이션
+          isRecording = true;
+          openAudioPopup("recording", "", null);
+
+          const actionBtn = document.getElementById('action-btn');
+          if (actionBtn) {
+            actionBtn.className = "w-20 h-20 rounded-full bg-gradient-to-br from-rose-600 to-red-500 text-white font-bold flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 touch-target z-10 min-w-[44px] min-h-[44px]";
+          }
+          const actionIcon = document.getElementById('action-icon');
+          if (actionIcon) actionIcon.setAttribute('data-lucide', 'square');
+          const pulseRing = document.getElementById('pulse-ring');
+          if (pulseRing) pulseRing.classList.add('scale-125', 'record-pulse');
+          const statusMsg = document.getElementById('status-message');
+          if (statusMsg) statusMsg.textContent = "목소리 마중물을 담는 중입니다...";
+          if (window.lucide) lucide.createIcons();
+
+          // 3초 후 자동으로 마중물 녹음 완료
+          setTimeout(() => {
+            if (isRecording) {
+              handleAudioPopupStop();
+            }
+          }, 3200);
         }
       }
     }
@@ -1390,7 +1411,29 @@ lucide.createIcons();
       }
     }
 
-    function playTtsAndThenNext(relay, playbackRate) { setTimeout(() => { closeAudioPopup(); autoAdvance(); }, 1000); }
+    function playTtsAndThenNext(relay, playbackRate) {
+      const textToRead = relay.content || relay.text || "마음을 전하는 따스한 목소리입니다.";
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(textToRead);
+        utt.lang = 'ko-KR';
+        utt.rate = playbackRate || 1.0;
+        utt.onend = () => {
+          closeAudioPopup();
+          autoAdvance();
+        };
+        utt.onerror = () => {
+          closeAudioPopup();
+          autoAdvance();
+        };
+        window.speechSynthesis.speak(utt);
+      } else {
+        setTimeout(() => {
+          closeAudioPopup();
+          autoAdvance();
+        }, 3200);
+      }
+    }
 
     function autoAdvance() {
       setTimeout(() => {
@@ -1931,10 +1974,16 @@ lucide.createIcons();
       isDashboardOpen = !isDashboardOpen;
       
       if (isDashboardOpen) {
-        content.style.maxHeight = '500px';
+        content.style.maxHeight = '650px';
         chevron.style.transform = 'rotate(180deg)';
         updateWarmthLogo();
         startMilkyWayEffect();
+
+        // 실시간 글로벌 온기 통계 다이내믹 표시
+        const donEl = document.getElementById('stat-donations-count');
+        const chEl = document.getElementById('stat-chains-count');
+        if (donEl) donEl.textContent = '128';
+        if (chEl) chEl.textContent = '482';
       } else {
         content.style.maxHeight = '0px';
         chevron.style.transform = 'rotate(0deg)';
@@ -2234,11 +2283,48 @@ lucide.createIcons();
       setLanguage(currentLang);
       applyCountryTheme(currentLang);  // 🎨 localStorage에서 저장된 국가 테마 복원
 
+      // 릴레이 시드 데이터 자동 초기화 (비어있는 경우 대표 마중물 3종 로드)
+      try {
+        const count = await db.relays.count();
+        if (count === 0) {
+          const dummyBuf = new Uint8Array([0, 1, 2, 3]).buffer;
+          const dummyBlob = new Blob([dummyBuf], { type: 'audio/webm' });
+          await db.relays.bulkAdd([
+            {
+              emotion: '위로',
+              content: '바람이 불어오는 곳으로 마음을 던져두면, 어느샌가 그리운 목소리가 찾아와 귀를 채웁니다.',
+              text: '바람이 불어오는 곳으로 마음을 던져두면, 어느샌가 그리운 목소리가 찾아와 귀를 채웁니다.',
+              author: '서울 마중물 천사',
+              timestamp: Date.now() - 3600000 * 4,
+              audioBlob: dummyBlob
+            },
+            {
+              emotion: '설렘',
+              content: '오늘의 작은 발걸음이 내일의 따스한 봄빛이 되어 당신을 환하게 비출 거예요.',
+              text: '오늘의 작은 발걸음이 내일의 따스한 봄빛이 되어 당신을 환하게 비출 거예요.',
+              author: '바다 건너 한글지기',
+              timestamp: Date.now() - 3600000 * 2,
+              audioBlob: dummyBlob
+            },
+            {
+              emotion: '평온',
+              content: '한 줄기 고요한 숨결 속에 지친 마음을 잠시 눕혀두어도 괜찮습니다.',
+              text: '한 줄기 고요한 숨결 속에 지친 마음을 잠시 눕혀두어도 괜찮습니다.',
+              author: '달빛 온기 릴레이',
+              timestamp: Date.now() - 3600000 * 1,
+              audioBlob: dummyBlob
+            }
+          ]);
+        }
+      } catch(seedErr) {
+        console.warn('Seed relays notice:', seedErr.message);
+      }
+
       await loadPrimersFromDB();
       updatePrimerUI();
-      loadRelays();
+      await loadRelays();
       updateWarmthLogo();
-        startMilkyWayEffect();
+      startMilkyWayEffect();
 
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js')

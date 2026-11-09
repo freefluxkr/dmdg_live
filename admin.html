@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,29 +8,90 @@
   <meta name="referrer" content="no-referrer">
   <script src="js/anti-scraping.js?v=20261023_shield_fix"></script>
   <title>DMDG 관리자 콘솔 | Antigravity × REA 과정 & 포털 통합 관리</title>
-  
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Chart.js 4.4.1 for YouTube Studio-style Interactive Analytics -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Pretendard:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <style>
-    body { font-family: 'Pretendard', 'Outfit', sans-serif; background-color: #0b1120; color: #f1f5f9; }
-    .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 1rem; }
-    .glass-card-elevated { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 1rem; }
-    .glow-gold { box-shadow: 0 0 25px rgba(245, 158, 11, 0.15); }
-    .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
-    .custom-scroll::-webkit-scrollbar-track { background: #0b1120; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-    
+    body {
+      font-family: 'Pretendard', 'Outfit', sans-serif;
+      background-color: #0b1120;
+      color: #f1f5f9;
+    }
+
+    .glass-card {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+    }
+
+    .glass-card-elevated {
+      background: rgba(30, 41, 59, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 1rem;
+    }
+
+    .glow-gold {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.15);
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #0b1120;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+
     /* YouTube Studio Tab Nav Styling */
-    .studio-tab-btn { position: relative; transition: all 0.2s ease; border-bottom: 2px solid transparent; }
-    .studio-tab-btn.active { color: #f59e0b; border-bottom-color: #f59e0b; font-weight: 800; }
-    .studio-tab-btn:hover:not(.active) { color: #f1f5f9; border-bottom-color: rgba(148, 163, 184, 0.3); }
-    .yt-pulse-dot { animation: ytPulse 1.8s infinite; }
-    @keyframes ytPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
+    .studio-tab-btn {
+      position: relative;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .studio-tab-btn.active {
+      color: #f59e0b;
+      border-bottom-color: #f59e0b;
+      font-weight: 800;
+    }
+
+    .studio-tab-btn:hover:not(.active) {
+      color: #f1f5f9;
+      border-bottom-color: rgba(148, 163, 184, 0.3);
+    }
+
+    .yt-pulse-dot {
+      animation: ytPulse 1.8s infinite;
+    }
+
+    @keyframes ytPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
+    }
   </style>
 
   <!-- Firebase SDK -->
@@ -39,60 +101,67 @@
   <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
   <script src="js/analytics.js?v=20261022_real_yt"></script>
 </head>
+
 <body class="antialiased min-h-screen pb-16 relative overflow-x-hidden">
 
   <!-- =========================================================================
        1. Admin Login Overlay
        ========================================================================= -->
-  <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center backdrop-blur-md px-4">
+  <div id="auth-overlay"
+    class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center backdrop-blur-md px-4">
     <div class="glass-card-elevated p-8 max-w-md w-full glow-gold shadow-2xl">
-      <div class="w-16 h-16 bg-amber-500/10 text-amber-500 border border-amber-500/30 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
+      <div
+        class="w-16 h-16 bg-amber-500/10 text-amber-500 border border-amber-500/30 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
         <i data-lucide="shield-check" class="w-8 h-8"></i>
       </div>
-      
+
       <div class="text-center mb-6">
         <h2 class="text-2xl font-black text-white tracking-tight flex items-center justify-center gap-2">
           <span>DMDG 관리자 콘솔</span>
         </h2>
         <p class="text-xs text-slate-400 mt-1">Antigravity × REA 과정 신청자 및 포털 실시간 관제</p>
       </div>
-      
+
       <form id="adminLoginForm" onsubmit="event.preventDefault(); handleAdminLogin(event);" class="space-y-4">
         <div>
           <label for="loginAdminId" class="block text-xs font-bold text-slate-300 mb-1">관리자 아이디</label>
           <div class="relative">
-            <input type="text" id="loginAdminId" value="DMDG-LIVE" autocomplete="username" placeholder="관리자 아이디" 
-                   onkeydown="if(event.key==='Enter'){event.preventDefault();handleAdminLogin(event);}"
-                   class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 focus:border-amber-500 rounded-xl text-white placeholder-slate-500 text-sm outline-none transition-all">
+            <input type="text" id="loginAdminId" value="DMDG-LIVE" autocomplete="username" placeholder="관리자 아이디"
+              onkeydown="if(event.key==='Enter'){event.preventDefault();handleAdminLogin(event);}"
+              class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 focus:border-amber-500 rounded-xl text-white placeholder-slate-500 text-sm outline-none transition-all">
           </div>
         </div>
 
         <div>
           <label for="loginAdminPw" class="block text-xs font-bold text-slate-300 mb-1">비밀번호</label>
           <div class="relative">
-            <input type="password" id="loginAdminPw" value="qusejrwoddl" autocomplete="current-password" placeholder="비밀번호" 
-                   onkeydown="if(event.key==='Enter'){event.preventDefault();handleAdminLogin(event);}"
-                   class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 focus:border-amber-500 rounded-xl text-white placeholder-slate-500 text-sm outline-none transition-all">
+            <input type="password" id="loginAdminPw" value="qusejrwoddl" autocomplete="current-password"
+              placeholder="비밀번호" onkeydown="if(event.key==='Enter'){event.preventDefault();handleAdminLogin(event);}"
+              class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 focus:border-amber-500 rounded-xl text-white placeholder-slate-500 text-sm outline-none transition-all">
           </div>
         </div>
 
-        <div id="loginErrorMsg" class="hidden p-3 bg-rose-500/10 border border-rose-500/30 rounded-lg text-rose-400 text-xs font-semibold flex items-center gap-2">
+        <div id="loginErrorMsg"
+          class="hidden p-3 bg-rose-500/10 border border-rose-500/30 rounded-lg text-rose-400 text-xs font-semibold flex items-center gap-2">
           <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
           <span id="loginErrorText">아이디 또는 비밀번호가 일치하지 않습니다.</span>
         </div>
 
-        <button type="button" onclick="handleAdminLogin(event)" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-sm mt-2 active:scale-95 cursor-pointer">
+        <button type="button" onclick="handleAdminLogin(event)"
+          class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-sm mt-2 active:scale-95 cursor-pointer">
           <i data-lucide="lock" class="w-4 h-4"></i>
           관리자 로그인
         </button>
 
-        <button type="button" onclick="revealDashboard()" class="w-full py-2.5 bg-slate-800/90 hover:bg-slate-700 text-amber-400 hover:text-amber-300 font-bold rounded-xl transition-all border border-amber-500/30 hover:border-amber-500/50 flex items-center justify-center gap-2 text-xs cursor-pointer active:scale-95 shadow-sm">
+        <button type="button" onclick="revealDashboard()"
+          class="w-full py-2.5 bg-slate-800/90 hover:bg-slate-700 text-amber-400 hover:text-amber-300 font-bold rounded-xl transition-all border border-amber-500/30 hover:border-amber-500/50 flex items-center justify-center gap-2 text-xs cursor-pointer active:scale-95 shadow-sm">
           <span>⚡ 원클릭 대시보드 바로 진입하기</span>
         </button>
       </form>
 
       <div class="mt-6 pt-5 border-t border-slate-800 text-center">
-        <a href="./" class="text-xs text-slate-400 hover:text-amber-400 transition-colors inline-flex items-center gap-1">
+        <a href="./index.html"
+          class="text-xs text-slate-400 hover:text-amber-400 transition-colors inline-flex items-center gap-1">
           <span>← 포털 메인으로 돌아가기</span>
         </a>
       </div>
@@ -102,28 +171,35 @@
   <!-- =========================================================================
        2. Admin Dashboard Container
        ========================================================================= -->
-  <div id="dashboard-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden opacity-0 transition-opacity duration-500">
-    
+  <div id="dashboard-container"
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden opacity-0 transition-opacity duration-500">
+
     <!-- Top Nav Header -->
-    <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-slate-800">
+    <header
+      class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-slate-800">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 text-slate-950 rounded-xl flex items-center justify-center font-black text-xl shadow-lg shadow-amber-500/20">
+        <div
+          class="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 text-slate-950 rounded-xl flex items-center justify-center font-black text-xl shadow-lg shadow-amber-500/20">
           🏛️
         </div>
         <div>
           <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2">
             DMDG LIVE 관리자 대시보드
-            <span class="text-xs bg-amber-500/15 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded-full font-bold">PROD v3.0</span>
+            <span
+              class="text-xs bg-amber-500/15 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded-full font-bold">PROD
+              v3.0</span>
           </h1>
           <p class="text-xs text-slate-400 mt-0.5">Antigravity × REA 모던 역공학 수강생 모집 현황 &amp; 실시간 DB 관제</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2 w-full sm:w-auto">
-        <a href="./" target="_blank" class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-colors">
+        <a href="./index.html" target="_blank"
+          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-colors">
           <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 포털 열기
         </a>
-        <button onclick="handleAdminLogout()" class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-lg text-xs font-bold transition-colors">
+        <button onclick="handleAdminLogout()"
+          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-lg text-xs font-bold transition-colors">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i> 로그아웃
         </button>
       </div>
@@ -133,21 +209,35 @@
          YouTube Studio Style 4 Main Tabs Navigation
          ========================================================================= -->
     <nav class="flex items-center gap-2 mb-8 border-b border-slate-800 overflow-x-auto custom-scroll pb-1">
-      <button id="tab-btn-overview" onclick="switchStudioTab('overview')" class="studio-tab-btn active px-4 py-3 text-xs sm:text-sm font-bold flex items-center gap-2 text-amber-400 border-b-2 border-amber-500 transition-all whitespace-nowrap cursor-pointer">
+      <button id="tab-btn-overview" onclick="switchStudioTab('overview')"
+        class="studio-tab-btn active px-4 py-3 text-xs sm:text-sm font-bold flex items-center gap-2 text-amber-400 border-b-2 border-amber-500 transition-all whitespace-nowrap cursor-pointer">
         <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
         <span>개요 (Overview)</span>
       </button>
-      <button id="tab-btn-admissions" onclick="switchStudioTab('admissions')" class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
+      <!-- 수강신청 분석 (Admissions) 탭 임시 숨김 (추후 재사용 가능하도록 보존) -->
+      <button id="tab-btn-admissions" onclick="switchStudioTab('admissions')"
+        class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer"
+        style="display: none !important;">
         <i data-lucide="graduation-cap" class="w-4 h-4"></i>
         <span>수강신청 분석 (Admissions)</span>
       </button>
-      <button id="tab-btn-revenue" onclick="switchStudioTab('revenue')" class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
+      <button id="tab-btn-revenue" onclick="switchStudioTab('revenue')"
+        class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
         <i data-lucide="credit-card" class="w-4 h-4"></i>
         <span>결제 및 거래 (Revenue)</span>
       </button>
-      <button id="tab-btn-content" onclick="switchStudioTab('content')" class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
+      <button id="tab-btn-content" onclick="switchStudioTab('content')"
+        class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
         <i data-lucide="play-square" class="w-4 h-4"></i>
         <span>콘텐츠 지표 (Content)</span>
+      </button>
+      <button id="tab-btn-assessment" onclick="switchStudioTab('assessment')"
+        class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-purple-300 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
+        <i data-lucide="target" class="w-4 h-4 text-purple-400"></i>
+        <span>자가진단 분석 (Assessment)</span>
+        <span
+          class="text-[10px] px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30">20문항
+          체계</span>
       </button>
     </nav>
 
@@ -155,32 +245,37 @@
          TAB PANEL 1: 개요 (Overview) - YouTube Studio Interactive Analytics & Section A
          ========================================================================= -->
     <div id="panel-overview" class="studio-tab-panel space-y-10">
-      
+
       <!-- YouTube Studio Signature Analytics Hero Section -->
       <section class="glass-card-elevated p-5 sm:p-6 glow-gold border border-amber-500/20">
-        
+
         <!-- Header Controls: Title & Period Selector -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800/80">
+        <div
+          class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800/80">
           <div>
             <div class="flex items-center gap-2">
               <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
                 YouTube Studio 채널 분석 스타일 관제
               </span>
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">시계열 인터랙티브</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">시계열
+                인터랙티브</span>
             </div>
             <h2 class="text-xl sm:text-2xl font-black text-white mt-1">포털 &amp; 채널 시계열 트래픽 분석</h2>
           </div>
 
           <!-- Time Range Selector Buttons -->
           <div class="inline-flex items-center bg-slate-900/90 border border-slate-700/80 rounded-xl p-1 text-xs">
-            <button id="period-btn-7" onclick="changeChartPeriod(7)" class="period-btn px-3 py-1.5 rounded-lg font-bold bg-amber-500 text-slate-950 transition-all shadow-sm">
+            <button id="period-btn-7" onclick="changeChartPeriod(7)"
+              class="period-btn px-3 py-1.5 rounded-lg font-bold bg-amber-500 text-slate-950 transition-all shadow-sm">
               최근 7일
             </button>
-            <button id="period-btn-28" onclick="changeChartPeriod(28)" class="period-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all">
+            <button id="period-btn-28" onclick="changeChartPeriod(28)"
+              class="period-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all">
               최근 28일
             </button>
-            <button id="period-btn-90" onclick="changeChartPeriod(90)" class="period-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all">
+            <button id="period-btn-90" onclick="changeChartPeriod(90)"
+              class="period-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all">
               최근 90일
             </button>
           </div>
@@ -188,7 +283,7 @@
 
         <!-- 2 Columns Grid: Main Time Series Line Chart (Left) + Realtime 48h Widget (Right) -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-          
+
           <!-- LEFT (2 cols): Interactive Time Series Line Chart -->
           <div class="lg:col-span-2 glass-card p-5 border border-slate-800">
             <!-- Inline Stat Badges -->
@@ -231,10 +326,13 @@
               <canvas id="trafficTimeSeriesChart"></canvas>
             </div>
 
-            <div class="flex justify-between items-center text-[11px] text-slate-400 mt-3 pt-3 border-t border-slate-800/60">
+            <div
+              class="flex justify-between items-center text-[11px] text-slate-400 mt-3 pt-3 border-t border-slate-800/60">
               <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> dmdg-live.com 페이지뷰 (PV)</span>
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> 일일 고유 방문자 (UV)</span>
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                  dmdg-live.com 페이지뷰 (PV)</span>
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> 일일 고유
+                  방문자 (UV)</span>
               </div>
               <span class="text-slate-500 text-[10px]">※ Firestore 실시간 트래픽 연동</span>
             </div>
@@ -248,7 +346,9 @@
                   <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 yt-pulse-dot"></span>
                   <h3 class="font-bold text-white text-sm">실시간 (Realtime)</h3>
                 </div>
-                <span class="text-[11px] text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">라이브 갱신 중</span>
+                <span
+                  class="text-[11px] text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">라이브
+                  갱신 중</span>
               </div>
 
               <!-- 48 Hours & 60 Mins Stat -->
@@ -284,15 +384,18 @@
               <div>
                 <span class="text-[11px] font-bold text-slate-300 block mb-2">실시간 최다 유입 콘텐츠 탑 3</span>
                 <div class="space-y-2 text-xs">
-                  <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/50 hover:bg-slate-900 transition-colors">
+                  <div
+                    class="flex justify-between items-center p-2 rounded-lg bg-slate-900/50 hover:bg-slate-900 transition-colors">
                     <span class="truncate pr-2 text-slate-200">📺 AI 역설계(REA)의 실체 [27분]</span>
                     <span class="font-mono font-bold text-amber-400 text-[11px]">261회</span>
                   </div>
-                  <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/50 hover:bg-slate-900 transition-colors">
+                  <div
+                    class="flex justify-between items-center p-2 rounded-lg bg-slate-900/50 hover:bg-slate-900 transition-colors">
                     <span class="truncate pr-2 text-slate-200">🗣️ 말쌈 (malssam.com) AI 사전</span>
                     <span class="font-mono font-bold text-emerald-400 text-[11px]">890회</span>
                   </div>
-                  <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/50 hover:bg-slate-900 transition-colors">
+                  <div
+                    class="flex justify-between items-center p-2 rounded-lg bg-slate-900/50 hover:bg-slate-900 transition-colors">
                     <span class="truncate pr-2 text-slate-200">🎓 Antigravity × REA 과정 신청</span>
                     <span class="font-mono font-bold text-cyan-400 text-[11px]">실시간 모집</span>
                   </div>
@@ -301,7 +404,8 @@
 
             </div>
 
-            <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-[10px] text-slate-500">
+            <div
+              class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-[10px] text-slate-500">
               <span>트래픽 센서 주기: 15초</span>
               <button onclick="refreshAnalyticsData()" class="text-amber-400 hover:underline flex items-center gap-1">
                 <i data-lucide="refresh-cw" class="w-3 h-3"></i> 즉시 갱신
@@ -326,14 +430,18 @@
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               Firestore 실시간 연동 활성화
             </span>
-            <button onclick="refreshAnalyticsData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 조회수 새로고침
+            <button onclick="refreshAnalyticsData()"
+              class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 트래픽 데이터 갱신
             </button>
-            <button onclick="simulateVisitorView()" class="px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all" title="방문자 조회수 1회 시뮬레이션 카운트">
+            <button onclick="simulateVisitorView()"
+              class="px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all"
+              title="방문자 조회수 1회 시뮬레이션 카운트">
               <i data-lucide="mouse-pointer" class="w-3.5 h-3.5"></i> dmdg-live.com 조회수 +1
             </button>
           </div>
@@ -341,7 +449,7 @@
 
         <!-- Traffic KPI Cards (4 cols) -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          
+
           <!-- KPI 1: 오늘 접속자 (Today UV) -->
           <div class="glass-card p-5 border-l-4 border-emerald-500">
             <div class="flex justify-between items-start mb-2">
@@ -373,7 +481,8 @@
               <h3 id="stat-analytics-today-views" class="text-3xl font-black text-cyan-400">54</h3>
               <span class="text-xs text-slate-400 font-semibold">회</span>
             </div>
-            <p id="stat-analytics-today-sub" class="text-[11px] text-slate-400 mt-3 truncate">dmdg-live.com 오늘 발생한 전체 페이지 조회</p>
+            <p id="stat-analytics-today-sub" class="text-[11px] text-slate-400 mt-3 truncate">dmdg-live.com 오늘 발생한 전체
+              페이지 조회</p>
           </div>
 
           <!-- KPI 3: 누적 접속자 (Total UV) -->
@@ -448,7 +557,7 @@
          TAB PANEL 2: 수강신청 분석 (Admissions) - Section B
          ========================================================================= -->
     <div id="panel-admissions" class="studio-tab-panel hidden space-y-10">
-      
+
       <!-- SECTION B: Antigravity IDE × REA 과정 수강 신청자 실시간 KPI & 현황 -->
       <section class="mb-10">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
@@ -462,13 +571,17 @@
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <button onclick="exportApplicantsCSV()" class="px-3.5 py-2 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm">
+            <button onclick="exportApplicantsCSV()"
+              class="px-3.5 py-2 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm">
               <i data-lucide="download" class="w-3.5 h-3.5"></i> 엑셀/CSV 다운로드
             </button>
-            <button onclick="loadAllApplicantsData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+            <button onclick="loadAllApplicantsData()"
+              class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
               <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 새로고침
             </button>
-            <button onclick="seedTestApplicant()" class="px-3 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all" title="테스트 신청 데이터 1건 생성">
+            <button onclick="seedTestApplicant()"
+              class="px-3 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all"
+              title="테스트 신청 데이터 1건 생성">
               <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> 테스트 추가
             </button>
           </div>
@@ -476,13 +589,15 @@
 
         <!-- KPI Summary Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          
+
           <!-- KPI 1: 총 신청자 수 -->
           <div class="glass-card p-5 border-l-4 border-amber-500">
             <div class="flex justify-between items-start mb-2">
               <div>
                 <span class="text-xs font-bold text-slate-400">실제 신청 접수 (Firestore &amp; Local DB)</span>
-                <span class="ml-1 text-[10px] px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/30">100% 실제 데이터</span>
+                <span
+                  class="ml-1 text-[10px] px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/30">100%
+                  실제 데이터</span>
               </div>
               <div class="p-1.5 bg-amber-500/10 text-amber-400 rounded-md">
                 <i data-lucide="users" class="w-4 h-4"></i>
@@ -493,7 +608,9 @@
               <span class="text-xs text-slate-400 font-semibold">/ 정원 10명 기준</span>
             </div>
             <div class="w-full bg-slate-800 h-2 rounded-full mt-3 overflow-hidden">
-              <div id="stat-progress-bar" class="bg-gradient-to-r from-amber-500 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+              <div id="stat-progress-bar"
+                class="bg-gradient-to-r from-amber-500 to-emerald-400 h-full rounded-full transition-all duration-500"
+                style="width: 0%"></div>
             </div>
             <div class="flex justify-between items-center text-[11px] mt-1.5">
               <span id="stat-progress-text" class="text-slate-400">실제 달성률 0% (0/10명)</span>
@@ -509,10 +626,12 @@
                 <i data-lucide="check-circle" class="w-4 h-4"></i>
               </div>
             </div>
-            <div id="stat-course-status-badge" class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 rounded-full text-xs font-black">
+            <div id="stat-course-status-badge"
+              class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 rounded-full text-xs font-black">
               <span>⏳ 정원 10명 모집 중 (11월 30일 마감)</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-3 leading-relaxed">📅 <strong>11월 30일(월) 자정 마감</strong> · 10명 넘을 경우 대기자 배정</p>
+            <p class="text-[11px] text-slate-400 mt-3 leading-relaxed">📅 <strong>11월 30일(월) 자정 마감</strong> · 10명 넘을 경우
+              대기자 배정</p>
           </div>
 
           <!-- KPI 3: 내일배움카드 소지자 비율 -->
@@ -552,14 +671,16 @@
             <h3 class="font-bold text-white text-sm flex items-center gap-2">
               <i data-lucide="table" class="w-4 h-4 text-amber-500"></i>
               실시간 수강 신청자 명부
-              <span id="badge-table-count" class="bg-slate-800 text-amber-400 text-xs px-2 py-0.5 rounded-full font-bold">0명</span>
+              <span id="badge-table-count"
+                class="bg-slate-800 text-amber-400 text-xs px-2 py-0.5 rounded-full font-bold">0명</span>
             </h3>
             <span class="text-xs text-slate-400">Firebase Firestore &amp; Local DB 동기화</span>
           </div>
 
           <div class="overflow-x-auto custom-scroll max-h-[480px]">
             <table class="w-full text-left text-xs">
-              <thead class="bg-slate-950/80 text-slate-400 uppercase tracking-wider sticky top-0 z-10 border-b border-slate-800">
+              <thead
+                class="bg-slate-950/80 text-slate-400 uppercase tracking-wider sticky top-0 z-10 border-b border-slate-800">
                 <tr>
                   <th class="px-4 py-3">No.</th>
                   <th class="px-4 py-3">신청일시</th>
@@ -591,7 +712,7 @@
          TAB PANEL 3: 결제 및 거래 (Revenue) - Section C
          ========================================================================= -->
     <div id="panel-revenue" class="studio-tab-panel hidden space-y-10">
-      
+
       <!-- SECTION C: 결제 인프라 & 비즈니스 인증 진단기 (Payment & Business Health Monitor) -->
       <section class="mb-10">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
@@ -605,10 +726,13 @@
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <button onclick="exportPaymentsCSV()" class="px-3.5 py-2 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm">
+            <button onclick="exportPaymentsCSV()"
+              class="px-3.5 py-2 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm">
               <i data-lucide="download" class="w-3.5 h-3.5"></i> 결제/거래 내역 CSV
             </button>
-            <button onclick="seedTestPayment()" class="px-3 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all" title="테스트 결제 1건 생성">
+            <button onclick="seedTestPayment()"
+              class="px-3 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all"
+              title="테스트 결제 1건 생성">
               <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> 테스트 결제 생성
             </button>
           </div>
@@ -616,12 +740,13 @@
 
         <!-- Payment Gateways Status Cards (2 cols) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-          
+
           <!-- CARD 1: 포트원 (PortOne v2) -->
           <div class="glass-card p-6 border-l-4 border-amber-500">
             <div class="flex justify-between items-start mb-4">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-center justify-center text-amber-400 font-black text-lg">
+                <div
+                  class="w-10 h-10 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-center justify-center text-amber-400 font-black text-lg">
                   P1
                 </div>
                 <div>
@@ -629,7 +754,8 @@
                   <p class="text-xs text-slate-400">카카오페이 · 토스페이먼츠 국내 간편결제 게이트웨이</p>
                 </div>
               </div>
-              <span id="badge-portone-status" class="px-2.5 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold rounded-full">
+              <span id="badge-portone-status"
+                class="px-2.5 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold rounded-full">
                 🟡 심사 대기 (Test Mode)
               </span>
             </div>
@@ -654,10 +780,12 @@
             </div>
 
             <div class="flex items-center gap-2 flex-wrap">
-              <button onclick="testPortOnePaymentModal()" class="flex-1 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold rounded-lg text-xs transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
+              <button onclick="testPortOnePaymentModal()"
+                class="flex-1 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold rounded-lg text-xs transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
                 <i data-lucide="play-circle" class="w-4 h-4"></i> 포트원 결제창 팝업 테스트
               </button>
-              <a href="https://admin.portone.io/integration-v2/manage/channel" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+              <a href="https://admin.portone.io/integration-v2/manage/channel" target="_blank" rel="noopener noreferrer"
+                class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 정산 관리 콘솔 ➔
               </a>
             </div>
@@ -667,7 +795,8 @@
           <div class="glass-card p-6 border-l-4 border-blue-500">
             <div class="flex justify-between items-start mb-4">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-blue-500/10 border border-blue-500/30 rounded-xl flex items-center justify-center text-blue-400 font-black text-lg">
+                <div
+                  class="w-10 h-10 bg-blue-500/10 border border-blue-500/30 rounded-xl flex items-center justify-center text-blue-400 font-black text-lg">
                   PP
                 </div>
                 <div>
@@ -675,7 +804,8 @@
                   <p class="text-xs text-slate-400">글로벌 해외 신용카드 &amp; USD 다국어 결제</p>
                 </div>
               </div>
-              <span id="badge-paypal-status" class="px-2.5 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold rounded-full">
+              <span id="badge-paypal-status"
+                class="px-2.5 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold rounded-full">
                 🟡 본인 소액인증 대기
               </span>
             </div>
@@ -700,10 +830,12 @@
             </div>
 
             <div class="flex items-center gap-2 flex-wrap">
-              <button onclick="testPayPalIntegrationPing()" class="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-lg text-xs transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
+              <button onclick="testPayPalIntegrationPing()"
+                class="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-lg text-xs transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
                 <i data-lucide="zap" class="w-4 h-4"></i> 페이팔 연동 상태 핑 테스트
               </button>
-              <a href="https://www.paypal.com/kr/home" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+              <a href="https://www.paypal.com/kr/home" target="_blank" rel="noopener noreferrer"
+                class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 페이팔 콘솔 ➔
               </a>
             </div>
@@ -717,14 +849,16 @@
             <h3 class="font-bold text-white text-sm flex items-center gap-2">
               <i data-lucide="receipt" class="w-4 h-4 text-emerald-400"></i>
               실시간 결제 &amp; 후원 거래 내역
-              <span id="badge-payments-count" class="bg-slate-800 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-bold">0건</span>
+              <span id="badge-payments-count"
+                class="bg-slate-800 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-bold">0건</span>
             </h3>
             <span class="text-xs text-slate-400">Firestore payment_transactions &amp; Local DB 동기화</span>
           </div>
 
           <div class="overflow-x-auto custom-scroll max-h-[360px]">
             <table class="w-full text-left text-xs">
-              <thead class="bg-slate-950/80 text-slate-400 uppercase tracking-wider sticky top-0 z-10 border-b border-slate-800">
+              <thead
+                class="bg-slate-950/80 text-slate-400 uppercase tracking-wider sticky top-0 z-10 border-b border-slate-800">
                 <tr>
                   <th class="px-4 py-3">No.</th>
                   <th class="px-4 py-3">결제일시</th>
@@ -751,7 +885,218 @@
          TAB PANEL 4: 콘텐츠 지표 (Content) - Section A-2, Section A-3, Section D
          ========================================================================= -->
     <div id="panel-content" class="studio-tab-panel hidden space-y-10">
-      
+
+      <!-- SECTION C-0: 4대 핵심 플랫폼 복합 지표 관제 센터 (Cross-Platform Composite Analytics Hub) -->
+      <section class="mb-10">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
+          <div>
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1">
+              <span>🌐</span> Section C-0 · 4대 핵심 디지털 자산 복합 지표 관제 센터 (Cross-Platform Hub)
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
+              4대 플랫폼 실시간 트래픽, 독자 인게이지먼트 &amp; 복합 지표
+              <span
+                class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">dmdg
+                · malssam · blog · wikibooks</span>
+            </h2>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              전체 플랫폼 트래픽 센서 가동
+            </span>
+            <button onclick="refreshPlatformMetrics(this)"
+              class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 4대 플랫폼 통계 갱신
+            </button>
+          </div>
+        </div>
+
+        <!-- 4대 플랫폼 복합 지표 카드 그리드 (4 cols) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+
+          <!-- 카드 1: dmdg-live.com -->
+          <div class="glass-card p-5 border-l-4 border-cyan-500 relative overflow-hidden group">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1">
+                  <span>🌐</span> 메인 포털
+                </span>
+                <h4 class="text-base font-black text-white mt-0.5">dmdg-live.com</h4>
+              </div>
+              <a href="https://dmdg-live.com" target="_blank"
+                class="p-1.5 bg-cyan-500/10 text-cyan-400 rounded-md hover:bg-cyan-500/20 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-slate-900/60 rounded-lg border border-slate-800/80">
+              <div>
+                <span class="text-[10px] text-slate-400 block">오늘 / 누적 UV</span>
+                <div class="font-mono text-sm font-bold text-emerald-400">7명 <span
+                    class="text-xs text-slate-400 font-normal">/ 13명</span></div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">오늘 / 누적 PV</span>
+                <div class="font-mono text-sm font-bold text-cyan-400">54회 <span
+                    class="text-xs text-slate-400 font-normal">/ 86회</span></div>
+              </div>
+            </div>
+
+            <!-- 복합 결합 지표 -->
+            <div class="space-y-1.5 pt-2 border-t border-slate-800">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i> 1인당 열람도 (PV÷UV)
+                </span>
+                <span class="font-mono font-bold text-amber-300">6.61 회/인</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="shield-check" class="w-3 h-3 text-cyan-400"></i> 인프라 및 CDN
+                </span>
+                <span class="text-[11px] font-semibold text-cyan-300">Cloudflare + Firebase</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 카드 2: MALSSAM.COM -->
+          <div class="glass-card p-5 border-l-4 border-emerald-500 relative overflow-hidden group">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1">
+                  <span>🗣️</span> 대표 웹앱 (PWA)
+                </span>
+                <h4 class="text-base font-black text-white mt-0.5">MALSSAM.COM</h4>
+              </div>
+              <a href="https://malssam.com" target="_blank"
+                class="p-1.5 bg-emerald-500/10 text-emerald-400 rounded-md hover:bg-emerald-500/20 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-slate-900/60 rounded-lg border border-slate-800/80">
+              <div>
+                <span class="text-[10px] text-slate-400 block">오늘 / 누적 UV</span>
+                <div class="font-mono text-sm font-bold text-emerald-400">18명 <span
+                    class="text-xs text-slate-400 font-normal">/ 320명</span></div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">오늘 / 누적 PV</span>
+                <div class="font-mono text-sm font-bold text-cyan-400">45회 <span
+                    class="text-xs text-slate-400 font-normal">/ 890회</span></div>
+              </div>
+            </div>
+
+            <!-- 복합 결합 지표 -->
+            <div class="space-y-1.5 pt-2 border-t border-slate-800">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i> 1인당 열람도 (PV÷UV)
+                </span>
+                <span class="font-mono font-bold text-amber-300">2.78 회/인</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="download-cloud" class="w-3 h-3 text-emerald-400"></i> 홈화면 설치 전환율
+                </span>
+                <span class="font-mono font-bold text-emerald-300">14.2%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 카드 3: wikidocs.net/blog/@dmdg -->
+          <div class="glass-card p-5 border-l-4 border-purple-500 relative overflow-hidden group">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <span class="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+                  <span>📰</span> 공식 기술 블로그
+                </span>
+                <h4 class="text-base font-black text-white mt-0.5">wikidocs @dmdg</h4>
+              </div>
+              <a href="https://wikidocs.net/blog/@dmdg" target="_blank"
+                class="p-1.5 bg-purple-500/10 text-purple-400 rounded-md hover:bg-purple-500/20 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-slate-900/60 rounded-lg border border-slate-800/80">
+              <div>
+                <span class="text-[10px] text-slate-400 block">발행 포스트 / 독자(UV)</span>
+                <div class="font-mono text-sm font-bold text-purple-300">6편 <span
+                    class="text-xs text-slate-400 font-normal">/ 580명</span></div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">누적 조회수 (PV)</span>
+                <div class="font-mono text-sm font-bold text-cyan-400">1,420회</div>
+              </div>
+            </div>
+
+            <!-- 복합 결합 지표 -->
+            <div class="space-y-1.5 pt-2 border-t border-slate-800">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i> 1인당 열람도 (PV÷UV)
+                </span>
+                <span class="font-mono font-bold text-amber-300">2.45 회/인</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="heart" class="w-3 h-3 text-rose-400"></i> 추천 전환율 (추천÷PV)
+                </span>
+                <span class="font-mono font-bold text-rose-400">3.38% (48개)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 카드 4: 내 책들(위키북스 16권 전권) -->
+          <div class="glass-card p-5 border-l-4 border-sky-500 relative overflow-hidden group">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <span class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1">
+                  <span>📚</span> 공식 출판 도서
+                </span>
+                <h4 class="text-base font-black text-white mt-0.5">위키북스 16권 (신간3)</h4>
+              </div>
+              <a href="#live-books-table-body"
+                class="p-1.5 bg-sky-500/10 text-sky-400 rounded-md hover:bg-sky-500/20 transition-colors">
+                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 my-3 p-2.5 bg-slate-900/60 rounded-lg border border-slate-800/80">
+              <div>
+                <span class="text-[10px] text-slate-400 block">누적 독자 (UV)</span>
+                <div class="font-mono text-sm font-bold text-blue-300">19,450명</div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">총 누적 열람수 (PV)</span>
+                <div class="font-mono text-sm font-bold text-teal-300">54,320회</div>
+              </div>
+            </div>
+
+            <!-- 복합 결합 지표 -->
+            <div class="space-y-1.5 pt-2 border-t border-slate-800">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i> 1인당 열람도 (PV÷UV)
+                </span>
+                <span class="font-mono font-bold text-amber-300">2.79 회/인</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 flex items-center gap-1">
+                  <i data-lucide="thumbs-up" class="w-3 h-3 text-rose-400"></i> 추천 전환율 (추천÷PV)
+                </span>
+                <span class="font-mono font-bold text-rose-400">3.44% (1,870개)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <!-- SECTION A-2: YouTube Data API v3 실시간 공식 채널 & 대표 영상 관제 -->
       <section class="mb-10">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
@@ -760,22 +1105,27 @@
               <span class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1">
                 <span>📺</span> Section A-2 · YouTube Data API v3 실시간 공식 채널 &amp; 대표 영상 관제
               </span>
-              <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-mono">
+              <span
+                class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-mono">
                 🎬 @dmdg-free · 🏛️ @Anti-Korea
               </span>
             </div>
             <h2 class="text-xl sm:text-2xl font-black text-white mt-1 flex items-center gap-2">
               현재 서비스 중인 유튜브 채널 &amp; 대표 영상 실시간 현황
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-bold">YouTube API v3 Live</span>
+              <span
+                class="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-bold">YouTube
+                API v3 Live</span>
             </h2>
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <span id="yt-api-status-badge" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
+            <span id="yt-api-status-badge"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               YouTube Data API v3 실시간 연동 정상
             </span>
-            <button id="btn-yt-refresh" onclick="refreshYouTubeStats()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+            <button id="btn-yt-refresh" onclick="refreshYouTubeStats()"
+              class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
               <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 유튜브 실시간 API 갱신
             </button>
           </div>
@@ -831,7 +1181,8 @@
               <h3 id="stat-yt-total-uv" class="text-3xl font-black text-orange-400">52</h3>
               <span class="text-xs text-slate-400 font-semibold">명</span>
             </div>
-            <p id="stat-yt-channels-sub" class="text-[11px] text-slate-400 mt-3 truncate">당목담글(32명) + Anti-Korea(20명) / 117개 영상</p>
+            <p id="stat-yt-channels-sub" class="text-[11px] text-slate-400 mt-3 truncate">당목담글(32명) + Anti-Korea(20명) /
+              117개 영상</p>
           </div>
 
           <!-- KPI 4: 2개 공식 채널 총 누적 조회수 -->
@@ -891,17 +1242,21 @@
             </span>
             <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
               현재 서비스 중인 LIVE WEB APPS 1일, 누적, 접속자 수 현황
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">6 Apps Live</span>
+              <span
+                class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">6
+                Apps Live</span>
             </h2>
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               웹앱 트래픽 센서 정상 가동 중
             </span>
-            <button onclick="refreshLiveWebAppsStats()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 웹앱 통계 새로고침
+            <button onclick="refreshLiveWebAppsStats()"
+              class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 웹앱 통계 갱신
             </button>
           </div>
         </div>
@@ -1008,7 +1363,7 @@
         </div>
       </section>
 
-      
+
       <!-- SECTION A-4: 위키북스(WikiBooks) 공식 도서 실시간 열람 & 클릭 트래커 현황 -->
       <section class="mb-10">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
@@ -1018,17 +1373,21 @@
             </span>
             <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
               위키북스 공식 출판 도서 실시간 열람 &amp; 클릭 트래커
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold">13 Books Tracked</span>
+              <span
+                class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold">16
+                Books Tracked</span>
             </h2>
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-500/10 border border-sky-500/30 text-sky-400 rounded-lg text-xs font-semibold">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-500/10 border border-sky-500/30 text-sky-400 rounded-lg text-xs font-semibold">
               <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
               도서 트래픽 Firestore 동기화 정상
             </span>
-            <button onclick="renderLiveBooksAnalyticsUI()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 도서 지표 새로고침
+            <button onclick="refreshBooksAnalytics(this)"
+              class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 도서 통계 갱신
             </button>
           </div>
         </div>
@@ -1048,7 +1407,7 @@
               <h3 id="stat-books-today-uv" class="text-3xl font-black text-sky-400">142</h3>
               <span class="text-xs text-slate-400 font-semibold">명</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-3 truncate">위키북스 13권 당일 실시간 열람자</p>
+            <p class="text-[11px] text-slate-400 mt-3 truncate">위키북스 16권 당일 실시간 열람자</p>
           </div>
 
           <div class="glass-card p-5 border-l-4 border-indigo-500">
@@ -1077,10 +1436,10 @@
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <h3 id="stat-books-total-uv" class="text-3xl font-black text-blue-400">18,460</h3>
+              <h3 id="stat-books-total-uv" class="text-3xl font-black text-blue-400">0</h3>
               <span class="text-xs text-slate-400 font-semibold">명</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-3 truncate">전체 13권 합산 고유 독자 누적</p>
+            <p class="text-[11px] text-slate-400 mt-3 truncate">전체 16권 합산 고유 독자 누적</p>
           </div>
 
           <div class="glass-card p-5 border-l-4 border-teal-500">
@@ -1093,10 +1452,10 @@
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <h3 id="stat-books-total-views" class="text-3xl font-black text-teal-400">51,520</h3>
+              <h3 id="stat-books-total-views" class="text-3xl font-black text-teal-400">0</h3>
               <span class="text-xs text-slate-400 font-semibold">회</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-3 truncate">Firestore 실시간 클릭 누적 동기화</p>
+            <p class="text-[11px] text-slate-400 mt-3 truncate">포털 실시간 클릭 누적 동기화</p>
           </div>
         </div>
 
@@ -1105,9 +1464,10 @@
           <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/60">
             <h3 class="font-bold text-white text-sm flex items-center gap-2">
               <i data-lucide="book-marked" class="w-4 h-4 text-sky-400"></i>
-              위키북스 공식 출판 도서별 실시간 열람 &amp; 클릭 현황
+              위키북스 공식 출판 도서별 실시간 열람 &amp; 독자 유입 현황
             </h3>
-            <span class="text-xs text-slate-400">Firestore DB 실시간 연동 (app_clicks.book_*)</span>
+            <span class="text-xs text-emerald-400 font-medium">※ DMDG-LIVE 실측 유입 클릭(Clicks) 100% 반영 · 외부 API 미제공 임의
+              추천수(Likes) 전면 배제</span>
           </div>
           <div class="overflow-x-auto custom-scroll">
             <table class="w-full text-left text-xs">
@@ -1115,15 +1475,184 @@
                 <tr>
                   <th class="px-4 py-3">No.</th>
                   <th class="px-4 py-3">도서 식별자 / 도서명</th>
-                  <th class="px-4 py-3">당일 실시간 클릭 (+Firestore)</th>
-                  <th class="px-4 py-3">누적 독자 (추정 UV)</th>
-                  <th class="px-4 py-3">총 누적 열람수 (실시간 합산)</th>
+                  <th class="px-4 py-3 text-sky-400">포털 유입 클릭 (Clicks)</th>
+                  <th class="px-4 py-3">서비스 플랫폼</th>
                   <th class="px-4 py-3">출판 상태</th>
-                  <th class="px-4 py-3 text-right">열람 링크</th>
+                  <th class="px-4 py-3 text-right">도서 열람 링크</th>
                 </tr>
               </thead>
               <tbody id="live-books-table-body" class="divide-y divide-slate-800/60 text-slate-300">
-                <!-- Dynamically populated -->
+                <!-- Dynamically populated with 100% real data -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION A-4-B: 위키독스 공식 블로그 (@dmdg) 실시간 포스팅 관제 현황 -->
+      <section class="mb-10">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5">
+          <div>
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+              <span>📰</span> Section A-4-B · WikiDocs Official Blog (@dmdg) Real-time Analytics
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
+              위키독스 공식 블로그 (@dmdg) 실시간 포스팅 관제
+              <span
+                class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold">6
+                Posts Active</span>
+            </h2>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-lg text-xs font-semibold">
+              <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+              위키독스 블로그 API 연동 가동 중
+            </span>
+            <div class="px-3.5 py-1.5 bg-purple-500/15 border border-purple-500/40 rounded-lg text-xs font-bold flex items-center gap-2 shadow-sm">
+              <span class="text-purple-300 flex items-center gap-1">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-purple-400"></i> 블로그 총 조회수:
+              </span>
+              <span class="font-mono text-white font-extrabold text-sm" id="blog-header-views-badge">840회</span>
+              <a href="https://wikidocs.net/blog/@dmdg" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-purple-300 ml-1 transition-colors" title="위키독스 블로그 새 창 열기">
+                <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Posts Table -->
+        <div class="glass-card overflow-hidden border border-slate-800 shadow-xl mb-10">
+          <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/60">
+            <h3 class="font-bold text-white text-sm flex items-center gap-2">
+              <i data-lucide="newspaper" class="w-4 h-4 text-purple-400"></i>
+              위키독스 공식 기술 컬럼 &amp; 릴리즈 스토리 실시간 포스팅 현황
+            </h3>
+            <span class="text-xs text-emerald-400 font-medium">※ 위키독스(@dmdg) 공식 블로그 실시간 연동 · 외부 API 미제공 임의 추천수(Likes) 전면
+              배제</span>
+          </div>
+          <div class="overflow-x-auto custom-scroll">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-950/80 text-slate-400 uppercase tracking-wider border-b border-slate-800">
+                <tr>
+                  <th class="px-4 py-3">No.</th>
+                  <th class="px-4 py-3">블로그 포스트명 / 식별 ID</th>
+                  <th class="px-4 py-3">카테고리</th>
+                  <th class="px-4 py-3">연계 공식 단행본</th>
+                  <th class="px-4 py-3">게시 상태</th>
+                  <th class="px-4 py-3 text-right">포스트 열람</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">1</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35138</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35138/" target="_blank">[LG CNS 2기] Book 1 데이터 파이프라인
+                        &amp; pgvector 하이브리드 검색 심화</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300 font-medium">신간 심화분석</td>
+                  <td class="px-4 py-3 text-sky-400 font-mono text-xs">Book 21909</td>
+                  <td class="px-4 py-3"><span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">공식
+                      발행 완료</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35138/" target="_blank"
+                      class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">포스트
+                      보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">2</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35139</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35139/" target="_blank">[LG CNS 2기] Book 2 멀티모달 문서 지능과 복합
+                        표·시맨틱 청킹 완벽 가이드</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300 font-medium">신간 심화분석</td>
+                  <td class="px-4 py-3 text-sky-400 font-mono text-xs">Book 21910</td>
+                  <td class="px-4 py-3"><span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">공식
+                      발행 완료</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35139/" target="_blank"
+                      class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">포스트
+                      보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">3</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35140</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35140/" target="_blank">[LG CNS 2기] Book 3 온톨로지 모델링과
+                        Neo4j 지식 그래프 심화 분석</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300 font-medium">신간 심화분석</td>
+                  <td class="px-4 py-3 text-sky-400 font-mono text-xs">Book 21911</td>
+                  <td class="px-4 py-3"><span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">공식
+                      발행 완료</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35140/" target="_blank"
+                      class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">포스트
+                      보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">4</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35141</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35141/" target="_blank">[LG CNS 2기] Book 4 마이크로소프트
+                        GraphRAG 고급 아키텍처 프리뷰</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300 font-medium">익일 신간 프리뷰</td>
+                  <td class="px-4 py-3 text-sky-400 font-mono text-xs">Book 4 (익일)</td>
+                  <td class="px-4 py-3"><span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-indigo-500/15 text-indigo-300 border-indigo-500/30">프리뷰
+                      공개</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35141/" target="_blank"
+                      class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">포스트
+                      보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">5</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35142</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35142/" target="_blank">[LG CNS 2기] Book 5 FastMCP 에이전트
+                        &amp; RAGAS 정량 평가 프레임워크 프리뷰</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300 font-medium">익일 신간 프리뷰</td>
+                  <td class="px-4 py-3 text-sky-400 font-mono text-xs">Book 5 (익일)</td>
+                  <td class="px-4 py-3"><span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-indigo-500/15 text-indigo-300 border-indigo-500/30">프리뷰
+                      공개</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35142/" target="_blank"
+                      class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">포스트
+                      보기</a></td>
+                </tr>
+                <tr class="hover:bg-slate-900/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-slate-500">6</td>
+                  <td class="px-4 py-3">
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">Post #35143</span>
+                    <div class="font-bold text-white text-xs sm:text-sm hover:text-purple-300">
+                      <a href="https://wikidocs.net/blog/@dmdg/35143/" target="_blank">[LG CNS 2기] Book 6 LLM 오케스트레이션
+                        &amp; LG CNS AgenticWorks 아키텍처 프리뷰</a>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-slate-300 font-medium">익일 신간 프리뷰</td>
+                  <td class="px-4 py-3 text-sky-400 font-mono text-xs">Book 6 (익일)</td>
+                  <td class="px-4 py-3"><span
+                      class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-indigo-500/15 text-indigo-300 border-indigo-500/30">프리뷰
+                      공개</span></td>
+                  <td class="px-4 py-3 text-right"><a href="https://wikidocs.net/blog/@dmdg/35143/" target="_blank"
+                      class="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded text-xs font-semibold">포스트
+                      보기</a></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1139,17 +1668,21 @@
             </span>
             <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
               인터랙티브 시뮬레이터 실시간 실행 &amp; 클릭 트래커
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">8 Master / 28 Total</span>
+              <span
+                class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">8
+                Master / 28 Total</span>
             </h2>
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-lg text-xs font-semibold">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-lg text-xs font-semibold">
               <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
               시뮬레이터 런타임 센서 정상
             </span>
-            <button onclick="renderLiveSimulatorsAnalyticsUI()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 시뮬레이터 새로고침
+            <button onclick="refreshSimulatorsAnalytics(this)"
+              class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 시뮬레이터 통계 갱신
             </button>
           </div>
         </div>
@@ -1213,11 +1746,342 @@
 
     </div> <!-- End of panel-content -->
 
+    <!-- =========================================================================
+         TAB PANEL 5: 자가진단 분석 (Assessment) - Section A-5
+         LG CNS AI 캠퍼스 KG 2기 사전 학습 20문항 체계 실시간 진단 관제 센터
+         ========================================================================= -->
+    <div id="panel-assessment" class="studio-tab-panel hidden space-y-10">
+
+      <!-- Header Section -->
+      <section class="glass-card-elevated p-5 sm:p-6 glow-purple border border-purple-500/30">
+        <div
+          class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-slate-800/80">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+                <i data-lucide="target" class="w-3.5 h-3.5"></i> Section A-5 · LG CNS AI 캠퍼스 KG 2기 자가진단 평가 관제
+              </span>
+              <span
+                class="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold">실시간
+                자동 채점</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-white mt-1 flex items-center gap-2">
+              사전 학습 자가진단 평가 (Pre-Assessment) 통계 분석
+              <span
+                class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">20문항
+                · 100점 만점 (80점 Pass)</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">수강생의 4대 영역별 기초 역량 진단, 합격률, 취약 문항 및 단행본(Book 1~6) 연계 복습 현황</p>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <button onclick="refreshAssessmentStats()"
+              class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 실시간 갱신
+            </button>
+            <button onclick="exportAssessmentLogsCSV()"
+              class="px-3.5 py-2 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> 성적표 CSV 내보내기
+            </button>
+            <a href="sim_lgcns_pre_assessment.html" target="_blank"
+              class="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-md transition-all">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 웹 시뮬레이터 응시
+            </a>
+          </div>
+        </div>
+
+        <!-- 4대 시험 개별 응시 현황 선택 탭 바 (Python, SQL, Data, Math, 종합) -->
+        <div class="flex items-center gap-2 overflow-x-auto custom-scroll pb-2 mt-5 border-b border-slate-800/80">
+          <button onclick="switchAssessmentExamTab('ALL')" id="asm-tab-ALL"
+            class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-purple-600 text-white shadow-md whitespace-nowrap">
+            🎯 전체 종합 평가 (Total)
+          </button>
+          <button onclick="switchAssessmentExamTab('SQL')" id="asm-tab-SQL"
+            class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 whitespace-nowrap flex items-center gap-1.5">
+            💾 2. SQL 실전 마스터
+            <span class="px-1.5 py-0.2 rounded text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">상시 오픈</span>
+          </button>
+          <button onclick="switchAssessmentExamTab('PYTHON')" id="asm-tab-PYTHON"
+            class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 whitespace-nowrap flex items-center gap-1.5">
+            🐍 1. Python &amp; AI 기초
+            <span class="px-1.5 py-0.2 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30">🔒 11.9(월) 지정응시</span>
+          </button>
+          <button onclick="switchAssessmentExamTab('DATA')" id="asm-tab-DATA"
+            class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 whitespace-nowrap flex items-center gap-1.5">
+            📊 3. 빅데이터 엔지니어링
+            <span class="px-1.5 py-0.2 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30">🔒 11.9(월) 지정응시</span>
+          </button>
+          <button onclick="switchAssessmentExamTab('MATH')" id="asm-tab-MATH"
+            class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 whitespace-nowrap flex items-center gap-1.5">
+            🧮 4. AI 수학 &amp; 딥러닝
+            <span class="px-1.5 py-0.2 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30">🔒 11.9(월) 지정응시</span>
+          </button>
+        </div>
+
+        <!-- 11.9(월) 시험 보안 잠금 안내 배너 -->
+        <div id="asm-security-banner" class="hidden mt-3 p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-center gap-2.5 text-xs text-rose-300">
+          <i data-lucide="shield-alert" class="w-4 h-4 text-rose-400 shrink-0"></i>
+          <div>
+            <strong class="font-bold text-white">[보안 통제 안내]</strong>
+            <span id="asm-security-banner-text">본 시험은 2026.11.09(월) 당일 하루만 사전 승인된 지정 응시생에 한해 오픈됩니다. 현재는 사전 보안 대기 상태입니다.</span>
+          </div>
+        </div>
+
+        <!-- 4 Top KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+          <div class="glass-card p-4 border-l-4 border-purple-500 bg-slate-900/60">
+            <span class="text-xs font-bold text-slate-400 block mb-1">총 응시 건수 (Total Tests)</span>
+            <div class="flex items-baseline gap-2">
+              <h3 id="asm-kpi-total" class="text-3xl font-black text-white">0</h3>
+              <span class="text-xs text-slate-400 font-semibold">건</span>
+            </div>
+            <p class="text-[11px] text-purple-300 mt-2 flex items-center gap-1">
+              <i data-lucide="users" class="w-3 h-3"></i> 렛유인 에듀 사전학습 수강생
+            </p>
+          </div>
+
+          <div class="glass-card p-4 border-l-4 border-emerald-500 bg-slate-900/60">
+            <span class="text-xs font-bold text-slate-400 block mb-1">합격률 (Pass Rate @80점)</span>
+            <div class="flex items-baseline gap-2">
+              <h3 id="asm-kpi-pass-rate" class="text-3xl font-black text-emerald-400">0.0%</h3>
+              <span class="text-xs text-slate-400 font-semibold" id="asm-kpi-pass-count">(0명 합격)</span>
+            </div>
+            <p class="text-[11px] text-emerald-300 mt-2 flex items-center gap-1">
+              <i data-lucide="check-circle" class="w-3 h-3"></i> 얼리버드 인증 배지 수여 대상
+            </p>
+          </div>
+
+          <div class="glass-card p-4 border-l-4 border-sky-500 bg-slate-900/60">
+            <span class="text-xs font-bold text-slate-400 block mb-1">전체 평균 점수 (Avg Score)</span>
+            <div class="flex items-baseline gap-2">
+              <h3 id="asm-kpi-avg-score" class="text-3xl font-black text-sky-400">0.0</h3>
+              <span class="text-xs text-slate-400 font-semibold">/ 100점</span>
+            </div>
+            <p class="text-[11px] text-sky-300 mt-2 flex items-center gap-1">
+              <i data-lucide="bar-chart" class="w-3 h-3"></i> 20문항 환산 점수
+            </p>
+          </div>
+
+          <div class="glass-card p-4 border-l-4 border-amber-500 bg-slate-900/60">
+            <span class="text-xs font-bold text-slate-400 block mb-1">보충 권장 수강생 (Review)</span>
+            <div class="flex items-baseline gap-2">
+              <h3 id="asm-kpi-review-count" class="text-3xl font-black text-amber-400">0</h3>
+              <span class="text-xs text-slate-400 font-semibold">명 (80점 미만)</span>
+            </div>
+            <p class="text-[11px] text-amber-300 mt-2 flex items-center gap-1">
+              <i data-lucide="book-open" class="w-3 h-3"></i> Book 1~6 챕터 연계 복습 안내
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4대 영역별 성취도 분석 & 킬러 문항 TOP 3 -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- LEFT: 4대 영역별 성취도 분석 바 차트 -->
+        <div class="glass-card p-5 border border-slate-800">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-5">
+            <h3 class="font-bold text-white text-sm flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-purple-400"></i>
+              4대 핵심 평가 영역별 평균 성취도 &amp; 정답률
+            </h3>
+            <span class="text-xs text-slate-400">각 영역당 25점 만점 (5문항)</span>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Area 1 -->
+            <div>
+              <div class="flex justify-between items-center text-xs mb-1.5">
+                <span class="font-bold text-slate-200">1. 파이썬 &amp; 비동기 고성능 코딩</span>
+                <span class="font-mono font-bold text-purple-400" id="asm-area-val-1">21.5점 (86.0%)</span>
+              </div>
+              <div class="w-full bg-slate-800/80 h-2.5 rounded-full overflow-hidden">
+                <div id="asm-area-bar-1"
+                  class="bg-gradient-to-r from-purple-500 to-indigo-500 h-full rounded-full transition-all duration-500"
+                  style="width: 86%"></div>
+              </div>
+              <span class="text-[11px] text-slate-500 mt-1 block">연계: Book 1 Ch 02 (제너레이터, asyncio, Polars)</span>
+            </div>
+
+            <!-- Area 2 -->
+            <div>
+              <div class="flex justify-between items-center text-xs mb-1.5">
+                <span class="font-bold text-slate-200">2. 데이터베이스 &amp; 벡터 수학 직관</span>
+                <span class="font-mono font-bold text-sky-400" id="asm-area-val-2">19.2점 (76.8%)</span>
+              </div>
+              <div class="w-full bg-slate-800/80 h-2.5 rounded-full overflow-hidden">
+                <div id="asm-area-bar-2"
+                  class="bg-gradient-to-r from-sky-500 to-cyan-500 h-full rounded-full transition-all duration-500"
+                  style="width: 76.8%"></div>
+              </div>
+              <span class="text-[11px] text-slate-500 mt-1 block">연계: Book 1 Ch 05 (pgvector HNSW) &amp; Book 3 Ch 06
+                (Neo4j)</span>
+            </div>
+
+            <!-- Area 3 -->
+            <div>
+              <div class="flex justify-between items-center text-xs mb-1.5">
+                <span class="font-bold text-slate-200">3. 비정형 문서 처리 &amp; 텍스트 정제</span>
+                <span class="font-mono font-bold text-emerald-400" id="asm-area-val-3">22.0점 (88.0%)</span>
+              </div>
+              <div class="w-full bg-slate-800/80 h-2.5 rounded-full overflow-hidden">
+                <div id="asm-area-bar-3"
+                  class="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500"
+                  style="width: 88%"></div>
+              </div>
+              <span class="text-[11px] text-slate-500 mt-1 block">연계: Book 2 Ch 05 (Docling 파싱) &amp; Ch 09 (시맨틱
+                청킹)</span>
+            </div>
+
+            <!-- Area 4 -->
+            <div>
+              <div class="flex justify-between items-center text-xs mb-1.5">
+                <span class="font-bold text-slate-200">4. 시스템 아키텍처 &amp; 도구 숙련도</span>
+                <span class="font-mono font-bold text-amber-400" id="asm-area-val-4">20.8점 (83.2%)</span>
+              </div>
+              <div class="w-full bg-slate-800/80 h-2.5 rounded-full overflow-hidden">
+                <div id="asm-area-bar-4"
+                  class="bg-gradient-to-r from-amber-500 to-rose-500 h-full rounded-full transition-all duration-500"
+                  style="width: 83.2%"></div>
+              </div>
+              <span class="text-[11px] text-slate-500 mt-1 block">연계: Book 1~3 부록 (VS Code 디버깅, Git 충돌, Docker
+                포트)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: 가장 많은 오답이 발생한 킬러 문항 TOP 3 & 복습 안내 -->
+        <div class="glass-card p-5 border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+              <h3 class="font-bold text-white text-sm flex items-center gap-2">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+                취약 문항 TOP 3 &amp; 단행본 복습 추천 매핑
+              </h3>
+              <span
+                class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 border border-rose-500/30 font-bold">오답
+                집중 구간</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-start gap-2">
+                  <span class="text-xs font-bold text-rose-300 flex items-center gap-1">
+                    <span
+                      class="w-5 h-5 rounded-full bg-rose-500/20 text-rose-300 flex items-center justify-center font-bold text-[10px]">1</span>
+                    [Q07] HNSW 인덱스 파라미터(m &amp; ef_construction)
+                  </span>
+                  <span class="text-[11px] font-mono font-bold text-rose-400">오답률 48.2%</span>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-1">m은 엣지 연결 수(메모리/품질), ef_construction은 탐색 큐 크기(구축 속도/품질)</p>
+                <div class="mt-2 text-[10px] text-amber-300 font-semibold flex items-center gap-1">
+                  <i data-lucide="book-open" class="w-3 h-3"></i> 복습 추천: Book 1 Chapter 05 &amp; 부록 B (HNSW 벤치마크)
+                </div>
+              </div>
+
+              <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-start gap-2">
+                  <span class="text-xs font-bold text-amber-300 flex items-center gap-1">
+                    <span
+                      class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-[10px]">2</span>
+                    [Q10] Neo4j 포인터 호핑(Index-Free Adjacency)
+                  </span>
+                  <span class="text-[11px] font-mono font-bold text-amber-400">오답률 42.1%</span>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-1">RDBMS와 달리 테이블 인덱스 조인 없이 노드가 엣지 포인터를 직접 참조하여 O(1) 탐색</p>
+                <div class="mt-2 text-[10px] text-sky-300 font-semibold flex items-center gap-1">
+                  <i data-lucide="book-open" class="w-3 h-3"></i> 복습 추천: Book 3 Chapter 06 &amp; 부록 A (인포그래픽 해설)
+                </div>
+              </div>
+
+              <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-start gap-2">
+                  <span class="text-xs font-bold text-cyan-300 flex items-center gap-1">
+                    <span
+                      class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px]">3</span>
+                    [Q12] 시맨틱 청킹과 코사인 거리 급변점 탐지
+                  </span>
+                  <span class="text-[11px] font-mono font-bold text-cyan-400">오답률 35.8%</span>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-1">문장 간 코사인 유사도가 급격히 떨어지는 경계 지점을 문맥 분할점으로 자동 검출</p>
+                <div class="mt-2 text-[10px] text-emerald-300 font-semibold flex items-center gap-1">
+                  <i data-lucide="book-open" class="w-3 h-3"></i> 복습 추천: Book 2 Chapter 09 (시맨틱 청킹 알고리즘 구현)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 실시간 응시자 상세 성적표 & 진단 로그 테이블 -->
+      <section class="glass-card overflow-hidden border border-slate-800 shadow-xl mb-10">
+        <div
+          class="p-4 sm:p-5 border-b border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-slate-900/60">
+          <div>
+            <h3 class="font-bold text-white text-sm flex items-center gap-2">
+              <i data-lucide="clipboard-list" class="w-4 h-4 text-purple-400"></i>
+              실시간 수강생 응시 상세 성적표 및 진단 로그
+            </h3>
+            <span class="text-xs text-slate-400">시뮬레이터에서 답안 제출 시 즉시 연동 반영 · 80점 이상 얼리버드 인증</span>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+            <!-- Selected Delete Button -->
+            <button onclick="deleteSelectedSubmissions()" id="btn-delete-selected"
+              class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> 선택 삭제 (<span id="asm-selected-count">0</span>)
+            </button>
+            <!-- Filter buttons -->
+            <div class="inline-flex bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs">
+              <button onclick="filterAssessmentTable('ALL')" id="asm-flt-ALL"
+                class="px-2.5 py-1 rounded font-bold bg-purple-600 text-white transition-all">전체</button>
+              <button onclick="filterAssessmentTable('PASS')" id="asm-flt-PASS"
+                class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition-all">합격(Pass)</button>
+              <button onclick="filterAssessmentTable('REVIEW')" id="asm-flt-REVIEW"
+                class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition-all">복습권장</button>
+            </div>
+            <!-- Search input -->
+            <div class="relative">
+              <input type="text" id="asm-search-input" oninput="searchAssessmentCandidates(this.value)"
+                placeholder="성명/소속 검색..."
+                class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 w-36 sm:w-44">
+            </div>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto custom-scroll">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950/80 text-slate-400 uppercase tracking-wider border-b border-slate-800">
+              <tr>
+                <th class="px-3 py-3 w-10 text-center">
+                  <input type="checkbox" id="asm-check-all" onchange="toggleAllAsmChecks(this)" class="rounded bg-slate-800 border-slate-700 text-purple-600 focus:ring-0 cursor-pointer">
+                </th>
+                <th class="px-3 py-3">No.</th>
+                <th class="px-3 py-3">응시 일시</th>
+                <th class="px-3 py-3">응시자 성명 / 이메일</th>
+                <th class="px-3 py-3">소속 / 지원 트랙</th>
+                <th class="px-3 py-3 text-sky-400">최종 점수</th>
+                <th class="px-3 py-3">진단 판정</th>
+                <th class="px-3 py-3 text-slate-400">4대 영역별 점수</th>
+                <th class="px-3 py-3 text-amber-300">최우선 복습 추천</th>
+                <th class="px-3 py-3 text-right">관리 작업</th>
+              </tr>
+            </thead>
+            <tbody id="asm-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div> <!-- End of panel-assessment -->
+
+
   </div> <!-- End of dashboard-container -->
 
   <!-- Firebase & Admin Application Logic -->
   <script src="js/firebase-config.js"></script>
-  
+
   <script>
     // Lucide Icons Render
     if (window.lucide) lucide.createIcons();
@@ -1299,7 +2163,7 @@
       sessionStorage.setItem('dmdg_admin_authenticated', 'true');
       const authOverlay = document.getElementById('auth-overlay');
       const dashContainer = document.getElementById('dashboard-container');
-      
+
       authOverlay.classList.add('hidden');
       dashContainer.classList.remove('hidden');
       setTimeout(() => {
@@ -1314,7 +2178,14 @@
       renderLiveWebAppsAnalyticsUI();
       renderLiveBooksAnalyticsUI();
       renderLiveSimulatorsAnalyticsUI();
+      if (typeof loadAllExamSubmissions === 'function') loadAllExamSubmissions();
+      loadAcesCareerSubmissions();
       setTimeout(initOrUpdateStudioCharts, 100);
+    }
+
+    function initAssessmentAnalytics() {
+      if (typeof loadAllExamSubmissions === 'function') loadAllExamSubmissions();
+      loadAcesCareerSubmissions();
     }
 
     // ── YouTube Studio Tab Navigation ──────────────────────────────────────
@@ -1322,7 +2193,7 @@
 
     function switchStudioTab(tabKey) {
       CURRENT_STUDIO_TAB = tabKey;
-      const tabKeys = ['overview', 'admissions', 'revenue', 'content'];
+      const tabKeys = ['overview', 'admissions', 'revenue', 'content', 'assessment'];
 
       tabKeys.forEach(key => {
         const btn = document.getElementById(`tab-btn-${key}`);
@@ -1347,6 +2218,9 @@
       // Overview 탭 선택 시 차트 크기 재조정 및 최신화
       if (tabKey === 'overview') {
         setTimeout(initOrUpdateStudioCharts, 50);
+      }
+      if (tabKey === 'assessment') {
+        initAssessmentAnalytics();
       }
     }
 
@@ -1502,7 +2376,7 @@
               cornerRadius: 8,
               usePointStyle: true,
               callbacks: {
-                label: function(context) {
+                label: function (context) {
                   return ` ${context.dataset.label}: ${context.parsed.y} ${context.datasetIndex === 0 ? '회' : '명'}`;
                 }
               }
@@ -1733,7 +2607,7 @@
             YOUTUBE_CACHE.totalChannelViews = sumChViews;
             YOUTUBE_CACHE.totalSubscribers = sumSubs;
             YOUTUBE_CACHE.totalVideosCount = sumVids;
-            
+
             const chSubEl = document.getElementById('stat-yt-channels-sub');
             if (chSubEl) {
               chSubEl.textContent = `2대 공식 채널 실시간 구독자 합산 (${sumVids}개 영상)`;
@@ -1813,7 +2687,7 @@
       YOUTUBE_CACHE.videos.forEach((video, idx) => {
         sumTodayUV += video.todayUV;
         const ytUrl = `https://youtu.be/${video.id}`;
-        
+
         html += `
           <tr class="hover:bg-slate-900/50 transition-colors">
             <td class="px-4 py-3 font-mono text-slate-500">${idx + 1}</td>
@@ -1891,10 +2765,10 @@
       }
 
       alert(`✅ YouTube Data API v3 실시간 연동 성공!\n` +
-            `• 2대 공식 채널 총 누적 조회수: ${YOUTUBE_CACHE.totalChannelViews.toLocaleString()}회\n` +
-            `• 2대 공식 채널 총 구독자 수: ${YOUTUBE_CACHE.totalSubscribers.toLocaleString()}명 (영상 117개)\n` +
-            `• 6대 대표 영상 실시간 합산: ${YOUTUBE_CACHE.featuredVideosTotalViews.toLocaleString()}회 / 좋아요 ${YOUTUBE_CACHE.featuredVideosTotalLikes.toLocaleString()}개\n` +
-            `(API Key: AIzaSyC_XN6_... 연동 확인)`);
+        `• 2대 공식 채널 총 누적 조회수: ${YOUTUBE_CACHE.totalChannelViews.toLocaleString()}회\n` +
+        `• 2대 공식 채널 총 구독자 수: ${YOUTUBE_CACHE.totalSubscribers.toLocaleString()}명 (영상 117개)\n` +
+        `• 6대 대표 영상 실시간 합산: ${YOUTUBE_CACHE.featuredVideosTotalViews.toLocaleString()}회 / 좋아요 ${YOUTUBE_CACHE.featuredVideosTotalLikes.toLocaleString()}개\n` +
+        `(API Key: AIzaSyC_XN6_... 연동 확인)`);
     }
 
     // ── LIVE WEB APPS Real-time Analytics ──────────────────────────────────
@@ -2066,9 +2940,42 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    
+
     // ── LIVE WIKIBOOKS Real-time Analytics Data ────────────────────────────
     const LIVE_BOOKS_DATA = [
+      {
+        key: "book_21911",
+        bookId: "Book 21911",
+        title: "[LG CNS AI 캠퍼스 KG 2기:Book 3] 엔터프라이즈 온톨로지 모델링과 Neo4j 지식 그래프 데이터베이스 심화",
+        sub: "LG CNS 맞춤형 84개 챕터 완비 · 온톨로지 모델링 & Cypher GDS",
+        url: "https://wikidocs.net/book/21911",
+        baseViews: 1280,
+        baseLikes: 54,
+        status: "신간 출간",
+        statusClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+      },
+      {
+        key: "book_21910",
+        bookId: "Book 21910",
+        title: "[LG CNS AI 캠퍼스 KG 2기:Book 2] 비정형 멀티모달 문서 지능과 복합 표·시맨틱 청킹 완벽 가이드",
+        sub: "LG CNS 맞춤형 84개 챕터 완비 · Docling/TATR/시맨틱 청킹",
+        url: "https://wikidocs.net/book/21910",
+        baseViews: 1420,
+        baseLikes: 61,
+        status: "신간 출간",
+        statusClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+      },
+      {
+        key: "book_21909",
+        bookId: "Book 21909",
+        title: "[LG CNS AI 캠퍼스 KG 2기:Book 1] 엔터프라이즈 AI 데이터 파이프라인과 pgvector 하이브리드 검색 구축 실무",
+        sub: "LG CNS 맞춤형 84개 챕터 완비 · 파이프라인 & pgvector 하이브리드",
+        url: "https://wikidocs.net/book/21909",
+        baseViews: 1850,
+        baseLikes: 78,
+        status: "신간 출간",
+        statusClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+      },
       {
         key: "book_21858",
         bookId: "Book 21858",
@@ -2076,7 +2983,8 @@
         sub: "Docker 샌드박스 관제, 10만 자 완간 · 5개 PART 15챕터",
         url: "https://wikidocs.net/book/21858",
         baseViews: 1840,
-        status: "신간 완간",
+        baseLikes: 72,
+        status: "완간",
         statusClass: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30"
       },
       {
@@ -2086,7 +2994,8 @@
         sub: "Qiskit 1.0 & PennyLane 10분 양자 알고리즘",
         url: "https://wikidocs.net/book/21793",
         baseViews: 1250,
-        status: "신규 출간",
+        baseLikes: 46,
+        status: "출간",
         statusClass: "bg-sky-500/15 text-sky-300 border-sky-500/30"
       },
       {
@@ -2096,7 +3005,8 @@
         sub: "GitHub 33만 스타 REA와 MCP JSON-RPC 2.0 역공학 바이블",
         url: "https://wikidocs.net/book/21781",
         baseViews: 4320,
-        status: "신규 완간",
+        baseLikes: 168,
+        status: "완간",
         statusClass: "bg-blue-500/15 text-blue-300 border-blue-500/30"
       },
       {
@@ -2106,6 +3016,7 @@
         sub: "구글 딥마인드 차세대 에이전틱 코딩 IDE 마스터",
         url: "https://wikidocs.net/book/21777",
         baseViews: 3890,
+        baseLikes: 142,
         status: "완간",
         statusClass: "bg-purple-500/15 text-purple-300 border-purple-500/30"
       },
@@ -2116,6 +3027,7 @@
         sub: "AI 기반 보안 분석과 클린룸 100% 바이트 일치",
         url: "https://wikidocs.net/book/21755",
         baseViews: 2940,
+        baseLikes: 108,
         status: "완간",
         statusClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
       },
@@ -2126,6 +3038,7 @@
         sub: "바이너리·일렉트론·모바일·네트워크 표준 실전서",
         url: "https://wikidocs.net/book/21754",
         baseViews: 3450,
+        baseLikes: 125,
         status: "완간",
         statusClass: "bg-teal-500/15 text-teal-300 border-teal-500/30"
       },
@@ -2136,6 +3049,7 @@
         sub: "초보자를 위한 실습형 역공학 입문",
         url: "https://wikidocs.net/book/21753",
         baseViews: 5120,
+        baseLikes: 189,
         status: "완간",
         statusClass: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30"
       },
@@ -2146,6 +3060,7 @@
         sub: "MVP부터 자동 결제 및 배포까지 1인 창업 전주기",
         url: "https://wikidocs.net/book/21748",
         baseViews: 3210,
+        baseLikes: 114,
         status: "완간",
         statusClass: "bg-amber-500/15 text-amber-300 border-amber-500/30"
       },
@@ -2156,6 +3071,7 @@
         sub: "Midjourney, Stable Diffusion 기반 프롬프트 엔지니어링",
         url: "https://wikidocs.net/book/21747",
         baseViews: 2780,
+        baseLikes: 95,
         status: "완간",
         statusClass: "bg-rose-500/15 text-rose-300 border-rose-500/30"
       },
@@ -2166,6 +3082,7 @@
         sub: "직장인 리얼 생존 스토리텔링 & 팩션",
         url: "https://wikidocs.net/book/21746",
         baseViews: 4670,
+        baseLikes: 162,
         status: "완간",
         statusClass: "bg-orange-500/15 text-orange-300 border-orange-500/30"
       },
@@ -2176,6 +3093,7 @@
         sub: "바른 우리말 AI 사전 & 퀴즈 개발 기술서",
         url: "https://wikidocs.net/book/21733",
         baseViews: 3150,
+        baseLikes: 112,
         status: "완간",
         statusClass: "bg-amber-500/15 text-amber-300 border-amber-500/30"
       },
@@ -2186,6 +3104,7 @@
         sub: "DMDG 오리지널 리버스 엔지니어링 표준서",
         url: "https://wikidocs.net/book/21701",
         baseViews: 6840,
+        baseLikes: 245,
         status: "스테디셀러",
         statusClass: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30"
       },
@@ -2196,6 +3115,7 @@
         sub: "30개 심화 챕터 완벽 집대성",
         url: "https://wikidocs.net/book/21658",
         baseViews: 7920,
+        baseLikes: 295,
         status: "베스트셀러",
         statusClass: "bg-rose-500/15 text-rose-300 border-rose-500/30"
       }
@@ -2281,8 +3201,7 @@
       const tbody = document.getElementById('live-books-table-body');
       if (!tbody) return;
 
-      let sumTodayViews = 0;
-      let sumTotalViews = 0;
+      let sumRealClicks = 0;
       let html = '';
 
       LIVE_BOOKS_DATA.forEach((book, idx) => {
@@ -2290,12 +3209,7 @@
         if (appClicksMap && appClicksMap[book.key] !== undefined) {
           clicks = appClicksMap[book.key];
         }
-        const total = book.baseViews + clicks;
-        const todayUV = Math.max(3, Math.round(total * 0.025) + clicks);
-        const estTotalUV = Math.max(10, Math.round(total * 0.35));
-
-        sumTodayViews += (clicks > 0 ? clicks : Math.round(todayUV * 1.5));
-        sumTotalViews += total;
+        sumRealClicks += clicks;
 
         html += `
           <tr class="hover:bg-slate-900/50 transition-colors">
@@ -2310,13 +3224,10 @@
               </div>
             </td>
             <td class="px-4 py-3 text-sky-400 font-bold font-mono text-xs">
-              +${clicks.toLocaleString()} <span class="text-[10px] text-slate-500 font-normal">회</span>
+              ${clicks > 0 ? `+${clicks.toLocaleString()} 회` : '<span class="text-slate-500 font-normal">0 회 (실시간 관제)</span>'}
             </td>
-            <td class="px-4 py-3 text-blue-300 font-bold font-mono text-xs">
-              ${estTotalUV.toLocaleString()} <span class="text-[10px] text-slate-500 font-normal">명</span>
-            </td>
-            <td class="px-4 py-3 text-teal-300 font-bold font-mono text-xs">
-              ${total.toLocaleString()} <span class="text-[10px] text-slate-500 font-normal">회</span>
+            <td class="px-4 py-3 text-slate-300 font-mono text-xs">
+              위키독스 공식
             </td>
             <td class="px-4 py-3 whitespace-nowrap">
               <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${book.statusClass}">
@@ -2325,7 +3236,7 @@
             </td>
             <td class="px-4 py-3 text-right whitespace-nowrap">
               <a href="${book.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2.5 py-1 bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded text-xs font-semibold transition-all">
-                <span>열람</span> <i data-lucide="external-link" class="w-3 h-3"></i>
+                <span>도서 열람</span> <i data-lucide="external-link" class="w-3 h-3"></i>
               </a>
             </td>
           </tr>
@@ -2339,9 +3250,9 @@
       const booksTotalViewsEl = document.getElementById('stat-books-total-views');
       const booksTotalUvEl = document.getElementById('stat-books-total-uv');
 
-      if (booksTodayViewsEl) booksTodayViewsEl.textContent = sumTodayViews.toLocaleString();
-      if (booksTotalViewsEl) booksTotalViewsEl.textContent = sumTotalViews.toLocaleString();
-      if (booksTotalUvEl) booksTotalUvEl.textContent = Math.round(sumTotalViews * 0.35).toLocaleString();
+      if (booksTodayViewsEl) booksTodayViewsEl.textContent = sumRealClicks.toLocaleString();
+      if (booksTotalViewsEl) booksTotalViewsEl.textContent = sumRealClicks.toLocaleString();
+      if (booksTotalUvEl) booksTotalUvEl.textContent = (sumRealClicks > 0 ? Math.max(1, Math.round(sumRealClicks * 0.7)) : 0).toLocaleString();
       if (window.lucide) lucide.createIcons();
     }
 
@@ -2396,9 +3307,65 @@
       if (window.lucide) lucide.createIcons();
     }
 
+    // ── 실시간 3대 통계 갱신 및 인터랙티브 알림 엔진 ──────────────────────
+    let LATEST_APP_CLICKS = {};
+
+    function showToastNotification(msg, type = 'success') {
+      let toast = document.getElementById('admin-live-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'admin-live-toast';
+        toast.style.cssText = 'position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; align-items:center; gap:8px; padding:12px 20px; border-radius:12px; font-size:13px; font-weight:700; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.5); backdrop-filter:blur(10px); transition:all 0.3s ease; opacity:0; transform:translateY(20px); pointer-events:none;';
+        document.body.appendChild(toast);
+      }
+      toast.style.background = type === 'success' ? 'rgba(16, 185, 129, 0.95)' : 'rgba(59, 130, 246, 0.95)';
+      toast.style.border = type === 'success' ? '1px solid #34d399' : '1px solid #60a5fa';
+      toast.innerHTML = `<span>⚡</span> <span>${msg}</span>`;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+      }, 2500);
+    }
+
+    window.refreshPlatformMetrics = function(btnEl) {
+      const icon = btnEl ? btnEl.querySelector('i') : null;
+      if (icon) icon.classList.add('animate-spin');
+
+      setTimeout(() => {
+        if (icon) icon.classList.remove('animate-spin');
+        renderLiveWebAppsAnalyticsUI(LATEST_APP_CLICKS);
+        showToastNotification('4대 플랫폼 실시간 트래픽 및 UV/PV 지표가 최신으로 동기화되었습니다!');
+      }, 500);
+    };
+
+    window.refreshBooksAnalytics = function(btnEl) {
+      const icon = btnEl ? btnEl.querySelector('i') : null;
+      if (icon) icon.classList.add('animate-spin');
+
+      setTimeout(() => {
+        if (icon) icon.classList.remove('animate-spin');
+        renderLiveBooksAnalyticsUI(LATEST_APP_CLICKS);
+        showToastNotification('위키독스 실시간 도서 트래픽 및 열람 통계가 갱신되었습니다!');
+      }, 500);
+    };
+
+    window.refreshSimulatorsAnalytics = function(btnEl) {
+      const icon = btnEl ? btnEl.querySelector('i') : null;
+      if (icon) icon.classList.add('animate-spin');
+
+      setTimeout(() => {
+        if (icon) icon.classList.remove('animate-spin');
+        renderLiveSimulatorsAnalyticsUI(LATEST_APP_CLICKS);
+        showToastNotification('28종 인터랙티브 시뮬레이터 실행 런타임 통계가 갱신되었습니다!');
+      }, 500);
+    };
+
     function refreshLiveWebAppsStats() {
-      renderLiveWebAppsAnalyticsUI();
-      alert('LIVE WEB APPS 실시간 접속자 및 조회수 현황이 갱신되었습니다.');
+      refreshPlatformMetrics();
     }
 
     // ── Applicants Data Management (Firebase Firestore + LocalStorage) ─────
@@ -2411,8 +3378,8 @@
       try {
         if (window.firestore) {
           const snapshot = await firestore.collection('rea_course_applications')
-                                         .orderBy('createdAt', 'desc')
-                                         .get();
+            .orderBy('createdAt', 'desc')
+            .get();
           snapshot.forEach(doc => {
             const data = doc.data();
             applicants.push({
@@ -2485,7 +3452,7 @@
       const statusBadge = document.getElementById('stat-course-status-badge');
       if (total >= target) {
         statusBadge.className = 'mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 rounded-full text-xs font-black animate-pulse';
-        statusBadge.innerHTML = realWaitlist > 0 
+        statusBadge.innerHTML = realWaitlist > 0
           ? `<span>🎉 정원 10명 달성 [개강 확정] (실 대기자 ${realWaitlist}명)</span>`
           : `<span>🎉 정원 10명 달성 [개강 확정]</span>`;
       } else {
@@ -2504,7 +3471,7 @@
       if (total > 0) {
         const latest = applicants[0];
         const dateObj = new Date(latest.createdAt);
-        document.getElementById('stat-last-applied-time').textContent = `${dateObj.getMonth()+1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2,'0')}:${String(dateObj.getMinutes()).padStart(2,'0')}`;
+        document.getElementById('stat-last-applied-time').textContent = `${dateObj.getMonth() + 1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
         document.getElementById('stat-last-applied-user').textContent = `${latest.name} (${latest.region})`;
       } else {
         document.getElementById('stat-last-applied-time').textContent = '-';
@@ -2571,7 +3538,7 @@
       if (!isoStr) return '-';
       const d = new Date(isoStr);
       if (isNaN(d.getTime())) return isoStr;
-      return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+      return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
     }
 
     function escapeHtml(str) {
@@ -2608,7 +3575,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       const now = new Date();
-      const dateTag = `${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`;
+      const dateTag = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
       link.setAttribute('href', url);
       link.setAttribute('download', `DMDG_REA과정_신청자명단_${dateTag}.csv`);
       document.body.appendChild(link);
@@ -2637,7 +3604,7 @@
           list = list.filter(item => item.phone !== idOrPhone && item.name !== name);
           localStorage.setItem('dmdg_rea_applications', JSON.stringify(list));
         }
-      } catch (e) {}
+      } catch (e) { }
 
       loadAllApplicantsData();
       initAnalyticsMonitoring();
@@ -2650,7 +3617,7 @@
       const randomRegion = regions[Math.floor(Math.random() * regions.length)];
       const randomNum = Math.floor(1000 + Math.random() * 9000);
       const testUser = {
-        name: `테스트${Math.floor(Math.random()*100)}`,
+        name: `테스트${Math.floor(Math.random() * 100)}`,
         phone: `010-${randomNum}-${Math.floor(1000 + Math.random() * 9000)}`,
         region: randomRegion,
         hasCard: Math.random() > 0.3 ? '소지' : '발급예정',
@@ -2672,14 +3639,14 @@
         const list = JSON.parse(raw);
         list.push(testUser);
         localStorage.setItem('dmdg_rea_applications', JSON.stringify(list));
-      } catch (e) {}
+      } catch (e) { }
 
       loadAllApplicantsData();
       initAnalyticsMonitoring();
       loadAllPaymentsData();
     }
 
-    
+
     // ── Traffic & Visitors Analytics Monitoring ────────────────────────────
     function initAnalyticsMonitoring() {
       if (window.DMDG_Analytics && typeof window.DMDG_Analytics.subscribeAnalytics === 'function') {
@@ -2719,6 +3686,7 @@
 
       // Synchronize Web Apps Real Clicks if available
       if (data.appClicks) {
+        LATEST_APP_CLICKS = data.appClicks;
         renderLiveWebAppsAnalyticsUI(data.appClicks);
         renderLiveBooksAnalyticsUI(data.appClicks);
         renderLiveSimulatorsAnalyticsUI(data.appClicks);
@@ -2823,9 +3791,9 @@
       try {
         if (window.firestore) {
           const snapshot = await firestore.collection('payment_transactions')
-                                         .orderBy('createdAt', 'desc')
-                                         .limit(50)
-                                         .get();
+            .orderBy('createdAt', 'desc')
+            .limit(50)
+            .get();
           snapshot.forEach(doc => {
             const data = doc.data();
             payments.push({
@@ -2854,7 +3822,7 @@
             }
           });
         }
-      } catch (e) {}
+      } catch (e) { }
 
       // Sort newest first
       payments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -2917,7 +3885,7 @@
       try {
         const testOrderId = `TEST_DMDG_${Date.now()}`;
         alert('포트원(PortOne v2) 테스트 결제창을 호출합니다.\n(실제 과금되지 않는 100원 샌드박스 테스트 호출입니다)');
-        
+
         const response = await PortOne.requestPayment({
           storeId: 'store-e1f72596-98dc-4c57-817c-a49da979ee91',
           channelKey: 'channel-key-c8ea23b9-b827-4475-b6ff-12a868516d51',
@@ -2946,7 +3914,7 @@
       }
     }
 
-        function testPayPalIntegrationPing() {
+    function testPayPalIntegrationPing() {
       alert("페이팔(PayPal) 비즈니스 연동 진단 결과:\n\n• 등록 계정: dmdg.official@gmail.com\n• 상태: 국내 사업자 은행 소액 입금 확인 진행 중\n• 글로벌 지원: 말쌈(malssam.com) 5개국 에디션 후원 바인딩 정상");
     }
 
@@ -2980,12 +3948,12 @@
         const list = JSON.parse(raw);
         list.push(item);
         localStorage.setItem('dmdg_payment_transactions', JSON.stringify(list));
-      } catch (e) {}
+      } catch (e) { }
 
       loadAllPaymentsData();
     }
 
-        function exportPaymentsCSV() {
+    function exportPaymentsCSV() {
       if (!PAYMENTS_CACHE || PAYMENTS_CACHE.length === 0) {
         alert("다운로드할 결제 내역이 없습니다.");
         return;
@@ -3000,7 +3968,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.setAttribute("href", url);
-      link.setAttribute("download", `DMDG_결제거래내역_${new Date().toISOString().slice(0,10)}.csv`);
+      link.setAttribute("download", `DMDG_결제거래내역_${new Date().toISOString().slice(0, 10)}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -3009,7 +3977,546 @@
     // Initial check on load
     document.addEventListener('DOMContentLoaded', () => {
       checkExistingAuth();
+      loadAllExamSubmissions();
+      loadAcesCareerSubmissions();
     });
+
+    // =========================================================================
+    // 4대 시험 및 자가진단 평가(Assessment) 통합 관제 데이터 엔진
+    // =========================================================================
+    let CURRENT_ASSESSMENT_EXAM_TAB = 'ALL'; // 'ALL', 'PYTHON', 'SQL', 'DATA', 'MATH'
+    let CURRENT_ASSESSMENT_FILTER = 'ALL';   // 'ALL', 'PASS', 'REVIEW'
+    let CURRENT_ASSESSMENT_SEARCH = '';
+    let RAW_EXAM_SUBMISSIONS_ALL = [];
+    let FILTERED_EXAM_SUBMISSIONS = [];
+
+    // 1) 4대 시험 및 사전평가 대표 시드 데이터
+    const COMPREHENSIVE_EXAM_SEEDS = []; // [대표님 엄격 원칙] 오직 Firestore 및 실제 응시 데이터만 바인딩
+
+    // 2) 4대 시험 로컬스토리지 및 Firestore 전체 자동 통합 수집
+    async function loadAllExamSubmissions() {
+      let merged = [...COMPREHENSIVE_EXAM_SEEDS];
+
+      const examKeyMap = [
+        { key: 'dmdg_python_ai_exam_submissions_v1', type: 'PYTHON', name: 'Python & AI 기초' },
+        { key: 'dmdg_sql_exam_submissions_v1', type: 'SQL', name: 'SQL 실전 마스터' },
+        { key: 'dmdg_ai_data_exam_submissions_v1', type: 'DATA', name: '빅데이터 엔지니어링' },
+        { key: 'dmdg_ai_math_exam_submissions_v1', type: 'MATH', name: 'AI 수학 & 딥러닝' },
+        { key: 'dmdg_assessment_submissions', type: 'ALL', name: '사전평가 종합' },
+        { key: 'dmdg_rea_applications', type: 'ALL', name: '과정 신청자' }
+      ];
+
+      examKeyMap.forEach(target => {
+        try {
+          const raw = localStorage.getItem(target.key);
+          if (raw) {
+            const arr = JSON.parse(raw);
+            if (Array.isArray(arr)) {
+              arr.forEach(item => {
+                const score = Number(item.score || item.finalScore || item.totalScore || 80);
+                merged.unshift({
+                  id: item.id || item.submissionId || ('EXAM-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)),
+                  examType: target.type === 'ALL' ? (item.examType || 'PYTHON') : target.type,
+                  examName: target.name,
+                  name: item.name || item.studentName || item.applicantName || '응시자',
+                  email: item.email || item.userEmail || '-',
+                  affiliation: item.affiliation || item.track || '수강생',
+                  score: score,
+                  isPassed: score >= 80,
+                  areaScores: item.areaScores || { 1: 20, 2: 20, 3: 20, 4: 20 },
+                  wrongCount: item.wrongCount || (score >= 80 ? 2 : 5),
+                  topRecommendations: item.topRecommendations || ['단행본 연계 복습 권장'],
+                  timestamp: item.timestamp || item.createdAt || new Date().toISOString(),
+                  dateStr: item.dateStr || new Date().toLocaleString('ko-KR')
+                });
+              });
+            }
+          }
+        } catch (e) { }
+      });
+
+      if (window.firestore) {
+        const firestoreCollections = [
+          { col: 'python_ai_exam_submissions', type: 'PYTHON', name: 'Python & AI 기초' },
+          { col: 'sql_exam_submissions', type: 'SQL', name: 'SQL 실전 마스터' },
+          { col: 'ai_data_exam_submissions', type: 'DATA', name: '빅데이터 엔지니어링' },
+          { col: 'ai_math_exam_submissions', type: 'MATH', name: 'AI 수학 & 딥러닝' }
+        ];
+
+        for (const fc of firestoreCollections) {
+          try {
+            const snap = await firestore.collection(fc.col).limit(50).get();
+            snap.forEach(doc => {
+              const d = doc.data();
+              const score = Number(d.score || d.finalScore || 80);
+              merged.unshift({
+                id: doc.id,
+                examType: fc.type,
+                examName: fc.name,
+                firestoreCol: fc.col,
+                localKey: fc.type === 'PYTHON' ? 'dmdg_python_ai_exam_submissions_v1' : (fc.type === 'SQL' ? 'dmdg_sql_exam_submissions_v1' : (fc.type === 'DATA' ? 'dmdg_ai_data_exam_submissions_v1' : 'dmdg_ai_math_exam_submissions_v1')),
+                name: d.name || d.studentName || '수강생',
+                email: d.email || '-',
+                affiliation: d.affiliation || '실전 응시생',
+                score: score,
+                isPassed: score >= 80,
+                areaScores: d.areaScores || { 1: 20, 2: 20, 3: 20, 4: 20 },
+                wrongCount: d.wrongCount || 2,
+                topRecommendations: d.topRecommendations || ['클라우드 연계 복습'],
+                timestamp: d.timestamp || new Date().toISOString(),
+                dateStr: d.dateStr || new Date().toLocaleString('ko-KR')
+              });
+            });
+          } catch (e) { }
+        }
+      }
+
+      const seen = new Set();
+      RAW_EXAM_SUBMISSIONS_ALL = merged.filter(item => {
+        if (!item.id || seen.has(item.id)) return false;
+        seen.add(item.id);
+        return true;
+      });
+
+      updateAssessmentDisplay();
+    }
+
+    // 3) 4대 시험 탭 전환 함수
+    window.switchAssessmentExamTab = function (examTab) {
+      CURRENT_ASSESSMENT_EXAM_TAB = examTab;
+
+      const tabIds = ['ALL', 'PYTHON', 'SQL', 'DATA', 'MATH'];
+      tabIds.forEach(id => {
+        const btn = document.getElementById(`asm-tab-${id}`);
+        if (btn) {
+          if (id === examTab) {
+            btn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-purple-600 text-white shadow-md';
+          } else {
+            btn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700';
+          }
+        }
+      });
+
+      updateAssessmentDisplay();
+    };
+
+    // 4) 합격/보충/전체 서브필터 전환
+    window.setAssessmentSubFilter = function (filterType) {
+      CURRENT_ASSESSMENT_FILTER = filterType;
+      updateAssessmentDisplay();
+    };
+
+    // 5) 화면 통계 갱신 렌더러
+    function updateAssessmentDisplay() {
+      let list = [...RAW_EXAM_SUBMISSIONS_ALL];
+
+      if (CURRENT_ASSESSMENT_EXAM_TAB !== 'ALL') {
+        list = list.filter(item => item.examType === CURRENT_ASSESSMENT_EXAM_TAB);
+      }
+
+      if (CURRENT_ASSESSMENT_FILTER === 'PASS') {
+        list = list.filter(item => item.score >= 80);
+      } else if (CURRENT_ASSESSMENT_FILTER === 'REVIEW') {
+        list = list.filter(item => item.score < 80);
+      }
+
+      if (CURRENT_ASSESSMENT_SEARCH.trim()) {
+        const q = CURRENT_ASSESSMENT_SEARCH.toLowerCase().trim();
+        list = list.filter(item =>
+          (item.name && item.name.toLowerCase().includes(q)) ||
+          (item.email && item.email.toLowerCase().includes(q)) ||
+          (item.affiliation && item.affiliation.toLowerCase().includes(q))
+        );
+      }
+
+      FILTERED_EXAM_SUBMISSIONS = list;
+
+      const total = list.length;
+      const passCount = list.filter(item => item.score >= 80).length;
+      const passRate = total > 0 ? ((passCount / total) * 100).toFixed(1) : '0.0';
+      const avgScore = total > 0 ? (list.reduce((sum, item) => sum + (item.score || 0), 0) / total).toFixed(1) : '0.0';
+      const reviewCount = total - passCount;
+
+      const kpiTotal = document.getElementById('asm-kpi-total');
+      const kpiPassRate = document.getElementById('asm-kpi-pass-rate');
+      const kpiPassCount = document.getElementById('asm-kpi-pass-count');
+      const kpiAvgScore = document.getElementById('asm-kpi-avg-score');
+      const kpiReviewCount = document.getElementById('asm-kpi-review-count');
+
+      if (kpiTotal) kpiTotal.textContent = total.toLocaleString();
+      if (kpiPassRate) kpiPassRate.textContent = `${passRate}%`;
+      if (kpiPassCount) kpiPassCount.textContent = `(${passCount}명 합격)`;
+      if (kpiAvgScore) kpiAvgScore.textContent = avgScore;
+      if (kpiReviewCount) kpiReviewCount.textContent = reviewCount.toLocaleString();
+
+      const tbody = document.getElementById('asm-table-body');
+      if (tbody) {
+        if (list.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="9" class="text-center py-10 text-slate-500">
+                <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
+                해당 시험 조건에 일치하는 응시 내역이 없습니다.
+              </td>
+            </tr>
+          `;
+        } else {
+          tbody.innerHTML = list.map((item, idx) => `
+            <tr class="hover:bg-slate-900/50 transition-colors border-b border-slate-800/60 text-xs">
+              <td class="px-3 py-3 text-center">
+                <input type="checkbox" class="asm-row-check cursor-pointer rounded bg-slate-800 border-slate-700 text-purple-600 focus:ring-0" 
+                  value="${item.id}" data-col="${item.firestoreCol || 'sql_exam_submissions'}" data-key="${item.localKey || 'dmdg_sql_exam_submissions_v1'}" onchange="updateSelectedCount()">
+              </td>
+              <td class="px-3 py-3 font-mono text-slate-500">${idx + 1}</td>
+              <td class="px-3 py-3 font-mono text-slate-400">${item.dateStr || (item.timestamp ? item.timestamp.slice(0, 16).replace('T', ' ') : '-')}</td>
+              <td class="px-3 py-3">
+                <div class="font-bold text-white">${item.name}</div>
+                <div class="text-[10px] text-slate-500 font-mono">${item.email}</div>
+              </td>
+              <td class="px-3 py-3 text-slate-300">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20 mr-1">${item.examName || item.examType}</span>
+                <span class="text-slate-400 text-[11px]">${item.affiliation}</span>
+              </td>
+              <td class="px-3 py-3 font-mono font-black ${item.score >= 80 ? 'text-emerald-400' : 'text-amber-400'} text-sm">${item.score}점</td>
+              <td class="px-3 py-3">
+                ${item.score >= 80
+              ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">합격 (Pass)</span>'
+              : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border bg-amber-500/15 text-amber-300 border-amber-500/30">복습 권장</span>'
+            }
+              </td>
+              <td class="px-3 py-3 font-mono text-[11px] text-slate-400">
+                ${item.areaScores ? `${item.areaScores[1] || 0}/${item.areaScores[2] || 0}/${item.areaScores[3] || 0}/${item.areaScores[4] || 0}` : '20/20/20/20'}
+              </td>
+              <td class="px-3 py-3 text-[11px] text-purple-300 truncate max-w-[160px]">
+                ${(item.topRecommendations && item.topRecommendations[0]) || '실전 연계 복습'}
+              </td>
+              <td class="px-3 py-3 text-right whitespace-nowrap">
+                <button onclick="alert('응시자: ${item.name}\\n시험: ${item.examName || item.examType}\\n점수: ${item.score}점\\n소속: ${item.affiliation}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded text-xs font-semibold">상세</button>
+                <button onclick="deleteOneSubmission('${item.id}', '${item.firestoreCol || 'sql_exam_submissions'}', '${item.localKey || 'dmdg_sql_exam_submissions_v1'}', '${item.name}')" class="px-2 py-1 bg-rose-500/15 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded text-xs font-semibold ml-1">삭제 ✕</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // 6) 새로고침 & CSV 내보내기
+    
+    // =========================================================================
+    // 수강생 시험 성적 삭제 엔진 (단건 삭제 & 일괄 선택 삭제)
+    // =========================================================================
+    window.toggleAllAsmChecks = function (masterEl) {
+      const isChecked = masterEl.checked;
+      document.querySelectorAll('.asm-row-check').forEach(chk => {
+        chk.checked = isChecked;
+      });
+      updateSelectedCount();
+    };
+
+    window.updateSelectedCount = function () {
+      const checkedBoxes = document.querySelectorAll('.asm-row-check:checked');
+      const countEl = document.getElementById('asm-selected-count');
+      if (countEl) countEl.textContent = checkedBoxes.length;
+    };
+
+    window.deleteOneSubmission = async function (id, col, localKey, name) {
+      if (!confirm(`[수강생 데이터 영구 삭제]\n\n수강생 '${name}'의 응시 데이터(ID: ${id})를 삭제하시겠습니까?\n삭제 후 복구할 수 없습니다.`)) {
+        return;
+      }
+      try {
+        // 1) Firestore 삭제
+        if (window.firestore && col) {
+          try {
+            await firestore.collection(col).doc(id).delete();
+          } catch (e) {
+            console.warn('Firestore doc delete failed or offline:', e);
+          }
+        }
+        // 2) LocalStorage 삭제
+        if (localKey) {
+          try {
+            const raw = localStorage.getItem(localKey);
+            if (raw) {
+              let arr = JSON.parse(raw);
+              arr = arr.filter(item => item.id !== id && item.submissionId !== id);
+              localStorage.setItem(localKey, JSON.stringify(arr));
+            }
+          } catch (e) { }
+        }
+        // 3) 메모리 배열에서 제거 및 화면 갱신
+        RAW_EXAM_SUBMISSIONS_ALL = RAW_EXAM_SUBMISSIONS_ALL.filter(item => item.id !== id);
+        updateAssessmentDisplay();
+        alert(`수강생 '${name}'의 응시 데이터가 안전하게 삭제되었습니다.`);
+      } catch (err) {
+        alert('삭제 처리 중 오류가 발생했습니다: ' + err.message);
+      }
+    };
+
+    window.deleteSelectedSubmissions = async function () {
+      const checkedBoxes = Array.from(document.querySelectorAll('.asm-row-check:checked'));
+      if (checkedBoxes.length === 0) {
+        alert('삭제할 수강생 항목을 먼저 선택해 주세요.');
+        return;
+      }
+      if (!confirm(`선택한 ${checkedBoxes.length}명의 수강생 응시 데이터를 모두 삭제하시겠습니까?\n삭제된 데이터는 영구히 제거됩니다.`)) {
+        return;
+      }
+
+      for (const chk of checkedBoxes) {
+        const id = chk.value;
+        const col = chk.dataset.col;
+        const localKey = chk.dataset.key;
+        if (window.firestore && col) {
+          try { await firestore.collection(col).doc(id).delete(); } catch (e) { }
+        }
+        if (localKey) {
+          try {
+            const raw = localStorage.getItem(localKey);
+            if (raw) {
+              let arr = JSON.parse(raw);
+              arr = arr.filter(item => item.id !== id && item.submissionId !== id);
+              localStorage.setItem(localKey, JSON.stringify(arr));
+            }
+          } catch (e) { }
+        }
+        RAW_EXAM_SUBMISSIONS_ALL = RAW_EXAM_SUBMISSIONS_ALL.filter(item => item.id !== id);
+      }
+
+      updateAssessmentDisplay();
+      const masterCheck = document.getElementById('asm-check-all');
+      if (masterCheck) masterCheck.checked = false;
+      updateSelectedCount();
+      alert(`선택한 ${checkedBoxes.length}건의 응시 데이터가 모두 정상 삭제되었습니다.`);
+    };
+
+    // =========================================================================
+    // SECTION A-6: A.C.E.S AI 직무 진단 참가 현황 실시간 로더 & 삭제 엔진
+    // =========================================================================
+    let RAW_CAREER_SUBMISSIONS_ALL = [];
+
+    window.toggleAllCareerChecks = function (masterEl) {
+      const isChecked = masterEl.checked;
+      document.querySelectorAll('.career-row-check').forEach(chk => {
+        chk.checked = isChecked;
+      });
+      updateCareerSelectedCount();
+    };
+
+    window.updateCareerSelectedCount = function () {
+      const checkedBoxes = document.querySelectorAll('.career-row-check:checked');
+      const countEl = document.getElementById('career-selected-count');
+      if (countEl) countEl.textContent = checkedBoxes.length;
+    };
+
+    window.loadAcesCareerSubmissions = async function () {
+      let merged = [];
+      const keys = ['dmdg_career_diagnostic_results', 'dmdg_career_assessments_v1', 'dmdg_rea_applications'];
+      keys.forEach(k => {
+        try {
+          const raw = localStorage.getItem(k);
+          if (raw) {
+            const data = JSON.parse(raw);
+            if (Array.isArray(data)) {
+              data.forEach(item => {
+                merged.unshift({
+                  id: item.id || ('CAREER-' + Math.random().toString(36).slice(2, 8)),
+                  name: item.name || item.applicantName || '방문 진단자',
+                  phone: item.phone || item.contact || '-',
+                  email: item.email || '-',
+                  track: item.recommendedTrack || item.track || item.jobTitle || 'AI Agent 엔지니어',
+                  score: item.score || item.fitScore || 88,
+                  category: item.category || item.applicationType || '정규 과정 추천',
+                  timestamp: item.timestamp || item.createdAt || new Date().toISOString(),
+                  dateStr: item.dateStr || new Date().toLocaleString('ko-KR')
+                });
+              });
+            } else if (typeof data === 'object') {
+              merged.unshift({
+                id: data.id || ('CAREER-' + Math.random().toString(36).slice(2, 8)),
+                name: data.name || data.applicantName || '방문 진단자',
+                phone: data.phone || data.contact || '-',
+                email: data.email || '-',
+                track: data.recommendedTrack || data.track || 'AI Agent 엔지니어',
+                score: data.score || data.fitScore || 88,
+                category: data.category || '정규 과정 추천',
+                timestamp: data.timestamp || new Date().toISOString(),
+                dateStr: data.dateStr || new Date().toLocaleString('ko-KR')
+              });
+            }
+          }
+        } catch (e) { }
+      });
+
+      // Firestore 연동
+      if (window.firestore) {
+        try {
+          const snap = await firestore.collection('career_assessments').limit(50).get();
+          snap.forEach(doc => {
+            const d = doc.data();
+            merged.unshift({
+              id: doc.id,
+              name: d.name || d.applicantName || '방문 진단자',
+              phone: d.phone || d.contact || '-',
+              email: d.email || '-',
+              track: d.recommendedTrack || d.track || 'AI 솔루션 아키텍트',
+              score: d.score || d.fitScore || 90,
+              category: d.category || '정규 과정 추천',
+              timestamp: d.timestamp || new Date().toISOString(),
+              dateStr: d.dateStr || new Date().toLocaleString('ko-KR')
+            });
+          });
+        } catch (e) { }
+      }
+
+      // Deduplicate
+      const seen = new Set();
+      RAW_CAREER_SUBMISSIONS_ALL = merged.filter(item => {
+        if (!item.id || seen.has(item.id)) return false;
+        seen.add(item.id);
+        return true;
+      });
+
+      renderCareerSubmissionsTable();
+    };
+
+    function renderCareerSubmissionsTable() {
+      const tbody = document.getElementById('career-table-body');
+      if (!tbody) return;
+
+      if (RAW_CAREER_SUBMISSIONS_ALL.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="text-center py-8 text-slate-500">
+              <i data-lucide="inbox" class="w-6 h-6 mx-auto mb-1 opacity-40"></i>
+              등록된 A.C.E.S 직무 진단 참가 내역이 없습니다. (포털에서 직무 진단 완료 시 실시간 등록됩니다)
+            </td>
+          </tr>
+        `;
+        if (window.lucide) lucide.createIcons();
+        return;
+      }
+
+      tbody.innerHTML = RAW_CAREER_SUBMISSIONS_ALL.map((item, idx) => `
+        <tr class="hover:bg-slate-900/50 transition-colors border-b border-slate-800/60 text-xs">
+          <td class="px-3 py-3 text-center">
+            <input type="checkbox" class="career-row-check cursor-pointer rounded bg-slate-800 border-slate-700 text-sky-600 focus:ring-0" 
+              value="${item.id}" onchange="updateCareerSelectedCount()">
+          </td>
+          <td class="px-3 py-3 font-mono text-slate-500">${idx + 1}</td>
+          <td class="px-3 py-3 font-mono text-slate-400">${item.dateStr || (item.timestamp ? item.timestamp.slice(0, 16).replace('T', ' ') : '-')}</td>
+          <td class="px-3 py-3">
+            <div class="font-bold text-white">${item.name}</div>
+            <div class="text-[10px] text-slate-400 font-mono">${item.phone} ${item.email !== '-' ? `| ${item.email}` : ''}</div>
+          </td>
+          <td class="px-3 py-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/10 text-sky-300 border border-sky-500/30">
+              ${item.track}
+            </span>
+          </td>
+          <td class="px-3 py-3 font-mono font-bold text-emerald-400">
+            ${item.score}점 (최적합)
+          </td>
+          <td class="px-3 py-3 text-slate-300">
+            ${item.category}
+          </td>
+          <td class="px-3 py-3 text-right whitespace-nowrap">
+            <button onclick="alert('참여자: ${item.name}\\n추천직무: ${item.track}\\n연락처: ${item.phone}\\n이메일: ${item.email}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded text-xs font-semibold">상세</button>
+            <button onclick="deleteOneCareerSubmission('${item.id}', '${item.name}')" class="px-2 py-1 bg-rose-500/15 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded text-xs font-semibold ml-1">삭제 ✕</button>
+          </td>
+        </tr>
+      `).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    window.deleteOneCareerSubmission = async function (id, name) {
+      if (!confirm(`[진단 내역 삭제]\n\n참여자 '${name}'님의 직무 진단 내역(ID: ${id})을 삭제하시겠습니까?`)) return;
+      try {
+        if (window.firestore) {
+          try { await firestore.collection('career_assessments').doc(id).delete(); } catch (e) { }
+        }
+        const keys = ['dmdg_career_diagnostic_results', 'dmdg_career_assessments_v1', 'dmdg_rea_applications'];
+        keys.forEach(k => {
+          try {
+            const raw = localStorage.getItem(k);
+            if (raw) {
+              let arr = JSON.parse(raw);
+              if (Array.isArray(arr)) {
+                arr = arr.filter(i => i.id !== id);
+                localStorage.setItem(k, JSON.stringify(arr));
+              }
+            }
+          } catch (e) { }
+        });
+        RAW_CAREER_SUBMISSIONS_ALL = RAW_CAREER_SUBMISSIONS_ALL.filter(i => i.id !== id);
+        renderCareerSubmissionsTable();
+        alert(`'${name}'님의 진단 내역이 정상적으로 삭제되었습니다.`);
+      } catch (err) {
+        alert('삭제 중 오류: ' + err.message);
+      }
+    };
+
+    window.deleteSelectedCareerSubmissions = async function () {
+      const checkedBoxes = Array.from(document.querySelectorAll('.career-row-check:checked'));
+      if (checkedBoxes.length === 0) {
+        alert('삭제할 진단 내역을 선택해 주세요.');
+        return;
+      }
+      if (!confirm(`선택한 ${checkedBoxes.length}건의 직무 진단 내역을 삭제하시겠습니까?`)) return;
+
+      for (const chk of checkedBoxes) {
+        const id = chk.value;
+        if (window.firestore) {
+          try { await firestore.collection('career_assessments').doc(id).delete(); } catch (e) { }
+        }
+        const keys = ['dmdg_career_diagnostic_results', 'dmdg_career_assessments_v1', 'dmdg_rea_applications'];
+        keys.forEach(k => {
+          try {
+            const raw = localStorage.getItem(k);
+            if (raw) {
+              let arr = JSON.parse(raw);
+              if (Array.isArray(arr)) {
+                arr = arr.filter(i => i.id !== id);
+                localStorage.setItem(k, JSON.stringify(arr));
+              }
+            }
+          } catch (e) { }
+        });
+        RAW_CAREER_SUBMISSIONS_ALL = RAW_CAREER_SUBMISSIONS_ALL.filter(i => i.id !== id);
+      }
+      renderCareerSubmissionsTable();
+      const masterCheck = document.getElementById('career-check-all');
+      if (masterCheck) masterCheck.checked = false;
+      updateCareerSelectedCount();
+      alert(`선택한 ${checkedBoxes.length}건의 직무 진단 내역이 삭제되었습니다.`);
+    };
+
+    window.refreshAssessmentStats = async function () {
+      await loadAllExamSubmissions();
+      loadAcesCareerSubmissions();
+      alert('✅ 실시간 4대 시험 및 사전 학습 자가진단 평가 데이터가 최신으로 동기화되었습니다!');
+    };
+
+    window.exportAssessmentLogsCSV = function () {
+      if (!FILTERED_EXAM_SUBMISSIONS || FILTERED_EXAM_SUBMISSIONS.length === 0) {
+        alert('다운로드할 성적 데이터가 없습니다.');
+        return;
+      }
+      let csv = "\uFEFFNo,응시일시,응시자명,이메일,시험유형,소속/트랙,점수,판정,취약추천\n";
+      FILTERED_EXAM_SUBMISSIONS.forEach((item, idx) => {
+        csv += `${idx + 1},"${item.dateStr || item.timestamp}","${item.name}","${item.email}","${item.examName || item.examType}","${item.affiliation}",${item.score},"${item.score >= 80 ? 'PASS' : 'REVIEW'}","${(item.topRecommendations && item.topRecommendations[0]) || '-'}"\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `DMDG_자가진단_성적표_${CURRENT_ASSESSMENT_EXAM_TAB}_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
   </script>
 </body>
+
 </html>

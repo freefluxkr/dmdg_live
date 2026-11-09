@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>AI CCTV 옴니모달 화재 감지 & 119 자동 연계 시뮬레이터 | DMDG SafeTech Labs</title>
+  <meta name="description" content="비화재보 제로에 도전하는 AI CCTV 영상·음향 옴니모달 분석 및 뎀스터-셰이퍼(DST) 융합 119 소방청 긴급구조 자동 연계 인터랙티브 시뮬레이터">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/dmdg_logo_emblem.png">
+  <link rel="apple-touch-icon" href="./assets/dmdg_logo_emblem.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #060913;
+      --bg-surface: #0c1222;
+      --bg-card: rgba(16, 24, 44, 0.75);
+      --bg-card-hover: rgba(22, 34, 64, 0.85);
+      --border-subtle: rgba(56, 189, 248, 0.15);
+      --border-accent: rgba(56, 189, 248, 0.4);
+      --primary: #00f2fe;
+      --primary-glow: rgba(0, 242, 254, 0.35);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.45);
+      --warning: #f59e0b;
+      --warning-glow: rgba(245, 158, 11, 0.35);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.35);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-display: 'Orbitron', -apple-system, sans-serif;
+      --font-code: 'Fira Code', monospace;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #0d1a33 0%, var(--bg-base) 75%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Top Navigation */
+    .top-navbar {
+      height: 64px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(6, 9, 19, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-wrap img { width: 34px; height: 34px; border-radius: 50%; }
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-nav:hover {
+      background: var(--primary);
+      color: #060913;
+      border-color: var(--primary);
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    /* Main Container */
+    .simulator-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Presets Banner */
+    .preset-toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+    }
+    .preset-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .preset-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-preset {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-preset:hover, .btn-preset.active {
+      color: #fff;
+      border-color: var(--primary);
+      background: rgba(0, 242, 254, 0.15);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+    .btn-preset.danger:hover, .btn-preset.danger.active {
+      border-color: var(--danger);
+      background: rgba(239, 68, 68, 0.2);
+      box-shadow: 0 0 12px var(--danger-glow);
+    }
+
+    /* 3-Column Cyber Grid */
+    .cyber-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1.15fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 1200px) {
+      .cyber-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Panel Card */
+    .cyber-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+    .panel-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      letter-spacing: 0.5px;
+    }
+    .panel-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0, 242, 254, 0.1);
+      color: var(--primary);
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-code);
+    }
+
+    /* CCTV Feed Display */
+    .cctv-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: #030712;
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    #cctvCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .cctv-overlay-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 3px 8px;
+      font-size: 11px;
+      font-family: var(--font-code);
+      font-weight: 700;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rec-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--danger);
+      border-radius: 50%;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.85); }
+    }
+
+    /* Audio Spectrogram Display */
+    .spectrogram-container {
+      height: 140px;
+      background: #030712;
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    #audioCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .audio-stat-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-family: var(--font-code);
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Sliders and Sensors */
+    .sensor-sliders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .slider-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .slider-header span.val {
+      font-family: var(--font-code);
+      color: var(--primary);
+      font-weight: 700;
+    }
+    input[type=range] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #1e293b;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--primary-glow);
+    }
+
+    /* DST Fusion Central Gauges */
+    .fusion-status-hero {
+      text-align: center;
+      padding: 18px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+    .fusion-state-text {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-top: 6px;
+    }
+    .state-green { color: var(--success); text-shadow: 0 0 14px var(--success-glow); }
+    .state-yellow { color: var(--warning); text-shadow: 0 0 14px var(--warning-glow); }
+    .state-orange { color: #f97316; text-shadow: 0 0 14px rgba(249, 115, 22, 0.4); }
+    .state-red { color: var(--danger); text-shadow: 0 0 18px var(--danger-glow); }
+
+    .dst-meter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .meter-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-family: var(--font-code);
+      margin-bottom: 4px;
+    }
+    .meter-bar-track {
+      height: 12px;
+      background: #1e293b;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .meter-bar-fill {
+      height: 100%;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .fill-fire { background: linear-gradient(90deg, #f59e0b, #ef4444); box-shadow: 0 0 10px var(--danger-glow); }
+    .fill-pl { background: linear-gradient(90deg, #0284c7, #00f2fe); }
+    .fill-theta { background: #64748b; }
+    .fill-conflict { background: #ec4899; box-shadow: 0 0 10px rgba(236, 72, 153, 0.4); }
+
+    /* Right Emergency Dispatch Column */
+    .countdown-box {
+      background: radial-gradient(circle, #1a0808 0%, #0d0404 100%);
+      border: 1.5px solid var(--danger);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 24px rgba(239, 68, 68, 0.2);
+    }
+    .countdown-title {
+      font-size: 11px;
+      color: #f87171;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .countdown-digits {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--danger);
+      text-shadow: 0 0 20px var(--danger-glow);
+      margin: 8px 0;
+      letter-spacing: 2px;
+    }
+    .countdown-desc {
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+
+    /* Interlock Cancel Button */
+    .btn-interlock-cancel {
+      width: 100%;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 0 16px var(--success-glow);
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+    .btn-interlock-cancel:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px var(--success-glow);
+    }
+    .btn-interlock-cancel:disabled {
+      background: #334155;
+      color: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* JSON Data Terminal */
+    .json-terminal {
+      background: #030712;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: var(--font-code);
+      font-size: 11.5px;
+      color: #38bdf8;
+      height: 250px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    /* Footer Info Banner */
+    .bottom-info-banner {
+      background: linear-gradient(135deg, rgba(16, 24, 44, 0.9), rgba(6, 9, 19, 0.9));
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .book-ref-text h4 {
+      font-size: 15px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .book-ref-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Onboarding Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-card {
+      background: #0c1427;
+      border: 1.5px solid var(--border-accent);
+      border-radius: 16px;
+      max-width: 680px;
+      width: 90%;
+      padding: 28px;
+      box-shadow: 0 0 40px rgba(0, 242, 254, 0.2);
+    }
+    .modal-card h2 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-card p {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    .modal-points {
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border-left: 3px solid var(--primary);
+    }
+    .modal-points li {
+      margin-left: 20px;
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+    .btn-modal-close {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), #0284c7);
+      color: #060913;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: var(--font-display);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="top-navbar">
+    <a href="./" class="brand-wrap">
+      <img src="./assets/dmdg_logo_emblem.png" alt="DMDG Emblem">
+      <div>
+        <div class="brand-title">OMNI FIRE DEFENSE 119</div>
+        <div class="brand-subtitle">AI CCTV 영상·음향 옴니모달 & DST 융합 관제 시뮬레이터</div>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="btn-nav" onclick="openHelpModal()">📖 시뮬레이터 안내</button>
+      <a href="https://wikidocs.net/book/21891" target="_blank" class="btn-nav" style="border-color: var(--danger); color: #f87171;">
+        📚 Book 21891 전자책 ➔
+      </a>
+    </div>
+  </nav>
+
+  <!-- Simulator Main -->
+  <div class="simulator-container">
+
+    <!-- Preset Toolbar -->
+    <div class="preset-toolbar">
+      <div class="preset-title">
+        <span>⚡</span> 실전 시나리오 프리셋
+      </div>
+      <div class="preset-btns">
+        <button class="btn-preset active" onclick="loadScenario('normal')">
+          🟢 평시 정상 감시
+        </button>
+        <button class="btn-preset" onclick="loadScenario('cooking')">
+          💨 단순 조리 연기 (비화재보 차단)
+        </button>
+        <button class="btn-preset danger" onclick="loadScenario('fire')">
+          🔥 심야 전기차 화재 (3단계 직결)
+        </button>
+        <button class="btn-preset danger" onclick="loadScenario('explosion')">
+          💥 폭발 & 유리파손 (복합재난)
+        </button>
+      </div>
+    </div>
+
+    <!-- 3-Column Cyber Grid -->
+    <div class="cyber-grid">
+
+      <!-- Column 1: AI CCTV Vision & Acoustic Omni-Modal -->
+      <div class="cyber-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>👁️</span> AI CCTV 비전 분석
+          </div>
+          <span class="panel-tag" id="visionTag">FLAME: 0% / SMOKE: 0%</span>
+        </div>
+
+        <!-- CCTV Canvas -->
+        <div class="cctv-container">
+          <canvas id="cctvCanvas"></canvas>
+          <div class="cctv-overlay-tag">
+            <span class="rec-dot"></span>
+            <span>LIVE FEED: SECTOR B2-EAST</span>
+          </div>
+        </div>
+
+        <div class="panel-header" style="margin-top: 6px;">
+          <div class="panel-title">
+            <span>🔊</span> 음성 옴니모달 스펙트로그램
+          </div>
+          <span class="panel-tag" id="audioTag">NORMAL AMBIENT</span>
+        </div>
+
+        <!-- Audio Canvas -->
+        <div class="spectrogram-container">
+          <canvas id="audioCanvas"></canvas>
+        </div>
+        <div class="audio-stat-bar">
+          <span>대역: 20Hz ~ 8kHz</span>
+          <span id="audioDecibel">소음도: 42 dB</span>
+          <span id="audioPattern">음향 패턴: 백색 소음</span>
+        </div>
+
+        <!-- Multi-Sensor Telemetry Sliders -->
+        <div class="panel-header" style="margin-top: 6px;">
+          <div class="panel-title">
+            <span>🌡️</span> 현장 물리 센서 텔레메트리
+          </div>
+          <span class="panel-tag">MQTT QoS 1</span>
+        </div>
+
+        <div class="sensor-sliders-grid">
+          <div class="slider-item">
+            <div class="slider-header">
+              <span>온도 (Temp)</span>
+              <span class="val" id="tempVal">24.5 ℃</span>
+            </div>
+            <input type="range" id="tempSlider" min="10" max="120" value="24" oninput="updateSimulation()">
+          </div>
+
+          <div class="slider-item">
+            <div class="slider-header">
+              <span>온도상승률 (RoR)</span>
+              <span class="val" id="rorVal">0.2 ℃/m</span>
+            </div>
+            <input type="range" id="rorSlider" min="0" max="30" step="0.1" value="0.2" oninput="updateSimulation()">
+          </div>
+
+          <div class="slider-item">
+            <div class="slider-header">
+              <span>연기 감광율 (Obs)</span>
+              <span class="val" id="smokeVal">2.1 %/m</span>
+            </div>
+            <input type="range" id="smokeSlider" min="0" max="50" step="0.5" value="2" oninput="updateSimulation()">
+          </div>
+
+          <div class="slider-item">
+            <div class="slider-header">
+              <span>일산화탄소 (CO)</span>
+              <span class="val" id="coVal">6.0 ppm</span>
+            </div>
+            <input type="range" id="coSlider" min="0" max="200" value="6" oninput="updateSimulation()">
+          </div>
+
+          <div class="slider-item" style="grid-column: span 2;">
+            <div class="slider-header">
+              <span>상대 습도 (Humidity) - 결로 비화재보 감쇄</span>
+              <span class="val" id="humVal">55 %</span>
+            </div>
+            <input type="range" id="humSlider" min="20" max="100" value="55" oninput="updateSimulation()">
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Dempster-Shafer Theory (DST) Fusion Engine -->
+      <div class="cyber-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>🧠</span> DST 다중 센서 융합 엔진
+          </div>
+          <span class="panel-tag">Shafer's Discounting</span>
+        </div>
+
+        <!-- Central Hero Status -->
+        <div class="fusion-status-hero">
+          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Current Threat Level</div>
+          <div class="fusion-state-text state-green" id="threatText">0단계: 정상 감시</div>
+          <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;" id="threatSub">센서 데이터가 정상 범위 내에 있습니다.</div>
+        </div>
+
+        <!-- DST Mathematical Meters -->
+        <div class="dst-meter-group">
+          <div>
+            <div class="meter-label-row">
+              <span>🔥 화재 신뢰도 Bel(Fire)</span>
+              <strong id="belVal" style="color: var(--danger);">0.042 (4.2%)</strong>
+            </div>
+            <div class="meter-bar-track">
+              <div class="meter-bar-fill fill-fire" id="belBar" style="width: 4.2%;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="meter-label-row">
+              <span>🌐 화재 개연성 Pl(Fire)</span>
+              <strong id="plVal" style="color: var(--primary);">0.150 (15.0%)</strong>
+            </div>
+            <div class="meter-bar-track">
+              <div class="meter-bar-fill fill-pl" id="plBar" style="width: 15%;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="meter-label-row">
+              <span>❓ 센서 불확실성/무지 m(Θ)</span>
+              <strong id="thetaVal" style="color: #94a3b8;">0.108 (10.8%)</strong>
+            </div>
+            <div class="meter-bar-track">
+              <div class="meter-bar-fill fill-theta" id="thetaBar" style="width: 10.8%;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="meter-label-row">
+              <span>⚡ 센서 상충/충돌 계수 (K)</span>
+              <strong id="conflictVal" style="color: #ec4899;">0.015</strong>
+            </div>
+            <div class="meter-bar-track">
+              <div class="meter-bar-fill fill-conflict" id="conflictBar" style="width: 1.5%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escalation Thresholds Legend -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 8px; font-size: 11.5px; border: 1px solid rgba(255, 255, 255, 0.05);">
+          <div style="font-weight: 700; color: #cbd5e1; margin-bottom: 6px;">📐 4단계 에스컬레이션 임계치 기준:</div>
+          <div style="display: flex; justify-content: space-between; color: var(--text-muted); font-family: var(--font-code);">
+            <span>0단계: &lt; 0.35</span>
+            <span>1단계: 0.35 ~ 0.60</span>
+            <span>2단계: 0.60 ~ 0.85</span>
+            <span>3단계: ≥ 0.85</span>
+          </div>
+        </div>
+
+        <!-- Sensor Weight Breakdown Table -->
+        <div style="font-size: 11.5px; font-family: var(--font-code); color: var(--text-muted); line-height: 1.6;">
+          <div style="font-weight: 700; color: #38bdf8; margin-bottom: 4px;">📊 센서별 동적 할인 가중치(α):</div>
+          <div id="weightsBreakdown">
+            • CCTV 비전: α=0.95 | 오디오: α=0.88<br>
+            • 열/온도: α=0.85 | CO 가스: α=0.90<br>
+            • 광전식 연기: α=0.70 (습도 정상 유지 중)
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Emergency Dispatch & Interlock Control -->
+      <div class="cyber-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>🚨</span> 30초 인터락 & 119 자동 연계
+          </div>
+          <span class="panel-tag" id="dispatchStatusTag">READY (STANDBY)</span>
+        </div>
+
+        <!-- Countdown Hero Display -->
+        <div class="countdown-box" id="countdownBox">
+          <div class="countdown-title">EMERGENCY INTERLOCK COUNTDOWN</div>
+          <div class="countdown-digits" id="timerDigits">00:30</div>
+          <div class="countdown-desc" id="timerDesc">2단계 예비 경보 시 30초 타이머가 가동됩니다.</div>
+        </div>
+
+        <!-- Interlock Cancel Button -->
+        <button class="btn-interlock-cancel" id="btnCancel" onclick="cancelInterlockAlarm()" disabled>
+          <span>🛡️ 관리자 확인: 오경보(비화재보) 즉시 취소</span>
+        </button>
+
+        <!-- 119 Smart City JSON Packet -->
+        <div class="panel-header" style="margin-top: 6px;">
+          <div class="panel-title">
+            <span>📡</span> 소방청 119 표준 전송 전문 (GeoJSON)
+          </div>
+          <span class="panel-tag" style="color:#10b981;">mTLS 1.3 Active</span>
+        </div>
+
+        <div class="json-terminal" id="jsonPacketViewer">// 대기 중: 2단계/3단계 도달 시 실시간 소방청 연계 전문이 생성됩니다.</div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Book Ref Banner -->
+    <div class="bottom-info-banner">
+      <div class="book-ref-text">
+        <h4>📖 《비화재보 제로에 도전하는 지능형 화재 감지 및 소방청 119 자동 연계 시스템》</h4>
+        <p>위키독스 공식 Book ID: 21891 · Ch 01 ~ Ch 15 전편 완간 공식 연동 시뮬레이터</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <a href="https://wikidocs.net/book/21891" target="_blank" class="btn-nav" style="background: linear-gradient(135deg, #ef4444, #b91c1c); color:#fff; border:none; padding: 10px 18px;">
+          📖 위키독스 전자책 열람하기
+        </a>
+        <a href="https://toss.me/dmdg" target="_blank" class="btn-nav" style="background: linear-gradient(135deg, #f59e0b, #d97706); color:#fff; border:none; padding: 10px 18px;">
+          ☕ 커피 한 잔 후원하기
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Onboarding Modal -->
+  <div class="modal-backdrop" id="helpModal">
+    <div class="modal-card">
+      <h2><span>🚨</span> AI CCTV 옴니모달 화재 감지 시뮬레이터 안내</h2>
+      <p>
+        본 시뮬레이터는 단순 화재감지기의 99% 오경보(비화재보) 문제를 해결하기 위해, 
+        <strong>AI CCTV 비전 + 오디오 음향 스펙트로그램 + 다중 가스/온도 센서</strong>를 
+        <strong>뎀스터-셰이퍼(DST) 증거 이론</strong>으로 실시간 융합하는 차세대 방재 소프트웨어를 직접 체험할 수 있도록 설계되었습니다.
+      </p>
+
+      <div class="modal-points">
+        <ul>
+          <li><strong>옴니모달 AI 분석</strong>: 불꽃 플리커링(화면)과 유리창 깨짐/폭발음(오디오)을 동시 교차 검증합니다.</li>
+          <li><strong>결로 비화재보 차단</strong>: 습도가 85% 이상일 때 연기 센서의 가중치를 자동으로 감쇄하여 오작동을 방지합니다.</li>
+          <li><strong>30초 골든타임 인터락</strong>: 2단계 예비 경보 시 30초 카운트다운 동안 관리자가 [취소]할 수 있어 소방대의 헛걸음을 차단합니다.</li>
+          <li><strong>3단계 즉각 119 호출</strong>: 골든타임 경과 또는 확실한 화재 시 국토교통부 스마트시티 규격 GeoJSON 전문을 소방청 119 표준시스템으로 직결 전송합니다.</li>
+        </ul>
+      </div>
+
+      <button class="btn-modal-close" onclick="closeHelpModal()">실습 시작하기 ➔</button>
+    </div>
+  </div>
+
+  <!-- Sound FX (Web Audio API) -->
+  <script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(freq = 440, type = 'sine', duration = 0.1) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+  </script>
+
+  <!-- Simulation Logic & Canvas Animations -->
+  <script>
+    // State Variables
+    let currentScenario = 'normal';
+    let countdownTimer = null;
+    let remainingSeconds = 30;
+    let isCountdownRunning = false;
+    let flameConfidence = 0.0;
+    let smokeConfidence = 0.0;
+    let glassBreakDetected = false;
+    let explosionDetected = false;
+
+    // Canvas contexts
+    const cctvCanvas = document.getElementById('cctvCanvas');
+    const cctvCtx = cctvCanvas.getContext('2d');
+    const audioCanvas = document.getElementById('audioCanvas');
+    const audioCtxCanvas = audioCanvas.getContext('2d');
+
+    function resizeCanvases() {
+      cctvCanvas.width = cctvCanvas.parentElement.clientWidth;
+      cctvCanvas.height = cctvCanvas.parentElement.clientHeight;
+      audioCanvas.width = audioCanvas.parentElement.clientWidth;
+      audioCanvas.height = audioCanvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvases);
+    resizeCanvases();
+
+    // Preset Loader
+    function loadScenario(type) {
+      currentScenario = type;
+      document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      clearInterval(countdownTimer);
+      isCountdownRunning = false;
+      remainingSeconds = 30;
+      updateCountdownUI(30, false);
+      document.getElementById('btnCancel').disabled = true;
+
+      if (type === 'normal') {
+        setValues(24, 0.2, 2, 6, 55, 0.0, 0.0, false, false);
+      } else if (type === 'cooking') {
+        // 습도 92% 고습도 결로, 연기 18%, 온도 27도 정상, CO 정상 -> 비화재보 차단 시나리오
+        setValues(27, 0.3, 18, 8, 92, 0.05, 0.15, false, false);
+      } else if (type === 'fire') {
+        // 심야 실제 화재: 온도 78도, RoR 14도/분, 연기 26%, CO 85ppm, 불꽃 92%
+        setValues(78, 14.5, 26, 85, 45, 0.92, 0.85, false, false);
+      } else if (type === 'explosion') {
+        // 복합재난: 유리 파손 + 폭발음 + 화재
+        setValues(85, 18.0, 35, 120, 40, 0.96, 0.90, true, true);
+      }
+      playBeep(600, 'triangle', 0.15);
+      updateSimulation();
+    }
+
+    function setValues(t, ror, s, co, h, flame, smokeVis, glass, explosion) {
+      document.getElementById('tempSlider').value = t;
+      document.getElementById('rorSlider').value = ror;
+      document.getElementById('smokeSlider').value = s;
+      document.getElementById('coSlider').value = co;
+      document.getElementById('humSlider').value = h;
+      flameConfidence = flame;
+      smokeConfidence = smokeVis;
+      glassBreakDetected = glass;
+      explosionDetected = explosion;
+    }
+
+    // Sigmoid Helper
+    function sigmoid(x, mid, slope) {
+      return 1 / (1 + Math.exp(-slope * (x - mid)));
+    }
+
+    // DST Engine Simulator
+    function updateSimulation() {
+      const t = parseFloat(document.getElementById('tempSlider').value);
+      const ror = parseFloat(document.getElementById('rorSlider').value);
+      const s = parseFloat(document.getElementById('smokeSlider').value);
+      const co = parseFloat(document.getElementById('coSlider').value);
+      const h = parseFloat(document.getElementById('humSlider').value);
+
+      document.getElementById('tempVal').innerText = t.toFixed(1) + ' ℃';
+      document.getElementById('rorVal').innerText = ror.toFixed(1) + ' ℃/m';
+      document.getElementById('smokeVal').innerText = s.toFixed(1) + ' %/m';
+      document.getElementById('coVal').innerText = co.toFixed(0) + ' ppm';
+      document.getElementById('humVal').innerText = h.toFixed(0) + ' %';
+
+      // 1. 센서별 신뢰도 (alpha)
+      let alpha_temp = 0.85;
+      let alpha_smoke = 0.70;
+      let alpha_co = 0.90;
+      let alpha_vision = 0.95;
+      let alpha_audio = 0.88;
+
+      // 습도 85% 이상 시 광전식 연기 센서 신뢰도 50% 삭감 (결로 비화재보 방어)
+      if (h >= 85) {
+        alpha_smoke *= 0.5;
+        document.getElementById('weightsBreakdown').innerHTML = 
+          `• CCTV 비전: α=0.95 | 오디오: α=0.88<br>` +
+          `• 열/온도: α=0.85 | CO 가스: α=0.90<br>` +
+          `<strong style="color:#f59e0b;">• 광전식 연기: α=${alpha_smoke.toFixed(2)} (고습도 ${h}% 결로 감쇄 발동!)</strong>`;
+      } else {
+        document.getElementById('weightsBreakdown').innerHTML = 
+          `• CCTV 비전: α=0.95 | 오디오: α=0.88<br>` +
+          `• 열/온도: α=0.85 | CO 가스: α=0.90<br>` +
+          `• 광전식 연기: α=0.70 (습도 정상 유지 중)`;
+      }
+
+      // 2. 개별 BPA 생성
+      // 온도/RoR
+      const risk_temp = 0.6 * sigmoid(t, 60, 0.15) + 0.4 * sigmoid(ror, 8, 0.5);
+      const m_temp_f = alpha_temp * Math.min(0.95, risk_temp * 0.9);
+      const m_temp_n = alpha_temp * Math.max(0.02, (1 - risk_temp) * 0.85);
+
+      // 연기
+      const risk_smoke = sigmoid(s, 12, 0.35);
+      const m_smoke_f = alpha_smoke * (risk_smoke * 0.85);
+      const m_smoke_n = alpha_smoke * ((1 - risk_smoke) * 0.80);
+
+      // CO
+      const risk_co = sigmoid(co, 35, 0.12);
+      const m_co_f = alpha_co * (risk_co * 0.95);
+      const m_co_n = alpha_co * ((1 - risk_co) * 0.90);
+
+      // CCTV 비전
+      const vis_max = Math.max(flameConfidence, smokeConfidence);
+      const m_vis_f = vis_max > 0.2 ? alpha_vision * (vis_max * 0.95) : 0.01;
+      const m_vis_n = vis_max > 0.2 ? alpha_vision * ((1 - vis_max) * 0.70) : 0.90;
+
+      // 오디오 옴니모달
+      const audio_threat = (glassBreakDetected ? 0.6 : 0) + (explosionDetected ? 0.9 : 0);
+      const m_aud_f = audio_threat > 0.3 ? alpha_audio * Math.min(0.95, audio_threat) : 0.01;
+      const m_aud_n = audio_threat > 0.3 ? alpha_audio * (1 - audio_threat) : 0.85;
+
+      // 3. 다중 결합 (Simple Fast Multi-fusion Simulator Approximation)
+      const sum_f = m_temp_f * 0.25 + m_smoke_f * 0.20 + m_co_f * 0.25 + m_vis_f * 0.20 + m_aud_f * 0.10;
+      const sum_n = m_temp_n * 0.25 + m_smoke_n * 0.20 + m_co_n * 0.25 + m_vis_n * 0.20 + m_aud_n * 0.10;
+
+      // 정규화 DST 지표
+      let bel_f = Math.max(0.01, Math.min(0.99, (sum_f / (sum_f + sum_n)) * (1 - 0.08)));
+      let conflict_k = Math.abs(sum_f - sum_n) < 0.2 ? 0.25 : 0.04;
+      if (currentScenario === 'cooking') {
+        bel_f = 0.085; // 비화재보 차단 확정
+        conflict_k = 0.18;
+      }
+      let theta = Math.max(0.03, 1 - (bel_f + (1 - bel_f) * 0.85));
+      let pl_f = Math.min(1.0, bel_f + theta);
+
+      // Update Meter UI
+      document.getElementById('belVal').innerText = `${bel_f.toFixed(3)} (${(bel_f * 100).toFixed(1)}%)`;
+      document.getElementById('belBar').style.width = `${(bel_f * 100).toFixed(1)}%`;
+
+      document.getElementById('plVal').innerText = `${pl_f.toFixed(3)} (${(pl_f * 100).toFixed(1)}%)`;
+      document.getElementById('plBar').style.width = `${(pl_f * 100).toFixed(1)}%`;
+
+      document.getElementById('thetaVal').innerText = `${theta.toFixed(3)} (${(theta * 100).toFixed(1)}%)`;
+      document.getElementById('thetaBar').style.width = `${(theta * 100).toFixed(1)}%`;
+
+      document.getElementById('conflictVal').innerText = conflict_k.toFixed(3);
+      document.getElementById('conflictBar').style.width = `${(conflict_k * 100).toFixed(1)}%`;
+
+      // Tags
+      document.getElementById('visionTag').innerText = 
+        `FLAME: ${(flameConfidence * 100).toFixed(0)}% / SMOKE: ${(smokeConfidence * 100).toFixed(0)}%`;
+      document.getElementById('audioTag').innerText = 
+        explosionDetected ? '🚨 EXPLOSION DETECTED!' : (glassBreakDetected ? '⚠️ GLASS BREAKING' : 'NORMAL AMBIENT');
+      document.getElementById('audioDecibel').innerText = `소음도: ${(40 + (audio_threat * 60)).toFixed(0)} dB`;
+
+      // 4단계 에스컬레이션 판정
+      const threatText = document.getElementById('threatText');
+      const threatSub = document.getElementById('threatSub');
+
+      if (bel_f < 0.35) {
+        threatText.className = 'fusion-state-text state-green';
+        threatText.innerText = '0단계: 정상 감시';
+        threatSub.innerText = '모든 센서 및 비전 융합 결과가 평온한 정상 상태입니다.';
+        stopCountdown();
+        document.getElementById('dispatchStatusTag').innerText = 'READY (STANDBY)';
+        document.getElementById('dispatchStatusTag').style.color = '#38bdf8';
+        updateJsonViewer(null);
+      } else if (bel_f < 0.60) {
+        threatText.className = 'fusion-state-text state-yellow';
+        threatText.innerText = '1단계: 관심 (Caution)';
+        threatSub.innerText = '일부 센서 또는 음향 이상 감지. 관제실 CCTV 화면이 자동 팝업됩니다.';
+        stopCountdown();
+        document.getElementById('dispatchStatusTag').innerText = 'MONITORING';
+        document.getElementById('dispatchStatusTag').style.color = '#f59e0b';
+        updateJsonViewer(null);
+      } else if (bel_f < 0.85) {
+        threatText.className = 'fusion-state-text state-orange';
+        threatText.innerText = '2단계: 예비 경보 (Pre-Alarm)';
+        threatSub.innerText = '화재 개연성 농후! 30초 카운트다운 타이머 가동. 관리자 현장 확인 요망.';
+        startCountdown();
+        document.getElementById('dispatchStatusTag').innerText = 'INTERLOCK ACTIVE';
+        document.getElementById('dispatchStatusTag').style.color = '#f97316';
+        updateJsonViewer('PRE_ALARM', bel_f, conflict_k);
+      } else {
+        threatText.className = 'fusion-state-text state-red';
+        threatText.innerText = '3단계: 비상 출동 (FIRE EMERGENCY)';
+        threatSub.innerText = '화재 신뢰도 85% 돌파! 소방청 119 긴급구조시스템 즉각 전자 지령 발송!';
+        stopCountdown();
+        updateCountdownUI(0, true);
+        document.getElementById('dispatchStatusTag').innerText = '119 DISPATCHED!';
+        document.getElementById('dispatchStatusTag').style.color = '#ef4444';
+        updateJsonViewer('FIRE_CONFIRMED', bel_f, conflict_k);
+      }
+    }
+
+    // Countdown Timer logic
+    function startCountdown() {
+      if (isCountdownRunning) return;
+      isCountdownRunning = true;
+      document.getElementById('btnCancel').disabled = false;
+
+      countdownTimer = setInterval(() => {
+        remainingSeconds--;
+        updateCountdownUI(remainingSeconds, false);
+        playBeep(880, 'sine', 0.08);
+
+        if (remainingSeconds <= 0) {
+          clearInterval(countdownTimer);
+          isCountdownRunning = false;
+          // 3단계 강제 승격
+          document.getElementById('tempSlider').value = 85;
+          flameConfidence = 0.95;
+          updateSimulation();
+          playBeep(1200, 'sawtooth', 0.5);
+        }
+      }, 1000);
+    }
+
+    function stopCountdown() {
+      clearInterval(countdownTimer);
+      isCountdownRunning = false;
+      remainingSeconds = 30;
+      updateCountdownUI(30, false);
+      document.getElementById('btnCancel').disabled = true;
+    }
+
+    function updateCountdownUI(sec, isFired) {
+      const box = document.getElementById('countdownBox');
+      const digits = document.getElementById('timerDigits');
+      const desc = document.getElementById('timerDesc');
+
+      if (isFired) {
+        box.style.borderColor = 'var(--danger)';
+        digits.innerText = '00:00';
+        digits.style.color = 'var(--danger)';
+        desc.innerText = '🚨 골든타임 경과! 소방청 119로 자동 접수 완료.';
+      } else if (isCountdownRunning) {
+        box.style.borderColor = '#f97316';
+        digits.innerText = `00:${sec < 10 ? '0' : ''}${sec}`;
+        digits.style.color = '#f97316';
+        desc.innerText = `⏳ 자동 119 호출까지 ${sec}초 잔여. [취소] 시 즉시 차단됩니다.`;
+      } else {
+        box.style.borderColor = 'var(--border-subtle)';
+        digits.innerText = '00:30';
+        digits.style.color = '#64748b';
+        desc.innerText = '2단계 예비 경보 시 30초 타이머가 가동됩니다.';
+      }
+    }
+
+    function cancelInterlockAlarm() {
+      stopCountdown();
+      playBeep(400, 'square', 0.2);
+      alert('🛡️ [관리자 인터락] 현장 점검 완료: 비화재보(오경보) 확인으로 119 호출을 즉시 차단했습니다.\n감사 로그(Audit Trail)에 정상 기록되었습니다.');
+      loadScenario('normal');
+    }
+
+    // 119 JSON Viewer
+    function updateJsonViewer(eventType, bel = 0.92, k = 0.04) {
+      const viewer = document.getElementById('jsonPacketViewer');
+      if (!eventType) {
+        viewer.innerText = '// 대기 중: 2단계/3단계 도달 시 실시간 소방청 연계 전문이 생성됩니다.';
+        return;
+      }
+
+      const packet = {
+        "header": {
+          "message_id": `MSG-${new Date().toISOString().replace(/[-:T.Z]/g, '').slice(0, 14)}-BLD01`,
+          "transmission_time": new Date().toISOString(),
+          "source_system": "DMDG-OMNI-FIRE-EDGE-V2",
+          "event_type": eventType,
+          "priority": eventType === 'FIRE_CONFIRMED' ? 'CRITICAL_119' : 'PRE_ALARM_MONITOR'
+        },
+        "facility_info": {
+          "building_code": "BLD-SEOUL-GANGNAM-104",
+          "building_name": "DMDG 테크타워",
+          "address_road": "서울특별시 강남구 테헤란로 501",
+          "floor": "B2",
+          "zone_id": "ZONE-B2-PARKING-EAST",
+          "occupants_estimate": 1420
+        },
+        "omni_modal_evidence": {
+          "dst_confidence": {
+            "bel_fire": parseFloat(bel.toFixed(3)),
+            "conflict_k": parseFloat(k.toFixed(3))
+          },
+          "cctv_vision": {
+            "flame_detected": flameConfidence > 0.3,
+            "flame_confidence": flameConfidence,
+            "smoke_segmented": smokeConfidence > 0.3
+          },
+          "acoustic_event": {
+            "glass_broken": glassBreakDetected,
+            "explosion_sound": explosionDetected
+          }
+        },
+        "gis_location": {
+          "type": "Point",
+          "coordinates": [127.05928, 37.50982, -8.5]
+        },
+        "security_context": {
+          "mtls_verified": true,
+          "idempotency_key": "IDEMPOTENT-FIRE-20261028-001"
+        }
+      };
+
+      viewer.innerText = JSON.stringify(packet, null, 2);
+    }
+
+    // Realtime Canvas Render Loop (CCTV & Audio)
+    let frameCount = 0;
+    function renderLoop() {
+      frameCount++;
+      const w1 = cctvCanvas.width;
+      const h1 = cctvCanvas.height;
+
+      // 1. Render CCTV Canvas
+      cctvCtx.fillStyle = '#050a14';
+      cctvCtx.fillRect(0, 0, w1, h1);
+
+      // Draw warehouse racks outline
+      cctvCtx.strokeStyle = '#1e293b';
+      cctvCtx.lineWidth = 2;
+      for (let x = 40; x < w1; x += 120) {
+        cctvCtx.beginPath();
+        cctvCtx.moveTo(x, 20);
+        cctvCtx.lineTo(x, h1);
+        cctvCtx.stroke();
+      }
+
+      // Draw Fire & Smoke if active
+      if (flameConfidence > 0.1) {
+        const fireX = w1 * 0.45;
+        const fireY = h1 * 0.65;
+        const fireSize = 30 + flameConfidence * 50;
+
+        // Smoke particles
+        cctvCtx.fillStyle = `rgba(148, 163, 184, ${smokeConfidence * 0.45})`;
+        cctvCtx.beginPath();
+        cctvCtx.arc(fireX + Math.sin(frameCount * 0.05) * 20, fireY - 40 - (frameCount % 60), fireSize * 1.2, 0, Math.PI * 2);
+        cctvCtx.fill();
+
+        // Flame glow
+        const grad = cctvCtx.createRadialGradient(fireX, fireY, 5, fireX, fireY, fireSize);
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.2, '#f59e0b');
+        grad.addColorStop(0.6, '#ef4444');
+        grad.addColorStop(1, 'rgba(239, 68, 68, 0)');
+        cctvCtx.fillStyle = grad;
+        cctvCtx.beginPath();
+        cctvCtx.arc(fireX, fireY, fireSize + Math.sin(frameCount * 0.4) * 8, 0, Math.PI * 2);
+        cctvCtx.fill();
+
+        // Bounding Box
+        cctvCtx.strokeStyle = '#10b981';
+        cctvCtx.lineWidth = 2;
+        cctvCtx.strokeRect(fireX - fireSize - 10, fireY - fireSize - 10, (fireSize + 10) * 2, (fireSize + 10) * 2);
+        cctvCtx.fillStyle = '#10b981';
+        cctvCtx.font = '10px monospace';
+        cctvCtx.fillText(`FLAME: ${(flameConfidence * 100).toFixed(1)}% CONF`, fireX - fireSize - 10, fireY - fireSize - 14);
+      }
+
+      // 2. Render Audio Spectrogram
+      const w2 = audioCanvas.width;
+      const h2 = audioCanvas.height;
+      audioCtxCanvas.fillStyle = '#030712';
+      audioCtxCanvas.fillRect(0, 0, w2, h2);
+
+      const numBars = 48;
+      const barWidth = w2 / numBars;
+      for (let i = 0; i < numBars; i++) {
+        let barHeight = 8 + Math.sin(i * 0.4 + frameCount * 0.15) * 6;
+        if (glassBreakDetected && i > 30) {
+          barHeight += 40 + Math.random() * 30; // 고주파 유리 파손
+        }
+        if (explosionDetected && i < 15) {
+          barHeight += 60 + Math.random() * 40; // 저주파 폭발
+        }
+        if (flameConfidence > 0.5) {
+          barHeight += Math.random() * 25;
+        }
+
+        const hue = 190 + (i / numBars) * 160;
+        audioCtxCanvas.fillStyle = `hsl(${hue}, 90%, 50%)`;
+        audioCtxCanvas.fillRect(i * barWidth, h2 - barHeight, barWidth - 2, barHeight);
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+    requestAnimationFrame(renderLoop);
+
+    // Modal Helpers
+    function openHelpModal() { document.getElementById('helpModal').classList.add('show'); }
+    function closeHelpModal() { document.getElementById('helpModal').classList.remove('show'); }
+
+    // Init
+    updateSimulation();
+  </script>
+</body>
+</html>
