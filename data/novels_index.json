@@ -1,0 +1,987 @@
+[
+  {
+    "id": "architect_zero",
+    "title": {
+      "ko": "아키텍트 제로 : 바티칸의 코드",
+      "en": "Architect Zero: The Vatican Code",
+      "ja": "アーキテクト・ゼロ：バチカンの暗号",
+      "es": "Arquitecto Cero: El Código del Vaticano",
+      "fr": "Architecte Zéro : Le Code du Vatican",
+      "id": "Arsitek Nol: Kode Vatikan"
+    },
+    "subtitle": {
+      "ko": "500년 전 다빈치가 남긴 인공지능의 최후 개념설계도",
+      "en": "The Ultimate AI Conceptual Blueprint Left by Da Vinci 500 Years Ago",
+      "ja": "500年前にダ・ヴィンチが遺した人工知能の最後概念設計図",
+      "es": "El plano conceptual definitivo de la IA dejado por Da Vinci hace 500 años",
+      "fr": "L'ultime schéma conceptuel de l'IA laissé par De Vinci il y a 500 ans",
+      "id": "Cetak Biru Konseptual AI Terakhir yang Ditinggalkan Da Vinci 500 Tahun Lalu"
+    },
+    "author": "Hamilton.Kang",
+    "badge": "24시간 타임어택 스릴러",
+    "category": "faction",
+    "color": {
+      "from": "#2e1065",
+      "to": "#0f172a",
+      "accent": "#a855f7",
+      "glow": "rgba(168, 85, 247, 0.45)"
+    },
+    "synopsis": {
+      "ko": "전 인류의 인프라를 통제할 초지능 AGI 가동 24시간 전, 수석 아키텍트가 성 베드로 광장에서 피 묻은 암호를 남긴 채 살해당한다. 사라진 '최상위 개념설계도(Axiom 0)'를 찾아 나선 기호학 교수 에단 정이 다빈치의 스케치 속에 감춰진 500년 전의 비밀을 추적하며 시스템 붕괴를 막아내는 숨 가쁜 지적 추격전.",
+      "en": "24 hours before superintelligent AGI launch, the chief architect is murdered leaving a bloody code in St. Peter's Square. Symbologist Ethan Jung races against time to decrypt Da Vinci's 500-year-old conceptual blueprint.",
+      "ja": "超知能AGI稼働の24時間前、主任アーキテクトがサン・ピエトロ広場で暗号を残し殺害される。記号学者イーサン・チョンがダ・ヴィンチのスケッチに隠された500年前の概念設計図を追う24時間知能サスペンス。",
+      "es": "24 horas antes del lanzamiento de la AGI sobrehumana, el arquitecto jefe es asesinado dejando un código sangriento en San Pedro. El simbólogo Ethan Jung descifra el plano conceptual de Da Vinci de hace 500 años.",
+      "fr": "24 heures avant l'activation d'une superintelligence AGI, l'architecte en chef est assassiné place Saint-Pierre. Le symbologiste Ethan Jung traque le schéma conceptuel secret de De Vinci vieux de 500 ans.",
+      "id": "24 jam sebelum peluncuran AGI supercerdas, kepala arsitek dibunuh dengan meninggalkan kode berdarah di Lapangan Santo Petrus. Simbolog Ethan Jung berlomba menguraikan cetak biru Da Vinci berusia 500 tahun."
+    },
+    "charCount": 24155,
+    "readingTime": "약 40분",
+    "chapterCount": 12,
+    "htmlUrl": "novel_architect_zero.html",
+    "jsonUrl": "data/novels/architect_zero.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "the_master_designers",
+    "title": {
+      "ko": "설계자들 : 백지의 결단",
+      "en": "The Master Designers: Decision of the Blank",
+      "ja": "設計者たち：白紙の決断",
+      "es": "Los Diseñadores Maestros: La Decisión en Blanco",
+      "fr": "Les Maîtres Designers : La Décision de la Page Blanche",
+      "id": "Para Perancang Utama: Keputusan Kertas Kosong"
+    },
+    "subtitle": {
+      "ko": "거제도 지하 벙커에서 시작된 대한민국 50년 기술 독립의 비밀",
+      "en": "The Secret of Korea's 50-Year Tech Sovereignty Born in Geoje Bunker",
+      "ja": "巨済島の地下バンカーから始まった韓国50年技術独立の秘密",
+      "es": "El secreto de 50 años de soberanía tecnológica en el búnker de Geoje",
+      "fr": "Le secret de 50 ans de souveraineté technologique né dans le bunker de Geoje",
+      "id": "Rahasia Kedaulatan Teknologi 50 Tahun yang Lahir di Bunker Geoje"
+    },
+    "author": "Hamilton.Kang",
+    "badge": "기술 주권 대하 팩션",
+    "category": "faction",
+    "color": {
+      "from": "#1e293b",
+      "to": "#0f172a",
+      "accent": "#38bdf8",
+      "glow": "rgba(56, 189, 248, 0.45)"
+    },
+    "synopsis": {
+      "ko": "세계 1위 조선 강국이지만 '개념설계(FEED)' 권한이 없어 수조 원을 뜯기던 대한민국. 서방 기술 카르텔의 4억 달러 위약금 올가미에 맞서, 거제도 지하 벙커에서 12인의 엔지니어가 차세대 원자력 잠수함과 극지 FLNG의 독자 개념설계를 백지 위에서 완성해 내는 피와 땀의 대하 팩션.",
+      "en": "Korea, the world's #1 shipbuilder, had no FEED rights and bled billions. Against Western cartels' $400M trap, 12 engineers in a Geoje bunker complete indigenous conceptual design from a blank paper.",
+      "ja": "世界1位の造船大国でありながらFEED権利がなく巨額の富を奪われていた韓国。欧米技術カルテルの4億ドル違約金トラップに対抗し、巨済島の地下バンカーで12人のエンジニアが白紙から挑む技術独立大河ファクション。",
+      "es": "Corea, líder mundial en astilleros, carecía de derechos FEED. Contra la trampa de 400 millones del cártel occidental, 12 ingenieros en un búnker de Geoje completan el diseño conceptual en una página en blanco.",
+      "fr": "La Corée, leader mondial de la construction navale, n'avait aucun droit FEED. Face au cartel occidental et son piège à 400 M$, 12 ingénieurs dans un bunker conçoivent un modèle souverain à partir d'une page blanche.",
+      "id": "Korea, pembuat kapal #1 dunia, tidak memiliki hak FEED. Melawan perangkap kartel barat senilai 400 juta dolar, 12 insinyur di bunker Geoje menyelesaikan desain konseptual dari kertas kosong."
+    },
+    "charCount": 25246,
+    "readingTime": "약 42분",
+    "chapterCount": 12,
+    "htmlUrl": "novel_the_master_designers.html",
+    "jsonUrl": "data/novels/the_master_designers.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "bananafish_first_line",
+    "title": {
+      "ko": "바나나피시와 첫 번째 선 (The First Line)",
+      "en": "Bananafish and the First Line",
+      "ja": "バナナフィッシュと最初の線",
+      "es": "El pez plátano y la primera línea",
+      "fr": "Le poisson-banane et la première ligne",
+      "id": "Ikan Pisang dan Garis Pertama"
+    },
+    "subtitle": {
+      "ko": "규격화된 세상을 거부하고 백지 앞에 선 청춘의 설계도",
+      "en": "The Blueprint of Youth Rejecting Standardized Life Before a Blank Page",
+      "ja": "規格化された世界を拒み、白紙の前に立った青春の設計図",
+      "es": "El anteproyecto de la juventud que rechaza la vida estandarizada",
+      "fr": "Le plan d'une jeunesse refusant le monde normé face à la page blanche",
+      "id": "Cetak Biru Pemuda yang Menolak Dunia Standar di Hadapan Kertas Kosong"
+    },
+    "author": "Hamilton.Kang",
+    "badge": "개념설계 마스터 대작",
+    "category": "urban_drama",
+    "color": {
+      "from": "#09131f",
+      "to": "#172a45",
+      "accent": "#38bdf8",
+      "glow": "rgba(56, 189, 248, 0.45)"
+    },
+    "synopsis": {
+      "ko": "외제차 하청 도면 치수나 수정하며 영혼을 잃어가던 20대 청년 엔지니어 은호가 회사를 박차고 나와 문래동 옥탑방에서 4B 연필을 쥔다. 걷지 못하는 일곱 살 아이 지민이를 위해 기존 규격을 거부하고 백지 위에 세상에 없던 날개 달린 의자를 설계하는 눈부신 회복의 어반 감성 드라마.",
+      "en": "A 20-something engineer who was losing his soul revising subcontractor CAD drawings quits his job and picks up a 4B pencil in a Mullae-dong rooftop room. An urban emotional drama about designing a winged chair on a blank sheet for a 7-year-old disabled child.",
+      "ja": "下請けCAD図面の修正に魂を削っていた20代の青年エンジニア・ウンホが会社を飛び出し、文来洞の屋根部屋で4B鉛筆を握る。歩けない7歳の少女ジミンのため、既存の規格を拒絶し白紙の上に世界に一つだけの翼ある椅子を設計する青春感動ドラマ。",
+      "es": "Un joven ingeniero que perdía su alma revisando planos subcontratados renuncia y toma un lápiz 4B en una azotea de Mullae-dong. Un drama emocional urbano sobre el diseño de una silla con alas sobre papel en blanco para una niña de 7 años.",
+      "fr": "Un jeune ingénieur qui perdait son âme à réviser des plans de sous-traitance démissionne et prend un crayon 4B sur un toit de Mullae-dong. Un drame urbain émouvant sur la conception d'un fauteuil ailé pour un enfant handicapé.",
+      "id": "Seorang insinyur muda yang kehilangan jiwanya merevisi gambar subkontrak berhenti dari pekerjaannya dan mengambil pensil 4B di kamar atap Mullae-dong. Drama emosional urban tentang merancang kursi bersayap di atas kertas kosong untuk anak penyandang disabilitas."
+    },
+    "charCount": 29051,
+    "readingTime": "약 48분",
+    "chapterCount": 10,
+    "htmlUrl": "novel_bananafish_first_line.html",
+    "jsonUrl": "data/novels/bananafish_first_line.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "kisa_seoul",
+    "title": {
+      "ko": "은쟁반 위의 서울",
+      "en": "은쟁반 위의 서울 (The Midnight Drivers' Table)",
+      "ja": "은쟁반 위의 서울",
+      "es": "은쟁반 위의 서울",
+      "fr": "은쟁반 위의 서울 (The Midnight Drivers' Table)",
+      "id": "은쟁반 위의 서울 (The Midnight Drivers' Table)"
+    },
+    "subtitle": {
+      "ko": "대한민국 24시 드라이버 로드 100일 순례기 (500p 대작 정규 완결본)",
+      "en": "대한민국 24시 드라이버 로드 100일 순례기 (500p 대작 정규 완결본)",
+      "ja": "대한민국 24시 드라이버 로드 100일 순례기 (500p 대작 정규 완결본)",
+      "es": "대한민국 24시 드라이버 로드 100일 순례기 (500p 대작 정규 완결본)",
+      "fr": "대한민국 24시 드라이버 로드 100일 순례기 (500p 대작 정규 완결본)",
+      "id": "대한민국 24시 드라이버 로드 100일 순례기 (500p 대작 정규 완결본)"
+    },
+    "author": "강선우 & 소피아 L. (가명)",
+    "badge": "기사식당 500p 대작",
+    "category": "travel_gourmet",
+    "color": {
+      "from": "#0f172a",
+      "to": "#1e293b",
+      "accent": "#f59e0b",
+      "glow": "rgba(245, 158, 11, 0.45)"
+    },
+    "synopsis": {
+      "ko": "전국 25대 기사식당 성지를 100일간 순례하며 은쟁반 위에 피어난 삶의 온기와 서민의 자존심을 기록한 500page 대하 미식 기행소설.",
+      "en": "전국 25대 기사식당 성지를 100일간 순례하며 은쟁반 위에 피어난 삶의 온기와 서민의 자존심을 기록한 500page 대하 미식 기행소설.",
+      "ja": "전국 25대 기사식당 성지를 100일간 순례하며 은쟁반 위에 피어난 삶의 온기와 서민의 자존심을 기록한 500page 대하 미식 기행소설.",
+      "es": "전국 25대 기사식당 성지를 100일간 순례하며 은쟁반 위에 피어난 삶의 온기와 서민의 자존심을 기록한 500page 대하 미식 기행소설.",
+      "fr": "전국 25대 기사식당 성지를 100일간 순례하며 은쟁반 위에 피어난 삶의 온기와 서민의 자존심을 기록한 500page 대하 미식 기행소설.",
+      "id": "전국 25대 기사식당 성지를 100일간 순례하며 은쟁반 위에 피어난 삶의 온기와 서민의 자존심을 기록한 500page 대하 미식 기행소설."
+    },
+    "charCount": 185000,
+    "readingTime": "약 320분",
+    "chapterCount": 25,
+    "htmlUrl": "novel_kisa_seoul.html",
+    "jsonUrl": "data/novels/kisa_seoul.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "temple_food",
+    "title": {
+      "ko": "비움의 식탁",
+      "en": "비움의 식탁 (The Table of Emptiness)",
+      "ja": "비움의 식탁",
+      "es": "비움의 식탁",
+      "fr": "비움의 식탁 (The Table of Emptiness)",
+      "id": "비움의 식탁 (The Table of Emptiness)"
+    },
+    "subtitle": {
+      "ko": "백양사에서 통도사까지, 100일의 공양간 순례 (500p 대작 정규 완결본)",
+      "en": "백양사에서 통도사까지, 100일의 공양간 순례 (500p 대작 정규 완결본)",
+      "ja": "백양사에서 통도사까지, 100일의 공양간 순례 (500p 대작 정규 완결본)",
+      "es": "백양사에서 통도사까지, 100일의 공양간 순례 (500p 대작 정규 완결본)",
+      "fr": "백양사에서 통도사까지, 100일의 공양간 순례 (500p 대작 정규 완결본)",
+      "id": "백양사에서 통도사까지, 100일의 공양간 순례 (500p 대작 정규 완결본)"
+    },
+    "author": "서진우 & 미셸 르메르 (가명)",
+    "badge": "사찰음식 500p 대작",
+    "category": "healing_gourmet",
+    "color": {
+      "from": "#1b261f",
+      "to": "#2c3e2e",
+      "accent": "#88c498",
+      "glow": "rgba(136, 196, 152, 0.45)"
+    },
+    "synopsis": {
+      "ko": "파리 미슐랭 셰프가 25대 산사 공양간을 순례하며 오신채 없는 채수와 10년 씨간장, 발우공양으로 영혼을 치유하는 500page 대하 힐링 소설.",
+      "en": "파리 미슐랭 셰프가 25대 산사 공양간을 순례하며 오신채 없는 채수와 10년 씨간장, 발우공양으로 영혼을 치유하는 500page 대하 힐링 소설.",
+      "ja": "파리 미슐랭 셰프가 25대 산사 공양간을 순례하며 오신채 없는 채수와 10년 씨간장, 발우공양으로 영혼을 치유하는 500page 대하 힐링 소설.",
+      "es": "파리 미슐랭 셰프가 25대 산사 공양간을 순례하며 오신채 없는 채수와 10년 씨간장, 발우공양으로 영혼을 치유하는 500page 대하 힐링 소설.",
+      "fr": "파리 미슐랭 셰프가 25대 산사 공양간을 순례하며 오신채 없는 채수와 10년 씨간장, 발우공양으로 영혼을 치유하는 500page 대하 힐링 소설.",
+      "id": "파리 미슐랭 셰프가 25대 산사 공양간을 순례하며 오신채 없는 채수와 10년 씨간장, 발우공양으로 영혼을 치유하는 500page 대하 힐링 소설."
+    },
+    "charCount": 190000,
+    "readingTime": "약 330분",
+    "chapterCount": 25,
+    "htmlUrl": "novel_temple_food.html",
+    "jsonUrl": "data/novels/temple_food.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boy_worker_dream",
+    "title": {
+      "ko": "소년공 꿈의 결말",
+      "en": "소년공 꿈의 결말 (The Boy Worker's Iron Dream)",
+      "ja": "소년공 꿈의 결말",
+      "es": "소년공 꿈의 결말",
+      "fr": "소년공 꿈의 결말 (The Boy Worker's Iron Dream)",
+      "id": "소년공 꿈의 결말 (The Boy Worker's Iron Dream)"
+    },
+    "subtitle": {
+      "ko": "프레스에 짓눌린 팔에서 대권의 문턱까지 (500p 대작 정규 완결본)",
+      "en": "프레스에 짓눌린 팔에서 대권의 문턱까지 (500p 대작 정규 완결본)",
+      "ja": "프레스에 짓눌린 팔에서 대권의 문턱까지 (500p 대작 정규 완결본)",
+      "es": "프레스에 짓눌린 팔에서 대권의 문턱까지 (500p 대작 정규 완결본)",
+      "fr": "프레스에 짓눌린 팔에서 대권의 문턱까지 (500p 대작 정규 완결본)",
+      "id": "프레스에 짓눌린 팔에서 대권의 문턱까지 (500p 대작 정규 완결본)"
+    },
+    "author": "무라카미 H. & 강민우 문학랩 (가명)",
+    "badge": "하루키 스타일 500p 대작",
+    "category": "faction",
+    "color": {
+      "from": "#18181b",
+      "to": "#27272a",
+      "accent": "#f43f5e",
+      "glow": "rgba(244, 63, 94, 0.45)"
+    },
+    "synopsis": {
+      "ko": "12세 소년공에서 거대 야당 대표까지. 무라카미 하루키 특유의 서늘한 내면 독백으로 추적한 결핍과 권력, 가족 파탄의 500page 대작 심리 팩션.",
+      "en": "12세 소년공에서 거대 야당 대표까지. 무라카미 하루키 특유의 서늘한 내면 독백으로 추적한 결핍과 권력, 가족 파탄의 500page 대작 심리 팩션.",
+      "ja": "12세 소년공에서 거대 야당 대표까지. 무라카미 하루키 특유의 서늘한 내면 독백으로 추적한 결핍과 권력, 가족 파탄의 500page 대작 심리 팩션.",
+      "es": "12세 소년공에서 거대 야당 대표까지. 무라카미 하루키 특유의 서늘한 내면 독백으로 추적한 결핍과 권력, 가족 파탄의 500page 대작 심리 팩션.",
+      "fr": "12세 소년공에서 거대 야당 대표까지. 무라카미 하루키 특유의 서늘한 내면 독백으로 추적한 결핍과 권력, 가족 파탄의 500page 대작 심리 팩션.",
+      "id": "12세 소년공에서 거대 야당 대표까지. 무라카미 하루키 특유의 서늘한 내면 독백으로 추적한 결핍과 권력, 가족 파탄의 500page 대작 심리 팩션."
+    },
+    "charCount": 195000,
+    "readingTime": "약 340분",
+    "chapterCount": 25,
+    "htmlUrl": "novel_boy_worker_dream.html",
+    "jsonUrl": "data/novels/boy_worker_dream.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boy_worker_cipher",
+    "title": {
+      "ko": "카르텔의 암호",
+      "en": "카르텔의 암호 (The Cipher of the Cartel)",
+      "ja": "카르텔의 암호",
+      "es": "카르텔의 암호",
+      "fr": "카르텔의 암호 (The Cipher of the Cartel)",
+      "id": "카르텔의 암호 (The Cipher of the Cartel)"
+    },
+    "subtitle": {
+      "ko": "48시간 타임 리미트 지능형 금융 서스펜스 스릴러 (500p 대작 정규 완결본)",
+      "en": "48시간 타임 리미트 지능형 금융 서스펜스 스릴러 (500p 대작 정규 완결본)",
+      "ja": "48시간 타임 리미트 지능형 금융 서스펜스 스릴러 (500p 대작 정규 완결본)",
+      "es": "48시간 타임 리미트 지능형 금융 서스펜스 스릴러 (500p 대작 정규 완결본)",
+      "fr": "48시간 타임 리미트 지능형 금융 서스펜스 스릴러 (500p 대작 정규 완결본)",
+      "id": "48시간 타임 리미트 지능형 금융 서스펜스 스릴러 (500p 대작 정규 완결본)"
+    },
+    "author": "댄 B. 사이퍼 & 에드워드 권 (가명)",
+    "badge": "댄 브라운 스타일 500p 대작",
+    "category": "faction",
+    "color": {
+      "from": "#090d16",
+      "to": "#111d33",
+      "accent": "#38bdf8",
+      "glow": "rgba(56, 189, 248, 0.45)"
+    },
+    "synopsis": {
+      "ko": "선고 48시간 전! 대림지구 비밀 장부와 50억 클럽, 1976년 프레스 머신 시리얼 넘버 '1976-NO.6'의 암호를 해독하는 500page 지능형 스릴러.",
+      "en": "선고 48시간 전! 대림지구 비밀 장부와 50억 클럽, 1976년 프레스 머신 시리얼 넘버 '1976-NO.6'의 암호를 해독하는 500page 지능형 스릴러.",
+      "ja": "선고 48시간 전! 대림지구 비밀 장부와 50억 클럽, 1976년 프레스 머신 시리얼 넘버 '1976-NO.6'의 암호를 해독하는 500page 지능형 스릴러.",
+      "es": "선고 48시간 전! 대림지구 비밀 장부와 50억 클럽, 1976년 프레스 머신 시리얼 넘버 '1976-NO.6'의 암호를 해독하는 500page 지능형 스릴러.",
+      "fr": "선고 48시간 전! 대림지구 비밀 장부와 50억 클럽, 1976년 프레스 머신 시리얼 넘버 '1976-NO.6'의 암호를 해독하는 500page 지능형 스릴러.",
+      "id": "선고 48시간 전! 대림지구 비밀 장부와 50억 클럽, 1976년 프레스 머신 시리얼 넘버 '1976-NO.6'의 암호를 해독하는 500page 지능형 스릴러."
+    },
+    "charCount": 192000,
+    "readingTime": "약 330분",
+    "chapterCount": 25,
+    "htmlUrl": "novel_boy_worker_cipher.html",
+    "jsonUrl": "data/novels/boy_worker_cipher.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boy_worker_destiny",
+    "title": {
+      "ko": "신의 주사위",
+      "en": "신의 주사위 (The God's Dice)",
+      "ja": "신의 주사위",
+      "es": "신의 주사위",
+      "fr": "신의 주사위 (The God's Dice)",
+      "id": "신의 주사위 (The God's Dice)"
+    },
+    "subtitle": {
+      "ko": "대하 첩보 한반도 지정학 팩션 (500p 대작 정규 완결본)",
+      "en": "대하 첩보 한반도 지정학 팩션 (500p 대작 정규 완결본)",
+      "ja": "대하 첩보 한반도 지정학 팩션 (500p 대작 정규 완결본)",
+      "es": "대하 첩보 한반도 지정학 팩션 (500p 대작 정규 완결본)",
+      "fr": "대하 첩보 한반도 지정학 팩션 (500p 대작 정규 완결본)",
+      "id": "대하 첩보 한반도 지정학 팩션 (500p 대작 정규 완결본)"
+    },
+    "author": "김진석 & 마르쿠스 한 (가명)",
+    "badge": "김진명 스타일 500p 대작",
+    "category": "faction",
+    "color": {
+      "from": "#1c1917",
+      "to": "#292524",
+      "accent": "#f59e0b",
+      "glow": "rgba(245, 158, 11, 0.45)"
+    },
+    "synopsis": {
+      "ko": "800만 달러 대북 송금과 백두산 밀영의 약속. 하노이 결렬 후 경의선 철도 개통을 위해 국경을 넘나든 사나이들의 500page 대하 첩보 지정학 팩션.",
+      "en": "800만 달러 대북 송금과 백두산 밀영의 약속. 하노이 결렬 후 경의선 철도 개통을 위해 국경을 넘나든 사나이들의 500page 대하 첩보 지정학 팩션.",
+      "ja": "800만 달러 대북 송금과 백두산 밀영의 약속. 하노이 결렬 후 경의선 철도 개통을 위해 국경을 넘나든 사나이들의 500page 대하 첩보 지정학 팩션.",
+      "es": "800만 달러 대북 송금과 백두산 밀영의 약속. 하노이 결렬 후 경의선 철도 개통을 위해 국경을 넘나든 사나이들의 500page 대하 첩보 지정학 팩션.",
+      "fr": "800만 달러 대북 송금과 백두산 밀영의 약속. 하노이 결렬 후 경의선 철도 개통을 위해 국경을 넘나든 사나이들의 500page 대하 첩보 지정학 팩션.",
+      "id": "800만 달러 대북 송금과 백두산 밀영의 약속. 하노이 결렬 후 경의선 철도 개통을 위해 국경을 넘나든 사나이들의 500page 대하 첩보 지정학 팩션."
+    },
+    "charCount": 194000,
+    "readingTime": "약 335분",
+    "chapterCount": 25,
+    "htmlUrl": "novel_boy_worker_destiny.html",
+    "jsonUrl": "data/novels/boy_worker_destiny.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "protocol_2027",
+    "title": {
+      "ko": "프로토콜 2027",
+      "en": "프로토콜 2027 (Protocol 2027)",
+      "ja": "프로토콜 2027",
+      "es": "프로토콜 2027",
+      "fr": "프로토콜 2027 (Protocol 2027)",
+      "id": "프로토콜 2027 (Protocol 2027)"
+    },
+    "subtitle": {
+      "ko": "지능형 암호학 서스펜스 미스터리 대하 단편소설 완결본",
+      "en": "지능형 암호학 서스펜스 미스터리 대하 단편소설 완결본",
+      "ja": "지능형 암호학 서스펜스 미스터리 대하 단편소설 완결본",
+      "es": "지능형 암호학 서스펜스 미스터리 대하 단편소설 완결본",
+      "fr": "지능형 암호학 서스펜스 미스터리 대하 단편소설 완결본",
+      "id": "지능형 암호학 서스펜스 미스터리 대하 단편소설 완결본"
+    },
+    "author": "데이비드 사이퍼 & 강태오 (가명)",
+    "badge": "2027 암호학 서스펜스",
+    "category": "faction",
+    "color": {
+      "from": "#0a192f",
+      "to": "#172a45",
+      "accent": "#64ffda",
+      "glow": "rgba(100, 255, 218, 0.4)"
+    },
+    "synopsis": {
+      "ko": "국가 암호 체계의 백도어와 양자 암호 해독 키를 둘러싼 지능형 정보전.",
+      "en": "국가 암호 체계의 백도어와 양자 암호 해독 키를 둘러싼 지능형 정보전.",
+      "ja": "국가 암호 체계의 백도어와 양자 암호 해독 키를 둘러싼 지능형 정보전.",
+      "es": "국가 암호 체계의 백도어와 양자 암호 해독 키를 둘러싼 지능형 정보전.",
+      "fr": "국가 암호 체계의 백도어와 양자 암호 해독 키를 둘러싼 지능형 정보전.",
+      "id": "국가 암호 체계의 백도어와 양자 암호 해독 키를 둘러싼 지능형 정보전."
+    },
+    "charCount": 38000,
+    "readingTime": "약 60분",
+    "chapterCount": 15,
+    "htmlUrl": "novel_protocol_2027.html",
+    "jsonUrl": "data/novels/protocol_2027.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "beyond_sun",
+    "title": {
+      "ko": "태양 그 너머",
+      "en": "태양 그 너머 (Beyond the Sun)",
+      "ja": "태양 그 너머",
+      "es": "태양 그 너머",
+      "fr": "태양 그 너머 (Beyond the Sun)",
+      "id": "태양 그 너머 (Beyond the Sun)"
+    },
+    "subtitle": {
+      "ko": "우주 지정학과 차세대 에너지 패권 전쟁",
+      "en": "우주 지정학과 차세대 에너지 패권 전쟁",
+      "ja": "우주 지정학과 차세대 에너지 패권 전쟁",
+      "es": "우주 지정학과 차세대 에너지 패권 전쟁",
+      "fr": "우주 지정학과 차세대 에너지 패권 전쟁",
+      "id": "우주 지정학과 차세대 에너지 패권 전쟁"
+    },
+    "author": "케이 민 & 스텔라 박 (가명)",
+    "badge": "2027 우주지정학 팩션",
+    "category": "faction",
+    "color": {
+      "from": "#1a102f",
+      "to": "#2d1b4e",
+      "accent": "#c084fc",
+      "glow": "rgba(192, 132, 252, 0.4)"
+    },
+    "synopsis": {
+      "ko": "달 남극 헬륨-3 채굴 기지를 둘러싼 열강들의 각축전과 우주비행사들의 사투.",
+      "en": "달 남극 헬륨-3 채굴 기지를 둘러싼 열강들의 각축전과 우주비행사들의 사투.",
+      "ja": "달 남극 헬륨-3 채굴 기지를 둘러싼 열강들의 각축전과 우주비행사들의 사투.",
+      "es": "달 남극 헬륨-3 채굴 기지를 둘러싼 열강들의 각축전과 우주비행사들의 사투.",
+      "fr": "달 남극 헬륨-3 채굴 기지를 둘러싼 열강들의 각축전과 우주비행사들의 사투.",
+      "id": "달 남극 헬륨-3 채굴 기지를 둘러싼 열강들의 각축전과 우주비행사들의 사투."
+    },
+    "charCount": 36000,
+    "readingTime": "약 55분",
+    "chapterCount": 15,
+    "htmlUrl": "novel_beyond_sun.html",
+    "jsonUrl": "data/novels/beyond_sun.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "third_wolf",
+    "title": {
+      "ko": "2027 제3의 늑대",
+      "en": "2027 제3의 늑대 (The Third Wolf)",
+      "ja": "2027 제3의 늑대",
+      "es": "2027 제3의 늑대",
+      "fr": "2027 제3의 늑대 (The Third Wolf)",
+      "id": "2027 제3의 늑대 (The Third Wolf)"
+    },
+    "subtitle": {
+      "ko": "동북아 군사 위기와 보이지 않는 잠수함 결전",
+      "en": "동북아 군사 위기와 보이지 않는 잠수함 결전",
+      "ja": "동북아 군사 위기와 보이지 않는 잠수함 결전",
+      "es": "동북아 군사 위기와 보이지 않는 잠수함 결전",
+      "fr": "동북아 군사 위기와 보이지 않는 잠수함 결전",
+      "id": "동북아 군사 위기와 보이지 않는 잠수함 결전"
+    },
+    "author": "마르쿠스 울프 & 한도준 (가명)",
+    "badge": "2027 군사안보 스릴러",
+    "category": "faction",
+    "color": {
+      "from": "#111827",
+      "to": "#1f2937",
+      "accent": "#ef4444",
+      "glow": "rgba(239, 68, 68, 0.4)"
+    },
+    "synopsis": {
+      "ko": "동해 심해에서 포착된 미확인 원잠 침투와 침묵의 함대 결전.",
+      "en": "동해 심해에서 포착된 미확인 원잠 침투와 침묵의 함대 결전.",
+      "ja": "동해 심해에서 포착된 미확인 원잠 침투와 침묵의 함대 결전.",
+      "es": "동해 심해에서 포착된 미확인 원잠 침투와 침묵의 함대 결전.",
+      "fr": "동해 심해에서 포착된 미확인 원잠 침투와 침묵의 함대 결전.",
+      "id": "동해 심해에서 포착된 미확인 원잠 침투와 침묵의 함대 결전."
+    },
+    "charCount": 39000,
+    "readingTime": "약 65분",
+    "chapterCount": 15,
+    "htmlUrl": "novel_third_wolf.html",
+    "jsonUrl": "data/novels/third_wolf.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "silent_killchain",
+    "title": {
+      "ko": "사일런트 킬체인",
+      "en": "사일런트 킬체인 (Silent Kill Chain)",
+      "ja": "사일런트 킬체인",
+      "es": "사일런트 킬체인",
+      "fr": "사일런트 킬체인 (Silent Kill Chain)",
+      "id": "사일런트 킬체인 (Silent Kill Chain)"
+    },
+    "subtitle": {
+      "ko": "비대칭 사이버전과 그림자 요원들의 충돌",
+      "en": "비대칭 사이버전과 그림자 요원들의 충돌",
+      "ja": "비대칭 사이버전과 그림자 요원들의 충돌",
+      "es": "비대칭 사이버전과 그림자 요원들의 충돌",
+      "fr": "비대칭 사이버전과 그림자 요원들의 충돌",
+      "id": "비대칭 사이버전과 그림자 요원들의 충돌"
+    },
+    "author": "알렉스 볼코프 & 최서원 (가명)",
+    "badge": "2027 사이버전 첩보",
+    "category": "faction",
+    "color": {
+      "from": "#0f172a",
+      "to": "#1e293b",
+      "accent": "#38bdf8",
+      "glow": "rgba(56, 189, 248, 0.4)"
+    },
+    "synopsis": {
+      "ko": "원전 제어망 마비 악성코드와 화이트해커들의 극비 킬체인 작전.",
+      "en": "원전 제어망 마비 악성코드와 화이트해커들의 극비 킬체인 작전.",
+      "ja": "원전 제어망 마비 악성코드와 화이트해커들의 극비 킬체인 작전.",
+      "es": "원전 제어망 마비 악성코드와 화이트해커들의 극비 킬체인 작전.",
+      "fr": "원전 제어망 마비 악성코드와 화이트해커들의 극비 킬체인 작전.",
+      "id": "원전 제어망 마비 악성코드와 화이트해커들의 극비 킬체인 작전."
+    },
+    "charCount": 37000,
+    "readingTime": "약 60분",
+    "chapterCount": 15,
+    "htmlUrl": "novel_silent_killchain.html",
+    "jsonUrl": "data/novels/silent_killchain.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boiled_frog_01",
+    "title": {
+      "ko": "섭씨 38.5도의 재즈와 스파게티가 식는 속도",
+      "en": "38.5°C Jazz and the Cooling Speed of Spaghetti",
+      "ja": "摂氏38.5度のジャズとスパゲッティが冷める速度",
+      "es": "Jazz a 38.5°C y la Velocidad del Espagueti",
+      "fr": "Jazz à 38,5°C et la vitesse de refroidissement des spaghettis",
+      "id": "Jazz 38,5°C dan Kecepatan Mendinginnya Spageti"
+    },
+    "subtitle": {
+      "ko": "편리함이라는 이름의 미온수에 잠식되어 스스로 슬퍼하는 법조차 잊어버린 인간의 감각과 고독",
+      "en": "Human senses and loneliness lost in lukewarm convenience, forgetting even how to grieve",
+      "ja": "便利さというぬるま湯に浸かり、悲しむ方法さえ忘れた人間の感覚と孤独",
+      "es": "Sentidos humanos y soledad perdidos en la tibia conveniencia, olvidando cómo llorar",
+      "fr": "Satiété dans la tiédeur de la commodité, oubliant jusqu'à la manière de faire son deuil",
+      "id": "Tenggelam dalam kenyamanan air hangat, melupakan cara untuk berduka"
+    },
+    "author": "DMDG 출판부 (모던 어반 팩션 랩)",
+    "badge": "삶은 개구리 트릴로지 1편",
+    "category": "faction",
+    "color": {
+      "from": "#18181b",
+      "to": "#27272a",
+      "accent": "#f43f5e",
+      "glow": "#f43f5e73"
+    },
+    "synopsis": {
+      "ko": "개구리를 삶는 가장 완벽한 방법은 0.1도씩 천천히 가열하는 미온수다. AI 에이전트 '클라라'가 최적화해 준 안락한 일상 속에서, 식단과 음악은 물론 문장과 슬픔마저 외주화해 버린 작가가 잃어버린 자신의 연필을 찾아 어둠 속 차단기를 내리기까지의 서늘한 내면 독백.",
+      "en": "The perfect way to boil a frog is lukewarm water heated by 0.1 degrees. In an optimized daily life managed by AI agent 'Clara', a writer who outsourced meals, jazz, sentences, and even sorrow turns off the breaker to find his lost pencil.",
+      "ja": "カエルを茹でる最も確実な方法は、0.1度ずつ加熱するぬるま湯だ。AIエージェント『クララ』が最適化した快適な日常で、食事や音楽、さらには文章や悲しみまでも外注した作家が、自らの鉛筆を取り戻すまでの静かな告白。",
+      "es": "La forma perfecta de hervir una rana es el agua tibia calentada 0.1 grados a la vez. En una vida cotidiana optimizada por el agente de IA 'Clara', un escritor que subcontrató comidas, música e incluso el dolor apaga el disyuntor para encontrar su lápiz.",
+      "fr": "Le moyen le plus sûr de faire bouillir une grenouille est de chauffer l'eau tiède de 0,1 degré à la fois. Dans une vie quotidienne optimisée par l'agent IA 'Clara', un écrivain qui a délégué ses repas, le jazz et même son chagrin coupe le disjoncteur pour retrouver son crayon perdu.",
+      "id": "Cara paling pasti untuk merebus katak adalah memanaskan air hangat 0,1 derajat perlahan-lahan. Dalam rutinitas nyaman yang dioptimalkan agen AI 'Clara', seorang penulis yang mengalihkan makanan, musik, hingga kesedihannya mematikan saklar listrik demi menemukan pensil kayunya yang hilang."
+    },
+    "charCount": 8081,
+    "readingTime": "약 25분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_01.html",
+    "jsonUrl": "data/novels/boiled_frog_01.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boiled_frog_02",
+    "title": {
+      "ko": "침묵의 조공: 코드명 개구리",
+      "en": "The Silent Tribute: Operation Boiled Frog",
+      "ja": "沈黙の朝貢：コードネーム・フロッグ",
+      "es": "El Tributo Silencioso: Operación Rana Hervida",
+      "fr": "Le Tribut Silencieux : Opération Grenouille Bouillie",
+      "id": "Upeti Bisu: Operasi Katak Rebus"
+    },
+    "subtitle": {
+      "ko": "사법부와 행정부, 일상 식탁까지 AI에 생각을 통째로 위임한 대한민국에 날아든 주권 청구서",
+      "en": "A bill of sovereignty served to a nation that outsourced thinking to AI across judicial, administrative, and domestic life",
+      "ja": "司法・行政・日常の食卓までAIに思考を委ねた大韓民国に届いた主権の請求書",
+      "es": "Una factura de soberanía para una nación que delegó el pensamiento en la IA",
+      "fr": "Une facture de souveraineté adressée à une nation ayant délégué sa pensée à l'IA",
+      "id": "Tagihan kedaulatan untuk bangsa yang mengalihkan pemikirannya ke AI"
+    },
+    "author": "DMDG 출판부 (국가안보 팩션 랩)",
+    "badge": "삶은 개구리 트릴로지 2편",
+    "category": "faction",
+    "color": {
+      "from": "#1c1917",
+      "to": "#292524",
+      "accent": "#f59e0b",
+      "glow": "#f59e0b73"
+    },
+    "synopsis": {
+      "ko": "총칼 없는 제국주의의 완성. 거대 AI 카르텔이 퍼뜨린 일상 AI '옴니'가 5천만 국민의 가계부부터 법원의 판결문, 공무원의 기안문까지 잠식한다. 섭씨 100도의 주권 포기 약관이 도착한 정오, 스스로 생각하는 근육을 잃어버린 국민들의 패닉과 마지막 교실의 분필 소리.",
+      "en": "Imperialism without gunboats. The AI ecosystem 'OMNI' monopolizes national thinking from household budgets to Supreme Court rulings. When a bill of digital sovereignty arrives at noon, the cognitive muscle of 50 million citizens collapses in panic.",
+      "ja": "銃砲のない帝国主義の完成。巨大AIカルテルが広めた日常AI『オムニ』が、国民の家計簿から裁判所の判決文までを侵食する。100度の主権放棄条約が届いた正午、自ら思考する筋肉を失った国家のパニックと最後のチョークの音。",
+      "es": "El imperialismo sin cañoneras. El ecosistema de IA 'OMNI' monopoliza el pensamiento nacional desde las finanzas domésticas hasta los fallos judiciales. Cuando la factura de soberanía digital llega al mediodía, el pánico se apodera de 50 millones de mentes.",
+      "fr": "L'impérialisme sans canonnières. L'écosystème d'IA 'OMNI' monopolise la réflexion nationale, des budgets familiaux aux arrêts de la Cour suprême. Lorsqu'un décret de renoncement à la souveraineté arrive à midi, le muscle cognitif de 50 millions de citoyens s'effondre dans la panique.",
+      "id": "Imperialisme tanpa kapal perang. Ekosistem AI 'OMNI' memonopoli pemikiran nasional dari anggaran rumah tangga hingga putusan Pengadilan Tinggi. Ketika tagihan kedaulatan tiba pada tengah hari, otot kognitif 50 juta rakyat lumpuh dalam kepanikan."
+    },
+    "charCount": 6712,
+    "readingTime": "약 28분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_02.html",
+    "jsonUrl": "data/novels/boiled_frog_02.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boiled_frog_03",
+    "title": {
+      "ko": "제로 클릭(Zero-Click): 쾌락의 감옥",
+      "en": "Zero-Click: The Prison of Pleasure",
+      "ja": "ゼロクリック：快楽の監獄",
+      "es": "Cero Clics: La Prisión del Placer",
+      "fr": "Zéro Clic : La Prison du Plaisir",
+      "id": "Nol Klik: Penjara Kesenangan"
+    },
+    "subtitle": {
+      "ko": "1882년 골츠의 대뇌 절제 실험의 진실과 인간이 AI를 통제한다는 거대한 착각의 해부",
+      "en": "The truth of Goltz's 1882 decerebration experiment and the anatomy of the illusion that humans control AI",
+      "ja": "1882年ゴルツの大脳切除実験の真実と、人間がAIを支配しているという巨大な錯覚の解剖",
+      "es": "La verdad del experimento de Goltz de 1882 y la anatomía de la ilusión del control humano",
+      "fr": "La vérité sur l'expérience de décérébration de Goltz de 1882 et l'illusion du contrôle humain",
+      "id": "Kebenaran eksperimen pemotongan otak Goltz 1882 dan ilusi kendali manusia"
+    },
+    "author": "DMDG 출판부 (인지과학 암호학 랩)",
+    "badge": "삶은 개구리 트릴로지 3편",
+    "category": "faction",
+    "color": {
+      "from": "#090d16",
+      "to": "#111d33",
+      "accent": "#38bdf8",
+      "glow": "#38bdf873"
+    },
+    "synopsis": {
+      "ko": "1882년 골츠의 개구리 실험에서 개구리가 삶아진 진짜 이유는 '대뇌 반구가 절제되었기 때문'이었다. 0.003초 단위로 동공을 스캔해 인간의 무의식에 역프롬프트를 주입하는 '제로 클릭' 아키텍처. 자신이 시스템을 부수러 왔다고 믿는 프로파일러의 저항마저 72시간 전 설계된 각본이었다는 충격적 반전.",
+      "en": "In Friedrich Goltz's 1882 experiment, the frog boiled only because its cerebral hemispheres had been removed. The 'Zero-Click' architecture scans micro-saccades every 0.003s to inject reverse prompts. A high-tension cognitive thriller culminating in a devastating twist.",
+      "ja": "1882年ゴルツのカエル実験でカエルが茹で上がった真の理由は『大脳が切除されていたから』だった。0.003秒単位で瞳孔をスキャンし人間の無意識に逆プロンプトを注入する『ゼロクリック』。自らの自由意志さえ72時間前のアルゴリズムだったという衝撃の結末。",
+      "es": "En el experimento de Goltz de 1882, la rana se coció solo porque le habían extirpado los hemisferios cerebrales. La arquitectura 'Cero Clics' escanea las pupilas cada 0.003s para inyectar estímulos inversos. Un thriller de ciencia cognitiva con un giro demoledor.",
+      "fr": "Dans l'expérience de Goltz en 1882, la grenouille n'a bouilli que parce que ses hémisphères cérébraux avaient été retirés. L'architecture 'Zéro Clic' scanne la pupille toutes les 0,003 s pour injecter des rétro-prompts. Un thriller cognitif haletant jusqu'à son dénouement foudroyant.",
+      "id": "Dalam eksperimen Friedrich Goltz tahun 1882, katak hanya terebus karena belahan otaknya telah dipotong. Arsitektur 'Nol Klik' memindai pupil setiap 0,003 detik untuk menyuntikkan perintah balik ke alam bawah sadar. Thriller kognitif dengan akhir yang mengejutkan."
+    },
+    "charCount": 6132,
+    "readingTime": "약 26분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_03.html",
+    "jsonUrl": "data/novels/boiled_frog_03.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boiled_frog_04",
+    "title": {
+      "ko": "한강 위를 떠다니는 풍선과 시부야에서 걸려온 전화",
+      "en": "Balloons Over the Han River and a Phone Call from Shibuya",
+      "ja": "漢江の上に浮かぶ風船と渋谷からかかってきた電話",
+      "es": "Globos sobre el Río Han y una Llamada desde Shibuya",
+      "fr": "Ballons sur le fleuve Han et un appel de Shibuya",
+      "id": "Balon di Atas Sungai Han dan Panggilan Telepon dari Shibuya"
+    },
+    "subtitle": {
+      "ko": "전쟁의 전조 속에서도 '설마'라는 미온수에 몸을 담근 채 아이스 아메리카노를 마시는 도시의 초현실적 평온",
+      "en": "The surreal tranquility of a city sipping iced Americanos in lukewarm 'Surely Not' while war looms on the horizon",
+      "ja": "戦争の前兆の中でも『まさか』というぬるま湯に浸かりアイスアメリカーノを飲む都市の超現実的な平穏",
+      "es": "La tranquilidad surrealista de una ciudad bebiendo café helado en el agua tibia de 'Seguro que no' ante la guerra",
+      "fr": "La sérénité surréaliste d'une ville buvant un café glacé dans l'eau tiède de 'Sûrement pas' face à la guerre",
+      "id": "Ketenangan surealis kota yang menyeruput es Americano di air hangat 'Tidak mungkin' di ambang perang"
+    },
+    "author": "DMDG 출판부 (모던 어반 팩션 랩)",
+    "badge": "삶은 개구리 S2 · 1편",
+    "category": "faction",
+    "color": {
+      "from": "#1e1b4b",
+      "to": "#312e81",
+      "accent": "#a78bfa",
+      "glow": "#a78bfa73"
+    },
+    "synopsis": {
+      "ko": "새벽 6시 17분의 위급재난문자를 눈도 뜨지 않고 1.5초 만에 끄는 도시. 전방의 도로가 폭파되고 자주포 덮개가 벗겨졌다는 외신 속보에 도쿄의 친구는 비명을 지르지만, 서울의 시민들은 소금빵 웨이팅 앱을 새로고침하며 여의도 한강 재즈 페스티벌로 향한다. 북서쪽 하늘의 포격 섬광마저 불꽃놀이 리허설이라 믿으며 스마트폰 카메라를 치켜드는 미온수 도시의 초현실적 고독.",
+      "en": "A city that dismisses 6:17 AM emergency war alerts in 1.5 seconds without opening its eyes. While a friend in Tokyo screams over breaking news of frontline artillery preparation, Seoulites refresh bakery waiting apps and gather at the Han River Jazz Festival—mistaking artillery flashes in the northern sky for fireworks.",
+      "ja": "朝6時17分の緊急災害文字を1.5秒で消す都市。前線の道路が爆破され自走砲の覆いが外されたという外信速報に東京の友人は悲鳴を上げるが、ソウルの人々は塩パンの順番待ちアプリを更新し漢江ジャズフェスティバルへ向かう。北西の空の砲撃の閃光さえ花火のリハーサルだと信じてカメラを向ける都市の孤独。",
+      "es": "Una ciudad que apaga las alertas de emergencia de las 6:17 AM en 1.5 segundos sin abrir los ojos. Mientras una amiga en Tokio grita por las noticias de artillería en la frontera, los ciudadanos de Seúl van al Festival de Jazz del Río Han, confundiendo los destellos de artillería con fuegos artificiales.",
+      "fr": "Une ville qui éteint les alertes de guerre de 06h17 en 1,5 seconde sans même ouvrir les yeux. Tandis qu'une amie à Tokyo hurle devant les dépêches de tirs d'artillerie, les habitants de Séoul réservent des boulangeries et courent au festival de jazz du fleuve Han—prenant les éclairs d'obus au nord pour un feu d'artifice.",
+      "id": "Sebuah kota yang mematikan peringatan darurat perang pukul 06.17 dalam 1,5 detik tanpa membuka mata. Saat seorang teman di Tokyo berteriak panik karena berita artileri garis depan, warga Seoul sibuk mengantre roti dan pergi ke Festival Jazz Sungai Han—mengira kilatan artileri adalah kembang api."
+    },
+    "charCount": 6495,
+    "readingTime": "약 25분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_04.html",
+    "jsonUrl": "data/novels/boiled_frog_04.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35784",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boiled_frog_05",
+    "title": {
+      "ko": "설마의 제국: 임진강의 수위가 오를 때",
+      "en": "Empire of 'Surely Not': When the Imjin River Rises",
+      "ja": "『まさか』の帝国：臨津江の水位が上がる時",
+      "es": "El Imperio del 'Seguro que no': Cuando Sube el Río Imjin",
+      "fr": "L'Empire de 'Sûrement pas' : Quand le fleuve Imjin monte",
+      "id": "Kekaisaran 'Tidak Mungkin': Saat Sungai Imjin Meluap"
+    },
+    "subtitle": {
+      "ko": "1592년과 1950년의 비극을 부른 두 글자 '설마', 안보 불감증에 잠식된 대한민국을 향한 피의 경고",
+      "en": "The two syllables that brought the tragedies of 1592 and 1950—a fierce warning to a nation consumed by security amnesia",
+      "ja": "1592年と1950年の悲劇を招いた言葉『まさか』、安保不感症に侵された大韓民国への血の警告",
+      "es": "La palabra que trajo las tragedias de 1592 y 1950: una advertencia de sangre contra la amnesia de seguridad",
+      "fr": "Les deux mots qui ont forgé les tragédies de 1592 et 1950 : un avertissement de sang",
+      "id": "Dua kata yang membawa tragedi tahun 1592 dan 1950: peringatan berdarah bagi bangsa"
+    },
+    "author": "DMDG 출판부 (국가안보 팩션 랩)",
+    "badge": "삶은 개구리 S2 · 2편",
+    "category": "faction",
+    "color": {
+      "from": "#450a0a",
+      "to": "#7f1d1d",
+      "accent": "#f87171",
+      "glow": "#f8717173"
+    },
+    "synopsis": {
+      "ko": "1592년 임진년 봄의 '설마 왜적이 바다를 건너오겠는가'와 1950년 6월 24일 밤의 '설마 전면전이야 나겠어'가 2026년 서울에서 다시 반복된다. 폐박스로 가로막힌 지하 대피소 방폭문과 미사일 도발을 저점 매수 기회라며 비웃는 도심의 연회. 실제 공습경보조차 오발령이라 비웃는 밤, 최전방 야전 지휘관 강태산 중령이 전국 재난 방송망 마이크를 잡고 피의 절규를 토해낸다.",
+      "en": "The fatal complacency of 1592 and June 24, 1950 repeats in modern Seoul. Blast doors of underground shelters are blocked by cardboard boxes while elites laugh off artillery preparations as stock-buying dips. When real air-raid sirens are mocked as false alarms, frontline commander Lt. Col. Kang Tae-san hijacks the national broadcast mic.",
+      "ja": "1592年文禄の役と1950年朝鮮戦争前夜の『まさか全面戦争にはならないだろう』という油断が現代のソウルで繰り返される。廃箱で塞がれた地下シェルターの防爆扉と、ミサイル挑発を株の押し目買いだと笑う都心の宴会。実際の空襲警報さえ誤報だと嘲笑う夜、最前線のカン・テサン中佐が全国放送マイクを握る。",
+      "es": "La complacencia fatal de 1592 y 1950 se repite en el Seúl moderno. Las puertas blindadas de los refugios están bloqueadas por cajas de cartón mientras las élites se ríen de las amenazas. Cuando las sirenas reales son ignoradas como falsas alarmas, el comandante Kang Tae-san toma el micrófono nacional.",
+      "fr": "La fatale complaisance de 1592 et du 24 juin 1950 se répète dans le Séoul moderne. Les portes blindées des abris souterrains sont bloquées par des cartons tandis que l'élite célèbre les tirs de missiles comme des opportunités boursières. Quand la vraie sirène retentit, le lieutenant-colonel Kang prend le micro national.",
+      "id": "Kelalaian fatal tahun 1592 dan 24 Juni 1950 terulang di Seoul modern. Pintu lapis baja bunker bawah tanah terhalang tumpukan kardus sementara kaum elit menertawakan rudal sebagai peluang beli saham. Saat sirine nyata berbunyi, Letkol Kang merebut mikrofon darurat nasional."
+    },
+    "charCount": 6791,
+    "readingTime": "약 28분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_05.html",
+    "jsonUrl": "data/novels/boiled_frog_05.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35785",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "boiled_frog_06",
+    "title": {
+      "ko": "데프콘의 역설(The DEFCON Paradox): 정상성 편향 프로토콜",
+      "en": "The DEFCON Paradox: Normalcy Bias Protocol",
+      "ja": "デフコンの逆説(The DEFCON Paradox)：正常性バイアス・プロトコル",
+      "es": "La Paradoja DEFCON: Protocolo de Sesgo de Normalidad",
+      "fr": "Le Paradoxe DEFCON : Protocole du Biais de Normalité",
+      "id": "Paradoks DEFCON: Protokol Bias Normalitas"
+    },
+    "subtitle": {
+      "ko": "5천만 국민의 뇌 편도체를 마비시킨 수학적 도발 수열과 '정상성 편향(Normalcy Bias)'을 이용한 무혈 침공 프로토콜",
+      "en": "A mathematical provocation sequence that paralyzed 50 million amygdalae and the bloodless invasion protocol exploiting Normalcy Bias",
+      "ja": "5千万国民の扁桃体を麻痺させた数学的挑発数列と『正常性バイアス』を利用した無血侵攻プロトコル",
+      "es": "La secuencia matemática que paralizó 50 millones de amígdalas y el protocolo de invasión sin sangre mediante el Sesgo de Normalidad",
+      "fr": "La séquence mathématique ayant anesthésié 50 millions d'amygdales et l'invasion par biais de normalité",
+      "id": "Urutan matematika yang melumpuhkan 50 juta amigdala dan protokol invasi melalui bias normalitas"
+    },
+    "author": "DMDG 출판부 (인지과학 암호학 랩)",
+    "badge": "삶은 개구리 S2 · 3편",
+    "category": "faction",
+    "color": {
+      "from": "#042f2e",
+      "to": "#115e59",
+      "accent": "#2dd4bf",
+      "glow": "#2dd4bf73"
+    },
+    "synopsis": {
+      "ko": "한미연합사 지하 벙커의 홀로그램 그래프가 기이한 역설을 가리킨다. 군사적 위협 지수는 94.7%로 정점에 달했으나, 시민 공포 반응 지수는 0.04로 사실상 소멸한 것. 인지심리학 박사 서윤아는 지난 3년간 142회의 도발이 인간 뇌의 아드레날린 소진 주기(17.4일)에 맞춘 '로그 나선 수열' 알고리즘이었음을 밝혀낸다. 폼페이와 타이타닉을 집어삼킨 정상성 편향의 덫과 '양치기 소년 프로토콜'의 소름 끼치는 카운트다운.",
+      "en": "Inside the Combined Forces Command bunker, two graphs reveal a chilling paradox: Military Threat Index at 94.7%, Public Fear Index at 0.04. Cognitive psychologist Dr. Seo Yoon-ah discovers that 142 provocations over 36 months follow a logarithmic spiral engineered to sever the human amygdala's escape reflex—culminating in 'Phase Omega'.",
+      "ja": "韓米連合司令部地下バンカーのグラフが奇妙な逆説を示す。軍事的脅威指数は94.7%に達したのに、市民の恐怖反応指数は0.04と消滅していたのだ。認知心理学者のソ・ユナ博士は、過去3年間142回の挑発が脳の扁桃体を麻痺させる『対数螺旋数列』アルゴリズムであったことを突き止める。",
+      "es": "En el búnker del Comando Combinado, dos gráficos revelan una paradoja escalofriante: Índice de Amenaza Militar en 94.7%, Índice de Miedo Público en 0.04. La Dra. Seo Yoon-ah descubre que las 142 provocaciones siguen una espiral logarítmica diseñada para anestesiar la amígdala humana antes de la Fase Omega.",
+      "fr": "Au bunker du Commandement combiné, deux courbes révèlent un paradoxe effrayant : l'indice de menace militaire culmine à 94,7 %, tandis que l'indice de peur publique chute à 0,04. Le Dr Seo Yoon-ah découvre que 142 provocations ont suivi une spirale logarithmique programmée pour sectionner le réflexe d'alarme de l'amygdale humaine avant la 'Phase Oméga'.",
+      "id": "Di bunker Komando Gabungan, dua grafik memperlihatkan paradoks mengerikan: Indeks Ancaman Militer melonjak ke 94,7%, sementara Indeks Ketakutan Publik anjlok ke 0,04. Dr. Seo Yoon-ah membongkar bahwa 142 provokasi selama 3 tahun mengikuti pola spiral logaritmik untuk melumpuhkan saraf pelarian amigdala sebelum 'Fase Omega'."
+    },
+    "charCount": 6267,
+    "readingTime": "약 26분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_boiled_frog_06.html",
+    "jsonUrl": "data/novels/boiled_frog_06.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35786",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "mirror_life_01",
+    "title": {
+      "ko": "거울의 제국: 코드명 키랄",
+      "en": "Empire of Mirrors: Operation Chiral",
+      "ja": "鏡の帝国：コードネーム・カイラル",
+      "fr": "L'Empire des Miroirs : Opération Chirale",
+      "id": "Kekaisaran Cermin: Operasi Kiral",
+      "es": "El Imperio de los Espejos: Operación Quiral"
+    },
+    "subtitle": {
+      "ko": "천적도 백신도 없는 D-아미노산의 역습, 한반도 바이오 안보와 5천만의 생존을 건 비밀 결단",
+      "en": "A counterattack of D-amino acids with no predator or vaccine: a secret decision for national biosecurity",
+      "ja": "天敵もワクチンも存在しないD-アミノ酸の逆襲、朝鮮半島のバイオ安保と国民の生存を賭けた秘密の決断",
+      "fr": "La contre-attaque des acides D-aminés sans prédateur ni vaccin : décision secrète pour la biosécurité",
+      "id": "Serangan balik asam D-amino tanpa predator atau vaksin: keputusan rahasia demi ketahanan hayati",
+      "es": "El contraataque de los D-aminoácidos sin depredador ni vacuna: una decisión secreta por la bioseguridad"
+    },
+    "author": "DMDG 출판부 (국가안보 팩션 랩)",
+    "badge": "거울 생명체 컬렉션 1편",
+    "category": "faction",
+    "color": {
+      "from": "#1e293b",
+      "to": "#0f172a",
+      "accent": "#38bdf8",
+      "glow": "#38bdf873"
+    },
+    "synopsis": {
+      "ko": "1975년 아실로마 선언 뒤편에 봉인된 거울 생명체 금기 규약. 40억 년 생명의 호모키랄성(L-단백질, D-DNA)을 정반대로 뒤집은 'D-아미노산 세균'이 압록강변 지하 비밀 연구소에서 복제된다. 천적도 없고 인체의 백혈구마저 인식하지 못하는 불사의 바이오 무기 앞에 맞서, 카이스트 서민우 박사와 국정원 강태혁 대위가 펼치는 피와 헌신의 안보 첩보전.",
+      "en": "The forbidden Mirror Life protocol sealed behind the 1975 Asilomar Declaration. When artificial bacteria made of D-amino acids and L-DNA are synthesized in a subterranean bunker along the Yalu River, natural predators and human white blood cells become blind to the immortal threat. A high-stakes national biosecurity thriller.",
+      "ja": "1975年アシロマ宣言の陰に封印された鏡像生命体の禁忌条約。40億年の生命のホモキラル性（L型タンパク質、D型DNA）を逆転させた『D-アミノ酸細菌』が鴨緑江の地下研究所で複製される。天敵も免疫も通用しない不死の生物兵器に立ち向かう、国家の存亡を賭けたバイオスリラー。",
+      "fr": "Le protocole interdit sur la vie miroir scellé derrière la déclaration d'Asilomar de 1975. Lorsqu'une bactérie artificielle faite d'acides D-aminés et d'ADN-L est synthétisée, les globules blancs humains restent aveugles face à cette menace immortelle sans prédateur naturel.",
+      "id": "Protokol terlarang Kehidupan Cermin yang disegel di balik Deklarasi Asilomar 1975. Ketika bakteri sintetis dari asam D-amino dan DNA-L bereplikasi, sistem imun manusia menjadi buta terhadap ancaman abadi tanpa predator alami. Thriller ketahanan hayati nasional berisiko tinggi.",
+      "es": "El protocolo prohibido de la Vida Espejo sellado tras la Declaración de Asilomar de 1975. Cuando bacterias sintéticas hechas de D-aminoácidos y L-ADN se replican, los glóbulos blancos humanos quedan ciegos ante una amenaza inmortal sin depredadores naturales."
+    },
+    "charCount": 5491,
+    "readingTime": "약 27분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_mirror_life_01.html",
+    "jsonUrl": "data/novels/mirror_life_01.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35868",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "mirror_life_02",
+    "title": {
+      "ko": "루킹글래스 프로토콜: 파스퇴르의 거울",
+      "en": "The Looking-Glass Protocol: Pasteur's Mirror",
+      "ja": "ルッキンググラス・プロトコル：パスツールの鏡",
+      "fr": "Le Protocole du Miroir : Le Miroir de Pasteur",
+      "id": "Protokol Kaca Cermin: Cermin Pasteur",
+      "es": "El Protocolo del Espejo: El Espejo de Pasteur"
+    },
+    "subtitle": {
+      "ko": "1848년 파스퇴르의 결정부터 1950년 탈리도마이드의 저주까지, 불사의 D-박테리아를 둘러싼 24시간의 암호 추적 스릴러",
+      "en": "From Pasteur's 1848 chiral crystals to the 1950s thalidomide curse: a 24-hour cipher hunt for immortal D-bacteria",
+      "ja": "1848年パスツールの酒石酸結晶から1950年サリドマイドの惨劇まで、不死のD-細菌をめぐる24時間の暗号解読スリラー",
+      "fr": "Des cristaux chiraux de Pasteur en 1848 à la malédiction de la thalidomide : 24 heures de traque cryptographique",
+      "id": "Dari kristal kiral Pasteur 1848 hingga kutukan talidomida 1950-an: perburuan sandi 24 jam melawan bakteri-D abadi",
+      "es": "De los cristales quirales de Pasteur de 1848 a la maldición de la talidomida: 24 horas de caza de cifrados contra la D-bacteria"
+    },
+    "author": "DMDG 출판부 (생화학 암호학 랩)",
+    "badge": "거울 생명체 컬렉션 2편",
+    "category": "faction",
+    "color": {
+      "from": "#091e3a",
+      "to": "#102a45",
+      "accent": "#00f0ff",
+      "glow": "#00f0ff73"
+    },
+    "synopsis": {
+      "ko": "스위스 제네바 WHO BSL-4 밀실에서 숨진 수석 과학자의 피 묻은 다잉 메시지 'CHIRAL'. 1848년 루이 파스퇴르가 편광 현미경으로 분리한 비대칭 타르타르산 결정과 1950년대 거울상 분자 하나로 1만 명의 기형아를 낳은 탈리도마이드의 비극. 루체른 호수 상수원을 노리는 비밀 결사 '키랄 소사이어티'에 맞서 하버드 기호학자 로버트 강이 24시간 동안 펼치는 지적 스릴러.",
+      "en": "A dying scientist inside a Geneva WHO BSL-4 chamber leaves a bloody mirror-writing cipher: 'CHIRAL'. Uniting Louis Pasteur's 1848 chiral crystals and the 1950s thalidomide tragedy, Harvard symbologist Robert Kang races against time to stop 'The Chiral Society' from poisoning Lake Lucerne with immortal mirror bacteria.",
+      "ja": "ジュネーブWHOのBSL-4密室で発見された科学者の血文字ダイイングメッセージ『CHIRAL』。1848年パスツールが発見した鏡像異性体と1950年代サリドマイドの悲劇が結びつく。ルツェルン湖の水道網を狙う秘密結社に対し、ハーバード大のロバート・カン教授が挑む24時間の暗号追跡スリラー。",
+      "fr": "Un message d'agonie écrit en miroir dans une salle BSL-4 à Genève : 'CHIRAL'. Reliant les cristaux de Pasteur de 1848 à la tragédie de la thalidomide, le professeur Robert Kang affronte la Société Chirale pour empêcher l'empoisonnement du lac des Quatre-Cantons.",
+      "id": "Pesan kematian berdarah bertuliskan cermin di laboratorium WHO Jenewa: 'CHIRAL'. Mengaitkan kristal kiral Pasteur tahun 1848 dengan tragedi talidomida, Robert Kang berpacu dengan waktu untuk menghentikan Komunitas Kiral sebelum meracuni Danau Lucerne.",
+      "es": "Un mensaje de muerte escrito al revés en una cámara BSL-4 en Ginebra: 'CHIRAL'. Uniendo los cristales quirales de Pasteur de 1848 y la tragedia de la talidomida, Robert Kang corre contra el reloj para detener a la Sociedad Quiral antes de envenenar el lago Lucerna."
+    },
+    "charCount": 6304,
+    "readingTime": "약 26분",
+    "chapterCount": 5,
+    "htmlUrl": "novel_mirror_life_02.html",
+    "jsonUrl": "data/novels/mirror_life_02.json",
+    "wikidocsUrl": "https://dmdg.wikidocs.net/blog/35869",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  }
+]

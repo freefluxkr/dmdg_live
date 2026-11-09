@@ -824,8 +824,86 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
   }
 }
 
+
+/* TTS Dropdown Menu */
+.tts-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.tts-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 270px;
+  background: rgba(18, 24, 38, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(16px);
+  padding: 6px;
+  z-index: 9999;
+  flex-direction: column;
+  gap: 4px;
+}
+.tts-dropdown-menu.show {
+  display: flex !important;
+  animation: ttsFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes ttsFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.tts-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #f1f5f9;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s ease;
+  font-family: inherit;
+  width: 100%;
+}
+.tts-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(245, 158, 11, 0.3);
+  transform: translateX(2px);
+}
+.tts-item-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.tts-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tts-item-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+}
+.tts-item-desc {
+  font-size: 0.74rem;
+  color: #94a3b8;
+  line-height: 1.3;
+}
+.reader-article p {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.reader-article p:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
 </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+  <link rel="stylesheet" href="css/dmdg_payment_modal.css">
 </head>
 <body class="theme-dark">
 
@@ -871,12 +949,14 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
         <!-- Filter Chips -->
         <div class="filter-bar">
-          <button class="filter-chip active" data-filter="all">전체 도서관 (25)</button>
+          <button class="filter-chip active" data-filter="all">전체 도서관 (43)</button>
+          <button class="filter-chip" data-filter="faction">🖋️ 팩션 소설 컬렉션 (18)</button>
           <button class="filter-chip" data-filter="security">🛡️ 산업 IoT &amp; 안전관제 (5)</button>
-          <button class="filter-chip" data-filter="rea">📕 REA 역공학 &amp; IDE (5)</button>
-          <button class="filter-chip" data-filter="agent">🤖 AI 에이전트 &amp; 양자 (4)</button>
-          <button class="filter-chip" data-filter="business">💼 비즈니스 &amp; 데이터 (7)</button>
-          <button class="filter-chip" data-filter="faction">🖋️ 2027 팩션 소설 (4)</button>
+          <button class="filter-chip" data-filter="rea">📕 REA 역공학 &amp; IDE (6)</button>
+          <button class="filter-chip" data-filter="agent">🤖 AI 에이전트 &amp; 양자 (5)</button>
+          <button class="filter-chip" data-filter="business">💼 비즈니스 &amp; 데이터 (9)</button>
+          <button class="filter-chip" data-filter="healing_gourmet">🍃 사찰음식 인문기행 (1)</button>
+          <button class="filter-chip" data-filter="travel_gourmet">🍲 K-기사식당 기행 (1)</button>
         </div>
       </section>
 
@@ -908,10 +988,26 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
         <div class="controls-right">
           <!-- Audio TTS Widget -->
-          <div class="audio-widget">
+          <div class="audio-widget tts-wrap">
             <button id="btn-tts-play" class="btn-ctrl" style="height:30px; padding:0 0.5rem;" title="AI 음성 낭독">
               <span id="tts-icon">🎧</span> <span id="tts-text">낭독</span>
             </button>
+            <div id="tts-menu" class="tts-dropdown-menu">
+              <button type="button" class="tts-menu-item" onclick="startAudioWithMode('continuous')">
+                <span class="tts-item-icon">▶️</span>
+                <div class="tts-item-body">
+                  <div class="tts-item-title">전체 연속 낭독</div>
+                  <div class="tts-item-desc">현재 본문을 처음부터 끝까지 자동 연속 낭독</div>
+                </div>
+              </button>
+              <button type="button" class="tts-menu-item" onclick="startAudioWithMode('paragraph')">
+                <span class="tts-item-icon">📑</span>
+                <div class="tts-item-body">
+                  <div class="tts-item-title">문단 단위 낭독</div>
+                  <div class="tts-item-desc">선택 문단만 낭독 (본문 문단 클릭 시 개별 낭독)</div>
+                </div>
+              </button>
+            </div>
             <button id="btn-tts-speed" class="audio-speed-btn" title="재생 속도 변경">1.0x</button>
           </div>
 
@@ -957,7 +1053,7 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
   </div>
 
   <!-- Scripts -->
-  <script src="js/books_data.js"></script>
+  <script src="js/books_data.js?v=20261109_2346_v3"></script>
   <script>
 // 2026_korea 단편소설 컬렉션 통합 데이터셋
   const NOVELS_DATA = window.NOVELS_DATA || [];
@@ -1133,11 +1229,11 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
     const filteredNovels = NOVELS_DATA.filter(n => {
       if (filter === 'all') return true;
-      if (filter === 'faction') return n.category && (n.category.includes('faction') || !n.wikidocsUrl);
-      if (filter === 'security') return n.category && (n.category.includes('security') || n.id.includes('21858') || n.id.includes('21842') || n.id.includes('21870') || n.id.includes('21868'));
-      if (filter === 'rea') return n.category && (n.category.includes('rea') || n.id.includes('21781') || n.id.includes('21777') || n.id.includes('21753') || n.id.includes('21754') || n.id.includes('21755'));
-      if (filter === 'agent') return n.category && (n.category.includes('agent') || n.id.includes('21695') || n.id.includes('21747') || n.id.includes('21793') || n.id.includes('21701'));
-      if (filter === 'business') return n.category && (n.category.includes('business') || n.id.includes('21748') || n.id.includes('21746') || n.id.includes('21733') || n.id.includes('21658') || n.id.includes('21683') || n.id.includes('21841') || n.id.includes('21869') || n.id.includes('21665'));
+      if (filter === 'faction') return n.category && (n.category.includes('faction') || !n.wikidocsUrl || String(n.id).includes('boiled_frog') || String(n.id).includes('mirror_life'));
+      if (filter === 'security') return n.category && (n.category.includes('security') || n.category.includes('fire-safety') || String(n.id).includes('21858') || String(n.id).includes('21842') || String(n.id).includes('21870') || String(n.id).includes('21868') || String(n.id).includes('21891'));
+      if (filter === 'rea') return n.category && (n.category.includes('rea') || n.category.includes('robotics') || String(n.id).includes('21781') || String(n.id).includes('21777') || String(n.id).includes('21753') || String(n.id).includes('21754') || String(n.id).includes('21755') || String(n.id).includes('21887'));
+      if (filter === 'agent') return n.category && (n.category.includes('agent') || n.category.includes('ai') || String(n.id).includes('21695') || String(n.id).includes('21747') || String(n.id).includes('21793') || String(n.id).includes('21701'));
+      if (filter === 'business') return n.category && (n.category.includes('business') || n.category.includes('data') || String(n.id).includes('21748') || String(n.id).includes('21746') || String(n.id).includes('21733') || String(n.id).includes('21658') || String(n.id).includes('21683') || String(n.id).includes('21841') || String(n.id).includes('21869') || String(n.id).includes('21665'));
       return (n.author && n.author.includes(filter)) || (n.badge && n.badge.includes(filter)) || (n.category && n.category.includes(filter));
     });
 
@@ -1151,7 +1247,12 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
       card.style.setProperty('--card-glow', c.glow || 'rgba(245,158,11,0.2)');
 
       const novelId = String(novel.id || '');
-      const coverIcon = novelId.includes('21748') ? '💰' : 
+      const coverIcon = novelId.includes('master_designer') ? '🏛️' :
+          (novelId.includes('architect') ? '🔐' :
+            (novelId.includes('bananafish') ? '🎷' :
+              (novelId.includes('mirror') ? '🪞' :
+                       (novelId.includes('boiled') ? '🐸' :
+                       (novelId.includes('21748') ? '💰' : 
                        (novelId.includes('21747') ? '🤖' : 
                        (novelId.includes('21746') ? '💼' : 
                        (novelId.includes('21858') ? '🛡️' :
@@ -1161,7 +1262,9 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
                        (novelId.includes('21869') ? '🚚' :
                        (novelId.includes('wolf') ? '🐺' : 
                        (novelId.includes('sun') ? '☀️' : 
-                       (novelId.includes('silent') ? '🛡️' : '🔐'))))))))));
+                       (novelId.includes('silent') ? '🛡️' : 
+                       (novelId.includes('kisa') ? '🍲' :
+                       (novelId.includes('temple') ? '🍃' : '🔐'))))))))))))));
 
       card.innerHTML = `
         <div class="book-cover">
@@ -1208,7 +1311,35 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
   // ── Reader View Functions ────────────────────────────────────────────────
   function openReader(novelId, chapterIdx = 0) {
-    const novel = NOVELS_DATA.find(n => n.id === novelId);
+    const novel = NOVELS_DATA.find(n => String(n.id) === String(novelId));
+    if (novel && novel.htmlUrl) {
+      window.location.href = novel.htmlUrl;
+      return;
+    }
+                const safeMap = {
+      'kisa_seoul': 'novel_kisa_seoul.html',
+      'kisa-seoul': 'novel_kisa_seoul.html',
+      'temple_food': 'novel_temple_food.html',
+      'temple-food': 'novel_temple_food.html',
+      'boy_worker_dream': 'novel_boy_worker_dream.html',
+      'boy-worker-dream': 'novel_boy_worker_dream.html',
+      'boy_worker_cipher': 'novel_boy_worker_cipher.html',
+      'boy-worker-cipher': 'novel_boy_worker_cipher.html',
+      'boy_worker_destiny': 'novel_boy_worker_destiny.html',
+      'boy-worker-destiny': 'novel_boy_worker_destiny.html',
+      'protocol_2027': 'novel_protocol_2027.html',
+      'protocol-2027': 'novel_protocol_2027.html',
+      'beyond_sun': 'novel_beyond_sun.html',
+      'beyond-sun': 'novel_beyond_sun.html',
+      'third_wolf': 'novel_third_wolf.html',
+      'third-wolf': 'novel_third_wolf.html',
+      'silent_killchain': 'novel_silent_killchain.html',
+      'silent-killchain': 'novel_silent_killchain.html'
+    };
+    if (safeMap[novelId]) {
+      window.location.href = safeMap[novelId];
+      return;
+    }
     if (!novel) return;
 
     stopAudio();
@@ -1349,6 +1480,7 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
   let ttsKeepAliveTimer = null;
   let koreanVoice = null;
   let ttsIsStarting = false;
+  let ttsMode = "continuous";
   // Safari GC에 의한 조기 소멸 방지용 영구 Set
   window.__dmdgActiveUtterances = window.__dmdgActiveUtterances || new Set();
 
@@ -1439,9 +1571,21 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
 
     if (STATE.tts.isPlaying) {
       stopAudio();
-    } else {
-      startAudio(0);
+      return;
     }
+    const menu = document.getElementById('tts-menu');
+    if (menu) {
+      menu.classList.toggle('show');
+    } else {
+      startAudioWithMode('continuous', 0);
+    }
+  }
+
+  function startAudioWithMode(mode, startIdx = 0) {
+    const menu = document.getElementById('tts-menu');
+    if (menu) menu.classList.remove('show');
+    ttsMode = mode;
+    startAudio(startIdx);
   }
 
   function startAudio(startFromIdx = 0) {
@@ -1585,6 +1729,8 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
     el.ttsIcon.textContent = '🎧';
     el.ttsText.textContent = '낭독';
     el.btnTtsPlay.classList.remove('active');
+    const menu = document.getElementById('tts-menu');
+    if (menu) menu.classList.remove('show');
   }
 
   function cycleSpeed() {
@@ -1690,5 +1836,8 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
   }
 
   </script>
+  <script src="js/dmdg_payment.js"></script>
 </body>
 </html>
+
+<!-- Cache-Buster: 20261109_2346_v3 -->
