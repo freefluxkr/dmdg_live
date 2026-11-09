@@ -1246,25 +1246,31 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
       card.style.setProperty('--card-accent', c.accent || '#f59e0b');
       card.style.setProperty('--card-glow', c.glow || 'rgba(245,158,11,0.2)');
 
+            function getCoverIcon(novelId) {
+        if (!novelId) return '📚';
+        const id = String(novelId);
+        if (id.includes('master_designer')) return '🏛️';
+        if (id.includes('architect')) return '🔐';
+        if (id.includes('bananafish')) return '🎷';
+        if (id.includes('mirror')) return '🪞';
+        if (id.includes('boiled')) return '🐸';
+        if (id.includes('21748')) return '💰';
+        if (id.includes('21747')) return '🤖';
+        if (id.includes('21746')) return '💼';
+        if (id.includes('21858') || id.includes('silent')) return '🛡️';
+        if (id.includes('21842')) return '🏭';
+        if (id.includes('21870')) return '🚨';
+        if (id.includes('21868')) return '🌐';
+        if (id.includes('21869')) return '🚚';
+        if (id.includes('wolf')) return '🐺';
+        if (id.includes('sun')) return '☀️';
+        if (id.includes('kisa')) return '🍲';
+        if (id.includes('temple')) return '🍃';
+        return '📚';
+      }
+
       const novelId = String(novel.id || '');
-      const coverIcon = novelId.includes('master_designer') ? '🏛️' :
-          (novelId.includes('architect') ? '🔐' :
-            (novelId.includes('bananafish') ? '🎷' :
-              (novelId.includes('mirror') ? '🪞' :
-                       (novelId.includes('boiled') ? '🐸' :
-                       (novelId.includes('21748') ? '💰' : 
-                       (novelId.includes('21747') ? '🤖' : 
-                       (novelId.includes('21746') ? '💼' : 
-                       (novelId.includes('21858') ? '🛡️' :
-                       (novelId.includes('21842') ? '🏭' :
-                       (novelId.includes('21870') ? '🚨' :
-                       (novelId.includes('21868') ? '🌐' :
-                       (novelId.includes('21869') ? '🚚' :
-                       (novelId.includes('wolf') ? '🐺' : 
-                       (novelId.includes('sun') ? '☀️' : 
-                       (novelId.includes('silent') ? '🛡️' : 
-                       (novelId.includes('kisa') ? '🍲' :
-                       (novelId.includes('temple') ? '🍃' : '🔐'))))))))))))));
+      const coverIcon = getCoverIcon(novelId);
 
       card.innerHTML = `
         <div class="book-cover">
