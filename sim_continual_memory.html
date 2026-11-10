@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영구 두뇌 AI: 지속 메모리(Continual Memory) × Unsloth QLoRA/DPO 시뮬레이터 | DMDG Great AI Live Lab</title>
+  <meta name="description" content="심화 3 (Book 22037) 공식 인터랙티브 시뮬레이터 — 해마(Temporal KG) ↔ 대뇌피질(Unsloth QLoRA/DPO) 2단계 기억 응고화, 에빙하우스 망각 곡선, 7:3 Replay Buffer & LoRA 핫스왑">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #050711;
+      --bg-card: rgba(13, 19, 38, 0.92);
+      --bg-surface: #090e1d;
+      --border-color: rgba(168, 85, 247, 0.24);
+      --border-highlight: rgba(16, 185, 129, 0.65);
+      --cyan-neon: #38bdf8;
+      --emerald-neon: #10b981;
+      --purple-neon: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.45);
+      --amber-neon: #f59e0b;
+      --rose-neon: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-ui: 'Outfit', 'Pretendard', -apple-system, sans-serif;
+      --font-code: 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #1d1238 0%, var(--bg-base) 68%);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .bg-grid {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none; z-index: 0;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 7, 17, 0.92);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 26px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo-badge {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: linear-gradient(135deg, #a855f7, #0ea5e9);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+      box-shadow: 0 0 22px var(--purple-glow);
+    }
+    .brand-text h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
+    .brand-text p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .badge-live {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 9999px;
+      background: rgba(168, 85, 247, 0.14);
+      border: 1px solid var(--purple-neon);
+      color: #d8b4fe; font-size: 12px; font-weight: 600; font-family: var(--font-code);
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--purple-neon);
+      box-shadow: 0 0 10px var(--purple-neon);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+    .btn-link {
+      padding: 8px 15px; border-radius: 8px;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(56, 189, 248, 0.2));
+      border: 1px solid rgba(168, 85, 247, 0.55);
+      color: #e9d5ff; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s ease;
+    }
+    .btn-link:hover {
+      background: linear-gradient(135deg, var(--purple-neon), var(--cyan-neon));
+      color: #050711; box-shadow: 0 0 18px var(--purple-glow);
+    }
+
+    main {
+      position: relative; z-index: 1;
+      max-width: 1580px; width: 100%; margin: 0 auto;
+      padding: 20px 24px 40px;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+
+    .scenario-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 15px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      flex-wrap: wrap;
+    }
+    .scenario-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn-scenario {
+      padding: 9px 14px; border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(148,163,184,0.25);
+      color: var(--text-main); font-size: 12.8px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-scenario:hover { border-color: var(--purple-neon); background: rgba(168,85,247,0.12); }
+    .btn-scenario.active {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.28), rgba(16, 185, 129, 0.22));
+      border-color: var(--emerald-neon);
+      color: #6ee7b7;
+      box-shadow: 0 0 16px rgba(168, 85, 247, 0.3);
+    }
+    .btn-run {
+      padding: 10px 20px; border-radius: 10px;
+      background: linear-gradient(135deg, #a855f7, #10b981);
+      border: none; color: #050711; font-weight: 800; font-size: 13.5px;
+      cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 0 20px var(--purple-glow);
+    }
+    .btn-run:hover { transform: translateY(-1px); filter: brightness(1.08); }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    @media (max-width: 1024px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .kpi-title { font-size: 11.5px; color: var(--text-muted); font-weight: 600; }
+    .kpi-value { font-size: 21px; font-weight: 800; font-family: var(--font-code); color: var(--text-main); }
+    .kpi-sub { font-size: 11.5px; color: #d8b4fe; }
+
+    .workspace-grid { display: grid; grid-template-columns: 1.32fr 1fr; gap: 18px; }
+    @media (max-width: 1180px) { .workspace-grid { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 14px; display: flex; flex-direction: column; overflow: hidden;
+    }
+    .panel-header {
+      padding: 13px 18px; background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border-color);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .panel-title { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .panel-tag {
+      font-size: 11px; font-family: var(--font-code);
+      padding: 3px 8px; border-radius: 6px;
+      background: rgba(168, 85, 247, 0.14); color: #e9d5ff;
+      border: 1px solid rgba(168, 85, 247, 0.35);
+    }
+
+    .graph-stage {
+      position: relative; height: 455px;
+      background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.08), rgba(5, 7, 17, 0.96));
+    }
+    svg#memorySvg { width: 100%; height: 100%; display: block; }
+
+    .synapse-line {
+      stroke: rgba(148, 163, 184, 0.26); stroke-width: 2;
+    }
+    .synapse-line.active-flow {
+      stroke: #10b981; stroke-width: 3.4; stroke-dasharray: 8 4;
+      animation: dashFlow 0.85s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.85));
+    }
+    .synapse-line.archived-flow {
+      stroke: #64748b; stroke-width: 2; stroke-dasharray: 4 4;
+    }
+    .synapse-line.cortex-flow {
+      stroke: #a855f7; stroke-width: 3.6; stroke-dasharray: 9 4;
+      animation: dashFlow 0.75s linear infinite;
+      filter: drop-shadow(0 0 9px rgba(168, 85, 247, 0.9));
+    }
+    @keyframes dashFlow { to { stroke-dashoffset: -24; } }
+
+    .node-group { cursor: pointer; }
+    .node-title { fill: #f8fafc; font-size: 11.5px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+    .node-sub { fill: #cbd5e1; font-size: 9.5px; font-family: var(--font-code); text-anchor: middle; pointer-events: none; }
+
+    .code-box {
+      padding: 14px 16px; background: #060913;
+      font-family: var(--font-code); font-size: 12px; line-height: 1.6;
+      color: #e2e8f0; border-bottom: 1px solid var(--border-color);
+      overflow-x: auto; white-space: pre;
+    }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 980px) { .compare-grid { grid-template-columns: 1fr; } }
+    .compare-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px;
+    }
+    .compare-card.amnesia { border-top: 3px solid var(--rose-neon); }
+    .compare-card.alterego { border-top: 3px solid var(--emerald-neon); }
+    .terminal-log {
+      background: #050711; border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: 10px; padding: 14px;
+      font-family: var(--font-code); font-size: 12px; line-height: 1.65;
+      color: #cbd5e1; min-height: 150px; white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <header>
+    <div class="brand">
+      <div class="logo-badge">CM</div>
+      <div class="brand-text">
+        <h1>영구 두뇌 AI: 지속 메모리(Continual Memory) × Unsloth QLoRA/DPO 시뮬레이터</h1>
+        <p>Tier 1 해마(Neo4j Temporal KG) ↔ Tier 2 대뇌피질(Qwen-2.5 7B QLoRA + DPO + Hot-Swap) 2단계 기억 응고화 실험실</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="badge-live"><span class="pulse-dot"></span>DUAL-TIER BRAIN: ALTER-EGO v1 ACTIVE</div>
+      <a href="https://wikidocs.net/book/22037" target="_blank" class="btn-link">📘 위키독스 교안 (Book 22037)</a>
+      <a href="sim_graphrag.html" class="btn-link">🕸️ 심화 2 GraphRAG 시뮬레이터</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="scenario-bar">
+      <div class="scenario-group">
+        <button class="btn-scenario active" onclick="selectScenario(0)" id="scenBtn0">
+          🕰️ 단계 1: Tier 1 해마 — 시간축 지식 그래프(Temporal KG) & 에빙하우스 망각 감쇠
+        </button>
+        <button class="btn-scenario" onclick="selectScenario(1)" id="scenBtn1">
+          ⚗️ 단계 2: 야간 수면 합성 — 사고사슬(&lt;thought&gt;) 증류 & 7:3 Replay Buffer 망각 방어
+        </button>
+        <button class="btn-scenario" onclick="selectScenario(2)" id="scenBtn2">
+          🔥 단계 3: Tier 2 대뇌피질 — Unsloth QLoRA + DPO 선호도 정렬 & 0.002초 무중단 핫스왑
+        </button>
+      </div>
+      <button class="btn-run" onclick="triggerSleepCycle()">🌙 새벽 03:00 수면 기억 응고화 실행</button>
+    </section>
+
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-title">30일 누적 장기 기억 회상률 (Recall)</span>
+        <span class="kpi-value" id="kpiRecall" style="color:#10b981;">96.3% (유지)</span>
+        <span class="kpi-sub" id="kpiRecallSub">프롬프트 스터핑 (62.1%) 대비 +34.2%p</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">파괴적 망각 방어 (Old Skill Retention)</span>
+        <span class="kpi-value" id="kpiRetain" style="color:#38bdf8;">91.5% 보존</span>
+        <span class="kpi-sub">EWC Fisher + 7:3 Replay Anchor Buffer</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">Tier 2 대뇌피질 QLoRA / DPO 상태</span>
+        <span class="kpi-value" id="kpiLora" style="color:#d8b4fe;font-size:16px;">Qwen2.5-7B (r=16, α=32)</span>
+        <span class="kpi-sub" id="kpiLoraSub">Final Loss=0.284 | DPO Margin=+4.39</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">무중단 어댑터 핫스왑 지연 시간</span>
+        <span class="kpi-value" id="kpiSwap" style="color:#f59e0b;">0.002 sec</span>
+        <span class="kpi-sub">Atomic Symlink (current_active -> v1)</span>
+      </div>
+    </section>
+
+    <section class="workspace-grid">
+      <!-- Left: Dual-Tier Brain Architecture Canvas -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">🧠 인간 뇌 모사 2단계 기억 응고화 (Hippocampus Tier 1 ➔ Neocortex Tier 2)</div>
+          <span class="panel-tag">노드를 클릭하면 시간축(valid_from/to) 및 LoRA 가중치 상태를 검사합니다</span>
+        </div>
+        <div class="graph-stage">
+          <svg id="memorySvg" viewBox="0 0 860 440">
+            <defs>
+              <marker id="arr-green" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+              </marker>
+              <marker id="arr-purple" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7"/>
+              </marker>
+              <marker id="arr-muted" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+              </marker>
+            </defs>
+            <!-- Zone Labels -->
+            <rect x="20" y="18" width="415" height="404" rx="12" fill="rgba(16,185,129,0.04)" stroke="rgba(16,185,129,0.25)" stroke-dasharray="6 4"/>
+            <text x="36" y="42" fill="#6ee7b7" font-size="12" font-weight="700">☀️ Tier 1: 해마 (Neo4j Temporal KG & FastMCP)</text>
+
+            <rect x="455" y="18" width="385" height="404" rx="12" fill="rgba(168,85,247,0.05)" stroke="rgba(168,85,247,0.3)" stroke-dasharray="6 4"/>
+            <text x="472" y="42" fill="#d8b4fe" font-size="12" font-weight="700">🌙 Tier 2: 대뇌피질 (Unsloth QLoRA + DPO + Hot-Swap)</text>
+
+            <g id="edgesLayer"></g>
+            <g id="nodesLayer"></g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Right: Code & JSON-RPC / Training Inspector -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">⚡ Temporal KG Cypher & CoT / DPO 학습 파이프라인 코드</div>
+          <span class="panel-tag">cat &lt;&lt; 'EOF' 복붙 표준</span>
+        </div>
+        <div class="code-box" id="codeBox"></div>
+        <div class="panel-header" style="border-top:1px solid var(--border-color);">
+          <div class="panel-title">📡 FastMCP recall_user_context() & LoRA Adapter Inspector</div>
+          <span class="panel-tag">current_active -> alter_ego_v1</span>
+        </div>
+        <div class="code-box" id="inspectorBox" style="border-bottom:none;flex:1;"></div>
+      </div>
+    </section>
+
+    <section class="compare-grid">
+      <div class="compare-card amnesia">
+        <h3 style="font-size:15px;color:#fda4af;">❌ 기존 Stateless LLM / 프롬프트 스터핑 (건망증 & 과거 기억 충돌)</h3>
+        <div class="terminal-log" id="amnesiaBox"></div>
+      </div>
+      <div class="compare-card alterego">
+        <h3 style="font-size:15px;color:#6ee7b7;">✅ Dual-Tier 영구 두뇌 AI (Temporal KG + Unsloth QLoRA/DPO Alter-Ego)</h3>
+        <div class="terminal-log" id="alteregoBox"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const NODES = [
+      { id: "USER-HAMILTON", label: "User:Hamilton", sub: "대표 엔지니어", type: "User", color: "#38bdf8", x: 95, y: 215 },
+      { id: "OLD-PIP", label: "pip + req.txt", sub: "ARCHIVED (is_active=false)", type: "Archived", color: "#64748b", x: 295, y: 105 },
+      { id: "NEW-POETRY", label: "Poetry (lock)", sub: "ACTIVE (recalls=12)", type: "ActivePref", color: "#10b981", x: 295, y: 215 },
+      { id: "NEW-CATEOF", label: "cat << 'EOF'", sub: "ACTIVE (recalls=15)", type: "ActivePref", color: "#10b981", x: 295, y: 325 },
+      { id: "COT-SYNTH", label: "CoT + 7:3 Replay", sub: "verified_sft.jsonl", type: "Synthesizer", color: "#f59e0b", x: 545, y: 145 },
+      { id: "QLORA-DPO", label: "Unsloth QLoRA+DPO", sub: "r=16, α=32, β=0.1", type: "Trainer", color: "#a855f7", x: 545, y: 295 },
+      { id: "ALTER-EGO", label: "Alter-Ego v1", sub: "Hot-Swap (0.002s)", type: "Cortex", color: "#ec4899", x: 750, y: 220 }
+    ];
+
+    const EDGES = [
+      { id: "e1", from: "USER-HAMILTON", to: "OLD-PIP", rel: "valid_to:2026-11", style: "archived-flow" },
+      { id: "e2", from: "USER-HAMILTON", to: "NEW-POETRY", rel: "is_active:true", style: "active-flow" },
+      { id: "e3", from: "USER-HAMILTON", to: "NEW-CATEOF", rel: "is_active:true", style: "active-flow" },
+      { id: "e4", from: "NEW-POETRY", to: "COT-SYNTH", rel: "Consolidate", style: "cortex-flow" },
+      { id: "e5", from: "NEW-CATEOF", to: "COT-SYNTH", rel: "Consolidate", style: "cortex-flow" },
+      { id: "e6", from: "COT-SYNTH", to: "QLORA-DPO", rel: "ChatML 6건", style: "cortex-flow" },
+      { id: "e7", from: "OLD-PIP", to: "QLORA-DPO", rel: "DPO Rejected", style: "archived-flow" },
+      { id: "e8", from: "QLORA-DPO", to: "ALTER-EGO", rel: "ln -sfn HotSwap", style: "cortex-flow" }
+    ];
+
+    const SCENARIOS = [
+      {
+        code: `// [Chapter 06 & 07] 선호도 변경 시 구버전(pip)을 마감하고 신규(Poetry) 활성화
+MATCH (u:User {id: 'User:Hamilton'})-[r:PREFERS {category: 'PACKAGE_MANAGER', is_active: true}]->(old:Tool)
+SET r.is_active = false, r.valid_to = '2026-11-10T14:00:00';
+
+// FastMCP @mcp.tool() recall_user_context 호출 시 회상 카운트 +1 증가
+MATCH (u:User {id: 'User:Hamilton'})-[r:PREFERS {is_active: true}]->(t:Tool)
+SET r.recall_count = coalesce(r.recall_count, 0) + 1
+RETURN r.category, t.name, r.rationale, r.recall_count;`,
+        inspector: `{
+  "mcp_tool": "recall_user_context",
+  "user_id": "User:Hamilton",
+  "active_memories": [
+    {"category": "SHELL_STYLE", "item": "cat << 'EOF' 원클릭 복붙 스크립트", "recalls": 15, "R_t": 0.9102},
+    {"category": "PACKAGE_MANAGER", "item": "Poetry (pyproject.toml)", "recalls": 12, "R_t": 0.8358}
+  ],
+  "archived_history": [
+    {"category": "PACKAGE_MANAGER", "item": "pip + requirements.txt", "valid_to": "2026-11-10"}
+  ]
+}`,
+        amnesia: `[Stateless LLM / 단순 벡터 검색 한계]
+질문: "새 파이썬 프로젝트 세팅 스크립트 짜줘."
+❌ 오류: 2달 전 대화 청크('pip install -r requirements.txt')와 오늘 대화 청크('Poetry')가 동시에 검색되어, 사용자가 금지한 pip 명령어를 섞어서 출력함.`,
+        alterego: `pc@DESKTOP-NUVH6QH:~/memory-lab$ poetry run python standalone_memory_client.py
+✅ [Tier 1 해마 회상] is_active=true 엣지만 정확히 필터링!
+  - PACKAGE_MANAGER: Poetry (pyproject.toml) [회상 12회, 보유율 83.6%]
+  - SHELL_STYLE: cat << 'EOF' 원클릭 복붙 스크립트 [회상 15회, 보유율 91.0%]`
+      },
+      {
+        code: `# [Chapter 10 & 11] 사고사슬(<thought>) 주입 및 7:3 Replay Buffer 망각 방어
+thought_block = """<thought>
+1. [기억 탐색] User:Hamilton의 활성 시간축 그래프(is_active=true) 규칙을 확인한다.
+2. [충돌 검증] 과거 아카이빙된 구형 방식(pip, nano 수동 편집)을 배제한다.
+3. [응답 구성] 사용자의 핵심 사유(Rationale)와 실행 명령어를 함께 제시한다.
+</thought>"""
+# 신규 에피소드(66.7%) + 범용 엔지니어링 앵커(33.3%) 혼합 -> Pydantic .jsonl 검증`,
+        inspector: `{
+  "validator": "pydantic_jsonl_validator.py",
+  "new_episodic_samples": 4,
+  "replay_anchor_samples": 2,
+  "corrupted_rejected": 1,
+  "output_file": "verified_sft_train.jsonl",
+  "old_skill_retention_rate": "91.5% (Catastrophic Forgetting 0건)"
+}`,
+        amnesia: `[Naive Fine-Tuning (신규 데이터만 100% 학습 시)]
+❌ Epoch 5 이후 기존 파이썬 비동기(asyncio) 및 리눅스 네트워크 기본 지식이 0.0%로 붕괴하는 파괴적 망각(Catastrophic Forgetting) 발생!`,
+        alterego: `pc@DESKTOP-NUVH6QH:~/memory-lab$ poetry run python pydantic_jsonl_validator.py
+❌ [불량 샘플 #7 자동 차단] <thought> 태그 누락 감지
+✅ [검증 통과] 신규 CoT 기억 4건 + Replay 앵커 2건 = 총 6건 'verified_sft_train.jsonl' 생성 완료!`
+      },
+      {
+        code: `# [Chapter 14, 15, 17] Unsloth 4-bit QLoRA + DPO 선호도 정렬 & 심볼릭 링크 핫스왑
+# Chosen(Poetry, is_active=true) vs Rejected(pip, is_active=false) DPO 마진 극대화
+os.symlink("/home/pc/memory-lab/lora_adapters/alter_ego_v1", "./lora_adapters/current_active")
+# 새벽 03:00 Crontab 배치: ./nightly_sleep_consolidation.sh`,
+        inspector: `{
+  "base_model": "unsloth/Qwen2.5-7B-Instruct-bnb-4bit",
+  "lora_config": {"r": 16, "lora_alpha": 32, "vram_usage": "5.8 GB"},
+  "dpo_alignment": {"beta": 0.1, "chosen_reward": "+2.41", "rejected_reward": "-1.98", "margin": "+4.39"},
+  "hot_swap_latency": "0.002 sec (Zero Downtime)"
+}`,
+        amnesia: `[일반 LLM]
+매번 프롬프트에 "나는 pip 싫어하고 Poetry 좋아해, 그리고 nano 말고 cat << EOF로 짜줘..."라고 500자씩 시스템 프롬프트를 매 턴 반복 입력해야 함.`,
+        alterego: `pc@DESKTOP-NUVH6QH:~/memory-lab$ poetry run python alter_ego_agent_cli.py
+🤖 [Alter-Ego 자동 생성 완료] 별도 설명 없이도 Qwen2.5-7B(alter_ego_v1) 대뇌피질 가중치와 Tier 1 해마가 공명하여 Poetry + cat << 'EOF' 표준 회의록 및 코드를 즉시 발행했습니다!`
+      }
+    ];
+
+    function renderBrainGraph() {
+      const edgesLayer = document.getElementById("edgesLayer");
+      const nodesLayer = document.getElementById("nodesLayer");
+      edgesLayer.innerHTML = "";
+      nodesLayer.innerHTML = "";
+
+      const map = {};
+      NODES.forEach(n => map[n.id] = n);
+
+      EDGES.forEach(e => {
+        const n1 = map[e.from];
+        const n2 = map[e.to];
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", n1.x);
+        line.setAttribute("y1", n1.y);
+        line.setAttribute("x2", n2.x);
+        line.setAttribute("y2", n2.y);
+        line.setAttribute("class", "synapse-line " + e.style);
+        const marker = e.style === "active-flow" ? "url(#arr-green)" : (e.style === "cortex-flow" ? "url(#arr-purple)" : "url(#arr-muted)");
+        line.setAttribute("marker-end", marker);
+        edgesLayer.appendChild(line);
+
+        const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        txt.setAttribute("x", (n1.x + n2.x) / 2);
+        txt.setAttribute("y", (n1.y + n2.y) / 2 - 7);
+        txt.setAttribute("fill", e.style === "archived-flow" ? "#64748b" : "#cbd5e1");
+        txt.setAttribute("font-size", "10");
+        txt.setAttribute("font-family", "Fira Code, monospace");
+        txt.setAttribute("text-anchor", "middle");
+        txt.textContent = e.rel;
+        edgesLayer.appendChild(txt);
+      });
+
+      NODES.forEach(n => {
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("transform", `translate(${n.x}, ${n.y})`);
+        g.setAttribute("class", "node-group");
+        g.onclick = () => {
+          document.getElementById("inspectorBox").textContent = JSON.stringify({
+            inspected_node: n.id,
+            role: n.type,
+            label: n.label,
+            status: n.sub
+          }, null, 2);
+        };
+
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("r", 25);
+        c.setAttribute("fill", "#0b1124");
+        c.setAttribute("stroke", n.color);
+        c.setAttribute("stroke-width", "3");
+        g.appendChild(c);
+
+        const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        t.setAttribute("y", -2);
+        t.setAttribute("class", "node-title");
+        t.textContent = n.label;
+        g.appendChild(t);
+
+        const s = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        s.setAttribute("y", 40);
+        s.setAttribute("class", "node-sub");
+        s.textContent = n.sub;
+        g.appendChild(s);
+
+        nodesLayer.appendChild(g);
+      });
+    }
+
+    function selectScenario(idx) {
+      [0, 1, 2].forEach(i => document.getElementById("scenBtn" + i).classList.toggle("active", i === idx));
+      const s = SCENARIOS[idx];
+      document.getElementById("codeBox").textContent = s.code;
+      document.getElementById("inspectorBox").textContent = s.inspector;
+      document.getElementById("amnesiaBox").textContent = s.amnesia;
+      document.getElementById("alteregoBox").textContent = s.alterego;
+      renderBrainGraph();
+    }
+
+    function triggerSleepCycle() {
+      selectScenario(2);
+      const box = document.getElementById("alteregoBox");
+      box.textContent = "🌙 [03:00 AM Crontab] nightly_sleep_consolidation.sh 가동 중...\n  ✔ Step 1: 에빙하우스 감쇠 완료\n  ✔ Step 2: CoT + 7:3 Replay 합성 완료\n  ✔ Step 3: Unsloth QLoRA + DPO 가중치 각인 및 0.002초 핫스왑 완료!";
+    }
+
+    selectScenario(0);
+  </script>
+</body>
+</html>

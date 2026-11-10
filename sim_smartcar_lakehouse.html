@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자율주행 AI 빅데이터 레이크하우스 (Kafka · HDFS · Hive · Pydeck · DNN) 시뮬레이터 | DMDG Great AI Live Lab</title>
+  <meta name="description" content="심화 1 (Book 22015) 공식 인터랙티브 시뮬레이터 — 자율주행차 10대 실시간 CAN/GPS 센서 스트리밍, Kafka 브로커, Hadoop HDFS 3-복제, HiveQL 집계, OLS 소득 예측 및 3-Class 사고 예측 DNN">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #040914;
+      --bg-card: rgba(11, 22, 42, 0.92);
+      --border-color: rgba(56, 189, 248, 0.25);
+      --cyan-neon: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.45);
+      --emerald-neon: #10b981;
+      --amber-neon: #f59e0b;
+      --rose-neon: #f43f5e;
+      --purple-neon: #a855f7;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-ui: 'Outfit', 'Pretendard', -apple-system, sans-serif;
+      --font-code: 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #0c2b4e 0%, var(--bg-base) 68%);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .bg-grid {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none; z-index: 0;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(4, 9, 20, 0.92);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 26px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo-badge {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: linear-gradient(135deg, #38bdf8, #10b981);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #040914;
+      box-shadow: 0 0 22px var(--cyan-glow);
+    }
+    .brand-text h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
+    .brand-text p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .badge-live {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid var(--cyan-neon);
+      color: var(--cyan-neon); font-size: 12px; font-weight: 600; font-family: var(--font-code);
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--cyan-neon);
+      box-shadow: 0 0 10px var(--cyan-neon);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+    .btn-link {
+      padding: 8px 15px; border-radius: 8px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(16, 185, 129, 0.2));
+      border: 1px solid rgba(56, 189, 248, 0.55);
+      color: #7dd3fc; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s ease;
+    }
+    .btn-link:hover {
+      background: linear-gradient(135deg, var(--cyan-neon), var(--emerald-neon));
+      color: #040914; box-shadow: 0 0 18px var(--cyan-glow);
+    }
+
+    main {
+      position: relative; z-index: 1;
+      max-width: 1580px; width: 100%; margin: 0 auto;
+      padding: 20px 24px 40px;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+
+    .scenario-bar {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 14px; padding: 15px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      flex-wrap: wrap;
+    }
+    .scenario-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn-scenario {
+      padding: 9px 14px; border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(148,163,184,0.25);
+      color: var(--text-main); font-size: 12.8px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-scenario:hover { border-color: var(--cyan-neon); background: rgba(56,189,248,0.12); }
+    .btn-scenario.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(16, 185, 129, 0.25));
+      border-color: var(--cyan-neon);
+      color: #7dd3fc;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+    }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    @media (max-width: 1024px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .kpi-title { font-size: 11.5px; color: var(--text-muted); font-weight: 600; }
+    .kpi-value { font-size: 21px; font-weight: 800; font-family: var(--font-code); color: var(--text-main); }
+    .kpi-sub { font-size: 11.5px; color: var(--emerald-neon); }
+
+    .workspace-grid { display: grid; grid-template-columns: 1.32fr 1fr; gap: 18px; }
+    @media (max-width: 1180px) { .workspace-grid { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 14px; display: flex; flex-direction: column; overflow: hidden;
+    }
+    .panel-header {
+      padding: 13px 18px; background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border-color);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .panel-title { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .panel-tag {
+      font-size: 11px; font-family: var(--font-code);
+      padding: 3px 8px; border-radius: 6px;
+      background: rgba(56, 189, 248, 0.14); color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+
+    .graph-stage {
+      position: relative; height: 445px;
+      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08), rgba(4, 9, 20, 0.96));
+    }
+    svg#lakehouseSvg { width: 100%; height: 100%; display: block; }
+
+    .stream-line {
+      stroke: #38bdf8; stroke-width: 3.2; stroke-dasharray: 8 4;
+      animation: dashFlow 0.8s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
+    }
+    .ai-line {
+      stroke: #10b981; stroke-width: 3.2; stroke-dasharray: 8 4;
+      animation: dashFlow 0.8s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
+    }
+    @keyframes dashFlow { to { stroke-dashoffset: -24; } }
+
+    .node-group { cursor: pointer; }
+    .node-title { fill: #f8fafc; font-size: 11.5px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+    .node-sub { fill: #cbd5e1; font-size: 9.5px; font-family: var(--font-code); text-anchor: middle; pointer-events: none; }
+
+    .code-box {
+      padding: 14px 16px; background: #040812;
+      font-family: var(--font-code); font-size: 12px; line-height: 1.6;
+      color: #e2e8f0; border-bottom: 1px solid var(--border-color);
+      overflow-x: auto; white-space: pre;
+    }
+
+    /* Interactive AI Predictor Card */
+    .predictor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 980px) { .predictor-grid { grid-template-columns: 1fr; } }
+    .predictor-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px;
+    }
+    .slider-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      font-size: 13px;
+    }
+    .slider-row input[type=range] { flex: 1; accent-color: #38bdf8; }
+    .pred-output {
+      background: #040812; border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 10px; padding: 14px;
+      font-family: var(--font-code); font-size: 12.5px; line-height: 1.65;
+      color: #6ee7b7; white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <header>
+    <div class="brand">
+      <div class="logo-badge">AV</div>
+      <div class="brand-text">
+        <h1>자율주행 AI 자동차 빅데이터 레이크하우스 실무 시뮬레이터</h1>
+        <p>8-Container Docker · Apache Kafka (:9092) · Hadoop HDFS (:9870) · Apache Hive (:10000) · Pydeck 3D · OLS & DNN</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="badge-live"><span class="pulse-dot"></span>SMARTCAR-STATUS TOPIC STREAMING</div>
+      <a href="https://wikidocs.net/book/22015" target="_blank" class="btn-link">📘 위키독스 교안 (Book 22015)</a>
+      <a href="sim_graphrag.html" class="btn-link">🕸️ 심화 2 시뮬레이터</a>
+      <a href="sim_continual_memory.html" class="btn-link">🧠 심화 3 시뮬레이터</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="scenario-bar">
+      <div class="scenario-group">
+        <button class="btn-scenario active" onclick="selectStage(0)" id="stgBtn0">
+          📡 파이프라인 1: CAR-001~010 센서 발생 & Kafka 브로커 + GPS 이상치 정제 (Ch 05~11)
+        </button>
+        <button class="btn-scenario" onclick="selectStage(1)" id="stgBtn1">
+          🗄️ 파이프라인 2: Hadoop HDFS 분산 적재 & Apache HiveServer2 SQL 집계 (Ch 04~09)
+        </button>
+        <button class="btn-scenario" onclick="selectStage(2)" id="stgBtn2">
+          🤖 파이프라인 3: 하이브 연동 OLS 고객 소득 회귀 예측 & 3-Class 사고 예측 DNN (Ch 12~14)
+        </button>
+      </div>
+    </section>
+
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-title">가동 중인 도커 컨테이너 클러스터</span>
+        <span class="kpi-value" style="color:#38bdf8;">8 Nodes UP</span>
+        <span class="kpi-sub">Zookeeper · Kafka · NameNode · DataNode · Hive · Postgres</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">실시간 GPS 정제 신뢰도 (Bounding Box)</span>
+        <span class="kpi-value" style="color:#10b981;">99.2% Valid</span>
+        <span class="kpi-sub">터널 결측치(0.0, 0.0) 인메모리 자동 필터링</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">차량 제원 기반 소득 회귀 모델 (OLS)</span>
+        <span class="kpi-value" style="color:#f59e0b;">R² = 74.6%</span>
+        <span class="kpi-sub">배기량(capacity) · 연령(age) · 연식(year) 다중회귀</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">주행 사고 3-Class 심층신경망 (DNN)</span>
+        <span class="kpi-value" style="color:#a855f7;">Acc = 99.80%</span>
+        <span class="kpi-sub">정상(0) · 아차사고(1) · 추돌위험(2) 분류</span>
+      </div>
+    </section>
+
+    <section class="workspace-grid">
+      <!-- Left: End-to-End Lakehouse Pipeline Topology -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">🚗 자율주행 빅데이터 레이크하우스 End-to-End 아키텍처 토폴로지</div>
+          <span class="panel-tag">각 서버 노드를 클릭하면 컨테이너 포트와 실행 명령어를 확인합니다</span>
+        </div>
+        <div class="graph-stage">
+          <svg id="lakehouseSvg" viewBox="0 0 860 430">
+            <defs>
+              <marker id="arr-cyan" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+              </marker>
+              <marker id="arr-emerald" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+              </marker>
+            </defs>
+            <g id="edgesLayer"></g>
+            <g id="nodesLayer"></g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Right: Docker / HiveQL / Python Code Inspector -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">⚡ 우분투 리눅스 실행 명령어 & 파이프라인 코드</div>
+          <span class="panel-tag">pc@DESKTOP-NUVH6QH:~/smartcar-pilot$</span>
+        </div>
+        <div class="code-box" id="codeBox"></div>
+        <div class="panel-header" style="border-top:1px solid var(--border-color);">
+          <div class="panel-title">🖥️ 컨테이너 실시간 실행 결과 로그</div>
+          <span class="panel-tag">Live Telemetry Output</span>
+        </div>
+        <div class="code-box" id="logBox" style="border-bottom:none;flex:1;"></div>
+      </div>
+    </section>
+
+    <!-- Bottom Interactive Simulators for Ch 12 (OLS Income) & Ch 13 (3-Class Accident DNN) -->
+    <section class="predictor-grid">
+      <div class="predictor-card">
+        <h3 style="font-size:15px;color:#7dd3fc;">💰 [Ch 12.4 실습 연동] 차량 스펙 실시간 고객 연소득 예측기 (OLS 회귀)</h3>
+        <div class="slider-row">
+          <span>운전자 나이 (Age): <b id="lblAge">42</b>세</span>
+          <input type="range" id="rngAge" min="22" max="70" value="42" oninput="updatePredictions()">
+        </div>
+        <div class="slider-row">
+          <span>차량 배기량 (Capacity): <b id="lblCap">2998</b>cc</span>
+          <input type="range" id="rngCap" min="998" max="5000" step="100" value="2998" oninput="updatePredictions()">
+        </div>
+        <div class="slider-row">
+          <span>차량 연식 (Year): <b id="lblYear">2025</b>년식</span>
+          <input type="range" id="rngYear" min="2015" max="2026" value="2025" oninput="updatePredictions()">
+        </div>
+        <div class="pred-output" id="olsOutputBox"></div>
+      </div>
+
+      <div class="predictor-card">
+        <h3 style="font-size:15px;color:#6ee7b7;">🚨 [Ch 13 & 14 실습 연동] 실시간 센서 기반 주행 사고 위험도 3-Class DNN 분류기</h3>
+        <div class="slider-row">
+          <span>현재 주행 속도 (Speed): <b id="lblSpd">118</b>km/h</span>
+          <input type="range" id="rngSpd" min="0" max="180" value="118" oninput="updatePredictions()">
+        </div>
+        <div class="slider-row">
+          <span>급제동 압력 (Brake Pressure): <b id="lblBrk">82</b>%</span>
+          <input type="range" id="rngBrk" min="0" max="100" value="82" oninput="updatePredictions()">
+        </div>
+        <div class="slider-row">
+          <span>급조향 각도 (Steering Angle): <b id="lblStr">34</b>deg</span>
+          <input type="range" id="rngStr" min="0" max="60" value="34" oninput="updatePredictions()">
+        </div>
+        <div class="pred-output" id="dnnOutputBox"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const NODES = [
+      { id: "CAR-SIM", label: "CAR-001~010", sub: "10대 자율주행 센서", x: 95, y: 215, color: "#38bdf8" },
+      { id: "KAFKA", label: "Apache Kafka", sub: "Broker :9092 (Topic)", x: 265, y: 120, color: "#f59e0b" },
+      { id: "GPS-CLEAN", label: "GPS Stream Cleaner", sub: "Bounding Box 정제", x: 265, y: 310, color: "#10b981" },
+      { id: "HDFS", label: "Hadoop HDFS", sub: "NameNode :9870", x: 475, y: 120, color: "#38bdf8" },
+      { id: "HIVE", label: "HiveServer2", sub: "Thrift :10000 (SQL)", x: 475, y: 310, color: "#a855f7" },
+      { id: "PYDECK", label: "Streamlit + Pydeck", sub: "Carto Dark 3D (:8501)", x: 715, y: 120, color: "#10b981" },
+      { id: "AI-MODEL", label: "OLS 회귀 & 3-Class DNN", sub: "R²=74.6% / Acc=99.8%", x: 715, y: 310, color: "#f43f5e" }
+    ];
+
+    const EDGES = [
+      { from: "CAR-SIM", to: "KAFKA", rel: "JSON 1Hz", cls: "stream-line" },
+      { from: "KAFKA", to: "GPS-CLEAN", rel: "smartcar-status", cls: "stream-line" },
+      { from: "KAFKA", to: "HDFS", rel: "Micro-Batch", cls: "stream-line" },
+      { from: "HDFS", to: "HIVE", rel: "External Table", cls: "stream-line" },
+      { from: "GPS-CLEAN", to: "PYDECK", rel: "Clean Coords", cls: "ai-line" },
+      { from: "HIVE", to: "AI-MODEL", rel: "car_income / incident", cls: "ai-line" }
+    ];
+
+    const STAGES = [
+      {
+        code: `# [Ch 06 & Ch 11.2] 카프카 토픽 구독 및 수도권 Bounding Box 실시간 GPS 이상치 정제
+poetry run python smartcar_kafka_gps_clean.py
+# 서울/수도권 유효 위경도: 위도 37.35~37.75, 경도 126.80~127.25 (터널 결측치 0.0, 0.0 자동 차단)`,
+        log: `📡 [Kafka Consumer] Topic='smartcar-status' 연결 성공 (bootstrap_servers='localhost:9092')
+🟢 [VALID] CAR-001 | spd=74.2km/h | lat=37.4979, lon=127.0276 (강남역) | Quality=100.0%
+🔴 [BLOCKED] CAR-004 | 터널 GPS 음영 결측치 감지 (lat=0.0000, lon=0.0000) -> 레이크하우스 적재 차단!
+🟢 [VALID] CAR-007 | spd=68.5km/h | lat=37.5665, lon=126.9780 (시청역) | Quality=99.2%`
+      },
+      {
+        code: `# [Ch 08 & Ch 12.3] 하둡 HDFS 적재 확인 및 하이브(Hive) 테이블 SQL 조회
+docker exec namenode hdfs dfs -ls /smartcar/data
+docker exec hive-server hive -e "SELECT car_num, sex, age, capacity, year, income FROM car_income LIMIT 5;"`,
+        log: `CAR-001    M    45    2998    2024    8650
+CAR-002    F    32    1598    2022    4520
+CAR-003    M    51    3470    2025    10800
+CAR-004    F    28    998     2020    3190
+CAR-005    M    39    2497    2023    6890
+Time taken: 1.42 seconds, Fetched: 5 row(s)`
+      },
+      {
+        code: `# [Ch 12.4 & Ch 14] 하이브 레이크하우스 연동 OLS 소득 회귀 & 3-Class 사고 예측 DNN
+poetry run python smartcar_predict_income.py
+poetry run python smartcar_hive_dnn.py`,
+        log: `📊 [OLS 다중선형회귀 학습 완료] Adj. R-squared = 0.746 (F-statistic p < 0.001)
+🧠 [TensorFlow 3-Class DNN 학습 완료] Test Accuracy = 99.80% (Loss = 0.0112)
+👉 아래 슬라이더를 움직여 새로운 차량 스펙과 실시간 센서값에 따른 예측 결과를 직접 테스트해 보세요!`
+      }
+    ];
+
+    function renderTopology() {
+      const edgesLayer = document.getElementById("edgesLayer");
+      const nodesLayer = document.getElementById("nodesLayer");
+      edgesLayer.innerHTML = "";
+      nodesLayer.innerHTML = "";
+
+      const map = {};
+      NODES.forEach(n => map[n.id] = n);
+
+      EDGES.forEach(e => {
+        const n1 = map[e.from];
+        const n2 = map[e.to];
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", n1.x);
+        line.setAttribute("y1", n1.y);
+        line.setAttribute("x2", n2.x);
+        line.setAttribute("y2", n2.y);
+        line.setAttribute("class", e.cls);
+        line.setAttribute("marker-end", e.cls === "stream-line" ? "url(#arr-cyan)" : "url(#arr-emerald)");
+        edgesLayer.appendChild(line);
+
+        const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        txt.setAttribute("x", (n1.x + n2.x) / 2);
+        txt.setAttribute("y", (n1.y + n2.y) / 2 - 7);
+        txt.setAttribute("fill", "#cbd5e1");
+        txt.setAttribute("font-size", "10");
+        txt.setAttribute("font-family", "Fira Code, monospace");
+        txt.setAttribute("text-anchor", "middle");
+        txt.textContent = e.rel;
+        edgesLayer.appendChild(txt);
+      });
+
+      NODES.forEach(n => {
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("transform", `translate(${n.x}, ${n.y})`);
+        g.setAttribute("class", "node-group");
+
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("r", 26);
+        c.setAttribute("fill", "#081226");
+        c.setAttribute("stroke", n.color);
+        c.setAttribute("stroke-width", "3");
+        g.appendChild(c);
+
+        const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        t.setAttribute("y", -2);
+        t.setAttribute("class", "node-title");
+        t.textContent = n.label;
+        g.appendChild(t);
+
+        const s = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        s.setAttribute("y", 41);
+        s.setAttribute("class", "node-sub");
+        s.textContent = n.sub;
+        g.appendChild(s);
+
+        nodesLayer.appendChild(g);
+      });
+    }
+
+    function selectStage(idx) {
+      [0, 1, 2].forEach(i => document.getElementById("stgBtn" + i).classList.toggle("active", i === idx));
+      document.getElementById("codeBox").textContent = STAGES[idx].code;
+      document.getElementById("logBox").textContent = STAGES[idx].log;
+      renderTopology();
+    }
+
+    function updatePredictions() {
+      const age = parseInt(document.getElementById("rngAge").value);
+      const cap = parseInt(document.getElementById("rngCap").value);
+      const year = parseInt(document.getElementById("rngYear").value);
+      document.getElementById("lblAge").textContent = age;
+      document.getElementById("lblCap").textContent = cap;
+      document.getElementById("lblYear").textContent = year;
+
+      const predIncome = Math.round(-41200 + (age * 52.4) + (cap * 1.85) + (year * 20.6));
+      let tier = "일반 스탠다드 멤버십";
+      if (predIncome >= 8000) tier = "🏆 VVIP 프레스티지 플래티넘 (프리미엄 자율주행 구독 타겟)";
+      else if (predIncome >= 5500) tier = "💎 골드 패밀리 케어 멤버십";
+
+      document.getElementById("olsOutputBox").textContent =
+`[smartcar_predict_income.py 실시간 추론 결과]
+• 입력 스펙: 나이 ${age}세 / 배기량 ${cap.toLocaleString()}cc / ${year}년식
+• 예상 연소득: 약 ${predIncome.toLocaleString()}만 원 (${(predIncome/10000).toFixed(2)}억 원)
+• AI 추천 마케팅 등급: ${tier}`;
+
+      const spd = parseInt(document.getElementById("rngSpd").value);
+      const brk = parseInt(document.getElementById("rngBrk").value);
+      const str = parseInt(document.getElementById("rngStr").value);
+      document.getElementById("lblSpd").textContent = spd;
+      document.getElementById("lblBrk").textContent = brk;
+      document.getElementById("lblStr").textContent = str;
+
+      const riskScore = (spd * 0.35) + (brk * 0.45) + (str * 0.85);
+      let clsName = "🟢 Class 0: 정상 안전 주행 (Normal Driving)";
+      let prob = "98.7%";
+      if (riskScore > 95) {
+        clsName = "🔴 Class 2: 추돌 사고 위험 긴급 제어 (Collision Emergency)";
+        prob = "99.4%";
+      } else if (riskScore > 60) {
+        clsName = "🟡 Class 1: 급제동/급조향 아차사고 경고 (Near-Miss Warning)";
+        prob = "94.2%";
+      }
+
+      document.getElementById("dnnOutputBox").textContent =
+`[smartcar_hive_dnn.py 3-Class Softmax 추론 결과]
+• 센서 벡터: 차속 ${spd}km/h | 제동압력 ${brk}% | 조향각 ${str}deg
+• DNN 판정 등급: ${clsName}
+• Softmax 신뢰도: ${prob} (긴급 AEB 제어 신호 연동 완료)`;
+    }
+
+    selectStage(0);
+    updatePredictions();
+  </script>
+</body>
+</html>
