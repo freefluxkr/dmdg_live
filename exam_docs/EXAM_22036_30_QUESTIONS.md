@@ -1,0 +1,365 @@
+# 심화 2: 리눅스 · FastMCP · GraphRAG 역량 평가 (30문항)
+> 출처 도서: https://wikidocs.net/book/22036 | 총 30문항
+
+---
+### Q01. [1. 리눅스 데몬·Docker·SSH 보안 | Ch 01 | 초급] 차세대 AI 에이전트와 FastMCP 서버 인프라로 윈도우 GUI 대신 **Ubuntu 22.04 LTS 리눅스** 환경이 사실상 표준(De facto)으로 채택되는 가장 결정적인 이유는?
+```python
+pc@DESKTOP-NUVH6QH:~/graphrag-lab$ uname -a && python3 -c "import os; print(os.cpu_count())"
+```
+1. 표준 입출력(stdio) 기반 초저지연 파이프 통신, systemd 무중단 데몬 관리, 네이티브 Docker 컨테이너 격리, 그리고 방대한 오픈소스 AI 생태계 호환성이 완벽하기 때문이다. ✅ **(정답)**
+2. 리눅스에서는 Python 들여쓰기 문법 오류가 자동으로 무시되기 때문이다. 
+3. 우분투는 인터넷 연결 없이도 OpenAI GPT 모델 가중치를 기본 내장하고 있기 때문이다. 
+4. 리눅스에서만 Neo4j 그래프 노드를 마우스로 드래그할 수 있기 때문이다. 
+> **해설**: AI 에이전트의 MCP 도구 실행(subprocess stdio 파이프), 컨테이너 격리, 무중단 서비스 감시(systemd) 및 고속 파일 I/O는 리눅스 커널 환경에서 가장 안정적이고 빠르게 작동합니다.
+
+---
+### Q02. [1. 리눅스 데몬·Docker·SSH 보안 | Ch 01~02 | 초급] 리눅스 터미널에서 `cat << 'EOF' > script.py ... EOF` 구문을 사용할 때 `EOF` 양쪽에 **작은따옴표(`'EOF'`)**를 감싸는 중요한 보안·문법적 이유는?
+```python
+cat << 'EOF' > agent_env.sh
+export API_KEY=$MY_SECRET
+EOF
+```
+1. Here-Document 내부의 `$변수`, 백틱(`), 역슬래시(\) 등이 현재 쉘에 의해 미리 치환(Expansion)되지 않고 코드 원문 그대로 파일에 안전하게 기록되도록 하기 위함이다. ✅ **(정답)**
+2. 작은따옴표가 없으면 파일 용량이 10배로 커지기 때문이다. 
+3. EOF를 소문자 eof로 자동 변환해 주기 때문이다. 
+4. 파일을 자동으로 암호화하여 root 사용자도 읽지 못하게 만들기 때문이다. 
+> **해설**: 따옴표 없는 `cat << EOF`는 본문 안의 `$변수`나 백틱 명령어를 현재 쉘이 실행·치환해 버려 스크립트가 깨집니다. `'EOF'`로 감싸면 원문 그대로 안전하게 생성됩니다.
+
+---
+### Q03. [1. 리눅스 데몬·Docker·SSH 보안 | Ch 02 | 중급] 장시간 실행되는 백그라운드 Python 에이전트 프로세스가 예기치 못한 오류로 종료되었을 때, 리눅스 쉘 워치독(`agent_watchdog.sh`)이나 프로세스 감시 스크립트가 종료 코드를 확인하기 위해 참조하는 특수 쉘 변수는?
+```python
+python3 mock_mcp_worker.py
+EXIT_CODE=____
+if [ $EXIT_CODE -ne 0 ]; then echo "재기동 필요"; fi
+```
+1. $? (직전에 실행된 포그라운드 명령어의 종료 상태 코드: 0=정상, 0이 아님=비정상) ✅ **(정답)**
+2. $0 (현재 실행 중인 스크립트의 파일명) 
+3. $$ (현재 쉘의 프로세스 ID) 
+4. $# (전달된 인자의 총 개수) 
+> **해설**: 리눅스 bash에서 `$?`는 바로 직전 명령의 exit status(종료 코드)를 반환합니다. `0`이 아니면 장애로 판단하고 즉시 재기동하는 워치독 로직의 핵심입니다.
+
+---
+### Q04. [1. 리눅스 데몬·Docker·SSH 보안 | Ch 03 | 중급] Docker Compose로 Neo4j 5.18 컨테이너를 배포할 때, 그래프 알고리즘 및 다중 JSON/패턴 처리를 위해 함께 활성화하는 공식 확장 플러그인 및 환경변수는?
+```python
+environment:
+  - NEO4J_PLUGINS=["____"]
+  - NEO4J_dbms_security_procedures_unrestricted=____.*
+```
+1. apoc (Awesome Procedures on Cypher) ✅ **(정답)**
+2. pydeck 
+3. numpy 
+4. tensorboard 
+> **해설**: APOC(Awesome Procedures on Cypher)는 Neo4j에서 경로 탐색, 배치 적재, 동적 그래프 조작 및 스키마 검사를 수행할 때 필수적인 공식 확장 라이브러리입니다.
+
+---
+### Q05. [1. 리눅스 데몬·Docker·SSH 보안 | Ch 04 | 고급] 사내 보안 규정이 엄격한 환경에서 Docker로 띄운 Neo4j DB(Bolt 포트 `7687`)와 웹 콘솔(`7474`)이 외부 공용 인터넷(`0.0.0.0`)으로 노출되는 것을 원천 차단하는 가장 안전한 포트 바인딩 설정은?
+```python
+ports:
+  - "____:7474"
+  - "____:7687"
+```
+1. 127.0.0.1:7474 및 127.0.0.1:7687 (루프백 인터페이스 한정 바인딩 + 필요 시 SSH 터널링 접속) ✅ **(정답)**
+2. 0.0.0.0:7474 및 0.0.0.0:7687 
+3. 255.255.255.255:7687 
+4. *:7687 
+> **해설**: Docker는 기본 포트 매핑(`7687:7687`) 시 `0.0.0.0`에 바인딩되어 UFW 방화벽을 우회하고 외부에 노출될 수 있습니다. 반드시 `127.0.0.1:7687:7687`로 루프백 제한을 걸고 원격 관리 시 `ssh -L` 터널링을 사용해야 안전합니다.
+
+---
+### Q06. [1. 리눅스 데몬·Docker·SSH 보안 | Ch 04 | 중급] 원격 사내 리눅스 서버의 `127.0.0.1:7474`에만 닫혀 있는 Neo4j 브라우저 화면을 내 로컬 노트북 웹 브라우저(`localhost:17474`)에서 암호화하여 안전하게 열어보기 위한 **SSH 로컬 포트 포워딩** 명령어는?
+```python
+ssh ____ 17474:127.0.0.1:7474 -N user@internal-ai-server
+```
+1. -L (Local Port Forwarding) ✅ **(정답)**
+2. -R (Remote Port Forwarding) 
+3. -X (X11 GUI Forwarding) 
+4. -D (Dynamic SOCKS Proxy) 
+> **해설**: `ssh -L [로컬포트]:[원격대상IP]:[원격대상포트]` 옵션은 내 로컬 포트로 들어온 트래픽을 암호화된 SSH 터널을 통해 원격 서버의 내부 루프백 서비스로 안전하게 전달합니다.
+
+---
+### Q07. [2. 지식그래프 온톨로지·Multi-Hop Cypher | Ch 05 | 초급] 관계형 데이터베이스(RDB)와 비교할 때, **다중 홉(Multi-Hop, 3~5단계 이상 연쇄 추적)** 사규·특허 인과관계 질의에서 Neo4j 지식 그래프가 압도적으로 빠른 근본 원리는?
+```python
+# RDB: 5개 테이블 다중 JOIN 시 인덱스 탐색 비용 기하급수적 증가
+# Neo4j: Index-Free Adjacency (인덱스 없는 인접성)
+```
+1. 각 노드가 자신과 연결된 인접 노드/관계의 물리적 메모리 포인터(인접 리스트)를 직접 가지고 있어(Index-Free Adjacency), 전체 테이블 크기와 무관하게 연결된 홉 수에 비례해 O(1) 포인터 추적 속도로 탐색한다. ✅ **(정답)**
+2. Neo4j는 모든 JOIN 연산을 엑셀 CSV 파일로 변환한 뒤 선형 탐색(Full Scan)하기 때문이다. 
+3. RDB는 문자열 컬럼을 저장할 수 없지만 Neo4j는 문자열만 저장하기 때문이다. 
+4. Neo4j는 데이터를 CPU 캐시에 저장하지 않고 하드디스크에만 순차 기록하기 때문이다. 
+> **해설**: Index-Free Adjacency 덕분에 그래프 DB는 데이터가 1,000만 건으로 늘어나도 특정 시작 노드의 3~4홉 이웃을 탐색하는 시간은 거의 일정하게(밀리초 단위) 유지됩니다.
+
+---
+### Q08. [2. 지식그래프 온톨로지·Multi-Hop Cypher | Ch 05 | 중급] Neo4j 온톨로지 스키마 설계 시, 동일한 ID를 가진 `Project`나 `License` 노드가 중복 생성되는 것을 원천 차단하고 `MERGE` 성능을 극대화하기 위해 반드시 선언해야 하는 Cypher 명령어는?
+```python
+CREATE ____ proj_id_unique IF NOT EXISTS
+FOR (p:Project) REQUIRE p.id IS UNIQUE;
+```
+1. CONSTRAINT ... REQUIRE p.id IS UNIQUE (고유성 제약조건) ✅ **(정답)**
+2. TRIGGER ... AFTER INSERT 
+3. FOREIGN KEY ... REFERENCES 
+4. VIEW ... AS SELECT 
+> **해설**: Neo4j에서 `REQUIRE p.id IS UNIQUE` 제약조건을 걸면 중복 노드 삽입을 DB 레벨에서 차단할 뿐만 아니라 자동으로 해당 속성에 B-Tree/Range 인덱스가 생성되어 `MATCH`/`MERGE` 속도가 비약적으로 빨라집니다.
+
+---
+### Q09. [2. 지식그래프 온톨로지·Multi-Hop Cypher | Ch 06 | 중급] Ch 06에서 구축한 사내 규정 및 특허 온톨로지에서 `PRJ-AGENT-01` 프로젝트가 상용 배포 중단(`PEN-STOP-RELEASE`) 리스크에 걸리게 되는 **4-Hop 인과 사슬**로 정확히 짝지어진 것은?
+```python
+# Project -> OSSLibrary -> License -> Article -> Penalty
+```
+1. (PRJ-AGENT-01)-[:DEPENDS_ON]->(gpl-graph-parser)-[:GOVERNED_BY]->(GPL-3.0)-[:CONFLICTS_WITH]->(제4조 2항)-[:ENFORCES_PENALTY]->(PEN-STOP-RELEASE) ✅ **(정답)**
+2. (PRJ-AGENT-01)-[:DEPENDS_ON]->(fastmcp)-[:GOVERNED_BY]->(MIT License)-[:ENFORCES_PENALTY]->(PEN-STOP-RELEASE) 
+3. (DEPT-AI)-[:OWNS]->(fastmcp)-[:CONFLICTS_WITH]->(제4조 1항) 
+4. (PRJ-AGENT-01)-[:POTENTIALLY_INFRINGES]->(MIT License) 
+> **해설**: `fastmcp` 라이브러리는 상용 허용인 `MIT` 라이선스라 안전하지만, `gpl-graph-parser` 패키지가 전염성 `GPL-3.0` 라이선스를 따르고 있어 사규 `제4조 2항`과 충돌하며 `PEN-STOP-RELEASE` 제재로 연결됩니다.
+
+---
+### Q10. [2. 지식그래프 온톨로지·Multi-Hop Cypher | Ch 07 | 초급] Cypher 쿼리에서 기존 노드가 없을 때만 새로 생성하고, 이미 존재하면 중복 생성하지 않고 기존 노드를 재사용하는 멱등성(Idempotent) 키워드는?
+```python
+____ (lic:License {id: 'GPL-3.0'})
+ON CREATE SET lic.viral = true
+```
+1. MERGE ✅ **(정답)**
+2. CREATE 
+3. INSERT INTO 
+4. DUPLICATE 
+> **해설**: `CREATE`는 실행할 때마다 무조건 새 노드를 추가하지만, `MERGE`는 패턴이 존재하면 매칭하고 존재하지 않을 때만 생성(Get-or-Create)하므로 ETL 적재 파이프라인의 멱등성을 보장합니다.
+
+---
+### Q11. [2. 지식그래프 온톨로지·Multi-Hop Cypher | Ch 08 | 고급] Ch 08 다중 홉 경로 추적에서 시작 프로젝트(`PRJ-AGENT-01`)로부터 징계 노드(`PEN-DISMISS`)까지의 **최단 연결 경로**를 구할 때 사용하는 Cypher 내장 함수 및 가변 길이 패턴 표기법으로 옳은 것은?
+```python
+MATCH path = ____((p:Project {id:'PRJ-AGENT-01'})-[____]->(pen:Penalty {id:'PEN-DISMISS'}))
+RETURN [n IN nodes(path) | coalesce(n.name, n.clause, n.id)] AS route;
+```
+1. shortestPath(...-[*1..6]->...) ✅ **(정답)**
+2. minJoin(...-[0..0]->...) 
+3. fastBFS(...-[*]->... ORDER BY LIMIT 0) 
+4. dijkstraVector(...-[1]->...) 
+> **해설**: Neo4j Cypher의 `shortestPath((a)-[*1..6]->(b))`는 BFS(너비 우선 탐색) 기반으로 두 노드 간 최소 홉 수의 경로를 찾습니다. `[*1..6]`처럼 상한 홉 수를 명시하면 무한 순환 탐색 폭증을 예방할 수 있습니다.
+
+---
+### Q12. [2. 지식그래프 온톨로지·Multi-Hop Cypher | Ch 08 | 중급] Cypher 쿼리에서 특정 프로젝트가 라이선스 위반은 물론 경쟁사 특허(`Patent`) 침해 가능성까지 동시에 확인하려 할 때, **특허 노드가 연결되어 있지 않더라도 기존 라이선스 결과 행이 사라지지 않게** 유지하는 절(Clause)은?
+```python
+MATCH (p:Project)-[:DEPENDS_ON]->(lib:OSSLibrary)-[:GOVERNED_BY]->(lic:License)
+____ MATCH (lib)-[:POTENTIALLY_INFRINGES]->(pat:Patent)
+RETURN p.id, lib.name, lic.id, pat.id;
+```
+1. OPTIONAL MATCH (SQL의 LEFT OUTER JOIN과 동일한 동작) ✅ **(정답)**
+2. REQUIRED MATCH 
+3. STRICT MATCH 
+4. CROSS JOIN 
+> **해설**: 일반 `MATCH`는 패턴이 매칭되지 않으면 해당 행 전체를 결과에서 탈락(Inner Join)시킵니다. `OPTIONAL MATCH`를 쓰면 특허 침해 관계가 없는 라이브러리도 `pat.id = null` 형태로 안전하게 함께 반환됩니다.
+
+---
+### Q13. [3. 트리플 추출·동음이의어·Hybrid RRF | Ch 09 | 초급] 단순 벡터 유사도 검색 기반 RAG(Vector-Only RAG)가 **"A 프로젝트에서 쓰는 라이브러리 중 경쟁사 특허 침해 위험 및 관련 사규 처벌 수위를 모두 찾아줘"** 같은 복합 질문에서 환각(Hallucination)을 일으키는 구조적 원인은?
+```python
+# 문서 1: 'PRJ-01은 libX를 쓴다.' / 문서 2: 'libX는 GPL-3.0이다.' / 문서 3: 'GPL-3.0 위반은 배포중단이다.'
+```
+1. 질문 문장과 의미적 코사인 유사도가 높은 앞뒤 조각만 Top-K로 뽑기 때문에, 서로 다른 문서에 흩어진 징검다리(Multi-Hop Bridge) 문서 간 명시적 연결 관계가 단절된다. ✅ **(정답)**
+2. 벡터 임베딩 모델은 한국어 문장을 숫자로 변환할 수 없기 때문이다. 
+3. 벡터 DB는 최대 1개의 문서만 저장할 수 있는 용량 제한이 있기 때문이다. 
+4. BM25 키워드 검색이 항상 벡터 검색보다 모든 면에서 정확하기 때문이다. 
+> **해설**: Top-K 벡터 검색은 질문 키워드와 직접 비슷한 문단만 가져오므로, 중간 매개 엔티티(`libX` $\rightarrow$ `GPL-3.0`)를 징검다리로 삼아 추론해야 하는 Multi-Hop 질의에서 핵심 근거를 누락하게 됩니다.
+
+---
+### Q14. [3. 트리플 추출·동음이의어·Hybrid RRF | Ch 10 | 중급] Ch 10 LLM 기반 트리플 자동 파서(`auto_triple_extractor.py`)에서 비정형 텍스트로부터 `(주어, 술어, 목적어)`를 추출할 때 **Pydantic v2 스키마 검증(`BaseModel`)**을 강제하는 가장 큰 실무적 이점은?
+```python
+class KnowledgeTriple(BaseModel):
+    subject: str
+    predicate: Literal['DEPENDS_ON', 'GOVERNED_BY', 'CONFLICTS_WITH', 'ENFORCES_PENALTY']
+    object: str
+```
+1. LLM이 임의로 지어낸 불규칙한 관계명(예: '약간_관련있음')이나 누락된 필드를 사전에 차단하여, 허용된 온톨로지 스키마 규격의 깨끗한 트리플만 Neo4j에 적재할 수 있다. ✅ **(정답)**
+2. Pydantic을 import하면 OpenAI API 요금이 무료로 전환된다. 
+3. Pydantic이 자동으로 비정형 PDF 파일을 PNG 이미지로 변환해 준다. 
+4. Neo4j의 Cypher 문법 대신 SQL로 쿼리를 자동 변환해 주기 때문이다. 
+> **해설**: LLM에게 자유 형식으로 추출을 맡기면 관계 이름이 제각각으로 흩어져 그래프가 오염됩니다. Pydantic `Literal` 타입 제약과 유효성 검증을 거치면 사전에 정의된 온톨로지 관계만 통과시킬 수 있습니다.
+
+---
+### Q15. [3. 트리플 추출·동음이의어·Hybrid RRF | Ch 11 | 고급] 여러 문서에서 추출한 트리플을 지식 그래프에 통합할 때 `'GPL 3.0'`, `'GNU GPL v3'`, `'gpl-3.0'` 처럼 **표기는 다르지만 실제로는 같은 개체(Entity)**가 별도 노드로 파편화되는 문제를 해결하는 Ch 11의 핵심 프로세스는?
+```python
+# Canonicalization Map + String Similarity(SequenceMatcher >= 0.85)
+# 'GPL 3.0', 'GNU GPL v3'  ===>  Canonical ID: 'GPL-3.0'
+```
+1. 엔티티 해소 및 정규화 병합(Entity Resolution & Canonical Merging)을 통해 하나의 표준 정식 노드 ID로 통합하고 alias 속성에 별칭을 보존한다. ✅ **(정답)**
+2. 서로 다른 문자열을 무조건 삭제하여 그래프 노드를 0개로 만든다. 
+3. 동음이의어 노드가 생길 때마다 Docker 컨테이너를 새로 생성한다. 
+4. 모든 영문자를 랜덤 숫자로 해싱하여 사람이 읽을 수 없게 만든다. 
+> **해설**: 표기가 조금씩 다른 동일 엔티티가 분리되면 홉 연결이 끊어집니다. 정규화 매핑, 약어 사전, 문자열/임베딩 유사도 기반 Entity Resolution을 통해 단일 Canonical 노드로 병합(`MERGE`)해야 온전한 GraphRAG가 작동합니다.
+
+---
+### Q16. [3. 트리플 추출·동음이의어·Hybrid RRF | Ch 12 | 고급] Ch 12 하이브리드 RAG 통합 엔진(`hybrid_graphrag_engine.py`)에서 **BM25(키워드 검색)** 순위와 **Dense Vector(의미 검색)** 순위, 그리고 **Neo4j 2-Hop 서브그래프** 점수를 단일 랭킹으로 결합할 때 사용하는 표준 공식은?
+```python
+score(d) = 1/(k + rank_bm25(d)) + 1/(k + rank_vec(d)) + graph_boost  # k=60
+```
+1. RRF (Reciprocal Rank Fusion, 상호 순위 융합) ✅ **(정답)**
+2. K-Means Clustering 
+3. PCA Dimensionality Reduction 
+4. Dropout Regularization 
+> **해설**: BM25 점수와 코사인 유사도는 스케일(단위)이 전혀 달라 단순 가중합 시 한쪽이 지배할 수 있습니다. RRF($1/(k + rank)$)는 각 검색기의 '순위(Rank)'만을 역수로 합산하므로 스케일 보정 없이 안정적인 앙상블 랭킹을 생성합니다.
+
+---
+### Q17. [3. 트리플 추출·동음이의어·Hybrid RRF | Ch 12 | 중급] 고유한 특허 출원 번호(`KR-PAT-2024-009182`)나 사규 조항 코드(`SEC-2026-04`)가 포함된 질의를 검색할 때, 임베딩 벡터 검색보다 **BM25(Sparse Keyword) 검색**을 반드시 병행해야 하는 이유는?
+```python
+# Query: 'KR-PAT-2024-009182 특허와 연결된 라이브러리'
+```
+1. Dense 임베딩은 문맥적 의미 요약에는 강하지만 고유 ID·모델명·특허번호 같은 희귀 정확한 토큰(Exact Match) 구별 능력이 떨어지므로 BM25가 이를 완벽히 보완한다. ✅ **(정답)**
+2. BM25가 항상 GPU VRAM 24GB를 사용해 더 딥러닝스럽기 때문이다. 
+3. Dense 벡터 검색은 숫자가 들어간 문장을 검색하지 못하기 때문이다. 
+4. BM25는 영문 알파벳을 한국어로 자동 번역해 주기 때문이다. 
+> **해설**: 특허 번호나 사규 코드처럼 1자리만 달라도 전혀 다른 개체인 경우, 의미 벡터는 유사도가 높게 섞일 수 있습니다. 정확한 어휘 가중치(TF-IDF/BM25)를 결합해야 Exact Match 정밀도가 보장됩니다.
+
+---
+### Q18. [3. 트리플 추출·동음이의어·Hybrid RRF | Ch 12 | 중급] Hybrid GraphRAG에서 1차 RRF로 추출된 시드(Seed) 문서의 핵심 엔티티(`PRJ-AGENT-01`)를 기점으로 **Neo4j 2-Hop 서브그래프 확장(Subgraph Expansion)**을 수행하면 LLM에게 어떤 이점이 생기는가?
+```python
+MATCH (seed {id: $seed_id})-[*1..2]-(neighbor) RETURN collect(DISTINCT neighbor)
+```
+1. 문서 청크에는 직접 적혀 있지 않았지만 그래프로 연결된 관련 라이선스·상위 사규·징계 수위 노드까지 사실 근거 컨텍스트에 포함시켜 환각 없는 추론이 가능해진다. ✅ **(정답)**
+2. LLM의 모델 파라미터 크기가 7B에서 70B로 물리적 증가한다. 
+3. 컨텍스트 윈도우 크기가 0 토큰으로 줄어든다. 
+4. Neo4j의 모든 노드가 자동 삭제된다. 
+> **해설**: 검색된 엔티티 주변의 1~2홉 이웃 트리플을 동적으로 수집하여 프롬프트 컨텍스트에 보강하면, 단일 청크 경계를 넘어서는 구조적 인과관계 답변을 생성할 수 있습니다.
+
+---
+### Q19. [4. MCP JSON-RPC 2.0·FastMCP 서버 | Ch 13 | 초급] Anthropic이 제창한 **Model Context Protocol (MCP)**을 현실의 컴퓨팅 아키텍처에 비유할 때 가장 적절한 역할 설명과 기반 통신 프로토콜은?
+```python
+{"jsonrpc": "2.0", "id": 101, "method": "tools/call", "params": {"name": "audit_project_compliance"}}
+```
+1. 어떤 AI 모델·클라이언트든 사내 DB나 로컬 도구에 단일 표준 규격으로 꽂아 쓸 수 있게 해주는 'AI계의 USB-C 표준 포트'이며, 메시지 규격은 JSON-RPC 2.0 기반이다. ✅ **(정답)**
+2. HTML 웹페이지를 디자인하는 CSS 프레임워크이다. 
+3. 딥러닝 모델의 행렬 곱셈을 가속하는 GPU 드라이버이다. 
+4. 리눅스 커널의 파일시스템 포맷(ext4 대체)이다. 
+> **해설**: MCP는 호스트(클라이언트)와 도구/데이터 제공자(서버) 사이의 통신을 JSON-RPC 2.0 기반 표준(`tools/list`, `tools/call`, `resources/read`)으로 통일하여, AI 에이전트와 백엔드 도구 개발을 완벽히 분리합니다.
+
+---
+### Q20. [4. MCP JSON-RPC 2.0·FastMCP 서버 | Ch 13 | 고급] 로컬 리눅스 환경에서 `stdio` 전송(Transport) 방식으로 동작하는 FastMCP 서버 코드를 작성할 때, 디버깅 로그 출력 시 **`print(...)` (stdout)를 절대 사용하면 안 되고 `sys.stderr`에 출력해야 하는 결정적 이유**는?
+```python
+# ❌ print("디버그: Neo4j 접속됨")  --> JSON-RPC 통신 파이프 오염!
+# ✅ print("디버그: Neo4j 접속됨", file=sys.stderr)
+```
+1. stdio 모드에서는 표준 출력(stdout) 채널 자체가 클라이언트-서버 간 JSON-RPC 2.0 프로토콜 패킷 전용 파이프로 사용되므로, 일반 텍스트가 stdout으로 나가면 JSON 파싱 치명적 오류가 발생하기 때문이다. ✅ **(정답)**
+2. 파이썬의 print() 함수는 리눅스 우분투에서 실행이 금지되어 있기 때문이다. 
+3. sys.stderr로 출력하면 자동으로 슬랙(Slack) 알림이 발송되기 때문이다. 
+4. stdout은 최대 10글자까지만 출력할 수 있는 버퍼 제한이 있기 때문이다. 
+> **해설**: MCP `stdio` 트랜스포트는 부모 프로세스(Client)와 자식 프로세스(Server)가 `stdin`/`stdout`으로 순수 JSON-RPC 줄바꿈 메시지를 주고받습니다. 디버그 로그는 반드시 `sys.stderr`나 파일 로거로 우회해야 합니다.
+
+---
+### Q21. [4. MCP JSON-RPC 2.0·FastMCP 서버 | Ch 14 | 초급] Python **FastMCP** 프레임워크에서 일반 파이썬 함수 위에 `@mcp.tool()` 데코레이터를 붙였을 때 프레임워크가 자동으로 수행해 주는 핵심 기능은?
+```python
+@mcp.tool()
+def check_license_policy(license_name: str) -> str:
+    """오픈소스 라이선스의 사내 상용 배포 허용 여부를 조회합니다."""
+    ...
+```
+1. 파이썬 타입 힌트(Type Hints)와 독스트링(Docstring)을 자동 파싱하여 MCP 클라이언트가 이해할 수 있는 JSON Schema 도구 명세를 자동 생성·노출한다. ✅ **(정답)**
+2. 해당 함수를 C++ 기계어로 컴파일하여 GPU에 업로드한다. 
+3. 함수가 호출될 때마다 자동으로 Docker 컨테이너를 삭제한다. 
+4. 독스트링을 지워버리고 파라미터 이름을 a, b, c로 난독화한다. 
+> **해설**: FastMCP는 함수 시그니처의 타입 힌트(`license_name: str`)와 독스트링을 리플렉션(Reflection)하여 `tools/list` 요청 시 LLM에게 전달할 JSON Schema(`inputSchema`, `description`)를 자동 생성합니다.
+
+---
+### Q22. [4. MCP JSON-RPC 2.0·FastMCP 서버 | Ch 15 | 중급] Ch 15 `enterprise_graphrag_mcp_server.py`에 구현된 Neo4j 연동 사내 컴플라이언스 전용 MCP Tool 3종의 역할 연결로 올바른 것은?
+```python
+# 1) audit_project_compliance(project_id)
+# 2) trace_shortest_risk_path(start_id, end_id)
+# 3) search_regulation_subgraph(keyword)
+```
+1. 프로젝트 전체 라이선스·특허 일괄 감사 / 두 노드 간 최단 위험 인과 경로 탐색 / 키워드 기반 사규 서브그래프 및 징계 조항 조회 ✅ **(정답)**
+2. 도커 이미지 삭제 / 우분투 재부팅 / 파이썬 버전 다운그레이드 
+3. 유튜브 영상 다운로드 / 이미지 해상도 축소 / 음성 파일 변환 
+4. 윈도우 레지스트리 백업 / 방화벽 전체 해제 / 평문 비밀번호 전송 
+> **해설**: 이 3종의 도구를 조합하면 자율 에이전트가 특정 키워드로 사규를 찾고(`search_regulation_subgraph`), 프로젝트의 의존성 리스크를 감사하며(`audit_project_compliance`), 징계까지의 인과 사슬을 증명(`trace_shortest_risk_path`)할 수 있습니다.
+
+---
+### Q23. [4. MCP JSON-RPC 2.0·FastMCP 서버 | Ch 15 | 고급] MCP 서버가 LLM 에이전트에게 **Neo4j Cypher 임의 실행권(`run_any_cypher(raw_sql_or_cypher)`)**을 통째로 열어주지 않고, **`audit_project_compliance(project_id: str)`**처럼 검증된 파라미터 기반 전용 Tool로 캡슐화하여 노출해야 하는 보안 아키텍처 원칙은?
+```python
+# 파라미터 바인딩: session.run("MATCH (p:Project {id: $pid})...", pid=project_id)
+```
+1. 프롬프트 인젝션(Prompt Injection)이나 LLM 환각으로 인한 `DETACH DELETE` 데이터 파괴 및 Cypher 인젝션 공격을 원천 차단하는 최소 권한 원칙(Least Privilege)과 쿼리 파라미터화 ✅ **(정답)**
+2. FastMCP는 문자열이 20자를 넘으면 실행할 수 없기 때문 
+3. Neo4j 드라이버가 읽기 전용 DELETE 문만 지원하기 때문 
+4. LLM이 영어로 된 SQL을 한국어로 번역하는 데 시간이 오래 걸리기 때문 
+> **해설**: 에이전트에게 원시 DB 쓰기/삭제 쿼리 권한을 주면 악성 프롬프트 인젝션 한 줄로 사내 그래프가 삭제될 수 있습니다. 읽기 전용 파라미터 바인딩(`$pid`) 기반의 캡슐화된 MCP Tool만 제공해야 엔터프라이즈 보안이 확보됩니다.
+
+---
+### Q24. [4. MCP JSON-RPC 2.0·FastMCP 서버 | Ch 16 | 중급] SSE/Streamable-HTTP 원격 모드로 구동되는 FastMCP 서버를 리눅스 프로덕션 서버에 **무중단 데몬(`graphrag-mcp.service`)**으로 등록할 때, 프로세스 비정상 종료 시 5초 뒤 자동 부활하도록 `systemd` 유닛 파일에 지정하는 핵심 설정은?
+```python
+[Service]
+ExecStart=/home/pc/.local/bin/poetry run python enterprise_graphrag_mcp_server.py
+____=always
+RestartSec=5
+```
+1. Restart=always ✅ **(정답)**
+2. KillOnFail=true 
+3. AutoDelete=yes 
+4. SleepTime=infinite 
+> **해설**: `systemd` 서비스 파일의 `[Service]` 섹션에 `Restart=always`와 `RestartSec=5`를 선언하고 `systemctl enable --now graphrag-mcp.service`를 실행하면 장애나 서버 재부팅 시에도 자동으로 서비스가 복구됩니다.
+
+---
+### Q25. [5. Standalone MCP Client·자율 감사 에이전트 | Ch 17 | 초급] 외부 상용 IDE나 별도 GUI 클라이언트 없이, 순수 파이썬 코드에서 로컬 FastMCP 서버 프로세스를 직접 실행하고 연결할 때 사용하는 공식 **`mcp` SDK** 비동기 컨텍스트 매니저 조합은?
+```python
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import ____
+```
+1. stdio_client(server_params) 와 ClientSession(read_stream, write_stream) ✅ **(정답)**
+2. flask_app() 와 requests.post() 
+3. selenium.webdriver() 와 beautifulsoup() 
+4. sqlite3.connect() 와 cursor.execute() 
+> **해설**: 공식 `mcp` Python SDK는 `async with stdio_client(server_params) as (read, write): async with ClientSession(read, write) as session:` 패턴을 통해 외부 IDE 없이도 독립형(Standalone) MCP 호스트를 완벽히 구현할 수 있게 해줍니다.
+
+---
+### Q26. [5. Standalone MCP Client·자율 감사 에이전트 | Ch 17 | 중급] Standalone Python MCP 클라이언트에서 `ClientSession`을 연결한 직후, 서버와 프로토콜 버전·지원 기능을 협상하고 사용 가능한 도구 목록을 동적으로 받아오기 위해 호출하는 두 메서드의 올바른 순서는?
+```python
+await session.____()
+tools_resp = await session.____()
+res = await session.call_tool("audit_project_compliance", {"project_id": "PRJ-AGENT-01"})
+```
+1. initialize() -> list_tools() ✅ **(정답)**
+2. shutdown() -> delete_tools() 
+3. compile() -> run_sql() 
+4. login() -> create_table() 
+> **해설**: MCP 프로토콜 핸드셰이크 규칙상 반드시 `await session.initialize()`로 초기 협상을 마친 뒤에 `list_tools()`로 도구 스키마를 발견(Discovery)하고 `call_tool()`을 실행해야 합니다.
+
+---
+### Q27. [5. Standalone MCP Client·자율 감사 에이전트 | Ch 18 | 중급] Ch 18 자율 에이전트(`autonomous_graph_agent.py`)가 복잡한 감사 목표를 달성할 때 반복 수행하는 **ReAct (Think-Act-Observe)** 의사결정 루프의 동작 순서로 올바른 것은?
+```python
+# Goal: PRJ-AGENT-01 배포 리스크 및 최단 징계 경로 규명
+```
+1. (Thought) 현재 부족한 정보가 무엇인지 추론 -> (Action) 적절한 FastMCP Tool 선택 및 호출 -> (Observation) 반환된 그래프 데이터를 분석해 다음 홉 탐색 또는 최종 결론 도출 ✅ **(정답)**
+2. 아무 도구도 부르지 않고 100% 랜덤 숫자를 생성해 즉시 종료 
+3. 사용자 질문을 그대로 다시 사용자에게 되물으며 무한 대기 
+4. 모든 Neo4j 노드를 삭제한 뒤 빈 화면 출력 
+> **해설**: 자율 에이전트는 한 번의 검색으로 끝나지 않고 Think $\rightarrow$ Act(FastMCP `call_tool`) $\rightarrow$ Observe 루프를 돌며, 1차 감사에서 발견된 `gpl-graph-parser`나 `PEN-STOP-RELEASE`를 근거로 추가 최단 경로 탐색을 스스로 연쇄 실행합니다.
+
+---
+### Q28. [5. Standalone MCP Client·자율 감사 에이전트 | Ch 18 | 고급] 자율 에이전트의 Think-Act-Observe 루프가 잘못된 도구 호출을 계속 반복하며 무한 루프에 빠지고 API 비용을 탕진하는 사고를 막기 위해 에이전트 오케스트레이터에 반드시 구현해야 하는 안전장치는?
+```python
+MAX_REASONING_STEPS = 5
+for step in range(1, MAX_REASONING_STEPS + 1): ...
+```
+1. 최대 추론 스텝 상한선(max_steps) 제한 및 동일 인자 중복 도구 호출 감지 시 조기 종료(Circuit Breaker) ✅ **(정답)**
+2. while True 루프 안에 sleep(0)만 넣고 탈출 조건 제거 
+3. 오류가 날 때마다 GPU 클럭을 2배로 오버클럭 
+4. 에이전트 메모리 limit을 무제한으로 설정 
+> **해설**: 자율 에이전트는 LLM 추론 오류 시 동일 도구를 무한 반복 호출할 위험이 있으므로 반드시 `max_steps` 상한과 중복 호출 차단 가드레일을 구현해야 합니다.
+
+---
+### Q29. [5. Standalone MCP Client·자율 감사 에이전트 | Ch 19 | 중급] Ch 19 실전 프로젝트(`enterprise_audit_cli.py`)에서 소프트웨어 특허 침해 및 사규 위반을 감지한 뒤 최종 발행하는 Markdown 감사 리포트(`AUDIT_REPORT.md`)가 실무 컴플라이언스 도구로서 신뢰를 얻기 위해 반드시 포함해야 할 요소는?
+```python
+## 발견된 위반 경로: (PRJ-AGENT-01) -> (gpl-graph-parser) -> (GPL-3.0) -> (제4조 2항)
+```
+1. 추측성 문장이 아닌 Neo4j 그래프에서 실제 검증된 구체적 노드 ID, 위반 사규 조항 번호, 특허 번호, 그리고 즉각적인 기술적 시정 조치 권고안(Evidence-Based Citation) ✅ **(정답)**
+2. 근거 조항 없이 '아마 문제가 있을 것 같습니다'라는 1줄 요약 
+3. 사내 전체 직원의 급여 테이블 전체 덤프 
+4. 실행할 수 없는 의사코드 이미지 캡처 1장 
+> **해설**: 법무·보안 실무 감사는 100% 근거 중심(Evidence-Based)이어야 합니다. GraphRAG 에이전트가 탐색한 정확한 엣지 경로와 조항/특허 ID를 인용(Citation)해야 감사관과 개발자가 즉시 조치할 수 있습니다.
+
+---
+### Q30. [5. Standalone MCP Client·자율 감사 에이전트 | Ch 20 | 고급] Ch 20 미래 확장: 오늘 수행한 감사 에피소드(`AuditEpisode`)와 해결 결과를 다시 Neo4j 지식 그래프에 실시간 동기화(`continual_memory_sync.py`)할 때, 다음 도서 **[심화 3] 지속 메모리(Continual Memory)**로 이어지는 핵심 아키텍처 가치는?
+```python
+MERGE (ep:AuditEpisode {id: $ep_id})-[:AUDITED]->(p:Project {id: 'PRJ-AGENT-01'})
+```
+1. 에이전트가 과거 감사 이력과 사용자의 피드백을 외장 지식 그래프에 축적하여, 내일 똑같은 라이브러리 점검 시 이미 해결된 이력과 재발 패턴을 기억하고 스스로 진화하는 영구 두뇌 토대를 마련한다. ✅ **(정답)**
+2. 감사 기록을 저장함으로써 다음 날 Neo4j DB가 자동으로 초기화되게 한다. 
+3. FastMCP 서버의 JSON-RPC 버전을 1.0으로 다운그레이드한다. 
+4. 모든 Python 코드를 JavaScript로 자동 번역한다. 
+> **해설**: 단순 일회성 질의-응답을 넘어 에이전트의 행동 결과(`AuditEpisode`)를 다시 지식 그래프에 환류(Feedback Sync)시키는 순간, 에이전트는 경험을 기억하고 학습하는 **지속 메모리(Continual Memory) 시스템**으로 도약합니다.
+
+---

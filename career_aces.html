@@ -629,17 +629,17 @@
           </div>
         </div>
 
-        <!-- Track 2: 정규 4대 시험 성적표 기반 -->
+        <!-- Track 2: 정규 4대 + 심화 3대 시험 성적표 기반 -->
         <div id="tabModeOfficial" class="mode-select-card" onclick="switchMode('official')">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <strong style="color: #cbd5e1; font-size: 15px;">🎓 [트랙 2] 정규 4대 시험 성적표 기반 (공인 인증)</strong>
-            <span style="background: #334155; color: #e2e8f0; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">총 400문항 공인 실기</span>
+            <strong style="color: #cbd5e1; font-size: 15px;">🎓 [트랙 2] 정규 4대 + 심화 3대 시험 성적표 기반 (공인 인증)</strong>
+            <span style="background: #334155; color: #e2e8f0; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">총 490문항 공인 실기</span>
           </div>
           <div style="font-size: 12.5px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">
-            DMDG 4대 평가(SQL 90문항·수학 75문항·데이터 90문항·파이썬 145문항)에서 실제로 획득한 성적으로 공인 추천서를 발행합니다.
+            기초 4대 평가(SQL·수학·데이터·파이썬 400문항)와 심화 3대 평가(레이크하우스·GraphRAG/FastMCP·지속메모리 90문항) 성적으로 공인 추천서를 발행합니다.
           </div>
           <div id="statusTagOfficial" style="display: inline-flex; align-items: center; gap: 4px; background: rgba(51, 65, 85, 0.5); color: #94a3b8; font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 4px; border: 1px solid #334155;">
-            🔘 클릭 시 전환: 4대 시험 성적표 입력
+            🔘 클릭 시 전환: 7대 공인 시험 성적표 입력
           </div>
         </div>
       </div>
@@ -786,15 +786,15 @@
       </div>
     </div>
 
-    <!-- VIEW B: 정규 4대 시험 성적 기반 공인 인증 모드 -->
+    <!-- VIEW B: 정규 4대 + 심화 3대 시험 성적 기반 공인 인증 모드 -->
     <div id="officialExamView" class="screen-card" style="display: none;">
-      <span class="step-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">OFFICIAL EXAM VERIFICATION</span>
-      <h2 style="color: #f8fafc; font-size: 19px; margin-bottom: 6px;">🎓 정규 4대 실무 시험 응시 및 성적표 연동</h2>
+      <span class="step-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">OFFICIAL EXAM VERIFICATION (7 EXAMS · 490Q)</span>
+      <h2 style="color: #f8fafc; font-size: 19px; margin-bottom: 6px;">🎓 정규 4대 + 심화 3대 실무 시험 응시 및 성적표 연동</h2>
       <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">
-        실제 공인 평가 시험(총 400문항)을 아직 치르지 않으셨다면 각 시험 링크를 통해 먼저 응시하시고, 획득한 성적을 아래에 입력해 주세요.
+        실제 공인 평가 시험(기초 400문항 + 심화 90문항 = 총 490문항) 중 응시하신 과목의 점수를 입력해 주세요. (심화 3종 시험에서도 직무 추천 평가지표가 실시간 작동합니다.)
       </p>
 
-      <!-- 4대 시험 바로가기 링크 그리드 -->
+      <!-- 기초 4대 시험 바로가기 링크 그리드 -->
       <div class="exam-grid">
         <div class="exam-mini-card">
           <div>
@@ -826,31 +826,68 @@
         </div>
       </div>
 
+      <!-- 심화 3대 실전 시험 바로가기 링크 그리드 -->
+      <div class="exam-grid" style="margin-top: 12px;">
+        <div class="exam-mini-card" style="border-color: rgba(56, 189, 248, 0.45);">
+          <div>
+            <h4 style="color:#38bdf8;">🚗 심화 1: 자율주행 레이크하우스</h4>
+            <span>총 30문항 · Kafka·HDFS·Hive·DNN</span>
+          </div>
+          <a href="exam_smartcar_lakehouse.html" target="_blank" class="exam-link-btn">시험 응시하기 ➔</a>
+        </div>
+        <div class="exam-mini-card" style="border-color: rgba(16, 185, 129, 0.45);">
+          <div>
+            <h4 style="color:#34d399;">🕸️ 심화 2: FastMCP·GraphRAG</h4>
+            <span>총 30문항 · Linux·Neo4j·Hybrid RRF</span>
+          </div>
+          <a href="exam_graphrag_mcp.html" target="_blank" class="exam-link-btn">시험 응시하기 ➔</a>
+        </div>
+        <div class="exam-mini-card" style="border-color: rgba(168, 85, 247, 0.45);">
+          <div>
+            <h4 style="color:#d8b4fe;">🧠 심화 3: 지속 메모리 &amp; 모델 정렬</h4>
+            <span>총 30문항 · Temporal KG·QLoRA·DPO</span>
+          </div>
+          <a href="exam_continual_memory.html" target="_blank" class="exam-link-btn">시험 응시하기 ➔</a>
+        </div>
+      </div>
+
       <!-- 성적표 점수 입력 폼 -->
       <div style="background: #111827; border: 1.5px solid #1e293b; border-radius: 12px; padding: 20px; margin-top: 20px;">
-        <h3 style="color: #38bdf8; font-size: 15px; margin-bottom: 14px;">📝 4대 시험 성적표 점수 입력 (0 ~ 100점)</h3>
+        <h3 style="color: #38bdf8; font-size: 15px; margin-bottom: 14px;">📝 7대 공인 시험 성적표 점수 입력 (0 ~ 100점)</h3>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 14px; margin-bottom: 20px;">
           <div>
-            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">1. SQL 실무 평가 획득 점수</label>
+            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">1. SQL 실무 평가 점수</label>
             <input type="number" id="exam_sql" min="0" max="100" value="85" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
           </div>
           <div>
-            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">2. AI &amp; LLM 사전수학 획득 점수</label>
-            <input type="number" id="exam_math" min="0" max="100" value="70" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">2. AI &amp; LLM 사전수학 점수</label>
+            <input type="number" id="exam_math" min="0" max="100" value="75" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
           </div>
           <div>
-            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">3. AI 데이터 분석 획득 점수</label>
+            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">3. AI 데이터 분석 점수</label>
             <input type="number" id="exam_data" min="0" max="100" value="88" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
           </div>
           <div>
-            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">4. 파이썬 &amp; ML/DL 획득 점수</label>
-            <input type="number" id="exam_python" min="0" max="100" value="82" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">4. 파이썬 &amp; ML/DL 점수</label>
+            <input type="number" id="exam_python" min="0" max="100" value="84" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+          </div>
+          <div>
+            <label style="font-size: 12px; color: #38bdf8; display: block; margin-bottom: 4px;">5. [심화 1] 자율주행 레이크하우스</label>
+            <input type="number" id="exam_smartcar" min="0" max="100" value="86" style="width: 100%; background: #0f172a; border: 1px solid #0284c7; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+          </div>
+          <div>
+            <label style="font-size: 12px; color: #34d399; display: block; margin-bottom: 4px;">6. [심화 2] FastMCP·GraphRAG</label>
+            <input type="number" id="exam_graphrag" min="0" max="100" value="88" style="width: 100%; background: #0f172a; border: 1px solid #059669; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+          </div>
+          <div>
+            <label style="font-size: 12px; color: #d8b4fe; display: block; margin-bottom: 4px;">7. [심화 3] 지속 메모리·모델정렬</label>
+            <input type="number" id="exam_memory" min="0" max="100" value="85" style="width: 100%; background: #0f172a; border: 1px solid #9333ea; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
           </div>
         </div>
 
         <button onclick="calculateFromOfficialExams()" style="width: 100%; background: linear-gradient(135deg, #10b981, #0284c7); color: #fff; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
-          🎯 실제 시험 성적으로 공인 직무 추천 &amp; 채용 JD 분석 산출 ➔
+          🎯 7대 실제 시험 성적으로 공인 직무 추천 &amp; 채용 JD 분석 산출 ➔
         </button>
       </div>
     </div>
@@ -1366,29 +1403,55 @@
       executeFullAnalysis([math, coding, data, genai, biz, arch]);
     }
 
-    // ── Calculate from Official 4 Exams (Mode 2) ──
+    // ── Calculate from Official 7 Exams (Mode 2) ──
     function calculateFromOfficialExams() {
       const sql = parseFloat(document.getElementById('exam_sql').value) || 0;
       const math = parseFloat(document.getElementById('exam_math').value) || 0;
       const data = parseFloat(document.getElementById('exam_data').value) || 0;
       const py = parseFloat(document.getElementById('exam_python').value) || 0;
+      const smartcar = parseFloat(document.getElementById('exam_smartcar')?.value) || 0;
+      const graphrag = parseFloat(document.getElementById('exam_graphrag')?.value) || 0;
+      const memory = parseFloat(document.getElementById('exam_memory')?.value) || 0;
 
-      // 4대 시험 점수를 A.C.E.S 기둥 점수로 정밀 매핑
-      const pA = math;
-      const pC = (0.5 * py) + (0.5 * sql);
-      const pE = data;
-      const pS = (0.4 * py) + (0.3 * sql) + (0.3 * data);
+      // 기초 4대 시험 + 심화 3대 시험 성적을 A.C.E.S 6대 직무 역량으로 정밀 매핑
+      const pA = (0.75 * math) + (0.25 * memory);
+      const pC = (0.35 * py) + (0.35 * sql) + (0.15 * smartcar) + (0.15 * graphrag);
+      const pData = (0.45 * data) + (0.35 * smartcar) + (0.20 * sql);
+      const pE = (0.40 * graphrag) + (0.40 * memory) + (0.20 * data);
+      const pS = (0.25 * smartcar) + (0.35 * graphrag) + (0.25 * memory) + (0.15 * py);
 
-      const m = Math.round(0.75 * pA + 0.15 * pC + 0.05 * pE + 0.05 * pS);
+      const m = Math.round(0.80 * pA + 0.10 * pC + 0.05 * pE + 0.05 * pS);
       const c = Math.round(0.10 * pA + 0.65 * pC + 0.15 * pE + 0.10 * pS);
-      const d = Math.round(0.05 * pA + 0.30 * pC + 0.45 * pE + 0.20 * pS);
-      const g = Math.round(0.05 * pA + 0.10 * pC + 0.70 * pE + 0.15 * pS);
-      const b = Math.round(0.05 * pA + 0.05 * pC + 0.15 * pE + 0.75 * pS);
-      const a = Math.round(0.05 * pA + 0.20 * pC + 0.25 * pE + 0.50 * pS);
+      const d = Math.round(0.05 * pA + 0.20 * pC + 0.65 * pData + 0.10 * pS);
+      const g = Math.round(0.05 * pA + 0.15 * pC + 0.70 * pE + 0.10 * pS);
+      const b = Math.round(0.05 * pA + 0.10 * pC + 0.25 * pE + 0.60 * pS);
+      const a = Math.round(0.05 * pA + 0.20 * pC + 0.30 * pE + 0.45 * pS);
 
-      document.getElementById('reportModeBadge').innerText = '정규 4대 시험 성적 기반 공인 인증';
+      document.getElementById('reportModeBadge').innerText = '정규 4대 + 심화 3대 시험(총 490문항) 공인 인증';
       executeFullAnalysis([m, c, d, g, b, a]);
     }
+
+    // URL 파라미터 연동 (?exam=smartcar_lakehouse&score=93 등)
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const examId = params.get('exam');
+      const score = params.get('score');
+      if (examId && score !== null) {
+        switchMode('official');
+        const mapId = {
+          'smartcar_lakehouse': 'exam_smartcar',
+          'graphrag_mcp': 'exam_graphrag',
+          'continual_memory': 'exam_memory'
+        };
+        const targetInput = document.getElementById(mapId[examId]);
+        if (targetInput) {
+          targetInput.value = score;
+          targetInput.style.boxShadow = '0 0 12px rgba(56, 189, 248, 0.7)';
+        }
+        const sec = document.getElementById('officialExamView');
+        if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
 
     // ── Full Recommendation & JD Analytics Execution Engine ──
     function executeFullAnalysis(userScores) {

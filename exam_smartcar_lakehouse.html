@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>심화 1: 자율주행 AI 빅데이터 레이크하우스 역량 평가 (30문항) | DMDG 공인 역량 평가 & 직무 추천</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #070b14;
+      color: #f8fafc;
+    }
+    .code-font { font-family: 'Fira Code', monospace; }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .option-btn { transition: all 0.16s ease; }
+    .option-btn:hover { border-color: #38bdf8; background: rgba(30, 41, 59, 0.95); }
+    .option-btn.selected {
+      border-color: #38bdf8;
+      background: rgba(16, 185, 129, 0.16);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.22);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-slate-950 shadow-lg" style="background: linear-gradient(135deg, #38bdf8, #10b981);">
+          30Q
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-extrabold text-white">심화 1: 자율주행 AI 빅데이터 레이크하우스 역량 평가 (30문항)</h1>
+          <p class="text-xs text-slate-400">Docker 8-Container · Hadoop HDFS · Apache Kafka · HiveServer2 · Pydeck 3D · OLS 회귀 & 3-Class DNN</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <div id="header-timer-badge" class="hidden items-center gap-2 bg-slate-950 border border-slate-700 px-3 py-1.5 rounded-xl">
+          <i class="fa-solid fa-stopwatch text-cyan-400"></i>
+          <span id="timer-display" class="code-font text-sm font-extrabold text-cyan-300">01:00</span>
+        </div>
+        <a href="https://wikidocs.net/book/22015" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700">
+          📘 위키독스 교안
+        </a>
+        <a href="sim_smartcar_lakehouse.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-emerald-300 border border-emerald-500/40">
+          🎛️ 시뮬레이터
+        </a>
+        <a href="career_aces.html" class="px-3 py-1.5 rounded-lg text-xs font-extrabold text-slate-950" style="background: linear-gradient(135deg, #38bdf8, #10b981);">
+          🏆 A.C.E.S 종합 직무진단
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl w-full mx-auto px-4 py-7 flex-1">
+
+    <!-- VIEW 1: START SCREEN -->
+    <section id="view-start" class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-wrap justify-between items-start gap-4 border-b border-slate-800 pb-5">
+        <div>
+          <span class="inline-block px-2.5 py-1 rounded-full text-[11px] font-extrabold mb-2" style="background: rgba(56,189,248,0.16); color: #38bdf8; border: 1px solid #38bdf8;">
+            DMDG OFFICIAL CERTIFICATION · 30 QUESTIONS + JOB MATCHING
+          </span>
+          <h2 class="text-2xl font-black text-white">실전 변별력 30문항 역량 평가 &amp; 직무 추천 평가지표</h2>
+          <p class="text-sm text-slate-300 mt-1">
+            5대 핵심 영역(각 6문항, 총 30문항)을 응시하면 <b>자동 채점 결과(PASS 80점 기준)</b>와 함께
+            <b>DMDG A.C.E.S 6대 역량 레이더 차트 · 1~3순위 최적 추천 직무 · SHAP 강점/보완 분석</b>을 즉시 산출합니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Domain Overview Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="category-cards"></div>
+
+      <!-- User Info & Mode Settings -->
+      <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-5 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">응시자 성명</label>
+            <input type="text" id="input-student-name" placeholder="예: 홍길동 (미입력 시 '학습자')" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">응시 모드 선택</label>
+            <select id="select-exam-mode" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+              <option value="timed">⏱️ 실전 공인 모드 (문항당 60초 제한 · 보기 셔플)</option>
+              <option value="practice">📖 자유 학습 모드 (시간 제한 없음 · 보기 셔플)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 pt-2">
+          <button onclick="startExam('ALL')" class="flex-1 min-w-[220px] py-3.5 px-6 rounded-xl font-black text-slate-950 text-sm shadow-lg transition hover:brightness-110" style="background: linear-gradient(135deg, #38bdf8, #10b981);">
+            🚀 전체 30문항 실전 시험 &amp; 직무 추천 시작하기
+          </button>
+          <button onclick="showSampleResult()" class="py-3.5 px-5 rounded-xl font-bold text-xs bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/40 transition">
+            📊 직무 추천 평가지표 결과 미리보기 (샘플)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: EXAM IN PROGRESS -->
+    <section id="view-exam" class="hidden glass-card rounded-2xl p-6 sm:p-8 space-y-5">
+      <div class="flex justify-between items-center text-xs text-slate-400">
+        <span id="exam-progress-text" class="code-font font-bold text-cyan-300">문항 1 / 30</span>
+        <span id="exam-category-badge" class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-300 font-bold"></span>
+      </div>
+      <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+        <div id="exam-progress-bar" class="h-full transition-all duration-300" style="width: 3%; background: linear-gradient(90deg, #38bdf8, #10b981);"></div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-center gap-2">
+          <span id="q-chapter-badge" class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-500/30"></span>
+          <span id="q-diff-badge" class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/30"></span>
+        </div>
+        <h2 id="q-title" class="text-lg sm:text-xl font-bold text-white leading-relaxed"></h2>
+        <pre id="q-code" class="hidden bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-cyan-200 code-font overflow-x-auto leading-relaxed"></pre>
+
+        <div id="q-options" class="grid grid-cols-1 gap-3 pt-2"></div>
+      </div>
+
+      <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+        <span class="text-xs text-slate-400">정답 선택 후 [다음 문항]을 클릭하세요.</span>
+        <button onclick="nextQuestion()" id="btn-next-q" class="px-6 py-2.5 rounded-xl font-extrabold text-sm text-slate-950 transition hover:brightness-110" style="background: linear-gradient(135deg, #38bdf8, #10b981);">
+          다음 문항 ➔
+        </button>
+      </div>
+    </section>
+
+    <!-- VIEW 3: RESULT + JOB RECOMMENDATION BENCHMARK DASHBOARD -->
+    <section id="view-result" class="hidden space-y-6">
+      <!-- Score & Readiness Card -->
+      <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+        <div class="flex flex-wrap justify-between items-center gap-4 border-b border-slate-800 pb-5">
+          <div>
+            <span class="text-xs font-bold text-cyan-300 code-font">OFFICIAL ASSESSMENT &amp; A.C.E.S CAREER REPORT</span>
+            <h2 class="text-2xl font-black text-white mt-1"><span id="res-student-name">응시자</span>님의 역량 평가 및 직무 추천 리포트</h2>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="text-right">
+              <div class="text-xs text-slate-400">100점 환산 점수</div>
+              <div class="text-3xl font-black code-font" style="color: #38bdf8;"><span id="res-score-100">0</span>점</div>
+              <div id="res-correct-count" class="text-xs text-slate-300"></div>
+            </div>
+            <span id="res-pass-badge" class="px-3.5 py-1.5 rounded-full text-xs font-extrabold"></span>
+          </div>
+        </div>
+
+        <!-- Area Breakdown -->
+        <div>
+          <h3 class="text-sm font-bold text-slate-200 mb-3">📊 5대 핵심 영역별 정답률</h3>
+          <div id="res-area-bars" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3"></div>
+        </div>
+
+        <!-- DMDG A.C.E.S 6-Axis Radar + Top 3 Job Recommendation -->
+        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-5">
+          <div class="flex flex-wrap justify-between items-center gap-2">
+            <div>
+              <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[11px] font-extrabold">DMDG A.C.E.S 6대 직무 역량 평가지표</span>
+              <h3 class="text-lg font-black text-white mt-1">🏆 직무 추천 평가지표 &amp; 6대 육각형 역량 레이더</h3>
+            </div>
+            <a id="btn-send-aces" href="career_aces.html" class="px-4 py-2 rounded-xl text-xs font-extrabold text-slate-950 shadow-lg transition hover:brightness-110" style="background: linear-gradient(135deg, #38bdf8, #10b981);">
+              🚀 A.C.E.S 종합 직무진단에 이 성적 연동하기 ➔
+            </a>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-6 gap-2.5 text-center" id="res-aces-6kpi"></div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 h-[320px]">
+              <canvas id="radarChart"></canvas>
+            </div>
+            <div class="space-y-3" id="res-job-cards"></div>
+          </div>
+
+          <!-- SHAP XAI Analysis -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-900/70 border border-slate-800 rounded-xl p-4 text-xs leading-relaxed">
+            <div>
+              <div class="font-extrabold text-emerald-400 mb-1.5">🌟 직무 추천을 견인한 핵심 강점 (SHAP +)</div>
+              <div id="res-shap-plus" class="text-slate-300 space-y-1"></div>
+            </div>
+            <div>
+              <div class="font-extrabold text-amber-400 mb-1.5">💡 커리어 확장을 위한 보완 권장 영역</div>
+              <div id="res-shap-minus" class="text-slate-300 space-y-1"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button onclick="retakeExam()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white border border-slate-700">
+            🔄 다시 응시하기
+          </button>
+          <button onclick="filterReview('all')" class="px-4 py-2.5 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 text-xs font-bold text-indigo-200 border border-indigo-500/40">
+            전체 30문항 해설 보기
+          </button>
+          <button onclick="filterReview('wrong')" class="px-4 py-2.5 rounded-xl bg-rose-600/25 hover:bg-rose-600/45 text-xs font-bold text-rose-200 border border-rose-500/40">
+            오답 문항만 모아보기
+          </button>
+        </div>
+      </div>
+
+      <!-- Detailed Question-by-Question Review -->
+      <div id="res-review-list" class="space-y-4"></div>
+    </section>
+
+  </main>
+
+  <script>
+    const EXAM_META = {"id": "smartcar_lakehouse", "book_id": 22015, "title": "심화 1: 자율주행 AI 빅데이터 레이크하우스 역량 평가 (30문항)", "subtitle": "Docker 8-Container · Hadoop HDFS · Apache Kafka · HiveServer2 · Pydeck 3D · OLS 회귀 & 3-Class DNN", "book_url": "https://wikidocs.net/book/22015", "sim_url": "sim_smartcar_lakehouse.html", "accent": "#38bdf8", "accent_secondary": "#10b981", "categories": ["1. 도커·WSL2·Poetry 인프라", "2. HDFS 분산저장·센서 시뮬레이션", "3. Kafka 스트리밍·Hive 웨어하우스", "4. GPS 정제·Streamlit·Pydeck 3D", "5. OLS 회귀·3-Class DNN·트러블슈팅"], "aces_weights": {"1. 도커·WSL2·Poetry 인프라": [0.05, 0.25, 0.35, 0.05, 0.05, 0.25], "2. HDFS 분산저장·센서 시뮬레이션": [0.1, 0.25, 0.4, 0.05, 0.05, 0.15], "3. Kafka 스트리밍·Hive 웨어하우스": [0.05, 0.2, 0.45, 0.05, 0.1, 0.15], "4. GPS 정제·Streamlit·Pydeck 3D": [0.1, 0.3, 0.25, 0.1, 0.15, 0.1], "5. OLS 회귀·3-Class DNN·트러블슈팅": [0.35, 0.25, 0.2, 0.05, 0.1, 0.05]}};
+    const RAW_QUESTIONS = [{"id": 1, "category": "1. 도커·WSL2·Poetry 인프라", "chapter": "Ch 01", "difficulty": "초급", "question": "과거 가상머신(VirtualBox/VMware에 CentOS 3대 설치) 방식과 비교했을 때, 모던 도커(Docker) 컨테이너 기반 클러스터가 노트북 실습 환경에서 압도적으로 유리한 핵심 기술적 이유는?", "code": "# 호스트 OS(WSL2 리눅스 커널) 1개를 공유하여 8대 빅데이터 서버 컨테이너 격리 실행", "options": ["컨테이너마다 독립된 OS 커널을 매번 부팅할 필요 없이 호스트 리눅스 커널을 공유하므로 RAM 점유율이 획기적으로 낮고 수 초 만에 8대 서버를 기동할 수 있다.", "도커는 모든 서버 코드를 윈도우 레지스트리에 직접 컴파일하므로 리눅스 커널이 전혀 필요 없다.", "도커를 사용하면 HDFS 블록 크기가 128MB에서 1KB로 자동 축소되어 디스크가 절약된다.", "가상머신은 Python을 지원하지 않지만 도커만 Python 3.12를 지원하기 때문이다."], "answer": 0, "explanation": "가상머신(VM)은 각 게스트마다 완전한 OS 커널을 띄워야 하므로 16~32GB 이상 메모리를 소모하지만, 도커 컨테이너는 호스트 리눅스 커널을 공유하고 프로세스 격리만 수행하므로 일반 노트북에서도 8대 빅데이터 컨테이너를 쾌적하게 가동할 수 있습니다."}, {"id": 2, "category": "1. 도커·WSL2·Poetry 인프라", "chapter": "Ch 01", "difficulty": "초급", "question": "윈도우 WSL2(Ubuntu-22.04) 환경에서 실습 프로젝트를 생성할 때 `/mnt/c/Users/PC` 경로 대신 리눅스 홈 경로(`~/smartcar-pilot`)로 반드시 이동해야 하는 이유로 가장 올바른 것은?", "code": "pc@DESKTOP-NUVH6QH:/mnt/c/Users/PC$ cd ~/smartcar-pilot\npc@DESKTOP-NUVH6QH:~/smartcar-pilot$ pwd", "options": ["윈도우 마운트 경로(/mnt/c)는 NTFS 파일시스템 브릿지를 거쳐 파일 I/O 속도가 매우 느리고 리눅스 실행 권한(chmod) 충돌이 발생하지만, 리눅스 홈(~)은 네이티브 ext4 파일시스템 위에서 초고속 I/O와 완전한 POSIX 권한을 보장하기 때문이다.", "/mnt/c 경로에서는 git clone 명령어가 문법적으로 차단되어 있기 때문이다.", "리눅스 홈 경로(~)에 파일을 저장하면 자동으로 도커 허브에 업로드되기 때문이다.", "/mnt/c 경로는 읽기 전용(Read-Only)이라서 텍스트 파일을 생성할 수 없기 때문이다."], "answer": 0, "explanation": "WSL2에서 Windows 드라이브(/mnt/c) 접근은 9P 프로토콜 변환 오버헤드로 인해 Python 가상환경 생성 및 대용량 파일 처리가 수십 배 느려집니다. 반면 `~` 경로는 가상 디스크의 네이티브 ext4 파일시스템이므로 압도적인 성능을 발휘합니다."}, {"id": 3, "category": "1. 도커·WSL2·Poetry 인프라", "chapter": "Ch 01", "difficulty": "중급", "question": "WSL2 환경의 우분투 내부에 직접 `docker-ce` 데몬을 설치하는 대신, Windows용 Docker Desktop의 'WSL Integration(Ubuntu)' 연동 기능을 사용하는 아키텍처상의 핵심 이점은?", "code": "# Docker Desktop -> Settings -> Resources -> WSL Integration -> Ubuntu 활성화", "options": ["WSL2 터미널을 닫더라도 백그라운드 데몬 종료 위험이 없고, 윈도우 브라우저에서 localhost:8501 / 9870 포트 포워딩 및 동적 RAM/OOM 관리가 매끄럽게 유지된다.", "Docker Desktop을 쓰면 카프카(Kafka)가 주키퍼(Zookeeper) 없이 단일 파일로 자동 변환된다.", "WSL2에서는 docker-ce가 TCP 포트를 최대 2개까지만 열 수 있는 커널 제한이 있기 때문이다.", "Docker Desktop이 파이썬 코드를 자동으로 GPU CUDA 바이너리로 컴파일해 주기 때문이다."], "answer": 0, "explanation": "WSL2는 윈도우 터미널 창 종료 시 백그라운드 프로세스 유지가 까다로운 반면, Docker Desktop 백엔드를 공유하면 Windows 브라우저와의 localhost 포트 포워딩, 메모리(RAM) 할당 제어, 컨테이너 영속성이 안정적으로 보장됩니다."}, {"id": 4, "category": "1. 도커·WSL2·Poetry 인프라", "chapter": "Ch 02", "difficulty": "초급", "question": "기존 `pip install + requirements.txt` 방식 대비 모던 파이썬 의존성 관리 도구인 **Poetry**가 실무 빅데이터 프로젝트에서 채택되는 가장 결정적인 이유는?", "code": "poetry add pandas kafka-python pydeck\n# 생성 파일: pyproject.toml + poetry.lock", "options": ["poetry.lock 파일에 모든 직·간접 의존성 패키지의 정확한 버전과 SHA-256 해시를 잠금 기록하여 어떤 팀원의 리눅스 서버에서도 100% 동일한 재현성(Reproducibility)을 보장한다.", "Poetry는 C++ 컴파일러이므로 파이썬 인터프리터 없이도 .py 파일을 실행한다.", "Poetry를 사용하면 TensorFlow 모델의 학습 정확도가 자동으로 10% 향상된다.", "Poetry는 도커 컨테이너 내부의 방화벽 포트를 자동으로 개방하는 보안 도구이다."], "answer": 0, "explanation": "Poetry는 `pyproject.toml`과 `poetry.lock`을 통해 하위 라이브러리 간 버전 충돌을 사전에 해결(Dependency Resolution)하고, 해시값까지 고정하여 팀 내 환경 불일치('내 PC에선 됐는데?') 문제를 원천 차단합니다."}, {"id": 5, "category": "1. 도커·WSL2·Poetry 인프라", "chapter": "Ch 03", "difficulty": "중급", "question": "본 도서 `docker-compose.yml`에서 Zookeeper와 Kafka를 안정적으로 구동하기 위해 채택한 공식 도커 이미지 및 `depends_on` 오케스트레이션 설정으로 옳은 것은?", "code": "services:\n  zookeeper:\n    image: confluentinc/cp-zookeeper:7.5.0\n  kafka:\n    image: confluentinc/cp-kafka:7.5.0\n    depends_on:\n      - zookeeper", "options": ["confluentinc/cp-zookeeper:7.5.0 과 cp-kafka:7.5.0 을 사용하며, Kafka가 실행되기 전 Zookeeper가 먼저 시작되도록 depends_on으로 의존 순서를 지정한다.", "Kafka가 Zookeeper보다 반드시 먼저 실행된 후 10분 뒤에 Zookeeper를 수동 실행한다.", "bitnami/kafka 이미지를 쓰면서 Zookeeper 포트를 9870으로 변경해야만 브로커가 실행된다.", "Kafka 컨테이너는 네트워크 격리를 위해 ports 매핑을 완전히 제거해야 localhost:9092 접속이 가능하다."], "answer": 0, "explanation": "구형 Kafka 브로커는 메타데이터 및 브로커 코디네이션을 위해 Zookeeper(2181)가 선행 기동되어야 합니다. `confluentinc/cp-zookeeper:7.5.0`과 `cp-kafka:7.5.0` 조합에 `depends_on: [zookeeper]`를 명시하면 안정적으로 기동됩니다."}, {"id": 6, "category": "1. 도커·WSL2·Poetry 인프라", "chapter": "Ch 03", "difficulty": "고급", "question": "Docker Compose의 Kafka 설정에서 `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092` 처럼 리스너를 2개로 분리하는 이유는?", "code": "KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT\nKAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092", "options": ["우분투 호스트(외부)에서 실행하는 Python 스크립트는 localhost:9092로 접속하고, 같은 Docker 브리지 네트워크 안의 다른 컨테이너는 서비스명 kafka:29092로 동시 통신할 수 있게 라우팅하기 위함이다.", "9092 포트는 읽기 전용이고 29092 포트는 삭제 전용이기 때문이다.", "하나의 포트로 초당 10건 이상 메시지가 들어오면 자동 차단되기 때문이다.", "Zookeeper가 29092 포트로 GPU 데이터를 전송하기 때문이다."], "answer": 0, "explanation": "Kafka 클라이언트는 초기 연결 후 브로커가 알려주는 `ADVERTISED_LISTENERS` 주소로 재접속합니다. 호스트 PC의 Python 프로세스(localhost:9092)와 도커 내부 컨테이너(kafka:29092)가 각각 올바른 주소를 반환받도록 리스너를 분리 설계합니다."}, {"id": 7, "category": "2. HDFS 분산저장·센서 시뮬레이션", "chapter": "Ch 04", "difficulty": "초급", "question": "하둡 분산 파일시스템(HDFS) 아키텍처에서 **NameNode(네임노드)**와 **DataNode(데이터노드)**의 역할 분담으로 가장 정확한 설명은?", "code": "docker exec namenode hdfs dfs -ls /smartcar/data", "options": ["NameNode는 파일의 디렉터리 구조와 블록 위치 매핑 정보(메타데이터)를 관리하는 관제탑이고, DataNode는 실제 분할된 데이터 블록들을 디스크에 물리적으로 저장하는 창고 작업자이다.", "NameNode가 모든 영상 파일을 직접 저장하고, DataNode는 SQL 쿼리 파싱만 담당한다.", "DataNode가 죽더라도 NameNode를 삭제하면 자동으로 데이터가 복구된다.", "NameNode는 카프카 토픽을 생성하고 DataNode는 Streamlit 웹 서버를 띄운다."], "answer": 0, "explanation": "HDFS는 Master-Worker 구조로, NameNode가 파일명·권한·블록 ID 매핑 등 메타데이터를 메모리에 유지하고, 실제 128MB 단위 데이터 블록 I/O는 다수의 DataNode가 분산 처리합니다."}, {"id": 8, "category": "2. HDFS 분산저장·센서 시뮬레이션", "chapter": "Ch 04", "difficulty": "중급", "question": "HDFS에서 대용량 자율주행 주행 로그 파일을 저장할 때 기본 **복제 계수(Replication Factor = 3)**를 유지하는 근본적인 목적은?", "code": "# HDFS 기본 블록 크기: 128MB | 기본 복제 계수(dfs.replication): 3", "options": ["특정 DataNode 하드웨어나 디스크가 고장 나더라도 다른 노드에 복제된 블록을 통해 데이터 유실 없이 즉각적인 장애 허용(Fault Tolerance)과 병렬 읽기 성능 향상을 보장하기 위함이다.", "파일 용량을 3분의 1로 압축하여 저장하기 위함이다.", "한 파일당 최대 3명의 사용자만 읽을 수 있도록 접근 제한을 걸기 위함이다.", "리눅스 파일시스템의 3글자 확장자 제한을 우회하기 위함이다."], "answer": 0, "explanation": "분산 클러스터에서는 개별 서버의 디스크 고장이 일상적으로 발생합니다. 블록을 3개의 서로 다른 노드에 복제해 두면 1~2대 노드가 장애를 일으켜도 무중단 서비스 및 데이터 무결성이 유지됩니다."}, {"id": 9, "category": "2. HDFS 분산저장·센서 시뮬레이션", "chapter": "Ch 04", "difficulty": "초급", "question": "우분투 터미널에서 로컬 디렉터리에 있는 `CarMaster2Income.txt` 파일을 하둡 HDFS의 `/smartcar/master/` 경로로 업로드할 때 사용하는 올바른 명령어는?", "code": "docker cp CarMaster2Income.txt namenode:/tmp/\ndocker exec namenode hdfs dfs -____ /tmp/CarMaster2Income.txt /smartcar/master/", "options": ["-put (또는 -copyFromLocal)", "-get (또는 -copyToLocal)", "-rm -r", "-chmod 400"], "answer": 0, "explanation": "HDFS에서 로컬 파일을 분산 파일시스템으로 올릴 때는 `hdfs dfs -put` (또는 `-copyFromLocal`)을 사용하고, HDFS에서 로컬로 내려받을 때는 `-get` (또는 `-copyToLocal`)을 사용합니다."}, {"id": 10, "category": "2. HDFS 분산저장·센서 시뮬레이션", "chapter": "Ch 05", "difficulty": "중급", "question": "도로 위 자율주행차 10대(`CAR-001` ~ `CAR-010`) 센서 시뮬레이터가 생성하는 실시간 텔레메트리 데이터 중, 차량의 **주행 위험도 및 급정거/급선회 패턴**을 판별하는 핵심 CAN-Bus 물리 지표 묶음은?", "code": "{\"car_num\": \"CAR-001\", \"speed\": 118, \"brake_pressure\": 82, \"steering_angle\": 34, \"lat\": 37.4979, \"lon\": 127.0276}", "options": ["차속(speed), 제동 압력(brake_pressure), 조향각(steering_angle)", "운전자 성별(sex), 차량 연식(year), 자동차세 납부액", "도커 컨테이너 ID, 리눅스 커널 버전, CPU 온도", "와이파이 SSID, 블루투스 MAC 주소, 화면 밝기"], "answer": 0, "explanation": "고속 주행 중 높은 제동 압력(급브레이크)과 큰 조향각(급핸들 조작)이 동시에 관측되면 추돌 회피 또는 아차사고(Near-Miss) 패턴으로 분류하는 핵심 물리 피처가 됩니다."}, {"id": 11, "category": "2. HDFS 분산저장·센서 시뮬레이션", "chapter": "Ch 05", "difficulty": "중급", "question": "자율주행 테스트 차량 시뮬레이터에서 간헐적으로 발생하는 **터널 진입 GPS 음영 결측치** 패킷의 특징적인 좌표값은 무엇인가?", "code": "# 정상: lat=37.4979, lon=127.0276\n# 터널 음영 구간 센서 두절 시 발생 값: ?", "options": ["위도(lat) = 0.0, 경도(lon) = 0.0 (적도 기니만 부근 Null Island 좌표)", "위도(lat) = 90.0, 경도(lon) = 180.0", "위도(lat) = -37.5, 경도(lon) = -127.0", "문자열 'SEOUL_STATION'"], "answer": 0, "explanation": "위성 신호가 끊긴 상태에서 GPS 수신기 기본값이나 파싱 오류 시 `(0.0, 0.0)` 좌표가 유입되는 경우가 많으며, 이를 필터링하지 않으면 Pydeck 3D 지도 궤적이 서울에서 대서양(Null Island)으로 날아가는 직선 왜곡이 발생합니다."}, {"id": 12, "category": "2. HDFS 분산저장·센서 시뮬레이션", "chapter": "Ch 14", "difficulty": "고급", "question": "Ch 14 엔터프라이즈 파이프라인에서 Hadoop HDFS 상에 적재한 핵심 마스터 및 사고 데이터 파일(`CarMaster2Income.txt`, `CarDrivingIncidentInfo.csv`)과 Hive 테이블의 역할 연결로 올바른 것은?", "code": "HDFS: /smartcar/master/CarMaster2Income.txt  <---> Hive Table: car_income\nHDFS: /smartcar/incident/CarDrivingIncidentInfo.csv <---> Hive Table: car_incident", "options": ["CarMaster2Income.txt는 차량 제원·운전자 소득 회귀 모델(car_income)의 학습 원천이며, CarDrivingIncidentInfo.csv는 주행 사고 3-Class DNN 분류기(car_incident)의 학습 원천이다.", "두 파일 모두 Streamlit의 CSS 배경 테마 설정만을 저장하는 JSON 파일이다.", "CarMaster2Income.txt는 도커 컨테이너를 강제 종료하는 쉘 스크립트이다.", "HDFS에 올린 파일은 Hive 테이블에서 SQL SELECT 문으로 조회할 수 없다."], "answer": 0, "explanation": "엔터프라이즈 레이크하우스 구조에서는 원천 데이터를 HDFS에 분산 저장한 뒤 Hive 외부 테이블로 스키마를 씌워 각각 OLS 회귀(`car_income`) 및 심층신경망 분류(`car_incident`) 파이프라인으로 공급합니다."}, {"id": 13, "category": "3. Kafka 스트리밍·Hive 웨어하우스", "chapter": "Ch 06", "difficulty": "중급", "question": "자율주행 실시간 센서 파이프라인에서 휘발성 메시지 큐(Redis Pub/Sub 등) 대신 **Apache Kafka**를 채택하는 아키텍처상의 3대 핵심 근거로 옳은 것은?", "code": "# Kafka Producer -> Topic: smartcar-status -> Multiple Consumer Groups (Hive / Streamlit / AI Interlock)", "options": ["디스크 오프셋(Offset) 기반 데이터 영속성(장애 시 재현 Replay 가능), 다중 컨슈머 그룹의 독립적 병렬 소비, 차량 ID 키 해싱을 통한 파티션 수평 확장 및 패킷 순서 보장", "Kafka는 SQL 데이터베이스보다 그래프 최단 경로(shortestPath) 탐색 속도가 빠르기 때문", "Kafka는 별도 디스크 저장 없이 RAM에만 데이터를 1초 보관 후 자동 삭제하기 때문", "Kafka를 쓰면 Pydeck WebGL 렌더링 시 Mapbox 유료 토큰을 무료로 우회해 주기 때문"], "answer": 0, "explanation": "Redis Pub/Sub은 구독자가 잠시 끊기면 메시지가 증발하지만, Kafka는 디스크 로그에 오프셋으로 영구 기록하므로 장애 복구·다중 소비(레이크하우스 적재 + 대시보드 + AI 감시 동시 소비)·차량별 패킷 순서 보장이 가능합니다."}, {"id": 14, "category": "3. Kafka 스트리밍·Hive 웨어하우스", "chapter": "Ch 06", "difficulty": "고급", "question": "Kafka 컨슈머가 특정 차량(`car_num = 'CAR-001'`)이 보낸 시계열 주행 패킷의 **시간 순서(Ordering)**가 뒤섞이지 않고 정확히 보낸 순서대로 처리받으려면 프로듀서가 어떻게 메시지를 발행해야 하는가?", "code": "producer.send('smartcar-status', key=b'CAR-001', value=payload_bytes)", "options": ["동일한 차량 ID(car_num)를 메시지 키(Key)로 지정하여, 해시 파티셔닝에 의해 해당 차량의 모든 패킷이 항상 같은 파티션(Partition)에 순차 적재되도록 한다.", "모든 차량의 메시지를 매번 랜덤한 토픽 이름으로 새로 생성해 발행한다.", "acks=0 으로 설정하고 브로커 파티션 개수를 1000개로 늘린 뒤 키(Key)를 None으로 비워둔다.", "Zookeeper 포트를 2181에서 9092로 변경한다."], "answer": 0, "explanation": "Kafka는 토픽 전체가 아니라 **개별 파티션(Partition) 내부**에서만 엄격한 FIFO 순서를 보장합니다. 따라서 `key=car_num`을 지정하면 동일 차량 데이터는 항상 동일 파티션으로 해싱되어 시간 역전을 방지할 수 있습니다."}, {"id": 15, "category": "3. Kafka 스트리밍·Hive 웨어하우스", "chapter": "Ch 07", "difficulty": "중급", "question": "Apache Hive에서 **내부 테이블(Managed Table)**과 비교할 때, **외부 테이블(External Table)**로 HDFS 데이터를 연동할 때의 가장 결정적인 장점은?", "code": "CREATE EXTERNAL TABLE car_income (...)\nROW FORMAT DELIMITED FIELDS TERMINATED BY '|'\nLOCATION '/smartcar/master/';", "options": ["DROP TABLE 명령으로 하이브 테이블 스키마를 삭제하더라도, HDFS 상의 실제 원본 데이터 파일(/smartcar/master/)은 삭제되지 않고 안전하게 보존된다.", "외부 테이블은 SQL SELECT 문 대신 NoSQL Cypher 문법으로만 조회해야 한다.", "외부 테이블을 쓰면 Zookeeper 없이도 Kafka 브로커가 자동 복제된다.", "외부 테이블은 데이터를 100바이트 이하로만 저장할 수 있다."], "answer": 0, "explanation": "레이크하우스 환경에서는 여러 엔진(Hive, Spark, Python 등)이 HDFS의 원천 데이터를 공유합니다. External Table은 스키마 메타데이터만 관리하므로 테이블을 드롭해도 원천 빅데이터가 안전하게 유지됩니다."}, {"id": 16, "category": "3. Kafka 스트리밍·Hive 웨어하우스", "chapter": "Ch 08", "difficulty": "초급", "question": "Ch 08~12 실습에서 우분투 호스트 터미널로부터 도커 컨테이너 안의 하이브(`hive-server`)에 접속하여 `car_income` 테이블 데이터를 즉시 SQL로 조회하는 올바른 명령어는?", "code": "pc@DESKTOP-NUVH6QH:~/smartcar-pilot$ ______", "options": ["docker exec hive-server hive -e \"SELECT car_num, sex, age, capacity, year, income FROM car_income LIMIT 5;\"", "hdfs dfs -select \"SELECT * FROM car_income LIMIT 5;\"", "kafka-console-consumer --query \"SELECT * FROM car_income\"", "poetry run streamlit hive-query car_income"], "answer": 0, "explanation": "`docker exec hive-server hive -e \"...\"` 명령을 통해 실행 중인 하이브 서버 컨테이너 내부의 Hive CLI에 SQL 문을 직접 전달하고 실행 결과를 터미널에 출력할 수 있습니다."}, {"id": 17, "category": "3. Kafka 스트리밍·Hive 웨어하우스", "chapter": "Ch 09", "difficulty": "중급", "question": "HiveQL로 자율주행 차량별 운행 지표를 분석할 때, 수십억 건의 주행 로그가 쌓여 있어도 특정 날짜(`dt='2026-11-10'`) 데이터만 스캔하여 쿼리 속도를 수십 배 빠르게 만드는 테이블 설계 기법은?", "code": "SELECT car_num, AVG(speed) FROM smartcar_logs\nWHERE dt = '2026-11-10'\nGROUP BY car_num;", "options": ["파티셔닝(PARTITIONED BY (dt STRING)) 적용을 통한 Full Table Scan 방지 및 파티션 프루닝(Partition Pruning)", "테이블의 모든 숫자 컬럼을 STRING 타입으로 변환", "LIMIT 1000000 을 모든 서브쿼리에 삽입", "NameNode 컨테이너를 2개 이상 중복 실행"], "answer": 0, "explanation": "Hive에서 `PARTITIONED BY`를 설정하면 HDFS 내부에서 날짜별 하위 디렉터리(`/dt=2026-11-10/`)로 물리 분리 저장되므로, WHERE 조건 시 해당 폴더만 읽어 Full Scan 비용을 제거합니다."}, {"id": 18, "category": "3. Kafka 스트리밍·Hive 웨어하우스", "chapter": "Ch 08", "difficulty": "고급", "question": "카프카(`smartcar-status`)에서 하이브 창고(HDFS 적재 경로)로 실시간 데이터를 자동 적재하는 마이크로 배치 컨슈머 파이프라인에서, 메시지 소비 도중 프로세스가 비정상 종료되었을 때 데이터 유실이나 중복을 통제하기 위한 핵심 설정 개념은?", "code": "consumer = KafkaConsumer('smartcar-status', group_id='hive-loader-group', enable_auto_commit=False)", "options": ["HDFS 파일 쓰기(Flush/Commit)가 성공적으로 완료된 직후에만 수동으로 오프셋을 커밋(consumer.commit())하는 At-Least-Once 보장 전략", "메시지를 읽기도 전에 무조건 1초마다 오프셋을 랜덤 값으로 초기화하는 전략", "컨슈머 group_id를 매번 None으로 두어 브로커가 기억하지 못하게 하는 전략", "토픽의 모든 파티션을 0개로 줄이는 전략"], "answer": 0, "explanation": "`enable_auto_commit=False`로 설정하고 실제 HDFS 저장이 완료된 후 `commit()`을 호출해야, 저장 전 크래시가 발생했을 때 마지막 커밋 지점부터 다시 읽어 데이터 유실을 막을 수 있습니다."}, {"id": 19, "category": "4. GPS 정제·Streamlit·Pydeck 3D", "chapter": "Ch 10", "difficulty": "초급", "question": "Ch 10 실습에서 Streamlit 실시간 관제 센터(`localhost:8501`)와 센서 시뮬레이터, 적재 파이프라인을 동시에 가동하기 위한 올바른 멀티 터미널 운영 구성은?", "code": "# 터미널 1: 파이프라인/컨슈머 적재 | 터미널 2: 10대 차량 센서 발생기 | 터미널 3: Streamlit 관제 대시보드", "options": ["3개의 독립된 우분투 터미널 탭에서 백엔드 스트리밍 발생기, 정제 적재기, Streamlit 프론트엔드 웹 서버를 각각 병렬 실행한 뒤 브라우저에서 localhost:8501로 접속한다.", "반드시 단일 터미널 하나에서 3개 스크립트를 세미콜론(;)으로 이어 순차 실행해야 한다.", "Streamlit 실행 후 윈도우 Docker Desktop을 완전히 종료해야 포트가 열린다.", "Streamlit은 터미널 텍스트만 출력하므로 웹 브라우저로는 접속할 수 없다."], "answer": 0, "explanation": "스트리밍 생산자, 소비자, 대시보드 웹 서버는 모두 무한 루프로 상시 동작하는 프로세스이므로 각각 별도의 터미널 창(또는 백그라운드 프로세스)에서 동시 실행해야 실시간 데이터 흐름을 관제할 수 있습니다."}, {"id": 20, "category": "4. GPS 정제·Streamlit·Pydeck 3D", "chapter": "Ch 10", "difficulty": "중급", "question": "최근 파이썬 3.12 및 최신 데이터 분석 라이브러리 환경에서 Streamlit / PyArrow 연동 시 종종 발생하는 **`NumPy 2.0` 호환성 충돌(`AttributeError` / ABI 불일치)**을 해결하는 표준 조치는?", "code": "# Error: A module that was compiled using NumPy 1.x cannot be run in NumPy 2.x...", "options": ["poetry add \"numpy<2.0\" 명령으로 NumPy 버전을 1.26.x 계열로 안전하게 다운그레이드 고정한다.", "파이썬 대신 Java 8 JDK를 poetry로 설치한다.", "도커 컨테이너의 모든 볼륨 마운트를 삭제한다.", "numpy 대신 math 표준 모듈을 pandas 내부 코드에 덮어쓴다."], "answer": 0, "explanation": "일부 C-확장 기반 라이브러리(구형 pyarrow, tensorflow 등)가 NumPy 1.x ABI로 컴파일되어 있는 경우 NumPy 2.0+ 환경에서 바이너리 호환성 오류가 발생하므로 `numpy<2.0` 제약 조건을 명시해 해결합니다."}, {"id": 21, "category": "4. GPS 정제·Streamlit·Pydeck 3D", "chapter": "Ch 11", "difficulty": "중급", "question": "Ch 11 Pydeck 3D 지도 시각화에서 유료 Mapbox API 토큰 부재로 **흰 화면(Blank Map)**이 뜨는 문제를 100% 해결하기 위해 본 도서에서 전면 도입한 오픈소스 WebGL 지도 타일 엔진 설정은?", "code": "view = pdk.Deck(\n    map_provider=____,\n    map_style=____,\n    initial_view_state=view_state,\n    layers=[path_layer, column_layer]\n)", "options": ["map_provider=\"carto\", map_style=\"dark\" (Carto Dark-Matter 엔진, API 키 불필요)", "map_provider=\"mapbox\", map_style=\"mapbox://styles/mapbox/dark-v11\" (유료 토큰 필수)", "map_provider=\"google_earth\", map_style=\"3d_paid\"", "map_provider=\"none\", map_style=\"white\""], "answer": 0, "explanation": "Mapbox는 API 키가 없거나 만료되면 배경 지도가 흰 화면으로 렌더링됩니다. Carto 오픈소스 타일 공급자(`map_provider=\"carto\"`, `map_style=\"dark\"`)를 사용하면 별도 가입이나 토큰 없이 즉시 다크 3D WebGL 지도가 출력됩니다."}, {"id": 22, "category": "4. GPS 정제·Streamlit·Pydeck 3D", "chapter": "Ch 11", "difficulty": "고급", "question": "Ch 11.2 실시간 카프카 스트리밍 GPS 정제 파이프라인(`smartcar_kafka_gps_clean.py`)에서 서울·수도권 외곽의 이상치 및 터널 결측 좌표를 차단하는 **Bounding Box** 판별 조건으로 올바른 것은?", "code": "# 정상 수도권 좌표 범위 판별 (위도 lat, 경도 lon)\nis_valid = (____ <= lat <= ____) and (____ <= lon <= ____)", "options": ["37.35 <= lat <= 37.75 and 126.80 <= lon <= 127.25", "0.0 <= lat <= 10.0 and 0.0 <= lon <= 10.0", "-90.0 <= lat <= 0.0 and -180.0 <= lon <= 0.0", "126.80 <= lat <= 127.25 and 37.35 <= lon <= 37.75"], "answer": 0, "explanation": "서울 및 수도권 중심부의 위도(Latitude)는 약 37.35~37.75, 경도(Longitude)는 약 126.80~127.25 범위입니다. 위도와 경도 숫자를 뒤바꾸지 않도록 주의해야 하며, 이 범위를 벗어난 `(0.0, 0.0)` 등은 즉시 차단합니다."}, {"id": 23, "category": "4. GPS 정제·Streamlit·Pydeck 3D", "chapter": "Ch 11", "difficulty": "중급", "question": "Pydeck `PathLayer`와 `ColumnLayer`에서 마우스를 올렸을 때 툴팁에 **`undefined`**가 출력되는 치명적인 버그를 해결하기 위해 반드시 지켜야 할 데이터 매핑 규칙은?", "code": "tooltip={\"html\": \"<b>차량:</b> {car_num}<br/><b>속도:</b> {speed} km/h\"}", "options": ["tooltip HTML 템플릿에 기재한 `{컬럼명}` 키 이름이 실제 Layer에 전달한 DataFrame(또는 dict 리스트)의 컬럼명과 대소문자까지 정확히 일치해야 한다.", "tooltip 문자열 안에 JavaScript alert() 함수를 반드시 포함시켜야 한다.", "Layer의 pickable=False 로 설정해야 툴팁 텍스트가 정상 렌더링된다.", "모든 숫자 데이터를 NaN으로 치환해 전달해야 한다."], "answer": 0, "explanation": "Pydeck은 `pickable=True` 상태에서 hover된 객체의 속성을 `{key}` 템플릿으로 바인딩합니다. DataFrame에 없는 컬럼명을 적거나 nested 속성을 잘못 참조하면 `undefined`가 표시됩니다."}, {"id": 24, "category": "4. GPS 정제·Streamlit·Pydeck 3D", "chapter": "Ch 11", "difficulty": "초급", "question": "`CAR-001`부터 `CAR-010`까지 **10대 자율주행차의 주행 궤적**을 Pydeck 3D 지도에 한눈에 구분되게 시각화할 때 가장 효과적인 색상/레이어 설계 전략은?", "code": "# 각 차량 ID별 고유 RGB 네온 컬러 배열 매핑 (get_color='color')", "options": ["차량별로 서로 다른 고대비 네온 RGB 색상 배열 컬럼을 부여해 PathLayer로 궤적을 그리고, 주요 랜드마크/위험 지점은 3D ColumnLayer의 elevation으로 높이 표현한다.", "10대 차량 모두를 배경과 똑같은 검은색([0, 0, 0])으로 칠한다.", "모든 차량의 위경도를 평균 내어 지도 중앙에 점 1개만 찍는다.", "pitch(기울기)를 0도로 고정하고 텍스트 표만 출력한다."], "answer": 0, "explanation": "다중 차량 관제에서는 차량별 고유 색상 컬럼(`color`)을 `PathLayer`의 `get_color`에 바인딩하고, `pitch=45` 이상의 3D 시야각에서 `ColumnLayer` 높이를 결합해야 궤적 겹침 없이 입체적인 관제가 가능합니다."}, {"id": 25, "category": "5. OLS 회귀·3-Class DNN·트러블슈팅", "chapter": "Ch 12", "difficulty": "중급", "question": "Ch 12 `smartcar_hive_regression.py`에서 하이브 `car_income` 테이블 데이터를 기반으로 운전자 연소득(`income`)을 예측할 때, 결정계수 **$R^2 = 74.6\\%$**가 의미하는 통계적 해석은?", "code": "model = smf.ols('income ~ age + capacity + year + C(sex)', data=df).fit()\n# R-squared: 0.746, Prob (F-statistic): 1.2e-180", "options": ["차량 배기량(capacity), 운전자 나이(age), 연식(year), 성별 등 독립변수가 전체 고객 소득 변동성(분산)의 약 74.6%를 통계적으로 유의하게 설명한다는 뜻이다.", "모델이 예측한 금액이 실제 소득과 항상 정확히 74.6원 차이가 난다는 뜻이다.", "학습 데이터 중 74.6%를 임의로 삭제했다는 뜻이다.", "과적합이 발생하여 모델이 전혀 쓸모없다는 뜻이다."], "answer": 0, "explanation": "결정계수 $R^2$(R-squared)는 종속변수(소득)의 전체 분산 중 회귀 모형이 설명해 내는 분산의 비율(0~1)입니다. 사회과학·마케팅 실무 데이터에서 $R^2=0.746$은 매우 높은 설명력입니다."}, {"id": 26, "category": "5. OLS 회귀·3-Class DNN·트러블슈팅", "chapter": "Ch 12", "difficulty": "중급", "question": "Ch 12.4 실시간 소득 예측 프로그램(`smartcar_predict_income.py`)에서 운전자 성별(`sex`: `'M'`, `'F'`) 같은 범주형 문자열 변수를 OLS 회귀식에 안전하게 반영하기 위해 사용하는 `statsmodels` 공식 문법은?", "code": "formula = 'income ~ age + capacity + year + ____(sex)'", "options": ["C(sex) — 자동 더미 변수(One-Hot / Categorical Coding) 변환", "INT(sex) — ASCII 코드 곱셈", "DROP(sex) — 문자열 컬럼 강제 삭제", "HASH(sex) — SHA-256 해시화"], "answer": 0, "explanation": "`statsmodels.formula.api`에서 `C(컬럼명)`을 사용하면 범주형 변수를 자동으로 더미(Dummy) 변수로 인코딩하여 회귀 계수를 산출해 줍니다."}, {"id": 27, "category": "5. OLS 회귀·3-Class DNN·트러블슈팅", "chapter": "Ch 13", "difficulty": "중급", "question": "Ch 13~14에서 자율주행 차량의 10대 센서 특성을 입력받아 **정상 주행(0), 아차사고 경고(1), 추돌 위험(2)**의 **3-Class 다중 분류 심층신경망(DNN)**을 설계할 때, 출력층(Output Layer)의 활성화 함수와 손실 함수의 올바른 조합은?", "code": "model.add(Dense(3, activation=____))\nmodel.compile(optimizer='adam', loss=____, metrics=['accuracy'])", "options": ["activation='softmax', loss='sparse_categorical_crossentropy' (정수 라벨 0, 1, 2 기준)", "activation='sigmoid', loss='mean_squared_error'", "activation='relu', loss='binary_crossentropy'", "activation='linear', loss='mae'"], "answer": 0, "explanation": "상호 배타적인 3개 클래스 확률 분포(합=1.0)를 출력하려면 `softmax`가 필수이며, 정답 타깃이 정수(0, 1, 2) 형태일 때는 `sparse_categorical_crossentropy`를 사용해야 원-핫 인코딩 없이 정확히 손실을 계산합니다."}, {"id": 28, "category": "5. OLS 회귀·3-Class DNN·트러블슈팅", "chapter": "Ch 13", "difficulty": "고급", "question": "차속(`0~180`), 배기량(`998~5000`), 조향각(`-60~60`)처럼 물리 단위와 스케일이 제각각인 센서 데이터를 DNN에 입력하기 전 반드시 **`StandardScaler`** 등으로 스케일링(정규화)해야 하는 이유는?", "code": "scaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)  # 주의: 테스트셋에는 transform만!", "options": ["특정 큰 수치 변수(배기량 등)가 가중치 기울기(Gradient)를 지배해 경사하강법 수렴이 느려지거나 발산하는 것을 막기 위함이며, 데이터 누수(Data Leakage) 방지를 위해 테스트셋에는 학습셋 기준으로 transform만 호출해야 한다.", "StandardScaler를 통과하면 모든 결측 문자열이 자동으로 한국어로 번역되기 때문이다.", "테스트셋에도 fit_transform을 매번 새로 호출해야 모델 성능이 공정하게 올라가기 때문이다.", "스케일링은 딥러닝의 파라미터 개수를 3배로 늘리기 위한 기법이다."], "answer": 0, "explanation": "입력 스케일이 다르면 손실 곡면이 찌그러져 학습이 불안정해집니다. 또한 테스트셋에 `fit_transform()`을 쓰면 테스트 데이터의 평균/분산 정보가 유출(Data Leakage)되므로 반드시 학습셋 기준 통계량으로 `transform()`만 적용합니다."}, {"id": 29, "category": "5. OLS 회귀·3-Class DNN·트러블슈팅", "chapter": "Ch 14", "difficulty": "고급", "question": "Ch 14에서 Hive 레이크하우스와 직접 연동한 `smartcar_hive_dnn.py`가 **99.80%**의 높은 테스트 정확도를 달성한 뒤, 실제 운영 환경에서 **특정 소수 클래스(추돌위험 Class 2)의 재현율(Recall)**이 떨어지지 않는지 추가 검증해야 할 가장 중요한 평가지표는?", "code": "from sklearn.metrics import classification_report, confusion_matrix", "options": ["혼동 행렬(Confusion Matrix)과 Class 2(추돌위험)에 대한 정밀도(Precision)·재현율(Recall)·F1-Score 확인 (실제 사고를 정상으로 놓치는 False Negative 최소화)", "단순 학습 시간(초)만 확인하고 나머지는 무시", "모든 예측값을 무조건 Class 0으로 고정했을 때의 정확도", "HDFS 블록 개수와 Docker 이미지 용량 비교"], "answer": 0, "explanation": "자율주행 안전 도메인에서는 정상 주행 비율이 압도적(클래스 불균형)이므로 전체 Accuracy만 보면 사고 미탐지(False Negative)를 놓칠 수 있습니다. 반드시 혼동 행렬과 위험 클래스의 Recall을 검증해야 합니다."}, {"id": 30, "category": "5. OLS 회귀·3-Class DNN·트러블슈팅", "chapter": "Ch 15", "difficulty": "초급", "question": "Ch 15 트러블슈팅: 파이썬 스크립트에서 HiveServer2(`localhost:10000`)에 접속할 때 `TTransportException: Could not connect to localhost:10000` 오류가 발생했을 때 가장 먼저 점검해야 할 조치는?", "code": "pc@DESKTOP-NUVH6QH:~/smartcar-pilot$ docker ps -a | grep hive", "options": ["docker ps 및 docker logs hive-server 로 Hive 컨테이너와 선행 의존성인 Postgres 메타스토어·HDFS NameNode가 정상 기동(Up/Healthy) 완료되었는지 확인한다.", "인터넷 공유기 전원을 뽑고 컴퓨터 BIOS로 진입한다.", "C 드라이브의 모든 Python 파일을 삭제한다.", "Hadoop 포트 번호를 10000에서 80으로 강제 수정한다."], "answer": 0, "explanation": "HiveServer2는 기동 시 PostgreSQL 메타스토어와 HDFS SafeMode 해제를 기다리기 때문에 초기 부팅에 30~60초가 걸릴 수 있습니다. `docker ps`와 `docker logs hive-server`로 기동 완료 및 포트 바인딩 상태를 확인하는 것이 정석입니다."}];
+
+    // A.C.E.S 6대 IT/AI 직무 벤치마크 [수학, SW코딩, 데이터인프라, GenAI, 비즈니스기획, 아키텍처]
+    const JOBS = [
+      { name: "AI 데이터 엔지니어 (Lakehouse)", scores: [70, 80, 95, 60, 50, 72], desc: "대용량 분산 레이크하우스(Kafka, HDFS, Hive), 실시간 스트림 정제 및 파이프라인 총괄" },
+      { name: "MLOps / LLMOps 엔지니어", scores: [65, 82, 90, 78, 55, 75], desc: "FastMCP 인프라, 컨테이너 오케스트레이션, LoRA 무중단 서빙 및 모니터링 최적화" },
+      { name: "GenAI 풀스택 / 에이전트 개발자", scores: [60, 92, 65, 90, 68, 75], desc: "GraphRAG, Standalone MCP Client, 지속 메모리 기반 자율 AI 에이전트 개발" },
+      { name: "AI 모델 연구원 (Core Research)", scores: [94, 85, 60, 72, 45, 70], desc: "Unsloth QLoRA/DPO 모델 정렬, 파괴적 망각(EWC) 극복 및 심층신경망(DNN) 연구" },
+      { name: "AI 솔루션 아키텍트 / 테크 PM", scores: [55, 68, 70, 75, 92, 88], desc: "엔터프라이즈 컴플라이언스·보안 아키텍처 설계 및 AI ROI 전략 수립" },
+      { name: "온디바이스 / 엣지 AI 엔지니어", scores: [85, 90, 72, 60, 48, 68], desc: "실시간 차량 센서 추론 엔진 및 4-bit 양자화 소형 모델(SLM) 경량 최적화" }
+    ];
+
+    let session = null;
+    let selectedOptionOrigIdx = null;
+    let timerId = null;
+    let radarChart = null;
+    let lastDetails = [];
+
+    function shuffleArray(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function initStartView() {
+      const wrap = document.getElementById("category-cards");
+      wrap.innerHTML = EXAM_META.categories.map((cat, idx) => {
+        const cnt = RAW_QUESTIONS.filter(q => q.category === cat).length;
+        return `
+          <div class="bg-slate-950/75 border border-slate-800 rounded-xl p-4 flex flex-col justify-between gap-2">
+            <div>
+              <div class="text-[11px] code-font font-bold text-cyan-400">PART ${idx + 1} · ${cnt}문항</div>
+              <div class="text-sm font-bold text-white mt-0.5">${cat}</div>
+            </div>
+            <button onclick="startExam('${cat}')" class="text-left text-xs font-bold text-emerald-400 hover:underline">이 영역만 연습하기 ➔</button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function startExam(catFilter) {
+      const name = document.getElementById("input-student-name").value.trim() || "학습자";
+      const mode = document.getElementById("select-exam-mode").value;
+      const filtered = catFilter === "ALL" ? RAW_QUESTIONS : RAW_QUESTIONS.filter(q => q.category === catFilter);
+
+      // Prepare questions with shuffled option indices
+      const prepared = filtered.map(q => {
+        const idxs = shuffleArray([0, 1, 2, 3]);
+        return { ...q, shuffledOrder: idxs };
+      });
+
+      session = {
+        studentName: name,
+        mode: mode,
+        questions: prepared,
+        currentIdx: 0,
+        details: []
+      };
+
+      document.getElementById("view-start").classList.add("hidden");
+      document.getElementById("view-result").classList.add("hidden");
+      document.getElementById("view-exam").classList.remove("hidden");
+      if (mode === "timed") {
+        document.getElementById("header-timer-badge").classList.remove("hidden");
+        document.getElementById("header-timer-badge").classList.add("flex");
+      } else {
+        document.getElementById("header-timer-badge").classList.add("hidden");
+      }
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      if (timerId) { clearInterval(timerId); timerId = null; }
+      selectedOptionOrigIdx = null;
+      const q = session.questions[session.currentIdx];
+      const total = session.questions.length;
+      const num = session.currentIdx + 1;
+
+      document.getElementById("exam-progress-text").textContent = `문항 ${num} / ${total}`;
+      document.getElementById("exam-category-badge").textContent = q.category;
+      document.getElementById("exam-progress-bar").style.width = `${Math.round((num / total) * 100)}%`;
+      document.getElementById("q-chapter-badge").textContent = q.chapter;
+      document.getElementById("q-diff-badge").textContent = `난이도: ${q.difficulty}`;
+      document.getElementById("q-title").textContent = `Q${num}. ${q.question}`;
+
+      const codeEl = document.getElementById("q-code");
+      if (q.code) {
+        codeEl.textContent = q.code;
+        codeEl.classList.remove("hidden");
+      } else {
+        codeEl.classList.add("hidden");
+      }
+
+      const optWrap = document.getElementById("q-options");
+      optWrap.innerHTML = "";
+      q.shuffledOrder.forEach((origIdx, dispIdx) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn w-full text-left p-4 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-slate-200 flex items-start gap-3";
+        btn.innerHTML = `<span class="code-font font-black text-cyan-400 shrink-0">${dispIdx + 1})</span><span>${escapeHtml(q.options[origIdx])}</span>`;
+        btn.onclick = () => {
+          selectedOptionOrigIdx = origIdx;
+          document.querySelectorAll("#q-options .option-btn").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+        };
+        optWrap.appendChild(btn);
+      });
+
+      document.getElementById("btn-next-q").textContent = num === total ? "제출 및 직무추천 성적표 확인 ➔" : "다음 문항 ➔";
+
+      if (session.mode === "timed") {
+        let sec = 60;
+        const tDisp = document.getElementById("timer-display");
+        tDisp.textContent = "01:00";
+        timerId = setInterval(() => {
+          sec--;
+          const mm = String(Math.floor(sec / 60)).padStart(2, "0");
+          const ss = String(sec % 60).padStart(2, "0");
+          tDisp.textContent = `${mm}:${ss}`;
+          if (sec <= 0) {
+            clearInterval(timerId);
+            nextQuestion();
+          }
+        }, 1000);
+      }
+    }
+
+    function nextQuestion() {
+      if (timerId) { clearInterval(timerId); timerId = null; }
+      const q = session.questions[session.currentIdx];
+      const isCorrect = selectedOptionOrigIdx !== null && selectedOptionOrigIdx === q.answer;
+      session.details.push({
+        q: q,
+        userOrigIdx: selectedOptionOrigIdx,
+        isCorrect: isCorrect
+      });
+
+      if (session.currentIdx + 1 < session.questions.length) {
+        session.currentIdx++;
+        renderQuestion();
+      } else {
+        finishExam();
+      }
+    }
+
+    function finishExam() {
+      document.getElementById("view-exam").classList.add("hidden");
+      document.getElementById("header-timer-badge").classList.add("hidden");
+      document.getElementById("view-result").classList.remove("hidden");
+
+      const details = session.details;
+      lastDetails = details;
+      const correctCnt = details.filter(d => d.isCorrect).length;
+      const totalCnt = details.length;
+      const score100 = Math.round((correctCnt / totalCnt) * 100);
+
+      renderDashboard(session.studentName, score100, correctCnt, totalCnt, details);
+    }
+
+    function showSampleResult() {
+      const sampleDetails = RAW_QUESTIONS.map((q, i) => ({
+        q: q,
+        userOrigIdx: (i % 7 === 0) ? ((q.answer + 1) % 4) : q.answer,
+        isCorrect: (i % 7 !== 0)
+      }));
+      lastDetails = sampleDetails;
+      const correctCnt = sampleDetails.filter(d => d.isCorrect).length;
+      const score100 = Math.round((correctCnt / sampleDetails.length) * 100);
+      document.getElementById("view-start").classList.add("hidden");
+      document.getElementById("view-result").classList.remove("hidden");
+      renderDashboard("샘플 응시자 (데모)", score100, correctCnt, sampleDetails.length, sampleDetails);
+    }
+
+    function renderDashboard(studentName, score100, correctCnt, totalCnt, details) {
+      document.getElementById("res-student-name").textContent = studentName;
+      document.getElementById("res-score-100").textContent = score100;
+      document.getElementById("res-correct-count").textContent = `${correctCnt} / ${totalCnt}문항 정답`;
+
+      const badge = document.getElementById("res-pass-badge");
+      if (score100 >= 80) {
+        badge.textContent = "PASS (공인 합격 · 80점 이상)";
+        badge.className = "px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+      } else {
+        badge.textContent = "보완 권장 (80점 미만)";
+        badge.className = "px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-rose-500/20 text-rose-300 border border-rose-500/40";
+      }
+
+      // Compute per-category %
+      const areaScores = {};
+      const areaHtml = EXAM_META.categories.map(cat => {
+        const sub = details.filter(d => d.q.category === cat);
+        const pct = sub.length > 0 ? Math.round((sub.filter(d => d.isCorrect).length / sub.length) * 100) : score100;
+        areaScores[cat] = pct;
+        return `
+          <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+            <div class="text-[11px] font-bold text-slate-300 truncate">${cat}</div>
+            <div class="text-lg font-black code-font text-cyan-300 mt-1">${pct}%</div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
+              <div class="h-full rounded-full" style="width:${pct}%; background: linear-gradient(90deg, #38bdf8, #10b981);"></div>
+            </div>
+          </div>
+        `;
+      }).join("");
+      document.getElementById("res-area-bars").innerHTML = areaHtml;
+
+      // Map 5 area scores -> A.C.E.S 6-Axis [Math, Coding, Data, GenAI, Biz, Arch]
+      const raw6 = [0, 0, 0, 0, 0, 0];
+      const normSum = [0, 0, 0, 0, 0, 0];
+      EXAM_META.categories.forEach(cat => {
+        const w = EXAM_META.aces_weights[cat];
+        const s = areaScores[cat];
+        for (let i = 0; i < 6; i++) {
+          raw6[i] += s * w[i];
+          normSum[i] += w[i];
+        }
+      });
+      const aces6 = raw6.map((v, i) => Math.min(100, Math.round(normSum[i] > 0 ? v / normSum[i] : score100)));
+
+      const featNames = ["수학/알고리즘", "SW 코딩", "데이터/인프라", "GenAI/프롬프트", "비즈니스 기획", "시스템 아키텍처"];
+      document.getElementById("res-aces-6kpi").innerHTML = featNames.map((fn, i) => `
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-2.5">
+          <div class="text-[11px] text-slate-400">${fn}</div>
+          <div class="text-base font-black text-cyan-300 code-font">${aces6[i]}점</div>
+        </div>
+      `).join("");
+
+      // Update A.C.E.S integration link
+      document.getElementById("btn-send-aces").href = `career_aces.html?exam=${EXAM_META.id}&score=${score100}`;
+
+      // Cosine + Adequacy Job Matching
+      const uNorm = Math.sqrt(aces6.reduce((a, v) => a + v * v, 0));
+      const uMean = aces6.reduce((a, v) => a + v, 0) / 6;
+      const ranked = JOBS.map((job, idx) => {
+        const b = job.scores;
+        const bNorm = Math.sqrt(b.reduce((a, v) => a + v * v, 0));
+        let dot = 0;
+        for (let i = 0; i < 6; i++) dot += aces6[i] * b[i];
+        const cosSim = uNorm > 0 ? Math.max(0, dot / (uNorm * bNorm)) : 0;
+        return { job, idx, score: cosSim };
+      });
+      const expSum = ranked.reduce((a, r) => a + Math.exp(r.score * 6.0), 0);
+      const scaleFactor = Math.min(1.0, Math.max(0.45, uMean / 65.0));
+      ranked.forEach(r => { r.prob = Math.round((Math.exp(r.score * 6.0) / expSum) * 100 * scaleFactor * 10) / 10; });
+      ranked.sort((a, b) => b.prob - a.prob);
+
+      const medals = ["🥇 1순위 추천", "🥈 2순위 추천", "🥉 3순위 추천"];
+      document.getElementById("res-job-cards").innerHTML = ranked.slice(0, 3).map((r, i) => `
+        <div class="p-4 rounded-xl border ${i === 0 ? 'bg-cyan-950/30 border-cyan-500/50' : 'bg-slate-900/70 border-slate-800'}">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-extrabold ${i === 0 ? 'text-cyan-300' : 'text-slate-300'}">${medals[i]}</span>
+            <span class="text-lg font-black code-font ${i === 0 ? 'text-emerald-400' : 'text-slate-300'}">${r.prob}%</span>
+          </div>
+          <div class="text-base font-extrabold text-white mt-0.5">${r.job.name}</div>
+          <div class="text-xs text-slate-400 mt-1">${r.job.desc}</div>
+        </div>
+      `).join("");
+
+      // SHAP XAI
+      const top1 = ranked[0].job;
+      const diffs = featNames.map((fn, i) => ({ name: fn, val: aces6[i], diff: aces6[i] - top1.scores[i] }))
+        .sort((a, b) => b.diff - a.diff);
+      document.getElementById("res-shap-plus").innerHTML = diffs.slice(0, 3).map(d =>
+        `<div>• <b>${d.name}</b> (${d.val}점): 목표 기준선 대비 <span class="${d.diff >= 0 ? 'text-emerald-400' : 'text-cyan-300'} font-bold">${d.diff >= 0 ? '+' : ''}${d.diff}점</span></div>`
+      ).join("");
+      document.getElementById("res-shap-minus").innerHTML = diffs.slice(-2).map(d =>
+        `<div>• <b>${d.name}</b> (${d.val}점): 기준(${d.val - d.diff}점) 대비 ${d.diff >= 0 ? '충분히 우수함' : `<span class="text-amber-300 font-bold">${d.diff}점 보완 시 경쟁력 극대화</span>`}</div>`
+      ).join("");
+
+      // Radar Chart
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      if (radarChart) radarChart.destroy();
+      radarChart = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: featNames.map((n, i) => `${n} (${aces6[i]})`),
+          datasets: [
+            {
+              label: "내 역량 점수",
+              data: aces6,
+              backgroundColor: "rgba(56, 189, 248, 0.3)",
+              borderColor: "#38bdf8",
+              borderWidth: 2.5
+            },
+            {
+              label: `1순위 직무 (${top1.name}) 기준선`,
+              data: top1.scores,
+              backgroundColor: "rgba(245, 158, 11, 0.1)",
+              borderColor: "#f59e0b",
+              borderDash: [4, 4],
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0, max: 100,
+              ticks: { display: false, stepSize: 20 },
+              grid: { color: "#1e293b" },
+              angleLines: { color: "#1e293b" },
+              pointLabels: { color: "#cbd5e1", font: { size: 11, weight: "bold" } }
+            }
+          },
+          plugins: { legend: { labels: { color: "#f8fafc", font: { size: 11 } }, position: "bottom" } }
+        }
+      });
+
+      filterReview("all");
+    }
+
+    function filterReview(mode) {
+      const list = document.getElementById("res-review-list");
+      const items = mode === "wrong" ? lastDetails.filter(d => !d.isCorrect) : lastDetails;
+      if (items.length === 0) {
+        list.innerHTML = `<div class="glass-card rounded-2xl p-6 text-center text-emerald-400 font-bold">축하합니다! 틀린 문항이 없습니다.</div>`;
+        return;
+      }
+      list.innerHTML = items.map((d, idx) => {
+        const q = d.q;
+        const badge = d.isCorrect
+          ? `<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-xs font-bold">정답</span>`
+          : `<span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-xs font-bold">오답</span>`;
+        return `
+          <div class="glass-card rounded-2xl p-5 space-y-3 border ${d.isCorrect ? 'border-emerald-500/30' : 'border-rose-500/40'}">
+            <div class="flex flex-wrap justify-between items-center gap-2 text-xs">
+              <div class="flex items-center gap-2">
+                <span class="code-font font-bold text-slate-400">Q${q.id}</span>
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-cyan-300 font-semibold">${q.category} · ${q.chapter}</span>
+                ${badge}
+              </div>
+              <span class="text-emerald-400 font-bold">정답: ${q.answer + 1}번</span>
+            </div>
+            <div class="text-sm sm:text-base font-bold text-white">${escapeHtml(q.question)}</div>
+            ${q.code ? `<pre class="bg-slate-950 p-3 rounded-lg text-xs text-cyan-200 code-font overflow-x-auto">${escapeHtml(q.code)}</pre>` : ''}
+            <div class="grid grid-cols-1 gap-1.5 text-xs">
+              ${q.options.map((opt, oi) => {
+                const isC = oi === q.answer;
+                const isU = oi === d.userOrigIdx;
+                const cls = isC ? "bg-emerald-950/40 border-emerald-500/50 text-emerald-200 font-bold" : (isU ? "bg-rose-950/40 border-rose-500/50 text-rose-200" : "bg-slate-900/70 border-slate-800 text-slate-400");
+                return `<div class="p-2.5 rounded-lg border ${cls}">${oi + 1}) ${escapeHtml(opt)} ${isC ? '<b>[정답]</b>' : ''} ${isU && !isC ? '<b>[내 선택]</b>' : ''}</div>`;
+              }).join("")}
+            </div>
+            <div class="bg-indigo-950/35 border border-indigo-500/30 rounded-lg p-3 text-xs text-slate-200 leading-relaxed">
+              <b class="text-amber-400">💡 핵심 해설:</b> ${escapeHtml(q.explanation)}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function retakeExam() {
+      document.getElementById("view-result").classList.add("hidden");
+      document.getElementById("view-start").classList.remove("hidden");
+    }
+
+    function escapeHtml(str) {
+      return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    initStartView();
+  </script>
+</body>
+</html>
