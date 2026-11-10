@@ -521,3 +521,4 @@ QUESTIONS_22036 = [
         "explanation": "단순 일회성 질의-응답을 넘어 에이전트의 행동 결과(`AuditEpisode`)를 다시 지식 그래프에 환류(Feedback Sync)시키는 순간, 에이전트는 경험을 기억하고 학습하는 **지속 메모리(Continual Memory) 시스템**으로 도약합니다."
     }
 ]
+

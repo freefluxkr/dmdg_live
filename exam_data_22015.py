@@ -521,3 +521,4 @@ QUESTIONS_22015 = [
         "explanation": "HiveServer2는 기동 시 PostgreSQL 메타스토어와 HDFS SafeMode 해제를 기다리기 때문에 초기 부팅에 30~60초가 걸릴 수 있습니다. `docker ps`와 `docker logs hive-server`로 기동 완료 및 포트 바인딩 상태를 확인하는 것이 정석입니다."
     }
 ]
+
