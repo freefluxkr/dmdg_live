@@ -9,6 +9,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <!-- Chart.js for Radar Chart -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Firebase Compat SDK & A.C.E.S Tamper-Lock Module -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="js/aces_score_lock.js"></script>
 
   <style>
     :root {
@@ -252,6 +256,51 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+
+    .locked-score-input {
+      width: 100%;
+      background: #090e1a;
+      border: 1px dashed #334155;
+      color: #64748b;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: not-allowed;
+      pointer-events: none;
+      user-select: none;
+      -moz-appearance: textfield;
+    }
+    .locked-score-input.verified {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1.5px solid rgba(16, 185, 129, 0.55);
+      color: #34d399;
+    }
+    .locked-score-input::-webkit-outer-spin-button,
+    .locked-score-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .lock-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      margin-top: 5px;
+    }
+    .lock-status-pill.pending {
+      background: rgba(100, 116, 139, 0.18);
+      color: #94a3b8;
+      border: 1px solid rgba(100, 116, 139, 0.35);
+    }
+    .lock-status-pill.verified {
+      background: rgba(16, 185, 129, 0.16);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.45);
     }
 
     .exam-mini-card h4 {
@@ -499,8 +548,8 @@
     <!-- 2026 Promo Banner -->
     <div class="promo-banner">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <span class="promo-badge">2026 PROMO</span>
-        <span class="promo-text">🎉 2026년 베타 런칭 기념 <strong>전액 무료 진단 서비스</strong> 제공 중!</span>
+        <span class="promo-badge">2026 OPEN PROMO</span>
+        <span class="promo-text">🎉 전 국민 · 개발자 <strong>누구나 전액 무료 상시 응시 오픈!</strong> (사전 등록·날짜 제한 해제)</span>
       </div>
       <span class="promo-price">🔒 2027.01.01 유료 구독 전환 예정 (19,800원/회)</span>
     </div>
@@ -851,43 +900,72 @@
         </div>
       </div>
 
-      <!-- 성적표 점수 입력 폼 -->
+      <!-- 성적표 자동 검증 연동 영역 (임의 수정 차단) -->
       <div style="background: #111827; border: 1.5px solid #1e293b; border-radius: 12px; padding: 20px; margin-top: 20px;">
-        <h3 style="color: #38bdf8; font-size: 15px; margin-bottom: 14px;">📝 7대 공인 시험 성적표 점수 입력 (0 ~ 100점)</h3>
-        
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+          <h3 style="color: #38bdf8; font-size: 15px; margin: 0;">🔒 7대 공인 시험 성적표 자동 검증 연동 (개인 점수 임의 수정 불가)</h3>
+          <span style="background: rgba(244, 63, 94, 0.14); border: 1px solid rgba(244, 63, 94, 0.4); color: #fda4af; font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 9999px;">
+            🛡️ Read-Only 무결성 잠금 적용
+          </span>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font-size: 12.5px; color: #cbd5e1; line-height: 1.6;">
+          • 공정한 공인 리포트 발급을 위해 <strong style="color: #f87171;">모든 시험 점수의 직접 키보드 입력·URL 임의 조작·DOM 변조는 원천 차단</strong>됩니다.<br>
+          • <strong>기초 4대 시험</strong>은 아래 응시자 실명으로 Firestore 공인 기록을 불러오고, <strong>심화 3대 시험</strong>은 시험 완료 후 연동 버튼을 누르면 무결성 서명과 함께 자동 반영됩니다.
+        </div>
+
+        <!-- 변조 경고 배너 -->
+        <div id="tamperAlertBanner" style="display: none; background: rgba(239, 68, 68, 0.14); border: 1.5px solid rgba(239, 68, 68, 0.6); color: #fecaca; border-radius: 10px; padding: 11px 14px; margin-bottom: 16px; font-size: 12.5px; font-weight: 700;"></div>
+
+        <!-- 4대 기초 시험 Firestore 실명 연동 조회 바 -->
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #0b1220; border: 1px solid #1e293b; border-radius: 10px; padding: 12px 14px; margin-bottom: 18px;">
+          <input type="text" id="candidateLookupName" placeholder="기초 4대 시험 응시자 실명 입력 (예: 홍길동)" style="flex: 1; min-width: 220px; background: #0f172a; border: 1px solid #334155; color: #f8fafc; padding: 9px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">
+          <button type="button" id="btnLookupFirestore" onclick="lookupOfficialBasicScores()" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 13px; font-weight: 800; cursor: pointer;">
+            🔍 기초 4대 시험 공인 성적 조회
+          </button>
+          <span id="lookupStatusMsg" style="font-size: 12px; color: #94a3b8; width: 100%;">※ 기초 4대 시험 응시 후 동일한 응시자 성명으로 조회하면 점수가 잠금 상태로 자동 채워집니다.</span>
+        </div>
+
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 14px; margin-bottom: 20px;">
           <div>
             <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">1. SQL 실무 평가 점수</label>
-            <input type="number" id="exam_sql" min="0" max="100" value="85" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <input type="number" id="exam_sql" min="0" max="100" value="0" readonly tabindex="-1" data-locked="true" class="locked-score-input">
+            <span id="badge_exam_sql" class="lock-status-pill pending">🔒 미연동 · 수정 불가</span>
           </div>
           <div>
             <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">2. AI &amp; LLM 사전수학 점수</label>
-            <input type="number" id="exam_math" min="0" max="100" value="75" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <input type="number" id="exam_math" min="0" max="100" value="0" readonly tabindex="-1" data-locked="true" class="locked-score-input">
+            <span id="badge_exam_math" class="lock-status-pill pending">🔒 미연동 · 수정 불가</span>
           </div>
           <div>
             <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">3. AI 데이터 분석 점수</label>
-            <input type="number" id="exam_data" min="0" max="100" value="88" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <input type="number" id="exam_data" min="0" max="100" value="0" readonly tabindex="-1" data-locked="true" class="locked-score-input">
+            <span id="badge_exam_data" class="lock-status-pill pending">🔒 미연동 · 수정 불가</span>
           </div>
           <div>
             <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px;">4. 파이썬 &amp; ML/DL 점수</label>
-            <input type="number" id="exam_python" min="0" max="100" value="84" style="width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <input type="number" id="exam_python" min="0" max="100" value="0" readonly tabindex="-1" data-locked="true" class="locked-score-input">
+            <span id="badge_exam_python" class="lock-status-pill pending">🔒 미연동 · 수정 불가</span>
           </div>
           <div>
             <label style="font-size: 12px; color: #38bdf8; display: block; margin-bottom: 4px;">5. [심화 1] 자율주행 레이크하우스</label>
-            <input type="number" id="exam_smartcar" min="0" max="100" value="86" style="width: 100%; background: #0f172a; border: 1px solid #0284c7; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <input type="number" id="exam_smartcar" min="0" max="100" value="0" readonly tabindex="-1" data-locked="true" class="locked-score-input">
+            <span id="badge_exam_smartcar" class="lock-status-pill pending">🔒 미연동 · 수정 불가</span>
           </div>
           <div>
             <label style="font-size: 12px; color: #34d399; display: block; margin-bottom: 4px;">6. [심화 2] FastMCP·GraphRAG</label>
-            <input type="number" id="exam_graphrag" min="0" max="100" value="88" style="width: 100%; background: #0f172a; border: 1px solid #059669; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <input type="number" id="exam_graphrag" min="0" max="100" value="0" readonly tabindex="-1" data-locked="true" class="locked-score-input">
+            <span id="badge_exam_graphrag" class="lock-status-pill pending">🔒 미연동 · 수정 불가</span>
           </div>
           <div>
             <label style="font-size: 12px; color: #d8b4fe; display: block; margin-bottom: 4px;">7. [심화 3] 지속 메모리·모델정렬</label>
-            <input type="number" id="exam_memory" min="0" max="100" value="85" style="width: 100%; background: #0f172a; border: 1px solid #9333ea; color: #fff; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 700;">
+            <input type="number" id="exam_memory" min="0" max="100" value="0" readonly tabindex="-1" data-locked="true" class="locked-score-input">
+            <span id="badge_exam_memory" class="lock-status-pill pending">🔒 미연동 · 수정 불가</span>
           </div>
         </div>
 
         <button onclick="calculateFromOfficialExams()" style="width: 100%; background: linear-gradient(135deg, #10b981, #0284c7); color: #fff; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
-          🎯 7대 실제 시험 성적으로 공인 직무 추천 &amp; 채용 JD 분석 산출 ➔
+          🎯 검증 완료된 공인 시험 성적으로 직무 추천 &amp; 채용 JD 분석 산출 ➔
         </button>
       </div>
     </div>
@@ -917,7 +995,7 @@
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 16px;">
           <div>
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-              <span style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; font-size: 11px; font-weight: 900; padding: 2px 8px; border-radius: 4px;">OFFICIAL REPORT</span>
+              <span id="reportTypeBadge" style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; font-size: 11px; font-weight: 900; padding: 2px 8px; border-radius: 4px;">OFFICIAL REPORT</span>
               <span style="color: #94a3b8; font-size: 12px;" id="reportModeBadge">5분 쾌속 진단 모드</span>
             </div>
             <h2 style="font-size: 22px; font-weight: 900; color: #ffffff;">IT/AI 전문 직무 추천 &amp; 실무 채용 JD 정밀 성적표</h2>
@@ -1273,14 +1351,14 @@
           tagQuick.style.borderColor = 'rgba(6, 182, 212, 0.4)';
         }
         if (tagOfficial) {
-          tagOfficial.innerHTML = '🔘 클릭 시 전환: 4대 시험 성적표 입력';
+          tagOfficial.innerHTML = '🔘 클릭 시 전환: 🔒 7대 공인 시험 성적 자동 연동';
           tagOfficial.style.background = 'rgba(51, 65, 85, 0.5)';
           tagOfficial.style.color = '#94a3b8';
           tagOfficial.style.borderColor = '#334155';
         }
         document.getElementById('quickAssessmentView').style.display = 'block';
         document.getElementById('officialExamView').style.display = 'none';
-        document.getElementById('reportModeBadge').innerText = '5분 쾌속 진단 모드';
+        document.getElementById('reportModeBadge').innerText = '5분 쾌속 진단 모드 (비공인 참고용)';
       } else {
         document.getElementById('tabModeQuick').classList.remove('active');
         document.getElementById('tabModeOfficial').classList.add('active');
@@ -1291,14 +1369,14 @@
           tagQuick.style.borderColor = '#334155';
         }
         if (tagOfficial) {
-          tagOfficial.innerHTML = '✅ 현재 선택됨: 4대 시험 성적표 입력 진행 중';
+          tagOfficial.innerHTML = '✅ 현재 선택됨: 🔒 7대 공인 시험 성적 자동 연동 (수정 불가)';
           tagOfficial.style.background = 'rgba(16, 185, 129, 0.2)';
           tagOfficial.style.color = '#34d399';
           tagOfficial.style.borderColor = 'rgba(16, 185, 129, 0.4)';
         }
         document.getElementById('quickAssessmentView').style.display = 'none';
         document.getElementById('officialExamView').style.display = 'block';
-        document.getElementById('reportModeBadge').innerText = '정규 4대 시험 성적표 기반 공인 인증';
+        document.getElementById('reportModeBadge').innerText = '정규 4대 + 심화 3대 시험 자동 검증 연동';
       }
     }
 
@@ -1365,6 +1443,21 @@
       }
     }
 
+    function setReportTypeBadge(kind) {
+      const badge = document.getElementById('reportTypeBadge');
+      if (!badge) return;
+      if (kind === 'official') {
+        badge.innerText = 'OFFICIAL VERIFIED REPORT';
+        badge.style.background = 'linear-gradient(135deg, #10b981, #0284c7)';
+      } else if (kind === 'sample') {
+        badge.innerText = 'DEMO SAMPLE (참고용)';
+        badge.style.background = '#475569';
+      } else {
+        badge.innerText = 'SELF-DIAGNOSIS (비공인 참고용)';
+        badge.style.background = '#d97706';
+      }
+    }
+
     // ── Sample Presets (1-Click Demo) ──
     function loadSamplePreset(type) {
       let scores = [];
@@ -1378,6 +1471,7 @@
         scores = [95, 88, 65, 75, 50, 72]; // AI 연구원
         document.getElementById('reportModeBadge').innerText = '🔬 [샘플 3] AI 모델 연구원 (90점대 코어)';
       }
+      setReportTypeBadge('sample');
       executeFullAnalysis(scores);
       setTimeout(() => {
         const target = document.getElementById('resultSection');
@@ -1399,19 +1493,148 @@
       const biz = Math.round(0.05 * pA + 0.05 * pC + 0.15 * pE + 0.75 * pS);
       const arch = Math.round(0.05 * pA + 0.20 * pC + 0.25 * pE + 0.50 * pS);
 
-      document.getElementById('reportModeBadge').innerText = '5분 쾌속 직무 매칭 진단';
+      setReportTypeBadge('self');
+      document.getElementById('reportModeBadge').innerText = '5분 쾌속 자가진단 (비공인 · 시험 성적 미연동)';
       executeFullAnalysis([math, coding, data, genai, biz, arch]);
     }
 
-    // ── Calculate from Official 7 Exams (Mode 2) ──
+    // ── Locked Score UI Sync & Anti-Tamper Guard ──
+    let _isSyncingLockedInputs = false;
+
+    function syncLockedScoreInputs(highlightExamId) {
+      if (!window.DMDGScoreLock) return;
+      _isSyncingLockedInputs = true;
+      try {
+        const cfgMap = window.DMDGScoreLock.EXAM_CONFIG;
+        Object.keys(cfgMap).forEach((examId) => {
+          const cfg = cfgMap[examId];
+          const el = document.getElementById(cfg.inputId);
+          const badge = document.getElementById(cfg.badgeId);
+          const rec = window.DMDGScoreLock.getVerifiedRecord(examId);
+          if (el) {
+            el.readOnly = true;
+            el.setAttribute('readonly', 'readonly');
+            el.setAttribute('tabindex', '-1');
+            el.value = rec ? rec.score : 0;
+            if (rec) {
+              el.classList.add('verified');
+              if (highlightExamId === examId) {
+                el.style.boxShadow = '0 0 12px rgba(56, 189, 248, 0.7)';
+              }
+            } else {
+              el.classList.remove('verified');
+              el.style.boxShadow = '';
+            }
+          }
+          if (badge) {
+            if (rec) {
+              const srcLabel = rec.source === 'firestore' ? 'Firestore 검증' : '시험 자동연동';
+              badge.className = 'lock-status-pill verified';
+              badge.innerText = `✅ 공인 검증완료 (${srcLabel} · ${rec.studentName || '응시자'})`;
+            } else {
+              badge.className = 'lock-status-pill pending';
+              badge.innerText = '🔒 미연동 · 수정 불가';
+            }
+          }
+        });
+      } finally {
+        _isSyncingLockedInputs = false;
+      }
+    }
+
+    function showTamperAlert(msg) {
+      const banner = document.getElementById('tamperAlertBanner');
+      if (banner) {
+        banner.style.display = 'block';
+        banner.innerText = msg;
+      }
+    }
+
+    function attachScoreLockObservers() {
+      if (!window.DMDGScoreLock) return;
+      const cfgMap = window.DMDGScoreLock.EXAM_CONFIG;
+      Object.keys(cfgMap).forEach((examId) => {
+        const el = document.getElementById(cfgMap[examId].inputId);
+        if (!el) return;
+        const revert = (e) => {
+          if (e) e.preventDefault();
+          syncLockedScoreInputs();
+          showTamperAlert('⚠️ 개인 시험 점수는 임의로 수정할 수 없습니다. 실제 시험 응시 완료 또는 Firestore 성적 조회로만 반영됩니다.');
+        };
+        ['keydown', 'keypress', 'paste', 'input', 'change', 'wheel'].forEach((evt) => {
+          el.addEventListener(evt, revert, { passive: false });
+        });
+        const observer = new MutationObserver(() => {
+          if (_isSyncingLockedInputs) return;
+          const rec = window.DMDGScoreLock.getVerifiedRecord(examId);
+          const expectedVal = String(rec ? rec.score : 0);
+          if (!el.hasAttribute('readonly') || el.value !== expectedVal) {
+            revert();
+          }
+        });
+        observer.observe(el, { attributes: true, attributeFilter: ['readonly', 'disabled', 'value'] });
+      });
+    }
+
+    async function lookupOfficialBasicScores() {
+      if (!window.DMDGScoreLock) return;
+      const nameInput = document.getElementById('candidateLookupName');
+      const statusEl = document.getElementById('lookupStatusMsg');
+      const btn = document.getElementById('btnLookupFirestore');
+      const cleanName = String(nameInput?.value || '').trim();
+      if (!cleanName) {
+        alert('기초 4대 시험에 응시한 응시자 성명을 입력해 주세요.');
+        if (nameInput) nameInput.focus();
+        return;
+      }
+      if (btn) btn.disabled = true;
+      if (statusEl) {
+        statusEl.style.color = '#38bdf8';
+        statusEl.innerText = '🔄 Firebase Firestore에서 공인 응시 기록을 검증하는 중입니다...';
+      }
+      try {
+        const res = await window.DMDGScoreLock.lookupFirestoreScoresByName(cleanName);
+        syncLockedScoreInputs();
+        if (res.matchedCount > 0) {
+          const summary = res.matchedDetails.map(d => `${d.label}: ${d.score}점`).join(' / ');
+          if (statusEl) {
+            statusEl.style.color = '#34d399';
+            statusEl.innerText = `✅ [${cleanName}] 님 공인 성적 ${res.matchedCount}건 검증 연동 완료 (${summary})`;
+          }
+        } else {
+          if (statusEl) {
+            statusEl.style.color = '#fbbf24';
+            statusEl.innerText = `ℹ️ [${cleanName}] 님 이름으로 저장된 기초 4대 시험 응시 기록이 없습니다. 시험 응시 완료 후 다시 조회해 주세요.`;
+          }
+        }
+      } catch (err) {
+        if (statusEl) {
+          statusEl.style.color = '#f87171';
+          statusEl.innerText = `⚠️ 성적 조회 중 오류: ${err.message}`;
+        }
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    // ── Calculate from Official 7 Exams (Mode 2 — Verified State Only) ──
     function calculateFromOfficialExams() {
-      const sql = parseFloat(document.getElementById('exam_sql').value) || 0;
-      const math = parseFloat(document.getElementById('exam_math').value) || 0;
-      const data = parseFloat(document.getElementById('exam_data').value) || 0;
-      const py = parseFloat(document.getElementById('exam_python').value) || 0;
-      const smartcar = parseFloat(document.getElementById('exam_smartcar')?.value) || 0;
-      const graphrag = parseFloat(document.getElementById('exam_graphrag')?.value) || 0;
-      const memory = parseFloat(document.getElementById('exam_memory')?.value) || 0;
+      if (!window.DMDGScoreLock) return;
+      syncLockedScoreInputs();
+      const verifiedCount = window.DMDGScoreLock.getVerifiedCount();
+      if (verifiedCount <= 0) {
+        alert('연동된 공인 시험 성적이 0건입니다.\n\n• 심화 3대 시험: [시험 응시하기] 완료 후 [A.C.E.S 성적 연동하기] 버튼을 클릭해 주세요.\n• 기초 4대 시험: 응시 완료 후 상단에서 응시자 성명으로 공인 성적을 조회해 주세요.\n\n※ 개인 점수의 임의 입력·수정은 차단되어 있습니다.');
+        return;
+      }
+
+      const vs = window.DMDGScoreLock.getAllVerifiedScores();
+      const sql = vs.sql || 0;
+      const math = vs.math || 0;
+      const data = vs.data || 0;
+      const py = vs.python || 0;
+      const smartcar = vs.smartcar_lakehouse || 0;
+      const graphrag = vs.graphrag_mcp || 0;
+      const memory = vs.continual_memory || 0;
 
       // 기초 4대 시험 + 심화 3대 시험 성적을 A.C.E.S 6대 직무 역량으로 정밀 매핑
       const pA = (0.75 * math) + (0.25 * memory);
@@ -1427,26 +1650,26 @@
       const b = Math.round(0.05 * pA + 0.10 * pC + 0.25 * pE + 0.60 * pS);
       const a = Math.round(0.05 * pA + 0.20 * pC + 0.30 * pE + 0.45 * pS);
 
-      document.getElementById('reportModeBadge').innerText = '정규 4대 + 심화 3대 시험(총 490문항) 공인 인증';
+      setReportTypeBadge('official');
+      document.getElementById('reportModeBadge').innerText = `공인 검증 성적표 연동 (${verifiedCount}/7과목 검증완료 · 수정불가)`;
       executeFullAnalysis([m, c, d, g, b, a]);
     }
 
-    // URL 파라미터 연동 (?exam=smartcar_lakehouse&score=93 등)
+    // 무결성 서명 URL 및 로컬 검증 저장소 연동
     window.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      const examId = params.get('exam');
-      const score = params.get('score');
-      if (examId && score !== null) {
+      attachScoreLockObservers();
+      if (!window.DMDGScoreLock) return;
+      const state = window.DMDGScoreLock.verifyPortalState(window.location.search);
+      const { urlResult } = state;
+      syncLockedScoreInputs(urlResult.urlTampered ? null : urlResult.examId);
+
+      if (urlResult.hasUrlExam) {
         switchMode('official');
-        const mapId = {
-          'smartcar_lakehouse': 'exam_smartcar',
-          'graphrag_mcp': 'exam_graphrag',
-          'continual_memory': 'exam_memory'
-        };
-        const targetInput = document.getElementById(mapId[examId]);
-        if (targetInput) {
-          targetInput.value = score;
-          targetInput.style.boxShadow = '0 0 12px rgba(56, 189, 248, 0.7)';
+        if (urlResult.urlTampered) {
+          showTamperAlert('⚠️ URL 파라미터의 점수 또는 서명이 변조되었거나 미서명 상태여서 차단되었습니다. 시험 완료 화면의 정식 연동 버튼으로만 점수를 등록할 수 있습니다.');
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }
         }
         const sec = document.getElementById('officialExamView');
         if (sec) sec.scrollIntoView({ behavior: 'smooth' });

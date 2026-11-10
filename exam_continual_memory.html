@@ -6,6 +6,7 @@
   <title>심화 3: 지속 메모리 & 모델 정렬 역량 평가 (30문항) | DMDG 공인 역량 평가 & 직무 추천</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/aces_score_lock.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
@@ -377,7 +378,7 @@
       const totalCnt = details.length;
       const score100 = Math.round((correctCnt / totalCnt) * 100);
 
-      renderDashboard(session.studentName, score100, correctCnt, totalCnt, details);
+      renderDashboard(session.studentName, score100, correctCnt, totalCnt, details, false);
     }
 
     function showSampleResult() {
@@ -391,10 +392,10 @@
       const score100 = Math.round((correctCnt / sampleDetails.length) * 100);
       document.getElementById("view-start").classList.add("hidden");
       document.getElementById("view-result").classList.remove("hidden");
-      renderDashboard("샘플 응시자 (데모)", score100, correctCnt, sampleDetails.length, sampleDetails);
+      renderDashboard("샘플 응시자 (데모)", score100, correctCnt, sampleDetails.length, sampleDetails, true);
     }
 
-    function renderDashboard(studentName, score100, correctCnt, totalCnt, details) {
+    function renderDashboard(studentName, score100, correctCnt, totalCnt, details, isDemo = false) {
       document.getElementById("res-student-name").textContent = studentName;
       document.getElementById("res-score-100").textContent = score100;
       document.getElementById("res-correct-count").textContent = `${correctCnt} / ${totalCnt}문항 정답`;
@@ -447,8 +448,25 @@
         </div>
       `).join("");
 
-      // Update A.C.E.S integration link
-      document.getElementById("btn-send-aces").href = `career_aces.html?exam=${EXAM_META.id}&score=${score100}`;
+      // Update A.C.E.S integration link (Signed Token — Real Exam Only)
+      const sendBtn = document.getElementById("btn-send-aces");
+      if (sendBtn) {
+        if (isDemo || !window.DMDGScoreLock) {
+          sendBtn.href = "career_aces.html";
+          sendBtn.style.opacity = "0.65";
+          sendBtn.textContent = "🔒 샘플 점수는 공인 포털 전송 불가 (실제 응시 필요)";
+          sendBtn.onclick = function (e) {
+            e.preventDefault();
+            alert("샘플 미리보기 점수는 공인 직무추천 포털로 전송할 수 없습니다. [응시 시작하기]로 실제 시험을 완료해 주세요.");
+          };
+        } else {
+          const signedQuery = window.DMDGScoreLock.recordOfficialExamScore(EXAM_META.id, score100, studentName);
+          sendBtn.href = `career_aces.html?${signedQuery}`;
+          sendBtn.style.opacity = "1";
+          sendBtn.textContent = "🚀 A.C.E.S 종합 직무진단에 공인 검증 성적 연동하기 ➔";
+          sendBtn.onclick = null;
+        }
+      }
 
       // Cosine + Adequacy Job Matching
       const uNorm = Math.sqrt(aces6.reduce((a, v) => a + v * v, 0));
