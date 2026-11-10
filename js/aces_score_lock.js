@@ -38,19 +38,19 @@
     smartcar_lakehouse: {
       inputId: 'exam_smartcar',
       badgeId: 'badge_exam_smartcar',
-      collection: null,
+      collection: 'dmdg_advanced_exam_submissions',
       label: '[심화 1] 자율주행 레이크하우스'
     },
     graphrag_mcp: {
       inputId: 'exam_graphrag',
       badgeId: 'badge_exam_graphrag',
-      collection: null,
+      collection: 'dmdg_advanced_exam_submissions',
       label: '[심화 2] FastMCP·GraphRAG'
     },
     continual_memory: {
       inputId: 'exam_memory',
       badgeId: 'badge_exam_memory',
-      collection: null,
+      collection: 'dmdg_advanced_exam_submissions',
       label: '[심화 3] 지속 메모리·모델정렬'
     }
   };
@@ -180,6 +180,21 @@
     const cleanName = String(studentName || '응시자').trim() || '응시자';
     const rec = _setVerifiedRecord(examId, score100, ts, cleanName, 'official_exam');
     if (!rec) return '';
+    try {
+      const db = _getFirestore();
+      if (db && EXAM_CONFIG[examId] && EXAM_CONFIG[examId].collection) {
+        const docId = `ADV-${examId}-${ts}-${Math.random().toString(36).slice(2, 7)}`;
+        db.collection(EXAM_CONFIG[examId].collection).doc(docId).set({
+          id: docId,
+          examId: rec.examId,
+          studentName: rec.studentName,
+          score100: rec.score,
+          ts: rec.ts,
+          submittedAt: new Date(rec.ts).toISOString(),
+          sig: rec.sig
+        }).catch(function () {});
+      }
+    } catch (_) {}
     const params = new URLSearchParams();
     params.set('exam', rec.examId);
     params.set('score', String(rec.score));
@@ -242,7 +257,7 @@
   }
 
   /**
-   * Firebase Firestore에서 응시자 실명으로 4대 기초 공인 시험 성적 조회 및 서명 잠금
+   * Firebase Firestore에서 응시자 실명으로 7대 공인 시험(기초 4대 + 심화 3대) 성적 조회 및 서명 잠금
    */
   async function lookupFirestoreScoresByName(studentName) {
     const cleanName = String(studentName || '').trim();
@@ -256,7 +271,9 @@
     }
 
     const basicIds = ['sql', 'math', 'data', 'python'];
+    const advIds = ['smartcar_lakehouse', 'graphrag_mcp', 'continual_memory'];
     const matchedDetails = [];
+    const normQueryName = cleanName.replace(/\s+/g, '').toLowerCase();
 
     for (let i = 0; i < basicIds.length; i++) {
       const examId = basicIds[i];
@@ -271,7 +288,6 @@
       if (!snap || snap.empty) continue;
 
       let bestRecord = null;
-      const normQueryName = cleanName.replace(/\s+/g, '').toLowerCase();
       snap.docs.forEach(function (doc) {
         const d = doc.data();
         if (!d) return;
@@ -290,6 +306,37 @@
         matchedDetails.push({ examId: examId, label: cfg.label, score: bestRecord.score });
       }
     }
+
+    // 심화 3대 시험 Firestore 조회
+    try {
+      let advSnap = null;
+      try {
+        advSnap = await db.collection('dmdg_advanced_exam_submissions').orderBy('submittedAt', 'desc').limit(300).get();
+      } catch (_) {
+        advSnap = await db.collection('dmdg_advanced_exam_submissions').limit(300).get();
+      }
+      if (advSnap && !advSnap.empty) {
+        const advBest = {};
+        advSnap.docs.forEach(function (doc) {
+          const d = doc.data();
+          if (!d || advIds.indexOf(d.examId) === -1) return;
+          const recName = String(d.studentName || '').trim();
+          if (recName.replace(/\s+/g, '').toLowerCase() !== normQueryName) return;
+          const sc = _normalizeScore(d.score100);
+          if (sc === null) return;
+          const recTs = d.submittedAt ? new Date(d.submittedAt).getTime() : (Number(d.ts) || Date.now());
+          if (!advBest[d.examId] || recTs > advBest[d.examId].ts) {
+            advBest[d.examId] = { score: sc, ts: Number.isFinite(recTs) ? recTs : Date.now() };
+          }
+        });
+        advIds.forEach(function (examId) {
+          if (advBest[examId]) {
+            _setVerifiedRecord(examId, advBest[examId].score, advBest[examId].ts, cleanName, 'firestore');
+            matchedDetails.push({ examId: examId, label: EXAM_CONFIG[examId].label, score: advBest[examId].score });
+          }
+        });
+      }
+    } catch (_) {}
 
     return {
       matchedCount: matchedDetails.length,

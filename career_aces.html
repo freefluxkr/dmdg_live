@@ -647,7 +647,7 @@
 
     <!-- ===================================================================
          SECTION 2: [실전 평가 응시 트랙] (Start My Assessment)
-         내 실력으로 직접 진단받기 (모드 1: 5분 쾌속 vs 모드 2: 정규 4대 시험)
+         내 실력으로 직접 진단받기 (모드 1: 5분 쾌속 vs 모드 2: 7대 공인 시험 490문항)
          =================================================================== -->
     <section class="assessment-mode-section">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
@@ -660,7 +660,7 @@
         📝 "구직자 본인의 실제 역량으로 진단받으시겠습니까? 응시 방식을 선택하세요."
       </h2>
       <p style="color: #94a3b8; font-size: 13px; line-height: 1.5; margin: 0;">
-        시간이 촉박하신 분은 5분 쾌속 자가진단을, 공인 인증 성적표가 필요하신 분은 4대 시험 공식 성적표 연동을 선택해 주세요.
+        시간이 촉박하신 분은 5분 쾌속 자가진단을, 공인 인증 성적표가 필요하신 분은 7대 공인 시험(기초 4대 + 심화 3대, 총 490문항) 자동 연동을 선택해 주세요.
       </p>
 
       <div class="mode-cards-grid">
@@ -910,20 +910,20 @@
         </div>
 
         <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font-size: 12.5px; color: #cbd5e1; line-height: 1.6;">
-          • 공정한 공인 리포트 발급을 위해 <strong style="color: #f87171;">모든 시험 점수의 직접 키보드 입력·URL 임의 조작·DOM 변조는 원천 차단</strong>됩니다.<br>
-          • <strong>기초 4대 시험</strong>은 아래 응시자 실명으로 Firestore 공인 기록을 불러오고, <strong>심화 3대 시험</strong>은 시험 완료 후 연동 버튼을 누르면 무결성 서명과 함께 자동 반영됩니다.
+          • 공정한 공인 리포트 발급을 위해 <strong style="color: #f87171;">모든 7대 시험 점수의 직접 키보드 입력·URL 임의 조작·DOM 변조는 원천 차단</strong>됩니다.<br>
+          • <strong>기초 4대 + 심화 3대(총 7대 공인 시험)</strong> 완료 후 아래 <strong>응시자 실명으로 Firestore 성적 조회</strong>를 누르거나, 심화 시험 결과 화면의 연동 버튼을 누르면 무결성 서명과 함께 자동 반영됩니다.
         </div>
 
         <!-- 변조 경고 배너 -->
         <div id="tamperAlertBanner" style="display: none; background: rgba(239, 68, 68, 0.14); border: 1.5px solid rgba(239, 68, 68, 0.6); color: #fecaca; border-radius: 10px; padding: 11px 14px; margin-bottom: 16px; font-size: 12.5px; font-weight: 700;"></div>
 
-        <!-- 4대 기초 시험 Firestore 실명 연동 조회 바 -->
+        <!-- 7대 공인 시험 Firestore 실명 연동 조회 바 -->
         <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #0b1220; border: 1px solid #1e293b; border-radius: 10px; padding: 12px 14px; margin-bottom: 18px;">
-          <input type="text" id="candidateLookupName" placeholder="기초 4대 시험 응시자 실명 입력 (예: 홍길동)" style="flex: 1; min-width: 220px; background: #0f172a; border: 1px solid #334155; color: #f8fafc; padding: 9px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">
+          <input type="text" id="candidateLookupName" placeholder="7대 공인 시험 응시자 실명 입력 (예: 홍길동)" style="flex: 1; min-width: 220px; background: #0f172a; border: 1px solid #334155; color: #f8fafc; padding: 9px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">
           <button type="button" id="btnLookupFirestore" onclick="lookupOfficialBasicScores()" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 13px; font-weight: 800; cursor: pointer;">
-            🔍 기초 4대 시험 공인 성적 조회
+            🔍 7대 공인 시험 성적 조회
           </button>
-          <span id="lookupStatusMsg" style="font-size: 12px; color: #94a3b8; width: 100%;">※ 기초 4대 시험 응시 후 동일한 응시자 성명으로 조회하면 점수가 잠금 상태로 자동 채워집니다.</span>
+          <span id="lookupStatusMsg" style="font-size: 12px; color: #94a3b8; width: 100%;">※ 7대 공인 시험(기초 4대 + 심화 3대) 중 응시 완료한 과목이 동일한 응시자 성명으로 조회·잠금 연동됩니다.</span>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 14px; margin-bottom: 20px;">
@@ -1583,14 +1583,14 @@
       const btn = document.getElementById('btnLookupFirestore');
       const cleanName = String(nameInput?.value || '').trim();
       if (!cleanName) {
-        alert('기초 4대 시험에 응시한 응시자 성명을 입력해 주세요.');
+        alert('7대 공인 시험에 응시한 응시자 성명을 입력해 주세요.');
         if (nameInput) nameInput.focus();
         return;
       }
       if (btn) btn.disabled = true;
       if (statusEl) {
         statusEl.style.color = '#38bdf8';
-        statusEl.innerText = '🔄 Firebase Firestore에서 공인 응시 기록을 검증하는 중입니다...';
+        statusEl.innerText = '🔄 Firebase Firestore에서 7대 공인 시험 응시 기록을 검증하는 중입니다...';
       }
       try {
         const res = await window.DMDGScoreLock.lookupFirestoreScoresByName(cleanName);
@@ -1604,7 +1604,7 @@
         } else {
           if (statusEl) {
             statusEl.style.color = '#fbbf24';
-            statusEl.innerText = `ℹ️ [${cleanName}] 님 이름으로 저장된 기초 4대 시험 응시 기록이 없습니다. 시험 응시 완료 후 다시 조회해 주세요.`;
+            statusEl.innerText = `ℹ️ [${cleanName}] 님 이름으로 저장된 공인 시험 응시 기록이 없습니다. 시험 응시 완료 후 다시 조회해 주세요.`;
           }
         }
       } catch (err) {
@@ -1623,7 +1623,7 @@
       syncLockedScoreInputs();
       const verifiedCount = window.DMDGScoreLock.getVerifiedCount();
       if (verifiedCount <= 0) {
-        alert('연동된 공인 시험 성적이 0건입니다.\n\n• 심화 3대 시험: [시험 응시하기] 완료 후 [A.C.E.S 성적 연동하기] 버튼을 클릭해 주세요.\n• 기초 4대 시험: 응시 완료 후 상단에서 응시자 성명으로 공인 성적을 조회해 주세요.\n\n※ 개인 점수의 임의 입력·수정은 차단되어 있습니다.');
+        alert('연동된 7대 공인 시험 성적이 0건입니다.\n\n• 7대 공인 시험(기초 4대 + 심화 3대, 총 490문항) 중 1과목 이상 응시를 완료해 주세요.\n• 응시 완료 후 상단에서 응시자 성명으로 조회하거나, 심화 시험 결과 화면의 연동 버튼을 눌러 성적을 불러올 수 있습니다.\n\n※ 개인 점수의 임의 입력·수정은 차단되어 있습니다.');
         return;
       }
 
