@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사내규정 & 법률/특허 지식 그래프 GraphRAG × FastMCP 시뮬레이터 | DMDG Great AI Live Lab</title>
+  <meta name="description" content="리눅스 · FastMCP · Neo4j GraphRAG 완벽 바이블 (Book 22036) 공식 인터랙티브 시뮬레이터 — 다중 홉 온톨로지 탐색, Vector RAG vs GraphRAG 비교, FastMCP JSON-RPC 2.0 패킷 인스펙터">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #050811;
+      --bg-card: rgba(12, 20, 38, 0.9);
+      --bg-surface: #091020;
+      --border-color: rgba(56, 189, 248, 0.22);
+      --border-highlight: rgba(16, 185, 129, 0.65);
+      --cyan-neon: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.4);
+      --emerald-neon: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.45);
+      --purple-neon: #a855f7;
+      --amber-neon: #f59e0b;
+      --rose-neon: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-ui: 'Outfit', 'Pretendard', -apple-system, sans-serif;
+      --font-code: 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #0f243c 0%, var(--bg-base) 68%);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bg-grid {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none; z-index: 0;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 8, 17, 0.92);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 26px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo-badge {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: linear-gradient(135deg, #10b981, #0ea5e9);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #050811;
+      box-shadow: 0 0 22px var(--emerald-glow);
+    }
+    .brand-text h1 {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.3px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .brand-text p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .badge-live {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid var(--emerald-neon);
+      color: var(--emerald-neon); font-size: 12px; font-weight: 600; font-family: var(--font-code);
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--emerald-neon);
+      box-shadow: 0 0 10px var(--emerald-neon);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    .btn-link {
+      padding: 8px 15px; border-radius: 8px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(56, 189, 248, 0.16));
+      border: 1px solid var(--border-highlight);
+      color: #6ee7b7; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s ease;
+    }
+    .btn-link:hover {
+      background: linear-gradient(135deg, var(--emerald-neon), var(--cyan-neon));
+      color: #050811; box-shadow: 0 0 18px var(--emerald-glow);
+    }
+
+    main {
+      position: relative; z-index: 1;
+      max-width: 1580px; width: 100%; margin: 0 auto;
+      padding: 20px 24px 40px;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+
+    /* Scenario Control Bar */
+    .scenario-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      flex-wrap: wrap;
+    }
+    .scenario-group {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .scenario-label {
+      font-size: 12px; font-weight: 700; color: var(--cyan-neon);
+      text-transform: uppercase; letter-spacing: 0.8px;
+      margin-right: 4px;
+    }
+    .btn-scenario {
+      padding: 9px 15px; border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(148,163,184,0.25);
+      color: var(--text-main); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .btn-scenario:hover {
+      border-color: var(--cyan-neon);
+      background: rgba(56, 189, 248, 0.1);
+    }
+    .btn-scenario.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.22), rgba(56, 189, 248, 0.22));
+      border-color: var(--emerald-neon);
+      color: #6ee7b7;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.28);
+    }
+
+    .btn-run {
+      padding: 10px 20px; border-radius: 10px;
+      background: linear-gradient(135deg, #10b981, #0ea5e9);
+      border: none; color: #050811; font-weight: 800; font-size: 13.5px;
+      cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 0 20px var(--emerald-glow);
+    }
+    .btn-run:hover { transform: translateY(-1px); filter: brightness(1.08); }
+
+    /* KPI Row */
+    .kpi-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    }
+    @media (max-width: 1024px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .kpi-title { font-size: 11.5px; color: var(--text-muted); font-weight: 600; }
+    .kpi-value { font-size: 22px; font-weight: 800; font-family: var(--font-code); color: var(--text-main); }
+    .kpi-sub { font-size: 11.5px; color: var(--emerald-neon); }
+
+    /* Workspace Grid */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 1180px) { .workspace-grid { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 13px 18px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border-color);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .panel-title {
+      font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px;
+    }
+    .panel-tag {
+      font-size: 11px; font-family: var(--font-code);
+      padding: 3px 8px; border-radius: 6px;
+      background: rgba(56, 189, 248, 0.12); color: var(--cyan-neon);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* Interactive SVG Ontology Graph */
+    .graph-stage {
+      position: relative;
+      height: 460px;
+      background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.06), rgba(5, 8, 17, 0.95));
+      user-select: none;
+    }
+    svg#ontologySvg { width: 100%; height: 100%; display: block; }
+
+    .edge-line {
+      stroke: rgba(148, 163, 184, 0.28);
+      stroke-width: 2;
+      transition: all 0.35s ease;
+    }
+    .edge-line.active-hop {
+      stroke: #10b981;
+      stroke-width: 3.5;
+      stroke-dasharray: 8 4;
+      animation: dashFlow 0.9s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
+    }
+    .edge-line.danger-hop {
+      stroke: #f43f5e;
+      stroke-width: 3.8;
+      stroke-dasharray: 8 4;
+      animation: dashFlow 0.8s linear infinite;
+      filter: drop-shadow(0 0 9px rgba(244, 63, 94, 0.85));
+    }
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -24; }
+    }
+
+    .edge-label {
+      fill: #94a3b8;
+      font-family: var(--font-code);
+      font-size: 10px;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+    .edge-label.highlight { fill: #6ee7b7; font-weight: 700; }
+    .edge-label.danger { fill: #fda4af; font-weight: 700; }
+
+    .node-group { cursor: pointer; transition: transform 0.2s ease; }
+    .node-circle {
+      stroke-width: 2.5;
+      transition: all 0.3s ease;
+    }
+    .node-group.active .node-circle {
+      stroke-width: 4;
+      filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.95));
+    }
+    .node-group.danger .node-circle {
+      stroke-width: 4;
+      filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.95));
+    }
+    .node-title {
+      fill: #f8fafc; font-size: 11.5px; font-weight: 700;
+      text-anchor: middle; pointer-events: none;
+    }
+    .node-sub {
+      fill: #cbd5e1; font-size: 9.5px; font-family: var(--font-code);
+      text-anchor: middle; pointer-events: none;
+    }
+
+    .graph-legend {
+      position: absolute; bottom: 12px; left: 14px;
+      display: flex; gap: 10px; flex-wrap: wrap;
+      background: rgba(5, 8, 17, 0.85);
+      border: 1px solid rgba(148,163,184,0.2);
+      padding: 7px 12px; border-radius: 8px; font-size: 11px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 5px; color: var(--text-muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* Right Column Tabs: Cypher & FastMCP JSON-RPC */
+    .code-box {
+      padding: 14px 16px;
+      background: #060a14;
+      font-family: var(--font-code);
+      font-size: 12.2px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      border-bottom: 1px solid var(--border-color);
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* Comparison Row: Vector RAG vs Hybrid GraphRAG */
+    .compare-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    }
+    @media (max-width: 980px) { .compare-grid { grid-template-columns: 1fr; } }
+
+    .compare-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .compare-card.vector { border-top: 3px solid var(--amber-neon); }
+    .compare-card.graphrag { border-top: 3px solid var(--emerald-neon); }
+
+    .compare-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 6px;
+      width: fit-content;
+    }
+    .compare-badge.warn { background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .compare-badge.ok { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.45); }
+
+    .terminal-log {
+      background: #050811;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: var(--font-code);
+      font-size: 12px;
+      line-height: 1.65;
+      color: #cbd5e1;
+      min-height: 150px;
+      white-space: pre-wrap;
+    }
+    .prompt-ubuntu {
+      color: #34d399; font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <header>
+    <div class="brand">
+      <div class="logo-badge">KG</div>
+      <div class="brand-text">
+        <h1>사내규정 & 법률·특허 지식 그래프 GraphRAG × FastMCP 시뮬레이터</h1>
+        <p>Ubuntu Linux · Neo4j 5.18 Ontology · Python FastMCP JSON-RPC 2.0 · Standalone Autonomous Agent</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="badge-live"><span class="pulse-dot"></span>NEO4J BOLT :7687 CONNECTED</div>
+      <a href="https://wikidocs.net/book/22036" target="_blank" class="btn-link">📘 위키독스 교안 (Book 22036)</a>
+      <a href="sim_master_hub.html" class="btn-link">🎛️ 시뮬레이터 허브</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Scenario Selector -->
+    <section class="scenario-bar">
+      <div class="scenario-group">
+        <span class="scenario-label">실전 감사 시나리오 선택</span>
+        <button class="btn-scenario active" onclick="selectScenario(0)" id="scenBtn0">
+          🚨 시나리오 1: GPL-3.0 전염성 라이선스 & 특허 침해 다중 홉(4-Hop) 추적
+        </button>
+        <button class="btn-scenario" onclick="selectScenario(1)" id="scenBtn1">
+          🔐 시나리오 2: 사내 중요 소스코드 외부 퍼블릭 LLM 업로드 보안 규정 감사
+        </button>
+        <button class="btn-scenario" onclick="selectScenario(2)" id="scenBtn2">
+          ⚖️ 시나리오 3: Hybrid GraphRAG RRF (BM25 + Vector + 2-Hop Subgraph) 통합 추론
+        </button>
+      </div>
+      <button class="btn-run" onclick="runAuditAnimation()">▶ FastMCP 다중 홉 자율 감사 실행</button>
+    </section>
+
+    <!-- KPI Row -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-title">온톨로지 탐색 경로 (Multi-Hop Depth)</span>
+        <span class="kpi-value" id="kpiHops">4 Hops</span>
+        <span class="kpi-sub" id="kpiHopsSub">shortestPath((p:Project)-[*1..5]->(target))</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">감지된 컴플라이언스 리스크 등급</span>
+        <span class="kpi-value" id="kpiRisk" style="color:#f43f5e;">CRITICAL (해고/배포금지)</span>
+        <span class="kpi-sub" id="kpiRiskSub">사규 SEC-2026-04 & KR-PAT-2024-009182</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">호출된 Python FastMCP 도구</span>
+        <span class="kpi-value" id="kpiTool" style="color:#38bdf8;font-size:16px;">audit_project_compliance()</span>
+        <span class="kpi-sub">JSON-RPC 2.0 over stdio (ClientSession)</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-title">GraphRAG 사실 근거 정밀도 (Faithfulness)</span>
+        <span class="kpi-value" id="kpiAcc" style="color:#10b981;">99.4% (환각 0건)</span>
+        <span class="kpi-sub">단순 Vector RAG (42.0%) 대비 +57.4%p 향상</span>
+      </div>
+    </section>
+
+    <!-- Main Interactive Workspace -->
+    <section class="workspace-grid">
+      <!-- Left: Neo4j Ontology Graph Canvas -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">🕸️ Neo4j 엔터프라이즈 온톨로지 다중 홉(Multi-Hop) 실시간 탐색 뷰어</div>
+          <span class="panel-tag">노드를 클릭하면 속성(Property)과 연결 엣지를 검사합니다</span>
+        </div>
+        <div class="graph-stage">
+          <svg id="ontologySvg" viewBox="0 0 860 440">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+              </marker>
+              <marker id="arrow-danger" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e"/>
+              </marker>
+            </defs>
+            <g id="edgesLayer"></g>
+            <g id="nodesLayer"></g>
+          </svg>
+          <div class="graph-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:#38bdf8;"></span>Project / Department</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#a855f7;"></span>OSSLibrary / License</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span>Regulation / Article</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#f43f5e;"></span>Patent / Penalty (Risk)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Cypher Query + FastMCP JSON-RPC 2.0 Inspector -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">⚡ Cypher 다중 홉 쿼리 & FastMCP JSON-RPC 2.0 패킷 트레이서</div>
+          <span class="panel-tag">Ubuntu 22.04 LTS · Python 3.12</span>
+        </div>
+        <div class="code-box" id="cypherBox"></div>
+        <div class="panel-header" style="border-top:1px solid var(--border-color);">
+          <div class="panel-title">📡 Standalone Python MCP Client ↔ FastMCP Server (stdio)</div>
+          <span class="panel-tag" id="rpcStatusTag">JSON-RPC 2.0 id=101 OK</span>
+        </div>
+        <div class="code-box" id="jsonRpcBox" style="border-bottom:none;flex:1;"></div>
+      </div>
+    </section>
+
+    <!-- Bottom Comparison: Vector RAG vs GraphRAG & Ubuntu Terminal Output -->
+    <section class="compare-grid">
+      <div class="compare-card vector">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <h3 style="font-size:15px;">❌ 기존 단순 벡터 RAG (Vector-Only Top-K Chunking)</h3>
+          <span class="compare-badge warn">⚠️ 다중 홉 연결 단절 (부분 환각 발생)</span>
+        </div>
+        <div class="terminal-log" id="vectorResultBox"></div>
+      </div>
+
+      <div class="compare-card graphrag">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <h3 style="font-size:15px;">✅ 차세대 Hybrid GraphRAG + FastMCP 자율 감사 에이전트</h3>
+          <span class="compare-badge ok">🎯 4-Hop 인과 사슬 + 처벌 수위 100% 특정</span>
+        </div>
+        <div class="terminal-log" id="graphragResultBox"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const NODES = [
+      { id: "PRJ-AGENT-01", label: "PRJ-AGENT-01", sub: "차세대 AI 비서 상용화", type: "Project", color: "#38bdf8", x: 110, y: 220 },
+      { id: "DEPT-AI", label: "DEPT-AI", sub: "AI플랫폼개발팀", type: "Department", color: "#0ea5e9", x: 110, y: 85 },
+      { id: "LIB-FASTMCP", label: "fastmcp 2.0", sub: "OSSLibrary", type: "OSSLibrary", color: "#a855f7", x: 300, y: 110 },
+      { id: "LIC-MIT", label: "MIT License", sub: "상용 배포 허용", type: "License", color: "#10b981", x: 490, y: 75 },
+      { id: "LIB-GPL-PARSER", label: "gpl-graph-parser", sub: "OSSLibrary (3.2.1)", type: "OSSLibrary", color: "#a855f7", x: 310, y: 250 },
+      { id: "LIC-GPL3", label: "GPL-3.0", sub: "소스코드 공개 의무", type: "License", color: "#f43f5e", x: 520, y: 195 },
+      { id: "PAT-KR-9182", label: "KR-PAT-9182", sub: "실시간 그래프 신경망 특허", type: "Patent", color: "#f43f5e", x: 525, y: 315 },
+      { id: "ART-SEC-04-2", label: "제4조 2항", sub: "전염성 라이선스 금지", type: "Article", color: "#f59e0b", x: 730, y: 150 },
+      { id: "ART-SEC-04-1", label: "제4조 1항", sub: "소스코드 외부 유출 금지", type: "Article", color: "#f59e0b", x: 310, y: 375 },
+      { id: "PEN-DISMISS", label: "PEN-DISMISS", sub: "권고사직 / 징계해고", type: "Penalty", color: "#f43f5e", x: 545, y: 395 },
+      { id: "PEN-STOP", label: "PEN-STOP-RELEASE", sub: "상용 배포 즉시 중단", type: "Penalty", color: "#f43f5e", x: 745, y: 285 }
+    ];
+
+    const EDGES = [
+      { id: "e1", from: "DEPT-AI", to: "PRJ-AGENT-01", rel: "OWNS" },
+      { id: "e2", from: "PRJ-AGENT-01", to: "LIB-FASTMCP", rel: "DEPENDS_ON" },
+      { id: "e3", from: "LIB-FASTMCP", to: "LIC-MIT", rel: "GOVERNED_BY" },
+      { id: "e4", from: "PRJ-AGENT-01", to: "LIB-GPL-PARSER", rel: "DEPENDS_ON" },
+      { id: "e5", from: "LIB-GPL-PARSER", to: "LIC-GPL3", rel: "GOVERNED_BY" },
+      { id: "e6", from: "LIB-GPL-PARSER", to: "PAT-KR-9182", rel: "POTENTIALLY_INFRINGES" },
+      { id: "e7", from: "LIC-GPL3", to: "ART-SEC-04-2", rel: "CONFLICTS_WITH" },
+      { id: "e8", from: "ART-SEC-04-2", to: "PEN-STOP", rel: "ENFORCES_PENALTY" },
+      { id: "e9", from: "PRJ-AGENT-01", to: "ART-SEC-04-1", rel: "AUDITED_BY" },
+      { id: "e10", from: "ART-SEC-04-1", to: "PEN-DISMISS", rel: "ENFORCES_PENALTY" }
+    ];
+
+    const SCENARIOS = [
+      {
+        kpiHops: "4 Hops",
+        kpiHopsSub: "PRJ-AGENT-01 → gpl-graph-parser → GPL-3.0 → 제4조2항 → 배포중단",
+        kpiRisk: "CRITICAL (배포 즉시 중단)",
+        kpiTool: "audit_project_compliance()",
+        activeNodes: ["PRJ-AGENT-01", "LIB-GPL-PARSER", "LIC-GPL3", "PAT-KR-9182", "ART-SEC-04-2", "PEN-STOP"],
+        dangerEdges: ["e4", "e5", "e6", "e7", "e8"],
+        cypher: `// [Chapter 08 & 15] 다중 홉(Multi-Hop) 오픈소스 라이선스 & 특허 침해 동시 감사 쿼리
+MATCH (p:Project {id: 'PRJ-AGENT-01'})-[:DEPENDS_ON]->(lib:OSSLibrary)
+OPTIONAL MATCH (lib)-[:GOVERNED_BY]->(lic:License)-[:CONFLICTS_WITH]->(art:Article)-[:ENFORCES_PENALTY]->(pen:Penalty)
+OPTIONAL MATCH (lib)-[:POTENTIALLY_INFRINGES]->(pat:Patent)
+RETURN p.id AS project, lib.name AS library, lic.id AS license,
+       art.clause AS violated_clause, pen.action AS penalty, pat.id AS patent_risk;`,
+        jsonrpc: `// [Request] Standalone Python Client -> FastMCP Server (stdio)
+{"jsonrpc": "2.0", "id": 101, "method": "tools/call", "params": {
+  "name": "audit_project_compliance", "arguments": {"project_id": "PRJ-AGENT-01"}
+}}
+
+// [Response] FastMCP Server -> ClientSession
+{"jsonrpc": "2.0", "id": 101, "result": {
+  "project_id": "PRJ-AGENT-01",
+  "status": "HIGH_RISK_DETECTED",
+  "findings": [
+    {"library": "gpl-graph-parser", "license": "GPL-3.0", "violated": "제4조 2항",
+     "penalty": "상용 배포 즉시 중단 및 모듈 교체 명령", "patent": "KR-PAT-2024-009182"}
+  ]
+}}`,
+        vectorOut: `[Vector Search Top-2 Chunks]
+1. (sim=0.81) "제4조 2항: 상용 배포 제품에는 GPL-3.0 등 전염성 라이선스를 링크할 수 없다."
+2. (sim=0.77) "PRJ-AGENT-01 프로젝트는 fastmcp 및 gpl-graph-parser 패키지를 사용한다."
+
+[단순 Vector LLM 답변 한계]
+▶ gpl-graph-parser가 어떤 라이선스(GPL-3.0)를 따르는지, 그리고 경쟁사 특허(KR-PAT-9182) 침해 위험 및 구체적 징계 수위(PEN-STOP-RELEASE)까지 연결된 징검다리 문서를 놓쳐 불완전한 답변을 생성합니다.`,
+        graphOut: `pc@DESKTOP-NUVH6QH:~/graphrag-lab$ poetry run python enterprise_audit_cli.py
+[Step 1] FastMCP 도구 호출: audit_project_compliance('PRJ-AGENT-01')
+[Step 2] 4-Hop 경로 추적: PRJ-AGENT-01 -> gpl-graph-parser -> GPL-3.0 -> 제4조 2항 -> PEN-STOP-RELEASE
+[Step 3] 특허 침해 감지: gpl-graph-parser -> POTENTIALLY_INFRINGES -> KR-PAT-2024-009182 (A사)
+✅ [최종 판정] 상용 배포 즉시 중단(Critical) 및 gpl-graph-parser 모듈 제거 명령 발동!`
+      },
+      {
+        kpiHops: "3 Hops",
+        kpiHopsSub: "DEPT-AI → PRJ-AGENT-01 → 제4조 1항(보안수칙) → PEN-DISMISS(징계해고)",
+        kpiRisk: "CRITICAL (징계해고/권고사직)",
+        kpiTool: "trace_shortest_risk_path()",
+        activeNodes: ["DEPT-AI", "PRJ-AGENT-01", "ART-SEC-04-1", "PEN-DISMISS"],
+        dangerEdges: ["e1", "e9", "e10"],
+        cypher: `// [Chapter 07 & 08] 사내 핵심 소스코드 외부 생성형 AI 업로드 시 징계 규정 추적
+MATCH path = (d:Department {id: 'DEPT-AI'})-[:OWNS]->(p:Project {id: 'PRJ-AGENT-01'})
+             -[:AUDITED_BY]->(art:Article {id: 'ART-SEC-04-1'})-[:ENFORCES_PENALTY]->(pen:Penalty)
+RETURN [n IN nodes(path) | coalesce(n.name, n.clause, n.action)] AS audit_chain,
+       pen.level AS severity, pen.action AS final_sanction;`,
+        jsonrpc: `// [Request] Standalone Python Client -> FastMCP Server (stdio)
+{"jsonrpc": "2.0", "id": 102, "method": "tools/call", "params": {
+  "name": "trace_shortest_risk_path",
+  "arguments": {"start_id": "PRJ-AGENT-01", "end_id": "PEN-DISMISS"}
+}}
+
+// [Response] FastMCP Server -> ClientSession
+{"jsonrpc": "2.0", "id": 102, "result": {
+  "hops": 2,
+  "nodes": ["PRJ-AGENT-01", "ART-SEC-04-1(제4조 1항)", "PEN-DISMISS(권고사직/징계해고)"],
+  "relations": ["AUDITED_BY", "ENFORCES_PENALTY"]
+}}`,
+        vectorOut: `[Vector Search Top-2 Chunks]
+1. (sim=0.84) "제4조 1항: 사내 1급 비밀 소스코드를 외부 퍼블릭 LLM에 업로드해서는 안 된다."
+2. (sim=0.72) "보안 규정 위반 시 인사위원회에 회부될 수 있다."
+
+[단순 Vector LLM 답변 한계]
+▶ '인사위원회 회부'라는 모호한 일반론만 답변할 뿐, 취업규칙 및 보안수칙 온톨로지에 명시된 정확한 징계 코드(PEN-DISMISS: 권고사직 또는 징계해고)를 특정하지 못합니다.`,
+        graphOut: `pc@DESKTOP-NUVH6QH:~/graphrag-lab$ poetry run python autonomous_graph_agent.py
+[Thought 1] 사내 소스코드 외부 LLM 업로드 위반 조항(ART-SEC-04-1)과 연결된 Penalty 노드를 탐색합니다.
+[Observation] (ART-SEC-04-1:제4조 1항)-[:ENFORCES_PENALTY]->(PEN-DISMISS:권고사직 또는 징계해고)
+✅ [최종 판정] 사규 SEC-2026-04 제4조 1항 위반으로 최고 수위 징계(권고사직/징계해고) 대상입니다.`
+      },
+      {
+        kpiHops: "RRF Ensemble",
+        kpiHopsSub: "BM25(k=60) + Dense Vector + Neo4j 2-Hop Subgraph Boost(+0.025)",
+        kpiRisk: "HYBRID VERIFIED (신뢰도 99.4%)",
+        kpiTool: "hybrid_graphrag_engine()",
+        activeNodes: ["PRJ-AGENT-01", "LIB-FASTMCP", "LIC-MIT", "LIB-GPL-PARSER", "LIC-GPL3", "ART-SEC-04-2"],
+        dangerEdges: ["e2", "e3", "e4", "e5", "e7"],
+        cypher: `// [Chapter 12] Hybrid GraphRAG: RRF 상위 문서의 엔티티를 시드(Seed)로 2-Hop 서브그래프 확장
+MATCH (seed:Project {id: $seed_entity})-[r1*1..2]-(neighbor)
+RETURN seed.id AS anchor,
+       collect(DISTINCT labels(neighbor)[0] + ':' + coalesce(neighbor.name, neighbor.id)) AS subgraph_context,
+       count(DISTINCT neighbor) AS expanded_nodes;`,
+        jsonrpc: `// [Hybrid RRF Ranking Fusion Output]
+{
+  "query": "PRJ-AGENT-01 프로젝트의 GPL-3.0 위반 조항과 특허 침해 리스크",
+  "rrf_ranking": [
+    {"doc_id": "DOC-PAT-03", "rrf_score": 0.0573, "graph_2hop_verified": true},
+    {"doc_id": "DOC-SEC-01", "rrf_score": 0.0568, "graph_2hop_verified": true},
+    {"doc_id": "DOC-HR-02",  "rrf_score": 0.0563, "graph_2hop_verified": true}
+  ]
+}`,
+        vectorOut: `[단일 검색기(Single Retriever) 한계]
+- BM25 단독: 정확한 법령 번호('KR-PAT-2024-009182')는 찾지만 의미적 유사 문맥 누락
+- Vector 단독: 의미는 비슷하나 다른 부서/타 프로젝트 규정을 혼동하여 랭킹 상위에 노출`,
+        graphOut: `pc@DESKTOP-NUVH6QH:~/graphrag-lab$ poetry run python hybrid_graphrag_engine.py
+🥇 1위 [DOC-PAT-03] RRF 점수: 0.05730 (BM25 #3, Vector #2, Graph 2-Hop Verified ✅)
+🥈 2위 [DOC-SEC-01] RRF 점수: 0.05680 (BM25 #1, Vector #5, Graph 2-Hop Verified ✅)
+🥉 3위 [DOC-HR-02]  RRF 점수: 0.05628 (BM25 #5, Vector #1, Graph 2-Hop Verified ✅)
+✅ [결론] MIT 라이선스(fastmcp)는 정상 통과, GPL-3.0(gpl-graph-parser)만 정밀 분리 차단 완료!`
+      }
+    ];
+
+    let currentScenario = 0;
+
+    function renderGraph(scen) {
+      const edgesLayer = document.getElementById("edgesLayer");
+      const nodesLayer = document.getElementById("nodesLayer");
+      edgesLayer.innerHTML = "";
+      nodesLayer.innerHTML = "";
+
+      const nodeMap = {};
+      NODES.forEach(n => nodeMap[n.id] = n);
+
+      EDGES.forEach(e => {
+        const n1 = nodeMap[e.from];
+        const n2 = nodeMap[e.to];
+        const isDanger = scen.dangerEdges.includes(e.id);
+
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", n1.x);
+        line.setAttribute("y1", n1.y);
+        line.setAttribute("x2", n2.x);
+        line.setAttribute("y2", n2.y);
+        line.setAttribute("class", isDanger ? "edge-line danger-hop" : "edge-line");
+        line.setAttribute("marker-end", isDanger ? "url(#arrow-danger)" : "url(#arrow)");
+        edgesLayer.appendChild(line);
+
+        const mx = (n1.x + n2.x) / 2;
+        const my = (n1.y + n2.y) / 2 - 7;
+        const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        txt.setAttribute("x", mx);
+        txt.setAttribute("y", my);
+        txt.setAttribute("class", isDanger ? "edge-label danger" : "edge-label");
+        txt.textContent = e.rel;
+        edgesLayer.appendChild(txt);
+      });
+
+      NODES.forEach(n => {
+        const isActive = scen.activeNodes.includes(n.id);
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("transform", `translate(${n.x}, ${n.y})`);
+        g.setAttribute("class", isActive ? "node-group danger" : "node-group");
+        g.onclick = () => inspectNode(n);
+
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("r", 24);
+        circle.setAttribute("fill", "#0b1326");
+        circle.setAttribute("stroke", n.color);
+        circle.setAttribute("class", "node-circle");
+        g.appendChild(circle);
+
+        const title = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        title.setAttribute("y", -3);
+        title.setAttribute("class", "node-title");
+        title.textContent = n.label;
+        g.appendChild(title);
+
+        const sub = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        sub.setAttribute("y", 12);
+        sub.setAttribute("class", "node-sub");
+        sub.textContent = n.type;
+        g.appendChild(sub);
+
+        const cap = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        cap.setAttribute("y", 40);
+        cap.setAttribute("class", "node-sub");
+        cap.setAttribute("fill", isActive ? "#fda4af" : "#94a3b8");
+        cap.textContent = n.sub;
+        g.appendChild(cap);
+
+        nodesLayer.appendChild(g);
+      });
+    }
+
+    function inspectNode(node) {
+      const connected = EDGES.filter(e => e.from === node.id || e.to === node.id)
+        .map(e => `(${e.from})-[:${e.rel}]->(${e.to})`).join("\n  ");
+      document.getElementById("jsonRpcBox").textContent =
+`// [Neo4j Node Inspector] 클릭한 노드 실시간 프로퍼티 및 1-Hop 관계
+{
+  "node_id": "${node.id}",
+  "label": "${node.type}",
+  "display_name": "${node.label}",
+  "description": "${node.sub}",
+  "connected_triples": [
+    ${connected.replace(/\n/g, ",\n  ")}
+  ]
+}`;
+    }
+
+    function selectScenario(idx) {
+      currentScenario = idx;
+      [0, 1, 2].forEach(i => {
+        document.getElementById("scenBtn" + i).classList.toggle("active", i === idx);
+      });
+      const s = SCENARIOS[idx];
+      document.getElementById("kpiHops").textContent = s.kpiHops;
+      document.getElementById("kpiHopsSub").textContent = s.kpiHopsSub;
+      document.getElementById("kpiRisk").textContent = s.kpiRisk;
+      document.getElementById("kpiTool").textContent = s.kpiTool;
+      document.getElementById("cypherBox").textContent = s.cypher;
+      document.getElementById("jsonRpcBox").textContent = s.jsonrpc;
+      document.getElementById("vectorResultBox").textContent = s.vectorOut;
+      document.getElementById("graphragResultBox").textContent = s.graphOut;
+      renderGraph(s);
+    }
+
+    function runAuditAnimation() {
+      const s = SCENARIOS[currentScenario];
+      const box = document.getElementById("graphragResultBox");
+      box.textContent = "⏳ [FastMCP ClientSession] Neo4j 다중 홉(Multi-Hop) 서브그래프 질의 패킷 전송 중...\n";
+      setTimeout(() => {
+        box.textContent = s.graphOut;
+        renderGraph(s);
+      }, 350);
+    }
+
+    // Initialize Scenario 0 on load
+    selectScenario(0);
+  </script>
+</body>
+</html>
