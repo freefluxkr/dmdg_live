@@ -209,7 +209,7 @@ body.aurora-portal-body .wave-backdrop-side-right {
 }
 
 .studio-main-slogan {
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.45rem;
   font-size: clamp(1.45rem, 2.5vw, 2.15rem);
   font-weight: 900;
   letter-spacing: -0.02em;
@@ -217,6 +217,15 @@ body.aurora-portal-body .wave-backdrop-side-right {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.studio-slogan-en {
+  margin: 0 auto 0.65rem;
+  font-family: 'Outfit', 'Pretendard', sans-serif;
+  font-size: clamp(0.9rem, 1.25vw, 1.08rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #cbd5e1;
 }
 
 .studio-tabs-row {
