@@ -1,4 +1,4 @@
-# 📚 당목담글(DMDG) 공식 위키독스(WikiDocs) 연재 도서관
+# 📚 DMDG(당목담글) 공식 위키독스(WikiDocs) 연재 도서관
 
 <div align="center">
 
@@ -19,7 +19,7 @@
 | 🎨 **《AI 데이터 분석_마스터 인포그래픽》** | [👉 **Book 21683 바로가기**](https://wikidocs.net/book/21683) | 복잡한 딥러닝/머신러닝 수학과 알고리즘을 한눈에 조망하는 고화질 시각 다이어그램 컬렉션 |
 | 💬 **《말쌈 (MALSSAM) : 한글 Urban Dictionary》** | [👉 **Book 21733 바로가기**](https://wikidocs.net/book/21733) | 100대 실전 신조어 뉘앙스 해독, 세대공감 카톡 판독 및 K-컬처 신조어 백과사전 |
 | 🌿 **《DMDG 스튜디오 컬렉션: 당목담글 · 소담 · 방법》** | [👉 **Book 21665 바로가기**](https://wikidocs.net/book/21665) | 마음의 온기와 치유를 잇는 팩션 및 감성 에세이 3부작 |
-| 🌐 **당목담글(DMDG) 공식 브랜드 홈** | [👉 **dmdg.wikidocs.net 바로가기**](https://dmdg.wikidocs.net/) | 전 도서 통합 포털, 20종 실시간 시뮬레이터 허브, 라이브 서비스 관제 센터 |
+| 🌐 **DMDG(당목담글) 공식 브랜드 홈** | [👉 **dmdg.wikidocs.net 바로가기**](https://dmdg.wikidocs.net/) | 전 도서 통합 포털, 20종 실시간 시뮬레이터 허브, 라이브 서비스 관제 센터 |
 
 ---
 

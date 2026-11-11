@@ -99,7 +99,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <!-- PortOne v2 SDK & Analytics -->
   <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
-  <script src="js/analytics.js?v=20261022_real_yt"></script>
+  <script src="js/analytics.js?v=20261111_real_sync"></script>
 </head>
 
 <body class="antialiased min-h-screen pb-16 relative overflow-x-hidden">
@@ -193,13 +193,17 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-2 w-full sm:w-auto">
+      <div class="flex items-center flex-wrap gap-2 w-full sm:w-auto">
+        <a href="https://dmdg-live.com/workspace_hub.html" target="_blank" rel="noopener noreferrer"
+          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 rounded-lg text-xs font-bold border border-indigo-500/35 transition-colors whitespace-nowrap">
+          <i data-lucide="cpu" class="w-3.5 h-3.5"></i> DMDG_관제 타워
+        </a>
         <a href="./index.html" target="_blank"
-          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-colors">
+          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-colors whitespace-nowrap">
           <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 포털 열기
         </a>
         <button onclick="handleAdminLogout()"
-          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-lg text-xs font-bold transition-colors">
+          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-lg text-xs font-bold transition-colors whitespace-nowrap">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i> 로그아웃
         </button>
       </div>
@@ -2243,37 +2247,31 @@
       renderStudioTimeSeriesChart();
     }
 
+    function getDashboardKSTDateString(daysOffset = 0) {
+      if (window.DMDG_Analytics && typeof window.DMDG_Analytics.getKSTDateString === 'function') {
+        return window.DMDG_Analytics.getKSTDateString(daysOffset);
+      }
+      const now = new Date();
+      const target = new Date(now.getTime() + (9 * 60 * 60 * 1000) - (daysOffset * 24 * 60 * 60 * 1000));
+      return target.toISOString().split('T')[0];
+    }
+
     function generateTimeSeriesData(periodDays, viewsMap, uvMap) {
       const labels = [];
       const pvData = [];
       const uvData = [];
-      const now = new Date();
 
       for (let i = periodDays - 1; i >= 0; i--) {
-        const d = new Date(now.getTime() - (i * 24 * 60 * 60 * 1000));
-        const dateKey = d.toISOString().split('T')[0];
-        const monthDay = `${d.getMonth() + 1}/${d.getDate()}`;
+        const dateKey = getDashboardKSTDateString(i);
+        const parts = dateKey.split('-');
+        const monthDay = `${parseInt(parts[1], 10)}/${parseInt(parts[2], 10)}`;
         labels.push(monthDay);
 
-        let pv = (viewsMap && viewsMap[dateKey]) !== undefined ? viewsMap[dateKey] : 0;
-        let uv = (uvMap && uvMap[dateKey]) !== undefined ? uvMap[dateKey] : 0;
-
-        if (pv === 0 && i > 0) {
-          const baseNoise = ((i * 7 + 13) % 11) + 4;
-          pv = baseNoise;
-          uv = Math.max(1, Math.round(baseNoise * 0.4));
-        }
+        const pv = (viewsMap && viewsMap[dateKey] !== undefined) ? Number(viewsMap[dateKey]) : 0;
+        const uv = (uvMap && uvMap[dateKey] !== undefined) ? Number(uvMap[dateKey]) : 0;
 
         pvData.push(pv);
         uvData.push(uv);
-      }
-
-      const todayKey = now.toISOString().split('T')[0];
-      if (viewsMap && viewsMap[todayKey] !== undefined && viewsMap[todayKey] > 0) {
-        pvData[pvData.length - 1] = viewsMap[todayKey];
-      }
-      if (uvMap && uvMap[todayKey] !== undefined && uvMap[todayKey] > 0) {
-        uvData[uvData.length - 1] = uvMap[todayKey];
       }
 
       return { labels, pvData, uvData };
@@ -2283,9 +2281,11 @@
       const canvas = document.getElementById('trafficTimeSeriesChart');
       if (!canvas || typeof Chart === 'undefined') return;
 
-      const analyticsData = (window.DMDG_Analytics && typeof window.DMDG_Analytics.getLocalAnalyticsData === 'function')
-        ? window.DMDG_Analytics.getLocalAnalyticsData()
-        : { dailyViewsMap: {}, dailyUVMap: {}, todayViews: 54, todayUV: 7, totalViews: 86, totalUV: 13 };
+      const analyticsData = (window.DMDG_Analytics && typeof window.DMDG_Analytics.getLatestAnalyticsData === 'function')
+        ? window.DMDG_Analytics.getLatestAnalyticsData()
+        : (window.DMDG_Analytics && typeof window.DMDG_Analytics.getLocalAnalyticsData === 'function')
+          ? window.DMDG_Analytics.getLocalAnalyticsData()
+          : { dailyViewsMap: {}, dailyUVMap: {}, todayViews: 54, todayUV: 7, totalViews: 86, totalUV: 13 };
 
       const viewsMap = analyticsData.dailyViewsMap || {};
       const uvMap = analyticsData.dailyUVMap || {};
@@ -3701,10 +3701,8 @@
       if (!tbody) return;
 
       const days = [];
-      const now = new Date();
       for (let i = 0; i < 7; i++) {
-        const d = new Date(now.getTime() - (i * 24 * 60 * 60 * 1000));
-        days.push(d.toISOString().split('T')[0]);
+        days.push(getDashboardKSTDateString(i));
       }
 
       let totalInPeriod = 0;
@@ -3748,23 +3746,28 @@
       tbody.innerHTML = html;
     }
 
-    function refreshAnalyticsData() {
+    async function refreshAnalyticsData() {
       let data = null;
-      if (window.DMDG_Analytics && typeof window.DMDG_Analytics.getLocalAnalyticsData === 'function') {
-        data = window.DMDG_Analytics.getLocalAnalyticsData();
+      if (window.DMDG_Analytics && typeof window.DMDG_Analytics.fetchLatestAnalytics === 'function') {
+        data = await window.DMDG_Analytics.fetchLatestAnalytics();
+      } else if (window.DMDG_Analytics && typeof window.DMDG_Analytics.getLatestAnalyticsData === 'function') {
+        data = window.DMDG_Analytics.getLatestAnalyticsData();
       }
       if (data) {
         renderAnalyticsUI(data);
       } else {
         initAnalyticsMonitoring();
       }
-      alert('접속 통계가 실시간으로 동기화되었습니다.');
+      alert('접속 통계가 Firestore 실시간 데이터로 동기화되었습니다.');
     }
 
     function simulateVisitorView() {
       let updatedData = null;
       if (window.DMDG_Analytics && typeof window.DMDG_Analytics.simulateVisit === 'function') {
-        updatedData = window.DMDG_Analytics.simulateVisit();
+        window.DMDG_Analytics.simulateVisit();
+        updatedData = typeof window.DMDG_Analytics.getLatestAnalyticsData === 'function'
+          ? window.DMDG_Analytics.getLatestAnalyticsData()
+          : window.DMDG_Analytics.getLocalAnalyticsData();
       } else if (window.DMDG_Analytics && typeof window.DMDG_Analytics.recordVisit === 'function') {
         updatedData = window.DMDG_Analytics.recordVisit();
       }

@@ -15,10 +15,80 @@
   const BASELINE_TOTAL_UV = 13;
   const BASELINE_TODAY_UV = 7;
 
+  let LATEST_CLOUD_ANALYTICS = null;
+
   function getKSTDateString(daysOffset = 0) {
     const now = new Date();
     const target = new Date(now.getTime() + (9 * 60 * 60 * 1000) - (daysOffset * 24 * 60 * 60 * 1000));
     return target.toISOString().split('T')[0];
+  }
+
+  /**
+   * Merge both nested Firestore maps (`data.daily_views['2026-11-11']`)
+   * and literal dotted top-level keys (`data['daily_views.2026-11-11']` created by `.set({merge:true})`).
+   */
+  function readMetricMap(docData, prefix) {
+    const out = {};
+    if (!docData || typeof docData !== 'object') return out;
+
+    const nested = docData[prefix];
+    if (nested && typeof nested === 'object') {
+      Object.keys(nested).forEach(k => {
+        const val = Number(nested[k]);
+        if (!Number.isNaN(val)) out[k] = val;
+      });
+    }
+
+    const dottedPrefix = `${prefix}.`;
+    Object.keys(docData).forEach(k => {
+      if (k.startsWith(dottedPrefix)) {
+        const subKey = k.slice(dottedPrefix.length);
+        const val = Number(docData[k]);
+        if (!Number.isNaN(val)) {
+          out[subKey] = (out[subKey] || 0) + val;
+        }
+      }
+    });
+    return out;
+  }
+
+  function buildCloudSnapshot(data) {
+    const today = getKSTDateString(0);
+    const localFallback = getLocalAnalyticsData();
+
+    const cloudDailyViews = readMetricMap(data, 'daily_views');
+    const cloudDailyUV = readMetricMap(data, 'daily_uv');
+    const cloudAppClicks = readMetricMap(data, 'app_clicks');
+
+    const rawTotalViews = data.total_views !== undefined ? Number(data.total_views) : localFallback.totalViews;
+    const rawTotalUV = data.total_uv !== undefined ? Number(data.total_uv) : localFallback.totalUV;
+    const rawTodayViews = cloudDailyViews[today] !== undefined ? cloudDailyViews[today] : 0;
+    const rawTodayUV = cloudDailyUV[today] !== undefined ? cloudDailyUV[today] : 0;
+
+    const dailyViewsMap = {};
+    const dailyUVMap = {};
+    Object.keys(cloudDailyViews).forEach(dateKey => {
+      dailyViewsMap[dateKey] = cloudDailyViews[dateKey];
+    });
+    Object.keys(cloudDailyUV).forEach(dateKey => {
+      dailyUVMap[dateKey] = cloudDailyUV[dateKey];
+    });
+    for (let i = 0; i < 30; i++) {
+      const dStr = getKSTDateString(i);
+      if (dailyViewsMap[dStr] === undefined) dailyViewsMap[dStr] = i === 0 ? rawTodayViews : 0;
+      if (dailyUVMap[dStr] === undefined) dailyUVMap[dStr] = i === 0 ? rawTodayUV : 0;
+    }
+
+    return {
+      source: 'firestore',
+      totalViews: rawTotalViews,
+      todayViews: rawTodayViews,
+      totalUV: rawTotalUV,
+      todayUV: rawTodayUV,
+      dailyViewsMap,
+      dailyUVMap,
+      appClicks: cloudAppClicks
+    };
   }
 
   // Initialize or fetch current local analytics state
@@ -37,25 +107,23 @@
       localStorage.setItem(`dmdg_daily_views_${today}`, todayViews.toString());
     }
 
-    // Build 7-day maps
+    const totalUV = parseInt(localStorage.getItem('dmdg_total_uv') || BASELINE_TOTAL_UV.toString(), 10);
+    const todayUV = parseInt(localStorage.getItem(`dmdg_daily_uv_${today}`) || BASELINE_TODAY_UV.toString(), 10);
+
+    // Build 7-day maps without fabricated 0.25 multipliers so KPI === Table
     const dailyViewsMap = {};
     const dailyUVMap = {};
 
     for (let i = 0; i < 7; i++) {
       const dStr = getKSTDateString(i);
-      const stored = localStorage.getItem(`dmdg_daily_views_${dStr}`);
-      let v = stored ? parseInt(stored, 10) : 0;
-      if (i === 0) {
-        v = todayViews;
-      }
-      dailyViewsMap[dStr] = v;
-      dailyUVMap[dStr] = stored ? Math.max(1, Math.round(v * 0.25)) : (i === 0 ? BASELINE_TODAY_UV : 0);
+      const storedViews = localStorage.getItem(`dmdg_daily_views_${dStr}`);
+      const storedUV = localStorage.getItem(`dmdg_daily_uv_${dStr}`);
+      dailyViewsMap[dStr] = i === 0 ? todayViews : (storedViews ? parseInt(storedViews, 10) : 0);
+      dailyUVMap[dStr] = i === 0 ? todayUV : (storedUV ? parseInt(storedUV, 10) : 0);
     }
 
-    const totalUV = parseInt(localStorage.getItem('dmdg_total_uv') || BASELINE_TOTAL_UV.toString(), 10);
-    const todayUV = parseInt(localStorage.getItem(`dmdg_daily_uv_${today}`) || BASELINE_TODAY_UV.toString(), 10);
-
     return {
+      source: 'local',
       totalViews,
       todayViews,
       totalUV,
@@ -63,6 +131,10 @@
       dailyViewsMap,
       dailyUVMap
     };
+  }
+
+  function getLatestAnalyticsData() {
+    return LATEST_CLOUD_ANALYTICS || getLocalAnalyticsData();
   }
 
   // Record a page view (called on page load or F5)
@@ -145,13 +217,28 @@
     }
   }
 
+  // Fetch fresh real-time snapshot from Firestore
+  async function fetchLatestAnalytics() {
+    if (!window.firestore) return getLatestAnalyticsData();
+    try {
+      const doc = await window.firestore.collection(ANALYTICS_COLLECTION).doc(ANALYTICS_DOC).get();
+      if (doc && doc.exists) {
+        LATEST_CLOUD_ANALYTICS = buildCloudSnapshot(doc.data() || {});
+        return LATEST_CLOUD_ANALYTICS;
+      }
+    } catch (err) {
+      console.warn('Firestore fetch notice:', err.message);
+    }
+    return getLatestAnalyticsData();
+  }
+
   // Subscribe callback (feeds local data, then synchronizes 100% pure real Firestore data)
   function subscribeAnalytics(callback) {
     if (typeof callback !== 'function') return () => {};
 
-    // 1. Immediate call with local baseline
-    const localData = getLocalAnalyticsData();
-    callback(localData);
+    // 1. Immediate call with latest known snapshot
+    const initialData = getLatestAnalyticsData();
+    callback(initialData);
 
     // 2. Pure Firestore real-time listener
     if (window.firestore) {
@@ -159,33 +246,8 @@
         return window.firestore.collection(ANALYTICS_COLLECTION).doc(ANALYTICS_DOC)
           .onSnapshot(doc => {
             if (doc && doc.exists) {
-              const data = doc.data() || {};
-              const today = getKSTDateString(0);
-              
-              const rawTotalViews = data.total_views !== undefined ? data.total_views : localData.totalViews;
-              const rawTotalUV = data.total_uv !== undefined ? data.total_uv : localData.totalUV;
-              const cloudDailyViews = data.daily_views || {};
-              const cloudDailyUV = data.daily_uv || {};
-              const rawTodayViews = cloudDailyViews[today] !== undefined ? cloudDailyViews[today] : localData.todayViews;
-              const rawTodayUV = cloudDailyUV[today] !== undefined ? cloudDailyUV[today] : localData.todayUV;
-
-              const dailyViewsMap = {};
-              const dailyUVMap = {};
-              for (let i = 0; i < 7; i++) {
-                const dStr = getKSTDateString(i);
-                dailyViewsMap[dStr] = cloudDailyViews[dStr] !== undefined ? cloudDailyViews[dStr] : (i === 0 ? rawTodayViews : 0);
-                dailyUVMap[dStr] = cloudDailyUV[dStr] !== undefined ? cloudDailyUV[dStr] : (i === 0 ? rawTodayUV : 0);
-              }
-
-              callback({
-                totalViews: rawTotalViews,
-                todayViews: rawTodayViews,
-                totalUV: rawTotalUV,
-                todayUV: rawTodayUV,
-                dailyViewsMap: dailyViewsMap,
-                dailyUVMap: dailyUVMap,
-                appClicks: data.app_clicks || {}
-              });
+              LATEST_CLOUD_ANALYTICS = buildCloudSnapshot(doc.data() || {});
+              callback(LATEST_CLOUD_ANALYTICS);
             }
           }, err => {
             console.warn('Firestore snapshot notice:', err.message);
@@ -202,6 +264,8 @@
     simulateVisit: simulateVisit,
     recordAppClick: recordAppClick,
     getLocalAnalyticsData: getLocalAnalyticsData,
+    getLatestAnalyticsData: getLatestAnalyticsData,
+    fetchLatestAnalytics: fetchLatestAnalytics,
     subscribeAnalytics: subscribeAnalytics,
     getKSTDateString: getKSTDateString
   };
