@@ -23,8 +23,8 @@
 
   <!-- Core CSS (Cache Busting v4 - 5 cards limit) -->
   <!-- 16:9 Ambient Aurora Glassmorphism Masterpiece Theme -->
-  <link rel="stylesheet" href="./style.css?v=20261021_5cards_limit">
-  <link rel="stylesheet" href="./aurora_theme.css?v=20261111_mobile_960">
+  <link rel="stylesheet" href="./style.css?v=20261111_c109d30_restored">
+
   <!-- Firebase & Real-time Analytics SDK (Non-blocking defer) -->
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -32,7 +32,7 @@
   <script defer src="js/analytics.js"></script>
 </head>
 
-<body class="aurora-portal-body">
+<body>
   <script>console.log('>>> BODY STARTED <<<');</script>
 
   <!-- =======================================================================
@@ -77,842 +77,11 @@
        Top Header (Mockup 1 & 3 Navigation Bar)
        ======================================================================= -->
 
-  <div class="portal-main-wrapper">
-    <!-- ── 0. Top Header ──────────────────────────────────────── -->
-    <header class="portal-top-header">
-      <a href="./index.html" class="header-brand-wrap" title="DMDG LIVE 포털 홈">
-        <img src="./assets/dmdg_logo_emblem.png" alt="DMDG 당목담글 정통 엠블럼" class="brand-emblem-circle">
-        <div class="brand-title-box">
-          <span class="brand-title-dmdg">DMDG</span>
-          <span class="brand-title-platform">Platform</span>
-        </div>
-      </a>
-
-      <!-- Real-time Live Search Input -->
-      <div class="portal-search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="liveSearchInput" placeholder="서비스, 시뮬레이터, 도서 실시간 검색...">
-      </div>
-
-      <!-- Quick Navigation Buttons (일반 방문자 / 관리자 모드 동적 전환) -->
-      <nav class="portal-header-nav" id="portalHeaderNav">
-        <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn"
-          style="border-color: #f59e0b; color: #fde68a;">🗣️ 말쌈관</a>
-        <a href="./novels.html" class="nav-pill-btn" style="border-color: #38bdf8; color: #bae6fd;">📖 서재관</a>
-        <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn"
-          style="border-color: #9333ea; color: #e9d5ff;">📚 위키북스</a>
-        <button type="button" onclick="openCareerModal()" class="nav-pill-btn"
-          style="border-color: #06b6d4; color: #a5f3fc;">🎯 직무진단</button>
-        <a href="./voice.html" class="nav-pill-btn" style="border-color: #ec4899; color: #f472b6;">🎙️ 마음잇기</a>
-        <!-- 관리자 전용 보안 관제 센터 버튼 -->
-        <button type="button" onclick="promptAdminAccess()" class="nav-pill-btn active-glow"
-          style="border-color: #38bdf8; color: #38bdf8;" title="최고 관리자 전용 관제 센터">🔒 Admin</button>
-      </nav>
-    </header>
-
-    <!-- ── 1. Hero Audio Studio ──────────────────────────────── -->
-    <section class="hero-audio-studio-card">
-      <div class="studio-badge-label">🎧 7대 핵심 플랫폼 앰비언트 사운드 & Prompt 쇼케이스</div>
-      <h1 class="studio-main-slogan">기술과 사람의 마음을 잇는 세상에서 가장 따뜻한 목소리 플랫폼</h1>
-      <p class="studio-slogan-en">Connecting technology and the human heart – The warmest voice platform.</p>
-      <p style="text-align: center; font-size: 0.88rem; color: #94a3b8; margin: 0 auto 1.25rem; max-width: 680px;">
-        원하는 탭을 클릭해 각 서비스의 음향 테마와 감성 Prompt를 미리 듣고, 아래 바로가기 버튼으로 직접 입장하세요.
-      </p>
-
-      <!-- 7-Relay Tabs -->
-      <div class="studio-tabs-row">
-        <button class="studio-tab-btn active" onclick="switchRelayTab('voice', event)">🎙️ 마음잇기</button>
-        <button class="studio-tab-btn" onclick="switchRelayTab('sodam', event)">🌸 소담</button>
-        <button class="studio-tab-btn" onclick="switchRelayTab('malssam', event)">🗣️ 말쌈</button>
-        <button class="studio-tab-btn" onclick="switchRelayTab('novels', event)">📖 서재</button>
-        <button class="studio-tab-btn" onclick="switchRelayTab('aces', event)">🎯 ACES</button>
-        <button class="studio-tab-btn" onclick="switchRelayTab('techlib', event)">📚 기술도서관</button>
-        <button class="studio-tab-btn" onclick="switchRelayTab('blog', event)">📝 공식블로그</button>
-      </div>
-
-      <!-- 60fps Sunset Wave Canvas & Ambient Quote Card -->
-      <div class="wave-quote-container">
-        <div class="wave-canvas-wrap">
-          <canvas id="sunsetWaveCanvas" width="720" height="120"
-            style="width: 100%; height: 100%; display: block;"></canvas>
-        </div>
-        <div class="quote-ambient-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div class="quote-label" id="heroRelayLabel">Sample Prompt:</div>
-            <p class="quote-text" id="heroRelayText">“마음을 전하는 목소리,<br>따뜻함을 나누는 시간…”</p>
-          </div>
-          <div style="margin-top: 0.75rem;">
-            <a href="./voice.html" id="heroRelayDirectBtn" class="pill-action-btn pill-pink" style="display: inline-flex; text-decoration: none; padding: 0.45rem 1rem; font-size: 0.82rem; font-weight: 800; border-radius: 8px; width: 100%; justify-content: center;">
-              <span>🎙️ 마음잇기 웹앱 바로가기 ➔</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Studio Wave Controls (대표님 직관적 명세 100% 반영) -->
-      <!-- Studio Wave Controls (대표님 직관적 명세 100% 반영: Play=오른쪽문구낭독, 가운데마이크=녹음시작/완료, Replay=녹음내용다시듣기) -->
-      <div class="studio-wave-controls">
-        <button class="ctrl-btn" id="btnWavePlayPause" onclick="toggleHeroWave()" title="오른쪽 Prompt 문구를 실제 한국어 음성으로 낭독합니다">
-          <span class="ctrl-icon">▶</span>
-          <div class="ctrl-label-box">
-            <span class="ctrl-main-text">Play</span>
-            <span class="ctrl-sub-desc">우측 문구 낭독</span>
-          </div>
-        </button>
-
-        <button class="ctrl-mic-big" id="btnHeroMic" title="클릭하여 내 목소리 녹음 시작 / 완료" onclick="toggleHeroRecording()">
-          <span class="mic-icon">🎙️</span>
-          <span class="mic-badge" id="heroMicBadge">녹음 시작</span>
-        </button>
-
-        <button class="ctrl-btn" id="btnWaveReplay" onclick="replayHeroWave()" title="방금 녹음한 내 목소리를 다시 듣습니다">
-          <span class="ctrl-icon">🔄</span>
-          <div class="ctrl-label-box">
-            <span class="ctrl-main-text">Replay</span>
-            <span class="ctrl-sub-desc">내 목소리 다시듣기</span>
-          </div>
-        </button>
-      </div>
-
-      <!-- 3대 컨트롤 역할 직관 가이드 팁바 -->
-      <div class="flex items-center justify-center gap-4 text-[12px] text-slate-400 mt-3 px-4 py-1.5 rounded-full bg-slate-900/60 border border-slate-800/80 mx-auto max-w-xl">
-        <span class="flex items-center gap-1.5"><strong class="text-amber-400">▶ Play:</strong> 우측 Prompt 낭독</span>
-        <span class="text-slate-600">|</span>
-        <span class="flex items-center gap-1.5"><strong class="text-rose-400">🎙️ 마이크:</strong> 내 목소리 녹음</span>
-        <span class="text-slate-600">|</span>
-        <span class="flex items-center gap-1.5"><strong class="text-emerald-400">🔄 Replay:</strong> 녹음 내용 다시듣기</span>
-      </div>
-      <p style="font-size: 0.76rem; color: #94a3b8; margin: 0.55rem auto 0; text-align: center;">
-        📱 아이폰(iOS)에서 낭독 소리가 들리지 않으면 <strong>측면 무음(진동) 스위치를 해제</strong>하거나 <strong>알림/미디어 소리</strong>를 켜주세요.
-      </p>
-    </section>
-
-    <!-- ── 2. Karaoke & 4 Action Buttons Card (독립 레이어, 잔상 0%) ──── -->
-    <section class="karaoke-action-card">
-      <div class="karaoke-word-box" id="karaokeTextBox">
-        나의 다정한 한마디 <span class="neon-pink-highlight">[ 목소리가, ]</span> 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.
-      </div>
-      <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
-        <a href="./voice.html" class="pill-action-btn pill-pink flex items-center gap-2 px-6 py-2.5 text-sm font-bold shadow-lg shadow-pink-500/20 hover:scale-105 transition-all">
-          <span>🎙️</span> 마음잇기 보이스 릴레이 전체 녹음 &amp; 오디오북 참여하기 ➔
-        </a>
-      </div>
-    </section>
-
-    <!-- ── 100% 무결점 60fps Sunset Glow 오디오 캔버스 & 가라오케 사운드 엔진 ── -->
-    <script>
-      // 1. Web Audio API 사운드 신디사이저 (맑고 따뜻한 차임 & 화음 멜로디)
-      let webAudioCtx = null;
-      function getAudioCtx() {
-        if (!webAudioCtx) {
-          const AC = window.AudioContext || window.webkitAudioContext;
-          if (AC) webAudioCtx = new AC();
-        }
-        if (webAudioCtx && webAudioCtx.state === 'suspended') {
-          webAudioCtx.resume();
-        }
-        return webAudioCtx;
-      }
-
-      function playTone(freq, duration, gainVal = 0.12) {
-        try {
-          const ctx = getAudioCtx();
-          if (!ctx) return;
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, ctx.currentTime);
-          gain.gain.setValueAtTime(gainVal, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start();
-          osc.stop(ctx.currentTime + duration);
-        } catch (e) { }
-      }
-
-      function playWarmMelody() {
-        const notes = [261.63, 329.63, 392.00, 523.25, 587.33]; // C, E, G, C, D
-        notes.forEach((f, i) => {
-          setTimeout(() => playTone(f, 0.45, 0.1), i * 180);
-        });
-      }
-
-      // 2. 60fps Sunset Glow 캔버스 렌더러 (절대 죽지 않는 100% 무적 엔진)
-      window.heroWavePlaying = true;
-      window.heroWaveIntensity = 1.0;
-      window.heroWavePhase = 0;
-      window.heroWaveTheme = 'sunset';
-
-      (function initCanvasEngine() {
-        const cv = document.getElementById('sunsetWaveCanvas');
-        if (!cv) return;
-        const ctx = cv.getContext('2d');
-        if (!ctx) return;
-
-        function resize() {
-          const w = cv.parentElement ? cv.parentElement.clientWidth : 720;
-          cv.width = w > 100 ? w : 720;
-          cv.height = 120;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        function drawFrame() {
-          try {
-            const w = cv.width || 720;
-            const h = cv.height || 120;
-            ctx.clearRect(0, 0, w, h);
-
-            const cy = h / 2;
-            const bars = 48;
-            const bw = Math.max(4, (w / bars) * 0.52);
-            const gap = Math.max(3, (w / bars) * 0.48);
-
-            // 5중 그라디언트 테마
-            const grad = ctx.createLinearGradient(0, cy - 45, 0, cy + 45);
-            if (window.heroWaveTheme === 'sunset') {
-              grad.addColorStop(0, '#f59e0b');
-              grad.addColorStop(0.5, '#ec4899');
-              grad.addColorStop(1, '#8b5cf6');
-            } else if (window.heroWaveTheme === 'emerald') {
-              grad.addColorStop(0, '#34d399');
-              grad.addColorStop(0.5, '#06b6d4');
-              grad.addColorStop(1, '#3b82f6');
-            } else {
-              grad.addColorStop(0, '#a855f7');
-              grad.addColorStop(0.5, '#f43f5e');
-              grad.addColorStop(1, '#f59e0b');
-            }
-            ctx.fillStyle = grad;
-
-            for (let i = 0; i < bars; i++) {
-              const x = i * (bw + gap) + gap / 2;
-              let amp;
-              if (window.heroWavePlaying) {
-                amp = (0.35 + 0.55 * Math.sin(window.heroWavePhase + i * 0.18) * Math.cos(window.heroWavePhase * 0.8 + i * 0.08)) * window.heroWaveIntensity;
-              } else {
-                amp = 0.18 + 0.08 * Math.sin(i * 0.35);
-              }
-              amp = Math.max(0.12, Math.min(1.45, amp));
-              const bh = Math.max(8, amp * (h * 0.74));
-              const y = cy - bh / 2;
-
-              // 무결점 직사각형 바 렌더링 (절대 에러 없음)
-              ctx.fillRect(x, y, bw, bh);
-            }
-
-            if (window.heroWavePlaying) {
-              window.heroWavePhase += 0.045;
-            }
-          } catch (e) {
-            console.warn('Canvas render notice:', e);
-          }
-          requestAnimationFrame(drawFrame);
-        }
-        requestAnimationFrame(drawFrame);
-
-        cv.onclick = function () { window.toggleHeroWave(); };
-      })();
-
-      // 3. 7-Relay Hero Audio Studio 3대 버튼 엔진 (대표님 직관적 명세 100% 구현)
-      let heroPromptSpeaking = false;
-      const HERO_PLAY_BTN_HTML = '<span class="ctrl-icon">▶</span><div class="ctrl-label-box"><span class="ctrl-main-text">Play</span><span class="ctrl-sub-desc">우측 문구 낭독</span></div>';
-      const HERO_PAUSE_BTN_HTML = '<span class="ctrl-icon">⏸</span><div class="ctrl-label-box"><span class="ctrl-main-text">Pause</span><span class="ctrl-sub-desc">낭독 중지</span></div>';
-
-      // 1) Play 버튼: 오른쪽 Prompt 문구를 실제 한국어 음성(TTS)으로 낭독
-      window.toggleHeroWave = function () {
-        const btn = document.getElementById('btnWavePlayPause');
-        const txtEl = document.getElementById('heroRelayText');
-        const textToRead = txtEl ? txtEl.textContent.replace(/“|”/g, '').trim() : "마음을 전하는 목소리, 따뜻함을 나누는 시간입니다.";
-
-        if (heroPromptSpeaking) {
-          if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-          heroPromptSpeaking = false;
-          window.heroWaveIntensity = 1.0;
-          if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
-          return;
-        }
-
-        heroPromptSpeaking = true;
-        window.heroWavePlaying = true;
-        window.heroWaveIntensity = 1.6;
-        if (btn) btn.innerHTML = HERO_PAUSE_BTN_HTML;
-        playTone(523.25, 0.15);
-
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
-          const utt = new SpeechSynthesisUtterance(textToRead);
-          utt.lang = 'ko-KR';
-          utt.rate = 0.95;
-          utt.onend = () => {
-            heroPromptSpeaking = false;
-            window.heroWaveIntensity = 1.0;
-            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
-          };
-          utt.onerror = () => {
-            heroPromptSpeaking = false;
-            window.heroWaveIntensity = 1.0;
-            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
-          };
-          window.speechSynthesis.speak(utt);
-        } else {
-          setTimeout(() => {
-            heroPromptSpeaking = false;
-            window.heroWaveIntensity = 1.0;
-            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
-          }, 3500);
-        }
-      };
-
-      // 2) Replay 버튼: 방금 녹음한 내 목소리(녹음 내용)를 다시 듣기
-      window.replayHeroWave = function () {
-        const btn = document.getElementById('btnWaveReplay');
-        if (btn) btn.style.boxShadow = '0 0 20px rgba(52, 211, 153, 0.8)';
-        window.handlePlaybackAndRetry();
-        setTimeout(() => { if (btn) btn.style.boxShadow = ''; }, 2000);
-      };
-
-      // 3) 가운데 마이크 버튼: 내 목소리 녹음 시작 / 완료
-      window.toggleHeroRecording = function () {
-        window.handleMicRecordToggle();
-      };
-
-      const RELAY_QUOTES_DATA = {
-        'voice': {
-          label: '마음잇기 보이스 Prompt:',
-          text: '“마음을 전하는 목소리, 따뜻함을 나누는 시간…”',
-          theme: 'sunset',
-          btnText: '🎙️ 마음잇기 웹앱 바로가기 ➔',
-          btnUrl: './voice.html',
-          isExternal: false
-        },
-        'sodam': {
-          label: '소담 힐링 Prompt:',
-          text: '“지친 마음에 따스한 온기를 건네는 포근한 힐링 대화…”',
-          theme: 'emerald',
-          btnText: '🌸 소담 라이브 바로가기 ➔',
-          btnUrl: 'https://dmdg-ut.web.app/sodam-web/',
-          isExternal: true
-        },
-        'malssam': {
-          label: '말쌈 우리말 사전 Prompt:',
-          text: '“세대와 국경을 넘어 바른 우리말로 잇는 소통의 다리…”',
-          theme: 'cyber',
-          btnText: '🗣️ 말쌈 PWA 사전 바로가기 ➔',
-          btnUrl: 'https://dmdg-malssam.web.app/',
-          isExternal: true
-        },
-        'novels': {
-          label: 'DMDG 서재관 Prompt:',
-          text: '“다국어와 AI 오디오 낭독으로 감상하는 DMDG 팩션 소설…”',
-          theme: 'sunset',
-          btnText: '📖 서재관 소설·오디오북 읽기 ➔',
-          btnUrl: './novels.html',
-          isExternal: false
-        },
-        'aces': {
-          label: 'A.C.E.S 직무진단 Prompt:',
-          text: '“LG CNS/빅데이터 역량 정량화와 최적 IT/AI 커리어 패스…”',
-          theme: 'emerald',
-          btnText: '🎯 직무 추천 진단 시작하기 ➔',
-          btnUrl: 'javascript:openCareerModal()',
-          isExternal: false
-        },
-        'techlib': {
-          label: '위키북스 기술서적 Prompt:',
-          text: '“엔터프라이즈 AI 아키텍처와 LLMOps·리버스 엔지니어링 35권…”',
-          theme: 'cyber',
-          btnText: '📚 위키북스 기술서적 35권 보기 ➔',
-          btnUrl: './books.html',
-          isExternal: false
-        },
-        'blog': {
-          label: '위키독스 공식블로그 Prompt:',
-          text: '“기술과 사람을 잇는 당목담글의 성장과 릴리즈 스토리…”',
-          theme: 'sunset',
-          btnText: '📝 위키독스 공식블로그 방문 ➔',
-          btnUrl: 'https://wikidocs.net/blog/@dmdg',
-          isExternal: true
-        }
-      };
-
-      window.switchRelayTab = function (tabKey, evt) {
-        document.querySelectorAll('.studio-tab-btn').forEach(b => b.classList.remove('active'));
-        const el = (evt && evt.target) || (window.event && window.event.target);
-        if (el) el.classList.add('active');
-
-        const q = RELAY_QUOTES_DATA[tabKey] || RELAY_QUOTES_DATA['voice'];
-        const lbl = document.getElementById('heroRelayLabel');
-        const txt = document.getElementById('heroRelayText');
-        const btn = document.getElementById('heroRelayDirectBtn');
-
-        if (lbl) lbl.textContent = q.label;
-        if (txt) txt.innerHTML = `“${q.text.replace(/“|”/g, '')}”`;
-        if (btn) {
-          btn.innerHTML = `<span>${q.btnText}</span>`;
-          if (q.btnUrl.startsWith('javascript:')) {
-            btn.removeAttribute('href');
-            btn.onclick = function() { openCareerModal(); };
-          } else {
-            btn.onclick = null;
-            btn.href = q.btnUrl;
-            if (q.isExternal) {
-              btn.target = '_blank';
-              btn.rel = 'noopener noreferrer';
-            } else {
-              btn.removeAttribute('target');
-              btn.removeAttribute('rel');
-            }
-          }
-        }
-
-        window.heroWaveTheme = q.theme;
-        window.heroWaveIntensity = 1.4;
-        setTimeout(() => { window.heroWaveIntensity = 1.0; }, 1200);
-        playTone(659.25, 0.2);
-      };
-
-      // 4. 가라오케 낭독 · 마이크 녹음 · 다시 듣기 엔진
-      let ttsIsActive = false;
-      let micIsActive = false;
-      let micTimer = null;
-      let micSeconds = 0;
-      let karaokeAnimTimer = null;
-      let recordedSampleReady = false;
-
-      const KARAOKE_PHRASE = ["나의", "다정한", "한마디", "[ 목소리가, ]", "바다 건너", "한글을", "배우는", "이들에게", "따뜻한", "빛이 됩니다."];
-
-      function startKaraokeFlow() {
-        const box = document.getElementById('karaokeTextBox');
-        if (!box) return;
-        let step = 0;
-        clearInterval(karaokeAnimTimer);
-        karaokeAnimTimer = setInterval(() => {
-          let html = '';
-          KARAOKE_PHRASE.forEach((w, i) => {
-            if (i === (step % KARAOKE_PHRASE.length)) {
-              html += `<span class="neon-pink-highlight" style="display:inline-block; transform:scale(1.1); box-shadow: 0 0 20px #ec4899; color:#FFFFFF; border:1.5px solid #ec4899; border-radius:8px; padding:0.1rem 0.4rem; background:rgba(236,72,153,0.3);">${w}</span> `;
-            } else {
-              html += `<span style="color:#f8fafc;">${w}</span> `;
-            }
-          });
-          box.innerHTML = html.trim();
-          step++;
-        }, 380);
-      }
-
-      function stopKaraokeFlow() {
-        clearInterval(karaokeAnimTimer);
-        const box = document.getElementById('karaokeTextBox');
-        if (box) {
-          box.innerHTML = `나의 다정한 한마디 <span class="neon-pink-highlight">[ 목소리가, ]</span> 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.`;
-        }
-      }
-
-      // 4-1. 실제 음성 낭독 듣기 / 중단
-      window.handleTtsReadToggle = function () {
-        const btn = document.getElementById('btnTtsRead');
-        if (ttsIsActive) {
-          // 중단
-          ttsIsActive = false;
-          if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-          stopKaraokeFlow();
-          if (btn) {
-            btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
-            btn.style.borderColor = '';
-            btn.style.boxShadow = '';
-          }
-          window.heroWaveIntensity = 1.0;
-        } else {
-          // 재생
-          ttsIsActive = true;
-          window.heroWavePlaying = true;
-          window.heroWaveIntensity = 1.5;
-          startKaraokeFlow();
-          playWarmMelody();
-
-          if (btn) {
-            btn.innerHTML = '<span>⏹</span> 음성 낭독 중단하기 (재생 중)';
-            btn.style.borderColor = '#fbbf24';
-            btn.style.boxShadow = '0 0 20px rgba(251, 191, 36, 0.6)';
-          }
-
-          if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-            const utt = new SpeechSynthesisUtterance("나의 다정한 한마디 목소리가 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.");
-            utt.lang = 'ko-KR';
-            utt.rate = 0.92;
-            utt.onend = function () {
-              ttsIsActive = false;
-              stopKaraokeFlow();
-              if (btn) {
-                btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
-                btn.style.borderColor = '';
-                btn.style.boxShadow = '';
-              }
-              window.heroWaveIntensity = 1.0;
-            };
-            utt.onerror = function () {
-              setTimeout(() => {
-                ttsIsActive = false;
-                stopKaraokeFlow();
-                if (btn) {
-                  btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
-                  btn.style.borderColor = '';
-                  btn.style.boxShadow = '';
-                }
-                window.heroWaveIntensity = 1.0;
-              }, 4200);
-            };
-            window.speechSynthesis.speak(utt);
-          } else {
-            setTimeout(() => {
-              ttsIsActive = false;
-              stopKaraokeFlow();
-              if (btn) {
-                btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
-                btn.style.borderColor = '';
-                btn.style.boxShadow = '';
-              }
-              window.heroWaveIntensity = 1.0;
-            }, 4200);
-          }
-        }
-      };
-
-      // 4-2. 내 마이크 녹음 시작 ➔ 완료 (실제 브라우저 마이크 하드웨어 스트림 + 가상 폴백)
-      let realMediaRecorder = null;
-      let realAudioChunks = [];
-      let realRecordedAudioBlob = null;
-      let realRecordedAudioUrl = null;
-
-      window.handleMicRecordToggle = async function () {
-        const btn = document.getElementById('btnMicRecord');
-        const heroMic = document.getElementById('btnHeroMic');
-        const playBtn = document.getElementById('btnPlaybackLoop');
-
-        if (!micIsActive) {
-          // ── 녹음 시작
-          micIsActive = true;
-          playTone(659.25, 0.25); // Start Beep
-          window.heroWavePlaying = true;
-          window.heroWaveIntensity = 1.7;
-          startKaraokeFlow();
-
-          if (heroMic) heroMic.classList.add('recording-pulse');
-          if (btn) {
-            btn.style.borderColor = '#ef4444';
-            btn.style.boxShadow = '0 0 25px rgba(239, 68, 68, 0.7)';
-            btn.innerHTML = '<span>⏹</span> ⏺ 실제 마이크 녹음 중 (00:00)... 클릭 시 완료';
-          }
-
-          // 실제 하드웨어 마이크 스트림 시도
-          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            try {
-              const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-              realAudioChunks = [];
-              realMediaRecorder = new MediaRecorder(stream);
-              realMediaRecorder.ondataavailable = e => {
-                if (e.data.size > 0) realAudioChunks.push(e.data);
-              };
-              realMediaRecorder.onstop = () => {
-                realRecordedAudioBlob = new Blob(realAudioChunks, { type: 'audio/webm' });
-                realRecordedAudioUrl = URL.createObjectURL(realRecordedAudioBlob);
-              };
-              realMediaRecorder.start();
-            } catch (err) {
-              console.log('실제 마이크 권한 제약 또는 file:// 프로토콜 환경 (가상 녹음 가동):', err.message);
-            }
-          }
-
-          micSeconds = 0;
-          clearInterval(micTimer);
-          micTimer = setInterval(() => {
-            micSeconds++;
-            const s = micSeconds < 10 ? '0' + micSeconds : micSeconds;
-            if (btn) btn.innerHTML = `<span>⏹</span> ⏺ 실제 마이크 녹음 중 (00:${s})... 클릭 시 완료`;
-            playTone(330, 0.05, 0.04);
-          }, 1000);
-
-        } else {
-          // ── 녹음 완료
-          micIsActive = false;
-          clearInterval(micTimer);
-          stopKaraokeFlow();
-          playTone(880, 0.35, 0.2); // Finish Chime
-          window.heroWaveIntensity = 1.0;
-          recordedSampleReady = true;
-
-          if (realMediaRecorder && realMediaRecorder.state !== 'inactive') {
-            try {
-              realMediaRecorder.stop();
-              if (realMediaRecorder.stream) realMediaRecorder.stream.getTracks().forEach(t => t.stop());
-            } catch (e) { }
-          }
-
-          if (heroMic) heroMic.classList.remove('recording-pulse');
-          if (btn) {
-            btn.style.borderColor = '';
-            btn.style.boxShadow = '';
-            btn.innerHTML = '<span>🎤</span> 내 마이크 녹음 시작 ➔ ⏹ 완료';
-          }
-
-          if (playBtn) {
-            playBtn.style.borderColor = '#34d399';
-            playBtn.style.boxShadow = '0 0 25px rgba(52, 211, 153, 0.8)';
-            playBtn.innerHTML = '<span>🎧</span> 방금 녹음한 내 목소리 다시 듣기 (준비완료) ➔';
-          }
-        }
-      };
-
-      // 4-3. 내 목소리 다시 듣기 & 다시 녹음
-      window.handlePlaybackAndRetry = function () {
-        const btn = document.getElementById('btnPlaybackLoop');
-        window.heroWavePlaying = true;
-        window.heroWaveIntensity = 1.5;
-        startKaraokeFlow();
-
-        if (btn) {
-          btn.innerHTML = '<span>🔊</span> 내 목소리 재생 중...';
-          btn.style.borderColor = '#34d399';
-          btn.style.boxShadow = '0 0 25px rgba(52, 211, 153, 0.8)';
-        }
-
-        function finish() {
-          stopKaraokeFlow();
-          window.heroWaveIntensity = 1.0;
-          if (btn) {
-            btn.innerHTML = '<span>🎧</span> 내 목소리 다시 듣기 & 🔄 다시 녹음';
-            btn.style.borderColor = '';
-            btn.style.boxShadow = '';
-          }
-        }
-
-        // 실제 마이크 녹음된 음성 파일이 있는 경우
-        if (realRecordedAudioUrl) {
-          const audio = new Audio(realRecordedAudioUrl);
-          audio.onended = finish;
-          audio.onerror = () => { fallbackPlay(); };
-          audio.play().catch(() => { fallbackPlay(); });
-        } else {
-          fallbackPlay();
-        }
-
-        function fallbackPlay() {
-          playWarmMelody();
-          if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-            const utt = new SpeechSynthesisUtterance("나의 다정한 한마디 목소리가 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.");
-            utt.lang = 'ko-KR';
-            utt.rate = 0.95;
-            utt.onend = finish;
-            utt.onerror = finish;
-            window.speechSynthesis.speak(utt);
-          } else {
-            setTimeout(finish, 3800);
-          }
-        }
-      };
-    </script>
-
-    <!-- ── 3. A.C.E.S Neon Banner ────────────────────────────── -->
-    <section class="aces-neon-banner">
-      <div class="aces-banner-info">
-        <div class="aces-badges-wrap">
-          <span class="badge-premier">🎯 AI Premier Service</span>
-          <span class="badge-promo">🎁 2026 무료 체험 프로모션 (2027년 유료 전환)</span>
-        </div>
-        <h2 class="aces-banner-title">A.C.E.S 6대 IT/AI 직무 추천 & 역량 진단 대시보드</h2>
-        <p class="aces-banner-desc">DMDG 7대 공인 평가(기초 4대 + 심화 3대 · 490문항) 결과 기반 구직자 역량 정량화 및 최적 IT/AI 직무 맞춤형 추천 솔루션</p>
-      </div>
-      <button type="button" onclick="openCareerModal()" class="aces-banner-action-btn">
-        <span>🚀 직무 추천 진단 시작하기 ➔</span>
-      </button>
-    </section>
-
-    <!-- ── 4. Services 3-Column Grid ─────────────────────────── -->
-    <section class="services-3col-grid">
-      <!-- 1열: Live Web Apps (에메랄드 그린 반투명 글래스) -->
-      <div class="service-column-card col-live-apps">
-        <div class="column-header-row">
-          <h3 class="column-title">Live Web Apps</h3>
-          <a href="./novels.html" class="col-view-all-btn">전체보기 ➔</a>
-        </div>
-        <div class="item-list-wrap">
-          <!-- 1. 마음잇기 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🎙️ 마음잇기 (당목담글 보이스)</span>
-              <span class="item-sub-desc">외국인 발음 교정 & 목소리 릴레이</span>
-            </div>
-            <a href="./voice.html" class="item-action-btn btn-green-action">View ➔</a>
-          </div>
-          <!-- 2. 소담 라이브 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🌸 소담 라이브 (Sodam Live)</span>
-              <span class="item-sub-desc">감성 치유 및 따뜻한 힐링 웹</span>
-            </div>
-            <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer"
-              class="item-action-btn btn-green-action">View ➔</a>
-          </div>
-          <!-- 3. DMDG 서재 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">📖 DMDG 서재 (eBook&오디오)</span>
-              <span class="item-sub-desc">DMDG Master 팩션 소설 & AI 낭독</span>
-            </div>
-            <a href="./novels.html" class="item-action-btn btn-green-action">View ➔</a>
-          </div>
-          <!-- 4. 말쌈 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🗣️ 말쌈 (MALSSAM)</span>
-              <span class="item-sub-desc">바른 우리말 AI 사전 & 퀴즈 PWA</span>
-            </div>
-            <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer"
-              class="item-action-btn btn-green-action">View ➔</a>
-          </div>
-          <!-- 5. 공식 블로그 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">✍️ 당목담글 공식 블로그</span>
-              <span class="item-sub-desc">AI 기술 컬럼 & 릴리즈 스토리</span>
-            </div>
-            <a href="https://dmdg.wikidocs.net/blog/" target="_blank" rel="noopener noreferrer"
-              class="item-action-btn btn-green-action">View ➔</a>
-          </div>
-          <!-- 6. YOUTUBE (듀얼 채널 버튼) -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">📺 YOUTUBE</span>
-              <span class="item-sub-desc">DMDG 공식 유튜브 & 미디어 허브</span>
-            </div>
-            <div class="yt-dual-btns">
-              <a href="https://www.youtube.com/@dmdg-free" target="_blank" rel="noopener noreferrer"
-                class="yt-pill-btn">@dmdg-free ➔</a>
-              <a href="https://www.youtube.com/@Anti-Korea" target="_blank" rel="noopener noreferrer"
-                class="yt-pill-btn">@Anti-Korea ➔</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2열: Interactive Simulators (로열 퍼플 반투명 글래스) -->
-      <div class="service-column-card col-simulators">
-        <div class="column-header-row">
-          <h3 class="column-title">Interactive Simulators</h3>
-          <button type="button" onclick="openAllSimulatorsModal()" class="col-view-all-btn">전체보기 ➔</button>
-        </div>
-        <div class="item-list-wrap">
-          <!-- 1. Neo4j -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🕸️ Neo4j 지식 그래프</span>
-              <span class="item-sub-desc">지식 베이스 시각적 탐색 엔진</span>
-            </div>
-            <a href="./sim_07_decision_tree.html" class="item-action-btn btn-purple-action">실습 ➔</a>
-          </div>
-          <!-- 2. Docling -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">📄 Docling 멀티모달</span>
-              <span class="item-sub-desc">비정형 문서 AI 구조화 분석</span>
-            </div>
-            <a href="./sim_03_flatten_dense.html" class="item-action-btn btn-purple-action">실습 ➔</a>
-          </div>
-          <!-- 3. pgvector -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">⚡ pgvector 벡터 DB</span>
-              <span class="item-sub-desc">초고속 고차원 임베딩 검색</span>
-            </div>
-            <a href="./sim_math_18_pandas_scaling.html" class="item-action-btn btn-purple-action">실습 ➔</a>
-          </div>
-          <!-- 4. AI CCTV -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">📹 AI CCTV 비전</span>
-              <span class="item-sub-desc">실시간 지능형 이상 감지 모델</span>
-            </div>
-            <a href="./sim_01_cnn.html" class="item-action-btn btn-purple-action">실습 ➔</a>
-          </div>
-          <!-- 5. Docker -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🐳 Docker 컨테이너</span>
-              <span class="item-sub-desc">클라우드 네이티브 가상화 환경</span>
-            </div>
-            <a href="./sim_16_transformer.html" class="item-action-btn btn-purple-action">실습 ➔</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3열: Tech Books & Knowledge (대표님 진짜 위키독스 저서 5종 완벽 연결) -->
-      <div class="service-column-card col-tech-books">
-        <div class="column-header-row">
-          <h3 class="column-title">Tech Books & Knowledge</h3>
-          <a href="./books.html" class="col-view-all-btn">전체보기 ➔</a>
-        </div>
-        <div class="item-list-wrap">
-          <!-- 1. Book 21777 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🚀 Book 21777</span>
-              <span class="item-sub-desc">Antigravity IDE 완벽 가이드</span>
-            </div>
-            <a href="https://wikidocs.net/book/21777" target="_blank" rel="noopener noreferrer"
-              class="item-action-btn btn-amber-action">열람 ➔</a>
-          </div>
-          <!-- 2. Book 21695 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🤖 Book 21695</span>
-              <span class="item-sub-desc">LLM 에이전트 완벽 마스터북</span>
-            </div>
-            <a href="https://wikidocs.net/book/21695" target="_blank" rel="noopener noreferrer"
-              class="item-action-btn btn-amber-action">열람 ➔</a>
-          </div>
-          <!-- 3. Book 21858 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🛡️ Book 21858</span>
-              <span class="item-sub-desc">악성코드 예측 감지 EDR & 엔트로피</span>
-            </div>
-            <a href="https://wikidocs.net/book/21858" target="_blank" rel="noopener noreferrer"
-              class="item-action-btn btn-amber-action">열람 ➔</a>
-          </div>
-          <!-- 4. Book 21842 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">🏭 Book 21842</span>
-              <span class="item-sub-desc">가스누출 감지 관제 시스템</span>
-            </div>
-            <a href="https://wikidocs.net/book/21842" target="_blank" rel="noopener noreferrer"
-              class="item-action-btn btn-amber-action">열람 ➔</a>
-          </div>
-          <!-- 5. Book 21781 -->
-          <div class="service-item-row">
-            <div class="item-text-info">
-              <span class="item-main-name">📕 Book 21781</span>
-              <span class="item-sub-desc">REA 4권 역공학 마스터</span>
-            </div>
-            <a href="https://wikidocs.net/book/21781" target="_blank" rel="noopener noreferrer"
-              class="item-action-btn btn-amber-action">열람 ➔</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Legacy Content Hidden for Seamless Aurora Experience -->
-  <div style="display:none;" id="legacyContentWrap">
     <header class="top-header">
       <a href="./index.html" class="header-brand" title="DMDG LIVE 포털 홈">
         <img src="./assets/dmdg_logo_emblem.png" alt="DMDG 당목담글 엠블럼" class="brand-emblem-small">
         <div class="brand-title-wrap">
-          <span class="brand-main-text">당목담글</span>
+          <span class="brand-main-text">DMDG(당목담글)</span>
           <span class="brand-sub-text">DMDG LIVE 통합 서비스 허브</span>
         </div>
       </a>
@@ -925,21 +94,33 @@
 
       <!-- Quick Navigation Links (High Contrast Solid Pill Buttons) -->
       <nav class="header-nav">
+        <a href="./voice.html" class="nav-link-btn"
+          style="background: linear-gradient(135deg, #CD2E3A, #e8532b) !important; color: #FFFFFF !important; border: 1.5px solid #CD2E3A !important; box-shadow: 0 2px 8px rgba(205,46,58,0.25) !important;">
+          <span style="color: #FFFFFF !important; font-weight: 800 !important;">🎙️ 마음잇기</span>
+        </a>
+        <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer" class="nav-link-btn"
+          style="background: #FFFFFF !important; color: #0F766E !important; border: 1.5px solid #0D9488 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;">
+          <span style="color: #0F766E !important; font-weight: 800 !important;">🌸 소담 라이브</span>
+        </a>
         <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-link-btn highlight"
           style="background: linear-gradient(135deg, #F77F00, #E85D04) !important; color: #FFFFFF !important; border: 1.5px solid #F77F00 !important;">
-          <span style="color: #FFFFFF !important; font-weight: 800 !important;">🗣️ 말쌈 전용관</span>
+          <span style="color: #FFFFFF !important; font-weight: 800 !important;">🗣️ 말쌈관</span>
         </a>
-        <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="nav-link-btn"
-          style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
-          <span style="color: #0B1B3D !important; font-weight: 800 !important;">📖 DMDG 서재 (E-Reader)</span>
+        <a href="./novels.html" class="nav-link-btn"
+          style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.14) !important;">
+          <span style="color: #0B1B3D !important; font-weight: 800 !important;">📖 서재관</span>
         </a>
-        <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="nav-link-btn"
-          style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
-          <span style="color: #0B1B3D !important; font-weight: 800 !important;">📚 위키북스</span>
+        <a href="./books.html" class="nav-link-btn"
+          style="background: #FFFFFF !important; color: #5B21B6 !important; border: 1.5px solid #7C3AED !important; box-shadow: 0 2px 8px rgba(0,0,0,0.14) !important;">
+          <span style="color: #5B21B6 !important; font-weight: 800 !important;">📚 위키북스</span>
         </a>
         <a href="#panel-exams" class="nav-link-btn"
           style="background: linear-gradient(135deg, #2563EB, #0284C7) !important; color: #FFFFFF !important; border: 1.5px solid #2563EB !important; box-shadow: 0 2px 8px rgba(37,99,235,0.28) !important;">
-          <span style="color: #FFFFFF !important; font-weight: 800 !important;">🎯 직무 추천 &amp; 역량 진단</span>
+          <span style="color: #FFFFFF !important; font-weight: 800 !important;">🎯 직무진단</span>
+        </a>
+        <a href="./admin.html" class="nav-link-btn"
+          style="background: rgba(15,23,42,0.88) !important; color: #F8FAFC !important; border: 1.5px solid #334155 !important;">
+          <span style="color: #F8FAFC !important; font-weight: 800 !important;">🔒 관리자</span>
         </a>
       </nav>
     </header>
@@ -953,14 +134,14 @@
       </div>
       <div class="hero-text-block">
         <h1 class="hero-slogan-main">
-          사람과 마음을 연결하는<br>
-          세상에서 가장 따뜻한 이어읽기 플랫폼
+          기술과 사람의 마음을 잇는<br>
+          세상에서 가장 따뜻한 <span style="background: linear-gradient(135deg, #F77F00, #E85D04); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">목소리 플랫폼</span>
         </h1>
         <div class="hero-slogan-en">
-          Connecting hearts and people – The warmest interactive storytelling platform.
+          Connecting technology and the human heart – The warmest voice platform.
         </div>
         <div class="hero-slogan-sub">
-          당신의 목소리로 다음글을 읽어주세요 — DMDG(당목담글)
+          소중한 당신의 기술과 목소리로 다음 이야기를 들려주세요 — DMDG(당목담글) LIVE
         </div>
         <div style="margin-top: 1.25rem;">
           <button onclick="openCourseModal()"
@@ -1125,8 +306,7 @@
                     class="val">9,720</strong>명</span>
               </div>
               <div class="app-card-footer">
-                <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-view-app">
+                <a href="./novels.html" class="btn-view-app">
                   <span>View App</span> <span>➔</span>
                 </a>
                 <div class="app-meta-icons">
@@ -1167,34 +347,32 @@
               </div>
             </article>
 
-            <!-- Card 5: 당목담글 보이스 (점검 중) -->
-            <article class="app-item-card" data-keyword="당목담글 보이스 voice 발음교정 목소리릴레이 gemini" style="opacity: 0.88;">
+            <!-- Card 5: 마음잇기 (당목담글 보이스) -->
+            <article class="app-item-card" data-keyword="마음잇기 당목담글 보이스 voice 발음교정 목소리릴레이 gemini">
               <div class="app-card-head">
                 <div class="app-brand-row">
                   <div class="app-avatar" style="color: var(--dmdg-teal);">🎙️</div>
                   <div class="app-title-group">
-                    <h3>당목담글 보이스</h3>
+                    <h3>마음잇기 (당목담글 보이스)</h3>
                     <span>외국인 발음 교정 &amp; 목소리 릴레이</span>
                   </div>
                 </div>
-                <span class="badge-tag beta" style="background:#64748B;">Updating</span>
+                <span class="badge-tag live">Live</span>
               </div>
               <p class="app-card-desc">
-                Gemini 2.5 Flash 기반 초·중·종성 발음 정밀 코칭 성적표와 전 세계 학습자를 잇는 따스한 목소리 릴레이입니다.
+                초·중·종성 발음 코칭과 전 세계 학습자를 잇는 따스한 목소리 릴레이 스튜디오입니다. (📱 iOS 무음 해제 시 낭독 재생)
               </p>
               <div class="content-visitor-row">
                 <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong
                     class="val">1,430</strong>명</span>
               </div>
               <div class="app-card-footer">
-                <span class="btn-view-app"
-                  style="background: rgba(100, 116, 139, 0.2); color: #64748B; border: 1px solid rgba(100, 116, 139, 0.3); cursor: not-allowed; box-shadow: none;"
-                  title="현재 기능 점검 및 업그레이드 작업 중입니다.">
-                  <span>🛠️ Working...</span>
-                </span>
+                <a href="./voice.html" class="btn-view-app">
+                  <span>View App</span> <span>➔</span>
+                </a>
                 <div class="app-meta-icons">
                   <span title="음성 분석">🎤</span>
-                  <span title="성적표">📊</span>
+                  <span title="오디오북">🎧</span>
                 </div>
               </div>
             </article>
@@ -1866,9 +1044,9 @@
             <div class="panel-title">
               <span>📚</span> WIKIBOOKS (위키북스)
             </div>
-            <a href="https://dmdg.wikidocs.net/book/" target="_blank" rel="noopener noreferrer"
-              class="panel-count-badge" style="text-decoration:none;" title="위키독스 전체 도서 열람">
-              19 Books (전체 ➔)
+            <a href="./books.html"
+              class="panel-count-badge" style="text-decoration:none;" title="Hamilton.Kang 실제 위키독스 도서 35종 전체 보기">
+              35 Books (전체 ➔)
             </a>
           </div>
 
@@ -2453,7 +1631,6 @@
        Career Recommender Onboarding Modal (A.C.E.S 7대 공인 평가 & AI 직무 추천)
        ======================================================================= -->
 
-  </div>
   <div id="career-recommender-modal-backdrop" class="course-modal-backdrop">
     <div class="course-modal-container"
       style="max-width: 640px; background: #0f172a; border: 1.5px solid rgba(6, 182, 212, 0.4); color: #f8fafc; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); padding: 2.25rem 2rem;">

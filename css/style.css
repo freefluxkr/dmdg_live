@@ -1,19 +1,19 @@
 /* ============================================================================
-   🎙️ 당목담글 보이스 (마음잇기) — DMDG Unified Bright Aurora Glassmorphism Theme
-   Harmonized with index.html & books.html (Responsive Desktop + Mobile PWA)
+   🎙️ DMDG(당목담글) 보이스 (마음잇기) — Unified Taegeuk Light & Hanji Peach Theme
+   초기 감성 한지·피치 라이트 톤 통일 (데스크탑 2단 + 모바일 PWA 반응형 공통)
    ============================================================================ */
 
 :root {
-  --theme-primary: #ec4899;
-  --theme-primary-dark: #db2777;
-  --theme-secondary: #38bdf8;
-  --theme-secondary-dark: #0284c7;
-  --theme-accent: #f59e0b;
-  --theme-text-body: #f8fafc;
-  --theme-text-muted: #cbd5e1;
-  --theme-bg-circle1: rgba(52, 211, 153, 0.45);
-  --theme-bg-circle2: rgba(244, 114, 182, 0.40);
-  --theme-glow: rgba(236, 72, 153, 0.42);
+  --theme-primary: #CD2E3A;
+  --theme-primary-dark: #a82230;
+  --theme-secondary: #0047A0;
+  --theme-secondary-dark: #003580;
+  --theme-accent: #e8532b;
+  --theme-text-body: #1A1A1A;
+  --theme-text-muted: #475569;
+  --theme-bg-circle1: rgba(205, 46, 58, 0.12);
+  --theme-bg-circle2: rgba(0, 71, 160, 0.10);
+  --theme-glow: rgba(205, 46, 58, 0.28);
 }
 
 *, *::before, *::after {
@@ -26,15 +26,12 @@ body.voice-aurora-body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #0b1936;
+  background-color: #f6efe9;
   background-image:
-    radial-gradient(ellipse 85% 60% at 12% 8%, rgba(52, 211, 153, 0.50), transparent 62%),
-    radial-gradient(ellipse 75% 55% at 88% 12%, rgba(56, 189, 248, 0.48), transparent 60%),
-    radial-gradient(ellipse 72% 58% at 70% 58%, rgba(167, 139, 250, 0.44), transparent 62%),
-    radial-gradient(ellipse 68% 52% at 22% 88%, rgba(244, 114, 182, 0.38), transparent 62%),
-    linear-gradient(155deg, #0b1936 0%, #122b52 44%, #1d2259 76%, #0f2447 100%);
+    radial-gradient(ellipse 75% 55% at 18% 10%, rgba(205, 46, 58, 0.11) 0%, transparent 62%),
+    radial-gradient(ellipse 65% 50% at 85% 90%, rgba(0, 71, 160, 0.09) 0%, transparent 62%);
   background-attachment: fixed;
-  color: #f8fafc;
+  color: #1A1A1A;
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
 }
@@ -44,12 +41,12 @@ body.voice-aurora-body {
 .font-cute    { font-family: 'Gaegu', 'Pretendard', cursive; }
 
 .bg-theme-grad {
-  background: linear-gradient(135deg, #ec4899 0%, #f43f5e 50%, #f59e0b 100%) !important;
+  background: linear-gradient(135deg, #CD2E3A 0%, #e8532b 100%) !important;
   color: #ffffff !important;
 }
 
 .bg-secondary-grad {
-  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%) !important;
+  background: linear-gradient(135deg, #0047A0 0%, #1a6bd4 100%) !important;
   color: #ffffff !important;
 }
 
@@ -60,81 +57,140 @@ body.voice-aurora-body {
 .touch-target { touch-action: manipulation; }
 .touch-target:active { transform: scale(0.96); }
 
-/* Frosted Aurora Glass Card */
+/* Crisp Hanji White Glass Card */
 .glass-card {
-  background: rgba(15, 26, 52, 0.56) !important;
-  backdrop-filter: blur(22px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.90) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(205, 46, 58, 0.15) !important;
+  box-shadow: 0 10px 28px rgba(139, 92, 60, 0.08) !important;
+  color: #1A1A1A !important;
 }
 
-/* Crisp Lucide Icon & Text Contrast inside Aurora Glass Cards */
 body.voice-aurora-body svg.lucide {
   stroke: currentColor;
   flex-shrink: 0;
 }
 
+/* Light card typography readability across all viewports */
+body.voice-aurora-body .text-white,
+body.voice-aurora-body .text-slate-100,
+body.voice-aurora-body .text-slate-200,
 body.voice-aurora-body [class*="text-orange-950"],
 body.voice-aurora-body [class*="text-orange-900"],
 body.voice-aurora-body [class*="text-orange-850"],
 body.voice-aurora-body [class*="text-orange-800"] {
-  color: #f8fafc !important;
+  color: #1A1A1A !important;
+}
+
+body.voice-aurora-body .text-slate-300,
+body.voice-aurora-body .text-slate-400,
+body.voice-aurora-body .text-slate-500 {
+  color: #475569 !important;
 }
 
 body.voice-aurora-body [class*="text-orange-700"],
-body.voice-aurora-body [class*="text-orange-600"] {
-  color: #fde68a !important;
+body.voice-aurora-body [class*="text-orange-600"],
+body.voice-aurora-body .text-amber-300,
+body.voice-aurora-body .text-amber-400 {
+  color: #b91c1c !important;
 }
 
+body.voice-aurora-body .text-emerald-300 {
+  color: #047857 !important;
+}
+
+body.voice-aurora-body .text-pink-200,
+body.voice-aurora-body .text-pink-300,
 body.voice-aurora-body [class*="text-rose-800"],
 body.voice-aurora-body [class*="text-rose-700"],
-body.voice-aurora-body [class*="text-rose-600"] {
-  color: #f9a8d4 !important;
+body.voice-aurora-body [class*="text-rose-600"],
+body.voice-aurora-body .text-sky-200,
+body.voice-aurora-body .text-sky-300 {
+  color: #0047A0 !important;
+}
+
+/* Preserve white text inside gradient CTA buttons */
+body.voice-aurora-body .bg-theme-grad,
+body.voice-aurora-body .bg-theme-grad *,
+body.voice-aurora-body #action-btn,
+body.voice-aurora-body #action-btn *,
+body.voice-aurora-body .bg-secondary-grad,
+body.voice-aurora-body .bg-secondary-grad * {
+  color: #ffffff !important;
+}
+
+body.voice-aurora-body .bg-slate-900\/50,
+body.voice-aurora-body .bg-slate-900\/70,
+body.voice-aurora-body .bg-slate-900\/80,
+body.voice-aurora-body .bg-white\/5,
+body.voice-aurora-body .bg-white\/10 {
+  background: rgba(255, 250, 245, 0.90) !important;
+  border-color: rgba(205, 46, 58, 0.16) !important;
+}
+
+body.voice-aurora-body #relay-count {
+  background: rgba(205, 46, 58, 0.10) !important;
+  color: #b91c1c !important;
+  border-color: rgba(205, 46, 58, 0.25) !important;
 }
 
 body.voice-aurora-body select,
 body.voice-aurora-body input {
-  background: rgba(15, 23, 42, 0.72) !important;
-  color: #f8fafc !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: #1A1A1A !important;
+  border: 1px solid rgba(205, 46, 58, 0.24) !important;
 }
 
 body.voice-aurora-body select option {
-  background: #0f172a;
-  color: #f8fafc;
+  background: #ffffff;
+  color: #1A1A1A;
 }
 
 /* Relay list action circles & badges */
 body.voice-aurora-body #relay-list .bg-orange-100\/80 {
-  background: rgba(56, 189, 248, 0.22) !important;
-  color: #bae6fd !important;
-  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  background: rgba(0, 71, 160, 0.10) !important;
+  color: #0047A0 !important;
+  border: 1px solid rgba(0, 71, 160, 0.25) !important;
 }
 
 body.voice-aurora-body #relay-list .bg-rose-50\/50 {
-  background: rgba(244, 63, 94, 0.18) !important;
-  color: #fda4af !important;
-  border: 1px solid rgba(244, 63, 94, 0.35) !important;
+  background: rgba(205, 46, 58, 0.08) !important;
+  color: #CD2E3A !important;
+  border: 1px solid rgba(205, 46, 58, 0.22) !important;
 }
 
 body.voice-aurora-body #relay-list .bg-orange-100\/60,
 body.voice-aurora-body #relay-list .bg-rose-100\/60,
 body.voice-aurora-body #relay-list .bg-amber-100\/60 {
-  background: rgba(236, 72, 153, 0.24) !important;
-  color: #fbcfe8 !important;
-  border: 1px solid rgba(244, 114, 182, 0.35);
+  background: rgba(205, 46, 58, 0.10) !important;
+  color: #CD2E3A !important;
+  border: 1px solid rgba(205, 46, 58, 0.22) !important;
 }
 
-/* Modal light-surface readability */
+/* Language dropdown & modals */
+#lang-dropdown {
+  background: #ffffff !important;
+  border: 1px solid rgba(205, 46, 58, 0.22) !important;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18) !important;
+  z-index: 9999 !important;
+}
+
+#lang-dropdown button {
+  color: #1A1A1A !important;
+}
+
+#lang-dropdown button:hover {
+  background: rgba(205, 46, 58, 0.08) !important;
+}
+
 #audio-popup-modal,
 #ai-evaluation-modal,
 #paywall-modal,
 #settings-modal,
 #benefit-modal,
 #donate-modal {
-  background: rgba(4, 9, 24, 0.72) !important;
+  background: rgba(15, 23, 42, 0.45) !important;
 }
 
 #audio-popup-modal .glass-card,
@@ -143,8 +199,9 @@ body.voice-aurora-body #relay-list .bg-amber-100\/60 {
 #settings-modal .glass-card,
 #benefit-modal .glass-card,
 #donate-modal .glass-card {
-  background: rgba(15, 26, 52, 0.94) !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  background: #ffffff !important;
+  color: #1A1A1A !important;
+  border: 1px solid rgba(205, 46, 58, 0.2) !important;
 }
 
 #evaluation-feedback-wrapper {
@@ -157,7 +214,7 @@ body.voice-aurora-body #relay-list .bg-amber-100\/60 {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.35);
+  background: rgba(205, 46, 58, 0.22);
   border-radius: 9999px;
 }
 
@@ -182,165 +239,4 @@ body[data-motif="grid"] header::before {
   opacity: 0.75;
   pointer-events: none;
   z-index: 100;
-}
-
-/* ============================================================================
-   Mobile & Compact Legacy Taegeuk Light / Peach Theme Override (<= 960px)
-   데스크탑(>= 961px)은 위 오로라 다크 테마를 그대로 유지하고,
-   모바일 및 축소 창(<= 960px)에서는 이전(06e4ef8) 시점의 따뜻한 피치·라이트 톤을 복원합니다.
-   ============================================================================ */
-@media (max-width: 960px) {
-  :root {
-    --theme-primary: #CD2E3A;
-    --theme-primary-dark: #a82230;
-    --theme-secondary: #0047A0;
-    --theme-secondary-dark: #003580;
-    --theme-accent: #e8532b;
-    --theme-text-body: #1A1A1A;
-    --theme-text-muted: #4a4a4a;
-    --theme-glow: rgba(205, 46, 58, 0.28);
-  }
-
-  body.voice-aurora-body {
-    background-color: #f4ece6 !important;
-    background-image:
-      radial-gradient(ellipse 75% 55% at 18% 10%, rgba(205, 46, 58, 0.11) 0%, transparent 62%),
-      radial-gradient(ellipse 65% 50% at 85% 90%, rgba(0, 71, 160, 0.09) 0%, transparent 62%) !important;
-    color: #1A1A1A !important;
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.88) !important;
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
-    border: 1px solid rgba(205, 46, 58, 0.15) !important;
-    box-shadow: 0 10px 28px rgba(139, 92, 60, 0.08) !important;
-    color: #1A1A1A !important;
-  }
-
-  .bg-theme-grad {
-    background: linear-gradient(135deg, #CD2E3A 0%, #e8532b 100%) !important;
-    color: #ffffff !important;
-  }
-
-  .bg-secondary-grad {
-    background: linear-gradient(135deg, #0047A0 0%, #1a6bd4 100%) !important;
-    color: #ffffff !important;
-  }
-
-  /* Light card typography readability (keep CTA pills white) */
-  body.voice-aurora-body .text-white,
-  body.voice-aurora-body .text-slate-100,
-  body.voice-aurora-body .text-slate-200,
-  body.voice-aurora-body [class*="text-orange-950"],
-  body.voice-aurora-body [class*="text-orange-900"],
-  body.voice-aurora-body [class*="text-orange-850"],
-  body.voice-aurora-body [class*="text-orange-800"] {
-    color: #1A1A1A !important;
-  }
-
-  body.voice-aurora-body .text-slate-300,
-  body.voice-aurora-body .text-slate-400,
-  body.voice-aurora-body .text-slate-500 {
-    color: #475569 !important;
-  }
-
-  body.voice-aurora-body [class*="text-orange-700"],
-  body.voice-aurora-body [class*="text-orange-600"],
-  body.voice-aurora-body .text-amber-300,
-  body.voice-aurora-body .text-amber-400 {
-    color: #b91c1c !important;
-  }
-
-  body.voice-aurora-body .text-pink-200,
-  body.voice-aurora-body .text-pink-300,
-  body.voice-aurora-body [class*="text-rose-800"],
-  body.voice-aurora-body [class*="text-rose-700"],
-  body.voice-aurora-body [class*="text-rose-600"],
-  body.voice-aurora-body .text-sky-200,
-  body.voice-aurora-body .text-sky-300 {
-    color: #0047A0 !important;
-  }
-
-  body.voice-aurora-body .bg-theme-grad,
-  body.voice-aurora-body .bg-theme-grad *,
-  body.voice-aurora-body #action-btn,
-  body.voice-aurora-body #action-btn *,
-  body.voice-aurora-body .bg-secondary-grad,
-  body.voice-aurora-body .bg-secondary-grad * {
-    color: #ffffff !important;
-  }
-
-  body.voice-aurora-body .bg-slate-900\/50,
-  body.voice-aurora-body .bg-slate-900\/70,
-  body.voice-aurora-body .bg-slate-900\/80,
-  body.voice-aurora-body .bg-white\/5,
-  body.voice-aurora-body .bg-white\/10 {
-    background: rgba(255, 250, 245, 0.88) !important;
-    border-color: rgba(205, 46, 58, 0.16) !important;
-  }
-
-  body.voice-aurora-body #relay-count {
-    background: rgba(205, 46, 58, 0.10) !important;
-    color: #b91c1c !important;
-    border-color: rgba(205, 46, 58, 0.25) !important;
-  }
-
-  body.voice-aurora-body select,
-  body.voice-aurora-body input {
-    background: rgba(255, 255, 255, 0.94) !important;
-    color: #1A1A1A !important;
-    border: 1px solid rgba(205, 46, 58, 0.24) !important;
-  }
-
-  body.voice-aurora-body select option {
-    background: #ffffff;
-    color: #1A1A1A;
-  }
-
-  body.voice-aurora-body #relay-list .bg-orange-100\/80 {
-    background: rgba(0, 71, 160, 0.10) !important;
-    color: #0047A0 !important;
-    border-color: rgba(0, 71, 160, 0.25) !important;
-  }
-
-  body.voice-aurora-body #relay-list .bg-rose-50\/50 {
-    background: rgba(205, 46, 58, 0.08) !important;
-    color: #CD2E3A !important;
-    border-color: rgba(205, 46, 58, 0.22) !important;
-  }
-
-  body.voice-aurora-body #relay-list .bg-orange-100\/60,
-  body.voice-aurora-body #relay-list .bg-rose-100\/60,
-  body.voice-aurora-body #relay-list .bg-amber-100\/60 {
-    background: rgba(205, 46, 58, 0.10) !important;
-    color: #CD2E3A !important;
-    border-color: rgba(205, 46, 58, 0.22) !important;
-  }
-
-  #audio-popup-modal .glass-card,
-  #ai-evaluation-modal .glass-card,
-  #paywall-modal .glass-card,
-  #settings-modal .glass-card,
-  #benefit-modal .glass-card,
-  #donate-modal .glass-card {
-    background: #ffffff !important;
-    color: #1A1A1A !important;
-    border: 1px solid rgba(205, 46, 58, 0.2) !important;
-  }
-
-  #lang-dropdown {
-    background: #ffffff !important;
-    border: 1px solid rgba(205, 46, 58, 0.22) !important;
-    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18) !important;
-    z-index: 9999 !important;
-  }
-
-  #lang-dropdown button {
-    color: #1A1A1A !important;
-  }
-
-  #lang-dropdown button:hover {
-    background: rgba(205, 46, 58, 0.08) !important;
-  }
 }
