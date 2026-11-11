@@ -49,16 +49,16 @@
       box-shadow: 0 6px 24px rgba(0,0,0,0.45);
     }
     .header-title h1 {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 800;
       color: #38bdf8;
       display: flex;
       align-items: center;
-      gap: 12px;
-      letter-spacing: -0.5px;
+      gap: 10px;
+      letter-spacing: -0.4px;
     }
     .header-title p {
-      font-size: 13.5px;
+      font-size: 13px;
       color: var(--text-muted);
       margin-top: 5px;
     }
@@ -66,19 +66,19 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .search-box {
       position: relative;
-      min-width: 290px;
+      min-width: 260px;
     }
     .search-box input {
       width: 100%;
       background: #0b0f19;
       border: 1px solid #374151;
-      padding: 10px 16px 10px 38px;
+      padding: 10px 16px 10px 36px;
       border-radius: 20px;
       color: #fff;
       font-size: 13px;
@@ -87,52 +87,52 @@
     }
     .search-box input:focus {
       border-color: #38bdf8;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
     }
     .search-box span {
       position: absolute;
-      left: 14px;
+      left: 12px;
       top: 10px;
       font-size: 14px;
       color: #6b7280;
     }
 
     .btn-nav-rules {
-      background: rgba(139, 92, 246, 0.2);
-      border: 1px solid rgba(167, 139, 250, 0.4);
-      color: #c4b5fd;
-      padding: 9px 16px;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.42);
+      color: #38bdf8;
+      padding: 9px 14px;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       transition: all 0.2s;
+      white-space: nowrap;
     }
     .btn-nav-rules:hover {
-      background: rgba(139, 92, 246, 0.35);
+      background: rgba(56, 189, 248, 0.28);
       color: #fff;
       transform: translateY(-1px);
     }
 
-    /* KPI Summary Stats */
+    /* KPI Stats */
     .kpi-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
+      gap: 16px;
       margin-bottom: 24px;
     }
     .kpi-card {
-      background: #111827;
-      border: 1px solid #1f2937;
-      border-radius: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
       padding: 16px 20px;
       display: flex;
       align-items: center;
       gap: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
     .kpi-icon {
       font-size: 26px;
@@ -143,16 +143,17 @@
       align-items: center;
       justify-content: center;
       background: #1e293b;
+      flex-shrink: 0;
     }
     .kpi-info h4 {
-      font-size: 12px;
+      font-size: 11.5px;
       color: #94a3b8;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .kpi-info .kpi-num {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
       color: #f8fafc;
       margin-top: 2px;
@@ -174,16 +175,16 @@
       background: #1e293b;
       border: 1px solid #334155;
       color: #cbd5e1;
-      padding: 10px 18px;
+      padding: 10px 16px;
       border-radius: 8px;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
       white-space: nowrap;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
     .tab-btn:hover {
       background: #334155;
@@ -196,7 +197,7 @@
       box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
     }
 
-    /* Rule / Directory Grid */
+    /* Grid */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -292,6 +293,7 @@
       font-size: 11px;
       margin-left: 8px;
       transition: all 0.2s;
+      flex-shrink: 0;
     }
     .btn-copy:hover {
       background: #38bdf8;
@@ -316,11 +318,12 @@
       flex-grow: 1;
     }
     .card-list li {
-      padding: 4px 0;
+      padding: 5px 0;
       color: #94a3b8;
-      display: flex;
-      align-items: flex-start;
-      gap: 7px;
+      display: block;
+      line-height: 1.55;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
       border-bottom: 1px solid #131c2e;
     }
     .card-list li:last-child {
@@ -374,8 +377,9 @@
       font-family: 'Consolas', 'Courier New', monospace;
       font-size: 13px;
       color: #94a3b8;
-      line-height: 1.6;
+      line-height: 1.65;
       overflow-x: auto;
+      white-space: pre;
     }
     .tree-box .tree-root { color: #38bdf8; font-weight: bold; }
     .tree-box .tree-dir-upper { color: #a78bfa; font-weight: bold; }
@@ -422,34 +426,36 @@
     <header>
       <div class="header-title">
         <h1>🏛️ DMDG_Jobs 워크스페이스 아키텍처 관제 타워</h1>
-        <p>개편 완료된 4대 마크다운(all 소문자) 및 DMDG_PRJ(all 대문자 + DMDG_) 통합 디렉터리 맵</p>
+        <p>2026-11-11 최신 표준 개편 완료 · DMDG_RULEs / DMDG_PLANs / DMDG_PRJ 통합 맵</p>
       </div>
 
       <div class="header-actions">
         <div class="search-box">
           <span>🔍</span>
-          <input type="text" id="dirSearch" placeholder="프로젝트, 디렉터리, 도서명 검색...">
+          <input type="text" id="dirSearch" placeholder="프로젝트, 디렉터리, 도서, 시험 검색...">
         </div>
-        <a href="rules_hub.html" class="btn-nav-rules">📜 Rules Hub 열기 ➔</a>
+        <a href="index.html" class="btn-nav-rules">🏠 포털 홈 ➔</a>
+        <a href="rules_hub.html" class="btn-nav-rules">🛡️ Rules Hub ➔</a>
+        <a href="sim_master_hub.html" class="btn-nav-rules">🎮 Sim Hub ➔</a>
       </div>
     </header>
 
     <!-- KPI STATS -->
     <div class="kpi-row">
       <div class="kpi-card">
-        <div class="kpi-icon" style="color: #38bdf8;">🚀</div>
+        <div class="kpi-icon" style="color: #38bdf8;">🗂️</div>
         <div class="kpi-info">
-          <h4>통합 프로젝트</h4>
-          <div class="kpi-num">9대 핵심축</div>
-          <div class="kpi-sub">DMDG_PRJ/ 하위 집중 배치 (자율주행·직무추천 추가)</div>
+          <h4>신규 표준 3대 축</h4>
+          <div class="kpi-num">RULEs · PLANs · PRJ</div>
+          <div class="kpi-sub">구형 MD_ 폴더는 _archive로 정식 이관</div>
         </div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-icon" style="color: #34d399;">📝</div>
+        <div class="kpi-icon" style="color: #34d399;">📚</div>
         <div class="kpi-info">
-          <h4>마크다운 보관소</h4>
-          <div class="kpi-num">4개 폴더</div>
-          <div class="kpi-sub">MD_ 접두사 전용 디렉터리</div>
+          <h4>위키독스 &amp; 심화</h4>
+          <div class="kpi-num">20+ 프로젝트</div>
+          <div class="kpi-sub">심화 1~3(22015/22036/22037) · AEGIS(22085)</div>
         </div>
       </div>
       <div class="kpi-card">
@@ -461,11 +467,11 @@
         </div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-icon" style="color: #fb923c;">📚</div>
+        <div class="kpi-icon" style="color: #fb923c;">🎯</div>
         <div class="kpi-info">
-          <h4>위키독스 도서관</h4>
-          <div class="kpi-num">36대 도서</div>
-          <div class="kpi-sub">공개 및 비공개(Hamilton.Kang 전용) 완비</div>
+          <h4>A.C.E.S 7대 공인 평가</h4>
+          <div class="kpi-num">490문항 개방</div>
+          <div class="kpi-sub">기초 4대(400Q) + 심화 3대(90Q) 무결성 잠금</div>
         </div>
       </div>
     </div>
@@ -473,353 +479,219 @@
     <!-- TABS NAVIGATION -->
     <div class="tabs-nav">
       <button class="tab-btn active" onclick="switchTab('all', this)">🌟 전체 아키텍처 (All)</button>
-      <button class="tab-btn" onclick="switchTab('prj', this)">🚀 DMDG_PRJ 프로젝트 (7대 그룹)</button>
-      <button class="tab-btn" onclick="switchTab('md', this)">📝 MD_ 마크다운 보관소 (4대 폴더)</button>
-      <button class="tab-btn" onclick="switchTab('live', this)">🌐 상용 라이브 배포 (Live Deploy)</button>
-      <button class="tab-btn" onclick="switchTab('system', this)">⚙️ 시스템 & 인프라 (.agents/scripts 등)</button>
-      <button class="tab-btn" onclick="switchTab('tree', this)">📐 대화형 디렉터리 트리 (Tree View)</button>
+      <button class="tab-btn" onclick="switchTab('rules-plans', this)">🛡️ DMDG_RULEs &amp; PLANs</button>
+      <button class="tab-btn" onclick="switchTab('prj', this)">🚀 DMDG_PRJ 사업부</button>
+      <button class="tab-btn" onclick="switchTab('live', this)">🌐 상용 라이브 &amp; 시험</button>
+      <button class="tab-btn" onclick="switchTab('system', this)">⚙️ 시스템 · 스크립트 · 아카이브</button>
+      <button class="tab-btn" onclick="switchTab('tree', this)">📐 최신 디렉터리 트리 (Tree View)</button>
     </div>
 
-    <!-- TAB 1: ALL / PRJ / MD / LIVE GRID -->
+    <!-- TAB 1: GRID -->
     <div id="tab-grid" class="tab-content">
       <div class="grid-container" id="cardsContainer">
 
-        <!-- CARD 1: DMDG_LIVE_DOT_COM -->
-        <div class="dir-card border-blue" data-category="prj live" data-name="dmdg_live_dot_com dmdg-live.com 대표포털">
+        <!-- CARD 1: DMDG_RULEs -->
+        <div class="dir-card border-cyan" data-category="rules-plans" data-name="dmdg_rules 공통규칙 작업별규칙 00_common 01_tasks threads">
           <div class="card-header">
-            <span class="card-badge badge-blue">DEPLOY REPO 01</span>
-            <span class="card-type-tag">LIVE PROD</span>
+            <span class="card-badge badge-cyan">STANDARD 01</span>
+            <span class="card-type-tag">00_common + 01_tasks</span>
+          </div>
+          <div class="card-title">🛡️ DMDG_RULEs/</div>
+          <div class="path-box">
+            <span class="path-text">c:\DMDG_Jobs\DMDG_RULEs</span>
+            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_RULEs')">복사</button>
+          </div>
+          <p class="card-desc">상시 적용되는 공통 강령(<code>00_common/</code>)과 해당 업무 시에만 조건부 적용되는 작업별 규칙(<code>01_tasks/</code>)의 통합 규칙 보관소입니다.</p>
+          <ul class="card-list">
+            <li>• <strong>00_common/ (2종)</strong>: 팀 협업·실행·모델 분담(01), 구조·네이밍·귀가 패키징(02)</li>
+            <li>• <strong>01_tasks/ (6종)</strong>: 위키독스 출판(01), 블로그 SEO(02), 시뮬레이터·ACES(03), 말쌈(04), 스레드(05), 유튜브(06)</li>
+            <li>• <strong>README.md</strong>: 공통/작업별 적용 시점 매핑 인덱스</li>
+          </ul>
+          <div class="card-actions">
+            <a href="rules_hub.html" class="action-btn primary">Rules Hub 열기 ➔</a>
+          </div>
+        </div>
+
+        <!-- CARD 2: DMDG_PLANs -->
+        <div class="dir-card border-green" data-category="rules-plans" data-name="dmdg_plans 실행계획서 로드맵 체크포인트 future_to_do_list session_checkpoint">
+          <div class="card-header">
+            <span class="card-badge badge-green">STANDARD 02</span>
+            <span class="card-type-tag">ROADMAP &amp; PLANS</span>
+          </div>
+          <div class="card-title">📋 DMDG_PLANs/</div>
+          <div class="path-box">
+            <span class="path-text">c:\DMDG_Jobs\DMDG_PLANs</span>
+            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PLANs')">복사</button>
+          </div>
+          <p class="card-desc">전사 실행 계획서, 주간 마스터 로드맵, 세션 체크포인트 및 프로젝트별 세부 기획서를 일원화해 관리하는 계획 본부입니다.</p>
+          <ul class="card-list">
+            <li>• <strong>전사 로드맵 (4종)</strong>: 5대 핵심과제, <code>FUTURE_TO_DO_LIST.md</code>, 체크포인트 1109/1106</li>
+            <li>• <strong>SESSION_CHECKPOINT_20261110.md</strong>: 최신 퇴근 인계 및 익일 최우선 과제 기록</li>
+            <li>• <strong>02_project_plans/</strong>: <code>books/</code>(13종), <code>services/</code>, <code>education/</code>, <code>novels/</code></li>
+          </ul>
+        </div>
+
+        <!-- CARD 3: dmdg_live_dot_com -->
+        <div class="dir-card border-blue" data-category="prj live" data-name="dmdg_live_dot_com dmdg-live.com 대표포털 aurora_theme career_aces sim_master_hub">
+          <div class="card-header">
+            <span class="card-badge badge-blue">LIVE REPO 01</span>
+            <span class="card-type-tag">ALL LOWERCASE GIT</span>
           </div>
           <div class="card-title">🌐 dmdg_live_dot_com</div>
           <div class="path-box">
             <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\dmdg_live_dot_com</span>
             <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\dmdg_live_dot_com')">복사</button>
           </div>
-          <p class="card-desc"><strong>dmdg-live.com</strong> 공식 대표 포털의 Git 리포지토리(<code>freefluxkr/dmdg_potal</code>)이자 라이브 프로덕션 소스코드 집합체입니다.</p>
+          <p class="card-desc"><strong>dmdg-live.com</strong> 공식 대표 포털 및 양대 관제 허브(<code>workspace_hub.html</code>, <code>rules_hub.html</code>), A.C.E.S 직무 진단, 심화 시뮬레이터·시험의 프로덕션 Git 저장소입니다.</p>
           <ul class="card-list">
-            <li>• <strong>index.html</strong>: 3열 5개 카드 균형 메인 포털 &amp; 실시간 검색</li>
-            <li>• <strong>admin.html</strong>: 관리자 인증 대시보드 &amp; 실시간 지원자 DB</li>
-            <li>• <strong>curriculum.html</strong>: Antigravity × REA 8주 취업 과정 상세 안내</li>
-            <li>• <strong>novels.html</strong>: DMDG 서재 E-Reader 팩션 소설 뷰어</li>
+            <li>• <strong>index.html + aurora_theme.css</strong>: 16:9 Aurora 글래스모피즘 포털 &amp; 7-Relay 사운드 스튜디오</li>
+            <li>• <strong>Hub 4종</strong>: <code>workspace_hub.html</code>, <code>rules_hub.html</code>, <code>sim_master_hub.html</code>, <code>sim_lgcns_kg2_hub.html</code></li>
+            <li>• <strong>career_aces.html &amp; exam_*.html</strong>: 7대 공인 평가(490Q) &amp; <code>aces_score_lock.js</code> 변조 차단</li>
           </ul>
           <div class="card-actions">
-            <a href="https://dmdg-live.com/" target="_blank" class="action-btn primary">라이브 사이트 ➔</a>
-            <a href="https://dmdg-live.com/admin.html" target="_blank" class="action-btn">관리자 콘솔 ➔</a>
+            <a href="index.html" class="action-btn primary">로컬 포털 홈 ➔</a>
+            <a href="https://dmdg-live.com/" target="_blank" rel="noopener noreferrer" class="action-btn">실서버 ➔</a>
+            <a href="career_aces.html" class="action-btn">A.C.E.S 진단 ➔</a>
           </div>
         </div>
 
-        
-        <!-- NEW CARD: SMARTCAR LAKEHOUSE BOOK (Book 22015) -->
-        <div class="dir-card border-cyan" data-category="prj live" data-name="smartcar_lakehouse_book 자율주행 ai 빅데이터 레이크하우스 22015 시뮬레이터">
+        <!-- CARD 4: dmdg_malssam_dot_com -->
+        <div class="dir-card border-cyan" data-category="prj live" data-name="dmdg_malssam_dot_com malssam.com 말쌈 신조어 사전">
           <div class="card-header">
-            <span class="card-badge badge-cyan">PRJ SDV 2026</span>
-            <span class="card-type-tag">BOOK 22015 &amp; SIM</span>
-          </div>
-          <div class="card-title">🚗 smartcar_lakehouse_book</div>
-          <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\smartcar_lakehouse_book</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\smartcar_lakehouse_book')">복사</button>
-          </div>
-          <p class="card-desc"><strong>《자율주행 AI 자동차 빅데이터 레이크하우스 실무 가이드》</strong>(위키독스 Book 22015)와 독자 실시간 1-Click 인터랙티브 웹 시뮬레이터 및 GitHub 오픈소스 저장소입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>sim_autonomous_car_lakehouse.html</strong>: 10대 차량 CAN-Bus 센서 + 카프카 + HDFS 3벌 복제 + Hive SQL + Keras 딥러닝 사고예측 웹 시뮬레이터</li>
-            <li>• <strong>GitHub 오픈소스</strong>: <code>freefluxkr/smartcar-lakehouse</code> (원고 유출 방지 및 100% 코드 공개)</li>
-            <li>• <strong>전 14개 챕터 + 부록 데이터 사전</strong>: 위키독스 정식 출판 및 대문 하이퍼링크 완비</li>
-          </ul>
-          <div class="card-actions">
-            <a href="https://wikidocs.net/book/22015" target="_blank" class="action-btn primary">위키독스 Book 22015 ➔</a>
-            <a href="https://freefluxkr.github.io/smartcar-lakehouse/sim_autonomous_car_lakehouse.html" target="_blank" class="action-btn">라이브 시뮬레이터 ➔</a>
-          </div>
-        </div>
-
-        <!-- NEW CARD: CAREER RECOMMENDER & ACES FRAMEWORK -->
-        <div class="dir-card border-purple" data-category="prj live" data-name="career_recommender 직무추천 aces framework 육각형 지표 lightgbm shap streamlit">
-          <div class="card-header">
-            <span class="card-badge badge-purple">HR-TECH ML</span>
-            <span class="card-type-tag">A.C.E.S ENGINE</span>
-          </div>
-          <div class="card-title">🎯 career_recommender</div>
-          <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\career_recommender</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\career_recommender')">복사</button>
-          </div>
-          <p class="card-desc"><strong>A.C.E.S 4대 역량 평가 프레임워크</strong>와 6대 육각형 지표 기반 IT/AI 6대 전문 직무 추천 LightGBM 머신러닝 파이프라인 및 SHAP XAI 대시보드입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>ACES_EVALUATION_FRAMEWORK.md</strong>: 4대 기둥(A·C·E·S) 루브릭 및 AI 토큰 인사고과(TIR/TTA) 공식</li>
-            <li>• <strong>model_train.py</strong>: 5-Fold Stratified CV 학습 (정확도 88.7%, Macro F1 0.89 다중 분류기)</li>
-            <li>• <strong>shap_explainer.py</strong>: SHAP TreeExplainer 기반 6대 축 기여도 분석 및 자연어 맞춤형 정량 사유 생성</li>
-            <li>• <strong>app_career_radar.py</strong>: Streamlit Plotly 인터랙티브 육각형 레이더 차트 웹 대시보드</li>
-            <li>• <strong>DMDG_CAREER_RECOMMENDER_GUIDE.md</strong>: 재택 작업 실습 및 튜닝 가이드</li>
-          </ul>
-          <div class="card-actions">
-            <a href="file:///c:/DMDG_Jobs/DMDG_PRJ/career_recommender/DMDG_CAREER_RECOMMENDER_GUIDE.md" target="_blank" class="action-btn primary">실습 가이드 열기 ➔</a>
-            <a href="file:///c:/DMDG_Jobs/DMDG_PRJ/ACES_EVALUATION_FRAMEWORK.md" target="_blank" class="action-btn">A.C.E.S 규격서 ➔</a>
-          </div>
-        </div>
-
-        <!-- NEW CARD: HAMILTON.KANG PRIVATE DMDG PLATFORM (Book 22013) -->
-        <div class="dir-card border-orange" data-category="live md" data-name="hamilton kang 전용 dmdg 플랫폼에 대하여 22013 비공개 도서 포털 구조">
-          <div class="card-header">
-            <span class="card-badge badge-orange">CONFIDENTIAL</span>
-            <span class="card-type-tag">PRIVATE BOOK 22013</span>
-          </div>
-          <div class="card-title">🔒 &lt;&lt;Hamilton.Kang 전용&gt;&gt; DMDG 플랫폼에 대하여</div>
-          <div class="path-box">
-            <span class="path-text">https://wikidocs.net/book/22013 (Private Edition)</span>
-            <button class="btn-copy" onclick="copyPath('https://wikidocs.net/book/22013')">복사</button>
-          </div>
-          <p class="card-desc">당목담글(DMDG) 스튜디오의 모든 라이브 웹앱, 통합 포털 링크, 워크스페이스 구조도, 텔레그램 봇 인프라를 집대성한 <strong>Hamilton.Kang 전용 비공개(Private) 보안 도서</strong>입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>비공개 통제(open_yn: 'N')</strong>: 외부 검색 및 비인가자 열람 완전 차단, 보안 헤더 장착</li>
-            <li>• <strong>00~06장 전 7개 페이지 완비</strong>: 총괄 개요, LIVE_SERVICES, DMDG_SERVICES_PORTAL, WORKSPACE_STRUCTURE, DMDG_SYSTEM_BLUEPRINT, TELEGRAM_AGENTS 등</li>
-          </ul>
-          <div class="card-actions">
-            <a href="https://wikidocs.net/book/22013" target="_blank" class="action-btn primary">비공개 도서 바로가기 ➔</a>
-            <a href="https://wikidocs.net/476091" target="_blank" class="action-btn">대문 페이지 ➔</a>
-          </div>
-        </div>
-
-
-        <!-- CARD 2: DMDG_MALSSAM_DOT_COM -->
-        <div class="dir-card border-cyan" data-category="prj live" data-name="dmdg_malssam_dot_com malssam.com 말쌈">
-          <div class="card-header">
-            <span class="card-badge badge-cyan">DEPLOY REPO 02</span>
-            <span class="card-type-tag">LIVE PROD</span>
+            <span class="card-badge badge-cyan">LIVE REPO 02</span>
+            <span class="card-type-tag">ALL LOWERCASE GIT</span>
           </div>
           <div class="card-title">🇰🇷 dmdg_malssam_dot_com</div>
           <div class="path-box">
             <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\dmdg_malssam_dot_com</span>
             <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\dmdg_malssam_dot_com')">복사</button>
           </div>
-          <p class="card-desc"><strong>malssam.com</strong> 한글 어반 딕셔너리 공식 서비스 Git 리포지토리(<code>freefluxkr/malssam</code>) 및 CNAME 결제 연동 플랫폼입니다.</p>
+          <p class="card-desc"><strong>malssam.com</strong> 한글 어반 딕셔너리·세대별 신조어 사전 및 다국어 PWA 공식 배포 저장소입니다.</p>
           <ul class="card-list">
-            <li>• <strong>CNAME</strong>: <code>malssam.com</code> 도메인 바인딩 및 SSL HTTPS Enforce</li>
-            <li>• <strong>index.html</strong>: 4대 시대 탭 스위처 &amp; 듀얼 배틀 아레나 퀴즈</li>
-            <li>• <strong>global/</strong>: 미국, 일본, 베트남, 인도네시아, 스페인 5개국 에디션</li>
-            <li>• <strong>words_db.json</strong>: 대한민국 100대 마스터 신조어 데이터베이스</li>
+            <li>• <strong>index.html &amp; js/db.js</strong>: 4대 시대 탭 스위처 &amp; 듀얼 배틀 아레나 퀴즈</li>
+            <li>• <strong>global/</strong>: 미국·일본·베트남·인도네시아·스페인 다국어 에디션</li>
+            <li>• <strong>매주 토요일 10:00 KST</strong>: 정기 신조어 배치 업데이트 대상</li>
           </ul>
           <div class="card-actions">
-            <a href="https://malssam.com/" target="_blank" class="action-btn primary">말쌈 포털 ➔</a>
-            <a href="https://wikidocs.net/book/21733" target="_blank" class="action-btn">Book 21733 ➔</a>
+            <a href="https://malssam.com/" target="_blank" rel="noopener noreferrer" class="action-btn primary">말쌈 포털 ➔</a>
+            <a href="https://wikidocs.net/book/21733" target="_blank" rel="noopener noreferrer" class="action-btn">Book 21733 ➔</a>
           </div>
         </div>
 
-        <!-- CARD 3: DMDG_WIKIDOCS -->
-        <div class="dir-card border-green" data-category="prj" data-name="dmdg_wikidocs 위키독스 도서관 전자책 7대">
+        <!-- CARD 5: DMDG_WIKIDOCS -->
+        <div class="dir-card border-green" data-category="prj" data-name="dmdg_wikidocs 위키독스 도서관 심화 22015 22036 22037 22085 aegis 21868 rea">
           <div class="card-header">
             <span class="card-badge badge-green">PRJ PILLAR 01</span>
-            <span class="card-type-tag">7 BOOKS</span>
+            <span class="card-type-tag">20+ BOOK PROJECTS</span>
           </div>
           <div class="card-title">📚 DMDG_WIKIDOCS</div>
           <div class="path-box">
             <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\DMDG_WIKIDOCS</span>
             <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\DMDG_WIKIDOCS')">복사</button>
           </div>
-          <p class="card-desc">위키독스 공식 출판 및 연구 도서 7대 프로젝트의 원고, 챕터별 마크다운, 실습 주피터 노트북 및 자동 배포 파이프라인 자산입니다.</p>
+          <p class="card-desc">인포그래픽(21683), 실무 22대(21658), LLM(21695), REA 5대 도서, 7대 기업 마스터바이블(21868)부터 심화 1~3(22015·22036·22037) 및 통합 캡스톤 PROJECT-AEGIS(22085)까지 전 도서 원고 보관소입니다.</p>
           <ul class="card-list">
-            <li>• <strong>01_infographics_book</strong>: Book 21683 AI 인포그래픽 31종</li>
-            <li>• <strong>02_ai_book_research</strong>: Book 21658 AI 와 데이터 분석 22대 실무</li>
-            <li>• <strong>03_dmdg_studio</strong>: Book 21665 소담 · 당목담글 · 방법 3부작</li>
-            <li>• <strong>08_AI Service</strong>: Book 21695 실전 LLM 서비스 &amp; 멀티 에이전트</li>
-            <li>• <strong>09_ai_math_engineering</strong>: Book 21701 AI 사전학습 수학·엔지니어링</li>
-            <li>• <strong>11_future_wikidocs_trilogy</strong>: Book 21746~21748 미래 3부작 완결본</li>
-            <li>• <strong>12. REA</strong>: Book 21781 외 4종 모던 역공학 바이블 원고</li>
+            <li>• <strong>01~22 시리즈</strong>: 데이터분석, LLM, 수학, 미래 3부작, REA 5권, ROS2, Docker, MySQL, Git, AWS, Airflow</li>
+            <li>• <strong>23~26 심화 &amp; 캡스톤</strong>: 스마트카 레이크하우스(22015), GraphRAG+MCP(22036), Continual Memory(22037), AEGIS(22085)</li>
+            <li>• <strong>공통 품질 스크립트</strong>: <code>enrich_glossary_all_3_books.py</code>, <code>scan_3books_code_docker.py</code></li>
           </ul>
           <div class="card-actions">
-            <a href="https://dmdg.wikidocs.net/book/" target="_blank" class="action-btn primary">위키독스 서재 ➔</a>
+            <a href="https://dmdg.wikidocs.net/book/" target="_blank" rel="noopener noreferrer" class="action-btn primary">위키독스 서재 ➔</a>
+            <a href="books.html" class="action-btn">포털 서재관 ➔</a>
           </div>
         </div>
 
-        <!-- CARD 4: DMDG_YOUTUBE -->
-        <div class="dir-card border-orange" data-category="prj" data-name="dmdg_youtube 유튜브 영상 쇼츠 미디어">
+        <!-- CARD 6: 4 Basic Exams & Career Recommender -->
+        <div class="dir-card border-purple" data-category="prj live" data-name="career_recommender sql_exam ai_math_exam ai_data_exam python_ai_exam aces 시험">
           <div class="card-header">
-            <span class="card-badge badge-orange">PRJ PILLAR 02</span>
-            <span class="card-type-tag">MEDIA PIPELINE</span>
+            <span class="card-badge badge-purple">ACES &amp; EXAMS</span>
+            <span class="card-type-tag">4 EXAMS + ML ENGINE</span>
           </div>
-          <div class="card-title">🎬 DMDG_YOUTUBE</div>
+          <div class="card-title">🎯 4대 기초 시험 &amp; career_recommender</div>
           <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\DMDG_YOUTUBE</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\DMDG_YOUTUBE')">복사</button>
+            <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\career_recommender</span>
+            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\career_recommender')">복사</button>
           </div>
-          <p class="card-desc">당목담글 공식 유튜브 채널(<code>@dmdg-free</code>) 영상 제작 자동화 파이프라인 및 롱폼/쇼츠 미디어 자산 보관소입니다.</p>
+          <p class="card-desc">A.C.E.S 4대 역량 평가 프레임워크와 상시 개방된 4대 기초 공인 시험 저장소(<code>sql_exam</code>, <code>ai_math_exam</code>, <code>ai_data_exam</code>, <code>python_ai_exam</code>)입니다.</p>
           <ul class="card-list">
-            <li>• <strong>13. REA_YOUTUBE/</strong>: 풀HD 롱폼 영상 (<code>소프트웨어_블랙박스의_종말.mp4</code>)</li>
-            <li>• <strong>세로 쇼츠 4편</strong>: 크롬공룡 치트, 윈도우 계산기 %, 노션 ASAR, 모바일 OTP</li>
-            <li>• <strong>YOUTUBE_STUDIO_UPLOAD_RUNBOOK.md</strong>: 원클릭 업로드 런북</li>
-            <li>• <strong>음성 &amp; 렌더링</strong>: 씬별 프레임 렌더러 및 고해상도 인포그래픽 썸네일</li>
+            <li>• <strong>기초 4대 시험 (400문항)</strong>: 날짜·명단·중복 제한 해제로 상시 응시 및 Firestore 실시간 집계</li>
+            <li>• <strong>심화 3대 시험 (90문항)</strong>: SmartCar, GraphRAG+MCP, Continual Memory (<code>dmdg_live_dot_com</code> 내장)</li>
+            <li>• <strong>LightGBM + SHAP XAI</strong>: 6대 IT/AI 직무 추천 및 1-Click PDF 성적표</li>
           </ul>
           <div class="card-actions">
-            <a href="https://www.youtube.com/@dmdg-free" target="_blank" class="action-btn primary">유튜브 채널 ➔</a>
+            <a href="career_aces.html" class="action-btn primary">A.C.E.S 포털 ➔</a>
+            <a href="sim_master_hub.html" class="action-btn">시뮬레이터 &amp; 시험 허브 ➔</a>
           </div>
         </div>
 
-        <!-- CARD 5: DMDG_LIVE -->
-        <div class="dir-card border-purple" data-category="prj" data-name="dmdg_live 라이브 시뮬레이터 웹서비스 말쌈 scm 서재 텔레그램">
+        <!-- CARD 7: DMDG_LIVE -->
+        <div class="dir-card border-purple" data-category="prj live" data-name="dmdg_live simulator_hub novels_ereader telegram_agents malssam scm">
           <div class="card-header">
-            <span class="card-badge badge-purple">PRJ PILLAR 03</span>
-            <span class="card-type-tag">5 WEB SERVICES</span>
+            <span class="card-badge badge-purple">PRJ PILLAR 02</span>
+            <span class="card-type-tag">5 LIVE MODULES</span>
           </div>
           <div class="card-title">🎛️ DMDG_LIVE</div>
           <div class="path-box">
             <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\DMDG_LIVE</span>
             <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\DMDG_LIVE')">복사</button>
           </div>
-          <p class="card-desc">실서버에서 구동되는 5대 핵심 상용 웹 애플리케이션 및 알고리즘 시뮬레이터 소스코드 모음입니다.</p>
+          <p class="card-desc">라이브 웹 시뮬레이터 원본 허브, E-Reader 소설, 스마트 SCM/MLOps, 말쌈 원본 DB 및 텔레그램 관제 봇 소스 모듈입니다.</p>
           <ul class="card-list">
-            <li>• <strong>10_korean_urban_dictionary</strong>: 말쌈 웹앱 원천 소스 및 다국어 팩</li>
-            <li>• <strong>04_smart_scm_mlops</strong>: 엔터프라이즈 SCM &amp; MLOps 대시보드</li>
-            <li>• <strong>05_simulator_hub</strong>: 브라우저 무설치 구동 22종 시뮬레이터 허브</li>
-            <li>• <strong>06_novels_ereader</strong>: 2027 4대 팩션 소설 전집 &amp; E-Reader 소스</li>
-            <li>• <strong>07_telegram_agents</strong>: Great AI 팀 텔레그램 봇(<code>@aiffall_bot</code>) 관제 엔진</li>
+            <li>• <strong>05_simulator_hub/</strong>: <code>sim_master_hub.html</code> (실서버와 SHA256 100% 동기화), 심화 시뮬레이터 3종</li>
+            <li>• <strong>06_novels_ereader/</strong>: DMDG 서재 팩션 소설 E-Reader 뷰어 소스</li>
+            <li>• <strong>04_smart_scm_mlops/ &amp; 07_telegram_agents/ &amp; 10_korean_urban_dictionary/</strong></li>
           </ul>
           <div class="card-actions">
-            <a href="https://dmdg-live.com/sim_master_hub.html" target="_blank" class="action-btn primary">시뮬레이터 허브 ➔</a>
+            <a href="sim_master_hub.html" class="action-btn primary">Sim Master Hub ➔</a>
+            <a href="novels.html" class="action-btn">DMDG 서재 ➔</a>
           </div>
         </div>
 
-        <!-- CARD 6: DMDG_CURR -->
-        <div class="dir-card border-yellow" data-category="prj" data-name="dmdg_curr 커리큘럼 교육 antigravity rea">
+        <!-- CARD 8: DMDG_YOUTUBE & THREADs Site -->
+        <div class="dir-card border-orange" data-category="prj" data-name="dmdg_youtube threads site 스레드 타래 유튜브 쇼츠">
           <div class="card-header">
-            <span class="card-badge badge-yellow">EDUCATION</span>
-            <span class="card-type-tag">8 WEEKS</span>
+            <span class="card-badge badge-orange">MEDIA &amp; SNS</span>
+            <span class="card-type-tag">YOUTUBE + THREADS</span>
           </div>
-          <div class="card-title">🎓 DMDG_CURR</div>
+          <div class="card-title">🎬 DMDG_YOUTUBE &amp; THREADs Site</div>
           <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\DMDG_CURR</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\DMDG_CURR')">복사</button>
+            <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\DMDG_YOUTUBE</span>
+            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\DMDG_YOUTUBE')">복사</button>
           </div>
-          <p class="card-desc"><strong>Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정</strong> 8주 취업 연계 정규 교육 과정 상세 기획서 및 모집 공고문입니다.</p>
+          <p class="card-desc">공식 유튜브(<code>@dmdg-free</code>, <code>@Anti-Korea</code>) 롱폼·쇼츠 제작 파이프라인과 Meta Threads Graph API 자동 포스팅 설계 디렉터리입니다.</p>
           <ul class="card-list">
-            <li>• <strong>커리큘럼 마크다운 원본 소스.md</strong>: 8주차 타임테이블 &amp; 전 8주 실습서</li>
-            <li>• <strong>취준생 모집 공고문 최종.pdf</strong>: 고전환율 수강생 모집 공식 공고</li>
-            <li>• <strong>타임테이블 표준</strong>: 오전 4교시(해체 쇼) / 점심 1시간 / 오후 4교시(TDD)</li>
-            <li>• <strong>강의장 안내</strong>: 성남시 태평역 부근 및 20명 달성 시 개강 지침</li>
+            <li>• <strong>DMDG_YOUTUBE/13. REA_YOUTUBE/</strong>: 롱폼 영상, 세로 쇼츠 4편, 업로드 런북</li>
+            <li>• <strong>THREADs Site 관련/</strong>: 스레드 Graph API·타래(`reply_to_id`) 설계 PDF 8종 &amp; 전용 <code>AGENTS.md</code></li>
           </ul>
           <div class="card-actions">
-            <a href="https://dmdg-live.com/curriculum.html" target="_blank" class="action-btn primary">상세 커리큘럼 웹 ➔</a>
+            <a href="https://www.youtube.com/@dmdg-free" target="_blank" rel="noopener noreferrer" class="action-btn primary">유튜브 채널 ➔</a>
           </div>
         </div>
 
-        <!-- CARD 7: DMDG_14_DMDG -->
-        <div class="dir-card border-blue" data-category="prj" data-name="dmdg_design dmdg_14_dmdg 브랜드 명함 디자인 시안">
+        <!-- CARD 9: Education & SmartCar Repo -->
+        <div class="dir-card border-yellow" data-category="prj live" data-name="dmdg_curr let_u_in_edu lg_cns kg2 sim_lgcns_kg2_hub smartcar_lakehouse_book">
           <div class="card-header">
-            <span class="card-badge badge-blue">BRAND &amp; DESIGN</span>
-            <span class="card-type-tag">ASSETS</span>
+            <span class="card-badge badge-yellow">EDU &amp; SDV</span>
+            <span class="card-type-tag">KG2 + SMARTCAR</span>
           </div>
-          <div class="card-title">🎨 DMDG_DESIGN</div>
+          <div class="card-title">🎓 교육 커리큘럼 &amp; SmartCar 원천</div>
           <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\DMDG_DESIGN</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\DMDG_DESIGN')">복사</button>
+            <span class="path-text">c:\DMDG_Jobs\DMDG_PRJ\smartcar_lakehouse_book</span>
+            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\DMDG_PRJ\\smartcar_lakehouse_book')">복사</button>
           </div>
-          <p class="card-desc">당목담글 공식 브랜드 아이덴티티, 최고급 명함 인쇄용 앞/뒷면 아트워크 및 대표 포털 디자인 시안 1~3번 원본입니다.</p>
+          <p class="card-desc">기업 사전학습·취업 연계 교육 과정 및 자율주행 빅데이터 레이크하우스(Book 22015) 원고·오픈소스 코드 저장소입니다.</p>
           <ul class="card-list">
-            <li>• <strong>당목담글 명함 앞/뒷면_최종.png</strong>: 인쇄용 고해상도 디자인 원본</li>
-            <li>• <strong>디자인 시안 1~3번</strong>: 3중 유기적 웨이브 &amp; 3열 대시보드 시안 세트</li>
+            <li>• <strong>DMDG_CURR/ &amp; LET_U_IN_EDU/</strong>: 8주 취업 연계 교육 과정 및 도서/시뮬레이터 패키지</li>
+            <li>• <strong>LG_CNS_AI_캠퍼스_KG2기_사전학습및평가_통합마스터패키지_20261101/</strong>: KG2기 통합 패키지</li>
+            <li>• <strong>smartcar_lakehouse_book/ &amp; smartcar-lakehouse-repo/</strong>: Book 22015 원고 &amp; 코드 저장소</li>
           </ul>
+          <div class="card-actions">
+            <a href="sim_lgcns_kg2_hub.html" class="action-btn primary">KG2기 진단 허브 ➔</a>
+            <a href="curriculum.html" class="action-btn">교육 커리큘럼 ➔</a>
+          </div>
         </div>
 
-        <!-- CARD 8: temp_dmdg_live -->
-        <div class="dir-card border-orange" data-category="live" data-name="temp_dmdg_live 실서버 배포 전진기지 루트보존">
-          <div class="card-header">
-            <span class="card-badge badge-orange">DEPLOY BASE</span>
-            <span class="card-type-tag">ROOT PRESERVED</span>
-          </div>
-          <div class="card-title">🛡️ temp_dmdg_live</div>
-          <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\temp_dmdg_live</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\temp_dmdg_live')">복사</button>
-          </div>
-          <p class="card-desc"><strong>dmdg-live.com</strong>의 실서버 배포 Git 저장소(<code>freefluxkr/dmdg_live</code>)이자 사장님 특별 지시로 루트 상태가 그대로 유지된 배포 전진기지입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>106개 파일/폴더</strong>: 실서비스 배포용 자산 및 PWA 캐시 번들 완비</li>
-            <li>• <strong>루트 보존 원칙</strong>: <code>c:\DMDG_Jobs\temp_dmdg_live\</code> 위치 고정</li>
-          </ul>
-        </div>
-
-        <!-- CARD 9: todo_lst -->
-        <div class="dir-card border-green" data-category="md" data-name="todo_lst 할일 오늘 내일 today tomorrow 금일긴급처리">
-          <div class="card-header">
-            <span class="card-badge badge-green">MD FOLDER 01</span>
-            <span class="card-type-tag">ALL LOWERCASE</span>
-          </div>
-          <div class="card-title">📋 MD_todo_lst</div>
-          <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\MD_todo_lst</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\MD_todo_lst')">복사</button>
-          </div>
-          <p class="card-desc">당일 및 익일 집중 실행 과제 목록을 날짜 기반으로 체계화하여 보관하는 <strong>all 소문자</strong> 마크다운 디렉터리입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>TODAY_20261021.md</strong>: 당일 집중 과업 명세서 (포트원/페이팔 진단 등)</li>
-            <li>• <strong>TOMORROW_20261021.md</strong>: 익일 진행 및 완결 점검서</li>
-            <li>• <strong>금일긴급처리.md</strong>: 귀가 후 결제 인증 및 차기 신간 2선 기획안</li>
-          </ul>
-        </div>
-
-        <!-- CARD 10: session -->
-        <div class="dir-card border-cyan" data-category="md" data-name="session 체크포인트 checkpoint 작업이력 세션">
-          <div class="card-header">
-            <span class="card-badge badge-cyan">MD FOLDER 02</span>
-            <span class="card-type-tag">ALL LOWERCASE</span>
-          </div>
-          <div class="card-title">📌 MD_session</div>
-          <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\MD_session</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\MD_session')">복사</button>
-          </div>
-          <p class="card-desc">일일 전체 작업 및 의사결정을 실시간 누적 기록하는 체크포인트 아카이브 <strong>all 소문자</strong> 디렉터리입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>CHECKPOINT_20261021.md</strong>: 2026-10-21 최신 마스터 종합 리포트</li>
-            <li>• <strong>CHECKPOINT_20261021_0925.md</strong>: 10월 21일 오전 중간 점검 세션본</li>
-            <li>• <strong>CHECKPOINT_20261020.md</strong>: 10월 20일 일차 완결 세션 체크포인트</li>
-            <li>• <strong>SESSION_CHECKPOINT.md</strong>: 에이전트 연속 작업용 최신 미러</li>
-          </ul>
-        </div>
-
-        <!-- CARD 11: dmdg_svc -->
-        <div class="dir-card border-purple" data-category="md" data-name="dmdg_svc 서비스 명세 포털 블루프린트 텔레그램 라이브">
-          <div class="card-header">
-            <span class="card-badge badge-purple">MD FOLDER 03</span>
-            <span class="card-type-tag">ALL LOWERCASE</span>
-          </div>
-          <div class="card-title">🌐 MD_dmdg_svc</div>
-          <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\MD_dmdg_svc</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\MD_dmdg_svc')">복사</button>
-          </div>
-          <p class="card-desc">DMDG 대표 포털, 라이브 서비스, 텔레그램 봇 관제 및 엔터프라이즈 시스템 블루프린트 명세서를 보관하는 <strong>all 소문자</strong> 디렉터리입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>DMDG_SERVICES_PORTAL.md</strong>: 포털 기능 및 라우팅 명세</li>
-            <li>• <strong>LIVE_SERVICES.md</strong>: 실서버 배포된 라이브 서비스 상세 현황</li>
-            <li>• <strong>TELEGRAM_AGENTS.md</strong>: Great AI 팀 텔레그램 봇 관제 인프라</li>
-            <li>• <strong>DMDG_BOOK_INTRO_CARDS_ARCHIVE.md</strong>: 도서 소개 카드 영구 보관소</li>
-            <li>• <strong>DMDG_SYSTEM_BLUEPRINT.md</strong>: 엔터프라이즈 시스템 블루프린트</li>
-          </ul>
-        </div>
-
-        <!-- CARD 12: dmdg_compl -->
-        <div class="dir-card border-yellow" data-category="md" data-name="dmdg_compl 완료 아카이브 마이그레이션 전자책검수 연구">
-          <div class="card-header">
-            <span class="card-badge badge-yellow">MD FOLDER 04</span>
-            <span class="card-type-tag">ALL LOWERCASE</span>
-          </div>
-          <div class="card-title">📦 MD_dmdg_compl</div>
-          <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\MD_dmdg_compl</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\MD_dmdg_compl')">복사</button>
-          </div>
-          <p class="card-desc">마이그레이션 기록, 연구 보고서, 전자책 검수 리포트 등 성공적으로 완료된 작업을 영구 보존하는 <strong>all 소문자</strong> 아카이브 디렉터리입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>README_MIGRATION.md</strong>: 저장소 마이그레이션 완료 기록</li>
-            <li>• <strong>README_PRJs.md</strong>: 이전 프로젝트 종합 설명서</li>
-            <li>• <strong>research_modern_korean_dictionary.md</strong>: 한국어 사전 연구 완결서</li>
-            <li>• <strong>WIKIDOCS_EBOOK_INSPECTION_REPORT.md</strong>: 전자책 검수 완결서</li>
-            <li>• <strong>WIKIDOCS_MONETIZATION_STRATEGY.md</strong>: 수익화 전략 완결서</li>
-            <li>• <strong>WIKIDOCS_NEW_BOOK_PROPOSALS.md</strong>: 초기 신간 기획 제안서</li>
-            <li>• <strong>AGENTS_ROOT.md</strong>: 초기 에이전트 헌장 완결본</li>
-          </ul>
-        </div>
-
-        <!-- CARD 13: .agents -->
+        <!-- CARD 10: .agents -->
         <div class="dir-card border-purple" data-category="system" data-name=".agents 자율에이전트 rules skills telegram">
           <div class="card-header">
             <span class="card-badge badge-purple">SYSTEM CORE 01</span>
@@ -830,146 +702,95 @@
             <span class="path-text">c:\DMDG_Jobs\.agents</span>
             <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\.agents')">복사</button>
           </div>
-          <p class="card-desc">당목담글 <strong>12대 페르소나 자율 에이전트 협업 본부</strong>이자 행동 강령, 온디맨드 스킬, 텔레그램 실시간 무인 관제 봇의 핵심 사령탑입니다.</p>
+          <p class="card-desc">당목담글 <strong>Great AI 팀</strong> 페르소나 스킬(15종), Antigravity 자동 인식 규칙, 텔레그램 관제 인프라 및 팀 포트레이트 자산입니다.</p>
           <ul class="card-list">
-            <li>• <strong>rules/</strong>: 팀 핵심 운영 강령 (RULES.md, WORKSPACE_CLEANUP_RULES.md 등 16대 규칙)</li>
-            <li>• <strong>skills/</strong>: 페르소나별 온디맨드 실행 스킬 (craig, demis, haruki, jennifer, peggy, satya 등)</li>
-            <li>• <strong>telegram/</strong>: 실시간 원격 보고 및 자동 관제 봇 (@aiffall_bot, bot.py, report.py)</li>
-            <li>• <strong>hr_agents/</strong>: 주요 대기업(삼성, LG, CJ, 롯데, 신세계) 채용 평가 프롬프트</li>
-            <li>• <strong>portraits/ & assets/</strong>: 페르소나별 4K 프로필 초상화 및 그래픽 자산</li>
+            <li>• <strong>rules/</strong>: <code>RULES.md</code>, <code>WIKIDOCS_PUBLISHING_RULES.md</code>, <code>THREADS_SITE_RULES.md</code>(온디맨드)</li>
+            <li>• <strong>skills/</strong>: <code>demis</code>, <code>peggy</code>, <code>craig</code>, <code>jennifer</code>, <code>haruki</code>, <code>satya</code>, <code>sherlock</code> 등 15종</li>
+            <li>• <strong>telegram/ &amp; assets/</strong>: <code>@aiffall_bot</code> 실시간 보고 &amp; 출퇴근 팀 포트레이트</li>
           </ul>
         </div>
 
-        <!-- CARD 14: scripts -->
-        <div class="dir-card border-orange" data-category="system" data-name="scripts 자동화 빌더 배포 파이프라인">
+        <!-- CARD 11: scripts & scripts_wikidocs -->
+        <div class="dir-card border-orange" data-category="system" data-name="scripts scripts_wikidocs 자동화 위키독스 블로그 발행">
           <div class="card-header">
             <span class="card-badge badge-orange">SYSTEM CORE 02</span>
-            <span class="card-type-tag">PIPELINE &amp; TOOLS</span>
+            <span class="card-type-tag">PIPELINE &amp; BLOG</span>
           </div>
-          <div class="card-title">🛠️ scripts/</div>
+          <div class="card-title">🛠️ scripts/ &amp; scripts_wikidocs/</div>
           <div class="path-box">
             <span class="path-text">c:\DMDG_Jobs\scripts</span>
             <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\scripts')">복사</button>
           </div>
-          <p class="card-desc">위키독스 전자책 자동 업로더, GitHub 배포 엔진, 포털 인덱서, 말쌈 사전 빌더 등 <strong>112개 전문 자동화 파이프라인</strong> 도구 모음입니다.</p>
+          <p class="card-desc">위키독스 발행, 블로그 자동화, 배포 파이프라인 유틸리티 스위트 및 01~20편 기술 블로그 마크다운 원본 스니펫 모음입니다.</p>
           <ul class="card-list">
-            <li>• <strong>blog_publisher/ & wikidocs_tools/</strong>: 전자책 및 기술 블로그 자동 동기화</li>
-            <li>• <strong>build_global_sites.py</strong>: 글로벌 다국어 웹사이트 통합 빌드 스크립트</li>
-            <li>• <strong>update_malssam_ui.py</strong>: 말쌈 신조어 사전 DB 및 검색 인덱스 갱신 (Rule 16)</li>
-            <li>• <strong>build_100_master_db.py</strong>: 세대별 어반 딕셔너리 마스터 데이터베이스 빌더</li>
-            <li>• <strong>convert_curriculum_to_docs_and_pdf.py</strong>: 정규 교육과정 문서·PDF 자동 생성기</li>
+            <li>• <strong>scripts/</strong>: <code>wikidocs/</code>, <code>wikidocs_tools/</code>, <code>blog_publisher/</code>, <code>github_deploy/</code></li>
+            <li>• <strong>scripts_wikidocs/</strong>: <code>01_크롬공룡.md</code> ~ <code>20_반도체_스마트팩토리_AI.md</code></li>
           </ul>
         </div>
 
-        <!-- CARD 15: _archive -->
-        <div class="dir-card border-yellow" data-category="system" data-name="_archive 백업 레거시 히스토리">
+        <!-- CARD 12: _archive & scratch & root guides -->
+        <div class="dir-card border-yellow" data-category="system" data-name="_archive scratch workspace_folder_and_file_guide manifest 레거시 백업">
           <div class="card-header">
             <span class="card-badge badge-yellow">SYSTEM CORE 03</span>
-            <span class="card-type-tag">ARCHIVE &amp; BACKUP</span>
+            <span class="card-type-tag">ARCHIVE &amp; CLEAN ROOT</span>
           </div>
-          <div class="card-title">📦 _archive/</div>
+          <div class="card-title">📦 _archive/ · scratch/ · 루트 안내서</div>
           <div class="path-box">
             <span class="path-text">c:\DMDG_Jobs\_archive</span>
             <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\_archive')">복사</button>
           </div>
-          <p class="card-desc">과거 일자별 프로젝트 백업본, 데이터베이스 스냅샷 및 1회성 마이그레이션 스크립트를 안전하게 격리 보관하는 <strong>영구 아카이브</strong>입니다.</p>
+          <p class="card-desc">과거 <code>MD_*</code> 폴더·데모 HTML·구형 백업은 <code>_archive/</code>에 격리하고, 루트에는 마스터 안내서와 설정만 청결히 유지합니다.</p>
           <ul class="card-list">
-            <li>• <strong>backups/</strong>: 과거 일자별 프로젝트 및 데이터베이스 스냅샷 백업본</li>
-            <li>• <strong>temp_scripts/</strong>: 워크스페이스 마이그레이션 완료 후 격리된 스크립트</li>
-            <li>• <strong>organize_workspace.py</strong>: 대규모 프로젝트 정리 및 무결점 분류 도구</li>
-            <li>• <strong>move_all_project_data.py</strong>: 디렉터리 분리 및 이력 무손실 검증 유틸리티</li>
+            <li>• <strong>_archive/</strong>: <code>legacy_md_dirs_20261105/</code>, <code>demo_htmls_20261105/</code>, <code>backups/</code>, <code>temp_projects/</code>, <code>old_zips_20261105/</code></li>
+            <li>• <strong>scratch/</strong>: 파싱·분석용 임시 작업 파일 보관</li>
+            <li>• <strong>루트 마스터 문서</strong>: <code>WORKSPACE_FOLDER_AND_FILE_GUIDE.md</code>, <code>README.md</code>, <code>DMDG_WORKSPACE_AND_ARCHIVE_MANIFEST.md</code></li>
           </ul>
         </div>
 
-        <!-- CARD 16: .vscode -->
-        <div class="dir-card border-cyan" data-category="system" data-name=".vscode ide 환경설정 settings.json">
-          <div class="card-header">
-            <span class="card-badge badge-cyan">SYSTEM CORE 04</span>
-            <span class="card-type-tag">CONFIG</span>
-          </div>
-          <div class="card-title">💻 .vscode/</div>
-          <div class="path-box">
-            <span class="path-text">c:\DMDG_Jobs\.vscode</span>
-            <button class="btn-copy" onclick="copyPath('c:\\DMDG_Jobs\\.vscode')">복사</button>
-          </div>
-          <p class="card-desc">Google Antigravity IDE 및 VS Code 개발 환경을 최적화하고 일관된 코드 포맷을 유지하기 위한 <strong>공식 환경 설정</strong>입니다.</p>
-          <ul class="card-list">
-            <li>• <strong>settings.json</strong>: UTF-8 인코딩 강제, 파일 탐색기 제외 필터, 린터 및 자동 저장 규칙</li>
-            <li>• 워크스페이스 내 대용량 캐시 및 가상환경(venv) 노이즈 탐색 차단</li>
-          </ul>
-        </div>
       </div>
     </div>
 
     <!-- TAB 2: INTERACTIVE ASCII TREE -->
     <div id="tab-tree" class="tab-content" style="display: none;">
-      <div class="tree-box">
-<span class="tree-root">c:\DMDG_Jobs\</span>
+      <div class="tree-box"><span class="tree-root">c:\DMDG_Jobs\</span>
 │
-├── <span class="tree-dir-lower">MD_todo_lst/</span>                  <span class="tree-desc"># [MD_ 접두사] 오늘 및 내일 집중 실행 과제 목록</span>
-│   ├── TODAY_20261021.md         <span class="tree-desc"># 당일 집중 실행 업무 명세서</span>
-│   ├── TOMORROW_20261021.md      <span class="tree-desc"># 익일 진행 및 완결 점검서</span>
-│   └── 금일긴급처리.md            <span class="tree-desc"># 결제 인프라 &amp; 차기 신간 2선 긴급 과제</span>
+├── <span class="tree-dir-upper">DMDG_RULEs/</span>                   <span class="tree-desc"># 🛡️ [신규 표준] 공통 규칙(00_common) &amp; 작업별 규칙(01_tasks)</span>
+│   ├── README.md                 <span class="tree-desc"># 공통/작업별 적용 시점 매핑표</span>
+│   ├── 00_common/                <span class="tree-desc"># 01_COMMON_TEAM_AND_EXECUTION_RULES, 02_COMMON_WORKSPACE_AND_PACKAGING_RULES</span>
+│   └── 01_tasks/                 <span class="tree-desc"># 01~06 위키독스, 블로그SEO, 시뮬레이터, 말쌈, 스레드, 유튜브 규칙</span>
 │
-├── <span class="tree-dir-lower">MD_session/</span>                   <span class="tree-desc"># [MD_ 접두사] 일일 세션 종합 체크포인트 기록</span>
-│   ├── CHECKPOINT_20261021.md    <span class="tree-desc"># 2026-10-21 최신 마스터 체크포인트</span>
-│   ├── CHECKPOINT_20261021_0925.md <span class="tree-desc"># 2026-10-21 오전 세션 기록</span>
-│   ├── CHECKPOINT_20261020.md    <span class="tree-desc"># 2026-10-20 일차 완결 세션 기록</span>
-│   └── SESSION_CHECKPOINT.md     <span class="tree-desc"># 최신 체크포인트 동기화 미러</span>
+├── <span class="tree-dir-upper">DMDG_PLANs/</span>                   <span class="tree-desc"># 📋 [신규 표준] 실행 계획서, 로드맵, 체크포인트 통합 보관소</span>
+│   ├── README.md                 <span class="tree-desc"># 전사 로드맵 및 프로젝트별 기획서 목차</span>
+│   ├── SESSION_CHECKPOINT_20261110.md  <span class="tree-desc"># 최신 세션 체크포인트</span>
+│   ├── FUTURE_TO_DO_LIST.md      <span class="tree-desc"># 주간 마스터 로드맵</span>
+│   └── 02_project_plans/         <span class="tree-desc"># books/, services/, education/, novels/</span>
 │
-├── <span class="tree-dir-lower">MD_dmdg_svc/</span>                  <span class="tree-desc"># [MD_ 접두사] 상용 서비스 및 플랫폼 아키텍처 명세서</span>
-│   ├── DMDG_SERVICES_PORTAL.md   <span class="tree-desc"># 서비스 통합 포털 라우팅 명세</span>
-│   ├── LIVE_SERVICES.md          <span class="tree-desc"># 실서버 배포된 라이브 서비스 상세 현황</span>
-│   ├── TELEGRAM_AGENTS.md        <span class="tree-desc"># Great AI 팀 텔레그램 봇 관제 인프라</span>
-│   ├── DMDG_BOOK_INTRO_CARDS_ARCHIVE.md <span class="tree-desc"># 도서 소개 카드 영구 보관소</span>
-│   └── DMDG_SYSTEM_BLUEPRINT.md  <span class="tree-desc"># 엔터프라이즈 시스템 블루프린트</span>
+├── <span class="tree-dir-upper">DMDG_PRJ/</span>                     <span class="tree-desc"># 🚀 [핵심 사업부] 실서버·도서·시험·시뮬레이터·미디어 마스터</span>
+│   ├── <span class="tree-dir-lower">dmdg_live_dot_com/</span>        <span class="tree-desc"># 🌐 dmdg-live.com 대표 포털 &amp; Hub 4종 (workspace/rules/sim_master/kg2)</span>
+│   ├── <span class="tree-dir-lower">dmdg_malssam_dot_com/</span>     <span class="tree-desc"># 🇰🇷 malssam.com 말쌈 공식 웹앱 Git 저장소</span>
+│   ├── <span class="tree-dir-lower">sql_exam/ · ai_math_exam/ · ai_data_exam/ · python_ai_exam/</span> <span class="tree-desc"># 🎯 4대 기초 공인 시험</span>
+│   ├── <span class="tree-dir-lower">career_recommender/</span>       <span class="tree-desc"># 🎯 A.C.E.S 직무 추천 ML/SHAP 파이프라인</span>
+│   ├── <span class="tree-dir-upper">DMDG_WIKIDOCS/</span>            <span class="tree-desc"># 📚 01~26 위키독스 도서 (심화 1~3 &amp; AEGIS 캡스톤 포함)</span>
+│   ├── <span class="tree-dir-upper">DMDG_LIVE/</span>                <span class="tree-desc"># 🎛️ 04_smart_scm, 05_simulator_hub, 06_novels, 07_telegram, 10_malssam</span>
+│   ├── <span class="tree-dir-upper">DMDG_YOUTUBE/</span>             <span class="tree-desc"># 🎬 13. REA_YOUTUBE 롱폼·쇼츠 미디어 파이프라인</span>
+│   ├── <span class="tree-dir-upper">DMDG_CURR/ · DMDG_DESIGN/ · DMDG_QUANTUM_ML/ · DMDG_RENEWAL/</span>
+│   ├── smartcar_lakehouse_book/  <span class="tree-desc"># 🚗 Book 22015 원본 원고 및 배포 스크립트</span>
+│   └── THREADs Site 관련/        <span class="tree-desc"># 🧵 Meta Threads Graph API 홍보 설계 및 전용 AGENTS.md</span>
 │
-├── <span class="tree-dir-lower">MD_dmdg_compl/</span>                <span class="tree-desc"># [MD_ 접두사] 완료된 프로젝트·연구·보고서 아카이브</span>
-│   ├── README_MIGRATION.md       <span class="tree-desc"># 마이그레이션 완료 기록</span>
-│   ├── README_PRJs.md            <span class="tree-desc"># 이전 프로젝트 종합 설명서</span>
-│   ├── research_modern_korean_dictionary.md <span class="tree-desc"># 현대 한국어 사전 연구 완결서</span>
-│   ├── WIKIDOCS_EBOOK_INSPECTION_REPORT.md  <span class="tree-desc"># 위키독스 전자책 검수 완결서</span>
-│   ├── WIKIDOCS_MONETIZATION_STRATEGY.md    <span class="tree-desc"># 위키독스 수익화 전략 보고서</span>
-│   ├── WIKIDOCS_NEW_BOOK_PROPOSALS.md       <span class="tree-desc"># 초기 신간 기획 제안서</span>
-│   └── AGENTS_ROOT.md            <span class="tree-desc"># 초기 에이전트 헌장 완결본</span>
+├── <span class="tree-dir-upper">.agents/</span>                      <span class="tree-desc"># 🤖 Antigravity 규칙(rules)·스킬(skills 15종)·초상화·텔레그램 관제</span>
+├── <span class="tree-dir-upper">scripts/</span>                      <span class="tree-desc"># 🛠️ 위키독스 발행, 블로그 자동화, 배포 유틸리티 스위트</span>
+├── <span class="tree-dir-upper">scripts_wikidocs/</span>             <span class="tree-desc"># 📝 위키독스/기술 블로그 마크다운 원본 (01~20편)</span>
+├── <span class="tree-dir-upper">assets/</span>                       <span class="tree-desc"># 🖼️ 공용 시각 에셋</span>
+├── <span class="tree-dir-upper">scratch/</span>                      <span class="tree-desc"># 🧪 파싱·분석용 임시 작업 파일</span>
+├── <span class="tree-dir-upper">_archive/</span>                     <span class="tree-desc"># 📦 구형 MD_ 폴더, demo_htmls_20261105, 백업, 레거시 격리 보관</span>
+├── <span class="tree-dir-upper">.streamlit/ · .vscode/</span>        <span class="tree-desc"># ⚙️ 실행 및 IDE 환경 설정</span>
 │
-├── <span class="tree-dir-upper">DMDG_PRJ/</span>                     <span class="tree-desc"># [ALL 대문자] 통합 프로젝트 마스터 디렉터리</span>
-│   ├── <span class="tree-dir-lower">dmdg_live_dot_com/</span>        <span class="tree-desc"># [all 소문자 Git 리포지토리] dmdg-live.com 대표 포털</span>
-│   ├── <span class="tree-dir-lower">dmdg_malssam_dot_com/</span>     <span class="tree-desc"># [all 소문자 Git 리포지토리] malssam.com 말쌈 대표</span>
-│   │
-│   ├── <span class="tree-dir-upper">DMDG_WIKIDOCS/</span>            <span class="tree-desc"># [위키독스 전자책/연구 원고 7대 프로젝트]</span>
-│   │   ├── 01_infographics_book  <span class="tree-desc"># [Book 21683] AI 데이터 분석_마스터 인포그래픽</span>
-│   │   ├── 02_ai_book_research   <span class="tree-desc"># [Book 21658] AI 와 데이터 분석 22대 실무</span>
-│   │   ├── 03_dmdg_studio        <span class="tree-desc"># [Book 21665] DMDG 스튜디오 컬렉션 (소담·당목담글·방법)</span>
-│   │   ├── 08_AI Service         <span class="tree-desc"># [Book 21695] 실전 LLM 서비스 &amp; 멀티 에이전트</span>
-│   │   ├── 09_ai_math_engineering <span class="tree-desc"># [Book 21701] AI·LLM 사전학습 (수학 &amp; 기초 엔지니어링)</span>
-│   │   ├── 11_future_wikidocs_trilogy <span class="tree-desc"># [Book 21746~21748] 미래 신간 3부작 완결본</span>
-│   │   └── 12. REA               <span class="tree-desc"># [Book 21781 외 4종] REA 모던 역공학 5대 도서 원고</span>
-│   │
-│   ├── <span class="tree-dir-upper">DMDG_YOUTUBE/</span>             <span class="tree-desc"># [공식 유튜브 영상 미디어 파이프라인]</span>
-│   │   └── 13. REA_YOUTUBE       <span class="tree-desc"># 풀HD 롱폼 영상, 쇼츠 4편, 오디오/프레임 런북</span>
-│   │
-│   ├── <span class="tree-dir-upper">DMDG_LIVE/</span>                <span class="tree-desc"># [실서버 배포 대화형 라이브 서비스 5대 소스]</span>
-│   │   ├── 10_korean_urban_dictionary <span class="tree-desc"># [malssam.com] 한글 어반 딕셔너리 말쌈 소스</span>
-│   │   ├── 04_smart_scm_mlops    <span class="tree-desc"># [dmdg-live.com] 스마트 SCM &amp; MLOps 대시보드</span>
-│   │   ├── 05_simulator_hub      <span class="tree-desc"># [dmdg-live.com] 22종 인터랙티브 시뮬레이터 허브</span>
-│   │   ├── 06_novels_ereader     <span class="tree-desc"># [dmdg-live.com] DMDG 서재 팩션 소설 E-Reader 뷰어</span>
-│   │   └── 07_telegram_agents    <span class="tree-desc"># [@aiffall_bot] Great AI 팀 텔레그램 실시간 관제 봇</span>
-│   │
-│   ├── <span class="tree-dir-upper">DMDG_CURR/</span>                <span class="tree-desc"># Antigravity IDE × REA 8주 취업 연계 정규 교육 과정</span>
-│   └── <span class="tree-dir-upper">DMDG_DESIGN/</span>              <span class="tree-desc"># 당목담글 공식 명함 인쇄본 및 브랜드 디자인 시안</span>
-│
-├── <span class="tree-dir-upper">.agents/</span>                      <span class="tree-desc"># [🤖 시스템] 12대 페르소나 자율 오케스트레이션, rules, skills, telegram 관제 센터</span>
-├── <span class="tree-dir-upper">scripts/</span>                      <span class="tree-desc"># [🛠️ 시스템] 전자책 빌더, 배포 파이프라인, 포털 인덱서 유틸리티 스위트 (112개)</span>
-├── <span class="tree-dir-upper">_archive/</span>                     <span class="tree-desc"># [📦 시스템] 과거 백업본, 데이터베이스 스냅샷 및 레거시 격리 보관소</span>
-├── <span class="tree-dir-upper">.vscode/</span>                      <span class="tree-desc"># [💻 시스템] Antigravity IDE &amp; VS Code 통합 환경 설정 settings.json</span>
-│
-├── temp_dmdg_live/               <span class="tree-desc"># [dmdg-live.com] 실서버 배포 전진기지 (루트 상태 유지)</span>
-├── workspace_hub.html            <span class="tree-desc"># [🏛️ 관제] 워크스페이스 구조 관제 타워</span>
-├── rules_hub.html                <span class="tree-desc"># [🛡️ 관제] 룰 &amp; 출판 운영 관제 타워</span>
-├── WORKSPACE_STRUCTURE.md        <span class="tree-desc"># [🏛️ 마스터] 워크스페이스 통합 마스터 구조도 (구 PROJECTS_STRUCTURE.md)</span>
-└── README.md                     <span class="tree-desc"># [📖 대문] 루트 대문 통합 인덱스 안내서</span>
-      </div>
+├── WORKSPACE_FOLDER_AND_FILE_GUIDE.md     <span class="tree-desc"># 🌟 최신 폴더 구조 및 주요 파일 마스터 설명서</span>
+├── README.md                              <span class="tree-desc"># 🏛️ DMDG 스튜디오 통합 대문 안내서</span>
+├── DMDG_WORKSPACE_AND_ARCHIVE_MANIFEST.md <span class="tree-desc"># 📦 2026-11-10 정리 매니페스트 &amp; 번들 목록</span>
+├── DMDG_20261110_DOWNLOAD_FILES_SUMMARY.md<span class="tree-desc"># ⬇️ 다운로드 폴더 백업 zip 요약서</span>
+├── WORKSPACE_STRUCTURE.md · PROJECTS_STRUCTURE.md
+└── .env · .gitignore</div>
     </div>
 
     <!-- TOAST -->
@@ -994,9 +815,8 @@
         document.getElementById('tab-grid').style.display = 'block';
         document.getElementById('tab-tree').style.display = 'none';
 
-        // Filter cards by category
         document.querySelectorAll('.dir-card').forEach(card => {
-          const cats = card.getAttribute('data-category').split(' ');
+          const cats = (card.getAttribute('data-category') || '').split(' ');
           if (tabId === 'all' || cats.includes(tabId)) {
             card.style.display = 'flex';
           } else {
@@ -1009,13 +829,11 @@
     // Live Search Filter
     document.getElementById('dirSearch').addEventListener('input', function(e) {
       const q = e.target.value.toLowerCase().trim();
+      document.getElementById('tab-grid').style.display = 'block';
+      document.getElementById('tab-tree').style.display = 'none';
       document.querySelectorAll('.dir-card').forEach(card => {
         const text = (card.innerText + ' ' + (card.getAttribute('data-name') || '')).toLowerCase();
-        if (!q || text.includes(q)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display = (!q || text.includes(q)) ? 'flex' : 'none';
       });
     });
 
@@ -1023,7 +841,7 @@
     function copyPath(text) {
       navigator.clipboard.writeText(text).then(() => {
         showToast('📋 경로 복사 완료: ' + text);
-      }).catch(err => {
+      }).catch(() => {
         showToast('❌ 복사 실패');
       });
     }

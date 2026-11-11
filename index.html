@@ -23,8 +23,8 @@
 
   <!-- Core CSS (Cache Busting v4 - 5 cards limit) -->
   <!-- 16:9 Ambient Aurora Glassmorphism Masterpiece Theme -->
-  <link rel="stylesheet" href="./aurora_theme.css?v=20261106_masterpiece">
   <link rel="stylesheet" href="./style.css?v=20261021_5cards_limit">
+  <link rel="stylesheet" href="./aurora_theme.css?v=20261111_restore">
   <!-- Firebase & Real-time Analytics SDK (Non-blocking defer) -->
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -81,7 +81,7 @@
     <!-- ── 0. Top Header ──────────────────────────────────────── -->
     <header class="portal-top-header">
       <a href="./index.html" class="header-brand-wrap" title="DMDG LIVE 포털 홈">
-        <img src="./assets/dmdg_emblem_circle.png" alt="DMDG 당목담글 정통 엠블럼" class="brand-emblem-circle">
+        <img src="./assets/dmdg_logo_emblem.png" alt="DMDG 당목담글 정통 엠블럼" class="brand-emblem-circle">
         <div class="brand-title-box">
           <span class="brand-title-dmdg">DMDG</span>
           <span class="brand-title-platform">Platform</span>
@@ -112,10 +112,10 @@
 
     <!-- ── 1. Hero Audio Studio ──────────────────────────────── -->
     <section class="hero-audio-studio-card">
-      <div class="studio-badge-label">🎧 7대 핵심 플랫폼 앰비언트 사운드 & krompt 쇼케이스</div>
+      <div class="studio-badge-label">🎧 7대 핵심 플랫폼 앰비언트 사운드 & Prompt 쇼케이스</div>
       <h1 class="studio-main-slogan">기술과 사람의 마음을 잇는 가장 따뜻한 목소리 플랫폼</h1>
       <p style="text-align: center; font-size: 0.88rem; color: #94a3b8; margin: -0.4rem auto 1.25rem; max-width: 680px;">
-        원하는 탭을 클릭해 각 서비스의 음향 테마와 감성 krompt를 미리 듣고, 아래 바로가기 버튼으로 직접 입장하세요.
+        원하는 탭을 클릭해 각 서비스의 음향 테마와 감성 Prompt를 미리 듣고, 아래 바로가기 버튼으로 직접 입장하세요.
       </p>
 
       <!-- 7-Relay Tabs -->
@@ -137,7 +137,7 @@
         </div>
         <div class="quote-ambient-card" style="display: flex; flex-direction: column; justify-content: space-between;">
           <div>
-            <div class="quote-label" id="heroRelayLabel">Sample krompt:</div>
+            <div class="quote-label" id="heroRelayLabel">Sample Prompt:</div>
             <p class="quote-text" id="heroRelayText">“마음을 전하는 목소리,<br>따뜻함을 나누는 시간…”</p>
           </div>
           <div style="margin-top: 0.75rem;">
@@ -151,7 +151,7 @@
       <!-- Studio Wave Controls (대표님 직관적 명세 100% 반영) -->
       <!-- Studio Wave Controls (대표님 직관적 명세 100% 반영: Play=오른쪽문구낭독, 가운데마이크=녹음시작/완료, Replay=녹음내용다시듣기) -->
       <div class="studio-wave-controls">
-        <button class="ctrl-btn" id="btnWavePlayPause" onclick="toggleHeroWave()" title="오른쪽 krompt 문구를 실제 한국어 음성으로 낭독합니다">
+        <button class="ctrl-btn" id="btnWavePlayPause" onclick="toggleHeroWave()" title="오른쪽 Prompt 문구를 실제 한국어 음성으로 낭독합니다">
           <span class="ctrl-icon">▶</span>
           <div class="ctrl-label-box">
             <span class="ctrl-main-text">Play</span>
@@ -175,7 +175,7 @@
 
       <!-- 3대 컨트롤 역할 직관 가이드 팁바 -->
       <div class="flex items-center justify-center gap-4 text-[12px] text-slate-400 mt-3 px-4 py-1.5 rounded-full bg-slate-900/60 border border-slate-800/80 mx-auto max-w-xl">
-        <span class="flex items-center gap-1.5"><strong class="text-amber-400">▶ Play:</strong> 우측 krompt 낭독</span>
+        <span class="flex items-center gap-1.5"><strong class="text-amber-400">▶ Play:</strong> 우측 Prompt 낭독</span>
         <span class="text-slate-600">|</span>
         <span class="flex items-center gap-1.5"><strong class="text-rose-400">🎙️ 마이크:</strong> 내 목소리 녹음</span>
         <span class="text-slate-600">|</span>
@@ -312,26 +312,28 @@
       })();
 
       // 3. 7-Relay Hero Audio Studio 3대 버튼 엔진 (대표님 직관적 명세 100% 구현)
-      let heroKromptSpeaking = false;
+      let heroPromptSpeaking = false;
+      const HERO_PLAY_BTN_HTML = '<span class="ctrl-icon">▶</span><div class="ctrl-label-box"><span class="ctrl-main-text">Play</span><span class="ctrl-sub-desc">우측 문구 낭독</span></div>';
+      const HERO_PAUSE_BTN_HTML = '<span class="ctrl-icon">⏸</span><div class="ctrl-label-box"><span class="ctrl-main-text">Pause</span><span class="ctrl-sub-desc">낭독 중지</span></div>';
 
-      // 1) Play 버튼: 오른쪽 krompt 문구를 실제 한국어 음성(TTS)으로 낭독
+      // 1) Play 버튼: 오른쪽 Prompt 문구를 실제 한국어 음성(TTS)으로 낭독
       window.toggleHeroWave = function () {
         const btn = document.getElementById('btnWavePlayPause');
         const txtEl = document.getElementById('heroRelayText');
         const textToRead = txtEl ? txtEl.textContent.replace(/“|”/g, '').trim() : "마음을 전하는 목소리, 따뜻함을 나누는 시간입니다.";
 
-        if (heroKromptSpeaking) {
+        if (heroPromptSpeaking) {
           if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-          heroKromptSpeaking = false;
+          heroPromptSpeaking = false;
           window.heroWaveIntensity = 1.0;
-          if (btn) btn.innerHTML = '<span>▶</span> Play (문구 낭독)';
+          if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
           return;
         }
 
-        heroKromptSpeaking = true;
+        heroPromptSpeaking = true;
         window.heroWavePlaying = true;
         window.heroWaveIntensity = 1.6;
-        if (btn) btn.innerHTML = '<span>⏸</span> Pause (낭독 중)';
+        if (btn) btn.innerHTML = HERO_PAUSE_BTN_HTML;
         playTone(523.25, 0.15);
 
         if ('speechSynthesis' in window) {
@@ -340,21 +342,21 @@
           utt.lang = 'ko-KR';
           utt.rate = 0.95;
           utt.onend = () => {
-            heroKromptSpeaking = false;
+            heroPromptSpeaking = false;
             window.heroWaveIntensity = 1.0;
-            if (btn) btn.innerHTML = '<span>▶</span> Play (문구 낭독)';
+            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
           };
           utt.onerror = () => {
-            heroKromptSpeaking = false;
+            heroPromptSpeaking = false;
             window.heroWaveIntensity = 1.0;
-            if (btn) btn.innerHTML = '<span>▶</span> Play (문구 낭독)';
+            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
           };
           window.speechSynthesis.speak(utt);
         } else {
           setTimeout(() => {
-            heroKromptSpeaking = false;
+            heroPromptSpeaking = false;
             window.heroWaveIntensity = 1.0;
-            if (btn) btn.innerHTML = '<span>▶</span> Play (문구 낭독)';
+            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
           }, 3500);
         }
       };
@@ -374,7 +376,7 @@
 
       const RELAY_QUOTES_DATA = {
         'voice': {
-          label: '마음잇기 보이스 krompt:',
+          label: '마음잇기 보이스 Prompt:',
           text: '“마음을 전하는 목소리, 따뜻함을 나누는 시간…”',
           theme: 'sunset',
           btnText: '🎙️ 마음잇기 웹앱 바로가기 ➔',
@@ -382,7 +384,7 @@
           isExternal: false
         },
         'sodam': {
-          label: '소담 힐링 krompt:',
+          label: '소담 힐링 Prompt:',
           text: '“지친 마음에 따스한 온기를 건네는 포근한 힐링 대화…”',
           theme: 'emerald',
           btnText: '🌸 소담 라이브 바로가기 ➔',
@@ -390,7 +392,7 @@
           isExternal: true
         },
         'malssam': {
-          label: '말쌈 우리말 사전 krompt:',
+          label: '말쌈 우리말 사전 Prompt:',
           text: '“세대와 국경을 넘어 바른 우리말로 잇는 소통의 다리…”',
           theme: 'cyber',
           btnText: '🗣️ 말쌈 PWA 사전 바로가기 ➔',
@@ -398,7 +400,7 @@
           isExternal: true
         },
         'novels': {
-          label: 'DMDG 서재관 krompt:',
+          label: 'DMDG 서재관 Prompt:',
           text: '“삶은 개구리 트릴로지와 감성 팩션 소설의 깊은 여운…”',
           theme: 'sunset',
           btnText: '📖 서재관 도서·소설 읽기 ➔',
@@ -406,7 +408,7 @@
           isExternal: false
         },
         'aces': {
-          label: 'A.C.E.S 직무진단 krompt:',
+          label: 'A.C.E.S 직무진단 Prompt:',
           text: '“LG CNS/빅데이터 역량 정량화와 최적 IT/AI 커리어 패스…”',
           theme: 'emerald',
           btnText: '🎯 직무 추천 진단 시작하기 ➔',
@@ -414,7 +416,7 @@
           isExternal: false
         },
         'techlib': {
-          label: '6대 AI 기술도서관 krompt:',
+          label: '6대 AI 기술도서관 Prompt:',
           text: '“엔터프라이즈 AI 아키텍처와 LLMOps 엔지니어링 실무…”',
           theme: 'cyber',
           btnText: '📚 6대 기술도서관 열람하기 ➔',
@@ -422,7 +424,7 @@
           isExternal: false
         },
         'blog': {
-          label: '위키독스 공식블로그 krompt:',
+          label: '위키독스 공식블로그 Prompt:',
           text: '“기술과 사람을 잇는 당목담글의 성장과 릴리즈 스토리…”',
           theme: 'sunset',
           btnText: '📝 위키독스 공식블로그 방문 ➔',

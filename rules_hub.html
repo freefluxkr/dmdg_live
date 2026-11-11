@@ -216,9 +216,10 @@
     .card-checklist li {
       padding: 5px 0;
       color: #94a3b8;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      display: block;
+      line-height: 1.55;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
     }
     .card-checklist li strong {
       color: #e2e8f0;
@@ -285,7 +286,9 @@
           <span>🔍</span>
           <input type="text" id="ruleSearch" placeholder="규칙, 목차, MD 파일, 배포 검색...">
         </div>
-        <a href="workspace_hub.html" class="btn-nav-ws">🏛️ Workspace Hub 열기 ➔</a>
+        <a href="index.html" class="btn-nav-ws">🏠 포털 홈 ➔</a>
+        <a href="workspace_hub.html" class="btn-nav-ws">🏛️ Workspace Hub ➔</a>
+        <a href="sim_master_hub.html" class="btn-nav-ws">🎮 Sim Hub ➔</a>
       </div>
     </header>
 
@@ -462,14 +465,14 @@
           <div class="card-header">
             <span class="card-num">RULE 15 ⭐</span>
           </div>
-          <div class="card-title">🗂️ 워크스페이스 MD_ 접두사, Git 소문자 &amp; DMDG_PRJ 강령</div>
-          <p class="card-desc">루트 디렉터리 청결과 정합성을 위해 4대 마크다운(MD_ 접두사), Git 리포지토리(all 소문자) 및 프로젝트 모듈(DMDG_) 표준을 적용합니다:</p>
+          <div class="card-title">🗂️ DMDG_RULEs · DMDG_PLANs · DMDG_PRJ 통합 표준</div>
+          <p class="card-desc">루트 청결과 탐색 효율을 위해 규칙(DMDG_RULEs), 계획(DMDG_PLANs), 사업 프로젝트(DMDG_PRJ) 3대 표준 디렉터리와 Git 소문자·모듈 대문자 규격을 적용합니다:</p>
           <ul class="card-checklist">
-            <li>1. <strong>MD_ 접두사 필수</strong>: MD_todo_lst, MD_session, MD_dmdg_svc, MD_dmdg_compl</li>
-            <li>2. <strong>Git 리포지토리 소문자 구분</strong>: DMDG_PRJ 내 Git 저장소(dmdg_live_dot_com, dmdg_malssam_dot_com)는 all 소문자로 일반 모듈과 구분</li>
-            <li>3. <strong>디자인 자산 단일화</strong>: 명함 &amp; 브랜드 시안 폴더를 <strong>DMDG_DESIGN</strong>으로 단일화</li>
-            <li>4. <strong>프로젝트 모듈 표준</strong>: DMDG_WIKIDOCS, DMDG_YOUTUBE, DMDG_LIVE, DMDG_CURR, DMDG_DESIGN</li>
-            <li>5. <strong>루트 상시 보존</strong>: README.md, WORKSPACE_STRUCTURE.md, 양대 관제 허브(rules_hub.html, workspace_hub.html), temp_dmdg_live</li>
+            <li>1. <strong>DMDG_RULEs/</strong>: 상시 공통 규칙(00_common 2종) + 조건부 작업별 규칙(01_tasks 6종) 분리 관리</li>
+            <li>2. <strong>DMDG_PLANs/</strong>: 전사 로드맵, 세션 체크포인트, 02_project_plans/ 세부 기획서 통합</li>
+            <li>3. <strong>Git vs 일반 모듈</strong>: Git 저장소(dmdg_live_dot_com, dmdg_malssam_dot_com)는 all 소문자, 일반 모듈은 ALL 대문자 + DMDG_</li>
+            <li>4. <strong>구형 MD_ &amp; 데모 HTML</strong>: _archive/(legacy_md_dirs_20261105, demo_htmls_20261105)로 정식 격리 보관</li>
+            <li>5. <strong>루트 &amp; 관제 허브</strong>: 루트엔 WORKSPACE_FOLDER_AND_FILE_GUIDE.md 등 마스터 안내서만 유지, 4대 Hub HTML은 dmdg_live_dot_com/에서 일원 관리</li>
           </ul>
         </div>
 
