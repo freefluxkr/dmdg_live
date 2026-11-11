@@ -271,12 +271,19 @@ body[data-motif="grid"] header::before {
     color: #ffffff !important;
   }
 
+  body.voice-aurora-body .bg-slate-900\/50,
   body.voice-aurora-body .bg-slate-900\/70,
   body.voice-aurora-body .bg-slate-900\/80,
   body.voice-aurora-body .bg-white\/5,
   body.voice-aurora-body .bg-white\/10 {
-    background: rgba(255, 255, 255, 0.72) !important;
+    background: rgba(255, 250, 245, 0.88) !important;
     border-color: rgba(205, 46, 58, 0.16) !important;
+  }
+
+  body.voice-aurora-body #relay-count {
+    background: rgba(205, 46, 58, 0.10) !important;
+    color: #b91c1c !important;
+    border-color: rgba(205, 46, 58, 0.25) !important;
   }
 
   body.voice-aurora-body select,
