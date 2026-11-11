@@ -23,8 +23,8 @@
 
   <!-- Core CSS (Cache Busting v4 - 5 cards limit) -->
   <!-- 16:9 Ambient Aurora Glassmorphism Masterpiece Theme -->
-  <link rel="stylesheet" href="./style.css?v=20261111_c109d30_restored">
-
+  <link rel="stylesheet" href="./style.css?v=20261021_5cards_limit">
+  <link rel="stylesheet" href="./hanji_bento_theme.css?v=20261111_hanji_bento">
   <!-- Firebase & Real-time Analytics SDK (Non-blocking defer) -->
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -32,7 +32,7 @@
   <script defer src="js/analytics.js"></script>
 </head>
 
-<body>
+<body class="hanji-bento-body">
   <script>console.log('>>> BODY STARTED <<<');</script>
 
   <!-- =======================================================================
@@ -77,1445 +77,838 @@
        Top Header (Mockup 1 & 3 Navigation Bar)
        ======================================================================= -->
 
-    <header class="top-header">
-      <a href="./index.html" class="header-brand" title="DMDG LIVE 포털 홈">
-        <img src="./assets/dmdg_logo_emblem.png" alt="DMDG 당목담글 엠블럼" class="brand-emblem-small">
-        <div class="brand-title-wrap">
-          <span class="brand-main-text">DMDG(당목담글)</span>
-          <span class="brand-sub-text">DMDG LIVE 통합 서비스 허브</span>
+  <div class="portal-main-wrapper">
+    <!-- ── 0. Top Header ──────────────────────────────────────── -->
+    <header class="portal-top-header">
+      <a href="./index.html" class="header-brand-wrap" title="DMDG LIVE 포털 홈">
+        <img src="./assets/dmdg_logo_emblem.png" alt="DMDG 당목담글 정통 엠블럼" class="brand-emblem-circle">
+        <div class="brand-title-box">
+          <span class="brand-title-dmdg">DMDG(당목담글)</span>
+          <span class="brand-title-platform">DMDG LIVE 통합 서비스 허브</span>
         </div>
       </a>
 
-      <!-- Mockup 3 Header Search Box -->
-      <div class="header-search">
-        <span>🔍</span>
+      <!-- Real-time Live Search Input -->
+      <div class="portal-search-box">
+        <span class="search-icon">🔍</span>
         <input type="text" id="liveSearchInput" placeholder="서비스, 시뮬레이터, 도서 실시간 검색...">
       </div>
 
-      <!-- Quick Navigation Links (High Contrast Solid Pill Buttons) -->
-      <nav class="header-nav">
-        <a href="./voice.html" class="nav-link-btn"
-          style="background: linear-gradient(135deg, #CD2E3A, #e8532b) !important; color: #FFFFFF !important; border: 1.5px solid #CD2E3A !important; box-shadow: 0 2px 8px rgba(205,46,58,0.25) !important;">
-          <span style="color: #FFFFFF !important; font-weight: 800 !important;">🎙️ 마음잇기</span>
-        </a>
-        <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer" class="nav-link-btn"
-          style="background: #FFFFFF !important; color: #0F766E !important; border: 1.5px solid #0D9488 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;">
-          <span style="color: #0F766E !important; font-weight: 800 !important;">🌸 소담 라이브</span>
-        </a>
-        <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-link-btn highlight"
-          style="background: linear-gradient(135deg, #F77F00, #E85D04) !important; color: #FFFFFF !important; border: 1.5px solid #F77F00 !important;">
-          <span style="color: #FFFFFF !important; font-weight: 800 !important;">🗣️ 말쌈관</span>
-        </a>
-        <a href="./novels.html" class="nav-link-btn"
-          style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.14) !important;">
-          <span style="color: #0B1B3D !important; font-weight: 800 !important;">📖 서재관</span>
-        </a>
-        <a href="./books.html" class="nav-link-btn"
-          style="background: #FFFFFF !important; color: #5B21B6 !important; border: 1.5px solid #7C3AED !important; box-shadow: 0 2px 8px rgba(0,0,0,0.14) !important;">
-          <span style="color: #5B21B6 !important; font-weight: 800 !important;">📚 위키북스</span>
-        </a>
-        <a href="#panel-exams" class="nav-link-btn"
-          style="background: linear-gradient(135deg, #2563EB, #0284C7) !important; color: #FFFFFF !important; border: 1.5px solid #2563EB !important; box-shadow: 0 2px 8px rgba(37,99,235,0.28) !important;">
-          <span style="color: #FFFFFF !important; font-weight: 800 !important;">🎯 직무진단</span>
-        </a>
-        <a href="./admin.html" class="nav-link-btn"
-          style="background: rgba(15,23,42,0.88) !important; color: #F8FAFC !important; border: 1.5px solid #334155 !important;">
-          <span style="color: #F8FAFC !important; font-weight: 800 !important;">🔒 관리자</span>
-        </a>
+      <!-- Quick Navigation Buttons (일반 방문자 / 관리자 모드 동적 전환) -->
+      <nav class="portal-header-nav" id="portalHeaderNav">
+        <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn"
+          style="border-color: #f59e0b; color: #fde68a;">🗣️ 말쌈관</a>
+        <a href="./novels.html" class="nav-pill-btn" style="border-color: #38bdf8; color: #bae6fd;">📖 서재관</a>
+        <a href="./books.html" target="_blank" rel="noopener noreferrer" class="nav-pill-btn"
+          style="border-color: #9333ea; color: #e9d5ff;">📚 위키북스</a>
+        <button type="button" onclick="openCareerModal()" class="nav-pill-btn"
+          style="border-color: #06b6d4; color: #a5f3fc;">🎯 직무진단</button>
+        <a href="./voice.html" class="nav-pill-btn" style="border-color: #ec4899; color: #f472b6;">🎙️ 마음잇기</a>
+        <!-- 관리자 전용 보안 관제 센터 버튼 -->
+        <button type="button" onclick="promptAdminAccess()" class="nav-pill-btn active-glow"
+          style="border-color: #38bdf8; color: #38bdf8;" title="최고 관리자 전용 관제 센터">🔒 Admin</button>
       </nav>
     </header>
 
-    <!-- =======================================================================
-       Hero Centerpiece (Mockup 1 Signature: Emblem & Bold Slogan)
-       ======================================================================= -->
-    <section class="hero-centerpiece">
-      <div class="hero-emblem-large">
-        <img src="./assets/dmdg_emblem_hq.png" alt="당목담글 원형 엠블럼">
+    <!-- ── 1. Hero Audio Studio ──────────────────────────────── -->
+    <section class="hero-audio-studio-card">
+      <div class="studio-badge-label">🎧 7대 핵심 플랫폼 앰비언트 사운드 & Prompt 쇼케이스</div>
+      <h1 class="studio-main-slogan">기술과 사람의 마음을 잇는 세상에서 가장 따뜻한 <span class="slogan-highlight">목소리 플랫폼</span></h1>
+      <p class="studio-slogan-en">Connecting technology and the human heart – The warmest voice platform.</p>
+      <p class="studio-sub-guide">
+        원하는 탭을 클릭해 각 서비스의 음향 테마와 감성 Prompt를 미리 듣고, 아래 바로가기 버튼으로 직접 입장하세요.
+      </p>
+
+      <!-- 7-Relay Tabs -->
+      <div class="studio-tabs-row">
+        <button class="studio-tab-btn active" onclick="switchRelayTab('voice', event)">🎙️ 마음잇기</button>
+        <button class="studio-tab-btn" onclick="switchRelayTab('sodam', event)">🌸 소담</button>
+        <button class="studio-tab-btn" onclick="switchRelayTab('malssam', event)">🗣️ 말쌈</button>
+        <button class="studio-tab-btn" onclick="switchRelayTab('novels', event)">📖 서재</button>
+        <button class="studio-tab-btn" onclick="switchRelayTab('aces', event)">🎯 ACES</button>
+        <button class="studio-tab-btn" onclick="switchRelayTab('techlib', event)">📚 기술도서관</button>
+        <button class="studio-tab-btn" onclick="switchRelayTab('blog', event)">📝 공식블로그</button>
       </div>
-      <div class="hero-text-block">
-        <h1 class="hero-slogan-main">
-          기술과 사람의 마음을 잇는<br>
-          세상에서 가장 따뜻한 <span style="background: linear-gradient(135deg, #F77F00, #E85D04); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">목소리 플랫폼</span>
-        </h1>
-        <div class="hero-slogan-en">
-          Connecting technology and the human heart – The warmest voice platform.
+
+      <!-- 60fps Sunset Wave Canvas & Ambient Quote Card -->
+      <div class="wave-quote-container">
+        <div class="wave-canvas-wrap">
+          <canvas id="sunsetWaveCanvas" width="720" height="120"
+            style="width: 100%; height: 100%; display: block;"></canvas>
         </div>
-        <div class="hero-slogan-sub">
-          소중한 당신의 기술과 목소리로 다음 이야기를 들려주세요 — DMDG(당목담글) LIVE
+        <div class="quote-ambient-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="quote-label" id="heroRelayLabel">Sample Prompt:</div>
+            <p class="quote-text" id="heroRelayText">“마음을 전하는 목소리,<br>따뜻함을 나누는 시간…”</p>
+          </div>
+          <div style="margin-top: 0.75rem;">
+            <a href="./voice.html" id="heroRelayDirectBtn" class="pill-action-btn pill-pink" style="display: inline-flex; text-decoration: none; padding: 0.45rem 1rem; font-size: 0.82rem; font-weight: 800; border-radius: 8px; width: 100%; justify-content: center;">
+              <span>🎙️ 마음잇기 웹앱 바로가기 ➔</span>
+            </a>
+          </div>
         </div>
-        <div style="margin-top: 1.25rem;">
-          <button onclick="openCourseModal()"
-            style="background: rgba(15, 23, 42, 0.08); border: 1.5px solid #64748b; color: #1e293b; padding: 0.65rem 1.45rem; border-radius: 9999px; font-size: 0.92rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"
-            onmouseover="this.style.background='#1e293b'; this.style.color='#fff';"
-            onmouseout="this.style.background='rgba(15, 23, 42, 0.08)'; this.style.color='#1e293b';">
-            <span>🏁 [수강 접수 마감] Antigravity IDE × REA 모던 역공학 &amp; 클린룸 재구현 과정</span>
-            <span
-              style="background: linear-gradient(135deg, #475569, #334155); color: #fff; padding: 0.18rem 0.65rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 900; margin-left: 0.25rem; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">정원
-              초과 조기 마감 완료 (성원에 감사드립니다) ➔</span>
-          </button>
-        </div>
+      </div>
+
+      <!-- Studio Wave Controls (대표님 직관적 명세 100% 반영) -->
+      <!-- Studio Wave Controls (대표님 직관적 명세 100% 반영: Play=오른쪽문구낭독, 가운데마이크=녹음시작/완료, Replay=녹음내용다시듣기) -->
+      <div class="studio-wave-controls">
+        <button class="ctrl-btn" id="btnWavePlayPause" onclick="toggleHeroWave()" title="오른쪽 Prompt 문구를 실제 한국어 음성으로 낭독합니다">
+          <span class="ctrl-icon">▶</span>
+          <div class="ctrl-label-box">
+            <span class="ctrl-main-text">Play</span>
+            <span class="ctrl-sub-desc">우측 문구 낭독</span>
+          </div>
+        </button>
+
+        <button class="ctrl-mic-big" id="btnHeroMic" title="클릭하여 내 목소리 녹음 시작 / 완료" onclick="toggleHeroRecording()">
+          <span class="mic-icon">🎙️</span>
+          <span class="mic-badge" id="heroMicBadge">녹음 시작</span>
+        </button>
+
+        <button class="ctrl-btn" id="btnWaveReplay" onclick="replayHeroWave()" title="방금 녹음한 내 목소리를 다시 듣습니다">
+          <span class="ctrl-icon">🔄</span>
+          <div class="ctrl-label-box">
+            <span class="ctrl-main-text">Replay</span>
+            <span class="ctrl-sub-desc">내 목소리 다시듣기</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- 3대 컨트롤 역할 직관 가이드 팁바 -->
+      <div class="flex items-center justify-center gap-4 text-[12px] text-slate-400 mt-3 px-4 py-1.5 rounded-full bg-slate-900/60 border border-slate-800/80 mx-auto max-w-xl">
+        <span class="flex items-center gap-1.5"><strong class="text-amber-400">▶ Play:</strong> 우측 Prompt 낭독</span>
+        <span class="text-slate-600">|</span>
+        <span class="flex items-center gap-1.5"><strong class="text-rose-400">🎙️ 마이크:</strong> 내 목소리 녹음</span>
+        <span class="text-slate-600">|</span>
+        <span class="flex items-center gap-1.5"><strong class="text-emerald-400">🔄 Replay:</strong> 녹음 내용 다시듣기</span>
+      </div>
+      <p style="font-size: 0.76rem; color: #94a3b8; margin: 0.55rem auto 0; text-align: center;">
+        📱 아이폰(iOS)에서 낭독 소리가 들리지 않으면 <strong>측면 무음(진동) 스위치를 해제</strong>하거나 <strong>알림/미디어 소리</strong>를 켜주세요.
+      </p>
+    </section>
+
+    <!-- ── 2. Karaoke & 4 Action Buttons Card (독립 레이어, 잔상 0%) ──── -->
+    <section class="karaoke-action-card">
+      <div class="karaoke-word-box" id="karaokeTextBox">
+        나의 다정한 한마디 <span class="neon-pink-highlight">[ 목소리가, ]</span> 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
+        <a href="./voice.html" class="pill-action-btn pill-pink flex items-center gap-2 px-6 py-2.5 text-sm font-bold shadow-lg shadow-pink-500/20 hover:scale-105 transition-all">
+          <span>🎙️</span> 마음잇기 보이스 릴레이 전체 녹음 &amp; 오디오북 참여하기 ➔
+        </a>
       </div>
     </section>
 
-    <!-- =======================================================================
-       Main Dashboard: 3-Column Panels (Mockup 3 Layout)
-       Column 1: LIVE WEB APPS
-       Column 2: INTERACTIVE SIMULATORS
-       Column 3: WIKIBOOKS (Movie Scenarios 대신 위키북스 탑재)
-       ======================================================================= -->
-    <main class="main-dashboard">
-      <!-- ===================================================================
-         CATEGORY: COMPETENCY ASSESSMENT HUB · 실무 역량 평가 센터 (4종)
-         =================================================================== -->
-      <section class="dash-panel" id="panel-exams"
-        style="margin-bottom: 1.5rem; border: 1.5px solid rgba(37, 99, 235, 0.22); background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.96) 100%);">
-        <div class="panel-header" style="border-bottom: 2px solid rgba(37, 99, 235, 0.12);">
-          <div class="panel-title">
-            <span>🎯</span> 실무 역량 평가 &amp; 커리어 진단 센터 (A.C.E.S HUB)
-          </div>
-          <span class="panel-count-badge"
-            style="background: #EFF6FF; border-color: #BFDBFE; color: #1D4ED8; font-weight: 800;">2026 무료 프로모션</span>
+    <!-- ── 100% 무결점 60fps Sunset Glow 오디오 캔버스 & 가라오케 사운드 엔진 ── -->
+    <script>
+      // 1. Web Audio API 사운드 신디사이저 (맑고 따뜻한 차임 & 화음 멜로디)
+      let webAudioCtx = null;
+      function getAudioCtx() {
+        if (!webAudioCtx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) webAudioCtx = new AC();
+        }
+        if (webAudioCtx && webAudioCtx.state === 'suspended') {
+          webAudioCtx.resume();
+        }
+        return webAudioCtx;
+      }
+
+      function playTone(freq, duration, gainVal = 0.12) {
+        try {
+          const ctx = getAudioCtx();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(gainVal, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + duration);
+        } catch (e) { }
+      }
+
+      function playWarmMelody() {
+        const notes = [261.63, 329.63, 392.00, 523.25, 587.33]; // C, E, G, C, D
+        notes.forEach((f, i) => {
+          setTimeout(() => playTone(f, 0.45, 0.1), i * 180);
+        });
+      }
+
+      // 2. 60fps Sunset Glow 캔버스 렌더러 (절대 죽지 않는 100% 무적 엔진)
+      window.heroWavePlaying = true;
+      window.heroWaveIntensity = 1.0;
+      window.heroWavePhase = 0;
+      window.heroWaveTheme = 'sunset';
+
+      (function initCanvasEngine() {
+        const cv = document.getElementById('sunsetWaveCanvas');
+        if (!cv) return;
+        const ctx = cv.getContext('2d');
+        if (!ctx) return;
+
+        function resize() {
+          const w = cv.parentElement ? cv.parentElement.clientWidth : 720;
+          cv.width = w > 100 ? w : 720;
+          cv.height = 120;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function drawFrame() {
+          try {
+            const w = cv.width || 720;
+            const h = cv.height || 120;
+            ctx.clearRect(0, 0, w, h);
+
+            const cy = h / 2;
+            const bars = 48;
+            const bw = Math.max(4, (w / bars) * 0.52);
+            const gap = Math.max(3, (w / bars) * 0.48);
+
+            // 5중 그라디언트 테마
+            const grad = ctx.createLinearGradient(0, cy - 45, 0, cy + 45);
+            if (window.heroWaveTheme === 'sunset') {
+              grad.addColorStop(0, '#f59e0b');
+              grad.addColorStop(0.5, '#ec4899');
+              grad.addColorStop(1, '#8b5cf6');
+            } else if (window.heroWaveTheme === 'emerald') {
+              grad.addColorStop(0, '#34d399');
+              grad.addColorStop(0.5, '#06b6d4');
+              grad.addColorStop(1, '#3b82f6');
+            } else {
+              grad.addColorStop(0, '#a855f7');
+              grad.addColorStop(0.5, '#f43f5e');
+              grad.addColorStop(1, '#f59e0b');
+            }
+            ctx.fillStyle = grad;
+
+            for (let i = 0; i < bars; i++) {
+              const x = i * (bw + gap) + gap / 2;
+              let amp;
+              if (window.heroWavePlaying) {
+                amp = (0.35 + 0.55 * Math.sin(window.heroWavePhase + i * 0.18) * Math.cos(window.heroWavePhase * 0.8 + i * 0.08)) * window.heroWaveIntensity;
+              } else {
+                amp = 0.18 + 0.08 * Math.sin(i * 0.35);
+              }
+              amp = Math.max(0.12, Math.min(1.45, amp));
+              const bh = Math.max(8, amp * (h * 0.74));
+              const y = cy - bh / 2;
+
+              // 무결점 직사각형 바 렌더링 (절대 에러 없음)
+              ctx.fillRect(x, y, bw, bh);
+            }
+
+            if (window.heroWavePlaying) {
+              window.heroWavePhase += 0.045;
+            }
+          } catch (e) {
+            console.warn('Canvas render notice:', e);
+          }
+          requestAnimationFrame(drawFrame);
+        }
+        requestAnimationFrame(drawFrame);
+
+        cv.onclick = function () { window.toggleHeroWave(); };
+      })();
+
+      // 3. 7-Relay Hero Audio Studio 3대 버튼 엔진 (대표님 직관적 명세 100% 구현)
+      let heroPromptSpeaking = false;
+      const HERO_PLAY_BTN_HTML = '<span class="ctrl-icon">▶</span><div class="ctrl-label-box"><span class="ctrl-main-text">Play</span><span class="ctrl-sub-desc">우측 문구 낭독</span></div>';
+      const HERO_PAUSE_BTN_HTML = '<span class="ctrl-icon">⏸</span><div class="ctrl-label-box"><span class="ctrl-main-text">Pause</span><span class="ctrl-sub-desc">낭독 중지</span></div>';
+
+      // 1) Play 버튼: 오른쪽 Prompt 문구를 실제 한국어 음성(TTS)으로 낭독
+      window.toggleHeroWave = function () {
+        const btn = document.getElementById('btnWavePlayPause');
+        const txtEl = document.getElementById('heroRelayText');
+        const textToRead = txtEl ? txtEl.textContent.replace(/“|”/g, '').trim() : "마음을 전하는 목소리, 따뜻함을 나누는 시간입니다.";
+
+        if (heroPromptSpeaking) {
+          if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+          heroPromptSpeaking = false;
+          window.heroWaveIntensity = 1.0;
+          if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
+          return;
+        }
+
+        heroPromptSpeaking = true;
+        window.heroWavePlaying = true;
+        window.heroWaveIntensity = 1.6;
+        if (btn) btn.innerHTML = HERO_PAUSE_BTN_HTML;
+        playTone(523.25, 0.15);
+
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utt = new SpeechSynthesisUtterance(textToRead);
+          utt.lang = 'ko-KR';
+          utt.rate = 0.95;
+          utt.onend = () => {
+            heroPromptSpeaking = false;
+            window.heroWaveIntensity = 1.0;
+            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
+          };
+          utt.onerror = () => {
+            heroPromptSpeaking = false;
+            window.heroWaveIntensity = 1.0;
+            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
+          };
+          window.speechSynthesis.speak(utt);
+        } else {
+          setTimeout(() => {
+            heroPromptSpeaking = false;
+            window.heroWaveIntensity = 1.0;
+            if (btn) btn.innerHTML = HERO_PLAY_BTN_HTML;
+          }, 3500);
+        }
+      };
+
+      // 2) Replay 버튼: 방금 녹음한 내 목소리(녹음 내용)를 다시 듣기
+      window.replayHeroWave = function () {
+        const btn = document.getElementById('btnWaveReplay');
+        if (btn) btn.style.boxShadow = '0 0 20px rgba(52, 211, 153, 0.8)';
+        window.handlePlaybackAndRetry();
+        setTimeout(() => { if (btn) btn.style.boxShadow = ''; }, 2000);
+      };
+
+      // 3) 가운데 마이크 버튼: 내 목소리 녹음 시작 / 완료
+      window.toggleHeroRecording = function () {
+        window.handleMicRecordToggle();
+      };
+
+      const RELAY_QUOTES_DATA = {
+        'voice': {
+          label: '마음잇기 보이스 Prompt:',
+          text: '“마음을 전하는 목소리, 따뜻함을 나누는 시간…”',
+          theme: 'sunset',
+          btnText: '🎙️ 마음잇기 웹앱 바로가기 ➔',
+          btnUrl: './voice.html',
+          isExternal: false
+        },
+        'sodam': {
+          label: '소담 힐링 Prompt:',
+          text: '“지친 마음에 따스한 온기를 건네는 포근한 힐링 대화…”',
+          theme: 'emerald',
+          btnText: '🌸 소담 라이브 바로가기 ➔',
+          btnUrl: 'https://dmdg-ut.web.app/sodam-web/',
+          isExternal: true
+        },
+        'malssam': {
+          label: '말쌈 우리말 사전 Prompt:',
+          text: '“세대와 국경을 넘어 바른 우리말로 잇는 소통의 다리…”',
+          theme: 'cyber',
+          btnText: '🗣️ 말쌈 PWA 사전 바로가기 ➔',
+          btnUrl: 'https://dmdg-malssam.web.app/',
+          isExternal: true
+        },
+        'novels': {
+          label: 'DMDG 서재관 Prompt:',
+          text: '“다국어와 AI 오디오 낭독으로 감상하는 DMDG 팩션 소설…”',
+          theme: 'sunset',
+          btnText: '📖 서재관 소설·오디오북 읽기 ➔',
+          btnUrl: './novels.html',
+          isExternal: false
+        },
+        'aces': {
+          label: 'A.C.E.S 직무진단 Prompt:',
+          text: '“LG CNS/빅데이터 역량 정량화와 최적 IT/AI 커리어 패스…”',
+          theme: 'emerald',
+          btnText: '🎯 직무 추천 진단 시작하기 ➔',
+          btnUrl: 'javascript:openCareerModal()',
+          isExternal: false
+        },
+        'techlib': {
+          label: '위키북스 기술서적 Prompt:',
+          text: '“엔터프라이즈 AI 아키텍처와 LLMOps·리버스 엔지니어링 35권…”',
+          theme: 'cyber',
+          btnText: '📚 위키북스 기술서적 35권 보기 ➔',
+          btnUrl: './books.html',
+          isExternal: false
+        },
+        'blog': {
+          label: '위키독스 공식블로그 Prompt:',
+          text: '“기술과 사람을 잇는 당목담글의 성장과 릴리즈 스토리…”',
+          theme: 'sunset',
+          btnText: '📝 위키독스 공식블로그 방문 ➔',
+          btnUrl: 'https://wikidocs.net/blog/@dmdg',
+          isExternal: true
+        }
+      };
+
+      window.switchRelayTab = function (tabKey, evt) {
+        document.querySelectorAll('.studio-tab-btn').forEach(b => b.classList.remove('active'));
+        const el = (evt && evt.target) || (window.event && window.event.target);
+        if (el) el.classList.add('active');
+
+        const q = RELAY_QUOTES_DATA[tabKey] || RELAY_QUOTES_DATA['voice'];
+        const lbl = document.getElementById('heroRelayLabel');
+        const txt = document.getElementById('heroRelayText');
+        const btn = document.getElementById('heroRelayDirectBtn');
+
+        if (lbl) lbl.textContent = q.label;
+        if (txt) txt.innerHTML = `“${q.text.replace(/“|”/g, '')}”`;
+        if (btn) {
+          btn.innerHTML = `<span>${q.btnText}</span>`;
+          if (q.btnUrl.startsWith('javascript:')) {
+            btn.removeAttribute('href');
+            btn.onclick = function() { openCareerModal(); };
+          } else {
+            btn.onclick = null;
+            btn.href = q.btnUrl;
+            if (q.isExternal) {
+              btn.target = '_blank';
+              btn.rel = 'noopener noreferrer';
+            } else {
+              btn.removeAttribute('target');
+              btn.removeAttribute('rel');
+            }
+          }
+        }
+
+        window.heroWaveTheme = q.theme;
+        window.heroWaveIntensity = 1.4;
+        setTimeout(() => { window.heroWaveIntensity = 1.0; }, 1200);
+        playTone(659.25, 0.2);
+      };
+
+      // 4. 가라오케 낭독 · 마이크 녹음 · 다시 듣기 엔진
+      let ttsIsActive = false;
+      let micIsActive = false;
+      let micTimer = null;
+      let micSeconds = 0;
+      let karaokeAnimTimer = null;
+      let recordedSampleReady = false;
+
+      const KARAOKE_PHRASE = ["나의", "다정한", "한마디", "[ 목소리가, ]", "바다 건너", "한글을", "배우는", "이들에게", "따뜻한", "빛이 됩니다."];
+
+      function startKaraokeFlow() {
+        const box = document.getElementById('karaokeTextBox');
+        if (!box) return;
+        let step = 0;
+        clearInterval(karaokeAnimTimer);
+        karaokeAnimTimer = setInterval(() => {
+          let html = '';
+          KARAOKE_PHRASE.forEach((w, i) => {
+            if (i === (step % KARAOKE_PHRASE.length)) {
+              html += `<span class="neon-pink-highlight" style="display:inline-block; transform:scale(1.1); box-shadow: 0 0 20px #ec4899; color:#FFFFFF; border:1.5px solid #ec4899; border-radius:8px; padding:0.1rem 0.4rem; background:rgba(236,72,153,0.3);">${w}</span> `;
+            } else {
+              html += `<span style="color:#f8fafc;">${w}</span> `;
+            }
+          });
+          box.innerHTML = html.trim();
+          step++;
+        }, 380);
+      }
+
+      function stopKaraokeFlow() {
+        clearInterval(karaokeAnimTimer);
+        const box = document.getElementById('karaokeTextBox');
+        if (box) {
+          box.innerHTML = `나의 다정한 한마디 <span class="neon-pink-highlight">[ 목소리가, ]</span> 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.`;
+        }
+      }
+
+      // 4-1. 실제 음성 낭독 듣기 / 중단
+      window.handleTtsReadToggle = function () {
+        const btn = document.getElementById('btnTtsRead');
+        if (ttsIsActive) {
+          // 중단
+          ttsIsActive = false;
+          if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+          stopKaraokeFlow();
+          if (btn) {
+            btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
+            btn.style.borderColor = '';
+            btn.style.boxShadow = '';
+          }
+          window.heroWaveIntensity = 1.0;
+        } else {
+          // 재생
+          ttsIsActive = true;
+          window.heroWavePlaying = true;
+          window.heroWaveIntensity = 1.5;
+          startKaraokeFlow();
+          playWarmMelody();
+
+          if (btn) {
+            btn.innerHTML = '<span>⏹</span> 음성 낭독 중단하기 (재생 중)';
+            btn.style.borderColor = '#fbbf24';
+            btn.style.boxShadow = '0 0 20px rgba(251, 191, 36, 0.6)';
+          }
+
+          if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utt = new SpeechSynthesisUtterance("나의 다정한 한마디 목소리가 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.");
+            utt.lang = 'ko-KR';
+            utt.rate = 0.92;
+            utt.onend = function () {
+              ttsIsActive = false;
+              stopKaraokeFlow();
+              if (btn) {
+                btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
+                btn.style.borderColor = '';
+                btn.style.boxShadow = '';
+              }
+              window.heroWaveIntensity = 1.0;
+            };
+            utt.onerror = function () {
+              setTimeout(() => {
+                ttsIsActive = false;
+                stopKaraokeFlow();
+                if (btn) {
+                  btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
+                  btn.style.borderColor = '';
+                  btn.style.boxShadow = '';
+                }
+                window.heroWaveIntensity = 1.0;
+              }, 4200);
+            };
+            window.speechSynthesis.speak(utt);
+          } else {
+            setTimeout(() => {
+              ttsIsActive = false;
+              stopKaraokeFlow();
+              if (btn) {
+                btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
+                btn.style.borderColor = '';
+                btn.style.boxShadow = '';
+              }
+              window.heroWaveIntensity = 1.0;
+            }, 4200);
+          }
+        }
+      };
+
+      // 4-2. 내 마이크 녹음 시작 ➔ 완료 (실제 브라우저 마이크 하드웨어 스트림 + 가상 폴백)
+      let realMediaRecorder = null;
+      let realAudioChunks = [];
+      let realRecordedAudioBlob = null;
+      let realRecordedAudioUrl = null;
+
+      window.handleMicRecordToggle = async function () {
+        const btn = document.getElementById('btnMicRecord');
+        const heroMic = document.getElementById('btnHeroMic');
+        const playBtn = document.getElementById('btnPlaybackLoop');
+
+        if (!micIsActive) {
+          // ── 녹음 시작
+          micIsActive = true;
+          playTone(659.25, 0.25); // Start Beep
+          window.heroWavePlaying = true;
+          window.heroWaveIntensity = 1.7;
+          startKaraokeFlow();
+
+          if (heroMic) heroMic.classList.add('recording-pulse');
+          if (btn) {
+            btn.style.borderColor = '#ef4444';
+            btn.style.boxShadow = '0 0 25px rgba(239, 68, 68, 0.7)';
+            btn.innerHTML = '<span>⏹</span> ⏺ 실제 마이크 녹음 중 (00:00)... 클릭 시 완료';
+          }
+
+          // 실제 하드웨어 마이크 스트림 시도
+          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            try {
+              const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+              realAudioChunks = [];
+              realMediaRecorder = new MediaRecorder(stream);
+              realMediaRecorder.ondataavailable = e => {
+                if (e.data.size > 0) realAudioChunks.push(e.data);
+              };
+              realMediaRecorder.onstop = () => {
+                realRecordedAudioBlob = new Blob(realAudioChunks, { type: 'audio/webm' });
+                realRecordedAudioUrl = URL.createObjectURL(realRecordedAudioBlob);
+              };
+              realMediaRecorder.start();
+            } catch (err) {
+              console.log('실제 마이크 권한 제약 또는 file:// 프로토콜 환경 (가상 녹음 가동):', err.message);
+            }
+          }
+
+          micSeconds = 0;
+          clearInterval(micTimer);
+          micTimer = setInterval(() => {
+            micSeconds++;
+            const s = micSeconds < 10 ? '0' + micSeconds : micSeconds;
+            if (btn) btn.innerHTML = `<span>⏹</span> ⏺ 실제 마이크 녹음 중 (00:${s})... 클릭 시 완료`;
+            playTone(330, 0.05, 0.04);
+          }, 1000);
+
+        } else {
+          // ── 녹음 완료
+          micIsActive = false;
+          clearInterval(micTimer);
+          stopKaraokeFlow();
+          playTone(880, 0.35, 0.2); // Finish Chime
+          window.heroWaveIntensity = 1.0;
+          recordedSampleReady = true;
+
+          if (realMediaRecorder && realMediaRecorder.state !== 'inactive') {
+            try {
+              realMediaRecorder.stop();
+              if (realMediaRecorder.stream) realMediaRecorder.stream.getTracks().forEach(t => t.stop());
+            } catch (e) { }
+          }
+
+          if (heroMic) heroMic.classList.remove('recording-pulse');
+          if (btn) {
+            btn.style.borderColor = '';
+            btn.style.boxShadow = '';
+            btn.innerHTML = '<span>🎤</span> 내 마이크 녹음 시작 ➔ ⏹ 완료';
+          }
+
+          if (playBtn) {
+            playBtn.style.borderColor = '#34d399';
+            playBtn.style.boxShadow = '0 0 25px rgba(52, 211, 153, 0.8)';
+            playBtn.innerHTML = '<span>🎧</span> 방금 녹음한 내 목소리 다시 듣기 (준비완료) ➔';
+          }
+        }
+      };
+
+      // 4-3. 내 목소리 다시 듣기 & 다시 녹음
+      window.handlePlaybackAndRetry = function () {
+        const btn = document.getElementById('btnPlaybackLoop');
+        window.heroWavePlaying = true;
+        window.heroWaveIntensity = 1.5;
+        startKaraokeFlow();
+
+        if (btn) {
+          btn.innerHTML = '<span>🔊</span> 내 목소리 재생 중...';
+          btn.style.borderColor = '#34d399';
+          btn.style.boxShadow = '0 0 25px rgba(52, 211, 153, 0.8)';
+        }
+
+        function finish() {
+          stopKaraokeFlow();
+          window.heroWaveIntensity = 1.0;
+          if (btn) {
+            btn.innerHTML = '<span>🎧</span> 내 목소리 다시 듣기 & 🔄 다시 녹음';
+            btn.style.borderColor = '';
+            btn.style.boxShadow = '';
+          }
+        }
+
+        // 실제 마이크 녹음된 음성 파일이 있는 경우
+        if (realRecordedAudioUrl) {
+          const audio = new Audio(realRecordedAudioUrl);
+          audio.onended = finish;
+          audio.onerror = () => { fallbackPlay(); };
+          audio.play().catch(() => { fallbackPlay(); });
+        } else {
+          fallbackPlay();
+        }
+
+        function fallbackPlay() {
+          playWarmMelody();
+          if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utt = new SpeechSynthesisUtterance("나의 다정한 한마디 목소리가 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.");
+            utt.lang = 'ko-KR';
+            utt.rate = 0.95;
+            utt.onend = finish;
+            utt.onerror = finish;
+            window.speechSynthesis.speak(utt);
+          } else {
+            setTimeout(finish, 3800);
+          }
+        }
+      };
+    </script>
+
+    <!-- ── 3. A.C.E.S Neon Banner ────────────────────────────── -->
+    <div class="aces-outer-frame">
+      <section class="aces-neon-banner">
+      <div class="aces-banner-info">
+        <div class="aces-badges-wrap">
+          <span class="badge-premier">🎯 AI Premier Service</span>
+          <span class="badge-promo">🎁 2026 무료 체험 프로모션 (2027년 유료 전환)</span>
         </div>
-
-        <!-- A.C.E.S AI 직무 추천 프리미어 서비스 배너 카드 -->
-        <div
-          style="background: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%); border-radius: 14px; padding: 1.5rem 1.8rem; color: #fff; margin-bottom: 0; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.35); border: 1.5px solid rgba(6, 182, 212, 0.4); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.2rem;">
-          <div style="flex: 1; min-width: 290px;">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.45rem; flex-wrap: wrap;">
-              <span
-                style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; font-size: 0.72rem; font-weight: 900; padding: 0.22rem 0.65rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 2px 6px rgba(6, 182, 212, 0.4);">AI
-                Premier Service</span>
-              <span
-                style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 9999px;">🎁
-                2026 무료 체험 프로모션 (2027년 유료 전환)</span>
-            </div>
-            <h3
-              style="margin: 0 0 0.4rem 0; font-size: 1.3rem; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 0.5rem;">
-              <span>🎯</span> A.C.E.S 6대 IT/AI 직무 추천 &amp; 역량 진단 대시보드
-            </h3>
-            <p style="margin: 0; font-size: 0.88rem; color: #cbd5e1; line-height: 1.55;">
-              DMDG 7대 공인 평가(기초 4대: SQL·AI수학·데이터분석·파이썬 400문항 + 심화 3대: 레이크하우스·GraphRAG/FastMCP·지속메모리 90문항) 결과를 기반으로, 구직자의 6대 핵심 역량을 정량화하고 머신러닝 알고리즘으로 최적의 IT/AI 직무를 추천합니다. (PDF 성적표 즉시
-              발급)
-            </p>
-          </div>
-          <div>
-            <button onclick="openCareerModal()"
-              style="background: linear-gradient(135deg, #06b6d4 0%, #2563eb 50%, #7c3aed 100%); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); padding: 0.85rem 1.65rem; border-radius: 12px; font-size: 0.96rem; font-weight: 900; cursor: pointer; box-shadow: 0 6px 18px rgba(6, 182, 212, 0.45); transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 0.6rem;"
-              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(6, 182, 212, 0.65)';"
-              onmouseout="this.style.transform='none'; this.style.boxShadow='0 6px 18px rgba(6, 182, 212, 0.45)';">
-              <span>🚀 직무 추천 진단 시작하기</span>
-              <span>➔</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <div class="panels-grid">
-
-        <!-- -------------------------------------------------------------------
-           COLUMN 1: LIVE WEB APPS 🚀
-           ------------------------------------------------------------------- -->
-        <section class="dash-panel" id="panel-apps">
-          <div class="panel-header">
-            <div class="panel-title">
-              <span>🟢</span> LIVE WEB APPS 🚀
-            </div>
-            <span class="panel-count-badge">6 Services</span>
-          </div>
-
-          <div class="apps-list">
-            <!-- Card 1: 말쌈 PWA (완성) -->
-            <article class="app-item-card" data-keyword="말쌈 malssam 우리말사전 퀴즈 pwa">
-              <div class="app-card-head">
-                <div class="app-brand-row">
-                  <div class="app-avatar" style="color: var(--dmdg-orange);">🗣️</div>
-                  <div class="app-title-group">
-                    <h3>말쌈 (MALSSAM)</h3>
-                    <span>바른 우리말 AI 사전 &amp; 퀴즈</span>
-                  </div>
-                </div>
-                <span class="badge-tag live">Live PWA</span>
-              </div>
-              <p class="app-card-desc">
-                신조어부터 바른 우리말까지, AI 번역과 문해력 동적 퀴즈를 제공하는 온디바이스 PWA 웹 서비스입니다.
-              </p>
-              <div class="content-visitor-row">
-                <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">16,840</strong>명</span>
-              </div>
-              <div class="app-card-footer">
-                <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer"
-                  class="btn-view-app gold">
-                  <span>View App</span> <span>➔</span>
-                </a>
-                <div class="app-meta-icons">
-                  <span title="음성 낭독 지원">🔊</span>
-                  <span title="설정">⚙️</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 2: 당목담글 공식 블로그 (완성) -->
-            <article class="app-item-card" data-keyword="당목담글 블로그 blog 기술컬럼 미래팩션 위키독스">
-              <div class="app-card-head">
-                <div class="app-brand-row">
-                  <div class="app-avatar" style="color: #8B5CF6;">📰</div>
-                  <div class="app-title-group">
-                    <h3>당목담글 공식 블로그</h3>
-                    <span>AI 기술 컬럼 &amp; 릴리즈 스토리</span>
-                  </div>
-                </div>
-                <span class="badge-tag live" style="background:#8B5CF6;">Live Blog</span>
-              </div>
-              <p class="app-card-desc">
-                최신 LLM 에이전틱 엔지니어링, 위키북스 신간 챕터 심층 해설 및 DMDG 오리지널 기술 아티클 연재 공간입니다.
-              </p>
-              <div class="content-visitor-row">
-                <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">7,850</strong>명</span>
-              </div>
-              <div class="app-card-footer">
-                <a href="https://dmdg.wikidocs.net/blog/" target="_blank" rel="noopener noreferrer" class="btn-view-app"
-                  style="background: linear-gradient(135deg, #7C3AED, #A855F7);">
-                  <span>View Blog</span> <span>➔</span>
-                </a>
-                <div class="app-meta-icons">
-                  <span title="기술 아티클">✍️</span>
-                  <span title="공식 블로그">📑</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 3: DMDG 서재 (완성) -->
-            <article class="app-item-card" data-keyword="서재 novels e-reader dmdg master 소설 tts">
-              <div class="app-card-head">
-                <div class="app-brand-row">
-                  <div class="app-avatar" style="color: #0077B6;">📖</div>
-                  <div class="app-title-group">
-                    <h3>DMDG 서재 (E-Reader)</h3>
-                    <span>DMDG Master 팩션 소설 &amp; 신간</span>
-                  </div>
-                </div>
-                <span class="badge-tag pwa">Live</span>
-              </div>
-              <p class="app-card-desc">
-                2027 팩션 스릴러와 미래 베스트셀러 3부작을 감상할 수 있는 인터랙티브 소설 리더기 + AI 음성 낭독(TTS).
-              </p>
-              <div class="content-visitor-row">
-                <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">9,720</strong>명</span>
-              </div>
-              <div class="app-card-footer">
-                <a href="./novels.html" class="btn-view-app">
-                  <span>View App</span> <span>➔</span>
-                </a>
-                <div class="app-meta-icons">
-                  <span title="AI TTS 낭독">🔊</span>
-                  <span title="뷰어 설정">⚙️</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 4: 소담 라이브 (완성) -->
-            <article class="app-item-card" data-keyword="소담 sodam 감성치유 힐링 문학 firebase">
-              <div class="app-card-head">
-                <div class="app-brand-row">
-                  <div class="app-avatar" style="color: #FF758F;">🌸</div>
-                  <div class="app-title-group">
-                    <h3>소담 라이브 (Sodam Web)</h3>
-                    <span>감성 치유 및 따뜻한 힐링 웹</span>
-                  </div>
-                </div>
-                <span class="badge-tag live">Live</span>
-              </div>
-              <p class="app-card-desc">
-                따뜻한 글귀와 마음을 보듬는 시·산문을 아름다운 음악과 함께 감상할 수 있는 감성 힐링 웹 서비스입니다.
-              </p>
-              <div class="content-visitor-row">
-                <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">4,630</strong>명</span>
-              </div>
-              <div class="app-card-footer">
-                <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer"
-                  class="btn-view-app">
-                  <span>View App</span> <span>➔</span>
-                </a>
-                <div class="app-meta-icons">
-                  <span title="배경음악">🎵</span>
-                  <span title="카드">📑</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 5: 마음잇기 (당목담글 보이스) -->
-            <article class="app-item-card" data-keyword="마음잇기 당목담글 보이스 voice 발음교정 목소리릴레이 gemini">
-              <div class="app-card-head">
-                <div class="app-brand-row">
-                  <div class="app-avatar" style="color: var(--dmdg-teal);">🎙️</div>
-                  <div class="app-title-group">
-                    <h3>마음잇기 (당목담글 보이스)</h3>
-                    <span>외국인 발음 교정 &amp; 목소리 릴레이</span>
-                  </div>
-                </div>
-                <span class="badge-tag live">Live</span>
-              </div>
-              <p class="app-card-desc">
-                초·중·종성 발음 코칭과 전 세계 학습자를 잇는 따스한 목소리 릴레이 스튜디오입니다. (📱 iOS 무음 해제 시 낭독 재생)
-              </p>
-              <div class="content-visitor-row">
-                <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">1,430</strong>명</span>
-              </div>
-              <div class="app-card-footer">
-                <a href="./voice.html" class="btn-view-app">
-                  <span>View App</span> <span>➔</span>
-                </a>
-                <div class="app-meta-icons">
-                  <span title="음성 분석">🎤</span>
-                  <span title="오디오북">🎧</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 6: 방법 라이브 (점검 중) -->
-            <article class="app-item-card dmdg-hidden-card" data-keyword="방법 curse bangbeop 미스터리 오컬트 스토리텔링"
-              style="opacity: 0.88;">
-              <div class="app-card-head">
-                <div class="app-brand-row">
-                  <div class="app-avatar" style="color: #E63946;">🩸</div>
-                  <div class="app-title-group">
-                    <h3>방법 라이브 (Curse Bangbeop)</h3>
-                    <span>한국형 미스터리 오컬트 스토리</span>
-                  </div>
-                </div>
-                <span class="badge-tag beta" style="background:#64748B;">Updating</span>
-              </div>
-              <p class="app-card-desc">
-                고대 주술과 모던 도시 괴담이 얽힌 미스터리 오컬트 스토리텔링 인터랙티브 웹 쇼케이스입니다.
-              </p>
-              <div class="content-visitor-row">
-                <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">1,210</strong>명</span>
-              </div>
-              <div class="app-card-footer">
-                <span class="btn-view-app"
-                  style="background: rgba(100, 116, 139, 0.2); color: #64748B; border: 1px solid rgba(100, 116, 139, 0.3); cursor: not-allowed; box-shadow: none;"
-                  title="현재 전체 수정 및 업그레이드 작업 중입니다.">
-                  <span>🛠️ Working...</span>
-                </span>
-                <div class="app-meta-icons">
-                  <span title="사운드 연출">🎧</span>
-                  <span title="스토리">📜</span>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- -------------------------------------------------------------------
-           COLUMN 2: INTERACTIVE SIMULATORS 🔬 (Mockup 3 Wave Graphics)
-           ------------------------------------------------------------------- -->
-        <section class="dash-panel" id="panel-sims">
-          <div class="panel-header">
-            <div class="panel-title">
-              <span>🔬</span> INTERACTIVE SIMULATORS
-            </div>
-            <a href="https://dmdg-live.com/sim_master_hub.html" target="_blank" rel="noopener noreferrer"
-              class="panel-count-badge" style="text-decoration:none;" title="30종 전체 시뮬레이터 마스터 허브">33 Total ➔</a>
-          </div>
-
-          <div class="sims-list">
-            <!-- Sim Top 0-1: [Book 21911] Neo4j & Multi-hop 지식 그래프 샌드박스 -->
-            <article class="sim-item-card is-new-card"
-              data-keyword="lg cns kg 2기 book 3 neo4j 온톨로지 multi-hop cypher 지식 그래프 gds book 21911">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🕸️</span>
-                  <div class="sim-title-wrap">
-                    <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap;">
-                      <h3 style="margin:0;">Neo4j &amp; Multi-hop 지식 그래프</h3>
-                      <span class="badge-tag new-star" style="background:#8b5cf6; color:#fff;">✨ NEW</span>
-                    </div>
-                    <span>[KG 2기:Book 3] S-P-O 트리플 추출 &amp; 다단계 관계망 추적 샌드박스</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_lgcns_kg2_hub.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #ffffff; font-weight:800; border-color: #8b5cf6;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">1,910</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar" style="background:#8b5cf6;"></span>
-                <span class="wave-bar" style="background:#a78bfa;"></span>
-                <span class="wave-bar" style="background:#c4b5fd;"></span>
-                <span class="wave-bar" style="background:#8b5cf6;"></span>
-                <span class="wave-bar" style="background:#a78bfa;"></span>
-                <span class="wave-bar" style="background:#c4b5fd;"></span>
-                <span class="wave-bar" style="background:#8b5cf6;"></span>
-                <span class="wave-bar" style="background:#a78bfa;"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 21911 공식 연동: 텍스트 입력 즉시 Canvas 물리 노드 네트워크 실시간 렌더링</span>
-                <span title="공식 시뮬레이터">🕸️</span>
-              </div>
-            </article>
-
-            <!-- Sim Top 0-2: [Book 21910] Docling & 시맨틱 청킹 랩 -->
-            <article class="sim-item-card is-new-card"
-              data-keyword="lg cns kg 2기 book 2 docling 멀티모달 표 복원 tatr 시맨틱 청킹 book 21910">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">📄</span>
-                  <div class="sim-title-wrap">
-                    <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap;">
-                      <h3 style="margin:0;">Docling &amp; 시맨틱 청킹 랩</h3>
-                      <span class="badge-tag new-star" style="background:#10b981; color:#fff;">✨ NEW</span>
-                    </div>
-                    <span>[KG 2기:Book 2] TATR 표 셀 복원 및 코사인 변곡점 청킹 샌드박스</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_lgcns_kg2_hub.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; font-weight:800; border-color: #10b981;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">1,640</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar" style="background:#10b981;"></span>
-                <span class="wave-bar" style="background:#34d399;"></span>
-                <span class="wave-bar" style="background:#6ee7b7;"></span>
-                <span class="wave-bar" style="background:#10b981;"></span>
-                <span class="wave-bar" style="background:#34d399;"></span>
-                <span class="wave-bar" style="background:#6ee7b7;"></span>
-                <span class="wave-bar" style="background:#10b981;"></span>
-                <span class="wave-bar" style="background:#34d399;"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 21910 공식 연동: 임계값 조절 코사인 거리 곡선 그래프 &amp; 문맥 유실 방지</span>
-                <span title="공식 시뮬레이터">📑</span>
-              </div>
-            </article>
-
-            <!-- Sim Top 0-3: [Book 21909] pgvector & Airflow 파이프라인 -->
-            <article class="sim-item-card is-new-card"
-              data-keyword="lg cns kg 2기 book 1 pgvector 하이브리드 파이프라인 시뮬레이터 hnsw airflow book 21909">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">⚡</span>
-                  <div class="sim-title-wrap">
-                    <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap;">
-                      <h3 style="margin:0;">pgvector &amp; Airflow 파이프라인</h3>
-                      <span class="badge-tag new-star" style="background:#0284c7; color:#fff;">✨ NEW</span>
-                    </div>
-                    <span>[KG 2기:Book 1] 실시간 배치 인제스천 &amp; HNSW 인덱싱 샌드박스</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_lgcns_kg2_hub.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #0284c7, #0369a1); color: #ffffff; font-weight:800; border-color: #0284c7;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">1,820</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar" style="background:#0284c7;"></span>
-                <span class="wave-bar" style="background:#38bdf8;"></span>
-                <span class="wave-bar" style="background:#7dd3fc;"></span>
-                <span class="wave-bar" style="background:#0284c7;"></span>
-                <span class="wave-bar" style="background:#38bdf8;"></span>
-                <span class="wave-bar" style="background:#7dd3fc;"></span>
-                <span class="wave-bar" style="background:#0284c7;"></span>
-                <span class="wave-bar" style="background:#38bdf8;"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 21909 공식 연동: 배치 크기/HNSW m 파라미터 조작 및 QPS 실시간 측정</span>
-                <span title="공식 시뮬레이터">🧪</span>
-              </div>
-            </article>
-
-            <!-- Sim Top 1: AI CCTV 옴니모달 화재 감지 & 119 연계 (Book 21891 공식 연동) -->
-            <article class="sim-item-card is-new-card"
-              data-keyword="화재 감지 cctv 옴니모달 119 자동 연계 dst 뎀스터 셰이퍼 스마트시티 book 21891">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🚨</span>
-                  <div class="sim-title-wrap">
-                    <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap;">
-                      <h3 style="margin:0;">AI CCTV 옴니모달 화재 &amp; 119 연계</h3>
-                      <span class="badge-tag new-star" style="background:#ef4444; color:#fff;">✨ NEW</span>
-                    </div>
-                    <span>영상·음성 옴니모달 분석 &amp; 30초 인터락 119 직결</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_omni_fire_defense.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #ef4444, #b91c1c); color: #ffffff; font-weight:800; border-color: #ef4444;">
-                  <span>관제 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">1,240</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar" style="background:#ef4444;"></span>
-                <span class="wave-bar" style="background:#f59e0b;"></span>
-                <span class="wave-bar" style="background:#00f2fe;"></span>
-                <span class="wave-bar" style="background:#ef4444;"></span>
-                <span class="wave-bar" style="background:#f59e0b;"></span>
-                <span class="wave-bar" style="background:#00f2fe;"></span>
-                <span class="wave-bar" style="background:#ef4444;"></span>
-                <span class="wave-bar" style="background:#10b981;"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 21891 공식 연동: 불꽃·연기 비전 + 유리파손 오디오 DST 융합</span>
-                <span title="스마트 방재">🚒</span>
-              </div>
-            </article>
-
-            <!-- Sim Top 2: WSL2 & Docker 보안 샌드박스 & 대용량 데이터 (Book 21889 공식 연동) -->
-            <article class="sim-item-card is-new-card"
-              data-keyword="wsl2 docker 보안 샌드박스 대용량 데이터 청크 스트리밍 oom 방어 book 21889">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🛡️</span>
-                  <div class="sim-title-wrap">
-                    <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap;">
-                      <h3 style="margin:0;">Docker 샌드박스 &amp; 대용량 데이터</h3>
-                      <span class="badge-tag new-star" style="background:#6366f1; color:#fff;">✨ NEW</span>
-                    </div>
-                    <span>커널 5중 보안 격리 &amp; 10만 행 청크 스트리밍 OOM 방어</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_sandbox_docker.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #6366f1, #4338ca); color: #ffffff; font-weight:800; border-color: #6366f1;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">1,510</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar" style="background:#6366f1;"></span>
-                <span class="wave-bar" style="background:#818cf8;"></span>
-                <span class="wave-bar" style="background:#00f2fe;"></span>
-                <span class="wave-bar" style="background:#6366f1;"></span>
-                <span class="wave-bar" style="background:#818cf8;"></span>
-                <span class="wave-bar" style="background:#00f2fe;"></span>
-                <span class="wave-bar" style="background:#6366f1;"></span>
-                <span class="wave-bar" style="background:#10b981;"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 21889 공식 연동: 외부 위험 코드 격리 &amp; 메모리 85% 다운사이징</span>
-                <span title="보안 샌드박스">🔒</span>
-              </div>
-            </article>
-
-            <!-- Sim 0: 피지컬 AI & 로봇 팔 시뮬레이터 (Book 21887 공식 연동) -->
-            <article class="sim-item-card is-new-card" data-keyword="피지컬 ai 로봇 팔 ros 2 시뮬레이터 6축 역기구학 moveit book 21887">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🦾</span>
-                  <div class="sim-title-wrap">
-                    <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap;">
-                      <h3 style="margin:0;">피지컬 AI &amp; 로봇 팔 시뮬레이터</h3>
-                      <span class="badge-tag new-star">⭐ NEW</span>
-                    </div>
-                    <span>6축 역기구학(IK) &amp; 가상 궤적 제어 실습</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_19_robotic_arm.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; font-weight:800; border-color: #10b981;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">1,940</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 21887 공식 연동: 웹 브라우저에서 직접 돌려보는 6축 관절 제어</span>
-                <span title="피지컬 AI">🦾</span>
-              </div>
-            </article>
-
-            <!-- Sim New A: 심화 1 자율주행 빅데이터 레이크하우스 -->
-            <article class="sim-item-card" data-keyword="심화 1 자율주행 빅데이터 레이크하우스 kafka hdfs hive pydeck dnn book 22015">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🚗</span>
-                  <div class="sim-title-wrap">
-                    <h3>자율주행 빅데이터 레이크하우스</h3>
-                    <span>[심화 1] Kafka · HDFS · Hive · OLS &amp; 3-Class DNN</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_smartcar_lakehouse.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #38bdf8, #10b981); color: #040914; font-weight:800;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">📝</span> <a href="./exam_smartcar_lakehouse.html" style="color:#38bdf8;font-weight:700;text-decoration:none;">30문항 역량평가 &amp; 직무추천 ➔</a></span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
-                <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 22015 공식 연동 · 8대 컨테이너 토폴로지 &amp; 실시간 센서 AI 예측</span>
-                <span title="레이크하우스 시뮬레이터">📡</span>
-              </div>
-            </article>
-
-            <!-- Sim New B: 심화 2 FastMCP & GraphRAG 온톨로지 -->
-            <article class="sim-item-card" data-keyword="심화 2 fastmcp graphrag neo4j 3-hop cypher ontology book 22036">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🕸️</span>
-                  <div class="sim-title-wrap">
-                    <h3>GraphRAG × FastMCP 온톨로지</h3>
-                    <span>[심화 2] Neo4j 4-Hop 감사 · Hybrid RRF · JSON-RPC</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_graphrag.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #10b981, #38bdf8); color: #050811; font-weight:800;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">📝</span> <a href="./exam_graphrag_mcp.html" style="color:#34d399;font-weight:700;text-decoration:none;">30문항 역량평가 &amp; 직무추천 ➔</a></span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
-                <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 22036 공식 연동 · 사규·특허 다중 홉 추적 &amp; Standalone MCP</span>
-                <span title="GraphRAG 시뮬레이터">🧠</span>
-              </div>
-            </article>
-
-            <!-- Sim New C: 심화 3 지속 메모리 & Unsloth QLoRA/DPO -->
-            <article class="sim-item-card" data-keyword="심화 3 지속 메모리 continual memory unsloth qlora dpo temporal kg book 22037">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">♾️</span>
-                  <div class="sim-title-wrap">
-                    <h3>지속 메모리 × QLoRA/DPO 두뇌</h3>
-                    <span>[심화 3] Temporal KG · 7:3 Replay · 0.002초 핫스왑</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_continual_memory.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #a855f7, #10b981); color: #050711; font-weight:800;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">📝</span> <a href="./exam_continual_memory.html" style="color:#d8b4fe;font-weight:700;text-decoration:none;">30문항 역량평가 &amp; 직무추천 ➔</a></span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
-                <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 22037 공식 연동 · 해마↔대뇌피질 2단계 응고화 시뮬레이터</span>
-                <span title="지속 메모리 시뮬레이터">🔥</span>
-              </div>
-            </article>
-
-            <!-- Sim 1: AI 에이전트 & SCM MLOps (이동 배치) -->
-            <article class="sim-item-card" data-keyword="ai 에이전트 scm mlops 대시보드 수요예측 공급망">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">⚡</span>
-                  <div class="sim-title-wrap">
-                    <h3>AI 에이전트 &amp; SCM MLOps</h3>
-                    <span>스마트 공급망 수요 예측 관제 대시보드</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/scm_dashboard.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: rgba(245, 158, 11, 0.15); color: #d97706; border-color: rgba(245, 158, 11, 0.4);">
-                  <span>관제 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">2,480</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">LLM Brain과 지식 그래프 결합 실시간 리스크 추론 관제</span>
-                <span title="MLOps 관제">⚡</span>
-              </div>
-            </article>
-
-            <!-- Sim 2: REA × MCP Protocol Inspector (신규 탑재) -->
-            <article class="sim-item-card" data-keyword="rea mcp 프로토콜 인스펙터 json-rpc 역공학 book 21781">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🔬</span>
-                  <div class="sim-title-wrap">
-                    <h3>REA × MCP Protocol Inspector</h3>
-                    <span>JSON-RPC 2.0 실시간 증거 기반 역공학 시뮬레이터</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_mcp_explorer.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action"
-                  style="background: linear-gradient(135deg, #00f2fe, #3b82f6); color: #060913; font-weight:800;">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">3,120</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Book 21781 공식 연동 · 제로 할루시네이션 &amp; 4대 TDD 클린룸 검증</span>
-                <span title="공식 시뮬레이터">🛡️</span>
-              </div>
-            </article>
-
-            <!-- Sim 3: 크롬 공룡 랩 -->
-            <article class="sim-item-card" data-keyword="크롬 공룡 랩 dino chrome 역공학 book 21753">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🦖</span>
-                  <div class="sim-title-wrap">
-                    <h3>크롬 공룡 랩 (Chrome Dino)</h3>
-                    <span>런타임 메모리 실시간 변조 &amp; 무적 패치</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_dino_lab.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">4,950</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">속도·점프력·중력 슬라이더 제어 및 JS 코드 추출</span>
-                <span title="실습 환경 완비">🧪</span>
-              </div>
-            </article>
-
-            <!-- Sim 4: 윈도우 계산기 랩 -->
-            <article class="sim-item-card" data-keyword="윈도우 계산기 랩 calc percent x86 book 21754">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🧮</span>
-                  <div class="sim-title-wrap">
-                    <h3>윈도우 계산기 랩 (Calc Sim)</h3>
-                    <span>C++ x86_64 역공학 &amp; 퍼센트 연산자 패치</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_calc_percent.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">3,820</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">IEEE 754 부동소수점 검증 및 연산 우선순위 패치</span>
-                <span title="공식 교재 연계">📘</span>
-              </div>
-            </article>
-
-            <!-- Sim 5: 클린룸 TDD 검증기 -->
-            <article class="sim-item-card" data-keyword="클린룸 diff tdd 검증기 바이트 디프 book 21755">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🛡️</span>
-                  <div class="sim-title-wrap">
-                    <h3>클린룸 TDD 검증기 (Diff Sim)</h3>
-                    <span>오리지널 vs 클린룸 TDD 100% 무결성 검증</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_cleanroom_diff.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">2,190</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">실시간 헥사(Hex) 바이트 일치도 및 단위 테스트 100%</span>
-                <span title="보안 분석">🔬</span>
-              </div>
-            </article>
-
-            <!-- Sim 6: K-오피스 생존 연구소 -->
-            <article class="sim-item-card dmdg-hidden-card" data-keyword="k-오피스 직장인 생존 지수 롤플레잉 book 21746">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">👔</span>
-                  <div class="sim-title-wrap">
-                    <h3>K-오피스 생존 연구소</h3>
-                    <span>직장인 생존 지수 진단 &amp; 상사 대응 롤플레잉</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_k_office.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">3,460</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">세대 갈등 진단 지수 및 연봉 협상 시뮬레이션</span>
-                <span title="AI 롤플레잉">🤖</span>
-              </div>
-            </article>
-
-            <!-- Sim 7: 0원 SaaS 빌더 랩 -->
-            <article class="sim-item-card dmdg-hidden-card" data-keyword="0원 saas 빌더 랩 cloudflare supabase book 21748">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">💰</span>
-                  <div class="sim-title-wrap">
-                    <h3>0원 SaaS 빌더 랩</h3>
-                    <span>서버 비용 0원으로 구축하는 마이크로 SaaS</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_saas_builder.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action">
-                  <span>실습 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">2,870</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">Cloudflare + Supabase + Next.js 무료 티어 최적화</span>
-                <span title="수익화">💵</span>
-              </div>
-            </article>
-
-            <!-- Sim 8: 수학 시뮬레이터 마스터 허브 -->
-            <article class="sim-item-card dmdg-hidden-card"
-              data-keyword="수학 시뮬레이터 20종 마스터 허브 tensor norm adamw book 21701">
-              <div class="sim-head-row">
-                <div class="sim-icon-title">
-                  <span class="sim-icon">🎛️</span>
-                  <div class="sim-title-wrap">
-                    <h3>수학 시뮬레이터 마스터 허브</h3>
-                    <span>20종 수학·머신러닝 알고리즘 직관 체득</span>
-                  </div>
-                </div>
-                <a href="https://dmdg-live.com/sim_master_hub.html" target="_blank" rel="noopener noreferrer"
-                  class="btn-sim-action" style="background: var(--dmdg-teal); color: #fff;">
-                  <span>전체 허브 ➔</span>
-                </a>
-              </div>
-              <div class="sim-visitor-stat-row">
-                <span class="sim-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                    class="val">5,640</strong>명</span>
-              </div>
-              <div class="sim-wave-graphic">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
-              <div class="sim-footer-row">
-                <span class="sim-desc-text">텐서 놈, 코사인 유사도, 어텐션 행렬곱, LoRA, AdamW 등 20종 완비</span>
-                <span title="마스터 허브">🌟</span>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- -------------------------------------------------------------------
-           COLUMN 3: WIKIBOOKS 📚 (신규 도서 순 11권 완벽 재정비)
-           ------------------------------------------------------------------- -->
-        <section class="dash-panel" id="panel-books">
-          <div class="panel-header">
-            <div class="panel-title">
-              <span>📚</span> WIKIBOOKS (위키북스)
-            </div>
-            <a href="./books.html"
-              class="panel-count-badge" style="text-decoration:none;" title="Hamilton.Kang 실제 위키독스 도서 35종 전체 보기">
-              35 Books (전체 ➔)
-            </a>
-          </div>
-
-          <div class="wikibooks-grid">
-            <!-- Book Top 0-1: Book 21911 (2026 최신 완간!) -->
-            <article class="book-card-item is-new-card"
-              data-keyword="lg cns kg 2기 book 3 엔터프라이즈 온톨로지 neo4j 지식 그래프 cypher apoc gds book 21911 위키북스">
-              <div class="book-cover-mini"
-                style="background: linear-gradient(135deg, #2e1065, #1e1b4b); border: 1.5px solid #8b5cf6;">
-                <span class="book-cover-tag" style="background:#8b5cf6; color:#ffffff;">KG 2기:Book 3</span>
-                <span class="book-cover-title" style="color:#c4b5fd;">온톨로지 &amp;<br>Neo4j Graph</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21911</span>
-                  <span class="badge-tag new-star">✨ NEW</span>
-                  <span class="badge-tag live" style="background:#7c3aed;">최신 완간</span>
-                </div>
-                <h4 class="book-info-title">[LG CNS AI 캠퍼스 KG 2기:Book 3] 엔터프라이즈 온톨로지 모델링과 Neo4j 지식 그래프 데이터베이스 심화</h4>
-                <p class="book-info-desc">RDF/OWL 온톨로지, Neo4j 5.x Causal Cluster, Multi-hop Cypher 튜닝, APOC 및 GDS 그래프
-                  알고리즘</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">1,910</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21911" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff;">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book Top 0-2: Book 21910 (2026 최신 완간!) -->
-            <article class="book-card-item is-new-card"
-              data-keyword="lg cns kg 2기 book 2 비정형 멀티모달 문서 지능 복합 표 시맨틱 청킹 docling tatr book 21910 위키북스">
-              <div class="book-cover-mini"
-                style="background: linear-gradient(135deg, #064e3b, #0f172a); border: 1.5px solid #10b981;">
-                <span class="book-cover-tag" style="background:#10b981; color:#ffffff;">KG 2기:Book 2</span>
-                <span class="book-cover-title" style="color:#6ee7b7;">문서 지능 &amp;<br>시맨틱 청킹</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21910</span>
-                  <span class="badge-tag new-star">✨ NEW</span>
-                  <span class="badge-tag live" style="background:#059669;">최신 완간</span>
-                </div>
-                <h4 class="book-info-title">[LG CNS AI 캠퍼스 KG 2기:Book 2] 비정형 멀티모달 문서 지능과 복합 표·시맨틱 청킹 완벽 가이드</h4>
-                <p class="book-info-desc">IBM Docling 파싱, Table Transformer(TATR) 표 셀 복원, BGE-m3 및 코사인 변곡점 시맨틱 청킹 바이블
-                </p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">1,640</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21910" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book Top 0-3: Book 21909 (2026 최신 완간!) -->
-            <article class="book-card-item is-new-card"
-              data-keyword="lg cns kg 2기 book 1 엔터프라이즈 ai 데이터 파이프라인 pgvector 하이브리드 검색 airflow book 21909 위키북스">
-              <div class="book-cover-mini"
-                style="background: linear-gradient(135deg, #082f49, #0f172a); border: 1.5px solid #0284c7;">
-                <span class="book-cover-tag" style="background:#0284c7; color:#ffffff;">KG 2기:Book 1</span>
-                <span class="book-cover-title" style="color:#7dd3fc;">데이터 파이프라인<br>&amp; pgvector</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21909</span>
-                  <span class="badge-tag new-star">✨ NEW</span>
-                  <span class="badge-tag live" style="background:#0284c7;">최신 완간</span>
-                </div>
-                <h4 class="book-info-title">[LG CNS AI 캠퍼스 KG 2기:Book 1] 엔터프라이즈 AI 데이터 파이프라인과 pgvector 하이브리드 검색 구축 실무
-                </h4>
-                <p class="book-info-desc">Polars 스트리밍, PostgreSQL 16 pgvector HNSW 인덱싱, Airflow 2.9 오케스트레이션 및 무결점 실무 코드
-                </p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">1,820</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21909" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff;">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book Top 1: Book 21891 (2026 최신 완간!) -->
-            <article class="book-card-item is-new-card"
-              data-keyword="비화재보 제로 지능형 화재 감지 소방청 119 자동 연계 뎀스터 셰이퍼 dst rabbitmq dlq 스마트시티 book 21891 위키북스 fire safety">
-              <div class="book-cover-mini fire-sec"
-                style="background: linear-gradient(135deg, #450a0a, #18181b); border: 1.5px solid #ef4444;">
-                <span class="book-cover-tag" style="background:#ef4444; color:#ffffff;">Smart Fire Tech</span>
-                <span class="book-cover-title" style="color:#f87171;">지능형 화재감지<br>&amp; 119 연계</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21891</span>
-                  <span class="badge-tag new-star">✨ NEW</span>
-                  <span class="badge-tag live" style="background:#dc2626;">최신 완간</span>
-                </div>
-                <h4 class="book-info-title">비화재보 제로에 도전하는 지능형 화재 감지 및 소방청 119 자동 연계 시스템</h4>
-                <p class="book-info-desc">골든타임 5분 사수! 뎀스터-셰이퍼(DST) 다중 센서 융합과 스마트시티·소방청 119 표준 API 직결 연계 실무 바이블</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">1,080</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21891" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book" style="background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff;">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book Top 2: Book 21889 (2026 최신 완간!) -->
-            <article class="book-card-item is-new-card"
-              data-keyword="wsl2 docker 샌드박스 보안 격리 대용량 데이터 pandas oom 청크 chunk book 21889 위키북스 sandbox">
-              <div class="book-cover-mini sandbox-sec"
-                style="background: linear-gradient(135deg, #1e1b4b, #0f172a); border: 1.5px solid #6366f1;">
-                <span class="book-cover-tag" style="background:#6366f1; color:#ffffff;">Secure Sandbox</span>
-                <span class="book-cover-title" style="color:#818cf8;">WSL2 &amp; Docker<br>샌드박스</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21889</span>
-                  <span class="badge-tag new-star">✨ NEW</span>
-                  <span class="badge-tag live" style="background:#4338ca;">최신 완간</span>
-                </div>
-                <h4 class="book-info-title">WSL2와 Docker로 샌드박스 환경 구축하기</h4>
-                <p class="book-info-desc">외부 위험 코드 완벽 격리와 메모리 누수 없는 대용량 데이터 처리 실전 바이블 (커널 5중 보안 &amp; 청크 80% 압축)</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">1,120</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21889" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book" style="background: linear-gradient(135deg, #6366f1, #4338ca); color: #fff;">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book New: Book 21887 (2026 최신 완간!) -->
-            <article class="book-card-item is-new-card"
-              data-keyword="피지컬 ai ros 2 엔비디아 isaac sim 로봇 제어 자율주행 book 21887 위키북스 physical ai">
-              <div class="book-cover-mini physical-ai"
-                style="background: linear-gradient(135deg, #064e3b, #0f172a); border: 1.5px solid #10b981;">
-                <span class="book-cover-tag" style="background:#10b981; color:#064e3b;">Physical AI</span>
-                <span class="book-cover-title" style="color:#34d399;">피지컬 AI<br>&amp; ROS 2</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21887</span>
-                  <span class="badge-tag new-star">✨ NEW</span>
-                  <span class="badge-tag live" style="background:#059669;">최신 완간</span>
-                </div>
-                <h4 class="book-info-title">내 PC에서 시작하는 피지컬 AI &amp; ROS 2</h4>
-                <p class="book-info-desc">비싼 실물 로봇 없이, 내 컴퓨터에서 직접 돌려보는 차세대 로보틱스 프로그래밍 (Gazebo &amp; Isaac Sim)</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">1,890</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21887" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff;">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 0: Book 21793 (최신 출간!) -->
-            <article class="book-card-item"
-              data-keyword="내 노트북으로 시작하는 양자 컴퓨터 quantum ai 실전 바이블 qiskit pennylane book 21793 위키북스">
-              <div class="book-cover-mini quantum"
-                style="background: linear-gradient(135deg, #0b132b, #1c2541); border: 1.5px solid #38bdf8;">
-                <span class="book-cover-tag" style="background:#38bdf8; color:#0b132b;">Quantum AI</span>
-                <span class="book-cover-title" style="color:#38bdf8;">양자컴퓨터<br>&amp; QML</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21793</span>
-                  <span class="badge-tag live" style="background:#0284c7;">신규 출간</span>
-                </div>
-                <h4 class="book-info-title">내 노트북으로 시작하는 양자 컴퓨터 &amp; Quantum AI</h4>
-                <p class="book-info-desc">비전공자도 Qiskit 1.0과 PennyLane으로 10분 만에 돌려보는 양자 알고리즘 &amp; 하이브리드 머신러닝</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">1,250</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21793" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 1: Book 21781 (오늘 신규 출간!) -->
-            <article class="book-card-item" data-keyword="rea 완벽 마스터 가이드 book 21781 역공학 mcp 위키북스">
-              <div class="book-cover-mini rea-master">
-                <span class="book-cover-tag">REA 마스터</span>
-                <span class="book-cover-title">REA 완벽<br>마스터</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21781</span>
-                  <span class="badge-tag live" style="background:#0284c7;">신규 완간</span>
-                </div>
-                <h4 class="book-info-title">REA 완벽 마스터 가이드</h4>
-                <p class="book-info-desc">GitHub 33만 스타 REA와 MCP JSON-RPC 2.0 기반 자율 역공학 바이블</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">4,320</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21781" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 2: Book 21777 (신간) -->
-            <article class="book-card-item" data-keyword="antigravity ide 완벽 가이드 book 21777 deepmind 위키북스">
-              <div class="book-cover-mini ide">
-                <span class="book-cover-tag">AGY IDE</span>
-                <span class="book-cover-title">Antigravity<br>IDE 가이드</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21777</span>
-                  <span class="badge-tag live" style="background:#7c3aed;">완간</span>
-                </div>
-                <h4 class="book-info-title">Antigravity IDE 완벽 가이드</h4>
-                <p class="book-info-desc">구글 딥마인드 차세대 에이전틱 코딩 IDE, 3-Pane 아키텍처 및 자율 워크플로우</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">3,890</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21777" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 3: Book 21755 -->
-            <article class="book-card-item" data-keyword="모던 리버스 엔지니어링 클린룸 book 21755 rea 3권 위키북스">
-              <div class="book-cover-mini rea3">
-                <span class="book-cover-tag">REA 3</span>
-                <span class="book-cover-title">클린룸<br>시스템</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21755</span>
-                  <span class="badge-tag beta">완간</span>
-                </div>
-                <h4 class="book-info-title">모던 리버스 엔지니어링</h4>
-                <p class="book-info-desc">AI 기반 보안 분석과 클린룸 시스템 100% 바이트 일치 재구현</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">2,940</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21755" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 4: Book 21754 -->
-            <article class="book-card-item" data-keyword="리버스 엔지니어링 실전 바이블 book 21754 rea 2권 위키북스">
-              <div class="book-cover-mini rea2">
-                <span class="book-cover-tag">REA 2</span>
-                <span class="book-cover-title">리버스<br>바이블</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21754</span>
-                  <span class="badge-tag beta">완간</span>
-                </div>
-                <h4 class="book-info-title">리버스 엔지니어링 실전 바이블</h4>
-                <p class="book-info-desc">바이너리·일렉트론·모바일·네트워크 표준 실전서 (전 12챕터)</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">3,450</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21754" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 5: Book 21753 -->
-            <article class="book-card-item" data-keyword="남의 앱 뜯어보기 book 21753 rea 1권 위키북스">
-              <div class="book-cover-mini rea1">
-                <span class="book-cover-tag">REA 1</span>
-                <span class="book-cover-title">남의 앱<br>뜯어보기</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21753</span>
-                  <span class="badge-tag beta">완간</span>
-                </div>
-                <h4 class="book-info-title">남의 앱 뜯어보기 (입문)</h4>
-                <p class="book-info-desc">공룡 게임부터 윈도우 계산기까지 AI와 함께하는 10분 해체 쇼</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">5,120</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21753" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 6: Book 21748 (미래 3부작) -->
-            <article class="book-card-item dmdg-hidden-card" data-keyword="1인 ai 스튜디오 글로벌 saas빌딩 book 21748 창업 위키북스">
-              <div class="book-cover-mini saas">
-                <span class="book-cover-tag">글로벌 SaaS</span>
-                <span class="book-cover-title">1인 SaaS<br>빌딩</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21748</span>
-                  <span class="badge-tag live" style="background:#ea580c;">미래 3부작</span>
-                </div>
-                <h4 class="book-info-title">1인 AI 스튜디오 글로벌 SaaS빌딩</h4>
-                <p class="book-info-desc">Cloudflare + Supabase + Next.js 무료 티어로 0원 글로벌 SaaS 구축</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">3,210</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21748" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 7: Book 21747 (미래 3부작) -->
-            <article class="book-card-item dmdg-hidden-card" data-keyword="자율형 ai 멀티에이전트 오케스트레이션 book 21747 위키북스">
-              <div class="book-cover-mini agent">
-                <span class="book-cover-tag">멀티에이전트</span>
-                <span class="book-cover-title">에이전트<br>오케스트라</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21747</span>
-                  <span class="badge-tag live" style="background:#059669;">미래 3부작</span>
-                </div>
-                <h4 class="book-info-title">자율형 AI 멀티에이전트 오케스트레이션</h4>
-                <p class="book-info-desc">DeepMind Agentic 2.0과 비동기 서브에이전트 군집 오케스트레이션</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">2,780</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21747" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 8: Book 21746 (미래 3부작) -->
-            <article class="book-card-item dmdg-hidden-card" data-keyword="k오피스 생존 바이블 book 21746 직장인 위키북스">
-              <div class="book-cover-mini office">
-                <span class="book-cover-tag">K-오피스</span>
-                <span class="book-cover-title">K-오피스<br>생존기</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21746</span>
-                  <span class="badge-tag live" style="background:#334155;">미래 3부작</span>
-                </div>
-                <h4 class="book-info-title">K오피스 생존 바이블</h4>
-                <p class="book-info-desc">꼰대와 영ㅋㅋ 사이, 넵병과 조용한 사직을 관통하는 K-조직 생존 실전서</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">4,670</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21746" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 9: Book 21733 -->
-            <article class="book-card-item dmdg-hidden-card" data-keyword="말쌈 book 21733 나랏말싸미 힙해져라 위키북스">
-              <div class="book-cover-mini malssam">
-                <span class="book-cover-tag">어반 딕셔너리</span>
-                <span class="book-cover-title">말쌈<br>신조어</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21733</span>
-                  <span class="badge-tag beta">출간</span>
-                </div>
-                <h4 class="book-info-title">말쌈 (MALSSAM)</h4>
-                <p class="book-info-desc">영포티·영ㅋㅋ와 100대 마스터 신조어 계보학 (총 17장 완비)</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">3,150</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21733" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 10: Book 21701 -->
-            <article class="book-card-item dmdg-hidden-card" data-keyword="수학 기초 엔지니어링 book 21701 20일 완성 위키북스">
-              <div class="book-cover-mini math">
-                <span class="book-cover-tag">수학 20일</span>
-                <span class="book-cover-title">사전 학습<br>바이블</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21701</span>
-                  <span class="badge-tag beta">인기</span>
-                </div>
-                <h4 class="book-info-title">AI 사전 학습(수학·기초 엔지니어링)</h4>
-                <p class="book-info-desc">수포자도 이해하는 20일 완성 코스, 20종 시뮬레이터 수록</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">6,840</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21701" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Book 11: Book 21658 -->
-            <article class="book-card-item dmdg-hidden-card" data-keyword="ai와 데이터 분석 30개 챕터 book 21658 위키북스">
-              <div class="book-cover-mini ai">
-                <span class="book-cover-tag">AI 실무</span>
-                <span class="book-cover-title">데이터 분석<br>30챕터</span>
-              </div>
-              <div class="book-info-col">
-                <div class="book-badge-row">
-                  <span class="book-id-tag">Book 21658</span>
-                  <span class="badge-tag beta">완간</span>
-                </div>
-                <h4 class="book-info-title">AI 와 데이터 분석 (30개 챕터)</h4>
-                <p class="book-info-desc">머신러닝·딥러닝·MLOps, 31종 인포그래픽, 22개 시뮬레이터</p>
-                <div class="book-visitor-stat">
-                  <span class="book-visitor-badge"><span class="icon">👥</span> 누적 접속자 <strong
-                      class="val">7,920</strong>명</span>
-                </div>
-                <a href="https://wikidocs.net/book/21658" target="_blank" rel="noopener noreferrer"
-                  class="btn-read-book">
-                  <span>열람하기</span> <span>➔</span>
-                </a>
-              </div>
-            </article>
-          </div>
-        </section>
-
+        <h2 class="aces-banner-title">A.C.E.S 6대 IT/AI 직무 추천 & 역량 진단 대시보드</h2>
+        <p class="aces-banner-desc">DMDG 7대 공인 평가(기초 4대 + 심화 3대 · 490문항) 결과 기반 구직자 역량 정량화 및 최적 IT/AI 직무 맞춤형 추천 솔루션</p>
       </div>
-    </main>
+      <button type="button" onclick="openCareerModal()" class="aces-banner-action-btn">
+        <span>🚀 직무 추천 진단 시작하기 ➔</span>
+      </button>
+    </section>
+    </div>
 
-    <!-- =======================================================================
-       Footer
-       ======================================================================= -->
-    <footer class="dmdg-master-footer">
+    <!-- ── 4. Services 3-Column Grid ─────────────────────────── -->
+    <section class="services-3col-grid">
+      <!-- 1열: Live Web Apps (에메랄드 그린 반투명 글래스) -->
+      <div class="service-column-card col-live-apps">
+        <div class="column-header-row">
+          <h3 class="column-title">Live Web Apps</h3>
+          <a href="./novels.html" class="col-view-all-btn">전체보기 ➔</a>
+        </div>
+        <div class="item-list-wrap">
+          <!-- 1. 마음잇기 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🎙️ 마음잇기 (당목담글 보이스)</span>
+              <span class="item-sub-desc">외국인 발음 교정 & 목소리 릴레이</span>
+            </div>
+            <a href="./voice.html" class="item-action-btn btn-green-action">View ➔</a>
+          </div>
+          <!-- 2. 소담 라이브 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🌸 소담 라이브 (Sodam Live)</span>
+              <span class="item-sub-desc">감성 치유 및 따뜻한 힐링 웹</span>
+            </div>
+            <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer"
+              class="item-action-btn btn-green-action">View ➔</a>
+          </div>
+          <!-- 3. DMDG 서재 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">📖 DMDG 서재 (eBook&오디오)</span>
+              <span class="item-sub-desc">DMDG Master 팩션 소설 & AI 낭독</span>
+            </div>
+            <a href="./novels.html" class="item-action-btn btn-green-action">View ➔</a>
+          </div>
+          <!-- 4. 말쌈 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🗣️ 말쌈 (MALSSAM)</span>
+              <span class="item-sub-desc">바른 우리말 AI 사전 & 퀴즈 PWA</span>
+            </div>
+            <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer"
+              class="item-action-btn btn-green-action">View ➔</a>
+          </div>
+          <!-- 5. 공식 블로그 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">✍️ 당목담글 공식 블로그</span>
+              <span class="item-sub-desc">AI 기술 컬럼 & 릴리즈 스토리</span>
+            </div>
+            <a href="https://dmdg.wikidocs.net/blog/" target="_blank" rel="noopener noreferrer"
+              class="item-action-btn btn-green-action">View ➔</a>
+          </div>
+          <!-- 6. YOUTUBE (듀얼 채널 버튼) -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">📺 YOUTUBE</span>
+              <span class="item-sub-desc">DMDG 공식 유튜브 & 미디어 허브</span>
+            </div>
+            <div class="yt-dual-btns">
+              <a href="https://www.youtube.com/@dmdg-free" target="_blank" rel="noopener noreferrer"
+                class="yt-pill-btn">@dmdg-free ➔</a>
+              <a href="https://www.youtube.com/@Anti-Korea" target="_blank" rel="noopener noreferrer"
+                class="yt-pill-btn">@Anti-Korea ➔</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2열: Interactive Simulators (로열 퍼플 반투명 글래스) -->
+      <div class="service-column-card col-simulators">
+        <div class="column-header-row">
+          <h3 class="column-title">Interactive Simulators</h3>
+          <button type="button" onclick="openAllSimulatorsModal()" class="col-view-all-btn">전체보기 ➔</button>
+        </div>
+        <div class="item-list-wrap">
+          <!-- 1. Neo4j -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🕸️ Neo4j 지식 그래프</span>
+              <span class="item-sub-desc">지식 베이스 시각적 탐색 엔진</span>
+            </div>
+            <a href="./sim_07_decision_tree.html" class="item-action-btn btn-purple-action">실습 ➔</a>
+          </div>
+          <!-- 2. Docling -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">📄 Docling 멀티모달</span>
+              <span class="item-sub-desc">비정형 문서 AI 구조화 분석</span>
+            </div>
+            <a href="./sim_03_flatten_dense.html" class="item-action-btn btn-purple-action">실습 ➔</a>
+          </div>
+          <!-- 3. pgvector -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">⚡ pgvector 벡터 DB</span>
+              <span class="item-sub-desc">초고속 고차원 임베딩 검색</span>
+            </div>
+            <a href="./sim_math_18_pandas_scaling.html" class="item-action-btn btn-purple-action">실습 ➔</a>
+          </div>
+          <!-- 4. AI CCTV -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">📹 AI CCTV 비전</span>
+              <span class="item-sub-desc">실시간 지능형 이상 감지 모델</span>
+            </div>
+            <a href="./sim_01_cnn.html" class="item-action-btn btn-purple-action">실습 ➔</a>
+          </div>
+          <!-- 5. Docker -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🐳 Docker 컨테이너</span>
+              <span class="item-sub-desc">클라우드 네이티브 가상화 환경</span>
+            </div>
+            <a href="./sim_16_transformer.html" class="item-action-btn btn-purple-action">실습 ➔</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3열: Tech Books & Knowledge (대표님 진짜 위키독스 저서 5종 완벽 연결) -->
+      <div class="service-column-card col-tech-books">
+        <div class="column-header-row">
+          <h3 class="column-title">Tech Books & Knowledge</h3>
+          <a href="./books.html" class="col-view-all-btn">전체보기 ➔</a>
+        </div>
+        <div class="item-list-wrap">
+          <!-- 1. Book 21777 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🚀 Book 21777</span>
+              <span class="item-sub-desc">Antigravity IDE 완벽 가이드</span>
+            </div>
+            <a href="https://wikidocs.net/book/21777" target="_blank" rel="noopener noreferrer"
+              class="item-action-btn btn-amber-action">열람 ➔</a>
+          </div>
+          <!-- 2. Book 21695 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🤖 Book 21695</span>
+              <span class="item-sub-desc">LLM 에이전트 완벽 마스터북</span>
+            </div>
+            <a href="https://wikidocs.net/book/21695" target="_blank" rel="noopener noreferrer"
+              class="item-action-btn btn-amber-action">열람 ➔</a>
+          </div>
+          <!-- 3. Book 21858 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🛡️ Book 21858</span>
+              <span class="item-sub-desc">악성코드 예측 감지 EDR & 엔트로피</span>
+            </div>
+            <a href="https://wikidocs.net/book/21858" target="_blank" rel="noopener noreferrer"
+              class="item-action-btn btn-amber-action">열람 ➔</a>
+          </div>
+          <!-- 4. Book 21842 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">🏭 Book 21842</span>
+              <span class="item-sub-desc">가스누출 감지 관제 시스템</span>
+            </div>
+            <a href="https://wikidocs.net/book/21842" target="_blank" rel="noopener noreferrer"
+              class="item-action-btn btn-amber-action">열람 ➔</a>
+          </div>
+          <!-- 5. Book 21781 -->
+          <div class="service-item-row">
+            <div class="item-text-info">
+              <span class="item-main-name">📕 Book 21781</span>
+              <span class="item-sub-desc">REA 4권 역공학 마스터</span>
+            </div>
+            <a href="https://wikidocs.net/book/21781" target="_blank" rel="noopener noreferrer"
+              class="item-action-btn btn-amber-action">열람 ➔</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="dmdg-master-footer">
       <div class="footer-inner-container">
         <!-- Footer Top Branding & Status -->
         <div class="footer-top-brand">
@@ -1623,13 +1016,6 @@
         </div>
       </div>
     </footer>
-
-    <!-- =======================================================================
-       Course Popup Modal (Antigravity IDE × REA 모던 역공학 & 클린룸 재구현 과정)
-       ======================================================================= -->
-    <!-- =======================================================================
-       Career Recommender Onboarding Modal (A.C.E.S 7대 공인 평가 & AI 직무 추천)
-       ======================================================================= -->
 
   <div id="career-recommender-modal-backdrop" class="course-modal-backdrop">
     <div class="course-modal-container"
@@ -2554,17 +1940,17 @@
       if (!nav) return;
 
       nav.innerHTML = `
-        <a href="./voice.html" class="nav-pill-btn" style="border-color: #ec4899; color: #f472b6;" title="당목담글 보이스 릴레이 참여 웹앱">🎙️ 마음잇기</a>
-        <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn" style="border-color: #10b981; color: #6ee7b7;" title="소담 라이브 감성 치유 웹">🌸 소담 라이브</a>
-        <a href="./novels.html" class="nav-pill-btn" style="border-color: #38bdf8; color: #bae6fd;" title="소설 전용 E-Reader · 다국어 & AI 오디오 낭독 지원">📖 서재관</a>
-        <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn" style="border-color: #f59e0b; color: #fde68a;" title="바른 우리말 AI 사전 & 퀴즈 PWA 바로가기">🗣️ 말쌈관</a>
-        <button type="button" onclick="openCareerModal()" class="nav-pill-btn" style="border-color: #06b6d4; color: #a5f3fc;" title="A.C.E.S 직무 추천 및 REA 교육과정 신청">🎯 직무진단</button>
-        <a href="./books.html" class="nav-pill-btn" style="border-color: #9333ea; color: #e9d5ff;" title="Hamilton.Kang 실제 위키독스 기술 서적 전체 목록">📚 위키북스</a>
+        <a href="./voice.html" class="nav-pill-btn" style="background: linear-gradient(135deg, #CD2E3A, #e8532b); border-color: #CD2E3A; color: #ffffff;" title="DMDG(당목담글) 보이스 릴레이 참여 웹앱">🎙️ 마음잇기</a>
+        <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn" style="background: #ffffff; border-color: #0D9488; color: #0F766E;" title="소담 라이브 감성 치유 웹">🌸 소담 라이브</a>
+        <a href="./novels.html" class="nav-pill-btn" style="background: #ffffff; border-color: #0B1B3D; color: #0B1B3D;" title="소설 전용 E-Reader · 다국어 & AI 오디오 낭독 지원">📖 서재관</a>
+        <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn" style="background: linear-gradient(135deg, #F77F00, #E85D04); border-color: #F77F00; color: #ffffff;" title="바른 우리말 AI 사전 & 퀴즈 PWA 바로가기">🗣️ 말쌈관</a>
+        <button type="button" onclick="openCareerModal()" class="nav-pill-btn" style="background: linear-gradient(135deg, #2563EB, #0284C7); border-color: #2563EB; color: #ffffff;" title="A.C.E.S 직무 추천 및 REA 교육과정 신청">🎯 직무진단</button>
+        <a href="./books.html" class="nav-pill-btn" style="background: #ffffff; border-color: #7C3AED; color: #5B21B6;" title="Hamilton.Kang 실제 위키독스 기술 서적 전체 목록">📚 위키북스</a>
         ${isAdminAuthenticated ? `
-          <a href="./admin.html" class="nav-pill-btn active-glow" style="border-color: #38bdf8; color: #38bdf8; font-weight: 800;" title="최고 관리자 대시보드 바로가기">👑 Admin 관제실</a>
-          <button type="button" onclick="logoutAdminAccess()" class="nav-pill-btn" style="border-color: #64748b; color: #94a3b8;" title="관리자 모드 종료">🔓</button>
+          <a href="./admin.html" class="nav-pill-btn" style="background: #0B1B3D; border-color: #0B1B3D; color: #ffffff;" title="최고 관리자 대시보드 바로가기">👑 Admin 관제실</a>
+          <button type="button" onclick="logoutAdminAccess()" class="nav-pill-btn" style="background: #ffffff; border-color: #64748B; color: #334155;" title="관리자 모드 종료">🔓</button>
         ` : `
-          <button type="button" onclick="promptAdminAccess()" class="nav-pill-btn" style="border-color: rgba(255,255,255,0.15); color: #94a3b8;" title="최고 관리자 전용 관제 센터">🔒 관리자</button>
+          <button type="button" onclick="promptAdminAccess()" class="nav-pill-btn" style="background: #0F172A; border-color: #334155; color: #F8FAFC;" title="최고 관리자 전용 관제 센터">🔒 관리자</button>
         `}
       `;
     }
