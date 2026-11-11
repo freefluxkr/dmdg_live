@@ -117,6 +117,121 @@
       color: #fff;
       transform: translateY(-1px);
     }
+    .btn-nav-agents {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.28), rgba(236, 72, 153, 0.24));
+      border-color: rgba(192, 132, 252, 0.55);
+      color: #f3e8ff;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-nav-agents:hover {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.45), rgba(236, 72, 153, 0.4));
+      color: #fff;
+    }
+
+    /* Agents Org Chart */
+    .org-banner {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(30, 27, 75, 0.85));
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .org-banner img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      object-fit: cover;
+    }
+    .org-flow-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .org-node {
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #bae6fd;
+    }
+    .org-arrow { color: #64748b; font-weight: 800; }
+    .agent-group-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #e2e8f0;
+      margin: 22px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .agent-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .agent-card:hover {
+      transform: translateY(-2px);
+      border-color: #c084fc;
+    }
+    .agent-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1.5px solid rgba(192, 132, 252, 0.45);
+      flex-shrink: 0;
+    }
+    .agent-avatar-emoji {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      background: linear-gradient(135deg, #1e293b, #312e81);
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      flex-shrink: 0;
+    }
+    .agent-meta h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-bottom: 2px;
+    }
+    .agent-role {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 6px;
+    }
+    .agent-desc {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.45;
+    }
+    @media (max-width: 820px) {
+      .org-banner { grid-template-columns: 1fr; }
+    }
 
     /* KPI Stats */
     .kpi-row {
@@ -437,6 +552,7 @@
         <a href="index.html" class="btn-nav-rules">🏠 포털 홈 ➔</a>
         <a href="rules_hub.html" class="btn-nav-rules">🛡️ Rules Hub ➔</a>
         <a href="sim_master_hub.html" class="btn-nav-rules">🎮 Sim Hub ➔</a>
+        <button type="button" class="btn-nav-rules btn-nav-agents" onclick="openAgentsTab()">🤖 에이전트 구성도 ➔</button>
       </div>
     </header>
 
@@ -484,6 +600,7 @@
       <button class="tab-btn" onclick="switchTab('live', this)">🌐 상용 라이브 &amp; 시험</button>
       <button class="tab-btn" onclick="switchTab('system', this)">⚙️ 시스템 · 스크립트 · 아카이브</button>
       <button class="tab-btn" onclick="switchTab('tree', this)">📐 최신 디렉터리 트리 (Tree View)</button>
+      <button class="tab-btn" id="tabBtnAgents" onclick="switchTab('agents', this)">🤖 에이전트 구성도 (15종)</button>
     </div>
 
     <!-- TAB 1: GRID -->
@@ -793,6 +910,163 @@
 └── .env · .gitignore</div>
     </div>
 
+    <!-- TAB 3: AGENTS ORG CHART -->
+    <div id="tab-agents" class="tab-content" style="display: none;">
+      <div class="org-banner">
+        <img src="./assets/agents/dmdg_team_portrait.jpg" alt="DMDG Great AI 팀 단체 초상화">
+        <div>
+          <span class="card-badge badge-purple" style="margin-bottom:8px; display:inline-block;">DMDG GREAT AI TEAM · 15 AGENTS</span>
+          <h2 style="font-size:21px; font-weight:800; color:#f8fafc; margin-bottom:8px;">당목담글(DMDG) 자율 에이전트 조직 &amp; 협업 구성도</h2>
+          <p style="font-size:13px; color:#cbd5e1;">사장님(<strong>Hamilton.Kang</strong>)의 비전을 중심으로 전략·조율(Demis·Peggy), 풀스택·클라우드·QA(Craig·Satya·Sherlock), 디자인·스토리·미디어(Jennifer·Haruki·Mustafa·YUPD·Zimmer), 팩션·외부 자문단(Dan·Kim·Victor·Marcus)이 유기적으로 협업합니다.</p>
+          <div class="org-flow-row">
+            <span class="org-node">👑 Hamilton.Kang (사장님)</span>
+            <span class="org-arrow">➔</span>
+            <span class="org-node">🧠 Demis · 📋 Peggy</span>
+            <span class="org-arrow">➔</span>
+            <span class="org-node">💻 Craig · ☁️ Satya · 🔍 Sherlock</span>
+            <span class="org-arrow">➔</span>
+            <span class="org-node">🎨 Jennifer · ✍️ Haruki · 🔬 Mustafa · 🎬 YUPD · 🎧 Zimmer</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-group-title">👑 1. 전략 총괄 · 아카이빙 · 오케스트레이션 (3종)</div>
+      <div class="agent-grid">
+        <div class="agent-card">
+          <img src="./assets/agents/demis.jpg" alt="Demis" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>Demis (데미스)</h4>
+            <div class="agent-role">CEO · 비즈니스 로드맵 &amp; 전략 총괄</div>
+            <p class="agent-desc">DMDG 비즈니스 로드맵 수립, 프로젝트 우선순위 결정 및 통합 의사결정 가이드.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <img src="./assets/agents/peggy.jpg" alt="Peggy" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>Peggy (페기)</h4>
+            <div class="agent-role">아카이빙 · 체크포인트 · 텔레그램 보고</div>
+            <p class="agent-desc">세션 체크포인트 기록, 일일 현황 요약 및 <code>@aiffall_bot</code> 실시간 원격 보고 담당.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-avatar-emoji">🏛️</div>
+          <div class="agent-meta">
+            <h4>System (시스템 오케스트레이터)</h4>
+            <div class="agent-role">공통 지침 · 교차 에이전트 회의 시뮬레이터</div>
+            <p class="agent-desc">전 에이전트 공통 시스템 규율, 의사결정 추출 및 회의 시뮬레이션 관리.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-group-title">⚙️ 2. 엔지니어링 · 클라우드 · QA 무결성 (3종)</div>
+      <div class="agent-grid">
+        <div class="agent-card">
+          <img src="./assets/agents/craig.jpg" alt="Craig" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>Craig (크레이그)</h4>
+            <div class="agent-role">풀스택 · API · 영상 자동화 파이프라인</div>
+            <p class="agent-desc">풀스택 코드 구현, API 엔지니어링 및 영상 자동화 파이프라인 구축.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <img src="./assets/agents/satya.jpg" alt="Satya" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>Satya (사티아)</h4>
+            <div class="agent-role">멀티 클라우드 · PWA · 저장소 아키텍트</div>
+            <p class="agent-desc">멀티 클라우드, PWA 아키텍처 및 Git 저장소 분리/배포 설계 총괄.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <img src="./assets/agents/sherlock.jpg" alt="Sherlock" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>Sherlock (셜록)</h4>
+            <div class="agent-role">QA 무결성 · 오탈자 · 플로우 결함 제로</div>
+            <p class="agent-desc">코드 무결성, 오탈자·다국어 표기 및 사용자 플로우 결함 제로 검증.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-group-title">🎨 3. 디자인 · 리서치 · 스토리 · 미디어 · 사운드 (5종)</div>
+      <div class="agent-grid">
+        <div class="agent-card">
+          <img src="./assets/agents/jennifer.jpg" alt="Jennifer" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>Jennifer (제니퍼)</h4>
+            <div class="agent-role">UI/UX · 다크 Aurora · 웹 시뮬레이터</div>
+            <p class="agent-desc">세련된 다크 테마, 인터랙티브 웹 시뮬레이터 및 와우 미학 디자인.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <img src="./assets/agents/mustafa.jpg" alt="Mustafa" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>Mustafa (무스타파)</h4>
+            <div class="agent-role">트렌드 리서치 · 데이터 분석 · 팩트체크</div>
+            <p class="agent-desc">트렌드 리서치, 경쟁사 분석, 데이터 수집·요약 및 사실 확인.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <img src="./assets/agents/haruki.jpg" alt="Haruki" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>Haruki (하루키)</h4>
+            <div class="agent-role">감성 스토리텔링 · 위키독스 집필</div>
+            <p class="agent-desc">감성 스토리텔링, 팩션 소설 및 위키독스 도서·블로그 연재 원고 집필.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <img src="./assets/agents/upd.jpg" alt="유피디" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>유피디 (YUPD)</h4>
+            <div class="agent-role">유튜브 · 릴스 영상 기획 &amp; 편집 PD</div>
+            <p class="agent-desc">유튜브·릴스 영상 기획, 컷 구성, 편집 지시서 및 TTS 연동.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-avatar-emoji">🎧</div>
+          <div class="agent-meta">
+            <h4>Zimmer (짐머)</h4>
+            <div class="agent-role">AI 사운드 디렉터 · BGM &amp; 오디오</div>
+            <p class="agent-desc">AI 사운드 디렉팅, BGM·효과음 설계 및 오디오 프로덕션 가이드.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-group-title">📚 4. 팩션 기획 거장 &amp; 엔터프라이즈 외부 자문단 (4종)</div>
+      <div class="agent-grid">
+        <div class="agent-card">
+          <img src="./assets/agents/dan.jpg" alt="댄 브라운" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>댄 브라운 (Dan Brown)</h4>
+            <div class="agent-role">현대사 서스펜스 · 미스터리 팩션 기획</div>
+            <p class="agent-desc">한국 현대사 서스펜스 및 기호학·미스터리 팩션 스토리 기획.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <img src="./assets/agents/kim.jpg" alt="김진명" class="agent-avatar">
+          <div class="agent-meta">
+            <h4>김진명 (Kim Jin-myung)</h4>
+            <div class="agent-role">역사·정치 · 동아시아 지정학 팩션</div>
+            <p class="agent-desc">한국 역사·정치 및 동아시아 지정학 대하 팩션 스토리 기획.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-avatar-emoji">🏢</div>
+          <div class="agent-meta">
+            <h4>Victor Choi (LG CNS D&amp;A)</h4>
+            <div class="agent-role">LG CNS D&amp;A 사업부 팀장 외부 자문</div>
+            <p class="agent-desc">빅데이터 레이크하우스, MLOps/LLMOps, 클라우드 AM 연계 AI 실무 자문.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-avatar-emoji">🛡️</div>
+          <div class="agent-meta">
+            <h4>Marcus Vance (삼성SDS Gen.AI)</h4>
+            <div class="agent-role">삼성SDS Gen.AI사업팀장 외부 자문</div>
+            <p class="agent-desc">엔터프라이즈 생성형 AI, FabriX 플랫폼, SCP 클라우드 및 보안 RAG 자문.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- TOAST -->
     <div id="toast">📋 경로가 클립보드에 복사되었습니다!</div>
 
@@ -808,12 +1082,22 @@
       const activeBtn = el || (window.event ? window.event.currentTarget : null);
       if (activeBtn) activeBtn.classList.add('active');
 
+      const gridEl = document.getElementById('tab-grid');
+      const treeEl = document.getElementById('tab-tree');
+      const agentsEl = document.getElementById('tab-agents');
+
       if (tabId === 'tree') {
-        document.getElementById('tab-grid').style.display = 'none';
-        document.getElementById('tab-tree').style.display = 'block';
+        gridEl.style.display = 'none';
+        treeEl.style.display = 'block';
+        if (agentsEl) agentsEl.style.display = 'none';
+      } else if (tabId === 'agents') {
+        gridEl.style.display = 'none';
+        treeEl.style.display = 'none';
+        if (agentsEl) agentsEl.style.display = 'block';
       } else {
-        document.getElementById('tab-grid').style.display = 'block';
-        document.getElementById('tab-tree').style.display = 'none';
+        gridEl.style.display = 'block';
+        treeEl.style.display = 'none';
+        if (agentsEl) agentsEl.style.display = 'none';
 
         document.querySelectorAll('.dir-card').forEach(card => {
           const cats = (card.getAttribute('data-category') || '').split(' ');
@@ -826,11 +1110,19 @@
       }
     }
 
+    function openAgentsTab() {
+      const btn = document.getElementById('tabBtnAgents');
+      switchTab('agents', btn);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // Live Search Filter
     document.getElementById('dirSearch').addEventListener('input', function(e) {
       const q = e.target.value.toLowerCase().trim();
       document.getElementById('tab-grid').style.display = 'block';
       document.getElementById('tab-tree').style.display = 'none';
+      const agentsEl = document.getElementById('tab-agents');
+      if (agentsEl) agentsEl.style.display = 'none';
       document.querySelectorAll('.dir-card').forEach(card => {
         const text = (card.innerText + ' ' + (card.getAttribute('data-name') || '')).toLowerCase();
         card.style.display = (!q || text.includes(q)) ? 'flex' : 'none';
