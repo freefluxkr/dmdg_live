@@ -867,10 +867,10 @@ body.aurora-portal-body .wave-backdrop-side-right {
   }
 }
 
-/* ── Mobile Legacy Calm Dark Slate Theme Override (<= 768px) ───────────────
-   데스크탑(>= 769px)은 현재 밝은 오로라 테마를 그대로 유지하고,
-   모바일에서는 이전(06e4ef8) 시점의 차분한 다크 네이비 톤으로 표시합니다. */
-@media (max-width: 768px) {
+/* ── Mobile & Compact Legacy Calm Dark Slate Theme Override (<= 960px) ─────
+   데스크탑(>= 961px)은 현재 밝은 오로라 테마를 그대로 유지하고,
+   모바일 및 축소 창(<= 960px)에서는 이전(06e4ef8) 시점의 차분한 다크 네이비 톤으로 표시합니다. */
+@media (max-width: 960px) {
   body.aurora-portal-body {
     background-color: #0b1120;
     background-image: none;
@@ -884,7 +884,7 @@ body.aurora-portal-body .wave-backdrop-side-right {
   body.aurora-portal-body .wave-backdrop-top,
   body.aurora-portal-body .wave-backdrop-side-left,
   body.aurora-portal-body .wave-backdrop-side-right {
-    opacity: 0.14;
+    display: none;
   }
 
   .portal-top-header,

@@ -185,11 +185,11 @@ body[data-motif="grid"] header::before {
 }
 
 /* ============================================================================
-   Mobile Legacy Taegeuk Light / Peach Theme Override (<= 768px)
-   데스크탑(>= 769px)은 위 오로라 다크 테마를 그대로 유지하고,
-   모바일에서는 이전(06e4ef8) 시점의 따뜻한 피치·라이트 톤을 복원합니다.
+   Mobile & Compact Legacy Taegeuk Light / Peach Theme Override (<= 960px)
+   데스크탑(>= 961px)은 위 오로라 다크 테마를 그대로 유지하고,
+   모바일 및 축소 창(<= 960px)에서는 이전(06e4ef8) 시점의 따뜻한 피치·라이트 톤을 복원합니다.
    ============================================================================ */
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   :root {
     --theme-primary: #CD2E3A;
     --theme-primary-dark: #a82230;
