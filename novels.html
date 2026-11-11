@@ -915,14 +915,16 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
     <!-- Top Global Navigation -->
     <header class="top-nav">
       <div class="nav-brand" id="btn-home">
-        <div class="brand-icon">📚</div>
+        <div class="brand-icon">📖</div>
         <div class="brand-title-wrap">
-          <h1>DMDG 서재 <span class="brand-badge">E-Reader</span></h1>
-          <div class="brand-subtitle">미래 베스트셀러 3부작 & 2027 팩션 컬렉션 E-Reader</div>
+          <h1>DMDG 서재관 <span class="brand-badge">Novels · 다국어 &amp; 오디오</span></h1>
+          <div class="brand-subtitle">소설 전용 E-Reader · 6개 국어 다국어 번역 &amp; AI 오디오북 낭독 지원</div>
         </div>
       </div>
 
       <div class="nav-actions">
+        <a href="./index.html" class="nav-btn" style="text-decoration:none;">🏠 포털 홈</a>
+        <a href="./books.html" class="nav-btn" style="text-decoration:none;">📚 위키북스</a>
         <!-- Theme Dropdown Button -->
         <button id="btn-theme-toggle" class="nav-btn" title="테마 변경 (단축키: T)">
           <span id="theme-icon">🌙</span> <span id="theme-label">다크</span>
@@ -940,21 +942,18 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
     <main id="bookshelf-view">
       <!-- Hero Banner -->
       <section class="hero-section">
-        <div class="hero-tag">✨ DMDG 프리미엄 E-Reader & 위키북스 서재</div>
-        <h2 class="hero-title">미래 기술과 역사의 숨결을 읽다</h2>
+        <div class="hero-tag">📖 DMDG 서재관 · 소설 전용 (🌐 6개 국어 &amp; 🎧 AI 오디오북 지원)</div>
+        <h2 class="hero-title">감성 팩션 소설과 인문 서사의 세계</h2>
         <p class="hero-desc">
-          위키독스 화제의 미래 3부작(K-오피스·멀티에이전트·글로벌 SaaS)부터 거장들의 4대 지정학 팩션 대하 단편소설까지,<br>
-          몰입형 E-Reader와 정규 위키북스 연동 링크로 언제 어디서나 가장 편안하게 탐독하세요.
+          아키텍트 제로, 설계자들, 삶은 개구리 트릴로지, 소년공 연작부터 2027 지정학 팩션·미식 인문기행까지 <strong>순수 소설 20편</strong>을<br>
+          다국어(KO·EN·JA·FR·ID·ES) 전환 및 AI 오디오북 낭독으로 몰입감 있게 감상하세요. (기술 서적은 📚 <a href="./books.html" style="color:var(--accent-gold); font-weight:700;">위키북스</a>에서 별도 제공)<br>
+          <span style="display:inline-block; margin-top:6px; font-size:0.82rem; color:#94a3b8;">📱 아이폰(iOS)에서 낭독 소리가 들리지 않으면 측면 무음 스위치를 해제하거나 알림/미디어 소리를 켜주세요.</span>
         </p>
 
         <!-- Filter Chips -->
         <div class="filter-bar">
-          <button class="filter-chip active" data-filter="all">전체 도서관 (43)</button>
+          <button class="filter-chip active" data-filter="all">전체 소설 (20)</button>
           <button class="filter-chip" data-filter="faction">🖋️ 팩션 소설 컬렉션 (18)</button>
-          <button class="filter-chip" data-filter="security">🛡️ 산업 IoT &amp; 안전관제 (5)</button>
-          <button class="filter-chip" data-filter="rea">📕 REA 역공학 &amp; IDE (6)</button>
-          <button class="filter-chip" data-filter="agent">🤖 AI 에이전트 &amp; 양자 (5)</button>
-          <button class="filter-chip" data-filter="business">💼 비즈니스 &amp; 데이터 (9)</button>
           <button class="filter-chip" data-filter="healing_gourmet">🍃 사찰음식 인문기행 (1)</button>
           <button class="filter-chip" data-filter="travel_gourmet">🍲 K-기사식당 기행 (1)</button>
         </div>
@@ -1055,8 +1054,12 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
   <!-- Scripts -->
   <script src="js/books_data.js?v=20261109_2346_v3"></script>
   <script>
-// 2026_korea 단편소설 컬렉션 통합 데이터셋
-  const NOVELS_DATA = window.NOVELS_DATA || [];
+// 2026_korea 순수 소설 전용 컬렉션 (기술 서적은 books.html에서 별도 제공)
+  const NOVELS_DATA = (window.NOVELS_DATA || []).filter(n => {
+    const id = String(n.id || '');
+    const cat = String(n.category || '');
+    return !id.startsWith('book-') && !cat.includes('tech');
+  });
 
   const STATE = {
     currentNovel: null,
@@ -1831,7 +1834,7 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
     initTts();
     bindEvents();
     renderBookshelf('all');
-    console.log('DMDG 서재 웹앱 초기화 완료. 총 7편의 도서 및 소설 로드됨.');
+    console.log(`DMDG 서재관(소설 전용) 초기화 완료. 총 ${NOVELS_DATA.length}편의 소설 로드됨.`);
   }
 
   // Launch on DOM Ready

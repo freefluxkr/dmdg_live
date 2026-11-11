@@ -182,6 +182,9 @@
         <span class="text-slate-600">|</span>
         <span class="flex items-center gap-1.5"><strong class="text-emerald-400">🔄 Replay:</strong> 녹음 내용 다시듣기</span>
       </div>
+      <p style="font-size: 0.76rem; color: #94a3b8; margin: 0.55rem auto 0; text-align: center;">
+        📱 아이폰(iOS)에서 낭독 소리가 들리지 않으면 <strong>측면 무음(진동) 스위치를 해제</strong>하거나 <strong>알림/미디어 소리</strong>를 켜주세요.
+      </p>
     </section>
 
     <!-- ── 2. Karaoke & 4 Action Buttons Card (독립 레이어, 잔상 0%) ──── -->
@@ -402,10 +405,10 @@
         },
         'novels': {
           label: 'DMDG 서재관 Prompt:',
-          text: '“삶은 개구리 트릴로지와 감성 팩션 소설의 깊은 여운…”',
+          text: '“다국어와 AI 오디오 낭독으로 감상하는 DMDG 팩션 소설…”',
           theme: 'sunset',
-          btnText: '📖 서재관 도서·소설 읽기 ➔',
-          btnUrl: './books.html',
+          btnText: '📖 서재관 소설·오디오북 읽기 ➔',
+          btnUrl: './novels.html',
           isExternal: false
         },
         'aces': {
@@ -417,10 +420,10 @@
           isExternal: false
         },
         'techlib': {
-          label: '6대 AI 기술도서관 Prompt:',
-          text: '“엔터프라이즈 AI 아키텍처와 LLMOps 엔지니어링 실무…”',
+          label: '위키북스 기술서적 Prompt:',
+          text: '“엔터프라이즈 AI 아키텍처와 LLMOps·리버스 엔지니어링 35권…”',
           theme: 'cyber',
-          btnText: '📚 6대 기술도서관 열람하기 ➔',
+          btnText: '📚 위키북스 기술서적 35권 보기 ➔',
           btnUrl: './books.html',
           isExternal: false
         },
@@ -3376,10 +3379,10 @@
       nav.innerHTML = `
         <a href="./voice.html" class="nav-pill-btn" style="border-color: #ec4899; color: #f472b6;" title="당목담글 보이스 릴레이 참여 웹앱">🎙️ 마음잇기</a>
         <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn" style="border-color: #10b981; color: #6ee7b7;" title="소담 라이브 감성 치유 웹">🌸 소담 라이브</a>
-        <a href="./books.html" class="nav-pill-btn" style="border-color: #38bdf8; color: #bae6fd;" title="DMDG Master 팩션 소설 및 기술 단행본 라이브러리">📖 서재관</a>
+        <a href="./novels.html" class="nav-pill-btn" style="border-color: #38bdf8; color: #bae6fd;" title="소설 전용 E-Reader · 다국어 & AI 오디오 낭독 지원">📖 서재관</a>
         <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn" style="border-color: #f59e0b; color: #fde68a;" title="바른 우리말 AI 사전 & 퀴즈 PWA 바로가기">🗣️ 말쌈관</a>
         <button type="button" onclick="openCareerModal()" class="nav-pill-btn" style="border-color: #06b6d4; color: #a5f3fc;" title="A.C.E.S 직무 추천 및 REA 교육과정 신청">🎯 직무진단</button>
-        <a href="./books.html" class="nav-pill-btn" style="border-color: #9333ea; color: #e9d5ff;" title="대표님의 공식 기술 도서관 바로가기">📚 위키북스</a>
+        <a href="./books.html" class="nav-pill-btn" style="border-color: #9333ea; color: #e9d5ff;" title="Hamilton.Kang 실제 위키독스 기술 서적 전체 목록">📚 위키북스</a>
         ${isAdminAuthenticated ? `
           <a href="./admin.html" class="nav-pill-btn active-glow" style="border-color: #38bdf8; color: #38bdf8; font-weight: 800;" title="최고 관리자 대시보드 바로가기">👑 Admin 관제실</a>
           <button type="button" onclick="logoutAdminAccess()" class="nav-pill-btn" style="border-color: #64748b; color: #94a3b8;" title="관리자 모드 종료">🔓</button>

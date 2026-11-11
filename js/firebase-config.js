@@ -16,17 +16,3 @@ if (typeof firebase !== 'undefined') {
   }
   window.firestore = firebase.firestore();
 }
-
-let audioEngine = null;
-if (typeof AudioPlayerEngine !== 'undefined') {
-  audioEngine = new AudioPlayerEngine();
-}
-let currentFilter = '전체';
-const emotions = ['전체', '위로', '설렘', '평온'];
-let isRecording = false;
-let mediaRecorder = null;
-let audioChunks = [];
-let canvasAnimationId = null;
-
-let loadedPrimers = [];
-let currentPrimerIndex = 0;

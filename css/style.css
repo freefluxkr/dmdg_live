@@ -1,283 +1,185 @@
-/* ================================================
-       🇰🇷 당목담글 Master Theme — 태극기 디자인 시스템
-       Primary (Red)  : #CD2E3A  — 기부·녹음·시작 등 핵심 CTA
-       Secondary (Blue): #0047A0  — 정보·학습·링크 등 보조
-       Background     : White/Light — 콘텐츠 공간의 깨끗함
-       Text           : #1A1A1A  — 또렷한 가독성
-       Connector Grad : Blue→Red  — 사람과 마음의 연결
-       ================================================ */
-    :root {
-      /* ── 부드러운 전환 효과 (테마 전환 시 Flash 없이 0.35s 슬라이드) ── */
-      transition: background-color 0.35s ease, color 0.35s ease;
-    }
+/* ============================================================================
+   🎙️ 당목담글 보이스 (마음잇기) — DMDG Unified Bright Aurora Glassmorphism Theme
+   Harmonized with index.html & books.html (Responsive Desktop + Mobile PWA)
+   ============================================================================ */
 
-    /* 모든 요소에 색상 전환 적용 */
-    *, *::before, *::after {
-      transition: background-color 0.35s ease, border-color 0.35s ease, color 0.25s ease;
-    }
+:root {
+  --theme-primary: #ec4899;
+  --theme-primary-dark: #db2777;
+  --theme-secondary: #38bdf8;
+  --theme-secondary-dark: #0284c7;
+  --theme-accent: #f59e0b;
+  --theme-text-body: #f8fafc;
+  --theme-text-muted: #cbd5e1;
+  --theme-bg-circle1: rgba(52, 211, 153, 0.45);
+  --theme-bg-circle2: rgba(244, 114, 182, 0.40);
+  --theme-glow: rgba(236, 72, 153, 0.42);
+}
 
-    :root {
-      --theme-primary:       #CD2E3A;   /* 열정의 홍(Red) — 주요 CTA */
-      --theme-primary-dark:  #a82230;
-      --theme-secondary:     #0047A0;   /* 신뢰의 청(Blue) — 보조 정보 */
-      --theme-secondary-dark:#003580;
-      --theme-accent:        #e8532b;   /* 홍·청 중간의 따뜻한 주황 액센트 */
-      --theme-accent-dark:   #f4845e;
-      --theme-text-body:     #1A1A1A;   /* 본문 텍스트 — 짙고 또렷한 가독성 */
-      --theme-text-muted:    #4a4a4a;   /* 보조 설명 텍스트 */
-      --theme-text-dark:     #f8f5f2;   /* 어두운 배경 위 밝은 텍스트 */
-      --theme-text-deep:     #ffffff;   /* 최대 명도 텍스트 */
-      --theme-bg-page:       #f8f4f1;   /* 연한 한지색 페이지 배경 */
-      --theme-bg-card:       #ffffff;   /* 순백 카드 배경 */
-      --theme-bg-light:      rgba(205, 46, 58, 0.06);
-      --theme-bg-soft:       rgba(0, 71, 160, 0.06);
-      --theme-bg-medium:     rgba(0, 0, 0, 0.04);
-      --theme-glow:          rgba(205, 46, 58, 0.30);
-      --theme-glow-blue:     rgba(0, 71, 160, 0.25);
-      --theme-bg-circle1:    rgba(205, 46, 58, 0.12);  /* 홍(Red) 오라 */
-      --theme-bg-circle2:    rgba(0, 71, 160, 0.10);   /* 청(Blue) 오라 */
-      --theme-border:        rgba(205, 46, 58, 0.15);
-      --theme-connector:     linear-gradient(to right, #0047A0, #CD2E3A);
-      --border-radius: 12px;
-    }
+*, *::before, *::after {
+  box-sizing: border-box;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+}
 
-    /* ===== 핵심 CTA 버튼: 홍(Red) 그라데이션 ===== */
-    .bg-theme-grad {
-      background: linear-gradient(135deg, #CD2E3A 0%, #e8532b 100%) !important;
-    }
+body.voice-aurora-body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #0b1936;
+  background-image:
+    radial-gradient(ellipse 85% 60% at 12% 8%, rgba(52, 211, 153, 0.50), transparent 62%),
+    radial-gradient(ellipse 75% 55% at 88% 12%, rgba(56, 189, 248, 0.48), transparent 60%),
+    radial-gradient(ellipse 72% 58% at 70% 58%, rgba(167, 139, 250, 0.44), transparent 62%),
+    radial-gradient(ellipse 68% 52% at 22% 88%, rgba(244, 114, 182, 0.38), transparent 62%),
+    linear-gradient(155deg, #0b1936 0%, #122b52 44%, #1d2259 76%, #0f2447 100%);
+  background-attachment: fixed;
+  color: #f8fafc;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
 
-    /* ===== 연결 그라데이션 (Blue→Red): 사람과 마음의 연결 ===== */
-    .bg-connector-grad {
-      background: var(--theme-connector) !important;
-    }
+.font-warm    { font-family: 'Gowun Batang', 'Pretendard', serif; }
+.font-comfort { font-family: 'Comfortaa', 'Pretendard', cursive; }
+.font-cute    { font-family: 'Gaegu', 'Pretendard', cursive; }
 
-    /* ===== 보조 버튼/배지: 청(Blue) ===== */
-    .bg-secondary-grad {
-      background: linear-gradient(135deg, #0047A0 0%, #1a6bd4 100%) !important;
-    }
+.bg-theme-grad {
+  background: linear-gradient(135deg, #ec4899 0%, #f43f5e 50%, #f59e0b 100%) !important;
+  color: #ffffff !important;
+}
 
-    .text-theme-primary  { color: var(--theme-primary) !important; }
-    .text-theme-secondary { color: var(--theme-secondary) !important; }
-    .text-theme-accent   { color: var(--theme-accent) !important; }
-    .border-theme-primary { border-color: var(--theme-primary) !important; }
+.bg-secondary-grad {
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%) !important;
+  color: #ffffff !important;
+}
 
-    .glow-theme {
-      box-shadow: 0 0 28px var(--theme-glow) !important;
-    }
+.glow-theme {
+  box-shadow: 0 0 28px var(--theme-glow) !important;
+}
 
-    /* ===== 페이지 배경: 한지색 연한 베이지 ===== */
-    body {
-      font-family: 'Pretendard', sans-serif;
-      background: #f0ece6;
-      background-image:
-        radial-gradient(ellipse 70% 50% at 20% 10%, rgba(205,46,58,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(0,71,160,0.07) 0%, transparent 60%);
-      background-attachment: fixed;
-      min-height: 100vh;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-      position: relative;
-      overflow-x: hidden;
-    }
+.touch-target { touch-action: manipulation; }
+.touch-target:active { transform: scale(0.96); }
 
-    /* ===== 은은한 한지 결 텍스처 배경 ===== */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(1.5px 1.5px at 15% 25%, rgba(205,46,58,0.12), transparent),
-        radial-gradient(1px 1px at 45% 60%, rgba(0,71,160,0.08), transparent),
-        radial-gradient(1.5px 1.5px at 75% 20%, rgba(205,46,58,0.10), transparent),
-        radial-gradient(1px 1px at 88% 70%, rgba(0,71,160,0.09), transparent),
-        radial-gradient(1px 1px at 30% 85%, rgba(205,46,58,0.07), transparent);
-      background-size: 400px 400px;
-      opacity: 0.6;
-      z-index: -2;
-      pointer-events: none;
-      animation: hanjiShimmer 12s ease-in-out infinite alternate;
-    }
+/* Frosted Aurora Glass Card */
+.glass-card {
+  background: rgba(15, 26, 52, 0.56) !important;
+  backdrop-filter: blur(22px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  color: #f8fafc;
+}
 
-    @keyframes hanjiShimmer {
-      0%   { opacity: 0.4; }
-      100% { opacity: 0.75; }
-    }
-    
-    .font-warm    { font-family: 'Gowun Batang', serif; }
-    .font-comfort { font-family: 'Comfortaa', cursive; }
-    .font-cute    { font-family: 'Gaegu', cursive; }
+/* Crisp Lucide Icon & Text Contrast inside Aurora Glass Cards */
+body.voice-aurora-body svg.lucide {
+  stroke: currentColor;
+  flex-shrink: 0;
+}
 
-    /* ===== 마이크로 인터랙션 ===== */
-    .touch-target { touch-action: manipulation; }
-    .touch-target:active { transform: scale(0.95); }
+body.voice-aurora-body [class*="text-orange-950"],
+body.voice-aurora-body [class*="text-orange-900"],
+body.voice-aurora-body [class*="text-orange-850"],
+body.voice-aurora-body [class*="text-orange-800"] {
+  color: #f8fafc !important;
+}
 
-    /* ===== 글라스모피즘 카드 (라이트 모드 버전) ===== */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.82) !important;
-      backdrop-filter: blur(20px) !important;
-      -webkit-backdrop-filter: blur(20px) !important;
-      border: 1px solid rgba(205, 46, 58, 0.12) !important;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(205,46,58,0.08) !important;
-    }
+body.voice-aurora-body [class*="text-orange-700"],
+body.voice-aurora-body [class*="text-orange-600"] {
+  color: #fde68a !important;
+}
 
-    /* ===== 스크롤바 ===== */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(205, 46, 58, 0.25);
-      border-radius: 9999px;
-    }
+body.voice-aurora-body [class*="text-rose-800"],
+body.voice-aurora-body [class*="text-rose-700"],
+body.voice-aurora-body [class*="text-rose-600"] {
+  color: #f9a8d4 !important;
+}
 
-    /* ===== 텍스트 가독성 — 라이트 테마 ===== */
-    h1, h2, h3, h4, h5, h6,
-    #primer-content,
-    #primer-translation-text,
-    #status-message,
-    #stat-donations-count,
-    #stat-chains-count,
-    #warmth-degree {
-      color: var(--theme-text-body) !important;
-    }
+body.voice-aurora-body select,
+body.voice-aurora-body input {
+  background: rgba(15, 23, 42, 0.72) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+}
 
-    p, span,
-    [class*="text-orange-950"],
-    [class*="text-orange-900"],
-    [class*="text-orange-850"],
-    [class*="text-orange-700"] {
-      color: var(--theme-text-body) !important;
-    }
+body.voice-aurora-body select option {
+  background: #0f172a;
+  color: #f8fafc;
+}
 
-    footer {
-      color: var(--theme-text-muted) !important;
-    }
+/* Relay list action circles & badges */
+body.voice-aurora-body #relay-list .bg-orange-100\/80 {
+  background: rgba(56, 189, 248, 0.22) !important;
+  color: #bae6fd !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+}
 
-    /* ===== 배너 텍스트 ===== */
-    [data-i18n="privacy_banner"], [data-i18n="benefit_banner"] {
-      color: var(--theme-text-body) !important;
-      font-weight: 600 !important;
-    }
+body.voice-aurora-body #relay-list .bg-rose-50\/50 {
+  background: rgba(244, 63, 94, 0.18) !important;
+  color: #fda4af !important;
+  border: 1px solid rgba(244, 63, 94, 0.35) !important;
+}
 
-    /* ===== 강조 아이콘·텍스트: Red ===== */
-    [class*="text-orange-600"],
-    [class*="text-rose-600"],
-    [class*="text-rose-800"],
-    #primer-translate-btn span, #primer-type {
-      color: var(--theme-primary) !important;
-    }
+body.voice-aurora-body #relay-list .bg-orange-100\/60,
+body.voice-aurora-body #relay-list .bg-rose-100\/60,
+body.voice-aurora-body #relay-list .bg-amber-100\/60 {
+  background: rgba(236, 72, 153, 0.24) !important;
+  color: #fbcfe8 !important;
+  border: 1px solid rgba(244, 114, 182, 0.35);
+}
 
-    /* ===== 입력 필드 ===== */
-    input, select, textarea {
-      background: rgba(255, 255, 255, 0.9) !important;
-      color: var(--theme-text-body) !important;
-      border-color: rgba(205, 46, 58, 0.20) !important;
-    }
+/* Modal light-surface readability */
+#audio-popup-modal,
+#ai-evaluation-modal,
+#paywall-modal,
+#settings-modal,
+#benefit-modal,
+#donate-modal {
+  background: rgba(4, 9, 24, 0.72) !important;
+}
 
-    /* ===== 탭 비활성 버튼 ===== */
-    [class*="text-orange-950/40"], [class*="text-orange-950/50"] {
-      color: rgba(26, 26, 26, 0.35) !important;
-    }
+#audio-popup-modal .glass-card,
+#ai-evaluation-modal .glass-card,
+#paywall-modal .glass-card,
+#settings-modal .glass-card,
+#benefit-modal .glass-card,
+#donate-modal .glass-card {
+  background: rgba(15, 26, 52, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+}
 
-    #emotion-tabs button:not(.bg-theme-grad) {
-      color: var(--theme-text-muted) !important;
-      background: rgba(205, 46, 58, 0.05);
-    }
+#evaluation-feedback-wrapper {
+  max-height: 280px !important;
+  overflow-y: auto !important;
+  padding-right: 4px;
+}
 
-    /* ===== 대시보드 내부 소카드 ===== */
-    .bg-orange-50\/50, .bg-rose-50\/50 {
-      background: rgba(205, 46, 58, 0.06) !important;
-    }
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 9999px;
+}
 
-    /* ===== 성적표 모달 스크롤 제약 ===== */
-    #evaluation-feedback-wrapper {
-      max-height: 280px !important;
-      overflow-y: auto !important;
-      padding-right: 4px;
-    }
+/* Country Motifs */
+body[data-motif="tricolor"] header::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #0055A4 33%, #ffffff 33% 66%, #EF4135 66%);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 100;
+}
 
-    /* ===== 오디오북 패널: Primary 액센트 ===== */
-    #audiobook-player {
-      border-top-color: var(--theme-primary) !important;
-    }
-
-    /* ===================================================
-       🌍 국기 상징 요소 (Motif) — data-motif 속성 기반
-       각 국가의 기하학적 정체성을 배경에 은은하게 표현
-       =================================================== */
-
-    /* 🇯🇵 일장기: 원형(Circle) 모티브 — 버튼·배지에 원형 글로우 */
-    body[data-motif="circle"] .glass-card::before {
-      content: "";
-      position: absolute;
-      top: -30px; right: -30px;
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(188,0,45,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    body[data-motif="circle"] #action-btn {
-      border-radius: 50% !important;
-      box-shadow: 0 0 0 4px rgba(188,0,45,0.12), 0 0 0 8px rgba(188,0,45,0.06) !important;
-    }
-
-    /* 🇫🇷 삼색기: 세로선(Tricolor) 모티브 — 좌측에 청·백·적 세로 줄기 */
-    body[data-motif="tricolor"] header::before {
-      content: "";
-      position: fixed;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      background: linear-gradient(to bottom, #0055A4 33%, #ffffff 33% 66%, #EF4135 66%);
-      opacity: 0.5;
-      pointer-events: none;
-      z-index: 100;
-    }
-
-    /* 🇩🇪 삼색기: 가로띠(Grid) 모티브 — 상단에 흑·적·금 가로 줄기 */
-    body[data-motif="grid"] header::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(to right, #222222 33%, #DD0000 33% 66%, #FFCE00 66%);
-      opacity: 0.65;
-      pointer-events: none;
-      z-index: 100;
-    }
-
-    /* 🇺🇸 성조기: 별(Star) 모티브 — 미세한 포인트 장식 */
-    body[data-motif="star"] .bg-theme-grad::after {
-      content: "★";
-      position: absolute;
-      font-size: 8px;
-      color: rgba(255,255,255,0.35);
-      top: 4px; right: 6px;
-      pointer-events: none;
-    }
-
-    /* ===================================================
-       🌙 다크모드 미디어쿼리 — 시스템 다크모드 자동 대응
-       어두운 환경에서 채도를 낮추고 파스텔 톤으로 전환
-       =================================================== */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #1a1a1a !important;
-      }
-      .glass-card {
-        background: rgba(30, 30, 30, 0.80) !important;
-        border-color: rgba(255, 255, 255, 0.10) !important;
-      }
-      h1, h2, h3, h4, h5, h6,
-      p, span, [data-i18n],
-      #primer-content, #status-message {
-        color: #f0ece6 !important;
-      }
-      footer { color: rgba(255,255,255,0.35) !important; }
-      input, select, textarea {
-        background: rgba(40, 40, 40, 0.9) !important;
-        color: #f0ece6 !important;
-        border-color: rgba(255, 255, 255, 0.15) !important;
-      }
-      /* 다크모드에서 #0047A0 청색 → 파스텔 파랑으로 */
-      :root {
-        --theme-secondary: color-mix(in srgb, var(--theme-secondary) 70%, white 30%);
-      }
-    }
+body[data-motif="grid"] header::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #222222 33%, #DD0000 33% 66%, #FFCE00 66%);
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 100;
+}

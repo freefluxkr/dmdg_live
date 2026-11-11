@@ -1,5 +1,18 @@
 // Initialize Lucide Icons
-lucide.createIcons();
+if (window.lucide) lucide.createIcons();
+
+// Core Voice Relay States (Moved from firebase-config.js to avoid global pollution & duplicate emotions)
+let audioEngine = null;
+if (typeof AudioPlayerEngine !== 'undefined') {
+  audioEngine = new AudioPlayerEngine();
+}
+let currentFilter = '전체';
+let isRecording = false;
+let mediaRecorder = null;
+let audioChunks = [];
+let canvasAnimationId = null;
+let loadedPrimers = [];
+let currentPrimerIndex = 0;
 
     
 
@@ -522,11 +535,11 @@ lucide.createIcons();
         }
       });
 
-      // body 배경색 부드럽게 전환
-      document.body.style.background = theme.bodyBg;
-      document.body.style.backgroundImage =
-        `radial-gradient(ellipse 70% 50% at 20% 10%, ${theme['--theme-bg-circle1']} 0%, transparent 60%),
-         radial-gradient(ellipse 60% 50% at 80% 90%, ${theme['--theme-bg-circle2']} 0%, transparent 60%)`;
+      // 오로라 배경 위 국가별 글로우 오브 색상만 부드럽게 전환 (포털 통일감 유지)
+      const c1 = document.getElementById('bg-circle-1');
+      const c2 = document.getElementById('bg-circle-2');
+      if (c1) c1.style.backgroundColor = theme['--theme-bg-circle1'];
+      if (c2) c2.style.backgroundColor = theme['--theme-bg-circle2'];
 
       // 🎨 국기 상징 요소(Motif) 적용 — 국가별 기하학적 정체성 부여
       applyThemeMotif(theme.motif || 'none');
@@ -711,140 +724,47 @@ lucide.createIcons();
 
     async function loadPrimersFromDB() {
       try {
-        const isOnline = navigator.onLine;
-        
-        if (isOnline) {
-          console.log("Firebase Firestore에서 마중물 데이터를 로드합니다.");
-          const primersCol = firestore.collection("primers");
-          const checkSnapshot = await primersCol.limit(1).get();
-          
-          if (checkSnapshot.empty) {
-            console.log("Firestore primers 컬렉션이 비어있습니다. 행복한가 데이터를 적재합니다.");
-            const seedLetters = [
-              {
-                category: "일상스토리",
-                emotion: "위로",
-                title: "삶의 방향을 잃은 당신에게",
-                content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요. '나는 이런 사람이야' 하면서 자신을 가두거나, '나는 안 맞아' 하면서 미리 포기하지 마세요. 부디 자기 인생을 다른 사람과 비교하며 비참해지지 않았으면 좋겠습니다.” — 김창완 <이제야 보이네> 중에서",
-                translation: { ja: "「人生がどこに向かっているのか、方向を見失ったと感じている方々に、こんな言葉を贈りたいです。『私はこういう人間だから』と自分を閉じ込めたり、『自分には合わない』と最初から諦めたりしないでください」 — キム・チャンワン『やっと見えるね』より", en: "“To those who feel they have lost their direction in life, I want to say this. Don't trap yourself by saying 'I'm this kind of person,' or give up in advance saying 'It doesn't suit me.'” — From Kim Chang-wan <Only Now I See>" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "일상스토리",
-                emotion: "위로",
-                title: "그늘 속의 위로",
-                content: "“그늘이 깊다는 것은 그만큼 빛이 가깝다는 뜻입니다. 당신의 지친 하루에 조용히 손을 얹습니다. 괜찮아요, 오늘 하루 참 고생 많으셨습니다.”",
-                translation: { ja: "「陰が深いということは, それだけ光が近いという意味です。あなたの疲れた一日に、静かに手を添えます」", en: "“A deep shadow means that the light is just that close. I quietly lay my hand on your tiring day.”" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "일상스토리",
-                emotion: "위로",
-                title: "위안의 연결",
-                content: "“우리는 매일 밤 서로의 목소리에 기대어 보이지 않는 선을 잇는다. 그것은 하루를 견뎌낸 이들에게 주는 소박한 위안이다.”",
-                translation: { ja: "「私たちは毎晩、お互いの声に寄り添い、見えない線をつなぐ. それは一日を耐え抜いた人々への、ささやかな慰めだ」", en: "“Every night, we lean on each other's voices to connect invisible lines. It is a simple comfort to those who have endured the day.”" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "일상스토리",
-                emotion: "평온",
-                title: "진정한 나를 찾는 평온",
-                content: "“'나는 이런 사람이야'라며 억지로 규정하지 않을 때, 마음속에는 비로소 고요하고 넓은 평온함이 찾아옵니다. 나를 정의하는 복잡한 수식어를 내려놓고 그냥 숨을 쉬어 보세요.”",
-                translation: { ja: "「『私はこういう人間だ』と無理に規定しない時、心の中には初めて穏やかで広い平穏が訪れます」", en: "“When we do not force ourselves to be defined as 'I am this kind of person,' a calm and wide serenity finally visits our hearts.”" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "일상스토리",
-                emotion: "평온",
-                title: "일상 수용의 평화",
-                content: "“불안마저 일상의 자연스러운 부분으로 받아들이고 흘려보낼 때, 우리의 일상은 가장 정갈하고 평화로워집니다. 바람이 불면 흔들리는 대로, 비가 오면 내리는 대로 흘러가 봅시다.”",
-                translation: { ja: "「不安さえも日常의 자연스러운 부분으로 받아들이고 흘려보낼 때、私たちの日常は最も端正で平和になります」", en: "“When we accept and let go of even anxiety as a natural part of daily life, our daily life becomes the most neat and peaceful.”" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "설렘",
-                title: "교감이라는 이름의 소풍",
-                content: "“아이들이 놀아달라고 하는 것은 부모와 눈을 맞추고 따뜻한 교감을 하고 싶다는 신호입니다. 그것이 우리 안에 숨겨진 가장 맑고 설레는 만남의 시작입니다.”",
-                translation: { ja: "「子供たちが遊んでほしいと言うのは、親と目を合わせ、温かい交感をしたいというシグナルです。それが私たちの中に隠された、最も澄んだときめく出会いの始まりです」", en: "“Children asking to play is a signal that they want to make eye contact and have a warm connection with their parents. It is the beginning of the clearest and most exciting meeting hidden within us.”" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "설렘",
-                title: "가족과 함께하는 소풍",
-                content: "“가족과 함께 보내는 여가 시간은 서로를 더 깊이 이해하고 신뢰를 쌓아가는 신비한 울타리이자, 일상 속 작은 소풍과 같습니다. 함께 걷는 길 위에 설렘의 꽃이 핍니다.”",
-                translation: { ja: "「家族と過ごす余暇時間は、お互いをより深く理解し、信頼を築いていく神秘的な垣根であり、日常の中の小さな遠足のようです」", en: "“Leisure time spent with family is a mysterious fence where we understand each other deeper and build trust, like a small picnic in daily life.”" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "설렘",
-                title: "소리의 문을 두드리다",
-                content: "“어쩌면 오늘, 바람결에 실려 온 맑은 목소리가 당신의 마음을 가만히 두드릴지도 모릅니다. 설레는 맘으로 귀 기울여 들어보세요.”",
-                translation: { ja: "「もしかしたら今日、風に乗って届いた澄んだ声が、あなたの心をそっと叩くかもしれません。ワクワクする気持ちで待ってみてください」", en: "“Perhaps today, a clear voice carried on the wind might gently knock on your heart. Please wait for it with an excited heart.”" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "평온",
-                title: "자연의 평온함",
-                content: "“아무 일도 일어나지 않는 오후, 가볍게 스쳐 가는 새소리와 바람 소리 속에 우리의 평화가 조용히 깃들어 있다.”",
-                translation: { ja: "「何事も起こらない午後、軽くかすめていく鳥のさえずりと風の音の中に、私たちの平和が静かに宿っています」", en: "“On an afternoon when nothing happens, our peace quietly dwells in the sound of birds and the wind lightly brushing by.”" },
-                type: "오늘의 편지"
-              },
-              {
-                category: "문화생활정보",
-                emotion: "평온",
-                title: "내면의 고요한 방",
-                content: "“소리치며 바쁘게 달려가던 발걸음을 멈추고 내면의 방에 초를 켭니다. 고요하게 머물 때 마음은 가장 깨끗하게 씻겨 나갑니다.”",
-                translation: { ja: "「静かに時間を過ごしながら、内側の部屋にロウソクを灯します。静かにとどまる時、心は最もきれいに洗い流されます」", en: "“We stop our shouting and busy footsteps and light a candle in the inner room. The mind is washed cleanest when we stay quietly.”" },
-                type: "오늘의 편지"
-              }
-            ];
-
-            const batch = firestore.batch();
-            seedLetters.forEach((letter, index) => {
-              const docRef = primersCol.doc(`letter_${index + 1}`);
-              batch.set(docRef, { ...letter, timestamp: Date.now() });
-            });
-            await batch.commit();
-            console.log("Firestore에 행복한가 마중물 적재가 완료되었습니다.");
-          }
-
-          let queryRef = firestore.collection("primers");
-          if (currentFilter !== '전체') {
-            queryRef = queryRef.where("emotion", "==", currentFilter);
-          }
-          
-          const snapshot = await queryRef.get();
-          const items = [];
-          snapshot.forEach(doc => {
-            items.push(doc.data());
-          });
-
-          if (items.length > 0) {
-            loadedPrimers = items;
-            await db.primers.clear();
-            await db.primers.bulkAdd(items);
-            return;
-          }
-        }
-        
-        console.log("로컬 데이터베이스(IndexedDB)에서 마중물 데이터를 로드합니다.");
+        // 1. 로컬 IndexedDB(db.primers)에서 즉시 로드하여 무지연 응답 보장
         let localItems = [];
-        if (currentFilter === '전체') {
-          localItems = await db.primers.toArray();
-        } else {
-          localItems = await db.primers.where('emotion').equals(currentFilter).toArray();
+        try {
+          if (currentFilter === '전체') {
+            localItems = await db.primers.toArray();
+          } else {
+            localItems = await db.primers.where('emotion').equals(currentFilter).toArray();
+          }
+        } catch (dbErr) {
+          console.warn('Local primers read notice:', dbErr.message);
         }
-        
-        if (localItems.length === 0) {
-          loadedPrimers = [
-            { type: "오늘의 편지", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요.”" }
-          ];
-        } else {
+
+        if (localItems.length > 0) {
           loadedPrimers = localItems;
+        } else {
+          loadedPrimers = [
+            { type: "오늘의 편지", emotion: "위로", content: "“삶이 어디로 향하고 있는지 방향을 잃은 것 같다고 느끼는 분들께 이런 말을 해주고 싶어요. '나는 이런 사람이야' 하면서 자신을 가두거나, '나는 안 맞아' 하면서 미리 포기하지 마세요.” — 김창완 <이제야 보이네> 중에서" },
+            { type: "오늘의 편지", emotion: "설렘", content: "“어쩌면 오늘, 바람결에 실려 온 맑은 목소리가 당신의 마음을 가만히 두드릴지도 모릅니다. 설레는 맘으로 귀 기울여 들어보세요.”" },
+            { type: "오늘의 편지", emotion: "평온", content: "“모두에게 무리하여 좋은 사람이 되려 하기보다, 내 마음의 온기를 먼저 돌볼 때 비로소 진정한 평화가 깃듭니다.”" }
+          ];
+        }
+
+        // 2. 온라인 Firestore 동기화는 2.5초 타임아웃 내 비차단으로 시도
+        if (navigator.onLine && window.firestore) {
+          try {
+            let queryRef = firestore.collection("primers");
+            if (currentFilter !== '전체') {
+              queryRef = queryRef.where("emotion", "==", currentFilter);
+            }
+            const snapshot = await Promise.race([
+              queryRef.get(),
+              new Promise((_, reject) => setTimeout(() => reject(new Error('Firestore timeout')), 2500))
+            ]);
+            const items = [];
+            snapshot.forEach(doc => items.push(doc.data()));
+            if (items.length > 0) {
+              loadedPrimers = items;
+            }
+          } catch (fsErr) {
+            console.log('Firestore 마중물 동기화 생략 (로컬 행복한가 DB 사용):', fsErr.message);
+          }
         }
       } catch (err) {
         console.error("마중물 불러오기 오류:", err);
@@ -899,15 +819,25 @@ lucide.createIcons();
       };
       emotionTabs.appendChild(btn);
     });
+    updateTabsUI();
 
     function updateTabsUI() {
       Array.from(emotionTabs.children).forEach(btn => {
         const filterVal = btn.getAttribute('data-filter');
         if (currentFilter === filterVal) {
-          btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition-all touch-target select-none bg-orange-500 text-white shadow-md';
+          btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all touch-target select-none bg-theme-grad text-white shadow-md';
         } else {
-          btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition-all touch-target select-none text-orange-950/70 hover:bg-orange-100/30';
+          btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all touch-target select-none text-slate-300 hover:bg-white/10 hover:text-white';
         }
+      });
+    }
+
+    const playSpeedEl = document.getElementById('play-speed');
+    if (playSpeedEl) {
+      playSpeedEl.addEventListener('change', (e) => {
+        const rate = parseFloat(e.target.value) || 1.0;
+        if (audioEngine) audioEngine.setSpeed(rate);
+        showToast(`🎧 재생 속도가 ${rate}x 로 설정되었습니다.`);
       });
     }
 
@@ -1274,18 +1204,28 @@ lucide.createIcons();
       if (!relay) return;
 
       const speedSelect = document.getElementById('play-speed');
-      const playbackRate = parseFloat(speedSelect.value);
-      audioEngine.setSpeed(playbackRate);
-
-      const personaDisplay = document.getElementById('current-persona-text');
-      personaDisplay.textContent = `당목담글 재생 중 • ${relay.emotion} 릴레이`;
-
-      if (relay.audioBlob) {
-        const arrayBuffer = await relay.audioBlob.arrayBuffer();
-        await audioEngine.playChunk(arrayBuffer);
+      const playbackRate = speedSelect ? parseFloat(speedSelect.value) : 1.0;
+      if (audioEngine) {
+        if (audioEngine.audioContext && audioEngine.audioContext.state === 'suspended') {
+          try { await audioEngine.audioContext.resume(); } catch (e) {}
+        }
+        audioEngine.setSpeed(playbackRate);
       }
 
-      
+      const personaDisplay = document.getElementById('current-persona-text');
+      if (personaDisplay) personaDisplay.textContent = `당목담글 재생 중 • ${relay.emotion} 릴레이`;
+
+      if (relay.audioBlob && relay.audioBlob.size > 100 && audioEngine) {
+        const arrayBuffer = await relay.audioBlob.arrayBuffer();
+        await audioEngine.playChunk(arrayBuffer);
+      } else if ('speechSynthesis' in window) {
+        unlockTts();
+        window.speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(relay.content || relay.text || '마음을 이어주는 따스한 목소리입니다.');
+        utt.lang = 'ko-KR';
+        utt.rate = playbackRate || 1.0;
+        window.speechSynthesis.speak(utt);
+      }
     }
 
     // --- Audiobook Playback State and Functions ---
@@ -1322,14 +1262,15 @@ lucide.createIcons();
     function stopAudiobook() {
       audiobookPlaying = false;
       isAudiobookMode = false;
-      audioEngine.stop();
-      
-      
+      if (audioEngine) audioEngine.stop();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      closeAudioPopup();
+
       const playerEl = document.getElementById('audiobook-player');
-      playerEl.classList.add('hidden');
-      
+      if (playerEl) playerEl.classList.add('hidden');
+
       const personaDisplay = document.getElementById('current-persona-text');
-      personaDisplay.textContent = "따스한 감성 큐레이터 • 하루";
+      if (personaDisplay) personaDisplay.textContent = "따스한 감성 큐레이터 • 하루";
     }
 
     function toggleAudiobookPlay() {
@@ -1340,8 +1281,8 @@ lucide.createIcons();
       if (audiobookPlaying) {
         playAudiobookCurrentTrack();
       } else {
-        audioEngine.stop();
-        
+        if (audioEngine) audioEngine.stop();
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
       }
     }
 
@@ -1386,27 +1327,30 @@ lucide.createIcons();
          relay.emotion === '평온' ? 'bg-amber-100/60 text-amber-800' : 'bg-orange-200/60 text-orange-800');
 
       const personaDisplay = document.getElementById('current-persona-text');
-      personaDisplay.textContent = `오디오북 재생 중 • ${relay.emotion} ${audiobookIndex + 1}번 째 이야기`;
+      if (personaDisplay) personaDisplay.textContent = `오디오북 재생 중 • ${relay.emotion} ${audiobookIndex + 1}번 째 이야기`;
 
       const speedSelect = document.getElementById('play-speed');
-      const playbackRate = parseFloat(speedSelect.value);
-      audioEngine.setSpeed(playbackRate);
+      const playbackRate = speedSelect ? parseFloat(speedSelect.value) : 1.0;
+      if (audioEngine) {
+        if (audioEngine.audioContext && audioEngine.audioContext.state === 'suspended') {
+          try { await audioEngine.audioContext.resume(); } catch (e) {}
+        }
+        audioEngine.setSpeed(playbackRate);
+      }
 
-      
-
-      if (relay.audioBlob) {
+      if (relay.audioBlob && relay.audioBlob.size > 100 && audioEngine) {
         const arrayBuffer = await relay.audioBlob.arrayBuffer();
-        
+
         openAudioPopup("playing", relay.content, audioEngine.analyser);
         await audioEngine.playChunk(arrayBuffer, () => {
           closeAudioPopup();
           if (isAudiobookMode && audiobookPlaying) {
-        openAudioPopup("playing", relay.content, audioEngine.analyser);
-        playTtsAndThenNext(relay, playbackRate);
+            nextAudiobookTrack();
           }
         });
       } else {
-        openAudioPopup("playing", relay.content, audioEngine.analyser);
+        unlockTts();
+        openAudioPopup("playing", relay.content, audioEngine ? audioEngine.analyser : null);
         playTtsAndThenNext(relay, playbackRate);
       }
     }
@@ -2160,7 +2104,7 @@ lucide.createIcons();
         }
       });
 
-      initDexie();
+      // Dexie DB는 db.js에서 이미 초기화 완료됨
       animate();
     }
 
@@ -2264,20 +2208,12 @@ lucide.createIcons();
       
       updateFreeCountUI();
 
-      // 방문자 통계 기록
+      // 방문자 통계 기록 (Auth 미구성 환경에서도 에러 없이 비차단 처리)
       try {
-        if (!firebase.auth().currentUser) await firebase.auth().signInAnonymously();
-        await firestore.collection('analytics').add({
-          type: 'visit',
-          referrer: document.referrer || 'direct',
-          userAgent: navigator.userAgent,
-          timestamp: Date.now(),
-          uid: firebase.auth().currentUser.uid
-        });
-        await firestore.collection('stats').doc('overview').set({ visits: firebase.firestore.FieldValue.increment(1) }, { merge: true });
-      } catch (e) {
-        console.error("통계 기록 실패:", e);
-      }
+        if (firebase.auth && firebase.auth().currentUser && window.firestore) {
+          await firestore.collection('stats').doc('overview').set({ visits: firebase.firestore.FieldValue.increment(1) }, { merge: true });
+        }
+      } catch (e) { }
       
       currentLang = localStorage.getItem('preferredLang') || currentLang;
       setLanguage(currentLang);
