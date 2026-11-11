@@ -8,13 +8,13 @@ body.aurora-portal-body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #040814;
+  background-color: #0b1936;
   background-image:
-    radial-gradient(ellipse 85% 60% at 12% 8%, rgba(0, 212, 170, 0.34), transparent 62%),
-    radial-gradient(ellipse 75% 55% at 88% 12%, rgba(56, 189, 248, 0.30), transparent 60%),
-    radial-gradient(ellipse 70% 55% at 72% 62%, rgba(139, 92, 246, 0.30), transparent 62%),
-    radial-gradient(ellipse 65% 50% at 22% 88%, rgba(236, 72, 153, 0.24), transparent 62%),
-    linear-gradient(160deg, #040814 0%, #09132c 48%, #101233 78%, #060b18 100%);
+    radial-gradient(ellipse 85% 60% at 12% 8%, rgba(52, 211, 153, 0.56), transparent 62%),
+    radial-gradient(ellipse 75% 55% at 88% 12%, rgba(56, 189, 248, 0.52), transparent 60%),
+    radial-gradient(ellipse 72% 58% at 70% 58%, rgba(167, 139, 250, 0.48), transparent 62%),
+    radial-gradient(ellipse 68% 52% at 22% 88%, rgba(244, 114, 182, 0.40), transparent 62%),
+    linear-gradient(155deg, #0b1936 0%, #122b52 42%, #1d2259 74%, #0f2447 100%);
   background-attachment: fixed;
   color: #f8fafc;
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -23,32 +23,32 @@ body.aurora-portal-body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Vivid Multi-Layered Ambient Aurora Borealis Ribbons */
+/* Vivid Luminous Multi-Layered Ambient Aurora Borealis Ribbons */
 body.aurora-portal-body::before,
 body.aurora-portal-body::after {
   content: "";
   position: fixed;
-  inset: -20%;
+  inset: -18%;
   z-index: 0;
   pointer-events: none;
-  filter: blur(72px);
-  opacity: 0.72;
+  filter: blur(58px);
+  opacity: 0.92;
   will-change: transform;
 }
 
 body.aurora-portal-body::before {
   background:
-    radial-gradient(45% 32% at 22% 24%, rgba(16, 185, 129, 0.45), transparent 72%),
-    radial-gradient(42% 30% at 76% 20%, rgba(56, 189, 248, 0.42), transparent 70%),
-    radial-gradient(48% 34% at 52% 52%, rgba(168, 85, 247, 0.36), transparent 74%);
+    radial-gradient(46% 34% at 22% 24%, rgba(52, 211, 153, 0.62), transparent 72%),
+    radial-gradient(44% 32% at 78% 20%, rgba(56, 189, 248, 0.58), transparent 70%),
+    radial-gradient(48% 36% at 52% 50%, rgba(168, 85, 247, 0.48), transparent 74%);
   animation: auroraDriftA 18s ease-in-out infinite alternate;
 }
 
 body.aurora-portal-body::after {
   background:
-    radial-gradient(40% 28% at 80% 72%, rgba(236, 72, 153, 0.34), transparent 72%),
-    radial-gradient(46% 32% at 24% 76%, rgba(245, 158, 11, 0.22), transparent 72%),
-    radial-gradient(38% 26% at 50% 14%, rgba(45, 212, 191, 0.32), transparent 70%);
+    radial-gradient(42% 30% at 82% 72%, rgba(244, 114, 182, 0.48), transparent 72%),
+    radial-gradient(46% 34% at 24% 76%, rgba(251, 191, 36, 0.34), transparent 72%),
+    radial-gradient(40% 28% at 50% 14%, rgba(94, 234, 212, 0.48), transparent 70%);
   animation: auroraDriftB 22s ease-in-out infinite alternate;
 }
 
@@ -98,10 +98,10 @@ body.aurora-portal-body .wave-backdrop-side-right {
   padding: 0.85rem 1.25rem;
   margin-bottom: 1.35rem;
   border-radius: 20px;
-  background: rgba(11, 18, 36, 0.56);
-  backdrop-filter: blur(22px) saturate(145%);
-  -webkit-backdrop-filter: blur(22px) saturate(145%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(13, 23, 46, 0.48);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
@@ -225,10 +225,10 @@ body.aurora-portal-body .wave-backdrop-side-right {
   padding: 1.75rem 2rem 1.5rem;
   margin-bottom: 1.15rem;
   border-radius: 26px;
-  background: linear-gradient(145deg, rgba(13, 21, 42, 0.62), rgba(15, 23, 42, 0.54));
-  backdrop-filter: blur(24px) saturate(145%);
-  -webkit-backdrop-filter: blur(24px) saturate(145%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(145deg, rgba(15, 26, 52, 0.52), rgba(19, 30, 58, 0.44));
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow:
     0 22px 50px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -448,9 +448,9 @@ body.aurora-portal-body .wave-backdrop-side-right {
   padding: 1.3rem 1.75rem;
   margin-bottom: 1.25rem;
   border-radius: 22px;
-  background: rgba(13, 21, 42, 0.56);
-  backdrop-filter: blur(22px) saturate(145%);
-  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  background: rgba(15, 26, 52, 0.48);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
   border: 1px solid rgba(236, 72, 153, 0.26);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
   text-align: center;
@@ -594,26 +594,26 @@ body.aurora-portal-body .wave-backdrop-side-right {
   flex-direction: column;
   padding: 1.35rem;
   border-radius: 22px;
-  background: rgba(13, 21, 42, 0.56);
-  backdrop-filter: blur(22px) saturate(145%);
-  -webkit-backdrop-filter: blur(22px) saturate(145%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.38);
+  background: rgba(15, 26, 52, 0.48);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.34);
 }
 
 .col-live-apps {
-  border-color: rgba(16, 185, 129, 0.38);
-  background: linear-gradient(165deg, rgba(6, 78, 59, 0.24), rgba(13, 21, 42, 0.62));
+  border-color: rgba(52, 211, 153, 0.45);
+  background: linear-gradient(165deg, rgba(16, 185, 129, 0.20), rgba(15, 26, 52, 0.52));
 }
 
 .col-simulators {
-  border-color: rgba(168, 85, 247, 0.38);
-  background: linear-gradient(165deg, rgba(88, 28, 135, 0.24), rgba(13, 21, 42, 0.62));
+  border-color: rgba(192, 132, 252, 0.45);
+  background: linear-gradient(165deg, rgba(168, 85, 247, 0.20), rgba(15, 26, 52, 0.52));
 }
 
 .col-tech-books {
-  border-color: rgba(245, 158, 11, 0.38);
-  background: linear-gradient(165deg, rgba(120, 53, 15, 0.24), rgba(13, 21, 42, 0.62));
+  border-color: rgba(251, 191, 36, 0.45);
+  background: linear-gradient(165deg, rgba(245, 158, 11, 0.20), rgba(15, 26, 52, 0.52));
 }
 
 .column-header-row {
