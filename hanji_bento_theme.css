@@ -172,6 +172,16 @@ body.hanji-bento-body .wave-backdrop-side-right {
   box-shadow: 0 6px 16px rgba(11, 27, 61, 0.2);
 }
 
+.pill-nav-voice { background: linear-gradient(135deg, #CD2E3A, #e8532b); border-color: #CD2E3A; color: #ffffff; }
+.pill-nav-sodam { background: #ffffff; border-color: #0D9488; color: #0F766E; }
+.pill-nav-novels { background: #ffffff; border-color: #0B1B3D; color: #0B1B3D; }
+.pill-nav-malssam { background: linear-gradient(135deg, #F77F00, #E85D04); border-color: #F77F00; color: #ffffff; }
+.pill-nav-career { background: linear-gradient(135deg, #2563EB, #0284C7); border-color: #2563EB; color: #ffffff; }
+.pill-nav-books { background: #ffffff; border-color: #7C3AED; color: #5B21B6; }
+.pill-nav-admin-on { background: #0B1B3D; border-color: #0B1B3D; color: #ffffff; }
+.pill-nav-admin-off { background: #0F172A; border-color: #334155; color: #F8FAFC; }
+.pill-nav-logout { background: #ffffff; border-color: #64748B; color: #334155; }
+
 /* ── 1. Hero Audio Studio Card (Crisp White Hanji Card) ────────────────── */
 .hero-audio-studio-card {
   position: relative;
