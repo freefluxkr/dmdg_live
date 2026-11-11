@@ -1,37 +1,66 @@
-const CACHE_NAME = 'dangmok-cache-v15';
+const CACHE_NAME = 'dangmok-cache-v16-20261111';
 const urlsToCache = [
-  './',
-  './index.html',
   './manifest.json',
   './bg_waves.png',
-  './logo_circle.png',
-  './css/style.css',
-  './js/db.js',
-  './js/audio.js',
-  './js/firebase-config.js',
-  './js/app.js'
+  './logo_circle.png'
 ];
 
-// 서비스 워커 설치 및 리소스 캐싱
+// 서비스 워커 설치 및 핵심 정적 리소스 선캐싱
 self.addEventListener('install', (event) => {
-  self.skipWaiting(); // Force activate new service worker
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
+      return Promise.allSettled(
+        urlsToCache.map((url) => cache.add(url))
+      );
     })
   );
 });
 
-// 오프라인 시 캐시 우선 전략 (Cache-First)
+// HTML/CSS/JS는 Network-First, 기타 정적 에셋은 Stale-While-Revalidate
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
+  const reqUrl = new URL(event.request.url);
+  if (reqUrl.origin !== self.location.origin) return;
+
+  const isDynamicDocumentOrAsset =
+    event.request.mode === 'navigate' ||
+    reqUrl.pathname === '/' ||
+    reqUrl.pathname.endsWith('.html') ||
+    reqUrl.pathname.endsWith('.css') ||
+    reqUrl.pathname.endsWith('.js');
+
+  if (isDynamicDocumentOrAsset) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkRes) => {
+          if (networkRes && networkRes.ok) {
+            const resClone = networkRes.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+          }
+          return networkRes;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+    caches.match(event.request).then((cachedRes) => {
+      const fetchPromise = fetch(event.request).then((networkRes) => {
+        if (networkRes && networkRes.ok) {
+          const resClone = networkRes.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+        }
+        return networkRes;
+      }).catch(() => cachedRes);
+      return cachedRes || fetchPromise;
     })
   );
 });
 
-// 오래된 캐시 삭제
+// 오래된 캐시(v15 등) 즉시 삭제 및 활성 클라이언트 제어권 획득
 self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -43,6 +72,6 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });

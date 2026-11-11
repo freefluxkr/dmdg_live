@@ -24,8 +24,8 @@
   <!-- Core CSS (Cache Busting v4 - 5 cards limit) -->
   <!-- 16:9 Ambient Aurora Glassmorphism Masterpiece Theme -->
   <link rel="stylesheet" href="./style.css?v=20261021_5cards_limit">
-  <link rel="stylesheet" href="./aurora_theme.css?v=20261111_desktop_aurora" media="(min-width: 821px)">
-  <link rel="stylesheet" href="./hanji_bento_theme.css?v=20261111_mobile_hanji" media="(max-width: 820px)">
+  <link rel="stylesheet" href="./aurora_theme.css?v=20261111_desktop_aurora_v2" media="(min-width: 821px)">
+  <link rel="stylesheet" href="./hanji_bento_theme.css?v=20261111_mobile_hanji_v2" media="(max-width: 820px)">
   <!-- Firebase & Real-time Analytics SDK (Non-blocking defer) -->
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -205,7 +205,13 @@
       <div class="karaoke-word-box" id="karaokeTextBox">
         나의 다정한 한마디 <span class="neon-pink-highlight">[ 목소리가, ]</span> 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.
       </div>
+      <div id="karaokeLiveWordBadge" class="karaoke-live-badge" style="display:none;">
+        🔊 현재 낭독 단어: <span id="karaokeCurrentWordText" class="karaoke-live-word"></span>
+      </div>
       <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
+        <button id="btnTtsRead" type="button" onclick="handleTtsReadToggle()" class="pill-action-btn karaoke-tts-btn px-5 py-2.5 text-sm font-bold">
+          <span>▶</span> <span>이 문구 음성 낭독 &amp; 단어 표시</span>
+        </button>
         <a href="./voice.html" class="pill-action-btn pill-pink flex items-center gap-2 px-6 py-2.5 text-sm font-bold shadow-lg shadow-pink-500/20 hover:scale-105 transition-all">
           <span>🎙️</span> 마음잇기 보이스 릴레이 전체 녹음 &amp; 오디오북 참여하기 ➔
         </a>
@@ -555,32 +561,79 @@
       let karaokeAnimTimer = null;
       let recordedSampleReady = false;
 
-      const KARAOKE_PHRASE = ["나의", "다정한", "한마디", "[ 목소리가, ]", "바다 건너", "한글을", "배우는", "이들에게", "따뜻한", "빛이 됩니다."];
+      const KARAOKE_PHRASE = ["나의", "다정한", "한마디", "목소리가,", "바다", "건너", "한글을", "배우는", "이들에게", "따뜻한", "빛이", "됩니다."];
+      let karaokeWordTimers = [];
 
-      function startKaraokeFlow() {
+      function renderKaraokeStep(activeIdx) {
         const box = document.getElementById('karaokeTextBox');
+        const badge = document.getElementById('karaokeLiveWordBadge');
+        const wordTxt = document.getElementById('karaokeCurrentWordText');
         if (!box) return;
-        let step = 0;
+
+        let html = '';
+        KARAOKE_PHRASE.forEach((w, i) => {
+          let cls = 'karaoke-word-token';
+          if (i < activeIdx) cls += ' is-spoken';
+          else if (i === activeIdx) cls += ' is-current';
+          else if (i === activeIdx + 1) cls += ' is-next';
+          html += `<span class="${cls}">${w}</span>`;
+        });
+        box.innerHTML = html;
+
+        if (badge && wordTxt && activeIdx >= 0 && activeIdx < KARAOKE_PHRASE.length) {
+          badge.style.display = 'block';
+          wordTxt.textContent = KARAOKE_PHRASE[activeIdx];
+        }
+      }
+
+      function clearKaraokeTimers() {
         clearInterval(karaokeAnimTimer);
-        karaokeAnimTimer = setInterval(() => {
-          let html = '';
-          KARAOKE_PHRASE.forEach((w, i) => {
-            if (i === (step % KARAOKE_PHRASE.length)) {
-              html += `<span class="neon-pink-highlight" style="display:inline-block; transform:scale(1.1); box-shadow: 0 0 20px #ec4899; color:#FFFFFF; border:1.5px solid #ec4899; border-radius:8px; padding:0.1rem 0.4rem; background:rgba(236,72,153,0.3);">${w}</span> `;
-            } else {
-              html += `<span style="color:#f8fafc;">${w}</span> `;
-            }
-          });
-          box.innerHTML = html.trim();
-          step++;
-        }, 380);
+        karaokeWordTimers.forEach(t => clearTimeout(t));
+        karaokeWordTimers = [];
+      }
+
+      function startKaraokeFlow(totalDurationMs = 5200, loop = false) {
+        clearKaraokeTimers();
+        if (loop) {
+          let step = 0;
+          renderKaraokeStep(0);
+          karaokeAnimTimer = setInterval(() => {
+            step = (step + 1) % KARAOKE_PHRASE.length;
+            renderKaraokeStep(step);
+          }, 420);
+          return;
+        }
+
+        // 글자 수 가중치 기반 단어별 발화 타이밍 스케줄링
+        const weights = KARAOKE_PHRASE.map(w => Math.max(1.5, w.replace(/[,\.]/g, '').length));
+        const sumW = weights.reduce((a, b) => a + b, 0);
+        let accMs = 80;
+        KARAOKE_PHRASE.forEach((_, idx) => {
+          const tid = setTimeout(() => {
+            renderKaraokeStep(idx);
+          }, accMs);
+          karaokeWordTimers.push(tid);
+          accMs += Math.round((weights[idx] / sumW) * totalDurationMs);
+        });
       }
 
       function stopKaraokeFlow() {
-        clearInterval(karaokeAnimTimer);
+        clearKaraokeTimers();
         const box = document.getElementById('karaokeTextBox');
+        const badge = document.getElementById('karaokeLiveWordBadge');
         if (box) {
           box.innerHTML = `나의 다정한 한마디 <span class="neon-pink-highlight">[ 목소리가, ]</span> 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.`;
+        }
+        if (badge) {
+          badge.style.display = 'none';
+        }
+      }
+
+      function resetTtsBtnUI() {
+        const btn = document.getElementById('btnTtsRead');
+        if (btn) {
+          btn.classList.remove('is-playing');
+          btn.innerHTML = '<span>▶</span> <span>이 문구 음성 낭독 &amp; 단어 표시</span>';
         }
       }
 
@@ -592,65 +645,68 @@
           ttsIsActive = false;
           if ('speechSynthesis' in window) window.speechSynthesis.cancel();
           stopKaraokeFlow();
-          if (btn) {
-            btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
-            btn.style.borderColor = '';
-            btn.style.boxShadow = '';
-          }
+          resetTtsBtnUI();
           window.heroWaveIntensity = 1.0;
         } else {
           // 재생
           ttsIsActive = true;
           window.heroWavePlaying = true;
           window.heroWaveIntensity = 1.5;
-          startKaraokeFlow();
+          startKaraokeFlow(5200, false);
           playWarmMelody();
 
           if (btn) {
-            btn.innerHTML = '<span>⏹</span> 음성 낭독 중단하기 (재생 중)';
-            btn.style.borderColor = '#fbbf24';
-            btn.style.boxShadow = '0 0 20px rgba(251, 191, 36, 0.6)';
+            btn.classList.add('is-playing');
+            btn.innerHTML = '<span>⏹</span> <span>낭독 중단하기 (재생 중)</span>';
           }
 
           if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
-            const utt = new SpeechSynthesisUtterance("나의 다정한 한마디 목소리가 바다 건너 한글을 배우는 이들에게 따뜻한 빛이 됩니다.");
+            const fullSpeech = KARAOKE_PHRASE.join(' ');
+            const utt = new SpeechSynthesisUtterance(fullSpeech);
             utt.lang = 'ko-KR';
             utt.rate = 0.92;
+
+            // 브라우저가 word boundary 이벤트를 지원하면 실제 음성 위치와 정확히 동기화
+            utt.onboundary = function (ev) {
+              if (!ttsIsActive || ev.name !== 'word') return;
+              clearKaraokeTimers();
+              let cursor = 0;
+              for (let i = 0; i < KARAOKE_PHRASE.length; i++) {
+                const nextCursor = cursor + KARAOKE_PHRASE[i].length + 1;
+                if (ev.charIndex < nextCursor) {
+                  renderKaraokeStep(i);
+                  break;
+                }
+                cursor = nextCursor;
+              }
+            };
+
             utt.onend = function () {
+              if (!ttsIsActive) return;
               ttsIsActive = false;
               stopKaraokeFlow();
-              if (btn) {
-                btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
-                btn.style.borderColor = '';
-                btn.style.boxShadow = '';
-              }
+              resetTtsBtnUI();
               window.heroWaveIntensity = 1.0;
             };
             utt.onerror = function () {
               setTimeout(() => {
+                if (!ttsIsActive) return;
                 ttsIsActive = false;
                 stopKaraokeFlow();
-                if (btn) {
-                  btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
-                  btn.style.borderColor = '';
-                  btn.style.boxShadow = '';
-                }
+                resetTtsBtnUI();
                 window.heroWaveIntensity = 1.0;
-              }, 4200);
+              }, 5200);
             };
             window.speechSynthesis.speak(utt);
           } else {
             setTimeout(() => {
+              if (!ttsIsActive) return;
               ttsIsActive = false;
               stopKaraokeFlow();
-              if (btn) {
-                btn.innerHTML = '<span>▶</span> 실제 음성 낭독 듣기 / ⏹ 중단';
-                btn.style.borderColor = '';
-                btn.style.boxShadow = '';
-              }
+              resetTtsBtnUI();
               window.heroWaveIntensity = 1.0;
-            }, 4200);
+            }, 5400);
           }
         }
       };
@@ -673,7 +729,7 @@
           playTone(659.25, 0.25); // Start Beep
           window.heroWavePlaying = true;
           window.heroWaveIntensity = 1.7;
-          startKaraokeFlow();
+          startKaraokeFlow(5200, true);
 
           if (heroMic) heroMic.classList.add('recording-pulse');
           if (heroBadge) heroBadge.textContent = '녹음 중 (00:00) · 완료';
@@ -2384,6 +2440,13 @@
 
     // 페이지 로드 시 헤더 네비게이션 상태 동기화
     renderHeaderNav();
+
+    // 구버전 서비스 워커(v15 Cache-First)가 활성화된 브라우저 즉시 갱신
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((regs) => {
+        regs.forEach((reg) => reg.update().catch(() => {}));
+      }).catch(() => {});
+    }
   </script>
 </body>
 
