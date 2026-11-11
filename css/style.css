@@ -183,3 +183,157 @@ body[data-motif="grid"] header::before {
   pointer-events: none;
   z-index: 100;
 }
+
+/* ============================================================================
+   Mobile Legacy Taegeuk Light / Peach Theme Override (<= 768px)
+   데스크탑(>= 769px)은 위 오로라 다크 테마를 그대로 유지하고,
+   모바일에서는 이전(06e4ef8) 시점의 따뜻한 피치·라이트 톤을 복원합니다.
+   ============================================================================ */
+@media (max-width: 768px) {
+  :root {
+    --theme-primary: #CD2E3A;
+    --theme-primary-dark: #a82230;
+    --theme-secondary: #0047A0;
+    --theme-secondary-dark: #003580;
+    --theme-accent: #e8532b;
+    --theme-text-body: #1A1A1A;
+    --theme-text-muted: #4a4a4a;
+    --theme-glow: rgba(205, 46, 58, 0.28);
+  }
+
+  body.voice-aurora-body {
+    background-color: #f4ece6 !important;
+    background-image:
+      radial-gradient(ellipse 75% 55% at 18% 10%, rgba(205, 46, 58, 0.11) 0%, transparent 62%),
+      radial-gradient(ellipse 65% 50% at 85% 90%, rgba(0, 71, 160, 0.09) 0%, transparent 62%) !important;
+    color: #1A1A1A !important;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(205, 46, 58, 0.15) !important;
+    box-shadow: 0 10px 28px rgba(139, 92, 60, 0.08) !important;
+    color: #1A1A1A !important;
+  }
+
+  .bg-theme-grad {
+    background: linear-gradient(135deg, #CD2E3A 0%, #e8532b 100%) !important;
+    color: #ffffff !important;
+  }
+
+  .bg-secondary-grad {
+    background: linear-gradient(135deg, #0047A0 0%, #1a6bd4 100%) !important;
+    color: #ffffff !important;
+  }
+
+  /* Light card typography readability (keep CTA pills white) */
+  body.voice-aurora-body .text-white,
+  body.voice-aurora-body .text-slate-100,
+  body.voice-aurora-body .text-slate-200,
+  body.voice-aurora-body [class*="text-orange-950"],
+  body.voice-aurora-body [class*="text-orange-900"],
+  body.voice-aurora-body [class*="text-orange-850"],
+  body.voice-aurora-body [class*="text-orange-800"] {
+    color: #1A1A1A !important;
+  }
+
+  body.voice-aurora-body .text-slate-300,
+  body.voice-aurora-body .text-slate-400,
+  body.voice-aurora-body .text-slate-500 {
+    color: #475569 !important;
+  }
+
+  body.voice-aurora-body [class*="text-orange-700"],
+  body.voice-aurora-body [class*="text-orange-600"],
+  body.voice-aurora-body .text-amber-300,
+  body.voice-aurora-body .text-amber-400 {
+    color: #b91c1c !important;
+  }
+
+  body.voice-aurora-body .text-pink-200,
+  body.voice-aurora-body .text-pink-300,
+  body.voice-aurora-body [class*="text-rose-800"],
+  body.voice-aurora-body [class*="text-rose-700"],
+  body.voice-aurora-body [class*="text-rose-600"],
+  body.voice-aurora-body .text-sky-200,
+  body.voice-aurora-body .text-sky-300 {
+    color: #0047A0 !important;
+  }
+
+  body.voice-aurora-body .bg-theme-grad,
+  body.voice-aurora-body .bg-theme-grad *,
+  body.voice-aurora-body #action-btn,
+  body.voice-aurora-body #action-btn *,
+  body.voice-aurora-body .bg-secondary-grad,
+  body.voice-aurora-body .bg-secondary-grad * {
+    color: #ffffff !important;
+  }
+
+  body.voice-aurora-body .bg-slate-900\/70,
+  body.voice-aurora-body .bg-slate-900\/80,
+  body.voice-aurora-body .bg-white\/5,
+  body.voice-aurora-body .bg-white\/10 {
+    background: rgba(255, 255, 255, 0.72) !important;
+    border-color: rgba(205, 46, 58, 0.16) !important;
+  }
+
+  body.voice-aurora-body select,
+  body.voice-aurora-body input {
+    background: rgba(255, 255, 255, 0.94) !important;
+    color: #1A1A1A !important;
+    border: 1px solid rgba(205, 46, 58, 0.24) !important;
+  }
+
+  body.voice-aurora-body select option {
+    background: #ffffff;
+    color: #1A1A1A;
+  }
+
+  body.voice-aurora-body #relay-list .bg-orange-100\/80 {
+    background: rgba(0, 71, 160, 0.10) !important;
+    color: #0047A0 !important;
+    border-color: rgba(0, 71, 160, 0.25) !important;
+  }
+
+  body.voice-aurora-body #relay-list .bg-rose-50\/50 {
+    background: rgba(205, 46, 58, 0.08) !important;
+    color: #CD2E3A !important;
+    border-color: rgba(205, 46, 58, 0.22) !important;
+  }
+
+  body.voice-aurora-body #relay-list .bg-orange-100\/60,
+  body.voice-aurora-body #relay-list .bg-rose-100\/60,
+  body.voice-aurora-body #relay-list .bg-amber-100\/60 {
+    background: rgba(205, 46, 58, 0.10) !important;
+    color: #CD2E3A !important;
+    border-color: rgba(205, 46, 58, 0.22) !important;
+  }
+
+  #audio-popup-modal .glass-card,
+  #ai-evaluation-modal .glass-card,
+  #paywall-modal .glass-card,
+  #settings-modal .glass-card,
+  #benefit-modal .glass-card,
+  #donate-modal .glass-card {
+    background: #ffffff !important;
+    color: #1A1A1A !important;
+    border: 1px solid rgba(205, 46, 58, 0.2) !important;
+  }
+
+  #lang-dropdown {
+    background: #ffffff !important;
+    border: 1px solid rgba(205, 46, 58, 0.22) !important;
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18) !important;
+    z-index: 9999 !important;
+  }
+
+  #lang-dropdown button {
+    color: #1A1A1A !important;
+  }
+
+  #lang-dropdown button:hover {
+    background: rgba(205, 46, 58, 0.08) !important;
+  }
+}

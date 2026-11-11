@@ -867,3 +867,61 @@ body.aurora-portal-body .wave-backdrop-side-right {
   }
 }
 
+/* ── Mobile Legacy Calm Dark Slate Theme Override (<= 768px) ───────────────
+   데스크탑(>= 769px)은 현재 밝은 오로라 테마를 그대로 유지하고,
+   모바일에서는 이전(06e4ef8) 시점의 차분한 다크 네이비 톤으로 표시합니다. */
+@media (max-width: 768px) {
+  body.aurora-portal-body {
+    background-color: #0b1120;
+    background-image: none;
+  }
+
+  body.aurora-portal-body::before,
+  body.aurora-portal-body::after {
+    display: none;
+  }
+
+  body.aurora-portal-body .wave-backdrop-top,
+  body.aurora-portal-body .wave-backdrop-side-left,
+  body.aurora-portal-body .wave-backdrop-side-right {
+    opacity: 0.14;
+  }
+
+  .portal-top-header,
+  .hero-audio-studio-card,
+  .karaoke-action-card,
+  .aces-neon-banner,
+  .service-column-card {
+    background: #0f172a;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid #1e293b;
+    box-shadow: 0 10px 26px rgba(2, 6, 23, 0.55);
+  }
+
+  .col-live-apps {
+    background: #0f172a;
+    border-color: #1e293b;
+    border-top: 3px solid #10b981;
+  }
+
+  .col-simulators {
+    background: #0f172a;
+    border-color: #1e293b;
+    border-top: 3px solid #a855f7;
+  }
+
+  .col-tech-books {
+    background: #0f172a;
+    border-color: #1e293b;
+    border-top: 3px solid #f59e0b;
+  }
+
+  .service-item-row,
+  .quote-ambient-card,
+  .wave-canvas-wrap {
+    background: #131c31;
+    border-color: rgba(148, 163, 184, 0.16);
+  }
+}
+
