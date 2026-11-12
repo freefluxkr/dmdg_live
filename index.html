@@ -95,15 +95,16 @@
         <input type="text" id="liveSearchInput" placeholder="서비스, 시뮬레이터, 도서 실시간 검색...">
       </div>
 
-      <!-- Quick Navigation Buttons (일반 방문자 / 관리자 모드 동적 전환) -->
+      <!-- Quick Navigation Buttons (일반 방문자 / 관리자 모드 동적 전환 · 현재 창 열기 통일) -->
       <nav class="portal-header-nav" id="portalHeaderNav">
-        <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn pill-nav-malssam">🗣️ 말쌈관</a>
-        <a href="./novels.html" class="nav-pill-btn pill-nav-novels">📖 서재관</a>
-        <a href="./books.html" target="_blank" rel="noopener noreferrer" class="nav-pill-btn pill-nav-books">📚 위키북스</a>
-        <button type="button" onclick="openCareerModal()" class="nav-pill-btn pill-nav-career">🎯 직무진단</button>
-        <a href="./voice.html" class="nav-pill-btn pill-nav-voice">🎙️ 마음잇기</a>
+        <a href="./voice.html" class="nav-pill-btn pill-nav-voice" title="DMDG(당목담글) 보이스 릴레이 참여 웹앱">🎙️ 마음잇기</a>
+        <a href="https://dmdg-ut.web.app/sodam-web/" class="nav-pill-btn pill-nav-sodam" title="소담 라이브 감성 치유 웹">🌸 소담 라이브</a>
+        <a href="./novels.html" class="nav-pill-btn pill-nav-novels" title="소설 전용 E-Reader · 다국어 & AI 오디오 낭독 지원">📖 서재관</a>
+        <a href="https://dmdg-malssam.web.app/" class="nav-pill-btn pill-nav-malssam" title="바른 우리말 AI 사전 & 퀴즈 PWA 바로가기">🗣️ 말쌈관</a>
+        <button type="button" onclick="openCareerModal()" class="nav-pill-btn pill-nav-career" title="A.C.E.S 직무 추천 및 REA 교육과정 신청">🎯 직무진단</button>
+        <a href="./books.html" class="nav-pill-btn pill-nav-books" title="Hamilton.Kang 실제 위키독스 기술 서적 전체 목록">📚 위키북스</a>
         <!-- 관리자 전용 보안 관제 센터 버튼 -->
-        <button type="button" onclick="promptAdminAccess()" class="nav-pill-btn pill-nav-admin-off" title="최고 관리자 전용 관제 센터">🔒 Admin</button>
+        <button type="button" onclick="promptAdminAccess()" class="nav-pill-btn pill-nav-admin-off" title="최고 관리자 전용 관제 센터">🔒 관리자</button>
       </nav>
     </header>
 
@@ -1223,7 +1224,7 @@
           onmouseover="this.style.background='#475569';" onmouseout="this.style.background='#334155';">
           닫기
         </button>
-        <a href="career_aces.html"
+        <a id="careerModalActionLink" href="career_aces.html"
           style="flex: 2; padding: 0.85rem; background: linear-gradient(135deg, #06b6d4, #2563eb); color: #ffffff; text-decoration: none; border-radius: 10px; font-size: 0.95rem; font-weight: 900; text-align: center; display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; box-shadow: 0 4px 14px rgba(6, 182, 212, 0.4); transition: all 0.2s;"
           onmouseover="this.style.boxShadow='0 6px 20px rgba(6, 182, 212, 0.6)';"
           onmouseout="this.style.boxShadow='0 4px 14px rgba(6, 182, 212, 0.4)';">
@@ -2069,19 +2070,39 @@
     } catch (e) { }
 
     // 상단 헤더 네비게이션 (일반 방문자용 6대 공개 서비스 메뉴 고정 + 관리자 게이트)
+    // [창 열기 방식 일괄 제어 옵션]
+    // false: 모든 상단 헤더 메뉴를 '현재 창(_self)'에서 열기 (현재 기본값)
+    // true : 추후 모든 상단 헤더 메뉴를 '새 창(_blank)'으로 열도록 변경할 때 true로만 바꾸면 즉시 일괄 반영됨
+    window.PORTAL_HEADER_OPEN_IN_NEW_TAB = false;
+
     function renderHeaderNav() {
       const nav = document.getElementById('portalHeaderNav');
       if (!nav) return;
 
+      const targetAttr = window.PORTAL_HEADER_OPEN_IN_NEW_TAB
+        ? ' target="_blank" rel="noopener noreferrer"'
+        : '';
+
+      const careerLink = document.getElementById('careerModalActionLink');
+      if (careerLink) {
+        if (window.PORTAL_HEADER_OPEN_IN_NEW_TAB) {
+          careerLink.setAttribute('target', '_blank');
+          careerLink.setAttribute('rel', 'noopener noreferrer');
+        } else {
+          careerLink.removeAttribute('target');
+          careerLink.removeAttribute('rel');
+        }
+      }
+
       nav.innerHTML = `
-        <a href="./voice.html" class="nav-pill-btn pill-nav-voice" title="DMDG(당목담글) 보이스 릴레이 참여 웹앱">🎙️ 마음잇기</a>
-        <a href="https://dmdg-ut.web.app/sodam-web/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn pill-nav-sodam" title="소담 라이브 감성 치유 웹">🌸 소담 라이브</a>
-        <a href="./novels.html" class="nav-pill-btn pill-nav-novels" title="소설 전용 E-Reader · 다국어 & AI 오디오 낭독 지원">📖 서재관</a>
-        <a href="https://dmdg-malssam.web.app/" target="_blank" rel="noopener noreferrer" class="nav-pill-btn pill-nav-malssam" title="바른 우리말 AI 사전 & 퀴즈 PWA 바로가기">🗣️ 말쌈관</a>
+        <a href="./voice.html"${targetAttr} class="nav-pill-btn pill-nav-voice" title="DMDG(당목담글) 보이스 릴레이 참여 웹앱">🎙️ 마음잇기</a>
+        <a href="https://dmdg-ut.web.app/sodam-web/"${targetAttr} class="nav-pill-btn pill-nav-sodam" title="소담 라이브 감성 치유 웹">🌸 소담 라이브</a>
+        <a href="./novels.html"${targetAttr} class="nav-pill-btn pill-nav-novels" title="소설 전용 E-Reader · 다국어 & AI 오디오 낭독 지원">📖 서재관</a>
+        <a href="https://dmdg-malssam.web.app/"${targetAttr} class="nav-pill-btn pill-nav-malssam" title="바른 우리말 AI 사전 & 퀴즈 PWA 바로가기">🗣️ 말쌈관</a>
         <button type="button" onclick="openCareerModal()" class="nav-pill-btn pill-nav-career" title="A.C.E.S 직무 추천 및 REA 교육과정 신청">🎯 직무진단</button>
-        <a href="./books.html" class="nav-pill-btn pill-nav-books" title="Hamilton.Kang 실제 위키독스 기술 서적 전체 목록">📚 위키북스</a>
+        <a href="./books.html"${targetAttr} class="nav-pill-btn pill-nav-books" title="Hamilton.Kang 실제 위키독스 기술 서적 전체 목록">📚 위키북스</a>
         ${isAdminAuthenticated ? `
-          <a href="./admin.html" class="nav-pill-btn pill-nav-admin-on" title="최고 관리자 대시보드 바로가기">👑 Admin 관제실</a>
+          <a href="./admin.html"${targetAttr} class="nav-pill-btn pill-nav-admin-on" title="최고 관리자 대시보드 바로가기">👑 Admin 관제실</a>
           <button type="button" onclick="logoutAdminAccess()" class="nav-pill-btn pill-nav-logout" title="관리자 모드 종료">🔓</button>
         ` : `
           <button type="button" onclick="promptAdminAccess()" class="nav-pill-btn pill-nav-admin-off" title="최고 관리자 전용 관제 센터">🔒 관리자</button>
