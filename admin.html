@@ -92,6 +92,50 @@
         transform: scale(0.85);
       }
     }
+
+    @media (hover: hover) {
+      [data-tooltip] {
+        position: relative;
+      }
+      [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: calc(100% + 8px);
+        right: 0;
+        width: max-content;
+        max-width: 260px;
+        white-space: normal;
+        padding: 0.45rem 0.65rem;
+        border-radius: 0.55rem;
+        background: rgba(2, 6, 23, 0.96);
+        color: #e2e8f0;
+        border: 1px solid rgba(56, 189, 248, 0.4);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1.4;
+        text-align: left;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity 0.15s ease, transform 0.15s ease;
+        z-index: 60;
+      }
+      [data-tooltip].tip-left::after {
+        right: auto;
+        left: 0;
+      }
+      [data-tooltip].tip-bottom::after {
+        bottom: auto;
+        top: calc(100% + 8px);
+        transform: translateY(-4px);
+      }
+      [data-tooltip]:hover::after,
+      [data-tooltip]:focus-visible::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 
   <!-- Firebase SDK -->
@@ -195,15 +239,21 @@
 
       <div class="flex items-center flex-wrap gap-2 w-full sm:w-auto">
         <a href="https://dmdg-live.com/workspace_hub.html" target="_blank" rel="noopener noreferrer"
-          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 rounded-lg text-xs font-bold border border-indigo-500/35 transition-colors whitespace-nowrap">
+          data-tooltip="로컬 워크스페이스·에이전트·원격 서비스 아키텍처를 한눈에 보는 관제 타워를 새 창으로 엽니다."
+          title="DMDG 워크스페이스 통합 아키텍처 관제 타워를 새 창으로 엽니다."
+          class="tip-bottom flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 rounded-lg text-xs font-bold border border-indigo-500/35 transition-colors whitespace-nowrap">
           <i data-lucide="cpu" class="w-3.5 h-3.5"></i> DMDG_관제 타워
         </a>
         <a href="./index.html" target="_blank"
-          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-colors whitespace-nowrap">
+          data-tooltip="일반 사용자에게 보이는 DMDG LIVE 대표 메인 포털을 새 창으로 엽니다."
+          title="DMDG LIVE 대표 메인 포털(index.html)을 새 창으로 엽니다."
+          class="tip-bottom flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-colors whitespace-nowrap">
           <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 포털 열기
         </a>
         <button onclick="handleAdminLogout()"
-          class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-lg text-xs font-bold transition-colors whitespace-nowrap">
+          data-tooltip="현재 브라우저의 관리자 인증 세션을 종료하고 로그인 화면으로 돌아갑니다."
+          title="관리자 인증 세션을 로그아웃합니다."
+          class="tip-bottom flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-lg text-xs font-bold transition-colors whitespace-nowrap">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i> 로그아웃
         </button>
       </div>
@@ -214,28 +264,33 @@
          ========================================================================= -->
     <nav class="flex items-center gap-2 mb-8 border-b border-slate-800 overflow-x-auto custom-scroll pb-1">
       <button id="tab-btn-overview" onclick="switchStudioTab('overview')"
+        title="포털 실시간 트래픽 요약, 최근 48시간/기간별 접속 추이 그래프를 확인합니다."
         class="studio-tab-btn active px-4 py-3 text-xs sm:text-sm font-bold flex items-center gap-2 text-amber-400 border-b-2 border-amber-500 transition-all whitespace-nowrap cursor-pointer">
         <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
         <span>개요 (Overview)</span>
       </button>
       <!-- 수강신청 분석 (Admissions) 탭 임시 숨김 (추후 재사용 가능하도록 보존) -->
       <button id="tab-btn-admissions" onclick="switchStudioTab('admissions')"
+        title="수강신청 접수 현황 및 지원자 데이터를 분석합니다."
         class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer"
         style="display: none !important;">
         <i data-lucide="graduation-cap" class="w-4 h-4"></i>
         <span>수강신청 분석 (Admissions)</span>
       </button>
       <button id="tab-btn-revenue" onclick="switchStudioTab('revenue')"
+        title="결제 내역, 매출 현황 및 거래 로그를 조회합니다."
         class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
         <i data-lucide="credit-card" class="w-4 h-4"></i>
         <span>결제 및 거래 (Revenue)</span>
       </button>
       <button id="tab-btn-content" onclick="switchStudioTab('content')"
+        title="LIVE WEB APPS(7대 서비스), 위키북스, 시뮬레이터, 유튜브 조회수/클릭 지표를 관제합니다."
         class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
         <i data-lucide="play-square" class="w-4 h-4"></i>
         <span>콘텐츠 지표 (Content)</span>
       </button>
       <button id="tab-btn-assessment" onclick="switchStudioTab('assessment')"
+        title="20문항 자가진단·사전평가 및 ACES 직무 추천 제출 내역을 분석합니다."
         class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-purple-300 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
         <i data-lucide="target" class="w-4 h-4 text-purple-400"></i>
         <span>자가진단 분석 (Assessment)</span>
@@ -244,6 +299,7 @@
           체계</span>
       </button>
       <button id="tab-btn-academy" onclick="switchStudioTab('academy')"
+        title="6개 교육과정·64건 프로젝트 아카이브(DMDG ACADEMY SHOWCASE)를 관리자/공개용 모드로 바로 미리보고 제어합니다."
         class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-cyan-300 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
         <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400"></i>
         <span>아카데미 쇼케이스 (Academy)</span>
@@ -2109,7 +2165,9 @@
 
           <div class="flex flex-wrap items-center gap-2.5 shrink-0">
             <button type="button" onclick="loadAcademyShowcasePanel(true)"
-              class="px-3.5 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs sm:text-sm font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
+              data-tooltip="GitHub Pages의 최신 manifest.json을 캐시 없이(no-store) 강제 재조회해 과정 수·프로젝트·파일 통계를 즉시 갱신합니다."
+              title="최신 manifest.json을 강제 재조회해 아카데미 통계를 즉시 갱신합니다."
+              class="tip-bottom px-3.5 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs sm:text-sm font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
               <i data-lucide="refresh-cw" class="w-4 h-4 text-cyan-400"></i>
               <span>manifest 동기화</span>
             </button>
@@ -2148,10 +2206,16 @@
           </div>
           <div class="flex flex-wrap items-center gap-2">
             <button type="button" id="acad-prev-btn-admin" onclick="setAcademyPreviewMode('admin')"
+              data-tooltip="원본 파일·평가 리포트 전체 다운로드가 포함된 관리자 전용 페이지(/admin/)를 아래 뷰어에 임베드합니다."
+              title="관리자 전용 쇼케이스(/admin/)를 아래 뷰어로 엽니다."
               class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/45 cursor-pointer transition-all">🔐 관리자 (/admin/)</button>
             <button type="button" id="acad-prev-btn-public" onclick="setAcademyPreviewMode('public')"
+              data-tooltip="대외 공유·학생 열람용 공개 쇼케이스(/)를 아래 뷰어에 임베드합니다. (관리자 복귀 버튼 지원)"
+              title="대외 공개용 쇼케이스(/)를 아래 뷰어로 엽니다."
               class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/35 cursor-pointer transition-all">👁️ 공개용 (/)</button>
             <button type="button" id="acad-prev-btn-off" onclick="setAcademyPreviewMode('off')"
+              data-tooltip="아래에 펼쳐진 실시간 쇼케이스 미리보기 iframe을 접습니다."
+              title="실시간 쇼케이스 미리보기를 접습니다."
               class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 cursor-pointer transition-all">접기</button>
           </div>
         </div>
@@ -2160,6 +2224,8 @@
           <div class="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs">
             <span id="academy-preview-url" class="font-mono text-cyan-300 truncate max-w-full sm:max-w-xl">https://freefluxkr.github.io/dmdg-student-showcase/admin/</span>
             <a id="academy-preview-external" href="https://freefluxkr.github.io/dmdg-student-showcase/admin/" target="_blank" rel="noopener noreferrer"
+              data-tooltip="현재 선택된 쇼케이스 경로(관리자 또는 공개용)를 독립된 새 브라우저 탭으로 엽니다."
+              title="현재 미리보기 중인 쇼케이스를 새 탭에서 엽니다."
               class="px-2.5 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/35 text-xs font-bold text-cyan-200 flex items-center gap-1 shrink-0 transition-all">
               <span>새 창으로 열기</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
@@ -3220,6 +3286,8 @@
             </div>
             <div class="flex items-center justify-end pt-2 border-t border-slate-800/80">
               <button type="button" onclick="setAcademyPreviewMode(ACADEMY_ACTIVE_MODE || 'admin', '${safeTrackId}')"
+                data-tooltip="이 교육과정을 현재 선택된 뷰어 모드(관리자 또는 공개용)로 상단 미리보기 화면에 바로 불러옵니다."
+                title="이 교육과정을 상단 미리보기 뷰어에서 엽니다."
                 class="w-full px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-cyan-500/20 text-cyan-200 border border-slate-700 hover:border-cyan-500/45 cursor-pointer transition-all flex items-center justify-center gap-1.5">
                 <i data-lucide="play-circle" class="w-3.5 h-3.5 text-cyan-400"></i>
                 <span>상단 뷰어에서 열기</span>
