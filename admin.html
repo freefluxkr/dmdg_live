@@ -243,6 +243,13 @@
           class="text-[10px] px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30">20문항
           체계</span>
       </button>
+      <button id="tab-btn-academy" onclick="switchStudioTab('academy')"
+        class="studio-tab-btn px-4 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2 text-slate-400 hover:text-cyan-300 border-b-2 border-transparent transition-all whitespace-nowrap cursor-pointer">
+        <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400"></i>
+        <span>아카데미 쇼케이스 (Academy)</span>
+        <span id="tab-badge-academy"
+          class="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30">6과정 · 64건</span>
+      </button>
     </nav>
 
     <!-- =========================================================================
@@ -1247,7 +1254,7 @@
             <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 flex items-center gap-2">
               현재 서비스 중인 LIVE WEB APPS 1일, 누적, 접속자 수 현황
               <span
-                class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">6
+                class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">7
                 Apps Live</span>
             </h2>
           </div>
@@ -1341,7 +1348,7 @@
           <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/60">
             <h3 class="font-bold text-white text-sm flex items-center gap-2">
               <i data-lucide="layout-grid" class="w-4 h-4 text-emerald-400"></i>
-              현재 서비스 중인 LIVE WEB APPS 6대 서비스 실시간 현황
+              현재 서비스 중인 LIVE WEB APPS 7대 서비스 실시간 현황
             </h3>
             <span class="text-xs text-slate-400">1일 접속자, 1일 조회수, 누적 접속자, 총 누적 조회수</span>
           </div>
@@ -2080,6 +2087,118 @@
 
     </div> <!-- End of panel-assessment -->
 
+    <!-- ========================================== -->
+    <!-- STUDIO PANEL 6: ACADEMY SHOWCASE (아카데미 쇼케이스 관제) -->
+    <!-- ========================================== -->
+    <div id="panel-academy" class="studio-panel hidden space-y-8">
+      <section class="glass-card-elevated rounded-2xl p-6 sm:p-7 border border-cyan-500/30">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+          <div>
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-wider">DMDG Academy Archive</span>
+              <span id="acad-sync-status" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">Live Manifest Sync</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
+              <i data-lucide="graduation-cap" class="w-6 h-6 text-cyan-400"></i>
+              DMDG ACADEMY SHOWCASE 통합 관제
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
+              LG Uplus Why Not 1·2기, KDT 해커톤 2기, 삼성 AXI 6개월, AI·데이터 심화 1·2기 수료생 프로젝트와 4P 기술 감사 리포트를 공개용(/) 및 관리자 평가 모드(/admin/)로 통합 운영합니다.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+            <a href="https://freefluxkr.github.io/dmdg-student-showcase/admin/" target="_blank" rel="noopener noreferrer"
+              class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-cyan-500/20 flex items-center gap-2 transition-all">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              <span>쇼케이스 관리자 (/admin/)</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-80"></i>
+            </a>
+            <a href="https://freefluxkr.github.io/dmdg-student-showcase/" target="_blank" rel="noopener noreferrer"
+              class="px-4 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-emerald-300 border border-emerald-500/35 text-xs sm:text-sm font-bold flex items-center gap-2 transition-all">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+              <span>공개용 쇼케이스 (/)</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-80"></i>
+            </a>
+            <button type="button" onclick="loadAcademyShowcasePanel(true)"
+              class="px-3.5 py-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs sm:text-sm font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
+              <i data-lucide="refresh-cw" class="w-4 h-4 text-cyan-400"></i>
+              <span>동기화</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 KPI Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+          <div class="glass-card rounded-xl p-4 border border-slate-700/70">
+            <div class="text-[11px] font-semibold text-slate-400">누적 교육과정</div>
+            <div id="acad-kpi-tracks" class="text-2xl font-extrabold text-cyan-300 font-mono mt-1">6개 과정</div>
+            <div id="acad-kpi-tabs" class="text-[11px] text-slate-400 mt-1">13개 단계 탭 구성</div>
+          </div>
+          <div class="glass-card rounded-xl p-4 border border-slate-700/70">
+            <div class="text-[11px] font-semibold text-slate-400">등록 프로젝트</div>
+            <div id="acad-kpi-projects" class="text-2xl font-extrabold text-white font-mono mt-1">64건</div>
+            <div class="text-[11px] text-emerald-400 mt-1">기본 진입: AI·데이터 심화 2기</div>
+          </div>
+          <div class="glass-card rounded-xl p-4 border border-slate-700/70">
+            <div class="text-[11px] font-semibold text-slate-400">아카이브 자료 / 시연영상</div>
+            <div id="acad-kpi-files" class="text-2xl font-extrabold text-amber-300 font-mono mt-1">344개</div>
+            <div id="acad-kpi-videos" class="text-[11px] text-slate-400 mt-1">시연영상 25건 · 미제공 39건</div>
+          </div>
+          <div class="glass-card rounded-xl p-4 border border-slate-700/70">
+            <div class="text-[11px] font-semibold text-slate-400">4P 기술 감사 PDF</div>
+            <div id="acad-kpi-pdfs" class="text-2xl font-extrabold text-purple-300 font-mono mt-1">65건</div>
+            <div class="text-[11px] text-slate-400 mt-1">GitHub Release v1.0-assets</div>
+          </div>
+        </div>
+
+        <!-- Inline Preview Switcher -->
+        <div class="mt-6 pt-5 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="text-xs text-slate-400 flex items-center gap-2">
+            <i data-lucide="monitor-play" class="w-4 h-4 text-cyan-400"></i>
+            <span>관리자 콘솔 내 인라인 실시간 임베드 미리보기</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" id="acad-prev-btn-off" onclick="setAcademyPreviewMode('off')"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-200 border border-slate-600 cursor-pointer transition-all">미리보기 닫기</button>
+            <button type="button" id="acad-prev-btn-admin" onclick="setAcademyPreviewMode('admin')"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/35 cursor-pointer transition-all">🔐 관리자 (/admin/) 임베드</button>
+            <button type="button" id="acad-prev-btn-public" onclick="setAcademyPreviewMode('public')"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/35 cursor-pointer transition-all">👁️ 공개용 (/) 임베드</button>
+          </div>
+        </div>
+
+        <div id="academy-preview-wrap" class="hidden mt-4 space-y-2.5">
+          <div class="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs">
+            <span id="academy-preview-url" class="font-mono text-cyan-300 truncate max-w-full sm:max-w-xl">https://freefluxkr.github.io/dmdg-student-showcase/admin/</span>
+            <a id="academy-preview-external" href="https://freefluxkr.github.io/dmdg-student-showcase/admin/" target="_blank" rel="noopener noreferrer"
+              class="text-xs font-bold text-slate-200 hover:text-cyan-300 flex items-center gap-1 shrink-0">
+              <span>새 창으로 열기</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+          <iframe id="academy-preview-iframe" title="DMDG Academy Showcase Inline Preview"
+            class="w-full h-[640px] sm:h-[760px] rounded-xl border border-slate-700/80 bg-slate-950" loading="lazy"></iframe>
+        </div>
+      </section>
+
+      <!-- 6-Track Quick Launch Grid -->
+      <section class="glass-card rounded-2xl p-6 border border-slate-800/90">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+              <i data-lucide="layers" class="w-5 h-5 text-cyan-400"></i>
+              6대 교육과정 트랙별 바로가기 (Track Quick Launcher)
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">트랙별 공개용 뷰, 관리자 평가 뷰(/admin/?track=...), 인라인 임베드를 바로 실행합니다.</p>
+          </div>
+          <span id="acad-generated-at" class="text-[11px] font-mono text-slate-500">synced: fallback</span>
+        </div>
+        <div id="academy-tracks-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <!-- Populated dynamically by loadAcademyShowcasePanel() -->
+        </div>
+      </section>
+    </div> <!-- End of panel-academy -->
+
 
   </div> <!-- End of dashboard-container -->
 
@@ -2182,6 +2301,7 @@
       renderLiveWebAppsAnalyticsUI();
       renderLiveBooksAnalyticsUI();
       renderLiveSimulatorsAnalyticsUI();
+      if (typeof loadAcademyShowcasePanel === 'function') loadAcademyShowcasePanel();
       if (typeof loadAllExamSubmissions === 'function') loadAllExamSubmissions();
       loadAcesCareerSubmissions();
       setTimeout(initOrUpdateStudioCharts, 100);
@@ -2197,7 +2317,7 @@
 
     function switchStudioTab(tabKey) {
       CURRENT_STUDIO_TAB = tabKey;
-      const tabKeys = ['overview', 'admissions', 'revenue', 'content', 'assessment'];
+      const tabKeys = ['overview', 'admissions', 'revenue', 'content', 'assessment', 'academy'];
 
       tabKeys.forEach(key => {
         const btn = document.getElementById(`tab-btn-${key}`);
@@ -2225,6 +2345,9 @@
       }
       if (tabKey === 'assessment') {
         initAssessmentAnalytics();
+      }
+      if (tabKey === 'academy' && typeof loadAcademyShowcasePanel === 'function') {
+        loadAcademyShowcasePanel(false);
       }
     }
 
@@ -2850,6 +2973,19 @@
         status: "Updating (Beta)",
         statusClass: "bg-slate-700/50 text-slate-400 border-slate-600",
         icon: "🎙️"
+      },
+      {
+        key: "academy_showcase",
+        name: "DMDG ACADEMY SHOWCASE",
+        sub: "6개 교육과정 · 64건 포트폴리오 & 4P 감사 리포트 (/admin/)",
+        url: "https://freefluxkr.github.io/dmdg-student-showcase/admin/",
+        todayUV: 18,
+        todayViews: 52,
+        totalUV: 640,
+        totalViews: 1840,
+        status: "LIVE Archive",
+        statusClass: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
+        icon: "🎓"
       }
     ];
 
@@ -2938,6 +3074,180 @@
       if (appsTotalViewsEl) appsTotalViewsEl.textContent = sumTotalViews.toLocaleString();
 
       if (window.lucide) lucide.createIcons();
+    }
+
+    // ── DMDG ACADEMY SHOWCASE Integration Controller ──────────────────────
+    const ACADEMY_SHOWCASE_PUBLIC_URL = 'https://freefluxkr.github.io/dmdg-student-showcase/';
+    const ACADEMY_SHOWCASE_ADMIN_URL = 'https://freefluxkr.github.io/dmdg-student-showcase/admin/';
+    const ACADEMY_SHOWCASE_MANIFEST_URL = 'https://freefluxkr.github.io/dmdg-student-showcase/data/manifest.json';
+
+    const ACADEMY_FALLBACK_MANIFEST = {
+      defaultTrackId: 'adv_cohort_2',
+      generatedAt: 'static-fallback',
+      stats: {
+        totalTracks: 6,
+        totalTabs: 13,
+        totalProjects: 64,
+        totalFiles: 344,
+        videosAvailable: 25,
+        videosMissing: 39,
+        totalFeedbackPdfs: 65
+      },
+      tracks: [
+        { id: 'lg_whynot_1', label: '1. LG Uplus Why Not 1기 (2024.08~12 · 15건)', shortLabel: 'LG U+ 1기', subtitle: '1차 기획·데이터 → 2차 구현·현장 시연 → 3차 최종 발표', projectCount: 15, tabCount: 3 },
+        { id: 'lg_whynot_2', label: '2. LG Uplus Why Not 2기 (2024.10~2025 · 10건)', shortLabel: 'LG U+ 2기', subtitle: '중간 발표(공모전 기획) 및 최종 산출물', projectCount: 10, tabCount: 2 },
+        { id: 'kdt_hackathon', label: '3. [KDT] 해커톤 1·2기 (7건)', shortLabel: 'KDT 해커톤', subtitle: '공모전 기획 및 KDT 해커톤 본선 아카이브', projectCount: 7, tabCount: 2 },
+        { id: 'samsung_axi', label: '4. 삼성 AXI 6개월 과정 (4팀)', shortLabel: '삼성 AXI', subtitle: '엔터프라이즈 6개월 AXI 팀 프로젝트', projectCount: 4, tabCount: 1 },
+        { id: 'adv_cohort_1', label: '5. AI·데이터 심화 1기 (2명)', shortLabel: '심화 1기', subtitle: '심화 1기 개인 포트폴리오(김종훈 · 조유정)', projectCount: 2, tabCount: 1 },
+        { id: 'adv_cohort_2', label: '6. AI·데이터 심화 2기 (최신 · 26건)', shortLabel: '심화 2기', subtitle: '1~4차 프로젝트 & 4P AI 심층 감사 리포트 기본 선택 트랙', projectCount: 26, tabCount: 4 }
+      ],
+      tabs: []
+    };
+
+    let ACADEMY_MANIFEST_CACHE = null;
+    let ACADEMY_LOADED_ONCE = false;
+
+    async function loadAcademyShowcasePanel(forceRefresh = false) {
+      const statusEl = document.getElementById('acad-sync-status');
+      if (ACADEMY_LOADED_ONCE && !forceRefresh && ACADEMY_MANIFEST_CACHE) {
+        renderAcademyShowcaseStats(ACADEMY_MANIFEST_CACHE);
+        renderAcademyTracksGrid(ACADEMY_MANIFEST_CACHE);
+        return;
+      }
+
+      // Render fallback immediately so UI never looks empty
+      renderAcademyShowcaseStats(ACADEMY_FALLBACK_MANIFEST);
+      renderAcademyTracksGrid(ACADEMY_FALLBACK_MANIFEST);
+
+      if (statusEl) statusEl.textContent = 'Syncing manifest.json...';
+      try {
+        const url = forceRefresh
+          ? `${ACADEMY_SHOWCASE_MANIFEST_URL}?t=${Date.now()}`
+          : ACADEMY_SHOWCASE_MANIFEST_URL;
+        const res = await fetch(url, { cache: forceRefresh ? 'no-store' : 'default' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (data && Array.isArray(data.tracks) && data.tracks.length > 0) {
+          ACADEMY_MANIFEST_CACHE = data;
+          ACADEMY_LOADED_ONCE = true;
+          renderAcademyShowcaseStats(data);
+          renderAcademyTracksGrid(data);
+          if (statusEl) statusEl.textContent = 'Live Manifest Synced';
+          return;
+        }
+      } catch (err) {
+        console.warn('[Academy Showcase] Manifest sync fallback used:', err);
+        if (statusEl) statusEl.textContent = 'Fallback Snapshot Active';
+      }
+      ACADEMY_MANIFEST_CACHE = ACADEMY_FALLBACK_MANIFEST;
+      ACADEMY_LOADED_ONCE = true;
+    }
+
+    function renderAcademyShowcaseStats(manifest) {
+      const stats = (manifest && manifest.stats) || ACADEMY_FALLBACK_MANIFEST.stats;
+      const totalTracks = Number(stats.totalTracks || (manifest.tracks ? manifest.tracks.length : 6));
+      const totalTabs = Number(stats.totalTabs || 13);
+      const totalProjects = Number(stats.totalProjects || 64);
+      const totalFiles = Number(stats.totalFiles || 344);
+      const videosAvail = Number(stats.videosAvailable ?? 25);
+      const videosMiss = Number(stats.videosMissing ?? 39);
+      const totalPdfs = Number(stats.totalFeedbackPdfs || 65);
+
+      const tracksEl = document.getElementById('acad-kpi-tracks');
+      const tabsEl = document.getElementById('acad-kpi-tabs');
+      const projEl = document.getElementById('acad-kpi-projects');
+      const filesEl = document.getElementById('acad-kpi-files');
+      const videosEl = document.getElementById('acad-kpi-videos');
+      const pdfsEl = document.getElementById('acad-kpi-pdfs');
+      const badgeEl = document.getElementById('tab-badge-academy');
+      const genEl = document.getElementById('acad-generated-at');
+
+      if (tracksEl) tracksEl.textContent = `${totalTracks}개 과정`;
+      if (tabsEl) tabsEl.textContent = `${totalTabs}개 단계 탭 구성`;
+      if (projEl) projEl.textContent = `${totalProjects}건`;
+      if (filesEl) filesEl.textContent = `${totalFiles.toLocaleString()}개`;
+      if (videosEl) videosEl.textContent = `시연영상 ${videosAvail}건 · 미제공 ${videosMiss}건`;
+      if (pdfsEl) pdfsEl.textContent = `${totalPdfs}건`;
+      if (badgeEl) badgeEl.textContent = `${totalTracks}과정 · ${totalProjects}건`;
+      if (genEl) genEl.textContent = `synced: ${manifest.generatedAt || 'live'}`;
+    }
+
+    function renderAcademyTracksGrid(manifest) {
+      const grid = document.getElementById('academy-tracks-grid');
+      if (!grid) return;
+
+      const tracks = (manifest && Array.isArray(manifest.tracks) && manifest.tracks.length)
+        ? manifest.tracks
+        : ACADEMY_FALLBACK_MANIFEST.tracks;
+      const allTabs = (manifest && Array.isArray(manifest.tabs)) ? manifest.tabs : [];
+      const defaultTrackId = (manifest && manifest.defaultTrackId) || 'adv_cohort_2';
+
+      grid.innerHTML = tracks.map((track) => {
+        const trackTabs = allTabs.filter(tb => tb.trackId === track.id);
+        const tabCount = trackTabs.length || (Array.isArray(track.tabIds) ? track.tabIds.length : (track.tabCount || 1));
+        const projCount = trackTabs.length
+          ? trackTabs.reduce((acc, tb) => acc + (Array.isArray(tb.projects) ? tb.projects.length : 0), 0)
+          : (track.projectCount || 0);
+        const isDefault = track.id === defaultTrackId;
+        const encodedTrack = encodeURIComponent(track.id);
+        const adminUrl = `${ACADEMY_SHOWCASE_ADMIN_URL}?track=${encodedTrack}`;
+        const publicUrl = `${ACADEMY_SHOWCASE_PUBLIC_URL}?track=${encodedTrack}`;
+
+        return `
+          <div class="rounded-xl p-4 bg-slate-900/75 border ${isDefault ? 'border-cyan-500/45 shadow-lg shadow-cyan-500/10' : 'border-slate-700/75'} flex flex-col justify-between gap-3">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-800 text-cyan-300 border border-slate-700">${escapeHtml(track.shortLabel || track.id)}</span>
+                <span class="text-[11px] font-mono ${isDefault ? 'text-cyan-300 font-bold' : 'text-slate-400'}">
+                  ${isDefault ? '★ 기본 트랙 · ' : ''}${projCount}건 · ${tabCount}단계
+                </span>
+              </div>
+              <h4 class="text-sm font-bold text-white leading-snug">${escapeHtml(track.label || track.id)}</h4>
+              <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed line-clamp-2">${escapeHtml(track.subtitle || '')}</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-800/80">
+              <a href="${adminUrl}" target="_blank" rel="noopener noreferrer"
+                class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/35 transition-all">
+                관리자 ↗
+              </a>
+              <a href="${publicUrl}" target="_blank" rel="noopener noreferrer"
+                class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/35 transition-all">
+                공개용 ↗
+              </a>
+              <button type="button" onclick="setAcademyPreviewMode('admin', '${escapeHtml(track.id)}')"
+                class="px-2.5 py-1.5 rounded-lg text-[11px] font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer transition-all ml-auto">
+                인라인 임베드
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function setAcademyPreviewMode(mode, trackId = '') {
+      const wrap = document.getElementById('academy-preview-wrap');
+      const iframe = document.getElementById('academy-preview-iframe');
+      const urlText = document.getElementById('academy-preview-url');
+      const extLink = document.getElementById('academy-preview-external');
+      if (!wrap || !iframe) return;
+
+      if (mode === 'off') {
+        wrap.classList.add('hidden');
+        iframe.removeAttribute('src');
+        return;
+      }
+
+      const base = mode === 'public' ? ACADEMY_SHOWCASE_PUBLIC_URL : ACADEMY_SHOWCASE_ADMIN_URL;
+      const targetUrl = trackId ? `${base}?track=${encodeURIComponent(trackId)}` : base;
+      wrap.classList.remove('hidden');
+      if (urlText) urlText.textContent = targetUrl;
+      if (extLink) extLink.href = targetUrl;
+      if (iframe.getAttribute('src') !== targetUrl) {
+        iframe.src = targetUrl;
+      }
+      wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
 
