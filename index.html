@@ -24,8 +24,8 @@
   <!-- Core CSS (Cache Busting v4 - 5 cards limit) -->
   <!-- 16:9 Ambient Aurora Glassmorphism Masterpiece Theme -->
   <link rel="stylesheet" href="./style.css?v=20261021_5cards_limit">
-  <link rel="stylesheet" href="./aurora_theme.css?v=20261111_desktop_aurora_v2" media="(min-width: 821px)">
-  <link rel="stylesheet" href="./hanji_bento_theme.css?v=20261111_mobile_hanji_v2" media="(max-width: 820px)">
+  <link id="desktopAuroraThemeLink" rel="stylesheet" href="./aurora_theme.css?v=20261112_desktop_aurora_v3" media="(min-width: 1081px) and (hover: hover) and (pointer: fine)">
+  <link id="mobileHanjiThemeLink" rel="stylesheet" href="./hanji_bento_theme.css?v=20261112_mobile_hanji_v3" media="(max-width: 1080px), (hover: none), (pointer: coarse)">
   <!-- Firebase & Real-time Analytics SDK (Non-blocking defer) -->
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -2483,12 +2483,53 @@
     // 페이지 로드 시 헤더 네비게이션 상태 동기화
     renderHeaderNav();
 
-    // 구버전 서비스 워커(v15 Cache-First)가 활성화된 브라우저 즉시 갱신
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then((regs) => {
-        regs.forEach((reg) => reg.update().catch(() => {}));
-      }).catch(() => {});
-    }
+    // 반응형 테마(데스크톱 오로라 vs 모바일·컴팩트 한지 벤토) 및 서비스 워커(v22 Network-First) 무결성 동기화
+    (function syncResponsiveThemeAndServiceWorker() {
+      const CURRENT_SW_CACHE = 'dangmok-cache-v22-20261112';
+      const desktopLink = document.getElementById('desktopAuroraThemeLink');
+      const mobileLink = document.getElementById('mobileHanjiThemeLink');
+
+      function applyResponsiveThemeState() {
+        const isMobileOrCompact = window.matchMedia('(max-width: 1080px), (hover: none), (pointer: coarse)').matches;
+        document.documentElement.setAttribute('data-dmdg-theme', isMobileOrCompact ? 'hanji-mobile' : 'aurora-desktop');
+        if (desktopLink && mobileLink) {
+          desktopLink.disabled = isMobileOrCompact;
+          mobileLink.disabled = !isMobileOrCompact;
+        }
+      }
+
+      applyResponsiveThemeState();
+      window.addEventListener('resize', applyResponsiveThemeState);
+      window.addEventListener('orientationchange', applyResponsiveThemeState);
+
+      // 구버전 캐시(특히 dangmok-cache-v15 Cache-First) 즉시 삭제 및 1회 자동 새로고침
+      if ('caches' in window) {
+        caches.keys().then((keys) => {
+          const staleKeys = keys.filter((k) => k !== CURRENT_SW_CACHE);
+          if (staleKeys.length > 0) {
+            Promise.all(staleKeys.map((k) => caches.delete(k))).then(() => {
+              if (staleKeys.includes('dangmok-cache-v15') && !sessionStorage.getItem('dmdg_sw_v22_migrated')) {
+                sessionStorage.setItem('dmdg_sw_v22_migrated', '1');
+                window.location.reload();
+              }
+            }).catch(() => {});
+          }
+        }).catch(() => {});
+      }
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js?v=20261112_v22', { updateViaCache: 'none' }).then((reg) => {
+          reg.update().catch(() => {});
+        }).catch(() => {});
+
+        navigator.serviceWorker.addEventListener('message', (event) => {
+          if (event.data && event.data.type === 'DMDG_SW_UPDATED' && !sessionStorage.getItem('dmdg_sw_v22_reloaded')) {
+            sessionStorage.setItem('dmdg_sw_v22_reloaded', '1');
+            window.location.reload();
+          }
+        });
+      }
+    })();
   </script>
 </body>
 

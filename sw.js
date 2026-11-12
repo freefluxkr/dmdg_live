@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dangmok-cache-v21-20261112';
+const CACHE_NAME = 'dangmok-cache-v22-20261112';
 const urlsToCache = [
   './manifest.json',
   './bg_waves.png',
@@ -60,18 +60,33 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// 오래된 캐시(v15 등) 즉시 삭제 및 활성 클라이언트 제어권 획득
+// 오래된 캐시(v15 등) 즉시 삭제, 활성 클라이언트 제어권 획득 및 구버전 탭 자동 새로고침 알림
 self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE_NAME];
+  let hadLegacyV15 = false;
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheWhitelist.indexOf(cacheName) === -1) {
+            if (cacheName === 'dangmok-cache-v15') {
+              hadLegacyV15 = true;
+            }
             return caches.delete(cacheName);
           }
         })
       );
     }).then(() => self.clients.claim())
+      .then(() => self.clients.matchAll({ type: 'window', includeUncontrolled: true }))
+      .then((clients) => {
+        clients.forEach((client) => {
+          try {
+            client.postMessage({ type: 'DMDG_SW_UPDATED', cacheName: CACHE_NAME, hadLegacyV15 });
+          } catch (e) {}
+          if (hadLegacyV15 && typeof client.navigate === 'function') {
+            client.navigate(client.url).catch(() => {});
+          }
+        });
+      })
   );
 });
