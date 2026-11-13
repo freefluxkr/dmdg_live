@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DMDG Security &amp; Watermark Verifier</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card: #111827;
+      --border: #1f2937;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --green: #34d399;
+      --amber: #fbbf24;
+      --red: #f87171;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 820px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .card h2 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .card p.desc {
+      margin: 0 0 14px 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 10px 0 4px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      background: #0f172a;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+    textarea { min-height: 86px; resize: vertical; }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    button {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #1e293b;
+      color: #fff;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    button:hover { background: #334155; }
+    button.primary {
+      background: linear-gradient(135deg, #2563eb, #0284c7);
+      border-color: transparent;
+    }
+    button.danger {
+      background: rgba(248, 113, 113, 0.15);
+      color: var(--red);
+      border-color: rgba(248, 113, 113, 0.4);
+    }
+    button.success {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--green);
+      border-color: rgba(52, 211, 153, 0.4);
+    }
+    .result-box {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #090d16;
+      border: 1px solid #1e293b;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+      color: #cbd5e1;
+      min-height: 64px;
+    }
+    .status-ok { color: var(--green); font-weight: 700; }
+    .status-err { color: var(--red); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>🛡️ DMDG Security &amp; Invisible Watermark Verifier</h1>
+        <div style="color: var(--muted); font-size: 0.85rem; margin-top: 4px;">
+          HMAC-SHA256 만료 토큰(Signed URL) 검증 · 제로폭(Zero-Width) 비가시성 워터마크 인코더/디코더
+        </div>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <span class="badge" id="viewer-uid-badge">UID: loading...</span>
+        <button type="button" onclick="reopenPaywallNotice()">📢 유료화 공지 팝업 다시 열기</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- 1. Signed URL / Expiring Token Tester -->
+      <section class="card">
+        <h2>1. 기간 한정 만료 토큰 &amp; Signed URL 검증</h2>
+        <p class="desc">OTT 단기 열람/스트리밍 및 제한 다운로드용 HMAC-SHA256 서명 URL을 생성하고 만료 차단(403)을 테스트합니다.</p>
+
+        <label for="signed-resource">리소스 경로</label>
+        <input id="signed-resource" type="text" value="total_prj.zip" />
+
+        <label for="signed-ttl">유효 시간 (초)</label>
+        <input id="signed-ttl" type="number" value="1800" min="1" />
+
+        <div class="btn-row">
+          <button type="button" class="primary" onclick="handleCreateSignedUrl()">🔐 Signed URL 생성</button>
+          <button type="button" class="success" onclick="handleVerifySignedUrl()">✅ 즉시 검증</button>
+          <button type="button" class="danger" onclick="handleSimulateExpired()">⛔ 강제 만료(403) 테스트</button>
+        </div>
+
+        <label for="signed-url-output">생성된 Signed URL</label>
+        <textarea id="signed-url-output" placeholder="여기에 Signed URL이 생성됩니다..."></textarea>
+
+        <div class="result-box" id="signed-verify-result">대기 중...</div>
+      </section>
+
+      <!-- 2. Invisible Watermark Encoder / Decoder -->
+      <section class="card">
+        <h2>2. 눈에 안 보이는 워터마크 (Zero-Width Steganography)</h2>
+        <p class="desc">텍스트·복사본·다운로드 파일에 비가시성 유니코드(\u200B/\u200C/\u200D) 워터마크를 삽입하고 역추적 추출합니다.</p>
+
+        <label for="wm-plain-text">원본 텍스트</label>
+        <textarea id="wm-plain-text">DMDG 프리미엄 콘텐츠 및 실무 리포트 원본 텍스트입니다.</textarea>
+
+        <label for="wm-mode">라이선스 모델</label>
+        <select id="wm-mode">
+          <option value="limited">기간 한정 (단기 열람/스트리밍)</option>
+          <option value="owned" selected>완전 소유 (영구 소장/다운로드)</option>
+          <option value="subscription">정기 구독 (월간/연간 멤버십)</option>
+        </select>
+
+        <div class="btn-row">
+          <button type="button" class="primary" onclick="handleEmbedWatermark()">🧬 워터마크 삽입</button>
+          <button type="button" class="success" onclick="handleExtractWatermark()">🔍 워터마크 추출/검증</button>
+        </div>
+
+        <label for="wm-encoded-text">워터마크가 삽입된 텍스트 (육안으로는 원본과 동일)</label>
+        <textarea id="wm-encoded-text" placeholder="워터마크가 삽입된 텍스트가 여기에 표시됩니다..."></textarea>
+
+        <div class="result-box" id="wm-extract-result">대기 중...</div>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/dmdg_security.js"></script>
+  <script src="js/dmdg_paywall_notice.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.DMDG_Security) {
+        document.getElementById('viewer-uid-badge').textContent = 'UID: ' + window.DMDG_Security.getViewerId();
+      }
+    });
+
+    function reopenPaywallNotice() {
+      try {
+        localStorage.removeItem('dmdg_paywall_notice_hide_until');
+      } catch (e) {}
+      if (window.DMDG_PaywallNotice) {
+        window.DMDG_PaywallNotice.open(true);
+      }
+    }
+
+    function handleCreateSignedUrl() {
+      const resource = document.getElementById('signed-resource').value.trim() || 'total_prj.zip';
+      const ttl = parseInt(document.getElementById('signed-ttl').value, 10) || 1800;
+      const url = window.DMDG_Security.createSignedUrl(resource, ttl, null, 'limited');
+      document.getElementById('signed-url-output').value = url;
+      handleVerifySignedUrl();
+    }
+
+    function handleVerifySignedUrl() {
+      const url = document.getElementById('signed-url-output').value.trim();
+      const box = document.getElementById('signed-verify-result');
+      if (!url) {
+        box.innerHTML = '<span class="status-err">검증할 Signed URL이 없습니다.</span>';
+        return;
+      }
+      const res = window.DMDG_Security.verifySignedUrl(url);
+      if (res.valid) {
+        box.innerHTML = `<span class="status-ok">200 OK — 유효한 서명 토큰</span>\n` + JSON.stringify(res, null, 2);
+      } else {
+        box.innerHTML = `<span class="status-err">403 FORBIDDEN — ${res.reason}</span>\n` + JSON.stringify(res, null, 2);
+      }
+    }
+
+    function handleSimulateExpired() {
+      const resource = document.getElementById('signed-resource').value.trim() || 'total_prj.zip';
+      const url = window.DMDG_Security.createSignedUrl(resource, 1, null, 'limited');
+      document.getElementById('signed-url-output').value = url;
+      // Verify with future timestamp (+10s) to deterministically simulate expiration (403)
+      const res = window.DMDG_Security.verifySignedUrl(url, Date.now() + 10000);
+      const box = document.getElementById('signed-verify-result');
+      box.innerHTML = `<span class="status-err">403 FORBIDDEN (만료 시뮬레이션) — ${res.reason}</span>\n` + JSON.stringify(res, null, 2);
+    }
+
+    function handleEmbedWatermark() {
+      const raw = document.getElementById('wm-plain-text').value;
+      const mode = document.getElementById('wm-mode').value;
+      const embedded = window.DMDG_Security.embedTextWatermark(raw, {
+        mode: mode,
+        resource: 'verifier_sample'
+      });
+      document.getElementById('wm-encoded-text').value = embedded;
+      handleExtractWatermark();
+    }
+
+    function handleExtractWatermark() {
+      const encoded = document.getElementById('wm-encoded-text').value;
+      const box = document.getElementById('wm-extract-result');
+      const res = window.DMDG_Security.extractTextWatermark(encoded);
+      if (res.found) {
+        box.innerHTML = `<span class="status-ok">워터마크 검출 성공 (${res.bitLength} bits)</span>\n` + JSON.stringify(res, null, 2);
+      } else {
+        box.innerHTML = `<span class="status-err">워터마크가 검출되지 않았습니다.</span>`;
+      }
+    }
+  </script>
+</body>
+</html>
+

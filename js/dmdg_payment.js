@@ -159,7 +159,13 @@
     },
 
     triggerPdfDownload(book) {
-      // PDF 다운로드: 인쇄 다이얼로그 또는 텍스트 기반 공식 전자책 다운로드
+      // PDF 다운로드: 인쇄 다이얼로그 + 보이지 않는/인쇄용 워터마크 배너 주입
+      if (window.DMDG_Security && typeof window.DMDG_Security.injectPdfWatermarkBanner === 'function') {
+        window.DMDG_Security.injectPdfWatermarkBanner(document.body, {
+          mode: 'owned',
+          resource: book.id
+        });
+      }
       const printConfirm = confirm(`📄 [${book.title}] PDF 다운로드 준비 완료!\n\n'확인'을 누르시면 브라우저 인쇄 창이 열리며 [PDF로 저장]하여 영구 소장하실 수 있습니다.`);
       if (printConfirm) {
         window.print();
@@ -167,11 +173,32 @@
     },
 
     triggerAudioDownload(book) {
-      // 오디오 다운로드 안내 및 파일 생성 시뮬레이션
-      const audioUrl = `data/novels/${book.id}.json`;
-      const blob = new Blob([
-        `[DMDG Master Audiobook Pack]\n\nBook Title: ${book.title}\nBook ID: ${book.id}\nStatus: Paid & Licensed\nFormat: 5-Language TTS High-Definition Audio Pack\n\n전 챕터 고음질 오디오북이 성공적으로 라이선스 발급되었습니다.\n웹 리더기에서 [전체 낭독]을 오프라인 캐시 모드로 감상하실 수 있습니다.`
-      ], { type: 'text/plain;charset=utf-8' });
+      // 오디오 다운로드 안내 및 워터마크 + 만료 토큰 Signed URL 포함 파일 생성
+      const rawContent = [
+        `[DMDG Master Audiobook Pack]`,
+        ``,
+        `Book Title: ${book.title}`,
+        `Book ID: ${book.id}`,
+        `Status: Paid & Licensed`,
+        `Format: 5-Language TTS High-Definition Audio Pack`,
+        ``,
+        `전 챕터 고음질 오디오북이 성공적으로 라이선스 발급되었습니다.`,
+        `웹 리더기에서 [전체 낭독]을 오프라인 캐시 모드로 감상하실 수 있습니다.`
+      ].join('\n');
+
+      let blob;
+      let signedInfo = '';
+      if (window.DMDG_Security && typeof window.DMDG_Security.buildWatermarkedTextBlob === 'function') {
+        const signedUrl = window.DMDG_Security.createSignedUrl(`data/novels/${book.id}.json`, 1800, null, 'owned');
+        const wmResult = window.DMDG_Security.buildWatermarkedTextBlob(
+          `${rawContent}\n\n[Signed Access Token URL (30m)]\n${signedUrl}\n`,
+          { mode: 'owned', resource: `${book.id}_audiobook` }
+        );
+        blob = wmResult.blob;
+        signedInfo = `\n(보안 워터마크 UID: ${wmResult.uid})`;
+      } else {
+        blob = new Blob([rawContent], { type: 'text/plain;charset=utf-8' });
+      }
 
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
@@ -180,7 +207,7 @@
       link.click();
       document.body.removeChild(link);
 
-      alert(`🎧 [${book.title}] 오디오북 다운로드 라이선스 발급 완료!\n\n오프라인 소장용 파일이 저장되었습니다. 언제든 끊김 없이 최고 품질로 청취하실 수 있습니다.`);
+      alert(`🎧 [${book.title}] 오디오북 다운로드 라이선스 발급 완료!${signedInfo}\n\n오프라인 소장용 파일이 저장되었습니다. 언제든 끊김 없이 최고 품질로 청취하실 수 있습니다.`);
     }
   };
 

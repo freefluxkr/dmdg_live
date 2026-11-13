@@ -251,7 +251,7 @@
         </div>
       </div>
       <div class="header-pills">
-        <a href="total_prj.zip" download="total_prj.zip" class="pill" style="border-color: #10b981; color: #10b981; text-decoration: none; font-weight: bold; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.15)'" onmouseout="this.style.background='transparent'">📥 실무 코드 ZIP 즉시 다운로드</a>
+        <a href="total_prj.zip" download="total_prj.zip" onclick="return dmdgDownloadScmZip(event, this);" class="pill" style="border-color: #10b981; color: #10b981; text-decoration: none; font-weight: bold; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.15)'" onmouseout="this.style.background='transparent'">📥 실무 코드 ZIP 즉시 다운로드</a>
         <div class="pill"><div class="pulse-dot"></div> <span id="hdr-engine-status">AUTONOMOUS ONLINE</span></div>
         <div class="pill" style="border-color: var(--accent); color: var(--accent);">⚡ <span id="hdr-active-model">DeepSeek-LoRA v2.4</span></div>
       </div>
@@ -732,6 +732,33 @@
         window.DMDG_Analytics.recordAppClick('scm');
       }
     } catch(e) {}
+
+    function dmdgDownloadScmZip(event, linkEl) {
+      if (event) event.preventDefault();
+      try {
+        if (window.DMDG_Security) {
+          const signedUrl = window.DMDG_Security.createSignedUrl('total_prj.zip', 1800, null, 'limited');
+          const verification = window.DMDG_Security.verifySignedUrl(signedUrl);
+          if (!verification.valid) {
+            alert('⛔ [403] 만료되었거나 유효하지 않은 다운로드 토큰입니다.');
+            return false;
+          }
+          const a = document.createElement('a');
+          a.href = signedUrl;
+          a.download = 'total_prj.zip';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          return false;
+        }
+      } catch (e) {
+        console.warn('Signed URL download fallback:', e);
+      }
+      window.location.href = (linkEl && linkEl.getAttribute('href')) || 'total_prj.zip';
+      return false;
+    }
   </script>
+  <script src="js/dmdg_security.js"></script>
+  <script src="js/dmdg_paywall_notice.js"></script>
 </body>
 </html>

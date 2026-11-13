@@ -1915,6 +1915,12 @@
 
     function downloadReportPDF() {
       const element = document.getElementById('printableReport');
+      if (window.DMDG_Security && typeof window.DMDG_Security.injectPdfWatermarkBanner === 'function') {
+        window.DMDG_Security.injectPdfWatermarkBanner(element, {
+          mode: 'owned',
+          resource: 'career_aces_pdf'
+        });
+      }
       const opt = {
         margin:       8,
         filename:     'DMDG_ACES_직무추천_채용JD_성적표.pdf',
@@ -1925,5 +1931,7 @@
       html2pdf().set(opt).from(element).save();
     }
   </script>
+  <script src="js/dmdg_security.js"></script>
+  <script src="js/dmdg_paywall_notice.js"></script>
 </body>
 </html>
