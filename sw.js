@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dangmok-cache-v22-20261112';
+const CACHE_NAME = 'dangmok-cache-v23-20261113';
 const urlsToCache = [
   './manifest.json',
   './bg_waves.png',
