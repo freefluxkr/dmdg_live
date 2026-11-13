@@ -449,8 +449,8 @@
 
               <!-- Top Content Ranking List -->
               <div>
-                <span class="text-[11px] font-bold text-slate-300 block mb-2">실시간 최다 유입 콘텐츠 탑 3</span>
-                <div class="space-y-2 text-xs">
+                <span class="text-[11px] font-bold text-slate-300 block mb-2">실시간 최다 유입 콘텐츠 탑 3 <span class="text-[10px] text-slate-500 font-normal">(조회수 높은 순)</span></span>
+                <div id="realtime-top3-list" class="space-y-2 text-xs">
                   <div
                     class="flex justify-between items-center p-2 rounded-lg bg-slate-900/50 hover:bg-slate-900 transition-colors">
                     <span class="truncate pr-2 text-slate-200">📺 AI 역설계(REA)의 실체 [27분]</span>
@@ -2735,6 +2735,9 @@
       ]
     };
 
+    // 실시간 최다 유입 콘텐츠 탑 3 통합 랭킹 소스
+    const RANKING_SOURCES = { youtube: [], apps: [], sims: [], books: [] };
+
     // Global in-memory cache populated from YouTube Data API v3
     let YOUTUBE_CACHE = {
       totalChannelViews: 26698,
@@ -2864,7 +2867,12 @@
       let sumTodayUV = 0;
       let html = '';
 
-      YOUTUBE_CACHE.videos.forEach((video, idx) => {
+      // 실시간 조회수 높은 순 정렬 (총 누적 조회수 → 오늘 시청자 순)
+      const sortedVideos = [...YOUTUBE_CACHE.videos].sort((a, b) =>
+        ((b.totalViews || 0) - (a.totalViews || 0)) || ((b.todayUV || 0) - (a.todayUV || 0)));
+      RANKING_SOURCES.youtube = sortedVideos.map(v => ({ icon: '📺', name: v.title, views: v.totalViews || 0, color: 'text-amber-400' }));
+
+      sortedVideos.forEach((video, idx) => {
         sumTodayUV += video.todayUV;
         const ytUrl = `https://youtu.be/${video.id}`;
 
@@ -2925,6 +2933,7 @@
       if (ytTotalUvEl) ytTotalUvEl.textContent = YOUTUBE_CACHE.totalSubscribers.toLocaleString();
       if (ytTotalViewsEl) ytTotalViewsEl.textContent = YOUTUBE_CACHE.totalChannelViews.toLocaleString();
 
+      renderRealtimeTop3();
       if (window.lucide) lucide.createIcons();
     }
 
@@ -3056,17 +3065,20 @@
       let sumTotalViews = 0;
 
       let html = '';
-      LIVE_WEB_APPS_DATA.forEach((app, idx) => {
+      // 실시간 지표 계산 후 조회수 높은 순 정렬 (총 누적 조회수 → 오늘 1일 조회수 순)
+      const computedApps = LIVE_WEB_APPS_DATA.map(app => {
         let appViews = app.totalViews;
-        let appTodayViews = app.todayViews;
         let appTotalUV = app.totalUV;
-        let appTodayUV = app.todayUV;
-
         if (appClicksMap && appClicksMap[app.key] !== undefined) {
           const clicks = appClicksMap[app.key];
           appViews = Math.max(app.totalViews, clicks);
           appTotalUV = Math.max(app.totalUV, Math.round(appViews * 0.45));
         }
+        return { app, appViews, appTotalUV, appTodayViews: app.todayViews, appTodayUV: app.todayUV };
+      }).sort((a, b) => (b.appViews - a.appViews) || (b.appTodayViews - a.appTodayViews));
+      RANKING_SOURCES.apps = computedApps.map(c => ({ icon: c.app.icon, name: c.app.name, views: c.appViews, color: 'text-emerald-400' }));
+
+      computedApps.forEach(({ app, appViews, appTotalUV, appTodayViews, appTodayUV }, idx) => {
 
         sumTodayUV += appTodayUV;
         sumTodayViews += appTodayViews;
@@ -3118,6 +3130,7 @@
       });
 
       tbody.innerHTML = html;
+      renderRealtimeTop3();
 
       // KPI Update
       const appsTodayUvEl = document.getElementById('stat-apps-today-uv');
@@ -3599,11 +3612,14 @@
       let sumRealClicks = 0;
       let html = '';
 
-      LIVE_BOOKS_DATA.forEach((book, idx) => {
-        let clicks = 0;
-        if (appClicksMap && appClicksMap[book.key] !== undefined) {
-          clicks = appClicksMap[book.key];
-        }
+      // 실시간 유입 클릭 높은 순 정렬 (동률 시 기존 순서 유지)
+      const sortedBooks = LIVE_BOOKS_DATA.map((book, order) => ({
+        book, order,
+        clicks: (appClicksMap && appClicksMap[book.key] !== undefined) ? appClicksMap[book.key] : 0
+      })).sort((a, b) => (b.clicks - a.clicks) || (a.order - b.order));
+      RANKING_SOURCES.books = sortedBooks.map(s => ({ icon: '📘', name: s.book.title, views: s.clicks, color: 'text-sky-400' }));
+
+      sortedBooks.forEach(({ book, clicks }, idx) => {
         sumRealClicks += clicks;
 
         html += `
@@ -3648,6 +3664,7 @@
       if (booksTodayViewsEl) booksTodayViewsEl.textContent = sumRealClicks.toLocaleString();
       if (booksTotalViewsEl) booksTotalViewsEl.textContent = sumRealClicks.toLocaleString();
       if (booksTotalUvEl) booksTotalUvEl.textContent = (sumRealClicks > 0 ? Math.max(1, Math.round(sumRealClicks * 0.7)) : 0).toLocaleString();
+      renderRealtimeTop3();
       if (window.lucide) lucide.createIcons();
     }
 
@@ -3656,13 +3673,16 @@
       if (!tbody) return;
 
       let html = '';
-      LIVE_SIMS_DATA.forEach((sim, idx) => {
-        let clicks = 0;
-        if (appClicksMap && appClicksMap[sim.key] !== undefined) {
-          clicks = appClicksMap[sim.key];
-        }
+      // 실시간 조회(실행)수 높은 순 정렬 (총 누적 실행수 → 실시간 클릭 순)
+      const computedSims = LIVE_SIMS_DATA.map(sim => {
+        const clicks = (appClicksMap && appClicksMap[sim.key] !== undefined) ? appClicksMap[sim.key] : 0;
         const total = sim.baseViews + clicks;
         const todayUV = Math.max(5, Math.round(total * 0.03) + clicks);
+        return { sim, clicks, total, todayUV };
+      }).sort((a, b) => (b.total - a.total) || (b.clicks - a.clicks));
+      RANKING_SOURCES.sims = computedSims.map(c => ({ icon: '🧪', name: c.sim.name, views: c.total, color: 'text-purple-300' }));
+
+      computedSims.forEach(({ sim, clicks, total, todayUV }, idx) => {
 
         html += `
           <tr class="hover:bg-slate-900/50 transition-colors">
@@ -3699,7 +3719,25 @@
       });
 
       tbody.innerHTML = html;
+      renderRealtimeTop3();
       if (window.lucide) lucide.createIcons();
+    }
+
+    // ── 실시간 최다 유입 콘텐츠 TOP 3 (전체 소스 통합 · 조회수 높은 순) ──────
+    function renderRealtimeTop3() {
+      const box = document.getElementById('realtime-top3-list');
+      if (!box) return;
+      const all = [].concat(RANKING_SOURCES.youtube, RANKING_SOURCES.apps, RANKING_SOURCES.sims, RANKING_SOURCES.books)
+        .filter(item => item && item.views > 0)
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 3);
+      if (!all.length) return; // 데이터 미수신 시 기존 표시 유지
+      const medals = ['🥇', '🥈', '🥉'];
+      box.innerHTML = all.map((item, i) => `
+                  <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/50 hover:bg-slate-900 transition-colors">
+                    <span class="truncate pr-2 text-slate-200">${medals[i]} ${item.icon} ${escapeHtml(item.name)}</span>
+                    <span class="font-mono font-bold ${item.color} text-[11px]">${item.views.toLocaleString()}회</span>
+                  </div>`).join('');
     }
 
     // ── 실시간 3대 통계 갱신 및 인터랙티브 알림 엔진 ──────────────────────
