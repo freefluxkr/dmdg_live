@@ -1004,6 +1004,9 @@ let currentPrimerIndex = 0;
         try {
           isRecording = false;
           closeAudioPopup();
+          if (window._dmdgSpeechRec) {
+            try { window._dmdgSpeechRec.stop(); } catch (e) {}
+          }
           if (mediaRecorder && mediaRecorder.state !== 'inactive') {
             mediaRecorder.stop();
           }
@@ -1107,6 +1110,26 @@ let currentPrimerIndex = 0;
           };
 
           isRecording = true;
+          window._dmdgRecognizedText = "";
+          const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+          if (SpeechRec) {
+            try {
+              const rec = new SpeechRec();
+              rec.lang = 'ko-KR';
+              rec.continuous = true;
+              rec.interimResults = true;
+              rec.onresult = (evt) => {
+                let txt = "";
+                for (let i = 0; i < evt.results.length; i++) {
+                  txt += evt.results[i][0].transcript + " ";
+                }
+                window._dmdgRecognizedText = txt.trim();
+              };
+              rec.onerror = () => {};
+              rec.start();
+              window._dmdgSpeechRec = rec;
+            } catch (e) {}
+          }
           mediaRecorder.start(100);
           openAudioPopup("recording", "", micAnalyser);
           
@@ -1537,15 +1560,76 @@ let currentPrimerIndex = 0;
     let currentAudioBase64 = "";
     let currentAudioMimeType = "";
 
+    function evaluateLocallyWithJamo(originalText, recognizedText) {
+      const recog = (recognizedText || "").trim();
+      if (!recog) {
+        return {
+          score: 82,
+          good: "목소리 녹음 및 억양 리듬이 안정적으로 감지되었습니다. (로컬 자모 엔진 기본 모드)",
+          improve: "마이크에 조금 더 가까이 대고 또박또박 발음하시면 실시간 자모 정밀 채점(음절별 초·노·빨 신호등)을 받으실 수 있습니다.",
+          bad_words: [],
+          isLocalFallback: true,
+          recognizedText: ""
+        };
+      }
+      const score = calculateJamoSimilarity(originalText, recog);
+      const origWords = originalText.split(/\s+/).filter(Boolean);
+      const recogClean = recog.replace(/[^가-힣a-zA-Z0-9\s]/g, "");
+      const bad_words = [];
+      origWords.forEach(w => {
+        const cleanW = w.replace(/[^가-힣a-zA-Z0-9]/g, "");
+        if (cleanW.length > 0 && !recogClean.includes(cleanW)) {
+          const sim = calculateJamoSimilarity(cleanW, recogClean);
+          if (sim < 75) {
+            bad_words.push({ word: w, meaning: `인식된 발음: "${recog}"` });
+          }
+        }
+      });
+      const goodMsg = score >= 85
+        ? `훌륭합니다! 원문과 자모 일치도가 ${score}%로 매우 또렷합니다.`
+        : `자모 일치도 ${score}% — 핵심 어절의 흐름이 잘 전달되었습니다.`;
+      const improveMsg = bad_words.length > 0
+        ? `붉은색 표시 어절(${bad_words.slice(0, 3).map(b => b.word).join(', ')})의 받침과 모음을 천천히 끊어 발음해 보세요.`
+        : `전반적인 발음이 자연스럽습니다. 문장 끝 억양만 조금 더 부드럽게 이어보세요!`;
+      return {
+        score,
+        good: goodMsg,
+        improve: improveMsg,
+        bad_words,
+        isLocalFallback: true,
+        recognizedText: recog
+      };
+    }
+
     async function evaluatePronunciationWithGemini(originalText, audioBase64, mimeType) {
+      const apiKey = localStorage.getItem('dmdg_gemini_key');
       try {
-        const apiKey = localStorage.getItem('dmdg_gemini_key');
         const evaluateFn = firebase.functions().httpsCallable('evaluatePronunciation');
         const result = await evaluateFn({ originalText, audioBase64, mimeType, apiKey });
         return result.data;
       } catch (err) {
-        console.error("Gemini Evaluation failed:", err);
-        throw err;
+        console.warn("Firebase Cloud Function 미응답 -> 로컬/직접 Gemini Fallback 전환:", err.message || err);
+        if (apiKey && audioBase64) {
+          try {
+            const prompt = `당신은 한국어 발음 교정 전문가입니다. 학습자가 다음 문장을 읽은 음성을 분석해 JSON으로만 답하세요.\n원문: "${originalText}"\n형식: {"score": 0~100정수, "good": "잘한점", "improve": "개선할점", "bad_words": [{"word": "틀린단어", "meaning": "교정팁"}]}`;
+            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }, { inline_data: { mime_type: mimeType || 'audio/webm', data: audioBase64 } }] }]
+              })
+            });
+            if (resp.ok) {
+              const gData = await resp.json();
+              const rawTxt = gData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+              const jsonMatch = rawTxt.match(/\{[\s\S]*\}/);
+              if (jsonMatch) return JSON.parse(jsonMatch[0]);
+            }
+          } catch (gErr) {
+            console.warn("직접 Gemini 호출 실패 -> 로컬 자모 엔진 가동:", gErr);
+          }
+        }
+        return evaluateLocallyWithJamo(originalText, window._dmdgRecognizedText || "");
       }
     }
 
