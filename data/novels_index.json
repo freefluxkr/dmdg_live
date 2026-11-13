@@ -983,5 +983,93 @@
       "id",
       "es"
     ]
+  },
+  {
+    "id": "malssam_slang_200",
+    "title": {
+      "ko": "말쌈: 대한민국 신조어 연대기 200선",
+      "en": "MALSSAM: 200 Korean Slang & Memes (1990–2026)",
+      "ja": "マルッサム：韓国語新造語・ミーム年代記 200選",
+      "es": "MALSSAM: 200 Modismos y Memes Coreanos",
+      "fr": "MALSSAM : 200 Argots et Mèmes Coréens",
+      "id": "MALSSAM: 200 Bahasa Gaul & Meme Korea"
+    },
+    "subtitle": {
+      "ko": "1990 삐삐에서 2026 릴스까지, K-상황극으로 배우는 살아있는 한국어",
+      "en": "From 1990s Pagers to 2026 Reels — Living Korean with Roleplays",
+      "ja": "1990年ポケベルから2026年リールまで、状況劇で学ぶ韓国語",
+      "es": "De los años 90 a 2026: Coreano vivo con dramatizaciones",
+      "fr": "Des années 90 à 2026 : Le coréen vivant par le jeu de rôle",
+      "id": "Dari Era 90-an hingga Reels 2026 dengan Simulasi Dialog"
+    },
+    "author": "DMDG × MALSSAM",
+    "badge": "말쌈 신조어 200선",
+    "category": "K-Language · 신조어",
+    "color": "#0284c7",
+    "synopsis": {
+      "ko": "1990 삐삐에서 2026 릴스까지, K-상황극으로 배우는 살아있는 한국어",
+      "en": "From 1990s Pagers to 2026 Reels — Living Korean with Roleplays",
+      "ja": "1990年ポケベルから2026年リールまで、状況劇で学ぶ韓国語",
+      "es": "De los años 90 a 2026: Coreano vivo con dramatizaciones",
+      "fr": "Des années 90 à 2026 : Le coréen vivant par le jeu de rôle",
+      "id": "Dari Era 90-an hingga Reels 2026 dengan Simulasi Dialog"
+    },
+    "charCount": 55230,
+    "readingTime": 78,
+    "chapterCount": 3,
+    "htmlUrl": "novel_malssam_slang_200.html",
+    "jsonUrl": "data/novels/malssam_slang_200.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "es",
+      "fr",
+      "id"
+    ]
+  },
+  {
+    "id": "malssam_ksoul_118",
+    "title": {
+      "ko": "영어엔 없는 한국인의 마음: K-소울 118선",
+      "en": "Untranslatable Korean Soul: 118 Words from Nunchi to Jeong",
+      "ja": "英語にはない韓国人の心：ヌンチから情まで K-ソウル 118選",
+      "es": "El Alma Coreana Intraducible: 118 Palabras de Nunchi a Jeong",
+      "fr": "L'Âme Coréenne Intraduisible : 118 Mots de Nunchi à Jeong",
+      "id": "Jiwa Korea yang Tak Terjemahkan: 118 Kata K-Soul"
+    },
+    "subtitle": {
+      "ko": "눈치부터 정(情)까지, 직역할 수 없는 한국인의 정서와 크로스컬처 상황극",
+      "en": "Deep Korean emotional & cultural expressions with cross-cultural roleplays",
+      "ja": "直訳できない韓国人の情緒をクロスカルチャー状況劇で読み解く",
+      "es": "Expresiones emocionales y culturales coreanas imposibles de traducir",
+      "fr": "Expressions émotionnelles et culturelles coréennes uniques",
+      "id": "Ekspresi emosional dan budaya Korea yang penuh makna"
+    },
+    "author": "DMDG × MALSSAM",
+    "badge": "말쌈 K-정서 118선",
+    "category": "K-Soul · 인문교양",
+    "color": "#d97706",
+    "synopsis": {
+      "ko": "눈치부터 정(情)까지, 직역할 수 없는 한국인의 정서와 크로스컬처 상황극",
+      "en": "Deep Korean emotional & cultural expressions with cross-cultural roleplays",
+      "ja": "直訳できない韓国人の情緒をクロスカルチャー状況劇で読み解く",
+      "es": "Expresiones emocionales y culturales coreanas imposibles de traducir",
+      "fr": "Expressions émotionnelles et culturelles coréennes uniques",
+      "id": "Ekspresi emosional dan budaya Korea yang penuh makna"
+    },
+    "charCount": 30951,
+    "readingTime": 44,
+    "chapterCount": 4,
+    "htmlUrl": "novel_malssam_ksoul_118.html",
+    "jsonUrl": "data/novels/malssam_ksoul_118.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "es",
+      "fr",
+      "id"
+    ]
   }
 ]
