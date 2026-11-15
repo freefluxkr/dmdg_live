@@ -30,4 +30,9 @@
   - `embedTextWatermark` → `extractTextWatermark` 역추적 복원 확인 (`UID`, `MODE: "owned"`, `RES: "career_aces_pdf"`).
   - `DMDG_PaywallNotice.open` 및 `shouldShow()` 정상 동작 확인.
 - **로컬 HTTP 서빙 검증 (`http://localhost:8766`)**: 대상 HTML 6종 및 JS 3종 모두 HTTP 200 응답 확인.
-- **실시간 Chrome DevTools 브라우저 QA**: Chrome 원격 디버깅 승인 다이얼로그(`Allow remote debugging?`) 응답 대기 60초 타임아웃으로 미완료 (야간 예약 실행 환경).
+- **실시간 Chrome DevTools 브라우저 QA**: 2026-11-16 08:50 KST 실브라우저 UI 클릭 테스트 완료.
+  - `index.html`: 유료화 공지 팝업 노출, "오늘 하루 동안 보지 않기" 체크 및 닫기, 재방문 시 비노출 유지(당일 자정 만료 타임스탬프) 확인.
+  - `novels.html`, `store.html`, `scm_dashboard.html`, `career_aces.html`: `DMDG_Security` 및 `DMDG_PaywallNotice` 정상 로드, JS 런타임 오류 0건 확인.
+  - `security_verifier.html`: Signed URL 생성(200 OK), 강제 만료(403 EXPIRED), 비가시성 워터마크 추출(520 bits 복원), 팝업 재오픈 모두 정상 통과.
+  - 정적 리소스 보완: `career_aces.html` 및 `scm_dashboard.html` 파비콘 경로 `./assets/dmdg_logo_emblem.png` 통일 완료.
+
