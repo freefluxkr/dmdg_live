@@ -149,11 +149,11 @@
 
       <!-- 4. NSSM Windows Service & Tail Logs -->
       <div class="glass rounded-2xl p-5">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="text-sm font-extrabold text-purple-300">⚙️ [Part 4] NSSM Windows 서비스 &amp; 로그 tail</h2>
-          <div class="flex gap-1.5">
-            <button onclick="toggleService()" id="svcBtn" class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold">● RUNNING</button>
-            <button onclick="toggleErrorFilter()" id="errFilterBtn" class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-[11px] font-bold">ERROR 필터</button>
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <h2 class="text-sm font-extrabold text-purple-300 truncate">⚙️ [Part 4] NSSM 서비스 &amp; 로그 tail</h2>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button onclick="toggleService()" id="svcBtn" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold whitespace-nowrap">● RUNNING</button>
+            <button onclick="toggleErrorFilter()" id="errFilterBtn" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-[11px] font-bold whitespace-nowrap">ERROR 필터</button>
           </div>
         </div>
         <div id="nssmLogBox" class="bg-black/90 border border-slate-800 rounded-xl p-3 font-mono text-[11px] text-emerald-400 h-44 overflow-y-auto custom-scroll space-y-1">
@@ -282,11 +282,11 @@
       serviceRunning = !serviceRunning;
       const btn = document.getElementById('svcBtn');
       if (serviceRunning) {
-        btn.className = 'px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold';
+        btn.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold whitespace-nowrap';
         btn.innerText = '● RUNNING';
         addLog('stdout', 'INFO: NSSM ExaoneAgentServer restarted successfully.');
       } else {
-        btn.className = 'px-3 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[11px] font-bold';
+        btn.className = 'px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[11px] font-bold whitespace-nowrap';
         btn.innerText = '■ STOPPED';
         addLog('stderr', 'WARN: Service stopped by administrator.');
       }
@@ -296,8 +296,8 @@
       errorOnly = !errorOnly;
       const btn = document.getElementById('errFilterBtn');
       btn.className = errorOnly
-        ? 'px-3 py-1 rounded-lg bg-rose-500 text-white text-[11px] font-bold'
-        : 'px-3 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-[11px] font-bold';
+        ? 'px-2.5 py-1 rounded-lg bg-rose-500 text-white text-[11px] font-bold whitespace-nowrap'
+        : 'px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-[11px] font-bold whitespace-nowrap';
       renderLogs();
     }
 
@@ -386,7 +386,16 @@
       const prompt = document.getElementById('promptInput').value.trim();
       if (!prompt) return;
       document.getElementById('promptInput').value = '';
-      executeFlow(sess, prompt, 'EXAONE-1.2B', `'${prompt}' 요청을 로컬 100% GPU로 처리했습니다.`);
+
+      if (prompt.includes('시간') || prompt.includes('몇 시') || prompt.includes('몇시')) {
+        executeFlow(sess, prompt, 'tool_current_time', `현재 시스템 시각은 ${new Date().toLocaleString('ko-KR')} 입니다.`);
+      } else if (prompt.includes('Modelfile') || prompt.includes('파일')) {
+        executeFlow(sess, prompt, 'tool_read_local_note', 'Modelfile 확인: PARAMETER num_gpu 999 / PARAMETER num_ctx 4096 (VRAM 3GB 최적화).');
+      } else if (prompt.includes('날씨') || prompt.includes('검색')) {
+        executeFlow(sess, prompt, 'DuckDuckGoSearch', `웹 검색 도구로 '${prompt}' 관련 최신 실시간 정보를 조회해 요약했습니다.`);
+      } else {
+        executeFlow(sess, prompt, 'EXAONE-1.2B', `'${prompt}' 질문에 대해 로컬 100% GPU 모드로 한국어 추론을 완료했습니다.`);
+      }
     }
 
     renderSessions();
