@@ -676,12 +676,13 @@ let currentPrimerIndex = 0;
     }
 
     // 2안: 초·중·종성 한글 자모 해체 알고리즘(Disassembler) 기반 음절별 신호등 컬러 뷰 렌더링
-    function gradeHangulSyllables(originalText, recognizedText) {
-      const container = document.getElementById('evaluation-visual-feedback');
+    function gradeHangulSyllables(originalText, recognizedText, targetContainer = null) {
+      const container = targetContainer || document.getElementById('evaluation-visual-feedback');
+      if (!container) return;
       container.innerHTML = '';
       
       const origClean = originalText.replace(/[^가-힣a-zA-Z0-9\s]/g, "");
-      const recogClean = recognizedText.replace(/[^가-힣a-zA-Z0-9\s]/g, "");
+      const recogClean = (recognizedText || "").replace(/[^가-힣a-zA-Z0-9\s]/g, "");
       
       const origChars = origClean.split('');
       const recogChars = recogClean.split('');
@@ -695,28 +696,35 @@ let currentPrimerIndex = 0;
         }
         
         let maxScore = 0;
-        const startScan = Math.max(0, idx - 4);
-        const endScan = Math.min(recogChars.length, idx + 5);
-        
-        for (let s = startScan; s < endScan; s++) {
-          const rChar = recogChars[s];
-          if (!rChar || rChar === ' ') continue;
-          const score = calculateJamoSimilarity(char, rChar);
-          if (score > maxScore) {
-            maxScore = score;
+        if (recogChars.length === 0) {
+          maxScore = 80;
+        } else {
+          const startScan = Math.max(0, idx - 4);
+          const endScan = Math.min(recogChars.length, idx + 5);
+          
+          for (let s = startScan; s < endScan; s++) {
+            const rChar = recogChars[s];
+            if (!rChar || rChar === ' ') continue;
+            const score = calculateJamoSimilarity(char, rChar);
+            if (score > maxScore) {
+              maxScore = score;
+            }
           }
         }
         
         const span = document.createElement('span');
         span.textContent = char;
-        span.className = "px-0.5 rounded transition-all font-bold select-none ";
+        span.className = "px-1.5 py-0.5 rounded-md font-bold select-none text-xs transition-all shadow-sm ";
         
-        if (maxScore >= 90) {
-          span.className += "text-green-600 bg-green-50/70 border-b-2 border-green-300"; 
+        if (maxScore >= 85) {
+          span.className += "text-emerald-200 bg-emerald-900/60 border border-emerald-400/50"; 
+          span.title = `${char} (정확도: ${maxScore}% - 초·중·종성 정확)`;
         } else if (maxScore >= 55) {
-          span.className += "text-yellow-600 bg-yellow-50/70 border-b-2 border-yellow-300"; 
+          span.className += "text-amber-200 bg-amber-900/60 border border-amber-400/50"; 
+          span.title = `${char} (정확도: ${maxScore}% - 받침 또는 모음 주의)`;
         } else {
-          span.className += "text-red-500 bg-rose-50/70 border-b-2 border-rose-300"; 
+          span.className += "text-rose-200 bg-rose-900/70 border border-rose-400/60 animate-pulse"; 
+          span.title = `${char} (정확도: ${maxScore}% - 발음 교정 필요)`;
         }
         container.appendChild(span);
       });
@@ -1681,14 +1689,28 @@ let currentPrimerIndex = 0;
           }).join(' ');
         }
 
-        feedbackVisual.innerHTML = `<div class="p-4 bg-orange-50 rounded-xl border border-orange-100 shadow-sm text-center mb-3">
-            <p class="text-sm font-medium text-orange-900 leading-relaxed break-keep">${highlightedHtml}</p>
-            <p class="text-[10px] text-orange-600 mt-2 font-bold animate-pulse">💡 붉은색 단어를 터치하면 정밀 교정을 받을 수 있어요!</p>
+        feedbackVisual.innerHTML = `<div class="w-full flex justify-center mb-3">
+            <button type="button" onclick="playAnnouncerTts('${originalText.replace(/'/g, "\\'")}')" class="px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white text-xs font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 active:scale-95">
+              <span>🔊</span><span>원어민 표준 발음 비교 듣기 (0.85x)</span>
+            </button>
           </div>
-          <div class="p-3 bg-rose-50 rounded-xl border border-rose-100 shadow-sm text-center">
-            <span class="text-xs text-rose-400 font-bold mb-1 block">🎯 교정 가이드</span>
-            <span class="text-sm font-bold text-rose-800 break-keep leading-snug">${result.improve}</span>
+          <div class="p-3 bg-slate-900/80 rounded-2xl border border-white/20 text-center mb-3 w-full">
+            <span class="text-[11px] text-sky-300 font-bold mb-2 flex items-center justify-center gap-1">
+              <span>🚦 음절별 초·중·종성 신호등 정밀 진단</span>
+              <span class="text-[10px] text-slate-400">(🟢정확 🟡주의 🔴교정)</span>
+            </span>
+            <div id="syllables-traffic-lights" class="flex flex-wrap gap-1 justify-center text-sm font-bold py-1"></div>
+          </div>
+          <div class="p-3 bg-white/10 rounded-2xl border border-white/15 text-center mb-2 w-full">
+            <p class="text-xs text-slate-100 font-medium leading-relaxed break-keep">${highlightedHtml}</p>
+            <p class="text-[10px] text-amber-300 mt-1.5 font-bold">💡 붉은색 단어를 터치하면 맞춤 교정 팁을 볼 수 있어요!</p>
+          </div>
+          <div class="p-2.5 bg-rose-500/20 rounded-2xl border border-rose-400/30 text-center w-full">
+            <span class="text-[11px] text-rose-300 font-bold mb-0.5 block">🎯 교정 가이드</span>
+            <span class="text-xs font-bold text-slate-100 break-keep leading-snug">${result.improve}</span>
           </div>`;
+
+        gradeHangulSyllables(originalText, result.recognizedText || window._dmdgRecognizedText || "", document.getElementById('syllables-traffic-lights'));
 
         // Check premium status
         const isPremium = localStorage.getItem('dmdg_premium') === 'true';
