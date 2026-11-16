@@ -76,6 +76,7 @@
     <button onclick="runPreset('file')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-emerald-500/20 border border-emerald-500/40 text-xs font-bold text-emerald-300 transition">📄 Modelfile 읽기 도구</button>
     <button onclick="runPreset('search')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-purple-500/20 border border-purple-500/40 text-xs font-bold text-purple-300 transition">🌐 DuckDuckGo 웹 검색</button>
     <button onclick="runPreset('oom')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-rose-500/20 border border-rose-500/40 text-xs font-bold text-rose-300 transition">🔥 컨텍스트 초과(OOM) 스트레스</button>
+    <button onclick="resetVramSafe()" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-teal-500/20 border border-teal-500/40 text-xs font-bold text-teal-300 transition">✅ 3GB GPU 정상 복구 (2048)</button>
   </div>
 
   <!-- Main Workspace -->
@@ -368,8 +369,19 @@
       }
     }
 
+    function resetVramSafe() {
+      document.getElementById('ctxSlider').value = 2048;
+      updateVramCalc();
+      addLog('stdout', 'INFO: num_ctx=2048 복구 완료 -> VRAM 1,703MB (100% GPU 안정화)');
+    }
+
     function runPreset(kind) {
       const sess = document.getElementById('sessionInput').value || 'sess_vip_01';
+      if (kind !== 'oom' && currentVramMb > 2950) {
+        document.getElementById('ctxSlider').value = 2048;
+        updateVramCalc();
+        addLog('stdout', 'INFO: 일반 프리셋 실행을 위해 num_ctx=2048로 자동 복구됨');
+      }
       if (kind === 'time') executeFlow(sess, '지금 몇 시야?', 'tool_current_time', `현재 시각은 ${new Date().toLocaleString('ko-KR')} 입니다.`);
       if (kind === 'file') executeFlow(sess, 'Modelfile 읽어줘', 'tool_read_local_note', 'PARAMETER num_gpu 999 / PARAMETER num_ctx 2048 확인 완료.');
       if (kind === 'search') executeFlow(sess, 'EXAONE 1.2B 최신 정보 검색', 'DuckDuckGoSearch', 'LG AI Research EXAONE 1.2B 한국어 경량 모델 4-bit 양자화 최적화 확인.');
