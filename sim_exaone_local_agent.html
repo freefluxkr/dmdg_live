@@ -380,7 +380,7 @@
       }
     }
 
-    function handleCustomSend(e) {
+    async function handleCustomSend(e) {
       e.preventDefault();
       const sess = document.getElementById('sessionInput').value.trim() || 'sess_vip_01';
       const prompt = document.getElementById('promptInput').value.trim();
@@ -391,7 +391,22 @@
         executeFlow(sess, prompt, 'tool_current_time', `현재 시스템 시각은 ${new Date().toLocaleString('ko-KR')} 입니다.`);
       } else if (prompt.includes('Modelfile') || prompt.includes('파일')) {
         executeFlow(sess, prompt, 'tool_read_local_note', 'Modelfile 확인: PARAMETER num_gpu 999 / PARAMETER num_ctx 4096 (VRAM 3GB 최적화).');
-      } else if (prompt.includes('날씨') || prompt.includes('검색')) {
+      } else if (prompt.includes('날씨')) {
+        let city = '서울';
+        let lat = 37.5665, lon = 126.9780;
+        if (prompt.includes('부산')) { city = '부산'; lat = 35.1796; lon = 129.0756; }
+        else if (prompt.includes('제주')) { city = '제주'; lat = 33.4996; lon = 126.5312; }
+        try {
+          const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+          const data = await r.json();
+          const cw = data.current_weather;
+          const codeMap = { 0: '맑음 ☀️', 1: '대체로 맑음 🌤️', 2: '구름 조금 ⛅', 3: '흐림 ☁️', 45: '안개 🌫️', 61: '비 🌧️', 71: '눈 ❄️' };
+          const cond = codeMap[cw.weathercode] || '보통';
+          executeFlow(sess, prompt, 'OpenMeteo_Live_Tool', `실시간 ${city} 날씨: 현재 기온 ${cw.temperature}°C, 상태 ${cond}, 풍속 ${cw.windspeed} km/h 입니다.`);
+        } catch {
+          executeFlow(sess, prompt, 'DuckDuckGoSearch', `${city} 실시간 기상 API 연결이 일시 지연되었습니다. (오프라인 폴백)`);
+        }
+      } else if (prompt.includes('검색')) {
         executeFlow(sess, prompt, 'DuckDuckGoSearch', `웹 검색 도구로 '${prompt}' 관련 최신 실시간 정보를 조회해 요약했습니다.`);
       } else {
         executeFlow(sess, prompt, 'EXAONE-1.2B', `'${prompt}' 질문에 대해 로컬 100% GPU 모드로 한국어 추론을 완료했습니다.`);
