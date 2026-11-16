@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+kr 페이지에서 html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,25 +9,52 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-    body { font-family: 'Pretendard', sans-serif; background: #050a14; color: #f1f5f9; }
-    .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(56, 189, 248, 0.25); }
-    .node-active { box-shadow: 0 0 22px rgba(16, 185, 129, 0.65); border-color: #10b981 !important; background: rgba(16, 185, 129, 0.15) !important; }
-    .custom-scroll::-webkit-scrollbar { width: 6px; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: #050a14;
+      color: #f1f5f9;
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .node-active {
+      box-shadow: 0 0 22px rgba(16, 185, 129, 0.65);
+      border-color: #10b981 !important;
+      background: rgba(16, 185, 129, 0.15) !important;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
   </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
 
   <!-- Onboarding Modal (제4조 1항 준수) -->
-  <div id="onboardingModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
+  <div id="onboardingModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
     <div class="glass max-w-2xl w-full rounded-2xl p-6 sm:p-8 border border-sky-400/50 shadow-2xl">
       <div class="flex items-center justify-between mb-4">
-        <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-sky-500/20 text-sky-300 border border-sky-400/40">BOOK 22192 공식 인터랙티브 실습실</span>
+        <span
+          class="px-3 py-1 rounded-full text-xs font-extrabold bg-sky-500/20 text-sky-300 border border-sky-400/40">BOOK
+          22192 공식 인터랙티브 실습실</span>
         <button onclick="closeOnboarding()" class="text-slate-400 hover:text-white text-xl font-bold">✕</button>
       </div>
       <h2 class="text-xl sm:text-2xl font-extrabold text-white mb-2">🖥️ VRAM 3GB EXAONE 1.2B 로컬 AI 풀스택 시뮬레이터</h2>
       <p class="text-sm text-slate-300 mb-5 leading-relaxed">
-        설치 없이 브라우저에서 <b>3GB VRAM 튜닝 → LangGraph 도구 호출 → SQLite CRUD(삭제) → NSSM 윈도우 서비스 로그 → 성능/VRAM 통계 차트</b>까지 전 과정을 직접 클릭하며 검증할 수 있습니다.
+        설치 없이 브라우저에서 <b>3GB VRAM 튜닝 → LangGraph 도구 호출 → SQLite CRUD(삭제) → NSSM 윈도우 서비스 로그 → 성능/VRAM 통계 차트</b>까지 전 과정을 직접
+        클릭하며 검증할 수 있습니다.
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5 text-xs">
         <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700">
@@ -47,7 +75,8 @@
           <input type="checkbox" id="hideTodayCheck" class="rounded border-slate-600 bg-slate-800" />
           <span>오늘 하루 이 안내 보지 않기</span>
         </label>
-        <button onclick="closeOnboarding()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-emerald-500 text-slate-950 font-extrabold text-sm shadow-lg hover:brightness-110 transition">
+        <button onclick="closeOnboarding()"
+          class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-emerald-500 text-slate-950 font-extrabold text-sm shadow-lg hover:brightness-110 transition">
           🚀 시뮬레이터 실습 시작하기
         </button>
       </div>
@@ -55,28 +84,45 @@
   </div>
 
   <!-- Top Header -->
-  <header class="border-b border-slate-800 bg-slate-950/90 sticky top-0 z-40 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+  <header
+    class="border-b border-slate-800 bg-slate-950/90 sticky top-0 z-40 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
     <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center font-black text-slate-950">EX</div>
+      <div
+        class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center font-black text-slate-950">
+        EX</div>
       <div>
         <h1 class="text-sm sm:text-base font-extrabold text-white">EXAONE 1.2B × LangGraph × NSSM 풀스택 시뮬레이터</h1>
         <p class="text-[11px] text-slate-400">위키독스 Book 22192 연동 · VRAM 3GB 최적화 &amp; 관측 대시보드</p>
       </div>
     </div>
     <div class="flex items-center gap-2">
-      <button onclick="openOnboarding()" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-bold text-sky-300 transition">📖 사용 안내</button>
-      <a href="https://wikidocs.net/book/22192" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-xs font-extrabold text-slate-950 transition">📘 교재 보기</a>
+      <button onclick="openOnboarding()"
+        class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-bold text-sky-300 transition">📖
+        사용 안내</button>
+      <a href="https://wikidocs.net/book/22192" target="_blank"
+        class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-xs font-extrabold text-slate-950 transition">📘
+        교재 보기</a>
     </div>
   </header>
 
   <!-- One-Click Preset Bar (제4조 4항 준수) -->
   <div class="bg-slate-900/70 border-b border-slate-800 px-4 sm:px-6 py-2.5 flex flex-wrap items-center gap-2">
     <span class="text-xs font-bold text-amber-400 mr-1">⚡ 원클릭 프리셋:</span>
-    <button onclick="runPreset('time')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-sky-500/20 border border-sky-500/40 text-xs font-bold text-sky-300 transition">🕒 현재 시각 도구 실행</button>
-    <button onclick="runPreset('file')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-emerald-500/20 border border-emerald-500/40 text-xs font-bold text-emerald-300 transition">📄 Modelfile 읽기 도구</button>
-    <button onclick="runPreset('search')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-purple-500/20 border border-purple-500/40 text-xs font-bold text-purple-300 transition">🌐 DuckDuckGo 웹 검색</button>
-    <button onclick="runPreset('oom')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-rose-500/20 border border-rose-500/40 text-xs font-bold text-rose-300 transition">🔥 컨텍스트 초과(OOM) 스트레스</button>
-    <button onclick="resetVramSafe()" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-teal-500/20 border border-teal-500/40 text-xs font-bold text-teal-300 transition">✅ 3GB GPU 정상 복구 (2048)</button>
+    <button onclick="runPreset('time')"
+      class="px-3 py-1 rounded-full bg-slate-800 hover:bg-sky-500/20 border border-sky-500/40 text-xs font-bold text-sky-300 transition">🕒
+      현재 시각 도구 실행</button>
+    <button onclick="runPreset('file')"
+      class="px-3 py-1 rounded-full bg-slate-800 hover:bg-emerald-500/20 border border-emerald-500/40 text-xs font-bold text-emerald-300 transition">📄
+      Modelfile 읽기 도구</button>
+    <button onclick="runPreset('search')"
+      class="px-3 py-1 rounded-full bg-slate-800 hover:bg-purple-500/20 border border-purple-500/40 text-xs font-bold text-purple-300 transition">🌐
+      DuckDuckGo 웹 검색</button>
+    <button onclick="runPreset('oom')"
+      class="px-3 py-1 rounded-full bg-slate-800 hover:bg-rose-500/20 border border-rose-500/40 text-xs font-bold text-rose-300 transition">🔥
+      컨텍스트 초과(OOM) 스트레스</button>
+    <button onclick="resetVramSafe()"
+      class="px-3 py-1 rounded-full bg-slate-800 hover:bg-teal-500/20 border border-teal-500/40 text-xs font-bold text-teal-300 transition">✅
+      3GB GPU 정상 복구 (2048)</button>
   </div>
 
   <!-- Main Workspace -->
@@ -89,7 +135,9 @@
       <div class="glass rounded-2xl p-5">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-sm font-extrabold text-sky-300">🎛️ [Part 1] VRAM 3GB Modelfile GPU 100% 튜닝</h2>
-          <span id="gpuStatusBadge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">100% GPU 적재 안정</span>
+          <span id="gpuStatusBadge"
+            class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">100%
+            GPU 적재 안정</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
           <div>
@@ -97,7 +145,8 @@
               <span>컨텍스트 길이 (num_ctx)</span>
               <span id="ctxValLabel" class="text-sky-300">2048 tokens</span>
             </label>
-            <input type="range" id="ctxSlider" min="512" max="8192" step="512" value="2048" oninput="updateVramCalc()" class="w-full accent-sky-400" />
+            <input type="range" id="ctxSlider" min="512" max="8192" step="512" value="2048" oninput="updateVramCalc()"
+              class="w-full accent-sky-400" />
             <div class="flex justify-between text-[10px] text-slate-500 mt-1">
               <span>512 (초경량)</span><span>2048 (권장)</span><span>8192 (OOM 위험)</span>
             </div>
@@ -108,7 +157,8 @@
               <span id="vramText" class="font-extrabold text-white">1,520 / 3,072 MB (49%)</span>
             </div>
             <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden">
-              <div id="vramBar" class="h-full bg-gradient-to-r from-sky-400 to-emerald-400 transition-all duration-300" style="width: 49%;"></div>
+              <div id="vramBar" class="h-full bg-gradient-to-r from-sky-400 to-emerald-400 transition-all duration-300"
+                style="width: 49%;"></div>
             </div>
           </div>
         </div>
@@ -119,18 +169,25 @@
         <h2 class="text-sm font-extrabold text-emerald-300">🤖 [Part 2] LangGraph 상태 머신 &amp; 실시간 에이전트 실행</h2>
         <div class="grid grid-cols-4 gap-2 text-center text-[11px] font-bold">
           <div id="node-start" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">START</div>
-          <div id="node-router" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">Router 판단</div>
+          <div id="node-router" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">Router 판단
+          </div>
           <div id="node-tool" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">도구 실행</div>
-          <div id="node-end" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">EXAONE 응답</div>
+          <div id="node-end" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">EXAONE 응답
+          </div>
         </div>
 
         <form onsubmit="handleCustomSend(event)" class="flex gap-2">
-          <input id="sessionInput" type="text" value="sess_vip_01" class="w-32 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-amber-300 font-bold" title="세션 ID" />
-          <input id="promptInput" type="text" placeholder="예: 지금 몇 시야? 또는 Modelfile 읽어줘" class="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white" />
-          <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition">실행</button>
+          <input id="sessionInput" type="text" value="sess_vip_01"
+            class="w-32 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-amber-300 font-bold"
+            title="세션 ID" />
+          <input id="promptInput" type="text" placeholder="예: 지금 몇 시야? 또는 Modelfile 읽어줘"
+            class="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white" />
+          <button type="submit"
+            class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition">실행</button>
         </form>
 
-        <div id="chatOutput" class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 h-36 overflow-y-auto custom-scroll text-xs space-y-2">
+        <div id="chatOutput"
+          class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 h-36 overflow-y-auto custom-scroll text-xs space-y-2">
           <div class="text-slate-400">시스템 준비 완료. 상단 원클릭 프리셋을 누르거나 질문을 입력하세요.</div>
         </div>
       </div>
@@ -153,11 +210,16 @@
         <div class="flex items-center justify-between gap-2 mb-3">
           <h2 class="text-sm font-extrabold text-purple-300 truncate">⚙️ [Part 4] NSSM 서비스 &amp; 로그 tail</h2>
           <div class="flex items-center gap-1.5 shrink-0">
-            <button onclick="toggleService()" id="svcBtn" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold whitespace-nowrap">● RUNNING</button>
-            <button onclick="toggleErrorFilter()" id="errFilterBtn" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-[11px] font-bold whitespace-nowrap">ERROR 필터</button>
+            <button onclick="toggleService()" id="svcBtn"
+              class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold whitespace-nowrap">●
+              RUNNING</button>
+            <button onclick="toggleErrorFilter()" id="errFilterBtn"
+              class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-[11px] font-bold whitespace-nowrap">ERROR
+              필터</button>
           </div>
         </div>
-        <div id="nssmLogBox" class="bg-black/90 border border-slate-800 rounded-xl p-3 font-mono text-[11px] text-emerald-400 h-44 overflow-y-auto custom-scroll space-y-1">
+        <div id="nssmLogBox"
+          class="bg-black/90 border border-slate-800 rounded-xl p-3 font-mono text-[11px] text-emerald-400 h-44 overflow-y-auto custom-scroll space-y-1">
           <div>[stdout] INFO: Started server process [ExaoneAgentServer]</div>
           <div>[stdout] INFO: Uvicorn running on http://0.0.0.0:8000</div>
           <div>[stdout] INFO: AppRotateFiles=1 (10MB / 86400s) active</div>
@@ -320,9 +382,12 @@
       `).join('');
     }
 
+    const sessionMemories = {};
+
     function deleteSess(id) {
       if (!confirm(`세션 [${id}]의 SQLite 대화 기록을 삭제(DELETE)하시겠습니까?`)) return;
       sessions = sessions.filter(s => s.id !== id);
+      delete sessionMemories[id];
       renderSessions();
       addLog('stdout', `DELETE /api/admin/sessions/${id} -> 200 OK`);
     }
@@ -420,8 +485,60 @@
         }
       } else if (prompt.includes('검색')) {
         executeFlow(sess, prompt, 'DuckDuckGoSearch', `웹 검색 도구로 '${prompt}' 관련 최신 실시간 정보를 조회해 요약했습니다.`);
+      } else if (/(누구|내\s*이름|직업|직무|기억|방금|뭐라고\s*했)/.test(prompt)) {
+        const mem = sessionMemories[sess];
+        if (mem && (mem.name || mem.role || mem.facts.length > 0)) {
+          let who = '';
+          if (mem.role && mem.name) who = `${mem.role} <b>${mem.name}</b>님`;
+          else if (mem.name) who = `<b>${mem.name}</b>님`;
+          else if (mem.role) who = `<b>${mem.role}</b>님`;
+          const extra = mem.facts.length > 0 ? ` (최근 기록: "${mem.facts[mem.facts.length - 1]}")` : '';
+          const answer = who
+            ? `네, [${sess}] SQLite 세션 메모리에 기억하고 있습니다! 사용자님은 ${who}이십니다.${extra}`
+            : `네, [${sess}] 세션에서 최근에 "${mem.facts[mem.facts.length - 1]}"라고 말씀하신 내용을 기억하고 있습니다.`;
+          executeFlow(sess, prompt, 'SQLite_Memory', answer);
+        } else {
+          executeFlow(sess, prompt, 'SQLite_Memory', `[${sess}] 세션에 아직 저장된 사용자 정보가 없습니다. 먼저 자기소개(예: "나는 파이썬 개발자 홍길동이야")를 입력해 보세요!`);
+        }
+      } else if (/(보안|퇴사자|VPN|IAM|연차|휴가|백업|장애|온보딩|사내\s*규정)/.test(prompt)) {
+        let ragAns = '사내 PDF(4종) SQLite FTS5 검색 결과: 관련 사내 규정 조항을 참조해 답변을 생성했습니다.';
+        if (/(보안|퇴사자|VPN|IAM)/.test(prompt)) {
+          ragAns = '[출처: 01_IT_보안_및_접근제어_규정.pdf] 제2조에 따라 모든 API 키는 .env에 보관하며, 퇴사자 발생 시 1시간 이내에 VPN·GitHub·AWS IAM 계정을 회수합니다.';
+        } else if (/(연차|휴가)/.test(prompt)) {
+          ragAns = '[출처: 02_재택근무_및_연차_복리후생_가이드.pdf] 반차(4시간) 및 시간 단위 연차 사용이 가능하며, 주 2회 재택근무 시 오전 10시 스탠드업 미팅에 참여합니다.';
+        } else if (/(장애|백업)/.test(prompt)) {
+          ragAns = '[출처: 03_장애_대응_및_백업_복구_매뉴얼.pdf] Sev-1 장애 시 10분 내 상황실 개설 후 2시간 내 원인 분석을 보고하며, SQLite DB는 매일 새벽 03시 자동 백업됩니다.';
+        } else if (/(온보딩)/.test(prompt)) {
+          ragAns = '[출처: 04_신규입사자_온보딩_체크리스트.pdf] 입사 1일차에 사내 GitHub/SSH 키 및 로컬 EXAONE 1.2B 에이전트 환경을 세팅합니다.';
+        }
+        executeFlow(sess, prompt, 'SQLite_FTS5_RAG', ragAns);
       } else {
-        executeFlow(sess, prompt, 'EXAONE-1.2B', `'${prompt}' 질문에 대해 로컬 100% GPU 모드로 한국어 추론을 완료했습니다.`);
+        const mem = sessionMemories[sess] || (sessionMemories[sess] = { name: null, role: null, facts: [] });
+        let savedMsg = '';
+        const introMatch = prompt.match(/^(?:나는|저는|난|전)\s+(.+?)(?:이야|야|입니다|이에요|예요|라고\s*해|다)\.?$/);
+        const nameMatch = prompt.match(/(?:내\s*이름은|이름은)\s*([가-힣a-zA-Z0-9_]+)(?:이야|야|입니다|이에요|예요)?/);
+        if (introMatch) {
+          const body = introMatch[1].trim();
+          const parts = body.split(/\s+/);
+          if (parts.length >= 2) {
+            mem.name = parts[parts.length - 1];
+            mem.role = parts.slice(0, -1).join(' ');
+            savedMsg = `직무 '${mem.role}', 이름 '${mem.name}'`;
+          } else {
+            mem.name = body;
+            savedMsg = `이름 '${mem.name}'`;
+          }
+        } else if (nameMatch) {
+          mem.name = nameMatch[1].trim();
+          savedMsg = `이름 '${mem.name}'`;
+        }
+        mem.facts.push(prompt);
+        if (mem.facts.length > 10) mem.facts.shift();
+        if (savedMsg) {
+          executeFlow(sess, prompt, 'SQLite_Memory', `알겠습니다! [${sess}] SQLite 세션 메모리에 ${savedMsg} 정보를 저장했습니다. 이제 "나는 누구?"라고 물어보시면 기억해서 답변합니다.`);
+        } else {
+          executeFlow(sess, prompt, 'EXAONE-1.2B', `'${prompt}' 내용을 [${sess}] 세션 컨텍스트에 기록하고 로컬 100% GPU 모드로 한국어 추론을 완료했습니다.`);
+        }
       }
     }
 
@@ -429,4 +546,5 @@
     updateVramCalc();
   </script>
 </body>
+
 </html>
