@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DMDG Lab | VRAM 3GB EXAONE 1.2B × LangGraph × NSSM 풀스택 시뮬레이터</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+    body { font-family: 'Pretendard', sans-serif; background: #050a14; color: #f1f5f9; }
+    .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(56, 189, 248, 0.25); }
+    .node-active { box-shadow: 0 0 22px rgba(16, 185, 129, 0.65); border-color: #10b981 !important; background: rgba(16, 185, 129, 0.15) !important; }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Onboarding Modal (제4조 1항 준수) -->
+  <div id="onboardingModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
+    <div class="glass max-w-2xl w-full rounded-2xl p-6 sm:p-8 border border-sky-400/50 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-sky-500/20 text-sky-300 border border-sky-400/40">BOOK 22192 공식 인터랙티브 실습실</span>
+        <button onclick="closeOnboarding()" class="text-slate-400 hover:text-white text-xl font-bold">✕</button>
+      </div>
+      <h2 class="text-xl sm:text-2xl font-extrabold text-white mb-2">🖥️ VRAM 3GB EXAONE 1.2B 로컬 AI 풀스택 시뮬레이터</h2>
+      <p class="text-sm text-slate-300 mb-5 leading-relaxed">
+        설치 없이 브라우저에서 <b>3GB VRAM 튜닝 → LangGraph 도구 호출 → SQLite CRUD(삭제) → NSSM 윈도우 서비스 로그 → 성능/VRAM 통계 차트</b>까지 전 과정을 직접 클릭하며 검증할 수 있습니다.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5 text-xs">
+        <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700">
+          <div class="font-bold text-sky-300 mb-1">1단계: 3GB GPU 튜닝</div>
+          <p class="text-slate-400">컨텍스트(num_ctx)를 조절해 OOM 없이 100% GPU 적재를 확인하세요.</p>
+        </div>
+        <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700">
+          <div class="font-bold text-emerald-300 mb-1">2단계: LangGraph + CRUD</div>
+          <p class="text-slate-400">도구 실행 후 SQLite 세션에 적재하고, 관리자 삭제(DELETE)를 테스트하세요.</p>
+        </div>
+        <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700">
+          <div class="font-bold text-amber-300 mb-1">3단계: NSSM &amp; 차트</div>
+          <p class="text-slate-400">윈도우 서비스 로그를 감시하고 Latency·VRAM 실시간 그래프를 확인하세요.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-800">
+        <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
+          <input type="checkbox" id="hideTodayCheck" class="rounded border-slate-600 bg-slate-800" />
+          <span>오늘 하루 이 안내 보지 않기</span>
+        </label>
+        <button onclick="closeOnboarding()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-emerald-500 text-slate-950 font-extrabold text-sm shadow-lg hover:brightness-110 transition">
+          🚀 시뮬레이터 실습 시작하기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Header -->
+  <header class="border-b border-slate-800 bg-slate-950/90 sticky top-0 z-40 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center font-black text-slate-950">EX</div>
+      <div>
+        <h1 class="text-sm sm:text-base font-extrabold text-white">EXAONE 1.2B × LangGraph × NSSM 풀스택 시뮬레이터</h1>
+        <p class="text-[11px] text-slate-400">위키독스 Book 22192 연동 · VRAM 3GB 최적화 &amp; 관측 대시보드</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="openOnboarding()" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-bold text-sky-300 transition">📖 사용 안내</button>
+      <a href="https://wikidocs.net/book/22192" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-xs font-extrabold text-slate-950 transition">📘 교재 보기</a>
+    </div>
+  </header>
+
+  <!-- One-Click Preset Bar (제4조 4항 준수) -->
+  <div class="bg-slate-900/70 border-b border-slate-800 px-4 sm:px-6 py-2.5 flex flex-wrap items-center gap-2">
+    <span class="text-xs font-bold text-amber-400 mr-1">⚡ 원클릭 프리셋:</span>
+    <button onclick="runPreset('time')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-sky-500/20 border border-sky-500/40 text-xs font-bold text-sky-300 transition">🕒 현재 시각 도구 실행</button>
+    <button onclick="runPreset('file')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-emerald-500/20 border border-emerald-500/40 text-xs font-bold text-emerald-300 transition">📄 Modelfile 읽기 도구</button>
+    <button onclick="runPreset('search')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-purple-500/20 border border-purple-500/40 text-xs font-bold text-purple-300 transition">🌐 DuckDuckGo 웹 검색</button>
+    <button onclick="runPreset('oom')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-rose-500/20 border border-rose-500/40 text-xs font-bold text-rose-300 transition">🔥 컨텍스트 초과(OOM) 스트레스</button>
+  </div>
+
+  <!-- Main Workspace -->
+  <main class="max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1">
+
+    <!-- Left 7 Cols: VRAM Tuning + LangGraph + Chat & SQLite CRUD -->
+    <section class="lg:col-span-7 flex flex-col gap-5">
+
+      <!-- 1. VRAM 3GB Modelfile Tuner -->
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-extrabold text-sky-300">🎛️ [Part 1] VRAM 3GB Modelfile GPU 100% 튜닝</h2>
+          <span id="gpuStatusBadge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">100% GPU 적재 안정</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <div>
+            <label class="text-xs text-slate-300 font-bold flex justify-between mb-1">
+              <span>컨텍스트 길이 (num_ctx)</span>
+              <span id="ctxValLabel" class="text-sky-300">2048 tokens</span>
+            </label>
+            <input type="range" id="ctxSlider" min="512" max="8192" step="512" value="2048" oninput="updateVramCalc()" class="w-full accent-sky-400" />
+            <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+              <span>512 (초경량)</span><span>2048 (권장)</span><span>8192 (OOM 위험)</span>
+            </div>
+          </div>
+          <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+            <div class="flex justify-between text-xs mb-1.5">
+              <span class="text-slate-400">예상 VRAM 점유</span>
+              <span id="vramText" class="font-extrabold text-white">1,520 / 3,072 MB (49%)</span>
+            </div>
+            <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden">
+              <div id="vramBar" class="h-full bg-gradient-to-r from-sky-400 to-emerald-400 transition-all duration-300" style="width: 49%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. LangGraph Flow & Chat Console -->
+      <div class="glass rounded-2xl p-5 flex flex-col gap-4">
+        <h2 class="text-sm font-extrabold text-emerald-300">🤖 [Part 2] LangGraph 상태 머신 &amp; 실시간 에이전트 실행</h2>
+        <div class="grid grid-cols-4 gap-2 text-center text-[11px] font-bold">
+          <div id="node-start" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">START</div>
+          <div id="node-router" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">Router 판단</div>
+          <div id="node-tool" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">도구 실행</div>
+          <div id="node-end" class="p-2.5 rounded-xl bg-slate-900 border border-slate-700 transition-all">EXAONE 응답</div>
+        </div>
+
+        <form onsubmit="handleCustomSend(event)" class="flex gap-2">
+          <input id="sessionInput" type="text" value="sess_vip_01" class="w-32 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-amber-300 font-bold" title="세션 ID" />
+          <input id="promptInput" type="text" placeholder="예: 지금 몇 시야? 또는 Modelfile 읽어줘" class="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white" />
+          <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition">실행</button>
+        </form>
+
+        <div id="chatOutput" class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 h-36 overflow-y-auto custom-scroll text-xs space-y-2">
+          <div class="text-slate-400">시스템 준비 완료. 상단 원클릭 프리셋을 누르거나 질문을 입력하세요.</div>
+        </div>
+      </div>
+
+      <!-- 3. SQLite Admin CRUD (GET + DELETE) -->
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-extrabold text-amber-300">🗄️ [Part 3] SQLite 세션 관리자 CRUD (조회 &amp; DELETE 삭제)</h2>
+          <span id="sessCountBadge" class="text-[11px] font-bold text-slate-400">세션 2건</span>
+        </div>
+        <div id="sessionCards" class="space-y-2 max-h-48 overflow-y-auto custom-scroll"></div>
+      </div>
+    </section>
+
+    <!-- Right 5 Cols: NSSM Service Logs + Chart.js Metrics -->
+    <section class="lg:col-span-5 flex flex-col gap-5">
+
+      <!-- 4. NSSM Windows Service & Tail Logs -->
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-extrabold text-purple-300">⚙️ [Part 4] NSSM Windows 서비스 &amp; 로그 tail</h2>
+          <div class="flex gap-1.5">
+            <button onclick="toggleService()" id="svcBtn" class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold">● RUNNING</button>
+            <button onclick="toggleErrorFilter()" id="errFilterBtn" class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-[11px] font-bold">ERROR 필터</button>
+          </div>
+        </div>
+        <div id="nssmLogBox" class="bg-black/90 border border-slate-800 rounded-xl p-3 font-mono text-[11px] text-emerald-400 h-44 overflow-y-auto custom-scroll space-y-1">
+          <div>[stdout] INFO: Started server process [ExaoneAgentServer]</div>
+          <div>[stdout] INFO: Uvicorn running on http://0.0.0.0:8000</div>
+          <div>[stdout] INFO: AppRotateFiles=1 (10MB / 86400s) active</div>
+        </div>
+      </div>
+
+      <!-- 5. Latency, TPS & VRAM Chart.js Dashboard -->
+      <div class="glass rounded-2xl p-5 flex-1 flex flex-col justify-between">
+        <div>
+          <h2 class="text-sm font-extrabold text-sky-300 mb-3">📊 [Part 5] 응답 속도 · 토큰 · VRAM 실시간 통계</h2>
+          <div class="grid grid-cols-3 gap-2 mb-4 text-center">
+            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+              <div class="text-[10px] text-slate-400">평균 Latency</div>
+              <div id="kpiLat" class="text-sm font-extrabold text-sky-300 mt-0.5">142 ms</div>
+            </div>
+            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+              <div class="text-[10px] text-slate-400">생성 속도(TPS)</div>
+              <div id="kpiTps" class="text-sm font-extrabold text-emerald-300 mt-0.5">38.4 t/s</div>
+            </div>
+            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+              <div class="text-[10px] text-slate-400">누적 요청</div>
+              <div id="kpiReq" class="text-sm font-extrabold text-amber-300 mt-0.5">3 건</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+          <canvas id="metricsChart" height="170"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Onboarding check
+    function openOnboarding() {
+      const m = document.getElementById('onboardingModal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+    function closeOnboarding() {
+      if (document.getElementById('hideTodayCheck').checked) {
+        localStorage.setItem('dmdg_exaone_sim_hide', new Date().toDateString());
+      }
+      const m = document.getElementById('onboardingModal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+    if (localStorage.getItem('dmdg_exaone_sim_hide') !== new Date().toDateString()) {
+      openOnboarding();
+    }
+
+    // State
+    let currentVramMb = 1520;
+    let serviceRunning = true;
+    let errorOnly = false;
+    let logs = [
+      { type: 'stdout', text: '[stdout] INFO: Started server process [ExaoneAgentServer]' },
+      { type: 'stdout', text: '[stdout] INFO: Uvicorn running on http://0.0.0.0:8000' },
+      { type: 'stdout', text: '[stdout] INFO: AppRotateFiles=1 (10MB / 86400s) active' }
+    ];
+    let sessions = [
+      { id: 'sess_vip_01', count: 4, last: '14:05:12' },
+      { id: 'sess_dev_02', count: 2, last: '13:48:03' }
+    ];
+    let latHistory = [138, 151, 137];
+    let vramHistory = [1480, 1520, 1520];
+    let labels = ['#1', '#2', '#3'];
+
+    const ctx = document.getElementById('metricsChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Latency (ms)', data: latHistory, borderColor: '#38bdf8', tension: 0.35 },
+          { label: 'VRAM (MB)', data: vramHistory, borderColor: '#f59e0b', tension: 0.35 }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+        scales: {
+          x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } },
+          y: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } }
+        }
+      }
+    });
+
+    function updateVramCalc() {
+      const ctxVal = parseInt(document.getElementById('ctxSlider').value, 10);
+      document.getElementById('ctxValLabel').innerText = `${ctxVal} tokens`;
+      currentVramMb = Math.round(1150 + ctxVal * 0.27);
+      const pct = Math.min(100, Math.round((currentVramMb / 3072) * 100));
+      document.getElementById('vramText').innerText = `${currentVramMb.toLocaleString()} / 3,072 MB (${pct}%)`;
+      const bar = document.getElementById('vramBar');
+      bar.style.width = `${pct}%`;
+      const badge = document.getElementById('gpuStatusBadge');
+      if (currentVramMb > 2950) {
+        bar.className = 'h-full bg-rose-500 transition-all duration-300';
+        badge.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40';
+        badge.innerText = '⚠️ VRAM 초과 (CPU 오프로딩 경고)';
+      } else {
+        bar.className = 'h-full bg-gradient-to-r from-sky-400 to-emerald-400 transition-all duration-300';
+        badge.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+        badge.innerText = '100% GPU 적재 안정';
+      }
+    }
+
+    function renderLogs() {
+      const box = document.getElementById('nssmLogBox');
+      const filtered = errorOnly ? logs.filter(l => l.type === 'stderr') : logs;
+      box.innerHTML = filtered.map(l => `<div class="${l.type === 'stderr' ? 'text-rose-400' : 'text-emerald-400'}">${l.text}</div>`).join('');
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function addLog(type, msg) {
+      logs.push({ type, text: `[${type}] ${msg}` });
+      if (logs.length > 40) logs.shift();
+      renderLogs();
+    }
+
+    function toggleService() {
+      serviceRunning = !serviceRunning;
+      const btn = document.getElementById('svcBtn');
+      if (serviceRunning) {
+        btn.className = 'px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold';
+        btn.innerText = '● RUNNING';
+        addLog('stdout', 'INFO: NSSM ExaoneAgentServer restarted successfully.');
+      } else {
+        btn.className = 'px-3 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[11px] font-bold';
+        btn.innerText = '■ STOPPED';
+        addLog('stderr', 'WARN: Service stopped by administrator.');
+      }
+    }
+
+    function toggleErrorFilter() {
+      errorOnly = !errorOnly;
+      const btn = document.getElementById('errFilterBtn');
+      btn.className = errorOnly
+        ? 'px-3 py-1 rounded-lg bg-rose-500 text-white text-[11px] font-bold'
+        : 'px-3 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-[11px] font-bold';
+      renderLogs();
+    }
+
+    function renderSessions() {
+      document.getElementById('sessCountBadge').innerText = `세션 ${sessions.length}건`;
+      const box = document.getElementById('sessionCards');
+      if (!sessions.length) {
+        box.innerHTML = '<div class="text-xs text-slate-500">저장된 세션이 없습니다.</div>';
+        return;
+      }
+      box.innerHTML = sessions.map(s => `
+        <div class="flex items-center justify-between bg-slate-950/80 px-3.5 py-2.5 rounded-xl border border-slate-800 text-xs">
+          <div>
+            <span class="font-bold text-white">${s.id}</span>
+            <span class="text-slate-400 ml-2">메시지 ${s.count}건 · ${s.last}</span>
+          </div>
+          <button onclick="deleteSess('${s.id}')" class="px-2.5 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500 text-rose-300 hover:text-white border border-rose-500/40 font-bold transition">🗑️ DELETE</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteSess(id) {
+      if (!confirm(`세션 [${id}]의 SQLite 대화 기록을 삭제(DELETE)하시겠습니까?`)) return;
+      sessions = sessions.filter(s => s.id !== id);
+      renderSessions();
+      addLog('stdout', `DELETE /api/admin/sessions/${id} -> 200 OK`);
+    }
+
+    async function executeFlow(sessId, promptText, toolName, replyText) {
+      if (!serviceRunning) {
+        addLog('stderr', 'ERROR: 503 Service Unavailable (NSSM 서비스가 중지됨)');
+        return;
+      }
+      const nodes = ['node-start', 'node-router', 'node-tool', 'node-end'];
+      nodes.forEach(n => document.getElementById(n).classList.remove('node-active'));
+      for (const n of nodes) {
+        document.getElementById(n).classList.add('node-active');
+        await new Promise(r => setTimeout(r, 180));
+      }
+      const chatBox = document.getElementById('chatOutput');
+      chatBox.innerHTML += `<div class="text-sky-300 font-bold">[${sessId}] 사용자: ${promptText}</div>`;
+      chatBox.innerHTML += `<div class="text-slate-200 bg-slate-900 p-2 rounded-lg border border-slate-700">🤖 <b>(${toolName})</b> ${replyText}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      const existing = sessions.find(s => s.id === sessId);
+      const nowStr = new Date().toTimeString().slice(0, 8);
+      if (existing) { existing.count += 2; existing.last = nowStr; }
+      else { sessions.unshift({ id: sessId, count: 2, last: nowStr }); }
+      renderSessions();
+
+      const lat = currentVramMb > 2950 ? Math.round(620 + Math.random() * 250) : Math.round(125 + Math.random() * 45);
+      const tps = currentVramMb > 2950 ? 6.2 : +(36 + Math.random() * 8).toFixed(1);
+      latHistory.push(lat);
+      vramHistory.push(currentVramMb);
+      labels.push(`#${latHistory.length}`);
+      if (latHistory.length > 10) { latHistory.shift(); vramHistory.shift(); labels.shift(); }
+      chart.update();
+
+      const avgLat = Math.round(latHistory.reduce((a, b) => a + b, 0) / latHistory.length);
+      document.getElementById('kpiLat').innerText = `${avgLat} ms`;
+      document.getElementById('kpiTps').innerText = `${tps} t/s`;
+      document.getElementById('kpiReq').innerText = `${latHistory.length} 건`;
+
+      if (currentVramMb > 2950) {
+        addLog('stderr', `ERROR: VRAM OOM Warning (${currentVramMb}MB) - CPU offloading latency ${lat}ms`);
+      } else {
+        addLog('stdout', `POST /api/chat (${sessId}) 200 OK - ${lat}ms | VRAM ${currentVramMb}MB`);
+      }
+    }
+
+    function runPreset(kind) {
+      const sess = document.getElementById('sessionInput').value || 'sess_vip_01';
+      if (kind === 'time') executeFlow(sess, '지금 몇 시야?', 'tool_current_time', `현재 시각은 ${new Date().toLocaleString('ko-KR')} 입니다.`);
+      if (kind === 'file') executeFlow(sess, 'Modelfile 읽어줘', 'tool_read_local_note', 'PARAMETER num_gpu 999 / PARAMETER num_ctx 2048 확인 완료.');
+      if (kind === 'search') executeFlow(sess, 'EXAONE 1.2B 최신 정보 검색', 'DuckDuckGoSearch', 'LG AI Research EXAONE 1.2B 한국어 경량 모델 4-bit 양자화 최적화 확인.');
+      if (kind === 'oom') {
+        document.getElementById('ctxSlider').value = 8192;
+        updateVramCalc();
+        executeFlow(sess, '대용량 8K 컨텍스트 추론 요청', 'CPU_Offload_Fallback', 'VRAM 한계(3072MB) 초과로 시스템 RAM으로 오프로딩되어 응답이 지연되었습니다.');
+      }
+    }
+
+    function handleCustomSend(e) {
+      e.preventDefault();
+      const sess = document.getElementById('sessionInput').value.trim() || 'sess_vip_01';
+      const prompt = document.getElementById('promptInput').value.trim();
+      if (!prompt) return;
+      document.getElementById('promptInput').value = '';
+      executeFlow(sess, prompt, 'EXAONE-1.2B', `'${prompt}' 요청을 로컬 100% GPU로 처리했습니다.`);
+    }
+
+    renderSessions();
+    updateVramCalc();
+  </script>
+</body>
+</html>
