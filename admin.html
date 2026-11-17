@@ -2285,9 +2285,9 @@
               class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold cursor-pointer">
               HTTPS 클라우드
             </button>
-            <input id="aicapBaseUrlInput" type="text" value="http://127.0.0.1:8090"
+            <input id="aicapBaseUrlInput" type="text" value="https://aicap.dmdg-live.com"
               class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-200 font-mono w-56 focus:outline-none focus:border-emerald-400"
-              placeholder="http://127.0.0.1:8090 또는 https://..." />
+              placeholder="https://aicap.dmdg-live.com 또는 http://127.0.0.1:8090" />
             <button type="button" onclick="checkAndLoadAicapTab(true)"
               class="px-3.5 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition cursor-pointer">
               🔄 연결 및 새로고침
@@ -2478,12 +2478,21 @@
     let AICAP_TAB_LOADED_ONCE = false;
     function getAicapBaseUrl() {
       const inp = document.getElementById('aicapBaseUrlInput');
+      const isRemoteHttps = window.location.protocol === 'https:' && !/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+      const fallbackUrl = isRemoteHttps ? 'https://aicap.dmdg-live.com' : 'http://127.0.0.1:8090';
       const saved = localStorage.getItem('dmdg_aicap_base_url');
-      if (inp && !inp.dataset.inited && saved) {
-        inp.value = saved;
+      if (inp && !inp.dataset.inited) {
+        // 원격 HTTPS(폰/외부)에서 이전에 127.0.0.1이 저장돼 있었으면 자동으로 HTTPS 클라우드 도메인 사용
+        if (isRemoteHttps && (!saved || /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(saved))) {
+          inp.value = 'https://aicap.dmdg-live.com';
+        } else if (saved) {
+          inp.value = saved;
+        } else {
+          inp.value = fallbackUrl;
+        }
         inp.dataset.inited = '1';
       }
-      const url = (inp && inp.value ? inp.value : 'http://127.0.0.1:8090').trim().replace(/\/+$/, '');
+      const url = (inp && inp.value ? inp.value : fallbackUrl).trim().replace(/\/+$/, '');
       localStorage.setItem('dmdg_aicap_base_url', url);
       return url;
     }
