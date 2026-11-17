@@ -2277,9 +2277,17 @@
             <p class="text-xs text-slate-400 mt-1">로컬 AICAP 서버(<code class="text-emerald-300">C:\DMDG_AICAP</code>)와 연결해 사원별 TIR/TTA, Shadow AI, 6축 직무 추천 대시보드를 바로 조회합니다.</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
+            <button type="button" onclick="setAicapPreset('http://127.0.0.1:8090')"
+              class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-[11px] font-semibold cursor-pointer">
+              로컬 (:8090)
+            </button>
+            <button type="button" onclick="setAicapPreset('https://aicap.dmdg-live.com')"
+              class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold cursor-pointer">
+              HTTPS 클라우드
+            </button>
             <input id="aicapBaseUrlInput" type="text" value="http://127.0.0.1:8090"
               class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-200 font-mono w-56 focus:outline-none focus:border-emerald-400"
-              placeholder="http://127.0.0.1:8090" />
+              placeholder="http://127.0.0.1:8090 또는 https://..." />
             <button type="button" onclick="checkAndLoadAicapTab(true)"
               class="px-3.5 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition cursor-pointer">
               🔄 연결 및 새로고침
@@ -2480,6 +2488,16 @@
       return url;
     }
 
+    function setAicapPreset(presetUrl) {
+      const inp = document.getElementById('aicapBaseUrlInput');
+      if (inp) {
+        inp.value = presetUrl;
+        inp.dataset.inited = '1';
+      }
+      localStorage.setItem('dmdg_aicap_base_url', presetUrl);
+      checkAndLoadAicapTab(true);
+    }
+
     function openAicapNewTab() {
       window.open(getAicapBaseUrl() + '/', '_blank');
     }
@@ -2489,6 +2507,18 @@
       const stateEl = document.getElementById('aicapConnState');
       const offlineEl = document.getElementById('aicapOfflineGuide');
       const frame = document.getElementById('aicapPreviewFrame');
+
+      // HTTPS 페이지에서 비로컬 HTTP 서버 연결 시 Mixed Content 방지 경고
+      const isHttpsPage = window.location.protocol === 'https:';
+      const isNonLocalHttp = /^http:\/\//i.test(baseUrl) && !/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(baseUrl);
+      if (isHttpsPage && isNonLocalHttp) {
+        if (stateEl) {
+          stateEl.textContent = '차단됨 (HTTPS Mixed Content: https:// URL 필요)';
+          stateEl.className = 'text-amber-400';
+        }
+        if (offlineEl) offlineEl.classList.remove('hidden');
+        return;
+      }
       if (stateEl) {
         stateEl.textContent = '연결 확인 중...';
         stateEl.className = 'text-sky-300';
