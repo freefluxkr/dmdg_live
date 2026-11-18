@@ -380,6 +380,12 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* mobile-reader-fix */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  header, .reader-header, .toolbar { flex-wrap: wrap !important; gap: 6px !important; padding: 8px 10px !important; }
+  .btn-ctrl { padding: 5px 8px !important; font-size: 12px !important; white-space: nowrap !important; flex-shrink: 0 !important; }
+}
 </style>
   <link rel="stylesheet" href="css/dmdg_payment_modal.css">
 </head>
@@ -389,7 +395,7 @@ body {
   <!-- Reader Nav -->
   <header class="reader-nav">
     <div class="nav-left">
-      <a href="novels.html" class="btn-ctrl">
+      <a href="https://library.dmdg-live.com/" class="btn-ctrl">
         <span>←</span> <span>서재로</span>
       </a>
       <button id="btn-toggle-toc" class="btn-ctrl">

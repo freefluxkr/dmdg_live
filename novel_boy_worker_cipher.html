@@ -160,12 +160,18 @@
   line-height: 1.3;
 }
 
+/* mobile-reader-fix */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  header, .reader-header, .toolbar { flex-wrap: wrap !important; gap: 6px !important; padding: 8px 10px !important; }
+  .btn-ctrl { padding: 5px 8px !important; font-size: 12px !important; white-space: nowrap !important; flex-shrink: 0 !important; }
+}
 </style>
   <link rel="stylesheet" href="css/dmdg_payment_modal.css">
 </head>
 <body>
   <header class="header">
-    <a href="novels.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> 서재로</a>
+    <a href="https://library.dmdg-live.com/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> 서재로</a>
     <span style="font-weight: 700; font-family: var(--serif);">카르텔의 암호 (500p 완결본)</span>
         <div class="lang-tabs">
       <button class="lang-btn active" onclick="changeLang('ko')">🇰🇷 한국어</button>

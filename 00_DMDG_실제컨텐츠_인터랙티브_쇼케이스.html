@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>DMDG LIVE | 우리 실제 컨텐츠가 얹어진 인터랙티브 쇼케이스 (Aurora)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    :root {
+      --bg-dark: #0b1936;
+      --bg-card: rgba(15, 26, 52, 0.54);
+      --border-card: rgba(255, 255, 255, 0.2);
+      --emerald: #34d399;
+      --sky: #38bdf8;
+      --violet: #a78bfa;
+      --pink: #f472b6;
+      --amber: #fbbf24;
+      --rose: #f43f5e;
+      --cyan: #06b6d4;
+      --blue: #3b82f6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      position: relative;
+      background-color: #0b1936;
+      background-image:
+        radial-gradient(ellipse 85% 60% at 12% 8%, rgba(52, 211, 153, 0.54), transparent 62%),
+        radial-gradient(ellipse 75% 55% at 88% 12%, rgba(56, 189, 248, 0.50), transparent 60%),
+        radial-gradient(ellipse 72% 58% at 70% 58%, rgba(167, 139, 250, 0.46), transparent 62%),
+        radial-gradient(ellipse 68% 52% at 22% 88%, rgba(244, 114, 182, 0.38), transparent 62%),
+        linear-gradient(155deg, #0b1936 0%, #122b52 42%, #1d2259 74%, #0f2447 100%);
+      background-attachment: fixed;
+      color: #f8fafc;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Aurora Borealis Ribbons */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -18%;
+      z-index: 0;
+      pointer-events: none;
+      filter: blur(58px);
+      opacity: 0.9;
+      will-change: transform;
+    }
+    body::before {
+      background:
+        radial-gradient(46% 34% at 22% 24%, rgba(52, 211, 153, 0.58), transparent 72%),
+        radial-gradient(44% 32% at 78% 20%, rgba(56, 189, 248, 0.54), transparent 70%),
+        radial-gradient(48% 36% at 52% 50%, rgba(168, 85, 247, 0.46), transparent 74%);
+      animation: auroraDriftA 18s ease-in-out infinite alternate;
+    }
+    body::after {
+      background:
+        radial-gradient(42% 30% at 82% 72%, rgba(244, 114, 182, 0.45), transparent 72%),
+        radial-gradient(46% 34% at 24% 76%, rgba(251, 191, 36, 0.30), transparent 72%),
+        radial-gradient(40% 28% at 50% 14%, rgba(94, 234, 212, 0.46), transparent 70%);
+      animation: auroraDriftB 22s ease-in-out infinite alternate;
+    }
+    @keyframes auroraDriftA {
+      0% { transform: translate3d(-2%, -1%, 0) scale(1) rotate(0deg); }
+      100% { transform: translate3d(3%, 2%, 0) scale(1.06) rotate(4deg); }
+    }
+    @keyframes auroraDriftB {
+      0% { transform: translate3d(2%, 1%, 0) scale(1.03) rotate(0deg); }
+      100% { transform: translate3d(-3%, -2%, 0) scale(0.98) rotate(-4deg); }
+    }
+
+    .top-notice-bar,
+    header.site-header,
+    main.showcase-container,
+    footer.site-footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Top Global Notice Bar */
+    .top-notice-bar {
+      background: rgba(11, 20, 42, 0.68);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.28);
+      padding: 10px 20px;
+      font-size: 13px;
+      text-align: center;
+      color: #bae6fd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .top-notice-bar strong { color: #ffffff; }
+    .badge-live-now {
+      background: linear-gradient(135deg, #ec4899, #f43f5e);
+      color: #ffffff;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.5);
+      animation: blink 1.4s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    /* Top Navigation Header */
+    header.site-header {
+      max-width: 1240px;
+      margin: 18px auto 0;
+      padding: 14px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 20px;
+      background: rgba(13, 23, 46, 0.52);
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo-emblem {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #34d399, #38bdf8, #a78bfa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.42);
+    }
+    .brand-text h1 {
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff, #bae6fd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .brand-text span {
+      font-size: 11.5px;
+      color: #94a3b8;
+      display: block;
+      margin-top: -2px;
+    }
+
+    nav.header-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      padding: 8px 15px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-btn.malssam {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fde68a;
+      border: 1px solid rgba(251, 191, 36, 0.55);
+      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.22);
+    }
+    .nav-btn.malssam:hover {
+      background: rgba(245, 158, 11, 0.32);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .nav-btn.reader {
+      background: rgba(15, 23, 42, 0.72);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .nav-btn.reader:hover {
+      background: rgba(30, 41, 59, 0.92);
+      border-color: rgba(56, 189, 248, 0.5);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .nav-btn.aces {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.28), rgba(37, 99, 235, 0.34));
+      color: #a5f3fc;
+      border: 1px solid rgba(34, 211, 238, 0.55);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.24);
+    }
+    .nav-btn.aces:hover {
+      transform: translateY(-1px);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.42);
+    }
+
+    /* Main Container */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+    .hero-badge-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.42);
+      padding: 6px 18px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+      font-size: 12.5px;
+      color: #bae6fd;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+    .hero-slogan {
+      font-size: clamp(26px, 4.2vw, 44px);
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+    .hero-slogan .accent-gold {
+      background: linear-gradient(120deg, #34d399 0%, #38bdf8 48%, #f472b6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 15.5px;
+      color: #cbd5e1;
+      max-width: 720px;
+      margin: 0 auto 20px;
+    }
+
+    /* Slogan Switcher Pill */
+    .slogan-toggle-box {
+      margin-bottom: 26px;
+    }
+    .slogan-toggle-btn {
+      background: rgba(15, 26, 52, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #cbd5e1;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .slogan-toggle-btn:hover {
+      background: rgba(30, 41, 59, 0.88);
+      color: #ffffff;
+      border-color: rgba(56, 189, 248, 0.6);
+    }
+
+    /* =======================================================================
+       Interactive Audio Waveform Core Card (Aurora Glass Studio)
+       ======================================================================= */
+    .waveform-hero-card {
+      background: linear-gradient(145deg, rgba(15, 26, 52, 0.56), rgba(19, 30, 58, 0.46));
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 26px;
+      padding: 30px 28px;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      margin-bottom: 46px;
+      position: relative;
+      overflow: hidden;
+    }
+    .waveform-hero-card::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 480px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(52, 211, 153, 0.12) 45%, transparent 72%);
+      pointer-events: none;
+    }
+
+    /* Content Selector Tabs (말쌈, 서재, 소담, ACES) */
+    .content-tabs-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: rgba(15, 23, 42, 0.68);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      color: #cbd5e1;
+      padding: 9px 18px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn:hover {
+      background: rgba(30, 41, 59, 0.9);
+      color: #ffffff;
+      border-color: rgba(56, 189, 248, 0.48);
+      transform: translateY(-1px);
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.26), rgba(56, 189, 248, 0.28));
+      border-color: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.34);
+    }
+
+    /* Content Info Bar */
+    .content-source-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #a7f3d0;
+      background: rgba(52, 211, 153, 0.14);
+      border: 1px solid rgba(52, 211, 153, 0.36);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    /* Canvas Screen */
+    .canvas-box {
+      background: rgba(2, 6, 23, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 20px;
+      position: relative;
+      box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.6);
+    }
+    canvas#audioWaveCanvas {
+      width: 100%;
+      height: 125px;
+      display: block;
+    }
+    .canvas-status-tag {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #94a3b8;
+      letter-spacing: 0.05em;
+    }
+
+    /* Word-by-Word Karaoke Transcript */
+    .transcript-container {
+      background: rgba(2, 6, 23, 0.54);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 18px 24px;
+      margin-bottom: 22px;
+      min-height: 70px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px 12px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #94a3b8;
+    }
+    .k-word {
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 3px 8px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .k-word.active {
+      color: #ffffff;
+      font-weight: 900;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.34), rgba(244, 114, 182, 0.36));
+      border: 1px solid rgba(244, 114, 182, 0.72);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.45);
+      transform: scale(1.12) translateY(-2px);
+    }
+
+    /* Waveform Action Controls */
+    .action-controls-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .btn-play-voice {
+      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 52%, #06b6d4 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 14px 32px;
+      border-radius: 9999px;
+      font-size: 15.5px;
+      font-weight: 900;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 28px rgba(236, 72, 153, 0.38);
+      transition: all 0.22s ease;
+    }
+    .btn-play-voice:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(56, 189, 248, 0.48);
+    }
+    .btn-play-voice.playing {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      animation: pulsePlay 1.5s infinite;
+    }
+    @keyframes pulsePlay {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    .btn-ctrl-sub {
+      background: rgba(15, 23, 42, 0.76);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e2e8f0;
+      padding: 13px 22px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-ctrl-sub:hover {
+      background: rgba(30, 41, 59, 0.92);
+      border-color: rgba(244, 114, 182, 0.55);
+      color: #ffffff;
+    }
+    .btn-target-link {
+      background: rgba(56, 189, 248, 0.16);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #bae6fd;
+      padding: 13px 22px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-target-link:hover {
+      background: rgba(56, 189, 248, 0.32);
+      color: #ffffff;
+    }
+
+    .hero-audio-help {
+      font-size: 13px;
+      color: #cbd5e1;
+      text-align: center;
+    }
+    .hero-audio-help strong { color: #67e8f9; }
+
+    /* =======================================================================
+       DMDG Real Services Dashboard Section (Below Hero)
+       ======================================================================= */
+    .dashboard-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .dashboard-title-bar h2 {
+      font-size: 22px;
+      font-weight: 900;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dashboard-count {
+      font-size: 12.5px;
+      font-weight: 700;
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #bae6fd;
+      padding: 4px 12px;
+      border-radius: 9999px;
+    }
+
+    /* A.C.E.S Highlight Banner */
+    .aces-highlight-card {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.16), rgba(37, 99, 235, 0.18));
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      border: 1px solid rgba(34, 211, 238, 0.42);
+      border-radius: 22px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      box-shadow: 0 14px 36px rgba(6, 182, 212, 0.16);
+    }
+    .aces-info { flex: 1; min-width: 290px; }
+    .aces-badges {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .aces-badge-pill {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 11px;
+      border-radius: 9999px;
+    }
+    .aces-badge-pill.cyan {
+      background: rgba(6, 182, 212, 0.22);
+      border: 1px solid rgba(34, 211, 238, 0.55);
+      color: #67e8f9;
+    }
+    .aces-badge-pill.green {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(52, 211, 153, 0.5);
+      color: #6ee7b7;
+    }
+    .aces-info h3 {
+      font-size: 20px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .aces-info p {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    .btn-aces-start {
+      background: linear-gradient(135deg, #06b6d4, #2563eb);
+      color: #ffffff;
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      padding: 14px 26px;
+      border-radius: 14px;
+      font-size: 14.5px;
+      font-weight: 900;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(6, 182, 212, 0.38);
+      transition: all 0.2s;
+    }
+    .btn-aces-start:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(6, 182, 212, 0.56);
+    }
+
+    /* Real Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: linear-gradient(165deg, rgba(15, 26, 52, 0.58), rgba(11, 20, 42, 0.68));
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 22px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.24s ease;
+      position: relative;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.34);
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.48), 0 0 22px rgba(56, 189, 248, 0.18);
+    }
+    .service-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .service-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .service-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      background: rgba(2, 6, 23, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      flex-shrink: 0;
+    }
+    /* Fix: support both .service-title-wrap and .service-title-group */
+    .service-title-wrap h3,
+    .service-title-group h3 {
+      font-size: 16.5px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .service-title-wrap span,
+    .service-title-group span {
+      display: block;
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.35;
+    }
+    .service-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: rgba(245, 158, 11, 0.18);
+      color: #fde68a;
+      border: 1px solid rgba(251, 191, 36, 0.48);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .service-badge.purple {
+      background: rgba(168, 85, 247, 0.2);
+      color: #e9d5ff;
+      border-color: rgba(192, 132, 252, 0.48);
+    }
+    .service-badge.blue {
+      background: rgba(56, 189, 248, 0.2);
+      color: #bae6fd;
+      border-color: rgba(56, 189, 248, 0.48);
+    }
+    .service-desc {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.62;
+      margin-bottom: 16px;
+    }
+    .service-meta-stats {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .service-meta-stats strong { color: #f8fafc; }
+    .service-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .btn-service-view {
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-service-view:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+    .btn-service-view.gold {
+      background: linear-gradient(135deg, #f59e0b, #ea580c);
+      color: #ffffff;
+    }
+    .btn-service-view.blue {
+      background: linear-gradient(135deg, #06b6d4, #2563eb);
+      color: #ffffff;
+    }
+    .btn-service-view.purple {
+      background: linear-gradient(135deg, #8b5cf6, #9333ea);
+      color: #ffffff;
+    }
+    .service-icons {
+      color: #94a3b8;
+      font-size: 15px;
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      max-width: 1240px;
+      margin: 50px auto 0;
+      padding: 26px 20px 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      text-align: center;
+      font-size: 12.5px;
+      color: #94a3b8;
+    }
+    footer.site-footer a { color: #38bdf8; text-decoration: none; }
+    footer.site-footer a:hover { color: #34d399; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header.site-header { margin: 12px 12px 0; padding: 14px 16px; }
+      .waveform-hero-card { padding: 20px 16px; }
+      .transcript-container { font-size: 15px; }
+      .btn-play-voice { width: 100%; justify-content: center; }
+      .btn-ctrl-sub, .btn-target-link { width: 100%; justify-content: center; }
+      .action-controls-row { flex-direction: column; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Global Notice Bar -->
+  <div class="top-notice-bar">
+    <span class="badge-live-now">LIVE SOUND</span>
+    <span><strong>당목담글(DMDG LIVE)</strong> 실시간 오디오 파형 &amp; 실제 컨텐츠 통합 쇼케이스</span>
+    <span>•</span>
+    <span>독립 도메인 <strong>말쌈(malssam.com)</strong> 영구 연동</span>
+  </div>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <a href="#" class="brand-group">
+      <div class="brand-logo-emblem">🎙️</div>
+      <div class="brand-text">
+        <h1>당목담글 <span style="font-weight: 500; font-size: 14px; color:#cbd5e1;">(DMDG LIVE)</span></h1>
+        <span>기술로 사람과 마음을 잇는 통합 포털 허브</span>
+      </div>
+    </a>
+
+    <nav class="header-nav">
+      <a href="https://malssam.com/" target="_blank" rel="noopener noreferrer" class="nav-btn malssam" title="말쌈 공식 전용관">
+        <span>📖 말쌈 전용관</span>
+        <span style="font-size: 11px; opacity: 0.85;">malssam.com</span>
+      </a>
+      <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="nav-btn reader">
+        <span>📚 DMDG 서재</span>
+      </a>
+      <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="nav-btn reader">
+        <span>📖 위키북스</span>
+      </a>
+      <a href="#panel-aces" class="nav-btn aces">
+        <span>🎯 직무 추천 (A.C.E.S)</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Main Container -->
+  <main class="showcase-container">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-badge-wrap">
+        <span>✨ LIVE AUDIO SYNTHESIS &amp; CONTENT RELAY</span>
+      </div>
+
+      <h1 class="hero-slogan" id="mainSloganText">
+        기술과 사람의 마음을 잇는<br>
+        세상에서 가장 따뜻한 <span class="accent-gold">목소리 플랫폼</span>
+      </h1>
+
+      <p class="hero-sub" id="subSloganText">
+        소중한 당신의 기술과 목소리로 다음 이야기를 들려주세요 — 당목담글 (DMDG LIVE)
+      </p>
+
+      <!-- Slogan Switcher Pill -->
+      <div class="slogan-toggle-box">
+        <button class="slogan-toggle-btn" onclick="toggleSloganOption()">
+          🔄 슬로건 변경 비교: <span id="currentSloganLabel" style="color:#38bdf8; font-weight:800;">[추천 1안: 목소리 스토리텔링]</span> (클릭 시 대표님 원안과 즉시 비교)
+        </button>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Interactive Audio Waveform Core Card (The Hero Showcase)
+         ===================================================================== -->
+    <div class="waveform-hero-card">
+
+      <!-- Content Selector Tabs (실제 우리 컨텐츠 4종 선택) -->
+      <div class="content-tabs-wrap">
+        <button class="tab-btn active" id="tab-malssam" onclick="switchContent('malssam')">
+          <span>📖 1. 말쌈 (우리말 릴레이)</span>
+        </button>
+        <button class="tab-btn" id="tab-novel" onclick="switchContent('novel')">
+          <span>📚 2. DMDG 서재 (2027 팩션 소설)</span>
+        </button>
+        <button class="tab-btn" id="tab-sodam" onclick="switchContent('sodam')">
+          <span>🌿 3. 소담 라이브 (동화 릴레이)</span>
+        </button>
+        <button class="tab-btn" id="tab-aces" onclick="switchContent('aces')">
+          <span>🎯 4. A.C.E.S (AI 직무 진단)</span>
+        </button>
+      </div>
+
+      <!-- Current Content Metadata Pill -->
+      <div style="text-align: center;">
+        <span class="content-source-pill" id="contentPill">
+          📖 <strong>말쌈 (MALSSAM)</strong> 오늘의 추천 이어읽기 문장
+        </span>
+      </div>
+
+      <!-- 60FPS Waveform Canvas -->
+      <div class="canvas-box">
+        <canvas id="audioWaveCanvas" width="900" height="125"></canvas>
+        <div class="canvas-status-tag" id="canvasStatusTag">🎙️ 60FPS REAL-TIME HARMONIC SYNTH</div>
+      </div>
+
+      <!-- Word-by-Word Karaoke Glowing Transcript -->
+      <div class="transcript-container" id="transcriptContainer">
+        <!-- Rendered by JavaScript dynamically -->
+      </div>
+
+      <!-- Controls Row -->
+      <div class="action-controls-row">
+        <button id="mainPlayBtn" class="btn-play-voice" onclick="togglePlayVoice()">
+          <span style="font-size: 18px;">▶️</span>
+          <span id="playBtnLabel">이 컨텐츠 실제 음성 낭독 &amp; 파형 듣기</span>
+        </button>
+
+        <a id="contentDirectLink" href="https://malssam.com/" target="_blank" rel="noopener noreferrer" class="btn-target-link">
+          <span>🔗 말쌈(malssam.com) 바로가기</span>
+          <span>↗</span>
+        </a>
+
+        <button class="btn-ctrl-sub" onclick="toggleRealMic()">
+          <span>🎤 내 진짜 마이크로 직접 말해보기</span>
+        </button>
+      </div>
+
+      <div class="hero-audio-help" id="audioHelpText">
+        💡 <strong>[이 컨텐츠 실제 음성 낭독 듣기]</strong>를 누르시면, 맑은 하모닉 차임 사운드와 함께 해당 컨텐츠의 실제 문장이 한국어 음성으로 낭독되며 파형과 글자가 정확히 싱크됩니다!
+      </div>
+
+    </div>
+
+    <!-- =====================================================================
+         DMDG Real Services Dashboard Section (Below Hero)
+         ===================================================================== -->
+    <div class="dashboard-title-bar">
+      <h2>
+        <span>🏛️</span> 당목담글(DMDG) 대표 서비스 허브
+      </h2>
+      <span class="dashboard-count">5 Core Services &amp; Hub</span>
+    </div>
+
+    <!-- A.C.E.S AI 직무 진단 배너 -->
+    <section class="aces-highlight-card" id="panel-aces">
+      <div class="aces-info">
+        <div class="aces-badges">
+          <span class="aces-badge-pill cyan">AI PREMIER SERVICE</span>
+          <span class="aces-badge-pill green">✨ 2026 무료 체험 프로모션 (2027년 유료 전환)</span>
+        </div>
+        <h3>🎯 A.C.E.S 6대 IT/AI 직무 추천 &amp; 역량 진단 대시보드</h3>
+        <p>
+          DMDG 4대 평가(SQL·AI수학·데이터분석·파이썬) 결과를 기반으로, 구직자의 6대 핵심 역량을 정량화하고 머신러닝 알고리즘으로 최적의 IT/AI 직무를 추천합니다. (PDF 성적표 즉시 발급)
+        </p>
+      </div>
+      <div>
+        <a href="https://dmdg-live.com/career_aces.html" target="_blank" rel="noopener noreferrer" class="btn-aces-start">
+          <span>🎯 직무 추천 진단 시작하기</span>
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5 Core Services Grid -->
+    <div class="services-grid">
+
+      <!-- Card 1: 말쌈 (MALSSAM) - 반드시 도메인 유지 -->
+      <article class="service-card">
+        <div>
+          <div class="service-head">
+            <div class="service-brand">
+              <div class="service-avatar" style="color: #f97316;">📖</div>
+              <div class="service-title-group">
+                <h3>말쌈 (MALSSAM)</h3>
+                <span>바른 우리말 AI 사전 &amp; 퀴즈</span>
+              </div>
+            </div>
+            <span class="service-badge">Live PWA</span>
+          </div>
+          <p class="service-desc">
+            신조어부터 바른 우리말까지, AI 번역과 문해력 동적 퀴즈를 제공하는 온디바이스 PWA 웹 서비스입니다. 독립 도메인 <strong>malssam.com</strong>으로 영구 서비스됩니다.
+          </p>
+          <div class="service-meta-stats">
+            <span>👥 누적 접속자: <strong>16,840명</strong></span>
+            <span>•</span>
+            <span>독립 도메인 유지</span>
+          </div>
+        </div>
+        <div class="service-footer">
+          <a href="https://malssam.com/" target="_blank" rel="noopener noreferrer" class="btn-service-view gold">
+            <span>말쌈 바로가기</span> <span>↗</span>
+          </a>
+          <div class="service-icons">
+            <span title="음성 낭독 지원">🔊</span>
+            <span title="PWA 앱">📱</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: DMDG 서재 (E-Reader) -->
+      <article class="service-card">
+        <div>
+          <div class="service-head">
+            <div class="service-brand">
+              <div class="service-avatar" style="color: #06b6d4;">📚</div>
+              <div class="service-title-group">
+                <h3>DMDG 서재 (E-Reader)</h3>
+                <span>DMDG Master 팩션 소설 &amp; 신간</span>
+              </div>
+            </div>
+            <span class="service-badge blue">Interactive</span>
+          </div>
+          <p class="service-desc">
+            2027 팩션 스릴러와 미래 베스트셀러 3부작을 감상할 수 있는 인터랙티브 소설 리더기 + 실시간 AI 음성 낭독(TTS) 시스템입니다.
+          </p>
+          <div class="service-meta-stats">
+            <span>👥 누적 독자: <strong>9,720명</strong></span>
+            <span>•</span>
+            <span>AI TTS 탑재</span>
+          </div>
+        </div>
+        <div class="service-footer">
+          <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="btn-service-view blue">
+            <span>서재 입장하기</span> <span>↗</span>
+          </a>
+          <div class="service-icons">
+            <span title="TTS 음성">🎙️</span>
+            <span title="뷰어">📖</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: 위키북스 기술 도서관 -->
+      <article class="service-card">
+        <div>
+          <div class="service-head">
+            <div class="service-brand">
+              <div class="service-avatar" style="color: #a855f7;">📑</div>
+              <div class="service-title-group">
+                <h3>위키북스 기술 도서관</h3>
+                <span>자율주행 레이크하우스 &amp; REA</span>
+              </div>
+            </div>
+            <span class="service-badge purple">Knowledge</span>
+          </div>
+          <p class="service-desc">
+            자율주행 빅데이터 레이크하우스 아키텍처 및 REA 역공학 시스템 엔지니어링 실무 서적이 집대성된 DMDG 공식 기술 도서관입니다.
+          </p>
+          <div class="service-meta-stats">
+            <span>📚 열람수: <strong>14,350회</strong></span>
+            <span>•</span>
+            <span>위키독스 공식 연재</span>
+          </div>
+        </div>
+        <div class="service-footer">
+          <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="btn-service-view purple">
+            <span>기술도서관 열람</span> <span>↗</span>
+          </a>
+          <div class="service-icons">
+            <span title="실무 도서">📘</span>
+            <span title="기술 아키텍처">⚙️</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: 당목담글 공식 블로그 -->
+      <article class="service-card">
+        <div>
+          <div class="service-head">
+            <div class="service-brand">
+              <div class="service-avatar" style="color: #ec4899;">✍️</div>
+              <div class="service-title-group">
+                <h3>당목담글 공식 블로그</h3>
+                <span>AI 기술 컬럼 &amp; 릴리즈 스토리</span>
+              </div>
+            </div>
+            <span class="service-badge">Live Blog</span>
+          </div>
+          <p class="service-desc">
+            최신 LLM 에이전틱 엔지니어링, 위키북스 신간 챕터 프리뷰 및 DMDG 오리지널 기술 아티클이 연재되는 공식 스토리 블로그입니다.
+          </p>
+          <div class="service-meta-stats">
+            <span>👥 누적 방문자: <strong>7,850명</strong></span>
+            <span>•</span>
+            <span>주간 연재</span>
+          </div>
+        </div>
+        <div class="service-footer">
+          <a href="https://dmdg.wikidocs.net/blog/" target="_blank" rel="noopener noreferrer" class="btn-service-view gold">
+            <span>블로그 보기</span> <span>↗</span>
+          </a>
+          <div class="service-icons">
+            <span title="칼럼">📝</span>
+            <span title="뉴스">🔔</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: 소담 라이브 (Sodam Live) -->
+      <article class="service-card">
+        <div>
+          <div class="service-head">
+            <div class="service-brand">
+              <div class="service-avatar" style="color: #10b981;">🌿</div>
+              <div class="service-title-group">
+                <h3>소담 라이브 (Sodam Live)</h3>
+                <span>어르신·아이 세대공감 동화</span>
+              </div>
+            </div>
+            <span class="service-badge" style="background:rgba(16,185,129,0.15); color:#34d399; border-color:rgba(16,185,129,0.4);">Voice Relay</span>
+          </div>
+          <p class="service-desc">
+            세대를 넘어 온 가족이 따뜻한 목소리로 한 문장씩 이어가는 세대공감 목소리 릴레이 플랫폼입니다. 마음을 잇는 따스함을 전합니다.
+          </p>
+          <div class="service-meta-stats">
+            <span>🎙️ 참여 목소리: <strong>5,420개</strong></span>
+            <span>•</span>
+            <span>오디오 아카이브</span>
+          </div>
+        </div>
+        <div class="service-footer">
+          <a href="#" onclick="switchContent('sodam'); window.scrollTo({top: 150, behavior: 'smooth'}); return false;" class="btn-service-view" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;">
+            <span>이어읽기 참여</span> <span>↗</span>
+          </a>
+          <div class="service-icons">
+            <span title="목소리 릴레이">🎙️</span>
+            <span title="오디오북">🎧</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <p>
+      © 2026 <strong>당목담글 (DMDG LIVE)</strong>. All rights reserved. • 말쌈 전용 도메인: <a href="https://malssam.com/" target="_blank">https://malssam.com</a>
+    </p>
+  </footer>
+
+  <!-- =====================================================================
+       Interactive Audio Waveform & Speech Synthesis Engine (JavaScript)
+       ===================================================================== -->
+  <script>
+    // ── 1. Content Database (우리 실제 컨텐츠 4종 데이터셋) ──
+    const CONTENT_DATA = {
+      malssam: {
+        id: 'malssam',
+        badge: '📖 말쌈 (MALSSAM) • 바른 우리말 AI 사전 & 퀴즈 릴레이',
+        words: ['"훈민정음', '첫', '문장처럼,', '당신의', '다정한', '목소리가', '내일의', '따뜻한', '우리말이', '됩니다."'],
+        speechText: '훈민정음 첫 문장처럼, 당신의 다정한 목소리가 내일의 따뜻한 우리말이 됩니다.',
+        speechRate: 0.88,
+        speechPitch: 1.05,
+        directUrl: 'https://malssam.com/',
+        directLabel: '🔗 말쌈(malssam.com) 바로가기',
+        accentColor: '#f97316'
+      },
+      novel: {
+        id: 'novel',
+        badge: '📚 DMDG 서재 • 2027 팩션 스릴러 <청와대 지하벙커의 비밀코드>',
+        words: ['"칠흑', '같은', '침묵을', '깨고,', '암호화된', '통신망에서', '마침내', '세상을', '바꿀', '신호가', '울렸다."'],
+        speechText: '칠흑 같은 침묵을 깨고, 암호화된 통신망에서 마침내 세상을 바꿀 신호가 울렸다.',
+        speechRate: 0.84,
+        speechPitch: 0.92, // 약간 더 낮고 긴장감 있는 톤
+        directUrl: 'https://dmdg-live.com/novels.html',
+        directLabel: '📖 DMDG 서재 E-Reader 열기',
+        accentColor: '#06b6d4'
+      },
+      sodam: {
+        id: 'sodam',
+        badge: '🌿 소담 라이브 • 어르신과 아이들을 위한 세대공감 동화 릴레이',
+        words: ['"할머니가', '들려주던', '따스한', '옛이야기를,', '이제', '우리의', '목소리로', '다음', '세대에', '남깁니다."'],
+        speechText: '할머니가 들려주던 따스한 옛이야기를, 이제 우리의 목소리로 다음 세대에 남깁니다.',
+        speechRate: 0.85,
+        speechPitch: 1.15, // 따뜻하고 다정한 높은 톤
+        directUrl: '#',
+        directLabel: '🌿 소담 동화 릴레이 참여하기',
+        accentColor: '#10b981'
+      },
+      aces: {
+        id: 'aces',
+        badge: '🎯 A.C.E.S • 6대 IT/AI 직무 추천 & 역량 진단 센터',
+        words: ['"데이터와', 'AI', '기술의', '혁신,', '당신의', '숨은', '역량을', '객관적으로', '진단하고', '내일을', '엽니다."'],
+        speechText: '데이터와 AI 기술의 혁신, 당신의 숨은 역량을 객관적으로 진단하고 내일을 엽니다.',
+        speechRate: 0.92,
+        speechPitch: 1.0, // 명쾌하고 자신감 있는 톤
+        directUrl: 'https://dmdg-live.com/career_aces.html',
+        directLabel: '🎯 직무 추천 진단 시작하기',
+        accentColor: '#3b82f6'
+      }
+    };
+
+    let currentContentKey = 'malssam';
+    let isPlaying = false;
+    let step = 0;
+    let soundEnergy = 0.0;
+    let targetEnergy = 0.0;
+    let audioCtx = null;
+    let micStream = null;
+    let micAnalyser = null;
+    let micDataArray = null;
+
+    // DOM Elements
+    const canvas = document.getElementById('audioWaveCanvas');
+    const ctx = canvas.getContext('2d');
+    const transcriptContainer = document.getElementById('transcriptContainer');
+    const contentPill = document.getElementById('contentPill');
+    const directLink = document.getElementById('contentDirectLink');
+    const mainPlayBtn = document.getElementById('mainPlayBtn');
+    const playBtnLabel = document.getElementById('playBtnLabel');
+    const canvasStatusTag = document.getElementById('canvasStatusTag');
+    const audioHelpText = document.getElementById('audioHelpText');
+
+    // ── 2. Canvas Resizing ──
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth - 28;
+      canvas.height = 125;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // ── 3. Render Current Content Words ──
+    function renderTranscriptWords(content) {
+      transcriptContainer.innerHTML = '';
+      content.words.forEach((wordText, idx) => {
+        const span = document.createElement('span');
+        span.className = 'k-word';
+        span.id = `kw_${idx}`;
+        span.innerText = wordText;
+        transcriptContainer.appendChild(span);
+      });
+    }
+
+    // ── 4. Switch Content Tab ──
+    function switchContent(contentKey) {
+      if (isPlaying) {
+        stopPlayback();
+      }
+      currentContentKey = contentKey;
+      const data = CONTENT_DATA[contentKey];
+
+      // Update Tabs UI
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`tab-${contentKey}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Update Metadata
+      contentPill.innerHTML = data.badge;
+      directLink.href = data.directUrl;
+      directLink.innerHTML = `<span>${data.directLabel}</span> <span>↗</span>`;
+
+      // Render Words
+      renderTranscriptWords(data);
+    }
+    // Initial Render
+    switchContent('malssam');
+
+    // ── 5. Slogan Comparison Toggle ──
+    let isOption1 = true;
+    function toggleSloganOption() {
+      isOption1 = !isOption1;
+      const mainSlogan = document.getElementById('mainSloganText');
+      const subSlogan = document.getElementById('subSloganText');
+      const label = document.getElementById('currentSloganLabel');
+
+      if (isOption1) {
+        mainSlogan.innerHTML = '기술로 마음을 잇는<br>세상에서 가장 따뜻한 <span class="accent-gold">목소리 스토리텔링</span>';
+        subSlogan.innerHTML = '소중한 당신의 기술과 목소리로 다음 이야기를 들려주세요 — <strong>당목담글 (DMDG LIVE)</strong>';
+        label.innerText = '[추천 1안: 목소리 스토리텔링]';
+      } else {
+        mainSlogan.innerHTML = '기술로 사람과 마음을 연결하는<br>세상에서 가장 따뜻한 <span class="accent-gold">이어읽기 플랫폼</span>';
+        subSlogan.innerHTML = '당신의 목소리로 다음 글을 읽어주세요 — <strong>당목담글 (DMDG)</strong>';
+        label.innerText = '[대표님 원안: 이어읽기 플랫폼]';
+      }
+    }
+
+    // ── 6. Web Audio API Synth (Ambient Chime) ──
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playWarmChime(contentKey) {
+      const actx = getAudioContext();
+      // Different chord textures per content
+      let freqs = [261.63, 329.63, 392.00, 523.25]; // C major
+      if (contentKey === 'novel') {
+        freqs = [220.00, 261.63, 329.63, 440.00]; // A minor mystery
+      } else if (contentKey === 'sodam') {
+        freqs = [293.66, 369.99, 440.00, 587.33]; // D major bright warm
+      } else if (contentKey === 'aces') {
+        freqs = [261.63, 392.00, 523.25, 659.25]; // Modern quintal tech
+      }
+
+      freqs.forEach((freq, idx) => {
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, actx.currentTime + idx * 0.1);
+
+        gain.gain.setValueAtTime(0, actx.currentTime + idx * 0.1);
+        gain.gain.linearRampToValueAtTime(0.16, actx.currentTime + idx * 0.1 + 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + idx * 0.1 + 2.2);
+
+        osc.connect(gain);
+        gain.connect(actx.destination);
+
+        osc.start(actx.currentTime + idx * 0.1);
+        osc.stop(actx.currentTime + idx * 0.1 + 2.3);
+      });
+    }
+
+    // ── 7. Voice Narration & Waveform Karaoke Sync ──
+    function togglePlayVoice() {
+      if (isPlaying) {
+        stopPlayback();
+        return;
+      }
+      startPlayback();
+    }
+
+    function startPlayback() {
+      isPlaying = true;
+      mainPlayBtn.classList.add('playing');
+      playBtnLabel.innerText = '⏹️ 낭독 중단하기 (클릭 시 멈춤)';
+      canvasStatusTag.innerText = '🔊 LIVE AUDIO PLAYING (VOICE + WAVEFORM SYNC)';
+      canvasStatusTag.style.color = '#67e8f9';
+
+      const data = CONTENT_DATA[currentContentKey];
+
+      // 1. Play Harmonic Ambient Chime
+      playWarmChime(currentContentKey);
+      targetEnergy = 1.6;
+
+      // 2. Play Web Speech API
+      if (!('speechSynthesis' in window)) {
+        alert('이 브라우저는 음성 합성을 지원하지 않지만, 파형 애니메이션은 감상하실 수 있습니다!');
+        return;
+      }
+
+      window.speechSynthesis.cancel(); // Reset previous queue
+
+      const utterance = new SpeechSynthesisUtterance(data.speechText);
+      utterance.lang = 'ko-KR';
+      utterance.rate = data.speechRate;
+      utterance.pitch = data.speechPitch;
+
+      // Calculate approximate timings per word based on total words & speech rate
+      const totalWords = data.words.length;
+      const intervalMs = Math.round((4600 / (data.speechRate / 0.88)) / totalWords);
+
+      data.words.forEach((_, idx) => {
+        setTimeout(() => {
+          if (!isPlaying) return;
+          // Clear previous highlights
+          document.querySelectorAll('.k-word').forEach(w => w.classList.remove('active'));
+          const currentWord = document.getElementById(`kw_${idx}`);
+          if (currentWord) {
+            currentWord.classList.add('active');
+            targetEnergy = 2.4 + Math.random() * 0.8; // Burst waveform height on word pronunciation
+          }
+        }, 150 + idx * intervalMs);
+      });
+
+      utterance.onend = () => {
+        setTimeout(() => {
+          stopPlayback();
+        }, 600);
+      };
+
+      utterance.onerror = () => {
+        stopPlayback();
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function stopPlayback() {
+      isPlaying = false;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      mainPlayBtn.classList.remove('playing');
+      playBtnLabel.innerText = '이 컨텐츠 실제 음성 낭독 & 파형 듣기';
+      canvasStatusTag.innerText = '🎙️ 60FPS REAL-TIME HARMONIC SYNTH';
+      canvasStatusTag.style.color = '#64748b';
+      targetEnergy = 0.0;
+      document.querySelectorAll('.k-word').forEach(w => w.classList.remove('active'));
+    }
+
+    // ── 8. Real Microphone Mode ──
+    async function toggleRealMic() {
+      if (micStream) {
+        // Disconnect mic
+        micStream.getTracks().forEach(track => track.stop());
+        micStream = null;
+        micAnalyser = null;
+        canvasStatusTag.innerText = '🎙️ 60FPS REAL-TIME HARMONIC SYNTH';
+        canvasStatusTag.style.color = '#64748b';
+        audioHelpText.innerHTML = '💡 <strong>[이 컨텐츠 실제 음성 낭독 듣기]</strong>를 누르시면 음성과 파형이 동기화되어 재생됩니다.';
+        return;
+      }
+
+      try {
+        const actx = getAudioContext();
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        const source = actx.createMediaStreamSource(micStream);
+        micAnalyser = actx.createAnalyser();
+        micAnalyser.fftSize = 128;
+        micAnalyser.smoothingTimeConstant = 0.8;
+        source.connect(micAnalyser);
+        micDataArray = new Uint8Array(micAnalyser.frequencyBinCount);
+
+        canvasStatusTag.innerText = '🔴 REAL MIC CONNECTED (말씀하시면 파형이 반응합니다)';
+        canvasStatusTag.style.color = '#f43f5e';
+        audioHelpText.innerHTML = '✅ <strong>마이크 연결 성공!</strong> 지금 말씀해 보세요! 대표님의 목소리 데시벨과 톤에 맞춰 노을빛 파형이 직접 뜁니다.';
+      } catch (err) {
+        alert('마이크 접근 권한이 없거나 마이크가 연결되어 있지 않습니다. 대신 [이 컨텐츠 실제 음성 낭독 & 파형 듣기] 버튼으로 소리를 확인하세요!');
+      }
+    }
+
+    // ── 9. 60FPS Real-Time Waveform Render Loop ──
+    function renderLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = 4;
+      const gap = 3;
+      const totalBars = Math.floor(canvas.width / (barWidth + gap));
+      step += 0.035;
+
+      // Smooth energy lerp
+      soundEnergy += (targetEnergy - soundEnergy) * 0.12;
+
+      // Aurora Gradient per content
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+
+      if (currentContentKey === 'novel') {
+        gradient.addColorStop(0, '#38bdf8');
+        gradient.addColorStop(0.5, '#60a5fa');
+        gradient.addColorStop(1, '#818cf8');
+      } else if (currentContentKey === 'sodam') {
+        gradient.addColorStop(0, '#5eead4');
+        gradient.addColorStop(0.5, '#34d399');
+        gradient.addColorStop(1, '#10b981');
+      } else if (currentContentKey === 'aces') {
+        gradient.addColorStop(0, '#c084fc');
+        gradient.addColorStop(0.5, '#38bdf8');
+        gradient.addColorStop(1, '#2563eb');
+      } else {
+        gradient.addColorStop(0, '#34d399');
+        gradient.addColorStop(0.5, '#38bdf8');
+        gradient.addColorStop(1, '#f472b6');
+      }
+      ctx.fillStyle = gradient;
+
+      // Real Mic FFT Data
+      if (micAnalyser && micDataArray) {
+        micAnalyser.getByteFrequencyData(micDataArray);
+      }
+
+      for (let i = 0; i < totalBars; i++) {
+        let height = 0;
+
+        if (micAnalyser && micDataArray) {
+          const freqIndex = Math.floor((i / totalBars) * micDataArray.length);
+          const rawVal = micDataArray[freqIndex] || 0;
+          height = Math.max(6, (rawVal / 255) * (canvas.height - 14));
+        } else {
+          // Synthetic Harmonic Waves + Sound Energy Boost
+          const harmonic = Math.sin(step + i * 0.14) * 20 + Math.cos(step * 0.7 + i * 0.07) * 14;
+          const boost = soundEnergy > 0 ? (Math.sin(step * 3.5 + i * 0.4) * 26 * soundEnergy) : 0;
+          const totalVal = Math.abs(harmonic) + Math.abs(boost);
+          height = Math.max(6, Math.min(canvas.height - 10, totalVal * (0.8 + soundEnergy * 0.65)));
+        }
+
+        const x = i * (barWidth + gap);
+        const y = (canvas.height - height) / 2; // Center Aligned
+
+        ctx.beginPath();
+        if (ctx.roundRect) {
+          ctx.roundRect(x, y, barWidth, height, 2);
+        } else {
+          ctx.rect(x, y, barWidth, height);
+        }
+        ctx.fill();
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+  </script>
+</body>
+</html>

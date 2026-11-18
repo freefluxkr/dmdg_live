@@ -983,7 +983,7 @@ svg text { stroke: none; paint-order: fill; }
         txt.setAttribute('text-anchor', 'middle');
         txt.setAttribute('font-size', '10');
         txt.setAttribute('font-family', 'var(--ff-mono)');
-        txt.setAttribute('fill', INPUT_IMAGE[r][c] > 0.5 ? '#fff' : '#94a3b8');
+        txt.setAttribute('fill', INPUT_IMAGE[r][c] > 0.45 ? '#0f172a' : '#cbd5e1');
         txt.textContent = INPUT_IMAGE[r][c].toFixed(1);
         g.appendChild(txt);
 

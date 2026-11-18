@@ -401,7 +401,15 @@
       background: #F1F5F9;
       border-color: #0B1B3D;
     }
-  </style>
+  /* mobile-overflow-fix */
+html, body { overflow-x: hidden; max-width: 100%; }
+pre, table { max-width: 100%; overflow-x: auto; display: block; box-sizing: border-box; }
+h1, h2, h3, p { overflow-wrap: anywhere; }
+@media (max-width: 768px) {
+  body { padding: 12px !important; }
+  h1 { font-size: 20px !important; }
+}
+</style>
   <!-- Firebase & Real-time Analytics SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -427,10 +435,10 @@
       <a href="./" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; font-weight: 800;">
         <span>🏠 포털 홈</span>
       </a>
-      <a href="./curriculum.html" class="nav-link-btn highlight" style="background: linear-gradient(135deg, #00A896, #028090) !important; color: #FFFFFF !important; border: 1.5px solid #00A896 !important; font-weight: 800;">
+      <a href="https://academy.dmdg-live.com/" class="nav-link-btn highlight" style="background: linear-gradient(135deg, #00A896, #028090) !important; color: #FFFFFF !important; border: 1.5px solid #00A896 !important; font-weight: 800;">
         <span>🎓 상세 커리큘럼</span>
       </a>
-      <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important;">
+      <a href="https://library.dmdg-live.com/" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important;">
         <span>📖 DMDG 서재</span>
       </a>
       <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important;">
@@ -624,19 +632,19 @@
           <tr>
             <td style="text-align: center; font-weight: 800;">실습 교구 1</td>
             <td>🦖 <strong>크롬 공룡 게임 런타임 가속도 해체 랩</strong></td>
-            <td><a href="https://dmdg-live.com/sim_dino_lab.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_dino_lab.html</a></td>
+            <td><a href="https://sim.dmdg-live.com/sim_dino_lab.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_dino_lab.html</a></td>
             <td style="text-align: center;">3주차 실습</td>
           </tr>
           <tr>
             <td style="text-align: center; font-weight: 800;">실습 교구 2</td>
             <td>🧮 <strong>윈도우 계산기 퍼센트 상태머신 랩</strong></td>
-            <td><a href="https://dmdg-live.com/sim_calc_percent.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_calc_percent.html</a></td>
+            <td><a href="https://sim.dmdg-live.com/sim_calc_percent.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_calc_percent.html</a></td>
             <td style="text-align: center;">4주차 실습</td>
           </tr>
           <tr>
             <td style="text-align: center; font-weight: 800;">실습 교구 3</td>
             <td>🛡️ <strong>클린룸 TDD 재구현 &amp; 100% 바이트 일치 랩</strong></td>
-            <td><a href="https://dmdg-live.com/sim_cleanroom_diff.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_cleanroom_diff.html</a></td>
+            <td><a href="https://sim.dmdg-live.com/sim_cleanroom_diff.html" target="_blank" rel="noopener noreferrer">https://dmdg-live.com/sim_cleanroom_diff.html</a></td>
             <td style="text-align: center;">7주차, 8주차 실습</td>
           </tr>
         </tbody>
@@ -729,7 +737,7 @@
           <div class="week-session-row">
             <strong>🌇 오후 (5h) - Hands-on 실습 &amp; 깃허브 커밋:</strong>
             <ul>
-              <li><strong>[실습 랩]</strong>: 크롬 공룡 가속도 슬라이더 웹 개조 (<a href="https://dmdg-live.com/sim_dino_lab.html" target="_blank" rel="noopener noreferrer">시뮬레이터 랩</a>)</li>
+              <li><strong>[실습 랩]</strong>: 크롬 공룡 가속도 슬라이더 웹 개조 (<a href="https://sim.dmdg-live.com/sim_dino_lab.html" target="_blank" rel="noopener noreferrer">시뮬레이터 랩</a>)</li>
               <li><strong>[포트폴리오 빌드]</strong>: 노션 스타일의 다중 포맷 클립보드 복사-붙여넣기 모듈을 순수 웹으로 클론 구현</li>
             </ul>
             <div class="qa-box">
