@@ -26,3 +26,5 @@ PayPal 가입계정.txt
 __pycache__/
 *.pyc
 
+
+_deploy_pages/
