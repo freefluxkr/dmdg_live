@@ -553,6 +553,8 @@
         <a href="rules_hub.html" class="btn-nav-rules">🛡️ Rules Hub ➔</a>
         <a href="https://sim.dmdg-live.com" class="btn-nav-rules">🎮 Sim Hub ➔</a>
         <button type="button" class="btn-nav-rules btn-nav-agents" onclick="openAgentsTab()">🤖 에이전트 구성도 ➔</button>
+        <button type="button" class="btn-nav-rules btn-nav-tree" onclick="openSpecialTab('tree')">📐 디렉터리 트리 ➔</button>
+        <button type="button" class="btn-nav-rules btn-nav-services" onclick="openSpecialTab('services')">🌐 서비스 구조도 ➔</button>
       </div>
     </header>
 
@@ -599,8 +601,6 @@
       <button class="tab-btn" onclick="switchTab('prj', this)">🚀 DMDG_PRJ 사업부</button>
       <button class="tab-btn" onclick="switchTab('live', this)">🌐 상용 라이브 &amp; 시험</button>
       <button class="tab-btn" onclick="switchTab('system', this)">⚙️ 시스템 · 스크립트 · 아카이브</button>
-      <button class="tab-btn" onclick="switchTab('tree', this)">📐 최신 디렉터리 트리 (Tree View)</button>
-      <button class="tab-btn" onclick="switchTab('services', this)">🌐 전체 서비스 구조도 (Service Map)</button>
     </div>
 
     <!-- TAB 1: GRID -->
@@ -1133,10 +1133,12 @@
     function switchTab(tabId, el) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       const navAgentsBtn = document.querySelector('.btn-nav-agents');
-      if (navAgentsBtn) {
-        navAgentsBtn.style.outline = tabId === 'agents' ? '2px solid #c084fc' : 'none';
-      }
-      const activeBtn = el || (tabId !== 'agents' && window.event ? window.event.currentTarget : null);
+      const navTreeBtn = document.querySelector('.btn-nav-tree');
+      const navServicesBtn = document.querySelector('.btn-nav-services');
+      if (navAgentsBtn) navAgentsBtn.style.outline = tabId === 'agents' ? '2px solid #c084fc' : 'none';
+      if (navTreeBtn) navTreeBtn.style.outline = tabId === 'tree' ? '2px solid #38bdf8' : 'none';
+      if (navServicesBtn) navServicesBtn.style.outline = tabId === 'services' ? '2px solid #34d399' : 'none';
+      const activeBtn = el || (!['agents', 'tree', 'services'].includes(tabId) && window.event ? window.event.currentTarget : null);
       if (activeBtn && activeBtn.classList && activeBtn.classList.contains('tab-btn')) {
         activeBtn.classList.add('active');
       }
@@ -1178,9 +1180,12 @@
       }
     }
 
-    function openAgentsTab() {
-      switchTab('agents', null);
+    function openSpecialTab(tabId) {
+      switchTab(tabId, null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function openAgentsTab() {
+      openSpecialTab('agents');
     }
 
     // Live Search Filter
