@@ -881,7 +881,7 @@
           <ul class="card-list">
             <li>• <strong>_archive/</strong>: <code>legacy_md_dirs_20261105/</code>, <code>demo_htmls_20261105/</code>, <code>backups/</code>, <code>temp_projects/</code>, <code>old_zips_20261105/</code></li>
             <li>• <strong>scratch/</strong>: 파싱·분석용 임시 작업 파일 보관</li>
-            <li>• <strong>루트 마스터 문서</strong>: <code>WORKSPACE_FOLDER_AND_FILE_GUIDE.md</code>, <code>README.md</code>, <code>DMDG_WORKSPACE_AND_ARCHIVE_MANIFEST.md</code></li>
+            <li>• <strong>루트 최신 문서 (2026-11-18)</strong>: <code>DMDG_전체서비스_구조도_20261118.txt</code>, <code>DMDG_프로젝트_폴더구조_20261118.txt</code>, <code>DMDG_재정비_해야할일_20261118.txt</code></li>
           </ul>
         </div>
 
@@ -890,45 +890,34 @@
 
     <!-- TAB 2: INTERACTIVE ASCII TREE -->
     <div id="tab-tree" class="tab-content" style="display: none;">
-      <div class="tree-box"><span class="tree-root">c:\DMDG_Jobs\</span>
+      <div class="tree-box"><span class="tree-root">C:\ (DMDG 통합 워크스페이스 · 2026-11-18 최신)</span>
 │
-├── <span class="tree-dir-upper">DMDG_RULEs/</span>                   <span class="tree-desc"># 🛡️ [신규 표준] 공통 규칙(00_common) &amp; 작업별 규칙(01_tasks)</span>
-│   ├── README.md                 <span class="tree-desc"># 공통/작업별 적용 시점 매핑표</span>
-│   ├── 00_common/                <span class="tree-desc"># 01_COMMON_TEAM_AND_EXECUTION_RULES, 02_COMMON_WORKSPACE_AND_PACKAGING_RULES</span>
-│   └── 01_tasks/                 <span class="tree-desc"># 01~06 위키독스, 블로그SEO, 시뮬레이터, 말쌈, 스레드, 유튜브 규칙</span>
+├── <span class="tree-dir-upper">DMDG_AICAP\</span>                   <span class="tree-desc"># 🏢 [기준 원본] AICAP 역량 고과 + 16비트 가상 오피스 (aicap.dmdg-live.com)</span>
+│   ├── backend\                  <span class="tree-desc"># main.py, db.py, engine.py, office_chat.py, deliverables.py, llm_gemini.py</span>
+│   ├── frontend\                 <span class="tree-desc"># index.html(모바일 반응형), office.html + css/ + js 6모듈 + avatars/</span>
+│   └── deliverables\ · aicap.db  <span class="tree-desc"># Gemini 2.5 Flash 마크다운 보고서 &amp; 영구 SQLite DB</span>
 │
-├── <span class="tree-dir-upper">DMDG_PLANs/</span>                   <span class="tree-desc"># 📋 [신규 표준] 실행 계획서, 로드맵, 체크포인트 통합 보관소</span>
-│   ├── README.md                 <span class="tree-desc"># 전사 로드맵 및 프로젝트별 기획서 목차</span>
-│   ├── SESSION_CHECKPOINT_20261110.md  <span class="tree-desc"># 최신 세션 체크포인트</span>
-│   ├── FUTURE_TO_DO_LIST.md      <span class="tree-desc"># 주간 마스터 로드맵</span>
-│   └── 02_project_plans/         <span class="tree-desc"># books/, services/, education/, novels/</span>
+├── <span class="tree-dir-upper">DMDG_V_OFFICE\</span>                <span class="tree-desc"># 📦 [독립 패키지] 가상 오피스 단독 배포본 · BOOK_PLAN.md</span>
+├── <span class="tree-dir-upper">DMDG_DaaS\</span>                    <span class="tree-desc"># 🛡️ [교차검증] Chrome MV3 확장(OmniGuard) &amp; 15분 워크로드 워커</span>
+├── <span class="tree-dir-upper">DMDG_Backups\</span>                 <span class="tree-desc"># 💾 타임스탬프 통합 ZIP 스냅샷 보관소</span>
 │
-├── <span class="tree-dir-upper">DMDG_PRJ/</span>                     <span class="tree-desc"># 🚀 [핵심 사업부] 실서버·도서·시험·시뮬레이터·미디어 마스터</span>
-│   ├── <span class="tree-dir-lower">dmdg_live_dot_com/</span>        <span class="tree-desc"># 🌐 dmdg-live.com 대표 포털 &amp; Hub 4종 (workspace/rules/sim_master/kg2)</span>
-│   ├── <span class="tree-dir-lower">dmdg_malssam_dot_com/</span>     <span class="tree-desc"># 🇰🇷 malssam.com 말쌈 공식 웹앱 Git 저장소</span>
-│   ├── <span class="tree-dir-lower">sql_exam/ · ai_math_exam/ · ai_data_exam/ · python_ai_exam/</span> <span class="tree-desc"># 🎯 4대 기초 공인 시험</span>
-│   ├── <span class="tree-dir-lower">career_recommender/</span>       <span class="tree-desc"># 🎯 A.C.E.S 직무 추천 ML/SHAP 파이프라인</span>
-│   ├── <span class="tree-dir-upper">DMDG_WIKIDOCS/</span>            <span class="tree-desc"># 📚 01~26 위키독스 도서 (심화 1~3 &amp; AEGIS 캡스톤 포함)</span>
-│   ├── <span class="tree-dir-upper">DMDG_LIVE/</span>                <span class="tree-desc"># 🎛️ 04_smart_scm, 05_simulator_hub, 06_novels, 07_telegram, 10_malssam</span>
-│   ├── <span class="tree-dir-upper">DMDG_YOUTUBE/</span>             <span class="tree-desc"># 🎬 13. REA_YOUTUBE 롱폼·쇼츠 미디어 파이프라인</span>
-│   ├── <span class="tree-dir-upper">DMDG_CURR/ · DMDG_DESIGN/ · DMDG_QUANTUM_ML/ · DMDG_RENEWAL/</span>
-│   ├── smartcar_lakehouse_book/  <span class="tree-desc"># 🚗 Book 22015 원본 원고 및 배포 스크립트</span>
-│   └── THREADs Site 관련/        <span class="tree-desc"># 🧵 Meta Threads Graph API 홍보 설계 및 전용 AGENTS.md</span>
-│
-├── <span class="tree-dir-upper">.agents/</span>                      <span class="tree-desc"># 🤖 Antigravity 규칙(rules)·스킬(skills 15종)·초상화·텔레그램 관제</span>
-├── <span class="tree-dir-upper">scripts/</span>                      <span class="tree-desc"># 🛠️ 위키독스 발행, 블로그 자동화, 배포 유틸리티 스위트</span>
-├── <span class="tree-dir-upper">scripts_wikidocs/</span>             <span class="tree-desc"># 📝 위키독스/기술 블로그 마크다운 원본 (01~20편)</span>
-├── <span class="tree-dir-upper">assets/</span>                       <span class="tree-desc"># 🖼️ 공용 시각 에셋</span>
-├── <span class="tree-dir-upper">scratch/</span>                      <span class="tree-desc"># 🧪 파싱·분석용 임시 작업 파일</span>
-├── <span class="tree-dir-upper">_archive/</span>                     <span class="tree-desc"># 📦 구형 MD_ 폴더, demo_htmls_20261105, 백업, 레거시 격리 보관</span>
-├── <span class="tree-dir-upper">.streamlit/ · .vscode/</span>        <span class="tree-desc"># ⚙️ 실행 및 IDE 환경 설정</span>
-│
-├── WORKSPACE_FOLDER_AND_FILE_GUIDE.md     <span class="tree-desc"># 🌟 최신 폴더 구조 및 주요 파일 마스터 설명서</span>
-├── README.md                              <span class="tree-desc"># 🏛️ DMDG 스튜디오 통합 대문 안내서</span>
-├── DMDG_WORKSPACE_AND_ARCHIVE_MANIFEST.md <span class="tree-desc"># 📦 2026-11-10 정리 매니페스트 &amp; 번들 목록</span>
-├── DMDG_20261110_DOWNLOAD_FILES_SUMMARY.md<span class="tree-desc"># ⬇️ 다운로드 폴더 백업 zip 요약서</span>
-├── WORKSPACE_STRUCTURE.md · PROJECTS_STRUCTURE.md
-└── .env · .gitignore</div>
+└── <span class="tree-dir-upper">DMDG_Jobs\</span>                    <span class="tree-desc"># 🏛️ 마스터 워크스페이스 · 기획 · 도서 · 포털 · 쇼케이스</span>
+    ├── <span class="tree-dir-upper">DMDG_RULEs\</span>               <span class="tree-desc"># 🛡️ 공통/작업별 규칙 매핑표</span>
+    ├── <span class="tree-dir-upper">DMDG_PLANs\</span>               <span class="tree-desc"># 📋 실행 계획서, 로드맵, 체크포인트 보관소</span>
+    ├── <span class="tree-dir-upper">DMDG_PRJ\</span>                 <span class="tree-desc"># 🚀 실서버·도서·시험·시뮬레이터·쇼케이스 마스터</span>
+    │   ├── <span class="tree-dir-lower">dmdg_live_dot_com\</span>    <span class="tree-desc"># 🌐 dmdg-live.com 메인 포털 &amp; Hub 4종 + _deploy_pages\(sim, academy)</span>
+    │   ├── <span class="tree-dir-upper">DMDG_WIKIDOCS\</span>        <span class="tree-desc"># 📚 01~31권 위키독스 도서 (27권 EXAONE, 30권 AICAP, 31권 V_OFFICE 포함)</span>
+    │   ├── <span class="tree-dir-upper">DMDG_FINISHed\</span>        <span class="tree-desc"># 🏆 학생 쇼케이스(dmdg-student-showcase + _cf_videos), 말쌈관 등 완료 아카이브</span>
+    │   ├── <span class="tree-dir-upper">novel_planning\</span>       <span class="tree-desc"># ✍️ 팩션 소설 기획</span>
+    │   └── THREADs Site 관련\    <span class="tree-desc"># 🧵 Meta Threads Graph API 자동 홍보 파이프라인</span>
+    ├── <span class="tree-dir-upper">.agents\</span>                  <span class="tree-desc"># 🤖 Antigravity 규칙(MODEL_PRECHECK, WIKIDOCS 제1~15조) &amp; 스킬 16종</span>
+    ├── <span class="tree-dir-upper">scripts\ · scripts_wikidocs\ · assets\ · scratch\ · _archive\</span>
+    ├── DMDG_전체서비스_구조도_20261118.txt      <span class="tree-desc"># 🗺️ 메인 포털 &amp; 3대 서브도메인 · 전체 서비스 구조도</span>
+    ├── DMDG_프로젝트_폴더구조_20261118.txt      <span class="tree-desc"># 📁 로컬 프로젝트별 상세 폴더 트리</span>
+    ├── DMDG_재정비_해야할일_20261118.txt        <span class="tree-desc"># 📋 통합 마스터 해야 할 일 목록</span>
+    ├── DMDG_TASK_BY_MODEL_GUIDE_20261113.txt    <span class="tree-desc"># 🧠 작업별 최적 AI 모델 매핑표</span>
+    ├── AI_MODELS_GUIDE 및 API 단가_20261113.txt <span class="tree-desc"># 💰 AI 모델 및 API 단가 가이드</span>
+    └── .env · .gitignore</div>
     </div>
 
     <!-- TAB 3: AGENTS ORG CHART -->
