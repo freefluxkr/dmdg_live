@@ -600,6 +600,7 @@
       <button class="tab-btn" onclick="switchTab('live', this)">🌐 상용 라이브 &amp; 시험</button>
       <button class="tab-btn" onclick="switchTab('system', this)">⚙️ 시스템 · 스크립트 · 아카이브</button>
       <button class="tab-btn" onclick="switchTab('tree', this)">📐 최신 디렉터리 트리 (Tree View)</button>
+      <button class="tab-btn" onclick="switchTab('services', this)">🌐 전체 서비스 구조도 (Service Map)</button>
     </div>
 
     <!-- TAB 1: GRID -->
@@ -920,6 +921,48 @@
     └── .env · .gitignore</div>
     </div>
 
+    <!-- TAB 2-B: DMDG ALL SERVICES MAP -->
+    <div id="tab-services" class="tab-content" style="display: none;">
+      <div class="tree-box"><span class="tree-root">[최상위 통합 서비스 허브] <a href="https://dmdg-live.com" target="_blank" rel="noopener" style="color:#38bdf8;">https://dmdg-live.com</a></span>
+<span class="tree-desc">  - 호스팅: GitHub Pages (저장소: freefluxkr/dmdg_live) · DMDG 전체 AI·콘텐츠·교육·관제 대표 포털</span>
+
+│
+├── <span class="tree-dir-upper">[8대 독립 서브도메인 라인업 (*.dmdg-live.com · 전원 200 OK)]</span>
+│   ├── 1. 🎙️ <span class="tree-dir-lower">마음잇기</span>           <a href="https://voice.dmdg-live.com" target="_blank" rel="noopener" style="color:#34d399;">https://voice.dmdg-live.com</a>     <span class="tree-desc">(Cloudflare Pages: dmdg-voice)</span>
+│   │     └─ <span class="tree-desc">다문화·외국인 한국어 발음 교정 &amp; 목소리 릴레이 소셜 케어 웹앱</span>
+│   │
+│   ├── 2. 🌸 <span class="tree-dir-lower">소담 라이브</span>        <a href="https://sodam.dmdg-live.com" target="_blank" rel="noopener" style="color:#34d399;">https://sodam.dmdg-live.com</a>     <span class="tree-desc">(Cloudflare Pages: dmdg-sodam)</span>
+│   │     └─ <span class="tree-desc">어르신·청년을 위한 세대공감 동화 릴레이 및 AI 감성 치유 힐링 웹</span>
+│   │
+│   ├── 3. 📖 <span class="tree-dir-lower">서재관</span>             <a href="https://library.dmdg-live.com" target="_blank" rel="noopener" style="color:#34d399;">https://library.dmdg-live.com</a>   <span class="tree-desc">(Cloudflare Pages: dmdg-library)</span>
+│   │     └─ <span class="tree-desc">'삶은 개구리 트릴로지' 등 팩션 소설 22편 전용 E-Reader &amp; AI 오디오 낭독</span>
+│   │
+│   ├── 4. 🧪 <span class="tree-dir-lower">시뮬레이터 허브</span>    <a href="https://sim.dmdg-live.com" target="_blank" rel="noopener" style="color:#34d399;">https://sim.dmdg-live.com</a>       <span class="tree-desc">(Cloudflare Pages: dmdg-sim)</span>
+│   │     └─ <span class="tree-desc">60여 종의 인터랙티브 AI·딥러닝·수학·아키텍처 웹 시뮬레이터</span>
+│   │
+│   ├── 5. 🎓 <span class="tree-dir-lower">아카데미 쇼케이스</span>  <a href="https://academy.dmdg-live.com" target="_blank" rel="noopener" style="color:#34d399;">https://academy.dmdg-live.com</a>   <span class="tree-desc">(Cloudflare Pages: dmdg-academy)</span>
+│   │     └─ <span class="tree-desc">실제 콘텐츠 인터랙티브 쇼케이스(음성 낭독/파형), 교육 커리큘럼, 도서 안내</span>
+│   │
+│   ├── 6. 🏆 <span class="tree-dir-lower">학생 쇼케이스</span>      <a href="https://showcase.dmdg-live.com" target="_blank" rel="noopener" style="color:#34d399;">https://showcase.dmdg-live.com</a>  <span class="tree-desc">(Cloudflare Pages: dmdg-showcase)</span>
+│   │     ├─ 관리자 평가 뷰: <a href="https://showcase.dmdg-live.com/admin/" target="_blank" rel="noopener" style="color:#38bdf8;">https://showcase.dmdg-live.com/admin/</a>
+│   │     └─ 영상 스트리밍: <a href="https://dmdg-showcase-media.pages.dev" target="_blank" rel="noopener" style="color:#38bdf8;">https://dmdg-showcase-media.pages.dev</a> <span class="tree-desc">(34개 영상 모바일 Safari 호환)</span>
+│   │        <span class="tree-desc">· 6개 교육 과정(64개 팀 프로젝트) 발표자료 · AI 4P 피드백 아카이브</span>
+│   │
+│   ├── 7. 🏢 <span class="tree-dir-lower">직무진단·가상오피스</span> <a href="https://aicap.dmdg-live.com/office" target="_blank" rel="noopener" style="color:#34d399;">https://aicap.dmdg-live.com/office</a> <span class="tree-desc">(Cloudflare Tunnel ➔ FastAPI)</span>
+│   │     └─ <span class="tree-desc">A.C.E.S 역량 고과(TIR/TTA/SHAP), 모바일 대시보드, 16비트 가상 오피스(Gemini 2.5 Flash)</span>
+│   │
+│   └── 8. 🗼 <span class="tree-dir-lower">워크스페이스 관제 타워</span> <a href="https://tower.dmdg-live.com" target="_blank" rel="noopener" style="color:#34d399;">https://tower.dmdg-live.com</a> <span class="tree-desc">(Cloudflare Pages: dmdg-tower)</span>
+│         └─ <span class="tree-desc">workspace_hub.html (인프라·폴더 트리·서비스 구조도·조직도) + rules_hub.html</span>
+│
+├── <span class="tree-dir-upper">[포털 내 관리자 &amp; 독립 브랜드 도메인]</span>
+│   ├── 🔒 관리자 대시보드  <a href="https://dmdg-live.com/admin.html" target="_blank" rel="noopener" style="color:#38bdf8;">https://dmdg-live.com/admin.html</a> <span class="tree-desc">(PROD v3.0 · 5대 관제 탭)</span>
+│   ├── 🗣️ 말쌈관           <a href="https://malssam.com/" target="_blank" rel="noopener" style="color:#38bdf8;">https://malssam.com/</a> <span class="tree-desc">(바른 우리말·신조어 AI 백과사전 &amp; 퀴즈 PWA)</span>
+│   └── 📚 위키북스         <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener" style="color:#38bdf8;">https://dmdg.wikidocs.net/</a> <span class="tree-desc">(30권: 22228, 31권: 22232 비공개 포함)</span>
+│
+└── <span class="tree-dir-upper">[공통 클라우드 데이터 백본]</span>
+      └── Firebase (dmdg-live / dmdg-ut): <span class="tree-desc">Auth, Firestore (chosun_yeppumal 450건 등), 결제/로그</span></div>
+    </div>
+
     <!-- TAB 3: AGENTS ORG CHART -->
     <div id="tab-agents" class="tab-content" style="display: none;">
       <div class="org-banner">
@@ -1100,19 +1143,28 @@
 
       const gridEl = document.getElementById('tab-grid');
       const treeEl = document.getElementById('tab-tree');
+      const servicesEl = document.getElementById('tab-services');
       const agentsEl = document.getElementById('tab-agents');
 
       if (tabId === 'tree') {
         gridEl.style.display = 'none';
         treeEl.style.display = 'block';
+        if (servicesEl) servicesEl.style.display = 'none';
+        if (agentsEl) agentsEl.style.display = 'none';
+      } else if (tabId === 'services') {
+        gridEl.style.display = 'none';
+        treeEl.style.display = 'none';
+        if (servicesEl) servicesEl.style.display = 'block';
         if (agentsEl) agentsEl.style.display = 'none';
       } else if (tabId === 'agents') {
         gridEl.style.display = 'none';
         treeEl.style.display = 'none';
+        if (servicesEl) servicesEl.style.display = 'none';
         if (agentsEl) agentsEl.style.display = 'block';
       } else {
         gridEl.style.display = 'block';
         treeEl.style.display = 'none';
+        if (servicesEl) servicesEl.style.display = 'none';
         if (agentsEl) agentsEl.style.display = 'none';
 
         document.querySelectorAll('.dir-card').forEach(card => {
