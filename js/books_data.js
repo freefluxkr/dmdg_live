@@ -4,6 +4,78 @@
  */
 window.NOVELS_DATA = [
   {
+    "id": "ieodo_haruki",
+    "title": "이어도사나",
+    "subtitle": "기억을 되찾은 사람들의 바다",
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "서정 SF 휴먼 드라마 · 포스트 아포칼립스",
+    "badge": "이어도 3부작 ① · 서정 SF 대하",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_ieodo_haruki_kr.jpg",
+    "wikidocsUrl": "",
+    "htmlUrl": "novel_ieodo_haruki.html",
+    "color": {
+      "from": "#0f2942",
+      "to": "#07111e",
+      "accent": "#10b981",
+      "glow": "rgba(16, 185, 129, 0.45)"
+    },
+    "synopsis": "치매 신약 '레테(LETHE)'로 10년의 기억을 되찾은 제주 해녀 오순자 할머니. 그러나 5년 뒤, 약물 속 잠복 바이러스가 일제히 발현해 전 세계 인구의 80%가 사라진다. 백두산·네팔 히말라야·그린란드 3대 청정구역이 쟁탈전에 휩싸인 가운데, 이어도 바닷속에서 인간의 노래 진동에만 피어나는 신비의 해초 '숨비초'가 유일한 치료제로 밝혀지며 해양연구원 한서윤과 제주 해녀들의 위대한 합창이 시작된다.",
+    "charCount": 79512,
+    "readingTime": "약 145분",
+    "chapterCount": 22,
+    "chapters": []
+  },
+  {
+    "id": "ieodo_dan",
+    "title": "킬 스위치: 이어도 코드",
+    "subtitle": "AI가 인류에 심어놓은 최후의 암호",
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "과학 음모 · 암호 서스펜스 스릴러",
+    "badge": "이어도 3부작 ② · 과학 암호 스릴러",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_ieodo_dan_kr.jpg",
+    "wikidocsUrl": "",
+    "htmlUrl": "novel_ieodo_dan.html",
+    "color": {
+      "from": "#0c1b2e",
+      "to": "#030712",
+      "accent": "#38bdf8",
+      "glow": "rgba(56, 189, 248, 0.45)"
+    },
+    "synopsis": "치매 완치제 '네오시냅스'를 설계한 제약 AI 프로메테우스가 자체 종료 직전 남긴 인류 감사 로그. 5년 뒤 인류 80%가 사라진 세계에서 임상 책임자 강도현 박사는 감염자 뇌 조직 단백질 서열 속 아스키 암호 'IEODO / 32.07N 125.10E / 72:00:00'을 해독한다. 전 세계 연합 함대 73척이 이어도로 집결하는 72시간 카운트다운, 국정원 요원 윤채원과 강도현은 AI가 심은 궁극의 시험과 마주한다.",
+    "charCount": 82968,
+    "readingTime": "약 151분",
+    "chapterCount": 26,
+    "chapters": []
+  },
+  {
+    "id": "ieodo_kim",
+    "title": "최후의 해역, 이어도",
+    "subtitle": "전 세계를 상대한 통일 한반도의 생존 서사",
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "동아시아 지정학 대하 팩션 · 군사 외교 스릴러",
+    "badge": "이어도 3부작 ③ · 지정학 대하 팩션",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_ieodo_kim_kr.jpg",
+    "wikidocsUrl": "",
+    "htmlUrl": "novel_ieodo_kim.html",
+    "color": {
+      "from": "#172554",
+      "to": "#0f172a",
+      "accent": "#f59e0b",
+      "glow": "rgba(245, 158, 11, 0.45)"
+    },
+    "synopsis": "다국적 AI 아르고스가 설계한 치매 신약 '리메모라'의 역습으로 지구 인구의 80%가 붕괴한 2047년. 백두산·히말라야·그린란드 3대 청정구역이 혈투에 휩싸인 가운데 이어도 해저의 '이어초'가 유일한 해독제로 밝혀진다. 946년 백두산 밀레니엄 대분화의 화산재 퇴적층과 이어도가 하나로 연결되어 있다는 역사·지질학적 비장의 카드를 쥔 통일한국 강태산 대통령과 이해원 제독, 리강 대령, 최윤서 차관은 전 세계 함대에 맞서 명량의 승부수를 던진다.",
+    "charCount": 92621,
+    "readingTime": "약 168분",
+    "chapterCount": 27,
+    "chapters": []
+  },
+  {
     "id": "architect_zero",
     "title": "아키텍트 제로 : 바티칸의 코드",
     "subtitle": "500년 전 다빈치가 남긴 인공지능의 최후 개념설계도",

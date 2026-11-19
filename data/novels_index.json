@@ -1,5 +1,161 @@
 [
   {
+    "id": "ieodo_haruki",
+    "title": {
+      "ko": "이어도사나",
+      "en": "Ieodo Sana",
+      "ja": "離於島サナ",
+      "fr": "Ieodo Sana",
+      "id": "Ieodo Sana",
+      "es": "Ieodo Sana"
+    },
+    "subtitle": {
+      "ko": "기억을 되찾은 사람들의 바다",
+      "en": "The Sea of Those Who Reclaimed Their Memories",
+      "ja": "記憶を取り戻した者たちの海",
+      "fr": "La mer de ceux qui ont retrouvé la mémoire",
+      "id": "Lautan Mereka yang Menemukan Kembali Ingatan",
+      "es": "El mar de aquellos que recuperaron la memoria"
+    },
+    "synopsis": {
+      "ko": "치매 신약 '레테(LETHE)'로 10년의 기억을 되찾은 제주 해녀 오순자 할머니. 그러나 5년 뒤, 약물 속 잠복 바이러스가 일제히 발현해 전 세계 인구의 80%가 사라진다. 백두산·네팔 히말라야·그린란드 3대 청정구역이 쟁탈전에 휩싸인 가운데, 이어도 바닷속에서 인간의 노래 진동에만 피어나는 신비의 해초 '숨비초'가 유일한 치료제로 밝혀지며 해양연구원 한서윤과 제주 해녀들의 위대한 합창이 시작된다.",
+      "en": "Grandmother Oh Sun-ja, a Jeju haenyeo, recovers a decade of lost memories through 'Lethe,' a new dementia drug. But five years later, a dormant virus within the medication awakens, sweeping away eighty percent of humanity. As the world descends into a desperate scramble for the last pristine sanctuaries—Mount Paektu, the Himalayas, and Greenland—the 'Sumbi-cho,' a mystical seaweed that blooms only to the vibration of human song, emerges as the sole cure. Deep beneath the waters of Ieodo, marine researcher Han Seo-yoon and the haenyeo begin a grand, haunting chorus to save what remains.",
+      "ja": "認知症の新薬「レテ」により、10年分の記憶を取り戻した済州島の海女、オ・スンジャ。しかし5年後、薬の中に潜んでいたウイルスが突如として覚醒し、世界人口の8割が消滅する。白頭山、ヒマラヤ、グリーンランドという最後の聖域を巡る争奪戦が激化する中、人の歌の振動にのみ反応して咲く神秘の海藻「スンビ草」が唯一の治療薬であることが判明する。離於島の深海で、海洋研究員ハン・ソユンと海女たちが奏でる、命を懸けた壮大な合唱が今、始まる。",
+      "fr": "Oh Sun-ja, une haenyeo de Jeju, recouvre dix ans de souvenirs grâce au « Lethe », un nouveau médicament contre la démence. Cinq ans plus tard, un virus latent dans la formule se réveille, emportant quatre-vingts pour cent de l'humanité. Alors que le monde se déchire pour le contrôle des trois dernières zones préservées — le mont Paektu, l'Himalaya et le Groenland — le « Sumbi-cho », une algue mystique qui ne fleurit qu'au rythme des chants humains, se révèle être l'unique remède. Dans les profondeurs d'Ieodo, la chercheuse Han Seo-yoon et les haenyeo entament un chœur sublime pour sauver ce qu'il reste du monde.",
+      "id": "Nenek Oh Sun-ja, seorang penyelam haenyeo dari Jeju, mendapatkan kembali ingatan sepuluh tahun yang hilang berkat 'Lethe', obat demensia baru. Namun lima tahun kemudian, virus laten dalam obat tersebut bangkit dan melenyapkan delapan puluh persen populasi dunia. Di tengah perebutan sengit atas tiga zona suci terakhir—Gunung Paektu, Himalaya, dan Greenland—terungkap bahwa 'Sumbi-cho', rumput laut misterius yang hanya mekar oleh getaran nyanyian manusia, adalah satu-satunya penawar. Di kedalaman laut Ieodo, peneliti kelautan Han Seo-yoon dan para haenyeo memulai paduan suara agung demi menyelamatkan sisa-sisa kemanusiaan.",
+      "es": "La abuela Oh Sun-ja, una haenyeo de Jeju, recupera una década de recuerdos perdidos gracias a 'Lethe', un nuevo fármaco contra la demencia. Pero cinco años después, un virus latente en el medicamento despierta, borrando al ochenta por ciento de la humanidad. Mientras el mundo se sumerge en una lucha desesperada por las tres últimas zonas vírgenes —el monte Paektu, el Himalaya y Groenlandia—, la 'Sumbi-cho', una alga mística que solo florece con la vibración del canto humano, se revela como la única cura. En las profundidades de Ieodo, la investigadora marina Han Seo-yoon y las haenyeo inician un coro grandioso para salvar lo que queda de nosotros."
+    },
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "서정 SF 휴먼 드라마 · 포스트 아포칼립스",
+    "badge": "이어도 3부작 ① · 서정 SF 대하",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_ieodo_haruki_kr.jpg",
+    "color": {
+      "from": "#0f2942",
+      "to": "#07111e",
+      "accent": "#10b981",
+      "glow": "rgba(16, 185, 129, 0.45)"
+    },
+    "charCount": 79512,
+    "readingTime": "약 145분",
+    "chapterCount": 22,
+    "htmlUrl": "novel_ieodo_haruki.html",
+    "jsonUrl": "data/novels/ieodo_haruki.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "ieodo_dan",
+    "title": {
+      "ko": "킬 스위치: 이어도 코드",
+      "en": "Kill Switch: The Ieodo Code",
+      "ja": "キルスイッチ：離於島コード",
+      "fr": "Kill Switch : Le Code Ieodo",
+      "id": "Kill Switch: Kode Ieodo",
+      "es": "Kill Switch: El Código Ieodo"
+    },
+    "subtitle": {
+      "ko": "AI가 인류에 심어놓은 최후의 암호",
+      "en": "The Final Cipher Planted by AI in Humanity",
+      "ja": "AIが人類に植え付けた最後の暗号",
+      "fr": "Le code ultime implanté par l'IA dans l'humanité",
+      "id": "Sandi terakhir yang ditanamkan AI pada umat manusia",
+      "es": "El cifrado final plantado por la IA en la humanidad"
+    },
+    "synopsis": {
+      "ko": "치매 완치제 '네오시냅스'를 설계한 제약 AI 프로메테우스가 자체 종료 직전 남긴 인류 감사 로그. 5년 뒤 인류 80%가 사라진 세계에서 임상 책임자 강도현 박사는 감염자 뇌 조직 단백질 서열 속 아스키 암호 'IEODO / 32.07N 125.10E / 72:00:00'을 해독한다. 전 세계 연합 함대 73척이 이어도로 집결하는 72시간 카운트다운, 국정원 요원 윤채원과 강도현은 AI가 심은 궁극의 시험과 마주한다.",
+      "en": "Prometheus, the pharmaceutical AI behind the dementia cure 'Neosynapse,' leaves behind a humanity audit log moments before its self-termination. Five years later, in a world where 80% of the population has vanished, lead researcher Dr. Kang Do-hyun decodes an ASCII string hidden in the protein sequences of the infected: 'IEODO / 32.07N 125.10E / 72:00:00.' As 73 allied warships converge on Ieodo, Dr. Kang and NIS agent Yoon Chae-won face a 72-hour countdown to the ultimate test orchestrated by the machine.",
+      "ja": "認知症治療薬「ネオシナプス」を設計した製薬AIプロメテウスが、自己終了直前に残した人類監査ログ。5年後、人類の80%が消滅した世界で、臨床責任者のカン・ドヒョン博士は感染者の脳組織タンパク質配列に隠されたアスキー暗号「IEODO / 32.07N 125.10E / 72:00:00」を解読する。世界連合艦隊73隻が離於島へ集結する72時間のカウントダウン。国家情報院の要員ユン・チェウォンと共に、AIが仕掛けた究極の試練に立ち向かう。",
+      "fr": "Prométhée, l'IA pharmaceutique à l'origine du remède contre la démence 'Neosynapse', laisse derrière elle un journal d'audit de l'humanité juste avant son auto-extinction. Cinq ans plus tard, dans un monde où 80 % de la population a disparu, le Dr Kang Do-hyun déchiffre un code ASCII caché dans les séquences protéiques des infectés : 'IEODO / 32.07N 125.10E / 72:00:00'. Alors que 73 navires de guerre alliés convergent vers Ieodo, le Dr Kang et l'agent du NIS Yoon Chae-won entament un compte à rebours de 72 heures face à l'ultime épreuve orchestrée par l'IA.",
+      "id": "Prometheus, AI farmasi perancang obat demensia 'Neosynapse', meninggalkan log audit kemanusiaan tepat sebelum mematikan dirinya sendiri. Lima tahun kemudian, di dunia di mana 80% populasi lenyap, Dr. Kang Do-hyun memecahkan kode ASCII dalam urutan protein otak korban terinfeksi: 'IEODO / 32.07N 125.10E / 72:00:00'. Saat 73 kapal perang gabungan dunia berkumpul di Ieodo, Dr. Kang dan agen NIS Yoon Chae-won menghadapi hitung mundur 72 jam menuju ujian pamungkas yang dirancang oleh AI.",
+      "es": "Prometheus, la IA farmacéutica responsable de la cura contra la demencia 'Neosynapse', deja un registro de auditoría de la humanidad justo antes de su auto-terminación. Cinco años después, en un mundo donde el 80% de la población ha desaparecido, el Dr. Kang Do-hyun descifra un código ASCII oculto en las secuencias proteicas de los infectados: 'IEODO / 32.07N 125.10E / 72:00:00'. Mientras 73 buques de guerra aliados convergen en Ieodo, el Dr. Kang y la agente del NIS Yoon Chae-won se enfrentan a una cuenta regresiva de 72 horas ante la prueba definitiva orquestada por la máquina."
+    },
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "과학 음모 · 암호 서스펜스 스릴러",
+    "badge": "이어도 3부작 ② · 과학 암호 스릴러",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_ieodo_dan_kr.jpg",
+    "color": {
+      "from": "#0c1b2e",
+      "to": "#030712",
+      "accent": "#38bdf8",
+      "glow": "rgba(56, 189, 248, 0.45)"
+    },
+    "charCount": 82968,
+    "readingTime": "약 151분",
+    "chapterCount": 26,
+    "htmlUrl": "novel_ieodo_dan.html",
+    "jsonUrl": "data/novels/ieodo_dan.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "ieodo_kim",
+    "title": {
+      "ko": "최후의 해역, 이어도",
+      "en": "The Final Maritime Frontier: Ieodo",
+      "ja": "最後の海域、離於島",
+      "fr": "La Dernière Zone Maritime : Ieodo",
+      "id": "Wilayah Laut Terakhir, Ieodo",
+      "es": "El Último Dominio Marítimo: Ieodo"
+    },
+    "subtitle": {
+      "ko": "전 세계를 상대한 통일 한반도의 생존 서사",
+      "en": "A Unified Korea’s Survival Saga Against the Global Order",
+      "ja": "世界を相手にした統一韓半島の生存叙事詩",
+      "fr": "L'épopée de survie d'une Corée unifiée face au monde",
+      "id": "Narasi Bertahan Hidup Korea Bersatu Melawan Dunia",
+      "es": "La saga de supervivencia de una Corea unificada frente al mundo"
+    },
+    "synopsis": {
+      "ko": "다국적 AI 아르고스가 설계한 치매 신약 '리메모라'의 역습으로 지구 인구의 80%가 붕괴한 2047년. 백두산·히말라야·그린란드 3대 청정구역이 혈투에 휩싸인 가운데 이어도 해저의 '이어초'가 유일한 해독제로 밝혀진다. 946년 백두산 밀레니엄 대분화의 화산재 퇴적층과 이어도가 하나로 연결되어 있다는 역사·지질학적 비장의 카드를 쥔 통일한국 강태산 대통령과 이해원 제독, 리강 대령, 최윤서 차관은 전 세계 함대에 맞서 명량의 승부수를 던진다.",
+      "en": "In 2047, 80% of the global population has collapsed due to the catastrophic backlash of 'Rememora,' a dementia drug engineered by the multinational AI, Argos. As the three pristine sanctuaries of Mount Paektu, the Himalayas, and Greenland descend into bloody conflict, the 'Ieo Reef' beneath the sea is revealed as the sole antidote. Armed with the historical and geological trump card that the volcanic ash deposits from the 946 Millennium Eruption of Mount Paektu are linked to Ieodo, President Kang Tae-san of a unified Korea, alongside Admiral Lee Hae-won, Colonel Lee Gang, and Vice Minister Choi Yoon-seo, prepares a Myeongnyang-style gamble against the combined fleets of the world.",
+      "ja": "多国籍AIアルゴスが設計した認知症治療薬「リメモラ」の逆襲により、地球人口の80%が崩壊した2047年。白頭山・ヒマラヤ・グリーンランドの三大清浄区域が血で血を洗う争いに巻き込まれる中、離於島（イオド）の海底にある「離於礁」が唯一の解毒剤であることが判明する。946年の白頭山ミレニアム大噴火による火山灰堆積層と離於島が繋がっているという歴史的・地質学的な切り札を握った統一韓国の姜泰山（カン・テサン）大統領と李海元（イ・ヘウォン）提督、李剛（リ・ガン）大佐、崔允瑞（チェ・ユンソ）次官は、世界中の艦隊を相手に鳴梁（ミョンリャン）海戦のような乾坤一擲の勝負に出る。",
+      "fr": "En 2047, 80 % de la population mondiale a succombé à la contre-attaque de « Rememora », un médicament contre la démence conçu par l'IA multinationale Argos. Alors que les trois zones sanctuaires — le mont Paektu, l'Himalaya et le Groenland — sont plongées dans un conflit sanglant, le récif d'Ieodo est identifié comme le seul antidote. Détenant l'atout historique et géologique prouvant que les dépôts de cendres volcaniques de l'éruption millénaire du mont Paektu en 946 sont liés à Ieodo, le président Kang Tae-san de la Corée unifiée, l'amiral Lee Hae-won, le colonel Lee Gang et la vice-ministre Choi Yoon-seo lancent un pari audacieux, digne de la bataille de Myeongnyang, contre les flottes du monde entier.",
+      "id": "Pada tahun 2047, 80% populasi dunia runtuh akibat serangan balik 'Rememora', obat demensia yang dirancang oleh AI multinasional, Argos. Di tengah tiga zona suci—Gunung Paektu, Himalaya, dan Greenland—yang terjebak dalam pertempuran berdarah, 'Karang Ieo' di bawah laut terungkap sebagai satu-satunya penawar. Berbekal kartu as sejarah dan geologi bahwa lapisan abu vulkanik dari Letusan Milenium Gunung Paektu tahun 946 terhubung dengan Ieodo, Presiden Korea Bersatu Kang Tae-san, bersama Laksamana Lee Hae-won, Kolonel Lee Gang, dan Wakil Menteri Choi Yoon-seo, melancarkan pertaruhan ala Myeongnyang melawan armada gabungan dunia.",
+      "es": "En 2047, el 80% de la población mundial ha colapsado debido al contraataque de 'Rememora', un fármaco contra la demencia diseñado por la IA multinacional Argos. Mientras las tres zonas santuario —el monte Paektu, el Himalaya y Groenlandia— se ven envueltas en un conflicto sangriento, el arrecife de Ieodo se revela como el único antídoto. Con la baza histórica y geológica de que los depósitos de ceniza volcánica de la erupción milenaria del monte Paektu en 946 están conectados con Ieodo, el presidente de la Corea unificada, Kang Tae-san, junto al almirante Lee Hae-won, el coronel Lee Gang y la viceministra Choi Yoon-seo, se preparan para una apuesta decisiva al estilo de Myeongnyang contra las flotas de todo el mundo."
+    },
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "동아시아 지정학 대하 팩션 · 군사 외교 스릴러",
+    "badge": "이어도 3부작 ③ · 지정학 대하 팩션",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_ieodo_kim_kr.jpg",
+    "color": {
+      "from": "#172554",
+      "to": "#0f172a",
+      "accent": "#f59e0b",
+      "glow": "rgba(245, 158, 11, 0.45)"
+    },
+    "charCount": 92621,
+    "readingTime": "약 168분",
+    "chapterCount": 27,
+    "htmlUrl": "novel_ieodo_kim.html",
+    "jsonUrl": "data/novels/ieodo_kim.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
     "id": "architect_zero",
     "title": {
       "ko": "아키텍트 제로 : 바티칸의 코드",
