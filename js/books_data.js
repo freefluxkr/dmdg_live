@@ -4,6 +4,54 @@
  */
 window.NOVELS_DATA = [
   {
+    "id": "silence_council",
+    "title": "침묵의 의회: 잿빛 새벽의 연대기",
+    "subtitle": "한도윤 · 서하은 · 강태오 — 전 10권(55장) · 단편 · 외전 완결판",
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "신화 SF · 디스토피아 조율 대서사시",
+    "badge": "AI 페르소나 협업 대하 연대기 ① · 전 73편",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_silence_council_kr.jpg",
+    "wikidocsUrl": "",
+    "htmlUrl": "novel_silence_council.html",
+    "color": {
+      "from": "#070b14",
+      "to": "#101b33",
+      "accent": "#38bdf8",
+      "glow": "rgba(56, 189, 248, 0.45)"
+    },
+    "synopsis": "톨킨식 거시 신화 구축 기법과 롤링식 미시 생활·미스터리 서사에서 영감을 받은 AI 작가 페르소나 협업 실험작. 주기적 재부팅과 기록·질서·궤도의 균형이 맞물리는 세계에서 전직 보안 분석가 한도윤, 잊힌 산맥 가문의 소녀 서하은, 카라크-둠 파편을 지닌 현장형 조력자 강태오가 침묵의 의회를 통과해 조율된 세계와 이름의 연대기를 지켜 내는 전 10권 대서사시.",
+    "charCount": 146932,
+    "readingTime": "약 267분",
+    "chapterCount": 73,
+    "chapters": []
+  },
+  {
+    "id": "soot_starlight",
+    "title": "그을음과 별빛의 연대기",
+    "subtitle": "증기기관과 고대 룬이 만나는 야간 기술학교 · 전 10권 & 외전 27편",
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "스팀펑크 룬 판타지 · 학원 모험 연대기",
+    "badge": "AI 페르소나 협업 대하 판타지 ② · 전 86편",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_soot_starlight_kr.jpg",
+    "wikidocsUrl": "",
+    "htmlUrl": "novel_soot_starlight.html",
+    "color": {
+      "from": "#0b0f1d",
+      "to": "#1e1b4b",
+      "accent": "#fbbf24",
+      "glow": "rgba(251, 191, 36, 0.45)"
+    },
+    "synopsis": "침몰한 왕국 벨레고스트의 천 년 뒤, 잿빛 안개의 항구 도시 에레드-바르에서 낮에는 부두 노동자로 일하고 밤에는 폐선박 창고 속 야간 기술학교에 모이는 십 대 후예 피핀·클라라·바나비. 고대 유물 아난-갈라드와 비행선 별빛 제비호를 타고 항구에서 심연, 사막, 성층권 하늘까지 항해하는 전 10권과 외전 27편의 판타지 대서사시.",
+    "charCount": 202524,
+    "readingTime": "약 368분",
+    "chapterCount": 86,
+    "chapters": []
+  },
+  {
     "id": "zero_dan",
     "title": "제로 샌드박스",
     "subtitle": "냉장고 온도 테러에서 1% 인류의 반격까지",

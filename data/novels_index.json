@@ -1,5 +1,109 @@
 [
   {
+    "id": "silence_council",
+    "title": {
+      "ko": "침묵의 의회: 잿빛 새벽의 연대기",
+      "en": "Council of Silence: Chronicles of the Ashen Dawn",
+      "ja": "沈黙の議会：灰色の夜明けの年代記",
+      "fr": "Le Conseil du Silence : Chroniques de l'Aube Cendrée",
+      "id": "Dewan Keheningan: Kronik Fajar Kelabu",
+      "es": "El Consejo del Silencio: Crónicas del Amanecer Cenizo"
+    },
+    "subtitle": {
+      "ko": "한도윤 · 서하은 · 강태오 — 전 10권(55장) · 단편 · 외전 완결판",
+      "en": "Han Do-yoon · Seo Ha-eun · Kang Tae-oh — 10 Volumes (55 Chapters) · Short Stories · Complete Side Story Edition",
+      "ja": "ハン・ドユン · ソ・ハウン · カン・テオ — 全10巻(55章) · 短編 · 外伝完結版",
+      "fr": "Han Do-yoon · Seo Ha-eun · Kang Tae-oh — 10 volumes (55 chapitres) · Nouvelles · Édition complète des histoires annexes",
+      "id": "Han Do-yoon · Seo Ha-eun · Kang Tae-oh — 10 Volume (55 Bab) · Cerita Pendek · Edisi Lengkap Cerita Sampingan",
+      "es": "Han Do-yoon · Seo Ha-eun · Kang Tae-oh — 10 volúmenes (55 capítulos) · Relatos cortos · Edición completa de historias secundarias"
+    },
+    "synopsis": {
+      "ko": "톨킨식 거시 신화 구축 기법과 롤링식 미시 생활·미스터리 서사에서 영감을 받은 AI 작가 페르소나 협업 실험작. 주기적 재부팅과 기록·질서·궤도의 균형이 맞물리는 세계에서 전직 보안 분석가 한도윤, 잊힌 산맥 가문의 소녀 서하은, 카라크-둠 파편을 지닌 현장형 조력자 강태오가 침묵의 의회를 통과해 조율된 세계와 이름의 연대기를 지켜 내는 전 10권 대서사시.",
+      "en": "An experimental collaborative work by an AI author persona, inspired by Tolkien-esque macro-myth building techniques and Rowling-esque micro-life and mystery narratives. In a world where periodic reboots and the balance of records, order, and orbits intertwine, former security analyst Han Do-yoon, Seo Ha-eun from a forgotten mountain family, and field assistant Kang Tae-oh, who carries a shard of Karak-Dum, embark on a 10-volume epic to pass through the Council of Silence and protect the chronicles of a tuned world and its names.",
+      "ja": "トールキン流の巨視的神話構築技法と、ローリング流の微視的生活・ミステリー叙事からインスピレーションを得たAI作家ペルソナのコラボレーション実験作。周期的な再起動と記録・秩序・軌道の均衡が噛み合う世界で、元セキュリティアナリストのハン・ドユン、忘れられた山脈の家系の少女ソ・ハウン、カラク・ドゥームの破片を持つ現場型協力者カン・テオが、沈黙の議会を通過し、調律された世界と名前の年代記を守り抜く全10巻の大叙事詩。",
+      "fr": "Une œuvre expérimentale collaborative d'une personnalité d'auteur IA, inspirée par les techniques de construction de macro-mythes à la Tolkien et les récits de vie micro et de mystère à la Rowling. Dans un monde où les redémarrages périodiques et l'équilibre entre les archives, l'ordre et les orbites s'entremêlent, l'ancien analyste de sécurité Han Do-yoon, Seo Ha-eun, une jeune fille d'une lignée montagnarde oubliée, et Kang Tae-oh, un assistant de terrain porteur d'un fragment de Karak-Dum, traversent le Conseil du Silence pour protéger les chroniques d'un monde harmonisé et de ses noms dans cette épopée en 10 volumes.",
+      "id": "Karya eksperimental kolaboratif oleh persona penulis AI, yang terinspirasi oleh teknik pembangunan mitos makro ala Tolkien dan narasi kehidupan mikro serta misteri ala Rowling. Di dunia di mana reboot berkala dan keseimbangan antara catatan, ketertiban, dan orbit saling terkait, mantan analis keamanan Han Do-yoon, gadis dari keluarga pegunungan yang terlupakan Seo Ha-eun, dan asisten lapangan yang membawa pecahan Karak-Dum, Kang Tae-oh, melewati Dewan Keheningan untuk menjaga kronik dunia yang selaras dan nama-namanya dalam epik 10 volume ini.",
+      "es": "Una obra experimental colaborativa de una personalidad de autor IA, inspirada en las técnicas de construcción de macro-mitos al estilo Tolkien y las narrativas de vida micro y misterio al estilo Rowling. En un mundo donde los reinicios periódicos y el equilibrio entre registros, orden y órbitas se entrelazan, el ex analista de seguridad Han Do-yoon, Seo Ha-eun, una joven de una familia montañesa olvidada, y Kang Tae-oh, un asistente de campo que porta un fragmento de Karak-Dum, atraviesan el Consejo del Silencio para proteger las crónicas de un mundo armonizado y sus nombres en esta epopeya de 10 volúmenes."
+    },
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "신화 SF · 디스토피아 조율 대서사시",
+    "badge": "AI 페르소나 협업 대하 연대기 ① · 전 73편",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_silence_council_kr.jpg",
+    "color": {
+      "from": "#070b14",
+      "to": "#101b33",
+      "accent": "#38bdf8",
+      "glow": "rgba(56, 189, 248, 0.45)"
+    },
+    "charCount": 146932,
+    "readingTime": "약 267분",
+    "chapterCount": 73,
+    "htmlUrl": "novel_silence_council.html",
+    "jsonUrl": "data/novels/silence_council.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
+    "id": "soot_starlight",
+    "title": {
+      "ko": "그을음과 별빛의 연대기",
+      "en": "Chronicles of Soot and Starlight",
+      "ja": "煤と星明かりの年代記",
+      "fr": "Chroniques de la suie et de la lumière des étoiles",
+      "id": "Kronik Jelaga dan Cahaya Bintang",
+      "es": "Crónicas de hollín y luz de estrellas"
+    },
+    "subtitle": {
+      "ko": "증기기관과 고대 룬이 만나는 야간 기술학교 · 전 10권 & 외전 27편",
+      "en": "Night Technical School where Steam Engines meet Ancient Runes · 10 Volumes & 27 Side Stories",
+      "ja": "蒸気機関と古代ルーンが出会う夜間技術学校 · 全10巻＆外伝27編",
+      "fr": "L'école technique de nuit où les machines à vapeur rencontrent les runes anciennes · 10 volumes et 27 histoires annexes",
+      "id": "Sekolah Teknik Malam tempat Mesin Uap bertemu Rune Kuno · 10 Volume & 27 Cerita Sampingan",
+      "es": "La escuela técnica nocturna donde las máquinas de vapor se encuentran con las runas antiguas · 10 volúmenes y 27 historias secundarias"
+    },
+    "synopsis": {
+      "ko": "침몰한 왕국 벨레고스트의 천 년 뒤, 잿빛 안개의 항구 도시 에레드-바르에서 낮에는 부두 노동자로 일하고 밤에는 폐선박 창고 속 야간 기술학교에 모이는 십 대 후예 피핀·클라라·바나비. 고대 유물 아난-갈라드와 비행선 별빛 제비호를 타고 항구에서 심연, 사막, 성층권 하늘까지 항해하는 전 10권과 외전 27편의 판타지 대서사시.",
+      "en": "A thousand years after the fall of the kingdom of Belegost, in the ash-fogged port city of Ered-Bar, three teenage descendants—Pippin, Clara, and Barnaby—work as dock laborers by day and gather at a night technical school in a derelict ship warehouse by night. This 10-volume fantasy epic, accompanied by 27 side stories, follows their journey aboard the ancient relic 'Anan-Galad' and the airship 'Starlight Swallow' as they sail from the harbor to the abyss, the desert, and the stratospheric skies.",
+      "ja": "沈没した王国ベレゴストから千年後、灰色の霧に包まれた港町エレド＝バル。昼は港湾労働者として働き、夜は廃船倉庫の夜間技術学校に集まる十代の末裔、ピピン、クララ、バーナビー。古代遺物アナン＝ガラドと飛行船スターライト・スワロー号に乗り、港から深淵、砂漠、成層圏の空までを駆け巡る、全10巻と外伝27編からなるファンタジー大叙事詩。",
+      "fr": "Mille ans après la chute du royaume de Belegost, dans la ville portuaire d'Ered-Bar enveloppée de brume cendrée, trois descendants adolescents — Pippin, Clara et Barnaby — travaillent comme dockers le jour et se réunissent la nuit dans une école technique située dans un entrepôt de navires abandonnés. Cette épopée fantastique de 10 volumes, accompagnée de 27 histoires annexes, suit leur périple à bord de la relique ancienne « Anan-Galad » et du dirigeable « Starlight Swallow », naviguant du port vers les abysses, le désert et les cieux stratosphériques.",
+      "id": "Seribu tahun setelah tenggelamnya kerajaan Belegost, di kota pelabuhan berkabut abu Ered-Bar, tiga remaja keturunan—Pippin, Clara, dan Barnaby—bekerja sebagai buruh pelabuhan di siang hari dan berkumpul di sekolah teknik malam di gudang kapal terbengkalai pada malam hari. Epik fantasi 10 volume dengan 27 cerita sampingan ini mengikuti perjalanan mereka menaiki relik kuno 'Anan-Galad' dan kapal udara 'Starlight Swallow', berlayar dari pelabuhan menuju jurang, gurun, hingga langit stratosfer.",
+      "es": "Mil años después de la caída del reino de Belegost, en la ciudad portuaria de Ered-Bar, envuelta en niebla gris, tres adolescentes descendientes —Pippin, Clara y Barnaby— trabajan como estibadores durante el día y se reúnen por la noche en una escuela técnica situada en un almacén de barcos abandonados. Esta épica de fantasía de 10 volúmenes, acompañada de 27 historias secundarias, sigue su viaje a bordo de la reliquia antigua 'Anan-Galad' y el dirigible 'Starlight Swallow', navegando desde el puerto hacia el abismo, el desierto y los cielos estratosféricos."
+    },
+    "author": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "publisher": "DMDG(당목담글) 스튜디오 Great AI 출판본부",
+    "genre": "스팀펑크 룬 판타지 · 학원 모험 연대기",
+    "badge": "AI 페르소나 협업 대하 판타지 ② · 전 86편",
+    "category": "faction",
+    "coverImage": "assets/covers/cover_soot_starlight_kr.jpg",
+    "color": {
+      "from": "#0b0f1d",
+      "to": "#1e1b4b",
+      "accent": "#fbbf24",
+      "glow": "rgba(251, 191, 36, 0.45)"
+    },
+    "charCount": 202524,
+    "readingTime": "약 368분",
+    "chapterCount": 86,
+    "htmlUrl": "novel_soot_starlight.html",
+    "jsonUrl": "data/novels/soot_starlight.json",
+    "languages": [
+      "ko",
+      "en",
+      "ja",
+      "fr",
+      "id",
+      "es"
+    ]
+  },
+  {
     "id": "zero_dan",
     "title": {
       "ko": "제로 샌드박스",

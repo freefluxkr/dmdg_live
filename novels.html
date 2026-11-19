@@ -945,15 +945,15 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
         <div class="hero-tag">📖 DMDG 서재관 · 소설 전용 (🌐 6개 국어 &amp; 🎧 AI 오디오북 지원)</div>
         <h2 class="hero-title">감성 팩션 소설과 인문 서사의 세계</h2>
         <p class="hero-desc">
-          아키텍트 제로, 설계자들, 삶은 개구리 트릴로지, 소년공 연작부터 2027 지정학 팩션·미식 인문기행까지 <strong>순수 소설 26편</strong>을<br>
+          아키텍트 제로, 설계자들, 삶은 개구리 트릴로지, 소년공 연작부터 2027 지정학 팩션·미식 인문기행까지 <strong>순수 소설 28편</strong>을<br>
           다국어(KO·EN·JA·FR·ID·ES) 전환 및 AI 오디오북 낭독으로 몰입감 있게 감상하세요. (기술 서적은 📚 <a href="https://books.dmdg-live.com/" style="color:var(--accent-gold); font-weight:700;">위키북스</a>에서 별도 제공)<br>
           <span style="display:inline-block; margin-top:6px; font-size:0.82rem; color:#94a3b8;">📱 아이폰(iOS)에서 낭독 소리가 들리지 않으면 측면 무음 스위치를 해제하거나 알림/미디어 소리를 켜주세요.</span>
         </p>
 
         <!-- Filter Chips -->
         <div class="filter-bar">
-          <button class="filter-chip active" data-filter="all">전체 소설 (26)</button>
-          <button class="filter-chip" data-filter="faction">🖋️ 팩션 소설 컬렉션 (24)</button>
+          <button class="filter-chip active" data-filter="all">전체 소설 (28)</button>
+          <button class="filter-chip" data-filter="faction">🖋️ 팩션 소설 컬렉션 (26)</button>
           <button class="filter-chip" data-filter="healing_gourmet">🍃 사찰음식 인문기행 (1)</button>
           <button class="filter-chip" data-filter="travel_gourmet">🍲 K-기사식당 기행 (1)</button>
         </div>
@@ -1052,7 +1052,7 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
   </div>
 
   <!-- Scripts -->
-  <script src="js/books_data.js?v=20261119_zerosandbox"></script>
+  <script src="js/books_data.js?v=20261119_chronicles"></script>
   <script>
 // 2026_korea 순수 소설 전용 컬렉션 (기술 서적은 books.html에서 별도 제공)
   const NOVELS_DATA = (window.NOVELS_DATA || []).filter(n => {
@@ -1268,6 +1268,8 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
         if (id.includes('wolf')) return '🐺';
         if (id.includes('sun')) return '☀️';
         if (id.includes('kisa')) return '🍲';
+        if (id.includes('silence_council')) return '🌑';
+        if (id.includes('soot_starlight')) return '⚙️';
         if (id.includes('zero_dan')) return '🧊';
         if (id.includes('zero_haruki')) return '🌠';
         if (id.includes('zero_kim')) return '🛰️';
@@ -1354,6 +1356,8 @@ body.theme-light .hero-title, body.theme-sepia .hero-title {
       'malssam-slang-200': 'novel_malssam_slang_200.html',
       'malssam_ksoul_118': 'novel_malssam_ksoul_118.html',
       'malssam-ksoul-118': 'novel_malssam_ksoul_118.html',
+      'silence_council': 'novel_silence_council.html',
+      'soot_starlight': 'novel_soot_starlight.html',
       'zero_dan': 'novel_zero_dan.html',
       'zero_haruki': 'novel_zero_haruki.html',
       'zero_kim': 'novel_zero_kim.html',

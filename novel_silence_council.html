@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>침묵의 의회: 잿빛 새벽의 연대기 | DMDG 6개국어 다국어 E-Reader</title>
+  <meta name="description" content="침묵의 의회: 잿빛 새벽의 연대기 — 한도윤 · 서하은 · 강태오 — 전 10권(55장) · 단편 · 외전 완결판 (6개국어 텍스트 및 AI 오디오북 낭독 지원)">
+
+  <script src="data/novels/silence_council.js?v=20261119"></script>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Pretendard:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-app: #0b0f17;
+  --bg-surface: #131b26;
+  --bg-surface-elevated: #1a2434;
+  --bg-glass: rgba(19, 27, 38, 0.92);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(245, 158, 11, 0.4);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-gold: #38bdf8;
+  --reader-max-width: 780px;
+  --reader-font-size: 18px;
+  --reader-line-height: 1.95;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Noto Serif KR', Georgia, serif;
+}
+
+body.theme-sepia {
+  --bg-app: #f4ecd8;
+  --bg-surface: #eae0c8;
+  --bg-surface-elevated: #dfd4b8;
+  --bg-glass: rgba(244, 236, 216, 0.95);
+  --border-color: rgba(120, 80, 40, 0.15);
+  --text-primary: #382818;
+  --text-secondary: #6e553c;
+  --text-muted: #9c836a;
+  --accent-gold: #b45309;
+}
+
+body.theme-light {
+  --bg-app: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f1f5f9;
+  --bg-glass: rgba(255, 255, 255, 0.96);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --accent-gold: #d97706;
+}
+
+body.theme-oled {
+  --bg-app: #000000;
+  --bg-surface: #0a0a0a;
+  --bg-surface-elevated: #141414;
+  --bg-glass: rgba(10, 10, 10, 0.96);
+  --border-color: #222222;
+  --text-primary: #ededed;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  line-height: var(--reader-line-height);
+  font-size: var(--reader-font-size);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.reader-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--accent-gold);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+.reader-nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.65rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: var(--font-sans);
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.nav-center {
+  text-align: center;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-title-head { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+.chapter-title-head { font-size: 0.75rem; color: var(--text-muted); }
+
+.btn-ctrl {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  height: 34px;
+  padding: 0 0.75rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.btn-ctrl:hover { background: var(--bg-surface-elevated); color: var(--text-primary); border-color: var(--accent-gold); }
+.btn-ctrl.active { background: var(--accent-gold); color: #0b0f17; border-color: var(--accent-gold); }
+
+.lang-bar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--bg-surface);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.lang-btn.active { background: var(--accent-gold); color: #0b0f17; }
+
+.reader-container {
+  max-width: var(--reader-max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+.book-hero-card {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.75rem;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+.hero-cover-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.hero-meta-badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-color);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+.hero-title { font-size: 1.55rem; font-weight: 800; color: var(--text-primary); line-height: 1.3; margin-bottom: 0.35rem; }
+.hero-sub { font-family: var(--font-sans); font-size: 0.92rem; color: var(--accent-gold); font-weight: 600; margin-bottom: 0.85rem; }
+.hero-synopsis { font-size: 0.88rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 0.85rem; }
+.hero-pub { font-family: var(--font-sans); font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+
+@media (max-width: 680px) {
+  .book-hero-card { grid-template-columns: 1fr; text-align: center; }
+  .hero-cover-img { max-width: 210px; margin: 0 auto; }
+}
+
+.chapter-badge {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-sans);
+}
+
+.chapter-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.chapter-body p {
+  margin-bottom: 1.65rem;
+  text-align: justify;
+  text-indent: 1em;
+  word-break: keep-all;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+.chapter-body p:hover { background: rgba(255, 255, 255, 0.05); }
+.chapter-body p.audio-speaking {
+  background: rgba(245, 158, 11, 0.18);
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 10px;
+}
+.chapter-body h3 {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+  margin: 2rem 0 0.9rem;
+}
+.chapter-body blockquote {
+  margin: 1.4rem 0;
+  padding: 0.9rem 1.2rem;
+  background: var(--bg-surface);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.95em;
+}
+.chapter-body hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+.chapter-body code {
+  font-family: Consolas, monospace;
+  background: var(--bg-surface-elevated);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  font-family: var(--font-sans);
+}
+
+.toc-drawer {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 330px;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-color);
+  z-index: 1100;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+}
+.toc-drawer.open { transform: translateX(0); }
+.toc-header {
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.toc-list { flex: 1; overflow-y: auto; padding: 0.85rem; list-style: none; }
+.toc-part-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  padding: 10px 10px 4px;
+  text-transform: uppercase;
+}
+.toc-item {
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-bottom: 3px;
+  transition: all 0.2s ease;
+}
+.toc-item:hover, .toc-item.active { background: var(--bg-surface-elevated); color: var(--accent-gold); font-weight: 600; }
+.drawer-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1050; display: none;
+}
+.drawer-backdrop.open { display: block; }
+
+.tts-wrap { position: relative; display: inline-block; }
+.tts-dropdown-menu {
+  display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 270px;
+  background: rgba(18, 24, 38, 0.98); border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 12px; box-shadow: 0 16px 36px rgba(0,0,0,0.65); padding: 6px; z-index: 9999;
+  flex-direction: column; gap: 4px;
+}
+.tts-dropdown-menu.show { display: flex !important; }
+.tts-menu-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+  background: transparent; border: 1px solid transparent; border-radius: 8px;
+  color: #f1f5f9; cursor: pointer; text-align: left; width: 100%; font-family: inherit;
+}
+.tts-menu-item:hover { background: rgba(255,255,255,0.08); border-color: rgba(245,158,11,0.35); }
+.tts-item-title { font-size: 0.88rem; font-weight: 700; color: #fff; }
+.tts-item-desc { font-size: 0.74rem; color: #94a3b8; }
+
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  .nav-center { display: none; }
+  .reader-nav { padding: 8px 10px; }
+  .btn-ctrl { padding: 5px 8px; font-size: 12px; }
+}
+</style>
+  <link rel="stylesheet" href="css/dmdg_payment_modal.css">
+</head>
+<body class="theme-dark">
+  <div id="reader-progress" class="reader-progress-bar"></div>
+
+  <header class="reader-nav">
+    <div class="nav-left">
+      <a href="novels.html" class="btn-ctrl"><span>←</span> <span>서재로</span></a>
+      <button id="btn-toggle-toc" class="btn-ctrl"><span>📑</span> <span>목차</span></button>
+    </div>
+
+    <div class="nav-center">
+      <div id="head-book-title" class="book-title-head">침묵의 의회: 잿빛 새벽의 연대기</div>
+      <div id="head-chapter-title" class="chapter-title-head">로딩 중...</div>
+    </div>
+
+    <div class="nav-right">
+      <div class="lang-bar">
+        <button class="lang-btn active" data-lang="ko">🇰🇷 KO</button>
+        <button class="lang-btn" data-lang="en">🇺🇸 EN</button>
+        <button class="lang-btn" data-lang="ja">🇯🇵 JA</button>
+        <button class="lang-btn" data-lang="fr">🇫🇷 FR</button>
+        <button class="lang-btn" data-lang="id">🇮🇩 ID</button>
+        <button class="lang-btn" data-lang="es">🇪🇸 ES</button>
+      </div>
+
+      <div class="tts-wrap">
+        <button id="btn-tts-play" class="btn-ctrl" title="AI 음성 낭독 (6개국어 지원)">
+          <span id="tts-icon">🎧</span> <span id="tts-text">낭독</span>
+        </button>
+        <div id="tts-menu" class="tts-dropdown-menu">
+          <button type="button" class="tts-menu-item" onclick="startTtsWithMode('continuous')">
+            <span style="font-size:1.25rem;">▶️</span>
+            <div>
+              <div class="tts-item-title">전체 연속 낭독</div>
+              <div class="tts-item-desc">현재 챕터 전체 본문을 순서대로 연속 낭독</div>
+            </div>
+          </button>
+          <button type="button" class="tts-menu-item" onclick="startTtsWithMode('paragraph')">
+            <span style="font-size:1.25rem;">📑</span>
+            <div>
+              <div class="tts-item-title">문단 단위 낭독</div>
+              <div class="tts-item-desc">선택 문단만 낭독 (본문 문단 클릭 시 즉시 시작)</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-ctrl" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; color: #f59e0b; font-weight: 700;" onclick="DMDG_Payment.openModal('silence_council', getLocalizedText(BOOK_DATA ? BOOK_DATA.title : '침묵의 의회: 잿빛 새벽의 연대기'))">
+        <span>📥</span> <span class="hide-mobile">소장/다운로드 (PDF 500원 / 오디오 1,000원)</span>
+      </button>
+
+      <button id="btn-theme" class="btn-ctrl" title="테마 변경">🌙</button>
+      <button id="btn-font-dec" class="btn-ctrl" style="padding:0 8px;">A-</button>
+      <button id="btn-font-inc" class="btn-ctrl" style="padding:0 8px;">A+</button>
+    </div>
+  </header>
+
+  <main class="reader-container">
+    <div id="hero-slot"></div>
+    <article id="reader-article">
+      <div class="chapter-badge" id="chapter-badge">Chapter 1</div>
+      <h1 class="chapter-heading" id="chapter-title">로딩 중...</h1>
+      <div class="chapter-body" id="chapter-body"></div>
+    </article>
+
+    <div class="bottom-nav">
+      <button id="btn-prev" class="btn-ctrl">← 이전 챕터</button>
+      <button id="btn-top" class="btn-ctrl">맨 위로 ↑</button>
+      <button id="btn-next" class="btn-ctrl">다음 챕터 →</button>
+    </div>
+  </main>
+
+  <aside id="toc-drawer" class="toc-drawer">
+    <div class="toc-header">
+      <h3 id="toc-book-title">침묵의 의회: 잿빛 새벽의 연대기</h3>
+      <button id="btn-close-toc" class="btn-ctrl" style="height:28px; padding:0 8px;">✕</button>
+    </div>
+    <ul id="toc-list" class="toc-list"></ul>
+  </aside>
+  <div id="drawer-backdrop" class="drawer-backdrop"></div>
+
+  <script>
+  let BOOK_DATA = null;
+  let CURRENT_CH_IDX = 0;
+  let CURRENT_LANG = 'ko';
+  let CURRENT_FONT_SIZE = 18;
+  const THEMES = ['theme-dark', 'theme-sepia', 'theme-light', 'theme-oled'];
+  let THEME_IDX = 0;
+
+  let synth = window.speechSynthesis || null;
+  let ttsUtterance = null;
+  let isTtsPlaying = false;
+  let ttsMode = 'continuous';
+  let ttsParagraphs = [];
+  let ttsCurrentPIdx = 0;
+  let availableVoices = [];
+  function populateVoices() {
+    if (!synth) return;
+    availableVoices = synth.getVoices();
+  }
+  if (synth) {
+    populateVoices();
+    if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = populateVoices;
+  }
+
+  const LANG_VOICE_MAP = {
+    ko: 'ko-KR', en: 'en-US', ja: 'ja-JP', fr: 'fr-FR', id: 'id-ID', es: 'es-ES'
+  };
+
+  async function loadBookData() {
+    if (window.NOVEL_SILENCE_COUNCIL_DATA) {
+      BOOK_DATA = window.NOVEL_SILENCE_COUNCIL_DATA;
+      renderChapter(0);
+      renderToc();
+      return;
+    }
+    try {
+      const res = await fetch('data/novels/silence_council.json?v=20261119');
+      BOOK_DATA = await res.json();
+      renderChapter(0);
+      renderToc();
+    } catch (e) {
+      document.getElementById('chapter-body').innerHTML = '<p style="color:#ef4444;">소설 데이터를 불러오지 못했습니다.</p>';
+    }
+  }
+
+  function getLocalizedText(obj) {
+    if (!obj) return '';
+    if (typeof obj === 'string') return obj;
+    return obj[CURRENT_LANG] || obj['ko'] || '';
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function formatInlineMd(text) {
+    let s = escapeHtml(text);
+    s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+    s = s.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
+    return s;
+  }
+
+  function renderHero(show) {
+    const slot = document.getElementById('hero-slot');
+    if (!show || !BOOK_DATA) {
+      slot.innerHTML = '';
+      return;
+    }
+    const bTitle = escapeHtml(getLocalizedText(BOOK_DATA.title));
+    const bSub = escapeHtml(getLocalizedText(BOOK_DATA.subtitle));
+    const bDesc = escapeHtml(getLocalizedText(BOOK_DATA.description));
+    const bPub = escapeHtml(BOOK_DATA.publisher || BOOK_DATA.author || '');
+    const bBadge = escapeHtml(BOOK_DATA.badge || '');
+    slot.innerHTML = `
+      <section class="book-hero-card">
+        <img class="hero-cover-img" src="assets/covers/cover_silence_council_kr.jpg" alt="${bTitle}" />
+        <div>
+          <span class="hero-meta-badge">${bBadge}</span>
+          <h2 class="hero-title">${bTitle}</h2>
+          <div class="hero-sub">${bSub}</div>
+          <p class="hero-synopsis">${bDesc}</p>
+          <div class="hero-pub">📚 ${bPub} · 🌐 6개국어 전환 &amp; AI 오디오북 지원</div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderMarkdownBlocks(rawText) {
+    const norm = String(rawText || '').replace(/\r\n/g, '\n').trim();
+    const blocks = norm.split(/\n\n+/);
+    let pCounter = 0;
+    const htmlParts = [];
+    for (const blk of blocks) {
+      const t = blk.trim();
+      if (!t) continue;
+      if (t === '---' || t === '***') {
+        htmlParts.push('<hr>');
+        continue;
+      }
+      if (t.startsWith('### ')) {
+        htmlParts.push('<h3>' + formatInlineMd(t.slice(4).trim()) + '</h3>');
+        continue;
+      }
+      if (t.startsWith('## ')) {
+        htmlParts.push('<h3>' + formatInlineMd(t.slice(3).trim()) + '</h3>');
+        continue;
+      }
+      const lines = t.split('\n');
+      if (lines.every(ln => ln.trim().startsWith('>'))) {
+        const inner = lines.map(ln => formatInlineMd(ln.replace(/^>\s?/, ''))).join('<br>');
+        htmlParts.push('<blockquote>' + inner + '</blockquote>');
+        continue;
+      }
+      const pid = pCounter++;
+      const inner = lines.map(ln => formatInlineMd(ln)).join('<br>');
+      htmlParts.push(`<p id="p-${pid}" onclick="onParagraphClick(${pid})" title="클릭 시 이 문단부터 낭독">${inner}</p>`);
+    }
+    return htmlParts.join('\n');
+  }
+
+  function renderChapter(idx) {
+    if (!BOOK_DATA || !BOOK_DATA.chapters || !BOOK_DATA.chapters[idx]) return;
+    CURRENT_CH_IDX = idx;
+    const ch = BOOK_DATA.chapters[idx];
+    const bookTitle = getLocalizedText(BOOK_DATA.title);
+    const chTitle = getLocalizedText(ch.title);
+    const chContent = getLocalizedText(ch.content);
+
+    document.getElementById('head-book-title').textContent = bookTitle;
+    document.getElementById('head-chapter-title').textContent = chTitle;
+    document.getElementById('toc-book-title').textContent = bookTitle;
+    document.getElementById('chapter-badge').textContent = `${ch.part || 'Chapter'} · ${idx + 1} / ${BOOK_DATA.chapters.length}`;
+    document.getElementById('chapter-title').textContent = chTitle;
+
+    renderHero(idx === 0);
+    document.getElementById('chapter-body').innerHTML = renderMarkdownBlocks(chContent);
+
+    document.querySelectorAll('.toc-item').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    stopTts();
+  }
+
+  function renderToc() {
+    if (!BOOK_DATA || !BOOK_DATA.chapters) return;
+    const listEl = document.getElementById('toc-list');
+    listEl.innerHTML = '';
+    let lastPart = null;
+    BOOK_DATA.chapters.forEach((ch, i) => {
+      if (ch.part && ch.part !== lastPart) {
+        const lbl = document.createElement('li');
+        lbl.className = 'toc-part-lbl';
+        lbl.textContent = ch.part;
+        listEl.appendChild(lbl);
+        lastPart = ch.part;
+      }
+      const li = document.createElement('li');
+      li.className = `toc-item ${i === CURRENT_CH_IDX ? 'active' : ''}`;
+      li.textContent = getLocalizedText(ch.title);
+      li.onclick = () => { renderChapter(i); closeToc(); };
+      listEl.appendChild(li);
+    });
+  }
+
+  function switchLanguage(lang) {
+    CURRENT_LANG = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    renderChapter(CURRENT_CH_IDX);
+    renderToc();
+  }
+
+  function toggleTts() {
+    if (isTtsPlaying) { stopTts(); return; }
+    const menu = document.getElementById('tts-menu');
+    if (menu) menu.classList.toggle('show');
+    else startTtsWithMode('continuous');
+  }
+
+  function startTtsWithMode(mode, startIdx = 0) {
+    const menu = document.getElementById('tts-menu');
+    if (menu) menu.classList.remove('show');
+    ttsMode = mode;
+    startTts(startIdx);
+  }
+
+  function startTts(startIdx = 0) {
+    if (!synth) return;
+    synth.cancel();
+    ttsParagraphs = Array.from(document.querySelectorAll('#chapter-body p, #chapter-body blockquote'));
+    if (ttsParagraphs.length === 0) return;
+    isTtsPlaying = true;
+    ttsCurrentPIdx = Math.max(0, Math.min(startIdx, ttsParagraphs.length - 1));
+    document.getElementById('tts-icon').textContent = '⏹️';
+    document.getElementById('tts-text').textContent = (ttsMode === 'paragraph') ? '정지 (문단)' : '정지';
+    document.getElementById('btn-tts-play').classList.add('active');
+    speakNextP();
+  }
+
+  function speakNextP() {
+    if (!isTtsPlaying || ttsCurrentPIdx >= ttsParagraphs.length) { stopTts(); return; }
+    ttsParagraphs.forEach(p => p.classList.remove('audio-speaking'));
+    const curP = ttsParagraphs[ttsCurrentPIdx];
+    curP.classList.add('audio-speaking');
+    curP.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    ttsUtterance = new SpeechSynthesisUtterance(curP.textContent);
+    const targetLang = LANG_VOICE_MAP[CURRENT_LANG] || 'ko-KR';
+    ttsUtterance.lang = targetLang;
+    ttsUtterance.rate = 1.0;
+    if (availableVoices.length === 0 && synth) availableVoices = synth.getVoices();
+    const exactVoice = availableVoices.find(v => v.lang.replace('_', '-').toLowerCase() === targetLang.toLowerCase());
+    const prefixVoice = availableVoices.find(v => v.lang.toLowerCase().startsWith(targetLang.split('-')[0].toLowerCase()));
+    if (exactVoice) ttsUtterance.voice = exactVoice;
+    else if (prefixVoice) ttsUtterance.voice = prefixVoice;
+
+    ttsUtterance.onend = () => {
+      if (!isTtsPlaying) return;
+      if (ttsMode === 'paragraph') { stopTts(); return; }
+      ttsCurrentPIdx++;
+      speakNextP();
+    };
+    ttsUtterance.onerror = () => stopTts();
+    synth.speak(ttsUtterance);
+  }
+
+  function stopTts() {
+    if (synth) synth.cancel();
+    isTtsPlaying = false;
+    document.getElementById('tts-icon').textContent = '🎧';
+    document.getElementById('tts-text').textContent = '낭독';
+    document.getElementById('btn-tts-play').classList.remove('active');
+    const menu = document.getElementById('tts-menu');
+    if (menu) menu.classList.remove('show');
+    if (ttsParagraphs) ttsParagraphs.forEach(p => p.classList.remove('audio-speaking'));
+  }
+
+  function onParagraphClick(pIdx) { startTtsWithMode('paragraph', pIdx); }
+
+  document.addEventListener('click', (e) => {
+    const wrap = document.querySelector('.tts-wrap');
+    const menu = document.getElementById('tts-menu');
+    if (wrap && menu && !wrap.contains(e.target)) menu.classList.remove('show');
+  });
+
+  function openToc() {
+    document.getElementById('toc-drawer').classList.add('open');
+    document.getElementById('drawer-backdrop').classList.add('open');
+  }
+  function closeToc() {
+    document.getElementById('toc-drawer').classList.remove('open');
+    document.getElementById('drawer-backdrop').classList.remove('open');
+  }
+  function toggleTheme() {
+    document.body.classList.remove(THEMES[THEME_IDX]);
+    THEME_IDX = (THEME_IDX + 1) % THEMES.length;
+    document.body.classList.add(THEMES[THEME_IDX]);
+  }
+  function changeFontSize(delta) {
+    CURRENT_FONT_SIZE = Math.max(14, Math.min(26, CURRENT_FONT_SIZE + delta));
+    document.body.style.setProperty('--reader-font-size', `${CURRENT_FONT_SIZE}px`);
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+  });
+  document.getElementById('btn-toggle-toc').addEventListener('click', openToc);
+  document.getElementById('btn-close-toc').addEventListener('click', closeToc);
+  document.getElementById('drawer-backdrop').addEventListener('click', closeToc);
+  document.getElementById('btn-theme').addEventListener('click', toggleTheme);
+  document.getElementById('btn-font-dec').addEventListener('click', () => changeFontSize(-2));
+  document.getElementById('btn-font-inc').addEventListener('click', () => changeFontSize(2));
+  document.getElementById('btn-tts-play').addEventListener('click', toggleTts);
+  document.getElementById('btn-prev').addEventListener('click', () => { if (CURRENT_CH_IDX > 0) renderChapter(CURRENT_CH_IDX - 1); });
+  document.getElementById('btn-next').addEventListener('click', () => { if (BOOK_DATA && CURRENT_CH_IDX < BOOK_DATA.chapters.length - 1) renderChapter(CURRENT_CH_IDX + 1); });
+  document.getElementById('btn-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = total > 0 ? (window.scrollY / total) * 100 : 0;
+    document.getElementById('reader-progress').style.width = `${progress}%`;
+  });
+
+  loadBookData();
+  </script>
+  <script src="js/dmdg_payment.js"></script>
+</body>
+</html>
