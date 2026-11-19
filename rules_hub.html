@@ -294,7 +294,7 @@
 
     <!-- Navigation Tabs -->
     <div class="tabs-nav">
-      <button class="tab-btn active" onclick="switchTab('core', this)">🏛️ 핵심 5대 헌법 (Core)</button>
+      <button class="tab-btn active" onclick="switchTab('core', this)">🏛️ 핵심 6대 헌법 (Core)</button>
       <button class="tab-btn" onclick="switchTab('publish', this)">📚 도서 출간 &amp; 6대 MD 동기화</button>
       <button class="tab-btn" onclick="switchTab('blog', this)">✍️ 블로그 SEO &amp; 3초 후킹</button>
       <button class="tab-btn" onclick="switchTab('checklist', this)">✅ 실시간 출간 검증 체크리스트</button>
@@ -341,6 +341,21 @@
           </div>
           <div class="card-title">📱 텔레그램 실시간 원격 보고</div>
           <p class="card-desc">사용자가 "알려줘", "보고해"를 요청하거나 중요 작업 완료 시, 공식 봇(@aiffall_bot)으로 핵심 요약과 링크를 즉시 전송합니다.</p>
+        </div>
+
+        <div class="rule-card core">
+          <div class="card-header">
+            <span class="card-num">CORE RULE 06 · MODEL PRECHECK</span>
+          </div>
+          <div class="card-title">🧠 작업 착수 전 최적 AI 모델 사전 요청 강령 (MODEL_PRECHECK_RULES)</div>
+          <p class="card-desc"><strong>1순위 기준 문서</strong>: <code>A Guide to Selecting the Optimal Model for Each Task.md</code>. 실질적 개발·집필 착수 전 작업 성격과 Antigravity 3대 할당량 풀(Gemini Models / Gemini 4 Argon / Claude &amp; GPT) 잔여량에 맞춰 최적 모델을 먼저 제안하고 승인 후 착수합니다.</p>
+          <ul class="card-checklist">
+            <li>• <strong>일상 코딩·빠른 수정 (업무 90%)</strong>: <code>Gemini 4 Hydrogen (Medium)</code> — 기본값, 토큰 효율 최적</li>
+            <li>• <strong>신규 설계·다중 파일 수정</strong>: <code>Orchestrator (Neon)</code> — 설계(Neon) + 반복 실행(Hydrogen) 분담</li>
+            <li>• <strong>난제 버그·대규모 로그 분석</strong>: <code>Gemini 4 Neon (High)</code> — 단일 턴 최상위 추론</li>
+            <li>• <strong>UI/UX·문예 뉘앙스·구원투수</strong>: <code>Claude Sonnet 5.5</code> / <code>Opus 5.5</code> (별도 쿼터, 필요 시만 투입)</li>
+            <li>• <strong>Gemini Models 풀 소진 시 주의</strong>: <code>Orchestrator (Argon)</code>은 내부 실행기로 <code>Hydrogen</code>을 호출해 멈추므로 반드시 단독 <code>Gemini 4 Argon (Medium)</code> 또는 <code>Claude Sonnet 5.5</code> / <code>GPT-OSS 120B</code>를 선택</li>
+          </ul>
         </div>
       </div>
     </div>
