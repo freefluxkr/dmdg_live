@@ -1182,7 +1182,7 @@
               </span>
               <span
                 class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-mono">
-                🎬 @dmdg-free · 🏛️ @Anti-Korea
+                🤖 @DMDG-AI-DEV · 🎬 @dmdg-free · 🏛️ @Anti-Korea
               </span>
             </div>
             <h2 class="text-xl sm:text-2xl font-black text-white mt-1 flex items-center gap-2">
@@ -1242,11 +1242,11 @@
             <p class="text-[11px] text-slate-400 mt-3 truncate">유튜브 공식 대표 6대 영상 실시간 합산</p>
           </div>
 
-          <!-- KPI 3: 2개 공식 채널 구독자 -->
+          <!-- KPI 3: 3개 공식 채널 구독자 -->
           <div class="glass-card p-5 border-l-4 border-orange-500">
             <div class="flex justify-between items-start mb-2">
               <span class="text-xs font-bold text-slate-300 flex items-center gap-1">
-                <span>🌐</span> 2대 공식 채널 총 구독자
+                <span>🌐</span> 3대 공식 채널 총 구독자
               </span>
               <div class="p-1.5 bg-orange-500/10 text-orange-400 rounded-md">
                 <i data-lucide="user-check" class="w-4 h-4"></i>
@@ -1256,15 +1256,15 @@
               <h3 id="stat-yt-total-uv" class="text-3xl font-black text-orange-400">52</h3>
               <span class="text-xs text-slate-400 font-semibold">명</span>
             </div>
-            <p id="stat-yt-channels-sub" class="text-[11px] text-slate-400 mt-3 truncate">당목담글(32명) + Anti-Korea(20명) /
-              117개 영상</p>
+            <p id="stat-yt-channels-sub" class="text-[11px] text-slate-400 mt-3 truncate">DMDG AI DEV + 당목담글(32명) + Anti-Korea(20명) /
+              118개 영상</p>
           </div>
 
-          <!-- KPI 4: 2개 공식 채널 총 누적 조회수 -->
+          <!-- KPI 4: 3개 공식 채널 총 누적 조회수 -->
           <div class="glass-card p-5 border-l-4 border-amber-500">
             <div class="flex justify-between items-start mb-2">
               <span class="text-xs font-bold text-slate-300 flex items-center gap-1">
-                <span>📈</span> 2대 공식 채널 총 누적 조회수
+                <span>📈</span> 3대 공식 채널 총 누적 조회수
               </span>
               <div class="p-1.5 bg-amber-500/10 text-amber-400 rounded-md">
                 <i data-lucide="tv" class="w-4 h-4"></i>
@@ -1274,7 +1274,7 @@
               <h3 id="stat-yt-total-views" class="text-3xl font-black text-amber-400">26,698</h3>
               <span class="text-xs text-slate-400 font-semibold">회</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-3 truncate">YouTube Data API v3 2대 채널 전수 실시간 합산</p>
+            <p class="text-[11px] text-slate-400 mt-3 truncate">YouTube Data API v3 3대 채널 전수 실시간 합산</p>
           </div>
         </div>
 
@@ -2826,10 +2826,20 @@
     const YOUTUBE_CONFIG = {
       apiKey: "AIzaSyC_XN6_sM5G9KlEb4GOBV2XaKlkUByT3xo",
       channels: [
+        { id: "UCGKv56ofjHh9MFttTvZawoA", name: "DMDG AI DEV (실전 AI 개발·위키독스)", handle: "@DMDG-AI-DEV" },
         { id: "UC6tcqStNeSzoe7Kv0iFECUA", name: "당목담글 공식 채널", handle: "@dmdg-free" },
         { id: "UCW8OsY6gfQn4z0sLRS-ErOw", name: "한국 문화 & 역사 채널", handle: "@Anti-Korea" }
       ],
       featuredVideos: [
+        {
+          id: "8Ov7RASHyTE",
+          fallbackTitle: "[온프레미스 AI] 내 AI 에이전트 19명이 일하는 가상 오피스 (Docker 6+2 설계도)",
+          category: "AI 아키텍처 / 위키독스 (@DMDG-AI-DEV)",
+          views: 1,
+          likes: 1,
+          status: "신규 공개",
+          statusColor: "amber"
+        },
         {
           id: "q9rfdD0OXgU",
           fallbackTitle: "[힐링] 사찰음식 5분 완성 레시피 (흑백요리사 명장의 비결)",
@@ -2945,7 +2955,7 @@
 
             const chSubEl = document.getElementById('stat-yt-channels-sub');
             if (chSubEl) {
-              chSubEl.textContent = `2대 공식 채널 실시간 구독자 합산 (${sumVids}개 영상)`;
+              chSubEl.textContent = `3대 공식 채널 실시간 구독자 합산 (${sumVids}개 영상)`;
             }
             apiSuccess = true;
           }

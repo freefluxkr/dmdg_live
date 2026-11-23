@@ -264,13 +264,14 @@
             </div>
             <a href="https://dmdg.wikidocs.net/blog/" target="_blank" rel="noopener noreferrer" class="item-action-btn btn-green-action">View ➔</a>
           </div>
-          <!-- 6. YOUTUBE (듀얼 채널) -->
-          <div class="service-item-row" data-keyword="youtube 유튜브 dmdg-free anti-korea 영상 미디어">
+          <!-- 6. YOUTUBE (3대 공식 채널) -->
+          <div class="service-item-row" data-keyword="youtube 유튜브 dmdg-ai-dev dmdg-free anti-korea 위키독스 영상 미디어">
             <div class="item-text-info">
               <span class="item-main-name">📺 YOUTUBE</span>
               <span class="item-sub-desc">DMDG 공식 유튜브 &amp; 미디어 허브</span>
             </div>
             <div class="yt-dual-btns">
+              <a href="https://www.youtube.com/@DMDG-AI-DEV" target="_blank" rel="noopener noreferrer" class="yt-pill-btn" title="실전 AI 개발 & 위키독스 기술 홍보 채널">@DMDG-AI-DEV ➔</a>
               <a href="https://www.youtube.com/@dmdg-free" target="_blank" rel="noopener noreferrer" class="yt-pill-btn">@dmdg-free ➔</a>
               <a href="https://www.youtube.com/@Anti-Korea" target="_blank" rel="noopener noreferrer" class="yt-pill-btn">@Anti-Korea ➔</a>
             </div>
@@ -630,6 +631,7 @@
           <ul>
             <li><a href="https://t.me/aiffall_bot" target="_blank" rel="noopener noreferrer"><span>📱</span> Great AI 텔레그램 공식 봇 (@aiffall_bot)</a></li>
             <li><a href="https://github.com/freefluxkr/dmdg_live" target="_blank" rel="noopener noreferrer"><span>💻</span> GitHub 오픈소스 개발 본부</a></li>
+            <li><a href="https://www.youtube.com/@DMDG-AI-DEV" target="_blank" rel="noopener noreferrer"><span>🤖</span> DMDG AI DEV 유튜브 (위키독스·기술)</a></li>
             <li><a href="https://www.youtube.com/@dmdg-free" target="_blank" rel="noopener noreferrer"><span>🎬</span> 당목담글 유튜브 공식 채널</a></li>
             <li><a href="https://www.youtube.com/@Anti-Korea" target="_blank" rel="noopener noreferrer"><span>🏛️</span> Anti-Korea 역사 다큐 채널</a></li>
             <li><a href="https://wikidocs.net/buy/coffee/21842" target="_blank" rel="noopener noreferrer"><span>☕</span> 창작자 따뜻한 커피 후원하기</a></li>
@@ -1016,9 +1018,10 @@
         <div class="service-item-row">
           <div class="item-text-info">
             <span class="item-main-name">📺 YOUTUBE 공식 채널</span>
-            <span class="item-sub-desc">@dmdg-free · @Anti-Korea 미디어 허브</span>
+            <span class="item-sub-desc">@DMDG-AI-DEV · @dmdg-free · @Anti-Korea</span>
           </div>
-          <div class="yt-dual-btns">
+          <div class="yt-dual-btns" style="flex-wrap: wrap; gap: 4px;">
+            <a href="https://www.youtube.com/@DMDG-AI-DEV" target="_blank" rel="noopener noreferrer" class="yt-pill-btn">@DMDG-AI-DEV ➔</a>
             <a href="https://www.youtube.com/@dmdg-free" target="_blank" rel="noopener noreferrer" class="yt-pill-btn">@dmdg-free ➔</a>
             <a href="https://www.youtube.com/@Anti-Korea" target="_blank" rel="noopener noreferrer" class="yt-pill-btn">@Anti-Korea ➔</a>
           </div>
@@ -2186,6 +2189,10 @@
               <div class="item-text-info"><span class="item-main-name">✍️ 당목담글 공식 블로그</span><span class="item-sub-desc">신기술 분석 및 위키독스 아카이브</span></div>
               <span class="item-action-btn btn-green-action">열기 ➔</span>
             </a>
+            <a href="https://www.youtube.com/@DMDG-AI-DEV" target="_blank" rel="noopener noreferrer" class="service-item-row" style="text-decoration: none;">
+              <div class="item-text-info"><span class="item-main-name">🤖 유튜브 @DMDG-AI-DEV</span><span class="item-sub-desc">실전 AI 개발 &amp; 위키독스 기술 홍보 채널</span></div>
+              <span class="item-action-btn btn-green-action">열기 ➔</span>
+            </a>
             <a href="https://www.youtube.com/@dmdg-free" target="_blank" rel="noopener noreferrer" class="service-item-row" style="text-decoration: none;">
               <div class="item-text-info"><span class="item-main-name">🎬 유튜브 @dmdg-free</span><span class="item-sub-desc">공식 오디오북 &amp; 낭독 릴레이 채널</span></div>
               <span class="item-action-btn btn-amber-action">열기 ➔</span>
@@ -2281,7 +2288,7 @@
 
     // Responsive Desktop Aurora <-> Mobile Hanji switching + SW sync (bypassed cleanly on localhost)
     (function syncResponsiveThemeAndServiceWorker() {
-      const CURRENT_SW_CACHE = 'dangmok-cache-v23-20261113';
+      const CURRENT_SW_CACHE = 'dangmok-cache-v24-20261123';
       const desktopLink = document.getElementById('desktopAuroraThemeLink');
       const mobileLink = document.getElementById('mobileHanjiThemeLink');
 
@@ -2324,7 +2331,7 @@
       }
 
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js?v=20261113_v23', { updateViaCache: 'none' }).then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=20261123_v24', { updateViaCache: 'none' }).then((reg) => {
           reg.update().catch(() => {});
         }).catch(() => {});
 
