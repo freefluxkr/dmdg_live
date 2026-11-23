@@ -1278,6 +1278,11 @@
           </div>
         </div>
 
+        <!-- 3대 공식 유튜브 채널별 개별 실시간 현황 (3 cols) -->
+        <div id="youtube-channels-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <!-- Dynamically populated via renderYouTubeAnalyticsUI() -->
+        </div>
+
         <!-- YouTube Videos Table -->
         <div class="glass-card overflow-hidden border border-slate-800 shadow-xl mb-10">
           <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/60">
@@ -2904,9 +2909,19 @@
     let YOUTUBE_CACHE = {
       totalChannelViews: 26698,
       totalSubscribers: 52,
-      totalVideosCount: 117,
-      featuredVideosTotalViews: 8476,
-      featuredVideosTotalLikes: 65,
+      totalVideosCount: 118,
+      featuredVideosTotalViews: 8477,
+      featuredVideosTotalLikes: 66,
+      channels: YOUTUBE_CONFIG.channels.map((c, idx) => ({
+        id: c.id,
+        handle: c.handle,
+        name: c.name,
+        icon: idx === 0 ? '🤖' : (idx === 1 ? '🎬' : '🏛️'),
+        accent: idx === 0 ? 'cyan' : (idx === 1 ? 'rose' : 'amber'),
+        subscribers: idx === 1 ? 32 : (idx === 2 ? 20 : 0),
+        videoCount: 0,
+        viewCount: 0
+      })),
       videos: YOUTUBE_CONFIG.featuredVideos.map(v => ({
         id: v.id,
         title: v.fallbackTitle,
@@ -2927,7 +2942,7 @@
       let apiSuccess = false;
 
       try {
-        // 1. Fetch Official Channels Statistics (UC6tcqStNeSzoe7Kv0iFECUA & UCW8OsY6gfQn4z0sLRS-ErOw)
+        // 1. Fetch Official Channels Statistics (3 channels)
         const chUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelIds}&key=${apiKey}`;
         const chRes = await fetch(chUrl);
         if (chRes.ok) {
@@ -2936,7 +2951,7 @@
             let sumChViews = 0;
             let sumSubs = 0;
             let sumVids = 0;
-            let chDetails = [];
+            const channelStatsMap = {};
 
             chData.items.forEach(item => {
               const stats = item.statistics || {};
@@ -2946,7 +2961,26 @@
               sumChViews += vCount;
               sumSubs += sCount;
               sumVids += vidCount;
-              chDetails.push(`${item.snippet?.title || '채널'}(${sCount}명)`);
+              channelStatsMap[item.id] = {
+                title: item.snippet?.title || '',
+                subscribers: sCount,
+                videoCount: vidCount,
+                viewCount: vCount
+              };
+            });
+
+            YOUTUBE_CACHE.channels = YOUTUBE_CONFIG.channels.map((c, idx) => {
+              const live = channelStatsMap[c.id];
+              return {
+                id: c.id,
+                handle: c.handle,
+                name: (live && live.title) ? live.title : c.name,
+                icon: idx === 0 ? '🤖' : (idx === 1 ? '🎬' : '🏛️'),
+                accent: idx === 0 ? 'cyan' : (idx === 1 ? 'rose' : 'amber'),
+                subscribers: live ? live.subscribers : 0,
+                videoCount: live ? live.videoCount : 0,
+                viewCount: live ? live.viewCount : 0
+              };
             });
 
             YOUTUBE_CACHE.totalChannelViews = sumChViews;
@@ -2955,7 +2989,7 @@
 
             const chSubEl = document.getElementById('stat-yt-channels-sub');
             if (chSubEl) {
-              chSubEl.textContent = `3대 공식 채널 실시간 구독자 합산 (${sumVids}개 영상)`;
+              chSubEl.textContent = `3대 공식 채널 실시간 구독자 합산 (${sumVids.toLocaleString()}개 영상)`;
             }
             apiSuccess = true;
           }
@@ -3023,6 +3057,53 @@
     }
 
     function renderYouTubeAnalyticsUI() {
+      const channelsGrid = document.getElementById('youtube-channels-grid');
+      if (channelsGrid && Array.isArray(YOUTUBE_CACHE.channels)) {
+        const accentMap = {
+          cyan: { border: 'border-cyan-500', badge: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30', val: 'text-cyan-400' },
+          rose: { border: 'border-rose-500', badge: 'bg-rose-500/15 text-rose-300 border-rose-500/30', val: 'text-rose-400' },
+          amber: { border: 'border-amber-500', badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30', val: 'text-amber-400' }
+        };
+        channelsGrid.innerHTML = YOUTUBE_CACHE.channels.map(ch => {
+          const style = accentMap[ch.accent] || accentMap.cyan;
+          const chUrl = `https://www.youtube.com/${ch.handle}`;
+          return `
+            <div class="glass-card p-4 border-l-4 ${style.border} flex flex-col justify-between gap-3">
+              <div class="flex items-start justify-between gap-2">
+                <div class="min-w-0">
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${style.badge}">
+                    <span>${ch.icon}</span> ${escapeHtml(ch.handle)}
+                  </span>
+                  <h4 class="text-sm font-black text-white mt-1.5 truncate" title="${escapeHtml(ch.name)}">${escapeHtml(ch.name)}</h4>
+                </div>
+                <a href="${chUrl}" target="_blank" rel="noopener noreferrer"
+                  class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-md transition-colors flex-shrink-0"
+                  title="유튜브 채널 열기">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+              <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-800/80 text-center">
+                <div class="bg-slate-950/50 rounded-lg py-2 px-1">
+                  <span class="text-[10px] text-slate-400 block">구독자</span>
+                  <span class="font-mono text-sm font-black ${style.val}">${Number(ch.subscribers || 0).toLocaleString()}</span>
+                  <span class="text-[10px] text-slate-500">명</span>
+                </div>
+                <div class="bg-slate-950/50 rounded-lg py-2 px-1">
+                  <span class="text-[10px] text-slate-400 block">영상 수</span>
+                  <span class="font-mono text-sm font-black text-white">${Number(ch.videoCount || 0).toLocaleString()}</span>
+                  <span class="text-[10px] text-slate-500">개</span>
+                </div>
+                <div class="bg-slate-950/50 rounded-lg py-2 px-1">
+                  <span class="text-[10px] text-slate-400 block">누적 조회</span>
+                  <span class="font-mono text-sm font-black text-amber-300">${Number(ch.viewCount || 0).toLocaleString()}</span>
+                  <span class="text-[10px] text-slate-500">회</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
       const tbody = document.getElementById('youtube-videos-table-body');
       if (!tbody) return;
 
@@ -3116,9 +3197,9 @@
       }
 
       alert(`✅ YouTube Data API v3 실시간 연동 성공!\n` +
-        `• 2대 공식 채널 총 누적 조회수: ${YOUTUBE_CACHE.totalChannelViews.toLocaleString()}회\n` +
-        `• 2대 공식 채널 총 구독자 수: ${YOUTUBE_CACHE.totalSubscribers.toLocaleString()}명 (영상 117개)\n` +
-        `• 6대 대표 영상 실시간 합산: ${YOUTUBE_CACHE.featuredVideosTotalViews.toLocaleString()}회 / 좋아요 ${YOUTUBE_CACHE.featuredVideosTotalLikes.toLocaleString()}개\n` +
+        `• 3대 공식 채널 총 누적 조회수: ${YOUTUBE_CACHE.totalChannelViews.toLocaleString()}회\n` +
+        `• 3대 공식 채널 총 구독자 수: ${YOUTUBE_CACHE.totalSubscribers.toLocaleString()}명 (영상 ${YOUTUBE_CACHE.totalVideosCount.toLocaleString()}개)\n` +
+        `• 7대 대표 영상 실시간 합산: ${YOUTUBE_CACHE.featuredVideosTotalViews.toLocaleString()}회 / 좋아요 ${YOUTUBE_CACHE.featuredVideosTotalLikes.toLocaleString()}개\n` +
         `(API Key: AIzaSyC_XN6_... 연동 확인)`);
     }
 
