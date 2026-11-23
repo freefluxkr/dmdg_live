@@ -1,0 +1,68 @@
+[
+  {
+    "id": "notif-20261102-01",
+    "type": "novel",
+    "badge": "500P 대작 완결",
+    "badgeColor": "#ED793E",
+    "title": "DMDG 서재: 500페이지 대작 5종 전격 발행 (총 9권 전집 완비)",
+    "desc": "《은쟁반 위의 서울》, 《비움의 식탁》, 《소년공 꿈의 결말》 등 5대 신간 독립 뷰어 및 결제 다운로드 연동",
+    "date": "2026-11-02",
+    "url": "../novels_app/index.html",
+    "target": "_self"
+  },
+  {
+    "id": "notif-20261102-02",
+    "type": "blog",
+    "badge": "공식 블로그",
+    "badgeColor": "#10B981",
+    "title": "위키독스 공식 블로그: 기사식당 & 사찰음식 신규 2편 연재",
+    "desc": "돼지불백의 미학(ID: 35460) 및 사찰음식 오신채의 과학(ID: 35461) 실서버 발행",
+    "date": "2026-11-02",
+    "url": "https://wikidocs.net/blog/@dmdg/35460/",
+    "target": "_blank"
+  },
+  {
+    "id": "notif-001",
+    "type": "book",
+    "badge": "신간 출간",
+    "badgeColor": "#00A896",
+    "title": "위키북스 《Book 21911: KG & 시맨틱 RAG 파이프라인》 출간",
+    "desc": "Neo4j 지식그래프와 Docling 멀티모달 시맨틱 청킹 실전 가이드북",
+    "date": "2026-10-30",
+    "url": "./books.html#book-21911",
+    "target": "_blank"
+  },
+  {
+    "id": "notif-002",
+    "type": "blog",
+    "badge": "기술 칼럼",
+    "badgeColor": "#7C3AED",
+    "title": "DMDG 공식 블로그: 자율 에이전트 오케스트레이션 심층 해설",
+    "desc": "StateGraph와 12대 페르소나 거장 에이전트 무인 소프트웨어 팩토리 아키텍처",
+    "date": "2026-10-29",
+    "url": "https://dmdg.wikidocs.net/blog/",
+    "target": "_blank"
+  },
+  {
+    "id": "notif-003",
+    "type": "youtube",
+    "badge": "유튜브 영상",
+    "badgeColor": "#E63946",
+    "title": "당목담글 공식 유튜브: 《사일런트 킬체인》 오디오북 하이라이트 공개",
+    "desc": "2027 사이버 스릴러 소설 음성 낭독 및 AI 성우 풀버전 영상",
+    "date": "2026-10-28",
+    "url": "https://www.youtube.com/@dmdg-free",
+    "target": "_blank"
+  },
+  {
+    "id": "notif-004",
+    "type": "update",
+    "badge": "신규 기능",
+    "badgeColor": "#F77F00",
+    "title": "당목담글 보이스 & 말쌈 6개국 글로벌 풀 오디오 지원 개시",
+    "desc": "한국어, 영어, 일본어, 프랑스어, 인도네시아어, 스페인어 원어민 보이스 탑재",
+    "date": "2026-10-27",
+    "url": "./voice.html",
+    "target": "_self"
+  }
+]

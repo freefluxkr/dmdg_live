@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>DMDG 스튜디오 도서관 (Books) — 위키북스 기술서적 공식 아카이브</title>
+  <meta name="description" content="지식 그래프, 시맨틱 청킹, 엔터프라이즈 pgvector, 자율형 멀티에이전트, 클린룸 TDD 등 DMDG 위키북스 정식 출간 기술서적 아카이브">
+  
+  <link rel="icon" type="image/png" href="./assets/dmdg_logo_emblem.png">
+  <link rel="stylesheet" href="./style.css?v=20261030">
+  <link rel="stylesheet" href="./css/modules/core-cards.css?v=20261030">
+  <link rel="stylesheet" href="./css/modules/books.css?v=20261030">
+</head>
+<body class="books-app">
+
+  <!-- GNB Header -->
+  <header style="background: rgba(251, 249, 245, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(11, 27, 61, 0.08); position: sticky; top: 0; z-index: 100; padding: 12px 24px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a href="./index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+        <img src="./assets/dmdg_logo_emblem.png" alt="DMDG" style="width: 34px; height: 34px; object-fit: contain;">
+        <span style="font-size: 18px; font-weight: 800; color: #0B1B3D; letter-spacing: -0.02em;">DMDG LIVE</span>
+        <span style="font-size: 11px; background: rgba(0, 168, 150, 0.12); color: #00A896; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">Books Archive</span>
+      </a>
+      
+      <div style="display: flex; gap: 8px;">
+        <a href="./novels.html" style="padding: 7px 14px; background: rgba(247, 127, 0, 0.08); border: 1px solid rgba(247, 127, 0, 0.25); color: #F77F00; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 700;">
+          📖 eBook & Audio 이동
+        </a>
+        <a href="./index.html" style="padding: 7px 14px; background: #0B1B3D; color: #FFFFFF; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 700;">
+          ← 메인 홈으로
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="books-wrapper">
+    <!-- Hero Banner -->
+    <div class="books-hero">
+      <div class="books-hero-badge">📚 WIKIDOCS OFFICIAL TECH ARCHIVE</div>
+      <h1 class="books-hero-title">DMDG 스튜디오 기술도서관 (Books)</h1>
+      <p class="books-hero-desc">
+        AI 에이전트, 벡터 DB, 그래프 RAG, 시맨틱 청킹, 클린룸 TDD 등 엔터프라이즈 현장에서 검증된 기술 서적과 인터랙티브 실습 시뮬레이터를 원클릭으로 연결합니다.
+      </p>
+    </div>
+
+    <!-- Controls Bar: Search & Category Chips -->
+    <div class="books-controls-bar">
+      <!-- Search Input -->
+      <div class="books-search-box">
+        <span class="books-search-icon">🔍</span>
+        <input type="text" id="books-search-input" class="books-search-input" placeholder="도서명, 번호(예: 21911), 부제 또는 기술 키워드 검색...">
+      </div>
+
+      <!-- Filter Chips -->
+      <div class="books-filter-chips">
+        <button class="books-chip active" data-category="all">전체 도서</button>
+        <button class="books-chip" data-category="kg">지식그래프 / KG</button>
+        <button class="books-chip" data-category="chunking">시맨틱 청킹</button>
+        <button class="books-chip" data-category="vector">벡터DB / pgvector</button>
+        <button class="books-chip" data-category="agent">AI 에이전트</button>
+        <button class="books-chip" data-category="cleanroom">클린룸 TDD</button>
+      </div>
+
+      <div id="books-total-count" style="font-size: 12px; font-weight: 700; color: #64748B;">총 6종 수록</div>
+    </div>
+
+    <!-- Books Dynamic Grid -->
+    <div id="books-grid" class="books-grid">
+      <!-- Rendered dynamically via js/books/books-main.js -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  
+  <!-- DMDG Framework Official Footer -->
+  <dmdg-footer site="dmdg_live"></dmdg-footer>
+  <script src="../dmdg_framework/js/dmdg-footer.js"></script>
+
+
+  <!-- Micro-Frontend Entry Point -->
+  <script type="module" src="./js/books/books-main.js"></script>
+</body>
+</html>

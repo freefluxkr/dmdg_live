@@ -1,0 +1,120 @@
+[
+  {
+    "order": 1,
+    "id": "app-malssam",
+    "name": "말쌈 (MALSSAM)",
+    "subtitle": "바른 우리말 & 실시간 K-신조어 사전",
+    "icon": "🗣️",
+    "iconColor": "#F77F00",
+    "badge": "Live PWA",
+    "badgeType": "live",
+    "desc": "718개 실시간 신조어·직장어 사전, 3D 플립 카드 및 6개국어 15초 에이전트 상황극을 제공하는 웹 서비스입니다.",
+    "visitorCount": "16,840",
+    "primaryBtn": {
+      "text": "View App ➔",
+      "url": "../malssam_app/index.html",
+      "target": "_self",
+      "style": "gold"
+    },
+    "subLinks": [],
+    "metaIcons": ["🔊", "⚔️", "🌐"],
+    "keywords": "말쌈 malssam 신조어 사전 퀴즈 3D카드 직장어"
+  },
+  {
+    "order": 2,
+    "id": "app-voice",
+    "name": "당목담글 보이스",
+    "subtitle": "외국인 발음 교정 & 목소리 릴레이",
+    "icon": "🎙️",
+    "iconColor": "#00A896",
+    "badge": "● LIVE",
+    "badgeType": "live-active",
+    "desc": "Gemini 2.5 Flash 기반 초·중·종성 발음 정밀 코칭 성적표와 6개국 글로벌 학습자를 잇는 따스한 목소리 릴레이입니다.",
+    "visitorCount": "8,430",
+    "primaryBtn": {
+      "text": "View App ➔",
+      "url": "../voice_app/index.html",
+      "target": "_self",
+      "style": "teal"
+    },
+    "subLinks": [],
+    "metaIcons": ["🎤", "📊", "🌐"],
+    "keywords": "당목담글 보이스 voice 발음교정 목소리릴레이 gemini 다국어"
+  },
+  {
+    "order": 3,
+    "id": "app-novels",
+    "name": "DMDG 스튜디오 서재",
+    "subtitle": "500P 5대 대작 & 팩션 소설 9권 전집",
+    "icon": "📖",
+    "iconColor": "#ED793E",
+    "badge": "500P 신간 전집 완결",
+    "badgeType": "pwa",
+    "desc": "기사식당·사찰음식·소년공 500p 대작 5종과 미래 테크 스릴러 4종 등 총 9권 전집 독립 뷰어 및 6개국어 AI 오디오북 전용관입니다.",
+    "visitorCount": "15,820",
+    "primaryBtn": {
+      "text": "서재 열기 ➔",
+      "url": "../novels_app/index.html",
+      "target": "_self",
+      "style": "gold"
+    },
+    "subLinks": [],
+    "metaIcons": ["🎧", "📚", "🌐"],
+    "keywords": "소설 novels ebook 오디오북 tts 팩션 Cypher KMin 미래드라마"
+  },
+  {
+    "order": 4,
+    "id": "app-live",
+    "name": "DMDG 라이브",
+    "subtitle": "소담 라이브 & 공식 유튜브 채널 2종",
+    "icon": "🌸",
+    "iconColor": "#E63946",
+    "badge": "Live Hub",
+    "badgeType": "live",
+    "desc": "마음의 온기를 전하는 감성 소담 라이브와 문화·역사 및 개발 스토리 공식 유튜브 채널 2종으로 즉시 연결됩니다.",
+    "visitorCount": "12,150",
+    "primaryBtn": {
+      "text": "소담 라이브 ➔",
+      "url": "https://dmdg-ut.web.app/sodam-web/",
+      "target": "_blank",
+      "style": "gold"
+    },
+    "subLinks": [
+      {
+        "text": "🎬 당목담글 채널",
+        "url": "https://www.youtube.com/@dmdg-free",
+        "target": "_blank",
+        "icon": "📺"
+      },
+      {
+        "text": "🏛️ 한국문화 채널",
+        "url": "https://www.youtube.com/@koreans-culture",
+        "target": "_blank",
+        "icon": "📺"
+      }
+    ],
+    "metaIcons": ["🌸", "📺", "✨"],
+    "keywords": "소담 sodam 유튜브 youtube 힐링 감성 영상 다큐멘터리"
+  },
+  {
+    "order": 5,
+    "id": "app-books",
+    "name": "DMDG 스튜디오 도서 (Books)",
+    "subtitle": "위키북스 출간 공식 기술서적 아카이브",
+    "icon": "📚",
+    "iconColor": "#2A9D8F",
+    "badge": "Official Archive",
+    "badgeType": "pwa",
+    "desc": "지식 그래프, 시맨틱 청킹, pgvector, 자율형 멀티에이전트, 클린룸 TDD 등 정식 출간 기술서적 전용관과 실습 시뮬레이터입니다.",
+    "visitorCount": "14,320",
+    "primaryBtn": {
+      "text": "도서관 전용관 ➔",
+      "url": "../books_app/index.html",
+      "target": "_self",
+      "style": "teal"
+    },
+    "subLinks": [],
+    "metaIcons": ["📘", "🧪", "🔗"],
+    "keywords": "도서관 books 위키북스 기술서적 지식그래프 시맨틱청킹 에이전트 클린룸"
+  }
+]

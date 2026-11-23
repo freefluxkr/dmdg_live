@@ -7,7 +7,7 @@
   
   <title>DMDG LIVE | 당목담글 공식 대표 포털</title>
   <meta name="description" content="사람과 마음을 연결하는 세상에서 가장 따뜻한 이어읽기 플랫폼 - DMDG LIVE 공식 대표 포털 허브">
-  <meta name="keywords" content="당목담글, DMDG, DMDG LIVE, 말쌈, 소담 라이브, REA 역공학, 위키북스, Hamilton Kang, AI 시뮬레이터">
+  <meta name="keywords" content="당목담글, DMDG, DMDG LIVE, 말쌈, 소담 라이브, REA 역공학, 위키북스, DMDG Master, AI 시뮬레이터">
   
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
@@ -86,17 +86,32 @@
       <input type="text" id="liveSearchInput" placeholder="서비스, 시뮬레이터, 도서 실시간 검색...">
     </div>
 
-    <!-- Quick Navigation Links (High Contrast Solid Pill Buttons) -->
-    <nav class="header-nav">
+    <!-- Quick Navigation Links (High Contrast Solid Pill Buttons - 1st Screenshot Concept) -->
+    <nav class="header-nav" style="display: flex; align-items: center; gap: 0.5rem;">
       <a href="https://malssam.com/" target="_blank" rel="noopener noreferrer" class="nav-link-btn highlight" style="background: linear-gradient(135deg, #F77F00, #E85D04) !important; color: #FFFFFF !important; border: 1.5px solid #F77F00 !important;">
         <span style="color: #FFFFFF !important; font-weight: 800 !important;">🗣️ 말쌈 전용관</span>
       </a>
-      <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
+      <a href="../novels_app/index.html" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
         <span style="color: #0B1B3D !important; font-weight: 800 !important;">📖 DMDG 서재 (E-Reader)</span>
       </a>
       <a href="https://dmdg.wikidocs.net/" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="background: #FFFFFF !important; color: #0B1B3D !important; border: 1.5px solid #0B1B3D !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;">
         <span style="color: #0B1B3D !important; font-weight: 800 !important;">📚 위키북스</span>
       </a>
+
+      <!-- 6-Flag Offline Language Selector (Minimal Slim Dropdown) -->
+      <div class="lang-dropdown-wrapper" style="position: relative; margin-left: 0.25rem;">
+        <button type="button" id="livePortalLangBtn" style="background: rgba(255,255,255,0.22); border: 1.5px solid rgba(255,255,255,0.5); color: #FFFFFF; font-size: 0.78rem; font-weight: 800; padding: 0.42rem 0.85rem; border-radius: 9999px; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; transition: all 0.2s;">
+          <span id="livePortalActiveLang">🇰🇷 KR</span> <span style="font-size: 0.6rem;">▼</span>
+        </button>
+        <div id="livePortalLangMenu" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; background: #0B1B3D; border: 1.5px solid #00A896; border-radius: 1rem; padding: 0.5rem; min-width: 155px; box-shadow: 0 12px 28px rgba(0,0,0,0.35); z-index: 100;">
+          <button type="button" onclick="switchLiveLang('ko')" style="width: 100%; text-align: left; padding: 0.45rem 0.75rem; background: transparent; border: none; color: #fff; font-size: 0.78rem; font-weight: 700; cursor: pointer; border-radius: 0.5rem;">🇰🇷 한국어 (KR)</button>
+          <button type="button" onclick="switchLiveLang('en')" style="width: 100%; text-align: left; padding: 0.45rem 0.75rem; background: transparent; border: none; color: #fff; font-size: 0.78rem; font-weight: 700; cursor: pointer; border-radius: 0.5rem;">🇺🇸 English (EN)</button>
+          <button type="button" onclick="switchLiveLang('ja')" style="width: 100%; text-align: left; padding: 0.45rem 0.75rem; background: transparent; border: none; color: #fff; font-size: 0.78rem; font-weight: 700; cursor: pointer; border-radius: 0.5rem;">🇯🇵 日本語 (JA)</button>
+          <button type="button" onclick="switchLiveLang('fr')" style="width: 100%; text-align: left; padding: 0.45rem 0.75rem; background: transparent; border: none; color: #fff; font-size: 0.78rem; font-weight: 700; cursor: pointer; border-radius: 0.5rem;">🇫🇷 Français (FR)</button>
+          <button type="button" onclick="switchLiveLang('id')" style="width: 100%; text-align: left; padding: 0.45rem 0.75rem; background: transparent; border: none; color: #fff; font-size: 0.78rem; font-weight: 700; cursor: pointer; border-radius: 0.5rem;">🇮🇩 Indonesia (ID)</button>
+          <button type="button" onclick="switchLiveLang('es')" style="width: 100%; text-align: left; padding: 0.45rem 0.75rem; background: transparent; border: none; color: #fff; font-size: 0.78rem; font-weight: 700; cursor: pointer; border-radius: 0.5rem;">🇪🇸 Español (ES)</button>
+        </div>
+      </div>
     </nav>
   </header>
 
@@ -116,7 +131,7 @@
         Connecting hearts and people – The warmest interactive storytelling platform.
       </div>
       <div class="hero-slogan-sub">
-        당신의 목소리로 다음글을 읽어주세요 — 당목담글(DMDG)
+        당신의 목소리로 다음글을 읽어주세요 — DMDG(당목담글)
       </div>
       <div style="margin-top: 1.25rem;">
         <button onclick="openCourseModal()" style="background: rgba(15, 23, 42, 0.08); border: 1.5px solid #64748b; color: #1e293b; padding: 0.65rem 1.45rem; border-radius: 9999px; font-size: 0.92rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06);" onmouseover="this.style.background='#1e293b'; this.style.color='#fff';" onmouseout="this.style.background='rgba(15, 23, 42, 0.08)'; this.style.color='#1e293b';">
@@ -207,25 +222,25 @@
           </article>
 
           <!-- Card 3: DMDG 서재 (완성) -->
-          <article class="app-item-card" data-keyword="서재 novels e-reader hamilton kang 소설 tts">
+          <article class="app-item-card" data-keyword="서재 novels e-reader dmdg master 소설 tts">
             <div class="app-card-head">
               <div class="app-brand-row">
                 <div class="app-avatar" style="color: #0077B6;">📖</div>
                 <div class="app-title-group">
                   <h3>DMDG 서재 (E-Reader)</h3>
-                  <span>Hamilton.Kang 팩션 소설 &amp; 신간</span>
+                  <span>500P 5대 대작 &amp; 팩션 9권 전집</span>
                 </div>
               </div>
-              <span class="badge-tag pwa">Live</span>
+              <span class="badge-tag pwa">Live 9권</span>
             </div>
             <p class="app-card-desc">
-              2027 팩션 스릴러와 미래 베스트셀러 3부작을 감상할 수 있는 인터랙티브 소설 리더기 + AI 음성 낭독(TTS).
+              기사식당·사찰음식·소년공 500p 대작 5종과 미래 4종 등 총 9권 전집 독립 뷰어 및 6개국어 AI 음성 낭독(TTS).
             </p>
             <div class="content-visitor-row">
-              <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong class="val">9,720</strong>명</span>
+              <span class="visitor-pill"><span class="icon">👥</span> 누적 접속자 <strong class="val">15,820</strong>명</span>
             </div>
             <div class="app-card-footer">
-              <a href="https://dmdg-live.com/novels.html" target="_blank" rel="noopener noreferrer" class="btn-view-app">
+              <a href="../novels_app/index.html" class="btn-view-app">
                 <span>View App</span> <span>➔</span>
               </a>
               <div class="app-meta-icons">
@@ -1249,7 +1264,7 @@
         <div class="footer-brand-left">
           <img src="./assets/dmdg_logo_emblem.png" alt="DMDG Emblem" class="footer-brand-logo">
           <div>
-            <div class="footer-brand-title">당목담글(DMDG) 자율 에이전트 엔지니어링 스튜디오</div>
+            <div class="footer-brand-title">DMDG(당목담글) 자율 에이전트 엔지니어링 스튜디오</div>
             <div class="footer-brand-subtitle">인간과 AI의 아름다운 공존, 2026 차세대 엔지니어링 실무 서적·인터랙티브 웹 시뮬레이터·감성 팩션 문학 생태계를 선도합니다.</div>
           </div>
         </div>
@@ -1318,7 +1333,7 @@
             대표 도메인: <a href="https://dmdg-live.com">dmdg-live.com</a> · <a href="https://malssam.com" target="_blank" rel="noopener noreferrer">malssam.com</a> · <a href="https://dmdg.wikidocs.net" target="_blank" rel="noopener noreferrer">dmdg.wikidocs.net</a>
           </div>
           <div>|</div>
-          <div>Copyright &copy; 2026 DMDG Studio. All rights reserved. Directed by Hamilton Kang.</div>
+          <div>Copyright &copy; 2026 DMDG Studio. All rights reserved. Directed by DMDG Master.</div>
         </div>
         <div class="footer-team-signature">
           Designed with <strong>Passion</strong> by Great AI Team (Demis, Craig, Jennifer, Sherlock, Peggy)
@@ -1924,6 +1939,105 @@
       submitBtn.disabled = false;
       submitBtn.innerHTML = `<span>💾 과정 신청 저장하기</span>`;
     }
+
+    // =========================================================================
+    // 6-Flag Live Language Switching Engine (Zero-Latency Offline)
+    // =========================================================================
+    const LIVE_I18N = {
+      ko: {
+        flag: "🇰🇷 KR",
+        slogan_main: "사람과 마음을 연결하는<br>세상에서 가장 따뜻한 이어읽기 플랫폼",
+        slogan_sub: "당신의 목소리로 다음글을 읽어주세요 — DMDG(당목담글)",
+        panel_apps: "🟢 LIVE WEB APPS 🚀",
+        panel_sims: "🔬 INTERACTIVE SIMULATORS",
+        panel_wikibooks: "📚 WIKIBOOKS (위키북스)"
+      },
+      en: {
+        flag: "🇺🇸 EN",
+        slogan_main: "Connecting Hearts and People<br>The World's Warmest Relay Reading Platform",
+        slogan_sub: "Please read the next story with your voice — DMDG",
+        panel_apps: "🟢 LIVE WEB APPS 🚀",
+        panel_sims: "🔬 INTERACTIVE SIMULATORS",
+        panel_wikibooks: "📚 WIKIBOOKS LIBRARY"
+      },
+      ja: {
+        flag: "🇯🇵 JA",
+        slogan_main: "人と心をつなぐ<br>世界で最も温かいリレー読書プラットフォーム",
+        slogan_sub: "あなたの声で次の物語を読んでください — ダンモクダムグル(DMDG)",
+        panel_apps: "🟢 LIVE WEB APPS 🚀",
+        panel_sims: "🔬 INTERACTIVE SIMULATORS",
+        panel_wikibooks: "📚 ウィキブックス（WIKIBOOKS）"
+      },
+      fr: {
+        flag: "🇫🇷 FR",
+        slogan_main: "Relier les Cœurs et les Esprits<br>La Plateforme de Lecture Partagée la Plus Chaleureuse",
+        slogan_sub: "Faites résonner votre voix pour la suite de l'histoire — DMDG",
+        panel_apps: "🟢 LIVE WEB APPS 🚀",
+        panel_sims: "🔬 INTERACTIVE SIMULATORS",
+        panel_wikibooks: "📚 BIBLIOTHÈQUE WIKIBOOKS"
+      },
+      id: {
+        flag: "🇮🇩 ID",
+        slogan_main: "Menghubungkan Hati dan Manusia<br>Platform Estafet Membaca Terhangat di Dunia",
+        slogan_sub: "Bacakan kisah berikutnya dengan suara hangat Anda — DMDG",
+        panel_apps: "🟢 LIVE WEB APPS 🚀",
+        panel_sims: "🔬 INTERACTIVE SIMULATORS",
+        panel_wikibooks: "📚 PERPUSTAKAAN WIKIBOOKS"
+      },
+      es: {
+        flag: "🇪🇸 ES",
+        slogan_main: "Conectando Corazones y Personas<br>La Plataforma de Lectura Más Cálida del Mundo",
+        slogan_sub: "Por favor lee la siguiente historia con tu voz — DMDG",
+        panel_apps: "🟢 LIVE WEB APPS 🚀",
+        panel_sims: "🔬 INTERACTIVE SIMULATORS",
+        panel_wikibooks: "📚 BIBLIOTECA WIKIBOOKS"
+      }
+    };
+
+    function switchLiveLang(code) {
+      localStorage.setItem('dmdg_lang', code);
+      const data = LIVE_I18N[code] || LIVE_I18N.ko;
+
+      const activeLabel = document.getElementById('livePortalActiveLang');
+      if (activeLabel) activeLabel.textContent = data.flag;
+
+      const mainSlogan = document.querySelector('.hero-slogan-main');
+      if (mainSlogan) mainSlogan.innerHTML = data.slogan_main;
+
+      const subSlogan = document.querySelector('.hero-slogan-sub');
+      if (subSlogan) subSlogan.textContent = data.slogan_sub;
+
+      const panelAppsTitle = document.querySelector('#panel-apps .panel-title');
+      if (panelAppsTitle) panelAppsTitle.innerHTML = `<span>🟢</span> ${data.panel_apps}`;
+
+      const panelSimsTitle = document.querySelector('#panel-simulators .panel-title');
+      if (panelSimsTitle) panelSimsTitle.innerHTML = `<span>🔬</span> ${data.panel_sims}`;
+
+      const panelBooksTitle = document.querySelector('#panel-wikibooks .panel-title');
+      if (panelBooksTitle) panelBooksTitle.innerHTML = `<span>📚</span> ${data.panel_wikibooks}`;
+
+      const menu = document.getElementById('livePortalLangMenu');
+      if (menu) menu.style.display = 'none';
+
+      window.dispatchEvent(new CustomEvent('dmdg:lang-change', { detail: { lang: code } }));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('livePortalLangBtn');
+      const menu = document.getElementById('livePortalLangMenu');
+      if (btn && menu) {
+        btn.onclick = (e) => {
+          e.stopPropagation();
+          menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        };
+        document.addEventListener('click', () => {
+          menu.style.display = 'none';
+        });
+      }
+
+      const initialLang = localStorage.getItem('dmdg_lang') || 'ko';
+      switchLiveLang(initialLang);
+    });
   </script>
 </body>
 </html>

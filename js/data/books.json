@@ -1,0 +1,128 @@
+[
+  {
+    "id": "book-21944",
+    "bookNumber": "Book 6 (21944)",
+    "isLatest": true,
+    "title": "[LG CNS AI 캠퍼스 KG 2기 Book 6] LG CNS AgenticWorks 실무 기반: Knowledge Lake 구축 풀스택 프로젝트",
+    "subtitle": "3중 하이브리드 레이크하우스 & Three.js 3D 지식 노드 뷰어",
+    "desc": "정형 DW(Postgres) + 벡터 인덱스(pgvector) + 지식 그래프(Neo4j)를 융합한 엔터프라이즈 Knowledge Lake와 FastAPI 비동기 스트리밍, Three.js WebGL 3D 성운 관제 뷰어 캡스톤 프로젝트를 완결합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21944",
+    "simUrl": "./sim_lgcns_pre_assessment.html",
+    "simLabel": "사전평가 런처 🎯",
+    "category": "knowledgelake",
+    "topics": ["AgenticWorks", "Knowledge Lake", "Three.js 3D", "FastAPI 비동기", "3중 레이크하우스"],
+    "parts": [
+      { "num": "PART 1", "title": "실습 환경 구축 및 인포그래픽 아키텍처", "desc": "Knowledge Lake 풀스택 10대 컨테이너 올인원 오케스트레이션" },
+      { "num": "PART 2", "title": "LG CNS AgenticWorks 비전과 Knowledge Lake", "desc": "데이터 레이크의 한계와 지식 호수의 부상, 4계층 청사진" },
+      { "num": "PART 3", "title": "3중 하이브리드 레이크하우스(Lakehouse) 구축", "desc": "PostgreSQL DW + pgvector + Neo4j 하이브리드 실시간 동기화" },
+      { "num": "PART 4", "title": "초저지연 GraphRAG 백엔드 서빙 엔진", "desc": "FastAPI 비동기 스트리밍, RRF 리랭킹, Redis 서브세컨드 캐싱" },
+      { "num": "PART 5", "title": "Three.js 3D 지식 그래프 뷰어 & 인터랙티브 UI", "desc": "WebGL 기반 3D 지식 노드 성운(Constellation) 및 다크 대시보드" },
+      { "num": "PART 6", "title": "엔터프라이즈 운영 배포 및 보안 거버넌스", "desc": "RBAC 접근 제어, Kubernetes 배포 및 최종 캡스톤 E2E 검증" }
+    ]
+  },
+  {
+    "id": "book-21943",
+    "bookNumber": "Book 5 (21943)",
+    "isLatest": true,
+    "title": "[LG CNS AI 캠퍼스 KG 2기 Book 5] FastMCP 기반 기업용 에이전트 표준화와 RAGAS 정량 평가·LLMOps 파이프라인",
+    "subtitle": "Model Context Protocol & RAGAS 정량 품질 평가",
+    "desc": "Anthropic 글로벌 표준 Model Context Protocol(MCP) 기반 FastMCP 고속 마이크로서비스 구축, RAGAS 4대 정량 지표(Faithfulness, Relevance, Recall, Precision) 평가 및 Langfuse LLMOps를 마스터합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21943",
+    "simUrl": "./sim_mcp_explorer.html",
+    "simLabel": "FastMCP 런처 🧪",
+    "category": "fastmcp",
+    "topics": ["FastMCP", "Model Context Protocol", "RAGAS 평가", "LLMOps 트레이싱", "멀티 에이전트"],
+    "parts": [
+      { "num": "PART 1", "title": "실습 환경 구축 및 인포그래픽 아키텍처", "desc": "FastMCP & RAGAS 통합 개발 환경 샌드박스 세팅" },
+      { "num": "PART 2", "title": "모델과 도구의 글로벌 통일 규격 (MCP)", "desc": "레거시 Function Calling의 한계와 Tools, Resources, Prompts 표준" },
+      { "num": "PART 3", "title": "FastMCP 고속 마이크로서비스 구축", "desc": "파이썬 데코레이터 기반 도구 등록, REST API 리소스 노출, 비동기 스트리밍" },
+      { "num": "PART 4", "title": "RAGAS 정량적 품질 평가 프레임워크", "desc": "Faithfulness, Answer Relevance, Context Recall & Precision 정량 채점" },
+      { "num": "PART 5", "title": "LLMOps 트레이싱과 비용 거버넌스", "desc": "Langfuse 요청 추적, 실시간 토큰 감사, 환각 필터링 가드레일" },
+      { "num": "PART 6", "title": "엔터프라이즈 멀티 에이전트 오케스트레이션", "desc": "Supervisor 제어, 자율 복구(Self-Healing), 도커 클러스터 배포" }
+    ]
+  },
+  {
+    "id": "book-21942",
+    "bookNumber": "Book 4 (21942)",
+    "isLatest": true,
+    "title": "[LG CNS AI 캠퍼스 KG 2기 Book 4] Microsoft GraphRAG 아키텍처와 Multi-hop 계층적 추론 엔진 마스터",
+    "subtitle": "Leiden 계층 클러스터링 & Global/Local Search 듀얼 오케스트레이션",
+    "desc": "단순 Naive RAG의 치명적 결함을 극복하는 Microsoft GraphRAG 인덱싱 파이프라인 해체, Leiden 알고리즘 기반 계층 커뮤니티 자동 요약, Question Router 기반 전역/국소 복합 추론을 완전 정복합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21942",
+    "simUrl": "./sim_lgcns_kg2_hub.html",
+    "simLabel": "GraphRAG 런처 🧪",
+    "category": "graphrag",
+    "topics": ["Microsoft GraphRAG", "Leiden 클러스터링", "Global Search", "Local Search", "Multi-hop 추론"],
+    "parts": [
+      { "num": "PART 1", "title": "실습 환경 구축 및 인포그래픽 아키텍처", "desc": "Docker Neo4j & Microsoft GraphRAG 실습 샌드박스 세팅" },
+      { "num": "PART 2", "title": "Naive RAG의 침묵과 지식 그래프의 구원", "desc": "고정 청크 분할의 한계와 텍스트에서 그래프로의 패러다임 전환" },
+      { "num": "PART 3", "title": "GraphRAG 인덱싱 파이프라인 해체 쇼", "desc": "Document-TextUnit 생성, LLM 기반 Entity/Relationship/Claims 추출" },
+      { "num": "PART 4", "title": "Leiden 알고리즘과 계층적 커뮤니티 클러스터링", "desc": "그래프 계층 분할, 레벨별 커뮤니티 자동 요약 리포트 생성" },
+      { "num": "PART 5", "title": "Global Search vs Local Search 하이브리드 오케스트레이션", "desc": "전역 통찰 질문과 엔티티 핀포인트 질문의 Question Router 분기 전략" },
+      { "num": "PART 6", "title": "Multi-hop 복합 추론 엔진 실무 구축", "desc": "3-hop 이상 건너뛴 인과관계 추론, 할루시네이션 제로 근거 서브그래프 시각화" }
+    ]
+  },
+  {
+    "id": "book-21911",
+    "bookNumber": "Book 3 (21911)",
+    "isLatest": false,
+    "title": "[LG CNS AI 캠퍼스 KG 2기 Book 3] 엔터프라이즈 온톨로지 모델링과 Neo4j 지식 그래프 데이터베이스 심화",
+    "subtitle": "RDF/OWL 온톨로지 표준부터 Cypher 튜닝 & APOC 대규모 적재까지",
+    "desc": "비정형 텍스트에서 주어-서술어-목적어 트리플을 추출하고 Neo4j 그래프 데이터베이스에 적재하여, LLM의 환각을 원천 차단하는 지식 그래프 검색 증강 생성(Graph RAG) 전 과정을 다룹니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21911",
+    "simUrl": "./sim_master_hub.html?track=kg",
+    "simLabel": "지식그래프 런처 🧪",
+    "category": "kg",
+    "topics": ["Neo4j Cypher", "S-P-O 트리플", "온톨로지 RDF/OWL", "APOC 벌크로더", "GDS PageRank"],
+    "parts": [
+      { "num": "PART 1", "title": "실습 환경 구축 및 인포그래픽 아키텍처", "desc": "Docker Neo4j 5.x APOC/GDS 플러그인 샌드박스 세팅" },
+      { "num": "PART 2", "title": "지식 표현과 온톨로지 모델링 철학", "desc": "시맨틱 웹과 RDF/OWL 표준 기반 도메인 클래스 계층 설계" },
+      { "num": "PART 3", "title": "온톨로지 실무 모델링과 트리플 추출", "desc": "Protégé 활용 기업 자산 모델링 및 LLM 트리플 자동 추출" },
+      { "num": "PART 4", "title": "Neo4j 5.x 그래프 데이터베이스 코어", "desc": "라벨, 관계, 노드 프로퍼티 스키마 설계 및 ACID 트랜잭션" },
+      { "num": "PART 5", "title": "고성능 Cypher 쿼리 최적화", "desc": "MATCH, OPTIONAL MATCH, MERGE 패턴 및 실행 계획(EXPLAIN) 튜닝" },
+      { "num": "PART 6", "title": "대규모 그래프 관리와 APOC_GDS 알고리즘", "desc": "APOC 배치 벌크 로더 100만 건 적재 및 GDS PageRank 중심성 분석" }
+    ]
+  },
+  {
+    "id": "book-21910",
+    "bookNumber": "Book 2 (21910)",
+    "isLatest": false,
+    "title": "[LG CNS AI 캠퍼스 KG 2기 Book 2] 비정형 멀티모달 문서 지능과 복합 표·시맨틱 청킹 완벽 가이드",
+    "subtitle": "IBM Docling, Table Transformer & 시맨틱 청킹 엔지니어링",
+    "desc": "단순 글자 수 자르기를 넘어, 코사인 유사도 변곡점을 실시간 계산하여 의미론적 단락을 정밀하게 분할하고 복잡한 재무제표 표 구조를 완벽 복원하는 최신 청킹 기술을 마스터합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21910",
+    "simUrl": "./sim_master_hub.html?track=chunking",
+    "simLabel": "시맨틱청킹 런처 🧪",
+    "category": "chunking",
+    "topics": ["코사인 유사도", "Docling 파서", "TATR 복합 표 복원", "시맨틱 청킹", "한국어 임베딩"],
+    "parts": [
+      { "num": "PART 1", "title": "실습 환경 구축 및 인포그래픽 아키텍처", "desc": "Docling, PaddleOCR, PyTorch GPU 가속 환경 세팅" },
+      { "num": "PART 2", "title": "비정형 문서의 벽과 문서 지능 개요", "desc": "Naive RAG의 치명적 한계와 문서 레이아웃 구조 보존의 중요성" },
+      { "num": "PART 3", "title": "지능형 OCR 엔진과 레이아웃 파서", "desc": "Tesseract, PaddleOCR, LayoutParser 및 IBM Docling 도입" },
+      { "num": "PART 4", "title": "복잡한 표(Table) 구조 완벽 복원", "desc": "Table Transformer(TATR) 기반 셀 병합 및 다단 레이아웃 복원" },
+      { "num": "PART 5", "title": "시맨틱 청킹(Semantic Chunking) 엔지니어링", "desc": "고정 크기 분할을 탈피한 문맥 경계 탐지와 동적 윈도우 분할" },
+      { "num": "PART 6", "title": "한국어 도메인 임베딩 및 벡터화", "desc": "Sentence-BERT, BGE, E5 벤치마크 및 차원 축소 시각화" }
+    ]
+  },
+  {
+    "id": "book-21909",
+    "bookNumber": "Book 1 (21909)",
+    "isLatest": false,
+    "title": "[LG CNS AI 캠퍼스 KG 2기 Book 1] 엔터프라이즈 AI 데이터 파이프라인과 pgvector 하이브리드 검색 구축 실무",
+    "subtitle": "PostgreSQL 16, pgvector HNSW & Apache Airflow ETL",
+    "desc": "PostgreSQL 기반 pgvector를 활용한 고성능 벡터 인덱싱(HNSW/IVFFlat), BM25 결합 하이브리드 RRF 리랭킹 및 Apache Airflow 파이프라인 무인 오케스트레이션을 실증합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21909",
+    "simUrl": "./sim_master_hub.html?track=pgvector",
+    "simLabel": "pgvector 런처 🧪",
+    "category": "vector",
+    "topics": ["PostgreSQL pgvector", "HNSW 인덱스", "Apache Airflow", "하이브리드 BM25", "RRF 리랭킹"],
+    "parts": [
+      { "num": "PART 1", "title": "실습 환경 구축 및 인포그래픽 아키텍처", "desc": "Docker 기반 PostgreSQL 16 pgvector & Airflow 샌드박스 세팅" },
+      { "num": "PART 2", "title": "모던 파이썬과 고성능 데이터 핸들링", "desc": "제너레이터, 비동기 I/O, Dask/Polars 대용량 데이터 스트리밍" },
+      { "num": "PART 3", "title": "PostgreSQL 16과 pgvector 심층 해부", "desc": "HNSW vs IVFFlat 인덱스 튜닝 및 코사인 연산 최적화" },
+      { "num": "PART 4", "title": "하이브리드 검색 엔진 아키텍처", "desc": "BM25 역색인과 Dense Vector 결합 및 RRF 리랭킹 알고리즘" },
+      { "num": "PART 5", "title": "NoSQL 결합 하이브리드 저장소", "desc": "MongoDB 도큐먼트 모델링과 Redis 캐싱 레이어 연동" },
+      { "num": "PART 6", "title": "Apache Airflow 프로덕션 ETL 파이프라인", "desc": "DAG 작성, 스케줄러 분산 배치, 장애 알림 자동화 파이프라인" }
+    ]
+  }
+]

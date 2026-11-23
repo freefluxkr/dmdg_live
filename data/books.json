@@ -1,0 +1,74 @@
+[
+  {
+    "id": "book-21911",
+    "bookNumber": "Book 21911",
+    "isLatest": true,
+    "title": "지식 그래프 & Graph RAG 파이프라인",
+    "subtitle": "Neo4j, S-P-O 트리플 추출 & Multi-Hop 추론",
+    "desc": "비정형 텍스트에서 주어-서술어-목적어 트리플을 추출하고 Neo4j 그래프 데이터베이스에 적재하여, LLM의 환각을 원천 차단하는 지식 그래프 검색 증강 생성(Graph RAG) 전 과정을 다룹니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21911",
+    "simUrl": "./sim_master_hub.html?track=kg",
+    "simLabel": "지식그래프 런처 🧪",
+    "category": "kg"
+  },
+  {
+    "id": "book-21910",
+    "bookNumber": "Book 21910",
+    "isLatest": false,
+    "title": "멀티모달 시맨틱 청킹 & Docling",
+    "subtitle": "문맥 보존 동적 텍스트 분할과 변곡점 알고리즘",
+    "desc": "단순 글자 수 자르기를 넘어, 코사인 유사도 변곡점을 실시간 계산하여 의미론적 단락을 정밀하게 분할하고 표·이미지를 보존하는 최신 청킹(Chunking) 기술을 마스터합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21910",
+    "simUrl": "./sim_master_hub.html?track=chunking",
+    "simLabel": "시맨틱청킹 런처 🧪",
+    "category": "chunking"
+  },
+  {
+    "id": "book-21909",
+    "bookNumber": "Book 21909",
+    "isLatest": false,
+    "title": "엔터프라이즈 벡터 DB & pgvector",
+    "subtitle": "Airflow ETL 자동화 & HNSW 인덱싱 최적화",
+    "desc": "PostgreSQL 기반 pgvector를 활용한 고성능 벡터 인덱싱(HNSW/IVFFlat), Airflow 파이프라인 무인 오케스트레이션 및 실시간 대규모 QPS 벤치마크 튜닝을 실증합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21909",
+    "simUrl": "./sim_master_hub.html?track=pgvector",
+    "simLabel": "pgvector 런처 🧪",
+    "category": "vector"
+  },
+  {
+    "id": "book-21747",
+    "bookNumber": "Book 21747",
+    "isLatest": false,
+    "title": "자율형 AI 멀티에이전트 오케스트레이션",
+    "subtitle": "StateGraph & 12대 페르소나 무인 소프트웨어 팩토리",
+    "desc": "환각과 무한 루프를 극복하는 StateGraph 상태 머신, 순환 루프 제어, 텔레그램 메신저 원격 지휘 및 12대 페르소나 거장 에이전트(Demis, Craig, Jennifer)의 실전 아키텍처를 공개합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21747",
+    "simUrl": "./sim_agent_orchestrator.html",
+    "simLabel": "에이전트 런처 🧪",
+    "category": "agent"
+  },
+  {
+    "id": "book-21891",
+    "bookNumber": "Book 21891",
+    "isLatest": false,
+    "title": "클린룸 TDD & 무결점 리버스 엔지니어링",
+    "subtitle": "블라인드 룸 격리·입출력 명세서 기반 소프트웨어 복원",
+    "desc": "저작권 침해 없는 소프트웨어 재구현의 표준인 클린룸(Cleanroom) 기법과 단위 테스트 주도 개발(TDD), Hex 입출력 검증기를 결합한 엔터프라이즈 REA 바이블입니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21891",
+    "simUrl": "./sim_cleanroom_diff.html",
+    "simLabel": "클린룸 검증기 🧪",
+    "category": "cleanroom"
+  },
+  {
+    "id": "book-21746",
+    "bookNumber": "Book 21746",
+    "isLatest": false,
+    "title": "C++ x86_64 바이너리 역공학 마스터",
+    "subtitle": "크롬 공룡 런타임 메모리 조작 & 제어 흐름 분석",
+    "desc": "어셈블리어 디스어셈블리, 메모리 오프셋 스캔, 동적 후킹(Hooking) 기법을 크롬 공룡 게임과 윈도우 계산기 실사례를 통해 직관적이고 안전하게 실습합니다.",
+    "wikidocsUrl": "https://wikidocs.net/book/21746",
+    "simUrl": "./sim_dino_lab.html",
+    "simLabel": "메모리 역공학 🧪",
+    "category": "reversing"
+  }
+]

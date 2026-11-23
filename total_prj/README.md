@@ -1,4 +1,4 @@
-# 📚 당목담글(DMDG) 공식 위키독스(WikiDocs) 연재 도서관
+# 📚 DMDG(당목담글) 공식 위키독스(WikiDocs) 연재 도서관
 
 <div align="center">
 
@@ -15,7 +15,7 @@
 | 📘 **《AI 와 데이터 분석 & 최신 LLM 에이전트 완벽 정복을 위한 사전 학습 (수학·기초 엔지니어링)》** | [👉 **Book 21701 바로가기**](https://wikidocs.net/book/21701) | 선형대수학, 역전파, AdamW, Attention 행렬 연산 등 AI 필수 수학 20일 완성 & 파이썬 구현체 |
 | 🤖 **《실전 LLM 서비스 & 멀티 에이전트 완벽 마스터북》** | [👉 **Book 21695 바로가기**](https://wikidocs.net/book/21695) | Google Gemini 2.5, GPT-4o, LangChain, LangGraph, ChatDev 멀티 에이전트 협업 & 18종 단독 시뮬레이터 |
 | 📊 **《AI 와 데이터 분석 - 22대 핵심 실무 마스터》** | [👉 **Book 21658 바로가기**](https://wikidocs.net/book/21658) | CNN, LSTM, XGBoost, LightGBM, Transformer 실무 머신러닝/딥러닝 22개 챕터 주피터 노트북 |
-| 🌐 **당목담글(DMDG) 공식 브랜드 홈** | [👉 **dmdg.wikidocs.net 바로가기**](https://dmdg.wikidocs.net/) | 전 도서 통합 포털, 20종 실시간 시뮬레이터 허브, 라이브 서비스 관제 센터 |
+| 🌐 **DMDG(당목담글) 공식 브랜드 홈** | [👉 **dmdg.wikidocs.net 바로가기**](https://dmdg.wikidocs.net/) | 전 도서 통합 포털, 20종 실시간 시뮬레이터 허브, 라이브 서비스 관제 센터 |
 
 ---
 

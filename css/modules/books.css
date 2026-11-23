@@ -1,0 +1,509 @@
+/* ==============================================================================
+   DMDG 스튜디오 도서관 (Books) 모듈 스타일시트
+   파일명: css/modules/books.css
+   ============================================================================== */
+
+:root {
+  --books-bg: #FBF9F5;
+  --books-navy: #0B1B3D;
+  --books-teal: #00A896;
+  --books-teal-hover: #028072;
+  --books-orange: #F77F00;
+  --books-card-bg: #FFFFFF;
+  --books-border: rgba(11, 27, 61, 0.08);
+  --books-shadow: 0 4px 18px rgba(11, 27, 61, 0.05);
+  --books-shadow-hover: 0 12px 32px rgba(0, 168, 150, 0.16);
+  --books-radius: 18px;
+}
+
+body.books-app {
+  background-color: var(--books-bg);
+  color: var(--books-navy);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.books-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+  width: 100%;
+  flex: 1;
+}
+
+/* Hero Section */
+.books-hero {
+  background: linear-gradient(135deg, rgba(11, 27, 61, 0.04), rgba(0, 168, 150, 0.09));
+  border: 1px solid rgba(0, 168, 150, 0.22);
+  border-radius: var(--books-radius);
+  padding: 2.5rem 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.books-hero::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(0, 168, 150, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.books-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--books-teal);
+  background: rgba(0, 168, 150, 0.1);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 0.8rem;
+  border: 1px solid rgba(0, 168, 150, 0.25);
+}
+
+.books-hero-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--books-navy);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.books-hero-desc {
+  font-size: 1.02rem;
+  color: #475569;
+  line-height: 1.6;
+  max-width: 780px;
+}
+
+/* Search & Filter Controls */
+.books-controls-bar {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.books-search-box {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+}
+
+.books-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.8rem;
+  background: var(--books-card-bg);
+  border: 1px solid var(--books-border);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--books-navy);
+  outline: none;
+  box-shadow: 0 2px 8px rgba(11, 27, 61, 0.03);
+  transition: all 0.2s ease;
+}
+
+.books-search-input:focus {
+  border-color: var(--books-teal);
+  box-shadow: 0 0 0 3px rgba(0, 168, 150, 0.15);
+}
+
+.books-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94A3B8;
+  font-size: 1rem;
+}
+
+.books-filter-chips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.books-chip {
+  background: var(--books-card-bg);
+  border: 1px solid var(--books-border);
+  color: #64748B;
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.books-chip:hover {
+  color: var(--books-teal);
+  border-color: var(--books-teal);
+}
+
+.books-chip.active {
+  background: var(--books-teal);
+  color: #FFFFFF;
+  border-color: var(--books-teal);
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.25);
+}
+
+/* Books Grid */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 992px) {
+  .books-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .books-grid { grid-template-columns: 1fr; }
+}
+
+/* Book Tech Card */
+.book-tech-card {
+  background: var(--books-card-bg);
+  border-radius: var(--books-radius);
+  border: 1px solid var(--books-border);
+  box-shadow: var(--books-shadow);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.book-tech-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--books-shadow-hover);
+  border-color: var(--books-teal);
+}
+
+.book-tech-card.latest-border {
+  border-top: 4px solid var(--books-orange);
+}
+
+.book-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.book-badge-num {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--books-teal);
+  background: rgba(0, 168, 150, 0.08);
+  border: 1px solid rgba(0, 168, 150, 0.2);
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+
+.book-badge-latest {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  background: var(--books-orange);
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: -0.02em;
+}
+
+.book-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--books-navy);
+  margin-bottom: 0.4rem;
+  line-height: 1.35;
+}
+
+.book-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--books-orange);
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+
+.book-card-desc {
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  flex-grow: 1;
+}
+
+.book-topics-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1.2rem;
+}
+
+.book-topic-tag {
+  font-size: 0.72rem;
+  background: rgba(11, 27, 61, 0.04);
+  color: #475569;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.book-card-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+.btn-book-action {
+  flex: 1;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-book-action.primary {
+  background: var(--books-navy);
+  color: #FFFFFF;
+}
+
+.btn-book-action.primary:hover {
+  background: var(--books-teal);
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.25);
+}
+
+.btn-book-action.secondary {
+  background: #F1F5F9;
+  color: #334155;
+  border: 1px solid rgba(11, 27, 61, 0.08);
+}
+
+.btn-book-action.secondary:hover {
+  background: #E2E8F0;
+  color: var(--books-navy);
+}
+
+/* ==============================================================================
+   DMDG 전용관 인터랙티브 뷰어 모달 틀 (Dedicated In-App Viewer Shell)
+   ============================================================================== */
+.book-viewer-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 27, 61, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.book-viewer-modal-backdrop.open {
+  display: flex;
+  opacity: 1;
+}
+
+.book-viewer-window {
+  background: #FFFFFF;
+  width: 100%;
+  max-width: 980px;
+  height: 90vh;
+  max-height: 850px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: scale(0.96);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.book-viewer-modal-backdrop.open .book-viewer-window {
+  transform: scale(1);
+}
+
+/* Viewer Frame Header */
+.viewer-frame-header {
+  background: #0B1B3D;
+  color: #FFFFFF;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.viewer-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.viewer-header-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.viewer-header-subtitle {
+  font-size: 0.78rem;
+  color: var(--books-orange);
+  font-weight: 600;
+}
+
+.viewer-header-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #FFFFFF;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.viewer-header-close:hover {
+  background: rgba(239, 68, 68, 0.8);
+}
+
+/* Viewer Nav Tabs */
+.viewer-nav-tabs {
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  padding: 0 1.5rem;
+  gap: 0.5rem;
+}
+
+.viewer-tab-btn {
+  padding: 0.85rem 1.2rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748B;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.viewer-tab-btn:hover {
+  color: var(--books-navy);
+}
+
+.viewer-tab-btn.active {
+  color: var(--books-teal);
+  border-bottom-color: var(--books-teal);
+}
+
+/* Viewer Content Body */
+.viewer-content-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  background: #FFFFFF;
+}
+
+.viewer-tab-panel {
+  display: none;
+}
+
+.viewer-tab-panel.active {
+  display: block;
+}
+
+/* Chapter List in Viewer */
+.viewer-chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.viewer-chapter-item {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  transition: all 0.2s ease;
+}
+
+.viewer-chapter-item:hover {
+  border-color: var(--books-teal);
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.08);
+}
+
+.viewer-chapter-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.viewer-chapter-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--books-teal);
+  background: rgba(0, 168, 150, 0.1);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.viewer-chapter-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--books-navy);
+}
+
+.viewer-chapter-desc {
+  font-size: 0.85rem;
+  color: #64748B;
+  line-height: 1.5;
+}
+
+/* Iframe In-App Reader */
+.viewer-iframe-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 550px;
+  border: none;
+  border-radius: 12px;
+  background: #F8FAFC;
+}

@@ -15,8 +15,8 @@
 
   // ── 1. Anti-Headless & Automated Scraping Bot Detection ─────────────────────
   function detectHeadlessBrowser() {
-    // 관리자 페이지(admin.html)에서는 관리자 접속 편의를 위해 차단 검사 면제
-    if (window.location && window.location.pathname && window.location.pathname.includes('admin.html')) {
+    // 관리자 페이지(admin*.html) 및 평가 페이지에서는 차단 검사 면제
+    if (window.location && window.location.pathname && (window.location.pathname.includes('admin') || window.location.pathname.includes('assessment') || window.location.pathname.includes('sim_'))) {
       return;
     }
 

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "track-1",
+    "name": "Track 1: KG & 시맨틱 RAG",
+    "icon": "🔥",
+    "desc": "Neo4j 지식 그래프 및 Docling 시맨틱 청킹 파이프라인 실습",
+    "linkedBooks": ["Book 21911", "Book 21910", "Book 21909"],
+    "simulators": [
+      {
+        "id": "sim-neo4j",
+        "title": "Neo4j Multi-Hop Graph RAG",
+        "book": "Book 21911",
+        "desc": "지식 그래프 트리플(S-P-O) 추출 및 다중 홉 시각화 샌드박스",
+        "url": "./sim_master_hub.html?track=kg",
+        "icon": "🕸️",
+        "badge": "Graph DB"
+      },
+      {
+        "id": "sim-docling",
+        "title": "Docling 시맨틱 청킹 샌드박스",
+        "book": "Book 21910",
+        "desc": "코사인 유사도 변곡점 기반 동적 텍스트 분할 및 벡터화",
+        "url": "./sim_master_hub.html?track=chunking",
+        "icon": "📄",
+        "badge": "Chunking"
+      },
+      {
+        "id": "sim-pgvector",
+        "title": "pgvector & Airflow 파이프라인",
+        "book": "Book 21909",
+        "desc": "HNSW 인덱싱 튜닝 및 대용량 실시간 QPS 벤치마크",
+        "url": "./sim_master_hub.html?track=pgvector",
+        "icon": "⚡",
+        "badge": "Vector DB"
+      }
+    ]
+  },
+  {
+    "id": "track-2",
+    "name": "Track 2: REA 역공학 & Cleanroom",
+    "icon": "🛡️",
+    "desc": "TDD Cleanroom 아키텍처 및 x86 바이너리 정밀 리버스 엔지니어링",
+    "linkedBooks": ["Book 21891", "Book 21746"],
+    "simulators": [
+      {
+        "id": "sim-cleanroom",
+        "title": "Cleanroom TDD Hex 검증기",
+        "book": "Book 21891",
+        "desc": "블라인드 룸 격리 및 입출력 명세 기반 무결점 코드 검증",
+        "url": "./sim_cleanroom_diff.html",
+        "icon": "🧪",
+        "badge": "Cleanroom"
+      },
+      {
+        "id": "sim-dino",
+        "title": "크롬 공룡 메모리 변조 실습",
+        "book": "Book 21746",
+        "desc": "런타임 메모리 주소 스캔 및 동적 점프 패칭 시뮬레이터",
+        "url": "./sim_dino_lab.html",
+        "icon": "🦖",
+        "badge": "Memory RE"
+      },
+      {
+        "id": "sim-calc",
+        "title": "윈도우 계산기 역공학 엔진",
+        "book": "Book 21746",
+        "desc": "x86_64 디스어셈블리 제어 흐름 그래프(CFG) 분석",
+        "url": "./sim_calc_percent.html",
+        "icon": "🧮",
+        "badge": "Assembly"
+      }
+    ]
+  },
+  {
+    "id": "track-3",
+    "name": "Track 3: AI 방재 & MLOps",
+    "icon": "🚨",
+    "desc": "딥러닝 119 재난 골든타임 관제 및 엔터프라이즈 MLOps",
+    "linkedBooks": ["Book 21623", "Book 21625"],
+    "simulators": [
+      {
+        "id": "sim-fire-defense",
+        "title": "119 AI 지하차도 침수 방재 (DST)",
+        "book": "Book 21623",
+        "desc": "골든타임 20분 내 차량 대피 및 AI CCTV 실시간 수위 관제",
+        "url": "./sim_omni_fire_defense.html",
+        "icon": "🌊",
+        "badge": "Disaster AI"
+      },
+      {
+        "id": "sim-sandbox",
+        "title": "도커 샌드박스 보안 격리 랩",
+        "book": "Book 21625",
+        "desc": "컨테이너 런타임 제로트러스트 권한 격리 및 리소스 모니터",
+        "url": "./sim_sandbox_docker.html",
+        "icon": "🐳",
+        "badge": "DevOps"
+      }
+    ]
+  },
+  {
+    "id": "track-4",
+    "name": "Track 4: 자율 멀티 에이전트",
+    "icon": "🤖",
+    "desc": "12대 페르소나 거장 에이전트 오케스트레이션 및 무인 소프트웨어 팩토리",
+    "linkedBooks": ["Book 21747"],
+    "simulators": [
+      {
+        "id": "sim-agent-orch",
+        "title": "StateGraph 멀티에이전트 오케스트레이터",
+        "book": "Book 21747",
+        "desc": "순환 루프 제어, 타임트래블 롤백 및 인간 개입(HITL) 런처",
+        "url": "./sim_agent_orchestrator.html",
+        "icon": "🧠",
+        "badge": "Multi-Agent"
+      },
+      {
+        "id": "sim-mcp",
+        "title": "MCP 프로토콜 익스플로러",
+        "book": "Book 21747",
+        "desc": "Model Context Protocol 기반 자율 툴 바인딩 및 샌드박스",
+        "url": "./sim_mcp_explorer.html",
+        "icon": "🔌",
+        "badge": "MCP Protocol"
+      }
+    ]
+  }
+]

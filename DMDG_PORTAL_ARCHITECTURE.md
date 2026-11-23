@@ -3,7 +3,7 @@
 > **공식 서비스 URL**: [https://dmdg-live.com/](https://dmdg-live.com/)  
 > **GitHub Pages URL**: [https://freefluxkr.github.io/dmdg_potal/](https://freefluxkr.github.io/dmdg_potal/)  
 > **소스코드 리포지토리**: [`freefluxkr/dmdg_potal`](https://github.com/freefluxkr/dmdg_potal) (Main) & [`freefluxkr/dmdg_live`](https://github.com/freefluxkr/dmdg_live) (Live Deploy)  
-> **총괄 기획**: 당목담글(DMDG) 스튜디오 자율 에이전트 엔지니어링 본부
+> **총괄 기획**: DMDG(당목담글) 스튜디오 자율 에이전트 엔지니어링 본부
 
 ---
 
@@ -87,5 +87,5 @@ dmdg_potal/
 ---
 
 ## 🏛️ 하단 정보
-당목담글(DMDG) 스튜디오 자율 에이전트 엔지니어링 본부  
+DMDG(당목담글) 스튜디오 자율 에이전트 엔지니어링 본부  
 대표도메인: `dmdg-live.com` & `malssam.com`
