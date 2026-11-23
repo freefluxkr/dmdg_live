@@ -1,0 +1,33 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // 이어읽기 오디오 업로드 & 스트리밍 재생 (오디오 파일, 10MB 이하)
+    match /voice_relays/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if request.resource != null
+        && request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('audio/.*');
+    }
+
+    // A.C.E.S 공식 PDF 성적표 (본인만 접근/업로드, 또는 Cloud Function Signed URL 사용)
+    match /reports/{userId}/{fileName} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource != null
+        && request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType == 'application/pdf';
+    }
+
+    // 유료 전자책/오디오북 저장소 (직접 접근 차단 — 결제 검증 후 Signed URL로만 제공)
+    match /ebooks/{bookId}/{fileName} {
+      allow read, write: if false;
+    }
+
+    // 기타 모든 경로 차단
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

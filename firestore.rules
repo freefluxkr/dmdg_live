@@ -1,0 +1,115 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1. 사용자 프로필 & 권한 메타 (민감 필드는 서버 Admin SDK만 수정 가능)
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && !request.resource.data.keys().hasAny([
+          'premium',
+          'free_evals',
+          'monthly_reward_count',
+          'reward_month',
+          'purchasedBooks'
+        ]);
+      allow update: if request.auth != null
+        && request.auth.uid == uid
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+          'premium',
+          'free_evals',
+          'monthly_reward_count',
+          'reward_month',
+          'purchasedBooks'
+        ]);
+      allow delete: if false;
+    }
+
+    // 2. 통합 7대 시험 성적 & A.C.E.S 역량 스코어
+    match /exam_results/{resultId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['studentName', 'examId', 'score100'])
+        && request.resource.data.score100 is number
+        && request.resource.data.score100 >= 0
+        && request.resource.data.score100 <= 100;
+      allow update, delete: if false;
+    }
+
+    // 3. 말쌈/서재 이어읽기 음성 메타데이터 & 전후 문장 링크
+    match /voice_relays/{relayId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['text', 'createdAt'])
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 2000;
+      allow update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
+    // 4. 결제 원장 (Cloud Functions Admin SDK 전용 쓰기, 본인 내역만 읽기)
+    match /payments/{paymentId} {
+      allow read: if request.auth != null && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+
+    // 5. 기존 시험 웹앱 하위 호환 컬렉션
+    match /sql_exam_config/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /ai_math_exam_config/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /ai_data_exam_config/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /python_ai_exam_config/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /sql_exam_submissions/{subId} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+    match /ai_math_exam_submissions/{subId} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+    match /ai_data_exam_submissions/{subId} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+    match /python_ai_exam_submissions/{subId} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+    match /dmdg_advanced_exam_submissions/{subId} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+
+    // 6. 말쌈 신조어 및 기존 relays 하위 호환 컬렉션
+    match /malssam_words/{wordId} {
+      allow read, create: if true;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes', 'dislikes']);
+      allow delete: if false;
+    }
+    match /relays/{docId} {
+      allow read, create: if true;
+      allow update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
+    // 7. 비공개 저작권 보관 컬렉션 대외 접근 원천 차단 (Admin SDK 전용)
+    match /chosun_yeppumal/{docId} {
+      allow read, write: if false;
+    }
+
+    // 8. 기타 미정의 컬렉션 기본 거부
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
