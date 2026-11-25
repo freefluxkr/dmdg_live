@@ -1921,6 +1921,13 @@
           resource: 'career_aces_pdf'
         });
       }
+      if (element && !document.getElementById('dmdgReportPolicyFooter')) {
+        const policyFooter = document.createElement('div');
+        policyFooter.id = 'dmdgReportPolicyFooter';
+        policyFooter.style.cssText = 'margin-top:14px; padding:8px 12px; border-top:1px dashed rgba(148,163,184,0.45); font-size:10.5px; color:#cbd5e1; text-align:center;';
+        policyFooter.textContent = '~2026.12.31 무료 베타 / 2027.01.01 전면 유료화 전환 · 12월 사전 구독 시 2027년 평생 40% 할인 · 소셜 DRM 보호 · dmdg-live.com';
+        element.appendChild(policyFooter);
+      }
       const opt = {
         margin:       8,
         filename:     'DMDG_ACES_직무추천_채용JD_성적표.pdf',

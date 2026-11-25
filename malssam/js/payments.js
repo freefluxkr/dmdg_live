@@ -337,7 +337,8 @@ function downloadRealReportPDF() {
     ${expenseResolutionHtml}
 
     <div style="margin-top:40px; text-align:center; border-top:1px solid #e2e8f0; padding-top:20px; font-size:12px; color:#94a3b8;">
-      발행처: <strong>DMDG(당목담글) 스튜디오 연구 본부</strong> | 공식 도메인: https://malssam.com/
+      발행처: <strong>DMDG(당목담글) 스튜디오 연구 본부</strong> | 공식 도메인: https://malssam.com/ · https://dmdg-live.com/<br>
+      <span style="font-size:11px; color:#64748b;">~2026.12.31 무료 베타 · 2027.01.01 전면 유료화 전환 (12월 얼리버드 평생 40% 할인 · 유료 원본 소셜 DRM 적용)</span>
     </div>
   </div>
 </body>
