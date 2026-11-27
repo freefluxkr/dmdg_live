@@ -12,7 +12,12 @@ service cloud.firestore {
           'free_evals',
           'monthly_reward_count',
           'reward_month',
-          'purchasedBooks'
+          'purchasedBooks',
+          'bookPassActive',
+          'bookPassTier',
+          'bookPassExpiresAt',
+          'bookPassCode',
+          'role'
         ]);
       allow update: if request.auth != null
         && request.auth.uid == uid
@@ -21,7 +26,12 @@ service cloud.firestore {
           'free_evals',
           'monthly_reward_count',
           'reward_month',
-          'purchasedBooks'
+          'purchasedBooks',
+          'bookPassActive',
+          'bookPassTier',
+          'bookPassExpiresAt',
+          'bookPassCode',
+          'role'
         ]);
       allow delete: if false;
     }

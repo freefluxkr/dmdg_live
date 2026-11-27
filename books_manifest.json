@@ -1,0 +1,273 @@
+{
+  "generatedAt": "2026-11-27T13:53:42.119759+09:00",
+  "cutoverIso": "2027-01-01T00:00:00+09:00",
+  "totalBooks": 38,
+  "books": {
+    "22216": {
+      "id": 22216,
+      "title": "진동·센서 스트림 기반 예지보전(PdM) 관제 시스템 실전 구축: Kafka × TimescaleDB × PyTorch × Streamlit",
+      "pdfPages": 92,
+      "pdfBytes": 2628841,
+      "chapterCount": 34
+    },
+    "22215": {
+      "id": 22215,
+      "title": "월드 모델(World Model)로 완성하는 3D 산업안전 AI 관제: SafePredict 3D",
+      "pdfPages": 43,
+      "pdfBytes": 1769395,
+      "chapterCount": 22
+    },
+    "22192": {
+      "id": 22192,
+      "title": "VRAM 3GB로 완성하는 로컬 AI 에이전트 풀스택 실무: LG 엑사원(EXAONE) 1.2B × FastAPI × LangGraph × NSSM",
+      "pdfPages": 77,
+      "pdfBytes": 3117997,
+      "chapterCount": 29
+    },
+    "22085": {
+      "id": 22085,
+      "title": "자율진화형 AI 자율주행 관제 타워: 빅데이터 레이크하우스 × GraphRAG 에이전트 × 지속 메모리 모델 정렬",
+      "pdfPages": 80,
+      "pdfBytes": 2915615,
+      "chapterCount": 30
+    },
+    "22015": {
+      "id": 22015,
+      "title": "심화 1 : 자율주행 AI 자동차 빅데이터 레이크하우스 실무 가이드",
+      "pdfPages": 133,
+      "pdfBytes": 6476684,
+      "chapterCount": 23
+    },
+    "21989": {
+      "id": 21989,
+      "title": "실전 Apache Airflow 3.x 데이터 파이프라인 & MLOps 마스터 바이블",
+      "pdfPages": 69,
+      "pdfBytes": 4014789,
+      "chapterCount": 33
+    },
+    "21988": {
+      "id": 21988,
+      "title": "실전 AWS 클라우드 아키텍처 & 서버리스 인프라 마스터 바이블",
+      "pdfPages": 67,
+      "pdfBytes": 4113371,
+      "chapterCount": 33
+    },
+    "21982": {
+      "id": 21982,
+      "title": "실전 Git & GitHub 버전 관리부터 협업 브랜치 전략·대규모 모노레포까지 마스터 바이블",
+      "pdfPages": 76,
+      "pdfBytes": 3791602,
+      "chapterCount": 27
+    },
+    "21972": {
+      "id": 21972,
+      "title": "실전 MySQL & 관계형 데이터베이스(RDBMS) 아키텍처부터 NoSQL 빅데이터까지 마스터 바이블",
+      "pdfPages": 74,
+      "pdfBytes": 2845780,
+      "chapterCount": 27
+    },
+    "21951": {
+      "id": 21951,
+      "title": "[LG CNS AI 캠퍼스 KG 2기 Book 0] 4주 완성 사전 학습(Pre-Course) 워크북",
+      "pdfPages": 67,
+      "pdfBytes": 4904166,
+      "chapterCount": 30
+    },
+    "21909": {
+      "id": 21909,
+      "title": "[LG CNS AI 캠퍼스 KG 2기 Book 1] 엔터프라이즈 AI 데이터 파이프라인과 pgvector 하이브리드 검색 구축 실무",
+      "pdfPages": 84,
+      "pdfBytes": 5519630,
+      "chapterCount": 28
+    },
+    "21910": {
+      "id": 21910,
+      "title": "[LG CNS AI 캠퍼스 KG 2기 Book 2] 비정형 멀티모달 문서 지능과 복합 표·시맨틱 청킹 완벽 가이드",
+      "pdfPages": 83,
+      "pdfBytes": 4942514,
+      "chapterCount": 28
+    },
+    "21911": {
+      "id": 21911,
+      "title": "[LG CNS AI 캠퍼스 KG 2기 Book 3] 엔터프라이즈 온톨로지 모델링과 Neo4j 지식 그래프 데이터베이스 심화",
+      "pdfPages": 81,
+      "pdfBytes": 5248569,
+      "chapterCount": 28
+    },
+    "21942": {
+      "id": 21942,
+      "title": "[LG CNS AI 캠퍼스 KG 2기 Book 4] Microsoft GraphRAG 아키텍처와 Multi-hop 계층적 추론 엔진 마스터",
+      "pdfPages": 99,
+      "pdfBytes": 5514319,
+      "chapterCount": 29
+    },
+    "21943": {
+      "id": 21943,
+      "title": "[LG CNS AI 캠퍼스 KG 2기 Book 5] FastMCP 기반 기업용 에이전트 표준화와 RAGAS 정량 평가·LLMOps 파이프라인",
+      "pdfPages": 100,
+      "pdfBytes": 5499581,
+      "chapterCount": 29
+    },
+    "21944": {
+      "id": 21944,
+      "title": "[LG CNS AI 캠퍼스 KG 2기 Book 6] LG CNS AgenticWorks 실무 기반: Knowledge Lake 구축 풀스택 프로젝트",
+      "pdfPages": 114,
+      "pdfBytes": 5511816,
+      "chapterCount": 29
+    },
+    "21891": {
+      "id": 21891,
+      "title": "비화재보 제로에 도전하는 지능형 화재 감지 및 소방청 119 자동 연계 시스템",
+      "pdfPages": 59,
+      "pdfBytes": 2275255,
+      "chapterCount": 22
+    },
+    "21889": {
+      "id": 21889,
+      "title": "WSL2와 Docker로 샌드박스 환경 구축하기",
+      "pdfPages": 52,
+      "pdfBytes": 2875300,
+      "chapterCount": 22
+    },
+    "21887": {
+      "id": 21887,
+      "title": "내 PC에서 시작하는 피지컬 AI & ROS 2 : 시뮬레이션으로 배우는 로봇 제어와 공간 지능 실전",
+      "pdfPages": 68,
+      "pdfBytes": 4188945,
+      "chapterCount": 22
+    },
+    "21868": {
+      "id": 21868,
+      "title": "7대 기업 맞춤형 AI 프로젝트 실전 구축 마스터 바이블",
+      "pdfPages": 69,
+      "pdfBytes": 3835570,
+      "chapterCount": 39
+    },
+    "21858": {
+      "id": 21858,
+      "title": "AI 기반 악성코드 조기 예측 및 샌드박스 동적 행위 탐지 관제 시스템 구축",
+      "pdfPages": 71,
+      "pdfBytes": 4228561,
+      "chapterCount": 27
+    },
+    "21842": {
+      "id": 21842,
+      "title": "산업 IoT와 AI로 구현하는 가스누출 감지 및 지능형 자동 차단 관제 시스템 실무",
+      "pdfPages": 69,
+      "pdfBytes": 5742457,
+      "chapterCount": 28
+    },
+    "21781": {
+      "id": 21781,
+      "title": "《Reverse Engineer Anything (REA) 완벽 마스터 가이드》",
+      "pdfPages": 39,
+      "pdfBytes": 2328140,
+      "chapterCount": 18
+    },
+    "21777": {
+      "id": 21777,
+      "title": "REA Antigravity IDE 연동 최적화 가이드",
+      "pdfPages": 82,
+      "pdfBytes": 7695712,
+      "chapterCount": 21
+    },
+    "21755": {
+      "id": 21755,
+      "title": "REA 3. 모던 리버스 엔지니어링 : AI 기반 보안 분석과 클린룸 시스템 재구현",
+      "pdfPages": 49,
+      "pdfBytes": 2224300,
+      "chapterCount": 19
+    },
+    "21754": {
+      "id": 21754,
+      "title": "REA 2. AI 에이전트로 끝내는 리버스 엔지니어링 실전 바이블",
+      "pdfPages": 49,
+      "pdfBytes": 2359030,
+      "chapterCount": 20
+    },
+    "21753": {
+      "id": 21753,
+      "title": "REA 1. 남의 앱 뜯어보기 : 소스코드는 필요 없다, AI 에이전트와 함께하는 소프트웨어 해체 쇼",
+      "pdfPages": 52,
+      "pdfBytes": 2291917,
+      "chapterCount": 18
+    },
+    "21841": {
+      "id": 21841,
+      "title": "실전 Streamlit & 최신 LLM 풀스택 웹앱 마스터북 (2026 Edition)",
+      "pdfPages": 97,
+      "pdfBytes": 5434124,
+      "chapterCount": 26
+    },
+    "21793": {
+      "id": 21793,
+      "title": "내 노트북으로 시작하는 양자 컴퓨터 & Quantum AI 실전 바이블",
+      "pdfPages": 46,
+      "pdfBytes": 4279644,
+      "chapterCount": 21
+    },
+    "21748": {
+      "id": 21748,
+      "title": "《1인 AI 스튜디오의 글로벌 SaaS 빌딩》 (창업·결제 연동 실전서)",
+      "pdfPages": 50,
+      "pdfBytes": 4105140,
+      "chapterCount": 21
+    },
+    "21747": {
+      "id": 21747,
+      "title": "《자율형 AI 멀티 에이전트 실전 오케스트레이션》 (AI 협업 기술서)",
+      "pdfPages": 51,
+      "pdfBytes": 4734480,
+      "chapterCount": 21
+    },
+    "21746": {
+      "id": 21746,
+      "title": "《K-오피스 생존 바이블》 (한국 직장 문화·신조어 해독서)",
+      "pdfPages": 50,
+      "pdfBytes": 5003468,
+      "chapterCount": 21
+    },
+    "21733": {
+      "id": 21733,
+      "title": "말쌈 : 한글 Urban Dictionary",
+      "pdfPages": 125,
+      "pdfBytes": 7903808,
+      "chapterCount": 19
+    },
+    "21701": {
+      "id": 21701,
+      "title": "AI 와 데이터 분석 & 최신 LLM 에이전트 완벽 정복을 위한 사전 학습(수학·기초 엔지니어링)",
+      "pdfPages": 129,
+      "pdfBytes": 6783061,
+      "chapterCount": 27
+    },
+    "21695": {
+      "id": 21695,
+      "title": "실전 LLM 서비스 & 멀티 에이전트 완벽 마스터북",
+      "pdfPages": 111,
+      "pdfBytes": 12139606,
+      "chapterCount": 26
+    },
+    "21683": {
+      "id": 21683,
+      "title": "AI 데이터 분석_마스터 인포그래픽",
+      "pdfPages": 82,
+      "pdfBytes": 17460670,
+      "chapterCount": 37
+    },
+    "21665": {
+      "id": 21665,
+      "title": "DMDG 스튜디오 컬렉션: 당목담글 · 소담 · 방법 (마음의 온기와 치유를 잇는 3부작)",
+      "pdfPages": 68,
+      "pdfBytes": 6003016,
+      "chapterCount": 23
+    },
+    "21658": {
+      "id": 21658,
+      "title": "AI 와 데이터 분석 - 22대 핵심 실무 마스터",
+      "pdfPages": 210,
+      "pdfBytes": 13521198,
+      "chapterCount": 37
+    }
+  }
+}

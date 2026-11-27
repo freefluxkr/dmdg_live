@@ -641,3 +641,414 @@ exports.issueSecureReportUrl = onCall({
     throw new HttpsError("internal", err.message || "보안 다운로드 링크 생성에 실패했습니다.");
   }
 });
+
+// ============================================================================
+// DMDG Books (https://books.dmdg-live.com/) 독점 열람실 엔드포인트
+// - ~2026-12-31 23:59:59 KST: 내장 PDF.js 스트리밍 (방안 C)
+// - 2027-01-01 00:00:00 KST~: 회원/인증 전용 웹 리더 자동 전환 (방안 B)
+// ============================================================================
+
+const BOOK_CUTOVER_ISO = "2027-01-01T00:00:00+09:00";
+const BOOK_CUTOVER_MS = Date.parse(BOOK_CUTOVER_ISO);
+
+const ALLOWED_BOOK_IDS = new Set([
+  "22216", "22215", "22192", "22085", "22015", "21989", "21988", "21982", "21972",
+  "21951", "21909", "21910", "21911", "21942", "21943", "21944",
+  "21891", "21889", "21887", "21868", "21858", "21842",
+  "21781", "21777", "21755", "21754", "21753",
+  "21841", "21793", "21748", "21747", "21746", "21733", "21701", "21695", "21683", "21665", "21658"
+]);
+
+const BOOK_ADMIN_EMAILS = new Set([
+  "tuesvonita@gmail.com",
+  "dmdg.official@gmail.com"
+]);
+
+const VALID_VIP_CODES = new Set([
+  "dmdg_service"
+]);
+
+const BOOK_PASS_SECRET = process.env.BOOK_PASS_SECRET || crypto
+  .createHash("sha256")
+  .update("dmdg-live-books-pass-2026-2027:" + (process.env.GCLOUD_PROJECT || "dmdg-live"))
+  .digest("hex");
+
+function signBookPassToken(payload) {
+  const dataB64 = Buffer.from(JSON.stringify(payload), "utf8").toString("base64url");
+  const sig = crypto.createHmac("sha256", BOOK_PASS_SECRET).update(dataB64).digest("base64url");
+  return `${dataB64}.${sig}`;
+}
+
+function verifyBookPassToken(token) {
+  if (!token || typeof token !== "string" || !token.includes(".")) return null;
+  const parts = token.split(".");
+  if (parts.length !== 2) return null;
+  const [dataB64, sig] = parts;
+  if (!dataB64 || !sig) return null;
+  const expectedSig = crypto.createHmac("sha256", BOOK_PASS_SECRET).update(dataB64).digest("base64url");
+  const sigBuf = Buffer.from(sig);
+  const expBuf = Buffer.from(expectedSig);
+  if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+    return null;
+  }
+  try {
+    const parsed = JSON.parse(Buffer.from(dataB64, "base64url").toString("utf8"));
+    if (!parsed || typeof parsed.exp !== "number" || Date.now() > parsed.exp) {
+      return null;
+    }
+    return parsed;
+  } catch (_) {
+    return null;
+  }
+}
+
+const ALLOWED_VIEWER_ORIGINS = new Set([
+  "https://books.dmdg-live.com",
+  "https://dmdg-books.pages.dev",
+  "https://dmdg-live.com"
+]);
+
+function isAllowedViewerOrigin(origin) {
+  if (!origin || typeof origin !== "string") return false;
+  if (ALLOWED_VIEWER_ORIGINS.has(origin)) return true;
+  return /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin);
+}
+
+async function resolveBookEntitlement(authObj, bookId) {
+  if (!authObj || !authObj.uid) {
+    return {
+      isAuthenticated: false,
+      email: null,
+      hasFullAccess: false,
+      tier: "guest",
+      tierLabel: "비회원"
+    };
+  }
+
+  const uid = authObj.uid;
+  const email = normalizeEmail(authObj.token && authObj.token.email);
+  const db = admin.firestore();
+
+  if (email && BOOK_ADMIN_EMAILS.has(email)) {
+    return {
+      isAuthenticated: true,
+      email,
+      hasFullAccess: true,
+      tier: "admin",
+      tierLabel: "관리자"
+    };
+  }
+
+  const userSnap = await db.collection("users").doc(uid).get();
+  const userData = userSnap.exists ? (userSnap.data() || {}) : {};
+
+  if (userData.role === "admin") {
+    return {
+      isAuthenticated: true,
+      email: email || userData.email || null,
+      hasFullAccess: true,
+      tier: "admin",
+      tierLabel: "관리자"
+    };
+  }
+
+  if (userData.premium === true) {
+    return {
+      isAuthenticated: true,
+      email: email || userData.email || null,
+      hasFullAccess: true,
+      tier: "pro",
+      tierLabel: "Pro 구독 회원"
+    };
+  }
+
+  if (userData.bookPassActive === true) {
+    const expMs = userData.bookPassExpiresAt ? parseTimestampMs(userData.bookPassExpiresAt, 0) : 0;
+    if (!expMs || Date.now() <= expMs) {
+      return {
+        isAuthenticated: true,
+        email: email || userData.email || null,
+        hasFullAccess: true,
+        tier: userData.bookPassTier || "vip",
+        tierLabel: "VIP 패스 회원"
+      };
+    }
+  }
+
+  if (Array.isArray(userData.purchasedBooks) && userData.purchasedBooks.includes(String(bookId))) {
+    return {
+      isAuthenticated: true,
+      email: email || userData.email || null,
+      hasFullAccess: true,
+      tier: "single",
+      tierLabel: "단건 소장 회원"
+    };
+  }
+
+  const paySnap = await db.collection("payments")
+    .where("uid", "==", uid)
+    .where("bookId", "==", String(bookId))
+    .where("status", "==", "PAID")
+    .limit(1)
+    .get();
+  if (!paySnap.empty) {
+    return {
+      isAuthenticated: true,
+      email: email || userData.email || null,
+      hasFullAccess: true,
+      tier: "single",
+      tierLabel: "단건 소장 회원"
+    };
+  }
+
+  return {
+    isAuthenticated: true,
+    email: email || userData.email || null,
+    hasFullAccess: false,
+    tier: "member_free",
+    tierLabel: "무료 회원"
+  };
+}
+
+// 9. books.dmdg-live.com 전용 내장 PDF 스트리밍 (~2026-12-31 무료 / 2027-01-01 이후 인증 전용)
+exports.streamBookPdf = onRequest({
+  timeoutSeconds: 60,
+  memory: "512MiB"
+}, async (req, res) => {
+  const origin = req.headers.origin || "";
+  const originAllowed = isAllowedViewerOrigin(origin);
+  res.setHeader("Vary", "Origin");
+
+  if (originAllowed) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Authorization, X-DMDG-Viewer, X-DMDG-Pass-Token");
+    res.setHeader("Access-Control-Max-Age", "3600");
+  }
+
+  if (req.method === "OPTIONS") {
+    if (!originAllowed) {
+      res.status(403).json({
+        ok: false,
+        code: "ORIGIN_FORBIDDEN",
+        message: "이 도서는 https://books.dmdg-live.com/ 전용 뷰어에서만 열람할 수 있습니다."
+      });
+      return;
+    }
+    res.status(204).send("");
+    return;
+  }
+
+  const secFetchDest = String(req.headers["sec-fetch-dest"] || "").toLowerCase();
+  const viewerHeader = String(req.headers["x-dmdg-viewer"] || "");
+  if (req.method !== "GET" || !originAllowed || secFetchDest === "document" || viewerHeader !== "books-pdfjs") {
+    res.status(403).json({
+      ok: false,
+      code: "ORIGIN_FORBIDDEN",
+      message: "이 도서는 https://books.dmdg-live.com/ 전용 뷰어에서만 열람할 수 있습니다."
+    });
+    return;
+  }
+
+  const bookId = String((req.query && req.query.bookId) || "").trim();
+  if (!ALLOWED_BOOK_IDS.has(bookId)) {
+    res.status(403).json({
+      ok: false,
+      code: "BOOK_NOT_ALLOWED",
+      message: "열람 허용 대상 도서가 아닙니다."
+    });
+    return;
+  }
+
+  if (Date.now() >= BOOK_CUTOVER_MS) {
+    const passToken = String(req.headers["x-dmdg-pass-token"] || "").trim();
+    const verifiedPass = verifyBookPassToken(passToken);
+
+    if (!verifiedPass) {
+      const authHeader = String(req.headers.authorization || "");
+      const bearerMatch = authHeader.match(/^Bearer\s+(.+)$/i);
+      if (!bearerMatch) {
+        res.status(403).json({
+          ok: false,
+          code: "CUTOVER_TO_WEB_READER",
+          message: "2026-12-31 무료 PDF 열람이 종료되었습니다. 2027-01-01부터 회원/인증 전용 웹 리더를 이용해 주세요."
+        });
+        return;
+      }
+
+      let decoded;
+      try {
+        decoded = await admin.auth().verifyIdToken(bearerMatch[1].trim());
+      } catch (_) {
+        res.status(403).json({
+          ok: false,
+          code: "CUTOVER_TO_WEB_READER",
+          message: "인증 토큰이 유효하지 않습니다. 웹 리더에서 다시 로그인해 주세요."
+        });
+        return;
+      }
+
+      const entitlement = await resolveBookEntitlement({ uid: decoded.uid, token: decoded }, bookId);
+      if (!entitlement.hasFullAccess) {
+        res.status(403).json({
+          ok: false,
+          code: "CUTOVER_TO_WEB_READER",
+          message: "2026-12-31 무료 PDF 열람이 종료되었습니다. 2027-01-01부터 회원/인증 전용 웹 리더를 이용해 주세요."
+        });
+        return;
+      }
+    }
+  }
+
+  try {
+    const file = admin.storage().bucket().file(`ebooks/${bookId}/book.pdf`);
+    const [pdfBuffer] = await file.download();
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `inline; filename="dmdg_book_${bookId}.pdf"`);
+    res.setHeader("Cache-Control", "private, no-store");
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.status(200).send(pdfBuffer);
+  } catch (err) {
+    console.error(`streamBookPdf error (bookId=${bookId}):`, err);
+    res.status(500).json({
+      ok: false,
+      code: "PDF_STREAM_FAILED",
+      message: "PDF 파일을 불러오는 중 오류가 발생했습니다."
+    });
+  }
+});
+
+// 10. 2027-01-01 회원/인증 전용 웹 리더 및 목차/권한 정책 조회 (onCall)
+exports.getBookReader = onCall({
+  timeoutSeconds: 60,
+  memory: "512MiB"
+}, async (request) => {
+  const bookId = String((request.data && request.data.bookId) || "").trim();
+  if (!ALLOWED_BOOK_IDS.has(bookId)) {
+    throw new HttpsError("permission-denied", "열람 허용 대상 도서가 아닙니다.");
+  }
+
+  const nowMs = Date.now();
+  const isPost2027 = nowMs >= BOOK_CUTOVER_MS;
+  const daysUntilCutover = Math.max(0, Math.ceil((BOOK_CUTOVER_MS - nowMs) / 86400000));
+  const policy = {
+    serverNowIso: new Date(nowMs).toISOString(),
+    cutoverIso: BOOK_CUTOVER_ISO,
+    isPost2027,
+    activePhase: isPost2027 ? "web_member_2027" : "pdf_free_2026",
+    daysUntilCutover
+  };
+
+  let entitlement = await resolveBookEntitlement(request.auth, bookId);
+  if (!entitlement.hasFullAccess) {
+    const passToken = String((request.data && request.data.passToken) || "").trim();
+    const verifiedPass = verifyBookPassToken(passToken);
+    if (verifiedPass) {
+      entitlement = {
+        isAuthenticated: entitlement.isAuthenticated,
+        email: entitlement.email,
+        hasFullAccess: true,
+        tier: verifiedPass.tier || "vip",
+        tierLabel: verifiedPass.tierLabel || "VIP 초대코드 회원",
+        passVerified: true
+      };
+    }
+  }
+
+  let readerData;
+  try {
+    const file = admin.storage().bucket().file(`ebooks/${bookId}/reader.json`);
+    const [rawBuf] = await file.download();
+    readerData = JSON.parse(rawBuf.toString("utf8"));
+  } catch (err) {
+    console.error(`getBookReader storage error (bookId=${bookId}):`, err);
+    throw new HttpsError("internal", "도서 원고 데이터를 불러오는 데 실패했습니다.");
+  }
+
+  const rawChapters = Array.isArray(readerData.chapters) ? readerData.chapters : [];
+  const gatedChapters = rawChapters.map((ch, idx) => {
+    const unlocked = entitlement.hasFullAccess || idx < 2;
+    return {
+      index: idx,
+      id: ch.id,
+      subject: ch.subject || `Chapter ${idx + 1}`,
+      depth: Number(ch.depth || 0),
+      parent_id: ch.parent_id || null,
+      is_part: Boolean(ch.is_part),
+      locked: !unlocked,
+      content_md: unlocked ? (ch.content_md || "") : ""
+    };
+  });
+
+  return {
+    policy,
+    entitlement,
+    book: {
+      id: readerData.id || Number(bookId),
+      title: readerData.title || `Book ${bookId}`,
+      summary: readerData.summary || "",
+      chapter_count: gatedChapters.length,
+      chapters: gatedChapters
+    }
+  };
+});
+
+// 11. VIP / 초대코드 인증을 통한 회원 열람 패스 부여 (onCall)
+exports.redeemBookAccessCode = onCall({
+  timeoutSeconds: 30,
+  memory: "256MiB"
+}, async (request) => {
+  const code = String((request.data && request.data.code) || "").trim();
+  if (!code) {
+    throw new HttpsError("invalid-argument", "인증 코드를 입력해 주세요.");
+  }
+
+  const db = admin.firestore();
+  let passTier = "vip";
+
+  if (!VALID_VIP_CODES.has(code)) {
+    const codeDoc = await db.collection("book_invite_codes").doc(code).get();
+    if (!codeDoc.exists) {
+      throw new HttpsError("permission-denied", "유효하지 않은 초대코드입니다.");
+    }
+    const codeData = codeDoc.data() || {};
+    if (codeData.active === false) {
+      throw new HttpsError("permission-denied", "비활성화된 초대코드입니다.");
+    }
+    if (codeData.expiresAt) {
+      const expMs = parseTimestampMs(codeData.expiresAt, 0);
+      if (expMs && Date.now() > expMs) {
+        throw new HttpsError("permission-denied", "만료된 초대코드입니다.");
+      }
+    }
+    if (codeData.tier) {
+      passTier = String(codeData.tier);
+    }
+  }
+
+  if (request.auth && request.auth.uid) {
+    await db.collection("users").doc(request.auth.uid).set({
+      bookPassActive: true,
+      bookPassTier: passTier,
+      bookPassCode: code,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+  }
+
+  const expiresAtMs = Date.now() + 7 * 24 * 60 * 60 * 1000;
+  const tierLabel = "VIP 초대코드 회원";
+  const passToken = signBookPassToken({
+    tier: passTier,
+    tierLabel,
+    code,
+    exp: expiresAtMs
+  });
+
+  return {
+    ok: true,
+    tier: passTier,
+    tierLabel,
+    passToken,
+    expiresAt: new Date(expiresAtMs).toISOString()
+  };
+});

@@ -541,8 +541,8 @@
   <!-- Top Early-Bird Promo Bar -->
   <div class="promo-bar">
     <span class="promo-pill" id="ddayBadge">D-DAY 계산 중...</span>
-    <span id="promoBannerText">2026.12.31 무료 베타 종료 → 2027.01.01 단건/구독 유료화 전환 (얼리버드 40% 할인)</span>
-    <button class="promo-btn" onclick="openPricingModal()">구독 &amp; 단건 요금제 / 코드 입력</button>
+    <span id="promoBannerText">2026.12.31 무료 베타 종료 → 2027.01.01 단건(3,900원~) · All-Pass 이용권 전환 (12월 얼리버드 30일 4,900원)</span>
+    <button class="promo-btn" onclick="openPricingModal()">단건 · All-Pass 요금제 / 코드 입력</button>
   </div>
 
   <!-- Header -->
@@ -611,10 +611,10 @@
               전체 본문 웹 스트리밍 및 원본 PDF(*.pdf) 다운로드를 위해 인증 코드 입력 또는 구독을 선택해 주세요.
             </div>
             <div style="font-size:0.78rem; color:#fde68a; background:rgba(245,158,11,0.12); border:1px solid rgba(251,191,36,0.35); border-radius:10px; padding:0.6rem 0.85rem; margin-bottom:0.9rem; text-align:left; line-height:1.5;">
-              <strong>💡 2026.12 → 2027.01 전환 혜택:</strong> ① 12월 얼리버드 사전 구독 시 <strong>2027년 평생 40% 할인</strong> · ② VIP 초대 코드(<code>dmdg_servive</code>) 해금 · ③ 유료 원본 하단 여백 <strong>소셜 DRM 구매자 각인</strong>
+              <strong>💡 2026.12 → 2027.01 전환 혜택:</strong> ① 12월 사전 신청 시 <strong>30일 All-Pass 4,900원 얼리버드</strong> · ② VIP·수강생 전용 초대코드 해금 · ③ 유료 원본 하단 여백 <strong>소셜 DRM 구매자 각인</strong>
             </div>
             <div class="unlock-row">
-              <input type="text" id="paywallCodeInput" class="code-input" placeholder="dmdg_servive 또는 DMDG-PRO-2027" />
+              <input type="text" id="paywallCodeInput" class="code-input" placeholder="VIP / 수강생 초대코드 입력" />
               <button class="btn-primary" onclick="unlockWithCode('paywallCodeInput')">코드 해금</button>
               <button class="btn-cyan" onclick="requestCheckoutStub('pro')">결제 연동 (12.3 이후 오픈)</button>
             </div>
@@ -630,7 +630,7 @@
         </div>
         <div class="dl-actions">
           <button class="dl-btn dl-valid" onclick="downloadVariant('valid')">① 유효 샘플 (~2026-12-31 · 목차전용)</button>
-          <button class="dl-btn dl-expired" onclick="downloadVariant('expired')">② 만료 샘플 (비번: dmdg_servive · 목차전용)</button>
+          <button class="dl-btn dl-expired" onclick="downloadVariant('expired')">② 만료 샘플 (초대코드 잠금 · 목차전용)</button>
           <button class="dl-btn dl-original" onclick="downloadVariant('original')">③ 원본 PDF (*.pdf · 유료전용)</button>
         </div>
       </div>
@@ -641,25 +641,24 @@
   <div class="modal-backdrop" id="pricingModal" onclick="if(event.target===this) closePricingModal()">
     <div class="modal-card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
-        <h2 style="font-size:1.18rem; font-weight:900; color:#fde68a;">DMDG 하이브리드 유료화 &amp; 코드 인증</h2>
+        <h2 style="font-size:1.18rem; font-weight:900; color:#fde68a;">DMDG 합리적 요금제 &amp; 초대코드 인증</h2>
         <button class="ctrl-btn" onclick="closePricingModal()">닫기 ✕</button>
       </div>
       <p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:0.75rem;">
-        초대 코드(<code style="color:#6ee7b7;">dmdg_servive</code>), 단건 코드(<code style="color:#fde68a;">DMDG-SINGLE-2027</code>),
-        또는 Pro 코드(<code style="color:#38bdf8;">DMDG-PRO-2027</code>)를 입력해 즉시 테스트할 수 있습니다. (PG 결제는 12월 3일 이후 정식 연동)
+        발급받으신 <strong>VIP·수강생 초대코드</strong> 또는 구매 인증 코드를 입력해 즉시 열람할 수 있습니다. (PG 결제는 12월 3일 이후 정식 연동 · 정기결제 없음)
       </p>
       <div style="font-size:0.79rem; color:#e2e8f0; background:rgba(245,158,11,0.1); border:1px solid rgba(251,191,36,0.35); border-radius:10px; padding:0.65rem 0.9rem; margin-bottom:1rem; line-height:1.55;">
-        <strong>🚀 매출 전환 &amp; 보안 전략:</strong> 12월 사전 구독 시 <strong>2027년 평생 40% 얼리버드 할인</strong> · 만료 샘플 코드(<code>dmdg_servive</code>) VIP/파트너사 제공 · 유료 원본 PDF 하단 여백 <strong>소셜 DRM</strong>(<code>Licensed to: 이름/이메일</code>) 자동 각인
+        <strong>🚀 전환 &amp; 보안 정책:</strong> 12월 사전 신청 시 <strong>30일 All-Pass 4,900원 얼리버드 특가</strong> · VIP/파트너사 전용 초대코드 제공 · 유료 원본 PDF 하단 여백 <strong>소셜 DRM</strong>(<code>Licensed to: 이름/이메일</code>) 자동 각인
       </div>
       <div class="unlock-row" style="justify-content:flex-start;">
-        <input type="text" id="modalCodeInput" class="code-input" placeholder="인증 코드 입력..." />
+        <input type="text" id="modalCodeInput" class="code-input" placeholder="초대코드 또는 인증코드 입력..." />
         <button class="btn-primary" onclick="unlockWithCode('modalCodeInput')">인증 적용</button>
         <button class="ctrl-btn" onclick="clearUnlock()">인증 초기화</button>
       </div>
       <div class="tier-grid" id="modalTiers"></div>
       <div style="margin-top:1rem; display:flex; gap:0.6rem; flex-wrap:wrap;">
         <button class="btn-cyan" onclick="requestCheckoutStub('single')">단건 결제 테스트 (12.3 이후 연동)</button>
-        <button class="btn-primary" onclick="requestCheckoutStub('pro')">Pro 얼리버드 40% 사전 신청</button>
+        <button class="btn-primary" onclick="requestCheckoutStub('pro')">All-Pass 30일 얼리버드 (4,900원)</button>
       </div>
     </div>
   </div>
@@ -702,7 +701,7 @@
       {
         id: 'single',
         name: 'Single (단건 소장)',
-        price_label: '건당 5,000 ~ 29,000원',
+        price_label: '3,900 ~ 5,900원 (기술서 4,900~9,900원)',
         badge: '영구 소장',
         features: [
           '구매한 자료의 원본 PDF 영구 다운로드',
@@ -712,20 +711,20 @@
       },
       {
         id: 'pro',
-        name: 'Pro (월/연 구독)',
-        price_label: '월 9,900 ~ 19,900원 (연 20~30% 할인)',
-        badge: '얼리버드 40% 할인',
-        early_bird_price: '월 8,900원 / 연 77,400원',
+        name: 'All-Pass 이용권 (정기결제 없음)',
+        price_label: '30일 6,900원 / 1년 49,000원',
+        badge: '12월 얼리버드 4,900원',
+        early_bird_price: '30일 4,900원 (정가 6,900원) / 1년 49,000원',
         features: [
           '전 자료 웹 보안 뷰어 무제한 스트리밍',
           '원본 PDF 다운로드 (소셜 DRM)',
-          '개정판 및 신규 자료 우선 열람'
+          '개정판 및 신규 자료 우선 열람 (자동결제 없음)'
         ]
       },
       {
         id: 'team',
         name: 'Team / B2B (기관·스터디)',
-        price_label: '별도 문의 (5~10인)',
+        price_label: '별도 문의 (5~10인 · 연 19만원~)',
         badge: '기업 맞춤형',
         features: [
           '다중 계정 웹 보안 뷰어 통합 라이선스',
@@ -753,8 +752,8 @@
         days_remaining: daysRemaining,
         free_preview_pages_after_2027: 3,
         early_bird: {
-          discount_pct: 40,
-          banner_text: '2026.12.31 무료 종료 — 지금 사전 구독 시 2027년 평생 40% 할인'
+          discount_pct: 30,
+          banner_text: '2026.12.31 무료 종료 — 단건 3,900원~ · 12월 사전 신청 시 All-Pass 30일 4,900원'
         },
         tiers: STATIC_TIERS
       };
@@ -954,14 +953,14 @@
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
           ${hostedBtn}
           <button type="button" class="dl-btn dl-valid" onclick="downloadVariant('valid')">① 유효 샘플 (~2026-12-31 · 목차전용)</button>
-          <button type="button" class="dl-btn dl-expired" onclick="downloadVariant('expired')">② 만료 샘플 (비번: dmdg_servive · 목차전용)</button>
+          <button type="button" class="dl-btn dl-expired" onclick="downloadVariant('expired')">② 만료 샘플 (초대코드 잠금 · 목차전용)</button>
         </div>
         <div style="background:rgba(2,6,23,0.55); border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:12px 14px; margin-bottom:14px;">
           <div style="font-size:0.84rem; font-weight:800; color:#38bdf8; margin-bottom:8px;">📑 전체 목차 (Table of Contents — 본문 유출 방지용 목차 공개)</div>
           <div style="max-height:260px; overflow-y:auto;">${tocRows || '<div style="color:#94a3b8; font-size:0.8rem;">목차 정보가 없습니다.</div>'}</div>
         </div>
         <div style="font-size:0.78rem; color:#fde68a; background:rgba(245,158,11,0.1); border:1px solid rgba(251,191,36,0.3); border-radius:10px; padding:10px 12px; line-height:1.55;">
-          <strong>💡 2026.12 → 2027.01 전환 혜택:</strong> 12월 사전 구독 시 <strong>2027년 평생 40% 할인</strong> · VIP 초대코드(<code>dmdg_servive</code>) 해금 · 유료 원본 하단 여백 <strong>소셜 DRM 구매자 각인</strong>
+          <strong>💡 2026.12 → 2027.01 전환 혜택:</strong> 12월 사전 신청 시 <strong>30일 All-Pass 4,900원 얼리버드</strong> · VIP·수강생 전용 초대코드 해금 · 유료 원본 하단 여백 <strong>소셜 DRM 구매자 각인</strong>
         </div>
       `;
     }
@@ -977,7 +976,7 @@
       if (state.isStaticMode) {
         if (state.policy && state.policy.is_paid_period && !hasStaticWebUnlock(doc.doc_id) && state.pageNum > 3) {
           document.getElementById('paywallDesc').textContent =
-            '2027-01-01 유료화 정책에 따라 3페이지까지만 무료 미리보기가 제공됩니다. 전체 열람을 위해 VIP 코드(dmdg_servive) 또는 단건/Pro 구독을 이용해 주세요.';
+            '2027-01-01 유료화 정책에 따라 3페이지까지만 무료 미리보기가 제공됩니다. 전체 열람을 위해 VIP 초대코드 인증 또는 단건/All-Pass 이용권을 이용해 주세요.';
           paywall.classList.add('open');
           return;
         }
@@ -1038,18 +1037,11 @@
       if (state.isStaticMode) {
         let token = '';
         let label = '';
-        if (code === 'dmdg_servive') {
+        if (code === 'dmdg_service') {
           token = 'STATIC:VIP';
-          label = 'VIP 샘플 초대코드';
-        } else if (code.toUpperCase() === 'DMDG-PRO-2027') {
-          token = 'STATIC:PRO';
-          label = 'Pro 구독 회원';
-        } else if (code.toUpperCase() === 'DMDG-SINGLE-2027') {
-          const did = state.activeDoc ? state.activeDoc.doc_id : '';
-          token = `STATIC:SINGLE:${did}`;
-          label = 'Single 단건 소장';
+          label = 'VIP 초대코드 회원';
         } else {
-          showToast('유효하지 않은 코드입니다. (dmdg_servive / DMDG-SINGLE-2027 / DMDG-PRO-2027)');
+          showToast('유효하지 않은 코드입니다. 발급받으신 VIP·수강생 초대코드를 확인해 주세요.');
           return;
         }
         state.token = token;
@@ -1117,7 +1109,7 @@
         }
         if (variant === 'original') {
           if (!hasStaticOriginalUnlock(state.activeDoc.doc_id)) {
-            showToast('원본 PDF(*.pdf) 다운로드는 단건 구매 또는 Pro 구독 회원 전용입니다. (테스트 코드: DMDG-PRO-2027)');
+            showToast('원본 PDF(*.pdf) 다운로드는 단건 구매 또는 All-Pass 이용권 회원 전용입니다.');
             openPricingModal();
             return;
           }
@@ -1159,10 +1151,10 @@
 
     async function requestCheckoutStub(tierId) {
       if (state.isStaticMode) {
-        showToast('PG 결제(포트원/PayPal)는 2026-12-03 이후 정식 연동됩니다. 현재는 인증 코드(dmdg_servive / DMDG-PRO-2027)로 테스트할 수 있습니다.');
+        showToast('PG 결제(포트원/PayPal)는 2026-12-03 이후 정식 연동됩니다. 현재는 발급된 VIP 초대코드로 테스트할 수 있습니다.');
         return;
       }
-      const amount = tierId === 'single' && state.activeDoc ? state.activeDoc.single_price_krw : 8900;
+      const amount = tierId === 'single' && state.activeDoc ? state.activeDoc.single_price_krw : 4900;
       const res = await fetch(`${API_BASE}/api/checkout-stub`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

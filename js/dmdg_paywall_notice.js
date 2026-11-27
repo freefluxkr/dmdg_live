@@ -1,9 +1,9 @@
 /**
  * dmdg_paywall_notice.js
- * DMDG 전 서비스 접속 시 2026.12.31 무료 종료 -> 2027.01.01 [구독 + 단건] 하이브리드 유료화 전환 예고 팝업
+ * DMDG 전 서비스 접속 시 2026.12.31 무료 종료 -> 2027.01.01 [단건 + All-Pass 이용권] 유료화 전환 예고 팝업
  * - ~2026.12.31 23:59:59까지 전 서비스 무료 제공
- * - 1. [구독 + 단건] 하이브리드 티어: Free / Single(5,000~29,000원) / Pro(월 9,900~19,900원 · 연 20~30%↓) / Team·B2B
- * - 2. 2026.12 -> 2027.01 전환 전략: 12월 얼리버드 평생 40% 할인 / VIP 초대코드(dmdg_servive) / 유료 원본 소셜 DRM
+ * - 1. [단건 + All-Pass] 티어: Free / Single(소설·말쌈 3,900~5,900원 · 기술서 4,900~9,900원) / All-Pass(30일 6,900원·얼리버드 4,900원 / 1년 49,000원) / Team·B2B
+ * - 2. 2026.12 -> 2027.01 전환 전략: 12월 얼리버드 4,900원 특가 / VIP·수강생 초대코드 / 유료 원본 소셜 DRM
  * - "오늘 하루 동안 보지 않기" 체크박스 (당일 23:59:59까지 localStorage 억제)
  */
 (function (global) {
@@ -272,10 +272,10 @@
           <span class="dmdg-pw-badge-free">🎁 ~2026. 12. 31 23:59까지 무료 공개</span>
           <span class="dmdg-pw-badge-paid">📅 2027. 01. 01 전면 유료화 전환</span>
         </div>
-        <h2 class="dmdg-pw-title" id="dmdg-pw-title">DMDG [구독 + 단건] 하이브리드 유료화 &amp; PDF 보안 전환 안내</h2>
+        <h2 class="dmdg-pw-title" id="dmdg-pw-title">DMDG [단건 + All-Pass 이용권] 유료화 &amp; 보안 전환 안내</h2>
         <p class="dmdg-pw-lead">
           당목담글(<strong>dmdg-live.com</strong>)의 모든 웹앱·시뮬레이터·AI 도서·PDF 자료는 <strong>2026년 12월 31일 자정(23:59)까지 무료</strong>로 제공되며,
-          <strong>2027년 1월 1일부터</strong> <strong>[구독 + 단건] 하이브리드 티어</strong>로 전면 유료화됩니다.
+          <strong>2027년 1월 1일부터</strong> 합리적인 <strong>[단건 소장 + All-Pass 이용권]</strong>(정기결제 없음)으로 전환됩니다.
         </p>
 
         <div class="dmdg-pw-grid">
@@ -286,33 +286,33 @@
             </div>
             <div class="dmdg-pw-card-desc">
               • <strong>~2026.12.31</strong>: 웹 뷰어 전체 열람 + 유효 샘플 다운로드<br>
-              • <strong>2027.01.01~</strong>: 각 자료 앞부분(1~3p) 미리보기 + 만료 샘플 안내
+              • <strong>2027.01.01~</strong>: 각 자료 앞부분(1~3p / 2섹션) 미리보기
             </div>
           </div>
           <div class="dmdg-pw-card">
             <div class="dmdg-pw-card-head">
               <span class="dmdg-pw-card-title">2. Single (단건 소장)</span>
-              <span class="dmdg-pw-card-price">건당 5,000 ~ 29,000원</span>
+              <span class="dmdg-pw-card-price">3,900 ~ 9,900원</span>
             </div>
             <div class="dmdg-pw-card-desc">
-              • 분량·전문성별 차등 책정<br>
-              • 해당 자료 <strong>원본 PDF 영구 다운로드</strong> + 웹 뷰어 무제한 열람
+              • 소설·말쌈·기획서 <strong>3,900~5,900원</strong> / 기술서 <strong>4,900~9,900원</strong><br>
+              • 해당 자료 <strong>원본 PDF 영구 소장</strong> + 웹 뷰어 무제한 열람
             </div>
           </div>
           <div class="dmdg-pw-card featured">
             <div class="dmdg-pw-card-head">
-              <span class="dmdg-pw-card-title">3. Pro (월/연 구독)</span>
-              <span class="dmdg-pw-card-price">월 9,900 ~ 19,900원 (연 20~30%↓)</span>
+              <span class="dmdg-pw-card-title">3. All-Pass 이용권 (정기결제 없음)</span>
+              <span class="dmdg-pw-card-price">30일 6,900원 · 1년 49,000원</span>
             </div>
             <div class="dmdg-pw-card-desc">
-              • <strong>전 자료 웹 보안 뷰어 무제한 스트리밍</strong><br>
-              • 월 N건(또는 무제한) 원본 PDF 다운로드 + 개정판·신규 자료 우선 열람
+              • <strong>전 자료 웹 보안 뷰어 무제한 스트리밍</strong> (12월 얼리버드 30일 4,900원)<br>
+              • 원본 PDF 소셜 DRM 다운로드 + 개정판·신규 자료 우선 열람
             </div>
           </div>
           <div class="dmdg-pw-card">
             <div class="dmdg-pw-card-head">
               <span class="dmdg-pw-card-title">4. Team / B2B</span>
-              <span class="dmdg-pw-card-price">별도 문의 (5~10인)</span>
+              <span class="dmdg-pw-card-price">별도 문의 (5~10인 · 연 19만원~)</span>
             </div>
             <div class="dmdg-pw-card-desc">
               • 기업·기관·스터디 그룹 다중 계정 웹 뷰어<br>
@@ -323,8 +323,8 @@
 
         <div class="dmdg-pw-strategy">
           <div class="dmdg-pw-strategy-title">🚀 2026.12 → 2027.01 전환 혜택 &amp; 보안 정책</div>
-          <div>1) <strong>12월 얼리버드 사전 구독</strong>: <em>"2026.12.31 무료 종료 — 지금 사전 구독 시 2027년 평생 40% 할인"</em></div>
-          <div>2) <strong>만료 샘플 초대 코드(Passkey)</strong>: VIP·파트너사 전용 코드 <span class="dmdg-pw-code">dmdg_servive</span> 제공 <em>(유료화 후 월별 로테이션·전용 토큰 분리)</em></div>
+          <div>1) <strong>12월 얼리버드 사전 신청</strong>: <em>"2026.12.31 무료 종료 — 지금 사전 신청 시 30일 All-Pass 4,900원 특가"</em></div>
+          <div>2) <strong>초대코드 인증(Passkey)</strong>: VIP·수강생·파트너사 전용 초대코드 제공 <em>(로그인 없이 코드 인증으로 즉시 열람)</em></div>
           <div>3) <strong>유료 원본 PDF 소셜 DRM</strong>: 본문 가림 없이 하단 여백에 <em>"Licensed to: 이름 (email)"</em> 구매자 각인 워터마크 삽입</div>
         </div>
 
